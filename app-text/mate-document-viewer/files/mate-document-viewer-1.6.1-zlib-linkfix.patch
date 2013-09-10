@@ -1,0 +1,54 @@
+From a8b9cc1a18765d7ebca5c963410edf0e2eff5399 Mon Sep 17 00:00:00 2001
+From: infirit <infirit@gmail.com>
+Date: Sat, 10 Aug 2013 14:43:17 +0200
+Subject: [PATCH] Add check for zlib and add to linker
+
+Should solve https://bugs.gentoo.org/show_bug.cgi?id=480464 and
+https://github.com/Sabayon/mate-overlay/issues/46
+---
+ configure.ac            | 14 ++++++++++++++
+ libdocument/Makefile.am |  3 ++-
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 7250149..0e7ae4f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -196,6 +196,20 @@ esac
+ 
+ PKG_CHECK_MODULES([SHELL_CORE],[libxml-2.0 >= $LIBXML_REQUIRED gtk+-$GTK_API_VERSION >= $GTK_REQUIRED gio-2.0 >= $GLIB_REQUIRED gthread-2.0 $SHELL_PLATFORM_PKGS])
+ 
++dnl
++dnl zlib support
++dnl
++
++PKG_CHECK_MODULES([ZLIB], [zlib], [found_zlib=yes], [found_zlib=no])
++AS_IF([test "x$found_zlib" = "xno"], [
++  AC_CHECK_LIB(z, inflate, [AC_CHECK_HEADER(zlib.h, found_zlib=yes)])
++  if test "x$found_zlib" = "xno" ; then
++    AC_MSG_ERROR([*** Working zlib library and headers not found ***])
++  fi
++  ZLIB_LIBS='-lz'
++  AC_SUBST(ZLIB_LIBS)
++])
++
+ # *********
+ # SM client
+ # *********
+diff --git a/libdocument/Makefile.am b/libdocument/Makefile.am
+index b53fce1..b3ea2c5 100644
+--- a/libdocument/Makefile.am
++++ b/libdocument/Makefile.am
+@@ -115,7 +115,8 @@ libatrildocument_la_LDFLAGS = \
+ libatrildocument_la_LIBADD = \
+ 	$(LIBDOCUMENT_LIBS)	\
+ 	$(GMODULE_LIBS)		\
+-	$(top_builddir)/cut-n-paste/synctex/libsynctex.la
++	$(top_builddir)/cut-n-paste/synctex/libsynctex.la \
++	$(ZLIB_LIBS)
+ 
+ 
+ BUILT_SOURCES = 			\
+-- 
+1.8.1.6
+

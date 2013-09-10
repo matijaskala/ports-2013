@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare
+DEPEND==dev-lang/python-2*
+DESCRIPTION=pyNotifier provides an implementation of a notifier/event scheduler.
+EAPI=3
+HOMEPAGE=http://www.bitkipper.net/
+IUSE=qt4 gtk
+KEYWORDS=amd64 ppc x86
+LICENSE=LGPL-2
+RDEPEND=dev-python/twisted-core gtk? ( dev-python/pygobject:2 ) qt4? ( dev-python/PyQt4[X] ) =dev-lang/python-2*
+SLOT=0
+SRC_URI=http://www.bitkipper.net/bytes/debian/dists/unstable/source/pynotifier_0.7.0.orig.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=8e3e96478abe38ea5cc09e2b0eb5909e

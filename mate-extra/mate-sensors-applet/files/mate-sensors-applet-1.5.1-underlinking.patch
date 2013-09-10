@@ -1,0 +1,12 @@
+diff -ur mate-sensors-applet-1.5.1.orig/sensors-applet/Makefile.am mate-sensors-applet-1.5.1/sensors-applet/Makefile.am
+--- mate-sensors-applet-1.5.1.orig/sensors-applet/Makefile.am	2013-02-04 23:13:46.970064516 +0100
++++ mate-sensors-applet-1.5.1/sensors-applet/Makefile.am	2013-02-04 23:14:01.646962202 +0100
+@@ -15,7 +15,7 @@
+ 	$(GLIB_CFLAGS) $(GTK_CFLAGS) $(MATE_CFLAGS) $(CAIRO_CFLAGS) $(LIBMATENOTIFY_CFLAGS)
+ 
+ 
+-LIBS = $(GLIB_LIBS) $(GTK_LIBS) $(MATE_LIBS) $(CAIRO_LIBS) $(LIBMATENOTIFY_LIBS)
++LIBS = $(GLIB_LIBS) $(GTK_LIBS) $(MATE_LIBS) $(CAIRO_LIBS) $(LIBMATENOTIFY_LIBS) -ldl
+ 
+ if LIBMATENOTIFY
+ libmatenotify_SRC = active-sensor-libmatenotify.c \

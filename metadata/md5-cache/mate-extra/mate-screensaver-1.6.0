@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare setup unpack
+DEPEND=>=x11-libs/gtk+-2.14.0:2 >=mate-base/mate-desktop-1.5.3 >=mate-base/mate-menus-1.5.0 >=dev-libs/glib-2.15:2 >=mate-base/libmatekbd-1.5.0 >=dev-libs/dbus-glib-0.71 libnotify? ( >=x11-libs/libnotify-0.7.0 ) opengl? ( virtual/opengl ) pam? ( virtual/pam ) !pam? ( kernel_linux? ( sys-apps/shadow ) ) x11-libs/libX11 x11-libs/libXext x11-libs/libXrandr x11-libs/libXScrnSaver x11-libs/libXxf86misc x11-libs/libXxf86vm !!<gnome-extra/gnome-screensaver-3.0.0 virtual/pkgconfig >=dev-util/intltool-0.40 x11-proto/xextproto x11-proto/randrproto x11-proto/scrnsaverproto x11-proto/xf86miscproto >=mate-base/mate-common-1.2.2 systemd? ( sys-apps/systemd ) consolekit? ( sys-auth/consolekit ) || ( >=sys-devel/automake-1.12:1.12 >=sys-devel/automake-1.13:1.13 ) >=sys-devel/autoconf-2.68 sys-devel/libtool app-arch/xz-utils >=sys-apps/sed-4 dev-util/gtk-doc dev-util/gtk-doc-am
+DESCRIPTION=Replaces xscreensaver, integrating with the MATE desktop.
+EAPI=5
+HOMEPAGE=http://mate-desktop.org
+IUSE=libnotify opengl pam systemd consolekit kernel_linux debug
+KEYWORDS=~amd64 ~arm ~x86
+LICENSE=GPL-2
+RDEPEND=>=x11-libs/gtk+-2.14.0:2 >=mate-base/mate-desktop-1.5.3 >=mate-base/mate-menus-1.5.0 >=dev-libs/glib-2.15:2 >=mate-base/libmatekbd-1.5.0 >=dev-libs/dbus-glib-0.71 libnotify? ( >=x11-libs/libnotify-0.7.0 ) opengl? ( virtual/opengl ) pam? ( virtual/pam ) !pam? ( kernel_linux? ( sys-apps/shadow ) ) x11-libs/libX11 x11-libs/libXext x11-libs/libXrandr x11-libs/libXScrnSaver x11-libs/libXxf86misc x11-libs/libXxf86vm !!<gnome-extra/gnome-screensaver-3.0.0
+SLOT=0
+SRC_URI=http://pub.mate-desktop.org/releases/1.6/mate-screensaver-1.6.0.tar.xz
+_eclasses_=autotools	16761a2f972abd686713e5967ff3c754	eutils	63afaaed8aa819fdcb814c7cd39495a2	fdo-mime	0acfe1a88fd8751a1d5dc671168219fa	libtool	b1c8688e60f9580bcb9bb46e08737eb1	mate	6134d85fcc943e0815309c2451c7a1e5	mate-desktop.org	03a7e7ade2df0707fff08cba57525d12	mate-utils	1e95e18a611c8f19405ca1aba47f347d	multilib	892e597faee02a5b94eb02ab512e7622	multiprocessing	a2130e6fc4aa4c6a24b265ca0cbcc2b6	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=5998be45e8940b2ba6ffaf3ed4106b70

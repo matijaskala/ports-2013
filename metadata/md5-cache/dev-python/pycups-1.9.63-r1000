@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=net-print/cups doc? ( dev-python/epydoc ) python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 ) app-arch/tar app-arch/bzip2
+DESCRIPTION=Python bindings for libcups
+EAPI=5-progress
+HOMEPAGE=http://cyberelk.net/tim/software/pycups/ https://pypi.python.org/pypi/pycups
+IUSE=doc examples python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=net-print/cups python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://pypi/p/pycups/pycups-1.9.63.tar.bz2
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	multilib	892e597faee02a5b94eb02ab512e7622	python	9ffa83b7b864edd2fa5dd6ebe4a63738	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28
+_md5_=fdf1bdc4dda069a201cc2596d1421155

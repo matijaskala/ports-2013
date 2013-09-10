@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare test
+DEPEND=emacs? ( app-emacs/pymacs app-emacs/python-mode ) =dev-lang/python-2*
+DESCRIPTION=Bicycle Repair Man is the Python Refactoring Browser
+EAPI=3
+HOMEPAGE=http://bicyclerepair.sourceforge.net/
+IUSE=emacs
+KEYWORDS=amd64 ~ia64 ppc ppc64 x86
+LICENSE=icu GPL-2+
+RDEPEND=emacs? ( app-emacs/pymacs app-emacs/python-mode ) =dev-lang/python-2*
+SLOT=0
+SRC_URI=mirror://sourceforge/bicyclerepair/bicyclerepair-0.9.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	elisp-common	57a17c02cd0f6f0c423e3d6de5c83f13	eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	python	9ffa83b7b864edd2fa5dd6ebe4a63738	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28
+_md5_=389606cad4623d22dc7b393a93431944

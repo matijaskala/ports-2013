@@ -1,0 +1,22 @@
+--- Makefile	2013-03-10 11:49:58.795780620 -0700
++++ Makefile2	2013-03-10 16:23:04.785435416 -0700
+@@ -12,9 +12,17 @@
+ 
+ install: 
+ 	if [ -d "/usr/lib/lxpanel/plugins" ]; then \
+-	  cp sensors.so /usr/lib/lxpanel/plugins; \
++	  mkdir ${D}usr; \
++	  mkdir ${D}usr/lib; \
++	  mkdir ${D}usr/lib/lxpanel; \
++	  mkdir ${D}usr/lib/lxpanel/plugins; \
++	  cp sensors.so ${D}usr/lib/lxpanel/plugins; \
+ 	elif [ -d "/usr/lib64/lxpanel/plugins" ]; then \
+-	  cp sensors.so /usr/lib64/lxpanel/plugins; \
++	  mkdir ${D}usr; \
++	  mkdir ${D}usr/lib64; \
++	  mkdir ${D}usr/lib64/lxpanel; \
++	  mkdir ${D}usr/lib64/lxpanel/plugins; \
++	  cp sensors.so ${D}usr/lib64/lxpanel/plugins; \
+ 	else \
+ 	  echo ;\
+ 	  echo Couldn\'t find lxpanel/plugins directory.; \

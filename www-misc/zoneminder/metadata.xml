@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>web-apps</herd>
+	<maintainer>
+		<email>craig@codestorm.org</email>
+		<name>Craig van Tassle</name>
+	</maintainer>
+	<longdescription>
+		<pkg>Web-based security system</pkg>
+	</longdescription>
+	<use>
+		<flag name="setup">
+			Installs the phpMyAdmin setup utility.
+			Users who don't use the utility should disable this USE flag
+			for security reasons as the setup tool was the target of various
+			exploits in the past.
+		</flag>
+	</use>
+</pkgmetadata>
+

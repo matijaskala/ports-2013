@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=net-libs/libpcap python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+DESCRIPTION=Python interface for libpcap
+EAPI=4-python
+HOMEPAGE=http://pylibpcap.sourceforge.net/ http://sourceforge.net/projects/pylibpcap/ http://pypi.python.org/pypi/pylibpcap
+IUSE=examples python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=amd64 ~hppa ~ia64 x86
+LICENSE=BSD
+RDEPEND=net-libs/libpcap python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://sourceforge/pylibpcap/pylibpcap-0.6.4.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=a053833ce9266676c5ac0225cf8a26dd

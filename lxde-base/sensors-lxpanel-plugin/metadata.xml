@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>                                                           
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <herd>no-herd</herd>
+    <maintainer>
+        <email>yuyuyak@gmail.com</email>
+        <name>Mike Johnson</name>
+    </maintainer>
+    <maintainer>
+        <email>email2@domain.tld</email>
+        <name>Name of Maintainer 2</name>
+    </maintainer>
+    <longdescription lang="en">
+	This plugin works specifically with lxpanel, it adds the
+	ability to display data from lm-sensors (voltages, temperatures
+	and fan speeds) directly on lxpanel.  It is highly configurable
+	and allows html markup for colors and fonts.
+    </longdescription>
+    <use>
+        <flag name='gtk'>Necessary for the plugin itself</flag>
+        <flag name='alsa'>required by lxpanel</flag>
+        <flag name='wifi'>required by lxpanel</flag>
+    </use>
+    <upstream>
+        <changelog>URL to Online Changelogs</changelog>
+    </upstream>
+</pkgmetadata>

@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare
+DEPEND=dev-python/pygobject:3 || ( =dev-lang/python-3.4* =dev-lang/python-3.3* =dev-lang/python-3.2* ) >=sys-apps/sed-4
+DESCRIPTION=simple viewer for NFO files, which are ASCII art in the CP437 codepage
+EAPI=3
+HOMEPAGE=http://home.gna.org/nfoview/
+KEYWORDS=amd64 x86
+LICENSE=GPL-3
+RDEPEND=dev-python/pygobject:3 media-fonts/terminus-font || ( =dev-lang/python-3.4* =dev-lang/python-3.3* =dev-lang/python-3.2* )
+SLOT=0
+SRC_URI=http://download.gna.org/nfoview/1.10/nfoview-1.10.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	fdo-mime	0acfe1a88fd8751a1d5dc671168219fa	gnome2-utils	eb033547526fe401787037d54fb6ce6a	multilib	892e597faee02a5b94eb02ab512e7622	python	9ffa83b7b864edd2fa5dd6ebe4a63738	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142
+_md5_=edbbac6038484457e67c1b1d7eb4b676

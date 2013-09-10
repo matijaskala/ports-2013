@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst unpack
+DEPEND=>=app-i18n/scim-1.2 || ( >=app-i18n/anthy-5900 >=app-i18n/anthy-ss-5911 ) nls? ( virtual/libintl ) gtk? ( >=x11-libs/gtk+-2.4:2 ) nls? ( sys-devel/gettext ) virtual/pkgconfig
+DESCRIPTION=Japanese input method Anthy IMEngine for SCIM
+EAPI=1
+HOMEPAGE=http://scim-imengine.sourceforge.jp/index.cgi?cmd=view;name=SCIMAnthy
+IUSE=gtk nls
+KEYWORDS=amd64 ppc x86 ~x86-fbsd
+LICENSE=GPL-2
+RDEPEND=>=app-i18n/scim-1.2 || ( >=app-i18n/anthy-5900 >=app-i18n/anthy-ss-5911 ) nls? ( virtual/libintl ) gtk? ( >=x11-libs/gtk+-2.4:2 ) gtk? ( app-dicts/kasumi )
+SLOT=0
+SRC_URI=mirror://sourceforge.jp/scim-imengine/30199/scim-anthy-1.2.6.tar.gz
+_eclasses_=libtool	b1c8688e60f9580bcb9bb46e08737eb1	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142
+_md5_=da211304ebae9f4f9af99e44ae49bb47

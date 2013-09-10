@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.5-jython? ( dev-lang/jython:2.5 ) python_abis_2.7-jython? ( dev-lang/jython:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+DESCRIPTION=SNMP framework in Python
+EAPI=4-python
+HOMEPAGE=http://twistedsnmp.sourceforge.net/
+IUSE=python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.5-jython python_abis_2.7-jython python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=amd64 ~ppc sparc x86
+LICENSE=BSD
+RDEPEND=python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.5-jython? ( dev-lang/jython:2.5 ) python_abis_2.7-jython? ( dev-lang/jython:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.5-jython python_abis_2.7-jython python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://sourceforge/twistedsnmp/pysnmp-se-3.5.2.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=e965429930543a1016e9b0503412c73e
