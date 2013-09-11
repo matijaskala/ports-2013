@@ -17,7 +17,6 @@ LICENSE="GPL-2 BSD-2"
 SLOT="0"
 KEYWORDS="*"
 IUSE="build"
-PDEPEND="sys-apps/openrc"
 
 src_unpack() {
 	unpack ${A}
@@ -67,7 +66,7 @@ create_lib_dirs() {
 
 		[ "$dir" = "lib" ] && [ "$SYMLINK_LIB" = "yes" ] && continue
 
-		[ -e ${ROOT}${dir} ] || install -d ${ROOT}${dir} || die
+		[ -e ${ROOT}${dir} ] || ln -sf usr/${dir} ${ROOT} || die
 		[ -e ${ROOT}usr/${dir} ] || install -d ${ROOT}usr/${dir} || die
 		[ -e ${ROOT}usr/local${dir} ] || install -d ${ROOT}usr/local/${dir} || die
 	done
@@ -112,6 +111,11 @@ modfix() {
 }
 
 src_install() {
+	keepdir /usr
+	keepdir /usr/bin
+	keepdir /usr/sbin
+	dosym usr/sbin /sbin
+	dosym usr/bin /bin
 
 	cd $S2 || die
 	into /
@@ -130,9 +134,10 @@ src_install() {
 	cp -pPR etc/* etc.Linux/* ${D}/etc/ || die
 	cp -pPR share.Linux/* ${D}/usr/share/baselayout || die
 
+	mv ${D}/bin ${D}/sbin ${D}/usr
+
 	einfo "Creating directories..."
 
-	keepdir /usr
 	keepdir /usr/local
 	keepdir /boot
 	keepdir /etc/conf.d
@@ -153,7 +158,6 @@ src_install() {
 	keepdir /mnt/floppy
 	keepdir /opt
 	keepdir /sbin
-	keepdir /usr/bin
 	keepdir /usr/include
 	keepdir /usr/include/asm
 	keepdir /usr/include/linux
@@ -164,10 +168,8 @@ src_install() {
 	keepdir /usr/local/share/doc
 
 	keepdir /usr/local/share/man
-	dosym /usr/share/man /usr/local/share/man
 
 	keepdir /usr/local/src
-	keepdir /usr/sbin
 	keepdir /usr/share/doc
 	keepdir /usr/share/info
 	keepdir /usr/share/man
@@ -205,7 +207,6 @@ src_install() {
 
 	into /
 	dosbin "${FILESDIR}/MAKEDEV"
-	dosym ../../sbin/MAKEDEV /usr/sbin/MAKEDEV
 
 	# The following code generates an /etc/env.d/04multilib file for
 	# multilib profiles which contain default settings for all library

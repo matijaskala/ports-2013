@@ -12,7 +12,7 @@ SRC_URI="http://dev.gentoo.org/~flameeyes/${PN}/${P}.tar.bz2
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="*"
-IUSE="debug cracklib passwdqc consolekit gnome-keyring selinux mktemp pam_ssh +sha512 pam_krb5 minimal"
+IUSE="debug cracklib passwdqc consolekit gnome-keyring selinux mktemp pam_ssh +sha512 pam_krb5 minimal systemd"
 RESTRICT="binchecks"
 
 RDEPEND="
@@ -34,9 +34,15 @@ RDEPEND="
 		>=sys-libs/pam-1.1.0
 		>=sys-auth/pam_krb5-4.3
 	)
+	systemd? ( >=sys-apps/systemd-44-r1[pam] )
 	!<sys-freebsd/freebsd-pam-modules-6.2-r1
 	!<sys-libs/pam-0.99.9.0-r1"
 DEPEND="app-portage/portage-utils"
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-systemd.patch
+	epatch "${FILESDIR}"/${P}-lastlog-silent.patch
+}
 
 src_compile() {
 	local implementation=
@@ -64,6 +70,7 @@ src_compile() {
 		$(use_var cracklib) \
 		$(use_var passwdqc) \
 		$(use_var consolekit) \
+		$(use_var systemd) \
 		$(use_var GNOME_KEYRING gnome-keyring) \
 		$(use_var selinux) \
 		$(use_var mktemp) \
@@ -90,5 +97,11 @@ pkg_postinst() {
 		elog "Please note that the change only affects the newly-changed passwords"
 		elog "and that SHA512-hashed passwords will not work on earlier versions"
 		elog "of glibc or Linux-PAM."
+	fi
+
+	if use systemd && use consolekit; then
+		ewarn "You are enabling 2 session trackers, ConsoleKit and systemd-logind"
+		ewarn "at the same time. This is not recommended setup to have, please"
+		ewarn "consider disabling either USE=\"consolekit\" or USE=\"systemd\."
 	fi
 }

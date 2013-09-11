@@ -56,10 +56,10 @@ _bash-completion-r1_get_bashdir() {
 _bash-completion-r1_get_bashcompdir() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	if has_version '<app-shells/bash-completion-2.1-r1'; then
-		_bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion
-	else
+	if has_version '>=app-shells/bash-completion-2.1-r1'; then
 		_bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion/completions
+	else
+		_bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion
 	fi
 }
 
