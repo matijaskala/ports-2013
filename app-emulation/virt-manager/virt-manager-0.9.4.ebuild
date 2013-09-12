@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/virt-manager/virt-manager-0.9.4.ebuild,v 1.5 2013/03/24 00:40:35 cardoe Exp $
 
 EAPI=4
 

@@ -1,18 +1,19 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.2_p37.ebuild,v 1.10 2012/09/02 17:49:58 armin76 Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.0_p38.ebuild,v 1.5 2012/11/19 22:26:11 vapier Exp $
 
 EAPI="1"
 
 inherit eutils flag-o-matic toolchain-funcs multilib
 
 # Official patchlevel
-# See ftp://ftp.cwru.edu/pub/bash/bash-4.2-patches/
+# See ftp://ftp.cwru.edu/pub/bash/bash-3.2-patches/
 PLEVEL=${PV##*_p}
 MY_PV=${PV/_p*}
-MY_PV=${MY_PV/_/-}
 MY_P=${PN}-${MY_PV}
 [[ ${PV} != *_p* ]] && PLEVEL=0
+READLINE_VER=6.0
+READLINE_PLEVEL=0 # both readline patches are also released as bash patches
 patches() {
 	local opt=$1 plevel=${2:-${PLEVEL}} pn=${3:-${PN}} pv=${4:-${MY_PV}}
 	[[ ${plevel} -eq 0 ]] && return 1
@@ -30,21 +31,19 @@ patches() {
 
 DESCRIPTION="The standard GNU Bourne again shell"
 HOMEPAGE="http://tiswww.case.edu/php/chet/bash/bashtop.html"
-SRC_URI="mirror://gnu/bash/${MY_P}.tar.gz $(patches)"
+SRC_URI="mirror://gnu/bash/${MY_P}.tar.gz $(patches)
+	$(patches ${READLINE_PLEVEL} readline ${READLINE_VER})"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
-IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline vanilla"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd"
+IUSE="afs bashlogger mem-scramble +net nls plugins vanilla"
 
 DEPEND=">=sys-libs/ncurses-5.2-r2
-	readline? ( >=sys-libs/readline-6.2 )
 	nls? ( virtual/libintl )"
 RDEPEND="${DEPEND}
-	!<sys-apps/portage-2.1.6.7_p1
+	!<sys-apps/portage-2.1.5
 	!<sys-apps/paludis-0.26.0_alpha5"
-# we only need yacc when the .y files get patched (bash42-005)
-DEPEND+=" virtual/yacc"
 
 S=${WORKDIR}/${MY_P}
 
@@ -54,10 +53,6 @@ pkg_setup() {
 		eerror "as it breaks LFS (struct stat64) on x86."
 		die "remove -malign-double from your CFLAGS mr ricer"
 	fi
-	if use bashlogger ; then
-		ewarn "The logging patch should ONLY be used in restricted (i.e. honeypot) envs."
-		ewarn "This will log ALL output you enter into the shell, you have been warned."
-	fi
 }
 
 src_unpack() {
@@ -66,21 +61,29 @@ src_unpack() {
 
 	# Include official patches
 	[[ ${PLEVEL} -gt 0 ]] && epatch $(patches -s)
+	cd lib/readline
+	[[ ${READLINE_PLEVEL} -gt 0 ]] && epatch $(patches -s ${READLINE_PLEVEL} readline ${READLINE_VER})
+	cd ../..
 
-	# Clean out local libs so we know we use system ones
-	rm -rf lib/{readline,termcap}/*
-	touch lib/{readline,termcap}/Makefile.in # for config.status
-	sed -ri -e 's:\$[(](RL|HIST)_LIBSRC[)]/[[:alpha:]]*.h::g' Makefile.in || die
+	epatch "${FILESDIR}"/${PN}-4.0-configure.patch #304901
+	epatch "${FILESDIR}"/${PN}-4.x-deferred-heredocs.patch
 
-	# Avoid regenerating docs after patches #407985
-	sed -i -r '/^(HS|RL)USER/s:=.*:=:' doc/Makefile.in || die
-	touch -r . doc/*
-
-	epatch "${FILESDIR}"/${PN}-4.2-execute-job-control.patch #383237
-	epatch "${FILESDIR}"/${PN}-4.2-parallel-build.patch
-	epatch "${FILESDIR}"/${PN}-4.2-no-readline.patch
-
-	epatch_user
+	if ! use vanilla ; then
+		sed -i '1i#define NEED_FPURGE_DECL' execute_cmd.c # needs fpurge() decl
+		epatch "${FILESDIR}"/${PN}-3.2-parallel-build.patch #189671
+		epatch "${FILESDIR}"/${PN}-4.0-ldflags-for-build.patch #211947
+		epatch "${FILESDIR}"/${PN}-4.0-negative-return.patch
+		epatch "${FILESDIR}"/${PN}-4.0-parallel-build.patch #267613
+		# Log bash commands to syslog #91327
+		if use bashlogger ; then
+			ewarn "The logging patch should ONLY be used in restricted (i.e. honeypot) envs."
+			ewarn "This will log ALL output you enter into the shell, you have been warned."
+			ebeep
+			epause
+			epatch "${FILESDIR}"/${PN}-3.1-bash-logger.patch
+		fi
+		sed -i '/\.o: .*shell\.h/s:$: pathnames.h:' Makefile.in #267613
+	fi
 }
 
 src_compile() {
@@ -94,8 +97,13 @@ src_compile() {
 		-DSYS_BASHRC=\'\"/etc/bash/bashrc\"\' \
 		-DSYS_BASH_LOGOUT=\'\"/etc/bash/bash_logout\"\' \
 		-DNON_INTERACTIVE_LOGIN_SHELLS \
-		-DSSH_SOURCE_BASHRC \
-		$(use bashlogger && echo -DSYSLOG_HISTORY)
+		-DSSH_SOURCE_BASHRC
+
+	# Always use the buildin readline, else if we update readline
+	# bash gets borked as readline is usually not binary compadible
+	# between minor versions.
+	#myconf="${myconf} $(use_with !readline installed-readline)"
+	myconf="${myconf} --without-installed-readline"
 
 	# Don't even think about building this statically without
 	# reading Bug 7714 first.  If you still build it statically,
@@ -103,34 +111,19 @@ src_compile() {
 	#use static && export LDFLAGS="${LDFLAGS} -static"
 	use nls || myconf="${myconf} --disable-nls"
 
-	# Historically, we always used the builtin readline, but since
-	# our handling of SONAME upgrades has gotten much more stable
-	# in the PM (and the readline ebuild itself preserves the old
-	# libs during upgrades), linking against the system copy should
-	# be safe.
-	# Exact cached version here doesn't really matter as long as it
-	# is at least what's in the DEPEND up above.
-	export ac_cv_rl_version=6.2
-
 	# Force linking with system curses ... the bundled termcap lib
-	# sucks bad compared to ncurses.  For the most part, ncurses
-	# is here because readline needs it.  But bash itself calls
-	# ncurses in one or two small places :(.
+	# sucks bad compared to ncurses
+	myconf="${myconf} --with-curses"
 
 	use plugins && append-ldflags -Wl,-rpath,/usr/$(get_libdir)/bash
 	econf \
-		--with-installed-readline=. \
-		--with-curses \
 		$(use_with afs) \
 		$(use_enable net net-redirections) \
 		--disable-profiling \
 		$(use_enable mem-scramble) \
 		$(use_with mem-scramble bash-malloc) \
-		$(use_enable readline) \
-		$(use_enable readline history) \
-		$(use_enable readline bang-history) \
-		${myconf}
-	emake || die
+		${myconf} || die
+	emake || die "make failed"
 
 	if use plugins ; then
 		emake -C examples/loadables all others || die
@@ -151,38 +144,12 @@ src_install() {
 		newins "${FILESDIR}"/dot-${f} .${f}
 	done
 
-	local sed_args=(
-		-e "s:#${USERLAND}#@::"
-		-e '/#@/d'
-	)
-	if ! use readline ; then
-		sed_args+=( #432338
-			-e '/^shopt -s histappend/s:^:#:'
-			-e 's:use_color=true:use_color=false:'
-		)
-	fi
-	sed -i \
-		"${sed_args[@]}" \
-		"${D}"/etc/skel/.bashrc \
-		"${D}"/etc/bash/bashrc || die
+	sed -i -e "s:#${USERLAND}#@::" "${D}"/etc/skel/.bashrc "${D}"/etc/bash/bashrc
+	sed -i -e '/#@/d' "${D}"/etc/skel/.bashrc "${D}"/etc/bash/bashrc
 
 	if use plugins ; then
 		exeinto /usr/$(get_libdir)/bash
 		doexe $(echo examples/loadables/*.o | sed 's:\.o::g') || die
-	fi
-
-	if use examples ; then
-		for d in examples/{functions,misc,scripts,scripts.noah,scripts.v2} ; do
-			exeinto /usr/share/doc/${PF}/${d}
-			insinto /usr/share/doc/${PF}/${d}
-			for f in ${d}/* ; do
-				if [[ ${f##*/} != PERMISSION ]] && [[ ${f##*/} != *README ]] ; then
-					doexe ${f}
-				else
-					doins ${f}
-				fi
-			done
-		done
 	fi
 
 	doman doc/*.1

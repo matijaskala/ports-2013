@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/gcj-jdk/gcj-jdk-4.6.3.ebuild,v 1.2 2012/09/16 13:16:05 chithanh Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-java/gcj-jdk/gcj-jdk-4.6.3-r1.ebuild,v 1.1 2012/09/28 18:37:53 sera Exp $
 
 EAPI="4"
 
@@ -17,7 +17,8 @@ IUSE=""
 
 ECJ_GCJ_SLOT="3.6"
 
-RDEPEND="~sys-devel/gcc-${PV}[gcj,gtk]
+RDEPEND="
+	~sys-devel/gcc-${PV}[gcj,gtk]
 	dev-java/ecj-gcj:${ECJ_GCJ_SLOT}"
 DEPEND="${RDEPEND}"
 
@@ -41,20 +42,17 @@ src_install() {
 	gccbin=${gccbin#"${EPREFIX}"}
 	local gcclib=$(gcc-config -L|cut -d':' -f1)
 	gcclib=${gcclib#"${EPREFIX}"}
-	local gcjhome="/usr/lib/${P}"
+	local gcjhome="/usr/$(get_libdir)/${P}"
 	local gcc_version=$(gcc-fullversion)
 	local gccchost="${CHOST}"
 	local gcjlibdir=$(echo "${EPREFIX}"/usr/$(get_libdir)/gcj-${gcc_version}-*)
 	gcjlibdir=${gcjlibdir#"${EPREFIX}"}
 
-	# correctly install gcj
-	dosym ${gccbin}/gij /usr/bin/gij
-	dosym ${gccbin}/gcj-dbtool /usr/bin/gcj-dbtool
-
 	# links
 	dodir ${gcjhome}/bin
 	dodir ${gcjhome}/jre/bin
-	dosym ${gcjhome}/bin/java ${gcjhome}/jre/bin/java
+	dosym ${gccbin}/gij ${gcjhome}/bin/java
+	dosym ${gccbin}/gij ${gcjhome}/jre/bin/java
 	dosym ${gccbin}/gjar ${gcjhome}/bin/jar
 	dosym ${gccbin}/gjdoc ${gcjhome}/bin/javadoc
 	dosym ${gccbin}/grmic ${gcjhome}/bin/rmic
@@ -74,10 +72,13 @@ src_install() {
 	dosym ${gccbin}/gserialver ${gcjhome}/bin/serialver
 	dosym ${gccbin}/gtnameserv ${gcjhome}/bin/tnameserv
 	dosym ${gccbin}/gtnameserv ${gcjhome}/jre/bin/tnameserv
+
 	dodir ${gcjhome}/jre/lib/${libarch}/client
+	dodir ${gcjhome}/jre/lib/${libarch}/server
 	dosym ${gcjlibdir}/libjvm.so ${gcjhome}/jre/lib/${libarch}/client/libjvm.so
 	dosym ${gcjlibdir}/libjvm.so ${gcjhome}/jre/lib/${libarch}/server/libjvm.so
 	dosym ${gcjlibdir}/libjawt.so ${gcjhome}/jre/lib/${libarch}/libjawt.so
+
 	dosym /usr/share/gcc-data/${gccchost}/${gcc_version}/java/libgcj-${gcc_version/_/-}.jar \
 		${gcjhome}/jre/lib/rt.jar
 	dodir ${gcjhome}/lib
@@ -85,8 +86,7 @@ src_install() {
 		${gcjhome}/lib/tools.jar
 	dosym ${gcclib}/include ${gcjhome}
 
-	dosym /usr/bin/ecj-gcj-${ECJ_GCJ_SLOT} ${gcjhome}/bin/javac;
-	dosym /usr/bin/gij ${gcjhome}/bin/java;
+	dosym /usr/bin/ecj-gcj-${ECJ_GCJ_SLOT} ${gcjhome}/bin/javac
 
 	set_java_env
 }

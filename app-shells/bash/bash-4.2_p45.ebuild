@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.2_p37.ebuild,v 1.10 2012/09/02 17:49:58 armin76 Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.2_p45.ebuild,v 1.12 2013/05/20 18:01:51 ago Exp $
 
 EAPI="1"
 
@@ -34,7 +34,7 @@ SRC_URI="mirror://gnu/bash/${MY_P}.tar.gz $(patches)"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm hppa ia64 ~m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline vanilla"
 
 DEPEND=">=sys-libs/ncurses-5.2-r2
@@ -79,6 +79,7 @@ src_unpack() {
 	epatch "${FILESDIR}"/${PN}-4.2-execute-job-control.patch #383237
 	epatch "${FILESDIR}"/${PN}-4.2-parallel-build.patch
 	epatch "${FILESDIR}"/${PN}-4.2-no-readline.patch
+	epatch "${FILESDIR}"/${PN}-4.2-speed-up-read-N.patch
 
 	epatch_user
 }
@@ -118,6 +119,7 @@ src_compile() {
 	# ncurses in one or two small places :(.
 
 	use plugins && append-ldflags -Wl,-rpath,/usr/$(get_libdir)/bash
+	tc-export AR #444070
 	econf \
 		--with-installed-readline=. \
 		--with-curses \
@@ -169,6 +171,9 @@ src_install() {
 	if use plugins ; then
 		exeinto /usr/$(get_libdir)/bash
 		doexe $(echo examples/loadables/*.o | sed 's:\.o::g') || die
+		insinto /usr/include/bash-plugins
+		doins *.h builtins/*.h examples/loadables/*.h include/*.h \
+			lib/{glob/glob.h,tilde/tilde.h}
 	fi
 
 	if use examples ; then

@@ -1,0 +1,12 @@
+diff -U 3 -H -d -r -N -- a/pym/portage/const.py b/pym/portage/const.py
+--- a/pym/portage/const.py	2013-07-17 03:36:32.000000000 +0200
++++ b/pym/portage/const.py	2013-09-12 08:05:31.022081983 +0200
+@@ -44,7 +44,7 @@
+ 
+ # variables used with targetroot (these need to be absolute, but not
+ # have a leading '/' since they are used directly with os.path.join on EROOT)
+-VDB_PATH                 = "var/db/pkg"
++VDB_PATH                 = "usr/share/portage/pkg"
+ CACHE_PATH               = "var/cache/edb"
+ PRIVATE_PATH             = "var/lib/portage"
+ WORLD_FILE               = PRIVATE_PATH + "/world"

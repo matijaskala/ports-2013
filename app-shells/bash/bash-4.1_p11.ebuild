@@ -1,11 +1,13 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.1_p11.ebuild,v 1.5 2012/11/19 22:26:11 vapier Exp $
 
 EAPI="1"
 
 inherit eutils flag-o-matic toolchain-funcs multilib
 
 # Official patchlevel
-# See ftp://ftp.cwru.edu/pub/bash/bash-4.2-patches/
+# See ftp://ftp.cwru.edu/pub/bash/bash-3.2-patches/
 PLEVEL=${PV##*_p}
 MY_PV=${PV/_p*}
 MY_PV=${MY_PV/_/-}
@@ -35,16 +37,14 @@ SRC_URI="mirror://gnu/bash/${MY_P}.tar.gz $(patches)
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd"
 IUSE="afs bashlogger examples mem-scramble +net nls plugins vanilla"
 
 DEPEND=">=sys-libs/ncurses-5.2-r2
 	nls? ( virtual/libintl )"
 RDEPEND="${DEPEND}
-	!<sys-apps/portage-2.1.7.16
+	!<sys-apps/portage-2.1.6.7_p1
 	!<sys-apps/paludis-0.26.0_alpha5"
-# we only need yacc when the .y files get patched (bash42-005)
-DEPEND+=" virtual/yacc"
 
 S=${WORKDIR}/${MY_P}
 
@@ -70,9 +70,12 @@ src_unpack() {
 	[[ ${READLINE_PLEVEL} -gt 0 ]] && epatch $(patches -s ${READLINE_PLEVEL} readline ${READLINE_VER})
 	cd ../..
 
-	epatch "${FILESDIR}"/${PN}-4.1-document-system-bashrc.patch
-	epatch "${FILESDIR}"/${PN}-4.2-execute-job-control.patch #383237
-	epatch "${FILESDIR}"/${PN}-4.2-parallel-build.patch
+	epatch "${FILESDIR}"/${PN}-4.1-fbsd-eaccess.patch #303411
+
+	if ! use vanilla ; then
+		sed -i '1i#define NEED_FPURGE_DECL' execute_cmd.c # needs fpurge() decl
+		epatch "${FILESDIR}"/${PN}-4.1-parallel-build.patch
+	fi
 }
 
 src_compile() {
@@ -104,6 +107,7 @@ src_compile() {
 	# Force linking with system curses ... the bundled termcap lib
 	# sucks bad compared to ncurses
 	myconf="${myconf} --with-curses"
+
 	myconf="${myconf} --without-lispdir" #335896
 
 	use plugins && append-ldflags -Wl,-rpath,/usr/$(get_libdir)/bash

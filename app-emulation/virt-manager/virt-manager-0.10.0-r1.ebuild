@@ -1,15 +1,15 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/virt-manager/virt-manager-0.10.0.ebuild,v 1.11 2013/09/05 15:10:18 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/virt-manager/virt-manager-0.10.0-r1.ebuild,v 1.2 2013/09/06 15:22:16 cardoe Exp $
 
 EAPI=5
 
-#BACKPORTS=
+BACKPORTS=1cd29748
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 DISTUTILS_SINGLE_IMPL=1
 
-inherit eutils gnome2 distutils-r1
+inherit gnome2 distutils-r1
 
 DESCRIPTION="A graphical tool for administering virtual machines"
 HOMEPAGE="http://virt-manager.org"
@@ -21,7 +21,7 @@ if [[ ${PV} = *9999* ]]; then
 else
 	SRC_URI="http://virt-manager.org/download/sources/${PN}/${P}.tar.gz
 	${BACKPORTS+http://dev.gentoo.org/~cardoe/distfiles/${P}-${BACKPORTS}.tar.xz}"
-	KEYWORDS="amd64 x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
@@ -49,11 +49,6 @@ DEPEND="${RDEPEND}
 
 DOCS=( README NEWS )
 
-python_prepare_all() {
-	epatch_user
-	distutils-r1_python_prepare_all
-}
-
 distutils-r1_python_compile() {
 	local defgraphics=
 
@@ -63,11 +58,9 @@ distutils-r1_python_compile() {
 }
 
 python_install_all() {
-	python_fix_shebang "${ED}/usr/share/virt-manager/virt-clone"
-	python_fix_shebang "${ED}/usr/share/virt-manager/virt-convert"
-	python_fix_shebang "${ED}/usr/share/virt-manager/virt-image"
-	python_fix_shebang "${ED}/usr/share/virt-manager/virt-install"
-	python_fix_shebang "${ED}/usr/share/virt-manager/virt-manager"
+	distutils-r1_python_install
+	python_fix_shebang \
+		"${ED}"/usr/share/virt-manager/virt-{clone,convert,image,install,manager}
 }
 
 pkg_preinst() {

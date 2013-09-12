@@ -1,9 +1,8 @@
-diff -ruN system-config-printer-1.3.11/Makefile.am my/Makefile.am
---- system-config-printer-1.3.11/Makefile.am	2012-08-01 13:25:49.000000000 +0200
-+++ my/Makefile.am	2012-08-06 01:56:22.391528895 +0200
+--- a/Makefile.am	2013-08-11 23:49:07.085505820 +0200
++++ b/Makefile.am	2013-08-11 23:51:57.027522515 +0200
 @@ -1,90 +1,8 @@
 -CFLAGS=-g -O2 -Wall
-+CFLAGS=-Wall
++AM_CFLAGS=-Wall
  
  SUBDIRS=po
  
@@ -93,7 +92,7 @@ diff -ruN system-config-printer-1.3.11/Makefile.am my/Makefile.am
  	pysmb.py				\
  	scp-dbus-service.py			\
  	system-config-printer.py		\
-@@ -96,33 +14,21 @@
+@@ -97,31 +15,19 @@
  	asyncipp.py					\
  	asyncpk1.py					\
  	authconn.py					\
@@ -103,10 +102,9 @@ diff -ruN system-config-printer-1.3.11/Makefile.am my/Makefile.am
 -	dnssdresolve.py					\
  	errordialogs.py					\
  	HIG.py						\
--	firewall.py					\
+-	firewallsettings.py					\
  	gui.py						\
  	gtkinklevel.py					\
- 	gtkspinner.py					\
 -	installpackage.py				\
  	jobviewer.py					\
 -	monitor.py					\
@@ -119,7 +117,6 @@ diff -ruN system-config-printer-1.3.11/Makefile.am my/Makefile.am
  	ppdsloader.py					\
  	printerproperties.py				\
 -	probe_printer.py				\
- 	gtk_label_autowrap.py				\
 -	SearchCriterion.py				\
  	serversettings.py				\
 -	smburi.py					\
@@ -127,21 +124,18 @@ diff -ruN system-config-printer-1.3.11/Makefile.am my/Makefile.am
  	timedops.py					\
  	ToolbarSearchEntry.py				\
  	userdefault.py					\
-@@ -165,52 +71,17 @@
+@@ -164,9 +70,7 @@
  	troubleshoot/ServerFirewalled.py		\
  	troubleshoot/Shrug.py				\
  	troubleshoot/VerifyPackages.py			\
 -	troubleshoot/Welcome.py				\
 -	xml/preferreddrivers.rng			\
 -	xml/validate.py
--
--cupshelpersdir=$(sysconfdir)/cupshelpers
--cupshelpers_DATA=\
--	xml/preferreddrivers.xml
 +	troubleshoot/Welcome.py
  
- bin_SCRIPTS=					\
- 	system-config-printer			\
+ cupshelpersdir=$(sysconfdir)/cupshelpers
+ cupshelpers_DATA=\
+@@ -178,39 +82,10 @@
  	system-config-printer-applet		\
  	dbus/scp-dbus-service
  
@@ -162,7 +156,7 @@ diff -ruN system-config-printer-1.3.11/Makefile.am my/Makefile.am
 -%.service: %.service.in
 -	$(AM_V_GEN)sed -e 's,@udevhelperdir\@,$(udevhelperdir),g' $< > $@
 -systemdsystemunit_DATA = \
--	udev/udev-configure-printer.service
+-	udev/configure-printer@.service
 -CLEANFILES = \
 -	$(systemdsystemunit_DATA)
 -endif

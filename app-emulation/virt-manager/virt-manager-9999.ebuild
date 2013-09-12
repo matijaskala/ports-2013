@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/virt-manager/virt-manager-0.10.0.ebuild,v 1.11 2013/09/05 15:10:18 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/virt-manager/virt-manager-9999.ebuild,v 1.17 2013/06/25 17:28:53 cardoe Exp $
 
 EAPI=5
 
@@ -21,28 +21,27 @@ if [[ ${PV} = *9999* ]]; then
 else
 	SRC_URI="http://virt-manager.org/download/sources/${PN}/${P}.tar.gz
 	${BACKPORTS+http://dev.gentoo.org/~cardoe/distfiles/${P}-${BACKPORTS}.tar.xz}"
-	KEYWORDS="amd64 x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="gnome-keyring policykit sasl"
+IUSE="gnome-keyring policykit sasl +spice +vnc"
 
 RDEPEND="!app-emulation/virtinst
 	x11-libs/gtk+:3[introspection]
-	>=app-emulation/libvirt-0.7.0[python,${PYTHON_USEDEP}]
-	>=app-emulation/libvirt-glib-0.0.9[introspection,python,${PYTHON_USEDEP}]
+	>=app-emulation/libvirt-0.7.0[python]
+	>=app-emulation/libvirt-glib-0.0.9
 	${PYTHON_DEPS}
 	dev-libs/libxml2[python,${PYTHON_USEDEP}]
 	dev-python/ipaddr[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
 	dev-python/urlgrabber[${PYTHON_USEDEP}]
-	gnome-base/dconf
-	>=net-libs/gtk-vnc-0.3.8[gtk3,introspection,python,${PYTHON_USEDEP}]
-	net-misc/spice-gtk[gtk3,introspection,python,sasl?,${PYTHON_USEDEP}]
 	x11-libs/vte:2.90[introspection]
 	gnome-keyring? ( dev-python/gnome-keyring-python )
-	policykit? ( sys-auth/polkit[introspection] )"
+	policykit? ( sys-auth/polkit )
+	spice? ( net-misc/spice-gtk[gtk3,introspection,python,sasl?] )
+	vnc? ( >=net-libs/gtk-vnc-0.3.8[gtk3,introspection,python,${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}
 	dev-lang/perl
 	dev-util/intltool"
@@ -57,9 +56,12 @@ python_prepare_all() {
 distutils-r1_python_compile() {
 	local defgraphics=
 
+	use vnc && defgraphics="vnc"
+	use spice && defgraphics="spice"
+
 	esetup.py configure \
 		--qemu-user=qemu \
-		--default-graphics=spice
+		--default-graphics=${defgraphics}
 }
 
 python_install_all() {
@@ -68,11 +70,4 @@ python_install_all() {
 	python_fix_shebang "${ED}/usr/share/virt-manager/virt-image"
 	python_fix_shebang "${ED}/usr/share/virt-manager/virt-install"
 	python_fix_shebang "${ED}/usr/share/virt-manager/virt-manager"
-}
-
-pkg_preinst() {
-	gnome2_pkg_preinst
-
-	cd "${ED}"
-	export GNOME2_ECLASS_ICONS=$(find 'usr/share/virt-manager/icons' -maxdepth 1 -mindepth 1 -type d 2> /dev/null)
 }

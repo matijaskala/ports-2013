@@ -1,8 +1,8 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/gcj-jdk/gcj-jdk-4.6.3.ebuild,v 1.2 2012/09/16 13:16:05 chithanh Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-java/gcj-jdk/gcj-jdk-4.6.0.ebuild,v 1.1 2012/06/05 18:32:28 sera Exp $
 
-EAPI="4"
+EAPI="2"
 
 inherit java-vm-2 toolchain-funcs multilib versionator
 
@@ -11,17 +11,15 @@ HOMEPAGE="http://www.gentoo.org/"
 SRC_URI=""
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~ppc64 ~x86 ~x86-linux"
+KEYWORDS="~amd64 ~ia64 ~ppc ~ppc64 ~x86"
 SLOT="0"
 IUSE=""
 
-ECJ_GCJ_SLOT="3.6"
+ECJ_GCJ_SLOT="3.5"
 
-RDEPEND="~sys-devel/gcc-${PV}[gcj,gtk]
+RDEPEND="~sys-devel/gcc-${PV}[gcj]
 	dev-java/ecj-gcj:${ECJ_GCJ_SLOT}"
 DEPEND="${RDEPEND}"
-
-S="${WORKDIR}"
 
 pkg_setup() {
 	if [[ $(gcc-fullversion) != ${PV} ]]; then
@@ -38,14 +36,10 @@ src_install() {
 	# jre lib paths ...
 	local libarch="$(get_system_arch)"
 	local gccbin=$(gcc-config -B)
-	gccbin=${gccbin#"${EPREFIX}"}
 	local gcclib=$(gcc-config -L|cut -d':' -f1)
-	gcclib=${gcclib#"${EPREFIX}"}
 	local gcjhome="/usr/lib/${P}"
 	local gcc_version=$(gcc-fullversion)
 	local gccchost="${CHOST}"
-	local gcjlibdir=$(echo "${EPREFIX}"/usr/$(get_libdir)/gcj-${gcc_version}-*)
-	gcjlibdir=${gcjlibdir#"${EPREFIX}"}
 
 	# correctly install gcj
 	dosym ${gccbin}/gij /usr/bin/gij
@@ -75,9 +69,9 @@ src_install() {
 	dosym ${gccbin}/gtnameserv ${gcjhome}/bin/tnameserv
 	dosym ${gccbin}/gtnameserv ${gcjhome}/jre/bin/tnameserv
 	dodir ${gcjhome}/jre/lib/${libarch}/client
-	dosym ${gcjlibdir}/libjvm.so ${gcjhome}/jre/lib/${libarch}/client/libjvm.so
-	dosym ${gcjlibdir}/libjvm.so ${gcjhome}/jre/lib/${libarch}/server/libjvm.so
-	dosym ${gcjlibdir}/libjawt.so ${gcjhome}/jre/lib/${libarch}/libjawt.so
+	dosym /usr/$(get_libdir)/gcj-${gcc_version}*/libjvm.so ${gcjhome}/jre/lib/${libarch}/client/libjvm.so
+	dosym /usr/$(get_libdir)/gcj-${gcc_version}*/libjvm.so ${gcjhome}/jre/lib/${libarch}/server/libjvm.so
+	dosym /usr/$(get_libdir)/gcj-${gcc_version}*/libjawt.so ${gcjhome}/jre/lib/${libarch}/libjawt.so
 	dosym /usr/share/gcc-data/${gccchost}/${gcc_version}/java/libgcj-${gcc_version/_/-}.jar \
 		${gcjhome}/jre/lib/rt.jar
 	dodir ${gcjhome}/lib
