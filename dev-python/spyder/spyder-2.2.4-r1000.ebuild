@@ -31,6 +31,7 @@ RDEPEND="$(python_abi_depend virtual/python-qt:4[X,svg,webkit])
 DEPEND="${RDEPEND}
 	doc? ( $(python_abi_depend dev-python/sphinx) )"
 
+DOCS="CHANGELOG README"
 PYTHON_MODULES="spyderlib spyderplugins"
 
 src_prepare() {

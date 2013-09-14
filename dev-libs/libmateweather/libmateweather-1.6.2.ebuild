@@ -36,12 +36,12 @@ DEPEND="${RDEPEND}
 DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
 
 pkg_setup() {
+	python_set_active_version 2
 	G2CONF="${G2CONF}
 		--enable-locations-compression
 		--disable-all-translations-in-one-xml
 		$(use_enable python)"
 	if use python; then
-		python_set_active_version 2
 		python_pkg_setup
 	fi
 }

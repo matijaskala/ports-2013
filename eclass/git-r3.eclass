@@ -397,12 +397,16 @@ git-r3_fetch() {
 
 		# split on whitespace
 		local ref=(
-			$(git ls-remote "${r}" "${lookup_ref}")
+			$(git ls-remote "${r}" "${lookup_ref}" || echo __FAIL__)
 		)
 
+		# normally, ref[0] is a hash, so we can do magic strings here
+		[[ ${ref[0]} == __FAIL__ ]] && continue
+
+		local nonshallow=${EGIT_NONSHALLOW}
 		local ref_param=()
 		if [[ ! ${ref[0]} ]]; then
-			local EGIT_NONSHALLOW=1
+			nonshallow=1
 		fi
 
 		# 1. if we need a non-shallow clone and we have a shallow one,
@@ -417,7 +421,7 @@ git-r3_fetch() {
 		#    if that looks beneficial.
 
 		local fetch_command=( git fetch )
-		if [[ ${EGIT_NONSHALLOW} ]]; then
+		if [[ ${nonshallow} ]]; then
 			if [[ -f ${GIT_DIR}/shallow ]]; then
 				ref_param+=( --unshallow )
 			fi

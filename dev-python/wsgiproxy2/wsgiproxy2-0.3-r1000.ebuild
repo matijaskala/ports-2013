@@ -14,7 +14,7 @@ MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A WSGI Proxy with various http client backends"
 HOMEPAGE="https://github.com/gawel/WSGIProxy2 https://pypi.python.org/pypi/WSGIProxy2"
-SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
+SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="MIT"
 SLOT="0"
@@ -33,6 +33,7 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${MY_P}"
 
+DOCS="CHANGES.rst"
 PYTHON_MODULES="wsgiproxy"
 
 src_prepare() {
@@ -40,4 +41,8 @@ src_prepare() {
 
 	# Disable failing tests.
 	sed -e "/^with-doctest = true$/d" -i setup.cfg
+
+	# Disable hanging tests.
+	# https://github.com/gawel/WSGIProxy2/issues/4
+	sed -e "/client = 'requests'/a\\\\    test_chunked = test_form = test_redirect = test_status = lambda self: None" -i wsgiproxy/tests.py
 }

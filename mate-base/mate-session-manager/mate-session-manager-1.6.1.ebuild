@@ -66,6 +66,9 @@ src_prepare() {
 	# see https://bugzilla.gnome.org/show_bug.cgi?id=627903
 	epatch "${FILESDIR}/${PN}-1.2.0-idle-transition.patch"
 
+	# Fix suspend support with systemd
+	epatch "${FILESDIR}/${P}-login1.patch"
+
 	eautoreconf
 	mate_src_prepare
 }

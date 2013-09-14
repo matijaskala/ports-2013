@@ -14,7 +14,7 @@ MY_PN="WTForms"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A flexible forms validation and rendering library for python web development."
-HOMEPAGE="http://wtforms.simplecodes.com/ https://bitbucket.org/simplecodes/wtforms https://pypi.python.org/pypi/WTForms"
+HOMEPAGE="http://wtforms.simplecodes.com/ https://github.com/wtforms/wtforms https://pypi.python.org/pypi/WTForms"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="BSD"
@@ -32,8 +32,6 @@ DOCS="AUTHORS.txt CHANGES.txt README.txt"
 
 src_prepare() {
 	distutils_src_prepare
-
-	epatch "${FILESDIR}/${P}-python-3.patch"
 
 	# Fix compatibility with Python 3.1.
 	cat << EOF >> wtforms/compat.py

@@ -51,7 +51,7 @@ src_install() {
 
 	# Create cache directory for revdep-rebuild
 	keepdir /var/cache/revdep-rebuild
-	use prefix || fowners root:root /var/cache/revdep-rebuild
+	use prefix || fowners root:0 /var/cache/revdep-rebuild
 	fperms 0700 /var/cache/revdep-rebuild
 
 	# remove on Gentoo Prefix platforms where it's broken anyway
