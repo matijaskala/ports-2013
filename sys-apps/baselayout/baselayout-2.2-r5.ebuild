@@ -129,7 +129,7 @@ usrmerge_layout() {
 	for d in bin sbin $(get_all_libdirs) ; do
 		if [ -d "${ROOT}${d}" ] ; then
 			if [ -h "${ROOT}usr/${d}" ] ; then
-				if [ "${SYMLINK_LIB}" = "yes" && "${d}" == "lib" ] ; then
+				if [ "${SYMLINK_LIB}" = "yes" ] && [ "${d}" == "lib" ] ; then
 					mv ${ROOT}${d}/* ${ROOT}usr/${d}/
 					rmdir ${ROOT}${d}
 				else
