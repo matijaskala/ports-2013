@@ -92,6 +92,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch \
+		"${FILESDIR}/${PN}-1.52.0-glibc-2.18.patch" \
 		"${FILESDIR}/${PN}-1.53.0-graph_parallel_c++11.patch" \
 		"${FILESDIR}/${PN}-1.53.0-library_status_c++98.patch" \
 		"${FILESDIR}/${PN}-1.53.0-wave_c++11.patch" \

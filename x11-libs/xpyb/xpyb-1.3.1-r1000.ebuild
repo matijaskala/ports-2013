@@ -20,6 +20,8 @@ RDEPEND=">=x11-libs/libxcb-1.7
 	$(python_abi_depend ">=x11-proto/xcb-proto-1.7.1")"
 DEPEND="${RDEPEND}"
 
+PYTHON_CFLAGS=("2.* + -fno-strict-aliasing")
+
 DOCS=(NEWS README)
 
 pkg_setup() {

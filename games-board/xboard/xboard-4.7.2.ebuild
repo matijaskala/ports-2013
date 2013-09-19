@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-board/xboard/xboard-4.7.2.ebuild,v 1.4 2013/09/07 11:19:26 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/games-board/xboard/xboard-4.7.2.ebuild,v 1.6 2013/09/13 14:32:56 hasufell Exp $
 
 EAPI=5
 inherit autotools eutils fdo-mime gnome2-utils games
@@ -13,7 +13,6 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 IUSE="Xaw3d +default-font gtk nls zippy"
-REQUIRED_USE="?? ( Xaw3d gtk )"
 RESTRICT="test" #124112
 
 RDEPEND="
@@ -22,8 +21,6 @@ RDEPEND="
 	virtual/libintl
 	x11-libs/cairo[X]
 	x11-libs/libXpm
-	Xaw3d? ( x11-libs/libXaw3d )
-	!Xaw3d? ( !gtk? ( x11-libs/libXaw ) )
 	default-font? (
 		media-fonts/font-adobe-100dpi[nls?]
 		media-fonts/font-misc-misc[nls?]
@@ -32,6 +29,8 @@ RDEPEND="
 		x11-libs/libX11
 		x11-libs/libXt
 		x11-libs/libXmu
+		Xaw3d? ( x11-libs/libXaw3d )
+		!Xaw3d? ( x11-libs/libXaw )
 	)
 	gtk? ( x11-libs/gtk+:2 )"
 DEPEND="${RDEPEND}

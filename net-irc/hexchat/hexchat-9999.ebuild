@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-irc/hexchat/hexchat-9999.ebuild,v 1.5 2013/09/01 00:07:45 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-irc/hexchat/hexchat-9999.ebuild,v 1.9 2013/09/14 16:36:18 hasufell Exp $
 
 EAPI=5
 
@@ -43,7 +43,7 @@ RDEPEND="dev-libs/glib:2
 		sexy? ( x11-libs/libsexy )
 		!gtkspell? ( !sexy? ( dev-libs/libxml2 ) )
 	)
-	ssl? ( >=dev-libs/openssl-0.9.8u )
+	ssl? ( dev-libs/openssl:0 )
 	theme-manager? ( dev-lang/mono )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -111,6 +111,7 @@ src_configure() {
 		${myspellconf} \
 		$(use_enable ntlm) \
 		$(use_enable libproxy) \
+		--enable-minimal-flags \
 		$(use_with theme-manager)
 }
 
@@ -159,6 +160,13 @@ pkg_postinst() {
 	elog "Also, some internal hotkeys such as \"Ctrl+l\" (clear screen)"
 	elog "have been removed, but you can add them yourself via:"
 	elog "  Settings -> Keyboard Shortcuts"
+	einfo
+	elog "optional dependencies:"
+	elog "  media-sound/sox (sound playback if you don't have libcanberra"
+	elog "    enabled)"
+	elog "  x11-plugins/hexchat-javascript (javascript support)"
+	elog "  x11-themes/sound-theme-freedesktop (default BEEP sound,"
+	elog "    needs libcanberra enabled)"
 	einfo
 }
 

@@ -9,7 +9,8 @@ SRC_URI="https://www.github.com/${GITHUB_USER}/${PN}/tarball/master -> ${PN}.tar
 
 SLOT="0"
 KEYWORDS="*"
-IUSE=""
+IUSE="+bindist"
+DEPEND="!bindist? ( sys-apps/busybox[static] )"
 
 src_unpack() {
 	unpack ${A}
@@ -19,4 +20,11 @@ src_unpack() {
 src_install() {
 	dodir /etc
 	cp -pPR ${S}/* ${D}/etc/ || die
+	if ! use bindist; then
+		rm ${D}/etc/bin/busybox || die
+		cp /bin/busybox ${D}/etc/bin/busybox || die "/bin/busybox doesn't exist"
+	fi
+	for x in /etc/bin/busybox /etc/init; do
+		[[ -x ${D}${x} ]] || die "${x} won't work, aborting"
+	done
 }

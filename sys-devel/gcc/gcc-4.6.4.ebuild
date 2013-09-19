@@ -15,16 +15,8 @@ inherit multilib eutils
 # of the ebuild itself as it is less complex.
 #
 # -- Daniel Robbins, Apr 19, 2013.
-
-# Note: multi-stage bootstrapping is currently not being performed.
-
-RESTRICT="strip"
-FEATURES=${FEATURES/multilib-strict/}
-
-IUSE="ada cxx fortran f77 f95 objc objc++ openmp" # languages
-IUSE="$IUSE multislot nls nptl vanilla doc multilib altivec libssp hardened" # other stuff
-
-# USE Notes:
+#
+# Other important notes on this ebuild:
 #
 # x86/amd64 architecture support only (for now).
 # mudflap is enabled by default.
@@ -33,8 +25,18 @@ IUSE="$IUSE multislot nls nptl vanilla doc multilib altivec libssp hardened" # o
 # objc-gc is enabled by default when objc is enabled.
 # gcj is not currently supported by this ebuild.
 # graphite is not currently supported by this ebuild.
-# multislot is a good USE flag to set when testing this ebuild.
-# It allows this gcc to co-exist along identical x.y versions.
+# multislot is a good USE flag to set when testing this ebuild;
+#  (It allows this gcc to co-exist along identical x.y versions.)
+# hardened is now supported, but we have deprecated the nopie and
+#  nossp USE flags from gentoo.
+
+# Note: multi-stage bootstrapping is currently not being performed.
+
+RESTRICT="strip"
+FEATURES=${FEATURES/multilib-strict/}
+
+IUSE="ada cxx fortran f77 f95 objc objc++ openmp" # languages
+IUSE="$IUSE multislot nls nptl vanilla doc multilib altivec libssp hardened" # other stuff
 
 if use multislot; then
 	SLOT="${PV}"
@@ -105,7 +107,6 @@ src_unpack() {
 		unpack $SPECS_A || die "specs unpack fail"
 	fi
 	cd $S
-
 	mkdir ${WORKDIR}/objdir
 }
 
@@ -142,8 +143,8 @@ src_prepare() {
 	if use hardened; then
 		local gcc_hard_flags="-DEFAULT_RELRO -DEFAULT_BIND_NOW -DEFAULT_PIE_SSP"
 		sed -i -e "/^HARD_CFLAGS = /s|=|= ${gcc_hard_flags} |" "${S}"/gcc/Makefile.in || die
-		einfo "Applying PIE patches..."
-		epatch "${WORKDIR}"/piepatch/
+		EPATCH_MULTI_MSG="Applying PIE patches..." \
+		epatch "${WORKDIR}"/piepatch/*.patch
 	fi
 }
 
@@ -169,7 +170,11 @@ src_configure() {
 	use libssp || export gcc_cv_libc_provides_ssp=yes
 
 	local branding="Funtoo"
-	use hardened && branding="$branding Hardened, pie=${PIE_VER}"
+	if use hardened; then
+		branding="$branding Hardened ${PVR}, pie-${PIE_VER}"
+	else
+		branding="$branding ${PVR}"
+	fi
 
 	cd ${WORKDIR}/objdir && ../gcc-${PV}/configure \
 		$(use_enable libssp) \
@@ -193,7 +198,7 @@ src_configure() {
 		--enable-secureplt \
 		--disable-lto \
 		--with-bugurl=http://bugs.funtoo.org \
-		--with-pkgversion="$branding ${PVR}" \
+		--with-pkgversion="$branding" \
 		--with-mpfr-include=${S}/mpfr/src \
 		--with-mpfr-lib=${WORKDIR}/objdir/mpfr/src/.libs \
 		$confgcc \

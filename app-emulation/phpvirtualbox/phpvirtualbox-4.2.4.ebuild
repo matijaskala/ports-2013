@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/phpvirtualbox/phpvirtualbox-4.2.4.ebuild,v 1.3 2013/02/16 11:56:04 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/phpvirtualbox/phpvirtualbox-4.2.4.ebuild,v 1.4 2013/09/11 20:29:44 hwoarang Exp $
 
 EAPI="5"
 
@@ -10,7 +10,7 @@ MY_PV="$(replace_version_separator 2 '-')"
 MY_P="${PN}-${MY_PV}"
 
 DESCRIPTION="Web-based administration for VirtualBox in PHP"
-HOMEPAGE="http://phpvirtualbox.googlecode.com"
+HOMEPAGE="https://sourceforge.net/projects/phpvirtualbox/"
 SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.zip"
 
 LICENSE="GPL-2"

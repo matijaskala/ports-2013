@@ -88,10 +88,6 @@ sys-fs/zfs-fuse
 # mask >dev-perl/Net-DNS-0.680.0 due to FL-275
 >dev-perl/Net-DNS-0.680.0
 
-# Oleg Vinichenko (4 Nov 2012)
-# mask dangerous baselayout-2.2.0-r2
-=sys-apps/baselayout-2.2.0-r2
-
 # Oleg Vinichenko (30 Oct 2012 )
 # mask back nano-2.3.1-r2, stage build  issues
 >=app-editors/nano-2.3.1-r2
@@ -111,10 +107,6 @@ sys-fs/zfs-fuse
 =dev-lang/python-2.7.5_pre*
 =dev-lang/python-3.4_pre*
 =dev-lang/python-3.3.2_pre*
-
-# Oleg Vinichenko (2 Apr 2012)
-# mask a live hwids ebuild
-=sys-apps/hwids-99999999
 
 # DO NOT USE this one the ebuild does not include kernel revision dependencies (>= 2.6.38 REQUIRED) and it can affect many of our users 
 # See bug #359445

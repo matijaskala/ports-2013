@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/libvirt/libvirt-1.1.2-r1.ebuild,v 1.3 2013/09/07 19:08:32 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/libvirt/libvirt-1.1.2-r1.ebuild,v 1.5 2013/09/10 18:31:12 cardoe Exp $
 
 EAPI=5
 
@@ -139,10 +139,12 @@ LXC_CONFIG_CHECK="
 	~IPC_NS
 	~PID_NS
 	~NET_NS
+	~USER_NS
 	~DEVPTS_MULTIPLE_INSTANCES
 	~VETH
 	~MACVLAN
 	~POSIX_MQUEUE
+	~SECURITYFS
 	~!GRKERNSEC_CHROOT_MOUNT
 	~!GRKERNSEC_CHROOT_DOUBLE
 	~!GRKERNSEC_CHROOT_PIVOT

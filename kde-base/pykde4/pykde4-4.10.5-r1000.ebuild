@@ -25,10 +25,12 @@ RDEPEND="
 	)
 "
 DEPEND="${RDEPEND}
-	<dev-python/PyQt4-4.10.3
-	<dev-python/sip-4.15
 	sys-devel/libtool
 "
+
+PATCHES=(
+	"${FILESDIR}/${PN}-4.10.5-sip-4.15.patch"
+)
 
 pkg_setup() {
 	python_pkg_setup

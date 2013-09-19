@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/python-utils-r1.eclass,v 1.34 2013/09/08 14:56:29 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/python-utils-r1.eclass,v 1.40 2013/09/17 19:40:56 mgorny Exp $
 
 # @ECLASS: python-utils-r1
 # @MAINTAINER:
@@ -34,7 +34,7 @@ fi
 
 if [[ ! ${_PYTHON_UTILS_R1} ]]; then
 
-inherit multilib toolchain-funcs
+inherit eutils multilib toolchain-funcs
 
 # @ECLASS-VARIABLE: _PYTHON_ALL_IMPLS
 # @INTERNAL
@@ -193,6 +193,18 @@ _python_impl_supported() {
 # Example value:
 # @CODE
 # dev-lang/python:2.7[xml]
+# @CODE
+
+# @ECLASS-VARIABLE: PYTHON_SCRIPTDIR
+# @DEFAULT_UNSET
+# @DESCRIPTION:
+# The location where Python scripts must be installed for current impl.
+#
+# Set and exported on request using python_export().
+#
+# Example value:
+# @CODE
+# /usr/lib/python-exec/python2.7
 # @CODE
 
 # @FUNCTION: python_export
@@ -359,6 +371,11 @@ python_export() {
 				export PYTHON_PKG_DEP
 				debug-print "${FUNCNAME}: PYTHON_PKG_DEP = ${PYTHON_PKG_DEP}"
 				;;
+			PYTHON_SCRIPTDIR)
+				local dir
+				export PYTHON_SCRIPTDIR=${EPREFIX}/usr/lib/python-exec/${impl}
+				debug-print "${FUNCNAME}: PYTHON_SCRIPTDIR = ${PYTHON_SCRIPTDIR}"
+				;;
 			*)
 				die "python_export: unknown variable ${var}"
 		esac
@@ -377,6 +394,10 @@ python_export() {
 python_get_PYTHON() {
 	debug-print-function ${FUNCNAME} "${@}"
 
+	eqawarn '$(python_get_PYTHON) is discouraged since all standard environments' >&2
+	eqawarn 'have PYTHON exported anyway. Please use ${PYTHON} instead.' >&2
+	eqawarn 'python_get_PYTHON will be removed on 2013-10-16.' >&2
+
 	python_export "${@}" PYTHON
 	echo "${PYTHON}"
 }
@@ -390,6 +411,10 @@ python_get_PYTHON() {
 # to use python_export() directly instead.
 python_get_EPYTHON() {
 	debug-print-function ${FUNCNAME} "${@}"
+
+	eqawarn '$(python_get_EPYTHON) is discouraged since all standard environments' >&2
+	eqawarn 'have EPYTHON exported anyway. Please use ${EPYTHON} instead.' >&2
+	eqawarn 'python_get_EPYTHON will be removed on 2013-10-16.' >&2
 
 	python_export "${@}" EPYTHON
 	echo "${EPYTHON}"
@@ -475,6 +500,19 @@ python_get_LIBS() {
 	echo "${PYTHON_LIBS}"
 }
 
+# @FUNCTION: python_get_scriptdir
+# @USAGE: [<impl>]
+# @DESCRIPTION:
+# Obtain and print the script install path for the given
+# implementation. If no implementation is provided, ${EPYTHON} will
+# be used.
+python_get_scriptdir() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	python_export "${@}" PYTHON_SCRIPTDIR
+	echo "${PYTHON_SCRIPTDIR}"
+}
+
 # @FUNCTION: _python_rewrite_shebang
 # @USAGE: [<EPYTHON>] <path>...
 # @INTERNAL
@@ -553,36 +591,36 @@ _python_rewrite_shebang() {
 _python_ln_rel() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	local from=${1}
-	local to=${2}
+	local target=${1}
+	local symname=${2}
 
-	local frpath=${from%/*}/
-	local topath=${to%/*}/
-	local rel_path=
+	local tgpath=${target%/*}/
+	local sympath=${symname%/*}/
+	local rel_target=
 
-	while [[ ${topath} ]]; do
-		local frseg= toseg=
+	while [[ ${sympath} ]]; do
+		local tgseg= symseg=
 
-		while [[ ! ${frseg} && ${frpath} ]]; do
-			frseg=${frpath%%/*}
-			frpath=${frpath#${frseg}/}
+		while [[ ! ${tgseg} && ${tgpath} ]]; do
+			tgseg=${tgpath%%/*}
+			tgpath=${tgpath#${tgseg}/}
 		done
 
-		while [[ ! ${toseg} && ${topath} ]]; do
-			toseg=${topath%%/*}
-			topath=${topath#${toseg}/}
+		while [[ ! ${symseg} && ${sympath} ]]; do
+			symseg=${sympath%%/*}
+			sympath=${sympath#${symseg}/}
 		done
 
-		if [[ ${frseg} != ${toseg} ]]; then
-			rel_path=../${rel_path}${frseg:+${frseg}/}
+		if [[ ${tgseg} != ${symseg} ]]; then
+			rel_target=../${rel_target}${tgseg:+${tgseg}/}
 		fi
 	done
-	rel_path+=${frpath}${1##*/}
+	rel_target+=${tgpath}${target##*/}
 
-	debug-print "${FUNCNAME}: ${from} -> ${to}"
-	debug-print "${FUNCNAME}: rel_path = ${rel_path}"
+	debug-print "${FUNCNAME}: ${symname} -> ${target}"
+	debug-print "${FUNCNAME}: rel_target = ${rel_target}"
 
-	ln -fs "${rel_path}" "${to}"
+	ln -fs "${rel_target}" "${symname}"
 }
 
 # @FUNCTION: python_optimize
@@ -726,22 +764,31 @@ python_newscript() {
 	[[ ${#} -eq 2 ]] || die "Usage: ${FUNCNAME} <path> <new-name>"
 
 	local d=${python_scriptroot:-${DESTTREE}/bin}
-	local INSDESTTREE INSOPTIONS
-
-	insinto "${d}"
-	insopts -m755
+	local wrapd=${d}
 
 	local f=${1}
 	local barefn=${2}
+	local newfn
 
-	local newfn=${barefn}-${EPYTHON}
+	if _python_want_python_exec2; then
+		local PYTHON_SCRIPTDIR
+		python_export PYTHON_SCRIPTDIR
+		d=${PYTHON_SCRIPTDIR#${EPREFIX}}
+		newfn=${barefn}
+	else
+		newfn=${barefn}-${EPYTHON}
+	fi
 
-	debug-print "${FUNCNAME}: ${f} -> ${d}/${newfn}"
-	newins "${f}" "${newfn}" || die
-	_python_rewrite_shebang "${ED}/${d}/${newfn}"
+	(
+		dodir "${wrapd}"
+		exeinto "${d}"
+		newexe "${f}" "${newfn}" || die
+	)
+	_python_rewrite_shebang "${ED%/}/${d}/${newfn}"
 
 	# install the wrapper
-	_python_ln_rel "${ED}"/usr/bin/python-exec "${ED}/${d}/${barefn}" || die
+	_python_ln_rel "${ED%/}"$(_python_get_wrapper_path) \
+		"${ED%/}/${wrapd}/${barefn}" || die
 }
 
 # @ECLASS-VARIABLE: python_moduleroot
@@ -954,6 +1001,40 @@ python_is_python3() {
 	[[ ${impl} ]] || die "python_is_python3: no impl nor EPYTHON"
 
 	[[ ${impl} == python3* ]]
+}
+
+# @FUNCTION: _python_want_python_exec2
+# @INTERNAL
+# @DESCRIPTION:
+# Check whether we should be using python-exec:2.
+_python_want_python_exec2() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	# EAPI 4 lacks slot operators, so just fix it on python-exec:0.
+	[[ ${EAPI} == 4 ]] && return 1
+
+	# Check if we cached the result, or someone put an override.
+	if [[ ! ${_PYTHON_WANT_PYTHON_EXEC2+1} ]]; then
+		has_version 'dev-python/python-exec:2'
+		_PYTHON_WANT_PYTHON_EXEC2=$(( ! ${?} ))
+	fi
+
+	# Non-zero means 'yes', zero means 'no'.
+	[[ ${_PYTHON_WANT_PYTHON_EXEC2} != 0 ]]
+}
+
+# @FUNCTION: _python_get_wrapper_path
+# @INTERNAL
+# @DESCRIPTION:
+# Output path to proper python-exec slot.
+_python_get_wrapper_path() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	if _python_want_python_exec2; then
+		echo /usr/lib/python-exec/python-exec2
+	else
+		echo /usr/bin/python-exec
+	fi
 }
 
 _PYTHON_UTILS_R1=1

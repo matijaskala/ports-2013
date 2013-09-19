@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-9999.ebuild,v 1.151 2013/09/01 15:31:53 tetromino Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-9999.ebuild,v 1.153 2013/09/13 03:03:44 tetromino Exp $
 
 EAPI="5"
 
@@ -61,8 +61,6 @@ NATIVE_DEPEND="
 	openal? ( media-libs/openal:= )
 	gstreamer? ( media-libs/gstreamer:0.10 media-libs/gst-plugins-base:0.10 )
 	X? (
-		x11-libs/libICE
-		x11-libs/libSM
 		x11-libs/libXcursor
 		x11-libs/libXext
 		x11-libs/libXrandr
@@ -176,7 +174,7 @@ src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}"/${PN}-1.5.26-winegcc.patch #260726
 		"${FILESDIR}"/${PN}-1.4_rc2-multilib-portage.patch #395615
-		"${FILESDIR}"/${PN}-1.5.17-osmesa-check.patch #429386
+		"${FILESDIR}"/${PN}-1.7.2-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
 	)
 	[[ ${PV} == "9999" ]] || PATCHES+=(

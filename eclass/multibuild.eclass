@@ -27,7 +27,7 @@ if [[ ! ${_MULTIBUILD} ]]; then
 
 inherit multiprocessing
 
-RDEPEND="userland_GNU? ( >=sys-apps/coreutils-8.5 )"
+DEPEND="userland_GNU? ( >=sys-apps/coreutils-8.5 )"
 
 # @ECLASS-VARIABLE: MULTIBUILD_VARIANTS
 # @DESCRIPTION:

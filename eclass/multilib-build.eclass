@@ -375,5 +375,23 @@ multilib_is_native_abi() {
 	[[ ${ABI} == ${DEFAULT_ABI} ]]
 }
 
+# @FUNCTION: multilib_build_binaries
+# @DESCRIPTION:
+# Determine wheter to build binaries for the current build ABI.
+# Returns true status (0) if the current built ABI is the profile
+# native or COMPLETE_MULTILIB variable is set to yes, otherwise
+# false (1).
+#
+# The COMPLETE_MULTILIB variable can be set by users or profiles
+# when they want to build binaries for none-default ABI so e.g.
+# 32bit binaries on amd64.
+multilib_build_binaries() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	[[ ${#} -eq 0 ]] || die "${FUNCNAME}: too many arguments"
+
+	[[ ${COMPLETE_MULTILIB} == yes ]] || multilib_is_native_abi
+}
+
 _MULTILIB_BUILD=1
 fi

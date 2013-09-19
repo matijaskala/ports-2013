@@ -1,13 +1,13 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright owners: Gentoo Foundation
+#                   Arfrever Frehtes Taifersar Arahesis
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/setools/setools-3.3.8-r2.ebuild,v 1.2 2013/06/27 17:05:33 swift Exp $
 
-EAPI="2"
-PYTHON_DEPEND="python? *"
-SUPPORT_PYTHON_ABIS="1"
-RESTRICT_PYTHON_ABIS="*-jython *-pypy-* 3.*"
+EAPI="5-progress"
+PYTHON_DEPEND="python? ( <<>> )"
+PYTHON_MULTIPLE_ABIS="1"
+PYTHON_RESTRICTED_ABIS="3.* *-jython *-pypy-*"
 
-inherit autotools java-pkg-opt-2 python eutils
+inherit autotools eutils java-pkg-opt-2 python
 
 DESCRIPTION="SELinux policy tools"
 HOMEPAGE="http://www.tresys.com/selinux/selinux_policy_tools.shtml"
@@ -17,7 +17,7 @@ SRC_URI="http://oss.tresys.com/projects/setools/chrome/site/dists/${P}/${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="*"
 IUSE="X debug java python"
 
 DEPEND=">=sys-libs/libsepol-2.1.4
@@ -78,10 +78,19 @@ src_prepare() {
 
 	# Disable broken check for SWIG version.
 	sed -e "s/AC_PROG_SWIG(2.0.0)/AC_PROG_SWIG/" -i configure.ac || die "sed failed"
-	# Use swig1.3
-	sed -e 's/AC_PATH_PROG(\[SWIG\],\[swig\])/AC_PATH_PROG([SWIG],[swig1.3])/' -i m4/ac_pkg_swig.m4 || die "failed to set swig1.3"
-	# Fix build failure due to double __init__.py installation
-	sed -e "s/^wrappedpy_DATA = qpol.py \$(pkgpython_PYTHON)/wrappedpy_DATA = qpol.py/" -i libqpol/swig/python/Makefile.am || die
+	# Use SWIG 1.3.
+	sed -e 's/AC_PATH_PROG(\[SWIG\],\[swig\])/AC_PATH_PROG([SWIG],[swig1.3])/' -i m4/ac_pkg_swig.m4 || die "sed failed"
+	# Fix build failure due to double __init__.py installation.
+	sed -e "s/^wrappedpy_DATA = qpol.py \$(pkgpython_PYTHON)/wrappedpy_DATA = qpol.py/" -i libqpol/swig/python/Makefile.am || die "sed failed"
+
+	# Support Python 2.6.
+	sed -e "/AM_PATH_PYTHON(2.7)/s/2.7/2.6/" -i configure.ac
+	# Fix calculation of PYTHON_LDFLAGS and PYTHON_EXTRA_LIBS.
+	sed \
+		-e "/print('-L' + get_python_lib(1,1), \\\\/s/, / + ' ' + /" \
+		-e "/if test \"\$py_version\" == \"2.7\"; then/,/fi/d" \
+		-e "/print(conf('LOCALMODLIBS'), conf('LIBS'))/s/, / + ' ' + /" \
+		-i m4/ac_python_devel.m4
 
 	local dir
 	for dir in ${PYTHON_DIRS}; do
@@ -91,14 +100,11 @@ src_prepare() {
 		sed -e "/^AM_LDFLAGS =/s/@PYTHON_LDFLAGS@/\$(PYTHON_LDFLAGS)/" -i ${dir}/Makefile.am || die "sed failed"
 	done
 
-	# temporary work around bug #424581 until automake-1.12 is stable (then
-	# depend on it). Need to use MKDIR_P in the mean time for 1.12+.
-	has_version ">=sys-devel/automake-1.12.1" && { find . -name 'Makefile.*' -exec sed -i -e 's:mkdir_p:MKDIR_P:g' {} +  || die; }
+	sed -e "s/mkdir_p/MKDIR_P/" -i **/Makefile.am || die "sed failed"
 
 	eautoreconf
 
-	# Disable byte-compilation of Python modules.
-	echo '#!/bin/sh' > py-compile
+	python_clean_py-compile_files
 
 	epatch_user
 }
@@ -113,14 +119,10 @@ src_configure() {
 		$(use_enable X swig-tcl) \
 		$(use_enable X gui) \
 		$(use_enable debug)
-
-	# work around swig c99 issues.  it does not require
-	# c99 anyway.
-	sed -i -e 's/-std=gnu99//' "${S}/libseaudit/swig/python/Makefile"
 }
 
 src_compile() {
-	emake || die "Failed to build setools"
+	emake
 
 	if use python; then
 		local dir
@@ -134,8 +136,8 @@ src_compile() {
 					pythondir="$(python_get_sitedir)"
 			}
 			python_execute_function \
-				--action-message "Building of Python bindings from ${dir} directory with \$(python_get_implementation) \$(python_get_version)" \
-				--failure-message "Building of Python bindings from ${dir} directory with \$(python_get_implementation) \$(python_get_version) failed" \
+				--action-message "Building of Python bindings from ${dir} directory with \$(python_get_implementation_and_version)" \
+				--failure-message "Building of Python bindings from ${dir} directory with \$(python_get_implementation_and_version) failed" \
 				-s --source-dir ${dir} \
 				building
 		done
@@ -143,7 +145,7 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "emake install failed"
+	emake DESTDIR="${D}" install
 
 	if use python; then
 		local dir
@@ -156,8 +158,8 @@ src_install() {
 					install
 			}
 			python_execute_function \
-				--action-message "Installation of Python bindings from ${dir} directory with \$(python_get_implementation) \$(python_get_version)" \
-				--failure-message "Installation of Python bindings from ${dir} directory with \$(python_get_implementation) \$(python_get_version) failed" \
+				--action-message "Installation of Python bindings from ${dir} directory with \$(python_get_implementation_and_version)" \
+				--failure-message "Installation of Python bindings from ${dir} directory with \$(python_get_implementation_and_version) failed" \
 				-s --source-dir ${dir} \
 				installation
 		done

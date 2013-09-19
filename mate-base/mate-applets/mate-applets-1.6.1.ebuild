@@ -4,9 +4,9 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-PYTHON_DEPEND="2:2.5"
+PYTHON_DEPEND="2"
 
-inherit mate
+inherit mate python
 
 DESCRIPTION="Applets for the MATE Desktop and Panel"
 HOMEPAGE="http://mate-desktop.org"
@@ -47,6 +47,9 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.2.2"
 
 pkg_setup() {
+	python_set_active_version 2
+	python_pkg_setup
+
 	G2CONF="${G2CONF}
 		--libexecdir=/usr/libexec/mate-applets
 		--without-hal
@@ -54,6 +57,17 @@ pkg_setup() {
 		$(use_enable networkmanager)
 		$(use_enable policykit polkit)"
 	DOCS="AUTHORS ChangeLog NEWS README"
+}
+
+src_prepare() {
+	python_convert_shebangs -r 2 .
+
+	#Correct icon name, upstrean PR at:
+	#https://github.com/mate-desktop/mate-applets/pull/54
+	sed -i -e 's:Icon=invest-applet:Icon=mate-invest-applet:' \
+		invest-applet/data/org.mate.applets.InvestApplet.mate-panel-applet.in.in || die
+
+	mate_src_prepare
 }
 
 src_test() {

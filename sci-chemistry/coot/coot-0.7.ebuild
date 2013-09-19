@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/coot/coot-0.7.ebuild,v 1.3 2013/08/26 07:52:29 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/coot/coot-0.7.ebuild,v 1.6 2013/09/18 12:47:20 jlec Exp $
 
 EAPI=4
 
@@ -24,7 +24,7 @@ SRC_URI="
 
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 x86 ~amd64-linux ~x86-linux"
 IUSE="+openmp static-libs test"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
@@ -110,12 +110,6 @@ src_configure() {
 		$(use_enable openmp)
 		)
 	autotools-utils_src_configure
-}
-
-src_compile() {
-	autotools-utils_src_compile
-	python_convert_shebangs $(python_get_version) "${S}"/src/coot_gtk2.py
-	cp "${S}"/src/coot_gtk2.py python/coot.py || die
 }
 
 src_test() {

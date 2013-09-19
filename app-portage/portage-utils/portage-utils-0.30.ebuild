@@ -17,7 +17,7 @@ DEPEND="app-arch/xz-utils"
 RDEPEND=""
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-funtoo-sync.patch"
+	epatch "${FILESDIR}/${PN}-0.21-funtoo-sync.patch"
 }
 
 src_configure() {
