@@ -39,7 +39,7 @@ multilib_layout() {
 	# figure out which paths should be symlinks and which should be directories
 	local dirs syms exp d
 	for libdir in ${libdirs} ; do
-		exp=( {,usr/,usr/local/}${libdir} )
+		exp=( {usr/,usr/local/}${libdir} )
 		for d in "${exp[@]/#/${ROOT}}" ; do
 			# most things should be dirs
 			if [ "${SYMLINK_LIB}" = "yes" ] && [ "${libdir}" = "lib" ] ; then
@@ -129,7 +129,7 @@ usrmerge_layout() {
 	for d in bin sbin $(get_all_libdirs) ; do
 		if [ -d "${ROOT}${d}" ] ; then
 			if [ -h "${ROOT}usr/${d}" ] ; then
-				if [ "${SYMLINK_LIB}" = "yes" ] && ${d} == "lib" ] ; then
+				if [ "${SYMLINK_LIB}" = "yes" ] && "${d}" == "lib" ] ; then
 					mv ${ROOT}${d}/* ${ROOT}usr/${d}/
 					rmdir ${ROOT}${d}
 				else
