@@ -170,6 +170,9 @@ _git-r3_set_gitdir() {
 
 	local repo_name=${1#*://*/}
 
+	# strip the trailing slash
+	repo_name=${repo_name%/}
+
 	# strip common prefixes to make paths more likely to match
 	# e.g. git://X/Y.git vs https://X/git/Y.git
 	# (but just one of the prefixes)
@@ -207,8 +210,10 @@ _git-r3_set_gitdir() {
 		mkdir "${GIT_DIR}" || die
 		git init --bare || die
 
-		# avoid auto-unshallow :)
-		touch "${GIT_DIR}"/shallow || die
+		if [[ ! ${EGIT_NONSHALLOW} ]]; then
+			# avoid auto-unshallow :)
+			touch "${GIT_DIR}"/shallow || die
+		fi
 	fi
 }
 

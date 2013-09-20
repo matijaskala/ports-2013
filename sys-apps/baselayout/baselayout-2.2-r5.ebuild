@@ -127,7 +127,9 @@ multilib_layout() {
 usrmerge_layout() {
 	local d
 	for d in bin sbin $(get_all_libdirs) ; do
-		if [ -d "${ROOT}${d}" ] ; then
+		if [ -h "${ROOT}${d}" ] ; then
+			continue
+		elif [ -d "${ROOT}${d}" ] ; then
 			if [ -h "${ROOT}usr/${d}" ] ; then
 				if [ "${SYMLINK_LIB}" = "yes" ] && [ "${d}" == "lib" ] ; then
 					mv ${ROOT}${d}/* ${ROOT}usr/${d}/
