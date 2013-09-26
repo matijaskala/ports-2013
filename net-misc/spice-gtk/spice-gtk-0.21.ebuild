@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/spice-gtk/spice-gtk-0.21.ebuild,v 1.1 2013/09/19 16:21:23 cardoe Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/spice-gtk/spice-gtk-0.21.ebuild,v 1.4 2013/09/23 19:12:10 ago Exp $
 
 EAPI=5
 GCONF_DEBUG="no"
@@ -20,7 +20,7 @@ HOMEPAGE="http://spice-space.org http://gitorious.org/spice-gtk"
 LICENSE="LGPL-2.1"
 SLOT="0"
 SRC_URI="http://spice-space.org/download/gtk/${P}.tar.bz2"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="dbus doc gstreamer gtk3 +introspection policykit pulseaudio
 python sasl smartcard static-libs usbredir vala"
 
@@ -77,6 +77,11 @@ GTK2_BUILDDIR="${WORKDIR}/${P}_gtk2"
 GTK3_BUILDDIR="${WORKDIR}/${P}_gtk3"
 
 src_prepare() {
+
+	epatch "${FILESDIR}"/spice-gtk-0.21-fix-g-clear-pointer-on-old-glib.patch
+
+	epatch_user
+
 	use vala && vala_src_prepare
 	mkdir ${GTK2_BUILDDIR} ${GTK3_BUILDDIR} || die
 }

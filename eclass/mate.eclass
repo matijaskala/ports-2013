@@ -10,7 +10,7 @@
 # Exports portage base functions used by ebuilds written for packages using the
 # MATE framework. For additional functions, see mate-utils.eclass.
 
-inherit autotools fdo-mime libtool mate-desktop.org mate-utils
+inherit autotools fdo-mime libtool mate-desktop.org mate-utils eutils
 
 DEPEND="dev-util/gtk-doc
 		dev-util/gtk-doc-am"
@@ -91,6 +91,7 @@ mate_src_unpack() {
 # Prepare environment for build, fix build of scrollkeeper documentation,
 # run elibtoolize.
 mate_src_prepare() {
+	epatch_user
 	# Prevent assorted access violations and test failures
 	mate_environment_reset
 
@@ -116,6 +117,11 @@ mate_src_prepare() {
 			eautopoint --force
 		fi
 
+		if grep -q "^A[CM]_PROG_LIBTOOL" "${mate_conf_in}" || grep -q "^LT_INIT" "${mate_conf_in}"; then
+			_elibtoolize --copy --force --install
+		fi
+
+
 		if grep -q "^AC_PROG_INTLTOOL" "${mate_conf_in}" || grep -q "^IT_PROG_INTLTOOL" "${mate_conf_in}"; then
 			mkdir -p "${S}/m4"
 			autotools_run_tool intltoolize --automake --copy --force || die
@@ -130,11 +136,7 @@ mate_src_prepare() {
 			autotools_run_tool mate-doc-common --copy || die
 		fi
 
-		if grep -q "^A[CM]_PROG_LIBTOOL" "${mate_conf_in}" || grep -q "^LT_INIT" "${mate_conf_in}"; then
-			_elibtoolize --copy --force --install
-		fi
-
-	eaclocal
+		eaclocal
 		eautoconf
 		eautoheader
 		eautomake

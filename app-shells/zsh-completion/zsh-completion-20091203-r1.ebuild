@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-shells/zsh-completion/zsh-completion-20091203-r1.ebuild,v 1.5 2012/06/04 22:17:40 alexxy Exp $
 
+inherit eutils
+
 MY_PV="20080310"
 DESCRIPTION="Programmable Completion for zsh (includes emerge and ebuild commands)"
 HOMEPAGE="http://gentoo.org"
@@ -21,6 +23,7 @@ src_unpack() {
 	unpack ${A}
 	cd "${S}"
 	rm _eix
+	epatch "${FILESDIR}"/zsh-completion-eselect-20130926.patch
 }
 
 src_install() {

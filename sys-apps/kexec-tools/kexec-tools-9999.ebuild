@@ -1,39 +1,70 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kexec-tools/kexec-tools-9999.ebuild,v 1.7 2011/09/21 08:31:54 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/kexec-tools/kexec-tools-9999.ebuild,v 1.8 2013/09/21 11:35:53 jlec Exp $
 
-EAPI=2
+EAPI=5
 
-EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
-inherit git-2 autotools
+AUTOTOOLS_AUTORECONF=true
+
+inherit autotools-utils flag-o-matic git-2 linux-info systemd
 
 DESCRIPTION="Load another kernel from the currently executing Linux kernel"
 HOMEPAGE="http://kernel.org/pub/linux/utils/kernel/kexec/"
 SRC_URI=""
+EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="xen zlib"
-DEPEND="zlib? ( sys-libs/zlib )"
+IUSE="booke lzma xen zlib"
+
+DEPEND="
+	lzma? ( app-arch/xz-utils )
+	zlib? ( sys-libs/zlib )"
 RDEPEND="${DEPEND}"
 
-src_unpack() {
-	git-2_src_unpack
-	cd "${S}"
-	eautoreconf
+CONFIG_CHECK="~KEXEC"
+
+PATCHES=( "${FILESDIR}"/${PN}-2.0.4-disable-kexec-test.patch )
+
+pkg_setup() {
+	# GNU Make's $(COMPILE.S) passes ASFLAGS to $(CCAS), CCAS=$(CC)
+	export ASFLAGS="${CCASFLAGS}"
+	# to disable the -fPIE -pie in the hardened compiler
+	if gcc-specs-pie ; then
+		filter-flags -fPIE
+		append-ldflags -nopie
+	fi
 }
 
 src_configure() {
-	econf $(use_with zlib) $(use_with xen)
+	local myeconfargs=(
+		$(use_with booke)
+		$(use_with lzma)
+		$(use_with xen)
+		$(use_with zlib)
+		)
+	autotools-utils_src_configure
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "make install failed"
+	autotools-utils_src_install
 
-	doman kexec/kexec.8
-	dodoc News AUTHORS TODO doc/*.txt
+	dodoc "${FILESDIR}"/README.Gentoo
 
-	newinitd "${FILESDIR}"/kexec.init kexec || die
-	newconfd "${FILESDIR}"/kexec.conf kexec || die
+	newinitd "${FILESDIR}"/kexec.init-${PV} kexec
+	newconfd "${FILESDIR}"/kexec.conf-${PV} kexec
+
+	insinto /etc
+	doins "${FILESDIR}"/kexec.conf
+
+	systemd_dounit "${FILESDIR}"/kexec.service
+}
+
+pkg_postinst() {
+	if systemd_is_booted || has_version sys-apps/systemd; then
+		elog "For systemd support the new config file is"
+		elog "   /etc/kexec.conf"
+		elog "Please adopt it to your needs as there is no autoconfig anymore"
+	fi
 }

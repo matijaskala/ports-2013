@@ -1,0 +1,247 @@
+From 0cb71614dc9c275691964603024495cdf12f43ad Mon Sep 17 00:00:00 2001
+From: infirit <infirit@gmail.com>
+Date: Mon, 26 Aug 2013 17:10:47 +0200
+Subject: [PATCH] Rename .desktop files to avoid file collision with Gnome2
+
+---
+ capplets/accessibility/at-properties/Makefile.am               |  2 +-
+ .../accessibility/at-properties/at-properties.desktop.in.in    | 10 ----------
+ .../at-properties/mate-at-properties.desktop.in.in             | 10 ++++++++++
+ capplets/display/Makefile.am                                   |  2 +-
+ capplets/display/display-properties.desktop.in.in              | 10 ----------
+ capplets/display/mate-display-properties.desktop.in.in         | 10 ++++++++++
+ capplets/keyboard/Makefile.am                                  |  2 +-
+ capplets/keyboard/keyboard.desktop.in.in                       | 10 ----------
+ capplets/keyboard/mate-keyboard.desktop.in.in                  | 10 ++++++++++
+ capplets/windows/Makefile.am                                   |  2 +-
+ capplets/windows/mate-window-properties.desktop.in.in          | 10 ++++++++++
+ capplets/windows/window-properties.desktop.in.in               | 10 ----------
+ configure.ac                                                   |  8 ++++----
+ 13 files changed, 48 insertions(+), 48 deletions(-)
+ delete mode 100644 capplets/accessibility/at-properties/at-properties.desktop.in.in
+ create mode 100644 capplets/accessibility/at-properties/mate-at-properties.desktop.in.in
+ delete mode 100644 capplets/display/display-properties.desktop.in.in
+ create mode 100644 capplets/display/mate-display-properties.desktop.in.in
+ delete mode 100644 capplets/keyboard/keyboard.desktop.in.in
+ create mode 100644 capplets/keyboard/mate-keyboard.desktop.in.in
+ create mode 100644 capplets/windows/mate-window-properties.desktop.in.in
+ delete mode 100644 capplets/windows/window-properties.desktop.in.in
+
+diff --git a/capplets/accessibility/at-properties/Makefile.am b/capplets/accessibility/at-properties/Makefile.am
+index ecff71a..178a316 100644
+--- a/capplets/accessibility/at-properties/Makefile.am
++++ b/capplets/accessibility/at-properties/Makefile.am
+@@ -8,7 +8,7 @@ mate_at_properties_LDFLAGS = -export-dynamic
+ @INTLTOOL_DESKTOP_RULE@
+ 
+ desktopdir = $(datadir)/applications
+-Desktop_in_files = at-properties.desktop.in
++Desktop_in_files = mate-at-properties.desktop.in
+ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
+ 
+ pixmapdir  = $(pkgdatadir)/pixmaps
+diff --git a/capplets/accessibility/at-properties/at-properties.desktop.in.in b/capplets/accessibility/at-properties/at-properties.desktop.in.in
+deleted file mode 100644
+index ff4cd37..0000000
+--- a/capplets/accessibility/at-properties/at-properties.desktop.in.in
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Desktop Entry]
+-_Name=Assistive Technologies
+-_Comment=Choose which accessibility features to enable when you log in
+-Exec=mate-at-properties
+-Icon=preferences-desktop-accessibility
+-Terminal=false
+-Type=Application
+-StartupNotify=true
+-Categories=GTK;Settings;
+-OnlyShowIn=MATE;
+diff --git a/capplets/accessibility/at-properties/mate-at-properties.desktop.in.in b/capplets/accessibility/at-properties/mate-at-properties.desktop.in.in
+new file mode 100644
+index 0000000..ff4cd37
+--- /dev/null
++++ b/capplets/accessibility/at-properties/mate-at-properties.desktop.in.in
+@@ -0,0 +1,10 @@
++[Desktop Entry]
++_Name=Assistive Technologies
++_Comment=Choose which accessibility features to enable when you log in
++Exec=mate-at-properties
++Icon=preferences-desktop-accessibility
++Terminal=false
++Type=Application
++StartupNotify=true
++Categories=GTK;Settings;
++OnlyShowIn=MATE;
+diff --git a/capplets/display/Makefile.am b/capplets/display/Makefile.am
+index 972f271..4a304a9 100644
+--- a/capplets/display/Makefile.am
++++ b/capplets/display/Makefile.am
+@@ -48,7 +48,7 @@ iconssvgdir = $(datadir)/icons/hicolor/scalable/apps
+ dist_iconssvg_DATA = icons/scalable/mate-preferences-desktop-display.svg
+ 
+ desktopdir = $(datadir)/applications
+-Desktop_in_files = display-properties.desktop.in
++Desktop_in_files = mate-display-properties.desktop.in
+ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
+ 
+ AM_CPPFLAGS   = $(DISPLAY_CAPPLET_CFLAGS) \
+diff --git a/capplets/display/display-properties.desktop.in.in b/capplets/display/display-properties.desktop.in.in
+deleted file mode 100644
+index 607e354..0000000
+--- a/capplets/display/display-properties.desktop.in.in
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Desktop Entry]
+-_Name=Monitors
+-_Comment=Change resolution and position of monitors
+-Exec=mate-display-properties
+-Icon=mate-preferences-desktop-display
+-Terminal=false
+-Type=Application
+-StartupNotify=true
+-Categories=GTK;Settings;HardwareSettings;
+-OnlyShowIn=MATE;
+diff --git a/capplets/display/mate-display-properties.desktop.in.in b/capplets/display/mate-display-properties.desktop.in.in
+new file mode 100644
+index 0000000..607e354
+--- /dev/null
++++ b/capplets/display/mate-display-properties.desktop.in.in
+@@ -0,0 +1,10 @@
++[Desktop Entry]
++_Name=Monitors
++_Comment=Change resolution and position of monitors
++Exec=mate-display-properties
++Icon=mate-preferences-desktop-display
++Terminal=false
++Type=Application
++StartupNotify=true
++Categories=GTK;Settings;HardwareSettings;
++OnlyShowIn=MATE;
+diff --git a/capplets/keyboard/Makefile.am b/capplets/keyboard/Makefile.am
+index 58cbb1a..0b48fbb 100644
+--- a/capplets/keyboard/Makefile.am
++++ b/capplets/keyboard/Makefile.am
+@@ -27,7 +27,7 @@ dist_ui_DATA = mate-keyboard-properties-a11y-notifications.ui \
+                mate-keyboard-properties-options-dialog.ui
+ 
+ desktopdir = $(datadir)/applications
+-Desktop_in_files = keyboard.desktop.in
++Desktop_in_files = mate-keyboard.desktop.in
+ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
+ 
+ AM_CPPFLAGS = \
+diff --git a/capplets/keyboard/keyboard.desktop.in.in b/capplets/keyboard/keyboard.desktop.in.in
+deleted file mode 100644
+index 2c9cb01..0000000
+--- a/capplets/keyboard/keyboard.desktop.in.in
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Desktop Entry]
+-_Name=Keyboard
+-_Comment=Set your keyboard preferences
+-Exec=mate-keyboard-properties
+-Icon=preferences-desktop-keyboard
+-Terminal=false
+-Type=Application
+-StartupNotify=true
+-Categories=GTK;Settings;HardwareSettings;
+-OnlyShowIn=MATE;
+diff --git a/capplets/keyboard/mate-keyboard.desktop.in.in b/capplets/keyboard/mate-keyboard.desktop.in.in
+new file mode 100644
+index 0000000..2c9cb01
+--- /dev/null
++++ b/capplets/keyboard/mate-keyboard.desktop.in.in
+@@ -0,0 +1,10 @@
++[Desktop Entry]
++_Name=Keyboard
++_Comment=Set your keyboard preferences
++Exec=mate-keyboard-properties
++Icon=preferences-desktop-keyboard
++Terminal=false
++Type=Application
++StartupNotify=true
++Categories=GTK;Settings;HardwareSettings;
++OnlyShowIn=MATE;
+diff --git a/capplets/windows/Makefile.am b/capplets/windows/Makefile.am
+index ff35737..1f50f07 100644
+--- a/capplets/windows/Makefile.am
++++ b/capplets/windows/Makefile.am
+@@ -15,7 +15,7 @@ uidir   = $(pkgdatadir)/ui
+ ui_DATA = mate-window-properties.ui
+ 
+ desktopdir = $(datadir)/applications
+-Desktop_in_files = window-properties.desktop.in
++Desktop_in_files = mate-window-properties.desktop.in
+ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
+ 
+ AM_CPPFLAGS   = $(MATECC_CAPPLETS_CFLAGS)					\
+diff --git a/capplets/windows/mate-window-properties.desktop.in.in b/capplets/windows/mate-window-properties.desktop.in.in
+new file mode 100644
+index 0000000..0d72d6b
+--- /dev/null
++++ b/capplets/windows/mate-window-properties.desktop.in.in
+@@ -0,0 +1,10 @@
++[Desktop Entry]
++_Name=Windows
++_Comment=Set your window properties
++Exec=mate-window-properties
++Icon=preferences-system-windows
++Terminal=false
++Type=Application
++StartupNotify=true
++Categories=GTK;Settings;DesktopSettings;
++OnlyShowIn=MATE;
+diff --git a/capplets/windows/window-properties.desktop.in.in b/capplets/windows/window-properties.desktop.in.in
+deleted file mode 100644
+index 0d72d6b..0000000
+--- a/capplets/windows/window-properties.desktop.in.in
++++ /dev/null
+@@ -1,10 +0,0 @@
+-[Desktop Entry]
+-_Name=Windows
+-_Comment=Set your window properties
+-Exec=mate-window-properties
+-Icon=preferences-system-windows
+-Terminal=false
+-Type=Application
+-StartupNotify=true
+-Categories=GTK;Settings;DesktopSettings;
+-OnlyShowIn=MATE;
+diff --git a/configure.ac b/configure.ac
+index 8d6b0f5..1d917d4 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -311,7 +311,7 @@ capplets/about-me/Makefile
+ capplets/about-me/mate-about-me.desktop.in
+ capplets/about-me/icons/Makefile
+ capplets/accessibility/Makefile
+-capplets/accessibility/at-properties/at-properties.desktop.in
++capplets/accessibility/at-properties/mate-at-properties.desktop.in
+ capplets/accessibility/at-properties/Makefile
+ capplets/appearance/Makefile
+ capplets/appearance/data/Makefile
+@@ -322,18 +322,18 @@ capplets/default-applications/Makefile
+ capplets/default-applications/mate-default-applications-properties.desktop.in
+ capplets/default-applications/mate-default-applications.pc
+ capplets/display/Makefile
+-capplets/display/display-properties.desktop.in
++capplets/display/mate-display-properties.desktop.in
+ capplets/keybindings/Makefile
+ capplets/keybindings/mate-keybindings.pc
+ capplets/keybindings/mate-keybinding.desktop.in
+ capplets/keyboard/Makefile
+-capplets/keyboard/keyboard.desktop.in
++capplets/keyboard/mate-keyboard.desktop.in
+ capplets/mouse/Makefile
+ capplets/mouse/mate-settings-mouse.desktop.in
+ capplets/network/Makefile
+ capplets/network/mate-network-properties.desktop.in
+ capplets/windows/Makefile
+-capplets/windows/window-properties.desktop.in
++capplets/windows/mate-window-properties.desktop.in
+ font-viewer/Makefile
+ font-viewer/mate-font-viewer.desktop.in
+ help/Makefile
+-- 
+1.8.1.6
+

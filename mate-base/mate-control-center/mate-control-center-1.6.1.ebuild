@@ -48,8 +48,7 @@ RDEPEND="x11-libs/libXft
 	x11-libs/libXxf86misc
 	x11-libs/libXrandr
 	x11-libs/libXrender
-	x11-libs/libXcursor
-	!<gnome-base/gnome-control-center-3"
+	x11-libs/libXcursor"
 
 DEPEND="${RDEPEND}
 	x11-proto/scrnsaverproto
@@ -74,4 +73,10 @@ pkg_setup() {
 		--disable-update-mimedb
 		--disable-appindicator"
 	DOCS="AUTHORS ChangeLog NEWS README TODO"
+}
+
+src_prepare() {
+	epatch "${FILESDIR}/${P}-collision-fix.patch"
+	eautoreconf
+	mate_src_prepare
 }

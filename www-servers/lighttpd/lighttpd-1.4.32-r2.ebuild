@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-servers/lighttpd/lighttpd-1.4.32-r2.ebuild,v 1.10 2013/09/14 10:56:16 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-servers/lighttpd/lighttpd-1.4.32-r2.ebuild,v 1.12 2013/09/22 09:36:05 pacho Exp $
 
 EAPI="4"
 inherit base autotools eutils depend.php readme.gentoo user systemd

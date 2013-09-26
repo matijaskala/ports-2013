@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-azoth/lc-azoth-9999.ebuild,v 1.6 2013/08/10 19:11:44 maksbotan Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-azoth/lc-azoth-9999.ebuild,v 1.8 2013/09/25 11:10:59 pinkbyte Exp $
 
 EAPI="5"
 
@@ -13,20 +13,24 @@ KEYWORDS=""
 IUSE="debug doc astrality +acetamide +adiumstyles +autoidler +autopaste +birthdaynotifier
 		+chathistory +crypt +depester +embedmedia +herbicide +hili +isterique
 		+juick +keeso +lastseen	+metacontacts media +msn +murm +latex +nativeemoticons
-		+otroid +p100q +spell shx +standardstyles +vader +xmpp +xtazy"
+		+otroid +p100q +spell shx +standardstyles +vader +woodpecker +xmpp +xtazy"
 
 COMMON_DEPEND="~app-leechcraft/lc-core-${PV}
+		dev-libs/qjson
 		dev-qt/qtwebkit:4
-		dev-qt/qtmultimedia:4
 		autoidler? ( x11-libs/libXScrnSaver )
 		astrality? ( net-libs/telepathy-qt )
 		otroid? ( net-libs/libotr )
 		media? ( dev-qt/qtmultimedia:4 )
 		msn? ( net-libs/libmsn )
 		spell? ( app-text/hunspell )
-		xmpp? ( =net-libs/qxmpp-9999 media-libs/speex )
+		woodpecker? ( dev-libs/kqoauth )
+		xmpp? (
+			=net-libs/qxmpp-9999
+			media? ( =net-libs/qxmpp-9999[speex] )
+		)
 		xtazy? (
-			app-leechcraft/lc-xtazy
+			~app-leechcraft/lc-xtazy-${PV}
 			dev-qt/qtdbus:4
 		)
 		crypt? ( app-crypt/qca app-crypt/qca-gnupg )"
@@ -78,6 +82,7 @@ src_configure() {
 		$(cmake-utils_use_enable shx AZOTH_SHX)
 		$(cmake-utils_use_enable standardstyles AZOTH_STANDARDSTYLES)
 		$(cmake-utils_use_enable vader AZOTH_VADER)
+		$(cmake-utils_use_enable woodpecker AZOTH_WOODPECKER)
 		$(cmake-utils_use_enable xmpp AZOTH_XOOX)
 		$(cmake-utils_use_enable xtazy AZOTH_XTAZY)
 	)

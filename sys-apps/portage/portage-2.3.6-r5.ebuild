@@ -9,7 +9,7 @@ inherit eutils python
 DESCRIPTION="Portage is the package management and distribution system for Gentoo"
 HOMEPAGE="http://www.gentoo.org/proj/en/portage/index.xml"
 LICENSE="GPL-2"
-KEYWORDS="*"
+KEYWORDS="~*"
 SLOT="0"
 IUSE="build doc epydoc +ipc linguas_pl linguas_ru pypy2_0 python2 python3 selinux xattr"
 GITHUB_REPO="portage-funtoo"
@@ -146,6 +146,7 @@ src_prepare() {
 		fi
 		epatch "${WORKDIR}/${PN}-${PATCHVER}.patch"
 	fi
+	epatch "${FILESDIR}/partylinux-usr-merge.patch"
 	einfo "Setting portage.VERSION to ${PVR} ..."
 	sed -e "s/^VERSION=.*/VERSION=\"${PVR}\"/" -i pym/portage/__init__.py || \
 		die "Failed to patch portage.VERSION"
@@ -248,6 +249,7 @@ src_install() {
 
 	# Use dodoc for compression, since the Makefile doesn't do that.
 	dodoc "${S}"/{NEWS,RELEASE-NOTES} || die
+	dosym /var/db/pkg /usr/share/portage/
 
 	if use linguas_pl; then
 		doman -i18n=pl "${S_PL}"/man/pl/*.[0-9] || die

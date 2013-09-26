@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-video-savage/xf86-video-savage-2.3.6.ebuild,v 1.8 2012/12/30 14:50:36 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-video-savage/xf86-video-savage-2.3.6.ebuild,v 1.9 2013/09/25 14:06:01 chithanh Exp $
 
 EAPI=4
 XORG_DRI=dri

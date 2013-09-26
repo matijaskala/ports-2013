@@ -61,6 +61,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-fix-parameter-modifier-crash.patch
 	epatch "${FILESDIR}"/${PN}-5.0.2-texinfo-5.1.patch
 
+	cp "${FILESDIR}"/zshrc-1 "${T}"/zshrc || die
+
 	cp "${FILESDIR}"/zprofile-1 "${T}"/zprofile || die
 	eprefixify "${T}"/zprofile || die
 	if use prefix ; then
@@ -135,11 +137,13 @@ src_install() {
 	emake DESTDIR="${D}" install install.info
 
 	insinto /etc/zsh
+	doins "${T}"/zshrc
 	doins "${T}"/zprofile
 
 	keepdir /usr/share/zsh/site-functions
 	insinto /usr/share/zsh/${PV%_*}/functions/Prompts
 	newins "${FILESDIR}"/prompt_gentoo_setup-1 prompt_gentoo_setup
+	newins "${FILESDIR}"/prompt_party_setup-1 prompt_party_setup
 
 	# install miscellaneous scripts; bug #54520
 	local i
@@ -168,11 +172,14 @@ pkg_postinst() {
 	if [[ -z ${REPLACING_VERSIONS} ]] ; then
 		# should link to http://www.gentoo.org/doc/en/zsh.xml
 		echo
-		elog "If you want to enable Portage completions and Gentoo prompt,"
+		elog "If you want to enable partylinux prompt, add"
+		elog "	prompt party"
+		elog "to your ~/.zshrc"
+		echo
+		elog "If you want to enable Portage completions,"
 		elog "emerge app-shells/zsh-completion and add"
-		elog "	autoload -U compinit promptinit"
+		elog "	autoload -U compinit"
 		elog "	compinit"
-		elog "	promptinit; prompt gentoo"
 		elog "to your ~/.zshrc"
 		echo
 		elog "Also, if you want to enable cache for the completions, add"

@@ -3,6 +3,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5-progress"
+PYTHON_BDEPEND="test? ( <<[{2.*-cpython 2.*-pypy-*}sqlite]>> )"
+PYTHON_DEPEND="<<[{*-cpython *-pypy-*}sqlite?]>>"
 PYTHON_MULTIPLE_ABIS="1"
 PYTHON_TESTS_RESTRICTED_ABIS="3.* *-jython"
 DISTUTILS_SRC_TEST="nosetests"
@@ -13,7 +15,7 @@ MY_PN="SQLAlchemy"
 MY_P="${MY_PN}-${PV/_}"
 
 DESCRIPTION="Python SQL toolkit and Object Relational Mapper"
-HOMEPAGE="http://www.sqlalchemy.org/ http://pypi.python.org/pypi/SQLAlchemy"
+HOMEPAGE="http://www.sqlalchemy.org/ https://pypi.python.org/pypi/SQLAlchemy"
 SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"
@@ -21,14 +23,12 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="doc examples firebird mssql mysql postgres +sqlite test"
 
-RDEPEND="$(python_abi_depend dev-python/setuptools)
+DEPEND="$(python_abi_depend dev-python/setuptools)
 	firebird? ( $(python_abi_depend -e "3.* *-jython *-pypy-*" dev-python/kinterbasdb) )
 	mssql? ( $(python_abi_depend -e "3.* *-jython *-pypy-*" dev-python/pymssql) )
 	mysql? ( $(python_abi_depend -e "3.* *-jython" dev-python/mysql-python) )
-	postgres? ( $(python_abi_depend -e "*-jython *-pypy-*" dev-python/psycopg:2) )
-	sqlite? ( $(python_abi_depend -e "*-jython" virtual/python-sqlite[external]) )"
-DEPEND="${RDEPEND}
-	test? ( $(python_abi_depend -e "3.* *-jython" virtual/python-sqlite[external]) )"
+	postgres? ( $(python_abi_depend -e "*-jython *-pypy-*" dev-python/psycopg:2) )"
+RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 

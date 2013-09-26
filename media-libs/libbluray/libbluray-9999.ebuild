@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libbluray/libbluray-9999.ebuild,v 1.11 2012/08/27 06:19:51 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/libbluray/libbluray-9999.ebuild,v 1.13 2013/09/23 20:00:32 radhermit Exp $
 
-EAPI=4
+EAPI=5
 
-inherit autotools java-pkg-opt-2 git-2 flag-o-matic eutils
+inherit autotools java-pkg-opt-2 git-r3 flag-o-matic eutils
 
 EGIT_REPO_URI="git://git.videolan.org/libbluray.git"
 
@@ -14,7 +14,7 @@ HOMEPAGE="http://www.videolan.org/developers/libbluray.html"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
-IUSE="aacs java static-libs utils +xml"
+IUSE="aacs java static-libs +truetype utils +xml"
 
 COMMON_DEPEND="
 	xml? ( dev-libs/libxml2 )
@@ -22,44 +22,49 @@ COMMON_DEPEND="
 RDEPEND="
 	${COMMON_DEPEND}
 	aacs? ( media-libs/libaacs )
-	java? ( >=virtual/jre-1.6 )
+	java? (
+		truetype? ( media-libs/freetype:2 )
+		>=virtual/jre-1.6
+	)
 "
 DEPEND="
 	${COMMON_DEPEND}
 	java? (
+		truetype? ( media-libs/freetype:2 )
 		>=virtual/jdk-1.6
 		dev-java/ant-core
 	)
 	virtual/pkgconfig
 "
 
-REQUIRED_USE="utils? ( static-libs )"
-
 DOCS=( ChangeLog README.txt )
 
 src_prepare() {
-	use java && export JDK_HOME="$(java-config -g JAVA_HOME)"
-	eautoreconf
+	if use java ; then
+		export JDK_HOME="$(java-config -g JAVA_HOME)"
 
-	java-pkg-opt-2_src_prepare
+		# don't install a duplicate jar file
+		sed -i '/^jar_DATA/d' src/Makefile.am || die
+
+		java-pkg-opt-2_src_prepare
+	fi
+	eautoreconf
 }
 
 src_configure() {
-	local myconf=""
+	local myconf
 	if use java; then
 		export JAVACFLAGS="$(java-pkg_javac-args)"
 		append-cflags "$(java-pkg_get-jni-cflags)"
-		myconf="--with-jdk=${JDK_HOME}"
+		myconf="$(use_with truetype freetype)"
 	fi
 
-	use xml && myconf+=" --enable-libxml2"
-
 	econf \
-		--disable-debug \
 		--disable-optimizations \
+		$(use_enable utils examples) \
 		$(use_enable java bdjava) \
 		$(use_enable static-libs static) \
-		$(use_enable utils examples) \
+		$(use_with xml libxml2) \
 		${myconf}
 }
 
@@ -77,7 +82,7 @@ src_install() {
 	fi
 
 	if use java; then
-		java-pkg_dojar "${S}/src/.libs/${PN}.jar"
+		java-pkg_dojar "${S}"/src/.libs/${PN}.jar
 		doenvd "${FILESDIR}"/90${PN}
 	fi
 

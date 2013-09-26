@@ -1,10 +1,10 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/pianobar/pianobar-9999.ebuild,v 1.5 2013/05/25 20:53:13 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/pianobar/pianobar-9999.ebuild,v 1.6 2013/09/20 20:31:59 radhermit Exp $
 
 EAPI="5"
 
-inherit toolchain-funcs flag-o-matic eutils multilib git-2
+inherit toolchain-funcs flag-o-matic multilib git-r3
 
 EGIT_REPO_URI="git://github.com/PromyLOPh/pianobar.git"
 
@@ -13,7 +13,6 @@ HOMEPAGE="http://6xq.net/projects/pianobar/"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
 IUSE="+aac mp3 static-libs"
 
 RDEPEND="media-libs/libao
@@ -27,8 +26,11 @@ DEPEND="${RDEPEND}
 
 REQUIRED_USE="|| ( aac mp3 )"
 
-# Only releases are tested since patches required for testing often break
-RESTRICT="test"
+src_prepare() {
+	sed -e '/@echo /d' \
+		-e 's/@${CC}/${CC}/' \
+		-i Makefile || die
+}
 
 src_compile() {
 	local myconf="DYNLINK=1"

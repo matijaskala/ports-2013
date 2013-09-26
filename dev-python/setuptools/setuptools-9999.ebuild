@@ -4,8 +4,7 @@
 
 EAPI="5-progress"
 PYTHON_MULTIPLE_ABIS="1"
-# 2.5: https://bitbucket.org/tarek/distribute/issue/318
-PYTHON_TESTS_FAILURES_TOLERANT_ABIS="2.5 *-jython"
+PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*-jython"
 DISTUTILS_SRC_TEST="setup.py"
 
 inherit distutils mercurial
@@ -47,4 +46,9 @@ src_test() {
 
 src_install() {
 	SETUPTOOLS_DISABLE_VERSIONED_EASY_INSTALL_SCRIPT="1" distutils_src_install
+
+	delete_tests() {
+		rm -fr "${ED}$(python_get_sitedir)/setuptools/tests"
+	}
+	python_execute_function -q delete_tests
 }
