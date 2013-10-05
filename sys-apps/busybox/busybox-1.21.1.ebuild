@@ -196,7 +196,6 @@ src_install() {
 		newbin busybox_unstripped busybox
 		dosym busybox /bin/bb
 	fi
-	dosym busybox /bin/vi
 
 	# add busybox daemon's, bug #444718
 	if busybox_config_enabled FEATURE_NTPD_SERVER; then

@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/media-sound/pulseaudio/pulseaudio-4.0.ebuild,v 1.2 2013/08/09 19:19:40 ssuominen Exp $
 
 EAPI="5"
 
@@ -15,7 +17,7 @@ SRC_URI="http://freedesktop.org/software/pulseaudio/releases/${P}.tar.xz"
 # GPL-forcing USE flags for those who use them.
 LICENSE="!gdbm? ( LGPL-2.1 ) gdbm? ( GPL-2 )"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux"
 IUSE="+alsa +asyncns avahi bluetooth +caps dbus doc equalizer +gdbm +glib gnome
 gtk ipv6 jack libsamplerate lirc neon +orc oss qt4 realtime ssl systemd
 system-wide tcpd test +udev +webrtc-aec +X xen"
@@ -46,7 +48,7 @@ RDEPEND=">=media-libs/libsndfile-1.0.20
 		media-libs/sbc
 	)
 	asyncns? ( net-libs/libasyncns )
-	udev? ( >=virtual/udev-143[hwdb] )
+	udev? ( >=virtual/udev-143[hwdb(+)] )
 	realtime? ( sys-auth/rtkit )
 	equalizer? ( sci-libs/fftw:3.0 )
 	orc? ( >=dev-lang/orc-0.4.9 )
@@ -91,9 +93,12 @@ REQUIRED_USE="bluetooth? ( dbus )"
 
 pkg_setup() {
 	enewgroup audio 18 # Just make sure it exists
-	enewgroup pulse-access
-	enewgroup pulse
-	enewuser pulse -1 -1 /var/run/pulse pulse,audio
+
+	if use system-wide; then
+		enewgroup pulse-access
+		enewgroup pulse
+		enewuser pulse -1 -1 /var/run/pulse pulse,audio
+	fi
 }
 
 src_prepare() {
@@ -163,7 +168,6 @@ src_install() {
 	use X || rm "${ED}"/usr/bin/start-pulseaudio-x11
 
 	if use system-wide; then
-
 		newconfd "${FILESDIR}/pulseaudio.conf.d" pulseaudio
 
 		use_define() {

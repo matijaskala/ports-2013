@@ -5,9 +5,8 @@
 EAPI="5-progress"
 PYTHON_DEPEND="<<[tk?]>>"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="*-jython *-pypy-*"
 PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*"
-WX_GTK_VER="2.8"
 
 inherit distutils eutils
 
@@ -24,21 +23,33 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="cairo doc examples excel fltk gtk gtk3 latex qt4 test tk wxwidgets"
 
-CDEPEND="$(python_abi_depend dev-python/numpy)
+RDEPEND="$(python_abi_depend dev-python/numpy)
+	$(python_abi_depend dev-python/pyparsing)
 	$(python_abi_depend dev-python/python-dateutil)
 	$(python_abi_depend dev-python/pytz)
 	$(python_abi_depend -i "3.*" dev-python/six)
 	media-libs/freetype:2=
 	media-libs/libpng:0=
+	cairo? ( $(python_abi_depend dev-python/pycairo) )
+	excel? ( $(python_abi_depend -i "2.*" dev-python/xlwt) )
+	fltk? ( $(python_abi_depend -i "2.*" dev-python/pyfltk) )
 	gtk? ( $(python_abi_depend -i "2.*" dev-python/pygtk) )
 	gtk3? (
 		dev-libs/gobject-introspection
 		$(python_abi_depend dev-python/pygobject:3)
 		x11-libs/gtk+:3[introspection]
 	)
+	latex? (
+		app-text/dvipng
+		app-text/ghostscript-gpl
+		app-text/poppler[utils]
+		dev-texlive/texlive-fontsrecommended
+		virtual/latex-base
+	)
+	qt4? ( $(python_abi_depend virtual/python-qt[X] ) )
 	wxwidgets? ( $(python_abi_depend -i "2.*" dev-python/wxpython:2.8) )"
 
-DEPEND="${CDEPEND}
+DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	doc? (
 		app-text/dvipng
@@ -52,20 +63,6 @@ DEPEND="${CDEPEND}
 		media-gfx/graphviz[cairo]
 	)
 	test? ( $(python_abi_depend dev-python/nose) )"
-
-RDEPEND="${CDEPEND}
-	$(python_abi_depend dev-python/pyparsing)
-	cairo? ( $(python_abi_depend dev-python/pycairo) )
-	excel? ( $(python_abi_depend -i "2.*" dev-python/xlwt) )
-	fltk? ( $(python_abi_depend -i "2.*" dev-python/pyfltk) )
-	latex? (
-		app-text/dvipng
-		app-text/ghostscript-gpl
-		app-text/poppler[utils]
-		dev-texlive/texlive-fontsrecommended
-		virtual/latex-base
-	)
-	qt4? ( $(python_abi_depend virtual/python-qt[X] ) )"
 
 PYTHON_CFLAGS=("2.* + -fno-strict-aliasing")
 PYTHON_CXXFLAGS=("2.* + -fno-strict-aliasing")
@@ -142,14 +139,15 @@ src_install() {
 	distutils_src_install
 
 	delete_tests() {
-		rm -fr "${ED}$(python_get_sitedir)/matplotlib/"{testing,tests}
+		rm -fr "${ED}$(python_get_sitedir)/matplotlib/tests"
 	}
 	python_execute_function -q delete_tests
 
 	if use doc; then
-		insinto /usr/share/doc/${PF}
-		doins -r doc/build/latex/Matplotlib.pdf doc/build/html
+		dohtml -r doc/build/html/
+		dodoc doc/build/latex/Matplotlib.pdf
 	fi
+
 	if use examples; then
 		insinto /usr/share/doc/${PF}/examples
 		doins -r examples/*

@@ -9,9 +9,8 @@ DISTUTILS_SRC_TEST="setup.py"
 inherit distutils eutils
 
 DESCRIPTION="Interfaces for Python"
-HOMEPAGE="http://pypi.python.org/pypi/zope.interface"
-SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip
-	mirror://pypi/${PN:0:1}/${PN}/${PN}-3.8.0.tar.gz"
+HOMEPAGE="https://pypi.python.org/pypi/zope.interface"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip"
 
 LICENSE="ZPL"
 SLOT="0"
@@ -30,21 +29,12 @@ DEPEND="${RDEPEND}
 
 PYTHON_CFLAGS=("2.* + -fno-strict-aliasing")
 
-DISTUTILS_USE_SEPARATE_SOURCE_DIRECTORIES="1"
 DOCS="CHANGES.rst"
 PYTHON_MODULES="${PN/.//}"
 
 src_prepare() {
+	distutils_src_prepare
 	epatch "${FILESDIR}/${PN}-4.0.1-python-3.1.patch"
-
-	preparation() {
-		if [[ "$(python_get_version -l)" == "2.5" ]]; then
-			cp -fr "${WORKDIR}/${PN}-3.8.0" "${S}-${PYTHON_ABI}"
-		else
-			cp -fr "${WORKDIR}/${P}" "${S}-${PYTHON_ABI}"
-		fi
-	}
-	python_execute_function preparation
 }
 
 src_compile() {

@@ -85,8 +85,10 @@ if [[ ! ${_GIT_R3} ]]; then
 # a fair number of limitations. Therefore, if you'd like the eclass to
 # perform complete clones instead, set this to a non-null value.
 #
-# This variable is to be set in make.conf. Ebuilds are not allowed
-# to set it.
+# This variable can be set in make.conf and ebuilds. The make.conf
+# value specifies user-specific default, while ebuilds may use it
+# to force deep clones when the server does not support shallow clones
+# (e.g. Google Code).
 
 # @FUNCTION: _git-r3_env_setup
 # @INTERNAL
@@ -373,11 +375,15 @@ _git-r3_smart_fetch() {
 git-r3_fetch() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	if [[ $(declare -p EGIT_REPO_URI) != "declare -a"* ]]; then
-		local EGIT_REPO_URI=( ${EGIT_REPO_URI} )
+	local repos
+	if [[ ${1} ]]; then
+		repos=( ${1} )
+	elif [[ $(declare -p EGIT_REPO_URI) == "declare -a"* ]]; then
+		repos=( "${EGIT_REPO_URI[@]}" )
+	else
+		repos=( ${EGIT_REPO_URI} )
 	fi
 
-	local repos=( "${1:-${EGIT_REPO_URI[@]}}" )
 	local branch=${EGIT_BRANCH:+refs/heads/${EGIT_BRANCH}}
 	local remote_ref=${2:-${EGIT_COMMIT:-${branch:-HEAD}}}
 	local local_id=${3:-${CATEGORY}/${PN}/${SLOT}}
@@ -438,6 +444,8 @@ git-r3_fetch() {
 			if [[ -f ${GIT_DIR}/shallow ]]; then
 				ref_param+=( --unshallow )
 			fi
+			# fetch all branches
+			ref_param+=( "refs/heads/*:refs/remotes/origin/*" )
 		else
 			# 'git show-ref --heads' returns 1 when there are no branches
 			if ! git show-ref --heads -q; then
@@ -526,11 +534,15 @@ git-r3_fetch() {
 git-r3_checkout() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	if [[ $(declare -p EGIT_REPO_URI) != "declare -a"* ]]; then
-		local EGIT_REPO_URI=( ${EGIT_REPO_URI} )
+	local repos
+	if [[ ${1} ]]; then
+		repos=( ${1} )
+	elif [[ $(declare -p EGIT_REPO_URI) == "declare -a"* ]]; then
+		repos=( "${EGIT_REPO_URI[@]}" )
+	else
+		repos=( ${EGIT_REPO_URI} )
 	fi
 
-	local repos=( "${1:-${EGIT_REPO_URI[@]}}" )
 	local out_dir=${2:-${EGIT_CHECKOUT_DIR:-${WORKDIR}/${P}}}
 	local local_id=${3:-${CATEGORY}/${PN}/${SLOT}}
 
@@ -627,11 +639,15 @@ git-r3_checkout() {
 git-r3_peek_remote_ref() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	if [[ $(declare -p EGIT_REPO_URI) != "declare -a"* ]]; then
-		local EGIT_REPO_URI=( ${EGIT_REPO_URI} )
+	local repos
+	if [[ ${1} ]]; then
+		repos=( ${1} )
+	elif [[ $(declare -p EGIT_REPO_URI) == "declare -a"* ]]; then
+		repos=( "${EGIT_REPO_URI[@]}" )
+	else
+		repos=( ${EGIT_REPO_URI} )
 	fi
 
-	local repos=( "${1:-${EGIT_REPO_URI[@]}}" )
 	local branch=${EGIT_BRANCH:+refs/heads/${EGIT_BRANCH}}
 	local remote_ref=${2:-${EGIT_COMMIT:-${branch:-HEAD}}}
 

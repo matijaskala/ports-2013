@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="cli"
 
-DEPEND="cli? ( $(python_abi_depend -e "2.5 3.1 *-jython" dev-python/ipython) )"
+DEPEND="cli? ( $(python_abi_depend -e "3.1 *-jython" dev-python/ipython) )"
 RDEPEND="${DEPEND}"
 
 src_test() {

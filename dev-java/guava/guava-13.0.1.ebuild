@@ -1,7 +1,8 @@
-# Copyright owners: Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-java/guava/guava-13.0.1.ebuild,v 1.1 2013/03/07 04:05:31 radhermit Exp $
 
-EAPI="4-python"
+EAPI=5
 JAVA_PKG_IUSE="doc source"
 
 inherit java-pkg-2 java-pkg-simple
@@ -12,8 +13,7 @@ SRC_URI="http://search.maven.org/remotecontent?filepath=com/google/${PN}/${PN}/$
 
 LICENSE="Apache-2.0"
 SLOT="13"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
 
 COMMON_DEP="
 	dev-java/jsr305:0
@@ -21,6 +21,7 @@ COMMON_DEP="
 RDEPEND="${COMMON_DEP}
 	>=virtual/jre-1.6"
 DEPEND="${COMMON_DEP}
+	app-arch/unzip
 	>=virtual/jdk-1.7" # http://code.google.com/p/guava-libraries/issues/detail?id=635
 
 JAVA_GENTOO_CLASSPATH="jsr305"

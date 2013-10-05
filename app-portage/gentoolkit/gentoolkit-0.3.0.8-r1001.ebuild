@@ -5,7 +5,7 @@
 EAPI="5-progress"
 PYTHON_DEPEND="<<[xml]>>"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="*-jython *-pypy-*"
 PYTHON_NONVERSIONED_EXECUTABLES=(".*")
 
 inherit distutils eutils

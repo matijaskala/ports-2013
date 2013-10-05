@@ -2,10 +2,10 @@
 #                   Arfrever Frehtes Taifersar Arahesis
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="4-python"
+EAPI="5-progress"
 PYTHON_DEPEND="<<[threads,ssl,xml]>>"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.* *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="3.* *-jython *-pypy-*"
 
 inherit bash-completion-r1 distutils eutils versionator
 
@@ -13,13 +13,13 @@ MY_P=${PN}-${PV}
 SERIES=$(get_version_component_range 1-2)
 
 DESCRIPTION="Bazaar is a next generation distributed version control system."
-HOMEPAGE="http://bazaar-vcs.org/ http://pypi.python.org/pypi/bzr"
+HOMEPAGE="http://bazaar-vcs.org/ https://pypi.python.org/pypi/bzr"
 #SRC_URI="http://bazaar-vcs.org/releases/src/${MY_P}.tar.gz"
 SRC_URI="http://launchpad.net/bzr/${SERIES}/${PV}/+download/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh sparc x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris"
+KEYWORDS="*"
 IUSE="curl doc +sftp test"
 
 RDEPEND="curl? ( $(python_abi_depend dev-python/pycurl) )

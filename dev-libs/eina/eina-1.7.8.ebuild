@@ -1,22 +1,41 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/eina/eina-1.7.8.ebuild,v 1.1 2013/08/04 09:39:51 tommy Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/eina/eina-1.7.8.ebuild,v 1.2 2013/09/28 08:59:59 vapier Exp $
 
-EAPI="2"
+EAPI="4"
+
+if [[ ${PV} == "9999" ]] ; then
+	EGIT_SUB_PROJECT="legacy"
+	EGIT_URI_APPEND=${PN}
+	EGIT_BRANCH=${PN}-1.7
+else
+	SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+	EKEY_STATE="snap"
+fi
 
 inherit enlightenment
 
-DESCRIPTION="Enlightenment's data types library (List, hash, etc) in C"
+DESCRIPTION="Enlightenment's data types library (list, hash, etc) in C"
 
-SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
 LICENSE="LGPL-2.1"
+IUSE="altivec debug default-mempool mmx sse sse2 static-libs test valgrind"
 
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
-IUSE="altivec debug default-mempool mempool-buddy +mempool-chained
-	mempool-fixed-bitmap +mempool-pass-through
-	mmx sse sse2 static-libs test"
+MEMPOOLS=(
+	@buddy
+	+@chained-pool
+	# Looks like ememoa is a dead project?
+	#@ememoa-fixed
+	#@ememoa-unknown
+	@fixed-bitmap
+	+@one-big
+	@pass-through
+)
+IUSE_MEMPOOLS=${MEMPOOLS[@]/@/mempool-}
+IUSE+=" ${IUSE_MEMPOOLS}"
 
-RDEPEND="debug? ( dev-util/valgrind )"
+RDEPEND="valgrind? ( dev-util/valgrind )"
+#	mempool-ememoa-fixed? ( sys-libs/ememoa )
+#	mempool-ememoa-unknown? ( sys-libs/ememoa )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? (
@@ -26,36 +45,41 @@ DEPEND="${RDEPEND}
 	)"
 
 src_configure() {
-	local MODULE_ARGUMENT="static"
-	if use debug ; then
-		MODULE_ARGUMENT="yes"
-	fi
-
 	# Evas benchmark is broken!
-	MY_ECONF="
-	$(use_enable altivec cpu-altivec)
-	$(use_enable !debug amalgamation)
-	$(use_enable debug stringshare-usage)
-	$(use_enable debug assert)
-	$(use_enable debug valgrind)
-	$(use debug || echo " --with-internal-maximum-log-level=2")
-	$(use_enable default-mempool)
-	$(use_enable doc)
-	$(use_enable mempool-buddy mempool-buddy $MODULE_ARGUMENT)
-	$(use_enable mempool-chained mempool-chained-pool $MODULE_ARGUMENT)
-	$(use_enable mempool-fixed-bitmap mempool-fixed-bitmap $MODULE_ARGUMENT)
-	$(use_enable mempool-pass-through mempool-pass-through $MODULE_ARGUMENT)
-	$(use_enable mmx cpu-mmx)
-	$(use_enable sse cpu-sse)
-	$(use_enable sse2 cpu-sse2)
-	$(use test && echo " --disable-amalgamation")
-	$(use_enable test e17)
-	$(use_enable test tests)
-	$(use_enable test benchmark)
-	$(use test && echo " --with-internal-maximum-log-level=6")
-	--enable-magic-debug
-	--enable-safety-checks
-	"
+	E_ECONF=(
+		$(use_enable altivec cpu-altivec)
+		$(use_enable !debug amalgamation)
+		$(use_enable debug stringshare-usage)
+		$(use_enable debug assert)
+		$(use debug || echo " --with-internal-maximum-log-level=2")
+		$(use_enable default-mempool)
+		$(use_enable doc)
+		$(use_enable mmx cpu-mmx)
+		$(use_enable sse cpu-sse)
+		$(use_enable sse2 cpu-sse2)
+		$(use test && echo " --disable-amalgamation")
+		$(use_enable test e17)
+		$(use_enable test tests)
+		$(use_enable test benchmark)
+		$(use test && echo " --with-internal-maximum-log-level=6")
+		$(use_enable valgrind)
+		--enable-magic-debug
+		--enable-safety-checks
+	)
+
+	#if use mempool-ememoa-fixed || use mempool-ememoa-unknown ; then
+	#	E_ECONF+=( --enable-ememoa )
+	#else
+		E_ECONF+=( --disable-ememoa )
+	#fi
+
+	local m mempool_arg='static'
+	if use debug ; then
+		mempool_arg='yes'
+	fi
+	for m in ${IUSE_MEMPOOLS//+} ; do
+		E_ECONF+=( $(use_enable ${m} ${m} ${MODULE_ARGUMENT}) )
+	done
 
 	enlightenment_src_configure
 }

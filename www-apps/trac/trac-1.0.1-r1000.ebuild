@@ -3,6 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5-progress"
+PYTHON_DEPEND="<<[sqlite?]>>"
 PYTHON_MULTIPLE_ABIS="1"
 PYTHON_RESTRICTED_ABIS="3.* *-jython"
 
@@ -28,10 +29,9 @@ DEPEND="$(python_abi_depend dev-python/docutils)
 	$(python_abi_depend dev-python/setuptools)
 	cgi? ( virtual/httpd-cgi )
 	fastcgi? ( virtual/httpd-fastcgi )
-	i18n? ( $(python_abi_depend -e "2.5" dev-python/Babel) )
+	i18n? ( $(python_abi_depend dev-python/Babel) )
 	mysql? ( $(python_abi_depend dev-python/mysql-python) )
 	postgres? ( $(python_abi_depend -e "*-pypy-*" dev-python/psycopg:2) )
-	sqlite? ( $(python_abi_depend virtual/python-sqlite[external]) )
 	subversion? ( $(python_abi_depend -e "*-pypy-*" dev-vcs/subversion[python]) )"
 RDEPEND="${DEPEND}"
 

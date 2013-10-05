@@ -5,7 +5,7 @@
 EAPI="5-progress"
 PYTHON_DEPEND="<<[ncurses]>>"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython"
+PYTHON_RESTRICTED_ABIS="*-jython"
 
 inherit distutils
 
@@ -21,13 +21,13 @@ IUSE="doc gtk nls urwid"
 RDEPEND="$(python_abi_depend dev-python/pygments)
 	$(python_abi_depend dev-python/setuptools)
 	gtk? (
-		$(python_abi_depend -e "2.5 *-pypy-* 3.*" dev-python/pygobject:2)
-		$(python_abi_depend -e "2.5 *-pypy-* 3.*" dev-python/pygtk:2)
+		$(python_abi_depend -e "3.* *-pypy-*" dev-python/pygobject:2)
+		$(python_abi_depend -e "3.* *-pypy-*" dev-python/pygtk:2)
 	)
 	urwid? ( $(python_abi_depend dev-python/urwid) )"
 DEPEND="${RDEPEND}
 	doc? ( $(python_abi_depend dev-python/sphinx) )
-	nls? ( $(python_abi_depend -e "3.*" dev-python/Babel) )"
+	nls? ( $(python_abi_depend -e "3.1 3.2" dev-python/Babel) )"
 
 DOCS="sample-config sample.theme light.theme"
 PYTHON_MODULES="bpdb bpython"

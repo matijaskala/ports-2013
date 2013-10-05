@@ -5,7 +5,7 @@
 EAPI="5-progress"
 PYTHON_DEPEND="<<[tk?]>>"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="*-jython *-pypy-*"
 # https://github.com/matplotlib/matplotlib/issues/2343
 PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*"
 PYTHON_NAMESPACES="mpl_toolkits"
@@ -50,7 +50,7 @@ RDEPEND="$(python_abi_depend dev-python/imaging)
 	)
 	qt4? ( $(python_abi_depend virtual/python-qt[X] ) )
 	webagg? ( $(python_abi_depend -e "3.1" www-servers/tornado) )
-	wxwidgets? ( $(python_abi_depend -i "2.*" dev-python/wxpython:2.8) )"
+	wxwidgets? ( $(python_abi_depend -i "2.*" dev-python/wxpython) )"
 DEPEND="${RDEPEND}
 	$(python_abi_depend dev-python/pycxx)
 	$(python_abi_depend dev-python/setuptools)
@@ -90,6 +90,8 @@ src_prepare() {
 
 	# Create setup.cfg. (See setup.cfg.template and setupext.py for any changes.)
 	cat > setup.cfg <<-EOF
+		[directories]
+		basedirlist = ${EPREFIX}/usr
 		[gui_support]
 		$(use_setup gtk)
 		$(use_setup gtk gtkagg)
@@ -151,8 +153,8 @@ src_install() {
 	python_execute_function -q delete_tests
 
 	if use doc; then
-		insinto /usr/share/doc/${PF}
-		doins -r doc/build/latex/Matplotlib.pdf doc/build/html
+		dohtml -r doc/build/html/
+		dodoc doc/build/latex/Matplotlib.pdf
 	fi
 
 	if use examples; then

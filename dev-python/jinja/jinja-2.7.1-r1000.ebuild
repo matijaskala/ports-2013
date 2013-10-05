@@ -14,8 +14,7 @@ MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A small but fast and easy to use stand-alone template engine written in pure python."
 HOMEPAGE="http://jinja.pocoo.org/ https://github.com/mitsuhiko/jinja2 https://pypi.python.org/pypi/Jinja2"
-SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz
-	mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-2.6.tar.gz"
+SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -24,7 +23,7 @@ IUSE="doc examples i18n vim-syntax"
 
 RDEPEND="$(python_abi_depend dev-python/markupsafe)
 	$(python_abi_depend dev-python/setuptools)
-	i18n? ( $(python_abi_depend -e "2.5 3.1 3.2" dev-python/Babel) )"
+	i18n? ( $(python_abi_depend -e "3.1 3.2" dev-python/Babel) )"
 DEPEND="${RDEPEND}
 	doc? ( $(python_abi_depend dev-python/sphinx) )"
 
@@ -35,21 +34,13 @@ DOCS="CHANGES"
 PYTHON_MODULES="jinja2"
 
 src_prepare() {
+	# https://github.com/mitsuhiko/jinja2/commit/da94a8b504d981cb5f877219811d169823a2095e
+	# https://github.com/mitsuhiko/jinja2/commit/b89d1a8fe3fcbd73a8f4cebd4358eadebc2d8a9d
+	sed -e "/from jinja2.utils import next/d" -i docs/jinjaext.py
+
+	distutils_src_prepare
+
 	preparation() {
-		if [[ "$(python_get_version -l)" == "2.5" ]]; then
-			cp -fr "${WORKDIR}/${MY_PN}-2.6" "${S}-${PYTHON_ABI}"
-		else
-			cp -fr "${WORKDIR}/${MY_P}" "${S}-${PYTHON_ABI}"
-		fi
-
-		cd "${S}-${PYTHON_ABI}"
-
-		if ! has "$(python_get_version -l)" 2.5; then
-			# https://github.com/mitsuhiko/jinja2/commit/da94a8b504d981cb5f877219811d169823a2095e
-			# https://github.com/mitsuhiko/jinja2/commit/b89d1a8fe3fcbd73a8f4cebd4358eadebc2d8a9d
-			sed -e "/from jinja2.utils import next/d" -i docs/jinjaext.py
-		fi
-
 		if has "$(python_get_version -l)" 3.1; then
 			sed -e "s/callable(\(.*\))/isinstance(\1, __import__('collections').Callable)/" -i jinja2/nodes.py
 			sed -e "s/test_callable = callable/test_callable = lambda x: isinstance(x, __import__('collections').Callable)/" -i jinja2/tests.py
@@ -59,7 +50,7 @@ src_prepare() {
 			2to3-${PYTHON_ABI} -f unicode -nw --no-diffs jinja2
 		fi
 	}
-	python_execute_function preparation
+	python_execute_function -s preparation
 }
 
 src_compile(){
@@ -78,9 +69,6 @@ src_compile(){
 
 src_install(){
 	distutils_src_install
-
-	# Required only for 2.5 Python ABIS.
-	python_clean_installation_image
 
 	delete_tests() {
 		rm -fr "${ED}$(python_get_sitedir)/jinja2/testsuite"

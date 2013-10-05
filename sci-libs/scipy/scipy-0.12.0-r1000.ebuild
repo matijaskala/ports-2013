@@ -4,13 +4,13 @@
 
 EAPI="5-progress"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="*-jython *-pypy-*"
 PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*"
 
 inherit distutils eutils flag-o-matic fortran-2 multilib toolchain-funcs
 
 MY_P="${PN}-${PV/_/}"
-DOC_P="${PN}-0.11.0"
+DOC_P="${PN}-0.12.0"
 
 DESCRIPTION="Scientific algorithms library for Python"
 HOMEPAGE="http://www.scipy.org/ https://github.com/scipy/scipy https://pypi.python.org/pypi/scipy"
@@ -22,18 +22,18 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz
 
 LICENSE="BSD LGPL-2"
 SLOT="0"
-IUSE="doc test umfpack"
+IUSE="doc sparse test"
 KEYWORDS="*"
 
 CDEPEND="$(python_abi_depend dev-python/numpy[lapack])
 	sci-libs/arpack
 	virtual/cblas
 	virtual/lapack
-	umfpack? ( sci-libs/umfpack )"
+	sparse? ( sci-libs/umfpack )"
 DEPEND="${CDEPEND}
+	dev-lang/swig
 	virtual/pkgconfig
-	test? ( $(python_abi_depend dev-python/nose) )
-	umfpack? ( dev-lang/swig )"
+	test? ( $(python_abi_depend dev-python/nose) )"
 RDEPEND="${CDEPEND}
 	$(python_abi_depend dev-python/imaging)"
 
@@ -55,26 +55,24 @@ src_unpack() {
 
 pc_incdir() {
 	$(tc-getPKG_CONFIG) --cflags-only-I $@ | \
-		sed -e 's/^-I//' -e 's/[ ]*-I/:/g'
+		sed -e 's/^-I//' -e 's/[ ]*-I/:/g' -e 's/[ ]*$//'
 }
 
 pc_libdir() {
 	$(tc-getPKG_CONFIG) --libs-only-L $@ | \
-		sed -e 's/^-L//' -e 's/[ ]*-L/:/g'
+		sed -e 's/^-L//' -e 's/[ ]*-L/:/g' -e 's/[ ]*$//'
 }
 
 pc_libs() {
 	$(tc-getPKG_CONFIG) --libs-only-l $@ | \
 		sed -e 's/[ ]-l*\(pthread\|m\)[ ]*//g' \
-		-e 's/^-l//' -e 's/[ ]*-l/,/g'
+		-e 's/^-l//' -e 's/[ ]*-l/,/g' -e 's/[ ]*$//'
 }
 
 src_prepare() {
-	local libdir="${EPREFIX}"/usr/$(get_libdir)
-
 	# scipy automatically detects libraries by default
 	export {FFTW,FFTW3,UMFPACK}=None
-	use umfpack && unset UMFPACK
+	use sparse && unset UMFPACK
 	# the missing symbols are in -lpythonX.Y, but since the version can
 	# differ, we just introduce the same scaryness as on Linux/ELF
 	[[ ${CHOST} == *-darwin* ]] \
@@ -87,6 +85,7 @@ src_prepare() {
 	export SCIPY_FCONFIG="config_fc --noopt --noarch"
 	append-fflags -fPIC
 
+	local libdir="${EPREFIX}"/usr/$(get_libdir)
 	cat >> site.cfg <<-EOF
 		[blas]
 		include_dirs = $(pc_incdir cblas)
@@ -133,6 +132,6 @@ src_install() {
 pkg_postinst() {
 	distutils_pkg_postinst
 	elog "You might want to set the variable SCIPY_PIL_IMAGE_VIEWER"
-	elog "to your prefered image viewer if you don't like the default one. Ex:"
+	elog "to your prefered image viewer. Example:"
 	elog "\t echo \"export SCIPY_PIL_IMAGE_VIEWER=display\" >> ~/.bashrc"
 }

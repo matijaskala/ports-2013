@@ -22,10 +22,10 @@ KEYWORDS="*"
 # IUSE="doc test"
 IUSE="test"
 
-RDEPEND="$(python_abi_depend -i "2.5 2.6" dev-python/ordereddict)
+RDEPEND="$(python_abi_depend -i "2.6" dev-python/ordereddict)
 	$(python_abi_depend dev-python/setuptools)"
 DEPEND="${RDEPEND}
-	test? ( $(python_abi_depend -i "2.5 2.6" dev-python/unittest2) )"
+	test? ( $(python_abi_depend -i "2.6" dev-python/unittest2) )"
 #	doc? ( $(python_abi_depend dev-python/sphinx) )
 
 S="${WORKDIR}/${MY_P}"

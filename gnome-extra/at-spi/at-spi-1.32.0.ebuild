@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/at-spi/at-spi-1.32.0.ebuild,v 1.9 2012/05/05 06:25:18 jdhore Exp $
+# $Header: /var/cvsroot/gentoo-x86/gnome-extra/at-spi/at-spi-1.32.0.ebuild,v 1.10 2013/10/04 15:45:13 tetromino Exp $
 
 EAPI="3"
 GCONF_DEBUG="no"
@@ -28,7 +28,9 @@ RDEPEND=">=dev-libs/atk-1.29.2
 	x11-libs/libSM
 	x11-libs/libX11
 	x11-libs/libXi
-	x11-libs/libXtst"
+	x11-libs/libXtst
+
+	!app-accessibility/at-spi2-atk"
 
 DEPEND="${RDEPEND}
 	virtual/pkgconfig

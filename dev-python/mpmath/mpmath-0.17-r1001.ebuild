@@ -21,8 +21,8 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="doc examples gmp matplotlib"
 
-RDEPEND="gmp? ( $(python_abi_depend -e "2.5 *-jython *-pypy-*" dev-python/gmpy) )
-	matplotlib? ( $(python_abi_depend -e "2.5 *-jython *-pypy-*" dev-python/matplotlib) )"
+RDEPEND="gmp? ( $(python_abi_depend -e "*-jython *-pypy-*" dev-python/gmpy) )
+	matplotlib? ( $(python_abi_depend -e "*-jython *-pypy-*" dev-python/matplotlib) )"
 DEPEND="${RDEPEND}
 	doc? ( $(python_abi_depend dev-python/sphinx) )"
 

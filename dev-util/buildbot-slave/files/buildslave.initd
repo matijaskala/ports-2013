@@ -28,7 +28,8 @@ start() {
 	ebegin "Starting buildslave in ${BASEDIR}"
 	# HOME is being set here to make something valid show up in environment of child
 	# processes spawned by the buildslave.
-	start-stop-daemon --start -u "${USERNAME}" \
+	start-stop-daemon --start \
+		-u "${USERNAME}" \
 		--env HOME="${BASEDIR}" \
 		--pidfile="${BASEDIR}/buildslave.pid" \
 		--exec /usr/bin/twistd -- \
@@ -41,6 +42,7 @@ start() {
 
 stop() {
 	ebegin "Stopping buildslave in ${BASEDIR}"
-	start-stop-daemon --stop --pidfile "${BASEDIR}/buildslave.pid"
+	start-stop-daemon --stop \
+		--pidfile="${BASEDIR}/buildslave.pid"
 	eend $?
 }

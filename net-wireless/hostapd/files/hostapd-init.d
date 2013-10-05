@@ -1,12 +1,14 @@
 #!/sbin/runscript
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/hostapd/files/hostapd-init.d,v 1.3 2011/09/25 14:03:46 gurligebis Exp $
 
 extra_started_commands="reload"
 
 depend() {
 	local myneeds=
 	for iface in ${INTERFACES}; do
-		myneeds="${myneeds} netif.${iface}"
+		myneeds="${myneeds} net.${iface}"
 	done
 
 	[ -n "${myneeds}" ] && need ${myneeds}

@@ -4,7 +4,7 @@
 
 EAPI="5-progress"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_TESTS_FAILURES_TOLERANT_ABIS="2.5 2.6 *-jython"
+PYTHON_TESTS_FAILURES_TOLERANT_ABIS="2.6 *-jython"
 
 inherit distutils git-2
 
@@ -22,7 +22,7 @@ RDEPEND="$(python_abi_depend dev-python/coverage)
 	$(python_abi_depend dev-python/setuptools)"
 DEPEND="${RDEPEND}
 	doc? ( $(python_abi_depend dev-python/sphinx) )
-	test? ( $(python_abi_depend -e "2.5 3.* *-jython" dev-python/twisted-core) )"
+	test? ( $(python_abi_depend -e "3.* *-jython" dev-python/twisted-core) )"
 
 DOCS="AUTHORS"
 

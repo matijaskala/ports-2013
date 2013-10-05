@@ -1,9 +1,11 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus/ibus-1.4.2.ebuild,v 1.7 2013/05/14 06:05:49 naota Exp $
 
 EAPI=4
 PYTHON_DEPEND="python? 2:2.5"
 
-inherit eutils gnome2-utils multilib python autotools
+inherit eutils gnome2-utils multilib python autotools vala
 
 DESCRIPTION="Intelligent Input Bus for Linux / Unix OS"
 HOMEPAGE="http://code.google.com/p/ibus/"
@@ -32,10 +34,10 @@ RDEPEND=">=dev-libs/glib-2.26
 		dev-python/notify-python
 		>=dev-python/dbus-python-0.83
 	)
-	nls? ( virtual/libintl )"
+	nls? ( virtual/libintl )
+	vala? ( $(vala_depend) )"
 #	X? ( x11-libs/libX11 )
 #	gtk? ( x11-libs/gtk+:2 x11-libs/gtk+:3 )
-#	vala? ( dev-lang/vala )
 DEPEND="${RDEPEND}
 	>=dev-lang/perl-5.8.1
 	dev-util/intltool
@@ -43,6 +45,7 @@ DEPEND="${RDEPEND}
 	doc? ( >=dev-util/gtk-doc-1.9 )
 	nls? ( >=sys-devel/gettext-0.16.1 )"
 RDEPEND="${RDEPEND}
+	x11-apps/setxkbmap
 	python? (
 		dev-python/pygtk
 		dev-python/pyxdg
@@ -62,9 +65,11 @@ pkg_setup() {
 src_prepare() {
 	>py-compile #397497
 	echo ibus/_config.py >> po/POTFILES.skip
+	use vala && vala_src_prepare
 
 	epatch \
-		"${FILESDIR}"/${PN}-gconf-2.m4.patch
+		"${FILESDIR}"/${PN}-gconf-2.m4.patch \
+		"${FILESDIR}"/${PN}-1.4.1-libxslt-1.1.27.patch
 
 	eautoreconf
 }
@@ -106,8 +111,8 @@ pkg_preinst() {
 
 pkg_postinst() {
 	use gconf && gnome2_gconf_install
-	use gtk && update_gtk_immodules
-	use gtk3 && update_gtk3_immodules
+	use gtk && gnome2_query_immodules_gtk2
+	use gtk3 && gnome2_query_immodules_gtk3
 	use python && python_mod_optimize /usr/share/${PN}
 	gnome2_icon_cache_update
 
@@ -130,8 +135,8 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	use gtk && gnome2_query_immmodules_gtk2
-	use gtk3 && gnome2_query_immmodules_gtk3
+	use gtk && gnome2_query_immodules_gtk2
+	use gtk3 && gnome2_query_immodules_gtk3
 	use python && python_mod_cleanup /usr/share/${PN}
 	gnome2_icon_cache_update
 }

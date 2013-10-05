@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-monocle/lc-monocle-9999.ebuild,v 1.2 2013/04/14 16:18:51 pinkbyte Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-monocle/lc-monocle-9999.ebuild,v 1.3 2013/10/02 09:49:30 maksbotan Exp $
 
 EAPI="5"
 
@@ -15,7 +15,13 @@ IUSE="debug +djvu doc +fb2 +pdf +spectre"
 RDEPEND="~app-leechcraft/lc-core-${PV}
 	pdf? ( app-text/poppler[qt4] )
 	djvu? ( app-text/djvu )
-	spectre? ( app-text/libspectre )"
+	spectre? (
+		app-text/libspectre
+		|| (
+			app-text/poppler[-lcms]
+			<app-text/ghostscript-gpl-9.07
+		)
+	)"
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen[dot] )"
 

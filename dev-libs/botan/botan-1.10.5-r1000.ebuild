@@ -6,7 +6,7 @@ EAPI="5-progress"
 PYTHON_BDEPEND="<<>>"
 PYTHON_DEPEND="python? ( <<>> )"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="*-jython *-pypy-*"
 
 inherit multilib python toolchain-funcs
 
@@ -20,7 +20,7 @@ SRC_URI="http://files.randombit.net/botan/${MY_P}.tbz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="*"
-IUSE="bindist bzip2 doc gmp python ssl threads zlib"
+IUSE="bindist bzip2 doc gmp python ssl static-libs threads zlib"
 
 RDEPEND="bzip2? ( app-arch/bzip2:0= )
 	gmp? ( dev-libs/gmp:0= )
@@ -51,7 +51,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local disable_modules="proc_walk,unix_procs,cpu_counter"
+	local disable_modules="proc_walk,unix_procs"
 	use threads || disable_modules+=",pthreads"
 	use bindist && disable_modules+=",ecdsa"
 	elog "Disabling modules: ${disable_modules}"
@@ -124,6 +124,10 @@ src_test() {
 
 src_install() {
 	emake DESTDIR="${ED}usr" install
+
+	if ! use static-libs; then
+		rm "${ED}usr/$(get_libdir)/libbotan"*.a || die "Deletion of static libraries failed"
+	fi
 
 	# Add compatibility symlinks.
 	[[ -e "${ED}usr/bin/botan-config" ]] && die "Compatibility code no longer needed"

@@ -290,6 +290,7 @@ app-cdr/k3b:emovix - Enable burning support for eMoviX images
 app-cdr/mirage2iso:pinentry - Support app-crypt/pinentry password input backend.
 app-cdr/mybashburn:normalize - Add support for normalizing audio file volume levels
 app-crypt/ccid:twinserial - Enable twinserial reader
+app-crypt/codecrypt:cryptopp - Build algorithms that need Crypto++ support dev-libs/crypto++
 app-crypt/eid-mw:gtk - Enable the dialog pages, by using x11-libs/gtk+:2
 app-crypt/eid-mw:xpi - Build and install an extension for Mozilla browsers.
 app-crypt/ekeyd:minimal - Only install the ekey-egd-linux service rather than the full ekeyd package.
@@ -1249,6 +1250,7 @@ dev-games/physfs:zip - Enable ZIP archive support
 dev-haskell/abstract-deque:usecas - Enable the reference implementation to use hardware compare-and-swap.
 dev-haskell/aeson:developer - Operate in developer mode.'
 dev-haskell/cabal-install:noprefs - Ignore 'preferred-versions' file from hackage's tarball.
+dev-haskell/certificate:executable - Build the executable
 dev-haskell/cgi:extensible-exceptions-in-base - Required to be enabled for >=dev-lang/ghc-7.
 dev-haskell/citeproc-hs:bibutils - use Chris Putnam's app-text/bibutils
 dev-haskell/citeproc-hs:embed_data_files - Embed locale files into the library (needed for windows packaging)
@@ -1263,6 +1265,8 @@ dev-haskell/cryptohash:cryptoapi - Defines crypto-api instances
 dev-haskell/filestore:maxcount - Make use of a recent (>= 2.3.0) Darcs feature which vastly improves the performance of 'latest'. You should disable this flag if you plan to use gitit with an older version of Darcs, or 'latest' will raise an error.
 dev-haskell/glut:usenativewindowslibraries - When compiling under Windows, use the native libraries instead of e.g. the ones coming with Cygwin.
 dev-haskell/gtk:gio - Add glib's GIO bindings.
+dev-haskell/hashable:sse4_1 - Enable optimization for SSE4_1 capable processors (Intel Core 2 Penryn and later chips)
+dev-haskell/hashtables:sse4_1 - Enable optimization for SSE4_1 capable processors (Intel Core 2 Penryn and later chips)
 dev-haskell/highlighting-kate:executable - Build the Highlight executable.
 dev-haskell/highlighting-kate:pcre-light - Use the pcre-light library instead of regex-pcre-builtin.
 dev-haskell/hstringtemplate:quasi-quotation - Build module providing a quasi-quoter
@@ -1533,9 +1537,11 @@ dev-libs/ecore:xprint - Enable X11 Xprint support
 dev-libs/eeze:utilities - Install some test utilities for mount/umount support in eeze
 dev-libs/eina:default-mempool - By default use system's allocator (pass-through) instead of custom choice for Eina's own data structures.
 dev-libs/eina:mempool-buddy - Compile "buddy" memory pool allocation.
-dev-libs/eina:mempool-chained - Compile "chained-pool" memory pool allocation.
+dev-libs/eina:mempool-chained-pool - Compile "chained-pool" memory pool allocation.
 dev-libs/eina:mempool-fixed-bitmap - Compile "fixed-bitmap" memory pool allocation.
+dev-libs/eina:mempool-one-big - Compile "one-big" memory pool allocation.
 dev-libs/eina:mempool-pass-through - Compile "pass-through" (system's malloc) memory pool allocation.
+dev-libs/eina:valgrind - Compile in valgrind hints for smoother integration.
 dev-libs/elfutils:lzma - Support automatic decompression of LZMA-compressed files and kernel images
 dev-libs/elfutils:threads - Build the libraries with thread safe support
 dev-libs/elfutils:utils - Install command-line utilities (all the eu-* programs)
@@ -1939,7 +1945,6 @@ dev-qt/qdbusviewer:exceptions - Add support for exceptions - like catching them 
 dev-qt/qt-creator:android - Build Android plugin
 dev-qt/qt-creator:autotools - Enable autotools project manager plugin
 dev-qt/qt-creator:bazaar - Add support for dev-vcs/bzr version control system
-dev-qt/qt-creator:botan-bundled - Use the bundled copy of dev-libs/botan
 dev-qt/qt-creator:clearcase - Add support for IBM ClearCase version control system (requires manual installation of ClearCase client)
 dev-qt/qt-creator:cmake - Enable cmake project manager plugin
 dev-qt/qt-creator:fakevim - Enable support for vim-like key bindings
@@ -2110,6 +2115,7 @@ dev-tex/abntex:lyx - Install with app-office/lyx layout
 dev-tex/circuit_macros:script - Install CM2pdf to automatically create a correctly sized PDF from a circuit_macro m4 source
 dev-tex/dot2texi:pgf - Enable support for dev-tex/pgf (The TeX Portable Graphic Format)
 dev-tex/dot2texi:pstricks - Enable pstricks support
+dev-util/android-ndk:legacy-toolchains - Install legacy toolchains
 dev-util/anjuta:devhelp - Enable devhelp integration
 dev-util/anjuta:glade - Build glade plugin for anjuta
 dev-util/anjuta:packagekit - Use packagekit to search for missing tools
@@ -2156,6 +2162,8 @@ dev-util/meld:highlight - Enable source code highlighting via dev-python/pygtkso
 dev-util/metro:ccache - Enable support for ccache
 dev-util/metro:git - Enable support for git snapshots
 dev-util/metro:threads - Enable support for pbzip2 tarball packing/unpacking
+dev-util/mingw64-runtime:idl - Install idl files.
+dev-util/mingw64-runtime:tools - Build and install extra tools.
 dev-util/molecule:plugins - Add plugins provided by dev-util/molecule-plugins
 dev-util/monkeystudio:plugins - Build and install additional plugins
 dev-util/nemiver:memoryview - Enable the optional hexadecimal memory inspection with app-editors/ghex.
@@ -2203,7 +2211,6 @@ dev-vcs/git:mozsha1 - Makes git use an optimized SHA1 routine from Mozilla that 
 dev-vcs/git:ppcsha1 - Make use of a bundled routine that is optimized for the PPC arch
 dev-vcs/git:subversion - Include git-svn for dev-vcs/subversion support
 dev-vcs/git:webdav - Adds support for push'ing to HTTP/HTTPS repositories via DAV
-dev-vcs/git-annex:android - Building for Android
 dev-vcs/git-annex:assistant - Enable git-annex assistant and watch command
 dev-vcs/git-annex:dns - Enable the haskell DNS library for DNS lookup
 dev-vcs/git-annex:feed - Enable podcast feed support
@@ -2440,6 +2447,11 @@ games-strategy/heroes3:music - Installs optional music data
 games-strategy/heroes3:sounds - Installs optional sound data
 games-strategy/ja2-stracciatella:editor - Adds necessary file to run the editor
 games-strategy/ja2-stracciatella:linguas_ru_gold - Support for russian gold ja2 version
+games-strategy/liquidwar6:doc - Convert the info pages to html
+games-strategy/liquidwar6:gtk - Used to display error/critical messages
+games-strategy/liquidwar6:maps - Install extra maps
+games-strategy/liquidwar6:ogg - Enable mod-ogg via media-libs/sdl-mixer (currently the only sound provider)
+games-strategy/liquidwar6:readline - Enable interactive script shell for hacking
 games-strategy/megaglest:editor - Build map editor
 games-strategy/megaglest:model-viewer - Build model viewer
 games-strategy/megaglest:streflop - Use the library streflop. Out of synchs may occur if not enabled.
@@ -2489,9 +2501,11 @@ gnome-base/gnome-panel:bonobo - Enable Bonobo compatibility modules for applets 
 gnome-base/gnome-session:gconf - Optional support for gnome-base/gconf configuration storage system
 gnome-base/gnome-settings-daemon:colord - Support color management using x11-misc/colord
 gnome-base/gnome-settings-daemon:i18n - Enable support for enhanced input methods through app-i18n/ibus
+gnome-base/gnome-settings-daemon:openrc-force - Skip systemd dependency (#480336), enabling this flag will become your setup to be fully unsupported by upstream and downstream Gnome team. Do not try to enable it unless completely needed
 gnome-base/gnome-settings-daemon:packagekit - Enable support for the distro-neutral package manager GUI app-admin/packagekit
 gnome-base/gnome-settings-daemon:short-touchpad-timeout - Change the touchpad timeout so that it's effective for fast typists
 gnome-base/gnome-shell:i18n - Enable support for enhanced input methods through app-i18n/ibus
+gnome-base/gnome-shell:openrc-force - Skip systemd dependency (#480336), enabling this flag will become your setup to be fully unsupported by upstream and downstream Gnome team. Do not try to enable it unless completely needed
 gnome-base/gnome-shell:systemd - Use sys-apps/systemd instead of sys-auth/consolekit for session tracking
 gnome-base/gvfs:afp - Enables support for accessing AFP (Apple Filing Protocol) network shares
 gnome-base/gvfs:archive - Enables support for accessing files in archives transparently via app-arch/libarchive
@@ -2603,7 +2617,7 @@ gnustep-base/gnustep-back-xlib:xim - Enable X11 XiM input method
 gnustep-base/gnustep-gui:speech - Audio support using app-accessibility/flite
 gnustep-base/gnustep-make:libobjc2 - Enables use of the GNUstep Objective-C runtime (gnustep-base/libobjc2) with non-fragile ABI and sys-devel/clang compiler
 gnustep-base/gnustep-make:native-exceptions - Enables use of the native Objective-C exception support (@try/@catch/@finally) built-in objective-c exceptions with compilers that support it
-gnustep-base/libobjc2:boehm-gc - Enable Hans Boehm's garbage collector (dev-libs/boehm-gc)
+gnustep-base/libobjc2:boehm-gc - Enable Hans Boehm's garbage collector (dev-libs/boehm-gc). Not recommended by upstream
 gpe-base/gpe:games - Builds and installs GPE games.
 kde-base/ark:archive - Enable support for a variety of archive formats through libarchive
 kde-base/cantor:R - Enable dev-lang/R backend support
@@ -2860,6 +2874,7 @@ mail-mta/courier:webmail - Enable the webmail interface
 mail-mta/exim:dcc - Adds support for Distributed Checksum Clearinghouse (DCC)
 mail-mta/exim:dkim - Adds support for DomainKeys Identified Mail (DKIM)
 mail-mta/exim:dlfunc - Install local_scan.h header to compile separate dlfunc libraries
+mail-mta/exim:dmarc - Adds support for DMARC
 mail-mta/exim:dnsdb - Adds support for a DNS search for a record whose domain name is the supplied query
 mail-mta/exim:dovecot-sasl - Adds support for Dovecot's authentication
 mail-mta/exim:dsn - Adds support for Delivery Status Notifications (DSN)
@@ -4978,7 +4993,6 @@ net-misc/connman:ofono - Use net-misc/ofono for telephony support.
 net-misc/connman:openvpn - Use net-misc/openvpn for openvpn support.
 net-misc/connman:tools - Enable testing tools.
 net-misc/connman:vpnc - Use net-misc/vpnc for cisco VPN support.
-net-misc/connman:wimax - Use net-wireless/wimax for WiMAX support.
 net-misc/csync:sftp - Enable sftp transfer support via net-libs/libssh
 net-misc/curl:ares - Enabled c-ares dns support
 net-misc/curl:gnutls - Prefer gnutls over nss and openssl as the crypto engine
@@ -5626,7 +5640,6 @@ sci-libs/cholmod:supernodal - Enable the Supernodal module (needs virtual/lapack
 sci-libs/fftw:avx - Adds support for Advanced Vector Extensions
 sci-libs/fftw:float - Link default library to single precision instead of double (symlinks only and fftw-2.1)
 sci-libs/fftw:fma - Use the Fused Multiply Add instruction set (fma3/fma4 either one)
-sci-libs/fftw:paired-single - Adds support for pair-single optimizations of mips
 sci-libs/fftw:quad - Build quadruple precision lib
 sci-libs/fftw:zbus - Adds support for ZBus cycle-counter of mips
 sci-libs/flann:cuda - Enable support for nVidia CUDA
@@ -5956,7 +5969,6 @@ sys-apps/tcp-wrappers:netgroups - Support matching NIS (host) netgroup names via
 sys-apps/timer_entropyd:debug - Enable printf debugging and logging to the syslog at DEBUG level
 sys-apps/tuxonice-userui:fbsplash - Add support for framebuffer splash
 sys-apps/ucspi-ssl:tls - Add TLS support (see also http://www.suspectclass.com/~sgifford/ucspi-tls/)
-sys-apps/udevil:systemd - Support for sys-apps/systemd
 sys-apps/usb_modeswitch:jimtcl - Use dev-lang/jimtcl instead of dev-lang/tcl for smaller memory footprint
 sys-apps/usbutils:network-cron - Monthly cronjob the update-usbids script
 sys-apps/usermode-utilities:fuse - Build tools (currently umlmount) needing fuse
@@ -5966,6 +5978,7 @@ sys-apps/util-linux:cytune - build cytune for Cyclades-Z multiport serial cards
 sys-apps/util-linux:ddate - build ddate helper (Discordian dates)
 sys-apps/util-linux:fdformat - build fdformat (floppy disk format)
 sys-apps/util-linux:loop-aes - include support for Loop AES encryption
+sys-apps/util-linux:pam - build runuser helper
 sys-apps/util-linux:perl - install the chkdupexe helper script
 sys-apps/util-linux:suid - install mount/umount as setuid so non-root users may mount/umount devices, and wall/write as setgid so non-root users can notify other users
 sys-apps/util-linux:tty-helpers - install the mesg/wall/write tools for talking to local users
@@ -6078,10 +6091,12 @@ sys-cluster/nova:cert - Installs the initscripts for the nova scheduler service
 sys-cluster/nova:compute - Installs the initscripts for the nova volume service
 sys-cluster/nova:conductor - Installs the initscripts for the nova conductor service
 sys-cluster/nova:consoleauth - Installs the initscripts for the nova consoleauth service
+sys-cluster/nova:kvm - qemu-kvm hypervisor support
 sys-cluster/nova:network - Installs the initscripts for the nova network service
 sys-cluster/nova:novncproxy - Installs the initscripts for the nova novncproxy service
 sys-cluster/nova:scheduler - Installs the initscripts for the nova scheduler service
 sys-cluster/nova:spicehtml5proxy - Installs the initscripts for the nova spicehtml5proxy service
+sys-cluster/nova:xen - xen hypervisor support
 sys-cluster/nova:xvpvncproxy - Installs the initscripts for the nova xvpvncproxy service
 sys-cluster/ocfs:aio - Add aio support
 sys-cluster/openmpi:heterogeneous - Enable features required for heterogeneous platform support
@@ -6385,6 +6400,7 @@ sys-power/upower:deprecated - Use sys-power/pm-utils (deprecated) instead of sys
 sys-process/cronie:anacron - Install the periodic anacron command scheduler.
 sys-process/cronie:inotify - Enable inotify filesystem monitoring support.
 sys-process/fcron:debug - Enable debug code and output. Since version 3.0.5 this will no longer force foreground execution, and fcron will be able to run as a service properly.
+sys-process/fcron:mta - Enable mta support for sending emails from fcron
 sys-process/fcron:pam - Enable PAM support for fcron. This means that fcron will pass through the "fcron" stack before executing the jobs, and fcrontab will use the "fcrontab" stack to authenticate the user before editing its crontab file.
 sys-process/fcron:system-crontab - Set up fcron to respect /etc/crontab and /etc/cron.d. If this flag is disabled, /etc/cron.d and /etc/crontab will be ignored, but /etc/cron.{hourly,daily,weekly,monthly} will still be respected.
 sys-process/htop:openvz - Enable openvz support
@@ -6434,6 +6450,7 @@ www-apps/ikiwiki:extras - Installs additional modules used by ikiwiki plugins
 www-apps/lxr:freetext - Adds support for freetext search using swish-e
 www-apps/nikola:jinja - Add support for dev-python/jinja as alternative templating engine to Mako
 www-apps/nikola:markdown - Add support for Markdown as alternative markup language to reStructuredText
+www-apps/novnc:nova - Installs Openstack Nova for it's libraries
 www-apps/otrs:mod_perl - Provide all dependencies for use of mod_perl instead of cgi
 www-apps/postfixadmin:vacation - Install vacation.pl script and dependencies
 www-apps/redmine:openid - Enable support for OpenID

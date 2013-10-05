@@ -16,7 +16,6 @@ LICENSE=""
 SLOT="0"
 KEYWORDS="*"
 IUSE="tk"
-REQUIRED_USE="!python_abis_2.5"
 
 DEPEND=""
-RDEPEND="$(python_abi_depend -e "2.5" dev-python/imaging)"
+RDEPEND="$(python_abi_depend dev-python/imaging[tk?])"

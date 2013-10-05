@@ -4,7 +4,7 @@
 
 EAPI="5-progress"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython"
+PYTHON_RESTRICTED_ABIS="*-jython"
 
 inherit distutils
 
@@ -21,8 +21,7 @@ IUSE=""
 RDEPEND="app-misc/ca-certificates
 	$(python_abi_depend dev-python/chardet)
 	$(python_abi_depend -i "2.*" dev-python/oauthlib)
-	$(python_abi_depend dev-python/urllib3)
-	$(python_abi_depend virtual/python-json[external])"
+	$(python_abi_depend dev-python/urllib3)"
 DEPEND="${RDEPEND}
 	$(python_abi_depend dev-python/setuptools)"
 

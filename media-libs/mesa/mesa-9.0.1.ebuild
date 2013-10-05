@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-9.0.1.ebuild,v 1.2 2012/12/03 02:42:08 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-9.0.1.ebuild,v 1.18 2013/05/09 20:15:10 chithanh Exp $
 
 EAPI=4
 
@@ -36,7 +36,7 @@ fi
 # GLES[2]/gl[2]{,ext,platform}.h are SGI-B-2.0
 LICENSE="MIT SGI-B-2.0"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~sparc-solaris ~x64-solaris ~x86-solaris"
 
 INTEL_CARDS="i915 i965 intel"
 RADEON_CARDS="r100 r200 r300 r600 radeon radeonsi"
@@ -94,8 +94,11 @@ RDEPEND="!<x11-base/xorg-server-1.7
 	x11-libs/libXxf86vm
 	>=x11-libs/libxcb-1.8.1
 	vdpau? ( >=x11-libs/libvdpau-0.4.1 )
-	wayland? ( dev-libs/wayland )
-	xorg? (	x11-libs/libdrm[libkms]	)
+	wayland? ( >=dev-libs/wayland-1.0.3 )
+	xorg? (
+		<x11-base/xorg-server-1.13.49
+		x11-libs/libdrm[libkms]
+	)
 	xvmc? ( >=x11-libs/libXvMC-1.0.6 )
 	${LIBDRM_DEPSTRING}[video_cards_nouveau?,video_cards_vmware?]
 "
@@ -114,8 +117,9 @@ done
 DEPEND="${RDEPEND}
 	llvm? (
 		>=sys-devel/llvm-2.9
-		r600-llvm-compiler? ( >=sys-devel/llvm-3.1 )
-		video_cards_radeonsi? ( >=sys-devel/llvm-3.1 )
+		<sys-devel/llvm-3.3_rc
+		r600-llvm-compiler? ( =sys-devel/llvm-3.1* )
+		video_cards_radeonsi? ( =sys-devel/llvm-3.1* )
 	)
 	=dev-lang/python-2*
 	dev-libs/libxml2[python]

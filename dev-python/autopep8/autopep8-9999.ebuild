@@ -4,7 +4,6 @@
 
 EAPI="5-progress"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5"
 # http://bugs.jython.org/issue1982
 PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*-jython"
 
@@ -20,7 +19,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="$(python_abi_depend ">=dev-python/pep8-1.4.5")
+DEPEND="$(python_abi_depend ">=dev-python/pep8-1.4.6")
 	$(python_abi_depend dev-python/setuptools)"
 RDEPEND="${DEPEND}"
 

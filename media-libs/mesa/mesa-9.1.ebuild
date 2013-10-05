@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-9.1.ebuild,v 1.2 2013/02/27 06:06:13 zmedico Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-9.1.ebuild,v 1.5 2013/03/19 13:03:09 chithanh Exp $
 
 EAPI=5
 
@@ -11,7 +11,9 @@ if [[ ${PV} = 9999* ]]; then
 	EXPERIMENTAL="true"
 fi
 
-inherit base autotools multilib flag-o-matic toolchain-funcs ${GIT_ECLASS}
+PYTHON_COMPAT=( python{2_6,2_7} )
+
+inherit base autotools multilib flag-o-matic python-single-r1 toolchain-funcs ${GIT_ECLASS}
 
 OPENGL_DIR="xorg-x11"
 
@@ -24,7 +26,7 @@ FOLDER="${PV/_rc*/}"
 DESCRIPTION="OpenGL-like graphic library for Linux"
 HOMEPAGE="http://mesa3d.sourceforge.net/"
 
-#SRC_PATCHES="mirror://gentoo/${P}-gentoo-patches-01.tar.bz2"
+SRC_PATCHES="mirror://gentoo/${PN}-9.1-gentoo-patches-01.tar.bz2"
 if [[ $PV = 9999* ]]; then
 	SRC_URI="${SRC_PATCHES}"
 else
@@ -91,7 +93,7 @@ RDEPEND="
 	vdpau? ( >=x11-libs/libvdpau-0.4.1 )
 	wayland? ( >=dev-libs/wayland-1.0.3 )
 	xorg? (
-		x11-base/xorg-server
+		x11-base/xorg-server:=
 		x11-libs/libdrm[libkms]
 	)
 	xvmc? ( >=x11-libs/libXvMC-1.0.6 )
@@ -112,11 +114,11 @@ done
 DEPEND="${RDEPEND}
 	llvm? (
 		>=sys-devel/llvm-2.9
-		r600-llvm-compiler? ( >=sys-devel/llvm-3.1 )
-		video_cards_radeonsi? ( >=sys-devel/llvm-3.1 )
+		r600-llvm-compiler? ( sys-devel/llvm[video_cards_radeon] )
+		video_cards_radeonsi? ( sys-devel/llvm[video_cards_radeon] )
 	)
-	=dev-lang/python-2*
-	dev-libs/libxml2[python]
+	${PYTHON_DEPS}
+	dev-libs/libxml2[python,${PYTHON_USEDEP}]
 	sys-devel/bison
 	sys-devel/flex
 	virtual/pkgconfig
@@ -139,6 +141,8 @@ QA_WX_LOAD="usr/lib*/opengl/xorg-x11/lib/libGL.so*"
 pkg_setup() {
 	# workaround toc-issue wrt #386545
 	use ppc64 && append-flags -mminimal-toc
+
+	python-single-r1_pkg_setup
 }
 
 src_unpack() {
@@ -260,6 +264,7 @@ src_configure() {
 		$(use_enable xorg) \
 		--with-dri-drivers=${DRI_DRIVERS} \
 		--with-gallium-drivers=${GALLIUM_DRIVERS} \
+		PYTHON2="${PYTHON}" \
 		${myconf}
 }
 

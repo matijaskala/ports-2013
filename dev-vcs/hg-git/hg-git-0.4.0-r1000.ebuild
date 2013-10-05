@@ -9,7 +9,7 @@ PYTHON_RESTRICTED_ABIS="3.* *-jython *-pypy-*"
 inherit distutils
 
 DESCRIPTION="push and pull from a Git server using Mercurial"
-HOMEPAGE="http://hg-git.github.com/ https://pypi.python.org/pypi/hg-git"
+HOMEPAGE="https://hg-git.github.io/ https://pypi.python.org/pypi/hg-git"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -19,7 +19,7 @@ IUSE=""
 
 RDEPEND="$(python_abi_depend ">=dev-vcs/mercurial-1.9")
 	$(python_abi_depend ">=dev-python/dulwich-0.8")
-	$(python_abi_depend -i "2.5 2.6" dev-python/ordereddict)"
+	$(python_abi_depend -i "2.6" dev-python/ordereddict)"
 DEPEND="${RDEPEND}
 	$(python_abi_depend dev-python/setuptools)"
 

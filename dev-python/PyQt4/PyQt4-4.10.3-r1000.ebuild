@@ -10,7 +10,7 @@ PYTHON_EXPORT_PHASE_FUNCTIONS="1"
 inherit eutils python qt4-r2 toolchain-funcs
 
 DESCRIPTION="Python bindings for the Qt toolkit"
-HOMEPAGE="http://www.riverbankcomputing.co.uk/software/pyqt/intro https://pypi.python.org/pypi/PyQt"
+HOMEPAGE="http://www.riverbankcomputing.co.uk/software/pyqt/intro https://pypi.python.org/pypi/PyQt4"
 
 if [[ "${PV}" == *_pre* ]]; then
 	MY_P="PyQt-x11-gpl-snapshot-${PV%_pre*}-${REVISION}"
@@ -50,7 +50,7 @@ RDEPEND="$(python_abi_depend ">=dev-python/sip-4.15:0=")
 		>=dev-qt/qttest-${QT_PV}
 	)
 	dbus? (
-		$(python_abi_depend -e "2.5" ">=dev-python/dbus-python-0.80")
+		$(python_abi_depend ">=dev-python/dbus-python-0.80")
 		>=dev-qt/qtdbus-${QT_PV}
 	)
 	declarative? ( >=dev-qt/qtdeclarative-${QT_PV} )

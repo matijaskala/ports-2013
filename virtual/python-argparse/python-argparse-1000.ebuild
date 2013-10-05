@@ -16,4 +16,4 @@ KEYWORDS="*"
 IUSE=""
 
 DEPEND=""
-RDEPEND="$(python_abi_depend -i "2.5 2.6 3.1" dev-python/argparse)"
+RDEPEND="$(python_abi_depend -i "2.6 3.1" dev-python/argparse)"

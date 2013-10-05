@@ -20,7 +20,7 @@ KEYWORDS="*"
 IUSE="doc test"
 
 RDEPEND="$(python_abi_depend dev-python/setuptools)
-	$(python_abi_depend -i "2.5 2.6 3.1" dev-python/unittest2)"
+	$(python_abi_depend -i "2.6 3.1" dev-python/unittest2)"
 # Tests using dev-python/psycopg:2 are skipped when dev-python/psycopg:2 is not installed.
 DEPEND="${RDEPEND}
 	doc? ( dev-python/epydoc )

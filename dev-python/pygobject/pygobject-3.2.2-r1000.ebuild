@@ -6,7 +6,7 @@ EAPI="5-progress"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.3 3.4 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="3.[3-9] *-jython *-pypy-*"
 
 inherit autotools eutils gnome2 python virtualx
 

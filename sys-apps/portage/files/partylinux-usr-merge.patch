@@ -18,7 +18,7 @@ diff -U 3 -H -d -r -N -- a/vartree.py b/vartree.py
  				if not ignore:
  					if islink and f_match in \
 -						("/lib", "/usr/lib", "/usr/local/lib"):
-+						("/lib", "/usr/lib", "/usr/local/lib", "/bin", "/sbin", "/lib32", "lib64"):
++						("/lib", "/usr/lib", "/usr/local/lib", "/bin", "/sbin", "/lib32", "/lib64"):
  						# Ignore libdir symlinks for bug #423127.
  						ignore = True
  

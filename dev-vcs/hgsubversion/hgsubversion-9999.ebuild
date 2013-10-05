@@ -19,10 +19,9 @@ KEYWORDS=""
 IUSE="test"
 
 RDEPEND="$(python_abi_depend ">=dev-vcs/mercurial-1.4")
-	$(python_abi_depend -i "2.5" ">=dev-vcs/subversion-1.5[python]")
 	|| (
-		$(python_abi_depend -e "2.5" dev-python/subvertpy)
-		$(python_abi_depend -e "2.5" ">=dev-vcs/subversion-1.5[python]")
+		$(python_abi_depend dev-python/subvertpy)
+		$(python_abi_depend ">=dev-vcs/subversion-1.5[python]")
 	)"
 DEPEND="${RDEPEND}
 	$(python_abi_depend dev-python/setuptools)

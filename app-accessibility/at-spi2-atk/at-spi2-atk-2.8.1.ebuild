@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/at-spi2-atk/at-spi2-atk-2.8.1.ebuild,v 1.1 2013/04/17 16:57:53 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-accessibility/at-spi2-atk/at-spi2-atk-2.8.1.ebuild,v 1.3 2013/10/04 15:46:43 tetromino Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -29,7 +29,7 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 "
 
-src_configure(){
+src_configure() {
 	gnome2_src_configure --enable-p2p
 }
 

@@ -1,0 +1,16 @@
+--- compizconfig/compizconfig-python/CMakeLists.txt	2012-12-04 21:56:14.594710736 +0100
++++ compizconfig/compizconfig-python/CMakeLists.txt	2012-12-04 21:56:14.606710587 +0100
+@@ -1,4 +1,6 @@
++if (USE_PYTHON)
++
+ # Hack
+ set (CMAKE_PROJECT_NAME compizconfig-python)
+ 
+ # Get arch
+@@ -136,4 +138,6 @@
+         endif (PYTHON_EXECUTABLE AND
+                BASH_EXECUTABLE)
+ 
+ endif (COMPIZ_BUILD_TESTING)
++
++endif (USE_PYTHON)

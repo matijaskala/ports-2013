@@ -5,7 +5,7 @@
 EAPI="5-progress"
 GCONF_DEBUG="no"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="*-jython *-pypy-*"
 
 inherit eutils gnome2 python
 

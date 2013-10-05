@@ -11,10 +11,11 @@ SRC_URI="mirror://sourceforge/project/lxde/LXPolkit/${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE=""
+IUSE="gtk3"
 
 RDEPEND=">=sys-auth/polkit-0.102
-	x11-libs/gtk+:3
+	gtk3? ( x11-libs/gtk+:3 )
+	!gtk3? ( x11-libs/gtk+:2 )
 	!gnome-extra/polkit-gnome"
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.40.0
@@ -27,4 +28,4 @@ src_prepare() {
 	echo 'AutostartCondition=GNOME3 if-session gnome-fallback' >> ${f}
 }
 
-src_configure() { econf --enable-gtk3; }
+src_configure() { econf $(use_enable gtk3); }

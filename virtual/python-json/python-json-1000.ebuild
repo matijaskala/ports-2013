@@ -16,5 +16,4 @@ KEYWORDS="*"
 IUSE="external"
 
 DEPEND=""
-RDEPEND="$(python_abi_depend -i "2.5" dev-python/simplejson)
-	external? ( $(python_abi_depend -e "2.5 3.1 3.2" dev-python/simplejson) )"
+RDEPEND="external? ( $(python_abi_depend -e "3.1 3.2" dev-python/simplejson) )"

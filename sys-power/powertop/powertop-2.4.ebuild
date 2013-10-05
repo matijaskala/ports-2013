@@ -1,10 +1,10 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/powertop/powertop-2.4.ebuild,v 1.7 2013/09/06 15:54:15 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-power/powertop/powertop-2.4.ebuild,v 1.9 2013/10/03 19:51:51 zerochaos Exp $
 
 EAPI="5"
 
-inherit eutils linux-info
+inherit eutils linux-info autotools
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://github.com/fenrus75/powertop.git"
 	inherit git-2 autotools
@@ -88,9 +88,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if [[ ${PV} == "9999" ]] ; then
-		eautoreconf
-	fi
+	epatch "${FILESDIR}"/powertop-2.4-tinfo.patch
+	eautoreconf
 }
 
 src_configure() {

@@ -20,8 +20,8 @@ RDEPEND=">=x11-libs/gtk+-2.18:2
 	x11-libs/gdk-pixbuf:2[jpeg?,tiff?]
 	>=dev-libs/glib-2.25.9:2
 	>=dev-libs/libxml2-2
-	>=mate-base/mate-desktop-1.2.0
-	>=x11-themes/mate-icon-theme-1.2.0
+	>=mate-base/mate-desktop-1.6.0
+	>=x11-themes/mate-icon-theme-1.6.0
 	>=x11-misc/shared-mime-info-0.20
 	x11-libs/libX11
 	dbus? ( >=dev-libs/dbus-glib-0.71 )
@@ -29,7 +29,7 @@ RDEPEND=">=x11-libs/gtk+-2.18:2
 		>=media-libs/libexif-0.6.14
 		virtual/jpeg:0 )
 	jpeg? ( virtual/jpeg:0 )
-	lcms? ( =media-libs/lcms-1* )
+	lcms? ( media-libs/lcms:0 )
 	python? (
 		>=dev-python/pygobject-2.15.1:2
 		>=dev-python/pygtk-2.13 )

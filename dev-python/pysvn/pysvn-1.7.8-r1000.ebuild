@@ -33,14 +33,6 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.7.8-respect_flags.patch"
 
 	python_copy_sources
-
-	preparation() {
-		cd Source
-		if [[ "$(python_get_version -l)" == "2.5" ]]; then
-			python_execute "$(PYTHON)" setup.py backport || die "Backport failed"
-		fi
-	}
-	python_execute_function -s preparation
 }
 
 src_configure() {

@@ -1,6 +1,6 @@
 ####################################################################
 
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15134 2013/09/26 12:55:16 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15142 2013/10/04 19:31:59 hwoarang Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,6 +30,36 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Fabian Groffen <grobian@gentoo.org> (30 Sep 2013)
+# Mask release candidates
+=mail-mta/exim-4.82_rc*
+
+# Tiziano Müller <dev-zero@gentoo.org> (29 Sep 2013)
+# Mask for further testing
+>=www-servers/nginx-1.4.2
+
+# Manuel Rüger <mrueg@gentoo.org> (27 Sep 2013)
+# Mask further ruby-1.8 only packages
+# Masked for removal in 30 days
+app-office/tpp
+dev-ruby/ncurses-ruby
+net-news/raggle
+
+# Manuel Rüger <mrueg@gentoo.org> (27 Sep 2013)
+# Mask further ruby-1.8 only packages
+# Masked for removal in 30 days
+dev-ruby/heckle
+dev-ruby/main
+dev-ruby/rcov
+dev-ruby/rqr
+dev-ruby/ruby-svg
+
+# Markos Chandras <hwoarang@gentoo.org> (23 Sep 2013)
+# dead upstream. The microcode is now in the latest
+# sys-kernel/linux-firmware. Bug #455208
+# Removal in 30 days.
+sys-firmware/amd-ucode
 
 # Agostino Sarubbo <ago@gentoo.org> (23 Sep 2013)
 # Masked because of vulnerable versions
@@ -105,28 +135,28 @@ dev-db/edb
 # removal on ~15 Oct 2013
 # dead on upstream since ~2006
 # fails on compile >=vdr-2.0
-# Bug #414275 #414177   
+# Bug #414275 #414177
 media-plugins/vdr-sysinfo
 
 # Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
 # removal on ~15 Oct 2013
 # dead on upstream since ~2006
 # fails on compile >=vdr-2.0
-# Bug #414269 #414177   
+# Bug #414269 #414177
 media-plugins/vdr-taste
 
 # Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
 # removal on ~15 Oct 2013
 # dead on upstream since ~2008
 # fails on compile >=vdr-2.0
-# Bug #414261 #414177   
+# Bug #414261 #414177
 media-plugins/vdr-timeline
 
 # Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
 # removal on ~15 Oct 2013
 # dead on upstream since ~2006
 # fails on compile >=vdr-2.0
-# Bug #414257 #414177   
+# Bug #414257 #414177
 media-plugins/vdr-tvonscreen
 
 # Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
@@ -244,19 +274,13 @@ sys-fs/cdfs
 # Removal in a month.
 =dev-cpp/libxmlpp-1.0*
 
-# Chris Reffett <creffett@gentoo.org> (03 Sep 2013)
-# Dead upstream, outstanding security bug #260956.
-# Masked for removal in 30 days.
-dev-games/neoengine
-dev-games/neotools
-
 # Alexandre Rostovtsev <tetromino@gentoo.org> (02 Sep 2013)
 # Silent API/ABI change; mask until seahorse is patched; bug #483414
 >=app-crypt/libsecret-0.16
 
 # Tom Wijsman <TomWij@gentoo.org> (28 Aug 2013)
 # =sys-kernel/gentoo-sources-3.8.13 is masked due to multiple security bugs:
-# 
+#
 # 1. Security Bug #475618: CVE-2013-1059:
 # Linux Kernel: Ceph: NULL Pointer Dereference Denial of Service Vulnerability
 #
@@ -273,7 +297,7 @@ dev-games/neotools
 # the earlier long term stable branches (3.0.X or 3.4.Y), this might be the case
 # if you have older hardware or an unfortunate stability bug on 3.10.7.
 #
-# You can accept keywords by adding sys-kernel/gentoo-sources to the file 
+# You can accept keywords by adding sys-kernel/gentoo-sources to the file
 # /etc/portage/package.accept_keywords after which you can run
 # `emerge sys-kernel/gentoo-sources:X.Y.Z` to select a specific LTS kernel.
 # When you choose to turn back to stable later, don't forget to remove that.
@@ -337,12 +361,6 @@ dev-games/neotools
 # Masked for testing
 ~dev-util/boost-build-1.54.0
 ~dev-libs/boost-1.54.0
-
-# Julian Ospald <hasufell@gentoo.org> (25 Aug 2013)
-# experimental alpha software, may be insecure
-# https://github.com/Bitmessage/PyBitmessage/issues/376
-# https://bitmessage.org/forum/index.php/topic,1666.0.html
-net-p2p/pybitmessage
 
 # Mike Gilbert <floppym@gentoo.org> (23 Aug 2013)
 # Dev channel releases are only for people who are developers or want more
@@ -417,7 +435,7 @@ sci-geosciences/googleearth
 >=media-video/ffmpeg-2.0
 
 # Chris Reffett <creffett@gentoo.org> (20 Jul 2013)
-# Uses vulnerable versions of bzip2, but these versions are 
+# Uses vulnerable versions of bzip2, but these versions are
 # necessary to reconstruct older archives. Use at your own risk.
 =app-portage/deltup-0.4.5
 

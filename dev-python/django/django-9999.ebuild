@@ -3,8 +3,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5-progress"
+PYTHON_BDEPEND="test? ( <<[{*-cpython *-pypy-*}sqlite]>> )"
+PYTHON_DEPEND="<<[{*-cpython *-pypy-*}sqlite?]>>"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.1"
+PYTHON_RESTRICTED_ABIS="3.1"
 PYTHON_TESTS_RESTRICTED_ABIS="*-jython"
 WEBAPP_NO_AUTO_INSTALL="yes"
 
@@ -21,13 +23,10 @@ KEYWORDS=""
 IUSE="doc mysql postgres sqlite test"
 
 RDEPEND="$(python_abi_depend -e "*-jython" dev-python/imaging)
-	$(python_abi_depend virtual/python-json[external])
 	mysql? ( $(python_abi_depend -e "3.* *-jython" dev-python/mysql-python) )
-	postgres? ( $(python_abi_depend -e "*-jython *-pypy-*" dev-python/psycopg:2) )
-	sqlite? ( $(python_abi_depend -e "*-jython" virtual/python-sqlite[external]) )"
+	postgres? ( $(python_abi_depend -e "*-jython *-pypy-*" dev-python/psycopg:2) )"
 DEPEND="${RDEPEND}
-	doc? ( $(python_abi_depend dev-python/sphinx) )
-	test? ( $(python_abi_depend -e "*-jython" virtual/python-sqlite[external]) )"
+	doc? ( $(python_abi_depend dev-python/sphinx) )"
 
 WEBAPP_MANUAL_SLOT="yes"
 

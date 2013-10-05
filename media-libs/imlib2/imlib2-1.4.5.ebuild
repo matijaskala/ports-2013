@@ -1,15 +1,22 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/imlib2/imlib2-1.4.5.ebuild,v 1.10 2013/08/13 07:56:56 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/imlib2/imlib2-1.4.5.ebuild,v 1.11 2013/09/28 09:37:31 vapier Exp $
 
-EAPI=4
+EAPI="4"
+
+EGIT_SUB_PROJECT="legacy"
+EGIT_URI_APPEND=${PN}
+
+if [[ ${PV} != "9999" ]] ; then
+	EKEY_STATE="release"
+fi
+
 inherit enlightenment toolchain-funcs
 
 DESCRIPTION="Version 2 of an advanced replacement library for libraries like libXpm"
 HOMEPAGE="http://www.enlightenment.org/"
 
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sh sparc x86 ~amd64-fbsd ~x86-fbsd"
-IUSE="X bzip2 gif jpeg mmx mp3 png static-libs tiff zlib"
+IUSE="bzip2 gif jpeg mmx mp3 png static-libs tiff X zlib"
 
 RDEPEND="=media-libs/freetype-2*
 	bzip2? ( app-arch/bzip2 )
@@ -21,27 +28,26 @@ RDEPEND="=media-libs/freetype-2*
 	X? (
 		x11-libs/libX11
 		x11-libs/libXext
-		)
+	)
 	mp3? ( media-libs/libid3tag )"
 DEPEND="${RDEPEND}
 	png? ( virtual/pkgconfig )
 	X? (
 		x11-proto/xextproto
 		x11-proto/xproto
-		)"
+	)"
 
 src_configure() {
 	# imlib2 has diff configure options for x86/amd64 mmx
-	local myconf
 	if [[ $(tc-arch) == amd64 ]]; then
-		myconf="$(use_enable mmx amd64) --disable-mmx"
+		E_ECONF+=( $(use_enable mmx amd64) --disable-mmx )
 	else
-		myconf="--disable-amd64 $(use_enable mmx)"
+		E_ECONF+=( --disable-amd64 $(use_enable mmx) )
 	fi
 
-	[[ $(gcc-major-version) -ge 4 ]] && myconf="${myconf} --enable-visibility-hiding"
+	[[ $(gcc-major-version) -ge 4 ]] && E_ECONF+=( --enable-visibility-hiding )
 
-	export MY_ECONF="
+	E_ECONF+=(
 		$(use_enable static-libs static)
 		$(use_with X x)
 		$(use_with jpeg)
@@ -51,8 +57,7 @@ src_configure() {
 		$(use_with zlib)
 		$(use_with bzip2)
 		$(use_with mp3 id3)
-		${myconf}
-		"
+	)
 
 	enlightenment_src_configure
 }
@@ -61,5 +66,5 @@ src_install() {
 	enlightenment_src_install
 
 	# enlightenment_src_install should take care of this for us, but it doesn't
-	find "${ED}" -name '*.la' -exec rm -f {} +
+	find "${ED}" -name '*.la' -delete
 }
