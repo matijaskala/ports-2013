@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/lastfm-desktop/lastfm-desktop-2.1.35.ebuild,v 1.1 2013/08/14 10:00:29 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/lastfm-desktop/lastfm-desktop-2.1.35.ebuild,v 1.2 2013/10/08 12:51:14 jlec Exp $
 
 EAPI=5
 
@@ -19,15 +19,13 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtdbus:4
 	dev-qt/qtgui:4
-	dev-qt/qtphonon:4
 	dev-qt/qtsql:4
 	dev-qt/qtwebkit:4
 	media-libs/libgpod
-	media-libs/liblastfm
+	>=media-libs/liblastfm-1.0.6[fingerprint]
 	sys-libs/zlib
-"
-DEPEND="${RDEPEND}
-"
+	|| ( dev-qt/qtphonon:4 kde-base/phonon-kde:4 )"
+DEPEND="${RDEPEND}"
 
 src_configure() {
 	eqmake4 Last.fm.pro PREFIX="${EPREFIX}"/usr

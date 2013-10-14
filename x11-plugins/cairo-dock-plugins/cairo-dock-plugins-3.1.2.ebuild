@@ -13,7 +13,7 @@ SRC_URI="http://launchpad.net/${MY_PN}/${MY_PV}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="experimental"
+KEYWORDS="~*"
 IUSE="alsa disks doncky exif gmenu gnome gtk3 kde nwmon scooby terminal tomboy upower vala webkit xfce xgamma xklavier xrandr"
 
 RDEPEND="

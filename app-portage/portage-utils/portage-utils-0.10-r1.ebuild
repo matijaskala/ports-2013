@@ -16,6 +16,7 @@ IUSE="static"
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-x86-test.patch #412067
 	epatch "${FILESDIR}"/${P}-funtoo-sync.patch #FL-318
+	epatch "${FILESDIR}/partylinux-usr-merge.patch"
 }
 
 src_configure() {

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gst-plugins-bad/gst-plugins-bad-1.2.0.ebuild,v 1.3 2013/10/04 01:24:17 tetromino Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/gst-plugins-bad/gst-plugins-bad-1.2.0.ebuild,v 1.4 2013/10/06 22:20:25 eva Exp $
 
 EAPI="5"
 
@@ -19,8 +19,7 @@ RDEPEND="
 	>=dev-libs/glib-2.32:2
 	>=media-libs/gst-plugins-base-1.2:${SLOT}
 	>=media-libs/gstreamer-1.2:${SLOT}
-	media-libs/mesa
-	x11-libs/libX11
+	media-libs/mesa[egl]
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
 	orc? ( >=dev-lang/orc-0.4.17 )
 

@@ -106,7 +106,7 @@ fi
 
 # @ECLASS-VARIABLE: DOCS
 # @DESCRIPTION:
-# Additional documentation files installed by distutils_src_install().
+# Documentation files installed by distutils_src_install().
 
 _distutils_execute() {
 	if [[ "$(python_get_implementation)" == "PyPy" ]]; then
@@ -376,7 +376,7 @@ distutils_src_install() {
 	_python_initialize_prefix_variables
 	_python_set_color_variables
 
-	local default_docs doc line nspkg_pth_file nspkg_pth_files=() setup_file
+	local doc line nspkg_pth_file nspkg_pth_files=() setup_file
 
 	if _python_package_supporting_installation_for_multiple_python_abis; then
 		distutils_installation() {
@@ -436,18 +436,15 @@ distutils_src_install() {
 		die "Illegal installation into /usr/local"
 	fi
 
-	default_docs="AUTHORS Change* CHANGELOG CONTRIBUTORS KNOWN_BUGS MAINTAINERS NEWS README* TODO"
 
-	for doc in ${default_docs}; do
-		[[ -s "${doc}" ]] && dodoc "${doc}"
-	done
-
-	if has "${EAPI:-0}" 2 3; then
-		if [[ -n "${DOCS}" ]]; then
+	if [[ -z "$(declare -p DOCS 2> /dev/null)" ]]; then
+		for doc in AUTHORS Change* CHANGELOG CONTRIBUTORS KNOWN_BUGS MAINTAINERS NEWS README* TODO; do
+			[[ -s "${doc}" ]] && dodoc "${doc}"
+		done
+	elif [[ -n "${DOCS}" ]]; then
+		if has "${EAPI:-0}" 2 3; then
 			dodoc ${DOCS} || die "dodoc failed"
-		fi
-	else
-		if [[ -n "${DOCS}" ]]; then
+		else
 			dodoc -r ${DOCS}
 		fi
 	fi

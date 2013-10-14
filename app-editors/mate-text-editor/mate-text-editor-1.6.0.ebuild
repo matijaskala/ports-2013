@@ -7,6 +7,9 @@ GCONF_DEBUG="yes"
 MATE_LA_PUNT="yes"
 PYTHON_DEPEND="python? 2:2.5"
 
+# Most tests fail so disable test
+# Upstream issue https://github.com/mate-desktop/mate-text-editor/issues/33
+RESTRICT="test"
 inherit mate multilib python
 
 DESCRIPTION="Pluma text editor for the MATE desktop"

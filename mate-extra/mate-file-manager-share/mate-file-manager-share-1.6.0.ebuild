@@ -33,10 +33,11 @@ pkg_setup() {
 	G2CONF="${G2CONF} --disable-static"
 }
 
-#src_prepare() {
-#	epatch "${WORKDIR}"/debian/patches/15_user-acl.patch
-#	gnome2_src_prepare
-#}
+src_prepare() {
+	# Remove obsolete files to make test run
+	rm src/caja-share.c src/caja-share.h || die 
+	mate_src_prepare
+}
 
 src_install() {
 	mate_src_install

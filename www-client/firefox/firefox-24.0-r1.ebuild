@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-24.0-r1.ebuild,v 1.5 2013/09/26 15:00:20 axs Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-24.0-r1.ebuild,v 1.6 2013/10/07 20:37:33 nirbheek Exp $
 
 EAPI="3"
 VIRTUALX_REQUIRED="pgo"
@@ -44,7 +44,8 @@ IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system
 # More URIs appended below...
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
-	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz"
+	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
+	https://launchpad.net/ubuntu/saucy/+source/${PN}/${PV}+build1-0ubuntu1/+files/${PN}_${PV}+build1-0ubuntu1.debian.tar.gz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -62,7 +63,7 @@ RDEPEND="
 	system-cairo? ( >=x11-libs/cairo-1.12[X] )
 	system-icu? ( dev-libs/icu )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
-	system-sqlite? ( >=dev-db/sqlite-3.7.16.1:3[secure-delete,debug=] )
+	system-sqlite? ( >=dev-db/sqlite-3.7.17:3[secure-delete,debug=] )
 	>=media-libs/libvpx-1.0.0
 	kernel_linux? ( media-libs/alsa-lib )
 	selinux? ( sec-policy/selinux-mozilla )"
@@ -143,6 +144,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	epatch "${WORKDIR}/debian/patches/unity-menubar.patch"
 	# Apply our patches
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \

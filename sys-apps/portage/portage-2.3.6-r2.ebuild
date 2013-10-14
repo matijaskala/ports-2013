@@ -59,6 +59,7 @@ RDEPEND="${python_dep}
 	!<app-admin/logrotate-3.8.0"
 PDEPEND="
 	!build? (
+		dev-vcs/git
 		>=net-misc/rsync-2.6.4
 		userland_GNU? ( >=sys-apps/coreutils-6.4 )
 	)"

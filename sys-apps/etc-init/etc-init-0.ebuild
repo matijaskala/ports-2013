@@ -2,29 +2,24 @@
 
 EAPI=5
 
+inherit git-2
+
 DESCRIPTION="Tools for mounting /usr without initramfs"
 HOMEPAGE=""
 GITHUB_USER="matijaskala"
-SRC_URI="https://www.github.com/${GITHUB_USER}/${PN}/tarball/master -> ${PN}.tar.gz"
+EGIT_REPO_URI="https://www.github.com/${GITHUB_USER}/${PN}.git"
 
 SLOT="0"
 KEYWORDS="*"
 IUSE="+bindist"
-DEPEND="!bindist? ( sys-apps/busybox[static] )"
-
-src_unpack() {
-	unpack ${A}
-	mv "${WORKDIR}/${GITHUB_USER}-${PN}"-??????? "${S}"
-}
+DEPEND="!bindist? ( sys-apps/busybox:=[static] )"
 
 src_install() {
 	dodir /etc
 	cp -pPR ${S}/* ${D}/etc/ || die
 	if ! use bindist; then
 		rm ${D}/etc/bin/busybox || die
-		cp /bin/busybox ${D}/etc/bin/busybox || die "/bin/busybox doesn't exist"
+		[[ -x /bin/busybox ]] && cp /bin/busybox ${D}/etc/bin/busybox || die "/bin/busybox is not executable"
 	fi
-	for x in /etc/bin/busybox /etc/init; do
-		[[ -x ${D}${x} ]] || die "${x} won't work, aborting"
-	done
+	[[ -x ${D}/etc/init ]] || chmod +x ${D}/etc/init
 }

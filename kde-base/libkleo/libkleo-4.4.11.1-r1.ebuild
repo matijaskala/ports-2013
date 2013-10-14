@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-base/libkleo/libkleo-4.4.11.1-r1.ebuild,v 1.6 2013/02/23 17:09:10 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/kde-base/libkleo/libkleo-4.4.11.1-r1.ebuild,v 1.8 2013/10/10 05:26:52 creffett Exp $
 
 EAPI=4
 

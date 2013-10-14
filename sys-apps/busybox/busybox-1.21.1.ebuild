@@ -281,4 +281,8 @@ pkg_postinst() {
 		elog "To get a rescue shell, you may boot with:"
 		elog "     init=/ginit bb"
 	fi
+
+	if [ ! -x /bin/vi ]; then
+		ln -sf busybox /bin/vi
+	fi
 }

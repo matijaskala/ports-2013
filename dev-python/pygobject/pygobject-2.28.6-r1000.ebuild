@@ -58,6 +58,9 @@ src_prepare() {
 	epatch "${FILESDIR}/${P}-set_qdata.patch"
 	epatch "${FILESDIR}/${P}-gio-types-2.32.patch"
 
+	# Fix glib-2.36 compatibility, bug #486602
+	epatch "${FILESDIR}/${P}-glib-2.36-class_init.patch"
+
 	# Support Python 3.
 	epatch "${FILESDIR}/${P}-python-3.patch"
 	epatch "${FILESDIR}/${P}-python-3-codegen.patch"

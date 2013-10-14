@@ -18,6 +18,7 @@ RDEPEND=""
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-0.21-funtoo-sync.patch"
+	epatch "${FILESDIR}/partylinux-usr-merge.patch"
 }
 
 src_configure() {

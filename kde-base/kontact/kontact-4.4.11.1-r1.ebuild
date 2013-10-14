@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-base/kontact/kontact-4.4.11.1-r1.ebuild,v 1.5 2012/12/08 12:04:13 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/kde-base/kontact/kontact-4.4.11.1-r1.ebuild,v 1.7 2013/10/10 05:26:49 creffett Exp $
 
 EAPI=4
 

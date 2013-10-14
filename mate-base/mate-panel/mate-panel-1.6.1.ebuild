@@ -44,12 +44,9 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.5.0"
 
 pkg_setup() {
-	# possible values: none, clock, fish, notification-area, wncklet, all
-	local applets="all"
 	G2CONF="${G2CONF}
 		--libexecdir=/usr/libexec/mate-applets
 		--disable-deprecation-flags
-		--with-in-process-applets=${applets}
 		$(use_enable networkmanager network-manager)
 		$(use_enable introspection)"
 	DOCS="AUTHORS ChangeLog HACKING NEWS README"

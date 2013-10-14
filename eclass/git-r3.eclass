@@ -28,6 +28,10 @@ EXPORT_FUNCTIONS src_unpack
 
 if [[ ! ${_GIT_R3} ]]; then
 
+if [[ ! ${_INHERITED_BY_GIT_2} ]]; then
+	DEPEND=">=dev-vcs/git-1.8.2.1"
+fi
+
 # @ECLASS-VARIABLE: EGIT3_STORE_DIR
 # @DESCRIPTION:
 # Storage directory for git sources.
@@ -247,6 +251,11 @@ _git-r3_set_submodules() {
 		l=${l#submodule.}
 		local subname=${l%%.url=*}
 
+		# skip modules that have 'update = none', bug #487262.
+		local upd=$(echo "${data}" | git config -f /dev/fd/0 \
+			submodule."${subname}".update)
+		[[ ${upd} == none ]] && continue
+
 		submodules+=(
 			"${subname}"
 			"$(echo "${data}" | git config -f /dev/fd/0 \
@@ -374,6 +383,8 @@ _git-r3_smart_fetch() {
 # recursively.
 git-r3_fetch() {
 	debug-print-function ${FUNCNAME} "$@"
+
+	[[ ${EVCS_OFFLINE} ]] && return
 
 	local repos
 	if [[ ${1} ]]; then
@@ -684,8 +695,6 @@ git-r3_peek_remote_ref() {
 
 git-r3_src_fetch() {
 	debug-print-function ${FUNCNAME} "$@"
-
-	[[ ${EVCS_OFFLINE} ]] && return
 
 	if [[ ! ${EGIT3_STORE_DIR} && ${EGIT_STORE_DIR} ]]; then
 		ewarn "You have set EGIT_STORE_DIR but not EGIT3_STORE_DIR. Please consider"

@@ -15,6 +15,8 @@ inherit autotools fdo-mime libtool mate-desktop.org mate-utils eutils
 DEPEND="dev-util/gtk-doc
 		dev-util/gtk-doc-am"
 
+RESTRICT="primaryuri"
+
 case "${EAPI:-0}" in
 	0|1)
 		EXPORT_FUNCTIONS src_unpack src_compile src_install pkg_preinst pkg_postinst pkg_postrm
@@ -266,6 +268,14 @@ mate_src_install() {
 			find "${D}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
 		fi
 		eend
+	fi
+}
+
+# @FUNCTION: mate_src_test
+# @DESCRIPTION: Run make check
+src_test() {
+	if grep -q "^check:" Makefile; then
+		emake check
 	fi
 }
 

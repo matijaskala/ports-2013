@@ -48,6 +48,10 @@ src_prepare() {
 	# Fix exit status of tests.
 	epatch "${FILESDIR}/${P}-tests_result.patch"
 
+	# Fix tests.
+	# https://bugzilla.gnome.org/show_bug.cgi?id=709304
+	epatch "${FILESDIR}/${P}-test_dialog.patch"
+
 	# Disable installation of examples in wrong directory.
 	sed -e "/^SUBDIRS =/s/ examples//" -i Makefile.am
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-9.2.0-r1.ebuild,v 1.2 2013/09/21 21:30:49 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-9.2.0-r1.ebuild,v 1.4 2013/10/13 20:44:10 mgorny Exp $
 
 EAPI=5
 
@@ -102,7 +102,7 @@ RDEPEND="
 	>=x11-libs/libxcb-1.8.1[${MULTILIB_USEDEP}]
 	opencl? (
 				app-admin/eselect-opencl
-				>=dev-libs/libclc-0.0.1_pre20130524-r1
+				>=dev-libs/libclc-0.0.1_pre20130819-r1
 			)
 	vdpau? ( >=x11-libs/libvdpau-0.4.1[${MULTILIB_USEDEP}] )
 	wayland? ( >=dev-libs/wayland-1.0.3[${MULTILIB_USEDEP}] )
@@ -381,7 +381,8 @@ multilib_src_install() {
 }
 
 multilib_src_install_all() {
-	find "${ED}" -name '*.la' -exec rm -f {} + || die
+	prune_libtool_files --all
+	einstalldocs
 
 	if use !bindist; then
 		dodoc docs/patents.txt

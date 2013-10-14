@@ -1,6 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libdbusmenu/libdbusmenu-0.6.2.ebuild,v 1.10 2013/07/06 22:30:23 xmw Exp $
 
 EAPI=4
 VALA_MIN_API_VERSION=0.16
@@ -13,21 +11,25 @@ HOMEPAGE="http://launchpad.net/dbusmenu"
 SRC_URI="http://launchpad.net/${PN/lib}/${PV%.*}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1 LGPL-3"
-SLOT="3"
-KEYWORDS="~amd64 ~arm ~hppa ~mips ~x86"
-IUSE="debug gtk +introspection"
+SLOT="0"
+KEYWORDS="*"
+IUSE="debug gtk gtk3 +introspection"
 
 RDEPEND=">=dev-libs/glib-2.32
 	>=dev-libs/dbus-glib-0.100
 	dev-libs/libxml2
-	gtk? ( >=x11-libs/gtk+-3.2:3[introspection?] )
+	gtk? (
+		gtk3? ( >=x11-libs/gtk+-3.2:3[introspection?] )
+		!gtk3? ( x11-libs/gtk+:2[introspection?] )
+	)
 	introspection? ( >=dev-libs/gobject-introspection-1 )
-	!<${CATEGORY}/${PN}-0.5.1-r200"
+	"
 DEPEND="${RDEPEND}
 	app-text/gnome-doc-utils
 	dev-util/intltool
 	virtual/pkgconfig
 	introspection? ( $(vala_depend) )"
+REQUIRED_USE="gtk3? ( gtk )"
 
 src_prepare() {
 	if use introspection; then
@@ -39,7 +41,6 @@ src_prepare() {
 src_configure() {
 	append-flags -Wno-error #414323
 
-	# dumper extra tool is only for GTK+-2.x, tests use valgrind which is stupid
 	econf \
 		--docdir=/usr/share/doc/${PF} \
 		--disable-static \
@@ -52,7 +53,7 @@ src_configure() {
 		$(use_enable introspection vala) \
 		$(use_enable debug massivedebugging) \
 		--with-html-dir=/usr/share/doc/${PF}/html \
-		--with-gtk=3
+		--with-gtk=$(usex gtk3 "3" "2")
 }
 
 src_test() { :; } #440192

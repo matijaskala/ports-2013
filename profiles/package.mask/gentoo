@@ -1,6 +1,6 @@
 ####################################################################
 
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15142 2013/10/04 19:31:59 hwoarang Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15161 2013/10/14 13:33:19 jlec Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -31,13 +31,54 @@
 
 #--- END OF EXAMPLES ---
 
+# Justin Lecher <jlec@gentoo.org> (14 Oct 2013)
+# Seems to break all deps - API change?
+>=sci-libs/metis-5
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (13 Oct 2013)
+# Masked for security bug #472280, CVE 2013-1872
+<media-libs/mesa-9.1.4
+
+# Lars Wendler <polynomial-c@gentoo.org> (13 Oct 2013)
+# Masked for testing
+>=sys-devel/make-4.0
+
+# Diego Elio Pettenò <flameeyes@gentoo.org> (13 Oct 2013)
+# Requires a custom patch to www-server/apache which is not present in
+# Gentoo's ebuilds. If you want to play with this, please don't open
+# bugs related to Apache.
+www-apache/mod_spdy
+
+# Pacho Ramos <pacho@gentoo.org> (12 Oct 2013)
+# No package is needing it but it still needs obsolete
+# and unmaintained libda:4 slot (#482910). Removal in a month.
+=dev-cpp/libgdamm-4.1.3
+
+# Pacho Ramos <pacho@gentoo.org> (12 Oct 2013)
+# This meta is no longer needed, bug #480612
+# Removal in a month.
+>=gnome-extra/gnome-utils-3.4
+
+# Markos Chandras <hwoarang@gentoo.org> (10 Oct 2013)
+# Masked for futher testing with various pam setups
+=x11-misc/lightdm-1.8*
+
+# Thomas Kahle <tomka@gentoo.org> (09 Oct 2013)
+# Masked for removal in 30 days.  Game library with
+# no consumers and dead upstream.  games-strategy/freeorion
+# now uses a modified internal version of this and it makes
+# no sense to keep the unbundled version around.
+dev-games/gigi
+
+# Pawel Hajdan jr <phajdan.jr@gentoo.org> (08 Oct 2013)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+>=www-client/chromium-32
+>=dev-lang/v8-3.22
+
 # Fabian Groffen <grobian@gentoo.org> (30 Sep 2013)
 # Mask release candidates
 =mail-mta/exim-4.82_rc*
-
-# Tiziano Müller <dev-zero@gentoo.org> (29 Sep 2013)
-# Mask for further testing
->=www-servers/nginx-1.4.2
 
 # Manuel Rüger <mrueg@gentoo.org> (27 Sep 2013)
 # Mask further ruby-1.8 only packages
@@ -67,22 +108,6 @@ sys-firmware/amd-ucode
 # temporarily disabled as it also breaks s390 keywording
 #<net-nds/openldap-2.4.35
 
-# Michał Górny <mgorny@gentoo.org> (21 Sep 2013)
-# Mask multilib versions of OpenGL packages for testing.
-=app-emulation/emul-linux-x86-opengl-20130224-r1
-=dev-libs/wayland-1.2.1-r1
-=media-libs/freeglut-2.8.1-r1
-=media-libs/glew-1.10.0-r2
-=media-libs/glu-9.0.0-r1
-=media-libs/mesa-9.2.0-r1
-=virtual/glu-9.0-r1
-=virtual/opencl-0-r4
-=virtual/opengl-7.0-r1
-=x11-libs/libdrm-2.4.46-r1
-=x11-proto/dri2proto-2.8-r1
-=x11-proto/glproto-1.4.16-r1
-=x11-proto/xf86driproto-2.1.1-r1
-
 # Ian Stakenvicius <axs@gentoo.org> (20 Sep 2013)
 # on behalf of mozilla@gentoo.org
 # Severely outdated, no interest in maintaining,
@@ -91,7 +116,6 @@ sys-firmware/amd-ucode
 # See bug #442122 for discussion
 # Masked for removal in 30 days
 www-plugins/mozplugger
-
 
 # Michael Sterrett <mr_bones_@gentoo.org> (19 Sep 2013)
 # Old nasty gtk+-1-using things.
@@ -198,18 +222,6 @@ dev-python/pyparsing:py2
 dev-python/pyparsing:py3
 virtual/pyparsing
 
-# Michał Górny <mgorny@gentoo.org> (12 Sep 2013)
-# All currently supported Python implementations have built-in json
-# module already. This renders the virtual no longer needed. Please
-# remove your dependencies on it and enjoy json out-of-the-box.
-# Removal in 30 days.
-virtual/python-json
-
-# Andreas K. Hüttel <dilfridge@gentoo.org> (11 Sep 2013)
-# Not needed anymore, same version is provided by stable
-# dev-texlive/texlive-latex already and that should be used
-dev-tex/natbib
-
 # Ian Stakenvicius <axs@gentoo.org> (08 Sep 2013)
 # Collides with emul-linux-x86-sdl, will unmask after
 # fixed.
@@ -252,27 +264,6 @@ dev-tex/natbib
 virtual/perl-Carp
 virtual/perl-B-Debug
 =virtual/perl-File-Temp-0.230.100
-
-# Pacho Ramos <pacho@gentoo.org> (07 Sep 2013)
-# Fails to build with gcc-4.7, no release since 2009,
-# nothing in the tree needs it. Removal in a month.
-net-irc/ezbounce
-
-# Pacho Ramos <pacho@gentoo.org> (07 Sep 2013)
-# Upstream looks dead, lots of unattended bugs needing
-# patches (#369007, #444135, #446424, #458856).
-# Removal in a month.
-app-misc/gpsdrive
-
-# Pacho Ramos <pacho@gentoo.org> (07 Sep 2013)
-# Upstream dead, incompatible with current kernels
-# (#460138). Removal in a month.
-sys-fs/cdfs
-
-# Pacho Ramos <pacho@gentoo.org> (07 Sep 2013)
-# Obsolete for ages, nothing needs it (#482904).
-# Removal in a month.
-=dev-cpp/libxmlpp-1.0*
 
 # Alexandre Rostovtsev <tetromino@gentoo.org> (02 Sep 2013)
 # Silent API/ABI change; mask until seahorse is patched; bug #483414
@@ -317,12 +308,6 @@ sys-fs/cdfs
 #
 =sys-kernel/gentoo-sources-3.8.13
 
-# Gilles Dartiguelongue <eva@gentoo.org> (30 Aug 2013)
-# libsoup-gnome was split again. Mask the inappropriate
-# unsplit revisions to avoid accidental downgrades by users
-=net-libs/libsoup-2.42.2
-=net-libs/libsoup-2.42.1
-
 # Agostino Sarubbo <ago@gentoo.org> (29 Aug 2013)
 # Mask 5.1 series because the backport of the CVE-2012-5627
 # has not be done. bug #446240 comment 2
@@ -362,21 +347,9 @@ sys-fs/cdfs
 ~dev-util/boost-build-1.54.0
 ~dev-libs/boost-1.54.0
 
-# Mike Gilbert <floppym@gentoo.org> (23 Aug 2013)
-# Dev channel releases are only for people who are developers or want more
-# experimental features and accept a more unstable release.
->=www-client/chromium-31
->=dev-lang/v8-3.21
-
 # Patrick Lauer <patrick@gentoo.org> (19 Aug 2013)
 # Masking live ebuilds
 =www-apps/trac-mercurial-1.0.0.3_pre20130206
-
-# Michał Górny <mgorny@gentoo.org> (16 Aug 2013)
-# Getting more broken every day. No commit for 5 years. Nothing
-# in the tree uses it. Please consider dev-python/pygpgme instead.
-# Bug #339409. Masked for removal in 30 days.
-dev-python/pyme
 
 # Tom Wijsman <TomWij@gentoo.org> (15 Aug 2013)
 # Dependencies are unable to satisfy current version,
@@ -387,15 +360,6 @@ dev-java/itext:5
 # Not needed anymore
 # All consumer upstreams moved away from it
 sci-libs/mccp4
-
-# Ole Markus With <olemarkus@gentoo.org> (10 Aug 2013)
-# About a year since upstream stopped maintaining symfony 1.x.
-# Will be removed on the 17th of Sept.
-dev-php/symfony
-
-# Christian Faulhammer <fauli@gentoo.org> (06 Aug 2013)
-# Masked for removal, dead upstream, bug #474518
-dev-vcs/bzr-svn
 
 # Alexandre Rostovtsev <tetromino@gentoo.org> (04 Aug 2013)
 # API break, reverse dependencies need patching; bug #479458.
@@ -570,10 +534,6 @@ x11-misc/pcmanfm-qt
 # experimental features and accept a more unstable release.
 www-client/google-chrome:unstable
 www-plugins/chrome-binary-plugins:unstable
-
-# Ryan Hill <dirtyepic@gentoo.org> (03 Apr 2013)
-# masked for porting (bug #461954)
->=sys-devel/gcc-4.8.0
 
 # Sergey Popov <pinkbyte@gentoo.org> (02 Apr 2013)
 # Masking =media-libs/ffmpegsource-2.17.4_pre753
@@ -972,8 +932,10 @@ net-misc/netcf
 app-crypt/hmaccalc
 
 # Patrick Lauer <patrick@gentoo.org> (07 Apr 2010)
-# Keeping samba-4 masked until release.
->net-fs/samba-4
+# Lars Wendler <polynomial-c@gentoo.org> (14 Oct 2013)
+# Keeping samba-4.0 masked until bug #447022 is fixed. 4.1 masked for testing.
+=net-fs/samba-4.0*
+=net-fs/samba-4.1*
 
 # Mike Frysinger <vapier@gentoo.org> (07 Mar 2010)
 # Very old packages that people should have upgraded away from

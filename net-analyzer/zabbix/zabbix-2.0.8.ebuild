@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.0.8.ebuild,v 1.5 2013/10/05 03:12:50 zerochaos Exp $
 
 EAPI="5"
 
@@ -13,7 +15,7 @@ SRC_URI="http://prdownloads.sourceforge.net/zabbix/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 WEBAPP_MANUAL_SLOT="yes"
-KEYWORDS="*"
+KEYWORDS="amd64 x86"
 IUSE="agent java curl frontend ipv6 jabber ldap mysql openipmi oracle postgres proxy server ssh snmp sqlite iodbc odbc static"
 
 COMMON_DEPEND="snmp? ( net-analyzer/net-snmp )
@@ -215,8 +217,6 @@ pkg_postinst() {
 				ewarn "Please be aware that this might impose a security risk,"
 				ewarn "depending on the code quality of fping."
 				ewarn
-				ebeep 3
-				epause 5
 				;;
 		esac
 	fi
@@ -285,6 +285,8 @@ src_install() {
 		doins -r \
 			database \
 			upgrades
+		#remove unneeded files left over from wholesale copy (bug #433708)
+		rm "${ED}"/usr/share/zabbix/{database,upgrades}/Makefile{,.in,.am}
 		fowners zabbix:zabbix \
 			/etc/zabbix/zabbix_server.conf \
 			/etc/zabbix/zabbix_trapper.conf
@@ -305,7 +307,8 @@ src_install() {
 			/usr/share/zabbix
 		insinto /usr/share/zabbix
 		doins -r \
-			database
+			database \
+			create
 	fi
 
 	if use agent; then

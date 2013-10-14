@@ -38,3 +38,10 @@ pkg_setup() {
 	DOCS="ChangeLog NEWS README TODO"
 	python_set_active_version 2
 }
+
+src_prepare() {
+	# Fix test
+	sed -i 's/gucharmap/mucharmap/g' po/POTFILES.in || die
+	mate_src_prepare
+}
+

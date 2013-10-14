@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-proxy/privoxy/privoxy-3.0.21-r1.ebuild,v 1.1 2013/09/03 20:17:02 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-proxy/privoxy/privoxy-3.0.21-r1.ebuild,v 1.2 2013/10/08 19:55:38 dastergon Exp $
 
 EAPI="4"
 
@@ -39,6 +39,7 @@ src_prepare() {
 }
 
 src_configure() {
+
 	econf \
 		$(use_enable zlib) \
 		$(use_enable threads pthread) \

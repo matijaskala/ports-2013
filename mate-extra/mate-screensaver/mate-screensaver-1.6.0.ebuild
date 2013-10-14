@@ -70,7 +70,10 @@ src_prepare() {
 	# Fix intltoolize broken file, see upstream #577133
 	sed "s:'\^\$\$lang\$\$':\^\$\$lang\$\$:g" -i po/Makefile.in.in \
 		|| die "sed failed"
-
+	# Fix forgotten gnome->mate rename
+	sed -i 's:org.gnome:org.mate:' po/POTFILES.in || die "sed failed"
+	# Make tests work
+	sed -i '6 a\data/lock-dialog-default.ui' po/POTFILES.in || die "sed failed"
 	mate_src_prepare
 }
 

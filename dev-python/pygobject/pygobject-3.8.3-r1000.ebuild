@@ -93,6 +93,7 @@ src_compile() {
 src_test() {
 	unset DBUS_SESSION_BUS_ADDRESS
 	export GIO_USE_VFS="local" # prevents odd issues with deleting ${T}/.gvfs
+	export GIO_USE_VOLUME_MONITOR="unix" # prevent udisks-related failures in chroots, bug #449484
 
 	testing() {
 		export XDG_CACHE_HOME="${T}/${PYTHON_ABI}"

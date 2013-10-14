@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/ansible/ansible-9999.ebuild,v 1.12 2013/09/03 15:11:13 pinkbyte Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/ansible/ansible-9999.ebuild,v 1.13 2013/10/11 11:30:57 pinkbyte Exp $
 
 EAPI="5"
 
@@ -33,7 +33,7 @@ RDEPEND="
 "
 
 DOC_CONTENTS="You can define parameters through shell variables OR use config files
-Examples of config files installed in /usr/share/doc/${P}/examples\n\n
+Examples of config files installed in /usr/share/doc/${PF}/examples\n\n
 You have to create ansible hosts file!\n
 More info on http://ansible.cc/docs/gettingstarted.html"
 

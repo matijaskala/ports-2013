@@ -6,7 +6,7 @@ EAPI="5"
 GCONF_DEBUG="yes"
 MATE_LA_PUNT="yes"
 
-inherit mate
+inherit mate virtualx
 
 DESCRIPTION="Caja file manager for the MATE desktop"
 HOMEPAGE="http://mate-desktop.org"
