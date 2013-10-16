@@ -59,9 +59,7 @@ src_prepare() {
 }
 
 src_test() {
-	addpredict "/root/.gnome2_private"
 	unset SESSION_MANAGER
-	unset MATECORBA_SOCKETDIR
 	unset DBUS_SESSION_BUS_ADDRESS
 	Xemake check || die "Test phase failed"
 }

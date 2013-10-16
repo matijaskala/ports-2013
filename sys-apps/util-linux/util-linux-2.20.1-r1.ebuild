@@ -1,10 +1,18 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-2.20.1-r1.ebuild,v 1.11 2012/05/25 16:14:22 vapier Exp $
 
 EAPI="3"
 
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git"
-inherit eutils toolchain-funcs libtool flag-o-matic
-[[ ${PV} == "9999" ]] && inherit git autotools
+AUTOTOOLS_AUTO_DEPEND="no"
+inherit eutils toolchain-funcs libtool flag-o-matic autotools multilib
+if [[ ${PV} == "9999" ]] ; then
+	inherit git-2 autotools
+	#KEYWORDS=""
+else
+	KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~x86-linux"
+fi
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
@@ -14,11 +22,9 @@ DESCRIPTION="Various useful Linux utilities"
 HOMEPAGE="http://www.kernel.org/pub/linux/utils/util-linux/"
 if [[ ${PV} == "9999" ]] ; then
 	SRC_URI=""
-	#KEYWORDS=""
 else
 	SRC_URI="mirror://kernel/linux/utils/util-linux/v${PV:0:4}/${MY_P}.tar.bz2
 		loop-aes? ( http://loop-aes.sourceforge.net/updates/util-linux-2.20-20110905.diff.bz2 )"
-	KEYWORDS="amd64 sparc x86"
 fi
 
 LICENSE="GPL-2 GPL-3 LGPL-2.1 BSD-4 MIT public-domain"
@@ -37,7 +43,8 @@ RDEPEND="!sys-process/schedutils
 	slang? ( sys-libs/slang )"
 DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )
-	virtual/os-headers"
+	virtual/os-headers
+	uclibc? ( ${AUTOTOOLS_DEPEND} )"
 
 src_prepare() {
 	if [[ ${PV} == "9999" ]] ; then
@@ -47,7 +54,10 @@ src_prepare() {
 	else
 		use loop-aes && epatch "${WORKDIR}"/util-linux-*.diff
 	fi
-	use uclibc && sed -i -e s/versionsort/alphasort/g -e s/strverscmp.h/dirent.h/g mount/lomount.c
+	if use uclibc ; then
+		epatch "${FILESDIR}"/${P}-no-printf-alloc.patch #406303
+		eautoreconf
+	fi
 	elibtoolize
 }
 

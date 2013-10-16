@@ -11,7 +11,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-2 autotools
 	#KEYWORDS=""
 else
-	KEYWORDS="*"
+	KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~x86-linux"
 fi
 
 MY_PV=${PV/_/-}
@@ -119,3 +119,7 @@ src_install() {
 	fi
 }
 
+pkg_postinst() {
+	elog "The agetty util now clears the terminal by default.  You"
+	elog "might want to add --noclear to your /etc/inittab lines."
+}

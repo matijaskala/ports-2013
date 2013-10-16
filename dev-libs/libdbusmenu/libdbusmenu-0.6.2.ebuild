@@ -12,8 +12,8 @@ SRC_URI="http://launchpad.net/${PN/lib}/${PV%.*}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1 LGPL-3"
 SLOT="0"
-KEYWORDS="*"
-IUSE="debug gtk gtk3 +introspection"
+KEYWORDS="~*"
+IUSE="debug gtk gtk3 +introspection json"
 
 RDEPEND=">=dev-libs/glib-2.32
 	>=dev-libs/dbus-glib-0.100
@@ -28,7 +28,8 @@ DEPEND="${RDEPEND}
 	app-text/gnome-doc-utils
 	dev-util/intltool
 	virtual/pkgconfig
-	introspection? ( $(vala_depend) )"
+	introspection? ( $(vala_depend) )
+	json? ( dev-util/valgrind )"
 REQUIRED_USE="gtk3? ( gtk )"
 
 src_prepare() {
@@ -48,7 +49,7 @@ src_configure() {
 		--disable-scrollkeeper \
 		$(use_enable gtk) \
 		--disable-dumper \
-		--disable-tests \
+		$(use_enable json tests) \
 		$(use_enable introspection) \
 		$(use_enable introspection vala) \
 		$(use_enable debug massivedebugging) \

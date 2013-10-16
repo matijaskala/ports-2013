@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-java/jython/jython-2.5.3-r3.ebuild,v 1.1 2013/09/21 13:58:29 tomwij Exp $
 
 EAPI="4"
 
@@ -26,13 +28,12 @@ COMMON_DEP="
 	>=dev-java/java-config-2.1.11-r3
 	dev-java/jffi:1.0
 	dev-java/jline:0
-	dev-java/jnr-constants:0
+	dev-java/jnr-constants:0.8.2
 	dev-java/jnr-posix:1.1
 	java-virtuals/script-api:0
 	java-virtuals/servlet-api:2.5
 	readline? ( >=dev-java/libreadline-java-0.8.0:0 )"
 RDEPEND="${COMMON_DEP}
-	>=app-admin/eselect-jython-20130709
 	>=virtual/jre-1.5"
 DEPEND="${COMMON_DEP}
 	>=virtual/jdk-1.5
@@ -64,7 +65,7 @@ JAVA_ANT_REWRITE_CLASSPATH="yes"
 JAVA_ANT_CLASSPATH_TAGS+=" java"
 
 EANT_BUILD_TARGET="developer-build"
-EANT_GENTOO_CLASSPATH="asm-3,guava,jffi-1.0,jline,jnr-constants,script-api,servlet-api-2.5"
+EANT_GENTOO_CLASSPATH="asm-3,guava,jffi-1.0,jline,jnr-constants-0.8.2,script-api,servlet-api-2.5"
 
 # jdbc-informix and jdbc-oracle-bin (requires registration) aren't exposed.
 # Uncomment and add to COMMON_DEP if you want either of them
@@ -145,12 +146,3 @@ _EOF_
 	echo "EPYTHON='${EPYTHON}'" > epython.py
 	python_domodule epython.py
 }
-
-pkg_postinst() {
-	if [[ ! -e /usr/bin/jython ]] ; then
-		cd /usr/bin
-		rm jython > /dev/null 2>&1
-		ln -s ${PN}${SLOT} jython
-	fi
-}
-

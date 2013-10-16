@@ -3,7 +3,7 @@
 EAPI="5"
 GNOME2_LA_PUNT="yes"
 
-inherit autotools eutils gnome2 pam user
+inherit autotools eutils gnome2 pam systemd user
 
 G_PV="2012.09.25"
 G_P="gdm-gentoo-${G_PV}"
@@ -14,8 +14,8 @@ SRC_URI="${SRC_URI}
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="accessibility audit +consolekit +fallback fprint +gnome-shell +introspection ipv6 ldap plymouth selinux smartcard tcpd test xinerama"
-KEYWORDS="~*"
+IUSE="accessibility audit +consolekit +fallback fprint +gnome-shell +introspection ipv6 ldap plymouth selinux smartcard systemd tcpd test xinerama"
+KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86"
 
 # NOTE: x11-base/xorg-server dep is for X_SERVER_PATH etc, bug #295686
 # nspr used by smartcard extension
@@ -50,14 +50,18 @@ COMMON_DEPEND="
 	>=x11-misc/xdg-utils-1.0.2-r3
 
 	virtual/pam
-	sys-auth/pambase[consolekit?]
+	sys-auth/pambase[systemd?]
 
 	accessibility? ( x11-libs/libXevie )
 	audit? ( sys-process/audit )
-	consolekit? ( sys-auth/consolekit[pam] )
+	consolekit? ( >=sys-auth/consolekit-0.4.5_p20120320-r2 )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.12 )
 	plymouth? ( sys-boot/plymouth )
 	selinux? ( sys-libs/libselinux )
+	systemd? ( >=sys-apps/systemd-186[pam] )
+	!systemd? ( consolekit? (
+		sys-auth/consolekit[pam]
+		sys-auth/pambase[consolekit] ))
 	tcpd? ( >=sys-apps/tcp-wrappers-7.6 )
 	xinerama? ( x11-libs/libXinerama )
 "
@@ -168,6 +172,7 @@ src_configure() {
 		--with-pam-prefix=${EPREFIX}/etc
 		--with-default-pam-config=none
 		--with-at-spi-registryd-directory=${EPREFIX}/usr/libexec
+		--with-consolekit-directory=${EPREFIX}/usr/lib/ConsoleKit
 		--with-initial-vt=7
 		$(use_with accessibility xevie)
 		$(use_with audit libaudit)
@@ -175,6 +180,8 @@ src_configure() {
 		$(use_with consolekit console-kit)
 		$(use_with plymouth)
 		$(use_with selinux)
+		$(use_with systemd)
+		$(systemd_with_unitdir)
 		$(use_with tcpd tcp-wrappers)
 		$(use_with xinerama)
 		ITSTOOL=$(type -P true)"
@@ -202,7 +209,7 @@ src_install() {
 	local LDAP
 	use ldap && LDAP=yes
 	emake GDM_WELCOME="gdm-launch-environment" LDAP=${LDAP} EPREFIX="${EPREFIX}" \
-		DESTDIR="${D}" install
+		SYSTEMD_UNITDIR="$(systemd_get_unitdir)" DESTDIR="${D}" install
 }
 
 pkg_postinst() {

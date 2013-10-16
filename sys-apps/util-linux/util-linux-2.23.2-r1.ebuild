@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-2.23.2-r1.ebuild,v 1.2 2013/09/29 01:20:15 vapier Exp $
 
 EAPI="4"
 inherit eutils toolchain-funcs libtool flag-o-matic bash-completion-r1
@@ -6,19 +8,24 @@ inherit eutils toolchain-funcs libtool flag-o-matic bash-completion-r1
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
 
-KEYWORDS="*"
-SRC_URI="mirror://kernel/linux/utils/util-linux/v${PV:0:4}/${MY_P}.tar.xz"
+if [[ ${PV} == 9999 ]] ; then
+	inherit git-2 autotools
+	EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git"
+else
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
+	SRC_URI="mirror://kernel/linux/utils/util-linux/v${PV:0:4}/${MY_P}.tar.xz"
+fi
 
 DESCRIPTION="Various useful Linux utilities"
 HOMEPAGE="http://www.kernel.org/pub/linux/utils/util-linux/"
 
 LICENSE="GPL-2 GPL-3 LGPL-2.1 BSD-4 MIT public-domain"
 SLOT="0"
-IUSE="bash-completion caps +cramfs cytune fdformat ncurses nls old-linux selinux slang static-libs +suid test +tty-helpers udev unicode"
+IUSE="bash-completion caps +cramfs cytune fdformat ncurses nls old-linux pam selinux slang static-libs +suid test +tty-helpers udev unicode"
 
 RDEPEND="!sys-process/schedutils
 	!sys-apps/setarch
-	>=sys-apps/sysvinit-2.88-r6
+	!<sys-apps/sysvinit-2.88-r5
 	!sys-block/eject
 	!<sys-libs/e2fsprogs-libs-1.41.8
 	!<sys-fs/e2fsprogs-1.41.8
@@ -26,6 +33,7 @@ RDEPEND="!sys-process/schedutils
 	caps? ( sys-libs/libcap-ng )
 	cramfs? ( sys-libs/zlib )
 	ncurses? ( >=sys-libs/ncurses-5.2-r2 )
+	pam? ( sys-libs/pam )
 	selinux? ( sys-libs/libselinux )
 	slang? ( sys-libs/slang )
 	udev? ( virtual/udev )"
@@ -38,6 +46,10 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${MY_P}
 
 src_prepare() {
+	if [[ ${PV} == 9999 ]] ; then
+		po/update-potfiles
+		eautoreconf
+	fi
 	elibtoolize
 }
 
@@ -56,6 +68,7 @@ lfs_fallocate_test() {
 
 src_configure() {
 	lfs_fallocate_test
+	export ac_cv_header_security_pam_misc_h=$(usex pam) #485486
 	econf \
 		--enable-fs-paths-extra=/usr/sbin:/bin:/usr/bin \
 		$(use_enable nls) \

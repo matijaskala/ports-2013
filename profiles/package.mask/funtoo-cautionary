@@ -10,29 +10,12 @@
 #  see bug #477972 at b.g.o, this doesn't allow clean emerge of jython, forked in Funtoo
 >dev-java/icedtea-bin-7.2.3.9
 
-#  Oleg Vinichenko (26 Jul 2013)
-#  FL-645, mask latest gdm, gnome-shell, gnome-settings-daemon
-#  as they explicitly require systemd
->=gnome-base/gdm-3.8.3
->=gnome-base/gnome-shell-3.8.3
->=gnome-base/gnome-settings-daemon-3.8.3
->=gnome-base/gnome-control-center-3.8
-
-# Oleg Vinichenko (24 Jul 2013)
-# mask >media-player-info-18, we are not yet ready for udev-200
-# FL-641
->=app-misc/media-player-info-19
-
 # Ryan Harris (23 Jul 2013)
 # Mask phoronix-test-suite due to security concerns
 # Packages should not try to run emerge on their own
 # Users who understand the risks can unmask locally
 # Ref FL-454 and b.g.o # 477798
 app-benchmarks/phoronix-test-suite
-
-# Ryan Harris (21 Jul 2013)
-# Mask consolekit >=0.4.6 as it depends on >=udev-200
->=sys-auth/consolekit-0.4.6
 
 # Ryan Harris (30 Jun 2013)
 # Mask app-emulation/xen-tools-4.2.2-r1
@@ -55,22 +38,10 @@ app-benchmarks/phoronix-test-suite
 # mask openmpi-1.6.4 due to sandbox issues, FL-578, https://bugs.gentoo.org/show_bug.cgi?id=462602
 =sys-cluster/openmpi-1.6.4
 
-# Jean-Francis Roy (3 Jun 2013)
-# Mask back app-admin/system-config-printer-{common,gnome}, depending
-# on >=virtual/udev-172, until FL-34 is resolved.
->=app-admin/system-config-printer-common-1.3.12
->=app-admin/system-config-printer-gnome-1.3.12
-
 # Oleg Vinichenko (23 Apr 2013)
 # mask xorg-server-1.14, driver incompatibility, FL-449, FL-522,
 # security update for xorg-server
 >x11-base/xorg-server-1.13.4
-
-# Oleg Vinichenko (19 Apr 2013)
-# mask back mpc-1.0.1, ebuild itself is fine and usable
-# the mask required for metro stages successfully built until 
-# we implement newer gcc ebuilds, see FL-507
->=dev-libs/mpc-1.0 
 
 # Not currently maintained, last commit near 1 yr ago
 # ZFSOnLinux is a muche more viable and mature replacement 
@@ -87,10 +58,6 @@ sys-fs/zfs-fuse
 # Oleg Vinichenko (17 Dec 2012)
 # mask >dev-perl/Net-DNS-0.680.0 due to FL-275
 >dev-perl/Net-DNS-0.680.0
-
-# Oleg Vinichenko (30 Oct 2012 )
-# mask back nano-2.3.1-r2, stage build  issues
->=app-editors/nano-2.3.1-r2
 
 # Oleg Vinichenko (24 Oct 2012)
 # less-452 breaks man pages
