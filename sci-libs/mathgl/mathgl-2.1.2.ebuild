@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/mathgl/mathgl-2.1.2.ebuild,v 1.1 2013/03/21 15:40:47 bicatali Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-libs/mathgl/mathgl-2.1.2.ebuild,v 1.2 2013/10/15 15:00:27 jlec Exp $
 
 EAPI=5
 
@@ -57,7 +57,7 @@ pkg_setup() {
 src_unpack() {
 	unpack ${A}
 	[[ -d "${S}"/fonts ]] || mkdir "${S}"/fonts
-	cd "${S}"/fonts
+	cd "${S}"/fonts || die
 	unpack STIX_font.tgz
 }
 
@@ -71,11 +71,13 @@ src_prepare() {
 	echo "" > lang/install.m || die
 	# fix desktop file
 	sed -i -e 's/.png//' udav/udav.desktop || die
+	use python && append-cppflags -I"$($(PYTHON) -c 'import numpy; print(numpy.get_include())')"
 }
 
 src_configure() {
 	local mycmakeargs=(
 		-DHDF4_INCLUDE_DIR="${EPREFIX}/usr/include"
+		-DMGL_LIB_INSTALL_DIR="$(get_libdir)"
 		$(cmake-utils_use doc enable-doc)
 		$(cmake-utils_use fltk enable-fltk)
 		$(cmake-utils_use gif enable-gif)
@@ -101,9 +103,6 @@ src_configure() {
 		sed -i \
 			-e "s:--prefix=\(.*\) :--prefix=\$ENV{DESTDIR}\1 :" \
 			"${CMAKE_BUILD_DIR}"/lang/cmake_install.cmake || die
-		# fix location of numpy
-		use python && append-cppflags \
-			-I$(echo "import numpy; print(numpy.get_include())" | "$(PYTHON)" - 2>/dev/null)
 	fi
 
 }

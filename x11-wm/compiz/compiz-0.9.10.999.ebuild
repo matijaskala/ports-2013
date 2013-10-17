@@ -13,10 +13,10 @@ MINOR_VERSION=$(get_version_component_range 4)
 if [[ ${MINOR_VERSION} == 999 ]] ; then
 	inherit bzr
 	EBZR_REPO_URI="http://bazaar.launchpad.net/~compiz-team/compiz/${MAJOR_BRANCH}"
-	KEYWORDS=""
+	KEYWORDS="~exp"
 else
 	SRC_URI="https://launchpad.net/${PN}/${MAJOR_BRANCH}/${PV}/+download/${P}.tar.bz2"
-	KEYWORDS="experimental"
+	KEYWORDS="~*"
 fi
 
 LICENSE="GPL-2 LGPL-2.1 MIT"

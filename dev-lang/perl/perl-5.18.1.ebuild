@@ -16,16 +16,16 @@ MY_PV="${PV%_rc*}"
 DESCRIPTION="Larry Wall's Practical Extraction and Report Language"
 
 SRC_URI="
-	mirror://cpan/src/${MY_P}.tar.bz2
+$(true	mirror://cpan/src/${MY_P}.tar.bz2)
 	mirror://cpan/authors/id/${MODULE_AUTHOR:0:1}/${MODULE_AUTHOR:0:2}/${MODULE_AUTHOR}/${MY_P}.tar.bz2
-	mirror://gentoo/${MY_P}-${PATCH_VER}.tar.bz2
-	http://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${MY_P}-${PATCH_VER}.tar.bz2
+$(true	mirror://gentoo/${MY_P}-${PATCH_VER}.tar.bz2)
+$(true	http://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${MY_P}-${PATCH_VER}.tar.bz2)
 "
 HOMEPAGE="http://www.perl.org/"
 
 LICENSE="|| ( Artistic GPL-1+ )"
 SLOT="0/${SHORT_PV}"
-KEYWORDS="experimental"
+KEYWORDS="~*"
 IUSE="berkdb debug doc gdbm ithreads"
 
 RDEPEND="

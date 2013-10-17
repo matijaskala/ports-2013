@@ -1,10 +1,12 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.4.17.ebuild,v 1.14 2013/08/27 15:01:26 kensington Exp $
 
 EAPI=5
 
 inherit eutils autotools flag-o-matic versionator depend.apache apache-module db-use libtool
 
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 
 function php_get_uri ()
 {
@@ -90,7 +92,7 @@ DEPEND="
 	bzip2? ( app-arch/bzip2 )
 	cdb? ( || ( dev-db/cdb dev-db/tinycdb ) )
 	cjk? ( !gd? (
-		virtual/jpeg
+		virtual/jpeg:0
 		media-libs/libpng:0=
 		sys-libs/zlib
 	) )
@@ -98,12 +100,12 @@ DEPEND="
 	curl? ( >=net-misc/curl-7.10.5 )
 	enchant? ( app-text/enchant )
 	exif? ( !gd? (
-		virtual/jpeg
+		virtual/jpeg:0
 		media-libs/libpng:0=
 		sys-libs/zlib
 	) )
 	firebird? ( dev-db/firebird )
-	gd? ( virtual/jpeg media-libs/libpng:0= sys-libs/zlib )
+	gd? ( virtual/jpeg:0 media-libs/libpng:0= sys-libs/zlib )
 	gdbm? ( >=sys-libs/gdbm-1.8.0 )
 	gmp? ( >=dev-libs/gmp-4.1.2 )
 	iconv? ( virtual/libiconv )
@@ -139,7 +141,7 @@ DEPEND="
 		=media-libs/freetype-2*
 		>=media-libs/t1lib-5.0.0
 		!gd? (
-			virtual/jpeg media-libs/libpng:0= sys-libs/zlib )
+			virtual/jpeg:0 media-libs/libpng:0= sys-libs/zlib )
 	)
 	unicode? ( dev-libs/oniguruma )
 	wddx? ( >=dev-libs/libxml2-2.6.8 )
@@ -149,7 +151,7 @@ DEPEND="
 	xmlwriter? ( >=dev-libs/libxml2-2.6.8 )
 	xpm? (
 		x11-libs/libXpm
-		virtual/jpeg
+		virtual/jpeg:0
 		media-libs/libpng:0= sys-libs/zlib
 	)
 	xslt? ( dev-libs/libxslt >=dev-libs/libxml2-2.6.8 )
@@ -253,7 +255,7 @@ php_install_ini() {
 	# SAPI-specific handling
 
 	if [[ "${sapi}" == "fpm" ]] ; then
-        [[ -z ${PHP_FPM_CONF_VER} ]] && PHP_FPM_CONF_VER=0
+		[[ -z ${PHP_FPM_CONF_VER} ]] && PHP_FPM_CONF_VER=0
 		einfo "Installing FPM CGI config file php-fpm.conf"
 		insinto "${PHP_INI_DIR#${EPREFIX}}"
 		newins "${FILESDIR}/php-fpm-r${PHP_FPM_CONF_VER}.conf" php-fpm.conf
@@ -535,9 +537,9 @@ src_configure() {
 	my_conf="${my_conf} --with-pcre-regex=${EPREFIX}/usr --with-pcre-dir=${EPREFIX}/usr"
 
 	# Catch CFLAGS problems
-    # Fixes bug #14067.
-    # Changed order to run it in reverse for bug #32022 and #12021.
-    replace-cpu-flags "k6*" "i586"
+	# Fixes bug #14067.
+	# Changed order to run it in reverse for bug #32022 and #12021.
+	replace-cpu-flags "k6*" "i586"
 
 	# Support user-passed configuration parameters
 	my_conf="${my_conf} ${EXTRA_ECONF:-}"

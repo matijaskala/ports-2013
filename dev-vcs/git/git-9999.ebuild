@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-9999.ebuild,v 1.46 2013/10/07 18:16:27 williamh Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-9999.ebuild,v 1.47 2013/10/15 19:20:39 robbat2 Exp $
 
 EAPI=5
 
@@ -165,7 +165,8 @@ exportmakeopts() {
 	use subversion \
 		|| myopts="${myopts} NO_SVN_TESTS=YesPlease"
 	use threads \
-		&& myopts="${myopts} THREADED_DELTA_SEARCH=YesPlease"
+		&& myopts="${myopts} THREADED_DELTA_SEARCH=YesPlease" \
+		|| myopts="${myopts} NO_PTHREADS=YesPlease"
 	use cvs \
 		|| myopts="${myopts} NO_CVS=YesPlease"
 # Disabled until ~m68k-mint can be keyworded again
@@ -219,15 +220,15 @@ src_unpack() {
 
 src_prepare() {
 	# bug #350330 - automagic CVS when we don't want it is bad.
-	epatch "${FILESDIR}"/git-1.8.2-optional-cvs.patch
+	epatch "${FILESDIR}"/git-1.8.4-optional-cvs.patch
 
 	sed -i \
-		-e 's:^\(CFLAGS =\).*$:\1 $(OPTCFLAGS) -Wall:' \
-		-e 's:^\(LDFLAGS =\).*$:\1 $(OPTLDFLAGS):' \
-		-e 's:^\(CC = \).*$:\1$(OPTCC):' \
-		-e 's:^\(AR = \).*$:\1$(OPTAR):' \
-		-e "s:\(PYTHON_PATH = \)\(.*\)$:\1${EPREFIX}\2:" \
-		-e "s:\(PERL_PATH = \)\(.*\)$:\1${EPREFIX}\2:" \
+		-e 's:^\(CFLAGS[[:space:]]*=\).*$:\1 $(OPTCFLAGS) -Wall:' \
+		-e 's:^\(LDFLAGS[[:space:]]*=\).*$:\1 $(OPTLDFLAGS):' \
+		-e 's:^\(CC[[:space:]]* =\).*$:\1$(OPTCC):' \
+		-e 's:^\(AR[[:space:]]* =\).*$:\1$(OPTAR):' \
+		-e "s:\(PYTHON_PATH[[:space:]]*=\)\(.*\)$:\1${EPREFIX}\2:" \
+		-e "s:\(PERL_PATH[[:space:]]*=\)\(.*\)$:\1${EPREFIX}\2:" \
 		Makefile contrib/svn-fe/Makefile || die "sed failed"
 
 	# Never install the private copy of Error.pm (bug #296310)
@@ -236,7 +237,7 @@ src_prepare() {
 		perl/Makefile.PL
 
 	# Fix docbook2texi command
-	sed -i 's/DOCBOOK2X_TEXI=docbook2x-texi/DOCBOOK2X_TEXI=docbook2texi.pl/' \
+	sed -r -i 's/DOCBOOK2X_TEXI[[:space:]]*=[[:space:]]*docbook2x-texi/DOCBOOK2X_TEXI = docbook2texi.pl/' \
 		Documentation/Makefile || die "sed failed"
 
 	# Fix git-subtree missing DESTDIR
@@ -376,7 +377,8 @@ src_install() {
 	#dobin contrib/fast-import/git-p4 # Moved upstream
 	#dodoc contrib/fast-import/git-p4.txt # Moved upstream
 	newbin contrib/fast-import/import-tars.perl import-tars
-	newbin contrib/git-resurrect.sh git-resurrect
+	exeinto /usr/libexec/git-core/
+	newexe contrib/git-resurrect.sh git-resurrect
 
 	# git-subtree
 	cd "${S}"/contrib/subtree
@@ -397,8 +399,14 @@ src_install() {
 	newdoc contrib/diff-highlight/README README.diff-highlight
 
 	# git-jump
-	dobin contrib/git-jump/git-jump
+	exeinto /usr/libexec/git-core/
+	doexe contrib/git-jump/git-jump
 	newdoc contrib/git-jump/README git-jump.txt
+
+	# git-contacts
+	exeinto /usr/libexec/git-core/
+	doexe contrib/contacts/git-contacts
+	dodoc contrib/contacts/git-contacts.txt
 
 	if use gnome-keyring ; then
 		cd "${S}"/contrib/credential/gnome-keyring
@@ -415,6 +423,7 @@ src_install() {
 
 	# remote-helpers
 	if use python ; then
+		python_scriptinto /usr/libexec/git-core/
 		python_doscript "${S}"/contrib/remote-helpers/git-remote-{bzr,hg}
 		python_optimize
 	fi
@@ -437,7 +446,7 @@ src_install() {
 	# svnimport - use git-svn
 	# thunderbird-patch-inline - fixes thunderbird
 	for i in \
-		blameview buildsystems ciabot continuous convert-objects fast-import \
+		buildsystems ciabot convert-objects fast-import \
 		hg-to-git hooks remotes2config.sh rerere-train.sh \
 		stats vim workdir \
 		; do

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-9999.ebuild,v 1.8 2013/10/07 05:38:10 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-9999.ebuild,v 1.9 2013/10/15 23:16:55 radhermit Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -25,7 +25,7 @@ HOMEPAGE="http://www.vim.org/"
 
 SLOT="0"
 LICENSE="vim"
-IUSE="acl aqua cscope debug gnome gtk lua luajit motif neXt netbeans nls perl python ruby"
+IUSE="acl aqua cscope debug gnome gtk lua luajit motif neXt netbeans nls perl python ruby tcl"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="~app-editors/vim-core-${PV}
@@ -55,7 +55,8 @@ RDEPEND="~app-editors/vim-core-${PV}
 	nls? ( virtual/libintl )
 	perl? ( dev-lang/perl )
 	python? ( ${PYTHON_DEPS} )
-	ruby? ( || ( dev-lang/ruby:2.0 dev-lang/ruby:1.9 dev-lang/ruby:1.8 ) )"
+	ruby? ( || ( dev-lang/ruby:2.0 dev-lang/ruby:1.9 dev-lang/ruby:1.8 ) )
+	tcl? ( dev-lang/tcl )"
 DEPEND="${RDEPEND}
 	>=app-admin/eselect-vi-1.1
 	dev-util/ctags
@@ -254,6 +255,7 @@ src_configure() {
 		$(use_with luajit) \
 		$(use_enable netbeans) \
 		$(use_enable ruby rubyinterp) \
+		$(use_enable tcl tclinterp) \
 		${myconf}
 }
 

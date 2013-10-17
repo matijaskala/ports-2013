@@ -1,10 +1,12 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.5.3-r1.ebuild,v 1.4 2013/09/10 03:17:22 patrick Exp $
 
 EAPI=5
 
 inherit eutils autotools flag-o-matic versionator depend.apache apache-module db-use libtool
 
-KEYWORDS="~*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 
 function php_get_uri ()
 {
@@ -284,7 +286,7 @@ src_prepare() {
 	sed -re	"s|^(PHP_EXTRA_VERSION=\").*(\")|\1-pl${PR/r/}-gentoo\2|g" \
 		-i configure.in || die "Unable to change PHP branding"
 
-	epatch "${FILESDIR}"/iodbc-pkgconfig.patch
+	epatch "${FILESDIR}"/iodbc-pkgconfig-r1.patch
 	epatch "${FILESDIR}"/stricter-libc-client-symlink-check.patch
 	epatch "${FILESDIR}"/all_strict_aliasing.patch
 

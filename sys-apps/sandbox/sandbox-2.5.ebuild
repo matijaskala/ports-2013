@@ -1,11 +1,13 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/sandbox/sandbox-2.5.ebuild,v 1.10 2012/06/24 05:35:02 vapier Exp $
 
 #
 # don't monkey with this ebuild unless contacting portage devs.
 # period.
 #
 
-inherit eutils flag-o-matic toolchain-funcs multilib
+inherit eutils flag-o-matic toolchain-funcs multilib unpacker multiprocessing
 
 DESCRIPTION="sandbox'd LD_PRELOAD hack"
 HOMEPAGE="http://www.gentoo.org/"
@@ -14,7 +16,7 @@ SRC_URI="mirror://gentoo/${P}.tar.xz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~sparc-fbsd -x86-fbsd"
 IUSE="multilib"
 
 DEPEND="app-arch/xz-utils
@@ -31,53 +33,62 @@ sandbox_death_notice() {
 
 sb_get_install_abis() { use multilib && get_install_abis || echo ${ABI:-default} ; }
 
-src_unpack() {
-	unpack ${A}
-	if [[ ! -d ${S} ]] ; then
-		# When upgrading from older version, xz unpack may not work #271543
-		xz -dc "${DISTDIR}/${A}" | tar xof - || die
-	fi
+sb_foreach_abi() {
+	local OABI=${ABI}
+	for ABI in $(sb_get_install_abis) ; do
+		cd "${WORKDIR}/build-${ABI}"
+		einfo "Running $1 for ABI=${ABI}..."
+		"$@"
+	done
+	ABI=${OABI}
+}
+
+sb_configure() {
+	mkdir "${WORKDIR}/build-${ABI}"
+	cd "${WORKDIR}/build-${ABI}"
+
+	use multilib && multilib_toolchain_setup ${ABI}
+
+	einfo "Configuring sandbox for ABI=${ABI}..."
+	ECONF_SOURCE="../${P}/" \
+	econf ${myconf} || die
+}
+
+sb_compile() {
+	emake || die
 }
 
 src_compile() {
 	filter-lfs-flags #90228
 
+	# Run configures in parallel!
+	multijob_init
 	local OABI=${ABI}
 	for ABI in $(sb_get_install_abis) ; do
-		mkdir "${WORKDIR}/build-${ABI}"
-		cd "${WORKDIR}/build-${ABI}"
-
-		use multilib && multilib_toolchain_setup ${ABI}
-
-		einfo "Configuring sandbox for ABI=${ABI}..."
-		ECONF_SOURCE="../${P}/" \
-		econf ${myconf} || die
-		einfo "Building sandbox for ABI=${ABI}..."
-		emake || die
+		multijob_child_init sb_configure
 	done
 	ABI=${OABI}
+	multijob_finish
+
+	sb_foreach_abi sb_compile
+}
+
+sb_test() {
+	emake check TESTSUITEFLAGS="--jobs=$(makeopts_jobs)" || die
 }
 
 src_test() {
-	local OABI=${ABI}
-	for ABI in $(sb_get_install_abis) ; do
-		cd "${WORKDIR}/build-${ABI}"
-		einfo "Checking sandbox for ABI=${ABI}..."
-		emake check || die "make check failed for ${ABI}"
-	done
-	ABI=${OABI}
+	sb_foreach_abi sb_test
+}
+
+sb_install() {
+	emake DESTDIR="${D}" install || die
+	insinto /etc/sandbox.d #333131
+	doins etc/sandbox.d/00default || die
 }
 
 src_install() {
-	local OABI=${ABI}
-	for ABI in $(sb_get_install_abis) ; do
-		cd "${WORKDIR}/build-${ABI}"
-		einfo "Installing sandbox for ABI=${ABI}..."
-		emake DESTDIR="${D}" install || die "make install failed for ${ABI}"
-		insinto /etc/sandbox.d #333131
-		doins etc/sandbox.d/00default || die
-	done
-	ABI=${OABI}
+	sb_foreach_abi sb_install
 
 	doenvd "${FILESDIR}"/09sandbox
 
