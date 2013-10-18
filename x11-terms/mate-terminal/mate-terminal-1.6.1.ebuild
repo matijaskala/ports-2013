@@ -32,3 +32,9 @@ DEPEND="${RDEPEND}
 	>=app-text/scrollkeeper-0.3.11"
 
 DOCS="AUTHORS ChangeLog HACKING NEWS README"
+
+src_prepare() {
+	# Make test run
+	epatch "${FILESDIR}/${PN}-1.6.1-test-fix.patch"
+	mate_src_prepare
+}

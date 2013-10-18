@@ -41,6 +41,11 @@ src_prepare() {
 	#Fix crash because of missing keys in schema
 	epatch "${FILESDIR}/${P}-schema-fix.patch"
 
+	# Fix help file so test pass
+	for po in help/*/*.po;do \
+		sed -i 's/^"roller-/"engrampa-/g' ${po}; \
+		sed -i 's/linkend=\\"file-/linkend=\\"/g' ${po};done || die
+
 	mate_src_prepare
 
 	# Drop DEPRECATED flags as configure option doesn't do it, bug #385453

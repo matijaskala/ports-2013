@@ -1,0 +1,30 @@
+From 11ad9a4198071cc5aa5b0a7014e70b7a8b6f62ec Mon Sep 17 00:00:00 2001
+From: infirit <infirit@gmail.com>
+Date: Fri, 11 Oct 2013 12:36:38 +0200
+Subject: [PATCH] Update POTFILES.in so make check runs
+
+---
+ po/POTFILES.in | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/po/POTFILES.in b/po/POTFILES.in
+index 5f45211..2286075 100644
+--- a/po/POTFILES.in
++++ b/po/POTFILES.in
+@@ -1,11 +1,12 @@
+ [encoding: UTF-8]
+ # List of source files containing translatable strings.
+ # Please keep this file sorted alphabetically.
++caja/caja-open-terminal.c
+ mate-terminal.desktop.in.in
+ src/eggsmclient.c
+ src/encodings-dialog.glade
+ src/find-dialog.glade
+-src/mate-terminal.schemas.in
++src/org.mate.terminal.gschema.xml.in
+ src/keybinding-editor.glade
+ src/profile-editor.c
+ src/profile-manager.glade
+-- 
+1.8.3.2
+

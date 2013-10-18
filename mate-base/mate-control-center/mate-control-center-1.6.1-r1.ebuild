@@ -78,6 +78,8 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}/${P}-collision-fix.patch"
 	epatch "${FILESDIR}/${PN}-1.6-libsecret.patch"
+	#Make tests run
+	epatch "${FILESDIR}/${PN}-1.6.1-fix-POTFILES.patch"
 	eautoreconf
 	mate_src_prepare
 }

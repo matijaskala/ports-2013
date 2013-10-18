@@ -22,7 +22,7 @@ case "${EAPI:-0}" in
 		EXPORT_FUNCTIONS src_unpack src_compile src_install pkg_preinst pkg_postinst pkg_postrm
 		;;
 	2|3|4|5)
-		EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install pkg_preinst pkg_postinst pkg_postrm
+		EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install src_test pkg_preinst pkg_postinst pkg_postrm
 		;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
@@ -273,9 +273,9 @@ mate_src_install() {
 
 # @FUNCTION: mate_src_test
 # @DESCRIPTION: Run make check
-src_test() {
+mate_src_test() {
 	if grep -q "^check:" Makefile; then
-		emake check
+		emake check LINGUAS=""
 	fi
 }
 

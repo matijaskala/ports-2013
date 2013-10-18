@@ -148,6 +148,7 @@ src_prepare() {
 		epatch "${WORKDIR}/${PN}-${PATCHVER}.patch"
 	fi
 	epatch "${FILESDIR}/partylinux-repo.patch"
+	epatch "${FILESDIR}/partylinux-usr-merge.patch"
 	einfo "Setting portage.VERSION to ${PVR} ..."
 	sed -e "s/^VERSION=.*/VERSION=\"${PVR}\"/" -i pym/portage/__init__.py || \
 		die "Failed to patch portage.VERSION"
@@ -320,6 +321,31 @@ pkg_preinst() {
 		! { [ -e "${EROOT}"var/lib/portage/preserved_libs_registry ] && \
 		has_version ">=${CATEGORY}/${PN}-2.1.6_rc" ; } \
 		&& NEEDED_REBUILD_UPGRADE=true || NEEDED_REBUILD_UPGRADE=false
+
+	local PKG_SYM="${ROOT}/var/db/pkg"
+	if [ ! -h "${PKG_SYM}" ]
+		einfo "Creating /var/db/pkg symlink"
+		if [ -d "${PKG_SYM}" ]
+			ewarn "${PKG_SYM} is a directory."
+			ewarn "Merging it to /usr/share/portage/"
+			for group in "$(ls ${PKG_SYM})"; do
+				local GROUP_DIR="${PKG_SYM}/${group}"
+				mv ${GROUP_DIR}/* /usr/share/portage/${group} || (
+					local duplicates=""
+					for pkg in "$(ls ${GROUP_DIR})"; do
+						duplicates+=" $(ls -1 /usr/share/portage/${group} | grep ${pkg}) "
+					done
+					eerror "Merge failed due to duplicated packages."
+					eerror "Please consider removing following directories from ${GROUP_DIR}:"
+					die "${duplicates}"
+				)
+				rmdir "${GROUP_DIR}"
+			done
+			rmdir "${PKG_SYM}"
+		fi
+		mkdir -p "${ROOT}"/var/db
+		ln -s /usr/share/portage/pkg "${ROOT}"/var/db | die
+	fi
 }
 
 pkg_postinst() {

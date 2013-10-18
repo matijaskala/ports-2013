@@ -15,6 +15,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+introspection test"
 
+RESTRICT="test"
+
 COMMON_DEPEND="dev-libs/glib:2
 	x11-libs/gtk+:2
 	>=x11-libs/libnotify-0.7.0
@@ -54,6 +56,12 @@ pkg_setup() {
 	enewgroup plugdev
 }
 
+src_prepare() {
+	# Fix test
+	sed -i 's:applet/bluetooth-:applet/mate-bluetooth-:g' \
+		po/POTFILES.skip || die
+	mate_src_prepare
+}
 src_install() {
 	mate_src_install
 

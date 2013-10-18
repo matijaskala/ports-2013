@@ -1,0 +1,82 @@
+From 8863f8d53dc6440722ee5d3f0a55dcdc0408e86b Mon Sep 17 00:00:00 2001
+From: infirit <infirit@gmail.com>
+Date: Fri, 11 Oct 2013 11:36:31 +0200
+Subject: [PATCH] Update POTFILES.* with renamed (mate-*) files
+
+---
+ po/POTFILES.in   | 8 ++++----
+ po/POTFILES.skip | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/po/POTFILES.in b/po/POTFILES.in
+index 5a55258..fc6d887 100644
+--- a/po/POTFILES.in
++++ b/po/POTFILES.in
+@@ -13,7 +13,7 @@ capplets/about-me/mate-about-me-fingerprint.c
+ capplets/about-me/mate-about-me-password.c
+ [type: gettext/glade]capplets/about-me/mate-about-me-password.ui
+ [type: gettext/glade]capplets/accessibility/at-properties/at-enable-dialog.ui
+-capplets/accessibility/at-properties/at-properties.desktop.in.in
++capplets/accessibility/at-properties/mate-at-properties.desktop.in.in
+ capplets/accessibility/at-properties/main.c
+ capplets/appearance/appearance-desktop.c
+ capplets/appearance/appearance-font.c
+@@ -38,7 +38,7 @@ capplets/default-applications/mate-default-applications-properties.desktop.in.in
+ capplets/default-applications/mate-da-capplet.c
+ [type: gettext/glade]capplets/default-applications/mate-default-applications-properties.ui
+ [type: gettext/glade]capplets/display/display-capplet.ui
+-capplets/display/display-properties.desktop.in.in
++capplets/display/mate-display-properties.desktop.in.in
+ capplets/display/mate-display-properties-install-systemwide.c
+ capplets/display/org.mate.randr.policy.in
+ capplets/display/xrandr-capplet.c
+@@ -60,7 +60,7 @@ capplets/keyboard/mate-keyboard-properties-xkblt.c
+ capplets/keyboard/mate-keyboard-properties-xkbmc.c
+ capplets/keyboard/mate-keyboard-properties-xkbot.c
+ capplets/keyboard/mate-keyboard-properties-xkbpv.c
+-capplets/keyboard/keyboard.desktop.in.in
++capplets/keyboard/mate-keyboard.desktop.in.in
+ capplets/mouse/mate-mouse-properties.c
+ [type: gettext/glade]capplets/mouse/mate-mouse-properties.ui
+ capplets/mouse/mate-settings-mouse.desktop.in.in
+@@ -69,7 +69,7 @@ capplets/network/mate-network-properties.desktop.in.in
+ [type: gettext/glade]capplets/network/mate-network-properties.ui
+ capplets/windows/mate-window-properties.c
+ [type: gettext/glade]capplets/windows/mate-window-properties.ui
+-capplets/windows/window-properties.desktop.in.in
++capplets/windows/mate-window-properties.desktop.in.in
+ libwindow-settings/mate-wm-manager.c
+ libwindow-settings/marco-window-manager.c
+ shell/control-center.c
+diff --git a/po/POTFILES.skip b/po/POTFILES.skip
+index 454fa4e..ce7cbd9 100644
+--- a/po/POTFILES.skip
++++ b/po/POTFILES.skip
+@@ -1,20 +1,20 @@
+ capplets/about-me/mate-about-me.desktop.in
+ capplets/about-me/fingerprint-strings.h
+-capplets/accessibility/at-properties/at-properties.desktop.in
++capplets/accessibility/at-properties/mate-at-properties.desktop.in
+ capplets/accessibility/keyboard/accessibility-keyboard.desktop.in
+ capplets/appearance/data/mate-appearance-properties.desktop.in
+ capplets/appearance/data/mate-theme-installer.desktop.in
+ capplets/appearance/data/mate-theme-package.xml
+ capplets/default-applications/mate-default-applications-properties.desktop.in
+ capplets/default-applications/mate-at-session.desktop.in
+-capplets/display/display-properties.desktop.in
++capplets/display/mate-display-properties.desktop.in
+ capplets/keybindings/mate-keybinding.desktop.in
+-capplets/keyboard/keyboard.desktop.in
++capplets/keyboard/mate-keyboard.desktop.in
+ capplets/localization/localization.desktop.in
+ capplets/mouse/mate-settings-mouse.desktop.in
+ capplets/network/mate-network-properties.desktop.in
+ capplets/sound/mate-settings-sound.desktop.in
+-capplets/windows/window-properties.desktop.in
++capplets/windows/mate-window-properties.desktop.in
+ font-viewer/mate-font-viewer.desktop.in
+ schemas/desktop_mate_font_rendering.schemas.in
+ shell/matecc.desktop.in
+-- 
+1.8.3.2
+

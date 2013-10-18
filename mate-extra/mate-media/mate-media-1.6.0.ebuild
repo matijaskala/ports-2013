@@ -61,6 +61,11 @@ pkg_setup() {
 	DOCS="AUTHORS ChangeLog* NEWS README"
 }
 
+src_prepare() {
+	# Fix tests
+	epatch "${FILESDIR}/${PN}-1.6.0-fix-POTFILES.patch"
+	mate_src_prepare
+}
 pkg_postinst() {
 	mate_pkg_postinst
 	ewarn

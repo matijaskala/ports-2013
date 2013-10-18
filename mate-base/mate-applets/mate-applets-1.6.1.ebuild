@@ -67,6 +67,9 @@ src_prepare() {
 	sed -i -e 's:Icon=invest-applet:Icon=mate-invest-applet:' \
 		invest-applet/data/org.mate.applets.InvestApplet.mate-panel-applet.in.in || die
 
+	# Make tests run
+	epatch "${FILESDIR}/${PN}-1.6.1-fix-POTFILES.patch"
+
 	mate_src_prepare
 }
 
