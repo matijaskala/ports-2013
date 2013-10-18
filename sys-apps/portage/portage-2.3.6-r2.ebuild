@@ -344,7 +344,7 @@ pkg_preinst() {
 			rmdir "${PKG_SYM}"
 		fi
 		mkdir -p "${ROOT}"/var/db
-		ln -s /usr/share/portage/pkg "${ROOT}"/var/db | die
+		ln -s /usr/share/portage/pkg "${ROOT}"/var/db || die
 	fi
 }
 
