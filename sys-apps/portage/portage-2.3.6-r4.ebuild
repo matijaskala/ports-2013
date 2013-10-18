@@ -323,9 +323,9 @@ pkg_preinst() {
 		&& NEEDED_REBUILD_UPGRADE=true || NEEDED_REBUILD_UPGRADE=false
 
 	local PKG_SYM="${ROOT}/var/db/pkg"
-	if [ ! -h "${PKG_SYM}" ]
+	if [ ! -h "${PKG_SYM}" ]; then
 		einfo "Creating /var/db/pkg symlink"
-		if [ -d "${PKG_SYM}" ]
+		if [ -d "${PKG_SYM}" ]; then
 			ewarn "${PKG_SYM} is a directory."
 			ewarn "Merging it to /usr/share/portage/"
 			for group in "$(ls ${PKG_SYM})"; do
