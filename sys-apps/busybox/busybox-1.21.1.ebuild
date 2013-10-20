@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/busybox/busybox-1.21.1.ebuild,v 1.2 2013/09/29 00:55:52 vapier Exp $
 
 # See `man savedconfig.eclass` for info on how to use USE=savedconfig.
 
@@ -14,13 +16,13 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	MY_P=${PN}-${PV/_/-}
 	SRC_URI="http://www.busybox.net/downloads/${MY_P}.tar.bz2"
-	KEYWORDS="*"
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 
-IUSE="ipv6 make-symlinks math -pam selinux sep-usr +static syslog systemd"
+IUSE="ipv6 livecd make-symlinks math mdev -pam selinux sep-usr +static syslog systemd"
 RESTRICT="test"
 
 RDEPEND="!static? ( selinux? ( sys-libs/libselinux ) )
@@ -64,7 +66,7 @@ src_prepare() {
 
 	# patches go here!
 	epatch "${FILESDIR}"/${PN}-1.19.0-bb.patch
-	#epatch "${FILESDIR}"/${P}-*.patch
+	epatch "${FILESDIR}"/${P}-*.patch
 	cp "${FILESDIR}"/ginit.c init/ || die
 
 	# flag cleanup
@@ -196,6 +198,19 @@ src_install() {
 		newbin busybox_unstripped busybox
 		dosym busybox /bin/bb
 	fi
+	if use mdev ; then
+		dodir /$(get_libdir)/mdev/
+		use make-symlinks || dosym /bin/bb /sbin/mdev
+		cp "${S}"/examples/mdev_fat.conf "${ED}"/etc/mdev.conf
+
+		exeinto /$(get_libdir)/mdev/
+		doexe "${FILESDIR}"/mdev/*
+
+		newinitd "${FILESDIR}"/mdev.rc.1 mdev
+	fi
+	if use livecd ; then
+		dosym busybox /bin/vi
+	fi
 
 	# add busybox daemon's, bug #444718
 	if busybox_config_enabled FEATURE_NTPD_SERVER; then
@@ -280,9 +295,5 @@ pkg_postinst() {
 		elog "     init=/ginit /sbin/yourinit"
 		elog "To get a rescue shell, you may boot with:"
 		elog "     init=/ginit bb"
-	fi
-
-	if [ ! -x /bin/vi ]; then
-		ln -sf busybox /bin/vi
 	fi
 }

@@ -324,16 +324,15 @@ pkg_preinst() {
 
 	local PKG_SYM="${ROOT}/var/db/pkg"
 	if [ ! -h "${PKG_SYM}" ]; then
-		einfo "Creating /var/db/pkg symlink"
 		if [ -d "${PKG_SYM}" ]; then
-			ewarn "${PKG_SYM} is a directory."
-			ewarn "Merging it to /usr/share/portage/"
+			local DATADIR="${ROOT}/usr/share/portage/"
+			einfo "Merging ${PKG_SYM} to ${DATADIR}"
 			for group in "$(ls ${PKG_SYM})"; do
 				local GROUP_DIR="${PKG_SYM}/${group}"
-				mv ${GROUP_DIR}/* /usr/share/portage/${group} || (
+				mv ${GROUP_DIR}/* ${DATADIR}${group} || (
 					local duplicates=""
 					for pkg in "$(ls ${GROUP_DIR})"; do
-						duplicates+=" $(ls -1 /usr/share/portage/${group} | grep ${pkg}) "
+						duplicates+=" $(ls -1 ${DATADIR}${group} | grep ${pkg}) "
 					done
 					eerror "Merge failed due to duplicated packages."
 					eerror "Please consider removing following directories from ${GROUP_DIR}:"
@@ -343,6 +342,7 @@ pkg_preinst() {
 			done
 			rmdir "${PKG_SYM}"
 		fi
+		einfo "Creating ${PKG_SYM} symlink"
 		mkdir -p "${ROOT}"/var/db
 		ln -s /usr/share/portage/pkg "${ROOT}"/var/db || die
 	fi

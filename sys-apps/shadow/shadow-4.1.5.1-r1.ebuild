@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/shadow/shadow-4.1.5.1-r1.ebuild,v 1.14 2013/09/15 19:11:22 vapier Exp $
 
 EAPI="2"
 
@@ -10,7 +12,7 @@ SRC_URI="http://pkg-shadow.alioth.debian.org/releases/${P}.tar.bz2"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86"
 IUSE="acl audit cracklib nls pam selinux skey xattr"
 
 RDEPEND="acl? ( sys-apps/acl )
@@ -87,7 +89,7 @@ src_install() {
 	case $(tc-arch) in
 		ppc*)  devs="hvc0 hvsi0 ttyPSC0";;
 		hppa)  devs="ttyB0";;
-		arm)   devs="ttyFB0 ttySAC0 ttySAC1 ttySAC2 ttySAC3 ttymxc0 ttymxc1 ttyO0 ttyO1 ttyO2";;
+		arm)   devs="ttyFB0 ttySAC0 ttySAC1 ttySAC2 ttySAC3 ttymxc0 ttymxc1 ttymxc2 ttymxc3 ttyO0 ttyO1 ttyO2";;
 		sh)    devs="ttySC0 ttySC1";;
 	esac
 	[[ -n ${devs} ]] && printf '%s\n' ${devs} >> "${D}"/etc/securetty
@@ -99,6 +101,7 @@ src_install() {
 
 	# move passwd to / to help recover broke systems #64441
 	mv "${D}"/usr/bin/passwd "${D}"/bin/
+	dosym /bin/passwd /usr/bin/passwd
 
 	cd "${S}"
 	insinto /etc

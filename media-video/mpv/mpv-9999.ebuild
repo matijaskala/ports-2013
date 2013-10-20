@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/mpv/mpv-9999.ebuild,v 1.23 2013/10/18 13:36:22 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-video/mpv/mpv-9999.ebuild,v 1.25 2013/10/19 22:54:39 tomwij Exp $
 
 EAPI=5
 
@@ -97,7 +97,13 @@ RDEPEND+="
 		)
 	)
 	pulseaudio? ( media-sound/pulseaudio )
-	quvi? ( >=media-libs/libquvi-0.4.1:= )
+	quvi? (
+		>=media-libs/libquvi-0.4.1:=
+		|| (
+			>=media-video/libav-9[network]
+			>=media-video/ffmpeg-1.2:0[network]
+		)
+	)
 	samba? ( net-fs/samba )
 	wayland? (
 		>=dev-libs/wayland-1.0.0
@@ -286,7 +292,6 @@ src_configure() {
 		--confdir="${EPREFIX}"/etc/${PN} \
 		--mandir="${EPREFIX}"/usr/share/man \
 		--docdir="${EPREFIX}"/usr/share/doc/${PF} \
-		--localedir="${EPREFIX}"/usr/share/locale \
 		${myconf} || die
 
 	MAKEOPTS+=" V=1"
