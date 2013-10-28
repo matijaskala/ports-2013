@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/telepathy-farstream/telepathy-farstream-0.4.0.ebuild,v 1.5 2013/03/25 16:36:50 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/telepathy-farstream/telepathy-farstream-0.4.0.ebuild,v 1.7 2013/10/27 13:26:09 pacho Exp $
 
 EAPI="4"
 PYTHON_DEPEND="python? 2:2.5"

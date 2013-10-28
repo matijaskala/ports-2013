@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/dataenc/dataenc-0.14.0.5-r1.ebuild,v 1.1 2013/10/19 11:29:30 gienah Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-haskell/dataenc/dataenc-0.14.0.5-r1.ebuild,v 1.3 2013/10/26 09:19:25 gienah Exp $
 
 EAPI=5
 

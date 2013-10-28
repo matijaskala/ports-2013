@@ -1,18 +1,23 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/split2flac/split2flac-9999.ebuild,v 1.4 2012/05/19 09:11:44 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/split2flac/split2flac-9999.ebuild,v 1.5 2013/10/21 07:56:37 tomwij Exp $
 
-EAPI="4"
+EAPI="5"
 
-inherit mercurial
+EGIT_REPO_URI="https://github.com/ftrvxmtrx/split2flac.git"
+
+inherit bash-completion-r1
+[[ ${PV} == *9999* ]] && inherit git-2
 
 DESCRIPTION="sh script to split one big APE/FLAC/WV/WAV audio image with CUE sheet into tracks"
-HOMEPAGE="https://code.google.com/p/split2flac/"
-EHG_REPO_URI="https://code.google.com/p/split2flac/"
+HOMEPAGE="https://github.com/ftrvxmtrx/split2flac"
+[[ ${PV} == *9999* ]] || \
+SRC_URI="http://rion-overlay.googlecode.com/files/${P}.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+[[ ${PV} == *9999* ]] || \
+KEYWORDS="~amd64 ~x86"
 IUSE="enca flake imagemagick mac mp3 mp4 ogg replaygain wavpack"
 
 RDEPEND="
@@ -34,11 +39,17 @@ RDEPEND="
 	imagemagick? ( media-gfx/imagemagick )
 "
 
+src_configure() { :; }
+
+src_compile() { :; }
+
 src_install() {
-	dobin "${PN}.sh"
-	dosym "${PN}.sh" /usr/bin/split2wav.sh
+	dobin ${PN}
+	newbashcomp ${PN}-bash-completion.sh ${PN}
+
+	dosym ${PN} /usr/bin/split2wav
 	for i in mp3 mp4 ogg
 	do
-		use $i && dosym "${PN}.sh" /usr/bin/split2${i/mp4/m4a}.sh
+		use $i && dosym ${PN} /usr/bin/split2${i/mp4/m4a}
 	done
 }

@@ -98,6 +98,7 @@ src_install() {
 
 	cd "${S}"
 	dodoc AUTHORS ChangeLog* NEWS README
+	rm -f "${D}"/usr/share/applications/sandbox.desktop
 }
 
 pkg_preinst() {

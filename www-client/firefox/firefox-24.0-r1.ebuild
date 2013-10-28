@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-24.0-r1.ebuild,v 1.6 2013/10/07 20:37:33 nirbheek Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-24.0-r1.ebuild,v 1.7 2013/10/26 02:13:18 anarchy Exp $
 
 EAPI="3"
 VIRTUALX_REQUIRED="pgo"
@@ -25,7 +25,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-24.0-patches-0.3"
+PATCH="${PN}-24.0-patches-0.4"
 # Upstream ftp release URI that's used by mozlinguas.eclass
 # We don't use the http mirror because it deletes old tarballs.
 MOZ_FTP_URI="ftp://ftp.mozilla.org/pub/${PN}/releases/"
@@ -44,8 +44,7 @@ IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system
 # More URIs appended below...
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
-	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
-	https://launchpad.net/ubuntu/saucy/+source/${PN}/${PV}+build1-0ubuntu1/+files/${PN}_${PV}+build1-0ubuntu1.debian.tar.gz"
+	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -144,7 +143,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${WORKDIR}/debian/patches/unity-menubar.patch"
 	# Apply our patches
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \

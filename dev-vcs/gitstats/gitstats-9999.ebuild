@@ -1,17 +1,18 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/gitstats/gitstats-9999.ebuild,v 1.3 2011/09/21 08:25:56 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/gitstats/gitstats-9999.ebuild,v 1.4 2013/10/24 17:21:54 jlec Exp $
 
-EAPI="2"
+EAPI=5
 
-PYTHON_DEPEND="2"
+PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit python git-2
+inherit python-r1 git-2
 
 DESCRIPTION="Statistics generator for git"
 HOMEPAGE="http://gitstats.sourceforge.net/"
 SRC_URI=""
-EGIT_REPO_URI="git://repo.or.cz/${PN}.git
+EGIT_REPO_URI="
+	git://repo.or.cz/${PN}.git
 	http://repo.or.cz/r/${PN}.git"
 
 LICENSE="GPL-3"
@@ -24,12 +25,9 @@ RDEPEND="
 	dev-vcs/git"
 DEPEND=""
 
-pkg_setup() {
-	python_set_active_version 2
-}
-
 src_prepare() {
-	sed "s:basedir = os.path.dirname(os.path.abspath(__file__)):basedir = '/usr/share/gitstats':g" \
+	sed \
+		-e "s:basedir = os.path.dirname(os.path.abspath(__file__)):basedir = '${EPREFIX}/usr/share/gitstats':g" \
 	-i gitstats || die "failed to fix static files path"
 }
 
@@ -38,6 +36,7 @@ src_compile() {
 }
 
 src_install() {
-	emake PREFIX="${D}"/usr VERSION="${PV}" install || die
-	dodoc doc/{README,*.txt} || die "doc install failed"
+	emake PREFIX="${D}"/usr VERSION="${PV}" install
+	dodoc doc/{README,*.txt}
+	python_replicate_script "${ED}"/usr/bin/${PN}
 }

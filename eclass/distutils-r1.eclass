@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/distutils-r1.eclass,v 1.87 2013/10/10 06:10:00 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/distutils-r1.eclass,v 1.90 2013/10/26 17:47:51 mgorny Exp $
 
 # @ECLASS: distutils-r1
 # @MAINTAINER:
@@ -407,21 +407,21 @@ distutils-r1_python_test() {
 }
 
 # @FUNCTION: _distutils-r1_wrap_scripts
-# @USAGE: <path>
+# @USAGE: <path> <bindir>
 # @INTERNAL
 # @DESCRIPTION:
 # Moves and wraps all installed scripts/executables as necessary.
 _distutils-r1_wrap_scripts() {
 	debug-print-function ${FUNCNAME} "${@}"
 
+	[[ ${#} -eq 2 ]] || die "usage: ${FUNCNAME} <path> <bindir>"
 	local path=${1}
-	[[ ${path} ]] || die "${FUNCNAME}: no path given"
+	local bindir=${2}
 
 	if ! _python_want_python_exec2; then
-		local PYTHON_SCRIPTDIR=${EPREFIX}/usr/bin
+		local PYTHON_SCRIPTDIR=${bindir}
 	fi
 
-	mkdir -p "${path}${EPREFIX}/usr/bin" || die
 	local f
 	while IFS= read -r -d '' f; do
 		local basename=${f##*/}
@@ -429,6 +429,7 @@ _distutils-r1_wrap_scripts() {
 
 		[[ -d ${f} ]] && die "Unexpected directory: ${f}"
 
+		mkdir -p "${path}${bindir}" || die
 		local shebang
 		read -r shebang < "${f}"
 		if [[ ${shebang} == '#!'*${EPYTHON}* ]]; then
@@ -440,14 +441,14 @@ _distutils-r1_wrap_scripts() {
 				mv "${f}" "${newf}" || die
 			fi
 
-			debug-print "${FUNCNAME}: installing wrapper at /usr/bin/${basename}"
+			debug-print "${FUNCNAME}: installing wrapper at ${bindir}/${basename}"
 			_python_ln_rel "${path}${EPREFIX}"$(_python_get_wrapper_path) \
-				"${path}${EPREFIX}/usr/bin/${basename}" || die
+				"${path}${bindir}/${basename}" || die
 		elif _python_want_python_exec2; then
 			debug-print "${FUNCNAME}: non-matching shebang: ${shebang}"
 
-			debug-print "${FUNCNAME}: moving to /usr/bin/${basename}"
-			mv "${f}" "${path}${EPREFIX}/usr/bin/${basename}" || die
+			debug-print "${FUNCNAME}: moving to ${bindir}/${basename}"
+			mv "${f}" "${path}${bindir}/${basename}" || die
 		fi
 	done < <(find "${path}${PYTHON_SCRIPTDIR}" -mindepth 1 -print0)
 }
@@ -462,6 +463,7 @@ _distutils-r1_wrap_scripts() {
 distutils-r1_python_install() {
 	debug-print-function ${FUNCNAME} "${@}"
 
+	local args=( "${@}" )
 	local flags
 
 	case "${EPYTHON}" in
@@ -484,21 +486,59 @@ distutils-r1_python_install() {
 	[[ ${DISTUTILS_SINGLE_IMPL} ]] && root=${D}
 	flags+=( --root="${root}" )
 
-	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]] && _python_want_python_exec2
-	then
-		local PYTHON_SCRIPTDIR
-		python_export PYTHON_SCRIPTDIR
-		flags+=( --install-scripts="${PYTHON_SCRIPTDIR}" )
+	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
+		# user may override --install-scripts
+		# note: this is poor but distutils argv parsing is dumb
+		local mydistutilsargs=( "${mydistutilsargs[@]}" )
+		local scriptdir=${EPREFIX}/usr/bin
+
+		# construct a list of mydistutilsargs[0] args[0] args[1]...
+		local arg arg_vars
+		[[ ${mydistutilsargs[@]} ]] && eval arg_vars+=(
+			'mydistutilsargs['{0..$(( ${#mydistutilsargs[@]} - 1 ))}']'
+		)
+		[[ ${args[@]} ]] && eval arg_vars+=(
+			'args['{0..$(( ${#args[@]} - 1 ))}']'
+		)
+
+		set -- "${arg_vars[@]}"
+		while [[ ${@} ]]; do
+			local arg_var=${1}
+			shift
+			local a=${!arg_var}
+
+			case "${a}" in
+				--install-scripts=*)
+					scriptdir=${a#--install-scripts=}
+					if _python_want_python_exec2; then
+						unset "${arg_var}"
+					fi
+					;;
+				--install-scripts)
+					scriptdir=${!1}
+					if _python_want_python_exec2; then
+						unset "${arg_var}" "${1}"
+					fi
+					shift
+					;;
+			esac
+		done
+
+		if _python_want_python_exec2; then
+			local PYTHON_SCRIPTDIR
+			python_export PYTHON_SCRIPTDIR
+			flags+=( --install-scripts="${PYTHON_SCRIPTDIR}" )
+		fi
 	fi
 
-	esetup.py install "${flags[@]}" "${@}"
+	esetup.py install "${flags[@]}" "${args[@]}"
 
 	if [[ -d ${root}$(python_get_sitedir)/tests ]]; then
 		die "Package installs 'tests' package, file collisions likely."
 	fi
 
 	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
-		_distutils-r1_wrap_scripts "${root}"
+		_distutils-r1_wrap_scripts "${root}" "${scriptdir}"
 		multibuild_merge_root "${root}" "${D}"
 	fi
 }

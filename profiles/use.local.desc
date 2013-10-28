@@ -256,6 +256,13 @@ app-backup/bacula:bacula-clientonly - Disable DB support, and just build a clien
 app-backup/bacula:bacula-nodir - Disable building of director
 app-backup/bacula:bacula-nosd - Disable building of storage daemon
 app-backup/bacula:logwatch - Install support files for logwatch
+app-backup/bareos:clientonly - Only install file-daemon (client)
+app-backup/bareos:director - Install director
+app-backup/bareos:logwatch - Install support files for logwatch
+app-backup/bareos:ndmp - Enable support for NDMP (Network Data Management Protocol)
+app-backup/bareos:scsi-crypto - Enable low level SCSI crypto support
+app-backup/bareos:sql-pooling - Enable SQL pooling support
+app-backup/bareos:storage-daemon - Install storage daemon (bareos-sd)
 app-backup/boxbackup:client-only - Disable server support, and just build a client
 app-backup/dar:dar32 - Enables --enable-mode=32 option, which replace infinite by 32 bit integers
 app-backup/dar:dar64 - Enables --enable-mode=64 option, which replace infinite by 64 bit integers
@@ -401,6 +408,7 @@ app-editors/tea:hunspell - Enable spellchecking using app-text/hunspell
 app-editors/vim:X - Link console vim against X11 libraries to enable title and clipboard features in xterm
 app-editors/vim:luajit - Use dev-lang/luajit instead of dev-lang/lua
 app-editors/vim:vim-pager - Install vimpager and vimmanpager links
+app-editors/vim-qt:luajit - Use dev-lang/luajit instead of dev-lang/lua
 app-editors/xemacs:athena - Chooses the MIT Athena widget set
 app-editors/xemacs:dnd - Enables support for the x11-libs/dnd drag-n-drop library
 app-editors/xemacs:eolconv - Support detection and translation of newline conventions
@@ -498,7 +506,6 @@ app-emulation/lxc:vanilla - Avoid adding Gentoo Linux-specific modifications, wh
 app-emulation/open-vm-tools:doc - Generate API documentation
 app-emulation/open-vm-tools:fuse - Build vmblock-fuse in favor of FUSE based blocking mechanism for DnD
 app-emulation/open-vm-tools:pic - Force shared libraries to be built as PIC
-app-emulation/open-vm-tools:unity - Enable host unity support
 app-emulation/playonlinux:winbind - Enables support for the winbind auth daemon
 app-emulation/q4wine:gnome - Use the gksu sudo GUI for managing the devices
 app-emulation/q4wine:icoutils - Enable icoutils support
@@ -520,12 +527,14 @@ app-emulation/qemu:rbd - Enable rados block device backend support, see http://c
 app-emulation/qemu:sdl - Enable the SDL-based console
 app-emulation/qemu:seccomp - Utilize sys-libs/libseccomp to enable kernel filtering of system calls to prevent malicious guests from doing damage.
 app-emulation/qemu:spice - Enable Spice protocol support via app-emulation/spice
+app-emulation/qemu:ssh - Enable SSH based block device support via net-libs/libssh2
 app-emulation/qemu:static - Enables both 'static-softmmu' and 'static-user'
 app-emulation/qemu:static-softmmu - Builds the Software MMU (system) targets as static binaries
 app-emulation/qemu:static-user - Build the User targets as static binaries
 app-emulation/qemu:systemtap - Enable SystemTAP/DTrace tracing
 app-emulation/qemu:tci - Enable the TCG Interpreter which can speed up or slowdown workloads depending on the host and guest CPUs being emulated. In the future it will be a runtime option but for now its compile time.
 app-emulation/qemu:tls - Enable TLS support for the VNC console server. For 1.4 and newer this also enables WebSocket support.
+app-emulation/qemu:usb - Enable USB passthrough via dev-libs/libusbx
 app-emulation/qemu:usbredir - Use sys-apps/usbredir to redirect USB devices to another machine over TCP
 app-emulation/qemu:uuid - Enable UUID support in the vdi block driver
 app-emulation/qemu:vde - Enable VDE-based networking
@@ -1261,6 +1270,7 @@ dev-haskell/citeproc-hs:small_base - Choose the new smaller, split-up base packa
 dev-haskell/cmdargs:quotation - Build quote module
 dev-haskell/cmdargs:testprog - Build the test program
 dev-haskell/comonad:test-doctests - Run the doctests test suite
+dev-haskell/conduit:nohandles - experimental code to use raw system calls in place of handles. Not recommended for general use
 dev-haskell/crypto-api:all_cpolys - Build all the CMAC polynomes up to 10000 bits instead of just the usual ones
 dev-haskell/crypto-pubkey:benchmark - Build benchmarks.
 dev-haskell/cryptohash:cryptoapi - Defines crypto-api instances
@@ -1268,6 +1278,7 @@ dev-haskell/distributive:lib-werror - Compile with the ghc -Werror option
 dev-haskell/filestore:maxcount - Make use of a recent (>= 2.3.0) Darcs feature which vastly improves the performance of 'latest'. You should disable this flag if you plan to use gitit with an older version of Darcs, or 'latest' will raise an error.
 dev-haskell/glut:usenativewindowslibraries - When compiling under Windows, use the native libraries instead of e.g. the ones coming with Cygwin.
 dev-haskell/gtk:gio - Add glib's GIO bindings.
+dev-haskell/happstack-server:template_haskell - Description: Template Haskell is available on this system
 dev-haskell/hashable:sse4_1 - Enable optimization for SSE4_1 capable processors (Intel Core 2 Penryn and later chips)
 dev-haskell/hashtables:bounds-checking - if on, use bounds-checking array accesses
 dev-haskell/hashtables:portable - if on, use only pure Haskell code and no GHC extensions.
@@ -1435,6 +1446,7 @@ dev-lang/io:libxml2 - Build add-on for dev-libs/libxml2
 dev-lang/io:md5sum - Build md5sum add-on
 dev-lang/io:sha1 - Build sha1 add-on
 dev-lang/io:twitter - Build twitter add-on
+dev-lang/lazarus:minimal - Don't build extra packages from the bigide component
 dev-lang/logtalk:fop - Support for generating pdf documentation using fop
 dev-lang/logtalk:gnupl - Support GNU Prolog back-end compiler
 dev-lang/logtalk:qupl - Support Qu-Prolog back-end compiler
@@ -1939,30 +1951,28 @@ dev-python/ws4py:server - Install server modules
 dev-python/wxpython:doc - Install HTML wxWidgets docs and wxpython API reference.
 dev-python/wxpython:examples - Install interactive demo module browser and sample applets.
 dev-python/zsi:twisted - add support for dev-python/twisted
-dev-qt/assistant:c++0x - Build Qt using the C++11 standard
 dev-qt/assistant:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by Nokia)
-dev-qt/designer:c++0x - Build Qt using the C++11 standard
 dev-qt/designer:declarative - Build the qdeclarativeview plugin
 dev-qt/designer:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by Nokia)
 dev-qt/designer:phonon - Build the phononwidgets plugin
 dev-qt/designer:qt3support - Build the qt3supportwidgets plugin
 dev-qt/designer:webkit - Build the qwebview plugin
-dev-qt/linguist:c++0x - Build Qt using the C++11 standard
 dev-qt/linguist:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by Nokia)
-dev-qt/pixeltool:c++0x - Build Qt using the C++11 standard
 dev-qt/pixeltool:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by Nokia)
-dev-qt/qdbusviewer:c++0x - Build Qt using the C++11 standard
 dev-qt/qdbusviewer:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by Nokia)
-dev-qt/qt-creator:android - Build Android plugin
+dev-qt/qt-creator:android - Build plugin for Android devices
 dev-qt/qt-creator:autotools - Enable autotools project manager plugin
+dev-qt/qt-creator:baremetal - Build plugin for bare metal devices
 dev-qt/qt-creator:bazaar - Add support for dev-vcs/bzr version control system
 dev-qt/qt-creator:clearcase - Add support for IBM ClearCase version control system (requires manual installation of ClearCase client)
 dev-qt/qt-creator:cmake - Enable cmake project manager plugin
 dev-qt/qt-creator:fakevim - Enable support for vim-like key bindings
+dev-qt/qt-creator:ios - Build plugin for Apple iOS devices
 dev-qt/qt-creator:madde - Enable integration with MADDE (Maemo Application Development and Debugging Environment)
 dev-qt/qt-creator:mercurial - Add support for dev-vcs/mercurial version control system
 dev-qt/qt-creator:perforce - Add support for Perforce version control system (requires manual installation of Perforce client)
-dev-qt/qt-creator:qnx - Build QNX/Blackberry plugin
+dev-qt/qt-creator:python - Enable Python source code editor
+dev-qt/qt-creator:qnx - Build plugin for QNX/Blackberry devices
 dev-qt/qt-creator:valgrind - Add support for memory debugging using dev-util/valgrind
 dev-qt/qt-meta:kde - Select media-libs/phonon as Phonon variant (needed for KDE)
 dev-qt/qt-meta:opengl - Enable the QtOpenGL module
@@ -2050,8 +2060,6 @@ dev-qt/qtwebkit:exceptions - Add support for exceptions - like catching them ins
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer
 dev-qt/qtxmlpatterns:c++0x - Build Qt using the C++11 standard
 dev-ruby/barby:cairo - Add support for writing images (PNG, PS, EPS and, if supported, PDF and SVG) using dev-ruby/rcairo. Not available on JRuby.
-dev-ruby/barby:datamatrix - Add support for datamatrix 2D codes using dev-ruby/semacode.
-dev-ruby/barby:pdf-writer - Add support for writing PDF documents using dev-ruby/pdf-writer.
 dev-ruby/barby:png - Add support for writing PNG images using dev-ruby/chunky_png.
 dev-ruby/barby:prawn - Add support for writing PDF documents using dev-ruby/prawn.
 dev-ruby/barby:qrcode - Add support for QRCode 2D codes using dev-ruby/rqrcode.
@@ -2600,17 +2608,12 @@ gnome-extra/zeitgeist:telepathy - Enable telepathy framework as data source
 gnome-extra/zeitgeist-datahub:download - Monitor XDG download directory
 gnome-extra/zeitgeist-datahub:telepathy - Telepathy logging support for 1-to-1 chats, calls and file transfers
 gnome-extra/zeitgeist-datasources:bzr - Zeitgeist plugin for dev-vcs/bzr as data source
-gnome-extra/zeitgeist-datasources:chromium - Zeitgeist plugin for www-client/chromium as data source
 gnome-extra/zeitgeist-datasources:emacs - Zeitgeist plugin for emacs as data source
-gnome-extra/zeitgeist-datasources:eog - Zeitgeist plugin for media-gfx/eog as data source
 gnome-extra/zeitgeist-datasources:firefox - Zeitgeist plugin for www-client/firefox as data source
 gnome-extra/zeitgeist-datasources:geany - Zeitgeist plugin for dev-util/geany as data source
-gnome-extra/zeitgeist-datasources:gedit - Zeitgeist plugin for app-editors/gedit as data source
-gnome-extra/zeitgeist-datasources:rhythmbox - Zeitgeist plugin for media-sound/rhythmbox as data source
 gnome-extra/zeitgeist-datasources:telepathy - Zeitgeist plugin for telepathy framework as data source
 gnome-extra/zeitgeist-datasources:thunderbird - Zeitgeist plugin for mail-client/thunderbird as data source
 gnome-extra/zeitgeist-datasources:tomboy - Zeitgeist plugin for app-misc/tomboy as data source
-gnome-extra/zeitgeist-datasources:totem - Zeitgeist plugin for media-video/totem as data source
 gnome-extra/zeitgeist-datasources:vim - Zeitgeist plugin for vim as data source
 gnome-extra/zeitgeist-datasources:xchat - Zeitgeist plugin for net-irc/xchat-gnome as data source
 gnome-extra/zeitgeist-extensions:fts - Enable the full text search
@@ -2936,6 +2939,7 @@ media-fonts/terminus-font:ru-dv - Changes view of Russian letters 'de' and 've' 
 media-fonts/terminus-font:ru-g - Changes view of Russian letter 'ge' (see homepage)
 media-fonts/terminus-font:ru-i - Changes view of Russian letter 'i' - not like Latin u, but like "mirrored" N (see homepage)
 media-fonts/terminus-font:ru-k - Changes view of Russian letter 'k' (see homepage)
+media-fonts/unifont:fontforge - Use media-gfx/fontforge to build fonts from source
 media-gfx/album:plugins - Install optional plugins
 media-gfx/album:themes - Install optional themes
 media-gfx/assimp:boost - Build assimp with boost support
@@ -4025,6 +4029,7 @@ media-video/vlc:audioqueue - Enables AudioQueue audio module for Mac OS X.
 media-video/vlc:avcodec - Enables libavcodec support for video/audio encoding/decoding. libavcodec is part of FFmpeg.
 media-video/vlc:avformat - Enables libformat support for reading and writing various media containers. libavformat is part of FFmpeg.
 media-video/vlc:bluray - Enables libbluray for Blu-ray disc support.
+media-video/vlc:chromaprint - Enables libchromaprint for Chromaprint based audio fingerprinter support.
 media-video/vlc:dc1394 - Enables IIDC cameras support.
 media-video/vlc:dirac - Enable Dirac video support (an advanced royalty-free video compression format) via the reference library: dirac.
 media-video/vlc:direct2d - Enable Win7/VistaPU Direct2D support.
@@ -4033,7 +4038,9 @@ media-video/vlc:dshow - Enables Win32 DirectShow support.
 media-video/vlc:dvbpsi - Enables support for Mpeg-TS files (.ts, .m2ts, .mts) via media-libs/libdvbpsi.
 media-video/vlc:dxva2 - Enables Win32 DxVA2 support.
 media-video/vlc:egl - Enables EGL video output module.
+media-video/vlc:faad - Enable AAC audio decoding library support via media-libs/faad2.
 media-video/vlc:fbosd - Enables the framebuffer overlay plugin.
+media-video/vlc:fdk - Enables the Fraunhofer AAC codec library.
 media-video/vlc:fluidsynth - Enables Fluidsynth MIDI software synthesis (with external sound fonts).
 media-video/vlc:gcrypt - Enables cryptography support via libgcrypt.
 media-video/vlc:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
@@ -4047,6 +4054,7 @@ media-video/vlc:libtar - Uses libtar instead of the built-in tar reader for read
 media-video/vlc:libtiger - Enables Ogg Kate subtitles rendering using libtiger.
 media-video/vlc:linsys - Enables support for Linux Linear Systems Ltd. SDI and HD-SDI input cards.
 media-video/vlc:live - Enables live555 streaming media support (client support for rtsp).
+media-video/vlc:lua - Enable Lua scripting support, needed for including support for Jamendo (online music platform) and similar things.
 media-video/vlc:macosx - Enables Mac OS X gui support.
 media-video/vlc:macosx-audio - Enables Mac OS X audio module.
 media-video/vlc:macosx-dialog-provider - Enables Mac OS X dialog module.
@@ -4057,27 +4065,33 @@ media-video/vlc:macosx-vout - Enables Mac OS X video output module.
 media-video/vlc:matroska - Enables matroska support using reference libraries (fallback on other existing matroska support if disabled, i.e., matroska enabled FFmpeg)
 media-video/vlc:media-library - Build the (sqlite based) media library.
 media-video/vlc:omxil - Enables OpenMAX Integration Layer codec module.
+media-video/vlc:opencv - Enabled OpenCV (computer vision) filter module.
 media-video/vlc:optimisememory - Enable optimisation for memory rather than performance.
 media-video/vlc:opus - Support opus decoding via libopus.
 media-video/vlc:postproc - Enables image post-processing via libpostproc (part of FFmpeg).
 media-video/vlc:projectm - Enables the projectM visualization plugin.
 media-video/vlc:pvr - Enables PVR cards access module.
 media-video/vlc:qt4 - Builds a x11-libs/qt based frontend. It is now the most up-to-date graphical interface available.
+media-video/vlc:rdp - Enables freerdp for RDP/Remote Desktop client support
 media-video/vlc:rtsp - Enables real audio and RTSP modules.
 media-video/vlc:run-as-root - Allows vlc to start for root. Don't enable this unless you have a very specific (e.g. embedded) need for it!
 media-video/vlc:schroedinger - Enable Dirac video support (an advanced royalty-free video compression format) via libschroedinger (high-speed implementation in C of the Dirac codec).
 media-video/vlc:sdl-image - Enables sdl image video decoder (depends on sdl)
+media-video/vlc:sftp - Enables libssh2 to support SFTP file transfer.
 media-video/vlc:shine - Enables shine fixed point mp3 encoder.
 media-video/vlc:shout - Enables libshout output.
 media-video/vlc:sid - Adds support for playing C64 SID files through media-libs/libsidplay-2.
 media-video/vlc:skins - Enables support for the skins2 interface.
 media-video/vlc:switcher - Enables MPEG2 video switcher stream output module.
 media-video/vlc:swscale - Enables image scaling and conversion via libswscale (part of FFmpeg).
+media-video/vlc:tremor - Enables tremor, a fixed-point version of the Ogg Vorbis decoder.
 media-video/vlc:twolame - Enables twolame support (MPEG Audio Layer 2 encoder).
 media-video/vlc:upnp - Enables support for Intel UPnP stack.
 media-video/vlc:vaapi - Enables VAAPI (Video Acceleration API) for hardware decoding
 media-video/vlc:vcdx - Enables VCD with navigation via libvcdinfo (depends on cdio)
+media-video/vlc:visual - Enables a libvisual based visualization plugin.
 media-video/vlc:vlm - New videolan (media) manager (vlm), a little manager designed to launch and manage multiple streams from within one instance of VLC.
+media-video/vlc:vpx - Enables the decoder(s) from the WebM VP8 / VP9 Codec SDK.
 media-video/vlc:waveout - Enable win32 waveOut plugin.
 media-video/vlc:wingdi - Enable Win32 GDI module.
 media-video/vlc:wma-fixed - Enables fixed point WMA decoder.
@@ -4352,11 +4366,10 @@ net-fs/autofs:ldap - Install LDAP module
 net-fs/autofs:libtirpc - Use TiRPC library instead of SunRPC
 net-fs/autofs:mount-locking - Enable locking to prevent corruption of /etc/mtab in the presence of concurrent auto-mounting. If enabled, recursive auto-mounting (eg. using autofs to bind or loop mount a filesystem which is itself auto-mounted) is not possible.
 net-fs/autofs:sasl - Enable SASL support in the LDAP module
-net-fs/cifs-utils:ads - Enable Active Directory support
+net-fs/cifs-utils:ads - Enable Active Directory support and create cifs.idmap binary - idmap support
 net-fs/cifs-utils:caps - libcap support
 net-fs/cifs-utils:caps-ng - libcap-ng support
 net-fs/cifs-utils:creds - cifs credentials support
-net-fs/cifs-utils:upcall - Create cifs.idmap binary; idmap support
 net-fs/cvmfs:client - Install the cvmfs client programs and init script
 net-fs/cvmfs:server - Install the cvmfsd program and init script
 net-fs/netatalk:appletalk - Build support for Apple's AppleTalk (DDP) protocol and its utilities (atalkd, timelord, papd).
@@ -4996,13 +5009,21 @@ net-misc/batman-adv:dat - B.A.T.M.A.N. distributed arp table
 net-misc/batman-adv:nc - B.A.T.M.A.N. network coding
 net-misc/bfgminer:adl - Enable support for controlling fans and overclocking on AMD cards with AMD Display Library
 net-misc/bfgminer:avalon - Enable support for mining with Avalon ASIC modules
+net-misc/bfgminer:bfsb - Enable support for mining on BFSB host Raspberry Pi
+net-misc/bfgminer:bigpic - Enable support for mining with Big Picture Mining USB sticks (Red/BlueFury, BF1, etc)
 net-misc/bfgminer:bitforce - Enable support for mining with ButterFly Labs BitFORCE ASICs and/or FPGAs
+net-misc/bfgminer:bitfury - Enable support for mining with 55nm Bitfury-based devices
 net-misc/bfgminer:cpumining - Enable support for mining with CPUs
 net-misc/bfgminer:icarus - Enable support for mining with Icarus-compatible devices (including Block Erupter Sapphire ASICs)
+net-misc/bfgminer:littlefury - Enable support for mining with LittleFury USB sticks
+net-misc/bfgminer:metabank - Enable support for mining on Metabank host Raspberry Pi
 net-misc/bfgminer:modminer - Enable support for mining with ModMiner FPGAs
+net-misc/bfgminer:nanofury - Enable support for mining with NanoFury USB sticks
 net-misc/bfgminer:opencl - Enable support for mining with OpenCL-capable devices (GPUs)
 net-misc/bfgminer:padlock - Enable support for mining with VIA Padlock CPUs
-net-misc/bfgminer:proxy - Enable support for getwork proxy device (often used with Block Erupter Blades)
+net-misc/bfgminer:proxy - Enable support for virtual proxy device
+net-misc/bfgminer:proxy_getwork - Enable proxy support for getwork protocol (often used with Block Erupter Blades)
+net-misc/bfgminer:proxy_stratum - Enable proxy support for stratum protocol
 net-misc/bfgminer:scrypt - Enable support for scrypt mining algorithm
 net-misc/bfgminer:sse2_4way - Enable support for CPU SSE2 4way mining algorithm
 net-misc/bfgminer:sse4 - Enable support for CPU SSE4 mining algorithm
@@ -5725,6 +5746,7 @@ sci-libs/plplot:dynamic - Build with dynamic drivers
 sci-libs/plplot:octave - Add bindings for sci-mathematics/octave
 sci-libs/plplot:qhull - Add bindings for media-libs/qhull
 sci-libs/scikits_image:freeimage - Enable support for image i/o via media-libs/freeimage
+sci-libs/scikits_image:pyamg - Enable support for algebraic solvers via dev-python/pyamg
 sci-libs/scipy:sparse - Adds support for sparse solving with sci-libs/umfpack
 sci-libs/scotch:int64 - Build the 64 bits integer library (needed for > 2^31 vertices)
 sci-libs/scotch:tools - Build and install extra exec tools

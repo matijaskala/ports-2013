@@ -8,8 +8,8 @@ dev-libs/folks vala
 gnome-extra/evolution-data-server vala
 
 # Required by gnome-base/gvfs and sys-fs/udisks
-sys-fs/udev extras gudev
-virtual/udev extras gudev hwdb
+sys-fs/udev extras
+virtual/udev extras hwdb
 gnome-base/gvfs gdu
 sys-block/parted device-mapper 
 
@@ -25,10 +25,6 @@ dev-lang/python sqlite
 
 # Required for app-text/evince
 app-text/poppler cairo
-
-# Required by sys-auth/polkit[-systemd]
-sys-auth/consolekit policykit
-sys-auth/pambase consolekit
 
 # Required by media-libs/libcanberra[udev]
 media-libs/libcanberra alsa

@@ -51,6 +51,9 @@ DEPEND="${RDEPEND}
 
 ELTCONF="--portage"
 
+#Tests use dogtail which is not available on gentoo.
+RESTRICT="test"
+
 pkg_setup() {
 	# Passing --disable-help would drop offline help, that would be inconsistent
 	# with helps of the most of Gnome apps that doesn't require network for that.
