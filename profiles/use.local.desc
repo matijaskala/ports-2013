@@ -947,7 +947,6 @@ app-office/scribus:templates - Document tamplates
 app-office/scribus:tk - Install tk based scripts e.g. FontSample.py
 app-office/texmacs:netpbm - Add support for media-libs/netpbm
 app-office/texstudio:video - Use phonon for video embedding
-app-office/tpp:figlet - Install app-misc/figlet to support the --huge command
 app-pda/barry:boost - Enable boost support
 app-pda/barry:desktop - Install the GUI desktop control panel
 app-pda/barry:gui - Install the GUI backup tool
@@ -1135,11 +1134,9 @@ dev-db/mariadb:profiling - Add support for statement profiling (requires USE=com
 dev-db/mariadb:sphinx - Add suport for the sphinx full-text search engine
 dev-db/mariadb:systemtap - Build support for profiling and tracing using dev-util/systemtap
 dev-db/mariadb:test - Install upstream testsuites for end use.
-dev-db/mongodb:embedded-v8 - Use embedded version of v8 instead of system v8
 dev-db/mongodb:mms-agent - Install the MongoDB Monitoring Service agent
 dev-db/mongodb:sharedclient - build client shared library libmongoclient.so
-dev-db/mongodb:spidermonkey - Use embedded SpiderMonkey engine (dev-lang/spidermonkey) instead of v8 (dev-lang/v8)
-dev-db/mongodb:v8 - Use V8 JavaScript engine (dev-lang/v8) instead of SpiderMonkey (dev-lang/spidermonkey)
+dev-db/mongodb:spidermonkey - Use embedded SpiderMonkey engine (dev-lang/spidermonkey) instead of v8
 dev-db/mysql:big-tables - Make tables contain up to 1.844E+19 rows
 dev-db/mysql:cluster - Add support for NDB clustering (deprecated)
 dev-db/mysql:community - Enables the community features from upstream.
@@ -3736,6 +3733,8 @@ media-tv/xmltv:fi - Finland tv listing grabber
 media-tv/xmltv:fr - France tv listing grabber
 media-tv/xmltv:hr - Croatia tv listing grabber
 media-tv/xmltv:huro - Hungarian tv listing grabber
+media-tv/xmltv:il - Israel tv listing grabber
+media-tv/xmltv:in - India tv listing grabber
 media-tv/xmltv:is - Iceland tv listing grabber
 media-tv/xmltv:it - Italy tv listing grabber
 media-tv/xmltv:jp - Japan tv listing grabber
@@ -5051,10 +5050,7 @@ net-misc/connman:openvpn - Use net-misc/openvpn for openvpn support.
 net-misc/connman:tools - Enable testing tools.
 net-misc/connman:vpnc - Use net-misc/vpnc for cisco VPN support.
 net-misc/csync:sftp - Enable sftp transfer support via net-libs/libssh
-net-misc/curl:ares - Enabled c-ares dns support
-net-misc/curl:gnutls - Prefer gnutls over nss and openssl as the crypto engine
 net-misc/curl:metalink - Enable metalink support
-net-misc/curl:nss - Prefer NSS over openssl as the crypto engine
 net-misc/curl:rtmp - Enable Enables RTMPDump Streaming Media support
 net-misc/curl:ssh - Enabled SSH urls in curl using libssh2
 net-misc/curl:ssl - Enable crypto engine support (via openssl if USE='-gnutls -nss')
@@ -5722,7 +5718,6 @@ sci-libs/linux-gpib:firmware - Install firmware
 sci-libs/lis:fma - Use the Fused Multiply Add instruction set (x86 arches)
 sci-libs/lis:quad - Enable quadruple precision operations
 sci-libs/lis:saamg - Build the Smoothed Aggregation Algebraic MultiGrid preconditioner
-sci-libs/mathgl:double-precision - Add double precision calculations
 sci-libs/mathgl:hdf - Add support for the Hierarchical Data Format v.4 sci-libs/hdf
 sci-libs/mathgl:octave - Add bindings for sci-mathematics/octave
 sci-libs/matio:sparse - Extend formats for sparse matrix (not matlab)
@@ -5745,6 +5740,7 @@ sci-libs/plplot:ada - Add bindings for the ADA programming language
 sci-libs/plplot:dynamic - Build with dynamic drivers
 sci-libs/plplot:octave - Add bindings for sci-mathematics/octave
 sci-libs/plplot:qhull - Add bindings for media-libs/qhull
+sci-libs/plplot:shapefile - Enable support for ESRI shapefiles
 sci-libs/scikits_image:freeimage - Enable support for image i/o via media-libs/freeimage
 sci-libs/scikits_image:pyamg - Enable support for algebraic solvers via dev-python/pyamg
 sci-libs/scipy:sparse - Adds support for sparse solving with sci-libs/umfpack

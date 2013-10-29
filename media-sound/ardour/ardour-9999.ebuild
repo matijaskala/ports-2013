@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.1 2013/09/10 20:14:00 nativemad Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.2 2013/10/28 18:50:02 nativemad Exp $
 
 EAPI=4
 inherit eutils git-2 toolchain-funcs flag-o-matic waf-utils
@@ -69,7 +69,7 @@ src_unpack() {
 }
 
 src_prepare(){
-	epatch "${FILESDIR}"/${PN}-3.2-syslibs.patch
+	epatch "${FILESDIR}"/${PN}-3.5-syslibs.patch
 	sed 's/python/python2/' -i waf
 }
 
