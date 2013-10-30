@@ -38,11 +38,6 @@ app-benchmarks/phoronix-test-suite
 # mask openmpi-1.6.4 due to sandbox issues, FL-578, https://bugs.gentoo.org/show_bug.cgi?id=462602
 =sys-cluster/openmpi-1.6.4
 
-# Oleg Vinichenko (23 Apr 2013)
-# mask xorg-server-1.14, driver incompatibility, FL-449, FL-522,
-# security update for xorg-server
->x11-base/xorg-server-1.13.4
-
 # Not currently maintained, last commit near 1 yr ago
 # ZFSOnLinux is a muche more viable and mature replacement 
 sys-fs/zfs-fuse
@@ -74,10 +69,6 @@ sys-fs/zfs-fuse
 =dev-lang/python-2.7.5_pre*
 =dev-lang/python-3.4_pre*
 =dev-lang/python-3.3.2_pre*
-
-# DO NOT USE this one the ebuild does not include kernel revision dependencies (>= 2.6.38 REQUIRED) and it can affect many of our users 
-# See bug #359445
-=net-wireless/iwl5000-ucode-8.83.5.1
 
 #Daniel Robbins (13 Jul 2011)
 #pyxml is BAD - avoid if possible - see http://permalink.gmane.org/gmane.linux.gentoo.devel/71149

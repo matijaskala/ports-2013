@@ -51,6 +51,12 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 S=${WORKDIR}/${MY_P}
 
+python-single-r1_pkg_setup() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	use python && python_setup
+}
+
 src_prepare() {
 	if [[ ${PV} == 9999 ]] ; then
 		po/update-potfiles
