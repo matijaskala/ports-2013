@@ -578,9 +578,25 @@ git-r3_checkout() {
 		fi
 	fi
 
+	# Note: this is a hack to avoid parallel checkout issues.
+	# I will try to handle it without locks when I have more time.
+	local lockfile=${GIT_DIR}/.git-r3_checkout_lock
+	local lockfile_l=${lockfile}.${BASHPID}
+	touch "${lockfile_l}" || die
+	until ln "${lockfile_l}" "${lockfile}" &>/dev/null; do
+		sleep 1
+	done
+	rm "${lockfile_l}" || die
+
 	set -- git checkout -f "${local_id}"/__main__ .
 	echo "${@}" >&2
-	"${@}" || die "git checkout ${local_id}/__main__ failed"
+	"${@}"
+	local ret=${?}
+
+	# Remove the lock!
+	rm "${lockfile}" || die
+
+	[[ ${ret} == 0 ]] || die "git checkout ${local_id}/__main__ failed"
 
 	# diff against previous revision (if any)
 	local new_commit_id=$(git rev-parse --verify "${local_id}"/__main__)

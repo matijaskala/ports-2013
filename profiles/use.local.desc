@@ -2499,8 +2499,10 @@ gnome-base/gdm:gnome-shell - Enables a greeter based on GNOME Shell (uses OpenGL
 gnome-base/gdm:plymouth - Enable support for smooth transition from sys-boot/plymouth
 gnome-base/gdm:remote - Enables support for secure remote connections
 gnome-base/gdm:smartcard - Enables experimental smartcard authentication
+gnome-base/gnome:classic - Install gnome-extra/gnome-shell-extensions for the Gnome Shell Classic mode
 gnome-base/gnome:extras - Install additional GNOME applications
 gnome-base/gnome:fallback - Install gnome-base/gnome-panel and x11-wm/metacity for the GNOME 3 fallback mode
+gnome-base/gnome:flashback - Install gnome-base/gnome-panel and x11-wm/metacity for the GNOME 3 Flashback mode
 gnome-base/gnome-applets:cpufreq - Build cpu frequency scaling monitor applet
 gnome-base/gnome-control-center:colord - Support color management using x11-misc/colord
 gnome-base/gnome-control-center:gnome-online-accounts - Enable configuration panel for net-libs/gnome-online-accounts accounts
@@ -3452,11 +3454,15 @@ media-sound/beets:web - Enable embedded webserver support through dev-python/fla
 media-sound/cantata:online-services - Enable support for online services (Jamendo and Magantune)
 media-sound/cantata:phonon - Enable support for Phonon
 media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments.
+media-sound/clementine:box - Enable Box support
+media-sound/clementine:dropbox - Enable Dropbox support
 media-sound/clementine:googledrive - Enable Google Drive support
-media-sound/clementine:kde - Enable plasma krunner global search
 media-sound/clementine:lastfm - Use liblastfm for fetching song info, scrobbling and radio streams
 media-sound/clementine:moodbar - Enable moodbar support
 media-sound/clementine:projectm - Build with ProjectM visualization
+media-sound/clementine:skydrive - Enable Skydrive support
+media-sound/clementine:system-sqlite - Use the system-wide dev-db/sqlite installation
+media-sound/clementine:ubuntu-one - Enable Ubuntu One support
 media-sound/clementine:wiimote - Enable support for Wii remote
 media-sound/cmus:cdio - use libcdio for CD support
 media-sound/cmus:cue - enable CUE sheet parsing
@@ -4503,6 +4509,7 @@ net-im/kadu:sdk - Install Kadu SDK (cmake module, API headers)
 net-im/kadu:speech - Enables speech module
 net-im/kmess:konqueror - Enable integration with konqueror
 net-im/kmess:libnotify - Enable desktop notifications using the knotify library
+net-im/ktp-accounts-kcm:modemmanager - Enable support for mobile broadband devices
 net-im/licq:aosd - Build the advanced on screen display plugin.
 net-im/mcabber:aspell - Adds support for app-text/aspell spell checker.
 net-im/mcabber:otr - Enable encrypted conversations using Off-The-Records messaging
