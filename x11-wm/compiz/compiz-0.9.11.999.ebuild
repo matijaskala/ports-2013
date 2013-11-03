@@ -4,7 +4,7 @@ EAPI=5
 
 inherit cmake-utils eutils gnome2-utils versionator
 
-DESCRIPTION="OpenGL window and compositing manager."
+DESCRIPTION="OpenGL window and compositing manager"
 HOMEPAGE="https://launchpad.net/compiz"
 
 MAJOR_BRANCH=$(get_version_component_range 1-3)
