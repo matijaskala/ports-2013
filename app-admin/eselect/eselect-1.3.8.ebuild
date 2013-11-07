@@ -5,12 +5,12 @@ EAPI=4
 inherit eutils bash-completion-r1
 
 DESCRIPTION="Gentoo's multi-purpose configuration and management tool"
-HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Eselect"
+HOMEPAGE="http://wiki.gentoo.org/wiki/Project:Eselect"
 SRC_URI="mirror://gentoo/${P}.tar.xz"
 
 LICENSE="GPL-2+ || ( GPL-2+ CC-BY-SA-2.5 )"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ~ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="doc emacs vim-syntax"
 
 RDEPEND="sys-apps/sed
@@ -48,10 +48,8 @@ src_install() {
 		fperms g+w /var/lib/gentoo/news
 	fi
 
-	# tweaks for funtoo-1.0 profile
 	insinto /usr/share/eselect/modules
-	doins $FILESDIR/$PVR/profile.eselect || die
-	doins $FILESDIR/$PVR/kernel.eselect || die
+	doins $FILESDIR/profile.eselect || die
 }
 
 pkg_postinst() {

@@ -25,7 +25,7 @@ SRC_URI="${BASE_URI}/${SRC_ARCHIVE}
 
 LICENSE="BSD"
 SLOT="0/${MAJOR_VERSION}"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="c++11 debug doc examples static-libs"
 
 DEPEND=""
@@ -47,7 +47,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	# Do not hardcode flags in icu-config.
+	# Hardcode not flags in icu-config.
 	# https://ssl.icu-project.org/trac/ticket/6102
 	local variable
 	for variable in CFLAGS CPPFLAGS CXXFLAGS FFLAGS LDFLAGS; do

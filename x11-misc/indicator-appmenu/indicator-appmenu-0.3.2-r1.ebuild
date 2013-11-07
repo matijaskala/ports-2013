@@ -14,18 +14,19 @@ KEYWORDS="*"
 IUSE="gtk3 nls"
 
 RDEPEND=">=x11-libs/gtk+-2.12:2
-        gtk3? (
-        >=x11-libs/gtk+-3.2.1:3
-        >=x11-libs/libwnck-3.2.1 )
-        >=dev-libs/dbus-glib-0.76
-        >=dev-libs/libindicator-0.4.1
-        >=dev-libs/libdbusmenu-0.5.0[json]"
+	gtk3? (
+	>=x11-libs/gtk+-3.2.1:3
+	>=x11-libs/libwnck-3.2.1 )
+	>=dev-libs/dbus-glib-0.76
+	>=dev-libs/libindicator-0.4.1
+	>=dev-libs/libdbusmenu-0.5.0[json]"
 DEPEND="${RDEPEND}
-        virtual/pkgconfig
-        nls? ( dev-util/intltool )
-        x11-libs/bamf"
+	virtual/pkgconfig
+	nls? ( dev-util/intltool )
+	x11-libs/bamf"
 
 src_configure() {
-        econf \
-                --with-gtk=$(usex gtk3 "3" "2")
+	econf \
+		--with-gtk=$(usex gtk3 "3" "2")
+		epatch "${FILESDIR}/${P}-ubuntu3.diff"
 }

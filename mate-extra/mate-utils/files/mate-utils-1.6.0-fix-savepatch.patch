@@ -1,0 +1,22 @@
+diff --git a/mate-screenshot/screenshot-dialog.c b/mate-screenshot/screenshot-dialog.c
+index bcac343..b5b2be5 100644
+--- a/mate-screenshot/screenshot-dialog.c
++++ b/mate-screenshot/screenshot-dialog.c
+@@ -338,7 +338,7 @@ struct ScreenshotDialog
+   gchar *uri, *file, *tmp;
+   GError *error;
+ 
+-  folder = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
++  folder = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+   file_name = gtk_entry_get_text (GTK_ENTRY (dialog->filename_entry));
+ 
+   error = NULL;
+@@ -366,7 +366,7 @@ struct ScreenshotDialog
+ char *
+ screenshot_dialog_get_folder (ScreenshotDialog *dialog)
+ {
+-  return gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (dialog->save_widget));
++  return gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog->save_widget));
+ }
+ 
+ GdkPixbuf *

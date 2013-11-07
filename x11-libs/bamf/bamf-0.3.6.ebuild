@@ -13,12 +13,12 @@ LICENSE="LGPL-3"
 IUSE="gtk3 introspection webapps"
 
 DEPEND="
-    introspection? ( >=dev-lang/vala-0.11.7 )
-    gtk3? (
-        >=x11-libs/libwnck-3.2.1
-        >=x11-libs/gtk+-3.2.1 )
-    gnome-base/libgtop
-    dev-util/gtk-doc"
+	introspection? ( >=dev-lang/vala-0.11.7 )
+	gtk3? (
+		>=x11-libs/libwnck-3.2.1
+		>=x11-libs/gtk+-3.2.1 )
+	gnome-base/libgtop
+	dev-util/gtk-doc"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
@@ -34,8 +34,8 @@ src_prepare() {
 }
 
 src_configure() {
-    econf \
-        $(use_enable introspection)
-        $(use_enable webapps) \
-        --with-gtk=$(usex gtk3 "3" "2")
+	econf \
+		$(use_enable introspection)
+		$(use_enable webapps) \
+		--with-gtk=$(usex gtk3 "3" "2")
 }

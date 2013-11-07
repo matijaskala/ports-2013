@@ -11,8 +11,8 @@
 inherit package-manager output
 
 DESCRIPTION="Manage portage profiles"
-MAINTAINER="rh1@funtoo.org"
-VERSION="funtoo-1.8"
+MAINTAINER="mskala@gmx.com"
+VERSION="partylinux-1.9"
 
 ### INIT ###
 
@@ -73,6 +73,7 @@ case "${MACHINE_ARCH}" in
 		VALID_ARCHS=( "None" )
 		;;
 esac
+[[ "${VALID_ARCHS}" != "None" ]] && VALID_ARCHS+=( ${MACHINE_ARCH} )
 
 
 ### HELPER FUNCTIONS ###
@@ -456,7 +457,7 @@ is_profile_set() {
 # $1 = profile to check
 match_arch_profile() {
 	local pro_to_check="${1}"
-	local stripped_arch="${pro_to_check#*/arch/}"
+	local stripped_arch="${pro_to_check#*arch/}"
 	local pro_arch="${stripped_arch%%/*}"
 
 	for valid_arch in ${VALID_ARCHS[@]} ; do

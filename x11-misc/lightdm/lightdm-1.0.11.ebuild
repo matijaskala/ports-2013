@@ -32,7 +32,6 @@ DEPEND="${RDEPEND}
 	dev-lang/vala:0.12
 	dev-util/intltool
 	virtual/pkgconfig
-	gnome-base/gnome-common
 	sys-devel/gettext"
 
 REQUIRED_USE="branding? ( gtk ) || ( gtk qt4 )"

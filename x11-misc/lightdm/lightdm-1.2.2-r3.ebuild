@@ -32,7 +32,6 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	dev-util/gtk-doc-am
 	dev-util/intltool
-	gnome-base/gnome-common
 	sys-devel/gettext
 	virtual/pkgconfig"
 

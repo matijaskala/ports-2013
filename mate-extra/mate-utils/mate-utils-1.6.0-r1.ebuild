@@ -48,6 +48,10 @@ pkg_setup() {
 src_prepare() {
 	#Fix test
 	epatch "${FILESDIR}/${PN}-1.6.0-fix-POTFILES.patch"
+
+	#Fix savepatch upstream:
+	#https://github.com/mate-desktop/mate-utils/issues/32
+	epatch "${FILESDIR}/${PN}-1.6.0-fix-savepatch.patch"
 	mate_src_prepare
 
 	# Remove idiotic -D.*DISABLE_DEPRECATED cflags

@@ -14,25 +14,25 @@ LICENSE="LGPL-3"
 IUSE="introspection webapps"
 
 RDEPEND="
-    introspection? ( >=dev-lang/vala-0.11.7 )
-    >=x11-libs/libwnck-3.2.1
-    >=x11-libs/gtk+-3.2.1
-    gnome-base/libgtop"
+	introspection? ( >=dev-lang/vala-0.11.7 )
+	>=x11-libs/libwnck-3.2.1
+	>=x11-libs/gtk+-3.2.1
+	gnome-base/libgtop"
 DEPEND="${RDEPEND}
-    $(vala_depend)
-    virtual/pkgconfig"
+	$(vala_depend)
+	virtual/pkgconfig"
 
 src_prepare() {
-  	sed -i -e 's/-Werror//' configure.in
-	  eautoreconf
+	sed -i -e 's/-Werror//' configure.in
+	eautoreconf
 
-  	vala_src_prepare
+	vala_src_prepare
 }
 
 src_configure() {
-	  VALA_API_GEN="${VAPIGEN}" \
-    econf \
-        $(use_enable introspection)
-        $(use_enable webapps) \
-        --with-gtk=3
+	VALA_API_GEN="${VAPIGEN}" \
+	econf \
+		$(use_enable introspection)
+		$(use_enable webapps) \
+		--with-gtk=3
 }

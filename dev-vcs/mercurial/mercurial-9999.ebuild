@@ -17,13 +17,12 @@ EHG_REVISION="@"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="bugzilla emacs gpg test tk zsh-completion"
+IUSE="bugzilla emacs gpg test tk"
 
 RDEPEND="app-misc/ca-certificates
 	bugzilla? ( $(python_abi_depend dev-python/mysql-python) )
 	gpg? ( app-crypt/gnupg )
-	tk? ( dev-lang/tk )
-	zsh-completion? ( app-shells/zsh )"
+	tk? ( dev-lang/tk )"
 DEPEND="emacs? ( virtual/emacs )
 	$([[ ${PV} == 9999 ]] && python_abi_depend dev-python/docutils)
 	test? (
@@ -66,15 +65,12 @@ src_install() {
 	distutils_src_install
 
 	newbashcomp contrib/bash_completion hg
+	insinto /usr/share/zsh/site-functions
+	newins contrib/zsh_completion _hg
 
 	if use emacs; then
 		elisp-install ${PN} contrib/mercurial.el* || die "elisp-install failed!"
 		elisp-site-file-install "${FILESDIR}"/${SITEFILE}
-	fi
-
-	if use zsh-completion; then
-		insinto /usr/share/zsh/site-functions
-		newins contrib/zsh_completion _hg
 	fi
 
 	dodoc CONTRIBUTORS README
@@ -100,33 +96,47 @@ EOF
 }
 
 src_test() {
-	cd "${S}/tests/" || die
-	rm -rf *svn* || die					# Subversion tests fail with 1.5
-	rm -f test-archive* || die			# Fails due to verbose tar output changes
-	rm -f test-convert-baz* || die		# GNU Arch baz
-	rm -f test-convert-cvs* || die		# CVS
-	rm -f test-convert-darcs* || die	# Darcs
-	rm -f test-convert-git* || die		# git
-	rm -f test-convert-mtn* || die		# monotone
-	rm -f test-convert-tla* || die		# GNU Arch tla
-	rm -f test-doctest* || die			# doctest always fails with python 2.5.x
-	rm -f test-largefiles* || die		# tends to time out
-	if [[ ${EUID} -eq 0 ]]; then
-		einfo "Removing tests which require user privileges to succeed"
-		rm -f test-command-template* || die	# Test is broken when run as root
-		rm -f test-convert* || die			# Test is broken when run as root
-		rm -f test-lock-badness* || die		# Test is broken when run as root
-		rm -f test-permissions* || die		# Test is broken when run as root
-		rm -f test-pull-permission* || die	# Test is broken when run as root
-		rm -f test-clone-failure* || die
-		rm -f test-journal-exists* || die
-		rm -f test-repair-strip* || die
+	pushd tests > /dev/null || die
+	# https://bz.selenic.com/show_bug.cgi?id=4083
+	rm -f test-subrepo-svn.t
+	# https://bz.selenic.com/show_bug.cgi?id=4084
+	rm -f test-clone-cgi.t
+	rm -f test-hgweb-commands.t
+	rm -f test-push-cgi.t
+	# https://bz.selenic.com/show_bug.cgi?id=4085
+	rm -f test-commit-amend.t
+	# https://bz.selenic.com/show_bug.cgi?id=4086
+	rm -f test-subrepo-git.t
+	# https://bz.selenic.com/show_bug.cgi?id=4087
+	rm -f test-check-pyflakes.t
+	# Disable tests sometimes timing out.
+	rm -f test-largefiles.t
+	rm -f test-mq.t
+	if [[ "${EUID}" -eq 0 ]]; then
+		# https://bz.selenic.com/show_bug.cgi?id=4089
+		rm -f test-blackbox.t
+		rm -f test-clone.t
+		rm -f test-command-template.t
+		rm -f test-convert.t
+		rm -f test-journal-exists.t
+		rm -f test-lock-badness.t
+		rm -f test-permissions.t
+		rm -f test-phases-exchange.t
+		rm -f test-pull-permission.t
+		rm -f test-repair-strip.t
+		rm -f test-serve.t
 	fi
+	popd > /dev/null || die
 
 	testing() {
 		local testdir="${T}/tests-${PYTHON_ABI}"
-		rm -rf "${testdir}" || die
-		"$(PYTHON)" run-tests.py --tmpdir="${testdir}"
+		python_execute "$(PYTHON)" setup.py build -b build-${PYTHON_ABI} install --root="${testdir}"
+		cd tests || die
+		rm -fr "${testdir}/tests"
+		python_execute PYTHONPATH="${testdir}$(python_get_sitedir)" "$(PYTHON)" run-tests.py \
+			--tmpdir="${testdir}/tests" \
+			--verbose \
+			--with-hg="${testdir}/usr/bin/hg"
 	}
 	python_execute_function testing
 }

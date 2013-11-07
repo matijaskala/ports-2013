@@ -93,7 +93,7 @@ mate_src_unpack() {
 # Prepare environment for build, fix build of scrollkeeper documentation,
 # run elibtoolize.
 mate_src_prepare() {
-	epatch_user
+	epatch_user && eautoreconf
 	# Prevent assorted access violations and test failures
 	mate_environment_reset
 
