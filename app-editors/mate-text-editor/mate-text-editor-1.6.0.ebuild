@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="python spell"
 
-# Failed tests:https://github.com/mate-desktop/mate-text-editor/issues/33
+# Tests require gvfs sftp fs mounted and schema's installed. Disable tests.
+# https://github.com/mate-desktop/mate-text-editor/issues/33
 RESTRICT="test"
 
 

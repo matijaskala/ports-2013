@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/xmind/xmind-3.3.1.201212250029.ebuild,v 1.6 2013/07/08 02:10:42 creffett Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-misc/xmind/xmind-3.3.1.201212250029.ebuild,v 1.7 2013/11/08 18:03:57 creffett Exp $
 
 EAPI=5
 
@@ -40,7 +40,7 @@ src_configure() {
 		XDIR="XMind_Linux"
 	fi
 	mv -v "$XDIR" XMind || die
-	mv -v XMind/.eclipseproduct XMind/configuration Commons || die
+	mv -v XMind/.eclipseproduct  Commons/ || die
 
 	# force data instance & config area to be at home/.xmind directory
 	sed -i -e '/-configuration/d' \

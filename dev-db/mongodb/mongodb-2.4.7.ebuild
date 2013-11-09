@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/mongodb/mongodb-2.4.7.ebuild,v 1.2 2013/10/28 14:30:33 ultrabug Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-db/mongodb/mongodb-2.4.7.ebuild,v 1.3 2013/11/06 14:25:37 ultrabug Exp $
 
 EAPI=4
 SCONS_MIN_VERSION="1.2.0"
@@ -23,7 +23,7 @@ PDEPEND="mms-agent? ( dev-python/pymongo app-arch/unzip )"
 RDEPEND="
 	>=dev-libs/boost-1.50[threads(+)]
 	dev-libs/libpcre[cxx]
-	dev-util/google-perftools
+	dev-util/google-perftools[-minimal]
 	net-libs/libpcap
 	app-arch/snappy
 	ssl? ( >=dev-libs/openssl-1.0.1c )"

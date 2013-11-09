@@ -12,7 +12,7 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="amd64 arm ppc ppc64 x86"
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
 	keymap +kmod lzma openrc pam policykit python qrcode selinux static-libs
 	tcpd test vanilla xattr"
@@ -77,9 +77,9 @@ pkg_pretend() {
 	# and see which path to systemd was used (if any)
 	local init_path
 	IFS= read -r -d '' init_path < /proc/1/cmdline
-	if [[ ${init_path} == */bin/systemd ]]; then
+	if [[ ${init_path} == */bin/systemd && -e ${init_path} ]]; then
 		eerror "You are using a compatibility symlink to run systemd. The symlink"
-		eerror "has been removed. Please update your bootloader to use:"
+		eerror "is going to be removed. Please update your bootloader to use:"
 		eerror
 		eerror "	init=/usr/lib/systemd/systemd"
 		eerror

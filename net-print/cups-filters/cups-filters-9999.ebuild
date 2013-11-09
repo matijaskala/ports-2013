@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/cups-filters/cups-filters-9999.ebuild,v 1.41 2013/08/27 15:27:57 kensington Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/cups-filters/cups-filters-9999.ebuild,v 1.42 2013/11/04 23:21:09 dilfridge Exp $
 
 EAPI=5
 
@@ -92,15 +92,14 @@ src_install() {
 	prune_libtool_files --all
 
 	cp "${FILESDIR}"/cups-browsed.init.d "${T}"/cups-browsed || die
-	cp "${FILESDIR}/cups-browsed.service" "${T}"/ || die
 
 	if ! use zeroconf ; then
 		sed -i -e 's:need cupsd avahi-daemon:need cupsd:g' "${T}"/cups-browsed || die
-		sed -i -e 's:cups\.service avahi-daemon\.service:cups.service:g' "${T}"/cups-browsed.service || die
+		sed -i -e 's:cups\.service avahi-daemon\.service:cups.service:g' "${S}"/utils/cups-browsed.service || die
 	fi
 
 	doinitd "${T}"/cups-browsed
-	systemd_dounit "${T}/cups-browsed.service"
+	systemd_dounit "${S}/utils/cups-browsed.service"
 }
 
 pkg_postinst() {

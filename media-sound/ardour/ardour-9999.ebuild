@@ -1,19 +1,20 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.2 2013/10/28 18:50:02 nativemad Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.5 2013/11/08 12:34:31 nativemad Exp $
 
 EAPI=4
-inherit eutils git-2 toolchain-funcs flag-o-matic waf-utils
+inherit eutils toolchain-funcs flag-o-matic waf-utils
 
 DESCRIPTION="Digital Audio Workstation"
 HOMEPAGE="http://ardour.org/"
-EGIT_REPO_URI="git://git.ardour.org/ardour/ardour.git"
 
 if [ ${PV} = 9999 ]; then
 	KEYWORDS=""
+	EGIT_REPO_URI="http://git.ardour.org/ardour/ardour.git"
+	inherit git-2
 else
-	EGIT_COMMIT="${PV}"
 	KEYWORDS="~amd64 ~x86"
+	SRC_URI="https://github.com/Ardour/ardour/archive/${PV}.zip -> ${P}.zip"
 fi
 
 LICENSE="GPL-2"
@@ -56,20 +57,35 @@ RDEPEND="media-libs/aubio
 		media-libs/sratom
 		dev-libs/sord
 		>=media-libs/suil-0.6.10
-
+		>=media-libs/lv2-1.4.0
 	)"
 
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )
 	doc? ( app-doc/doxygen[dot] )"
+	if ! [ ${PV} = 9999 ]; then
+		DEPEND="${DEPEND}
+		app-arch/unzip"
+	fi
 
 src_unpack() {
-	git-2_src_unpack
+	if [ ${PV} = 9999 ]; then
+		git-2_src_unpack
+	else
+		unpack ${A}
+	fi
 }
 
 src_prepare(){
-	epatch "${FILESDIR}"/${PN}-3.5-syslibs.patch
+	if ! [ ${PV} = 9999 ]; then
+		PVTEMP=`echo "${PV}" | sed "s/\./-/2"`
+		sed -e '/cmd = "git describe HEAD/,/utf-8/{s:cmd = \"git describe HEAD\":rev = \"'${PVTEMP}-gentoo'\":p;d}' -i "${S}"/wscript
+		sed -e 's/'os.getcwd\(\),\ \'.git'/'os.getcwd\(\),\ \'libs/'' -i "${S}"/wscript
+		sed -e 's/'os.path.exists\(\'.git'/'os.path.exists\(\'wscript/'' -i "${S}"/wscript
+
+	fi
+	epatch "${FILESDIR}"/${PN}-3.5.7-syslibs.patch
 	sed 's/python/python2/' -i waf
 }
 
@@ -93,4 +109,9 @@ src_install() {
 	doman ${PN}${SLOT}.1
 	newicon icons/icon/ardour_icon_mac.png ${PN}${SLOT}.png
 	make_desktop_entry ardour3 ardour3 ardour3 AudioVideo
+}
+
+pkg_postinst() {
+	elog "If you are using Ardour and want to keep its development alive"
+	elog "then please consider to do a donation upstream at ardour.org. Thanks!"
 }

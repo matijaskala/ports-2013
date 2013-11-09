@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-keystoneclient/python-keystoneclient-9999.ebuild,v 1.6 2013/09/27 01:46:12 prometheanfire Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/python-keystoneclient/python-keystoneclient-9999.ebuild,v 1.8 2013/11/09 08:52:41 idella4 Exp $
 
 EAPI=5
 #restricted due to packages missing and bad depends in the test ==webob-1.0.8
@@ -53,5 +53,5 @@ PATCHES=(
 #	"${FILESDIR}/0.2.3-CVE-2013-2104.patch"
 
 python_test() {
-	${PYTHON} setup.py nosetests || die
+	nosetests || die "testsuite failed"
 }
