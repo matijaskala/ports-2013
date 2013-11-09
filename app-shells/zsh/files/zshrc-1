@@ -18,6 +18,9 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${TERM//[^[:alnum:]]/?}* ]]; then
 	promptinit
 	prompt gentoo
 
+	bindkey ${terminfo[khome]} beginning-of-line
+	bindkey ${terminfo[kend]} end-of-line
+
 	alias ls='ls --color=auto'
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'

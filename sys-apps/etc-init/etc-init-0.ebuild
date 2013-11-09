@@ -14,9 +14,13 @@ KEYWORDS="*"
 IUSE="+bindist"
 DEPEND="!bindist? ( sys-apps/busybox:=[static] )"
 
+src_compile() {
+	emake
+}
+
 src_install() {
 	dodir /etc
-	cp -pPR ${S}/* ${D}/etc/ || die
+	emake install DESTDIR=/etc
 	if ! use bindist; then
 		rm ${D}/etc/bin/busybox || die
 		[[ -x /bin/busybox ]] && cp /bin/busybox ${D}/etc/bin/busybox || die "/bin/busybox is not executable"
