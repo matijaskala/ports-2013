@@ -44,7 +44,8 @@ IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system
 # More URIs appended below...
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
-	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz"
+	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
+	https://launchpad.net/ubuntu/saucy/+source/${PN}/25.0+build3-0ubuntu0.13.10.1/+files/${PN}_25.0+build3-0ubuntu0.13.10.1.debian.tar.gz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -143,6 +144,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	epatch "${WORKDIR}/debian/patches/unity-menubar.patch"
 	# Apply our patches
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \
