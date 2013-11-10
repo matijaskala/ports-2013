@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare setup test
+DEPEND=dev-libs/ferrisloki x11-libs/qscintilla dev-qt/qtgui:4 dev-qt/qtsql:4[mysql?,postgres?] dev-qt/qtxmlpatterns:4 oci8-instant-client? ( dev-db/oracle-instantclient-basic dev-db/oracle-instantclient-sqlplus ) postgres? ( dev-db/postgresql-server ) sys-devel/make >=dev-util/cmake-2.8.9 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=TOra - Toolkit For Oracle
+EAPI=2
+HOMEPAGE=http://tora.sourceforge.net
+IUSE=debug mysql oracle oci8-instant-client postgres
+KEYWORDS=amd64 ~ppc ~x86
+LICENSE=GPL-2
+RDEPEND=dev-libs/ferrisloki x11-libs/qscintilla dev-qt/qtgui:4 dev-qt/qtsql:4[mysql?,postgres?] dev-qt/qtxmlpatterns:4 oci8-instant-client? ( dev-db/oracle-instantclient-basic dev-db/oracle-instantclient-sqlplus ) postgres? ( dev-db/postgresql-server )
+SLOT=0
+SRC_URI=mirror://sourceforge/tora/tora-2.1.3.tar.gz
+_eclasses_=cmake-utils	930116ef213eb319525fd8e27b0095ef	eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28
+_md5_=9656b877ed064343685deda590f3a71a

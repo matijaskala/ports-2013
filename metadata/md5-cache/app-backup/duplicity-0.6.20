@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=net-libs/librsync app-crypt/gnupg =dev-lang/python-2*
+DESCRIPTION=Secure backup system using gnupg to encrypt data
+EAPI=4
+HOMEPAGE=http://www.nongnu.org/duplicity/
+IUSE=s3
+KEYWORDS=amd64 ppc ~sparc x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos
+LICENSE=GPL-3
+RDEPEND=net-libs/librsync app-crypt/gnupg dev-python/paramiko >=dev-python/pexpect-2.1 s3? ( dev-python/boto ) =dev-lang/python-2*
+SLOT=0
+SRC_URI=http://code.launchpad.net/duplicity/0.6-series/0.6.20/+download/duplicity-0.6.20.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=302e9dc1e3ecc13731eb69b53845123e

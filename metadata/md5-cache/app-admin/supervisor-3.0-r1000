@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup test
+DEPEND=dev-python/meld3[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/setuptools[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] doc? ( dev-python/sphinx[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) test? ( dev-python/mock[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) python_abis_2.5? ( dev-lang/python:2.5[xml] ) python_abis_2.6? ( dev-lang/python:2.6[xml] ) python_abis_2.7? ( dev-lang/python:2.7[xml] ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 ) app-arch/tar app-arch/gzip
+DESCRIPTION=A system for controlling process state under UNIX
+EAPI=5-progress
+HOMEPAGE=http://supervisord.org/ https://pypi.python.org/pypi/supervisor
+IUSE=doc test python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=*
+LICENSE=BSD GPL-2 HPND repoze ZPL
+RDEPEND=dev-python/meld3[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/setuptools[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] python_abis_2.5? ( dev-lang/python:2.5[xml] ) python_abis_2.6? ( dev-lang/python:2.6[xml] ) python_abis_2.7? ( dev-lang/python:2.7[xml] ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://pypi/s/supervisor/supervisor-3.0.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738	python-namespaces	f3a539ac017667aa9b76ede9224b6e3b
+_md5_=8d943d97629c04ab502c98af96682372

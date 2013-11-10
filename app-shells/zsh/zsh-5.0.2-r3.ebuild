@@ -140,6 +140,9 @@ src_install() {
 	doins "${T}"/zshrc
 	doins "${T}"/zprofile
 
+	insinto /etc/skel
+	newins "${FILESDIR}"/zshrc-2 .zshrc
+
 	keepdir /usr/share/zsh/site-functions
 	insinto /usr/share/zsh/${PV%_*}/functions/Prompts
 	newins "${FILESDIR}"/prompt_gentoo_setup-1 prompt_gentoo_setup

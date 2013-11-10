@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup test
+DEPEND=( python_abis_2.6? ( dev-python/imaging[python_abis_2.6] ) python_abis_2.7? ( dev-python/imaging[python_abis_2.7] ) python_abis_2.7-pypy-1.9? ( dev-python/imaging[python_abis_2.7-pypy-1.9] ) python_abis_2.7-pypy-2.0? ( dev-python/imaging[python_abis_2.7-pypy-2.0] ) ) media-fonts/ttf-bitstream-vera media-libs/libart_lgpl:0= sys-libs/zlib:0= python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 ) app-arch/tar app-arch/gzip
+DESCRIPTION=Tools for generating printable PDF documents from any data source.
+EAPI=5-progress
+HOMEPAGE=http://www.reportlab.com/software/opensource/rl-toolkit/ https://pypi.python.org/pypi/reportlab
+IUSE=doc examples test python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=*
+LICENSE=BSD
+RDEPEND=( python_abis_2.6? ( dev-python/imaging[python_abis_2.6] ) python_abis_2.7? ( dev-python/imaging[python_abis_2.7] ) python_abis_2.7-pypy-1.9? ( dev-python/imaging[python_abis_2.7-pypy-1.9] ) python_abis_2.7-pypy-2.0? ( dev-python/imaging[python_abis_2.7-pypy-2.0] ) ) media-fonts/ttf-bitstream-vera media-libs/libart_lgpl:0= sys-libs/zlib:0= python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=http://www.reportlab.com/ftp/reportlab-2.7.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	python	9ffa83b7b864edd2fa5dd6ebe4a63738	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=07ec8564aafcd678c66ad6745e8ff7b1

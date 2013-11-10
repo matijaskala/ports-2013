@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=dev-python/ply dev-python/progressbar doc? ( dev-libs/libxslt ) =dev-lang/python-2* =dev-lang/python-2*[sqlite]
+DESCRIPTION=package management tool for OpenEmbedded
+EAPI=3
+HOMEPAGE=http://developer.berlios.de/projects/bitbake/
+IUSE=doc
+KEYWORDS=amd64 ppc x86
+LICENSE=GPL-2
+RDEPEND=dev-python/ply dev-python/progressbar =dev-lang/python-2* =dev-lang/python-2*[sqlite]
+SLOT=0
+SRC_URI=http://cgit.openembedded.org/cgit.cgi/bitbake/snapshot/bitbake-1.14.0.tar.bz2
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=4a4c9d324bcf36310826e0a0de5817ee

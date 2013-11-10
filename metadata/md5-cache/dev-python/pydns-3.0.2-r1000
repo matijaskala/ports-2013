@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=!dev-python/py3dns !dev-python/pydns:python-3 virtual/libiconv python_abis_3.1? ( dev-lang/python:3.1 ) python_abis_3.2? ( dev-lang/python:3.2 ) python_abis_3.3? ( dev-lang/python:3.3 ) python_abis_3.4? ( dev-lang/python:3.4 ) app-arch/tar app-arch/gzip
+DESCRIPTION=Python module for DNS (Domain Name Service)
+EAPI=5-progress
+HOMEPAGE=http://pydns.sourceforge.net/ https://pypi.python.org/pypi/pydns
+IUSE=examples python_abis_3.1 python_abis_3.2 python_abis_3.3 python_abis_3.4
+KEYWORDS=*
+LICENSE=CNRI
+RDEPEND=!dev-python/py3dns !dev-python/pydns:python-3 python_abis_3.1? ( dev-lang/python:3.1 ) python_abis_3.2? ( dev-lang/python:3.2 ) python_abis_3.3? ( dev-lang/python:3.3 ) python_abis_3.4? ( dev-lang/python:3.4 )
+REQUIRED_USE=|| ( python_abis_3.1 python_abis_3.2 python_abis_3.3 python_abis_3.4 )
+SLOT=3
+SRC_URI=mirror://sourceforge/pydns/py3dns-3.0.2.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=bb04467772f8907de9d34336f8b2e355

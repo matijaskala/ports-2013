@@ -20,7 +20,7 @@ RDEPEND=">=mate-base/libmatekbd-1.7.0
 	>=mate-base/caja-1.7.0
 	>=x11-themes/mate-backgrounds-1.6.0
 	>=mate-base/mate-menus-1.6.0
-	>=x11-wm/marco-1.7.0
+	>=x11-wm/mate-window-manager-1.6.0
 	>=mate-extra/mate-polkit-1.7.0
 	>=mate-base/mate-settings-daemon-1.7.0
 	>=mate-base/mate-control-center-1.6.0

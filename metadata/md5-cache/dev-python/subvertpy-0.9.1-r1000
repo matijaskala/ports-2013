@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup test
+DEPEND=>=dev-vcs/subversion-1.4 test? ( || ( python_abis_2.6? ( dev-python/unittest2[python_abis_2.6] ) python_abis_2.6? ( dev-python/testtools[python_abis_2.6] ) ) ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 ) test? ( dev-python/nose[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) app-arch/tar app-arch/gzip
+DESCRIPTION=Alternative Python bindings for Subversion
+EAPI=5-progress
+HOMEPAGE=http://www.samba.org/~jelmer/subvertpy/ https://pypi.python.org/pypi/subvertpy
+IUSE=test python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 test
+KEYWORDS=*
+LICENSE=|| ( LGPL-2.1 LGPL-3 )
+RDEPEND=>=dev-vcs/subversion-1.4 python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=http://www.samba.org/~jelmer/subvertpy/subvertpy-0.9.1.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=9f7f3523ddec200634c6954c3fa76b30
