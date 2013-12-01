@@ -353,6 +353,20 @@ _git-r3_smart_fetch() {
 	return ${main_ret}
 }
 
+# @FUNCTION: _git-r3_is_local_repo
+# @USAGE: <repo-uri>
+# @INTERNAL
+# @DESCRIPTION:
+# Determine whether the given URI specifies a local (on-disk)
+# repository.
+_git-r3_is_local_repo() {
+	debug-print-function ${FUNCNAME} "$@"
+
+	local uri=${1}
+
+	[[ ${uri} == file://* || ${uri} == /* ]]
+}
+
 # @FUNCTION: git-r3_fetch
 # @USAGE: [<repo-uri> [<remote-ref> [<local-id>]]]
 # @DESCRIPTION:
@@ -438,6 +452,10 @@ git-r3_fetch() {
 		if [[ ! ${ref[0]} ]]; then
 			nonshallow=1
 		fi
+
+		# trying to do a shallow clone of a local repo makes git try to
+		# write to the repo. we don't want that to happen.
+		_git-r3_is_local_repo "${r}" && nonshallow=1
 
 		# 1. if we need a non-shallow clone and we have a shallow one,
 		#    we need to unshallow it explicitly.

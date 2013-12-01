@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/gucharmap/Attic/gucharmap-2.32.1.ebuild,v 1.10 2012/11/16 07:34:04 pacho dead $
+# $Header: $
 
 EAPI="5"
 MATE_LA_PUNT="yes"
@@ -44,4 +44,3 @@ src_prepare() {
 	sed -i 's/gucharmap/mucharmap/g' po/POTFILES.in || die
 	mate_src_prepare
 }
-

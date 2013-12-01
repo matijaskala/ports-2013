@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -7,7 +7,7 @@ GCONF_DEBUG="yes"
 MATE_LA_PUNT="yes"
 PYTHON_DEPEND="python? 2:2.5"
 
-inherit mate multilib python
+inherit mate multilib python virtualx
 
 DESCRIPTION="Pluma text editor for the MATE desktop"
 HOMEPAGE="http://mate-desktop.org"
@@ -20,7 +20,6 @@ IUSE="gtk3 python spell"
 # Tests require gvfs sftp fs mounted and schema's installed. Disable tests.
 # https://github.com/mate-desktop/mate-text-editor/issues/33
 RESTRICT="test"
-
 
 RDEPEND=">=x11-libs/libSM-1.0
 	>=dev-libs/libxml2-2.5.0:2
@@ -63,6 +62,14 @@ pkg_setup() {
 src_prepare() {
 	mate_src_prepare
 	use python && python_clean_py-compile_files
+}
+
+src_test() {
+	# FIXME: this should be handled at eclass level
+	"${EROOT}${GLIB_COMPILE_SCHEMAS}" --allow-any-name "${S}/data" || die
+
+	unset DBUS_SESSION_BUS_ADDRESS
+	GSETTINGS_SCHEMA_DIR="${S}/data" Xemake check
 }
 
 pkg_postinst() {

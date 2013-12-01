@@ -21,7 +21,7 @@ RDEPEND=">=dev-libs/glib-2.28.0:2
 			dev-libs/libunique:3 )
 	!gtk3? ( x11-libs/gtk+:2
 			dev-libs/libunique:1 )
-	>=mate-base/mate-desktop-1.7.1
+	>=mate-base/mate-desktop-1.7.1[gtk3?]
 	>=x11-libs/pango-1.1.2
 	x11-libs/gtk+:2[introspection?]
 	>=gnome-base/gvfs-1.10.1

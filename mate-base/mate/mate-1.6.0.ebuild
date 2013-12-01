@@ -3,6 +3,7 @@
 # $Header: $
 
 EAPI="5"
+inherit multilib
 
 DESCRIPTION="Meta ebuild for MATE, The traditional desktop environment"
 HOMEPAGE="http://mate-desktop.org"

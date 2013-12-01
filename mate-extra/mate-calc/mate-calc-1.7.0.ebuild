@@ -1,11 +1,11 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI="5"
 GCONF_DEBUG="no"
 
-inherit mate eutils autotools
+inherit mate eutils
 
 DESCRIPTION="A calculator application for MATE"
 HOMEPAGE="http://mate-desktop.org"

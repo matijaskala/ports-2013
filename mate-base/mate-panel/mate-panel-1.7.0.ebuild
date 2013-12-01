@@ -19,15 +19,16 @@ IUSE="gtk3 +introspection networkmanager"
 
 RDEPEND="
 	gtk3? ( x11-libs/gtk+:3[introspection?]
-			x11-libs/libwnck:3[introspection?] )
+			x11-libs/libwnck:3[introspection?]
+			>=media-libs/libcanberra-0.23[gtk3] )
 	!gtk3? ( x11-libs/gtk+:2[introspection?]
-			x11-libs/libwnck:1[introspection?] )
-	>=mate-base/mate-desktop-1.7.0
+			x11-libs/libwnck:1[introspection?]
+			>=media-libs/libcanberra-0.23[gtk] )
+	>=mate-base/mate-desktop-1.7.0[gtk3?]
 	>=x11-libs/pango-1.15.4[introspection?]
 	>=dev-libs/glib-2.25.12:2
-	>=dev-libs/libmateweather-1.7.0
+	>=dev-libs/libmateweather-1.7.0[gtk3?]
 	dev-libs/libxml2:2
-	>=media-libs/libcanberra-0.23[gtk]
 	>=mate-base/mate-menus-1.5.0
 	gnome-base/librsvg:2
 	>=dev-libs/dbus-glib-0.80

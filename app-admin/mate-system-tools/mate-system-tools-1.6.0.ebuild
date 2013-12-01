@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $
+# $Header: $
 
 EAPI="5"
 GCONF_DEBUG="no"
 MATE_LA_PUNT="yes"
 
-inherit autotools eutils mate
+inherit eutils mate
 
 DESCRIPTION="Tools aimed to make easy the administration of UNIX systems"
 HOMEPAGE="http://mate-desktop.org"

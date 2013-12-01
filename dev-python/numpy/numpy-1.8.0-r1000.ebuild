@@ -11,7 +11,7 @@ FORTRAN_NEEDED="lapack"
 inherit distutils eutils flag-o-matic fortran-2 multilib toolchain-funcs
 
 MY_P="${PN}-${PV/_/}"
-DOC_PV="1.7.0"
+DOC_PV="1.8.0"
 DOC_P="${PN}-${DOC_PV}"
 
 DESCRIPTION="Fast array and numerical python library"
@@ -139,8 +139,10 @@ src_install() {
 	}
 	python_execute_function -q delete_txt
 
-	docinto f2py
-	dodoc numpy/f2py/docs/*.txt
+	(
+		docinto f2py
+		dodoc numpy/f2py/docs/*.txt
+	)
 	doman numpy/f2py/f2py.1
 
 	if use doc; then

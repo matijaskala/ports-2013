@@ -26,8 +26,9 @@ LICENSE="BSD-2"
 SLOT="0"
 IUSE="python static-libs zlib"
 
-RDEPEND="zlib? ( sys-libs/zlib:0= )"
-DEPEND="${RDEPEND}"
+DEPEND="zlib? ( sys-libs/zlib:0= )"
+RDEPEND="${DEPEND}
+	python? ( !!dev-python/python-magic )"
 
 PYTHON_MODULES="magic.py"
 

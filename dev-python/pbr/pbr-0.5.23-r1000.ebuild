@@ -16,7 +16,8 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-DEPEND="$(python_abi_depend dev-python/setuptools)"
+DEPEND="$(python_abi_depend dev-python/pip)
+	$(python_abi_depend dev-python/setuptools)"
 RDEPEND="${DEPEND}"
 
 src_install() {

@@ -1,11 +1,14 @@
+#init prompt
 autoload -U promptinit
 promptinit
+#set up default gentoo prompt
 prompt gentoo
 
+#enable emacs mode
 bindkey -e
 
+#set up keys
 typeset -A key
-
 key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
 key[Insert]=${terminfo[kich1]}
@@ -16,7 +19,6 @@ key[Left]=${terminfo[kcub1]}
 key[Right]=${terminfo[kcuf1]}
 key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
-
 [[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
 [[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
 [[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
@@ -28,6 +30,13 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   history-beginning-search-backward
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" history-beginning-search-forward
 
+#enable history saving
+export HISTSIZE=200
+export HISTFILE="$HOME/.history"
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+
+#some aliases
 alias l='ls -F'
 alias la='ls -A'
 alias ll='ls -alF'

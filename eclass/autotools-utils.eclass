@@ -190,22 +190,22 @@ EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_test
 # Determine using IN or OUT source build
 _check_build_dir() {
 	: ${ECONF_SOURCE:=${S}}
-	if [[ -n ${AUTOTOOLS_IN_SOURCE_BUILD} ]]; then
-		BUILD_DIR="${ECONF_SOURCE}"
+	# Respect both the old variable and the new one, depending
+	# on which one was set by the ebuild.
+	if [[ ! ${BUILD_DIR} && ${AUTOTOOLS_BUILD_DIR} ]]; then
+		eqawarn "The AUTOTOOLS_BUILD_DIR variable has been renamed to BUILD_DIR."
+		eqawarn "Please migrate the ebuild to use the new one."
+
+		# In the next call, both variables will be set already
+		# and we'd have to know which one takes precedence.
+		_RESPECT_AUTOTOOLS_BUILD_DIR=1
+	fi
+
+	if [[ ${_RESPECT_AUTOTOOLS_BUILD_DIR} ]]; then
+		BUILD_DIR=${AUTOTOOLS_BUILD_DIR:-${WORKDIR}/${P}_build}
 	else
-		# Respect both the old variable and the new one, depending
-		# on which one was set by the ebuild.
-		if [[ ! ${BUILD_DIR} && ${AUTOTOOLS_BUILD_DIR} ]]; then
-			eqawarn "The AUTOTOOLS_BUILD_DIR variable has been renamed to BUILD_DIR."
-			eqawarn "Please migrate the ebuild to use the new one."
-
-			# In the next call, both variables will be set already
-			# and we'd have to know which one takes precedence.
-			_RESPECT_AUTOTOOLS_BUILD_DIR=1
-		fi
-
-		if [[ ${_RESPECT_AUTOTOOLS_BUILD_DIR} ]]; then
-			BUILD_DIR=${AUTOTOOLS_BUILD_DIR:-${WORKDIR}/${P}_build}
+		if [[ -n ${AUTOTOOLS_IN_SOURCE_BUILD} ]]; then
+			: ${BUILD_DIR:=${ECONF_SOURCE}}
 		else
 			: ${BUILD_DIR:=${WORKDIR}/${P}_build}
 		fi
@@ -287,84 +287,6 @@ remove_libtool_files() {
 		if [[ ${removing} ]]; then
 			einfo "Removing unnecessary ${f#${D%/}} (${removing})"
 			rm -f "${f}" || die
-		fi
-	done
-}
-
-# @FUNCTION: autotools-utils_autoreconf
-# @DESCRIPTION:
-# Reconfigure the sources (like gnome-autogen.sh or eautoreconf).
-autotools-utils_autoreconf() {
-	debug-print-function ${FUNCNAME} "$@"
-
-	eqawarn "The autotools-utils_autoreconf() function was deprecated."
-	eqawarn "Please call autotools-utils_src_prepare()"
-	eqawarn "with AUTOTOOLS_AUTORECONF set instead."
-
-	# Override this func to not require unnecessary eaclocal calls.
-	autotools_check_macro() {
-		local x
-
-		# Add a few additional variants as we don't get expansions.
-		[[ ${1} = AC_CONFIG_HEADERS ]] && set -- "${@}" \
-			AC_CONFIG_HEADER AM_CONFIG_HEADER
-
-		for x; do
-			grep -h "^${x}" configure.{ac,in} 2>/dev/null
-		done
-	}
-
-	einfo "Autoreconfiguring '${PWD}' ..."
-
-	local auxdir=$(sed -n -e 's/^AC_CONFIG_AUX_DIR(\(.*\))$/\1/p' \
-			configure.{ac,in} 2>/dev/null)
-	if [[ ${auxdir} ]]; then
-		auxdir=${auxdir%%]}
-		mkdir -p ${auxdir##[}
-	fi
-
-	# Support running additional tools like gnome-autogen.sh.
-	# Note: you need to add additional depends to the ebuild.
-
-	# gettext
-	if [[ $(autotools_check_macro AM_GLIB_GNU_GETTEXT) ]]; then
-		echo 'no' | autotools_run_tool glib-gettextize --copy --force
-	elif [[ $(autotools_check_macro AM_GNU_GETTEXT) ]]; then
-		eautopoint --force
-	fi
-
-	# intltool
-	if [[ $(autotools_check_macro AC_PROG_INTLTOOL IT_PROG_INTLTOOL) ]]
-	then
-		autotools_run_tool intltoolize --copy --automake --force
-	fi
-
-	# gtk-doc
-	if [[ $(autotools_check_macro GTK_DOC_CHECK) ]]; then
-		autotools_run_tool gtkdocize --copy
-	fi
-
-	# gnome-doc
-	if [[ $(autotools_check_macro GNOME_DOC_INIT) ]]; then
-		autotools_run_tool gnome-doc-prepare --copy --force
-	fi
-
-	if [[ $(autotools_check_macro AC_PROG_LIBTOOL AM_PROG_LIBTOOL LT_INIT) ]]
-	then
-		_elibtoolize --copy --force --install
-	fi
-
-	eaclocal
-	eautoconf
-	eautoheader
-	FROM_EAUTORECONF=sure eautomake
-
-	local x
-	for x in $(autotools_check_macro_val AC_CONFIG_SUBDIRS); do
-		if [[ -d ${x} ]] ; then
-			pushd "${x}" >/dev/null || die
-			autotools-utils_autoreconf
-			popd >/dev/null || die
 		fi
 	done
 }

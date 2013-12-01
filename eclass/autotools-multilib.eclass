@@ -14,6 +14,10 @@
 # when the relevant flag is enabled. Other than that, it works like
 # regular autotools-utils.
 #
+# The multilib phase functions can be overriden via defining multilib_*
+# phase functions as in multilib-minimal.eclass. In some cases you may
+# need to call the underlying autotools-utils_* phase though.
+#
 # Note that the multilib support requires out-of-source builds to be
 # enabled. Thus, it is impossible to use AUTOTOOLS_IN_SOURCE_BUILD with
 # it.
@@ -28,40 +32,74 @@ if [[ ${AUTOTOOLS_IN_SOURCE_BUILD} ]]; then
 	die "${ECLASS}: multilib support requires out-of-source builds."
 fi
 
-inherit autotools-utils multilib-build
+inherit autotools-utils eutils multilib-build multilib-minimal
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
 
+# bug #485046
+_autotools-multilib_fix_multilib_minimal() {
+	src_conf=$(declare -f multilib-minimal_src_configure)
+	src_conf=${src_conf/multilib_foreach_abi/multilib_parallel_foreach_abi}
+	eval "${src_conf}"
+}
+_autotools-multilib_fix_multilib_minimal
+
+# Note: _at_args[@] passing is a backwards compatibility measure.
+# Don't use it in new packages.
+
 autotools-multilib_src_prepare() {
 	autotools-utils_src_prepare "${@}"
+
+	[[ ${AUTOTOOLS_IN_SOURCE_BUILD} ]] && multilib_copy_sources
+}
+
+multilib_src_configure() {
+	[[ ${AUTOTOOLS_IN_SOURCE_BUILD} ]] && local ECONF_SOURCE=${BUILD_DIR}
+	autotools-utils_src_configure "${_at_args[@]}"
 }
 
 autotools-multilib_src_configure() {
-	multilib_parallel_foreach_abi autotools-utils_src_configure "${@}"
+	local _at_args=( "${@}" )
+
+	multilib-minimal_src_configure
+}
+
+multilib_src_compile() {
+	emake "${_at_args[@]}"
 }
 
 autotools-multilib_src_compile() {
-	multilib_foreach_abi autotools-utils_src_compile "${@}"
+	local _at_args=( "${@}" )
+
+	multilib-minimal_src_compile
+}
+
+multilib_src_test() {
+	autotools-utils_src_test "${_at_args[@]}"
 }
 
 autotools-multilib_src_test() {
-	multilib_foreach_abi autotools-utils_src_test "${@}"
+	local _at_args=( "${@}" )
+
+	multilib-minimal_src_test
+}
+
+multilib_src_install() {
+	emake DESTDIR="${D}" "${_at_args[@]}" install
+}
+
+multilib_src_install_all() {
+	einstalldocs
+
+	# Remove libtool files and unnecessary static libs
+	local prune_ltfiles=${AUTOTOOLS_PRUNE_LIBTOOL_FILES}
+	if [[ ${prune_ltfiles} != none ]]; then
+		prune_libtool_files ${prune_ltfiles:+--${prune_ltfiles}}
+	fi
 }
 
 autotools-multilib_src_install() {
-	autotools-multilib_secure_install() {
-		autotools-utils_src_install "${@}"
+	local _at_args=( "${@}" )
 
-		# Do multilib magic only when >1 ABI is used.
-		if [[ ${#MULTIBUILD_VARIANTS[@]} -gt 1 ]]; then
-			multilib_prepare_wrappers
-			# Make sure all headers are the same for each ABI.
-			multilib_check_headers
-		fi
-	}
-
-	multilib_foreach_abi autotools-multilib_secure_install "${@}"
-
-	# merge the wrappers
-	multilib_install_wrappers
+	multilib-minimal_src_install
 }

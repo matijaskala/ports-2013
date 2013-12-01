@@ -26,9 +26,7 @@ RDEPEND=">=dev-libs/glib-2.25.11:2
 	>=dev-libs/libxml2-2.5:2
 	x11-libs/gtk+:2[introspection?]
 	>=x11-libs/libSM-1
-	|| (
-		>=x11-themes/mate-icon-theme-1.2.0
-		>=x11-themes/hicolor-icon-theme-0.10 )
+	>=x11-themes/mate-icon-theme-1.1.0
 	>=x11-libs/cairo-1.9.10
 	>=app-text/poppler-0.14[cairo]
 	djvu? ( >=app-text/djvu-3.5.17 )

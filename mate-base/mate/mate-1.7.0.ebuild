@@ -3,6 +3,7 @@
 # $Header: $
 
 EAPI="5"
+inherit multilib
 
 DESCRIPTION="Meta ebuild for MATE, The traditional desktop environment"
 HOMEPAGE="http://mate-desktop.org"
@@ -10,22 +11,22 @@ HOMEPAGE="http://mate-desktop.org"
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="~x86 ~amd64 ~arm"
-IUSE="bluetooth +extras"
+IUSE="bluetooth gtk3 +extras"
 
-RDEPEND=">=mate-base/libmatekbd-1.7.0
-	>=dev-libs/libmateweather-1.7.0
+RDEPEND=">=mate-base/libmatekbd-1.7.0[gtk3?]
+	>=dev-libs/libmateweather-1.7.0[gtk3?]
 	>=x11-themes/mate-icon-theme-1.7.0
 	>=mate-extra/mate-dialogs-1.7.0
-	>=mate-base/mate-desktop-1.7.0
-	>=mate-base/caja-1.7.0
+	>=mate-base/mate-desktop-1.7.0[gtk3?]
+	>=mate-base/caja-1.7.0[gtk3?]
 	>=x11-themes/mate-backgrounds-1.6.0
 	>=mate-base/mate-menus-1.6.0
 	>=x11-wm/mate-window-manager-1.6.0
 	>=mate-extra/mate-polkit-1.7.0
-	>=mate-base/mate-settings-daemon-1.7.0
+	>=mate-base/mate-settings-daemon-1.7.0[gtk3?]
 	>=mate-base/mate-control-center-1.6.0
 	>=mate-base/mate-panel-1.7.0
-	>=mate-base/mate-session-manager-1.7.0
+	>=mate-base/mate-session-manager-1.7.0[gtk3?]
 	>=x11-themes/mate-themes-1.7.0
 	>=mate-extra/mate-utils-1.6.0
 	>=mate-extra/mate-media-1.6.0
@@ -35,7 +36,7 @@ RDEPEND=">=mate-base/libmatekbd-1.7.0
 	virtual/notification-daemon
 	extras? (
 		>=mate-extra/mate-power-manager-1.6.0
-		>=app-editors/mate-text-editor-1.6.0
+		>=app-editors/pluma-1.7.0
 		>=app-arch/mate-file-archiver-1.6.0
 		>=media-gfx/mate-image-viewer-1.6.0
 		>=app-text/mate-document-viewer-1.6.0

@@ -3644,7 +3644,7 @@ _python_clean_compiled_modules() {
 					py_file="${compiled_file%[co]}"
 				fi
 				if [[ "${EBUILD_PHASE}" == "postinst" ]]; then
-					[[ -f "${py_file}" && "${compiled_file}" -nt "${py_file}" ]] && continue
+					[[ -f "${py_file}" && ! "${compiled_file}" -ot "${py_file}" ]] && continue
 				else
 					[[ -f "${py_file}" ]] && continue
 				fi
@@ -3659,7 +3659,7 @@ _python_clean_compiled_modules() {
 					py_file="${compiled_file%\$py.class}.py"
 				fi
 				if [[ "${EBUILD_PHASE}" == "postinst" ]]; then
-					[[ -f "${py_file}" && "${compiled_file}" -nt "${py_file}" ]] && continue
+					[[ -f "${py_file}" && ! "${compiled_file}" -ot "${py_file}" ]] && continue
 				else
 					[[ -f "${py_file}" ]] && continue
 				fi

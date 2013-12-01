@@ -20,8 +20,8 @@ COMMON_DEPEND=">=dev-libs/dbus-glib-0.74
 	>=dev-libs/glib-2.18:2
 	gtk3? ( x11-libs/gtk+:3 )
 	!gtk3? ( x11-libs/gtk+:2 )
-	>=mate-base/libmatekbd-1.7.0
-	>=mate-base/mate-desktop-1.7.0
+	>=mate-base/libmatekbd-1.7.0[gtk3?]
+	>=mate-base/mate-desktop-1.7.0[gtk3?]
 	>=gnome-base/dconf-0.13.4
 
 	x11-libs/libX11
@@ -38,7 +38,8 @@ COMMON_DEPEND=">=dev-libs/dbus-glib-0.74
 		>=sys-apps/dbus-1.1.2 )
 	pulseaudio? (
 		>=media-sound/pulseaudio-0.9.15
-		media-libs/libcanberra[gtk] )
+		gtk3? ( media-libs/libcanberra[gtk3] )
+		!gtk3? ( media-libs/libcanberra[gtk] ) )
 	!pulseaudio? (
 		>=media-libs/gstreamer-0.10.1.2:0.10
 		>=media-libs/gst-plugins-base-0.10.1.2:0.10 )

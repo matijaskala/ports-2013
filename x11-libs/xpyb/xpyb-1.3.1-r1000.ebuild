@@ -22,6 +22,9 @@ DEPEND="${RDEPEND}"
 
 PYTHON_CFLAGS=("2.* + -fno-strict-aliasing")
 
+PATCHES=(
+	"${FILESDIR}/${P}-xcb-proto-1.9.patch"
+)
 DOCS=(NEWS README)
 
 pkg_setup() {

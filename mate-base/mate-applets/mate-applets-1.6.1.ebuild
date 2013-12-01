@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -81,8 +81,8 @@ src_test() {
 src_install() {
 	mate_src_install
 
-	local APPLETS="accessx-status battstat charpick cpufreq drivemount geyes 
-			invest-applet mateweather mini-commander mixer modemlights 
+	local APPLETS="accessx-status battstat charpick cpufreq drivemount geyes
+			invest-applet mateweather mini-commander mixer modemlights
 			multiload null_applet stickynotes timer-applet trashapplet"
 
 	for applet in ${APPLETS}; do

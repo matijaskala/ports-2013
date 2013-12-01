@@ -105,6 +105,11 @@ src_prepare() {
 		excluded_patches="*_all_crosscompile.patch"
 	fi
 
+	if [[ "${PV}" != *_pre* ]]; then
+		# Delete potential useless files.
+		find "(" -name __pycache__ -o -name "*.py[co]" ")" -print0 | xargs -0 rm -fr
+	fi
+
 	local patchset_dir
 	if [[ "${PV}" == *_pre* ]]; then
 		patchset_dir="${FILESDIR}/${SLOT}-${PATCHSET_REVISION}"

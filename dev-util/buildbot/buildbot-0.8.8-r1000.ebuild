@@ -26,10 +26,7 @@ IUSE="doc examples irc mail manhole test"
 RDEPEND="$(python_abi_depend ">=dev-python/jinja-2.1")
 	dev-python/python-dateutil
 	$(python_abi_depend dev-python/sqlalchemy)
-	|| (
-		$(python_abi_depend "=dev-python/sqlalchemy-migrate-0.7*")
-		$(python_abi_depend "=dev-python/sqlalchemy-migrate-0.6*")
-	)
+	$(python_abi_depend dev-python/sqlalchemy-migrate)
 	$(python_abi_depend dev-python/twisted-core)
 	$(python_abi_depend dev-python/twisted-web)
 	irc? ( $(python_abi_depend dev-python/twisted-words) )
