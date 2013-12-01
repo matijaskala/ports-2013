@@ -12,13 +12,13 @@ if [[ "${PV}" == *_pre* ]]; then
 	inherit mercurial
 
 	EHG_REPO_URI="http://hg.python.org/cpython"
-	EHG_REVISION="4a2afda8f187"
+	EHG_REVISION="5469e1a68dbd"
 else
 	MY_PV="${PV%_p*}"
 	MY_P="Python-${MY_PV}"
 fi
 
-PATCHSET_REVISION="20131027"
+PATCHSET_REVISION="20131117"
 
 DESCRIPTION="Python is an interpreted, interactive, object-oriented programming language."
 HOMEPAGE="http://www.python.org/"
@@ -32,28 +32,17 @@ else
 fi
 
 LICENSE="PSF-2"
-SLOT="2.7"
+SLOT="3.4"
 PYTHON_ABI="${SLOT}"
-KEYWORDS="*"
-IUSE="-berkdb build doc elibc_uclibc examples gdbm ipv6 +ncurses +readline sqlite +ssl +threads tk +wide-unicode wininst +xml"
+KEYWORDS="~*"
+IUSE="build doc elibc_uclibc examples gdbm ipv6 +ncurses +readline sqlite +ssl +threads tk wininst +xml"
 
 RDEPEND="app-arch/bzip2
+		app-arch/xz-utils
 		>=sys-libs/zlib-1.1.3
 		virtual/libffi
 		virtual/libintl
 		!build? (
-			berkdb? ( || (
-				sys-libs/db:5.3
-				sys-libs/db:5.2
-				sys-libs/db:5.1
-				sys-libs/db:5.0
-				sys-libs/db:4.8
-				sys-libs/db:4.7
-				sys-libs/db:4.6
-				sys-libs/db:4.5
-				sys-libs/db:4.4
-				sys-libs/db:4.3
-			) )
 			gdbm? ( sys-libs/gdbm[berkdb] )
 			ncurses? (
 				>=sys-libs/ncurses-5.2
@@ -69,7 +58,7 @@ RDEPEND="app-arch/bzip2
 			xml? ( >=dev-libs/expat-2.1 )
 		)"
 DEPEND="${RDEPEND}
-		$([[ "${PV}" == *_pre* ]] && echo "=${CATEGORY}/${PN}-${PV%%.*}*")
+		$([[ "${PV}" == *_pre* ]] && echo ${CATEGORY}/${PN})
 		>=sys-devel/autoconf-2.65
 		virtual/pkgconfig
 		$([[ "${PV}" =~ ^[[:digit:]]+\.[[:digit:]]+_pre ]] && echo "doc? ( dev-python/sphinx )")"
@@ -82,18 +71,6 @@ fi
 
 pkg_setup() {
 	python_pkg_setup
-
-	if use berkdb; then
-		ewarn "\"bsddb\" module is out-of-date and no longer maintained inside dev-lang/python."
-		ewarn "\"bsddb\" and \"dbhash\" modules have been additionally removed in Python 3."
-		ewarn "You should use external, still maintained \"bsddb3\" module provided by dev-python/bsddb3,"
-		ewarn "which supports both Python 2 and Python 3."
-	else
-		if has_version "=${CATEGORY}/${PN}-${PV%%.*}*[berkdb]"; then
-			ewarn "You are migrating from =${CATEGORY}/${PN}-${PV%%.*}*[berkdb] to =${CATEGORY}/${PN}-${PV%%.*}*[-berkdb]."
-			ewarn "You might need to migrate your databases."
-		fi
-	fi
 
 	if tc-is-cross-compiler && ! ROOT="/" has_version "${CATEGORY}/${PN}:${SLOT}"; then
 		die "Cross-compilation requires ${CATEGORY}/${PN}:${SLOT} installed in host system"
@@ -130,6 +107,11 @@ src_prepare() {
 		fi
 	fi
 
+	if [[ "${PV}" != *_pre* ]]; then
+		# Delete potential useless files.
+		find "(" -name __pycache__ -o -name "*.py[co]" ")" -print0 | xargs -0 rm -fr
+	fi
+
 	local patchset_dir
 	if [[ "${PV}" == *_pre* ]]; then
 		patchset_dir="${FILESDIR}/${SLOT}-${PATCHSET_REVISION}"
@@ -152,6 +134,11 @@ src_prepare() {
 		Modules/getpath.c \
 		setup.py || die "sed failed to replace @@GENTOO_LIBDIR@@"
 
+	sed -e "s/test_stty_match/_&/" -i Lib/test/test_shutil.py
+
+	# Disable ABI flags.
+	sed -e "s/ABIFLAGS=\"\${ABIFLAGS}.*\"/:/" -i configure.ac || die "sed failed"
+
 	eautoconf
 	eautoheader
 }
@@ -159,14 +146,10 @@ src_prepare() {
 src_configure() {
 	if use build; then
 		# Disable extraneous modules with extra dependencies.
-		export PYTHON_DISABLE_MODULES="dbm _bsddb gdbm _curses _curses_panel readline _sqlite3 _tkinter _elementtree pyexpat"
+		export PYTHON_DISABLE_MODULES="gdbm _curses _curses_panel readline _sqlite3 _tkinter _elementtree pyexpat"
 		export PYTHON_DISABLE_SSL="1"
 	else
-		# dbm module can be linked against berkdb or gdbm.
-		# Defaults to gdbm when both are enabled, #204343.
 		local disable
-		use berkdb   || use gdbm || disable+=" dbm"
-		use berkdb   || disable+=" _bsddb"
 		use gdbm     || disable+=" gdbm"
 		use ncurses  || disable+=" _curses _curses_panel"
 		use readline || disable+=" readline"
@@ -201,15 +184,12 @@ src_configure() {
 		use hardened && replace-flags -O3 -O2
 	fi
 
-	# Export CXX so it ends up in /usr/lib/python2.X/config/Makefile.
+	# Export CXX so it ends up in /usr/lib/python3.X/config/Makefile.
 	tc-export CXX
 
 	local dbmliborder
 	if use gdbm; then
 		dbmliborder+="${dbmliborder:+:}gdbm"
-	fi
-	if use berkdb; then
-		dbmliborder+="${dbmliborder:+:}bdb"
 	fi
 
 	ac_cv_path_PKG_CONFIG="$(tc-getPKG_CONFIG)" OPT="" econf \
@@ -217,10 +197,11 @@ src_configure() {
 		--enable-shared \
 		$(use_enable ipv6) \
 		$(use_with threads) \
-		$(use wide-unicode && echo "--enable-unicode=ucs4" || echo "--enable-unicode=ucs2") \
 		--infodir='${prefix}/share/info' \
 		--mandir='${prefix}/share/man' \
+		--with-computed-gotos \
 		--with-dbmliborder="${dbmliborder}" \
+		--without-ensurepip \
 		--with-libc="" \
 		--enable-loadable-sqlite-extensions \
 		--with-system-expat \
@@ -231,12 +212,19 @@ src_compile() {
 	if [[ "${PV}" == *_pre* ]]; then
 		emake touch || die "emake touch failed"
 	fi
-	emake EPYTHON="python${PV%%.*}" || die "emake failed"
+	emake CPPFLAGS="" CFLAGS="" LDFLAGS="" || die "emake failed"
 
 	if has_version dev-libs/libffi[pax_kernel]; then
 		pax-mark E python
 	else
 		pax-mark m python
+	fi
+
+	if use doc; then
+		einfo "Generation of documentation"
+		cd Doc
+		mkdir -p build/{doctrees,html}
+		sphinx-build -b html -d build/doctrees . build/html || die "Generation of documentation failed"
 	fi
 }
 
@@ -252,13 +240,13 @@ src_test() {
 	python_enable_pyc
 
 	# Skip failing tests.
-	local skipped_tests="distutils gdb"
+	local skipped_tests="gdb"
 
 	for test in ${skipped_tests}; do
 		mv Lib/test/test_${test}.py "${T}"
 	done
 
-	emake test EXTRATESTOPTS="-w" < /dev/tty
+	emake test EXTRATESTOPTS="-j1 -ucpu,decimal,subprocess" CPPFLAGS="" CFLAGS="" LDFLAGS="" < /dev/tty
 	local result="$?"
 
 	for test in ${skipped_tests}; do
@@ -285,23 +273,22 @@ src_install() {
 	emake DESTDIR="${D}" altinstall || die "emake altinstall failed"
 	python_clean_installation_image -q
 
-	sed -e "s/\(LDFLAGS=\).*/\1/" -i "${ED}$(python_get_libdir)/config/Makefile" || die "sed failed"
+	sed \
+		-e "s/\(CONFIGURE_LDFLAGS=\).*/\1/" \
+		-e "s/\(PY_LDFLAGS=\).*/\1/" \
+		-i "${ED}$(python_get_libdir)/config-${SLOT}/Makefile" || die "sed failed"
 
 	dosym python${SLOT}-config /usr/bin/python-config-${SLOT}
 
 	# Fix collisions between different slots of Python.
-	mv "${ED}usr/bin/2to3" "${ED}usr/bin/2to3-${SLOT}"
-	mv "${ED}usr/bin/pydoc" "${ED}usr/bin/pydoc${SLOT}"
-	mv "${ED}usr/bin/idle" "${ED}usr/bin/idle${SLOT}"
-	rm -f "${ED}usr/bin/smtpd.py"
+	rm -f "${ED}usr/$(get_libdir)/libpython3.so"
 
 	if use build; then
-		rm -fr "${ED}usr/bin/idle${SLOT}" "${ED}$(python_get_libdir)/"{bsddb,dbhash.py,idlelib,lib-tk,sqlite3,test}
+		rm -fr "${ED}usr/bin/idle${SLOT}" "${ED}$(python_get_libdir)/"{idlelib,sqlite3,test,tkinter}
 	else
-		use elibc_uclibc && rm -fr "${ED}$(python_get_libdir)/"{bsddb/test,test}
-		use berkdb || rm -fr "${ED}$(python_get_libdir)/"{bsddb,dbhash.py,test/test_bsddb*}
+		use elibc_uclibc && rm -fr "${ED}$(python_get_libdir)/test"
 		use sqlite || rm -fr "${ED}$(python_get_libdir)/"{sqlite3,test/test_sqlite*}
-		use tk || rm -fr "${ED}usr/bin/idle${SLOT}" "${ED}$(python_get_libdir)/"{idlelib,lib-tk}
+		use tk || rm -fr "${ED}usr/bin/idle${SLOT}" "${ED}$(python_get_libdir)/"{idlelib,tkinter,test/test_tk*}
 	fi
 
 	use threads || rm -fr "${ED}$(python_get_libdir)/multiprocessing"
@@ -309,8 +296,15 @@ src_install() {
 
 	dodoc Misc/{ACKS,HISTORY,NEWS} || die "dodoc failed"
 
+	if use doc; then
+		dohtml -A xml -r Doc/build/html/
+		echo "PYTHONDOCS_${SLOT//./_}=\"${EPREFIX}/usr/share/doc/${PF}/html/library\"" > "60python-docs-${SLOT}"
+		doenvd "60python-docs-${SLOT}"
+	fi
+
 	if use examples; then
 		insinto /usr/share/doc/${PF}/examples
+		find Tools -name __pycache__ -print0 | xargs -0 rm -fr
 		doins -r Tools || die "doins failed"
 	fi
 
@@ -323,7 +317,7 @@ src_install() {
 }
 
 pkg_preinst() {
-	if has_version "<${CATEGORY}/${PN}-${SLOT}" && ! has_version "${CATEGORY}/${PN}:2.7"; then
+	if has_version "<${CATEGORY}/${PN}-${SLOT}" && ! has_version ">=${CATEGORY}/${PN}-${SLOT}_alpha"; then
 		python_updater_warning="1"
 	fi
 }

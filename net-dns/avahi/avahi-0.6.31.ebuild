@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dns/avahi/avahi-0.6.30-r1.ebuild,v 1.14 2013/08/03 09:45:41 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-dns/avahi/avahi-0.6.31.ebuild,v 1.5 2013/08/03 09:45:41 mgorny Exp $
 
 EAPI="3"
 
@@ -8,7 +8,9 @@ PYTHON_DEPEND="python? 2"
 PYTHON_USE_WITH="gdbm"
 PYTHON_USE_WITH_OPT="python"
 
-inherit autotools eutils mono python multilib flag-o-matic user
+WANT_AUTOMAKE=1.11
+
+inherit autotools eutils mono python multilib flag-o-matic user systemd
 
 DESCRIPTION="System which facilitates service discovery on a local network"
 HOMEPAGE="http://avahi.org/"
@@ -16,7 +18,7 @@ SRC_URI="http://avahi.org/download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-linux"
 IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6
 kernel_linux mdnsresponder-compat mono python qt4 test utils"
 
@@ -97,13 +99,19 @@ src_prepare() {
 		doxygen_to_devhelp.xsl || die
 
 	# Make gtk utils optional
-	epatch "${FILESDIR}/${PN}-0.6.30-optional-gtk-utils.patch"
+	epatch "${FILESDIR}"/${PN}-0.6.30-optional-gtk-utils.patch
 
 	# Fix init scripts for >=openrc-0.9.0 (bug #383641)
-	epatch "${FILESDIR}/${PN}-0.6.x-openrc-0.9.x-init-scripts-fixes.patch"
+	epatch "${FILESDIR}"/${PN}-0.6.x-openrc-0.9.x-init-scripts-fixes.patch
+
+	# install-exec-local -> install-exec-hook
+	epatch "${FILESDIR}"/${P}-install-exec-hook.patch
 
 	# Drop DEPRECATED flags, bug #384743
 	sed -i -e 's:-D[A-Z_]*DISABLE_DEPRECATED=1::g' avahi-ui/Makefile.am || die
+
+	# Prevent .pyc files in DESTDIR
+	>py-compile
 
 	eautoreconf
 }
@@ -156,6 +164,7 @@ src_configure() {
 		--disable-qt3 \
 		$(use_enable qt4) \
 		$(use_enable gdbm) \
+		$(systemd_with_unitdir) \
 		${myconf}
 }
 
@@ -166,7 +175,7 @@ src_compile() {
 }
 
 src_install() {
-	emake install py_compile=true DESTDIR="${D}" || die "make install failed"
+	emake install DESTDIR="${D}" || die "make install failed"
 	use bookmarks && use python && use dbus && use gtk || \
 		rm -f "${ED}"/usr/bin/avahi-bookmarks
 
@@ -189,8 +198,11 @@ src_install() {
 		doins avahi.devhelp || die
 	fi
 
-	# Remove .la files
-	find "${D}" -name '*.la' -exec rm -f {} + || die
+	# /usr/bin/avahi-bookmarks is installed only with USE="bookmarks dbus gtk python".
+	# /usr/bin/avahi-discover is installed only with USE="dbus gtk python".
+	use dbus && use gtk && use python && python_convert_shebangs -r 2 "${ED}usr/bin"
+
+	find "${ED}" -name '*.la' -exec rm -f {} +
 }
 
 pkg_postrm() {

@@ -32,6 +32,7 @@ RDEPEND="
 	$(python_abi_depend dev-python/setuptools)
 	lapack? ( virtual/cblas virtual/lapack )"
 DEPEND="${RDEPEND}
+	>=dev-python/cython-0.19
 	lapack? ( virtual/pkgconfig )
 	test? ( $(python_abi_depend dev-python/nose) )"
 
@@ -114,6 +115,11 @@ src_prepare() {
 
 	# Disable versioning of f2py script.
 	sed -e "s/f2py_exe = 'f2py'+os.path.basename(sys.executable)\[6:\]$/f2py_exe = 'f2py'/" -i numpy/f2py/setup.py || die
+
+	# Regenerate Cython-generated files.
+	pushd numpy/random/mtrand > /dev/null
+	python_execute "$(PYTHON -f)" generate_mtrand_c.py || die "Cythonization of numpy/random/mtrand/mtrand.pyx failed"
+	popd > /dev/null
 }
 
 src_compile() {

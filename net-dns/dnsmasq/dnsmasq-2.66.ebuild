@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-dns/dnsmasq/dnsmasq-2.66.ebuild,v 1.13 2013/08/16 15:47:07 swift Exp $
 
 EAPI=5
 
@@ -114,7 +116,7 @@ src_install() {
 	dohtml *.html
 
 	newinitd "${FILESDIR}"/dnsmasq-init-r2 dnsmasq
-	newconfd "${FILESDIR}"/dnsmasq.confd-r2 dnsmasq
+	newconfd "${FILESDIR}"/dnsmasq.confd-r1 dnsmasq
 
 	insinto /etc
 	newins dnsmasq.conf.example dnsmasq.conf

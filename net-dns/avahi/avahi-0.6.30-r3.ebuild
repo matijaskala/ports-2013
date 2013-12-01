@@ -1,10 +1,13 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-dns/avahi/avahi-0.6.30-r3.ebuild,v 1.18 2013/08/03 09:45:41 mgorny Exp $
 
 EAPI="3"
 
 PYTHON_DEPEND="python? 2"
 PYTHON_USE_WITH="gdbm"
 PYTHON_USE_WITH_OPT="python"
+
 WANT_AUTOMAKE=1.11
 
 inherit autotools eutils mono python multilib flag-o-matic user
@@ -15,9 +18,9 @@ SRC_URI="http://avahi.org/download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~*"
-IUSE="+autoipd bookmarks +dbus doc gdbm gtk gtk3 howl-compat introspection ipv6
-kernel_linux mdnsresponder-compat mono python qt4 test +utils"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-linux"
+IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6
+kernel_linux mdnsresponder-compat mono python qt4 test utils"
 
 DBUS_DEPEND=">=sys-apps/dbus-0.30"
 COMMON_DEPEND=">=dev-libs/libdaemon-0.14
@@ -42,13 +45,13 @@ COMMON_DEPEND=">=dev-libs/libdaemon-0.14
 		gtk? ( >=dev-python/pygtk-2 )
 	)
 	bookmarks? (
-		dev-python/twisted
+		dev-python/twisted-core
 		dev-python/twisted-web
 	)
 	kernel_linux? ( sys-libs/libcap )"
 DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.40.5
-    virtual/pkgconfig
+	virtual/pkgconfig
 	doc? (
 		app-doc/doxygen
 		mono? ( >=virtual/monodoc-1.1.8 )
@@ -108,6 +111,7 @@ src_prepare() {
 	>py-compile
 
 	epatch "${FILESDIR}"/${P}-automake-1.11.2.patch #397477
+	epatch "${FILESDIR}"/${P}-parallel.patch #411351
 
 	eautoreconf
 }
@@ -170,7 +174,7 @@ src_compile() {
 }
 
 src_install() {
-	emake -j1 install DESTDIR="${D}" || die "make install failed"
+	emake install DESTDIR="${D}" || die "make install failed"
 	use bookmarks && use python && use dbus && use gtk || \
 		rm -f "${ED}"/usr/bin/avahi-bookmarks
 
@@ -211,11 +215,5 @@ pkg_postinst() {
 		echo
 		elog "To use avahi-autoipd to configure your interfaces with IPv4LL (RFC3927)"
 		elog "addresses, just set config_<interface>=( autoipd ) in /etc/conf.d/net!"
-	fi
-
-	if use dbus; then
-		echo
-		elog "If this is your first install of avahi please reload your dbus config"
-		elog "with /etc/init.d/dbus reload before starting avahi-daemon!"
 	fi
 }

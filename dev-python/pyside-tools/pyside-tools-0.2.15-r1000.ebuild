@@ -2,27 +2,27 @@
 #                   Arfrever Frehtes Taifersar Arahesis
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="4-python"
+EAPI="5-progress"
 CMAKE_IN_SOURCE_BUILD="1"
 PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.1 *-jython *-pypy-*"
+PYTHON_RESTRICTED_ABIS="3.1 *-jython *-pypy-*"
 PYTHON_TESTS_FAILURES_TOLERANT_ABIS="3.*"
 VIRTUALX_COMMAND="cmake-utils_src_test"
 
-inherit cmake-utils eutils python virtualx
+inherit cmake-utils eutils python vcs-snapshot virtualx
 
 DESCRIPTION="PySide development tools (lupdate, rcc, uic)"
-HOMEPAGE="http://www.pyside.org/"
-SRC_URI="http://www.pyside.org/files/${P}.tar.bz2"
+HOMEPAGE="https://qt-project.org/wiki/PySide https://github.com/PySide/Tools"
+SRC_URI="https://github.com/PySide/Tools/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="*"
 IUSE="test"
 
 RDEPEND="
-	$(python_abi_depend ">=dev-python/pyside-1.1.0-r1[X]")
-	$(python_abi_depend ">=dev-python/shiboken-1.1.0-r1")
+	$(python_abi_depend ">=dev-python/pyside-1.2.0[X]")
+	$(python_abi_depend ">=dev-python/shiboken-1.2.0")
 	>=dev-qt/qtcore-4.7.0:4
 	>=dev-qt/qtgui-4.7.0:4
 "
@@ -81,7 +81,7 @@ src_install() {
 	python_execute_function -s installation
 	python_merge_intermediate_installation_images "${T}/images"
 
-	dodoc AUTHORS ChangeLog
+	dodoc AUTHORS
 }
 
 pkg_postinst() {

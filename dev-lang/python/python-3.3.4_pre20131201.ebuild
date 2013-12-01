@@ -12,7 +12,7 @@ if [[ "${PV}" == *_pre* ]]; then
 	inherit mercurial
 
 	EHG_REPO_URI="http://hg.python.org/cpython"
-	EHG_REVISION="69f8288056eb"
+	EHG_REVISION="a239897084bf"
 else
 	MY_PV="${PV%_p*}"
 	MY_P="Python-${MY_PV}"
@@ -105,6 +105,11 @@ src_prepare() {
 				-e "s/\(#define PY_VERSION[[:space:]]\+\"\)[^\"]\+\(\"\)/\1${version_string}\2/" \
 				-i Include/patchlevel.h || die "sed failed"
 		fi
+	fi
+
+	if [[ "${PV}" != *_pre* ]]; then
+		# Delete potential useless files.
+		find "(" -name __pycache__ -o -name "*.py[co]" ")" -print0 | xargs -0 rm -fr
 	fi
 
 	local patchset_dir

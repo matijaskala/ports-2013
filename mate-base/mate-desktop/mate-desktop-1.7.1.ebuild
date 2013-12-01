@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -62,8 +62,8 @@ src_install() {
 	mate_src_install
 	# Do migrate script foo see url:
 	# https://github.com/Sabayon/mate-overlay/issues/38
-	rm ${D}/usr/share/applications/mate-conf-import.desktop || die "rm failed"
-	mkdir ${D}/usr/$(get_libdir)/mate-desktop || die "mkdir failed"
-	mv ${D}/usr/bin/mate-conf-import \
-		${D}/usr/$(get_libdir)/mate-desktop/ || die "mv failed"
+	rm "${D}"/usr/share/applications/mate-conf-import.desktop || die "rm failed"
+	mkdir "${D}"/usr/$(get_libdir)/mate-desktop || die "mkdir failed"
+	mv "${D}"/usr/bin/mate-conf-import \
+		"${D}"/usr/$(get_libdir)/mate-desktop/ || die "mv failed"
 }
