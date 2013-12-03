@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/chrony/chrony-1.29-r1.ebuild,v 1.2 2013/11/02 15:49:50 swift Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/chrony/chrony-1.29-r1.ebuild,v 1.6 2013/11/30 15:19:00 johu Exp $
 
 EAPI=5
 inherit eutils systemd toolchain-funcs
@@ -11,7 +11,7 @@ SRC_URI="http://download.tuxfamily.org/${PN}/${P/_/-}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~sparc ~x86"
+KEYWORDS="amd64 ~arm hppa ~mips ~ppc ~sparc x86"
 IUSE="caps ipv6 +readline +rtc selinux"
 
 RDEPEND="
@@ -71,8 +71,6 @@ src_install() {
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/chrony.logrotate chrony
 
-	# systemd stuff
 	systemd_newunit "${FILESDIR}"/chronyd.service-r1 chronyd.service
-	insinto $(systemd_get_utildir)/ntp-units.d/
-	doins "${FILESDIR}"/50-chrony.list
+	systemd_enable_ntpunit 50-chrony chronyd.service
 }

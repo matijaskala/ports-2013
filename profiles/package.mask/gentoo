@@ -1,6 +1,6 @@
 ####################################################################
 
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15193 2013/11/05 22:41:48 sochotnicky Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15240 2013/12/02 19:54:08 hwoarang Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,6 +30,98 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Doug Goldstein <cardoe@gentoo.org> (30 Nov 2013)
+# Masked for removal in 30 days. please upgrade to >=0.26
+<media-tv/mythtv-0.26
+<media-plugins/mythplugins-0.26
+<www-apps/mythweb-0.26
+
+# Hans de Graaff <graaff@gentoo.org> (30 Nov 2013)
+# Masked for removal in a month due to ruby18 deprecation.
+# Only available for ruby18 which is deprecated, bug 483600
+app-i18n/rskkserv
+# Only available for ruby18, maintainer needed
+app-office/rabbit
+# Only available for ruby18, no dependencies left
+dev-ruby/postgres
+
+
+# Tom Wijsman <TomWij@gentoo.org> (30 Nov 2013)
+# Mask gentoo-sources-3.12.1 as it causes sandbox violations, 3.12.2 is out now.
+=sys-kernel/gentoo-sources-3.12.1
+
+# Hans de Graaff <graaff@gentoo.org> (24 Nov 2013)
+# dev-ruby/id3lib-ruby only works with deprecated ruby 1.8.
+# media-sound/omptagger is its dependency and no longer maintained
+# upstream, bug 488676.
+dev-ruby/id3lib-ruby
+media-sound/omptagger
+
+# Johannes Huber <johu@gentoo.org> (24 Nov 2013)
+# Masked for removal in 30 days. Broken functionality.
+# See bug #438790
+kde-misc/polkit-kde-kcmodules
+
+# Matti Bickel <mabi@gentoo.org> (20 Nov 2013)
+# Outdated, beta and abondoned upstream, removal on 20131220
+dev-php/PEAR-File_PDF
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (10 Nov 2013)
+# Causes build failures, bug #492800
+=media-libs/mesa-10.0*
+
+# Andreas K. Huettel <dilfridge@gentoo.org> (19 Nov 2013)
+# Something is wrong with the distfiles, maybe caused by mirrormaster
+# overload. Please deinstall app-office/libreoffice-bin-debug for now;
+# I'm considering abandoning the debug info because of its file size.
+>=app-office/libreoffice-bin-debug-4.1.3.2
+
+# Sergey Popov <pinkbyte@gentoo.org> (14 Nov 2013)
+# Masked for testing
+~dev-util/boost-build-1.55.0
+~dev-libs/boost-1.55.0
+
+# Pawel Hajdan jr <phajdan.jr@gentoo.org> (13 Nov 2013)
+# Masked for removal in 30 days. Depends on masked dev-lang/v8, no commits
+# since 2011. See bug #429276, bug #443586, bug #443688, bug #490214.
+dev-lang/v8cgi
+
+# Pawel Hajdan jr <phajdan.jr@gentoo.org> (13 Nov 2013)
+# Masked for removal in 30 days. Does not have stable API resulting in compile
+# breakages in reverse dependencies. Combined with short release cycle (6 weeks)
+# this makes it pretty much unusable as a shared library. See bug #417879,
+# bug #420995, bug #471582, bug #477300, bug #484786, bug #490214.
+# Also, the following discussions: 
+# - http://thread.gmane.org/gmane.linux.gentoo.devel/88222
+# - http://thread.gmane.org/gmane.linux.gentoo.devel/88811
+dev-lang/v8
+
+# Matti Bickel <mabi@gentoo.org> (13 Nov 2013)
+# Now included in dev-php/phpunit, removal on 20131213
+dev-php/DBUnit
+
+# Michael Sterrett <mr_bones_@gentoo.org> (13 Nov 2010)
+# gtk+:1 and glib:1 using apps masked for removal on 20131213
+app-text/gsview
+mail-client/gbuffy
+net-print/pup
+dev-libs/libsmtp
+net-analyzer/traffic-vis
+
+# Lars Wendler <polynomial-c@gentoo.org> (12 Nov 2013)
+# Masked for removal.
+<dev-vcs/git-1.8.1.5
+
+# Mike Gilbert <floppym@gentoo.org> (12 Nov 2013)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+>=www-client/chromium-33
+
+# Ben de Groot <yngwin@gentoo.org> (11 Nov 2013)
+# Mask older roboto versions to give users a regular upgrade path
+# now that we've switched to upstream versioning
+>media-fonts/roboto-9999
 
 # Stanislav Ochotnicky (05 Nov 2013)
 # Masked for testing and waiting for #488074
@@ -62,18 +154,6 @@ kde-misc/qtrans
 # See bug #442912
 kde-misc/kio-upnp-ms
 
-# Markos Chandras <hwoarang@gentoo.org> (02 Nov 2013)
-# On behalf of Treecleaners
-# Upstream started a complete rewrite of the package
-# meaning that existing bugs will not be fixed by future
-# version bumps of the existing code.
-# It is unclear when/if the new code will be released any time
-# soon so masked for removal in 30 days.
-# The package can be re-introduced later on if the new
-# maintainer feels it is stable enough.
-# See #483588 and #473692
-app-arch/xarchiver
-
 # Lars Wendler <polynomial-c@gentoo.org> (28 Oct 2013)
 # Masked alpha releases for testing.
 =app-arch/xz-utils-5.1*
@@ -85,33 +165,6 @@ app-arch/xarchiver
 # Davide Pesavento <pesa@gentoo.org> (23 Oct 2013)
 # Some features require Qt 5.2, which is not in tree yet.
 =dev-qt/qt-creator-3*
-
-# Hans de Graaff <graaff@gentoo.org> (20 Oct 2013)
-# Mask more ruby18-only packages for removal in 30 days.
-# All of these packages no longer have dependencies on them.
-dev-ruby/amstd
-dev-ruby/markaby
-dev-ruby/pdf-writer
-dev-ruby/semacode
-
-# Hans de Graaff <graaff@gentoo.org> (19 Oct 2013)
-# Mask Rails 3.1 for removal in 30 days. This version of rails
-# is no longer supported by upstream and has known security
-# bugs: https://bugs.gentoo.org/show_bug.cgi?id=488298
-# Please update to Rails 3.2 instead.
-dev-ruby/rails:3.1
-dev-ruby/railties:3.1
-dev-ruby/activerecord:3.1
-dev-ruby/actionmailer:3.1
-dev-ruby/actionpack:3.1
-dev-ruby/activeresource:3.1
-dev-ruby/activemodel:3.1
-dev-ruby/activesupport:3.1
-dev-ruby/arel:2.1
-dev-ruby/mail:2.3
-dev-ruby/sprockets:2.0
-=dev-ruby/coffee-rails-3.1.1
-=dev-ruby/sass-rails-3.1.5
 
 # Tim Harder <radhermit@gentoo.org (18 Oct 2013)
 # Masked for testing
@@ -131,51 +184,20 @@ media-video/pyqtrailer
 # Seems to break all deps - API change?
 >=sci-libs/metis-5
 
-# Lars Wendler <polynomial-c@gentoo.org> (13 Oct 2013)
-# Masked for testing
->=sys-devel/make-4.0
-
 # Diego Elio Pettenò <flameeyes@gentoo.org> (13 Oct 2013)
 # Requires a NPN support in mod_ssl (www-server/apache) to work.
 # See #471512 for more details.
 www-apache/mod_spdy
 
-# Pacho Ramos <pacho@gentoo.org> (12 Oct 2013)
-# This meta is no longer needed, bug #480612
-# Removal in a month.
->=gnome-extra/gnome-utils-3.4
-
 # Markos Chandras <hwoarang@gentoo.org> (10 Oct 2013)
 # Masked for futher testing with various pam setups
-=x11-misc/lightdm-1.8*
-
-# Thomas Kahle <tomka@gentoo.org> (09 Oct 2013)
-# Masked for removal in 30 days.  Game library with
-# no consumers and dead upstream.  games-strategy/freeorion
-# now uses a modified internal version of this and it makes
-# no sense to keep the unbundled version around.
-dev-games/gigi
-
-# Pawel Hajdan jr <phajdan.jr@gentoo.org> (08 Oct 2013)
-# Dev channel releases are only for people who are developers or want more
-# experimental features and accept a more unstable release.
->=www-client/chromium-32
->=dev-lang/v8-3.22
+=x11-misc/lightdm-1.9*
 
 # Agostino Sarubbo <ago@gentoo.org> (23 Sep 2013)
 # Masked because of vulnerable versions
 # DO NOT REMOVE OLDER VERSIONS
 # temporarily disabled as it also breaks s390 keywording
 #<net-nds/openldap-2.4.35
-
-# Ian Stakenvicius <axs@gentoo.org> (20 Sep 2013)
-# on behalf of mozilla@gentoo.org
-# Severely outdated, no interest in maintaining,
-# only a matter of time before it breaks,
-# major QA issues with newer versions.
-# See bug #442122 for discussion
-# Masked for removal in 30 days
-www-plugins/mozplugger
 
 # Tom Wijsman <TomWij@gentoo.org> (18 Sep 2013)
 # Temporarily masked due to QA issue during attempts to unbundle dependencies;
@@ -191,55 +213,6 @@ www-plugins/mozplugger
 # - do not compile in some USE-flag combinations
 # - requires at least gcc 4.7(and possibly even 4.8 for some features)
 >=dev-libs/botan-1.11.0
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# dead on upstream since ~2006
-# fails on compile >=vdr-2.0
-# Bug #414275 #414177
-media-plugins/vdr-sysinfo
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# dead on upstream since ~2006
-# fails on compile >=vdr-2.0
-# Bug #414269 #414177
-media-plugins/vdr-taste
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# dead on upstream since ~2008
-# fails on compile >=vdr-2.0
-# Bug #414261 #414177
-media-plugins/vdr-timeline
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# dead on upstream since ~2006
-# fails on compile >=vdr-2.0
-# Bug #414257 #414177
-media-plugins/vdr-tvonscreen
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# homepage dead, src_uri dead, dead on upstream ~2007
-# fails on compile >=vdr-2.0
-# Bug #414255 #414177
-media-plugins/vdr-tvtv
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# dead on upstream since ~2004
-# fails on compile >=vdr-2.0
-# Bug #414235 #414177
-media-plugins/vdr-vdrrip
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (15 Sep 2013)
-# removal on ~15 Oct 2013
-# dead on upstream since ~2006
-# fails on compile >=vdr-2.0
-# Bug #420883 #414177
-media-plugins/vdr-prefermenu
 
 # Michał Górny <mgorny@gentoo.org> (13 Sep 2013)
 # Segfaults for me in pam_unix.so. As this makes it impossible to
@@ -296,45 +269,6 @@ virtual/perl-B-Debug
 # Silent API/ABI change; mask until seahorse is patched; bug #483414
 >=app-crypt/libsecret-0.16
 
-# Tom Wijsman <TomWij@gentoo.org> (28 Aug 2013)
-# =sys-kernel/gentoo-sources-3.8.13 is masked due to multiple security bugs:
-#
-# 1. Security Bug #475618: CVE-2013-1059:
-# Linux Kernel: Ceph: NULL Pointer Dereference Denial of Service Vulnerability
-#
-# 2. Security Bug #480200: CVE-2013-4205:
-# Linux Kernel: CLONE_NEWUSER local DoS
-#
-# 3. Security Bug #482896: From CVE-2013-2888 to CVE-2013-2899:
-# Linux Kernel: HID security flaws (Memory writes and leaks, NULL DoS, etc...)
-#
-# This kernel also contains other security bugs due to its old age (May 11).
-#
-# We advice users to upgrade to the new stable kernel 3.10.7; alternatively, if
-# necessary, users can also choose to accept keywords and accept a kernel from
-# the earlier long term stable branches (3.0.X or 3.4.Y), this might be the case
-# if you have older hardware or an unfortunate stability bug on 3.10.7.
-#
-# You can accept keywords by adding sys-kernel/gentoo-sources to the file
-# /etc/portage/package.accept_keywords after which you can run
-# `emerge sys-kernel/gentoo-sources:X.Y.Z` to select a specific LTS kernel.
-# When you choose to turn back to stable later, don't forget to remove that.
-#
-# For proprietary NVIDIA drivers users, we temporarily keep 3.9.11-r1 around
-# as some of them experience problems with the new stable kernel 3.10.7; we aim
-# to mask it in one of the next weeks when the time is right.
-#
-# References:
-#
-# - http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-1059
-# - https://secunia.com/advisories/54042/
-# - https://bugs.gentoo.org/show_bug.cgi?id=475618
-# - https://bugs.gentoo.org/show_bug.cgi?id=480200
-# - https://bugs.gentoo.org/show_bug.cgi?id=482896
-# - https://bugs.gentoo.org/buglist.cgi?quicksearch=assignee%3Asecurity%20kernel
-#
-=sys-kernel/gentoo-sources-3.8.13
-
 # Agostino Sarubbo <ago@gentoo.org> (29 Aug 2013)
 # Mask 5.1 series because the backport of the CVE-2012-5627
 # has not be done. bug #446240 comment 2
@@ -383,11 +317,6 @@ virtual/perl-B-Debug
 # broken; needs a version bump from bug #475552.
 dev-java/itext:5
 
-# Justin Lecher <jlec@gentoo.org> (11 Aug 2013)
-# Not needed anymore
-# All consumer upstreams moved away from it
-sci-libs/mccp4
-
 # Alexandre Rostovtsev <tetromino@gentoo.org> (04 Aug 2013)
 # API break, reverse dependencies need patching; bug #479458.
 >=sci-geosciences/geocode-glib-0.99.1
@@ -399,12 +328,6 @@ sci-libs/mccp4
 # Jeroen Roovers <jer@gentoo.org> (31 Jul 2013)
 # Needs >=dev-lang/lua-5.2
 ~net-analyzer/nmap-6.40
-
-# Justin Lecher <jlec@gentoo.org> (28 Jul 2013)
-# First alpha/beta for testing
-=net-im/gajim-0.16_alpha1
-=net-im/gajim-0.16_alpha2
-=net-im/gajim-0.16_beta1
 
 # Tim Harder <radhermit@gentoo.org> (26 Jul 2013)
 # Masked for testing
@@ -435,11 +358,6 @@ sci-geosciences/googleearth
 >=sys-kernel/raspberrypi-image-3.7_pre
 >=sys-kernel/raspberrypi-sources-3.7_pre
 >=sys-boot/raspberrypi-firmware-1_pre
-
-# Justin Lecher <jlec@gentoo.org> (17 Jul 2013)
-# superseeded by sci-biology/allpathslg
-# Upstream wants anybody to move over
-sci-biology/allpaths
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (11 Jul 2013)
 # pwlib/openh323 masked for removal, bugs #290062 and #290063
@@ -639,12 +557,6 @@ media-gfx/yafaray
 # Masked for testing. Is not compatible with cvsps-2 (bug #450424).
 # But can be used on it's own! Try 'cvsps --fast-export'.
 >=dev-vcs/cvsps-3
-
-# Sergei Trofimovich <slyfox@gentoo.org> (28 Dec 2012)
-# Masked as needs masked version of wxGTK:2.9:
-dev-haskell/wxc:2.9
-dev-haskell/wxcore:2.9
-dev-haskell/wxhaskell:2.9
 
 # Christian Ruppert <idl0r@gentoo.org> (22 Dec 2012)
 # Experimental
@@ -1021,16 +933,11 @@ net-misc/netcomics-cvs
 # rdep for sci-astronomy/casacore
 sci-astronomy/casa-data
 sci-astronomy/casacore
-sci-biology/picard
 =sci-electronics/qelectrotech-9999
 =sys-fs/redirfs-9999
 sys-kernel/zen-sources
 =www-plugins/google-talkplugin-9999
 ~x11-wm/openbox-9999
-
-# Federico Ferri <mescalinum@gentoo.org> (08 Aug 2009)
-# Doesn't build with Tcl 8.5, has several bugs open
-=dev-tcltk/tcl-debug-2.0
 
 # Marijn Schouten <hkBst@gentoo.org> (29 Jul 2009)
 # Masked for increasingly many problems. Upstream is flaky and hasn't released since 2005.

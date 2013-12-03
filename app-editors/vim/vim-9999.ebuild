@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/vim/vim-9999.ebuild,v 1.7 2013/10/15 23:15:36 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/vim/vim-9999.ebuild,v 1.8 2013/11/19 10:25:01 radhermit Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -25,7 +25,7 @@ HOMEPAGE="http://www.vim.org/"
 
 SLOT="0"
 LICENSE="vim"
-IUSE="X acl cscope debug gpm lua luajit minimal nls perl python ruby tcl vim-pager"
+IUSE="X acl cscope debug gpm lua luajit minimal nls perl python racket ruby selinux tcl vim-pager"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND=">=app-admin/eselect-vi-1.1
@@ -44,7 +44,9 @@ RDEPEND=">=app-admin/eselect-vi-1.1
 	)
 	perl? ( dev-lang/perl )
 	python? ( ${PYTHON_DEPS} )
+	racket? ( dev-scheme/racket )
 	ruby? ( || ( dev-lang/ruby:2.0 dev-lang/ruby:1.9 dev-lang/ruby:1.8 ) )
+	selinux? ( sys-libs/libselinux )
 	tcl? ( dev-lang/tcl )
 	X? ( x11-libs/libXt )"
 DEPEND="${RDEPEND}
@@ -78,9 +80,6 @@ src_prepare() {
 	# Fixup a script to use awk instead of nawk
 	sed -i '1s|.*|#!'"${EPREFIX}"'/usr/bin/awk -f|' "${S}"/runtime/tools/mve.awk \
 		|| die "mve.awk sed failed"
-
-	# Patch to build with ruby-1.8.0_pre5 and following
-	sed -i 's/defout/stdout/g' "${S}"/src/if_ruby.c
 
 	# Read vimrc and gvimrc from /etc/vim
 	echo '#define SYS_VIMRC_FILE "'${EPREFIX}'/etc/vim/vimrc"' >> "${S}"/src/feature.h
@@ -176,7 +175,9 @@ src_configure() {
 			--disable-luainterp \
 			--disable-perlinterp \
 			--disable-pythoninterp \
+			--disable-mzschemeinterp \
 			--disable-rubyinterp \
+			--disable-selinux \
 			--disable-tclinterp \
 			--disable-gpm"
 	else
@@ -186,8 +187,14 @@ src_configure() {
 		myconf+=" $(use_enable acl)"
 		myconf+=" $(use_enable cscope)"
 		myconf+=" $(use_enable gpm)"
+		myconf+=" $(use_enable lua luainterp)"
+		myconf+=" $(use_with luajit)"
 		myconf+=" $(use_enable nls)"
 		myconf+=" $(use_enable perl perlinterp)"
+		myconf+=" $(use_enable racket mzschemeinterp)"
+		myconf+=" $(use_enable ruby rubyinterp)"
+		myconf+=" $(use_enable selinux)"
+		myconf+=" $(use_enable tcl tclinterp)"
 
 		if use python ; then
 			if [[ ${EPYTHON} == python3* ]] ; then
@@ -200,17 +207,6 @@ src_configure() {
 		else
 			myconf+=" --disable-pythoninterp --disable-python3interp"
 		fi
-
-		myconf+=" $(use_enable lua luainterp)"
-		myconf+=" $(use_with luajit)"
-		myconf+=" $(use_enable ruby rubyinterp)"
-		myconf+=" $(use_enable tcl tclinterp)"
-
-		# tclinterp is broken; when you --enable-tclinterp flag, then
-		# the following command never returns:
-		#   VIMINIT='let OS=system("uname -s")' vim
-		# mzscheme support is currently broken. bug #91970
-		#myconf+=" $(use_enable mzscheme mzschemeinterp)"
 
 		# --with-features=huge forces on cscope even if we --disable it. We need
 		# to sed this out to avoid screwiness. (1 Sep 2004 ciaranm)
@@ -232,7 +228,6 @@ src_configure() {
 
 	econf \
 		--with-modified-by=Gentoo-${PVR} \
-		--disable-selinux \
 		${myconf}
 }
 
@@ -336,27 +331,25 @@ pkg_postinst() {
 	# Update documentation tags (from vim-doc.eclass)
 	update_vim_helptags
 
-	if use X ; then
+	if [[ -z ${REPLACING_VERSIONS} ]] ; then
+		if use X ; then
+			echo
+			elog "The 'X' USE flag enables vim <-> X communication, like"
+			elog "updating the xterm titlebar. It does not install a GUI."
+		fi
 		echo
-		elog "The 'X' USE flag enables vim <-> X communication, like"
-		elog "updating the xterm titlebar. It does not install a GUI."
+		elog "To install a GUI version of vim, use the app-editors/gvim"
+		elog "package."
+		echo
+		elog "Vim 7 includes an integrated spell checker. You need to install"
+		elog "word list files before you can use it. There are ebuilds for"
+		elog "some of these named app-vim/vim-spell-*. If your language of"
+		elog "choice is not included, please consult vim-spell.eclass for"
+		elog "instructions on how to make a package."
+		echo
+		ewarn "Note that the English word lists are no longer installed by"
+		ewarn "default."
 	fi
-	echo
-	elog "To install a GUI version of vim, use the app-editors/gvim"
-	elog "package."
-	echo
-	elog "Vim 7 includes an integrated spell checker. You need to install"
-	elog "word list files before you can use it. There are ebuilds for"
-	elog "some of these named app-vim/vim-spell-*. If your language of"
-	elog "choice is not included, please consult vim-spell.eclass for"
-	elog "instructions on how to make a package."
-	echo
-	ewarn "Note that the English word lists are no longer installed by"
-	ewarn "default."
-	echo
-
-	echo
-	elog "To see what's new in this release, use :help version${VIM_VERSION/.*/}.txt"
 
 	# Make convenience symlinks
 	update_vim_symlinks

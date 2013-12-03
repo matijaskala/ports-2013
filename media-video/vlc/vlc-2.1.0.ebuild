@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/vlc/vlc-2.1.0.ebuild,v 1.5 2013/10/27 13:24:41 tomwij Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-video/vlc/vlc-2.1.0.ebuild,v 1.9 2013/11/17 15:48:44 tomwij Exp $
 
 EAPI="5"
 
@@ -35,7 +35,7 @@ LICENSE="LGPL-2.1 GPL-2"
 SLOT="0"
 
 if [ "${PV%9999}" = "${PV}" ] ; then
-	KEYWORDS="~amd64 ~ppc -sparc ~x86 ~x86-fbsd"
+	KEYWORDS="~amd64 ~ppc -sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 else
 	KEYWORDS=""
 fi
@@ -119,7 +119,7 @@ RDEPEND="
 		projectm? ( media-libs/libprojectm:0 media-fonts/dejavu:0 )
 		pulseaudio? ( >=media-sound/pulseaudio-0.9.22:0 )
 		qt4? ( >=dev-qt/qtgui-4.6.0:4 >=dev-qt/qtcore-4.6.0:4 )
-		qt5? ( >=dev-qt/qtgui-5.1.0:5 >=dev-qt/qtcore-5.1.0:5 )
+		qt5? ( >=dev-qt/qtgui-5.1.0:5 >=dev-qt/qtcore-5.1.0:5 dev-qt/qtwidgets:5 )
 		rdp? ( net-misc/freerdp:0= )
 		samba? ( || ( >=net-fs/samba-3.4.6:0[smbclient] >=net-fs/samba-4.0.0:0[client] ) )
 		schroedinger? ( >=media-libs/schroedinger-1.0.10:0 )
@@ -141,7 +141,7 @@ RDEPEND="
 		udev? ( >=virtual/udev-142:0 )
 		upnp? ( net-libs/libupnp:0 )
 		v4l? ( media-libs/libv4l:0 )
-		vaapi? ( x11-libs/libva:0 )
+		vaapi? ( x11-libs/libva:0 virtual/ffmpeg[vaapi] )
 		vcdx? ( >=dev-libs/libcdio-0.78.2:0 >=media-video/vcdimager-0.7.22:0 )
 		vdpau? ( >=x11-libs/libvdpau-0.6:0 !<media-video/libav-9.11 )
 		vorbis? ( media-libs/libvorbis:0 )
@@ -240,6 +240,9 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.1.0-TomWij-bisected-PA-broken-underflow.patch
 	epatch "${FILESDIR}"/${PN}-2.1.0-avcodec-check-update-buffered_time-earlier-so-we-sho.patch
 	epatch "${FILESDIR}"/${PN}-2.1.0-transcode-don-t-check-drift-if-we-have-VLC_TS_INVALI.patch
+
+	# Disable avcodec checks when avcodec is not used.
+	sed -i 's/^#if LIBAVCODEC_VERSION_CHECK(.*)$/#if 0/' modules/codec/avcodec/fourcc.c || die
 
 	eautoreconf
 

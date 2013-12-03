@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/planner/planner-0.14.6_p20130520.ebuild,v 1.3 2013/06/25 16:42:58 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-office/planner/planner-0.14.6_p20130520.ebuild,v 1.5 2013/11/30 18:40:15 pacho Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -15,7 +15,7 @@ SRC_URI="http://dev.gentoo.org/~eva/distfiles/${PN}/${P}.tar.xz"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~ppc ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~ppc ~sparc ~x86"
 IUSE="eds examples python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -61,7 +61,9 @@ src_configure() {
 }
 
 src_install() {
-	gnome2_src_install \
+	# error: relink `libstorage-mrproject-1.la' with the above command before installing it
+	# Try to drop workaround on next snapshot or bump
+	MAKEOPTS="${MAKEOPTS} -j1" gnome2_src_install \
 		sqldocdir="\$(datadir)/doc/${PF}" \
 		sampledir="\$(datadir)/doc/${PF}/examples"
 

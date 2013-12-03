@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/hugin/hugin-2013.0.0.ebuild,v 1.1 2013/10/28 22:18:52 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/hugin/hugin-2013.0.0.ebuild,v 1.4 2013/11/25 00:12:02 patrick Exp $
 
 EAPI=5
 WX_GTK_VER="2.8"
@@ -11,12 +11,13 @@ inherit base python-single-r1 wxwidgets versionator cmake-utils
 DESCRIPTION="GUI for the creation & processing of panoramic images"
 HOMEPAGE="http://hugin.sf.net"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+
 LICENSE="GPL-2 SIFT"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 
 LANGS=" bg ca cs da de en_GB es eu fi fr hu it ja ko nl pl pt_BR ro ru sk sl sv uk zh_CN zh_TW"
-IUSE="lapack python sift $(echo ${LANGS//\ /\ linguas_})"
+IUSE="lapack python sift debug $(echo ${LANGS//\ /\ linguas_})"
 
 CDEPEND="
 	!!dev-util/cocom
@@ -33,6 +34,7 @@ CDEPEND="
 	media-libs/libpng:0=
 	media-libs/openexr:=
 	media-libs/tiff
+	sci-libs/flann
 	sys-libs/zlib
 	virtual/jpeg
 	x11-libs/wxGTK:2.8=[X,opengl,-odbc]
@@ -48,6 +50,8 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 S=${WORKDIR}/${PN}-$(get_version_component_range 1-3)
 
+PATCHES=( "${FILESDIR}"/${P}-boost.patch )
+
 pkg_setup() {
 	DOCS="authors.txt README TODO"
 	mycmakeargs=(
@@ -55,6 +59,15 @@ pkg_setup() {
 		$(cmake-utils_use_build python HSI)
 	)
 	python-single-r1_pkg_setup
+}
+
+src_prepare() {
+	sed \
+		-e 's:-O3::g' \
+		-i src/celeste/CMakeLists.txt || die
+	rm CMakeModules/{FindLAPACK,FindPkgConfig}.cmake || die
+
+	cmake-utils_src_prepare
 }
 
 src_install() {

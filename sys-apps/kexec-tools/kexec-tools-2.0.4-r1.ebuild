@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kexec-tools/kexec-tools-2.0.4-r1.ebuild,v 1.3 2013/08/07 13:35:04 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/kexec-tools/kexec-tools-2.0.4-r1.ebuild,v 1.6 2013/11/12 09:09:20 jlec Exp $
 
 EAPI=5
 
@@ -14,6 +14,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="booke lzma xen zlib"
+
+REQUIRED_USE="lzma? ( zlib )"
 
 DEPEND="
 	lzma? ( app-arch/xz-utils )
@@ -40,7 +42,7 @@ src_configure() {
 	econf \
 		$(use_with booke) \
 		$(use_with lzma) \
-		$(use_with xen) \
+		$(use_with xen)
 		$(use_with zlib)
 }
 

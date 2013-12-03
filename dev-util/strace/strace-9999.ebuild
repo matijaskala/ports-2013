@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/strace/strace-9999.ebuild,v 1.4 2013/05/02 17:28:35 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/strace/strace-9999.ebuild,v 1.6 2013/11/29 14:04:14 vapier Exp $
 
 EAPI="4"
 
@@ -19,7 +19,7 @@ HOMEPAGE="http://sourceforge.net/projects/strace/"
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="static aio"
+IUSE="aio +perl static"
 
 # strace only uses the header from libaio to decode structs
 DEPEND="aio? ( >=dev-libs/libaio-0.3.106 )
@@ -41,5 +41,6 @@ src_prepare() {
 
 src_install() {
 	default
+	use perl || rm "${ED}"/usr/bin/strace-graph
 	dodoc CREDITS
 }

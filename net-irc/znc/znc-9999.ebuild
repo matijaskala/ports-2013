@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-irc/znc/znc-9999.ebuild,v 1.6 2013/02/02 02:48:24 wired Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-irc/znc/znc-9999.ebuild,v 1.7 2013/11/14 11:35:35 wired Exp $
 
 EAPI=5
 
-PYTHON_DEPEND="python? 3"
-inherit base python user
+PYTHON_COMPAT=( python{3_2,3_3} )
+inherit base python-single-r1 user
 
 MY_PV=${PV/_/-}
 DESCRIPTION="An advanced IRC Bouncer"
@@ -35,7 +35,7 @@ DEPEND="
 	virtual/pkgconfig
 	perl? ( dev-lang/swig )
 	python? (
-		>=dev-lang/swig-2.0.2
+		>=dev-lang/swig-2.0.8
 		>=dev-lang/perl-5.10
 	)
 	${RDEPEND}
@@ -51,8 +51,7 @@ CONFDIR="/var/lib/znc"
 
 pkg_setup() {
 	if use python; then
-		python_set_active_version 3
-		python_pkg_setup
+		python-single-r1_pkg_setup
 	fi
 	if use daemon; then
 		enewgroup ${PN}
@@ -73,7 +72,7 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable ipv6) \
 		$(use_enable perl) \
-		$(use python && echo "--enable-python=python-$(python_get_version)") \
+		$(use python && echo "--enable-python=python3") \
 		$(use_enable sasl cyrus) \
 		$(use_enable ssl openssl) \
 		$(use_enable tcl tcl)
@@ -81,7 +80,7 @@ src_configure() {
 
 src_install() {
 	emake install DESTDIR="${D}"
-	dodoc AUTHORS README.md
+	dodoc NOTICE README.md
 	if use daemon; then
 		newinitd "${FILESDIR}"/znc.initd znc
 		newconfd "${FILESDIR}"/znc.confd znc

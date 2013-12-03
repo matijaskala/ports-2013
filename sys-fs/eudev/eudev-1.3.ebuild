@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-1.3.ebuild,v 1.3 2013/10/08 14:24:30 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-1.3.ebuild,v 1.9 2013/12/01 15:49:03 johu Exp $
 
 EAPI="5"
 
@@ -14,7 +14,7 @@ then
 	inherit git-2
 else
 	SRC_URI="http://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~x86"
+	KEYWORDS="amd64 ~arm hppa ~mips ~ppc ~ppc64 x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
@@ -47,8 +47,6 @@ DEPEND="${COMMON_DEPEND}
 	test? ( app-text/tree dev-lang/perl )"
 
 RDEPEND="${COMMON_DEPEND}
-	hwdb? ( >=sys-apps/hwids-20121202.2[udev] )
-	keymap? ( >=sys-apps/hwids-20130717-r1[udev] )
 	!sys-fs/udev
 	!sys-apps/coldplug
 	!sys-apps/systemd
@@ -56,7 +54,9 @@ RDEPEND="${COMMON_DEPEND}
 	!sys-fs/device-mapper
 	!<sys-fs/udev-init-scripts-18"
 
-PDEPEND=">=virtual/udev-180
+PDEPEND="hwdb? ( >=sys-apps/hwids-20130717-r1[udev] )
+	keymap? ( >=sys-apps/hwids-20130717-r1[udev] )
+	>=virtual/udev-206-r2
 	openrc? ( >=sys-fs/udev-init-scripts-18 )"
 
 REQUIRED_USE="keymap? ( hwdb )"
@@ -138,6 +138,7 @@ multilib_src_configure()
 		--enable-split-usr
 		--exec-prefix=/
 	)
+
 	# Only build libudev for non-native_abi, and only install it to libdir,
 	# that means all options only apply to native_abi
 	if multilib_is_native_abi; then econf_args+=(
@@ -147,7 +148,7 @@ multilib_src_configure()
 		$(use_enable introspection)
 		$(use_enable keymap)
 		$(use_enable kmod libkmod)
-		$(use_enable modutils modules)
+		$(usex kmod --enable-modules $(use_enable modutils modules))
 		$(use_enable static-libs static)
 		$(use_enable selinux)
 		$(use_enable rule-generator)

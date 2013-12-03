@@ -1,17 +1,15 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/libvirt/libvirt-9999.ebuild,v 1.52 2013/09/05 18:20:53 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/libvirt/libvirt-9999.ebuild,v 1.54 2013/12/03 18:35:31 cardoe Exp $
 
 EAPI=5
 
-#BACKPORTS=864bcb0e
+#BACKPORTS=062ad8b2
 AUTOTOOLIZE=yes
 
 MY_P="${P/_rc/-rc}"
 
-PYTHON_COMPAT=( python{2_6,2_7} )
-
-inherit eutils python-single-r1 user autotools linux-info systemd
+inherit eutils user autotools linux-info systemd readme.gentoo
 
 if [[ ${PV} = *9999* ]]; then
 	inherit git-2
@@ -24,7 +22,7 @@ else
 		ftp://libvirt.org/libvirt/${MY_P}.tar.gz
 		${BACKPORTS:+
 			http://dev.gentoo.org/~cardoe/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
-	KEYWORDS="amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 S="${WORKDIR}/${P%_rc*}"
 
@@ -33,7 +31,7 @@ HOMEPAGE="http://www.libvirt.org/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 IUSE="audit avahi +caps firewalld fuse iscsi +libvirtd lvm lxc +macvtap nfs \
-	nls numa openvz parted pcap phyp policykit python +qemu rbd sasl \
+	nls numa openvz parted pcap phyp policykit +qemu rbd sasl \
 	selinux +udev uml +vepa virtualbox virt-network xen elibc_glibc \
 	systemd"
 REQUIRED_USE="libvirtd? ( || ( lxc openvz qemu uml virtualbox xen ) )
@@ -45,8 +43,7 @@ REQUIRED_USE="libvirtd? ( || ( lxc openvz qemu uml virtualbox xen ) )
 	virtualbox? ( libvirtd )
 	xen? ( libvirtd )
 	virt-network? ( libvirtd )
-	firewalld? ( virt-network )
-	python? ( ${PYTHON_REQUIRED_USE} )"
+	firewalld? ( virt-network )"
 
 # gettext.sh command is used by the libvirt command wrappers, and it's
 # non-optional, so put it into RDEPEND.
@@ -85,7 +82,6 @@ RDEPEND="sys-libs/readline
 	)
 	pcap? ( >=net-libs/libpcap-1.0.0 )
 	policykit? ( >=sys-auth/polkit-0.9 )
-	python? ( ${PYTHON_DEPS} )
 	qemu? (
 		>=app-emulation/qemu-0.13.0
 		dev-libs/yajl
@@ -112,6 +108,16 @@ DEPEND="${RDEPEND}
 	dev-lang/perl
 	dev-libs/libxslt"
 
+DOC_CONTENTS="For the basic networking support (bridged and routed networks)
+you don't need any extra software. For more complex network modes
+including but not limited to NATed network, you can enable the
+'virt-network' USE flag.\n\n
+If you are using dnsmasq on your system, you will have
+to configure /etc/dnsmasq.conf to enable the following settings:\n\n
+ bind-interfaces\n
+ interface or except-interface\n\n
+Otherwise you might have issues with your existing DNS server."
+
 LXC_CONFIG_CHECK="
 	~CGROUPS
 	~CGROUP_FREEZER
@@ -129,10 +135,12 @@ LXC_CONFIG_CHECK="
 	~IPC_NS
 	~PID_NS
 	~NET_NS
+	~USER_NS
 	~DEVPTS_MULTIPLE_INSTANCES
 	~VETH
 	~MACVLAN
 	~POSIX_MQUEUE
+	~SECURITYFS
 	~!GRKERNSEC_CHROOT_MOUNT
 	~!GRKERNSEC_CHROOT_DOUBLE
 	~!GRKERNSEC_CHROOT_PIVOT
@@ -153,6 +161,8 @@ MACVTAP_CONFIG_CHECK=" ~MACVTAP"
 
 LVM_CONFIG_CHECK=" ~BLK_DEV_DM ~DM_SNAPSHOT ~DM_MULTIPATH"
 
+ERROR_USER_NS="Optional depending on LXC configuration."
+
 pkg_setup() {
 	enewgroup qemu 77
 	enewuser qemu 77 -1 -1 qemu kvm
@@ -164,8 +174,6 @@ pkg_setup() {
 	if [[ $? -ne 0 ]]; then
 		gpasswd -a qemu kvm
 	fi
-
-	python-single-r1_pkg_setup
 
 	# Handle specific kernel versions for different features
 	kernel_is lt 3 6 && LXC_CONFIG_CHECK+=" ~CGROUP_MEM_RES_CTLR"
@@ -209,7 +217,7 @@ src_prepare() {
 	local iscsi_init=
 	local rbd_init=
 	local firewalld_init=
-	cp "${FILESDIR}/libvirtd.init-r12" "${S}/libvirtd.init"
+	cp "${FILESDIR}/libvirtd.init-r13" "${S}/libvirtd.init"
 	use avahi && avahi_init='avahi-daemon'
 	use iscsi && iscsi_init='iscsid'
 	use rbd && rbd_init='ceph'
@@ -283,7 +291,6 @@ src_configure() {
 
 	## other
 	myconf="${myconf} $(use_enable nls)"
-	myconf="${myconf} $(use_with python)"
 
 	# user privilege bits fir qemu/kvm
 	if use caps; then
@@ -359,10 +366,11 @@ src_install() {
 
 	newinitd "${S}/libvirtd.init" libvirtd || die
 	newconfd "${FILESDIR}/libvirtd.confd-r4" libvirtd || die
+	newinitd "${FILESDIR}/virtlockd.init" virtlockd || die
 
 	keepdir /var/lib/libvirt/images
 
-	use python && python_optimize
+	readme.gentoo_create_doc
 }
 
 pkg_preinst() {
@@ -409,20 +417,7 @@ pkg_postinst() {
 	use libvirtd || return 0
 	# From here, only libvirtd-related instructions, be warned!
 
-	elog
-	elog "For the basic networking support (bridged and routed networks)"
-	elog "you don't need any extra software. For more complex network modes"
-	elog "including but not limited to NATed network, you can enable the"
-	elog "'virt-network' USE flag."
-	elog
-	if has_version net-dns/dnsmasq; then
-		ewarn "If you have a DNS server setup on your machine, you will have"
-		ewarn "to configure /etc/dnsmasq.conf to enable the following settings: "
-		ewarn " bind-interfaces"
-		ewarn " interface or except-interface"
-		ewarn
-		ewarn "Otherwise you might have issues with your existing DNS server."
-	fi
+	readme.gentoo_print_elog
 
 	if use caps && use qemu; then
 		elog "libvirt will now start qemu/kvm VMs with non-root privileges."

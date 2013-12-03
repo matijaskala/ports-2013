@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/cppunit/cppunit-9999.ebuild,v 1.4 2013/03/03 10:29:04 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/cppunit/cppunit-9999.ebuild,v 1.6 2013/11/15 09:16:19 scarabeus Exp $
 
 EAPI=5
 
@@ -42,7 +42,8 @@ src_configure() {
 		$(use_enable doc doxygen) \
 		$(use_enable doc dot) \
 		--docdir="${EPREFIX}"/usr/share/doc/${PF} \
-		--htmldir="${EPREFIX}"/usr/share/doc/${PF}/html
+		--htmldir="${EPREFIX}"/usr/share/doc/${PF}/html \
+		--disable-silent-rules
 }
 
 src_install() {

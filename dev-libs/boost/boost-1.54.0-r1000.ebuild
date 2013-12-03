@@ -149,7 +149,7 @@ src_configure() {
 		[[ $(gcc-version) > 4.3 ]] && append-flags -mno-altivec
 	fi
 
-	use context || OPTIONS+=(--without-context)
+	use context || OPTIONS+=(--without-context --without-coroutine)
 	use icu && OPTIONS+=(-sICU_PATH="${EPREFIX}/usr")
 	use icu || OPTIONS+=(--disable-icu boost.locale.icu=off)
 	use mpi || OPTIONS+=(--without-mpi)

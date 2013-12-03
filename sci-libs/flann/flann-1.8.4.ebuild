@@ -1,14 +1,15 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/flann/flann-1.8.4.ebuild,v 1.1 2013/07/09 23:11:10 bicatali Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-libs/flann/flann-1.8.4.ebuild,v 1.3 2013/12/01 19:05:59 jlec Exp $
 
 EAPI=5
 
-inherit cmake-utils eutils toolchain-funcs
+inherit cmake-utils eutils multilib toolchain-funcs
 
 DESCRIPTION="Library for performing fast approximate nearest neighbor searches in high dimensional spaces"
 HOMEPAGE="http://www.cs.ubc.ca/~mariusm/index.php/FLANN/FLANN/"
-SRC_URI="http://people.cs.ubc.ca/~mariusm/uploads/FLANN/${P}-src.zip
+SRC_URI="
+	http://people.cs.ubc.ca/~mariusm/uploads/FLANN/${P}-src.zip
 	test? ( http://dev.gentoo.org/~bicatali/distfiles/${P}-testdata.tar.xz )"
 
 LICENSE="BSD"
@@ -17,12 +18,18 @@ KEYWORDS="~amd64 ~ppc ~x86 ~amd64-linux ~x86-linux"
 IUSE="cuda doc mpi openmp octave python static-libs test"
 
 RDEPEND="
-	sci-libs/hdf5[mpi?]
-	mpi? ( dev-libs/boost[mpi] )
+	mpi? (
+		sci-libs/hdf5[mpi]
+		dev-libs/boost[mpi]
+	)
 	octave? ( sci-mathematics/octave )"
 DEPEND="${RDEPEND}
 	app-arch/unzip
-	test? ( dev-cpp/gtest )"
+	test? (
+		dev-cpp/gtest
+		cuda? ( sci-libs/hdf5 )
+	)
+"
 PDEPEND="python? ( ~dev-python/pyflann-${PV} )"
 
 S="${WORKDIR}"/${P}-src
@@ -61,6 +68,11 @@ src_prepare() {
 	# avoid automatic installation of pdf
 	use doc || sed -i -e '/doc/d' CMakeLists.txt
 	use cuda && cuda_src_prepare
+
+	sed \
+		-e "/FLANN_LIB_INSTALL_DIR/s:lib:$(get_libdir):g" \
+		-i cmake/flann_utils.cmake || die
+	cmake-utils_src_prepare
 }
 
 src_configure() {

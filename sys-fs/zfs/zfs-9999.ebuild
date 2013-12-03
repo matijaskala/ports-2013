@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/zfs/zfs-9999.ebuild,v 1.49 2013/10/11 23:17:02 ryao Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/zfs/zfs-9999.ebuild,v 1.50 2013/11/21 16:21:23 ryao Exp $
 
 EAPI="5"
-PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_COMPAT=( python{2_6,2_7,3_1,3_2,3_3} )
 
-inherit python-single-r1
+inherit python-r1
 
 AT_M4DIR="config"
 AUTOTOOLS_AUTORECONF="1"
@@ -17,7 +17,8 @@ if [ ${PV} == "9999" ] ; then
 else
 	inherit eutils versionator
 	MY_PV=$(replace_version_separator 3 '-')
-	SRC_URI="https://github.com/zfsonlinux/${PN}/archive/${PN}-${MY_PV}.tar.gz"
+	SRC_URI="https://github.com/zfsonlinux/${PN}/archive/${PN}-${MY_PV}.tar.gz
+		http://dev.gentoo.org/~ryao/dist/${PN}-kmod-${MY_PV}-p2.tar.xz"
 	S="${WORKDIR}/${PN}-${PN}-${MY_PV}"
 	KEYWORDS="~amd64"
 fi
@@ -27,7 +28,7 @@ inherit bash-completion-r1 flag-o-matic toolchain-funcs autotools-utils udev sys
 DESCRIPTION="Userland utilities for ZFS Linux kernel module"
 HOMEPAGE="http://zfsonlinux.org/"
 
-LICENSE="BSD-2 CDDL MIT"
+LICENSE="BSD-2 CDDL bash-completion? ( MIT )"
 SLOT="0"
 IUSE="bash-completion custom-cflags kernel-builtin +rootfs selinux test-suite static-libs"
 RESTRICT="test"
@@ -68,6 +69,14 @@ pkg_setup() {
 }
 
 src_prepare() {
+	if [ ${PV} != "9999" ]
+	then
+		# Apply patch set
+		EPATCH_SUFFIX="patch" \
+		EPATCH_FORCE="yes" \
+		epatch "${WORKDIR}/${PN}-kmod-${MY_PV}-patches"
+	fi
+
 	# Update paths
 	sed -e "s|/sbin/lsmod|/bin/lsmod|" \
 		-e "s|/usr/bin/scsi-rescan|/usr/sbin/rescan-scsi-bus|" \
@@ -108,7 +117,7 @@ src_install() {
 	rm -rf "${ED}usr/lib/dracut"
 	use test-suite || rm -rf "${ED}usr/share/zfs"
 
-	use bash-completion && newbashcomp "${FILESDIR}/bash-completion" zfs
+	use bash-completion && newbashcomp "${FILESDIR}/bash-completion-r1" zfs
 
 	exeinto /usr/libexec
 	doexe "${T}/zfs-init.sh"

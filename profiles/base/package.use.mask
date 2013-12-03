@@ -1,10 +1,26 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.516 2013/10/30 20:27:37 maksbotan Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.522 2013/11/23 18:53:28 phajdan.jr Exp $
 
 # This file requires >=portage-2.1.1
 # New entries go on top.
 #
+
+# Pawel Hajdan jr <phajdan.jr@gentoo.org> (13 Nov 2013)
+# Depends on masked dev-lang/v8
+dev-db/drizzle v8
+
+# Andrey Grozin <grozin@gentoo.org> (12 Nov 2013)
+# berkdb support works only for sys-libs/db-6.0 which is masked
+sci-physics/reduze berkdb
+
+# Michał Górny <mgorny@gentoo.org> (10 Nov 2013)
+# (on behalf of python@)
+# USE=sandbox is not done properly in Gentoo and results in crippled
+# PyPy install that is not usable for non-sandbox clients (and there are
+# no real sandbox clients right now). Masked until the flag is
+# re-implemented or dropped. For more details, bug #429372.
+dev-python/pypy sandbox
 
 # Julian Ospald <hasufell@gentoo.org> (27 Oct 2013)
 # luajit is in ~arch, prepare for minetest stabilization
@@ -45,9 +61,9 @@ media-libs/libsdl2 custom-cflags
 >=www-plugins/gnash-0.8.10_p20130822 openvg
 
 # Tim Harder <radhermit@gentoo.org> (13 Aug 2013)
-# Requires dev-lang/luajit which is not keyworded by most arches.
-app-editors/vim luajit
-app-editors/gvim luajit
+# Related deps dev-lang/luajit and dev-scheme/racket are not keyworded by most arches.
+app-editors/vim luajit racket
+app-editors/gvim luajit racket
 
 # Alexis Ballier <aballier@gentoo.org> (11 Aug 2013)
 # Multilib migrated version for binary compatibility.
@@ -228,8 +244,8 @@ dev-ml/eliom ocamlduce
 <gnome-base/gvfs-1.14 udisks
 
 # Pawel Hajdan jr <phajdan.jr@gentoo.org> (28 Sep 2012)
-# Causes problems with e.g. NVidia drivers, bug #413637.
-www-client/chromium tcmalloc
+# Causes problems with old NVidia drivers, bug #413637.
+<www-client/chromium-32.0.1700.19 tcmalloc
 
 # Diego Elio Pettenò (27 Aug 2012)
 # The libpci access is only used for linux.
@@ -429,10 +445,6 @@ net-dns/pdnsd isdn urandom
 =dev-db/mysql-5.1.51* debug
 =dev-db/mysql-5.1.52* debug
 =dev-db/mysql-5.1.53* debug
-
-# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (28 Nov 2010)
-# sys-devel/llvm is not keyworded on many arches, bug #320221
-media-libs/mesa llvm
 
 # Justin Lecher <jlec@gentoo.org> (17 Nov 2010)
 # Upstream didn't release patches for aria yet

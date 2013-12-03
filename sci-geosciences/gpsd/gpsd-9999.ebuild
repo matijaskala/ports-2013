@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-geosciences/gpsd/gpsd-9999.ebuild,v 1.14 2013/08/27 17:59:55 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-geosciences/gpsd/gpsd-9999.ebuild,v 1.15 2013/11/23 04:25:41 vapier Exp $
 
 EAPI="5"
 
@@ -28,10 +28,10 @@ GPSD_PROTOCOLS=(
 	aivdm ashtech earthmate evermore fury fv18 garmin garmintxt
 	geostar gpsclock itrax mtk3301 navcom nmea nmea2000 ntrip
 	oceanserver oncore rtcm104v2 rtcm104v3 sirf superstar2 tnt
-	tripmate tsip ubx
+	tripmate tsip ublox
 )
 IUSE_GPSD_PROTOCOLS=${GPSD_PROTOCOLS[@]/#/gpsd_protocols_}
-IUSE="${IUSE_GPSD_PROTOCOLS} bluetooth cxx debug dbus ipv6 latency_timing ncurses ntp python qt4 +shm +sockets test udev usb X"
+IUSE="${IUSE_GPSD_PROTOCOLS} bluetooth cxx debug dbus ipv6 latency_timing ncurses ntp python qt4 +shm +sockets static test udev usb X"
 REQUIRED_USE="X? ( python )
 	gpsd_protocols_nmea2000? ( gpsd_protocols_aivdm )
 	python? ( ${PYTHON_REQUIRED_USE} )"
@@ -70,15 +70,10 @@ src_prepare() {
 	fi
 
 	epatch "${FILESDIR}"/${PN}-3.8-ldflags.patch
-	epatch "${FILESDIR}"/${PN}-3.8-libgps.patch
-	epatch "${FILESDIR}"/${PN}-3.8-udev.patch
-	epatch "${FILESDIR}"/${PN}-3.4-no-man-gen.patch
-	epatch "${FILESDIR}"/${PN}-3.7-rpath.patch
-	epatch "${FILESDIR}"/${PN}-3.7-gps_regress.patch #441760
+	epatch "${FILESDIR}"/${PN}-3.10-rpath.patch
 
 	# Avoid useless -L paths to the install dir
 	sed -i \
-		-e '/^env.Prepend(LIBPATH=.installdir(.libdir.).)$/d' \
 		-e 's:\<STAGING_PREFIX\>:SYSROOT:g' \
 		SConstruct || die
 
@@ -115,6 +110,8 @@ src_configure() {
 		gpsd_group=uucp
 		strip=False
 		python=False
+		manbuild=False
+		shared=$(usex !static True False)
 		$(use_scons bluetooth bluez)
 		$(use_scons cxx libgpsmm)
 		$(use_scons debug clientdebug)

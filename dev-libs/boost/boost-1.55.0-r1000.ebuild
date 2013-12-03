@@ -98,16 +98,6 @@ src_prepare() {
 		"${FILESDIR}/${PN}-1.48.0-disable_libboost_python3.patch" \
 		"${FILESDIR}/${PN}-1.48.0-python_linking.patch" \
 		"${FILESDIR}/${PN}-1.48.0-disable_icu_rpath.patch"
-
-	local file
-	for file in libs/context/src/asm/*.S; do
-		cat - >> "${file}" <<EOF
-
-#if defined(__linux__) && defined(__ELF__)
-.section .note.GNU-stack,"",%progbits
-#endif
-EOF
-	done
 }
 
 ejam() {
@@ -145,7 +135,7 @@ src_configure() {
 		[[ $(gcc-version) > 4.3 ]] && append-flags -mno-altivec
 	fi
 
-	use context || OPTIONS+=(--without-context)
+	use context || OPTIONS+=(--without-context --without-coroutine)
 	use icu && OPTIONS+=(-sICU_PATH="${EPREFIX}/usr")
 	use icu || OPTIONS+=(--disable-icu boost.locale.icu=off)
 	use mpi || OPTIONS+=(--without-mpi)

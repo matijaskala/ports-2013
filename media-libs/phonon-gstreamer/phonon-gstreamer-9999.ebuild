@@ -1,16 +1,16 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/phonon-gstreamer/phonon-gstreamer-9999.ebuild,v 1.15 2013/03/10 10:12:23 kensington Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/phonon-gstreamer/phonon-gstreamer-9999.ebuild,v 1.16 2013/11/11 21:07:10 johu Exp $
 
-EAPI=4
+EAPI=5
 
-[[ ${PV} == *9999 ]] && git_eclass="git-2"
-EGIT_REPO_URI="git://anongit.kde.org/${PN}"
+[[ ${PV} == *9999 ]] && git_eclass="git-r3"
+EGIT_REPO_URI=( "git://anongit.kde.org/${PN}" )
 
 MY_PN="phonon-backend-gstreamer"
 MY_P=${MY_PN}-${PV}
 
-inherit cmake-utils multilib ${git_eclass}
+inherit cmake-utils multibuild ${git_eclass}
 
 DESCRIPTION="Phonon GStreamer backend"
 HOMEPAGE="https://projects.kde.org/projects/kdesupport/phonon/phonon-gstreamer"
@@ -23,29 +23,66 @@ else
 	KEYWORDS="~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-fbsd ~x86-fbsd ~x64-macos"
 fi
 SLOT="0"
-IUSE="alsa debug +network"
+IUSE="alsa debug +network +qt4 qt5"
+REQUIRED_USE="|| ( qt4 qt5 )"
 
 RDEPEND="
 	media-libs/gstreamer:0.10
 	media-plugins/gst-plugins-meta:0.10[alsa?,ogg,vorbis]
-	>=media-libs/phonon-4.6.0
-	>=dev-qt/qtcore-4.6.0:4[glib]
-	>=dev-qt/qtgui-4.6.0:4[glib]
-	>=dev-qt/qtopengl-4.6.0:4
+	>=media-libs/phonon-4.7.0[qt4?,qt5?]
+	qt4? (
+		dev-qt/qtcore:4[glib]
+		dev-qt/qtgui:4[glib]
+		dev-qt/qtopengl:4
+	)
+	qt5? (
+		dev-qt/qtcore:5[glib]
+		dev-qt/qtgui:5[glib]
+		dev-qt/qtopengl:5
+	)
 	virtual/opengl
 	network? ( media-plugins/gst-plugins-soup:0.10 )
 "
 DEPEND="${RDEPEND}
-	>=dev-util/automoc-0.9.87
+	qt4? ( >=dev-util/automoc-0.9.87 )
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${MY_P}"
+[[ ${PV} == 9999 ]] || S=${WORKDIR}/${MY_P}
+
+pkg_setup() {
+	MULTIBUILD_VARIANTS=()
+	if use qt4; then
+		MULTIBUILD_VARIANTS+=(qt4)
+	fi
+	if use qt5; then
+		MULTIBUILD_VARIANTS+=(qt5)
+	fi
+}
 
 src_configure() {
-	local mycmakeargs=(
-		$(cmake-utils_use_with alsa)
-		-DPhonon_DIR=/usr/$(get_libdir)/cmake/phonon/
-	)
-	cmake-utils_src_configure
+	myconfigure() {
+		local mycmakeargs=()
+		if [[ ${MULTIBUILD_VARIANT} = qt4 ]]; then
+			mycmakeargs+=(-DPHONON_BUILD_PHONON4QT5=OFF)
+		fi
+		if [[ ${MULTIBUILD_VARIANT} = qt5 ]]; then
+			mycmakeargs+=(-DPHONON_BUILD_PHONON4QT5=ON)
+		fi
+		cmake-utils_src_configure
+	}
+
+	multibuild_foreach_variant myconfigure
+}
+
+src_compile() {
+	multibuild_foreach_variant cmake-utils_src_compile
+}
+
+src_install() {
+	multibuild_foreach_variant cmake-utils_src_install
+}
+
+src_test() {
+	multibuild_foreach_variant cmake-utils_src_test
 }

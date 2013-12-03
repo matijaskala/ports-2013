@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/sandbox/sandbox-2.6-r1.ebuild,v 1.13 2013/09/05 09:54:16 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/sandbox/sandbox-2.6-r1.ebuild,v 1.15 2013/11/28 00:51:47 vapier Exp $
 
 #
 # don't monkey with this ebuild unless contacting portage devs.
@@ -10,7 +10,7 @@
 inherit eutils flag-o-matic toolchain-funcs multilib unpacker multiprocessing
 
 DESCRIPTION="sandbox'd LD_PRELOAD hack"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="http://www.gentoo.org/proj/en/portage/sandbox/"
 SRC_URI="mirror://gentoo/${P}.tar.xz
 	http://dev.gentoo.org/~vapier/dist/${P}.tar.xz"
 
@@ -52,6 +52,7 @@ src_unpack() {
 	epatch "${FILESDIR}"/${P}-desktop.patch #443672
 	epatch "${FILESDIR}"/${P}-open-nofollow.patch #413441
 	epatch "${FILESDIR}"/${P}-check-empty-paths-at.patch #346929
+	epatch "${FILESDIR}"/${P}-no-pch.patch #425524
 	epatch_user
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/vim-core/vim-core-9999.ebuild,v 1.4 2013/08/18 18:12:03 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/vim-core/vim-core-9999.ebuild,v 1.5 2013/11/19 10:19:19 radhermit Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -47,20 +47,11 @@ src_prepare() {
 			# Apply any patches available from vim.org for this version
 			epatch "${WORKDIR}"/${VIM_ORG_PATCHES%.bz2}
 		fi
-
-		if [[ -d "${WORKDIR}"/gentoo/patches-core/ ]]; then
-			# Patches for vim-core only (runtime/*)
-			EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" \
-				epatch "${WORKDIR}"/gentoo/patches-core/
-		fi
 	fi
 
 	# Fixup a script to use awk instead of nawk
 	sed -i '1s|.*|#!'"${EPREFIX}"'/usr/bin/awk -f|' "${S}"/runtime/tools/mve.awk \
 		|| die "mve.awk sed failed"
-
-	# Patch to build with ruby-1.8.0_pre5 and following
-	sed -i 's/defout/stdout/g' "${S}"/src/if_ruby.c
 
 	# Read vimrc and gvimrc from /etc/vim
 	echo '#define SYS_VIMRC_FILE "'${EPREFIX}'/etc/vim/vimrc"' >> "${S}"/src/feature.h
