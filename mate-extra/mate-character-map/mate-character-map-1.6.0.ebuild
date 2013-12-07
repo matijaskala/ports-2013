@@ -15,12 +15,11 @@ HOMEPAGE="http://mate-desktop.org"
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="cjk gtk3 +introspection python test"
+IUSE="cjk +introspection python test"
 
 RDEPEND=">=dev-libs/glib-2.16.3
 	>=x11-libs/pango-1.2.1
-	gtk3? ( x11-libs/gtk+:3 )
-	!gtk3? ( x11-libs/gtk+:2 )
+	x11-libs/gtk+:2
 	introspection? ( >=dev-libs/gobject-introspection-0.6 )
 	python? ( >=dev-python/pygtk-2.7.1 )"
 DEPEND="${RDEPEND}
@@ -32,6 +31,7 @@ DEPEND="${RDEPEND}
 
 pkg_setup() {
 	G2CONF="${G2CONF}
+		--with-gtk=2.0
 		$(use_enable introspection)
 		$(use_enable cjk unihan)
 		$(use_enable python python-bindings)"

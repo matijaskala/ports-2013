@@ -35,6 +35,9 @@ ENTROPY_RDEPEND="!lxde-base/lxpolkit"
 DOCS=( AUTHORS HACKING NEWS README )
 
 pkg_setup() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	GCONF="${GCONF}
 		--disable-static
 		$(use_enable introspection)"

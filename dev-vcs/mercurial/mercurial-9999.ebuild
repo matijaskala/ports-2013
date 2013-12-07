@@ -40,9 +40,7 @@ SITEFILE="70${PN}-gentoo.el"
 
 src_prepare() {
 	distutils_src_prepare
-	# fix up logic that won't work in Gentoo Prefix (also won't outside in
-	# certain cases), bug #362891
-	sed -i -e 's:xcodebuild:nocodebuild:' setup.py || die
+	sed -e "s|^if sys.platform == 'darwin' and os.path.exists('/usr/bin/xcodebuild'):$|if False:|" -i setup.py
 }
 
 src_compile() {
@@ -73,7 +71,7 @@ src_install() {
 		elisp-site-file-install "${FILESDIR}"/${SITEFILE}
 	fi
 
-	dodoc CONTRIBUTORS README
+	dodoc CONTRIBUTORS
 	cp hgweb*.cgi "${ED}"/usr/share/doc/${PF}/ || die
 
 	dobin hgeditor
@@ -103,10 +101,6 @@ src_test() {
 	rm -f test-clone-cgi.t
 	rm -f test-hgweb-commands.t
 	rm -f test-push-cgi.t
-	# https://bz.selenic.com/show_bug.cgi?id=4085
-	rm -f test-commit-amend.t
-	# https://bz.selenic.com/show_bug.cgi?id=4086
-	rm -f test-subrepo-git.t
 	# https://bz.selenic.com/show_bug.cgi?id=4087
 	rm -f test-check-pyflakes.t
 	# Disable tests sometimes timing out.

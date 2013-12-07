@@ -49,6 +49,10 @@ DEPEND="${RDEPEND}
 
 pkg_setup() {
 	DOCS="AUTHORS ChangeLog NEWS README"
+
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	G2CONF="${G2CONF}
 		--disable-updater
 		$(use_enable python)

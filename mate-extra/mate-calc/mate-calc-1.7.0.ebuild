@@ -27,4 +27,9 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35
 	>=app-text/mate-doc-utils-1.2.1"
 
-DOCS="AUTHORS ChangeLog NEWS README"
+pkg_setup() {
+	DOCS="AUTHORS ChangeLog NEWS README"
+
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+}

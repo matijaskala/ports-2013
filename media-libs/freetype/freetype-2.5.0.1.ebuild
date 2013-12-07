@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/freetype/freetype-2.5.0.1.ebuild,v 1.3 2013/10/24 22:40:21 gienah Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/freetype/freetype-2.5.0.1.ebuild,v 1.4 2013/12/06 14:12:05 polynomial-c Exp $
 
 EAPI=5
 
@@ -13,7 +13,7 @@ HOMEPAGE="http://www.freetype.org/"
 SRC_URI="mirror://sourceforge/freetype/${P/_/}.tar.bz2
 	utils?	( mirror://sourceforge/freetype/ft2demos-${MY_PV}.tar.bz2 )
 	doc?	( mirror://sourceforge/freetype/${PN}-doc-${MY_PV}.tar.bz2 )
-	infinality? ( http://ibn.net63.net/infinality-bundle/src/${PN}2-infinality-ultimate-${PV}-5.src.tar.gz )"
+	infinality? ( https://raw.github.com/bohoomil/fontconfig-ultimate/c12482bd16b69cba5798dc7581b926b55682904d/01_freetype2-iu-2.5.0.1-7/infinality-2.5.patch -> ${P}-infinality.patch )"
 
 LICENSE="|| ( FTL GPL-2+ )"
 SLOT="2"
@@ -49,7 +49,7 @@ src_prepare() {
 	}
 
 	if use infinality; then
-		epatch "${WORKDIR}/${PN}2-infinality-ultimate/infinality-2.5.patch"
+		epatch "${DISTDIR}/${P}-infinality.patch"
 
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in
 		# freetype-2.4.11

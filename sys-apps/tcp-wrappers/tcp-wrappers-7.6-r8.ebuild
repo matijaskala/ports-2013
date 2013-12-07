@@ -1,6 +1,8 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/tcp-wrappers/tcp-wrappers-7.6-r8.ebuild,v 1.26 2013/05/14 05:46:04 radhermit Exp $
 
-inherit eutils toolchain-funcs
+inherit eutils toolchain-funcs multilib
 
 MY_P="${P//-/_}"
 PATCH_VER="1.0"
@@ -11,10 +13,8 @@ SRC_URI="ftp://ftp.porcupine.org/pub/security/${MY_P}.tar.gz
 
 LICENSE="tcp_wrappers_license"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~sparc-fbsd ~x86-fbsd"
 IUSE="ipv6"
-
-DEPEND=""
 
 S=${WORKDIR}/${MY_P}
 

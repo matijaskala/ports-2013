@@ -14,14 +14,13 @@ HOMEPAGE="http://mate-desktop.org"
 LICENSE="GPL-2"
 SLOT="2"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="gtk3"
+IUSE=""
 
 # TODO: appindicator
 # libgnomekbd-2.91 breaks API/ABI
 RDEPEND="x11-libs/libXft
 	>=x11-libs/libXi-1.2
-	gtk3? ( x11-libs/gtk+:3 )
-	!gtk3? ( x11-libs/gtk+:2 )
+	x11-libs/gtk+:2
 	>=dev-libs/glib-2.28:2
 	>=gnome-base/librsvg-2.0:2
 	>=mate-base/mate-file-manager-1.2.2

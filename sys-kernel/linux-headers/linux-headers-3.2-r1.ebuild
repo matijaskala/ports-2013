@@ -1,4 +1,6 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-kernel/linux-headers/linux-headers-3.2-r1.ebuild,v 1.2 2012/03/19 16:09:23 vapier Exp $
 
 EAPI="3"
 
@@ -11,7 +13,7 @@ PATCH_VER="3"
 SRC_URI="mirror://gentoo/gentoo-headers-base-${PV}.tar.xz"
 [[ -n ${PATCH_VER} ]] && SRC_URI="${SRC_URI} mirror://gentoo/gentoo-headers-${PV}-${PATCH_VER}.tar.xz"
 
-KEYWORDS="~*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux"
 
 DEPEND="app-arch/xz-utils
 	dev-lang/perl"

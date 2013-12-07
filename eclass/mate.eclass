@@ -1,11 +1,12 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 # @ECLASS: mate.eclass
 # @MAINTAINER:
 # micia@sabayon.org
-# @BLURB:
+# steev@gentoo.org
+# @BLURB: Privdes phases for MATE based packages
 # @DESCRIPTION:
 # Exports portage base functions used by ebuilds written for packages using the
 # MATE framework. For additional functions, see mate-utils.eclass.
@@ -201,16 +202,7 @@ mate_src_configure() {
 		fi
 	fi
 
-	# Enable gtk2/gtk3 depends on use for future support of MATE Desktop
-	if grep -q "with-gtk" configure; then
-		if use gtk3; then
-			G2CONF="${G2CONF} --with-gtk=3.0"
-		else
-			G2CONF="${G2CONF} --with-gtk=2.0"
-		fi
-	fi
-
-	econf "$@" ${G2CONF}
+	econf ${G2CONF} "$@"
 }
 
 # @FUNCTION: mate_src_compile

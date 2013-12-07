@@ -25,6 +25,9 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 pkg_setup() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	G2CONF="${G2CONF} $(use_enable test tests)"
 	DOCS="AUTHORS ChangeLog NEWS README"
 }

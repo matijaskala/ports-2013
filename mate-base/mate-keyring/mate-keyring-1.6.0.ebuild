@@ -14,12 +14,11 @@ HOMEPAGE="http://mate-desktop.org"
 LICENSE="GPL-2 LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="debug gtk3 pam test"
+IUSE="debug pam test"
 # USE=valgrind is probably not a good idea for the tree
 
 RDEPEND=">=dev-libs/glib-2.25:2
-	gtk3? ( x11-libs/gtk+:3 )
-	!gtk3? ( x11-libs/gtk+:2 )
+	x11-libs/gtk+:2
 	>=sys-apps/dbus-1.0
 	pam? ( virtual/pam )
 	>=dev-libs/libgcrypt-1.2.2
@@ -46,6 +45,7 @@ pkg_setup() {
 		$(use_enable pam)
 		$(use_with pam pam-dir $(getpam_mod_dir))
 		--with-root-certs="${EPREFIX}"/usr/share/ca-certificates/
+		--with-gtk=2.0
 		--enable-ssh-agent
 		--enable-gpg-agent"
 #		$(use_enable valgrind)

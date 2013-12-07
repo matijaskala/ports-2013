@@ -4,7 +4,7 @@ inherit eutils java-pkg-2
 
 DESCRIPTION="An educational tool for designing and simulating digital logic circuits."
 HOMEPAGE="http://ozark.hendrix.edu/~burch/logisim/"
-SRC_URI="mirror://sourceforge/circuit/${P}.jar"
+SRC_URI="mirror://sourceforge/circuit/2.7.x/${PV}/${PN}-generic-${PV}.jar"
 
 LICENSE="GPL-2"
 SLOT="0"

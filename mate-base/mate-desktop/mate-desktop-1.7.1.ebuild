@@ -44,6 +44,9 @@ PDEPEND=">=dev-python/pygtk-2.8:2
 
 #Disable desktop help due to file collision
 pkg_setup() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	python_set_active_version 2
 	python_pkg_setup
 	G2CONF="${G2CONF}

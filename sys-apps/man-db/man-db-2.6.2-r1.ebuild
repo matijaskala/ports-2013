@@ -1,8 +1,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="2"
+EAPI="4"
 
-inherit eutils
+inherit eutils user
 
 MAN_PKG="man-1.6g"
 MAN2HTML_SRC="http://primates.ximian.com/~flucifredi/man/${MAN_PKG}.tar.gz"
@@ -14,8 +14,8 @@ SRC_URI="http://download.savannah.nongnu.org/releases/man-db/${P}.tar.gz
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~*"
-IUSE="berkdb +gdbm nls zlib"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+IUSE="berkdb +gdbm nls static-libs zlib"
 
 RDEPEND="dev-libs/libpipeline
 	berkdb? ( sys-libs/db )
@@ -24,11 +24,12 @@ RDEPEND="dev-libs/libpipeline
 	|| ( sys-apps/groff >=app-doc/heirloom-doctools-080407-r2 )
 	zlib? ( sys-libs/zlib )
 	!sys-apps/man"
-DEPEND="
-	${RDEPEND}
+DEPEND="${RDEPEND}
+	virtual/pkgconfig
 	nls? ( sys-devel/gettext )"
 
 pkg_setup() {
+	# Create user now as Makefile in src_install does setuid/chown
 	enewgroup man 15
 	enewuser man 13 -1 /usr/share/man man
 }

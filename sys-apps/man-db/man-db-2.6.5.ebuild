@@ -14,7 +14,7 @@ SRC_URI="http://download.savannah.nongnu.org/releases/man-db/${P}.tar.xz
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~arm-linux ~x86-linux"
 IUSE="berkdb +gdbm nls static-libs zlib"
 
 RDEPEND="dev-libs/libpipeline
@@ -26,6 +26,7 @@ RDEPEND="dev-libs/libpipeline
 	!sys-apps/man"
 DEPEND="${RDEPEND}
 	app-arch/xz-utils
+	virtual/pkgconfig
 	nls? (
 		app-text/po4a
 		sys-devel/gettext
@@ -102,16 +103,15 @@ src_compile() {
 }
 
 src_install() {
-	cd "${S}"
-	emake install DESTDIR="${D}" || die
-	dodoc README ChangeLog NEWS docs/{HACKING,TODO}
+	default
+	dodoc docs/{HACKING,TODO}
 	prune_libtool_files
 
 	exeinto /etc/cron.daily
 	newexe "${FILESDIR}"/man-db.cron man-db #289884
 
 	keepdir /var/cache/man
-	fowners man:root /var/cache/man
+	fowners man:0 /var/cache/man
 	fperms 2755 /var/cache/man
 
 	# FL-258 Install just the man2html part of man.
@@ -127,7 +127,7 @@ pkg_preinst() {
 	if [[ ! -g ${EROOT}var/cache/man ]] ; then
 		einfo "Resetting permissions on ${EROOT}var/cache/man" #447944
 		mkdir -p "${EROOT}var/cache/man"
-		chown -R man:root "${EROOT}"var/cache/man
+		chown -R man:0 "${EROOT}"var/cache/man
 		find "${EROOT}"var/cache/man -type d '!' -perm /g=s -exec chmod 2755 {} +
 	fi
 }

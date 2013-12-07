@@ -38,6 +38,10 @@ DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
 
 pkg_setup() {
 	python_set_active_version 2
+
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	G2CONF="${G2CONF}
 		--enable-locations-compression
 		--disable-all-translations-in-one-xml

@@ -58,6 +58,10 @@ DEPEND="${COMMON_DEPEND}
 pkg_setup() {
 	# README is empty
 	DOCS="AUTHORS NEWS ChangeLog"
+
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	G2CONF="${G2CONF}
 		$(use_with libnotify)
 		$(use_enable debug)

@@ -30,6 +30,9 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.7.0"
 
 pkg_setup() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	G2CONF="${G2CONF}
 		$(use_enable libnotify)"
 	DOCS="AUTHORS ChangeLog HACKING NEWS NEWS.GNOME README THANKS TODO"

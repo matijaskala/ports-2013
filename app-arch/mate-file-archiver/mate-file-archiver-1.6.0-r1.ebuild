@@ -14,11 +14,10 @@ HOMEPAGE="http://mate-desktop.org"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="caja gtk3"
+IUSE="caja"
 
 # Doesn't build against gtk+-3 so remove useflag and dep for now.
-RDEPEND="gtk3? ( x11-libs/gtk+:3 )
-	!gtk3? ( x11-libs/gtk+:2 )
+RDEPEND="x11-libs/gtk+:2
 	>=dev-libs/glib-2.25.5:2
 	caja? ( >=mate-base/mate-file-manager-1.2.2 )"
 DEPEND="${RDEPEND}
@@ -33,6 +32,7 @@ pkg_setup() {
 		--disable-run-in-place
 		--disable-packagekit
 		--disable-deprecations
+		--with-gtk=2.0
 		$(use_enable caja caja-actions)"
 	DOCS="AUTHORS HACKING MAINTAINERS NEWS README TODO"
 }

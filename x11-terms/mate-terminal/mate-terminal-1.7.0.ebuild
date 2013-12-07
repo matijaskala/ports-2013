@@ -13,7 +13,7 @@ HOMEPAGE="http://mate-desktop.org"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm"
-IUSE="-gtk3"
+IUSE="gtk3"
 
 RDEPEND=">=dev-libs/glib-2.25.12:2
 	gtk3? ( x11-libs/gtk+:3 x11-libs/vte:2.90 )
@@ -30,4 +30,9 @@ DEPEND="${RDEPEND}
 	app-text/yelp-tools
 	>=app-text/scrollkeeper-0.3.11"
 
-DOCS="AUTHORS ChangeLog HACKING NEWS README"
+pkg_setup() {
+	DOCS="AUTHORS ChangeLog HACKING NEWS README"
+
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+}

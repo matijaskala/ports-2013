@@ -42,10 +42,14 @@ DEPEND="${RDEPEND}
 PDEPEND="mate? ( >=x11-themes/mate-icon-theme-1.2.0 )"
 
 pkg_setup() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	G2CONF="${G2CONF}
 		--disable-update-mimedb
 		--disable-packagekit
 		--enable-unique
+		${gtkapi}
 		$(use_enable introspection)
 		$(use_enable xmp)"
 	DOCS="AUTHORS ChangeLog* HACKING MAINTAINERS NEWS README THANKS TODO"

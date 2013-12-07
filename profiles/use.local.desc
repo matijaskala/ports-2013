@@ -1026,6 +1026,7 @@ app-text/evince:t1lib - Enable the Type-1 fonts for the built-in DVI viewer (med
 app-text/evince:xps - Enable XPS viewer using app-text/libgxps
 app-text/getxbook:ocr - Use app-text/tesseract for optical character recognition
 app-text/ghostscript-gpl:bindist - Disable dejavu support for binary distribution because of licensing issue
+app-text/glark:zip - Support for ZIP files using dev-ruby/rubyzip
 app-text/gtkspell:vala - Enable bindings for dev-lang/vala
 app-text/gtranslator:http - Enable support for open translation plugin using net-libs/libsoup
 app-text/hyperestraier:mecab - Enable app-text/mecab support for Estraier
@@ -1484,6 +1485,7 @@ dev-lang/mercury:erlang - Support Mercury Erlang grade
 dev-lang/mlton:binary - install a binary version (need to do this once to bootstrap, until smlnj is supported)
 dev-lang/mono:pax_kernel - Enable if the user plans to run the package under a pax enabled hardened kernel
 dev-lang/mono:xen - Make mono generate code that is considerably faster on xen VMs but slightly slower on for normal systems.
+dev-lang/nqp:parrot - Build the parrot backend (default)
 dev-lang/path64:assembler - Build PathAS
 dev-lang/path64:debugger - Build PathDB
 dev-lang/path64:native - Use EKOPath/Path64 for bootstraping
@@ -1516,6 +1518,7 @@ dev-lang/python:threads - Enable threading support. (DON'T DISABLE THIS UNLESS Y
 dev-lang/python:wide-unicode - Enable wide Unicode implementation which uses 4-byte Unicode characters. Switching of this USE flag changes ABI of Python and requires reinstallation of many Python modules. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
 dev-lang/python:wininst - Install Windows executables required to create an executable installer for MS Windows.
 dev-lang/qu-prolog:pedro - Pedro subscription/notification communications system
+dev-lang/rakudo:parrot - Build the parrot backend (default)
 dev-lang/rubinius:llvm - Build with llvm. Currently the package only builds against old versions of llvm.
 dev-lang/ruby:libedit - Use the dev-libs/libedit library to provide the readline extension, used for instance by the irb tool. This flag will take precedence over the readline USE flag. If neither libedit nor readline USE flags are enabled, the readline extension will not be built (and irb will lose line editing functionality).
 dev-lang/ruby:rdoc - Install dev-ruby/rdoc after installing Ruby.
@@ -1915,6 +1918,7 @@ dev-python/pymongo:mod_wsgi - Disable the C extension to work with mod_wsgi.
 dev-python/pypax:ptpax - Enable PT_PAX_FLAGS support.
 dev-python/pypax:xtpax - Enable XATTR_PAX_FLAGS support.
 dev-python/pyplusplus:indexing - Install indexing_suite_v2 to enhance boost python
+dev-python/pyplusplus:numpy - Generate code for dev-libs/boost-numpy to accelerate arrays
 dev-python/pypy:sandbox - Enable sandboxing functionality
 dev-python/pypy:shadowstack - Use a shadow stack for finding GC roots
 dev-python/pypy-bin:shadowstack - Use a shadow stack for finding GC roots
@@ -2253,7 +2257,6 @@ dev-vcs/git:curl - Support fetching and pushing (requires webdav too) over http:
 dev-vcs/git:gpg - Pull in gnupg for signing -- without gnupg, attempts at signing will fail at runtime!
 dev-vcs/git:gtk - Include the gitview contrib tool
 dev-vcs/git:highlight - GitWeb support for app-text/highlight
-dev-vcs/git:mozsha1 - Makes git use an optimized SHA1 routine from Mozilla that should be fast on non-x86 machines
 dev-vcs/git:ppcsha1 - Make use of a bundled routine that is optimized for the PPC arch
 dev-vcs/git:subversion - Include git-svn for dev-vcs/subversion support
 dev-vcs/git:webdav - Adds support for push'ing to HTTP/HTTPS repositories via DAV
@@ -6017,6 +6020,7 @@ sys-apps/flashrom:serprog - Enable Serial Flasher programmer
 sys-apps/flashrom:tools - Install additional tools
 sys-apps/flashrom:usbblaster - Enable support for Altera USB-Blaster dongles
 sys-apps/flashrom:wiki - Enable wiki informations, like supported devices etc.
+sys-apps/gawk:mpfr - use mpfr for high precision arithmetic (-M / --bignum)
 sys-apps/gnome-disk-utility:fat - Include FAT16/FAT32 support (sys-fs/dosfstools)
 sys-apps/gnome-disk-utility:nautilus - Enable gnome-base/nautilus extension.
 sys-apps/gnome-disk-utility:remote-access - Enable access to remote udisks daemons.
@@ -6841,6 +6845,7 @@ x11-libs/mx:glade - Build the dev-util/glade catalog files
 x11-libs/mx:introspection - Use dev-libs/gobject-introspection for introspection
 x11-libs/pixman:loongson2f - Enable Loongson2f MMI optimizations.
 x11-libs/pixman:mmxext - Enable MMX2 support.
+x11-libs/pixman:ssse3 - Enable SSSE3 support.
 x11-libs/qwt:mathml - Use the MathML renderer of the Qt solutions package.
 x11-libs/vte:glade - Provide integration with dev-util/glade.
 x11-libs/vte:introspection - Use dev-libs/gobject-introspection for introspection

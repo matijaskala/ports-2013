@@ -14,14 +14,13 @@ LICENSE="GPL-2 LGPL-2 FDL-1.1"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-IUSE="-gtk3 ipv6 elibc_FreeBSD systemd"
+IUSE="ipv6 elibc_FreeBSD systemd"
 
 # x11-misc/xdg-user-dirs{,-gtk} are needed to create the various XDG_*_DIRs, and
 # create .config/user-dirs.dirs which is read by glib to get G_USER_DIRECTORY_*
 # xdg-user-dirs-update is run during login (see 10-user-dirs-update-gnome below).
 RDEPEND=">=dev-libs/glib-2.16:2
-	gtk3? ( x11-libs/gtk+:3 )
-	!gtk3? ( x11-libs/gtk+:2 )
+	x11-libs/gtk+:2
 	>=dev-libs/dbus-glib-0.76
 	>=sys-power/upower-0.9.0
 	elibc_FreeBSD? ( dev-libs/libexecinfo )
@@ -52,6 +51,7 @@ pkg_setup() {
 	G2CONF="${G2CONF}
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
 		--with-default-wm=mate-wm
+		--with-gtk=2.0
 		$(use_enable ipv6)
 		$(use_with systemd)"
 	DOCS="AUTHORS ChangeLog NEWS README"

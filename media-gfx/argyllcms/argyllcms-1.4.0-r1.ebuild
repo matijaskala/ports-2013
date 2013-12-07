@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/argyllcms/argyllcms-1.4.0-r1.ebuild,v 1.5 2012/12/11 16:10:46 axs Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/argyllcms/argyllcms-1.4.0-r1.ebuild,v 1.6 2013/12/06 00:21:03 voyageur Exp $
 
 EAPI=5
 
-inherit base udev toolchain-funcs
+inherit base udev
 
 MY_P="Argyll_V${PV}"
 DESCRIPTION="Open source, ICC compatible color management system"
@@ -29,8 +29,7 @@ RDEPEND="media-libs/tiff
 	x11-libs/libXScrnSaver"
 DEPEND="${RDEPEND}
 	app-arch/unzip
-	dev-util/ftjam
-	virtual/pkgconfig"
+	dev-util/ftjam"
 
 S="${WORKDIR}/${MY_P}"
 

@@ -48,6 +48,9 @@ DEPEND="${RDEPEND}
 # gnome-base/gdm does not provide gnome.desktop anymore
 
 pkg_setup() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
 	# TODO: convert libnotify to a configure option
 	G2CONF="${G2CONF}
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
