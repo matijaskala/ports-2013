@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc/gcc-4.8.1-r1.ebuild,v 1.8 2013/11/04 02:29:58 mattst88 Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc/gcc-4.8.2.ebuild,v 1.1 2013/11/11 23:38:10 dirtyepic Exp $
 
-PATCH_VER="1.2"
+PATCH_VER="1.0"
 UCLIBC_VER="1.0"
 
 # Hardened gcc 4 stuff
-PIE_VER="0.5.7"
+PIE_VER="0.5.8"
 SPECS_VER="0.2.0"
 SPECS_GCC_VER="4.4.3"
 # arch/libc configurations known to be stable with {PIE,SSP}-by-default
@@ -63,9 +63,4 @@ pkg_setup() {
 
 pkg_postinst() {
 	toolchain_pkg_postinst
-
-	elog
-	elog "Packages failing to build with GCC 4.8 are tracked at"
-	elog "https://bugs.gentoo.org/461954"
-	elog
 }

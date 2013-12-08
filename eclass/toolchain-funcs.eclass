@@ -1,6 +1,6 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/toolchain-funcs.eclass,v 1.115 2012/07/26 16:43:59 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/toolchain-funcs.eclass,v 1.123 2013/10/12 21:31:01 vapier Exp $
 
 # @ECLASS: toolchain-funcs.eclass
 # @MAINTAINER:
@@ -17,8 +17,6 @@ if [[ ${___ECLASS_ONCE_TOOLCHAIN_FUNCS} != "recur -_+^+_- spank" ]] ; then
 ___ECLASS_ONCE_TOOLCHAIN_FUNCS="recur -_+^+_- spank"
 
 inherit multilib
-
-DESCRIPTION="Based on the ${ECLASS} eclass"
 
 # tc-getPROG <VAR [search vars]> <default> [tuple]
 _tc-getPROG() {
@@ -226,6 +224,12 @@ tc-export_build_env() {
 	: ${BUILD_CPPFLAGS:=}
 	: ${BUILD_LDFLAGS:=}
 	export BUILD_{C,CXX,CPP,LD}FLAGS
+
+	# Some packages use XXX_FOR_BUILD.
+	local v
+	for v in BUILD_{C,CXX,CPP,LD}FLAGS ; do
+		export ${v#BUILD_}_FOR_BUILD="${!v}"
+	done
 }
 
 # @FUNCTION: tc-env_build
@@ -359,12 +363,20 @@ ninj() { [[ ${type} == "kern" ]] && echo $1 || echo $2 ; }
 	local host=$2
 	[[ -z ${host} ]] && host=${CTARGET:-${CHOST}}
 
+	local KV=${KV:-${KV_FULL}}
+	[[ ${type} == "kern" ]] && [[ -z ${KV} ]] && \
+	ewarn "QA: Kernel version could not be determined, please inherit kernel-2 or linux-info"
+
 	case ${host} in
+		aarch64*)	ninj arm64 arm;;
 		alpha*)		echo alpha;;
 		arm*)		echo arm;;
 		avr*)		ninj avr32 avr;;
 		bfin*)		ninj blackfin bfin;;
+		c6x)		echo c6x;;
 		cris*)		echo cris;;
+		frv)		echo frv;;
+		hexagon)	echo hexagon;;
 		hppa*)		ninj parisc hppa;;
 		i?86*)
 			# Starting with linux-2.6.24, the 'x86_64' and 'i386'
@@ -378,9 +390,11 @@ ninj() { [[ ${type} == "kern" ]] && echo $1 || echo $2 ; }
 			;;
 		ia64*)		echo ia64;;
 		m68*)		echo m68k;;
+		metag)		echo metag;;
 		mips*)		echo mips;;
 		nios2*)		echo nios2;;
 		nios*)		echo nios;;
+		or32)		echo openrisc;;
 		powerpc*)
 			# Starting with linux-2.6.15, the 'ppc' and 'ppc64' trees
 			# have been unified into simply 'powerpc', but until 2.6.16,
@@ -402,6 +416,7 @@ ninj() { [[ ${type} == "kern" ]] && echo $1 || echo $2 ; }
 			fi
 			;;
 		s390*)		echo s390;;
+		score)		echo score;;
 		sh64*)		ninj sh64 sh;;
 		sh*)		echo sh;;
 		sparc64*)	ninj sparc64 sparc;;
@@ -409,6 +424,7 @@ ninj() { [[ ${type} == "kern" ]] && echo $1 || echo $2 ; }
 						&& ninj sparc64 sparc \
 						|| echo sparc
 					;;
+		tile*)		echo tile;;
 		vax*)		echo vax;;
 		x86_64*freebsd*) echo amd64;;
 		x86_64*)
@@ -420,6 +436,7 @@ ninj() { [[ ${type} == "kern" ]] && echo $1 || echo $2 ; }
 				ninj x86_64 amd64
 			fi
 			;;
+		xtensa*)	echo xtensa;;
 
 		# since our usage of tc-arch is largely concerned with
 		# normalizing inputs for testing ${CTARGET}, let's filter
@@ -446,6 +463,8 @@ tc-endian() {
 	host=${host%%-*}
 
 	case ${host} in
+		aarch64*be)	echo big;;
+		aarch64)	echo little;;
 		alpha*)		echo big;;
 		arm*b*)		echo big;;
 		arm*)		echo little;;
@@ -631,7 +650,15 @@ gen_usr_ldscript() {
 
 	# OUTPUT_FORMAT gives hints to the linker as to what binary format
 	# is referenced ... makes multilib saner
-	output_format=$($(tc-getCC) ${CFLAGS} ${LDFLAGS} -Wl,--verbose 2>&1 | sed -n 's/^OUTPUT_FORMAT("\([^"]*\)",.*/\1/p')
+	local flags=( ${CFLAGS} ${LDFLAGS} -Wl,--verbose )
+	if $(tc-getLD) --version | grep -q 'GNU gold' ; then
+		# If they're using gold, manually invoke the old bfd. #487696
+		local d="${T}/bfd-linker"
+		mkdir -p "${d}"
+		ln -sf $(which ${CHOST}-ld.bfd) "${d}"/ld
+		flags+=( -B"${d}" )
+	fi
+	output_format=$($(tc-getCC) "${flags[@]}" 2>&1 | sed -n 's/^OUTPUT_FORMAT("\([^"]*\)",.*/\1/p')
 	[[ -n ${output_format} ]] && output_format="OUTPUT_FORMAT ( ${output_format} )"
 
 	for lib in "$@" ; do

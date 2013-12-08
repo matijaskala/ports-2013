@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc/gcc-4.8.1-r1.ebuild,v 1.8 2013/11/04 02:29:58 mattst88 Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc/gcc-4.8.0.ebuild,v 1.10 2013/11/07 03:29:24 dirtyepic Exp $
 
-PATCH_VER="1.2"
+PATCH_VER="1.3"
 UCLIBC_VER="1.0"
 
 # Hardened gcc 4 stuff
-PIE_VER="0.5.7"
+PIE_VER="0.5.5"
 SPECS_VER="0.2.0"
 SPECS_GCC_VER="4.4.3"
 # arch/libc configurations known to be stable with {PIE,SSP}-by-default
@@ -45,8 +45,8 @@ src_unpack() {
 	toolchain_src_unpack
 
 	use vanilla && return 0
-	#Use -r1 for newer piepatchet that use DRIVER_SELF_SPECS for the hardened specs.
-	[[ ${CHOST} == ${CTARGET} ]] && epatch "${FILESDIR}"/gcc-spec-env-r1.patch
+
+	[[ ${CHOST} == ${CTARGET} ]] && epatch "${FILESDIR}"/gcc-spec-env.patch
 }
 
 pkg_setup() {
