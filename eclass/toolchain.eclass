@@ -1508,6 +1508,9 @@ toolchain_src_compile() {
 	mkdir -p "${WORKDIR}"/build
 	pushd "${WORKDIR}"/build > /dev/null
 
+	# HACK
+	unset ABI
+
 	einfo "Configuring ${PN} ..."
 	gcc_do_configure
 
@@ -1794,12 +1797,6 @@ gcc_quick_unpack() {
 	export HTB_GCC_VER=${HTB_GCC_VER:-${GCC_RELEASE_VER}}
 	export SPECS_GCC_VER=${SPECS_GCC_VER:-${GCC_RELEASE_VER}}
 
-	[[ -n ${MPC_VER} ]] && \
-	( unpack mpc-${MPC_VER}.tar.gz && mv ${WORKDIR}/mpc-${MPC_VER} ${S}/mpc )
-	[[ -n ${MPFR_VER} ]] && \
-	( unpack mpfr-${MPFR_VER}.tar.xz && mv ${WORKDIR}/mpfr-${MPFR_VER} ${S}/mpfr )
-	[[ -n ${GMP_VER} ]] && \
-	( unpack gmp-${GMP_VER}.tar.xz && mv ${WORKDIR}/gmp-${GMP_VER} ${S}/gmp )
 	if [[ -n ${GCC_A_FAKEIT} ]] ; then
 		unpack ${GCC_A_FAKEIT}
 	elif [[ -n ${PRERELEASE} ]] ; then
@@ -1830,6 +1827,16 @@ gcc_quick_unpack() {
 		fi
 		popd > /dev/null
 	fi
+
+	[[ -n ${MPC_VER} ]] && \
+		unpack mpc-${MPC_VER}.tar.gz && \
+		mv ${WORKDIR}/mpc-${MPC_VER} ${S}/mpc
+	[[ -n ${MPFR_VER} ]] && \
+		unpack mpfr-${MPFR_VER}.tar.xz && \
+		mv ${WORKDIR}/mpfr-${MPFR_VER} ${S}/mpfr
+	[[ -n ${GMP_VER} ]] && \
+		unpack gmp-${GMP_VER}.tar.xz && \
+		mv ${WORKDIR}/gmp-${GMP_VER} ${S}/gmp
 
 	[[ -n ${PATCH_VER} ]] && \
 		unpack gcc-${PATCH_GCC_VER}-patches-${PATCH_VER}.tar.bz2
