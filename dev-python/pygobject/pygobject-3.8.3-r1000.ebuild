@@ -15,7 +15,7 @@ HOMEPAGE="http://www.pygtk.org/"
 
 LICENSE="LGPL-2.1+"
 SLOT="3"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="+cairo examples test +threads"
 REQUIRED_USE="test? ( cairo )"
 

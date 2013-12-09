@@ -1,12 +1,14 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/glibc/glibc-2.11.3.ebuild,v 1.21 2013/04/05 00:25:16 vapier Exp $
 
-inherit eutils versionator libtool toolchain-funcs flag-o-matic gnuconfig multilib
+inherit eutils versionator toolchain-funcs flag-o-matic gnuconfig multilib multiprocessing
 
 DESCRIPTION="GNU libc6 (also called glibc2) C library"
 HOMEPAGE="http://www.gnu.org/software/libc/libc.html"
 
-LICENSE="LGPL-2"
-KEYWORDS="*"
+LICENSE="LGPL-2.1+ BSD HPND inner-net"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 sh sparc x86"
 RESTRICT="strip" # strip ourself #46186
 EMULTILIB_PKG="true"
 
@@ -20,16 +22,14 @@ RELEASE_VER=${PV}
 BRANCH_UPDATE=""
 SNAP_VER=""
 fi
-MANPAGE_VER=""                                 # pregenerated manpages
-INFOPAGE_VER=""                                # pregenerated infopages
 LIBIDN_VER=""                                  # it's integrated into the main tarball now
-PATCH_VER="2"                                  # Gentoo patchset
+PATCH_VER="3"                                  # Gentoo patchset
 PORTS_VER=${RELEASE_VER%.?}                    # version of glibc ports addon
 LT_VER=""                                      # version of linuxthreads addon
 NPTL_KERN_VER=${NPTL_KERN_VER:-"2.6.9"}        # min kernel version nptl requires
 #LT_KERN_VER=${LT_KERN_VER:-"2.4.1"}           # min kernel version linuxthreads requires
 
-IUSE="debug gd glibc-omitfp hardened multilib nls selinux profile vanilla crosscompile_opts_headers-only ${LT_VER:+glibc-compat20 nptl nptlonly}"
+IUSE="debug gd hardened multilib selinux profile vanilla crosscompile_opts_headers-only ${LT_VER:+glibc-compat20 nptl linuxthreads}"
 S=${WORKDIR}/glibc-${RELEASE_VER}${SNAP_VER:+-${SNAP_VER}}
 
 # Here's how the cross-compile logic breaks down ...
@@ -49,8 +49,8 @@ S=${WORKDIR}/glibc-${RELEASE_VER}${SNAP_VER:+-${SNAP_VER}}
 export CBUILD=${CBUILD:-${CHOST}}
 export CTARGET=${CTARGET:-${CHOST}}
 if [[ ${CTARGET} == ${CHOST} ]] ; then
-	if [[ ${CATEGORY/cross-} != ${CATEGORY} ]] ; then
-		export CTARGET=${CATEGORY/cross-}
+	if [[ ${CATEGORY} == cross-* ]] ; then
+		export CTARGET=${CATEGORY#cross-}
 	fi
 fi
 
@@ -59,22 +59,10 @@ fi
 is_crosscompile() {
 	[[ ${CHOST} != ${CTARGET} ]]
 }
-alt_libdir() {
-	if is_crosscompile ; then
-		echo /usr/${CTARGET}/$(get_libdir)
-	else
-		echo /$(get_libdir)
-	fi
-}
 
-if is_crosscompile ; then
-	SLOT="${CTARGET}-2.2"
-else
-	# Why SLOT 2.2 you ask yourself while sippin your tea ?
-	# Everyone knows 2.2 > 0, duh.
-	SLOT="2.2"
-	PROVIDE="virtual/libc"
-fi
+# Why SLOT 2.2 you ask yourself while sippin your tea ?
+# Everyone knows 2.2 > 0, duh.
+SLOT="2.2"
 
 # General: We need a new-enough binutils for as-needed
 # arch: we need to make sure our binutils/gcc supports TLS
@@ -86,18 +74,15 @@ DEPEND=">=sys-devel/gcc-3.4.4
 	ppc64? ( >=sys-devel/gcc-4.1.0 )
 	>=sys-devel/binutils-2.15.94
 	${LT_VER:+nptl? (} >=sys-kernel/linux-headers-${NPTL_KERN_VER} ${LT_VER:+)}
-	>=sys-devel/gcc-config-1.3.12
 	>=app-misc/pax-utils-0.1.10
 	virtual/os-headers
-	nls? ( sys-devel/gettext )
-	>=sys-apps/sandbox-1.2.18.1-r2
+	!<sys-apps/sandbox-1.2.18.1-r2
 	!<sys-apps/portage-2.1.2
 	selinux? ( sys-libs/libselinux )"
 RDEPEND="!sys-kernel/ps3-sources
-	nls? ( sys-devel/gettext )
 	selinux? ( sys-libs/libselinux )"
 
-if [[ ${CATEGORY/cross-} != ${CATEGORY} ]] ; then
+if [[ ${CATEGORY} == cross-* ]] ; then
 	DEPEND="${DEPEND} !crosscompile_opts_headers-only? ( ${CATEGORY}/gcc )"
 	[[ ${CATEGORY} == *-linux* ]] && DEPEND="${DEPEND} ${CATEGORY}/linux-headers"
 else
@@ -109,7 +94,7 @@ fi
 
 SRC_URI=$(
 	upstream_uris() {
-		echo mirror://gnu/glibc/$1 ftp://sources.redhat.com/pub/glibc/{releases,snapshots}/$1 mirror://gentoo/$1
+		echo mirror://gnu/glibc/$1 ftp://sourceware.org/pub/glibc/{releases,snapshots}/$1 mirror://gentoo/$1
 	}
 	gentoo_uris() {
 		local devspace="HTTP~vapier/dist/URI HTTP~azarah/glibc/URI"
@@ -130,8 +115,6 @@ SRC_URI=$(
 	[[ -n ${LT_VER}        ]] && upstream_uris ${TARNAME}-linuxthreads-${LT_VER}.tar.bz2
 	[[ -n ${BRANCH_UPDATE} ]] && gentoo_uris glibc-${RELEASE_VER}-branch-update-${BRANCH_UPDATE}.patch.bz2
 	[[ -n ${PATCH_VER}     ]] && gentoo_uris glibc-${RELEASE_VER}-patches-${PATCH_VER}.tar.bz2
-	[[ -n ${MANPAGE_VER}   ]] && gentoo_uris glibc-manpages-${MANPAGE_VER}.tar.bz2
-	[[ -n ${INFOPAGE_VER}  ]] && gentoo_uris glibc-infopages-${INFOPAGE_VER}.tar.bz2
 )
 
 # eblit-include [--skip] <function> [version]
@@ -143,14 +126,14 @@ eblit-include() {
 	local e v func=$1 ver=$2
 	[[ -z ${func} ]] && die "Usage: eblit-include <function> [version]"
 	for v in ${ver:+-}${ver} -${PVR} -${PV} "" ; do
-		e="${FILESDIR}/eblits-${PV}/${func}${v}.eblit"
+		e="${FILESDIR}/eblits/${func}${v}.eblit"
 		if [[ -e ${e} ]] ; then
 			source "${e}"
 			return 0
 		fi
 	done
 	${skipable} && return 0
-	die "Could not locate requested eblit '${func}' in ${FILESDIR}/eblits-${PV}/"
+	die "Could not locate requested eblit '${func}' in ${FILESDIR}/eblits/"
 }
 
 # eblit-run-maybe <function>
@@ -220,22 +203,4 @@ eblit-src_unpack-post() {
 			nscd/Makefile \
 			|| die "Failed to ensure nscd builds with ssp-all"
 	fi
-}
-
-maint_pkg_create() {
-	local base="/usr/local/src/gnu/glibc/glibc-${PV:0:1}_${PV:2:1}"
-	cd ${base}
-	local stamp=$(date +%Y%m%d)
-	local d
-	for d in libc ports ; do
-		#(cd ${d} && cvs up)
-		case ${d} in
-			libc)  tarball="${P}";;
-			ports) tarball="${PN}-ports-${PV}";;
-		esac
-		rm -f ${tarball}*
-		ln -sf ${d} ${tarball}
-		tar hcf - ${tarball} --exclude-vcs | lzma > "${T}"/${tarball}.tar.lzma
-		du -b "${T}"/${tarball}.tar.lzma
-	done
 }

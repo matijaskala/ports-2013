@@ -13,7 +13,7 @@ inherit eutils kde4-base multilib portability python toolchain-funcs
 DESCRIPTION="Python bindings for KDE4"
 HOMEPAGE="http://techbase.kde.org/Development/Languages/Python"
 
-KEYWORDS="~* amd64"
+KEYWORDS="*"
 IUSE="debug doc examples semantic-desktop"
 
 RDEPEND="
