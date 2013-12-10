@@ -1,15 +1,16 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/eselect-python/eselect-python-99999999.ebuild,v 1.9 2013/03/22 03:25:53 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/eselect-python/eselect-python-99999999.ebuild,v 1.10 2013/12/10 17:45:14 floppym Exp $
 
 # Keep the EAPI low here because everything else depends on it.
 # We want to make upgrading simpler.
 
 if [[ ${PV} == "99999999" ]] ; then
+	inherit autotools git-r3
 	EGIT_REPO_URI="git://git.overlays.gentoo.org/proj/${PN}.git"
-	inherit autotools git-2
 else
-	SRC_URI="mirror://gentoo/${P}.tar.bz2"
+	SRC_URI="mirror://gentoo/${P}.tar.bz2
+		http://dev.gentoo.org/~floppym/dist/${P}.tar.bz2"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 fi
 
@@ -30,7 +31,7 @@ fi
 
 src_unpack() {
 	if [[ ${PV} == "99999999" ]] ; then
-		git-2_src_unpack
+		git-r3_src_unpack
 		cd "${S}"
 		eautoreconf
 	else

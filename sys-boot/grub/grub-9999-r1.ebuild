@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/grub-9999-r1.ebuild,v 1.4 2013/12/04 00:46:37 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/grub-9999-r1.ebuild,v 1.6 2013/12/09 23:07:13 floppym Exp $
 
 EAPI=5
 
@@ -10,7 +10,7 @@ if [[ ${PV} == 9999 ]]; then
 fi
 
 if [[ -n ${GRUB_AUTOGEN} ]]; then
-	PYTHON_COMPAT=( python{2_6,2_7} )
+	PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3} )
 	inherit python-any-r1
 fi
 
@@ -48,7 +48,7 @@ HOMEPAGE="http://www.gnu.org/software/grub/"
 # Includes licenses for dejavu and unifont
 LICENSE="GPL-3 truetype? ( BitstreamVera GPL-2-with-font-exception )"
 SLOT="2"
-IUSE="custom-cflags debug device-mapper doc efiemu mount +multislot nls static sdl test truetype libzfs"
+IUSE="debug device-mapper doc efiemu mount +multislot nls static sdl test truetype libzfs"
 
 GRUB_ALL_PLATFORMS=(
 	# everywhere:
@@ -228,8 +228,14 @@ grub_configure() {
 }
 
 src_configure() {
-	use custom-cflags || unset CCASFLAGS CFLAGS CPPFLAGS LDFLAGS
-	use static && export HOST_LDFLAGS="${HOST_LDFLAGS} -static"
+	# We don't want to leak flags onto boot code.
+	export HOST_CCASFLAGS=${CCASFLAGS}
+	export HOST_CFLAGS=${CFLAGS}
+	export HOST_CPPFLAGS=${CPPFLAGS}
+	export HOST_LDFLAGS=${LDFLAGS}
+	unset CCASFLAGS CFLAGS CPPFLAGS LDFLAGS
+
+	use static && HOST_LDFLAGS+=" -static"
 
 	if version_is_at_least 4.8 "$(gcc-version)"; then
 		export TARGET_LDFLAGS+=" -fuse-ld=bfd"

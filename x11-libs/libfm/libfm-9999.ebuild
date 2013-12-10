@@ -1,31 +1,30 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/libfm/libfm-9999.ebuild,v 1.34 2013/11/17 11:51:31 hwoarang Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-libs/libfm/libfm-9999.ebuild,v 1.36 2013/12/10 19:08:00 hwoarang Exp $
 
 EAPI=5
 
-EGIT_REPO_URI="git://pcmanfm.git.sourceforge.net/gitroot/pcmanfm/${PN}"
-
+EGIT_REPO_URI="https://github.com/lxde/${PN}"
+# master seems way too unstable for us to use
+EGIT_BRANCH="1.1"
 inherit autotools git-2 fdo-mime vala
 
 DESCRIPTION="A library for file management"
 HOMEPAGE="http://pcmanfm.sourceforge.net/"
 
 LICENSE="GPL-2"
-SLOT="0/4.0.0" #copy ABI_VERSION because it seems upstream change it randomly
+SLOT="0/4.7.1" #copy ABI_VERSION because it seems upstream change it randomly
 IUSE="debug doc examples vala"
 KEYWORDS=""
 
 COMMON_DEPEND=">=dev-libs/glib-2.18:2
 	>=x11-libs/gtk+-2.16:2
-	>=lxde-base/menu-cache-0.3.2:=
-	!lxde-base/lxshortcut"
+	>=lxde-base/menu-cache-0.3.2:="
 RDEPEND="${COMMON_DEPEND}
 	x11-misc/shared-mime-info
 	|| ( gnome-base/gvfs[udev,udisks] gnome-base/gvfs[udev,gdu] )"
 DEPEND="${COMMON_DEPEND}
-	>=dev-lang/vala-0.14.0
-	dev-util/gtk-doc-am
+	vala? ( $(vala_depend) )
 	doc? (
 		dev-util/gtk-doc
 	)
@@ -37,23 +36,22 @@ DOCS=( AUTHORS TODO )
 
 src_prepare() {
 	if ! use doc; then
-		sed -ie "/^SUBDIRS_DOCS/d" Makefile.am || die "sed failed"
-		sed -ie "/^[[:space:]]*docs/d" configure.ac || die "sed failed"
+		sed -ie '/SUBDIRS=/s#docs##' "${S}"/Makefile.am || die "sed failed"
+		sed -ie '/^[[:space:]]*docs/d' configure.ac || die "sed failed"
 	else
 		gtkdocize --copy || die
 	fi
+	sed -i -e "s:-O0::" -e "/-DG_ENABLE_DEBUG/s: -g::" \
+		configure.ac || die "sed failed"
+
 	intltoolize --force --copy --automake || die
 	#disable unused translations. Bug #356029
 	for trans in app-chooser ask-rename exec-file file-prop preferred-apps \
 		progress;do
 		echo "data/ui/"${trans}.ui >> po/POTFILES.in
 	done
-	sed -i -e "s:-O0::" -e "/-DG_ENABLE_DEBUG/s: -g::" "${S}"/configure.ac || die
 	#Remove -Werror for automake-1.12. Bug #421101
 	sed -i "s:-Werror::" configure.ac || die
-	# Drop the symlink. We will create it later on. 439580
-	sed -i "/@LN_S@ @PACKAGE@-@FMLIBVER@/d" src/Makefile.am \
-		|| die "failed to remove the includedir symlink"
 
 	# subslot sanity check
 	local sub_slot=${SLOT#*/}
@@ -88,9 +86,13 @@ src_configure() {
 src_install() {
 	default
 	find "${D}" -name '*.la' -exec rm -f '{}' +
-	# 439570
-	[[ -d ${D}/usr/include/${PN} ]] \
-		&& rm -r ${D}/usr/include/${PN}
+	# Remove broken symlink #439570
+	# Sometimes a directory is created instead of a symlink. No idea why...
+	# It is wrong anyway. We expect a libfm-1.0 directory and then a libfm
+	# symlink to it.
+	if [[ -h ${D}/usr/include/${PN} || -d ${D}/usr/include/${PN} ]]; then
+		rm -r "${D}"/usr/include/${PN}
+	fi
 }
 
 pkg_preinst() {
