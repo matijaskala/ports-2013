@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-1.8.3.2-r1.ebuild,v 1.8 2013/12/09 17:11:03 zlogene Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-1.8.3.2-r1.ebuild,v 1.10 2013/12/11 10:39:17 pinkbyte Exp $
 
 EAPI=5
 
@@ -32,7 +32,7 @@ if [[ ${PV} != *9999 ]]; then
 			${SRC_URI_KORG}/${PN}-htmldocs-${DOC_VER}.tar.${SRC_URI_SUFFIX}
 			${SRC_URI_GOOG}/${PN}-htmldocs-${DOC_VER}.tar.${SRC_URI_SUFFIX}
 			)"
-	KEYWORDS="alpha amd64 ~arm hppa ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	KEYWORDS="alpha amd64 arm hppa ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 else
 	SRC_URI=""
 	KEYWORDS=""
@@ -495,10 +495,12 @@ src_test() {
 	local tests_cvs="t9200-git-cvsexportcommit.sh \
 					t9400-git-cvsserver-server.sh \
 					t9401-git-cvsserver-crlf.sh \
+					t9402-git-cvsserver-refs.sh \
 					t9600-cvsimport.sh \
 					t9601-cvsimport-vendor-branch.sh \
 					t9602-cvsimport-branches-tags.sh \
-					t9603-cvsimport-patchsets.sh"
+					t9603-cvsimport-patchsets.sh \
+					t9604-cvsimport-timestamps.sh"
 	local tests_perl="t3701-add-interactive.sh \
 					t5502-quickfetch.sh \
 					t5512-ls-remote.sh \

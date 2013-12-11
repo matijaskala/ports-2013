@@ -1,7 +1,9 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/zlib/zlib-1.2.6.ebuild,v 1.5 2013/03/03 09:18:24 vapier Exp $
 
 AUTOTOOLS_AUTO_DEPEND="no"
-inherit autotools eutils toolchain-funcs
+inherit autotools eutils toolchain-funcs multilib
 
 DESCRIPTION="Standard (de)compression library"
 HOMEPAGE="http://www.zlib.net/"
@@ -11,7 +13,7 @@ SRC_URI="http://zlib.net/${P}.tar.gz
 
 LICENSE="ZLIB"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 IUSE="minizip static-libs"
 
 DEPEND="minizip? ( ${AUTOTOOLS_DEPEND} )"
@@ -74,9 +76,9 @@ src_install() {
 	*)
 		emake install DESTDIR="${D}" LDCONFIG=: || die
 		gen_usr_ldscript -a z
-		sed_macros "${D}"/usr/include/*.h
 		;;
 	esac
+	sed_macros "${D}"/usr/include/*.h
 
 	dodoc FAQ README ChangeLog doc/*.txt
 

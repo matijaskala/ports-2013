@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/emacspeak/emacspeak-9999.ebuild,v 1.6 2013/07/09 02:25:08 williamh Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-accessibility/emacspeak/emacspeak-9999.ebuild,v 1.7 2013/12/11 01:20:33 teiresias Exp $
 
 EAPI=5
 
@@ -49,14 +49,28 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" install
+	rm "${D}/usr/bin/emacspeak"
 	if use espeak; then
 		pushd servers/linux-espeak > /dev/null || die
 		emake DESTDIR="${D}" install
 		popd > /dev/null || die
 	fi
+	install -dm755 "${D}/usr/$(get_libdir)/emacspeak" || die
+	mv "${D}/usr/share/emacs/site-lisp/emacspeak/servers" \
+		"${D}/usr/$(get_libdir)/emacspeak/servers" || die
+	dosym "/usr/$(get_libdir)/emacspeak/servers" \
+		/usr/share/emacs/site-lisp/emacspeak/servers
 	dodoc README etc/NEWS* etc/FAQ etc/COPYRIGHT
 	dohtml -r install-guide user-guide
 	cd "${D}/usr/share/emacs/site-lisp/${PN}"
 	rm -rf README etc/NEWS* etc/FAQ etc/COPYRIGHT install-guide \
 		user-guide || die
+}
+
+pkg_postinst() {
+	elog "As of version 39.0 and later, the /usr/bin/emacspeak"
+	elog "shell script has been removed downstream in Gentoo."
+	elog "You should launch emacspeak by another method, for instance"
+	elog " by adding the following to your ~/.emacs file:"
+	elog '(load "/usr/share/emacs/site-lisp/emacspeak/lisp/emacspeak-setup.el")'
 }
