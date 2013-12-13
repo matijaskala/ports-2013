@@ -141,6 +141,9 @@ src_prepare() {
 
 	eautoconf
 	eautoheader
+
+	# http://bugs.python.org/issue19966
+	touch Include/Python-ast.h Python/Python-ast.c
 }
 
 src_configure() {

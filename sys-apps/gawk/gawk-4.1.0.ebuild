@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/gawk/gawk-4.1.0.ebuild,v 1.4 2013/12/07 06:45:27 vapier Exp $
 
 EAPI="4"
 
@@ -10,29 +12,34 @@ SRC_URI="mirror://gnu/gawk/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
-IUSE="nls readline"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+IUSE="mpfr nls readline"
 
-# older gawk's provided shared lib for baselayout-1
-RDEPEND="!<sys-apps/baselayout-2.0.1
-	readline? ( sys-libs/readline )
-	dev-libs/mpfr"
+RDEPEND="mpfr? ( dev-libs/mpfr )
+	readline? ( sys-libs/readline )"
 DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
 src_prepare() {
+	epatch "${FILESDIR}/${PN}-4.1.0-ports.patch" #490266
+
 	# use symlinks rather than hardlinks, and disable version links
 	sed -i \
 		-e '/^LN =/s:=.*:= $(LN_S):' \
 		-e '/install-exec-hook:/s|$|\nfoo:|' \
-		Makefile.in doc/Makefile.in
+		Makefile.in doc/Makefile.in || die
 	sed -i '/^pty1:$/s|$|\n_pty1:|' test/Makefile.in #413327
+	# disable pointless build time hack that breaks cross-compiling #493362
+	sed -i \
+		-e '/check-recursive all-recursive: check-for-shared-lib-support/d' \
+		extension/Makefile.in || die
 }
 
 src_configure() {
 	export ac_cv_libsigsegv=no
 	econf \
 		--libexec='$(libdir)/misc' \
+		$(use_with mpfr) \
 		$(use_enable nls) \
 		$(use_with readline)
 }
