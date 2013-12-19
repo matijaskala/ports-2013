@@ -1,9 +1,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4-python
+EAPI=4
 
-PYTHON_MULTIPLE_ABIS=1
-PYTHON_RESTRICTED_ABIS="3.* *-jython *-pypy-*"
+PYTHON_DEPEND=2
+SUPPORT_PYTHON_ABIS=1
+RESTRICT_PYTHON_ABIS="3.* *-jython *-pypy-*"
 
 inherit distutils
 
@@ -13,9 +14,9 @@ SRC_URI="http://pypi.python.org/packages/source/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~*"
 IUSE=""
 
-DEPEND="$(python_abi_depend dev-python/setuptools)"
-RDEPEND="$(python_abi_depend dev-python/boto) ${DEPEND}"
+DEPEND="dev-python/setuptools"
+RDEPEND="dev-python/boto ${DEPEND}"
 

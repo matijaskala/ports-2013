@@ -1,9 +1,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4-python
+EAPI=4
 
-PYTHON_MULTIPLE_ABIS=1
-PYTHON_RESTRICTED_ABIS="3.[2-9]"
+PYTHON_DEPEND=2
+SUPPORT_PYTHON_ABIS=1
+RESTRICT_PYTHON_ABIS="3.[2-9]"
 
 inherit distutils
 
@@ -15,10 +16,10 @@ SRC_URI="http://pypi.python.org/packages/source/${PN:0:1}/${PN}/${P}.zip"
 
 LICENSE="PSF ZPL"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~*"
 IUSE=""
 
-DEPEND="$(python_abi_depend dev-python/setuptools) 
+DEPEND="dev-python/setuptools
 	    app-arch/unzip"
 RDEPEND="${DEPEND}"
 

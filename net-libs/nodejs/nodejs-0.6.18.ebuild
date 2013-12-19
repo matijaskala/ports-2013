@@ -1,4 +1,4 @@
-EAPI="4-python"
+EAPI="3"
 
 inherit eutils
 

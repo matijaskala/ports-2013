@@ -1,8 +1,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5-progress"
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.* *-jython *-pypy-*"
+EAPI=3
+PYTHON_DEPEND="2"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="3.*"
 
 inherit gnome2 distutils
 
@@ -12,19 +13,24 @@ SRC_URI="http://launchpad.net/${PN}/stable/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="~amd64 ~x86"
 IUSE="pulseaudio"
 
-DEPEND="$(python_abi_depend dev-python/python-distutils-extra)"
+DEPEND="dev-python/python-distutils-extra"
 RDEPEND="x11-libs/gtk+:3[introspection]
 	dev-python/gst-python:0.10
-	$(python_abi_depend dev-python/pycairo dev-python/pyxdg dev-python/pygobject:3 dev-python/pycurl dev-python/gdata) 
+	dev-python/pycairo
+	dev-python/pygobject:3
+	dev-python/pyxdg
+	dev-python/gdata
+	dev-python/pycurl
 	media-libs/gst-plugins-good:0.10
 	media-plugins/gst-plugins-x264:0.10
 	media-plugins/gst-plugins-ximagesrc:0.10
 	pulseaudio? ( media-sound/pulseaudio )
 	virtual/python-argparse
-	virtual/ffmpeg"
+	virtual/ffmpeg
+"
 
 pkg_setup() {
 	python_pkg_setup

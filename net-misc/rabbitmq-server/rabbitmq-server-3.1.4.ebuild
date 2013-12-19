@@ -1,35 +1,41 @@
-EAPI="4-python"
-PYTHON_DEPEND="<<2:2.6>>"
-inherit eutils python
+# Copyright 1999-2013 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-misc/rabbitmq-server/rabbitmq-server-3.1.4.ebuild,v 1.2 2013/09/05 19:02:09 mgorny Exp $
+
+EAPI="5"
+PYTHON_DEPEND="2"
+
+PYTHON_COMPAT=( python{2_6,2_7} )
+
+inherit eutils python-single-r1 systemd
 
 DESCRIPTION="RabbitMQ is a high-performance AMQP-compliant message broker written in Erlang."
 HOMEPAGE="http://www.rabbitmq.com/"
 SRC_URI="http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/rabbitmq-server-${PV}.tar.gz"
 
-LICENSE="MPL-1.1"
+LICENSE="GPL-2 MPL-1.1"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="=dev-lang/erlang-15*"
+RDEPEND="dev-lang/erlang"
 DEPEND="${RDEPEND}
 	app-arch/zip
 	app-arch/unzip
 	app-text/docbook-xml-dtd:4.5
 	app-text/xmlto
-	dev-libs/libxslt 
+	dev-libs/libxslt
 	dev-python/simplejson
-	"
-# above simplejson dep could be improved -- ask Arfrever
+"
 
 pkg_setup() {
 	enewgroup rabbitmq
 	enewuser rabbitmq -1 -1 /var/lib/rabbitmq rabbitmq
-	python_set_active_version 2
+	python-single-r1_pkg_setup
 }
 
 src_compile() {
-	emake all docs_all || die "emake all failed"
+	emake all docs_all
 	gunzip docs/*.gz
 }
 
@@ -54,7 +60,7 @@ src_install() {
 
 	# create the directory where our log file will go.
 	diropts -m 0770 -o rabbitmq -g rabbitmq
-	keepdir /var/log/rabbitmq
+	keepdir /var/log/rabbitmq /etc/rabbitmq
 
 	# create the mnesia directory
 	diropts -m 0770 -o rabbitmq -g rabbitmq
@@ -62,6 +68,7 @@ src_install() {
 
 	# install the init script
 	newinitd "${FILESDIR}"/rabbitmq-server.init-r3 rabbitmq
+	systemd_dounit "${FILESDIR}/rabbitmq.service"
 
 	# install documentation
 	doman docs/*.[15]
@@ -79,6 +86,11 @@ pkg_preinst() {
 		elog "  usermod -d /var/lib/rabbitmq rabbitmq"
 		elog "  chown rabbitmq:rabbitmq -R /var/lib/rabbitmq"
 		elog
+	elif has_version "<net-misc/rabbitmq-server-2.1.1"; then
+		elog "IMPORTANT UPGRADE NOTICE:"
+		elog
+		elog "Please read release notes before upgrading:"
+		elog
+		elog "http://www.rabbitmq.com/release-notes/README-3.0.0.txt"
 	fi
 }
-

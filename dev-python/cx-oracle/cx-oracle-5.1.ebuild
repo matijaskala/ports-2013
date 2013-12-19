@@ -1,8 +1,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="4-python"
+EAPI="4"
 
-PYTHON_MULTIPLE_ABIS="1"
+PYTHON_DEPEND=2
+SUPPORT_PYTHON_ABIS="1"
 PYTHON_MODNAME="cx_Oracle"
 
 inherit distutils
@@ -15,7 +16,7 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
 
 LICENSE="Computronix"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="doc examples"
 
 DEPEND=">=dev-db/oracle-instantclient-basic-10.2.0.3"
@@ -35,11 +36,6 @@ distutils_src_compile_pre_hook() {
 
 distutils_src_install_pre_hook() {
 	set_global_options
-}
-
-pkg_postinst() {
-	return
-	# no python_mod_optimize
 }
 
 src_install() {
