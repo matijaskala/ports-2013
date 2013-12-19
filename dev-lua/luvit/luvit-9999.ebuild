@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lua/luvit/luvit-9999.ebuild,v 1.3 2013/06/30 20:56:18 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lua/luvit/luvit-9999.ebuild,v 1.4 2013/12/14 14:13:10 hasufell Exp $
 
 EAPI=5
 
@@ -18,7 +18,7 @@ IUSE="bundled-libs examples"
 # luvit Apache-2.0
 # luajit MIT
 # yajl BSD
-LICENSE="Apache-2.0 !bundled-libs? ( BSD MIT )"
+LICENSE="Apache-2.0 bundled-libs? ( BSD MIT )"
 
 # fails in portage environment
 # succeeds if run manually
@@ -71,6 +71,8 @@ src_configure() {
 
 src_compile() {
 	tc-export CC AR
+
+	emake -C deps/cares
 
 	myemakeargs=(
 		DEBUG=0

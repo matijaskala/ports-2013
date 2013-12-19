@@ -1,109 +1,245 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-9999.ebuild,v 1.5 2013/11/03 03:07:32 mrueg Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-9999.ebuild,v 1.6 2013/12/15 17:19:08 zerochaos Exp $
 
-EAPI="3"
-inherit eutils subversion
+EAPI="5"
+inherit eutils
 
-ESVN_REPO_URI="https://metasploit.com/svn/framework3/trunk"
+#MY_P=${PN/metasploit/framework}-${PV}
+
+if [[ ${PV} == "9999" ]] ; then
+	EGIT_REPO_URI="https://github.com/rapid7/metasploit-framework.git"
+	inherit git-r3
+	KEYWORDS=""
+#	S="${WORKDIR}/${MY_P}"
+else
+	#https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
+	SRC_URI="http://downloads.metasploit.com/data/releases/archive/framework-${PV}.tar.bz2"
+	KEYWORDS="~amd64 ~arm ~x86"
+	S="${WORKDIR}"/msf3
+fi
 
 DESCRIPTION="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
 HOMEPAGE="http://www.metasploit.org/"
-
+SLOT="9999"
 LICENSE="BSD"
-SLOT="4.0"
-KEYWORDS=""
-IUSE="gui mysql postgres"
+IUSE="development +java lorcon +pcap test"
 
-# Note we use bundled gems (see data/msfweb/vendor/rails/) as upstream voted for
-# such solution, bug #247787
-RDEPEND="dev-lang/ruby
-	dev-ruby/rubygems
-	dev-ruby/kissfft
-	gui? ( virtual/jre )
-	mysql? ( dev-ruby/mysql-ruby
-		dev-ruby/activerecord[mysql] )
-	postgres? ( dev-ruby/activerecord[postgres] )"
-DEPEND=""
+#multiple known bugs with tests reported upstream and ignored
+RESTRICT="test"
 
-QA_PRESTRIPPED="
-	usr/lib/${PN}${SLOT}/data/msflinker_linux_x86.bin
-	usr/lib/${PN}${SLOT}/data/templates/template_armle_linux.bin
-	usr/lib/${PN}${SLOT}/data/templates/template_x86_linux.bin"
+COMMON_DEPEND="dev-db/postgresql-server
+	dev-lang/ruby:1.9[ssl]
+	|| ( dev-ruby/activesupport:3.1[ruby_targets_ruby19] dev-ruby/activesupport:3.2[ruby_targets_ruby19] )
+	dev-ruby/activerecord:3.2[ruby_targets_ruby19]
+	dev-ruby/json[ruby_targets_ruby19]
+	>=dev-ruby/metasploit_data_models-0.16.6[ruby_targets_ruby19]
+	dev-ruby/msgpack[ruby_targets_ruby19]
+	dev-ruby/nokogiri[ruby_targets_ruby19]
+	dev-ruby/builder:3[ruby_targets_ruby19]
+	>=dev-ruby/pg-0.11[ruby_targets_ruby19]
+	>=dev-ruby/packetfu-1.1.9[ruby_targets_ruby19]
+	dev-ruby/robots[ruby_targets_ruby19]
+	dev-ruby/kissfft[ruby_targets_ruby19]
+	>=app-crypt/johntheripper-1.7.9-r1[-minimal]
+	net-analyzer/nmap
+	!arm? ( java? ( dev-ruby/rjb[ruby_targets_ruby19] ) )
+	pcap? ( dev-ruby/pcaprub[ruby_targets_ruby19]
+		dev-ruby/network_interface[ruby_targets_ruby19] )
+	lorcon? ( net-wireless/lorcon[ruby] )
+	dev-ruby/bundler[ruby_targets_ruby19]
+	development? ( dev-ruby/redcarpet[ruby_targets_ruby19]
+			dev-ruby/yard[ruby_targets_ruby19]
+			dev-ruby/rake[ruby_targets_ruby19]
+			>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19] )"
+DEPEND="${COMMON_DEPEND}
+	test? (	>=dev-ruby/factory_girl-4.1.0[ruby_targets_ruby19]
+		dev-ruby/database_cleaner[ruby_targets_ruby19]
+		>=dev-ruby/rspec-2.12[ruby_targets_ruby19]
+		dev-ruby/shoulda-matchers[ruby_targets_ruby19]
+		dev-ruby/timecop[ruby_targets_ruby19] )
+	"
+		#>=dev-ruby/rake-10.0.0[ruby_targets_ruby19] re-add when in gentoo. I'm not allowed to add it :-(
 
-QA_EXECSTACK="
-	usr/lib/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin"
-QA_WX_LOAD="
-	usr/lib/${PN}${SLOT}/data/templates/template_*_linux.bin"
+RDEPEND="${COMMON_DEPEND}
+	>=app-admin/eselect-metasploit-0.10"
 
-S=${WORKDIR}/msf3
+RESTRICT="strip"
 
-src_unpack() {
-	subversion_fetch
+QA_PREBUILT="
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_armle_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsbe_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_mipsle_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_sniffer.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_armle_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_solaris.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x64_linux.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/templates/template_x86_bsd.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/msflinker_linux_x86.bin
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_sniffer.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_networkpug.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/meterpreter/ext_server_stdapi.lso
+	usr/$(get_libdir)/${PN}${SLOT}/data/exploits/CVE-2013-2171.bin
+	"
+
+pkg_setup() {
+	if use test; then
+		su postgres -c "dropdb msf_test_database" #this is intentionally allowed to fail
+		su postgres -c "createuser msf_test_user -d -S -R"
+		if [ $? -ne 0 ]; then
+			su postgres -c "dropuser msf_test_user" || die
+			su postgres -c "createuser msf_test_user -d -S -R" || die
+		fi
+		su postgres -c "createdb --owner=msf_test_user msf_test_database" || die
+	fi
 }
 
-src_configure() {
-	[[ "${ESVN_REVISION}" == "" ]] \
-		&& find "${S}" -type d -name ".svn" -print0 | xargs -0 -n1 rm -R
+src_prepare() {
+	# add psexec patch from pull request 2657 to allow custom exe templates from any files, bypassing most AVs
+	epatch "${FILESDIR}/agix_psexec_pull-2657.patch"
+	#so much cruft is bundled with msf that we will fix it in src_prepare to make intentions more clear
 
+	#stop asking about bloody bundler
+	#sed -i "/require 'bundler\/setup'/d" lib/msfenv.rb
+
+	#unbundle johntheripper, at least it now defaults to running the system version
+	rm -rf "${S}"/data/john/run.*
+	rm -rf "${S}"/data/john/src.tar.bz2
+	#remove random "cpuinfo" binaries which a only needed to detect which bundled john to run
+	rm -rf "${S}"/data/cpuinfo
+
+	#remove random included sources
+	rm -rf "${S}"/external/source
+
+	#remove unused "external" modules
+	rm -rf "${S}"/external/ruby-kissfft
+	rm -rf "${S}"/external/ruby-lorcon
+	rm -rf "${S}"/external/ruby-lorcon2
+
+	#remove unneeded ruby bundler versioning files
+	#Gemfile.lock contains the versions tested by the msf team but not the hard requirements
+	#we regen this file with src_test
+	rm -f "${S}"/Gemfile.lock
+	#The Gemfile contains real known deps, we keep it for use in src_test
+	#rm -f "${S}"/Gemfile
+	#now we edit the Gemfile based on use flags
+	#even if we pass --without=blah bundler still calculates the deps and messes us up
+	if ! use pcap; then
+		sed -i -e "/^group :pcap do/,/^end$/d" Gemfile || die
+	fi
+	if ! use development; then
+		sed -i -e "/^group :development do/,/^end$/d" Gemfile || die
+	fi
+	if ! use test; then
+		sed -i -e "/^group :test/,/^end$/d" Gemfile || die
+	fi
+	if ! use test && ! use development; then
+		sed -i -e "/^group :development/,/^end$/d" Gemfile || die
+	fi
+	if use test; then
+		#We don't need simplecov
+		sed -i -e "s#gem 'simplecov', '0.5.4', :require => false##" Gemfile || die
+		sed -i -e "s#require 'simplecov'##" spec/spec_helper.rb || die
+	fi
+	bundle install --local || die
+	bundle check || die
+
+	#they removed bundled armitage from releases so let's just keep it external
+	rm -rf "${S}"/armitage "${S}"/data/armitage
+
+	#whiles we are commiting fixes for filth, let's bogart msfupdate
 	rm "${S}"/msfupdate
-	chmod +x "${S}"/msf*
+	echo "#!/bin/sh" > "${S}"/msfupdate
+	echo "echo \"[*]\"" >> "${S}"/msfupdate
+	echo "echo \"[*] Attempting to update the Metasploit Framework...\"" >> "${S}"/msfupdate
+	echo "echo \"[*]\"" >> "${S}"/msfupdate
+	echo "echo \"\"" >> "${S}"/msfupdate
+	if [[ ${PV} == "9999" ]] ; then
+		echo "ESVN_REVISION=HEAD emerge --oneshot \"=${CATEGORY}/${PF}\"" >> "${S}"/msfupdate
+	else
+		echo "echo \"Unable to update tagged version of metasploit.\"" >> "${S}"/msfupdate
+		echo "echo \"If you want the latest please install and eselect the live version (metasploit9999)\"" >> "${S}"/msfupdate
+		echo "echo \"emerge metasploit:9999 -vat && eselect metasploit set metasploit9999\"" >> "${S}"/msfupdate
+	fi
+	#this is set executable in src_install
 
-	use gui || rm msfgui
+	#install our database.yml file before tests are run
+	cp "${FILESDIR}"/database.yml "${S}"/config/
+
+	#force all metasploit executables to ruby19, ruby18 is not supported anymore and ruby20 is not supported yet
+	#https://dev.metasploit.com/redmine/issues/8357
+	for file in $(ls -1 "${S}"/msf*)
+	do
+		#poorly adapted from python.eclass
+		sed -e "1s:^#![[:space:]]*\([^[:space:]]*/usr/bin/env[[:space:]]\)\?[[:space:]]*\([^[:space:]]*/\)\?ruby\([[:digit:]]\+\(\.[[:digit:]]\+\)\?\)\?\(\$\|[[:space:]].*\):#!\1\2ruby19:" -i "${file}" || die "Conversion of shebang in '${file}' failed"
+	done
+}
+
+#serialport does not work with ruby19 at this time
+#src_compile() {
+#	if use serialport; then
+#		cd "${S}"/external/serialport
+#		ruby extconf.rb
+#		emake
+#	fi
+#}
+
+src_test() {
+	#rake --trace spec || die
+	#MSF_DATABASE_CONFIG="${S}"/config/database.yml
+	# https://dev.metasploit.com/redmine/issues/8425
+	rake db:migrate || die
+	RAILS_ENV=test MSF_DATABASE_CONFIG="${S}"/config/database.yml rake spec || die
+	su postgres -c "dropuser msf_test_user" || die "failed to cleanup msf_test-user"
 }
 
 src_install() {
+	#Tests have already been run, we don't need this stuff
+	rm -rf "${S}"/spec
+	rm -rf "${S}"/test
+
 	# should be as simple as copying everything into the target...
-	dodir /usr/lib/${PN}${SLOT}
-	cp -R "${S}"/* "${D}"/usr/lib/${PN}${SLOT}
-	chown -R root:0 "${D}"
+	dodir /usr/$(get_libdir)/${PN}${SLOT}
+	cp -R "${S}"/* "${ED}"/usr/$(get_libdir)/${PN}${SLOT} || die "Copy files failed"
+	rm -Rf "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/documentation "${ED}"/usr/$(get_libdir)/${PN}${SLOT}/README.md
+	fowners -R root:0 /
 
 	# do not remove LICENSE, bug #238137
 	dodir /usr/share/doc/${PF}
-	cp "${S}"/{README,HACKING} "${D}"/usr/share/doc/${PF}
-	dosym /usr/lib/${PN}${SLOT}/documentation /usr/share/doc/${PF}/documentation
+	cp -R "${S}"/{documentation,README.md} "${ED}"/usr/share/doc/${PF} || die
+	dosym /usr/share/doc/${PF}/documentation /usr/$(get_libdir)/${PN}${SLOT}/documentation
 
-	dodir /usr/bin/
-	for file in msf*; do
-		dosym /usr/lib/${PN}${SLOT}/${file} /usr/bin/${file}${SLOT}
-	done
+	#does not work with ruby19 at this time
+	#if use serialport; then
+	#	cd "${S}"/external/serialport
+	#	emake DESTDIR="${ED}" install
+	#fi
 
-	newinitd "${FILESDIR}"/msfrpcd-${SLOT}-initd msfrpcd${SLOT} || die
-	newconfd "${FILESDIR}"/msfrpcd-${SLOT}-conf msfrpcd${SLOT} || die
-
-	use gui &&	make_desktop_entry msfgui${SLOT} \
-			"Metasploit Framework" \
-			metasploit \
-			'GNOME;System;Network;' &&
-		doicon "${FILESDIR}"/metasploit.icon
+	fperms +x /usr/$(get_libdir)/${PN}${SLOT}/msfupdate
 }
 
 pkg_postinst() {
-	if use gui; then
-		elog "You will need to create a /usr/bin/msfrpcd symlink pointing to"
-		elog "the version of msfrpcd if you want to be able to start msfrpcd"
-		elog "from the java gui."
-		elog
-		elog "ln /usr/bin/msfrpcd${SLOT} /usr/bin/msfrpcd"
-		elog
-	fi
+	elog "You need to prepare the database by running:"
+	elog "emerge --config postgresql-server"
+	elog "/etc/init.d/postgresql-<version> start"
+	elog "emerge --config =metasploit-${PV}"
 
-	elog "If you wish to update ${PN} manually simply run:"
-	elog
-	elog "ESVN_REVISION=<rev> emerge =${PF}"
-	elog
-	elog "where <rev> is either HEAD (in case you wish to get all updates)"
-	elog "or specific revision number. But NOTE, this update will vanish"
-	elog "next time you reemerge ${PN}. To make update permanent either"
-	elog "create ebuild with specific revision number inside your overlay"
-	elog "or report revision bump bug at http://bugs.gentoo.org ."
-	elog
-	elog "In case you use portage it's also possible to create"
-	elog "/etc/portage/env/${CATEGORY}/${PN} file with ESVN_REVISION=<rev>"
-	elog "content. Then each time you run emerge ${PN} you'll have said"
-	elog "<rev> installed. For example, if you run"
-	elog " # mkdir -p /etc/portage/env/${CATEGORY}"
-	elog " # echo ESVN_REVISION=HEAD >> /etc/portage/env/${CATEGORY}/${PN}"
-	elog "each time you reemerge ${PN} it'll be updated to get all possible"
-	elog "updates for framework-${PV%_p*} branch."
+	"${EROOT}"/usr/bin/eselect metasploit set --use-old ${PN}${SLOT}
+
+	einfo
+	elog "Adjust /usr/lib/${PN}${SLOT}/config/database.yml if necessary"
+}
+
+pkg_config() {
+	einfo "If the following fails, it is likely because you forgot to start/config postgresql first"
+	su postgres -c "createuser msf_user -D -S -R"
+	su postgres -c "createdb --owner=msf_user msf_database"
 }

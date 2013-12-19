@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/compton/compton-9999.ebuild,v 1.7 2013/08/12 20:47:00 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-misc/compton/compton-9999.ebuild,v 1.8 2013/12/14 11:38:28 hasufell Exp $
 
 EAPI=5
 
@@ -16,7 +16,7 @@ EGIT_REPO_URI="git://github.com/chjj/compton.git"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus +drm opengl +pcre"
+IUSE="dbus +drm opengl +pcre xinerama"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="${PYTHON_DEPS}
@@ -30,7 +30,8 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	x11-libs/libXrender
 	dbus? ( sys-apps/dbus )
 	opengl? ( virtual/opengl )
-	pcre? ( dev-libs/libpcre:3 )"
+	pcre? ( dev-libs/libpcre:3 )
+	xinerama? ( x11-libs/libXinerama )"
 RDEPEND="${COMMON_DEPEND}
 	x11-apps/xprop
 	x11-apps/xwininfo
@@ -51,7 +52,9 @@ pkg_setup() {
 
 src_compile() {
 	emake docs
+
 	NO_DBUS=$(nobuildit dbus) \
+	NO_XINERAMA=$(nobuildit xinerama) \
 	NO_VSYNC_DRM=$(nobuildit drm) \
 	NO_VSYNC_OPENGL=$(nobuildit opengl) \
 	NO_REGEX_PCRE=$(nobuildit pcre) \

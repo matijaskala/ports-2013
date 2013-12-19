@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/qemu/qemu-9999.ebuild,v 1.60 2013/09/05 18:20:53 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/qemu/qemu-9999.ebuild,v 1.61 2013/12/19 08:49:58 vapier Exp $
 
 EAPI=5
 
@@ -29,11 +29,11 @@ HOMEPAGE="http://www.qemu.org http://www.linux-kvm.org"
 
 LICENSE="GPL-2 LGPL-2 BSD-2"
 SLOT="0"
-IUSE="accessibility +aio alsa bluetooth +caps +curl debug fdt glusterfs \
+IUSE="accessibility +aio alsa bluetooth +caps +curl debug +fdt glusterfs \
 gtk iscsi +jpeg \
 kernel_linux kernel_FreeBSD mixemu ncurses opengl +png pulseaudio python \
-rbd sasl +seccomp sdl selinux smartcard spice static static-softmmu \
-static-user systemtap tci test +threads tls usbredir +uuid vde +vhost-net \
+rbd sasl +seccomp sdl selinux smartcard spice ssh static static-softmmu \
+static-user systemtap tci test +threads tls usb usbredir +uuid vde +vhost-net \
 virtfs +vnc xattr xen xfs"
 
 COMMON_TARGETS="i386 x86_64 alpha arm cris m68k microblaze microblazeel mips
@@ -59,6 +59,10 @@ REQUIRED_USE="${REQUIRED_USE} )"
 # Block USE flag configurations known to not work
 REQUIRED_USE="${REQUIRED_USE}
 	python? ( ${PYTHON_REQUIRED_USE} )
+	qemu_softmmu_targets_arm? ( fdt )
+	qemu_softmmu_targets_microblaze? ( fdt )
+	qemu_softmmu_targets_ppc? ( fdt )
+	qemu_softmmu_targets_ppc64? ( fdt )
 	static? ( static-softmmu static-user )
 	static-softmmu? ( !alsa !pulseaudio !bluetooth !opengl !gtk )
 	virtfs? ( xattr )"
@@ -71,7 +75,7 @@ LIB_DEPEND=">=dev-libs/glib-2.0[static-libs(+)]
 	aio? ( dev-libs/libaio[static-libs(+)] )
 	caps? ( sys-libs/libcap-ng[static-libs(+)] )
 	curl? ( >=net-misc/curl-7.15.4[static-libs(+)] )
-	fdt? ( >=sys-apps/dtc-1.2.0[static-libs(+)] )
+	fdt? ( >=sys-apps/dtc-1.4.0[static-libs(+)] )
 	glusterfs? ( >=sys-cluster/glusterfs-3.4.0[static-libs(+)] )
 	jpeg? ( virtual/jpeg[static-libs(+)] )
 	ncurses? ( sys-libs/ncurses[static-libs(+)] )
@@ -79,9 +83,11 @@ LIB_DEPEND=">=dev-libs/glib-2.0[static-libs(+)]
 	rbd? ( sys-cluster/ceph[static-libs(+)] )
 	sasl? ( dev-libs/cyrus-sasl[static-libs(+)] )
 	sdl? ( >=media-libs/libsdl-1.2.11[static-libs(+)] )
-	seccomp? ( >=sys-libs/libseccomp-1.0.1[static-libs(+)] )
+	seccomp? ( >=sys-libs/libseccomp-2.1.0[static-libs(+)] )
 	spice? ( >=app-emulation/spice-0.12.0[static-libs(+)] )
+	ssh? ( >=net-libs/libssh2-1.2.8[static-libs(+)] )
 	tls? ( net-libs/gnutls[static-libs(+)] )
+	usb? ( >=dev-libs/libusbx-1.0.13[static-libs(+)] )
 	uuid? ( >=sys-apps/util-linux-2.16.0[static-libs(+)] )
 	vde? ( net-misc/vde[static-libs(+)] )
 	xattr? ( sys-apps/attr[static-libs(+)] )
@@ -226,10 +232,11 @@ pkg_setup() {
 
 src_prepare() {
 	# Alter target makefiles to accept CFLAGS set via flag-o
-	sed -i 's/^\(C\|OP_C\|HELPER_C\)FLAGS=/\1FLAGS+=/' \
+	sed -i -r \
+		-e 's/^(C|OP_C|HELPER_C)FLAGS=/\1FLAGS+=/' \
 		Makefile Makefile.target || die
 
-	epatch "${FILESDIR}"/qemu-9999-cflags.patch
+	epatch "${FILESDIR}"/qemu-1.7.0-cflags.patch
 	[[ -n ${BACKPORTS} ]] && \
 		EPATCH_FORCE=yes EPATCH_SUFFIX="patch" EPATCH_SOURCE="${S}/patches" \
 			epatch
@@ -286,6 +293,8 @@ qemu_src_configure() {
 		conf_opts+=" --disable-smartcard-nss"
 		conf_opts+=" --disable-tools"
 		conf_opts+=" --disable-vde"
+		conf_opts+=" --disable-libssh2"
+		conf_opts+=" --disable-libusb"
 	fi
 
 	if [[ ${buildtype} == "softmmu" ]]; then
@@ -314,8 +323,10 @@ qemu_src_configure() {
 		conf_opts+=" $(use_enable seccomp)"
 		conf_opts+=" $(use_enable smartcard smartcard-nss)"
 		conf_opts+=" $(use_enable spice)"
+		conf_opts+=" $(use_enable ssh libssh2)"
 		conf_opts+=" $(use_enable tls vnc-tls)"
 		conf_opts+=" $(use_enable tls vnc-ws)"
+		conf_opts+=" $(use_enable usb libusb)"
 		conf_opts+=" $(use_enable usbredir usb-redir)"
 		conf_opts+=" $(use_enable uuid)"
 		conf_opts+=" $(use_enable vde)"
@@ -328,8 +339,6 @@ qemu_src_configure() {
 		conf_opts+=" $(use_enable xfs xfsctl)"
 		use mixemu && conf_opts+=" --enable-mixemu"
 		conf_opts+=" --audio-drv-list=${audio_opts}"
-		# Gentoo-specific opts
-		[[ ${PV} = *9999* ]] || conf_opts+=" --enable-migration-from-qemu-kvm"
 	fi
 
 	conf_opts+=" $(use_enable debug debug-info)"
@@ -414,12 +423,12 @@ src_test() {
 }
 
 qemu_python_install() {
-	python_domodule "${S}/QMP/qmp.py"
+	python_domodule "${S}/scripts/qmp/qmp.py"
 
 	python_doscript "${S}/scripts/kvm/kvm_stat"
 	python_doscript "${S}/scripts/kvm/vmxcap"
-	python_doscript "${S}/QMP/qmp-shell"
-	python_doscript "${S}/QMP/qemu-ga-client"
+	python_doscript "${S}/scripts/qmp/qmp-shell"
+	python_doscript "${S}/scripts/qmp/qemu-ga-client"
 }
 
 src_install() {
@@ -463,12 +472,12 @@ src_install() {
 	doins "${FILESDIR}/bridge.conf"
 
 	# Remove the docdir placed qmp-commands.txt
-	mv "${ED}/usr/share/doc/${PF}/html/qmp-commands.txt" "${S}/QMP/"
+	mv "${ED}/usr/share/doc/${PF}/html/qmp-commands.txt" "${S}/docs/qmp/"
 
 	cd "${S}"
 	dodoc Changelog MAINTAINERS docs/specs/pci-ids.txt
 	newdoc pc-bios/README README.pc-bios
-	dodoc QMP/qmp-commands.txt QMP/qmp-events.txt QMP/qmp-spec.txt
+	dodoc docs/qmp/*.txt
 
 	# Remove SeaBIOS since we're using the SeaBIOS packaged one
 	rm "${ED}/usr/share/qemu/bios.bin"
@@ -516,7 +525,7 @@ pkg_postinst() {
 	if qemu_support_kvm; then
 		readme.gentoo_print_elog
 		ewarn "Migration from qemu-kvm instances and loading qemu-kvm created"
-		ewarn "save states will be removed in the next release (1.7.x)"
+		ewarn "save states has been removed starting with the 1.6.2 release"
 		ewarn
 		ewarn "It is recommended that you migrate any VMs that may be running"
 		ewarn "on qemu-kvm to a host with a newer qemu and regenerate"

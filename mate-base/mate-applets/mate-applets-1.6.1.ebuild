@@ -4,9 +4,9 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-PYTHON_DEPEND="2"
+PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate python
+inherit mate python-single-r1
 
 DESCRIPTION="Applets for the MATE Desktop and Panel"
 HOMEPAGE="http://mate-desktop.org"
@@ -47,8 +47,7 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.2.2"
 
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+	python-single-r1_pkg_setup
 
 	G2CONF="${G2CONF}
 		--libexecdir=/usr/libexec/mate-applets
@@ -60,8 +59,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	python_convert_shebangs -r 2 .
-
 	#Correct icon name, upstrean PR at:
 	#https://github.com/mate-desktop/mate-applets/pull/54
 	sed -i -e 's:Icon=invest-applet:Icon=mate-invest-applet:' \
@@ -79,6 +76,7 @@ src_test() {
 }
 
 src_install() {
+	python_fix_shebang invest-applet timer-applet/src
 	mate_src_install
 
 	local APPLETS="accessx-status battstat charpick cpufreq drivemount geyes

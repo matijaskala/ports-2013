@@ -6,11 +6,9 @@ EAPI="5"
 GCONF_DEBUG="no"
 MATE_LA_PUNT="yes"
 
-PYTHON_DEPEND="python? 2:2.5"
-SUPPORT_PYTHON_ABIS="1"
-RESTRICT_PYTHON_ABIS="3.*"
+PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate python
+inherit mate python-r1
 
 DESCRIPTION="The MATE menu system, implementing the F.D.O cross-desktop spec"
 HOMEPAGE="http://mate-desktop.org"
@@ -19,9 +17,10 @@ LICENSE="GPL-2 LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="debug +introspection python"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND=">=dev-libs/glib-2.18
-	python? ( dev-python/pygtk )
+	python? ( dev-python/pygtk[${PYTHON_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-0.6.7 )"
 DEPEND="${RDEPEND}
 	sys-devel/gettext
@@ -42,20 +41,13 @@ pkg_setup() {
 		$(use_enable python)
 		$(use_enable introspection)"
 
-	use python && python_pkg_setup
-}
-
-src_prepare() {
-	mate_src_prepare
-	if use python; then
-		python_clean_py-compile_files
-		python_copy_sources
-	fi
+	python_setup
 }
 
 src_configure() {
 	if use python; then
-		python_execute_function -s mate_src_configure
+		python_copy_sources
+		python_foreach_impl run_in_build_dir mate_src_configure
 	else
 		mate_src_configure
 	fi
@@ -63,7 +55,7 @@ src_configure() {
 
 src_compile() {
 	if use python; then
-		python_execute_function -s mate_src_compile
+		python_foreach_impl run_in_build_dir mate_src_compile
 	else
 		mate_src_compile
 	fi
@@ -71,7 +63,7 @@ src_compile() {
 
 src_test() {
 	if use python; then
-		python_execute_function -s -d
+		python_foreach_impl run_in_build_dir mate_src_test
 	else
 		default
 	fi
@@ -79,8 +71,7 @@ src_test() {
 
 src_install() {
 	if use python; then
-		python_execute_function -s mate_src_install
-		python_clean_installation_image
+		python_foreach_impl run_in_build_dir mate_src_install
 	else
 		mate_src_install
 	fi

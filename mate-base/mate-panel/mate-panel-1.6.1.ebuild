@@ -5,9 +5,9 @@
 EAPI="5"
 GCONF_DEBUG="no"
 MATE_LA_PUNT="yes"
-PYTHON_DEPEND="2:2.5"
+PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate python
+inherit mate python-r1
 
 DESCRIPTION="The MATE panel"
 HOMEPAGE="http://mate-desktop.org"
@@ -19,12 +19,12 @@ IUSE="+introspection networkmanager"
 
 RDEPEND=">=mate-base/mate-desktop-1.5.0
 	>=x11-libs/pango-1.15.4[introspection?]
-	>=dev-libs/glib-2.25.12:2
+	>=dev-libs/glib-2.25.12:2[${PYTHON_USEDEP}]
 	x11-libs/gtk+:2[introspection?]
 	>=dev-libs/libmateweather-1.5.0
 	dev-libs/libxml2:2
 	>=media-libs/libcanberra-0.23[gtk]
-	>=mate-base/mate-menus-1.5.0
+	>=mate-base/mate-menus-1.5.0[${PYTHON_USEDEP}]
 	gnome-base/librsvg:2
 	>=dev-libs/dbus-glib-0.80
 	>=sys-apps/dbus-1.1.2
@@ -50,13 +50,12 @@ pkg_setup() {
 		$(use_enable networkmanager network-manager)
 		$(use_enable introspection)"
 	DOCS="AUTHORS ChangeLog HACKING NEWS README"
-	python_set_active_version 2
 }
 
 src_prepare() {
 	sed -e '/toplevel-id-list \= \/apps\/panel\/general\/toplevel_id_list/d' \
-		-i data/mate-panel.convert
+		-i data/mate-panel.convert || die
 	sed -e '/object-id-list \= \/apps\/panel\/general\/object_id_list/d' \
-		-i data/mate-panel.convert
+		-i data/mate-panel.convert || die
 	mate_src_prepare
 }

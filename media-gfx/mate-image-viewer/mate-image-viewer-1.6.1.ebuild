@@ -4,9 +4,9 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-PYTHON_DEPEND="2:2.5"
+PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate python
+inherit mate python-single-r1
 
 DESCRIPTION="The MATE image viewer"
 HOMEPAGE="http://mate-desktop.org"
@@ -15,6 +15,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="dbus exif jpeg lcms python svg tiff xmp"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND=">=x11-libs/gtk+-2.18:2
 	x11-libs/gdk-pixbuf:2[jpeg?,tiff?]
@@ -31,8 +32,9 @@ RDEPEND=">=x11-libs/gtk+-2.18:2
 	jpeg? ( virtual/jpeg:0 )
 	lcms? ( media-libs/lcms:0 )
 	python? (
-		>=dev-python/pygobject-2.15.1:2
-		>=dev-python/pygtk-2.13 )
+		${PYTHON_DEPS}
+		>=dev-python/pygobject-2.15.1:2[${PYTHON_USEDEP}]
+		>=dev-python/pygtk-2.13[${PYTHON_USEDEP}] )
 	svg? ( >=gnome-base/librsvg-2.26 )
 	xmp? ( >=media-libs/exempi-2 )"
 
@@ -52,5 +54,4 @@ pkg_setup() {
 		$(use_with xmp)
 		$(use_with svg librsvg)"
 	DOCS="AUTHORS ChangeLog HACKING NEWS README THANKS TODO"
-	python_set_active_version 2
 }

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-9999.ebuild,v 1.10 2013/11/19 10:28:43 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-9999.ebuild,v 1.12 2013/12/16 10:27:51 radhermit Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -25,13 +25,14 @@ HOMEPAGE="http://www.vim.org/"
 
 SLOT="0"
 LICENSE="vim"
-IUSE="acl aqua cscope debug gnome gtk lua luajit motif neXt netbeans nls perl python racket ruby selinux tcl"
+IUSE="acl aqua cscope debug gnome gtk lua luajit motif neXt netbeans nls perl python racket ruby selinux session tcl"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="~app-editors/vim-core-${PV}
 	>=app-admin/eselect-vi-1.1
 	>=sys-libs/ncurses-5.2-r2
 	x11-libs/libXext
+	x11-libs/libXt
 	acl? ( kernel_linux? ( sys-apps/acl ) )
 	!aqua? (
 		gtk? (
@@ -58,6 +59,7 @@ RDEPEND="~app-editors/vim-core-${PV}
 	racket? ( dev-scheme/racket )
 	ruby? ( || ( dev-lang/ruby:2.0 dev-lang/ruby:1.9 dev-lang/ruby:1.8 ) )
 	selinux? ( sys-libs/libselinux )
+	session? ( x11-libs/libSM )
 	tcl? ( dev-lang/tcl )"
 DEPEND="${RDEPEND}
 	>=app-admin/eselect-vi-1.1
@@ -119,8 +121,7 @@ src_prepare() {
 
 	# Try to avoid sandbox problems. Bug #114475.
 	if [[ -d "${S}"/src/po ]] ; then
-		sed -i -e \
-			'/-S check.vim/s,..VIM.,ln -s $(VIM) testvim \; ./testvim -X,' \
+		sed -i '/-S check.vim/s,..VIM.,ln -s $(VIM) testvim \; ./testvim -X,' \
 			"${S}"/src/po/Makefile
 	fi
 
@@ -175,6 +176,7 @@ src_configure() {
 	myconf+=" $(use_enable racket mzschemeinterp)"
 	myconf+=" $(use_enable ruby rubyinterp)"
 	myconf+=" $(use_enable selinux)"
+	myconf+=" $(use_enable session xsmp)"
 	myconf+=" $(use_enable tcl tclinterp)"
 
 	if use python ; then
@@ -192,7 +194,7 @@ src_configure() {
 	# --with-features=huge forces on cscope even if we --disable it. We need
 	# to sed this out to avoid screwiness. (1 Sep 2004 ciaranm)
 	if ! use cscope ; then
-		sed -i -e '/# define FEAT_CSCOPE/d' src/feature.h || \
+		sed -i '/# define FEAT_CSCOPE/d' src/feature.h || \
 			die "couldn't disable cscope"
 	fi
 
@@ -273,18 +275,17 @@ src_test() {
 
 	# Test 49 won't work inside a portage environment
 	einfo "Test 49 isn't sandbox-friendly, so it will be skipped."
-	sed -i -e 's~test49.out~~g' Makefile
+	sed -i 's~test49.out~~g' Makefile
 
 	# We don't want to rebuild vim before running the tests
-	sed -i -e 's,: \$(VIMPROG),: ,' Makefile
+	sed -i 's,: \$(VIMPROG),: ,' Makefile
 
 	# Make gvim not try to connect to X. See :help gui-x11-start
 	# in vim for how this evil trickery works.
 	ln -s "${S}"/src/gvim "${S}"/src/testvim
 
 	# Don't try to do the additional GUI test
-	emake -j1 VIMPROG=../testvim nongui \
-		|| die "At least one test failed"
+	emake -j1 VIMPROG=../testvim nongui
 }
 
 # Make convenience symlinks, hopefully without stepping on toes.  Some
@@ -343,10 +344,8 @@ src_install() {
 	newins "${FILESDIR}"/gvimrc-r1 gvimrc
 	eprefixify "${ED}"/etc/vim/gvimrc
 
-	insinto /usr/share/applications
-	newins "${FILESDIR}"/gvim.desktop-r2 gvim.desktop
-	insinto /usr/share/pixmaps
-	doins "${FILESDIR}"/gvim.xpm
+	domenu "${FILESDIR}"/gvim.desktop-r2 gvim.desktop
+	doicon "${FILESDIR}"/gvim.xpm
 
 	# bash completion script, bug #79018.
 	newbashcomp "${FILESDIR}"/${PN}-completion ${PN}

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/grub-9999-r1.ebuild,v 1.6 2013/12/09 23:07:13 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/grub-9999-r1.ebuild,v 1.8 2013/12/19 14:57:24 floppym Exp $
 
 EAPI=5
 
@@ -18,7 +18,7 @@ inherit autotools-utils bash-completion-r1 eutils flag-o-matic mount-boot multib
 
 if [[ ${PV} != 9999 ]]; then
 	if [[ ${PV} == *_alpha* || ${PV} == *_beta* || ${PV} == *_rc* ]]; then
-		MY_P=${P/_/~}
+		MY_P="${P/_/~}"
 		SRC_URI="mirror://gnu-alpha/${PN}/${MY_P}.tar.xz"
 		S=${WORKDIR}/${MY_P}
 	else
@@ -36,10 +36,10 @@ else
 fi
 
 DEJAVU=dejavu-sans-ttf-2.34
-UNIFONT=unifont-5.1.20080820.pcf
+UNIFONT=unifont-6.3.20131217
 SRC_URI+=" truetype? (
 	mirror://sourceforge/dejavu/${DEJAVU}.zip
-	http://unifoundry.com/${UNIFONT}.gz
+	http://unifoundry.com/pub/${UNIFONT}/${UNIFONT}.pcf.gz
 )"
 
 DESCRIPTION="GNU GRUB boot loader"
@@ -172,7 +172,7 @@ src_prepare() {
 
 setup_fonts() {
 	ln -s "${WORKDIR}/${DEJAVU}/ttf/DejaVuSans.ttf" DejaVuSans.ttf || die
-	ln -s "${WORKDIR}/${UNIFONT}" unifont.pcf || die
+	ln -s "${WORKDIR}/${UNIFONT}.pcf" unifont.pcf || die
 }
 
 grub_configure() {
@@ -278,7 +278,7 @@ src_install() {
 	fi
 
 	insinto /etc/default
-	newins "${FILESDIR}"/grub.default-2 grub
+	newins "${FILESDIR}"/grub.default-3 grub
 
 	cd "${ED}" || die
 	pax-mark mpes $(scanelf -BF %F usr/{bin,sbin})

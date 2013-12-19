@@ -1,16 +1,24 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.524 2013/12/07 18:55:29 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.528 2013/12/18 19:48:00 johu Exp $
 
 # This file requires >=portage-2.1.1
 # New entries go on top.
 #
 
-# Andreas K. Huettel <dilfridge@gentoo.org> (7 Dec 2013)
-# Too crash-prone and bitrotting
->=app-office/libreoffice-4.1.4 kde
->=app-office/libreoffice-bin-4.1.4 kde
->=app-office/libreoffice-bin-debug-4.1.4 kde
+# Johannes Huber <johu@gentoo.org> (18 Dec 2013)
+# net-libs/libotr-4.0.0 is masked. Please remove the use mask if package mask
+# is lifted.
+>=kde-base/kopete-4.12.0 otr
+
+# Alexandre Rostovtsev <tetromino@gentoo.org> (15 Dec 2013)
+# pulseaudio patchset breaks too often on live wine ebuild
+=app-emulation/wine-9999 pulseaudio
+
+# Lars Wendler <polynomial-c@gentoo.org> (13 Dec 2013)
+# mozilla changed their build system and enigmail will not provide a fix before
+# christmas.
+>=www-client/seamonkey-2.23 crypt
 
 # Pawel Hajdan jr <phajdan.jr@gentoo.org> (13 Nov 2013)
 # Depends on masked dev-lang/v8

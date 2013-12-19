@@ -3,9 +3,9 @@
 # $Header: $
 
 EAPI="5"
-PYTHON_DEPEND="2"
+PYTHON_COMPAT=( python2_{6,7} )
 MATE_LA_PUNT="yes"
-inherit autotools eutils python linux-info mate user
+inherit autotools eutils python-single-r1 linux-info mate user
 
 DESCRIPTION="Store, Sync and Share Files Online"
 HOMEPAGE="http://www.dropbox.com/"
@@ -18,7 +18,7 @@ IUSE="debug"
 
 RDEPEND="mate-base/mate-file-manager
 	dev-libs/glib:2
-	dev-python/pygtk:2
+	dev-python/pygtk:2[${PYTHON_USEDEP}]
 	net-misc/dropbox
 	x11-libs/gtk+:2
 	x11-libs/libXinerama"
@@ -33,15 +33,13 @@ G2CONF="${G2CONF} $(use_enable debug) --disable-static"
 CONFIG_CHECK="~INOTIFY_USER"
 
 pkg_setup () {
+	python-single-r1_pkg_setup
 	check_extra_config
 	enewgroup dropbox
-	python_set_active_version 2
-	python_pkg_setup
 }
 
 src_prepare() {
 	mate_src_prepare
-	python_convert_shebangs 2 dropbox.in
 
 	# use sysem dropbox
 	sed -e "s|~/[.]dropbox-dist|/opt/dropbox|" \
@@ -53,6 +51,8 @@ src_prepare() {
 }
 
 src_install () {
+	python_fix_shebang dropbox.in
+
 	mate_src_install
 
 	local extensiondir="$(pkg-config --variable=extensiondir libcaja-extension)"

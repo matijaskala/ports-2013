@@ -21,7 +21,7 @@ RDEPEND=">=dev-libs/glib-2.28.0:2
 	>=mate-base/mate-desktop-1.5.0
 	>=x11-libs/pango-1.1.2
 	x11-libs/gtk+:2[introspection?]
-	>=gnome-base/gvfs-1.10.1
+	>=gnome-base/gvfs-1.10.1[udisks]
 	>=dev-libs/libxml2-2.4.7:2
 	>=media-libs/libexif-0.5.12
 	dev-libs/libunique:1

@@ -5,9 +5,9 @@
 EAPI="5"
 GCONF_DEBUG="yes"
 MATE_LA_PUNT="yes"
-PYTHON_DEPEND="python? 2:2.5"
+PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate multilib python virtualx
+inherit mate multilib python-r1 virtualx
 
 DESCRIPTION="Pluma text editor for the MATE desktop"
 HOMEPAGE="http://mate-desktop.org"
@@ -33,8 +33,9 @@ RDEPEND=">=x11-libs/libSM-1.0
 		>=app-text/iso-codes-0.35
 	)
 	python? (
-		>=dev-python/pygobject-2.15.4:2
-		>=dev-python/pygtk-2.12:2
+		${PYTHON_DEPS}
+		>=dev-python/pygobject-2.15.4:2[${PYTHON_USEDEP}]
+		>=dev-python/pygtk-2.12:2[${PYTHON_USEDEP}]
 		>=dev-python/pygtksourceview-2.9.2:2
 	)"
 
@@ -57,15 +58,6 @@ pkg_setup() {
 		--disable-updater
 		$(use_enable python)
 		$(use_enable spell)"
-	if use python; then
-		python_set_active_version 2
-		python_pkg_setup
-	fi
-}
-
-src_prepare() {
-	mate_src_prepare
-	use python && python_clean_py-compile_files
 }
 
 src_test() {
@@ -74,14 +66,4 @@ src_test() {
 
 	unset DBUS_SESSION_BUS_ADDRESS
 	GSETTINGS_SCHEMA_DIR="${S}/data" Xemake check
-}
-
-pkg_postinst() {
-	mate_pkg_postinst
-	use python && python_mod_optimize /usr/$(get_libdir)/pluma/plugins
-}
-
-pkg_postrm() {
-	mate_pkg_postrm
-	use python && python_mod_cleanup /usr/$(get_libdir)/pluma/plugins
 }

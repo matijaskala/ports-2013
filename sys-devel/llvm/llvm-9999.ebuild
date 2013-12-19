@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/llvm/llvm-9999.ebuild,v 1.62 2013/12/03 14:02:42 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-devel/llvm/llvm-9999.ebuild,v 1.65 2013/12/19 17:26:35 mgorny Exp $
 
 EAPI=5
 
@@ -180,7 +180,8 @@ src_prepare() {
 
 multilib_src_configure() {
 	# disable timestamps since they confuse ccache
-	local CONF_FLAGS="--disable-timestamps
+	local conf_flags=(
+		--disable-timestamps
 		--enable-keep-symbols
 		--enable-shared
 		--with-optimize-option=
@@ -188,33 +189,33 @@ multilib_src_configure() {
 		$(use_enable debug assertions)
 		$(use_enable debug expensive-checks)
 		$(use_enable ncurses terminfo)
-		$(use_enable libffi)"
+		$(use_enable libffi)
+	)
 
 	if use clang; then
-		CONF_FLAGS+="
-			--with-clang-resource-dir=../lib/clang/3.5"
+		conf_flags+=( --with-clang-resource-dir=../lib/clang/3.5 )
 	fi
 
+	local targets bindings
 	if use multitarget; then
-		CONF_FLAGS="${CONF_FLAGS} --enable-targets=all"
+		targets='all'
 	else
-		CONF_FLAGS="${CONF_FLAGS} --enable-targets=host,cpp"
-		if use video_cards_radeon; then
-			CONF_FLAGS="${CONF_FLAGS},r600"
-		fi
+		targets='host,cpp'
+		use video_cards_radeon && targets+=',r600'
+	fi
+	conf_flags+=( --enable-targets=${targets} )
+
+	if multilib_build_binaries; then
+		use gold && conf_flags+=( --with-binutils-include="${EPREFIX}"/usr/include/ )
+		# extra commas don't hurt
+		use ocaml && bindings+=',ocaml'
 	fi
 
-	if multilib_build_binaries && use gold; then
-		CONF_FLAGS="${CONF_FLAGS} --with-binutils-include=${EPREFIX}/usr/include/"
-	fi
-	if multilib_is_native_abi && use ocaml; then
-		CONF_FLAGS="${CONF_FLAGS} --enable-bindings=ocaml"
-	else
-		CONF_FLAGS="${CONF_FLAGS} --enable-bindings=none"
-	fi
+	[[ ${bindings} ]] || bindings='none'
+	conf_flags+=( --enable-bindings=${bindings} )
 
 	if use udis86; then
-		CONF_FLAGS="${CONF_FLAGS} --with-udis86"
+		conf_flags+=( --with-udis86 )
 	fi
 
 	if use libffi; then
@@ -229,14 +230,53 @@ multilib_src_configure() {
 	tc-export CC CXX
 
 	ECONF_SOURCE=${S} \
-	econf ${CONF_FLAGS}
+	econf "${conf_flags[@]}"
+}
+
+set_makeargs() {
+	MAKEARGS=(
+		VERBOSE=1
+		REQUIRES_RTTI=1
+		GENTOO_LIBDIR=$(get_libdir)
+	)
+
+	# for tests, we want it all! otherwise, we may use a little filtering...
+	# adding ONLY_TOOLS also disables unittest building...
+	if [[ ${EBUILD_PHASE_FUNC} != src_test ]]; then
+		local tools=( llvm-config )
+		use clang && tools+=( clang )
+
+		if multilib_build_binaries; then
+			use gold && tools+=( gold )
+			tools+=(
+				opt llvm-as llvm-dis llc llvm-ar llvm-nm llvm-link lli
+				llvm-extract llvm-mc llvm-bcanalyzer llvm-diff macho-dump
+				llvm-objdump llvm-readobj llvm-rtdyld llvm-dwarfdump llvm-cov
+				llvm-size llvm-stress llvm-mcmarkup llvm-symbolizer obj2yaml
+				yaml2obj lto llvm-lto
+			)
+		fi
+
+		MAKEARGS+=(
+			# filter tools + disable unittests implicitly
+			ONLY_TOOLS="${tools[*]}"
+
+			# this disables unittests & docs from clang
+			BUILD_CLANG_ONLY=YES
+		)
+	fi
 }
 
 multilib_src_compile() {
-	emake VERBOSE=1 REQUIRES_RTTI=1 GENTOO_LIBDIR=$(get_libdir)
+	local MAKEARGS
+	set_makeargs
 
-	if multilib_is_native_abi; then
+	emake "${MAKEARGS[@]}"
+
+	if multilib_build_binaries; then
 		emake -C "${S}"/docs -f Makefile.sphinx man
+		use clang && emake -C "${S}"/tools/clang/docs/tools \
+			BUILD_FOR_WEBSITE=1 DST_MAN_DIR="${T}"/ man
 		use doc && emake -C "${S}"/docs -f Makefile.sphinx html
 	fi
 
@@ -247,17 +287,21 @@ multilib_src_compile() {
 		pax-mark m Release/bin/llvm-rtdyld
 		pax-mark m Release/bin/lli
 	fi
-	if use test; then
-		pax-mark m unittests/ExecutionEngine/JIT/Release/JITTests
-		pax-mark m unittests/ExecutionEngine/MCJIT/Release/MCJITTests
-		pax-mark m unittests/Support/Release/SupportTests
-	fi
 }
 
 multilib_src_test() {
-	default
+	local MAKEARGS
+	set_makeargs
 
-	use clang && emake -C tools/clang test
+	# build the remaining tools & unittests
+	emake "${MAKEARGS[@]}"
+
+	pax-mark m unittests/ExecutionEngine/JIT/Release/JITTests
+	pax-mark m unittests/ExecutionEngine/MCJIT/Release/MCJITTests
+	pax-mark m unittests/Support/Release/SupportTests
+
+	emake "${MAKEARGS[@]}" check
+	use clang && emake "${MAKEARGS[@]}" -C tools/clang test
 }
 
 src_install() {
@@ -274,13 +318,20 @@ src_install() {
 }
 
 multilib_src_install() {
-	emake DESTDIR="${D}" GENTOO_LIBDIR=$(get_libdir) install
+	local MAKEARGS
+	set_makeargs
+
+	emake "${MAKEARGS[@]}" DESTDIR="${D}" install
 
 	if multilib_build_binaries; then
 		# Move files back.
 		if path_exists -o "${ED}"/tmp/llvm-config.*; then
 			mv "${ED}"/tmp/llvm-config.* "${ED}"/usr/bin || die
 		fi
+
+		doman "${S}"/docs/_build/man/*.1
+		use clang && doman "${T}"/clang.1
+		use doc && dohtml -r "${S}"/docs/_build/html/
 	else
 		# Preserve ABI-variant of llvm-config,
 		# then drop all the executables since LLVM doesn't like to
@@ -296,7 +347,7 @@ multilib_src_install() {
 	if [[ ${CHOST} == *-darwin* ]] ; then
 		eval $(grep PACKAGE_VERSION= configure)
 		[[ -n ${PACKAGE_VERSION} ]] && libpv=${PACKAGE_VERSION}
-		for lib in lib{EnhancedDisassembly,LLVM-${libpv},LTO,profile_rt,clang}.dylib {BugpointPasses,LLVMHello}.dylib ; do
+		for lib in lib{EnhancedDisassembly,LLVM-${libpv},LTO,profile_rt,clang}.dylib LLVMHello.dylib ; do
 			# libEnhancedDisassembly is Darwin10 only, so non-fatal
 			# + omit clang libs if not enabled
 			[[ -f ${ED}/usr/lib/${lib} ]] || continue
@@ -327,9 +378,6 @@ multilib_src_install() {
 }
 
 multilib_src_install_all() {
-	doman docs/_build/man/*.1
-	use doc && dohtml -r docs/_build/html/
-
 	insinto /usr/share/vim/vimfiles/syntax
 	doins utils/vim/*.vim
 
