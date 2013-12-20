@@ -1,10 +1,14 @@
-Patch by Michael Casadevall <sonicmctails@gmail.com>
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03_qreal_float_support.dpatch by Michael Casadevall <sonicmctails@gmail.com>
+##
+## DP: Corrects a configure test, and adds explicate double handling
+##     to qlist.sip on architectures where qreal != double
 
-Corrects a configure test, and adds explicate double handling
-to qlist.sip on architectures where qreal != double
-
---- configure.py
-+++ configure.py
+@DPATCH@
+Index: python-qt4-4.7.2/configure.py
+===================================================================
+--- python-qt4-4.7.2.orig/configure.py	2010-03-17 19:29:19.000000000 +0100
++++ python-qt4-4.7.2/configure.py	2010-03-25 23:53:55.468631945 +0100
 @@ -1915,8 +1915,9 @@
      out << "PyQt_NoOpenGLES\\n";
  #endif
@@ -16,8 +20,10 @@ to qlist.sip on architectures where qreal != double
  
      return 0;
  }
---- sip/QtCore/qlist.sip
-+++ sip/QtCore/qlist.sip
+Index: python-qt4-4.7.2/sip/QtCore/qlist.sip
+===================================================================
+--- python-qt4-4.7.2.orig/sip/QtCore/qlist.sip	2010-03-17 19:29:26.000000000 +0100
++++ python-qt4-4.7.2/sip/QtCore/qlist.sip	2010-03-25 23:53:55.468631945 +0100
 @@ -749,3 +749,227 @@
      return sipGetState(sipTransferObj);
  %End

@@ -34,6 +34,7 @@ RDEPEND=">=x11-libs/gtk+-2.20:2
 	gnome-base/libgtop:2
 	sys-power/cpufrequtils
 	mate-extra/mate-character-map
+	dev-python/pygobject:3
 	networkmanager? ( >=net-misc/networkmanager-0.7.0 )
 	policykit? ( >=sys-auth/polkit-0.92 )"
 
@@ -67,6 +68,8 @@ src_prepare() {
 	# Make tests run
 	epatch "${FILESDIR}/${PN}-1.6.1-fix-POTFILES.patch"
 
+	# We need pygobject-3 for invest applet
+	epatch "${FILESDIR}/${PN}-1.6.1-pygobject-configure-fix.patch"
 	mate_src_prepare
 }
 

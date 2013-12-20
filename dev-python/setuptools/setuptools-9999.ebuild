@@ -1,54 +1,46 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-python/setuptools/setuptools-9999.ebuild,v 1.6 2013/09/05 18:46:35 mgorny Exp $
 
-EAPI="5-progress"
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*-jython"
-DISTUTILS_SRC_TEST="setup.py"
+EAPI="5"
+PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3} pypy2_0 )
 
-inherit distutils mercurial
+inherit distutils-r1
+#if LIVE
+inherit mercurial
+#endif
 
-DESCRIPTION="Setuptools is a collection of extensions to Distutils"
-HOMEPAGE="https://pythonhosted.org/setuptools/ https://bitbucket.org/pypa/setuptools https://pypi.python.org/pypi/setuptools"
-SRC_URI=""
-EHG_REPO_URI="https://bitbucket.org/pypa/setuptools"
+DESCRIPTION="a collection of extensions to Distutils"
+HOMEPAGE="http://pypi.python.org/pypi/setuptools"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="PSF-2"
 SLOT="0"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+#if LIVE
+SRC_URI=""
 KEYWORDS=""
-IUSE=""
+EHG_REPO_URI="https://bitbucket.org/pypa/setuptools"
+#endif
 
-DEPEND=""
-RDEPEND=""
+# Force in-source build because build system modifies sources.
+DISTUTILS_IN_SOURCE_BUILD=1
 
-DOCS="README.txt docs/easy_install.txt docs/pkg_resources.txt docs/setuptools.txt"
-PYTHON_MODULES="_markerlib easy_install.py pkg_resources.py setuptools"
+DOCS=( README.txt docs/{easy_install.txt,pkg_resources.txt,setuptools.txt} )
 
-src_prepare() {
-	distutils_src_prepare
-
+python_prepare_all() {
 	# Disable tests requiring network connection.
 	rm -f setuptools/tests/test_packageindex.py
+
+	distutils-r1_python_prepare_all
 }
 
-src_test() {
-	# test_install_site_py fails with disabled byte-compiling in Python 2.7 / >=3.2.
-	python_enable_pyc
-
-	distutils_src_test
-
-	python_disable_pyc
-
-	find -name "__pycache__" -print0 | xargs -0 rm -fr
-	find "(" -name "*.pyc" -o -name "*\$py.class" ")" -delete
+python_test() {
+	# Fails test_setup_requires under python2.5; probably a distutils bug
+	esetup.py test
 }
 
-src_install() {
-	SETUPTOOLS_DISABLE_VERSIONED_EASY_INSTALL_SCRIPT="1" distutils_src_install
-
-	delete_tests() {
-		rm -fr "${ED}$(python_get_sitedir)/setuptools/tests"
-	}
-	python_execute_function -q delete_tests
+python_install() {
+	export DISTRIBUTE_DISABLE_VERSIONED_EASY_INSTALL_SCRIPT=1
+	distutils-r1_python_install
 }

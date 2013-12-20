@@ -1,16 +1,14 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-python/autopep8/autopep8-9999.ebuild,v 1.8 2013/09/05 18:46:12 mgorny Exp $
 
-EAPI="5-progress"
-PYTHON_MULTIPLE_ABIS="1"
-# http://bugs.jython.org/issue1982
-PYTHON_TESTS_FAILURES_TOLERANT_ABIS="*-jython"
+EAPI=5
+PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3} )
 
-inherit distutils git-2
+inherit distutils-r1 git-2
 
-DESCRIPTION="A tool that automatically formats Python code to conform to the PEP 8 style guide"
-HOMEPAGE="https://github.com/hhatto/autopep8 https://pypi.python.org/pypi/autopep8"
+DESCRIPTION="Automatically formats Python code to conform to the PEP 8 style guide"
+HOMEPAGE="https://github.com/hhatto/autopep8 http://pypi.python.org/pypi/autopep8"
 SRC_URI=""
 EGIT_REPO_URI="git://github.com/hhatto/${PN}.git"
 
@@ -19,20 +17,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-DEPEND="$(python_abi_depend ">=dev-python/pep8-1.4.6")
-	$(python_abi_depend dev-python/setuptools)"
+DEPEND=">=dev-python/pep8-1.4.6[${PYTHON_USEDEP}]
+	dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
 
-PYTHON_MODULES="${PN}.py"
-
-src_test() {
-	testing() {
-		if [[ "$(python_get_implementation)" == "Jython" ]]; then
-			# http://bugs.jython.org/issue1944
-			python_execute LC_ALL="en_US.UTF-8" PYTHONPATH="build-${PYTHON_ABI}/lib" "$(PYTHON)" test/test_${PN}.py
-		else
-			python_execute PYTHONPATH="build-${PYTHON_ABI}/lib" "$(PYTHON)" test/test_${PN}.py
-		fi
-	}
-	python_execute_function testing
+python_test() {
+	"${PYTHON}" setup.py test || die
 }

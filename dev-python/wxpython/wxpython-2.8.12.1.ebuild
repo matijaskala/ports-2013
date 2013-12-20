@@ -1,11 +1,12 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-python/wxpython/wxpython-2.8.12.1.ebuild,v 1.19 2013/12/12 12:57:30 jlec Exp $
 
-EAPI="4-python"
+EAPI="4"
+PYTHON_DEPEND="2"
 WX_GTK_VER="2.8"
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="3.* *-jython *-pypy-*"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="3.* *-jython 2.7-pypy-*"
 
 inherit alternatives distutils eutils fdo-mime wxwidgets
 
@@ -13,27 +14,29 @@ MY_P="${P/wxpython-/wxPython-src-}"
 
 DESCRIPTION="A blending of the wxWindows C++ class library with Python"
 HOMEPAGE="http://www.wxpython.org/"
-SRC_URI="mirror://sourceforge/wxpython/${MY_P}.tar.bz2
-	doc? ( mirror://sourceforge/wxpython/wxPython-docs-${PV}.tar.bz2
-		   mirror://sourceforge/wxpython/wxPython-newdocs-2.8.9.2.tar.bz2 )
+SRC_URI="
+	mirror://sourceforge/wxpython/${MY_P}.tar.bz2
+	doc? (
+		mirror://sourceforge/wxpython/wxPython-docs-${PV}.tar.bz2
+		mirror://sourceforge/wxpython/wxPython-newdocs-2.8.9.2.tar.bz2 )
 	examples? ( mirror://sourceforge/wxpython/wxPython-demo-${PV}.tar.bz2 )"
 
 LICENSE="wxWinLL-3"
 SLOT="2.8"
-KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="cairo doc examples opengl"
 
 RDEPEND="
 	>=x11-libs/wxGTK-${PV}:${WX_GTK_VER}[opengl?,tiff,X]
 	dev-libs/glib:2
-	$(python_abi_depend dev-python/setuptools)
+	dev-python/setuptools
 	media-libs/libpng:0
 	media-libs/tiff:0
 	virtual/jpeg
 	x11-libs/gtk+:2
 	x11-libs/pango[X]
-	cairo?	( $(python_abi_depend -e "2.5" ">=dev-python/pycairo-1.8.4") )
-	opengl? ( $(python_abi_depend dev-python/pyopengl) )"
+	cairo?	( >=dev-python/pycairo-1.8.4 )
+	opengl?	( dev-python/pyopengl )"
 
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
@@ -44,7 +47,7 @@ DOC_S="${WORKDIR}/wxPython-${PV}"
 PYTHON_CFLAGS=("2.* + -fno-strict-aliasing")
 PYTHON_CXXFLAGS=("2.* + -fno-strict-aliasing")
 
-PYTHON_MODULES="wx-${SLOT}-gtk2-unicode wxversion.py"
+PYTHON_MODNAME="wx-${SLOT}-gtk2-unicode wxversion.py"
 
 src_prepare() {
 	sed -i "s:cflags.append('-O3'):pass:" config.py || die "sed failed"
@@ -52,11 +55,6 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.8.9-wxversion-scripts.patch
 	# drop editra - we have it as a separate package now
 	epatch "${FILESDIR}"/${PN}-2.8.12-drop-editra.patch
-
-	epatch "${FILESDIR}"/${P}-c++.patch
-	pushd wx/build > /dev/null
-	epatch "${FILESDIR}"/${P}-c++.patch
-	popd > /dev/null
 
 	if use doc; then
 		cd "${DOC_S}"
@@ -69,6 +67,9 @@ src_prepare() {
 	fi
 
 	python_copy_sources
+
+	# Workaround, buildsystem uses CFLAGS as CXXFLAGS
+	export CFLAGS="${CXXFLAGS}"
 }
 
 src_configure() {
@@ -144,27 +145,26 @@ pkg_postinst() {
 	elog "Developers, see this site for instructions on using"
 	elog "2.6 or 2.8 with your apps:"
 	elog "http://wiki.wxpython.org/index.cgi/MultiVersionInstalls"
-	echo
 	if use doc; then
+		echo
 		elog "To access the general wxWidgets documentation, run"
 		elog "/usr/share/doc/${PF}/docs/viewdocs.py"
-		elog
+		echo
 		elog "wxPython documentation is available by pointing a browser"
 		elog "at /usr/share/doc/${PF}/docs/api/index.html"
 	fi
 	if use examples; then
-		elog
+		echo
 		elog "The demo.py app which contains hundreds of demo modules"
 		elog "with documentation and source code has been installed at"
 		elog "/usr/share/doc/${PF}/demo/demo.py"
-		elog
+		echo
 		elog "Many more example apps and modules can be found in"
 		elog "/usr/share/doc/${PF}/samples/"
-		echo
 	fi
+	echo
 	elog "Editra is not packaged with wxpython in Gentoo."
 	elog "You can find it in the tree as app-editors/editra"
-	echo
 }
 
 pkg_postrm() {

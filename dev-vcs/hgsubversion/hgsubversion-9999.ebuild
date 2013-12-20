@@ -1,15 +1,16 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/hgsubversion/hgsubversion-9999.ebuild,v 1.1 2011/12/21 23:11:09 floppym Exp $
 
-EAPI="5-progress"
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="3.* *-jython *-pypy-*"
+EAPI="3"
+PYTHON_DEPEND="2"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="3.* *-jython"
 
 inherit distutils mercurial
 
 DESCRIPTION="hgsubversion is a Mercurial extension for working with Subversion repositories."
-HOMEPAGE="https://bitbucket.org/durin42/hgsubversion https://pypi.python.org/pypi/hgsubversion"
+HOMEPAGE="https://bitbucket.org/durin42/hgsubversion/wiki/Home http://pypi.python.org/pypi/hgsubversion"
 SRC_URI=""
 EHG_REPO_URI="https://bitbucket.org/durin42/hgsubversion"
 
@@ -18,14 +19,17 @@ SLOT="0"
 KEYWORDS=""
 IUSE="test"
 
-RDEPEND="$(python_abi_depend ">=dev-vcs/mercurial-1.4")
+RDEPEND="
+	>=dev-vcs/mercurial-1.4
 	|| (
-		$(python_abi_depend dev-python/subvertpy)
-		$(python_abi_depend ">=dev-vcs/subversion-1.5[python]")
-	)"
-DEPEND="${RDEPEND}
-	$(python_abi_depend dev-python/setuptools)
-	test? ( $(python_abi_depend dev-python/nose) )"
+		dev-python/subvertpy
+		>=dev-vcs/subversion-1.5[python]
+	)
+"
+DEPEND="
+	dev-python/setuptools
+	test? ( dev-python/nose )
+"
 
 DOCS="README"
 
@@ -33,7 +37,7 @@ src_test() {
 	cd tests
 
 	testing() {
-		python_execute PYTHONPATH="../build-${PYTHON_ABI}/lib" "$(PYTHON)" run.py
+		PYTHONPATH="../build-${PYTHON_ABI}/lib" "$(PYTHON)" run.py
 	}
 	python_execute_function testing
 }

@@ -1,23 +1,24 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-python/simpletal/simpletal-5.1.ebuild,v 1.2 2013/11/06 04:59:26 patrick Exp $
 
-EAPI="4-python"
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.*"
+EAPI="3"
+PYTHON_DEPEND="3"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="2.*"
 
 inherit distutils
 
 MY_PN="SimpleTAL"
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="SimpleTAL is a stand alone Python implementation of the TAL, TALES and METAL specifications used in Zope to power HTML and XML templates."
+DESCRIPTION="Stand alone Python implementation of the Zope TAL, TALES and METAL specs for HTML/XML templates."
 HOMEPAGE="http://www.owlfish.com/software/simpleTAL/ http://pypi.python.org/pypi/SimpleTAL"
 SRC_URI="http://www.owlfish.com/software/simpleTAL/downloads/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="5"
-KEYWORDS="~alpha amd64 ~ia64 ~ppc sparc x86"
+KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~sparc ~x86"
 IUSE="examples"
 
 DEPEND=""

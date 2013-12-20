@@ -1,10 +1,12 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-util/pida/pida-0.6.2.ebuild,v 1.7 2012/10/29 16:36:36 mgorny Exp $
 
-EAPI="4-python"
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.* *-jython *-pypy-*"
+EAPI="3"
+PYTHON_DEPEND="2:2.6"
+SUPPORT_PYTHON_ABIS="1"
+# json module required.
+RESTRICT_PYTHON_ABIS="2.4 2.5 3.*"
 
 inherit distutils eutils
 
@@ -14,18 +16,18 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86 ~x86-interix ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~x86 ~x86-interix ~amd64-linux ~x86-linux"
 IUSE=""
 
 RDEPEND=">=app-editors/gvim-6.3[gtk]
-	$(python_abi_depend ">=dev-python/anyvc-0.3.2")
-	$(python_abi_depend ">=dev-python/bpython-0.9.7[gtk]")
-	$(python_abi_depend ">=dev-python/pygtk-2.8:2")
-	$(python_abi_depend ">dev-python/pygtkhelpers-0.4.1")
-	$(python_abi_depend virtual/python-argparse)
-	$(python_abi_depend x11-libs/vte:0[python])"
+	>=dev-python/anyvc-0.3.2
+	>=dev-python/bpython-0.9.7[gtk]
+	>=dev-python/pygtk-2.8
+	>dev-python/pygtkhelpers-0.4.1
+	>=x11-libs/vte-0.11.11-r2:0[python]
+	virtual/python-argparse"
 DEPEND="${RDEPEND}
-	$(python_abi_depend dev-python/setuptools)
+	dev-python/setuptools
 	virtual/pkgconfig"
 
 src_prepare() {
@@ -40,6 +42,5 @@ src_prepare() {
 
 src_install() {
 	distutils_src_install
-	doicon pida/resources/pixmaps/pida-icon.png
-	make_desktop_entry pida Pida pida-icon Development
+	make_desktop_entry pida Pida pida/resources/pixmaps/pida-icon.png Development
 }

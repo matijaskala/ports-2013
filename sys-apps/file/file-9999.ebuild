@@ -1,14 +1,12 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/file/file-9999.ebuild,v 1.4 2013/11/28 19:53:24 vapier Exp $
 
-EAPI="5-progress"
-PYTHON_DEPEND="python? ( <<>> )"
-PYTHON_MULTIPLE_ABIS="1"
-# http://bugs.jython.org/issue1916
-PYTHON_RESTRICTED_ABIS="*-jython"
+EAPI="4"
+PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3} pypy2_0 )
+DISTUTILS_OPTIONAL=1
 
-inherit distutils eutils libtool toolchain-funcs
+inherit eutils distutils-r1 libtool toolchain-funcs
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://github.com/glensc/file.git"
@@ -16,7 +14,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	SRC_URI="ftp://ftp.astron.com/pub/file/${P}.tar.gz
 		ftp://ftp.gw.com/mirrors/pub/unix/file/${P}.tar.gz"
-	KEYWORDS="*"
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 fi
 
 DESCRIPTION="identify a file's format by scanning binary data for patterns"
@@ -26,15 +24,10 @@ LICENSE="BSD-2"
 SLOT="0"
 IUSE="python static-libs zlib"
 
-DEPEND="zlib? ( sys-libs/zlib:0= )"
+DEPEND="python? ( ${PYTHON_DEPS} )
+	zlib? ( sys-libs/zlib )"
 RDEPEND="${DEPEND}
-	python? ( !!dev-python/python-magic )"
-
-PYTHON_MODULES="magic.py"
-
-pkg_setup() {
-	use python && python_pkg_setup
-}
+	python? ( !dev-python/python-magic )"
 
 src_prepare() {
 	[[ ${PV} == "9999" ]] && eautoreconf
@@ -90,21 +83,13 @@ src_compile() {
 	fi
 	do_make
 
-	use python && cd python && distutils_src_compile
+	use python && cd python && distutils-r1_src_compile
 }
 
 src_install() {
 	do_make DESTDIR="${D}" install
 	dodoc ChangeLog MAINT README
 
-	use python && cd python && distutils_src_install
+	use python && cd python && distutils-r1_src_install
 	prune_libtool_files
-}
-
-pkg_postinst() {
-	use python && distutils_pkg_postinst
-}
-
-pkg_postrm() {
-	use python && distutils_pkg_postrm
 }
