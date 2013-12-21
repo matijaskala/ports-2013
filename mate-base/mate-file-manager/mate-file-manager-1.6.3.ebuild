@@ -38,24 +38,28 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.2.2"
 PDEPEND="mate? ( >=x11-themes/mate-icon-theme-1.2.0 )"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--disable-update-mimedb
-		--disable-packagekit
-		--enable-unique
-		--with-gtk=2.0
-		$(use_enable introspection)
-		$(use_enable xmp)"
-	DOCS="AUTHORS ChangeLog* HACKING MAINTAINERS NEWS README THANKS TODO"
-}
-
 src_prepare() {
 	mate_src_prepare
 
+	# Remove -n
+	sed -e 's:Exec=caja -n:Exec=caja:g' -i \
+		data/caja.desktop || die
 	# Remove crazy CFLAGS
 	sed -i \
 		-e 's:-DG.*DISABLE_DEPRECATED::g' \
 		configure{,.ac} eel/Makefile.{am,in} || die
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog* HACKING MAINTAINERS NEWS README THANKS TODO"
+
+	mate_src_configure \
+		--disable-update-mimedb \
+		--disable-packagekit \
+		--enable-unique \
+		--with-gtk=2.0 \
+		$(use_enable introspection) \
+		$(use_enable xmp)
 }
 
 src_test() {

@@ -24,13 +24,6 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35
 	virtual/pkgconfig"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		$(use_enable debug)
-		$(use_enable test tests)"
-	DOCS="AUTHORS ChangeLog NEWS README"
-}
-
 src_prepare() {
 	# Remove silly CFLAGS
 	sed 's:CFLAGS="$CFLAGS -Werror:CFLAGS="$CFLAGS:' \
@@ -41,6 +34,14 @@ src_prepare() {
 		-i configure.ac || die "sed DISABLE_DEPRECATED failed"
 
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README"
+
+	mate_src_configure \
+		$(use_enable debug) \
+		$(use_enable test tests)
 }
 
 src_test() {

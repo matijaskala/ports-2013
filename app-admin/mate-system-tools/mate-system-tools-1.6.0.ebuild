@@ -41,17 +41,22 @@ src_prepare() {
 	sed -i 's:DBUS_LIBS):DBUS_LIBS) -lm:' \
 		src/time/Makefile.am || die
 
+	find "${WORKDIR}" -name "*.desktop*" -exec sed -i \
+		-e 's:Categories=MATE;:Categories=:g' {} \; || die
 	mate_src_prepare
 }
 
-pkg_setup() {
+src_configure() {
+	DOCS="AUTHORS BUGS ChangeLog HACKING NEWS README TODO"
+
+	local myconf
 	if ! use nfs && ! use samba; then
-		G2CONF="${G2CONF} --disable-shares"
+		myconf="--disable-shares"
 	fi
 
-	DOCS="AUTHORS BUGS ChangeLog HACKING NEWS README TODO"
-	G2CONF="${G2CONF}
+	mate_src_configure \
+		${myconf} \
 		--disable-static \
-		$(use_enable policykit polkit-gtk) \
-		$(use_enable caja)"
+		$(use_enable policykit polkit-gtk-mate) \
+		$(use_enable caja)
 }

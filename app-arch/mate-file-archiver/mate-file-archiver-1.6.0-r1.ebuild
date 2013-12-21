@@ -27,16 +27,6 @@ DEPEND="${RDEPEND}
 	>=app-text/mate-doc-utils-1.2.1
 	>=mate-base/mate-common-1.2.2"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--disable-run-in-place
-		--disable-packagekit
-		--disable-deprecations
-		--with-gtk=2.0
-		$(use_enable caja caja-actions)"
-	DOCS="AUTHORS HACKING MAINTAINERS NEWS README TODO"
-}
-
 src_prepare() {
 	#Fix crash because of missing keys in schema
 	epatch "${FILESDIR}/${P}-schema-fix.patch"
@@ -51,6 +41,17 @@ src_prepare() {
 	# Drop DEPRECATED flags as configure option doesn't do it, bug #385453
 	sed -i -e 's:-D[A-Z_]*DISABLE_DEPRECATED:$(NULL):g' \
 		copy-n-paste/Makefile.am copy-n-paste/Makefile.in || die
+}
+
+src_configure() {
+	DOCS="AUTHORS HACKING MAINTAINERS NEWS README TODO"
+
+	mate_src_configure \
+		--disable-run-in-place \
+		--disable-packagekit \
+		--disable-deprecations \
+		--with-gtk=2.0 \
+		$(use_enable caja caja-actions)
 }
 
 pkg_postinst() {

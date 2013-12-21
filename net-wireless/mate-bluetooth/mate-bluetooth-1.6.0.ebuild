@@ -43,25 +43,25 @@ DEPEND="${COMMON_DEPEND}
 	x11-proto/xproto
 	>=mate-base/mate-common-1.2.1"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		$(use_enable introspection)
-		--disable-moblin
-		--disable-desktop-update
-		--disable-icon-update
-		--disable-schemas-compile"
-
-	DOCS="AUTHORS README NEWS ChangeLog"
-
-	enewgroup plugdev
-}
-
 src_prepare() {
 	# Fix test
 	sed -i 's:applet/bluetooth-:applet/mate-bluetooth-:g' \
 		po/POTFILES.skip || die
 	mate_src_prepare
 }
+
+src_configure() {
+	DOCS="AUTHORS README NEWS ChangeLog"
+
+	mate_src_configure \
+		$(use_enable introspection) \
+		--disable-moblin \
+		--disable-desktop-update \
+		--disable-icon-update \
+		--disable-schemas-compile
+}
+
+
 src_install() {
 	mate_src_install
 
@@ -71,6 +71,8 @@ src_install() {
 
 pkg_postinst() {
 	mate_pkg_postinst
+
+	enewgroup plugdev
 
 	elog "Don't forget to add yourself to the plugdev group "
 	elog "if you want to be able to control bluetooth transmitter."

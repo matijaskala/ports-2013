@@ -41,11 +41,12 @@ PDEPEND=">=dev-python/pygtk-2.8:2[${PYTHON_USEDEP}]
 # Includes X11/extensions/Xrandr.h that includes randr.h from randrproto (and
 # eventually libXrandr shouldn't RDEPEND on randrproto)
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--enable-mate-conf-import
-		--with-gtk=2.0"
+src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README"
+
+	mate_src_configure \
+		--enable-mate-conf-import \
+		--with-gtk=2.0
 }
 
 src_install() {

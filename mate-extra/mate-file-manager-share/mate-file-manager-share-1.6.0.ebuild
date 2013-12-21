@@ -28,15 +28,16 @@ DEPEND="${COMMON_DEPEND}
 USERSHARES_DIR="/var/lib/samba/usershare"
 USERSHARES_GROUP="samba"
 
-pkg_setup() {
-	DOCS="AUTHORS ChangeLog NEWS README TODO"
-	G2CONF="${G2CONF} --disable-static"
-}
-
 src_prepare() {
 	# Remove obsolete files to make test run
 	rm src/caja-share.c src/caja-share.h || die
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README TODO"
+
+	mate_src_configure --disable-static
 }
 
 src_install() {

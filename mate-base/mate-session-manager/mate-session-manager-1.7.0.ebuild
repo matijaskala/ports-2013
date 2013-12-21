@@ -44,22 +44,6 @@ DEPEND="${RDEPEND}
 	!<gnome-base/gdm-2.20.4
 	systemd? ( sys-apps/systemd )"
 
-# gnome-common needed for eautoreconf
-# gnome-base/gdm does not provide gnome.desktop anymore
-
-pkg_setup() {
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	# TODO: convert libnotify to a configure option
-	G2CONF="${G2CONF}
-		--docdir="${EPREFIX}/usr/share/doc/${PF}"
-		--with-default-wm=mate-wm
-		$(use_enable ipv6)
-		$(use_with systemd)"
-	DOCS="AUTHORS ChangeLog NEWS README"
-}
-
 src_prepare() {
 	# Add "session saving" button back:
 	# see https://bugzilla.gnome.org/show_bug.cgi?id=575544
@@ -71,6 +55,22 @@ src_prepare() {
 
 	eautoreconf
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README"
+
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	# TODO: convert libnotify to a configure option
+	mate_src_configure \
+		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
+		--with-default-wm=mate-wm \
+		$(use_enable ipv6) \
+		$(use_with systemd) \
+		${myconf}
+
 }
 
 src_install() {

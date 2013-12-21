@@ -7,7 +7,7 @@ GCONF_DEBUG="yes"
 MATE_LA_PUNT="yes"
 PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate multilib python-r1 virtualx
+inherit mate multilib python-single-r1 virtualx
 
 DESCRIPTION="Pluma text editor for the MATE desktop"
 HOMEPAGE="http://mate-desktop.org"
@@ -48,16 +48,18 @@ DEPEND="${RDEPEND}
 	~app-text/docbook-xml-dtd-4.1.2
 	>=mate-base/mate-common-1.7.0"
 
-pkg_setup() {
+src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
 
-	G2CONF="${G2CONF}
-		--disable-updater
-		$(use_enable python)
-		$(use_enable spell)"
+	mate_src_configure \
+		--disable-updater \
+		$(use_enable python) \
+		$(use_enable spell) \
+		${myconf}
 }
 
 src_test() {

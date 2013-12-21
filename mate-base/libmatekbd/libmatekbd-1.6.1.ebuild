@@ -23,7 +23,8 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35
 	virtual/pkgconfig"
 
-pkg_setup() {
-	G2CONF="${G2CONF} $(use_enable test tests)"
+src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
+
+	mate_src_configure $(use_enable test tests)
 }

@@ -53,19 +53,21 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.35.0
 	!!<mate-base/mate-applets-1.6.0"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		$(use_enable pulseaudio)
-		$(use_enable !pulseaudio gstmix)
-		$(use_enable !pulseaudio gst-mixer-applet)"
-	DOCS="AUTHORS ChangeLog* NEWS README"
-}
-
 src_prepare() {
 	# Fix tests
 	epatch "${FILESDIR}/${PN}-1.6.0-fix-POTFILES.patch"
 	mate_src_prepare
 }
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog* NEWS README"
+
+	mate_src_configure \
+		$(use_enable pulseaudio) \
+		$(use_enable !pulseaudio gstmix) \
+		$(use_enable !pulseaudio gst-mixer-applet)
+}
+
 pkg_postinst() {
 	mate_pkg_postinst
 	ewarn

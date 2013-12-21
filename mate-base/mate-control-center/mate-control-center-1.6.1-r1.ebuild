@@ -67,13 +67,6 @@ DEPEND="${RDEPEND}
 	>=app-text/mate-doc-utils-1.2.1
 	>=mate-base/mate-common-1.2.2"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--disable-update-mimedb
-		--disable-appindicator"
-	DOCS="AUTHORS ChangeLog NEWS README TODO"
-}
-
 src_prepare() {
 	epatch "${FILESDIR}/${P}-collision-fix.patch"
 	epatch "${FILESDIR}/${PN}-1.6-libsecret.patch"
@@ -81,4 +74,12 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.6.1-fix-POTFILES.patch"
 	eautoreconf
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README TODO"
+
+	mate_src_configure \
+		--disable-update-mimedb \
+		--disable-appindicator
 }

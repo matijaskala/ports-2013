@@ -28,23 +28,21 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.5.0
 	>=dev-util/intltool-0.40"
 
-pkg_setup() {
+src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
 	# Do NOT compile with --disable-debug/--enable-debug=no
 	# It disables api usage checks
+	local myconf
 	if ! use debug ; then
-		G2CONF="${G2CONF} --enable-debug=minimum"
+		myconf="${myconf} --enable-debug=minimum"
 	fi
 
-	G2CONF="${G2CONF}
-		$(use_enable python)
-		$(use_enable introspection)"
+	mate_src_configure \
+		$(use_enable python) \
+		$(use_enable introspection) \
+		${myconf}
 
-	python_setup
-}
-
-src_configure() {
 	if use python; then
 		python_copy_sources
 		python_foreach_impl run_in_build_dir mate_src_configure

@@ -28,17 +28,18 @@ DEPEND="${RDEPEND}
 	>=app-text/mate-doc-utils-1.2.1
 	test? ( ~app-text/docbook-xml-dtd-4.1.2 )"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--with-gtk=2.0
-		--disable-python-bindings
-		$(use_enable introspection)
-		$(use_enable cjk unihan)"
-	DOCS="ChangeLog NEWS README TODO"
-}
-
 src_prepare() {
 	# Fix test
 	sed -i 's/gucharmap/mucharmap/g' po/POTFILES.in || die
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="ChangeLog NEWS README TODO"
+
+	mate_src_configure \
+		--with-gtk=2.0 \
+		--disable-python-bindings \
+		$(use_enable introspection) \
+		$(use_enable cjk unihan)
 }

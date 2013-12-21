@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -53,23 +53,6 @@ DEPEND="${COMMON_DEPEND}
 	x11-proto/inputproto
 	x11-proto/xproto"
 
-pkg_setup() {
-	# README is empty
-	DOCS="AUTHORS NEWS ChangeLog"
-	G2CONF="${G2CONF}
-		$(use_with libnotify)
-		$(use_enable policykit polkit)
-		$(use_enable pulseaudio pulse)
-		$(use_enable !pulseaudio gstreamer)
-		$(use_enable smartcard smartcard-support)"
-
-	if use pulseaudio; then
-		elog "Building volume media keys using Pulseaudio"
-	else
-		elog "Building volume media keys using GStreamer"
-	fi
-}
-
 src_prepare() {
 	# More network filesystems not to monitor, upstream bug #606421
 	epatch "${FILESDIR}/${PN}-1.4.0-netfs-monitor.patch"
@@ -78,4 +61,22 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.2.0-syndaemon-mode.patch"
 
 	mate_src_prepare
+}
+
+src_configure() {
+	# README is empty
+	DOCS="AUTHORS NEWS ChangeLog"
+
+	mate_src_configure \
+		$(use_with libnotify) \
+		$(use_enable policykit polkit) \
+		$(use_enable pulseaudio pulse) \
+		$(use_enable !pulseaudio gstreamer) \
+		$(use_enable smartcard smartcard-support)
+
+	if use pulseaudio; then
+		elog "Building volume media keys using Pulseaudio"
+	else
+		elog "Building volume media keys using GStreamer"
+	fi
 }

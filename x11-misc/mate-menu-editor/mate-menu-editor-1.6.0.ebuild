@@ -33,16 +33,14 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
-pkg_setup() {
-	DOCS="AUTHORS NEWS README"
-}
-
 src_prepare() {
 	mate_src_prepare
 	python_copy_sources
 }
 
 src_configure() {
+	DOCS="AUTHORS NEWS README"
+
 	python_foreach_impl run_in_build_dir mate_src_configure
 }
 

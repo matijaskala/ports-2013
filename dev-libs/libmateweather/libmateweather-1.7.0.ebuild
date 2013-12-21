@@ -37,18 +37,6 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.7.0
 	virtual/pkgconfig"
 
-DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
-
-pkg_setup() {
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	G2CONF="${G2CONF}
-		--enable-locations-compression
-		--disable-all-translations-in-one-xml
-		$(use_enable python)"
-}
-
 src_prepare() {
 	# fix python automagic in configure.in
 	epatch "${FILESDIR}/${PN}-1.5.0-fix-automagic-python-support.patch"
@@ -61,7 +49,17 @@ src_prepare() {
 }
 
 src_configure() {
-	python_foreach_impl run_in_build_dir mate_src_configure
+	DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
+
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	python_foreach_impl run_in_build_dir mate_src_configure \
+		--enable-locations-compression \
+		--disable-all-translations-in-one-xml \
+		$(use_enable python) \
+		${myconf}
 }
 
 src_compile() {

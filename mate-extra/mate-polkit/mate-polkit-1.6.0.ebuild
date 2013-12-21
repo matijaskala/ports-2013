@@ -32,8 +32,6 @@ DEPEND="${RDEPEND}
 # into the build chroots.
 ENTROPY_RDEPEND="!lxde-base/lxpolkit"
 
-DOCS=( AUTHORS HACKING NEWS README )
-
 src_prepare() {
 	gtkdocize
 	eautoreconf
@@ -41,6 +39,8 @@ src_prepare() {
 }
 
 src_configure() {
+	DOCS="AUTHORS HACKING NEWS README"
+
 	econf \
 		--disable-static \
 		$(use_enable introspection)

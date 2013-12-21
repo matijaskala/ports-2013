@@ -7,7 +7,7 @@ GCONF_DEBUG="yes"
 MATE_LA_PUNT="yes"
 PYTHON_COMPAT=( python2_{6,7} )
 
-inherit mate multilib python-r1 virtualx
+inherit mate multilib python-single-r1 virtualx
 
 DESCRIPTION="Pluma text editor for the MATE desktop"
 HOMEPAGE="http://mate-desktop.org"
@@ -47,19 +47,19 @@ DEPEND="${RDEPEND}
 	~app-text/docbook-xml-dtd-4.1.2
 	>=mate-base/mate-common-1.2.2"
 
-pkg_setup() {
-	DOCS="AUTHORS ChangeLog NEWS README"
-	G2CONF="${G2CONF}
-		--disable-updater
-		$(use_enable python)
-		$(use_enable spell)"
-	python_setup
-}
-
 src_prepare() {
 	# Mate test run
 	epatch "${FILESDIR}/${PN}-1.6.0-fix-POTFILES.patch"
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README"
+
+	mate_src_configure \
+		--disable-updater \
+		$(use_enable python) \
+		$(use_enable spell)
 }
 
 src_test() {

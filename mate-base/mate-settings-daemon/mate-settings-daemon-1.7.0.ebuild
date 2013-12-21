@@ -55,28 +55,6 @@ DEPEND="${COMMON_DEPEND}
 	x11-proto/inputproto
 	x11-proto/xproto"
 
-pkg_setup() {
-	# README is empty
-	DOCS="AUTHORS NEWS ChangeLog"
-
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	G2CONF="${G2CONF}
-		$(use_with libnotify)
-		$(use_enable debug)
-		$(use_enable policykit polkit)
-		$(use_enable pulseaudio pulse)
-		$(use_enable !pulseaudio gstreamer)
-		$(use_enable smartcard smartcard-support)"
-
-	if use pulseaudio; then
-		elog "Building volume media keys using Pulseaudio"
-	else
-		elog "Building volume media keys using GStreamer"
-	fi
-}
-
 src_prepare() {
 	# More network filesystems not to monitor, upstream bug #606421
 	epatch "${FILESDIR}/${PN}-1.4.0-netfs-monitor.patch"
@@ -85,4 +63,28 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.2.0-syndaemon-mode.patch"
 
 	mate_src_prepare
+}
+
+src_configure() {
+	# README is empty
+	DOCS="AUTHORS NEWS ChangeLog"
+
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	mate_src_configure \
+		$(use_with libnotify) \
+		$(use_enable debug) \
+		$(use_enable policykit polkit) \
+		$(use_enable pulseaudio pulse) \
+		$(use_enable !pulseaudio gstreamer) \
+		$(use_enable smartcard smartcard-support) \
+		${myconf}
+
+	if use pulseaudio; then
+		elog "Building volume media keys using Pulseaudio"
+	else
+		elog "Building volume media keys using GStreamer"
+	fi
 }

@@ -24,10 +24,14 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35
 	virtual/pkgconfig"
 
-pkg_setup() {
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	G2CONF="${G2CONF} $(use_enable test tests)"
+src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
+
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	mate_src_configure \
+		$(use_enable test tests) \
+		${myconf}
 }

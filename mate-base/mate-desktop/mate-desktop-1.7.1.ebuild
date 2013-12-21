@@ -42,22 +42,26 @@ PDEPEND=">=dev-python/pygtk-2.8:2[${PYTHON_USEDEP}]
 # Includes X11/extensions/Xrandr.h that includes randr.h from randrproto (and
 # eventually libXrandr shouldn't RDEPEND on randrproto)
 
-#Disable desktop help due to file collision
-pkg_setup() {
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	G2CONF="${G2CONF}
-		--enable-mate-conf-import
-		--disable-desktop-docs"
-	DOCS="AUTHORS ChangeLog HACKING NEWS README"
-}
-
 src_prepare() {
 	# *Very* dirty hack so it installs, fixed in next release 
 	touch "${S}/tools/mate-conf-import" || die
 	mate_src_prepare
 }
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog HACKING NEWS README"
+
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	#Disable desktop help due to file collision
+	mate_src_configure \
+		--enable-mate-conf-import \
+		--disable-desktop-docs \
+		${myconf}
+}
+
 src_install() {
 	mate_src_install
 	# Do migrate script foo see url:

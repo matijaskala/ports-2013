@@ -36,17 +36,6 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.5.0
 	virtual/pkgconfig"
 
-DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
-
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--enable-locations-compression
-		--disable-all-translations-in-one-xml
-		$(use_enable python)"
-
-	python_setup
-}
-
 src_prepare() {
 	# fix python automagic in configure.in
 	epatch "${FILESDIR}/${PN}-1.5.0-fix-automagic-python-support.patch"
@@ -59,7 +48,12 @@ src_prepare() {
 }
 
 src_configure() {
-	python_foreach_impl run_in_build_dir mate_src_configure
+	DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
+
+	python_foreach_impl run_in_build_dir mate_src_configure \
+		--enable-locations-compression \
+		--disable-all-translations-in-one-xml \
+		$(use_enable python)
 }
 
 src_compile() {

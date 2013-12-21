@@ -32,18 +32,22 @@ DEPEND="${RDEPEND}
 # into the build chroots.
 ENTROPY_RDEPEND="!lxde-base/lxpolkit"
 
-DOCS=( AUTHORS HACKING NEWS README )
-
-pkg_setup() {
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	GCONF="${GCONF}
-		--disable-static
-		$(use_enable introspection)"
-}
-
 src_prepare() {
 	eautoreconf
 	mate_src_prepare
 }
+
+src_configure() {
+	DOCS="AUTHORS HACKING NEWS README"
+
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	mate_src_configure \ 
+		--disable-static \
+		$(use_enable introspection) \
+		${myconf}
+}
+
+

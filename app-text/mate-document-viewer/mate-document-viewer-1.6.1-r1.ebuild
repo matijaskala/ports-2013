@@ -50,32 +50,6 @@ ELTCONF="--portage"
 #Tests use dogtail which is not available on gentoo.
 RESTRICT="test"
 
-pkg_setup() {
-	# Passing --disable-help would drop offline help, that would be inconsistent
-	# with helps of the most of Gnome apps that doesn't require network for that.
-	G2CONF="${G2CONF}
-		--disable-tests
-		--enable-pdf
-		--enable-comics
-		--enable-thumbnailer
-		--enable-pixbuf
-		--with-smclient=xsmp
-		--with-platform=mate
-		--with-gtk=2.0
-		--enable-help
-		$(use_enable dbus)
-		$(use_enable djvu)
-		$(use_enable dvi)
-		$(use_with gnome-keyring keyring)
-		$(use_enable introspection)
-		$(use_enable caja)
-		$(use_enable ps)
-		$(use_enable t1lib)
-		$(use_enable tiff)
-		$(use_enable xps)"
-	DOCS="AUTHORS NEWS README TODO"
-}
-
 src_prepare() {
 	# Fix .desktop categories, upstream bug #666346
 	sed -e "s:GTK\;Graphics\;VectorGraphics\;Viewer\;:GTK\;Office\;Viewer\;Graphics\;VectorGraphics;:g" -i data/atril.desktop.in.in || die
@@ -89,4 +63,31 @@ src_prepare() {
 	eautoreconf
 
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS NEWS README TODO"
+
+	# Passing --disable-help would drop offline help, that would be inconsistent
+	# with helps of the most of Gnome apps that doesn't require network for that.
+	mate_src_configure \
+		--disable-tests \
+		--enable-pdf \
+		--enable-comics \
+		--enable-thumbnailer \
+		--enable-pixbuf \
+		--with-smclient=xsmp \
+		--with-platform=mate \
+		--with-gtk=2.0 \
+		--enable-help \
+		$(use_enable dbus) \
+		$(use_enable djvu) \
+		$(use_enable dvi) \
+		$(use_with gnome-keyring keyring) \
+		$(use_enable introspection) \
+		$(use_enable caja) \
+		$(use_enable ps) \
+		$(use_enable t1lib) \
+		$(use_enable tiff) \
+		$(use_enable xps)
 }

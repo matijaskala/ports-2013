@@ -48,15 +48,16 @@ DEPEND="${RDEPEND}
 	x11-proto/xextproto
 	x11-proto/xproto"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--enable-compositor
-		--enable-render
-		--enable-shape
-		--enable-sm
-		--enable-xsync
-		--with-gtk=2.0
-		$(use_enable startup-notification)
-		$(use_enable xinerama)"
+src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README *.txt doc/*.txt"
+
+	mate_src_configure \
+		--enable-compositor \
+		--enable-render \
+		--enable-shape \
+		--enable-sm \
+		--enable-xsync \
+		--with-gtk=2.0 \
+		$(use_enable startup-notification) \
+		$(use_enable xinerama)
 }

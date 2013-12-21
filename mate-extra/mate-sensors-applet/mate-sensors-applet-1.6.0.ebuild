@@ -43,20 +43,22 @@ DEPEND="${RDEPEND}
 
 PDEPEND="hddtemp? ( dbus? ( sys-fs/udisks:0 ) )"
 
-DOCS="AUTHORS ChangeLog NEWS README TODO"
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README TODO"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		--disable-scrollkeeper
-		--disable-static
-		$(use_enable libnotify)
-		$(use_with lm_sensors libsensors)
-		$(use_with video_cards_fglrx aticonfig)
-		$(use_with video_cards_nvidia nvidia)"
-
+	local myconf
 	if use hddtemp && use dbus; then
-		G2CONF="${G2CONF} $(use_enable dbus udisks)"
+		myconf="${myconf} $(use_enable dbus udisks)"
 	else
-		G2CONF="${G2CONF} --disable-udisks"
+		myconf="${myconf} --disable-udisks"
 	fi
+
+	mate_src_configure \
+		--disable-scrollkeeper \
+		--disable-static \
+		$(use_enable libnotify) \
+		$(use_with lm_sensors libsensors) \
+		$(use_with video_cards_fglrx aticonfig) \
+		$(use_with video_cards_nvidia nvidia) \
+		${myconf}
 }

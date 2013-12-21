@@ -237,9 +237,14 @@ mate_src_install() {
 
 	unset MATECONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
-	# Manual document installation
-	if [[ -n "${DOCS}" ]]; then
-		dodoc ${DOCS} || die "dodoc failed"
+	# Handle documentation as 'default' for eapi5 and newer, bug #373131
+	if has ${EAPI:-0} 0 1 2 3 4; then
+		# Manual document installation
+		if [[ -n "${DOCS}" ]]; then
+			dodoc ${DOCS} || die "dodoc failed"
+		fi
+	else
+		einstalldocs
 	fi
 
 	# Do not keep /var/lib/scrollkeeper because:
@@ -254,12 +259,20 @@ mate_src_install() {
 	rm -fr "${ED}/usr/share/applications/mimeinfo.cache"
 
 	# Delete all .la files
-	if [[ "${MATE_LA_PUNT}" != "no" ]]; then
-		ebegin "Removing .la files"
-		if ! { has static-libs ${IUSE//+} && use static-libs; }; then
-			find "${D}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
+	if has ${EAPI:-0} 0 1 2 3 4; then
+		if [[ "${MATE_LA_PUNT}" != "no" ]]; then
+			ebegin "Removing .la files"
+			if ! { has static-libs ${IUSE//+} && use static-libs; }; then
+				find "${D}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
+			fi
+			eend
 		fi
-		eend
+	else
+		case "${MATE_LA_PUNT}" in
+			yes)	prune_libtool_files --modules;;
+			no)		;;
+			*)		prune_libtool_files;;
+		esac
 	fi
 }
 

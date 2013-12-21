@@ -37,20 +37,6 @@ PDEPEND=">=mate-base/libmatekeyring-1.6.0"
 # revisit then.
 RESTRICT="test"
 
-pkg_setup() {
-	DOCS="AUTHORS ChangeLog NEWS README"
-	G2CONF="${G2CONF}
-		$(use_enable debug)
-		$(use_enable test tests)
-		$(use_enable pam)
-		$(use_with pam pam-dir $(getpam_mod_dir))
-		--with-root-certs="${EPREFIX}"/usr/share/ca-certificates/
-		--with-gtk=2.0
-		--enable-ssh-agent
-		--enable-gpg-agent"
-#		$(use_enable valgrind)
-}
-
 src_prepare() {
 	mate_src_prepare
 
@@ -61,6 +47,21 @@ src_prepare() {
 	# Remove DISABLE_DEPRECATED flags
 	sed -e '/-D[A-Z_]*DISABLE_DEPRECATED/d' \
 		-i configure.ac configure || die "sed DISABLE_DEPRECATED failed"
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README"
+
+	mate_src_configure \
+		$(use_enable debug) \
+		$(use_enable test tests) \
+		$(use_enable pam) \
+		$(use_with pam pam-dir $(getpam_mod_dir)) \
+		--with-root-certs="${EPREFIX}"/usr/share/ca-certificates/ \
+		--with-gtk=2.0 \
+		--enable-ssh-agent \
+		--enable-gpg-agent
+#		$(use_enable valgrind)
 }
 
 src_test() {

@@ -31,20 +31,6 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig
 	>=mate-base/mate-common-1.5.0"
-
-pkg_setup() {
-	if ! use debug; then
-		G2CONF="${G2CONF} --enable-debug=minimum"
-	fi
-
-	G2CONF="${G2CONF}
-		$(use_enable ipv6)
-		$(use_enable applet gdict-applet)
-		--disable-maintainer-flags
-		--enable-zlib"
-	DOCS="AUTHORS ChangeLog NEWS README THANKS"
-}
-
 src_prepare() {
 	#Fix test
 	epatch "${FILESDIR}/${PN}-1.6.0-fix-POTFILES.patch"
@@ -71,4 +57,20 @@ src_prepare() {
 	# Fix intltoolize broken file, see upstream #577133
 	# sed "s:'\^\$\$lang\$\$':\^\$\$lang\$\$:g" -i po/Makefile.in.in \
 	#	|| die "sed failed"
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog NEWS README THANKS"
+
+	local myconf
+	if ! use debug; then
+		myconf="${myconf} --enable-debug=minimum"
+	fi
+
+	mate_src_configure \
+		$(use_enable ipv6) \
+		$(use_enable applet gdict-applet) \
+		--disable-maintainer-flags \
+		--enable-zlib \
+		${myconf}
 }

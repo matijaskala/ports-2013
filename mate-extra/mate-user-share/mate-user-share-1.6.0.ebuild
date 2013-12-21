@@ -40,9 +40,10 @@ DEPEND="${RDEPEND}
 	app-text/mate-doc-utils
 	app-text/docbook-xml-dtd:4.1.2"
 
-pkg_setup() {
+src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
-	G2CONF="${G2CONF}
-		--with-httpd=apache2
-		--with-modules-path=/usr/$(get_libdir)/apache2/modules/"
+
+	mate_src_configure \
+		--with-httpd=apache2 \
+		--with-modules-path=/usr/$(get_libdir)/apache2/modules/
 }

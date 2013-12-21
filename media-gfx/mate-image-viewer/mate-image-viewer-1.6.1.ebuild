@@ -44,14 +44,15 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig"
 
-pkg_setup() {
-	G2CONF="${G2CONF}
-		$(use_enable python)
-		$(use_with jpeg libjpeg)
-		$(use_with exif libexif)
-		$(use_with dbus)
-		$(use_with lcms cms)
-		$(use_with xmp)
-		$(use_with svg librsvg)"
+src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README THANKS TODO"
+
+	mate_src_configure \
+		$(use_enable python) \
+		$(use_with jpeg libjpeg) \
+		$(use_with exif libexif) \
+		$(use_with dbus) \
+		$(use_with lcms cms) \
+		$(use_with xmp) \
+		$(use_with svg librsvg)
 }

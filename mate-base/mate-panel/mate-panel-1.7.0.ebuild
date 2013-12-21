@@ -47,22 +47,25 @@ DEPEND="${RDEPEND}
 	~app-text/docbook-xml-dtd-4.1.2
 	>=mate-base/mate-common-1.7.0"
 
-pkg_setup() {
-	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
-	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
-
-	G2CONF="${G2CONF}
-		--libexecdir=/usr/libexec/mate-applets
-		--disable-deprecation-flags
-		$(use_enable networkmanager network-manager)
-		$(use_enable introspection)"
-	DOCS="AUTHORS ChangeLog HACKING NEWS README"
-}
-
 src_prepare() {
 	sed -e '/toplevel-id-list \= \/apps\/panel\/general\/toplevel_id_list/d' \
 		-i data/mate-panel.convert || die
 	sed -e '/object-id-list \= \/apps\/panel\/general\/object_id_list/d' \
 		-i data/mate-panel.convert || die
 	mate_src_prepare
+}
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog HACKING NEWS README"
+
+	local myconf
+	use gtk3 && myconf="${myconf} --with-gtk=3.0"
+	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+
+	mate_src_configure \
+		--libexecdir=/usr/libexec/mate-applets \
+		--disable-deprecation-flags \
+		$(use_enable networkmanager network-manager) \
+		$(use_enable introspection) \
+		${myconf}
 }

@@ -23,11 +23,11 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.40
 	sys-devel/gettext"
 
-DOCS="AUTHORS NEWS TODO"
-
 # This ebuild does not install any binaries
 RESTRICT="binchecks strip"
 
-pkg_setup() {
-	G2CONF="${G2CONF} --enable-icon-mapping"
+src_configure() {
+	DOCS="AUTHORS NEWS TODO"
+
+	mate_src_configure --enable-icon-mapping
 }
