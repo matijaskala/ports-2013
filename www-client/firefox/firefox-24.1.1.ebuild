@@ -45,7 +45,7 @@ IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
 	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
-	https://launchpad.net/ubuntu/saucy/+source/${PN}/24.0+build1-0ubuntu1/+files/${PN}_24.0+build1-0ubuntu1.debian.tar.gz"
+	https://launchpad.net/ubuntu/trusty/+source/${PN}/24.0+build1-0ubuntu1/+files/${PN}_24.0+build1-0ubuntu1.debian.tar.gz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
