@@ -1,0 +1,42 @@
+diff --git a/src/Makefile.am b/src/Makefile.am
+index f03fe1a..7ccb7c5 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -6,6 +6,8 @@ AM_CPPFLAGS =						\
+ 	-I$(top_builddir)				\
+ 	$(DISABLE_DEPRECATED_CFLAGS)			\
+ 	$(CAJA_PYTHON_CFLAGS)			\
++	-DPYTHON_VERSION=\"$(PYTHON_VERSION)\"		\
++	-DPY_LIB_LOC="\"$(PYTHON_LIB_LOC)\""		\
+ 	$(PYTHON_INCLUDES)
+ 
+ caja_extensiondir=$(CAJA_EXTENSION_DIR)
+@@ -18,5 +20,5 @@ libcaja_python_la_SOURCES =     	\
+ 	caja-python-object.c	\
+ 	caja-python-object.h
+ 
+-libcaja_python_la_LDFLAGS = -module -avoid-version -no-undefined
++libcaja_python_la_LDFLAGS = -module -avoid-version
+ libcaja_python_la_LIBADD  = $(CAJA_PYTHON_LIBS) $(PYTHON_LIBS)
+diff --git a/src/caja-python.c b/src/caja-python.c
+index 21e7f42..a6a7478 100644
+--- a/src/caja-python.c
++++ b/src/caja-python.c
+@@ -155,11 +155,17 @@ static gboolean
+ caja_python_init_python (void)
+ {
+ 	PyObject *caja;
++	GModule *libpython;
+ 	char *argv[] = { "caja", NULL };
+ 
+ 	if (Py_IsInitialized())
+ 		return TRUE;
+ 
++  	debug("g_module_open " PY_LIB_LOC "/libpython" PYTHON_VERSION "." G_MODULE_SUFFIX ".1.0");
++	libpython = g_module_open(PY_LIB_LOC "/libpython" PYTHON_VERSION "." G_MODULE_SUFFIX ".1.0", 0);
++	if (!libpython)
++		g_warning("g_module_open libpython failed: %s", g_module_error());
++
+ 	debug("Py_Initialize");
+ 	Py_Initialize();
+ 	if (PyErr_Occurred())

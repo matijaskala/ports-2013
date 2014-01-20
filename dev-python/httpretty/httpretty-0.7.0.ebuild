@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/httpretty/httpretty-0.7.0.ebuild,v 1.2 2013/12/03 02:15:29 idella4 Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/httpretty/httpretty-0.7.0.ebuild,v 1.3 2014/01/06 11:50:34 idella4 Exp $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -28,7 +28,8 @@ RDEPEND="dev-python/urllib3[${PYTHON_USEDEP}]
 		"
 # I believe we don't need unpackaged package markment
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
-	test? ( dev-python/sure[${PYTHON_USEDEP}] )"
+	test? ( ${RDEPEND} )"
+DISTUTILS_NO_PARALLEL_BUILD=1
 
 PATCHES=( "${FILESDIR}"/${P}-deps.patch )
 
@@ -45,6 +46,7 @@ python_test() {
 		-e test_recording_calls \
 		-e test_playing_calls \
 		-e test_callback_setting_headers_and_status_response \
+		-e test_streaming_responses \
 		tests/functional || die "Tests failed under ${EPYTHON}"
 	rm -rf tests/ "${BUILD_DIR}"/lib/tests/ || die
 }

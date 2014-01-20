@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/use.mask,v 1.180 2013/09/28 09:23:23 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/use.mask,v 1.184 2014/01/16 00:12:06 redlizard Exp $
 
 # masking here and unmasking in default/linux/
 kmod
@@ -58,10 +58,12 @@ sse3
 sse4
 sse4a
 sse4_1
+sse4_2
 ssse3
 avx
 avx128fma
 avx256
+fma4
 svga
 nvram
 
@@ -75,6 +77,10 @@ n32
 n64
 fixed-point
 loongson2f
+mips32r2
+mipsdspr1
+mipsdspr2
+mipsfpu
 
 # ppc64 arch specific USE flags
 ibm
@@ -85,6 +91,10 @@ vis
 ultra1
 
 # arm arch specific USE flags
+armvfp
+armv5te
+armv6
+armv6t2
 iwmmxt
 neon
 
@@ -256,8 +266,9 @@ tcc
 pam_console
 
 # Jeremy Olexa <darkside@gentoo.org>
-# The prefix USE flag should never be used on non prefix profiles
+# The prefix USE flags should never be used on non prefix profiles
 prefix
+prefix-guest
 
 # Diego E. Pettenò <flameeyes@gentoo.org> (6 Dec 2009)
 #  on behalf of QA Team

@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit mate
 
@@ -62,7 +62,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.6-libsecret.patch"
 	eautoreconf
 
-	mate_src_prepare
+	gnome2_src_prepare
 }
 
 src_configure() {
@@ -70,7 +70,7 @@ src_configure() {
 
 	# Passing --disable-help would drop offline help, that would be inconsistent
 	# with helps of the most of Gnome apps that doesn't require network for that.
-	mate_src_configure \
+	gnome2_src_configure \
 		--disable-tests \
 		--enable-pdf \
 		--enable-comics \

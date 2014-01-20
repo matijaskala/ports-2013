@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -47,13 +47,17 @@ src_prepare() {
 	# Fix test
 	sed -i 's:applet/bluetooth-:applet/mate-bluetooth-:g' \
 		po/POTFILES.skip || die
-	mate_src_prepare
+
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="AUTHORS README NEWS ChangeLog"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		$(use_enable introspection) \
 		--disable-moblin \
 		--disable-desktop-update \
@@ -61,16 +65,15 @@ src_configure() {
 		--disable-schemas-compile
 }
 
-
 src_install() {
-	mate_src_install
+	gnome2_src_install
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/80-mate-rfkill.rules
 }
 
 pkg_postinst() {
-	mate_pkg_postinst
+	gnome2_pkg_postinst
 
 	enewgroup plugdev
 

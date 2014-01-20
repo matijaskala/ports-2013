@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/pciutils/pciutils-3.2.1.ebuild,v 1.1 2013/11/18 10:36:28 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/pciutils/pciutils-3.2.1.ebuild,v 1.3 2014/01/18 04:55:35 vapier Exp $
 
 EAPI="5"
 
@@ -12,8 +12,8 @@ SRC_URI="ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x64-freebsd ~amd64-linux ~arm-linux ~x86-linux"
-IUSE="+kmod static-libs zlib"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x64-freebsd ~amd64-linux ~arm-linux ~x86-linux"
+IUSE="dns +kmod static-libs zlib"
 
 # Have the sub-libs in RDEPEND with [static-libs] since, logically,
 # our libssl.a depends on libz.a/etc... at runtime.
@@ -39,7 +39,7 @@ pemake() {
 		HOST="${CHOST}" \
 		CROSS_COMPILE="${CHOST}-" \
 		CC="$(tc-getCC)" \
-		DNS="yes" \
+		DNS=$(usex dns) \
 		IDSDIR='$(SHAREDIR)/misc' \
 		MANDIR='$(SHAREDIR)/man' \
 		PREFIX="${EPREFIX}/usr" \
@@ -49,7 +49,7 @@ pemake() {
 		PCI_COMPRESSED_IDS=0 \
 		PCI_IDS=pci.ids \
 		LIBDIR="\${PREFIX}/$(get_libdir)" \
-		LIBKMOD="$(usex kmod)" \
+		LIBKMOD=$(usex kmod) \
 		"$@"
 }
 

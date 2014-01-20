@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-php/smarty/smarty-3.1.12.ebuild,v 1.8 2013/10/09 17:09:16 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-php/smarty/smarty-3.1.12.ebuild,v 1.10 2014/01/08 17:32:09 mabi Exp $
 
 EAPI=4
 
-KEYWORDS="alpha amd64 hppa ia64 ppc ppc64 sparc ~x86"
+KEYWORDS="alpha amd64 hppa ia64 ppc ppc64 sparc x86"
 
 MY_P="Smarty-${PV}"
 DOC_PV="3.1.8"
@@ -17,7 +17,7 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 IUSE="doc"
 
-DEPEND="app-arch/unzip"
+DEPEND="doc? ( app-arch/unzip )"
 RDEPEND="dev-lang/php"
 
 S="${WORKDIR}/${MY_P}"

@@ -31,5 +31,5 @@ RESTRICT="binchecks strip"
 src_configure() {
 	DOCS="AUTHORS NEWS TODO"
 
-	mate_src_configure --enable-icon-mapping
+	gnome2_src_configure --enable-icon-mapping
 }

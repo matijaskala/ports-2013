@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/httpunit/httpunit-1.7.ebuild,v 1.2 2013/08/14 09:30:34 patrick Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-java/httpunit/httpunit-1.7.ebuild,v 1.5 2014/01/14 13:51:58 ago Exp $
 
 EAPI="5"
 
@@ -10,12 +10,11 @@ inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="HttpUnit emulates the relevant portions of browser behavior."
 HOMEPAGE="http://httpunit.sourceforge.net/"
-# TODO What is metainf for? Where did it come from?
 SRC_URI="mirror://sourceforge/${PN}/${P}.zip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 CDEPEND="
 	>=dev-java/junit-3.8:0

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/gitolite/gitolite-3.5.3.1.ebuild,v 1.2 2013/11/07 07:26:05 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/gitolite/gitolite-3.5.3.1.ebuild,v 1.4 2014/01/19 16:48:26 idl0r Exp $
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="https://github.com/sitaramc/gitolite/archive/v${PV}.tar.gz -> ${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="tools vim-syntax"
 
 DEPEND="dev-lang/perl
@@ -70,7 +70,7 @@ src_install() {
 pkg_postinst() {
 	if [ "$(get_major_version $REPLACING_VERSIONS)" = "2" ]; then
 		ewarn
-		elog "***NOTE** This is a major upgrade and will likely break your existing gitolite-2.x setup!"
+		elog "***NOTE*** This is a major upgrade and will likely break your existing gitolite-2.x setup!"
 		elog "Please read http://sitaramc.github.com/gitolite/install.html#migr first!"
 	fi
 

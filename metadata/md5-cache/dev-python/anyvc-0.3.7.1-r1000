@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=dev-python/apipkg[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/execnet[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/py[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] git? ( dev-python/dulwich[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) mercurial? ( ( python_abis_2.6? ( dev-vcs/mercurial[python_abis_2.6] ) python_abis_2.7? ( dev-vcs/mercurial[python_abis_2.7] ) ) ) subversion? ( dev-python/subvertpy[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) dev-python/setuptools[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] doc? ( dev-python/sphinx[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+DESCRIPTION=Library to access any version control system
+EAPI=4-python
+HOMEPAGE=http://pypi.python.org/pypi/anyvc
+IUSE=doc git mercurial subversion python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=dev-python/apipkg[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/execnet[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/py[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] git? ( dev-python/dulwich[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) mercurial? ( ( python_abis_2.6? ( dev-vcs/mercurial[python_abis_2.6] ) python_abis_2.7? ( dev-vcs/mercurial[python_abis_2.7] ) ) ) subversion? ( dev-python/subvertpy[python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://pypi/a/anyvc/anyvc-0.3.7.1.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=f6844ed99e66428894fea7994bdf12c4

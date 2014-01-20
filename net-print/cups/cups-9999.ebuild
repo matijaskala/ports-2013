@@ -1,13 +1,14 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/cups/cups-9999.ebuild,v 1.45 2013/10/30 21:48:47 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/cups/cups-9999.ebuild,v 1.49 2014/01/17 02:54:44 patrick Exp $
 
 EAPI=5
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
 inherit autotools base fdo-mime gnome2-utils flag-o-matic linux-info \
-	multilib pam python-single-r1 user versionator java-pkg-opt-2 systemd
+	multilib pam python-single-r1 user versionator java-pkg-opt-2 systemd \
+	toolchain-funcs
 
 MY_P=${P/_rc/rc}
 MY_P=${MY_P/_beta/b}
@@ -31,7 +32,7 @@ HOMEPAGE="http://www.cups.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="acl dbus debug +filters gnutls java kerberos lprng-compat pam
+IUSE="acl dbus debug gnutls java kerberos lprng-compat pam
 	python selinux +ssl static-libs +threads usb X xinetd zeroconf"
 
 LANGS="ca es fr it ja ru"
@@ -74,8 +75,7 @@ DEPEND="${RDEPEND}
 PDEPEND="
 	app-text/ghostscript-gpl[cups]
 	app-text/poppler[utils]
-	>=net-print/cups-filters-1.0.30
-	filters? ( net-print/foomatic-filters )
+	>=net-print/cups-filters-1.0.43
 "
 
 REQUIRED_USE="gnutls? ( ssl )
@@ -162,6 +162,12 @@ src_configure() {
 		"
 	fi
 
+	if tc-is-static-only; then
+		myconf+="
+			--disable-shared
+		"
+	fi
+
 	econf \
 		--libdir="${EPREFIX}"/usr/$(get_libdir) \
 		--localstatedir="${EPREFIX}"/var \
@@ -241,8 +247,7 @@ src_install() {
 	fi
 
 	keepdir /usr/libexec/cups/driver /usr/share/cups/{model,profiles} \
-		/var/cache/cups /var/cache/cups/rss /var/log/cups \
-		/var/spool/cups/tmp
+		/var/log/cups /var/spool/cups/tmp
 
 	keepdir /etc/cups/{interfaces,ppd,ssl}
 
@@ -254,6 +259,10 @@ src_install() {
 	# the following files are now provided by cups-filters:
 	rm -r "${ED}"/usr/share/cups/banners || die
 	rm -r "${ED}"/usr/share/cups/data/testprint || die
+
+	# the following are created by the init script
+	rm -r "${ED}"/var/cache/cups || die
+	rm -r "${ED}"/run || die
 
 	# for the special case of running lprng and cups together, bug 467226
 	if use lprng-compat ; then

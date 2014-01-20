@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/eselect-python/eselect-python-99999999.ebuild,v 1.10 2013/12/10 17:45:14 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/eselect-python/eselect-python-99999999.ebuild,v 1.13 2014/01/19 15:59:11 floppym Exp $
 
 # Keep the EAPI low here because everything else depends on it.
 # We want to make upgrading simpler.
@@ -11,7 +11,7 @@ if [[ ${PV} == "99999999" ]] ; then
 else
 	SRC_URI="mirror://gentoo/${P}.tar.bz2
 		http://dev.gentoo.org/~floppym/dist/${P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 fi
 
 DESCRIPTION="Eselect module for management of multiple Python versions"
@@ -22,12 +22,6 @@ SLOT="0"
 IUSE=""
 
 RDEPEND=">=app-admin/eselect-1.2.3"
-# Avoid autotool deps for released versions for circ dep issues.
-if [[ ${PV} == "99999999" ]] ; then
-	DEPEND="sys-devel/autoconf"
-else
-	DEPEND=""
-fi
 
 src_unpack() {
 	if [[ ${PV} == "99999999" ]] ; then
@@ -45,9 +39,13 @@ src_install() {
 }
 
 pkg_postinst() {
-	local ret=0
-	ebegin "Running 'eselect python update'"
-	eselect python update --python2 --if-unset || ret=1
-	eselect python update --python3 --if-unset || ret=1
-	eend ${ret}
+	if has_version 'dev-lang/python'; then
+		eselect python update --if-unset
+	fi
+	if has_version '=dev-lang/python-2*'; then
+		eselect python update --python2 --if-unset
+	fi
+	if has_version '=dev-lang/python-3*'; then
+		eselect python update --python3 --if-unset
+	fi
 }

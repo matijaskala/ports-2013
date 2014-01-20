@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-video-virtualbox/xf86-video-virtualbox-4.3.6.ebuild,v 1.1 2013/12/18 20:54:59 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-video-virtualbox/xf86-video-virtualbox-4.3.6.ebuild,v 1.2 2014/01/11 21:25:31 polynomial-c Exp $
 
 EAPI=5
 
@@ -87,7 +87,7 @@ src_prepare() {
 
 	# Patch to link with lazy on hardened #394757
 	if gcc-specs-now ; then
-		epatch "${FILESDIR}/${PN}-link-lazy.patch"
+		epatch "${FILESDIR}/${PN}-4.3.6-link-lazy.patch"
 	fi
 }
 

@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 PYTHON_COMPAT=( python2_{6,7} )
 
 inherit mate python-r1
@@ -45,27 +45,27 @@ src_prepare() {
 	eautoreconf
 
 	python_copy_sources
-	python_foreach_impl run_in_build_dir mate_src_prepare
+	python_foreach_impl run_in_build_dir gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog MAINTAINERS NEWS"
 
-	local myconf
-	use gtk3 && myconf="${myconf} --with-gtk=3.0"
-	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+	G2CONF="${G2CONF}
+		--enable-locations-compression
+		--disable-all-translations-in-one-xml
+		$(use_enable python)"
 
-	python_foreach_impl run_in_build_dir mate_src_configure \
-		--enable-locations-compression \
-		--disable-all-translations-in-one-xml \
-		$(use_enable python) \
-		${myconf}
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	python_foreach_impl run_in_build_dir gnome2_src_configure
 }
 
 src_compile() {
-	python_foreach_impl run_in_build_dir mate_src_compile
+	python_foreach_impl run_in_build_dir gnome2_src_compile
 }
 
 src_install() {
-	python_foreach_impl run_in_build_dir mate_src_install
+	python_foreach_impl run_in_build_dir gnome2_src_install
 }

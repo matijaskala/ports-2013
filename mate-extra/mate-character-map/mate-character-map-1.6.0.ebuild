@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="5"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 GCONF_DEBUG="yes"
 PYTHON_COMPAT=( python2_{6,7} )
 
@@ -31,13 +31,17 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	# Fix test
 	sed -i 's/gucharmap/mucharmap/g' po/POTFILES.in || die
-	mate_src_prepare
+
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="ChangeLog NEWS README TODO"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		--with-gtk=2.0 \
 		--disable-python-bindings \
 		$(use_enable introspection) \

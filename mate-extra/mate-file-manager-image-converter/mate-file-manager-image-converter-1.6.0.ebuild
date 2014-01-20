@@ -19,3 +19,10 @@ RDEPEND="${DEPEND}
 	|| ( media-gfx/imagemagick media-gfx/graphicsmagick[imagemagick] )"
 
 DOCS="AUTHORS ChangeLog NEWS README"
+
+src_prepare() {
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
+}

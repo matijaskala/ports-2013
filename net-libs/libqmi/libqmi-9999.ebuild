@@ -1,16 +1,16 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/libqmi/libqmi-9999.ebuild,v 1.6 2013/06/30 18:27:08 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/libqmi/libqmi-9999.ebuild,v 1.7 2014/01/20 04:58:40 alexxy Exp $
 
-EAPI="4"
+EAPI="5"
 
 inherit multilib
 if [[ ${PV} == "9999" ]] ; then
-	inherit git-2 autotools
-	EGIT_REPO_URI="git://anongit.freedesktop.org/libqmi"
+	inherit git-r3 autotools
+	EGIT_REPO_URI="git://anongit.freedesktop.org/${PN}"
 else
 	KEYWORDS="~amd64 ~arm ~x86"
-	SRC_URI="http://www.freedesktop.org/software/libqmi/${P}.tar.xz"
+	SRC_URI="http://www.freedesktop.org/software/${PN}/${P}.tar.xz"
 fi
 
 DESCRIPTION="QMI modem protocol helper library"
@@ -40,5 +40,5 @@ src_configure() {
 
 src_install() {
 	default
-	use static-libs || rm -f "${ED}"/usr/$(get_libdir)/libqmi-glib.la
+	use static-libs || rm -f "${ED}/usr/$(get_libdir)/${PN}-glib.la"
 }

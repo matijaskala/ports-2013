@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/apache-2.eclass,v 1.31 2013/04/28 16:15:33 zmedico Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/apache-2.eclass,v 1.33 2014/01/08 08:38:10 patrick Exp $
 
 # @ECLASS: apache-2.eclass
 # @MAINTAINER:
@@ -10,7 +10,7 @@
 # This eclass handles apache-2.x ebuild functions such as LoadModule generation
 # and inter-module dependency checking.
 
-inherit autotools eutils flag-o-matic multilib ssl-cert
+inherit autotools eutils flag-o-matic multilib ssl-cert user
 
 # ==============================================================================
 # INTERNAL VARIABLES
@@ -171,7 +171,6 @@ check_module_critical() {
 		ewarn "Although this is not an error, please be"
 		ewarn "aware that this setup is UNSUPPORTED."
 		ewarn
-		ebeep 10
 	fi
 }
 

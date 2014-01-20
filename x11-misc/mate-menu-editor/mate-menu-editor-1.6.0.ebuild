@@ -34,27 +34,30 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
-	mate_src_prepare
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
 	python_copy_sources
 }
 
 src_configure() {
 	DOCS="AUTHORS NEWS README"
 
-	python_foreach_impl run_in_build_dir mate_src_configure
+	python_foreach_impl run_in_build_dir gnome2_src_configure
 }
 
 src_compile() {
-	python_foreach_impl run_in_build_dir mate_src_compile
+	python_foreach_impl run_in_build_dir gnome2_src_compile
 }
 
 src_test() {
-	python_foreach_impl run_in_build_dir mate_src_test
+	python_foreach_impl run_in_build_dir emake check
 }
 
 src_install() {
 	installing() {
-		mate_src_install
+		gnome2_src_install
 		# Massage shebang to make python_doscript happy
 		sed -e 's:#! '"${PYTHON}:#!/usr/bin/python:" \
 			-i mozo || die

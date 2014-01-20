@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.5 2013/11/08 12:34:31 nativemad Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.6 2014/01/16 08:16:34 nativemad Exp $
 
 EAPI=4
 inherit eutils toolchain-funcs flag-o-matic waf-utils
@@ -14,7 +14,7 @@ if [ ${PV} = 9999 ]; then
 	inherit git-2
 else
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/Ardour/ardour/archive/${PV}.zip -> ${P}.zip"
+	SRC_URI="https://github.com/Ardour/ardour/archive/${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 LICENSE="GPL-2"
@@ -65,8 +65,7 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )
 	doc? ( app-doc/doxygen[dot] )"
 	if ! [ ${PV} = 9999 ]; then
-		DEPEND="${DEPEND}
-		app-arch/unzip"
+		DEPEND="${DEPEND}"
 	fi
 
 src_unpack() {

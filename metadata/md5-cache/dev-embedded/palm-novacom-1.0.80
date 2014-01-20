@@ -1,0 +1,12 @@
+DEFINED_PHASES=install postinst unpack
+DESCRIPTION=A part of the Palm Mojo SDK for communication with and rootaccess to the webOS based devices
+EAPI=2
+HOMEPAGE=http://developer.palm.com/
+KEYWORDS=~amd64 ~x86 -*
+LICENSE=PalmSDK
+RDEPEND=virtual/libusb:0
+RESTRICT=mirror
+SLOT=0
+SRC_URI=amd64? ( https://cdn.downloads.palm.com/sdkdownloads/3.0.4.669/sdkBinaries/palm-novacom_1.0.80_amd64.deb ) x86? ( http://cdn.downloads.palm.com/sdkdownloads/3.0.4.669/sdkBinaries/palm-novacom_1.0.80_i386.deb )
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28
+_md5_=c64c5a8936b6e3e7a2d55cab09a37376

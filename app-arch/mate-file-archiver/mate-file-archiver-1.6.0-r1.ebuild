@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit mate
 
@@ -36,7 +36,10 @@ src_prepare() {
 		sed -i 's/^"roller-/"engrampa-/g' ${po}; \
 		sed -i 's/linkend=\\"file-/linkend=\\"/g' ${po};done || die
 
-	mate_src_prepare
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
 
 	# Drop DEPRECATED flags as configure option doesn't do it, bug #385453
 	sed -i -e 's:-D[A-Z_]*DISABLE_DEPRECATED:$(NULL):g' \
@@ -46,7 +49,7 @@ src_prepare() {
 src_configure() {
 	DOCS="AUTHORS HACKING MAINTAINERS NEWS README TODO"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		--disable-run-in-place \
 		--disable-packagekit \
 		--disable-deprecations \
@@ -55,7 +58,7 @@ src_configure() {
 }
 
 pkg_postinst() {
-	mate_pkg_postinst
+	gnome2_pkg_postinst
 
 	elog "${PN} is a frontend for several archiving utilities. If you want a"
 	elog "particular achive format support install the relevant package."

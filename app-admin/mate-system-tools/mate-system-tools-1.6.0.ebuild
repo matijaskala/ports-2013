@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit eutils mate
 
@@ -43,7 +43,11 @@ src_prepare() {
 
 	find "${WORKDIR}" -name "*.desktop*" -exec sed -i \
 		-e 's:Categories=MATE;:Categories=:g' {} \; || die
-	mate_src_prepare
+
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
 }
 
 src_configure() {
@@ -54,7 +58,7 @@ src_configure() {
 		myconf="--disable-shares"
 	fi
 
-	mate_src_configure \
+	gnome2_src_configure \
 		${myconf} \
 		--disable-static \
 		$(use_enable policykit polkit-gtk-mate) \

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-fs/curlftpfs/curlftpfs-0.9.2-r3.ebuild,v 1.1 2013/07/25 12:04:06 slyfox Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-fs/curlftpfs/curlftpfs-0.9.2-r3.ebuild,v 1.4 2014/01/14 13:56:02 ago Exp $
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS="amd64 arm x86 ~amd64-linux ~x86-linux ~x86-macos"
 IUSE=""
 RESTRICT="test" # bug 258460
 

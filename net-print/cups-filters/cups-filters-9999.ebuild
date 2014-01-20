@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/cups-filters/cups-filters-9999.ebuild,v 1.42 2013/11/04 23:21:09 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/cups-filters/cups-filters-9999.ebuild,v 1.45 2014/01/05 21:54:10 dilfridge Exp $
 
 EAPI=5
 
@@ -14,14 +14,14 @@ if [[ "${PV}" == "9999" ]] ; then
 	KEYWORDS=""
 else
 	SRC_URI="http://www.openprinting.org/download/${PN}/${P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~s390 ~x86 ~amd64-fbsd"
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~m68k-mint"
 fi
 DESCRIPTION="Cups PDF filters"
 HOMEPAGE="http://www.linuxfoundation.org/collaborate/workgroups/openprinting/pdfasstandardprintjobformat"
 
 LICENSE="MIT GPL-2"
 SLOT="0"
-IUSE="jpeg perl png static-libs tiff zeroconf"
+IUSE="dbus +foomatic jpeg perl png static-libs tiff zeroconf"
 
 RDEPEND="
 	>=app-text/ghostscript-gpl-9.09
@@ -34,8 +34,10 @@ RDEPEND="
 	!<=net-print/cups-1.5.9999
 	sys-devel/bc
 	sys-libs/zlib
+	dbus? ( sys-apps/dbus )
+	foomatic? ( !net-print/foomatic-filters )
 	jpeg? ( virtual/jpeg:0 )
-	perl? ( dev-lang/perl )
+	perl? ( dev-lang/perl:= )
 	png? ( media-libs/libpng:0= )
 	tiff? ( media-libs/tiff )
 	zeroconf? ( net-dns/avahi[dbus] )
@@ -51,6 +53,7 @@ src_prepare() {
 src_configure() {
 	econf \
 		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
+		$(use_enable dbus) \
 		$(use_enable zeroconf avahi) \
 		$(use_enable static-libs static) \
 		--with-fontdir="fonts/conf.avail" \
@@ -98,6 +101,12 @@ src_install() {
 		sed -i -e 's:cups\.service avahi-daemon\.service:cups.service:g' "${S}"/utils/cups-browsed.service || die
 	fi
 
+	if ! use foomatic ; then
+		# this needs an upstream solution / configure switch
+		rm -v "${ED}/usr/libexec/cups/filter/foomatic-rip" || die
+		rm -v "${ED}/usr/share/man/man1/foomatic-rip.1" || die
+	fi
+
 	doinitd "${T}"/cups-browsed
 	systemd_dounit "${S}/utils/cups-browsed.service"
 }
@@ -108,4 +117,9 @@ pkg_postinst() {
 	elog "This version of cups-filters includes cups-browsed, a daemon that autodiscovers"
 	elog "remote queues via avahi or cups-1.5 browsing protocol and adds them to your cups"
 	elog "configuration. You may want to add it to your default runlevel."
+
+	if ! use foomatic ; then
+		ewarn "You are disabling the foomatic code in cups-filters. Please do that ONLY if absolutely."
+		ewarn "necessary. net-print/foomatic-filters as replacement is deprecated and unmaintained."
+	fi
 }

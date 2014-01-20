@@ -5,7 +5,7 @@
 EAPI="5"
 # Debug only changes CFLAGS
 GCONF_DEBUG="no"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit mate
 
@@ -51,7 +51,7 @@ DEPEND="${RDEPEND}
 src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README *.txt doc/*.txt"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		--enable-compositor \
 		--enable-render \
 		--enable-shape \

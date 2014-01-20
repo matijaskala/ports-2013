@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup test
+DEPEND=dev-python/pygments[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_3.1?,python_abis_3.2?,python_abis_3.3?,python_abis_3.4?,python_abis_2.5-jython?,python_abis_2.7-jython?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] app-arch/unzip python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_3.1? ( dev-lang/python:3.1 ) python_abis_3.2? ( dev-lang/python:3.2 ) python_abis_3.3? ( dev-lang/python:3.3 ) python_abis_3.4? ( dev-lang/python:3.4 ) python_abis_2.5-jython? ( dev-lang/jython:2.5 ) python_abis_2.7-jython? ( dev-lang/jython:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+DESCRIPTION=A fast and complete Python implementation of Markdown
+EAPI=4-python
+HOMEPAGE=https://github.com/trentm/python-markdown2 http://pypi.python.org/pypi/markdown2
+IUSE=python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_3.1 python_abis_3.2 python_abis_3.3 python_abis_3.4 python_abis_2.5-jython python_abis_2.7-jython python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=amd64 x86
+LICENSE=MIT
+RDEPEND=dev-python/pygments[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_3.1?,python_abis_3.2?,python_abis_3.3?,python_abis_3.4?,python_abis_2.5-jython?,python_abis_2.7-jython?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_3.1? ( dev-lang/python:3.1 ) python_abis_3.2? ( dev-lang/python:3.2 ) python_abis_3.3? ( dev-lang/python:3.3 ) python_abis_3.4? ( dev-lang/python:3.4 ) python_abis_2.5-jython? ( dev-lang/jython:2.5 ) python_abis_2.7-jython? ( dev-lang/jython:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_3.1 python_abis_3.2 python_abis_3.3 python_abis_3.4 python_abis_2.5-jython python_abis_2.7-jython python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://pypi/m/markdown2/markdown2-2.1.0.zip
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=465a0b163a14bc4c761f5666402c4ae1

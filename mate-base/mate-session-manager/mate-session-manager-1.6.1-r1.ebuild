@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -57,16 +57,16 @@ src_prepare() {
 
 	# Use gnome-keyring
 	epatch "${FILESDIR}/${PN}-1.6-gnome-keyring.patch"
-	
+
 	eautoreconf
-	mate_src_prepare
+	gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
 	# TODO: convert libnotify to a configure option
-	mate_src_configure \
+	gnome2_src_configure \
 		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
 		--with-default-wm=mate-wm \
 		--with-gtk=2.0 \
@@ -75,7 +75,7 @@ src_configure() {
 }
 
 src_install() {
-	mate_src_install
+	gnome2_src_install
 
 	dodir /etc/X11/Sessions
 	exeinto /etc/X11/Sessions

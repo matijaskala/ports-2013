@@ -54,27 +54,25 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.2.0-idle-transition.patch"
 
 	eautoreconf
-	mate_src_prepare
+	gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
-	use gtk3 && myconf="${myconf} --with-gtk=3.0"
-	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
-
 	# TODO: convert libnotify to a configure option
-	mate_src_configure \
-		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
-		--with-default-wm=mate-wm \
-		$(use_enable ipv6) \
-		$(use_with systemd) \
-		${myconf}
+	G2CONF="${G2CONF}
+		--docdir=${EPREFIX}/usr/share/doc/${PF}
+		--with-default-wm=mate-wm"
 
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	gnome2_src_configure
 }
 
 src_install() {
-	mate_src_install
+	gnome2_src_install
 
 	dodir /etc/X11/Sessions
 	exeinto /etc/X11/Sessions

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/hugin/hugin-9999.ebuild,v 1.2 2013/11/24 17:03:45 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/hugin/hugin-9999.ebuild,v 1.3 2014/01/12 19:45:37 maekke Exp $
 
 EAPI=5
 WX_GTK_VER="2.8"
@@ -18,7 +18,7 @@ LICENSE="GPL-2 SIFT"
 SLOT="0"
 KEYWORDS=""
 
-LANGS=" bg ca cs da de en_GB es eu fi fr hu it ja ko nl pl pt_BR ro ru sk sl sv uk zh_CN zh_TW"
+LANGS=" cs da de en_GB es eu fi fr hu it ja nl pl pt_BR ro ru sk sv zh_CN zh_TW"
 IUSE="lapack python sift $(echo ${LANGS//\ /\ linguas_})"
 
 CDEPEND="
@@ -32,7 +32,7 @@ CDEPEND="
 	media-libs/freeglut
 	media-libs/glew:=
 	media-libs/lensfun
-	>=media-libs/libpano13-2.9.18
+	>=media-libs/libpano13-2.9.19_beta1:0=
 	media-libs/libpng:0=
 	media-libs/openexr:=
 	media-libs/tiff

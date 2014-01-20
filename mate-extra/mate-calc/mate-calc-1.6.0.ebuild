@@ -31,5 +31,9 @@ DOCS="AUTHORS ChangeLog NEWS README"
 src_prepare() {
 	sed -e 's:AC_ARG_WITH(\[gtk+\]:AC_ARG_WITH([gtk]:' \
 		-i configure.ac || die "sed failed"
-	mate_src_prepare
+
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
 }

@@ -32,7 +32,7 @@ RESTRICT="binchecks strip"
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		--disable-test-themes \
 		--enable-icon-mapping
 }

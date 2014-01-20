@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -34,20 +34,18 @@ ENTROPY_RDEPEND="!lxde-base/lxpolkit"
 
 src_prepare() {
 	eautoreconf
-	mate_src_prepare
+	gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="AUTHORS HACKING NEWS README"
 
-	local myconf
-	use gtk3 && myconf="${myconf} --with-gtk=3.0"
-	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+	G2CONF="${G2CONF}
+		--disable-static
+		$(use_enable introspection)"
 
-	mate_src_configure \ 
-		--disable-static \
-		$(use_enable introspection) \
-		${myconf}
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	gnome2_src_configure
 }
-
-

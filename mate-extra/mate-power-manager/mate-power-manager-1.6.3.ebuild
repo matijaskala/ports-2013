@@ -50,7 +50,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.6-libsecret.patch"
 
 	eautoreconf
-	mate_src_prepare
+	gnome2_src_prepare
 
 	if ! use man; then
 	# This needs to be after eautoreconf to prevent problems like bug #356277
@@ -64,7 +64,7 @@ src_prepare() {
 src_configure() {
 	DOCS="AUTHORS HACKING NEWS README TODO"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		--enable-unique \
 		--with-gtk=2.0 \
 		$(use_enable applet applets) \

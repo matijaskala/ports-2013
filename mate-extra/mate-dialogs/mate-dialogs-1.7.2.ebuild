@@ -32,11 +32,9 @@ DEPEND="${RDEPEND}
 src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS NEWS.GNOME README THANKS TODO"
 
-	local myconf
-	use gtk3 && myconf="${myconf} --with-gtk=3.0"
-	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+	G2CONF="${G2CONF} $(use_enable libnotify)"
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
 
-	mate_src_configre \
-		$(use_enable libnotify) \
-		${myconf}
+	gnome2_src_configre
 }

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/digikam/digikam-3.5.0.ebuild,v 1.2 2013/12/07 22:12:49 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/digikam/digikam-3.5.0.ebuild,v 1.4 2014/01/19 15:39:21 pacho Exp $
 
 EAPI=5
 
@@ -25,17 +25,17 @@ SRC_URI="mirror://kde/stable/${PN}/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2
 	handbook? ( FDL-1.2 )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 SLOT="4"
 IUSE="addressbook debug doc gphoto2 mysql semantic-desktop themedesigner +thumbnails video"
 
 CDEPEND="
 	$(add_kdebase_dep kdelibs 'semantic-desktop(+)?')
 	$(add_kdebase_dep kdebase-kioslaves)
-	$(add_kdebase_dep libkdcraw)
-	$(add_kdebase_dep libkexiv2 xmp)
+	kde-base/libkdcraw:4=
+	kde-base/libkexiv2:4=
 	$(add_kdebase_dep libkipi)
-	$(add_kdebase_dep marble plasma)
+	kde-base/marble:4=[plasma]
 	media-libs/jasper
 	media-libs/lcms:2
 	media-libs/lensfun

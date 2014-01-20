@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/emacs/emacs-24.3-r2.ebuild,v 1.15 2013/08/14 06:25:43 ulm Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/emacs/emacs-24.3-r2.ebuild,v 1.18 2014/01/16 17:48:57 vapier Exp $
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit autotools elisp-common eutils flag-o-matic multilib readme.gentoo
 DESCRIPTION="The extensible, customizable, self-documenting real-time display editor"
 HOMEPAGE="http://www.gnu.org/software/emacs/"
 SRC_URI="mirror://gnu/emacs/${P}.tar.xz
-	mirror://gentoo/${P}-patches-3.tar.xz"
+	http://dev.gentoo.org/~ulm/emacs/${P}-patches-4.tar.xz"
 
 LICENSE="GPL-3+ FDL-1.3+ BSD HPND MIT W3C unicode PSF-2"
 SLOT="24"
@@ -72,7 +72,10 @@ DEPEND="${RDEPEND}
 	libxml2? ( virtual/pkgconfig )
 	X? ( virtual/pkgconfig )
 	gzip-el? ( app-arch/gzip )
-	pax_kernel? ( sys-apps/paxctl )"
+	pax_kernel? (
+		sys-apps/attr
+		sys-apps/paxctl
+	)"
 
 RDEPEND="${RDEPEND}
 	!<app-editors/emacs-vcs-${PV}"

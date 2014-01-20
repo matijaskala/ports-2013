@@ -1815,13 +1815,13 @@ python_execute_function() {
 
 		if [[ "${_python[separate_build_dirs]}" == "1" ]]; then
 			if [[ -n "${_python[source_dir]}" ]]; then
-				export BUILDDIR="${S}/${_python[source_dir]}-${PYTHON_ABI}"
+				export BUILDDIR="$(pwd)/${_python[source_dir]}-${PYTHON_ABI}"
 			else
-				export BUILDDIR="${S}-${PYTHON_ABI}"
+				export BUILDDIR="$(pwd)-${PYTHON_ABI}"
 			fi
 			pushd "${BUILDDIR}" > /dev/null || die "pushd failed"
 		else
-			export BUILDDIR="${S}"
+			export BUILDDIR="$(pwd)"
 		fi
 
 		_python[previous_directory]="$(pwd)"
@@ -1891,7 +1891,7 @@ python_execute_function() {
 }
 
 # @FUNCTION: python_copy_sources
-# @USAGE: <directory="${S}"> [directory]
+# @USAGE: <directory="$(pwd)"> [directory]
 # @DESCRIPTION:
 # Copy unpacked sources of current package to separate build directory for each Python ABI.
 python_copy_sources() {
@@ -1904,8 +1904,8 @@ python_copy_sources() {
 	local dir dirs=() PYTHON_ABI
 
 	if [[ "$#" -eq 0 ]]; then
-		if [[ "${WORKDIR}" == "${S}" ]]; then
-			die "${FUNCNAME}() cannot be used with current value of S variable"
+		if [[ "${WORKDIR}" == "$(pwd)" ]]; then
+			die "${FUNCNAME}() without arguments cannot be used in current directory"
 		fi
 		dirs=("${S%/}")
 	else

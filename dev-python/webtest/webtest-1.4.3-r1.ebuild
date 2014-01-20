@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/webtest/webtest-1.4.3-r1.ebuild,v 1.9 2013/10/05 07:05:20 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/webtest/webtest-1.4.3-r1.ebuild,v 1.12 2014/01/18 15:59:55 maekke Exp $
 
 EAPI=5
 
@@ -17,7 +17,7 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~hppa ia64 ppc ~ppc64 s390 sh sparc x86 ~x86-fbsd"
+KEYWORDS="~alpha amd64 arm ~hppa ia64 ppc ~ppc64 s390 sh sparc x86 ~x86-fbsd"
 IUSE="doc test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -27,9 +27,11 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
 	test? ( dev-python/nose[${PYTHON_USEDEP}]
-		dev-python/pyquery[${PYTHON_USEDEP}] )"
+		dev-python/pyquery[${PYTHON_USEDEP}]
+		virtual/python-unittest2[${PYTHON_USEDEP}] )"
 
 S="${WORKDIR}/${MY_P}"
+PATCHES=( "${FILESDIR}/webtest-1.4.3-doctest.patch" )
 
 python_compile_all() {
 	if use doc; then
@@ -37,7 +39,13 @@ python_compile_all() {
 	fi
 }
 
+src_test() {
+	DISTUTILS_NO_PARALLEL_BUILD=1 distutils-r1_src_test
+}
+
 python_test() {
+	# Tests raise ImportErrors with our default PYTHONPATH.
+	unset PYTHONPATH
 	nosetests || die "Tests fail with ${EPYTHON}"
 }
 

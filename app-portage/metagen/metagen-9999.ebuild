@@ -1,13 +1,11 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/metagen/metagen-9999.ebuild,v 1.4 2011/09/25 14:31:01 neurogeek Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-portage/metagen/metagen-9999.ebuild,v 1.5 2014/01/20 03:46:53 floppym Exp $
 
-EAPI="3"
-PYTHON_DEPEND="2"
-SUPPORT_PYTHON_ABIS="1"
-RESTRICT_PYTHON_ABIS="3.*"
+EAPI="5"
+PYTHON_COMPAT=( python{2_6,2_7} pypy2_0 )
 
-inherit distutils git-2
+inherit distutils-r1 git-r3
 
 DESCRIPTION="metadata.xml generator for ebuilds"
 HOMEPAGE="http://git.overlays.gentoo.org/gitweb/?p=proj/metagen.git;a=summary"
@@ -19,30 +17,20 @@ SLOT="0"
 KEYWORDS=""
 
 IUSE=""
-DEPEND=">=dev-python/jaxml-3.01
-		>=sys-apps/portage-2.1.9.42"
+DEPEND=">=dev-python/jaxml-3.01[${PYTHON_USEDEP}]
+	>=sys-apps/portage-2.1.9.42[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
 
-src_install() {
-	distutils_src_install
-
-	metagen_install() {
-		local METAGEN_MOD="$(python_get_sitedir)/${PN}/main.py"
-		fperms 755 ${METAGEN_MOD}
-		dosym  "${D}"${METAGEN_MOD} "/usr/bin/${PN}-${PYTHON_ABI}"
-	}
-	python_execute_function metagen_install
-
-	python_generate_wrapper_scripts "${ED}usr/bin/${PN}"
-
-	doman "docs/metagen.1"
+python_install() {
+	distutils-r1_python_install
+	python_newscript metagen/main.py metagen
 }
 
-src_test() {
-	einfo "Starting tests..."
-	testing() {
-		$(PYTHON) -c "from metagen import metagenerator; metagenerator.do_tests()"
-	}
-	python_execute_function testing
-	einfo "Tests completed."
+python_install_all() {
+	distutils-r1_python_install_all
+	doman docs/metagen.1
+}
+
+python_test() {
+	"${PYTHON}" -c "from metagen import metagenerator; metagenerator.do_tests()" || die
 }

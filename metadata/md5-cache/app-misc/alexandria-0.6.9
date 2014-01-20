@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare setup test unpack
+DEPEND=test? ( ruby_targets_ruby18? ( >=dev-ruby/ruby-gettext-0.6.1[ruby_targets_ruby18] >=dev-ruby/ruby-gtk2-0.90[ruby_targets_ruby18] >=dev-ruby/ruby-goocanvas-0.90[ruby_targets_ruby18] >=dev-ruby/ruby-gstreamer-0.90[ruby_targets_ruby18] >=dev-ruby/ruby-pango-0.90[ruby_targets_ruby18] >=dev-ruby/imagesize-0.1.1[ruby_targets_ruby18] dev-ruby/hpricot[ruby_targets_ruby18] evo? ( >=dev-ruby/revolution-0.5[ruby_targets_ruby18] ) ) ) ruby_targets_ruby18? ( dev-ruby/rake[ruby_targets_ruby18] ) gnome-base/gconf:2 app-text/scrollkeeper app-arch/xz-utils >=sys-apps/sed-4 ruby_targets_ruby18? ( dev-lang/ruby:1.8 )
+DESCRIPTION=A GNOME application to help you manage your book collection
+EAPI=4
+HOMEPAGE=http://alexandria.rubyforge.org/
+IUSE=evo test debug elibc_FreeBSD ruby_targets_ruby18
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=ruby_targets_ruby18? ( >=dev-ruby/ruby-gettext-0.6.1[ruby_targets_ruby18] >=dev-ruby/ruby-gtk2-0.90[ruby_targets_ruby18] >=dev-ruby/ruby-goocanvas-0.90[ruby_targets_ruby18] >=dev-ruby/ruby-gstreamer-0.90[ruby_targets_ruby18] >=dev-ruby/ruby-pango-0.90[ruby_targets_ruby18] >=dev-ruby/imagesize-0.1.1[ruby_targets_ruby18] dev-ruby/hpricot[ruby_targets_ruby18] evo? ( >=dev-ruby/revolution-0.5[ruby_targets_ruby18] ) ) ruby_targets_ruby18? ( dev-lang/ruby:1.8 )
+REQUIRED_USE=|| ( ruby_targets_ruby18 )
+SLOT=0
+SRC_URI=mirror://rubyforge/alexandria/alexandria-0.6.9.tar.gz
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	fdo-mime	0acfe1a88fd8751a1d5dc671168219fa	gnome.org	8fef8f967214f56e08fa92d61163d891	gnome2	aa0ea5c139b7b3e8cfacc1fc342a9ba8	gnome2-utils	eb033547526fe401787037d54fb6ce6a	java-utils-2	6032f7ec6471c6459da900e11f0f7bf7	libtool	b1c8688e60f9580bcb9bb46e08737eb1	multilib	892e597faee02a5b94eb02ab512e7622	ruby-ng	89df90927c6d18908d75861c0778961a	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=6e28c360e77a46b6cf819547410f6eeb

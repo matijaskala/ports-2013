@@ -1,12 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libgcrypt/libgcrypt-1.6.0.ebuild,v 1.1 2013/12/16 22:52:10 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/libgcrypt/libgcrypt-1.6.0.ebuild,v 1.5 2014/01/18 05:07:26 vapier Exp $
 
 EAPI=5
 AUTOTOOLS_AUTORECONF=1
 WANT_AUTOMAKE=1.12
 
-inherit autotools-utils
+inherit autotools-utils flag-o-matic
 
 DESCRIPTION="General purpose crypto library based on the code used in GnuPG"
 HOMEPAGE="http://www.gnupg.org/"
@@ -15,7 +15,7 @@ SRC_URI="mirror://gnupg/libgcrypt/${P}.tar.bz2
 
 LICENSE="LGPL-2.1 MIT"
 SLOT="0/20" # subslot = soname major version
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 -arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="static-libs"
 
 RDEPEND=">=dev-libs/libgpg-error-1.11"
@@ -29,6 +29,12 @@ PATCHES=(
 )
 
 src_configure() {
+	if [[ ${CHOST} == *-solaris* ]] ; then
+		# ASM code uses GNU ELF syntax, divide in particular, we need to
+		# allow this via ASFLAGS, since we don't have a flag-o-matic
+		# function for that, we'll have to abuse cflags for this
+		append-cflags -Wa,--divide
+	fi
 	local myeconfargs=(
 		--disable-padlock-support # bug 201917
 		--disable-dependency-tracking

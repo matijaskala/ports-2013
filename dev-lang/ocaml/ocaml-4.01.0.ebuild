@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/ocaml/ocaml-4.01.0.ebuild,v 1.1 2013/09/14 22:49:57 aballier Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/ocaml/ocaml-4.01.0.ebuild,v 1.3 2014/01/18 13:12:48 gienah Exp $
 
 EAPI="5"
 
@@ -17,13 +17,14 @@ LICENSE="QPL-1.0 LGPL-2"
 # Everytime ocaml is updated to a new version, everything ocaml must be rebuilt,
 # so here we go with the subslot.
 SLOT="0/${PV}"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-fbsd ~x86-linux"
 IUSE="emacs latex ncurses +ocamlopt tk X xemacs"
 
-DEPEND="tk? ( >=dev-lang/tk-3.3.3 )
+RDEPEND="tk? ( >=dev-lang/tk-3.3.3 )
 	ncurses? ( sys-libs/ncurses )
 	X? ( x11-libs/libX11 x11-proto/xproto )"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	virtual/pkgconfig"
 
 PDEPEND="emacs? ( app-emacs/ocaml-mode )
 	xemacs? ( app-xemacs/ocaml )"
@@ -42,6 +43,8 @@ pkg_setup() {
 
 src_prepare() {
 	EPATCH_SUFFIX="patch" epatch "${WORKDIR}/patches"
+	# Bug #459512
+	epatch "${FILESDIR}/${PN}-4.01.0-pkg-config-ncurses.patch"
 }
 
 src_configure() {
@@ -62,10 +65,10 @@ src_configure() {
 	use X || myconf="${myconf} -no-graph"
 
 	# ocaml uses a home-brewn configure script, preventing it to use econf.
-	RAW_LDFLAGS="$(raw-ldflags)" ./configure -prefix /usr \
-		--bindir /usr/bin \
-		--libdir /usr/$(get_libdir)/ocaml \
-		--mandir /usr/share/man \
+	RAW_LDFLAGS="$(raw-ldflags)" ./configure -prefix "${EPREFIX}"/usr \
+		--bindir "${EPREFIX}"/usr/bin \
+		--libdir "${EPREFIX}"/usr/$(get_libdir)/ocaml \
+		--mandir "${EPREFIX}"/usr/share/man \
 		-host "${CHOST}" \
 		-cc "$(tc-getCC)" \
 		-as "$(tc-getAS)" \
@@ -89,9 +92,9 @@ src_compile() {
 }
 
 src_install() {
-	make BINDIR="${D}"/usr/bin \
-		LIBDIR="${D}"/usr/$(get_libdir)/ocaml \
-		MANDIR="${D}"/usr/share/man \
+	make BINDIR="${ED}"/usr/bin \
+		LIBDIR="${ED}"/usr/$(get_libdir)/ocaml \
+		MANDIR="${ED}"/usr/share/man \
 		install
 
 	# Symlink the headers to the right place
@@ -102,7 +105,7 @@ src_install() {
 
 	# Create and envd entry for latex input files
 	if use latex ; then
-		echo "TEXINPUTS=/usr/$(get_libdir)/ocaml/ocamldoc:" > "${T}"/99ocamldoc
+		echo "TEXINPUTS=${EPREFIX}/usr/$(get_libdir)/ocaml/ocamldoc:" > "${T}"/99ocamldoc
 		doenvd "${T}"/99ocamldoc
 	fi
 
@@ -119,7 +122,7 @@ pkg_postinst() {
 	if has_version '>=sys-apps/portage-2.2' ; then
 		ewarn "emerge @ocaml-rebuild"
 	else
-		ewarn "emerge -1 /usr/$(get_libdir)/ocaml"
+		ewarn "emerge -1 ${EROOT%/}/usr/$(get_libdir)/ocaml"
 	fi
 	echo
 }

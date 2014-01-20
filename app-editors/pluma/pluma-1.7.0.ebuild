@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 PYTHON_COMPAT=( python2_{6,7} )
 
 inherit mate multilib python-single-r1 virtualx
@@ -51,15 +51,15 @@ DEPEND="${RDEPEND}
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
-	local myconf
-	use gtk3 && myconf="${myconf} --with-gtk=3.0"
-	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+	G2CONF="${G2CONF}
+		--disable-updater
+		$(use_enable python)
+		$(use_enable spell)"
 
-	mate_src_configure \
-		--disable-updater \
-		$(use_enable python) \
-		$(use_enable spell) \
-		${myconf}
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	gnome2_src_configure
 }
 
 src_test() {

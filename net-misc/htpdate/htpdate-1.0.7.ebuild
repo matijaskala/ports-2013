@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/htpdate/htpdate-1.0.7.ebuild,v 1.4 2013/11/30 14:15:49 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/htpdate/htpdate-1.0.7.ebuild,v 1.8 2014/01/18 10:38:58 vapier Exp $
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="http://www.vervest.org/htp/archive/c/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm hppa ~mips ~ppc ~ppc64 ~s390 ~sh x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~mips ppc ~ppc64 s390 sh x86 ~amd64-linux ~x86-linux"
 
 DEPEND=""
 RDEPEND=""
@@ -25,6 +25,11 @@ src_unpack() {
 
 	cd "${S}" || die "change directory to ${S} failed"
 	unpacker htpdate.8.gz
+}
+
+src_prepare() {
+	# Use more standard adjtimex() to fix uClibc builds.
+	sed -i 's:ntp_adjtime:adjtimex:g' htpdate.[8c] || die
 }
 
 src_compile() {

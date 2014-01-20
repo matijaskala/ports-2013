@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=>=dev-python/rope-0.9.4[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] dev-python/setuptools[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+DESCRIPTION=A helper for using rope refactoring library in IDEs
+EAPI=4-python
+HOMEPAGE=http://pypi.python.org/pypi/ropemode
+IUSE=python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=>=dev-python/rope-0.9.4[python_abis_2.5?,python_abis_2.6?,python_abis_2.7?,python_abis_2.7-pypy-1.9?,python_abis_2.7-pypy-2.0?] python_abis_2.5? ( dev-lang/python:2.5 ) python_abis_2.6? ( dev-lang/python:2.6 ) python_abis_2.7? ( dev-lang/python:2.7 ) python_abis_2.7-pypy-1.9? ( virtual/pypy:1.9 ) python_abis_2.7-pypy-2.0? ( virtual/pypy:2.0 )
+REQUIRED_USE=|| ( python_abis_2.5 python_abis_2.6 python_abis_2.7 python_abis_2.7-pypy-1.9 python_abis_2.7-pypy-2.0 )
+SLOT=0
+SRC_URI=mirror://pypi/r/ropemode/ropemode-0.2.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	python	9ffa83b7b864edd2fa5dd6ebe4a63738
+_md5_=6f5eca00c4551a5c4a5b1041db579c3b

@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare
+DEPEND=vim-syntax? ( app-editors/vim ) emacs? ( virtual/emacs )
+DESCRIPTION=Lisaac is an object prototype based language
+EAPI=4
+HOMEPAGE=http://isaacproject.u-strasbg.fr/li.html
+IUSE=vim-syntax emacs examples
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=vim-syntax? ( app-editors/vim ) emacs? ( virtual/emacs )
+SLOT=0
+SRC_URI=http://isaacproject.u-strasbg.fr/download/lisaac-0.13.1.tar.gz
+_eclasses_=elisp-common	57a17c02cd0f6f0c423e3d6de5c83f13	eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=15955055b09bacee0778ec081f78b699

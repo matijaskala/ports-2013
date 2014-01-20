@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-process/lsof/lsof-4.85-r2.ebuild,v 1.10 2012/08/22 04:03:33 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-process/lsof/lsof-4.85-r2.ebuild,v 1.12 2014/01/20 06:40:56 vapier Exp $
 
 EAPI="2"
 
@@ -15,12 +15,13 @@ SRC_URI="ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/${MY_P}.tar.bz2
 
 LICENSE="lsof"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd"
 IUSE="examples ipv6 rpc selinux static"
 
 RDEPEND="rpc? ( net-libs/libtirpc )
 	selinux? ( sys-libs/libselinux )"
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	rpc? ( virtual/pkgconfig )"
 
 S=${WORKDIR}/${MY_P}/${MY_P}_src
 
@@ -44,7 +45,7 @@ target() { usex kernel_FreeBSD freebsd linux ; }
 src_configure() {
 	use static && append-ldflags -static
 
-	append-cppflags $(usex rpc "$($(tc-getPKG_CONFIG) libtirpc --cflags)" "-DHASNOTRPC -DHASNORPC_H")
+	append-cppflags $(use rpc && $(tc-getPKG_CONFIG) libtirpc --cflags || echo "-DHASNOTRPC -DHASNORPC_H")
 	append-cppflags $(usex ipv6 -{D,U}HASIPv6)
 
 	export LSOF_CFGL="${CFLAGS} ${LDFLAGS} \

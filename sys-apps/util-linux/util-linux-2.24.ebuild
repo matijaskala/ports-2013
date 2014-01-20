@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-2.24.ebuild,v 1.4 2013/11/28 20:41:52 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-2.24.ebuild,v 1.7 2014/01/18 05:14:28 vapier Exp $
 
 EAPI="4"
 
@@ -15,7 +15,7 @@ if [[ ${PV} == 9999 ]] ; then
 	inherit git-2 autotools
 	EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git"
 else
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
 	SRC_URI="mirror://kernel/linux/utils/util-linux/v${PV:0:4}/${MY_P}.tar.xz"
 fi
 
@@ -60,6 +60,8 @@ src_prepare() {
 		po/update-potfiles
 		eautoreconf
 	fi
+	epatch "${FILESDIR}"/${PN}-2.24-skip-last-tests.patch #491742
+	find tests/ -name bigyear -delete #489794
 	elibtoolize
 }
 
@@ -111,6 +113,10 @@ src_configure() {
 		$(use_enable static-libs static) \
 		$(use_with udev) \
 		$(tc-has-tls || echo --disable-tls)
+}
+
+src_test() {
+	emake check
 }
 
 src_install() {

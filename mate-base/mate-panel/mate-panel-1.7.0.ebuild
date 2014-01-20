@@ -4,10 +4,9 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-MATE_LA_PUNT="yes"
-PYTHON_COMPAT=( python2_{6,7} )
+GNOME2_LA_PUNT="yes"
 
-inherit mate python-r1
+inherit mate
 
 DESCRIPTION="The MATE panel"
 HOMEPAGE="http://mate-desktop.org"
@@ -26,10 +25,10 @@ RDEPEND="
 			>=media-libs/libcanberra-0.23[gtk] )
 	>=mate-base/mate-desktop-1.7.0[gtk3?]
 	>=x11-libs/pango-1.15.4[introspection?]
-	>=dev-libs/glib-2.25.12:2[${PYTHON_USEDEP}]
+	>=dev-libs/glib-2.25.12:2
 	>=dev-libs/libmateweather-1.7.0[gtk3?]
 	dev-libs/libxml2:2
-	>=mate-base/mate-menus-1.5.0[${PYTHON_USEDEP}]
+	>=mate-base/mate-menus-1.5.0
 	gnome-base/librsvg:2
 	>=dev-libs/dbus-glib-0.80
 	>=sys-apps/dbus-1.1.2
@@ -48,24 +47,23 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.7.0"
 
 src_prepare() {
-	sed -e '/toplevel-id-list \= \/apps\/panel\/general\/toplevel_id_list/d' \
-		-i data/mate-panel.convert || die
-	sed -e '/object-id-list \= \/apps\/panel\/general\/object_id_list/d' \
-		-i data/mate-panel.convert || die
-	mate_src_prepare
+	# Disable useless python check.
+	sed -i ':AM_PATH_PYTHON:d' configure.ac || die
+	eautoreconf
+	gnome2_src_prepare
 }
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README"
 
-	local myconf
-	use gtk3 && myconf="${myconf} --with-gtk=3.0"
-	use !gtk3 && myconf="${myconf} --with-gtk=2.0"
+	G2CONF="${G2CONF}
+		--libexecdir=/usr/libexec/mate-applets
+		--disable-deprecation-flags
+		$(use_enable networkmanager network-manager)
+		$(use_enable introspection)"
 
-	mate_src_configure \
-		--libexecdir=/usr/libexec/mate-applets \
-		--disable-deprecation-flags \
-		$(use_enable networkmanager network-manager) \
-		$(use_enable introspection) \
-		${myconf}
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	gnome2_src_configure
 }

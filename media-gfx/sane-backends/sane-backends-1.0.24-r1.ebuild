@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/sane-backends/sane-backends-1.0.24-r1.ebuild,v 1.1 2013/10/22 02:24:22 teiresias Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/sane-backends/sane-backends-1.0.24-r1.ebuild,v 1.7 2014/01/19 10:32:00 ago Exp $
 
 EAPI="5"
 
@@ -117,7 +117,7 @@ SRC_URI="https://alioth.debian.org/frs/download.php/file/3958/${P}.tar.gz"
 
 LICENSE="GPL-2 public-domain"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="alpha amd64 ~arm hppa ia64 ~ppc ppc64 ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 
 RDEPEND="
 	sane_backends_dc210? ( virtual/jpeg )
@@ -287,6 +287,6 @@ pkg_postinst() {
 		elog "/etc/sane.d/saned.conf and /etc/hosts.allow"
 	fi
 
-	elog "If you are using an USB scanner, add all users who want"
+	elog "If you are using a USB scanner, add all users who want"
 	elog "to access your scanner to the \"scanner\" group."
 }

@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
 src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README THANKS TODO"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		--with-gtk=2.0 \
 		$(use_enable libnotify)
 }

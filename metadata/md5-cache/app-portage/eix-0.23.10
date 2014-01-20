@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install prepare
+DEPEND=sqlite? ( >=dev-db/sqlite-3 ) nls? ( virtual/libintl ) zsh-completion? ( !!<app-shells/zsh-completion-20091203-r1 ) app-arch/xz-utils nls? ( sys-devel/gettext )
+DESCRIPTION=Search and query ebuilds, portage incl. local settings, ext. overlays, version changes, and more
+EAPI=4
+HOMEPAGE=http://eix.berlios.de
+IUSE=debug doc nls optimization security strong-optimization sqlite tools zsh-completion
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=sqlite? ( >=dev-db/sqlite-3 ) nls? ( virtual/libintl ) zsh-completion? ( !!<app-shells/zsh-completion-20091203-r1 )
+SLOT=0
+SRC_URI=mirror://berlios/eix/eix-0.23.10.tar.xz
+_eclasses_=bash-completion-r1	f916a3421ae232384f9be343e36d5927	eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28
+_md5_=dcf2da7e144e3ce1cd2f6b2ee5196b52

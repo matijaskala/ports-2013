@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-backup/amanda/amanda-3.3.3-r1.ebuild,v 1.1 2013/11/23 09:08:55 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-backup/amanda/amanda-3.3.3-r1.ebuild,v 1.6 2014/01/11 19:24:51 robbat2 Exp $
 
 EAPI=5
 inherit autotools eutils perl-module user systemd
@@ -10,7 +10,7 @@ HOMEPAGE="http://www.amanda.org/"
 SRC_URI="mirror://sourceforge/amanda/${P}.tar.gz"
 LICENSE="HPND BSD BSD-2 GPL-2+ GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="amd64 ppc ppc64 ~sparc x86"
 RDEPEND="sys-libs/readline
 	virtual/awk
 	app-arch/tar
@@ -284,6 +284,9 @@ src_configure() {
 	# build manpages
 	myconf="${myconf} --enable-manpage-build"
 
+	# bug #483120
+	tc-export AR
+
 	econf \
 		$(use_with readline) \
 		${myconf}
@@ -373,8 +376,13 @@ src_install() {
 		"${AMANDA_USER_HOMEDIR}" "${AMANDA_TAR_LISTDIR}" \
 		"${AMANDA_TMPDIR}" "${AMANDA_TMPDIR}/dumps" \
 		 "${AMANDA_USER_HOMEDIR}/amanda" \
-		 "${AMANDA_USER_HOMEDIR}/${AMANDA_CONFIG_NAME}" \
-		 /etc/amanda /etc/amanda/${AMANDA_CONFIG_NAME}
+		 /etc/amanda
+
+	if ! use minimal ; then
+		fperms 0700 \
+			 "${AMANDA_USER_HOMEDIR}/${AMANDA_CONFIG_NAME}" \
+	         /etc/amanda/${AMANDA_CONFIG_NAME}
+	fi
 
 	einfo "Setting setuid permissions"
 	amanda_permissions_fix "${D}"

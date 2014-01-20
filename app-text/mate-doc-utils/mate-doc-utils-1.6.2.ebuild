@@ -32,7 +32,7 @@ DEPEND="${RDEPEND}
 	>=mate-base/mate-common-1.5.0"
 
 src_prepare() {
-	mate_src_prepare
+	gnome2_src_prepare
 
 	# Leave shebang alone
 	sed -e '/s+^#!.*python.*+#/d' \
@@ -45,21 +45,21 @@ src_prepare() {
 }
 
 src_configure() {
-	ECONF_SOURCE="${S}" python_foreach_impl run_in_build_dir mate_src_configure
+	ECONF_SOURCE="${S}" python_foreach_impl run_in_build_dir gnome2_src_configure
 }
 
 src_compile() {
-	python_foreach_impl run_in_build_dir mate_src_compile
+	python_foreach_impl run_in_build_dir gnome2_src_compile
 }
 
 src_test() {
-	python_foreach_impl run_in_build_dir mate_src_test
+	python_foreach_impl run_in_build_dir emake check
 }
 
 src_install() {
 	dodoc AUTHORS ChangeLog NEWS README
-	python_foreach_impl run_in_build_dir mate_src_install
-	
+	python_foreach_impl run_in_build_dir gnome2_src_install
+
 	# Uncomment the below when we stop relying on gnome-doc-utils
 	#python_replicate_script "${ED}"/usr/bin/xml2po
 

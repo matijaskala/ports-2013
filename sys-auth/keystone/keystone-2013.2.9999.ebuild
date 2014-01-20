@@ -1,21 +1,20 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/keystone/keystone-2013.2.9999.ebuild,v 1.5 2013/12/13 17:31:29 prometheanfire Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-auth/keystone/keystone-2013.2.9999.ebuild,v 1.10 2014/01/20 06:08:12 prometheanfire Exp $
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit git-2 distutils-r1
+inherit git-2 distutils-r1 user
 
-DESCRIPTION="Keystone is the Openstack authentication, authorization, and
-service catalog written in Python."
+DESCRIPTION="The Openstack authentication, authorization, and service catalog written in Python."
 HOMEPAGE="https://launchpad.net/keystone"
 EGIT_REPO_URI="https://github.com/openstack/keystone.git"
 EGIT_BRANCH="stable/havana"
 
 LICENSE="Apache-2.0"
-SLOT="grizzly"
+SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+sqlite mysql postgres ldap test"
 REQUIRED_USE="|| ( mysql postgres sqlite )"
@@ -77,8 +76,6 @@ RDEPEND=">=dev-python/python-pam-0.1.4[${PYTHON_USEDEP}]
 	<dev-python/pbr-1.0[${PYTHON_USEDEP}]"
 
 PATCHES=(
-	"${FILESDIR}/2013.2-CVE-2013-4477.patch"
-	"${FILESDIR}/cve-2013-6391_2013.2.patch"
 )
 
 pkg_setup() {
@@ -87,7 +84,6 @@ pkg_setup() {
 }
 
 python_prepare_all() {
-	mkdir ${PN}/tests/tmp || die
 	cp etc/keystone-paste.ini ${PN}/tests/tmp/ || die
 	distutils-r1_python_prepare_all
 }
@@ -104,14 +100,13 @@ python_install() {
 	newinitd "${FILESDIR}/keystone.initd" keystone
 
 	diropts -m 0750
-	dodir /var/run/keystone /var/log/keystone /etc/keystone
-	keepdir /etc/keystone
+	keepdir /etc/keystone /var/log/keystone
 	insinto /etc/keystone
 	doins etc/keystone.conf.sample etc/logging.conf.sample
 	doins etc/default_catalog.templates etc/policy.json
 	doins etc/policy.v3cloudsample.json etc/keystone-paste.ini
 
-	fowners keystone:keystone /var/run/keystone /var/log/keystone /etc/keystone
+	fowners keystone:keystone /etc/keystone /var/log/keystone
 }
 
 pkg_postinst() {

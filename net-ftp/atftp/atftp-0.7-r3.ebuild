@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-ftp/atftp/atftp-0.7-r3.ebuild,v 1.1 2013/12/01 22:10:08 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-ftp/atftp/atftp-0.7-r3.ebuild,v 1.4 2014/01/19 10:28:57 ago Exp $
 
 EAPI=5
 inherit eutils flag-o-matic systemd
@@ -15,7 +15,7 @@ SRC_URI="ftp://ftp.mamalinux.com/pub/atftp/${P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~s390 ~sparc ~x86"
+KEYWORDS="amd64 arm ~ppc ppc64 ~s390 ~sparc x86"
 IUSE="selinux tcpd readline pcre"
 
 DEPEND="tcpd? ( sys-apps/tcp-wrappers )

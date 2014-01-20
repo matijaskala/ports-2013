@@ -18,3 +18,10 @@ RDEPEND="!minimal? ( x11-themes/mate-icon-theme )
 	x11-themes/hicolor-icon-theme"
 
 RESTRICT="binchecks strip"
+
+src_prepare() {
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
+}

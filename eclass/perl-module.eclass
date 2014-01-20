@@ -26,10 +26,24 @@ case "${EAPI:-0}" in
 			PERL_EXPF+=" pkg_postinst pkg_postrm"
 
 		case "${GENTOO_DEPEND_ON_PERL:-yes}" in
-			yes)
-				DEPEND="|| ( >=dev-lang/perl-5.16 <dev-lang/perl-5.16[-build] )"
-				RDEPEND="${DEPEND}"
+		yes)
+			case "${EAPI:-0}" in
+			5|5-progress)
+				case "${GENTOO_DEPEND_ON_PERL_SUBSLOT:-yes}" in
+				yes)
+					DEPEND="dev-lang/perl:=[-build(-)]"
+					;;
+				*)
+					DEPEND="dev-lang/perl[-build(-)]"
+					;;
+				esac
 				;;
+			*)
+				DEPEND="|| ( >=dev-lang/perl-5.16 <dev-lang/perl-5.16[-build] )"
+				;;
+			esac
+			RDEPEND="${DEPEND}"
+			;;
 		esac
 		;;
 	*)

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/tcl/tcl-8.5.13-r1.ebuild,v 1.12 2013/02/24 17:47:36 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/tcl/tcl-8.5.13-r1.ebuild,v 1.15 2014/01/20 07:34:30 jlec Exp $
 
 EAPI=4
 
@@ -14,23 +14,11 @@ SRC_URI="mirror://sourceforge/tcl/${MY_P}-src.tar.gz"
 
 LICENSE="tcltk"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x86-solaris"
 IUSE="debug threads"
 
 SPARENT="${WORKDIR}/${MY_P}"
 S="${SPARENT}"/unix
-
-pkg_setup() {
-	if use threads ; then
-		echo
-		ewarn "PLEASE NOTE: You are compiling ${P} with"
-		ewarn "threading enabled."
-		ewarn "Threading is not supported by all applications"
-		ewarn "that compile against tcl. You use threading at"
-		ewarn "your own discretion."
-		echo
-	fi
-}
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-multilib.patch
@@ -50,6 +38,14 @@ src_prepare() {
 }
 
 src_configure() {
+	# We went ahead and deleted the whole compat/ subdir which means
+	# the configure tests to detect broken versions need to pass (else
+	# we'll fail to build).  This comes up when cross-compiling, but
+	# might as well get a minor configure speed up normally.
+	export ac_cv_func_memcmp_working="yes"
+	export tcl_cv_str{str,toul,tod}_unbroken="ok"
+	export tcl_cv_strtod_buggy="no"
+
 	econf \
 		$(use_enable threads) \
 		$(use_enable debug symbols)

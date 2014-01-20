@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit eutils mate
 
@@ -60,14 +60,14 @@ src_prepare() {
 	# mouse: Use event driven mode for syndaemon
 	epatch "${FILESDIR}/${PN}-1.2.0-syndaemon-mode.patch"
 
-	mate_src_prepare
+	gnome2_src_prepare
 }
 
 src_configure() {
 	# README is empty
 	DOCS="AUTHORS NEWS ChangeLog"
 
-	mate_src_configure \
+	gnome2_src_configure \
 		$(use_with libnotify) \
 		$(use_enable policykit polkit) \
 		$(use_enable pulseaudio pulse) \

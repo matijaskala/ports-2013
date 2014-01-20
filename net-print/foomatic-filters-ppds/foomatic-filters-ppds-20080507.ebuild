@@ -1,6 +1,8 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/foomatic-filters-ppds/foomatic-filters-ppds-20080507.ebuild,v 1.1 2008/05/07 23:57:14 tgurr Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/foomatic-filters-ppds/foomatic-filters-ppds-20080507.ebuild,v 1.3 2014/01/05 22:05:27 dilfridge Exp $
+
+EAPI=5
 
 inherit eutils
 
@@ -14,13 +16,13 @@ SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 IUSE=""
 
-RDEPEND="net-print/foomatic-filters"
+RDEPEND="
+	|| ( >=net-print/cups-filters-1.0.43-r1[foomatic] net-print/foomatic-filters )
+"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
+src_prepare() {
 	# Fix a symlink collision, see bug #172341
-	sed -i -e '/ln -s \$prefix\/share\/ppd \$destdir\$ppddir\/foomatic-ppds/d' "${S}"/install
+	sed -i -e '/ln -s \$prefix\/share\/ppd \$destdir\$ppddir\/foomatic-ppds/d' "${S}"/install || die
 	# Fix building if /bin/sh isn't bash.  Bug #176799
 	epatch "${FILESDIR}/${PN}-20070501-remove-bashisms.patch"
 }

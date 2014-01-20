@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-nds/openldap/openldap-2.4.38-r1.ebuild,v 1.1 2013/12/13 03:11:09 patrick Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-nds/openldap/openldap-2.4.38-r1.ebuild,v 1.3 2014/01/08 06:32:30 vapier Exp $
 
 EAPI="5"
 
-inherit db-use eutils flag-o-matic multilib ssl-cert versionator toolchain-funcs autotools systemd
+inherit db-use eutils flag-o-matic multilib ssl-cert versionator toolchain-funcs autotools user systemd
 
 BIS_PN=rfc2307bis.schema
 BIS_PV=20120525
@@ -378,7 +378,7 @@ src_configure() {
 	myconf="${myconf} $(use_enable tcpd wrappers)"
 
 	local ssl_lib="no"
-	if use ssl || ( use ! minimal && use samba ) ; then
+	if use ssl || ( ! use minimal && use samba ) ; then
 		ssl_lib="openssl"
 		use gnutls && ssl_lib="gnutls"
 	fi

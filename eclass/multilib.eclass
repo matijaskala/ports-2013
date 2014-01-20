@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/multilib.eclass,v 1.103 2013/04/22 01:18:51 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/multilib.eclass,v 1.105 2014/01/17 07:44:45 vapier Exp $
 
 # @ECLASS: multilib.eclass
 # @MAINTAINER:
@@ -280,8 +280,28 @@ get_modname() {
 # a crosscompiler (and thus they aren't set in the profile)
 multilib_env() {
 	local CTARGET=${1:-${CTARGET}}
+	local cpu=${CTARGET%%*-}
 
-	case ${CTARGET} in
+	case ${cpu} in
+		aarch64*)
+			# Not possible to do multilib with aarch64 and a single toolchain.
+			export CFLAGS_arm=${CFLAGS_arm-}
+			case ${cpu} in
+			aarch64*be) export CHOST_arm="armv8b-${CTARGET#*-}";;
+			*)          export CHOST_arm="armv8l-${CTARGET#*-}";;
+			esac
+			CHOST_arm=${CHOST_arm/%-gnu/-gnueabi}
+			export CTARGET_arm=${CHOST_arm}
+			export LIBDIR_arm="lib"
+
+			export CFLAGS_arm64=${CFLAGS_arm64-}
+			export CHOST_arm64=${CTARGET}
+			export CTARGET_arm64=${CHOST_arm64}
+			export LIBDIR_arm64="lib64"
+
+			: ${MULTILIB_ABIS=arm64}
+			: ${DEFAULT_ABI=arm64}
+		;;
 		x86_64*)
 			export CFLAGS_x86=${CFLAGS_x86--m32}
 			export CHOST_x86=${CTARGET/x86_64/i686}

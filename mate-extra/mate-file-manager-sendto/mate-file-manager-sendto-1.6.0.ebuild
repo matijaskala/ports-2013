@@ -4,7 +4,7 @@
 
 EAPI="5"
 GCONF_DEBUG="yes"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit mate
 
@@ -31,6 +31,13 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35
 	>=mate-base/mate-common-1.2.2"
 
+src_prepare() {
+	# Tarball has no proper build system, should be fixed on next release.
+	mate_gen_build_system
+
+	gnome2_src_prepare
+}
+
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
@@ -42,5 +49,5 @@ src_configure() {
 	use gajim && myconf="${myconf}gajim,"
 	use upnp && myconf="${myconf}upnp,"
 
-	mate_src_configure ${myconf}
+	gnome2_src_configure ${myconf}
 }

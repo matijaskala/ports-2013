@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="5"
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 
 inherit mate
 
@@ -36,7 +36,7 @@ DEPEND="${RDEPEND}
 DOCS=( AUTHORS ChangeLog NEWS )
 
 src_install() {
-	mate_src_install
+	gnome2_src_install
 
 	keepdir /etc/mateconf/mateconf.xml.mandatory
 	keepdir /etc/mateconf/mateconf.xml.defaults

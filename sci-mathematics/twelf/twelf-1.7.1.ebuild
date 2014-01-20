@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/twelf/twelf-1.7.1.ebuild,v 1.2 2012/12/12 13:12:19 gienah Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/twelf/twelf-1.7.1.ebuild,v 1.4 2014/01/15 08:07:10 gienah Exp $
 
 EAPI="5"
 
@@ -37,7 +37,8 @@ PATCHES=("${FILESDIR}/${PN}-1.7.1-doc-guide-twelf-dot-texi.patch"
 	"${FILESDIR}/${PN}-1.7.1-doc-guide-Makefile.patch"
 	"${FILESDIR}/${PN}-1.7.1-emacs-twelf.patch"
 	"${FILESDIR}/${PN}-1.7.1-emacs-twelf-init.patch"
-	"${FILESDIR}/${PN}-1.7.1-Makefile.patch")
+	"${FILESDIR}/${PN}-1.7.1-Makefile.patch"
+	"${FILESDIR}/${PN}-1.7.1-mlton-mlb.patch")
 
 src_prepare() {
 	base_src_prepare
@@ -48,7 +49,7 @@ src_prepare() {
 }
 
 src_compile() {
-	emake mlton CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
+	emake mlton CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS} -fno-PIE"
 	if use emacs ; then
 		pushd "${S}/emacs" || die "Could change directory to emacs"
 		elisp-compile \

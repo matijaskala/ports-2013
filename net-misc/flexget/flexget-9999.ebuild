@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/flexget/flexget-9999.ebuild,v 1.42 2013/10/16 02:36:59 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/flexget/flexget-9999.ebuild,v 1.44 2014/01/11 23:11:46 floppym Exp $
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_{6,7} )
+PYTHON_COMPAT=( python{2_6,2_7} )
 
 inherit distutils-r1 eutils
 
@@ -14,7 +14,7 @@ if [[ ${PV} != 9999 ]]; then
 		http://download.flexget.com/archive/${MY_P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 else
-	inherit git-2
+	inherit git-r3
 	EGIT_REPO_URI="git://github.com/Flexget/Flexget.git
 		https://github.com/Flexget/Flexget.git"
 fi
@@ -29,23 +29,22 @@ IUSE="test transmission"
 DEPEND="
 	>=dev-python/feedparser-5.1.3[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-0.7[${PYTHON_USEDEP}]
-	<dev-python/sqlalchemy-0.7.99
+	<dev-python/sqlalchemy-0.9.99
 	dev-python/pyyaml[${PYTHON_USEDEP}]
-	dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]
 	>=dev-python/beautifulsoup-4.1:4[${PYTHON_USEDEP}]
 	<dev-python/beautifulsoup-4.4:4[${PYTHON_USEDEP}]
-	dev-python/html5lib[${PYTHON_USEDEP}]
-	dev-python/jinja[${PYTHON_USEDEP}]
-	>=dev-python/jsonschema-2.0[${PYTHON_USEDEP}]
+	>=dev-python/html5lib-0.11[${PYTHON_USEDEP}]
 	dev-python/PyRSS2Gen[${PYTHON_USEDEP}]
 	dev-python/pynzb[${PYTHON_USEDEP}]
 	dev-python/progressbar[${PYTHON_USEDEP}]
-	dev-python/flask[${PYTHON_USEDEP}]
-	dev-python/cherrypy[${PYTHON_USEDEP}]
-	dev-python/python-dateutil[${PYTHON_USEDEP}]
-	dev-python/python-tvrage[${PYTHON_USEDEP}]
+	dev-python/rpyc[${PYTHON_USEDEP}]
+	dev-python/jinja[${PYTHON_USEDEP}]
 	>=dev-python/requests-1.0[${PYTHON_USEDEP}]
 	<dev-python/requests-2.99[${PYTHON_USEDEP}]
+	dev-python/python-dateutil[${PYTHON_USEDEP}]
+	>=dev-python/jsonschema-2.0[${PYTHON_USEDEP}]
+	dev-python/python-tvrage[${PYTHON_USEDEP}]
+	dev-python/tmdb3[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	virtual/python-argparse[${PYTHON_USEDEP}]
 "

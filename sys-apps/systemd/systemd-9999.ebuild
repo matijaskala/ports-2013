@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.75 2013/12/04 03:06:19 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.79 2014/01/07 09:41:03 pacho Exp $
 
 EAPI=5
 
@@ -26,7 +26,7 @@ LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/1"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
-	+kmod lzma pam policykit python qrcode selinux tcpd test
+	+kdbus +kmod lzma pam policykit python qrcode selinux tcpd test
 	vanilla xattr"
 
 MINKV="3.0"
@@ -69,6 +69,7 @@ PDEPEND=">=sys-apps/dbus-1.6.8-r1:0
 	policykit? ( sys-auth/polkit )
 	!vanilla? ( sys-apps/gentoo-systemd-integration )"
 
+# Newer linux-headers needed by ia64, bug #480218
 DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils:0
 	app-text/docbook-xml-dtd:4.2
@@ -79,6 +80,7 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/binutils-2.23.1
 	>=sys-devel/gcc-4.6
 	>=sys-kernel/linux-headers-${MINKV}
+	ia64? ( >=sys-kernel/linux-headers-3.9 )
 	virtual/pkgconfig
 	doc? ( >=dev-util/gtk-doc-1.18 )
 	test? ( >=sys-apps/dbus-1.6.8-r1:0 )"
@@ -86,21 +88,24 @@ DEPEND="${COMMON_DEPEND}
 #if LIVE
 DEPEND="${DEPEND}
 	dev-libs/gobject-introspection
-	>=dev-libs/libgcrypt-1.4.5:0
-	>=dev-util/gtk-doc-1.18"
+	>=dev-libs/libgcrypt-1.4.5:0"
 
 SRC_URI=
 KEYWORDS=
 
 src_prepare() {
-	gtkdocize --docdir docs/ || die
+	if use doc; then
+		gtkdocize --docdir docs/ || die
+	else
+		echo 'EXTRA_DIST =' > docs/gtk-doc.make
+	fi
 
 	autotools-utils_src_prepare
 }
 #endif
 
 pkg_pretend() {
-	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS ~DEVTMPFS
+	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS ~DEVTMPFS ~DMIID
 		~EPOLL ~FANOTIFY ~FHANDLE ~INOTIFY_USER ~IPV6 ~NET ~PROC_FS
 		~SECCOMP ~SIGNALFD ~SYSFS ~TIMERFD
 		~!IDE ~!SYSFS_DEPRECATED ~!SYSFS_DEPRECATED_V2
@@ -108,8 +113,17 @@ pkg_pretend() {
 
 	use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"
 	use pam && CONFIG_CHECK+=" ~AUDITSYSCALL"
+	use xattr && CONFIG_CHECK+=" ~TMPFS_XATTR"
 	kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
 	use firmware-loader || CONFIG_CHECK+=" ~!FW_LOADER_USER_HELPER"
+
+	if linux_config_exists; then
+		local uevent_helper_path=$(linux_chkconfig_string UEVENT_HELPER_PATH)
+			if [ -n "${uevent_helper_path}" ] && [ "${uevent_helper_path}" != '""' ]; then
+				ewarn "It's recommended to set an empty value to the following kernel config option:"
+				ewarn "CONFIG_UEVENT_HELPER_PATH=${uevent_helper_path}"
+			fi
+	fi
 
 	if [[ ${MERGE_TYPE} != binary ]]; then
 		if [[ $(gcc-major-version) -lt 4
@@ -164,6 +178,7 @@ multilib_src_configure() {
 		$(use_enable gudev)
 		$(use_enable http microhttpd)
 		$(use_enable introspection)
+		$(use_enable kdbus)
 		$(use_enable kmod)
 		$(use_enable lzma xz)
 		$(use_enable pam)

@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/clustalw/clustalw-1.83-r2.ebuild,v 1.4 2009/08/18 17:24:32 weaver Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-biology/clustalw/clustalw-1.83-r2.ebuild,v 1.6 2014/01/06 08:46:49 jlec Exp $
 
 inherit toolchain-funcs
 

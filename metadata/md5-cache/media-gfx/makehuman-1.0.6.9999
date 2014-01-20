@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile install preinst prepare unpack
+DEPEND=dev-lang/python:2.7 media-libs/sdl-image media-libs/mesa media-libs/glew aqsis? ( media-gfx/aqsis ) || ( dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] ) net-misc/rsync
+DESCRIPTION=Software for the modelling of 3D humanoid characters.
+EAPI=4
+HOMEPAGE=http://www.makehuman.org/
+IUSE=aqsis
+KEYWORDS=~x86 ~amd64
+LICENSE=GPL-3
+RDEPEND=dev-vcs/subversion dev-lang/python:2.7 media-libs/sdl-image media-libs/mesa media-libs/glew aqsis? ( media-gfx/aqsis )
+SLOT=0
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	subversion	e80e84db0fc102c2959858102060bec9	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28
+_md5_=6a2b6122b85305bca6a44b139c921d24

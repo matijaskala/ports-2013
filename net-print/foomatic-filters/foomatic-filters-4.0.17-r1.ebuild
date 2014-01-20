@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/foomatic-filters/foomatic-filters-4.0.17-r1.ebuild,v 1.6 2013/10/20 20:24:57 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/foomatic-filters/foomatic-filters-4.0.17-r1.ebuild,v 1.13 2014/01/18 19:52:50 ago Exp $
 
 EAPI=5
 
@@ -12,12 +12,14 @@ SRC_URI="http://www.openprinting.org/download/foomatic/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="cups dbus"
 
 RDEPEND="
 	dev-lang/perl
 	app-text/ghostscript-gpl
+	!=net-print/cups-filters-1.0.43
+	!>=net-print/cups-filters-1.0.43-r1[foomatic]
 	cups? (
 		|| (
 			( >=net-print/cups-1.6.0 net-print/cups-filters )

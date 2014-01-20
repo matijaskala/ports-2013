@@ -17,6 +17,7 @@
 #  * ruby18 - Ruby (MRI) 1.8.x
 #  * ruby19 - Ruby (MRI) 1.9.x
 #  * ruby20 - Ruby (MRI) 2.0.x
+#  * ruby21 - Ruby (MRI) 2.1.x
 #  * ree18  - Ruby Enterprise Edition 1.8.x
 #  * jruby  - JRuby
 #  * rbx    - Rubinius
@@ -111,6 +112,10 @@ ruby_implementation_depend() {
 		ruby20)
 			rubypn="dev-lang/ruby"
 			rubyslot=":2.0"
+			;;
+		ruby21)
+			rubypn="dev-lang/ruby"
+			rubyslot=":2.1"
 			;;
 		ree18)
 			rubypn="dev-lang/ruby-enterprise"
@@ -451,7 +456,7 @@ _ruby_apply_patches() {
 _ruby_source_copy() {
 	# Until we actually find a reason not to, we use hardlinks, this
 	# should reduce the amount of disk space that is wasted by this.
-	cp -prl all ${_ruby_implementation} \
+	cp -prlP all ${_ruby_implementation} \
 		|| die "Unable to copy ${_ruby_implementation} environment"
 }
 

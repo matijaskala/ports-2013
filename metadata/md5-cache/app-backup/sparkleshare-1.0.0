@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare unpack
+DEPEND=>=dev-lang/mono-2.2 gtk? ( >=dev-dotnet/gtk-sharp-2.12.2 >=dev-dotnet/glib-sharp-2.12.2 libnotify? ( dev-dotnet/notify-sharp ) ) dev-dotnet/webkit-sharp nautilus? ( dev-python/nautilus-python ) >=dev-vcs/git-1.7.1 virtual/libintl sys-devel/gettext dev-util/pkgconfig doc? ( >=app-text/gnome-doc-utils-0.17.3 ) app-arch/xz-utils >=sys-apps/sed-4
+DESCRIPTION=A collaboration and sharing tool that is designed to keep things simple and to stay out of your way.
+EAPI=4
+HOMEPAGE=http://sparkleshare.org/
+IUSE=debug doc gtk libnotify +nautilus debug
+KEYWORDS=*
+LICENSE=GPL-3
+RDEPEND=>=dev-lang/mono-2.2 gtk? ( >=dev-dotnet/gtk-sharp-2.12.2 >=dev-dotnet/glib-sharp-2.12.2 libnotify? ( dev-dotnet/notify-sharp ) ) dev-dotnet/webkit-sharp nautilus? ( dev-python/nautilus-python ) >=dev-vcs/git-1.7.1 virtual/libintl
+SLOT=0
+SRC_URI=https://github.com/downloads/hbons/SparkleShare/sparkleshare-linux-1.0.0.tar.gz
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	fdo-mime	0acfe1a88fd8751a1d5dc671168219fa	gnome.org	8fef8f967214f56e08fa92d61163d891	gnome2	aa0ea5c139b7b3e8cfacc1fc342a9ba8	gnome2-utils	eb033547526fe401787037d54fb6ce6a	libtool	b1c8688e60f9580bcb9bb46e08737eb1	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28	versionator	6601b4c5b3f019a993db59a50e1854e4
+_md5_=648e0d1353582a704e55f4258230c77b

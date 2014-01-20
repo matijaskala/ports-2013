@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup test
+DEPEND=test? ( dev-libs/gobject-introspection dev-python/dbus-python dev-python/pygobject:3 gnome-base/gnome-desktop:2 x11-libs/gtk+:3[introspection] x11-libs/pango[introspection] ayatana? ( dev-libs/libappindicator:3[introspection] ) ayatana? ( dev-libs/libappindicator:3[introspection] ) ) =dev-lang/python-2* test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost )
+DESCRIPTION=A small Gtk+ application for keeping track of your time
+EAPI=4
+HOMEPAGE=http://mg.pov.lt/gtimelog/
+IUSE=ayatana test test
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=dev-libs/gobject-introspection dev-python/dbus-python dev-python/pygobject:3 gnome-base/gnome-desktop:2 x11-libs/gtk+:3[introspection] x11-libs/pango[introspection] ayatana? ( dev-libs/libappindicator:3[introspection] ) =dev-lang/python-2*
+SLOT=0
+SRC_URI=https://launchpad.net/gtimelog/devel/0.7.1/+download/gtimelog-0.7.1.tar.gz
+_eclasses_=distutils	4d62465f6d5c8554c77b91c9d95dd315	eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	python	9ffa83b7b864edd2fa5dd6ebe4a63738	toolchain-funcs	d3b5812eeab360bc41aa48b6cdbbc142	user	d0a4d0735a6c0183d707ca919bd72f28	virtualx	73cfc129b4b9ba23aed1abb10c825d86
+_md5_=e57dee18ebafebe276f7587f8388a93c

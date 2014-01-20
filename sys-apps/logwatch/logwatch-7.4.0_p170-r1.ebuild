@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/logwatch/logwatch-7.4.0_p170-r1.ebuild,v 1.1 2013/12/19 00:08:36 mjo Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/logwatch/logwatch-7.4.0_p170-r1.ebuild,v 1.9 2014/01/19 10:27:12 ago Exp $
 
 EAPI=5
 
@@ -13,7 +13,7 @@ SRC_URI="http://dev.gentoo.org/~polynomial-c/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 arm hppa ppc ppc64 ~sparc x86"
 IUSE=""
 
 DEPEND=""
@@ -41,11 +41,11 @@ src_install() {
 	keepdir /etc/logwatch
 	keepdir /var/cache/logwatch
 
-	newsbin scripts/logwatch.pl logwatch.pl || die "dosbin logwatch failed"
+	newsbin scripts/logwatch.pl logwatch.pl
 
 	for i in scripts/logfiles/* ; do
 		exeinto /usr/share/logwatch/$i
-		doexe $i/* || die "doexe $i failed"
+		doexe $i/*
 	done
 
 	exeinto /usr/share/logwatch/lib

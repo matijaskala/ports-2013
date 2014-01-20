@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/keyutils/keyutils-1.5.5.ebuild,v 1.9 2012/07/01 18:21:34 armin76 Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/keyutils/keyutils-1.5.5.ebuild,v 1.11 2014/01/18 04:49:23 vapier Exp $
 
 EAPI="3"
 
-inherit multilib eutils toolchain-funcs
+inherit multilib eutils toolchain-funcs linux-info
 
 DESCRIPTION="Linux Key Management Utilities"
 HOMEPAGE="http://people.redhat.com/dhowells/keyutils/"
@@ -12,10 +12,18 @@ SRC_URI="http://people.redhat.com/dhowells/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux"
-IUSE=""
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux"
+IUSE="test"
 
 DEPEND="!prefix? ( >=sys-kernel/linux-headers-2.6.11 )"
+
+pkg_setup() {
+	CONFIG_CHECK="~KEYS"
+	use test && CONFIG_CHECK="${CONFIG_CHECK} ~KEYS_DEBUG_PROC_KEYS"
+	ERROR_KEYS="You must have CONFIG_KEYS to use this package!"
+	ERROR_KEYS_DEBUG_PROC_KEYS="You must have CONFIG_KEYS_DEBUG_PROC_KEYS to run the package testsuite!"
+	linux-info_pkg_setup
+}
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-1.5.5-makefile-fixup.patch
@@ -43,6 +51,7 @@ src_prepare() {
 
 src_configure() {
 	tc-export CC
+	tc-export AR
 }
 
 src_test() {

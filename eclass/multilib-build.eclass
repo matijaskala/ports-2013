@@ -236,6 +236,31 @@ multilib_copy_sources() {
 # )
 # @CODE
 
+# @ECLASS-VARIABLE: MULTILIB_CHOST_TOOLS
+# @DESCRIPTION:
+# A list of tool executables to preserve for each multilib ABI.
+# The listed executables will be renamed to ${CHOST}-${basename},
+# and the native variant will be symlinked to the generic name.
+#
+# This variable has to be a bash array. Paths shall be relative to
+# installation root (${ED}), and name regular files. Recursive wrapping
+# is not supported.
+#
+# Please note that tool wrapping is *discouraged*. It is preferred to
+# install pkg-config files for each ABI, and require reverse
+# dependencies to use that.
+#
+# Packages that search for tools properly (e.g. using AC_PATH_TOOL
+# macro) will find the wrapper executables automatically. Other packages
+# will need explicit override of tool paths.
+#
+# Example:
+# @CODE
+# MULTILIB_CHOST_TOOLS=(
+#	/usr/bin/foo-config
+# )
+
+# @CODE
 # @FUNCTION: multilib_prepare_wrappers
 # @USAGE: [<install-root>]
 # @DESCRIPTION:
@@ -334,6 +359,21 @@ _EOF_
 				-i "${ED}/tmp/multilib-include${f}" || die
 		fi
 	done
+
+	for f in "${MULTILIB_CHOST_TOOLS[@]}"; do
+		# drop leading slash if it's there
+		f=${f#/}
+
+		local dir=${f%/*}
+		local fn=${f##*/}
+
+		mv "${root}/${f}" "${root}/${dir}/${CHOST}-${fn}" || die
+
+		# symlink the native one back
+		if multilib_build_binaries; then
+			ln -s "${CHOST}-${fn}" "${root}/${f}" || die
+		fi
+	done
 }
 
 # @FUNCTION: multilib_install_wrappers
@@ -370,9 +410,8 @@ multilib_install_wrappers() {
 # Determine whether the currently built ABI is the profile native.
 # Return true status (0) if that is true, otherwise false (1).
 #
-# This is often useful for configure calls when some of the options are
-# supposed to be disabled for multilib ABIs (like those used for
-# executables only).
+# This function is not intended to be used directly. Please use
+# multilib_build_binaries instead.
 multilib_is_native_abi() {
 	debug-print-function ${FUNCNAME} "${@}"
 
@@ -383,14 +422,14 @@ multilib_is_native_abi() {
 
 # @FUNCTION: multilib_build_binaries
 # @DESCRIPTION:
-# Determine wheter to build binaries for the current build ABI.
-# Returns true status (0) if the current built ABI is the profile
-# native or COMPLETE_MULTILIB variable is set to yes, otherwise
+# Determine whether to build binaries for the currently built ABI.
+# Returns true status (0) if the currently built ABI is the profile
+# native or COMPLETE_MULTILIB variable is set to 'yes', otherwise
 # false (1).
 #
-# The COMPLETE_MULTILIB variable can be set by users or profiles
-# when they want to build binaries for none-default ABI so e.g.
-# 32bit binaries on amd64.
+# This is often useful for configure calls when some of the options are
+# supposed to be disabled for multilib ABIs (like those used for
+# executables only).
 multilib_build_binaries() {
 	debug-print-function ${FUNCNAME} "${@}"
 

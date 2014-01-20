@@ -4,7 +4,7 @@
 
 EAPI="5"
 PYTHON_COMPAT=( python2_{6,7} )
-MATE_LA_PUNT="yes"
+GNOME2_LA_PUNT="yes"
 inherit autotools eutils python-single-r1 linux-info mate user
 
 DESCRIPTION="Store, Sync and Share Files Online"
@@ -39,7 +39,7 @@ pkg_setup () {
 }
 
 src_prepare() {
-	mate_src_prepare
+	gnome2_src_prepare
 
 	# use sysem dropbox
 	sed -e "s|~/[.]dropbox-dist|/opt/dropbox|" \
@@ -53,7 +53,7 @@ src_prepare() {
 src_install () {
 	python_fix_shebang dropbox.in
 
-	mate_src_install
+	gnome2_src_install
 
 	local extensiondir="$(pkg-config --variable=extensiondir libcaja-extension)"
 	[ -z ${extensiondir} ] && die "pkg-config unable to get caja extensions dir"
@@ -66,7 +66,7 @@ src_install () {
 }
 
 pkg_postinst () {
-	mate_pkg_postinst
+	gnome2_pkg_postinst
 
 	elog
 	elog "Add any users who wish to have access to the dropbox caja"

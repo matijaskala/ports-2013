@@ -28,10 +28,6 @@ case ${EAPI:-0} in
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
-if [[ ${AUTOTOOLS_IN_SOURCE_BUILD} ]]; then
-	die "${ECLASS}: multilib support requires out-of-source builds."
-fi
-
 inherit autotools-utils eutils multilib-build multilib-minimal
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
