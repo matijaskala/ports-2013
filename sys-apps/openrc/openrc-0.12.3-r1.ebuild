@@ -1,6 +1,6 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=5
 
 inherit eutils flag-o-matic multilib pam toolchain-funcs
 
@@ -10,20 +10,31 @@ RESTRICT="mirror"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="*"
-IUSE="debug elibc_glibc ncurses pam selinux static-libs unicode kernel_linux kernel_FreeBSD"
+IUSE="debug elibc_glibc ncurses pam prefix selinux static-libs
+	unicode kernel_linux kernel_FreeBSD"
+KEYWORDS="~alpha amd64 ~arm ~hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 
-RDEPEND="kernel_linux? ( >=sys-apps/sysvinit-2.86-r11 )
-	kernel_FreeBSD? ( sys-process/fuser-bsd )
-	pam? ( virtual/pam )
-	>=sys-apps/baselayout-2.2
-	sys-apps/iproute2"
-
-DEPEND="ncurses? ( sys-libs/ncurses ) pam? ( virtual/pam ) virtual/os-headers virtual/pkgconfig"
+COMMON_DEPEND=">=sys-apps/baselayout-2.1-r1
+	kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
+	elibc_glibc? ( >=sys-libs/glibc-2.5 )
+	ncurses? ( sys-libs/ncurses )
+	pam? ( sys-auth/pambase )
+	selinux? ( sec-policy/selinux-openrc )
+	!<sys-fs/udev-init-scripts-17
+	!<sys-fs/udev-133"
+DEPEND="${COMMON_DEPEND}
+	virtual/os-headers
+	ncurses? ( virtual/pkgconfig )"
+RDEPEND="${COMMON_DEPEND}
+	sys-apps/iproute2
+	!prefix? (
+		kernel_linux? ( || ( >=sys-apps/sysvinit-2.86-r6 sys-process/runit ) )
+		kernel_FreeBSD? ( sys-freebsd/freebsd-sbin )
+	)"
 
 GITHUB_REPO="${PN}"
 GITHUB_USER="funtoo"
-GITHUB_TAG="funtoo-openrc-0.12.3-r0"
+GITHUB_TAG="funtoo-${P}-r0"
 NETV="1.3.8"
 GITHUB_REPO_CN="corenetwork"
 GITHUB_TAG_CN="$NETV"
@@ -33,10 +44,27 @@ SRC_URI="
 	https://www.github.com/${GITHUB_USER}/${GITHUB_REPO_CN}/tarball/${GITHUB_TAG_CN} -> corenetwork-${NETV}.tar.gz
 	"
 
+src_prepare() {
+	sed -i 's:0444:0644:' mk/sys.mk || die
+
+	if [[ ${PV} == "9999" ]] ; then
+		local ver="git-${EGIT_VERSION:0:6}"
+		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/git.mk || die
+	fi
+
+	# Allow user patches to be applied without modifying the ebuild
+	epatch_user
+}
+
 make_args() {
 	unset LIBDIR #266688
 
-	MAKE_ARGS="${MAKE_ARGS} LIBNAME=$(get_libdir) LIBEXECDIR=/$(get_libdir)/rc MKNET=no"
+	MAKE_ARGS="${MAKE_ARGS}
+		LIBNAME=$(get_libdir)
+		LIBEXECDIR=${EPREFIX}/$(get_libdir)/rc
+		MKSELINUX=$(usex selinux)
+		MKSTATICLIBS=$(usex static-libs)
+	MKNET=no"
 
 	local brand="Unknown"
 	if use kernel_linux ; then
@@ -46,16 +74,8 @@ make_args() {
 		MAKE_ARGS="${MAKE_ARGS} OS=FreeBSD"
 		brand="FreeBSD"
 	fi
-	if use selinux; then
-			MAKE_ARGS="${MAKE_ARGS} MKSELINUX=yes"
-	fi
 	export BRANDING="Party ${brand}"
-	if ! use static-libs; then
-			MAKE_ARGS="${MAKE_ARGS} MKSTATICLIBS=no"
-	fi
-}
-
-pkg_setup() {
+	use prefix && MAKE_ARGS="${MAKE_ARGS} MKPREFIX=yes PREFIX=${EPREFIX}"
 	export DEBUG=$(usev debug)
 	export MKPAM=$(usev pam)
 	export MKTERMCAP=$(usev ncurses)
@@ -70,15 +90,6 @@ src_unpack() {
 	mv $old "${WORKDIR}/corenetwork-${NETV}" || die "move fail 2"
 }
 
-src_prepare() {
-	sed -i 's:0444:0644:' mk/sys.mk || die
-
-	if [[ ${PV} == "9999" ]] ; then
-		local ver="git-${EGIT_VERSION:0:6}"
-		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/git.mk || die
-	fi
-	##epatch "${FILESDIR}/openrc-nodevfs.patch"
-}
 src_compile() {
 	make_args
 
@@ -89,7 +100,7 @@ src_compile() {
 # set_config <file> <option name> <yes value> <no value> test
 # a value of "#" will just comment out the option
 set_config() {
-	local file="${D}/$1" var=$2 val com
+	local file="${ED}/$1" var=$2 val com
 	eval "${@:5}" && val=$3 || val=$4
 	[[ ${val} == "#" ]] && com="#" && val='\2'
 	sed -i -r -e "/^#?${var}=/{s:=([\"'])?([^ ]*)\1?:=\1${val}\1:;s:^#?:${com}:}" "${file}"
@@ -106,7 +117,7 @@ src_install() {
 	# move the shared libs back to /usr so ldscript can install
 	# more of a minimal set of files
 	# disabled for now due to #270646
-	#mv "${D}"/$(get_libdir)/lib{einfo,rc}* "${D}"/usr/$(get_libdir)/ || die
+	#mv "${ED}"/$(get_libdir)/lib{einfo,rc}* "${ED}"/usr/$(get_libdir)/ || die
 	#gen_usr_ldscript -a einfo rc
 	gen_usr_ldscript libeinfo.so
 	gen_usr_ldscript librc.so
@@ -118,8 +129,8 @@ src_install() {
 
 	# Backup our default runlevels
 	dodir /usr/share/"${PN}"
-	cp -PR "${D}"/etc/runlevels "${D}"/usr/share/${PN} || die
-	rm -rf "${D}"/etc/runlevels
+	cp -PR "${ED}"/etc/runlevels "${ED}"/usr/share/${PN} || die
+	rm -rf "${ED}"/etc/runlevels
 
 	# Setup unicode defaults for silly unicode users
 	set_config_yes_no /etc/rc.conf unicode use unicode
@@ -129,7 +140,7 @@ src_install() {
 
 	# On HPPA, do not run consolefont by default (bug #222889)
 	if use hppa; then
-		rm -f "${D}"/usr/share/openrc/runlevels/boot/consolefont
+		rm -f "${ED}"/usr/share/openrc/runlevels/boot/consolefont
 	fi
 
 	# Support for logfile rotation
@@ -138,6 +149,12 @@ src_install() {
 
 	# install the gentoo pam.d file
 	newpamd "${FILESDIR}"/start-stop-daemon.pam start-stop-daemon
+
+	# install documentation
+	dodoc README.busybox
+	if use newnet; then
+		dodoc README.newnet
+	fi
 
 	# Install funtoo networking parts:
 
@@ -152,23 +169,29 @@ src_install() {
 	ln -s /etc/init.d/netif.lo ${D}/usr/share/openrc/runlevels/sysinit/netif.lo || die
 }
 
-add_init() {
-	local runl=$1
-	shift
-	if [ ! -e ${ROOT}/etc/runlevels/${runl} ]
-	then
-		install -d -m0755 ${ROOT}/etc/runlevels/${runl}
+add_boot_init() {
+	local initd=$1
+	local runlevel=${2:-boot}
+	# if the initscript is not going to be installed and is not
+	# currently installed, return
+	[[ -e "${ED}"/etc/init.d/${initd} || -e "${EROOT}"etc/init.d/${initd} ]] \
+		|| return
+	[[ -e "${EROOT}"etc/runlevels/${runlevel}/${initd} ]] && return
+
+	# if runlevels dont exist just yet, then create it but still flag
+	# to pkg_postinst that it needs real setup #277323
+	if [[ ! -d "${EROOT}"etc/runlevels/${runlevel} ]] ; then
+		mkdir -p "${EROOT}"etc/runlevels/${runlevel}
+		touch "${EROOT}"etc/runlevels/.add_boot_init.created
 	fi
-	for initd in $*
-	do
-		[[ -e ${ROOT}/etc/runlevels/${runl}/${initd} ]] && continue
-		elog "Auto-adding '${initd}' service to your ${runl} runlevel"
-		ln -snf /etc/init.d/${initd} "${ROOT}"/etc/runlevels/${runl}/${initd}
-	done
+
+	elog "Auto-adding '${initd}' service to your ${runlevel} runlevel"
+	ln -snf /etc/init.d/${initd} "${EROOT}"etc/runlevels/${runlevel}/${initd}
 }
 
 pkg_postinst() {
 	local runl
+	local LIBDIR=$(get_libdir)
 	install -d -m0755 ${ROOT}/etc/runlevels
 	local runldir="${ROOT}usr/share/openrc/runlevels"
 
@@ -188,7 +211,10 @@ pkg_postinst() {
 	do
 		einfo "Processing $runl..."
 		einfo "Ensuring runlevel $runl has all required scripts..."
-		add_init $runl $( cd "$runldir/$runl"; echo * )
+		for initd in $( cd "$runldir/$runl"; echo * )
+			add_boot_init ${initd} $runl
+		do
+		done
 	done
 
 	# Rather than try to migrate everyone using complex scripts, simply print
@@ -213,8 +239,8 @@ pkg_postinst() {
 	# OTHER STUFF
 	# ===========
 
-	# update the dependency tree bug #224171
-	[[ "${ROOT}" = "/" ]] && "${ROOT}/$(get_libdir)"/rc/bin/rc-depend -u
+	# update the dependency tree after touching all files #224171
+	[[ "${EROOT}" = "/" ]] && "${EROOT}/${LIBDIR}"/rc/bin/rc-depend -u
 
 	elog "You should now update all files in /etc, using etc-update"
 	elog "or equivalent before rebooting."

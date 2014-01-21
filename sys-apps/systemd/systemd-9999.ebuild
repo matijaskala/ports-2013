@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.79 2014/01/07 09:41:03 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.80 2014/01/20 22:53:07 floppym Exp $
 
 EAPI=5
 
@@ -99,6 +99,9 @@ src_prepare() {
 	else
 		echo 'EXTRA_DIST =' > docs/gtk-doc.make
 	fi
+
+	# Bug 463376
+	sed -i -e 's/GROUP="dialout"/GROUP="uucp"/' rules/*.rules || die
 
 	autotools-utils_src_prepare
 }
@@ -356,9 +359,6 @@ migrate_locale() {
 }
 
 pkg_postinst() {
-	# for udev rules
-	enewgroup dialout
-
 	enewgroup systemd-journal
 	if use http; then
 		enewgroup systemd-journal-gateway

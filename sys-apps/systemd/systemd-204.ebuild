@@ -5,7 +5,6 @@ EAPI=5
 AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
 AUTOTOOLS_AUTORECONF=yes
 PYTHON_COMPAT=( python2_7 )
-
 inherit autotools-utils bash-completion-r1 fcaps linux-info multilib multilib-minimal pam python-single-r1 systemd toolchain-funcs udev user
 
 DESCRIPTION="System and service manager for Linux"
@@ -22,8 +21,7 @@ IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
 
 MINKV="2.6.39"
 
-COMMON_DEPEND="
-	>=sys-apps/dbus-1.6.8-r1
+COMMON_DEPEND=">=sys-apps/dbus-1.6.8-r1
 	>=sys-apps/util-linux-2.20
 	sys-libs/libcap
 	acl? ( sys-apps/acl )
@@ -55,12 +53,10 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	!sys-auth/nss-myhostname
 	!<sys-libs/glibc-2.10
-	!sys-fs/udev
-"
-PDEPEND="
-	>=sys-apps/hwids-20130326.1[udev]
-	!vanilla? ( ~sys-apps/gentoo-systemd-integration-1 )
-"
+	!sys-fs/udev"
+
+PDEPEND=">=sys-apps/hwids-20130326.1[udev]
+	!vanilla? ( ~sys-apps/gentoo-systemd-integration-1 )"
 
 DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
@@ -77,7 +73,8 @@ DEPEND="${COMMON_DEPEND}
 pkg_pretend() {
 	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS ~DEVTMPFS
 		~FANOTIFY ~HOTPLUG ~INOTIFY_USER ~IPV6 ~NET ~PROC_FS ~SIGNALFD
-		~SYSFS ~!IDE ~!SYSFS_DEPRECATED ~!SYSFS_DEPRECATED_V2"
+		~SYSFS ~!IDE ~!SYSFS_DEPRECATED ~!SYSFS_DEPRECATED_V2
+		~!GRKERNSEC_PROC"
 #		~!FW_LOADER_USER_HELPER"
 
 	use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"

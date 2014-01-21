@@ -1,8 +1,8 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/cxxtools/cxxtools-2.2.ebuild,v 1.1 2013/06/28 19:41:42 zzam Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/cxxtools/cxxtools-2.2.ebuild,v 1.2 2014/01/20 19:12:33 hd_brummy Exp $
 
-EAPI="5"
+EAPI=5
 
 DESCRIPTION="Collection of general purpose C++-classes"
 HOMEPAGE="http://www.tntnet.org/cxxtools.hms"

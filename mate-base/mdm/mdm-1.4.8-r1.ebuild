@@ -21,6 +21,6 @@ RDEPEND="${DEPEND}"
 S=${WORKDIR}/${P}+${MINT_V}
 
 src_prepare() {
-	autotools_run_tool gnome-doc-prepare --copy --force || die
-	mate_src_prepare
+	eautoreconf
+	gnome2_src_prepare
 }

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/darktable/darktable-9999.ebuild,v 1.11 2014/01/12 11:25:14 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/darktable/darktable-9999.ebuild,v 1.12 2014/01/21 20:35:00 maekke Exp $
 
 EAPI=5
 
@@ -10,43 +10,49 @@ EGIT_REPO_URI="git://github.com/darktable-org/darktable.git"
 
 DESCRIPTION="A virtual lighttable and darkroom for photographers"
 HOMEPAGE="http://www.darktable.org/"
+SRC_URI=""
 
-LICENSE="GPL-3"
+LICENSE="GPL-3 CC-BY-3.0"
 SLOT="0"
-IUSE="colord flickr geo gnome-keyring gphoto2 graphicsmagick jpeg2k kde
-nls opencl openmp pax_kernel +rawspeed +slideshow +squish web-services"
+KEYWORDS=""
+LANGS=" cs da de el es fr it ja nl pl pt_BR pt_PT ru sq sv uk"
+# TODO add lua once dev-lang/lua-5.2 is unmasked
+IUSE="colord doc flickr geo gnome-keyring gphoto2 graphicsmagick jpeg2k kde
+nls opencl openmp pax_kernel +rawspeed +slideshow +squish web-services webp
+${LANGS// / linguas_}"
 
 CDEPEND="
 	dev-db/sqlite:3
 	>=dev-libs/glib-2.28:2
 	dev-libs/libxml2:2
-	colord? ( x11-misc/colord )
-	flickr? ( media-libs/flickcurl )
-	geo? ( net-libs/libsoup:2.4 )
-	gnome-keyring? ( gnome-base/gnome-keyring )
 	gnome-base/librsvg:2
-	gphoto2? ( media-libs/libgphoto2:= )
-	graphicsmagick? ( media-gfx/graphicsmagick )
-	jpeg2k? ( media-libs/openjpeg:0 )
-	media-gfx/exiv2[xmp]
+	media-gfx/exiv2:0=[xmp]
 	media-libs/lcms:2
 	>=media-libs/lensfun-0.2.3
 	media-libs/libpng:0=
-	media-libs/openexr
+	media-libs/openexr:0=
 	media-libs/tiff:0
 	net-misc/curl
+	virtual/jpeg
+	x11-libs/cairo
+	x11-libs/gdk-pixbuf:2
+	x11-libs/gtk+:2
+	x11-libs/pango
+	colord? ( x11-misc/colord:0= )
+	flickr? ( media-libs/flickcurl )
+	geo? ( net-libs/libsoup:2.4 )
+	gnome-keyring? ( gnome-base/gnome-keyring )
+	gphoto2? ( media-libs/libgphoto2:= )
+	graphicsmagick? ( media-gfx/graphicsmagick )
+	jpeg2k? ( media-libs/openjpeg:0 )
 	opencl? ( virtual/opencl )
 	slideshow? (
 		media-libs/libsdl
 		virtual/glu
 		virtual/opengl
 	)
-	virtual/jpeg
 	web-services? ( dev-libs/json-glib )
-	x11-libs/cairo
-	x11-libs/gdk-pixbuf:2
-	x11-libs/gtk+:2
-	x11-libs/pango"
+	webp? ( media-libs/libwebp:0= )"
 RDEPEND="${CDEPEND}
 	kde? ( kde-base/kwalletd )"
 DEPEND="${CDEPEND}
@@ -83,6 +89,8 @@ src_configure() {
 		$(cmake-utils_use_use squish SQUISH)
 		$(cmake-utils_use_build slideshow SLIDESHOW)
 		$(cmake-utils_use_use web-services GLIBJSON)
+		$(cmake-utils_use_use webp WEBP)
+		-DUSE_LUA=OFF
 		-DCUSTOM_CFLAGS=ON
 		-DINSTALL_IOP_EXPERIMENTAL=ON
 		-DINSTALL_IOP_LEGACY=ON
@@ -92,6 +100,10 @@ src_configure() {
 
 src_install() {
 	cmake-utils_src_install
+
+	for lang in ${LANGS} ; do
+		use linguas_${lang} || rm -r "${ED}"/usr/share/locale/${lang}
+	done
 
 	if use pax_kernel && use opencl ; then
 		pax-mark Cm "${ED}"/usr/bin/${PN} || die

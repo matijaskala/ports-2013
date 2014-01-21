@@ -1,33 +1,32 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/cgit/cgit-9999.ebuild,v 1.6 2012/11/15 01:14:11 zx2c4 Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-apps/cgit/cgit-9999.ebuild,v 1.8 2014/01/21 19:50:01 zx2c4 Exp $
 
 EAPI="4"
 
 WEBAPP_MANUAL_SLOT="yes"
 
-inherit webapp multilib user git-2
+inherit webapp eutils multilib user git-2
 
 [[ -z "${CGIT_CACHEDIR}" ]] && CGIT_CACHEDIR="/var/cache/${PN}/"
 
-GIT_V="1.7.4"
-
 DESCRIPTION="a fast web-interface for git repositories"
-HOMEPAGE="http://git.zx2c4.com/cgit/about/"
-SRC_URI="mirror://kernel/software/scm/git/git-${GIT_V}.tar.bz2"
-EGIT_REPO_URI="http://git.zx2c4.com/cgit"
+HOMEPAGE="http://git.zx2c4.com/cgit/about"
+SRC_URI=""
+EGIT_REPO_URI="git://git.zx2c4.com/cgit"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc highlight"
+IUSE="doc +highlight +lua +jit"
 
 RDEPEND="
 	dev-vcs/git
 	sys-libs/zlib
 	dev-libs/openssl
 	virtual/httpd-cgi
-	highlight? ( app-text/highlight )
+	highlight? ( || ( dev-python/pygments app-text/highlight ) )
+	lua? ( jit? ( dev-lang/luajit ) !jit? ( dev-lang/lua ) )
 "
 # ebuilds without WEBAPP_MANUAL_SLOT="yes" are broken
 DEPEND="${RDEPEND}
@@ -42,12 +41,24 @@ pkg_setup() {
 }
 
 src_prepare() {
-	rmdir git || die
-	mv "${WORKDIR}"/git-"${GIT_V}" git || die
+	git submodule init || die
+	git submodule update || die
 
-	sed -i \
-		-e "/^CACHE_ROOT =/s:/var/cache/cgit:${CGIT_CACHEDIR}:" \
-		Makefile || die
+	echo "prefix = ${EPREFIX}/usr" >> cgit.conf
+	echo "libdir = ${EPREFIX}/usr/$(get_libdir)" >> cgit.conf
+	echo "CGIT_SCRIPT_PATH = ${MY_CGIBINDIR}" >> cgit.conf
+	echo "CGIT_DATA_PATH = ${MY_HTDOCSDIR}" >> cgit.conf
+	echo "CACHE_ROOT = ${CGIT_CACHEDIR}" >> cgit.conf
+	echo "DESTDIR = ${D}" >> cgit.conf
+	if use lua; then
+		if use jit; then
+			echo "LUA_IMPLEMENTATION = JIT" >> cgit.conf
+		else
+			echo "LUA_IMPLEMENTATION = VANILLA" >> cgit.conf
+		fi
+	else
+		echo "NO_LUA = 1" >> cgit.conf
+	fi
 }
 
 src_compile() {
@@ -58,12 +69,7 @@ src_compile() {
 src_install() {
 	webapp_src_preinst
 
-	emake \
-		prefix="${EPREFIX}"/usr \
-		libdir="${EPREFIX}"/usr/$(get_libdir) \
-		CGIT_SCRIPT_PATH="${MY_CGIBINDIR}" \
-		CGIT_DATA_PATH="${MY_HTDOCSDIR}" \
-		DESTDIR="${D}" install
+	emake install
 
 	insinto /etc
 	doins "${FILESDIR}"/cgitrc

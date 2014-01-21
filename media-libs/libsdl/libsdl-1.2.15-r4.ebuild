@@ -9,11 +9,11 @@ SRC_URI="http://www.libsdl.org/release/SDL-${PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ~ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
 # WARNING:
 # If you turn on the custom-cflags use flag in USE and something breaks,
 # you pick up the pieces.  Be prepared for bug reports to be marked INVALID.
-IUSE="oss alsa nas X dga xv xinerama fbcon directfb ggi svga tslib aalib opengl libcaca +audio +video +joystick custom-cflags pulseaudio ps3 static-libs alsa-shared pulseaudio-shared"
+IUSE="oss alsa nas X dga xv xinerama fbcon directfb ggi svga tslib aalib opengl libcaca +audio +video +joystick custom-cflags pulseaudio ps3 static-libs -alsa-shared -pulseaudio-shared"
 
 RDEPEND="audio? ( >=media-libs/audiofile-0.1.9 )
 	alsa? ( media-libs/alsa-lib )
@@ -56,18 +56,17 @@ pkg_setup() {
 		ewarn "Since you've chosen to use possibly unsafe CFLAGS,"
 		ewarn "don't bother filing libsdl-related bugs until trying to remerge"
 		ewarn "libsdl without the custom-cflags use flag in USE."
-		epause 10
 	fi
 }
 
 src_prepare() {
-		epatch \
+	epatch \
 		"${FILESDIR}"/${P}-sdl-config.patch \
 		"${FILESDIR}"/${P}-resizing.patch \
 		"${FILESDIR}"/${P}-joystick.patch \
 		"${FILESDIR}"/${P}-gamma.patch \
 		"${FILESDIR}"/${P}-const-xdata32.patch
-		AT_M4DIR="/usr/share/aclocal acinclude" eautoreconf
+	AT_M4DIR="/usr/share/aclocal acinclude" eautoreconf
 }
 
 src_configure() {
