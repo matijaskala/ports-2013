@@ -47,12 +47,6 @@ DEPEND="${RDEPEND}
 	~app-text/docbook-xml-dtd-4.1.2
 	>=mate-base/mate-common-1.2.2"
 
-src_prepare() {
-	epatch "${FILESDIR}/${PN}-1.6.1-gettext-fix.patch"
-	eautoreconf
-	gnome2_src_prepare
-}
-
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 

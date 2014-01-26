@@ -38,12 +38,6 @@ DEPEND="${RDEPEND}
 # Includes X11/extensions/Xrandr.h that includes randr.h from randrproto (and
 # eventually libXrandr shouldn't RDEPEND on randrproto)
 
-src_prepare() {
-	# *Very* dirty hack so it installs, fixed in next release 
-	touch "${S}/tools/mate-conf-import" || die
-	gnome2_src_prepare
-}
-
 src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README"
 

@@ -14,13 +14,15 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 KERNEL_IUSE="kernel_linux"
-IUSE="libnotify opengl pam systemd consolekit $KERNEL_IUSE"
+IUSE="gtk3 libnotify opengl pam systemd consolekit $KERNEL_IUSE"
 
-RDEPEND=">=x11-libs/gtk+-2.14.0:2
-	>=mate-base/mate-desktop-1.5.3
+RDEPEND="
+	>=mate-base/mate-desktop-1.7.1
 	>=mate-base/mate-menus-1.5.0
 	>=dev-libs/glib-2.15:2
-	>=mate-base/libmatekbd-1.5.0
+	!gtk3? ( x11-libs/gtk+:2 )
+	gtk3? ( x11-libs/gtk+:3 )
+	>=mate-base/libmatekbd-1.7.1
 	>=dev-libs/dbus-glib-0.71
 	libnotify? ( >=x11-libs/libnotify-0.7.0 )
 	opengl? ( virtual/opengl )
@@ -40,43 +42,36 @@ DEPEND="${RDEPEND}
 	x11-proto/randrproto
 	x11-proto/scrnsaverproto
 	x11-proto/xf86miscproto
-	>=mate-base/mate-common-1.2.2
+	>=mate-base/mate-common-1.7.0
 	systemd? ( sys-apps/systemd )
 	consolekit? ( sys-auth/consolekit )"
 
 src_prepare() {
-	#epatch "${FILESDIR}/${PN}-1.2.0-prevent-multiple-instances.patch"
-	# Fix QA warnings due to missing includes in popsquares
-	epatch "${FILESDIR}/${PN}-1.2.0-fix-popsquares-includes.patch"
-	# Fix libgl typo in configure.ac
-	epatch "${FILESDIR}/${PN}-1.2.0-fix-with-libgl.patch"
-	# Fix intltoolize broken file, see upstream #577133
-	sed "s:'\^\$\$lang\$\$':\^\$\$lang\$\$:g" -i po/Makefile.in.in \
-		|| die "sed failed"
-	# Fix forgotten gnome->mate rename
-	sed -i 's:org.gnome:org.mate:' po/POTFILES.in || die "sed failed"
-	# Make tests work
-	sed -i '6 a\data/lock-dialog-default.ui' po/POTFILES.in || die "sed failed"
 	# We use gnome-keyring now, update pam file
 	sed -e 's:mate_keyring:gnome_keyring:g' -i data/mate-screensaver || die "sed failed"
 	gnome2_src_prepare
+
 }
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog NEWS README"
 
-	gnome2_src_configure \
-		$(use_enable debug) \
-		$(use_with libnotify) \
-		$(use_with opengl libgl) \
-		$(use_enable pam) \
-		$(use_with systemd) \
-		$(use_with consolekit console-kit) \
-		--enable-locking \
-		--with-xf86gamma-ext \
-		--with-kbd-layout-indicator \
-		--with-xscreensaverdir=/usr/share/xscreensaver/config \
-		--with-xscreensaverhackdir=/usr/$(get_libdir)/misc/xscreensaver
+	G2CONF="${G2CONF}
+		$(use_enable debug)
+		$(use_with libnotify)
+		$(use_with opengl libgl)
+		$(use_enable pam)
+		$(use_with systemd)
+		$(use_with consolekit console-kit)
+		--enable-locking
+		--with-xf86gamma-ext
+		--with-kbd-layout-indicator
+		--with-xscreensaverdir=/usr/share/xscreensaver/config
+		--with-xscreensaverhackdir=/usr/$(get_libdir)/misc/xscreensaver"
+		use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+		use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+		gnome2_src_configure
 }
 
 src_install() {

@@ -1,0 +1,68 @@
+diff --git a/cut-n-paste/smclient/eggsmclient-private.h b/cut-n-paste/smclient/eggsmclient-private.h
+index fc3a0a2..4f8572f 100644
+--- a/cut-n-paste/smclient/eggsmclient-private.h
++++ b/cut-n-paste/smclient/eggsmclient-private.h
+@@ -20,7 +20,6 @@
+ #ifndef __EGG_SM_CLIENT_PRIVATE_H__
+ #define __EGG_SM_CLIENT_PRIVATE_H__
+ 
+-#include <gdkconfig.h>
+ #include "eggsmclient.h"
+ 
+ G_BEGIN_DECLS
+diff --git a/cut-n-paste/smclient/eggsmclient-xsmp.c b/cut-n-paste/smclient/eggsmclient-xsmp.c
+index 90f201d..4eed5c2 100644
+--- a/cut-n-paste/smclient/eggsmclient-xsmp.c
++++ b/cut-n-paste/smclient/eggsmclient-xsmp.c
+@@ -36,6 +36,7 @@
+ #include <X11/SM/SMlib.h>
+ 
+ #include <gdk/gdk.h>
++#include <gtk/gtk.h>
+ 
+ #define EGG_TYPE_SM_CLIENT_XSMP            (egg_sm_client_xsmp_get_type ())
+ #define EGG_SM_CLIENT_XSMP(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), EGG_TYPE_SM_CLIENT_XSMP, EggSMClientXSMP))
+@@ -367,7 +368,11 @@ sm_client_xsmp_startup (EggSMClient *client,
+       free (ret_client_id);
+ 
+       gdk_threads_enter ();
++#if GTK_CHECK_VERSION (2, 24, 0)
++      gdk_x11_set_sm_client_id (xsmp->client_id);
++#else
+       gdk_set_sm_client_id (xsmp->client_id);
++#endif
+       gdk_threads_leave ();
+ 
+       g_debug ("Got client ID \"%s\"", xsmp->client_id);
+diff --git a/libdocument/Makefile.am b/libdocument/Makefile.am
+index b3ea2c5..b3e79c0 100644
+--- a/libdocument/Makefile.am
++++ b/libdocument/Makefile.am
+@@ -159,9 +159,9 @@ AtrilDocument-$(EV_API_VERSION).gir: libatrildocument.la Makefile $(INST_H_FILES
+ 	--nsversion=$(EV_API_VERSION) \
+ 	--include=GLib-2.0 \
+ 	--include=Gio-2.0 \
+-	--include=Gdk-2.0 \
++	--include=Gdk-$(GTK_API_VERSION) \
+ 	--include=GdkPixbuf-2.0 \
+-	--include=Gtk-2.0 \
++	--include=Gtk-$(GTK_API_VERSION) \
+ 	--library=atrildocument \
+ 	--libtool="$(SAVED_LIBTOOL)" \
+ 	--output $@ \
+diff --git a/libview/Makefile.am b/libview/Makefile.am
+index 4be99e6..7dd0a95 100644
+--- a/libview/Makefile.am
++++ b/libview/Makefile.am
+@@ -127,9 +127,9 @@ AtrilView-$(EV_API_VERSION).gir: libatrilview.la Makefile $(INST_H_FILES) $(filt
+ 	--include=GLib-2.0 \
+ 	--include=GObject-2.0 \
+ 	--include=Gio-2.0 \
+-	--include=Gdk-2.0 \
++	--include=Gdk-$(GTK_API_VERSION) \
+ 	--include=GdkPixbuf-2.0 \
+-	--include=Gtk-2.0 \
++	--include=Gtk-$(GTK_API_VERSION) \
+ 	--include=AtrilDocument-$(EV_API_VERSION) \
+ 	--library=atrilview \
+ 	--libtool="$(LIBTOOL)" \

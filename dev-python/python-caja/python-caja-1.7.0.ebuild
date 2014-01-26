@@ -30,8 +30,6 @@ DEPEND="${RDEPEND}
 DOCS="AUTHORS ChangeLog NEWS README"
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-1.6.0-link-issue-fix.patch"
-	mate_gen_build_system
 	gnome2_src_prepare
 }
 src_install() {
