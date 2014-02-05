@@ -1,14 +1,11 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-xineliboutput/vdr-xineliboutput-9999.ebuild,v 1.14 2013/10/19 18:40:11 idl0r Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-xineliboutput/vdr-xineliboutput-9999.ebuild,v 1.15 2014/01/27 19:12:06 idl0r Exp $
 
 EAPI=5
 GENTOO_VDR_CONDITIONAL=yes
 
 inherit vdr-plugin-2 cvs toolchain-funcs eutils
-
-MY_PV=${PV#*_p}
-MY_P=${PN}
 
 DESCRIPTION="Video Disk Recorder Xinelib PlugIn"
 HOMEPAGE="http://sourceforge.net/projects/xineliboutput/"
@@ -19,7 +16,7 @@ ECVS_MODULE="${PN}"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS=""
-IUSE="caps dbus fbcon jpeg libextractor nls +vdr vdpau +X +xine xinerama"
+IUSE="bluray caps cec dbus fbcon jpeg libextractor nls opengl +vdr vdpau +X +xine xinerama"
 
 COMMON_DEPEND="
 	vdr? (
@@ -39,8 +36,12 @@ COMMON_DEPEND="
 			dbus? ( dev-libs/dbus-glib dev-libs/glib:2 )
 			vdpau? ( x11-libs/libvdpau >=media-libs/xine-lib-1.2 )
 			jpeg? ( virtual/jpeg )
+			bluray? ( media-libs/libbluray )
+			opengl? ( virtual/opengl )
 		)
-	)"
+	)
+
+	cec? ( dev-libs/libcec )"
 
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
@@ -54,8 +55,7 @@ DEPEND="${COMMON_DEPEND}
 	)"
 RDEPEND="${COMMON_DEPEND}"
 
-S=${WORKDIR}/${MY_P}
-
+S=${WORKDIR}/${PN}
 VDR_CONFD_FILE="${FILESDIR}/confd-1.0.0_pre6"
 
 pkg_setup() {
@@ -72,16 +72,10 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-build-system.patch"
-
 	# Allow user patches to be applied without modifyfing the ebuild
 	epatch_user
 
 	vdr-plugin-2_src_prepare
-
-	sed -i -e 's:^\(LOCALEDIR\) .*:\1 = $(DESTDIR)/usr/share/vdr/locale:' \
-		-e "s:LIBDIR .*:LIBDIR = ${VDR_PLUGIN_DIR}:" \
-		Makefile || die
 }
 
 src_configure() {
@@ -94,8 +88,6 @@ src_configure() {
 	fi
 
 	# No autotools based configure script
-	# There is no real opengl support, just the switch and some help text is
-	# left...
 	./configure \
 		--cc=$(tc-getCC) \
 		--cxx=$(tc-getCXX) \
@@ -114,8 +106,10 @@ src_configure() {
 		$(use_enable vdpau) \
 		$(use_enable dbus dbus-glib-1) \
 		$(use_enable nls i18n) \
+		$(use_enable bluray libbluray) \
+		$(use_enable opengl) \
+		$(use_enable cec libcec) \
 		${myconf} \
-		--disable-opengl \
 		|| die
 }
 

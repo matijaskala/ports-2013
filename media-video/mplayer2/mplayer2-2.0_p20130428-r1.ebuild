@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/mplayer2/mplayer2-2.0_p20130428-r1.ebuild,v 1.3 2013/09/05 18:58:07 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-video/mplayer2/mplayer2-2.0_p20130428-r1.ebuild,v 1.6 2014/01/29 22:58:13 eva Exp $
 
 EAPI=5
 
@@ -21,11 +21,11 @@ SRC_URI="http://rion-overlay.googlecode.com/files/${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
 [[ ${PV} == *9999* ]] || \
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
+KEYWORDS="~alpha ~amd64 ~arm hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
 IUSE="+alsa aqua bluray bs2b cddb +cdio cpudetection debug directfb doc dvb +dvd
 +dvdnav +enca ftp gif +iconv ipv6 jack joystick jpeg ladspa lcms +libass libcaca
 lirc md5sum mng +mp3 +network +opengl oss png pnm portaudio +postproc pulseaudio
-pvr +quvi radio samba +shm tga +threads +unicode v4l vcd vdpau +X xinerama
+pvr +quvi radio samba selinux +shm tga +threads +unicode v4l vcd vdpau +X xinerama
 +xscreensaver +xv yuv4mpeg"
 IUSE+=" symlink"
 
@@ -102,8 +102,9 @@ RDEPEND+="
 		)
 	)
 	pulseaudio? ( media-sound/pulseaudio )
-	quvi? ( >=media-libs/libquvi-0.4.1 )
+	quvi? ( >=media-libs/libquvi-0.4.1 <media-libs/libquvi-0.9 )
 	samba? ( net-fs/samba )
+	selinux? ( sec-policy/selinux-mplayer )
 	>=virtual/ffmpeg-9[threads?,vdpau?]
 	symlink? ( !media-video/mplayer )
 "

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/talloc/talloc-2.1.0.ebuild,v 1.2 2013/12/11 02:03:57 jmbsvicetto Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/talloc/talloc-2.1.0.ebuild,v 1.4 2014/02/02 17:40:57 vostorga Exp $
 
 EAPI=5
 

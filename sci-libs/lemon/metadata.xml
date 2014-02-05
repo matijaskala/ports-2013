@@ -3,7 +3,7 @@
 <pkgmetadata>
 <herd>sci</herd>
 <maintainer>
-  <email>mmokrejs@fold.natur.cuni.cz</email>
+  <email>mmokrejs@gmail.com</email>
   <name>Martin Mokrejs</name>
 </maintainer>
 <longdescription>
@@ -14,8 +14,13 @@
   networks.
 </longdescription>
 <use>
+  <flag name="coin">Enable the <pkg>coinor-clp</pkg> and
+  <pkg>coinor-cbc</pkg> graph algorithms</flag>
   <flag name='glpk'>Enable GNU Linear Programming Kit
   <pkg>sci-mathematics/glpk</pkg> support</flag>
   <flag name="tools">Build additional tools</flag>
+  <flag name="coin">Enable the <pkg>coinor-clp</pkg> and
+  <pkg>coinor-cbc</pkg> graph algorithms
+  </flag>
 </use>
 </pkgmetadata>

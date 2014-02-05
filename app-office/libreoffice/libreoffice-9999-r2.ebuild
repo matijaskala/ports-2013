@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-9999-r2.ebuild,v 1.205 2013/12/27 18:15:15 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-9999-r2.ebuild,v 1.209 2014/01/27 15:35:49 scarabeus Exp $
 
 EAPI=5
 
@@ -97,6 +97,7 @@ COMMON_DEPEND="
 	app-arch/unzip
 	>=app-text/hunspell-1.3.2-r3
 	app-text/mythes
+	app-text/libabw
 	>=app-text/libexttextcat-3.2
 	app-text/libebook
 	app-text/libetonyek
@@ -208,7 +209,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-util/cppunit
 	>=dev-util/gperf-3
 	dev-util/intltool
-	>=dev-util/mdds-0.9.1:=
+	>=dev-util/mdds-0.10.1:=
 	virtual/pkgconfig
 	net-misc/npapi-sdk
 	>=sys-apps/findutils-4.4.2

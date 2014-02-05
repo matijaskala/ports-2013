@@ -17,11 +17,12 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="gtk3 ipv6 networkmanager policykit"
 
 RDEPEND=">=dev-libs/glib-2.22:2
-	!gtk3? ( x11-libs/gtk+:2 )
-	gtk3? ( x11-libs/gtk+:3 )
+	!gtk3? ( x11-libs/gtk+:2
+			x11-libs/libwnck:2 )
+	gtk3? ( x11-libs/gtk+:3
+			x11-libs/libwnck:3 )
 	>=mate-base/mate-panel-1.7.0
 	>=x11-libs/libxklavier-4.0
-	>=x11-libs/libmatewnck-1.3.0
 	>=mate-base/mate-desktop-1.7.3
 	>=x11-libs/libnotify-0.7.0
 	>=sys-apps/dbus-1.1.2

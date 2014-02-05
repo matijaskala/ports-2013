@@ -130,7 +130,6 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	tc_version_is_at_least 4.2 && IUSE_DEF+=" openmp"
 	tc_version_is_at_least 4.3 && IUSE+=" fixed-point"
 	tc_version_is_at_least 4.6 && IUSE+=" graphite"
-	tc_version_is_at_least 4.6 && IUSE+=" lto"
 	tc_version_is_at_least 4.7 && IUSE+=" go"
 fi
 
@@ -1158,7 +1157,7 @@ toolchain_src_configure() {
 	fi
 
 	if tc_version_is_at_least 4.6 ; then
-		confgcc+=( $(use_enable lto) )
+		confgcc+=( --enable-lto )
 	elif tc_version_is_at_least 4.5 ; then
 		confgcc+=( --disable-lto )
 	fi

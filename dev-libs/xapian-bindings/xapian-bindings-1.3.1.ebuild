@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/xapian-bindings/xapian-bindings-1.3.1.ebuild,v 1.2 2013/08/11 00:58:20 blueness Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/xapian-bindings/xapian-bindings-1.3.1.ebuild,v 1.3 2014/01/31 13:15:44 blueness Exp $
 
 EAPI="5"
 
@@ -15,7 +15,7 @@ PHP_EXT_NAME="xapian"
 PHP_EXT_INI="yes"
 PHP_EXT_OPTIONAL_USE="php"
 
-inherit java-pkg-opt-2 mono php-ext-source-r2 python
+inherit java-pkg-opt-2 mono-env php-ext-source-r2 python
 
 DESCRIPTION="SWIG and JNI bindings for Xapian"
 HOMEPAGE="http://www.xapian.org/"
@@ -39,6 +39,7 @@ RDEPEND="${COMMONDEPEND}
 	java? ( >=virtual/jre-1.3 )"
 
 pkg_setup() {
+	mono-env_pkg_setup
 	java-pkg-opt-2_pkg_setup
 
 	if use python; then

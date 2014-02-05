@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/iniparser/iniparser-3.1.ebuild,v 1.8 2013/02/25 08:28:24 zmedico Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/iniparser/iniparser-3.1.ebuild,v 1.10 2014/02/02 02:40:15 vostorga Exp $
 
 EAPI=4
 
@@ -20,7 +20,7 @@ DEPEND="doc? ( app-doc/doxygen )
 		sys-devel/libtool"
 RDEPEND=""
 
-# the tests are rather examples than tests, no point in running them
+# the tests are rather examples than tests, no point in running  them
 RESTRICT="test"
 
 S="${WORKDIR}/${PN}"

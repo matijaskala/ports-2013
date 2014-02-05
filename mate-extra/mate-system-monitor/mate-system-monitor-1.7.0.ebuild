@@ -21,7 +21,7 @@ RDEPEND=">=dev-libs/glib-2.20:2
 			x11-libs/libwnck:1 )
 	gtk3? ( x11-libs/gtk+:3
 			x11-libs/libwnck:3
-			dev-cpp/gtkmm:3 )
+			dev-cpp/gtkmm:3.0 )
 	>=gnome-base/libgtop-2.23.1:2
 	>=x11-themes/mate-icon-theme-1.6.0
 	>=dev-cpp/glibmm-2.16:2
@@ -36,3 +36,10 @@ DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35"
 
 DOCS="AUTHORS ChangeLog NEWS README"
+
+src_configure() {
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	gnome2_src_configure
+}

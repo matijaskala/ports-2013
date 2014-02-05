@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-servers/apache/apache-2.2.25.ebuild,v 1.11 2013/11/07 14:56:35 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-servers/apache/apache-2.2.25.ebuild,v 1.13 2014/01/31 08:32:28 vapier Exp $
 
 EAPI="2"
 
@@ -83,7 +83,7 @@ MODULE_CRITICAL="
 	mime
 "
 
-inherit apache-2 systemd
+inherit apache-2 systemd toolchain-funcs
 
 DESCRIPTION="The Apache Web Server."
 HOMEPAGE="http://httpd.apache.org/"
@@ -91,7 +91,7 @@ HOMEPAGE="http://httpd.apache.org/"
 # some helper scripts are Apache-1.1, thus both are here
 LICENSE="Apache-2.0 Apache-1.1"
 SLOT="2"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ~ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ~ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 IUSE=""
 
 DEPEND="${DEPEND}
@@ -111,6 +111,13 @@ src_prepare() {
 	epatch "${FILESDIR}"/gentoo-apache-2.2.23-initd_fixups.patch
 	popd &>/dev/null || die
 	cp "${FILESDIR}"/2.2.22-envvars-std.in "${S}"/support/envvars-std.in || die "Failed to apply LD_PRELOAD fix"
+}
+
+src_configure() {
+	# Brain dead check.
+	tc-is-cross-compiler && export ap_cv_void_ptr_lt_long="no"
+
+	apache-2_src_configure
 }
 
 src_install() {

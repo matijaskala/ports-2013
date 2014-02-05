@@ -1,8 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/daq/daq-0.6.2.ebuild,v 1.6 2012/07/18 19:45:36 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/daq/daq-0.6.2.ebuild,v 1.7 2014/02/03 07:33:22 kumba Exp $
 
-EAPI="2"
+EAPI="4"
 
 inherit eutils multilib
 
@@ -39,7 +39,7 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "make install failed"
+	emake DESTDIR="${D}" install
 	dodoc ChangeLog README
 
 	# Remove unneeded .la files

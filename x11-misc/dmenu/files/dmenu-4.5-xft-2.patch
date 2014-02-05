@@ -1,6 +1,6 @@
---- a/dmenu-4.5/config.mk	2012-01-08 12:18:43.000000000 +0000
-+++ b/dmenu-4.5/config.mk	2013-05-17 10:47:11.964786792 +0100
-@@ -12,9 +12,13 @@ X11LIB = /usr/X11R6/lib
+--- a/config.mk
++++ b/config.mk
+@@ -12,9 +12,13 @@
  XINERAMALIBS  = -lXinerama
  XINERAMAFLAGS = -DXINERAMA
  
@@ -16,9 +16,9 @@
  
  # flags
  CPPFLAGS = -D_BSD_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
---- a/dmenu-4.5/dmenu.1	2012-01-08 12:18:43.000000000 +0000
-+++ b/dmenu-4.5/dmenu.1	2013-05-17 10:47:11.964786792 +0100
-@@ -53,7 +53,7 @@ dmenu lists items vertically, with the g
+--- a/dmenu.1
++++ b/dmenu.1
+@@ -53,7 +53,7 @@
  defines the prompt to be displayed to the left of the input field.
  .TP
  .BI \-fn " font"
@@ -27,8 +27,8 @@
  .TP
  .BI \-nb " color"
  defines the normal background color.
---- a/dmenu-4.5/dmenu.c	2012-01-08 12:18:43.000000000 +0000
-+++ b/dmenu-4.5/dmenu.c	2013-05-17 10:47:11.964786792 +0100
+--- a/dmenu.c
++++ b/dmenu.c
 @@ -17,6 +17,7 @@
                               * MAX(0, MIN((y)+(h),(r).y_org+(r).height) - MAX((y),(r).y_org)))
  #define MIN(a,b)              ((a) < (b) ? (a) : (b))
@@ -37,7 +37,7 @@
  
  typedef struct Item Item;
  struct Item {
-@@ -26,6 +27,7 @@ struct Item {
+@@ -26,6 +27,7 @@
  
  static void appenditem(Item *item, Item **list, Item **last);
  static void calcoffsets(void);
@@ -45,7 +45,7 @@
  static char *cistrstr(const char *s, const char *sub);
  static void drawmenu(void);
  static void grabkeyboard(void);
-@@ -50,10 +52,12 @@ static const char *normfgcolor = "#bbbbb
+@@ -50,10 +52,12 @@
  static const char *selbgcolor  = "#005577";
  static const char *selfgcolor  = "#eeeeee";
  static unsigned int lines = 0;
@@ -60,7 +60,7 @@
  static DC *dc;
  static Item *items = NULL;
  static Item *matches, *matchend;
-@@ -104,7 +108,9 @@ main(int argc, char *argv[]) {
+@@ -104,7 +108,9 @@
  			usage();
  
  	dc = initdc();
@@ -71,7 +71,7 @@
  
  	if(fast) {
  		grabkeyboard();
-@@ -117,7 +123,8 @@ main(int argc, char *argv[]) {
+@@ -117,7 +123,8 @@
  	setup();
  	run();
  
@@ -81,7 +81,7 @@
  }
  
  void
-@@ -160,6 +167,15 @@ cistrstr(const char *s, const char *sub)
+@@ -160,6 +167,15 @@
  }
  
  void
@@ -97,7 +97,7 @@
  drawmenu(void) {
  	int curpos;
  	Item *item;
-@@ -167,7 +183,7 @@ drawmenu(void) {
+@@ -167,7 +183,7 @@
  	dc->x = 0;
  	dc->y = 0;
  	dc->h = bh;
@@ -106,7 +106,7 @@
  
  	if(prompt) {
  		dc->w = promptw;
-@@ -178,7 +194,7 @@ drawmenu(void) {
+@@ -178,7 +194,7 @@
  	dc->w = (lines > 0 || !matches) ? mw - dc->x : inputw;
  	drawtext(dc, text, normcol);
  	if((curpos = textnw(dc, text, cursor) + dc->h/2 - 2) < dc->w)
@@ -115,7 +115,7 @@
  
  	if(lines > 0) {
  		/* draw vertical list */
-@@ -321,7 +337,8 @@ keypress(XKeyEvent *ev) {
+@@ -321,7 +337,8 @@
  		sel = matchend;
  		break;
  	case XK_Escape:
@@ -125,7 +125,7 @@
  	case XK_Home:
  		if(sel == matches) {
  			cursor = 0;
-@@ -359,7 +376,8 @@ keypress(XKeyEvent *ev) {
+@@ -359,7 +376,8 @@
  	case XK_Return:
  	case XK_KP_Enter:
  		puts((sel && !(ev->state & ShiftMask)) ? sel->text : text);
@@ -135,7 +135,7 @@
  	case XK_Right:
  		if(text[cursor] != '\0') {
  			cursor = nextrune(+1);
-@@ -490,7 +508,7 @@ void
+@@ -490,7 +508,7 @@
  run(void) {
  	XEvent ev;
  
@@ -144,7 +144,7 @@
  		if(XFilterEvent(&ev, win))
  			continue;
  		switch(ev.type) {
-@@ -524,11 +542,6 @@ setup(void) {
+@@ -524,11 +542,6 @@
  	XineramaScreenInfo *info;
  #endif
  
@@ -156,7 +156,7 @@
  	clip = XInternAtom(dc->dpy, "CLIPBOARD",   False);
  	utf8 = XInternAtom(dc->dpy, "UTF8_STRING", False);
  
-@@ -582,7 +595,7 @@ setup(void) {
+@@ -582,7 +595,7 @@
  
  	/* create menu window */
  	swa.override_redirect = True;
@@ -165,8 +165,8 @@
  	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask;
  	win = XCreateWindow(dc->dpy, root, x, y, mw, mh, 0,
  	                    DefaultDepth(dc->dpy, screen), CopyFromParent,
---- a/dmenu-4.5/draw.c	2012-01-08 12:18:43.000000000 +0000
-+++ b/dmenu-4.5/draw.c	2013-05-17 10:47:54.491105887 +0100
+--- a/draw.c
++++ b/draw.c
 @@ -9,9 +9,6 @@
  
  #define MAX(a, b)  ((a) > (b) ? (a) : (b))
@@ -177,7 +177,7 @@
  
  void
  drawrect(DC *dc, int x, int y, unsigned int w, unsigned int h, Bool fill, unsigned long color) {
-@@ -23,7 +20,7 @@ drawrect(DC *dc, int x, int y, unsigned
+@@ -23,7 +20,7 @@
  }
  
  void
@@ -186,7 +186,7 @@
  	char buf[BUFSIZ];
  	size_t mn, n = strlen(text);
  
-@@ -35,19 +32,24 @@ drawtext(DC *dc, const char *text, unsig
+@@ -35,19 +32,24 @@
  	if(mn < n)
  		for(n = MAX(mn-3, 0); n < mn; buf[n++] = '.');
  
@@ -216,7 +216,7 @@
  		XSetFont(dc->dpy, dc->gc, dc->font.xfont->fid);
  		XDrawString(dc->dpy, dc->canvas, dc->gc, x, y, text, n);
  	}
-@@ -69,16 +71,33 @@ eprintf(const char *fmt, ...) {
+@@ -69,16 +71,33 @@
  }
  
  void
@@ -255,7 +255,7 @@
  }
  
  unsigned long
-@@ -91,6 +110,20 @@ getcolor(DC *dc, const char *colstr) {
+@@ -91,6 +110,20 @@
  	return color.pixel;
  }
  
@@ -276,7 +276,7 @@
  DC *
  initdc(void) {
  	DC *dc;
-@@ -109,23 +142,11 @@ initdc(void) {
+@@ -109,23 +142,11 @@
  
  void
  initfont(DC *dc, const char *fontstr) {
@@ -301,7 +301,7 @@
  	if((dc->font.set = XCreateFontSet(dc->dpy, fontstr, &missing, &n, &def))) {
  		n = XFontsOfFontSet(dc->font.set, &xfonts, &names);
  		for(i = 0; i < n; i++) {
-@@ -133,15 +154,21 @@ loadfont(DC *dc, const char *fontstr) {
+@@ -133,15 +154,21 @@
  			dc->font.descent = MAX(dc->font.descent, xfonts[i]->descent);
  			dc->font.width   = MAX(dc->font.width,   xfonts[i]->max_bounds.width);
  		}
@@ -327,7 +327,7 @@
  }
  
  void
-@@ -151,20 +178,29 @@ mapdc(DC *dc, Window win, unsigned int w
+@@ -151,20 +178,29 @@
  
  void
  resizedc(DC *dc, unsigned int w, unsigned int h) {
@@ -360,8 +360,8 @@
  		XmbTextExtents(dc->font.set, text, len, NULL, &r);
  		return r.width;
  	}
---- a/dmenu-4.5/draw.h	2012-01-08 12:18:43.000000000 +0000
-+++ b/dmenu-4.5/draw.h	2013-05-17 10:47:11.964786792 +0100
+--- a/draw.h
++++ b/draw.h
 @@ -1,9 +1,6 @@
  /* See LICENSE file for copyright and license details. */
  
@@ -373,7 +373,7 @@
  
  typedef struct {
  	int x, y, w, h;
-@@ -11,6 +8,7 @@ typedef struct {
+@@ -11,6 +8,7 @@
  	Display *dpy;
  	GC gc;
  	Pixmap canvas;
@@ -381,7 +381,7 @@
  	struct {
  		int ascent;
  		int descent;
-@@ -18,15 +16,24 @@ typedef struct {
+@@ -18,15 +16,24 @@
  		int width;
  		XFontSet set;
  		XFontStruct *xfont;

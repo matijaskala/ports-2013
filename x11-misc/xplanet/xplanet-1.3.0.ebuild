@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/xplanet/xplanet-1.3.0.ebuild,v 1.6 2013/12/27 22:55:08 robbat2 Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-misc/xplanet/xplanet-1.3.0.ebuild,v 1.7 2014/01/24 19:48:27 jer Exp $
 
 EAPI=4
 inherit base flag-o-matic
@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~alpha amd64 ~hppa ppc ppc64 ~sparc x86"
 IUSE="gif jpeg png tiff truetype X"
 
-RDEPEND="gif? ( media-libs/giflib )
+RDEPEND="gif? ( <media-libs/giflib-4.2 )
 	jpeg? ( virtual/jpeg )
 	png? (
 		media-libs/libpng:0
@@ -39,8 +39,6 @@ DEPEND="${RDEPEND}
 		)"
 
 DOCS="AUTHORS ChangeLog NEWS README TODO"
-
-PATCHES=( "${FILESDIR}"/xplanet-1.3.0-giflib.patch )
 
 src_configure() {
 	# econf says 'checking pnm.h presence... no'

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/skype/skype-4.2.0.11-r1.ebuild,v 1.4 2013/10/17 18:32:40 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-im/skype/skype-4.2.0.11-r1.ebuild,v 1.5 2014/01/29 15:55:49 jlec Exp $
 
 EAPI=5
 inherit eutils gnome2-utils pax-utils
@@ -9,7 +9,7 @@ DESCRIPTION="A P2P Internet Telephony (VoiceIP) client"
 HOMEPAGE="http://www.skype.com/"
 SRC_URI="http://download.${PN}.com/linux/${P}.tar.bz2"
 
-LICENSE="${PN}-4.0.0.7-copyright ${PN}-4.0.0.7-third-party_attributions.txt"
+LICENSE="${PN}-4.0.0.7-copyright ${PN}-4.0.0.7-third-party_attributions.txt MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="pax_kernel selinux"

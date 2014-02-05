@@ -1,18 +1,29 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/waffle/waffle-1.3.0-r1.ebuild,v 1.1 2013/12/31 23:08:30 mattst88 Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/waffle/waffle-1.3.0-r1.ebuild,v 1.3 2014/01/24 02:38:01 patrick Exp $
 
 EAPI=5
 
-inherit cmake-utils cmake-multilib
+EGIT_REPO_URI="git://people.freedesktop.org/~chadversary/waffle"
+
+if [[ ${PV} = 9999* ]]; then
+	GIT_ECLASS="git-2"
+fi
+
+inherit cmake-utils cmake-multilib ${GIT_ECLASS}
 
 DESCRIPTION="Library that allows selection of GL API and of window system at runtime"
 HOMEPAGE="http://people.freedesktop.org/~chadversary/waffle/"
-SRC_URI="http://people.freedesktop.org/~chadversary/waffle/files/release/${P}/${P}.tar.xz"
+
+if [[ $PV = 9999* ]]; then
+	KEYWORDS=""
+else
+	SRC_URI="http://people.freedesktop.org/~chadversary/waffle/files/release/${P}/${P}.tar.xz"
+	KEYWORDS="~amd64 ~arm ~x86"
+fi
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
 IUSE="doc egl gbm test wayland"
 
 RDEPEND="
@@ -28,6 +39,11 @@ DEPEND="${RDEPEND}
 		dev-libs/libxslt
 		app-text/docbook-xml-dtd:4.2
 	)"
+
+src_unpack() {
+	default
+	[[ $PV = 9999* ]] && git-2_src_unpack
+}
 
 src_configure() {
 	local mycmakeargs=(

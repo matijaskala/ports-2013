@@ -1,8 +1,8 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-streamdev/vdr-streamdev-0.6.1.ebuild,v 1.1 2013/12/27 17:22:23 hd_brummy Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-plugins/vdr-streamdev/vdr-streamdev-0.6.1.ebuild,v 1.3 2014/01/29 14:10:16 hd_brummy Exp $
 
-EAPI="5"
+EAPI=5
 
 inherit vdr-plugin-2
 
@@ -26,6 +26,9 @@ REQUIRED_USE="|| ( client server )"
 PO_SUBDIR="client server"
 
 src_prepare() {
+	# make detection in vdr-plugin-2.eclass for new Makefile handling happy
+	echo "# SOFILE" >> Makefile
+
 	# rm unneeded entry
 	sed -i Makefile -e "s:-I\$(VDRDIR)/include::"
 
@@ -34,6 +37,8 @@ src_prepare() {
 	for flag in client server; do
 		if ! use ${flag}; then
 			sed -i Makefile \
+				-e '/^.PHONY:/s/'${flag}'//' \
+				-e '/^.PHONY:/s/'install-${flag}'//' \
 				-e '/^all:/s/'${flag}'//' \
 				-e '/^install:/s/'install-${flag}'//'
 		fi
@@ -43,10 +48,7 @@ src_prepare() {
 }
 
 src_install() {
-	# vdr-plugin-2_src_install
-	# do not use eclass, will fail in this case, ToDo
-
-	einstall install DESTDIR="${D}"
+	vdr-plugin-2_src_install
 
 	if use server; then
 		insinto /usr/share/vdr/streamdev

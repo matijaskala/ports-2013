@@ -1,16 +1,16 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kmod/kmod-16.ebuild,v 1.2 2014/01/18 04:33:50 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/kmod/kmod-16.ebuild,v 1.4 2014/02/05 09:46:31 ssuominen Exp $
 
 EAPI=5
-inherit eutils multilib
+inherit bash-completion-r1 eutils multilib
 
 if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/kernel/${PN}/${PN}.git"
 	inherit autotools git-2
 else
 	SRC_URI="mirror://kernel/linux/utils/kernel/kmod/${P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 	inherit libtool
 fi
 
@@ -67,7 +67,18 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable doc gtk-doc) \
 		$(use_with lzma xz) \
-		$(use_with zlib)
+		$(use_with zlib) \
+		--with-bashcompletiondir="$(get_bashcompdir)"
+}
+
+src_compile() {
+	if [[ ${PV} == 9999* ]]; then
+		default
+	else
+		# Force -j1 because of -15-dynamic-kmod.patch, likely caused by lack of eautoreconf
+		# wrt #494806
+		emake -j1
+	fi
 }
 
 src_install() {

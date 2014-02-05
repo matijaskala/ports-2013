@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/mupdf/mupdf-9999.ebuild,v 1.42 2013/08/28 22:26:18 xmw Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-text/mupdf/mupdf-9999.ebuild,v 1.43 2014/01/22 07:14:40 xmw Exp $
 
 EAPI=5
 
@@ -79,8 +79,8 @@ src_prepare() {
 			-i "${S}"-static/Makerules || die
 	fi
 
-	my_soname=libmupdf.so.1.2
-	my_soname_js_none=libmupdf-js-none.so.1.2
+	my_soname=libmupdf.so.1.3
+	my_soname_js_none=libmupdf-js-none.so.1.3
 	sed -e "\$a\$(MUPDF_LIB): \$(MUPDF_JS_NONE_LIB)" \
 		-e "\$a\\\t\$(QUIET_LINK) \$(CC) \$(LDFLAGS) --shared -Wl,-soname -Wl,${my_soname} -Wl,--no-undefined -o \$@ \$^ \$(MUPDF_JS_NONE_LIB) \$(LIBS)" \
 		-e "/^MUPDF_LIB :=/s:=.*:= \$(OUT)/${my_soname}:" \
@@ -102,6 +102,7 @@ src_install() {
 	if use X ; then
 		domenu platform/debian/${PN}.desktop
 		doicon platform/debian/${PN}.xpm
+		dobin platform/debian/${PN}-select-file
 	else
 		rm docs/man/${PN}.1
 	fi

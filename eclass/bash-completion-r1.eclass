@@ -35,11 +35,11 @@ esac
 # First argument is name of the string in bash-completion.pc
 # Second argument is the fallback directory if the string is not found
 # @EXAMPLE:
-# _bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion/completions
+# _bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion
 _bash-completion-r1_get_bashdir() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	if $(tc-getPKG_CONFIG) --exists bash-completion; then
+	if $(tc-getPKG_CONFIG) --exists bash-completion &>/dev/null; then
 		local path="$($(tc-getPKG_CONFIG) --variable=$1 bash-completion)"
 		# we need to return unprefixed, so strip from what pkg-config returns
 		# to us, bug #477692
@@ -56,11 +56,7 @@ _bash-completion-r1_get_bashdir() {
 _bash-completion-r1_get_bashcompdir() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	if has_version '>=app-shells/bash-completion-2.1-r1'; then
-		_bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion/completions
-	else
-		_bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion
-	fi
+	_bash-completion-r1_get_bashdir completionsdir /usr/share/bash-completion
 }
 
 # @FUNCTION: _bash-completion-r1_get_helpersdir

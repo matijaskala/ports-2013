@@ -1,9 +1,9 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/vbam/vbam-9999.ebuild,v 1.5 2013/06/15 09:26:01 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/games-emulation/vbam/vbam-9999.ebuild,v 1.6 2014/02/05 09:57:45 radhermit Exp $
 
-EAPI=4
-WX_GTK_VER="2.8"
+EAPI=5
+WX_GTK_VER="3.0"
 
 inherit cmake-utils wxwidgets subversion gnome2-utils fdo-mime games
 
@@ -33,7 +33,7 @@ RDEPEND=">=media-libs/libpng-1.4
 	wxwidgets? (
 		cairo? ( x11-libs/cairo )
 		openal? ( media-libs/openal )
-		x11-libs/wxGTK:2.8[X,opengl]
+		x11-libs/wxGTK:${WX_GTK_VER}[X,opengl]
 	)"
 DEPEND="${RDEPEND}
 	wxwidgets? ( || ( media-gfx/imagemagick media-gfx/graphicsmagick[imagemagick] ) )
@@ -42,11 +42,14 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
-	# Fix issue with zlib-1.2.5.1 macros (bug #383179)
+	# fix issue with zlib-1.2.5.1 macros (bug #383179)
 	sed -i '1i#define OF(x) x' src/common/memgzio.c || die
 
 	sed -i "s:\(DESTINATION\) bin:\1 ${GAMES_BINDIR}:" \
 		CMakeLists.txt src/wx/CMakeLists.txt || die
+
+	# fix desktop file QA warnings
+	edos2unix src/gtk/gvbam.desktop src/wx/wxvbam.desktop || die
 }
 
 src_configure() {
