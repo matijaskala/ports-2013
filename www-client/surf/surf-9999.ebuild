@@ -1,17 +1,17 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/surf/surf-0.6-r1.ebuild,v 1.7 2013/11/01 13:50:07 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-client/surf/surf-9999.ebuild,v 1.2 2013/10/04 14:52:10 jer Exp $
 
 EAPI=5
-inherit eutils savedconfig toolchain-funcs
+inherit eutils git-2 savedconfig toolchain-funcs
 
 DESCRIPTION="a simple web browser based on WebKit/GTK+"
 HOMEPAGE="http://surf.suckless.org/"
-SRC_URI="http://dl.suckless.org/${PN}/${P}.tar.gz"
+EGIT_REPO_URI="git://git.suckless.org/surf"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS=""
 
 COMMON_DEPEND="
 	dev-libs/glib
@@ -54,11 +54,4 @@ src_prepare() {
 src_install() {
 	default
 	save_config config.h
-}
-
-pkg_postinst() {
-	if [[ ${REPLACING_VERSIONS} ]] && [[ ${REPLACING_VERSIONS} < 0.4.1-r1 ]]; then
-		ewarn "Please correct the permissions of your \$HOME/.surf/ directory"
-		ewarn "and its contents to no longer be world readable (see bug #404983)"
-	fi
 }

@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/www-servers/nginx/nginx-1.4.4.ebuild,v 1.3 2013/11/20 20:22:16 ago Exp $
 
 EAPI="5"
 
@@ -70,7 +72,7 @@ HTTP_LUA_MODULE_P="ngx_http_lua-${HTTP_LUA_MODULE_PV}"
 HTTP_LUA_MODULE_URI="https://github.com/chaoslawful/lua-nginx-module/archive/v${HTTP_LUA_MODULE_PV}.tar.gz"
 HTTP_LUA_MODULE_WD="${WORKDIR}/lua-nginx-module-${HTTP_LUA_MODULE_PV}"
 
-# http_auth_pam (http://web.iti.upv.es/~sto/nginx/, unknown license)
+# http_auth_pam (http://web.iti.upv.es/~sto/nginx/, BSD-2 license)
 HTTP_AUTH_PAM_MODULE_PV="1.3"
 HTTP_AUTH_PAM_MODULE_P="ngx_http_auth_pam-${HTTP_AUTH_PAM_MODULE_PV}"
 HTTP_AUTH_PAM_MODULE_URI="http://web.iti.upv.es/~sto/nginx/ngx_http_auth_pam_module-${HTTP_AUTH_PAM_MODULE_PV}.tgz"
@@ -125,7 +127,7 @@ HTTP_PUSH_STREAM_MODULE_P="ngx_http_push_stream-${HTTP_PUSH_STREAM_MODULE_PV}"
 HTTP_PUSH_STREAM_MODULE_URI="https://github.com/wandenberg/nginx-push-stream-module/archive/${HTTP_PUSH_STREAM_MODULE_PV}.tar.gz"
 HTTP_PUSH_STREAM_MODULE_WD="${WORKDIR}/nginx-push-stream-module-${HTTP_PUSH_STREAM_MODULE_PV}"
 
-inherit eutils ssl-cert toolchain-funcs perl-module flag-o-matic user versionator
+inherit eutils ssl-cert toolchain-funcs perl-module flag-o-matic user systemd versionator
 
 DESCRIPTION="Robust, small and high performance http and reverse proxy server"
 HOMEPAGE="http://nginx.org"
@@ -154,7 +156,7 @@ LICENSE="BSD-2 BSD SSLeay MIT GPL-2 GPL-2+
 	nginx_modules_http_push_stream? ( GPL-3 )"
 
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="amd64 ~arm ~ppc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 
 NGINX_MODULES_STD="access auth_basic autoindex browser charset empty_gif fastcgi
 geo gzip limit_req limit_conn map memcached proxy referer rewrite scgi ssi
@@ -469,9 +471,9 @@ src_configure() {
 	if use nginx_modules_http_security; then
 		cd "${HTTP_SECURITY_MODULE_WD}"
 		./configure \
-				--enable-standalone-module \
-				$(use_enable pcre-jit) \
-				$(use_with nginx_modules_http_lua lua) || die "configure failed for mod_seciruty"
+			--enable-standalone-module \
+			$(use_enable pcre-jit) \
+			$(use_with nginx_modules_http_lua lua) || die "configure failed for mod_security"
 	fi
 }
 
@@ -486,22 +488,17 @@ src_compile() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	cp "${FILESDIR}"/${PVR}/nginx.conf "${ED}"/etc/nginx/nginx.conf || die
+	cp "${FILESDIR}"/nginx.conf "${ED}"/etc/nginx/nginx.conf || die
 
-	newinitd "${FILESDIR}"/${PVR}/nginx.initd nginx
+	newinitd "${FILESDIR}"/nginx.initd-r2 nginx
 
-	dodir /etc/${PN}/sites-{available,enabled}
-	insinto /etc/${PN}/sites-available
-	doins "$FILESDIR"/${PVR}/sites-available/localhost
-	dodir /usr/share/nginx/html
-	insinto /usr/share/nginx/html
-	doins ${FILESDIR}/example/index.html
-	doins ${FILESDIR}/example/nginx-logo.png
-	doins ${FILESDIR}/example/powered-by-funtoo.png
+	systemd_newunit "${FILESDIR}"/nginx.service-r1 nginx.service
 
 	doman man/nginx.8
 	dodoc CHANGES* README
 
+	# just keepdir. do not copy the default htdocs files (bug #449136)
+	keepdir /var/www/localhost
 	rm -rf "${D}"/usr/html || die
 
 	# set up a list of directories to keep
@@ -608,20 +605,7 @@ src_install() {
 	fi
 }
 
-pkg_preinst() {
-	if [ ! -d "${EROOT}"/etc/nginx/sites-available ]; then
-		first_install=yes
-	else
-		first_install=no
-	fi
-}
-
 pkg_postinst() {
-	if [ "$first_install" = "yes" ] && [ ! -e "${EROOT}"/etc/nginx/sites-enabled/localhost ]; then
-		einfo "Enabling example Web site (see http://127.0.0.1)"
-		# enable example Web site (listens on localhost only)
-		ln -s ../sites-available/localhost "${EROOT}"/etc/nginx/sites-enabled/localhost
-	fi
 	if use ssl; then
 		if [ ! -f "${EROOT}"/etc/ssl/${PN}/${PN}.key ]; then
 			install_cert /etc/ssl/${PN}/${PN}

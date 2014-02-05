@@ -1,17 +1,20 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/www-servers/thin/thin-1.5.1-r3.ebuild,v 1.2 2014/01/01 14:30:31 patrick Exp $
 
-EAPI=2
+EAPI=5
 
-USE_RUBY="ruby18 ruby19 ree18"
+USE_RUBY="ruby19"
 
 RUBY_FAKEGEM_TASK_TEST="spec"
+
+RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
 
 inherit ruby-fakegem
 
 DESCRIPTION="A fast and very simple Ruby web server"
 HOMEPAGE="http://code.macournoyer.com/thin/"
 SRC_URI="https://github.com/macournoyer/thin/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-RESTRICT="mirror"
 
 LICENSE="Ruby"
 SLOT="0"
@@ -27,38 +30,33 @@ RDEPEND="${RDEPEND}"
 mydeps=">=dev-ruby/daemons-1.0.9
 	>=dev-ruby/rack-1.0.0
 	>=dev-ruby/eventmachine-0.12.6
-	virtual/ruby-ssl
-	dev-ruby/rspec"
+	virtual/ruby-ssl"
 
 ruby_add_rdepend "${mydeps}"
 ruby_add_bdepend "${mydeps}
 	dev-ruby/rake-compiler
 	test? ( dev-ruby/rspec:0 )"
 
-# src_unpack() {
-# 	unpack ${A}
-# }
 all_ruby_prepare() {
 	# Fix Ragel-based parser generation (uses a *very* old syntax that
 	# is not supported in Gentoo)
-	# sed -i -e 's: | rlgen-cd::' Rakefile || die
+	sed -i -e 's: | rlgen-cd::' Rakefile || die
 
 	# Fix specs' dependencies so that the extension is not rebuilt
 	# when running tests
-	# sed -i -e '/:spec =>/s:^:#:' tasks/spec.rake || die
+	sed -i -e '/:spec =>/s:^:#:' tasks/spec.rake || die
 
 	# Fix rspec version to allow newer 1.x versions
-	# sed -i -e '/gem "rspec"/ s/1.2.9/1.0/' tasks/spec.rake spec/spec_helper.rb || die
+	sed -i -e '/gem "rspec"/ s/1.2.9/1.0/' tasks/spec.rake spec/spec_helper.rb || die
+
+	# Avoid CLEAN since it may not be available and we don't need it.
+	sed -i -e '/CLEAN/ s:^:#:' tasks/*.rake || die
 
 	# Disable a test that is known for freezing the testsuite,
-	# reported upstream.
-	#sed -i \
-	#	-e '/should force kill process in pid file/,/^  end/ s:^:#:' \
-	#	spec/daemonizing_spec.rb || die
-
-	# Pipelining specs don't work. Avoid them for now since this is not
-	# a regression. https://github.com/macournoyer/thin/issues/40
-	# rm spec/server/pipelining_spec.rb || die
+	# reported upstream. In thin 1.5.1 this just fails.
+	sed -i \
+		-e '/should force kill process in pid file/,/^  end/ s:^:#:' \
+		spec/daemonizing_spec.rb || die
 
 	# nasty but too complex to fix up for now :(
 	use test || rm tasks/spec.rake
@@ -72,8 +70,8 @@ all_ruby_install() {
 	all_fakegem_install
 
 	keepdir /etc/thin
-	newinitd "${FILESDIR}"/${PN}.initd ${PN}
-	newconfd "${FILESDIR}"/${PN}.confd ${PN}
+	newinitd "${FILESDIR}"/${PN}.initd-2 ${PN}
+	newconfd "${FILESDIR}"/${PN}.confd-2 ${PN}
 
 	einfo
 	elog "Thin is now shipped with init scripts."

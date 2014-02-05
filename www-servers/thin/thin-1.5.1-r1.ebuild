@@ -1,15 +1,20 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/www-servers/thin/thin-1.5.1-r1.ebuild,v 1.2 2014/01/01 14:30:31 patrick Exp $
 
-EAPI=2
+EAPI=5
 
-USE_RUBY="ruby18 ruby19 ree18"
+USE_RUBY="ruby19"
 
 RUBY_FAKEGEM_TASK_TEST="spec"
+
+RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
 
 inherit ruby-fakegem
 
 DESCRIPTION="A fast and very simple Ruby web server"
 HOMEPAGE="http://code.macournoyer.com/thin/"
+SRC_URI="https://github.com/macournoyer/thin/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Ruby"
 SLOT="0"
@@ -44,15 +49,14 @@ all_ruby_prepare() {
 	# Fix rspec version to allow newer 1.x versions
 	sed -i -e '/gem "rspec"/ s/1.2.9/1.0/' tasks/spec.rake spec/spec_helper.rb || die
 
+	# Avoid CLEAN since it may not be available and we don't need it.
+	sed -i -e '/CLEAN/ s:^:#:' tasks/*.rake || die
+
 	# Disable a test that is known for freezing the testsuite,
-	# reported upstream.
+	# reported upstream. In thin 1.5.1 this just fails.
 	sed -i \
 		-e '/should force kill process in pid file/,/^  end/ s:^:#:' \
 		spec/daemonizing_spec.rb || die
-
-	# Pipelining specs don't work. Avoid them for now since this is not
-	# a regression. https://github.com/macournoyer/thin/issues/40
-	rm spec/server/pipelining_spec.rb || die
 
 	# nasty but too complex to fix up for now :(
 	use test || rm tasks/spec.rake
