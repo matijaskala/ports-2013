@@ -16,7 +16,7 @@ if [[ ${MINOR_VERSION} == 999 ]] ; then
 	KEYWORDS="~exp"
 else
 	SRC_URI="https://launchpad.net/${PN}/${MAJOR_BRANCH}/${PV}/+download/${P}.tar.bz2"
-	KEYWORDS="~*"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2 LGPL-2.1 MIT"
@@ -91,16 +91,8 @@ RDEPEND="${COMMONDEPEND}
 	x11-apps/mesa-progs
 	x11-apps/xvinfo"
 
-if [[ ${MINOR_VERSION} == "999" ]] ; then
-src_unpack() {
-	bzr_src_unpack
-}
-fi
-
 src_prepare() {
-if [[ ${MINOR_VERSION} == "999" ]] ; then
-	bzr_src_prepare
-fi
+	default
 
 	epatch "${FILESDIR}/${PN}-sandbox.patch"
 	epatch "${FILESDIR}/python2.patch"

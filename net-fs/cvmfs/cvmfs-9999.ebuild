@@ -1,11 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-fs/cvmfs/cvmfs-9999.ebuild,v 1.2 2013/12/02 05:20:52 patrick Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-fs/cvmfs/cvmfs-9999.ebuild,v 1.3 2014/02/05 18:00:36 bicatali Exp $
 
 EAPI=5
 
 #if LIVE
-EGIT_REPO_URI="https://github.com/sfabbro/cvmfs.git"
+EGIT_REPO_URI="https://github.com/cvmfs/cvmfs.git"
+EGIT_BRANCH="devel"
 inherit git-r3
 #endif
 
@@ -27,7 +28,7 @@ CDEPEND="
 	dev-libs/openssl
 	net-libs/pacparser
 	net-misc/curl[adns]
-	sys-libs/attr
+	sys-apps/attr
 	sys-libs/zlib
 	client? (
 		dev-cpp/sparsehash

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/epoch/epoch-9999.ebuild,v 1.2 2013/12/07 21:17:40 tomwij Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/epoch/epoch-9999.ebuild,v 1.3 2014/02/07 13:39:20 tomwij Exp $
 
 EAPI="5"
 
@@ -26,7 +26,7 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-1.0_rc1-fix-CFLAGS.patch
+	epatch "${FILESDIR}"/${PN}-1.0-fix-CFLAGS.patch
 }
 
 src_compile() {

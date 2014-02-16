@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-4.2.9999.ebuild,v 1.6 2014/01/27 15:35:49 scarabeus Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-4.2.9999.ebuild,v 1.7 2014/02/08 12:14:52 dilfridge Exp $
 
 EAPI=5
 
@@ -239,7 +239,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-3.7-system-pyuno.patch"
 
 	# staged for git master
-	"${FILESDIR}/${PN}-9999-curl-config.patch"
+	"${FILESDIR}/${PN}-4.2.0.4-curl-config.patch"
 )
 
 REQUIRED_USE="

@@ -15,7 +15,7 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz -> ${P}-r1.tar.
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~ia64 ~ppc ~ppc64 x86"
+KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
 	+kmod lzma openrc pam policykit python qrcode selinux tcpd test
 	vanilla xattr"
@@ -120,6 +120,9 @@ src_prepare() {
 	local PATCHES=(
 		"${WORKDIR}"/${PN}-gentoo-patchset*/*.patch
 	)
+
+	# Bug 463376
+	sed -i -e 's/GROUP="dialout"/GROUP="uucp"/' rules/*.rules || die
 
 	autotools-utils_src_prepare
 }
@@ -325,9 +328,6 @@ migrate_locale() {
 }
 
 pkg_postinst() {
-	# for udev rules
-	enewgroup dialout
-
 	enewgroup systemd-journal
 	if use http; then
 		enewgroup systemd-journal-gateway

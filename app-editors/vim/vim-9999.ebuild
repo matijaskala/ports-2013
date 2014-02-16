@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/vim/vim-9999.ebuild,v 1.9 2013/12/16 09:57:57 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/vim/vim-9999.ebuild,v 1.10 2014/02/06 07:06:07 radhermit Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -26,9 +26,13 @@ HOMEPAGE="http://www.vim.org/"
 SLOT="0"
 LICENSE="vim"
 IUSE="X acl cscope debug gpm lua luajit minimal nls perl python racket ruby selinux tcl vim-pager"
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+REQUIRED_USE="
+	python? ( ${PYTHON_REQUIRED_USE} )
+	luajit? ( lua )
+"
 
-RDEPEND=">=app-admin/eselect-vi-1.1
+RDEPEND="
+	>=app-admin/eselect-vi-1.1
 	>=sys-libs/ncurses-5.2-r2
 	nls? ( virtual/libintl )
 	acl? ( kernel_linux? ( sys-apps/acl ) )
@@ -36,7 +40,7 @@ RDEPEND=">=app-admin/eselect-vi-1.1
 	gpm? ( >=sys-libs/gpm-1.19.3 )
 	lua? (
 		luajit? ( dev-lang/luajit )
-		!luajit? ( dev-lang/lua )
+		!luajit? ( dev-lang/lua[deprecated] )
 	)
 	!minimal? (
 		~app-editors/vim-core-${PV}
@@ -45,15 +49,17 @@ RDEPEND=">=app-admin/eselect-vi-1.1
 	perl? ( dev-lang/perl )
 	python? ( ${PYTHON_DEPS} )
 	racket? ( dev-scheme/racket )
-	ruby? ( || ( dev-lang/ruby:2.0 dev-lang/ruby:1.9 dev-lang/ruby:1.8 ) )
+	ruby? ( || ( dev-lang/ruby:2.1 dev-lang/ruby:2.0 dev-lang/ruby:1.9 dev-lang/ruby:1.8 ) )
 	selinux? ( sys-libs/libselinux )
 	tcl? ( dev-lang/tcl )
-	X? ( x11-libs/libXt )"
+	X? ( x11-libs/libXt )
+"
 DEPEND="${RDEPEND}
 	>=app-admin/eselect-vi-1.1
 	sys-devel/autoconf
 	>=sys-libs/ncurses-5.2-r2
-	nls? ( sys-devel/gettext )"
+	nls? ( sys-devel/gettext )
+"
 
 S=${WORKDIR}/vim${VIM_VERSION/.}
 

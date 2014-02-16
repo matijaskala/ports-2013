@@ -1,10 +1,9 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/graph-tool/graph-tool-9999.ebuild,v 1.5 2013/06/04 21:13:27 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/graph-tool/graph-tool-9999.ebuild,v 1.6 2014/02/05 18:41:16 radhermit Exp $
 
 EAPI=5
-# python3 missing from graphviz
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_2,3_3} )
 
 inherit check-reqs eutils toolchain-funcs python-r1
 
@@ -23,18 +22,18 @@ LICENSE="GPL-3"
 SLOT="0"
 IUSE="+cairo openmp"
 
-CDEPEND=">=dev-libs/boost-1.46.0[python,${PYTHON_USEDEP}]
+CDEPEND="${PYTHON_DEPS}
+	>=dev-libs/boost-1.46.0[python,${PYTHON_USEDEP}]
 	dev-libs/expat
 	dev-python/numpy[${PYTHON_USEDEP}]
 	sci-libs/scipy[${PYTHON_USEDEP}]
-	sci-mathematics/cgal
+	>=sci-mathematics/cgal-3.5
 	cairo? (
 		dev-cpp/cairomm
 		dev-python/pycairo[${PYTHON_USEDEP}]
 	)"
 RDEPEND="${CDEPEND}
-	dev-python/matplotlib[${PYTHON_USEDEP}]
-	media-gfx/graphviz[python,${PYTHON_USEDEP}]"
+	dev-python/matplotlib[${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-cpp/sparsehash
 	virtual/pkgconfig"

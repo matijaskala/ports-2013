@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15383 2014/02/05 07:50:31 pinkbyte Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15399 2014/02/15 17:56:27 ulm Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,83 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Ulrich Müller <ulm@gentoo.org> (15 Feb 2014)
+# Support library for app-emacs/prime-el, which is masked
+# for removal itself. No other reverse dependencies.
+# Masked for removal in 30 days, bug 501426.
+app-emacs/mell
+
+# Ulrich Müller <ulm@gentoo.org> (15 Feb 2014)
+# Doesn't appear to work with Emacs 24.
+# Last upstream release in 2002.
+# Masked for removal in 30 days, bug 501412.
+app-emacs/alt-font-menu
+
+# Ulrich Müller <ulm@gentoo.org> (15 Feb 2014)
+# Included with Emacs since version 23.
+# cperl-mode-6.2 does not work with Emacs 24.
+# Masked for removal in 30 days, bug 501410.
+app-emacs/cperl-mode
+
+# Ulrich Müller <ulm@gentoo.org> (15 Feb 2014)
+# Now included with app-emacs/vm.
+# Masked for removal in 30 days, bug 501414.
+app-emacs/u-vm-color
+
+# Ulrich Müller <ulm@gentoo.org> (14 Feb 2014)
+# Included with Emacs since version 22.3.
+# Last stand-alone release in 2008, last commit to repo in 2009.
+# Masked for removal in 30 days, bug 501274.
+app-emacs/erc
+
+# Manuel Rüger <mrueg@gentoo.org> (14 Feb 2014)
+# Mask further ruby18-only packages
+# Removal in 30 days
+www-servers/mongrel_cluster
+
+# Manuel Rüger <mrueg@gentoo.org> (13 Feb 2014)
+# Mask further ruby18-only packages
+# Acked by a3li.
+# Removal in 30 days
+dev-ruby/ruby-bdb
+=net-irc/rbot-0.9.15
+
+# Ulrich Müller <ulm@gentoo.org> (13 Feb 2014)
+# Included with Emacs since version 23.
+# Last stand-alone release in 2004.
+# Masked for removal in 30 days, bug 501234.
+app-emacs/nxml-mode
+
+# Bernard Cafarelli <voyageur@gentoo.org> (13 Feb 2014)
+# Dead original upstream (last release in 2003)
+# Now its only consumer gnustep-apps/cdplayer bundles it directly
+# Removal in 30 days (bug #501160)
+gnustep-libs/cddb
+
+# Dion Moult <moult@gentoo.org> (13 Feb 2014)
+# Masked for removal in 30 days. Unclear license, desklets dead. (bug #446776)
+x11-plugins/desklet-sudoku
+
+# Dion Moult <moult@gentoo.org> (12 Feb 2014)
+# Masked for removal in 30 days. Removed as this was a compatibility hack
+# package, with equivalent functionality already implemented elsewhere (xdg-open
+# and co). (bug #480522)
+www-client/htmlview
+
+# Dion Moult <moult@gentoo.org> (10 Feb 2014)
+# Masked for removal in 30 days. Upstream dead for ages, no package maintainer.
+# (bug #471548)
+rox-extra/comicthumb
+
+# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Feb 2014)
+# removal ~08/Mar/2014 , depend on i18n issues
+# wrt bug #424255
+media-plugins/vdr-amarok
+
+# Patrick Lauer <patrick@gentoo.org> (07 Feb 2014)
+# Reliably makes cryptsetup segfault, breaking boot is not acceptable
+=dev-libs/libgcrypt-1.6.1
 
 # Tim Harder <radhermit@gentoo.org> (04 Feb 2014)
 # Masked for testing
@@ -129,30 +206,6 @@ www-client/google-chrome:unstable
 # https://bugs.gentoo.org/show_bug.cgi?id=474654#c5
 =media-gfx/exiv2-0.23-r2
 
-# Joerg Bornkessel <hd_brummy@gentoo.org (14 Jan 2014)
-# plugin fails on compile >=vdr-1.7.27
-# dead on upstream, dead on src-uri, wrt bug 414181
-# removal ~ 14/02/2014
-media-plugins/vdr-xxvautotimer
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (14 Jan 2014)
-# plugin fails on compile >=vdr-1.7.27
-# dead on upstream, wrt bug 414887
-# removal ~ 14/02/2014
-media-plugins/vdr-skinclassic
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (14 Jan 2014)
-# plugin fails on compile
-# dead on upstream, wrt bug 420869
-# removal ~ 14/02/2014
-media-plugins/vdr-sky
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (14 Jan 2014)
-# vdr-skinreel fails on compile >=vdr-1.7.27
-# see wrt bug 420873
-# removal ~ 14/02/2014
-media-plugins/vdr-skinreel
-
 # Tony Vroon <chainsaw@gentoo.org> (13 Jan 2014)
 # Asterisk 12 is a short term "standard" release 
 # containing significant architectural changes.
@@ -181,62 +234,6 @@ net-libs/libguac-client-rdp
 net-libs/libguac-client-vnc
 net-misc/guacd
 <www-apps/guacamole-0.8.3
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Jan 2014)
-# masked for removal, wrt bug 497574
-media-plugins/vdr-premiereepg
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Jan 2014)
-# masked for removal, wrt bug 414193
-media-plugins/vdr-softplay
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Jan 2014)
-# masked for removal, wrt bug 420859 
-media-plugins/vdr-softdevice
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Jan 2014)
-# masked for removal, wrt bug 420881
-media-plugin/vdr-reelchannelscan
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, bundled with dev-php/phpunit
-dev-php/PHPUnit_MockObject
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, bundled with dev-php/phpunit
-dev-php/PHPUnit_Selenium
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, outdated, not maintained
-dev-php/PEAR-Tree
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, outdated, not maintained
-dev-php/PEAR-Structures_DataGrid
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, outdated, not maintained
-dev-php/PEAR-HTTP_WebDAV_Server
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, outdated, not maintained
-dev-php/PEAR-HTTP_Upload
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, outdated, not maintained
-dev-php/PEAR-HTML_QuickForm_ElementGrid
-
-# Matti Bickel <mabi@gentoo.org> (08 Jan 2014)
-# masked for removal 08/Feb/2014, outdated, not maintained
-dev-php/PEAR-HTML_BBcodeParser
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Jan 2014)
-# masked for removal ~08/Feb/2014, wrt bug 424281
-media-plugins/vdr-dvdconvert
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Jan 2014)
-# masked for removal ~08 Feb 2014, wrt bug 424257
-media-plugins/vdr-analogtv
 
 # Pacho Ramos <pacho@gentoo.org> (02 Jan 2014)
 # Breaks reverse dependencies and upstream don't want us
@@ -706,11 +703,6 @@ kde-misc/kgtk
 # Masked for testing since this is known to break nearly
 # every reverse dependency wrt bug 407091
 >=dev-lang/lua-5.2.0
-
-# Michał Górny <mgorny@gentoo.org> (21 Jan 2012)
-# Blocks sysvinit yet doesn't provide all tools provided by it.
-# Masking until we get the necessary tools out of sysvinit.
-sys-apps/systemd-sysv-utils
 
 # Jeroen Roovers <jer@gentoo.org> (27 Mar 2012)
 # Opera Next and Opera snapshots are unsupported and eternally unstable.

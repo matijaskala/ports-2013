@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-2.2.4.ebuild,v 1.4 2014/02/04 08:37:19 eva Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-2.2.4.ebuild,v 1.9 2014/02/11 22:43:12 eva Exp $
 
 EAPI="5"
 
@@ -75,9 +75,10 @@ DEPEND="${RDEPEND}
 		virtual/rubygems[ruby_targets_ruby19]
 		virtual/rubygems[ruby_targets_ruby18] )
 	>=app-accessibility/at-spi2-core-2.5.3
+	>=dev-libs/atk-2.8.0
 	>=dev-util/gtk-doc-am-1.10
 	dev-util/gperf
-	sys-devel/bison
+	>=sys-devel/bison-2.4.3
 	>=sys-devel/flex-2.5.33
 	|| ( >=sys-devel/gcc-4.7 >=sys-devel/clang-3.0 )
 	sys-devel/gettext
@@ -167,11 +168,12 @@ src_prepare() {
 		-e '/Programs\/TestWebKitAPI\/WebKitGtk\/testwebplugindatabase/ d' \
 		-i Source/WebKit/gtk/GNUmakefile.am || die
 
-	if ! use gstreamer; then
+# Upstream thinks this is already solved
+#	if ! use gstreamer; then
 		# webkit2's TestWebKitWebView requires <video> support, upstream bug #128164
-		sed -e '/Programs\/WebKit2APITests\/TestWebKitWebView/ d' \
-			-i Tools/TestWebKitAPI/GNUmakefile.am || die
-	fi
+#		sed -e '/Programs\/WebKit2APITests\/TestWebKitWebView/ d' \
+#			-i Tools/TestWebKitAPI/GNUmakefile.am || die
+#	fi
 
 	# Respect CC, otherwise fails on prefix #395875
 	tc-export CC
@@ -190,7 +192,7 @@ src_configure() {
 	# It doesn't compile on alpha without this in LDFLAGS, bug #???
 	use alpha && append-ldflags "-Wl,--no-relax"
 
-	# Sigbuses on SPARC with mcpu and co., bug #????
+	# Sigbuses on SPARC with mcpu and co., bug #???
 	use sparc && filter-flags "-mvis"
 
 	# https://bugs.webkit.org/show_bug.cgi?id=42070 , #301634
@@ -198,7 +200,9 @@ src_configure() {
 
 	# Try to use less memory, bug #469942 (see Fedora .spec for reference)
 	append-ldflags "-Wl,--no-keep-memory"
-	append-ldflags "-Wl,--reduce-memory-overheads"
+	if ! $(tc-getLD) --version | grep -q "GNU gold"; then
+		append-ldflags "-Wl,--reduce-memory-overheads"
+	fi
 
 	local myconf=""
 
@@ -224,6 +228,7 @@ src_configure() {
 		$(use_enable geoloc geolocation) \
 		$(use_enable gles2) \
 		$(use_enable gstreamer video) \
+		$(use_enable gstreamer web-audio) \
 		$(use_enable introspection) \
 		$(use_enable jit) \
 		$(use_enable libsecret credential_storage) \

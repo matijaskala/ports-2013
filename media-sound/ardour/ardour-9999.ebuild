@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.6 2014/01/16 08:16:34 nativemad Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/ardour/ardour-9999.ebuild,v 1.7 2014/02/07 14:22:45 nativemad Exp $
 
 EAPI=4
 inherit eutils toolchain-funcs flag-o-matic waf-utils
@@ -86,6 +86,7 @@ src_prepare(){
 	fi
 	epatch "${FILESDIR}"/${PN}-3.5.7-syslibs.patch
 	sed 's/python/python2/' -i waf
+	sed 's/'FLAGS\'\,\ optimization_flags'/'FLAGS\'\,\ \'\''/g' -i "${S}"/wscript
 }
 
 src_configure() {
@@ -97,7 +98,7 @@ src_configure() {
 		--configdir=/etc \
 		$(use lv2 && echo "--lv2" || echo "--no-lv2") \
 		$(use nls && echo "--nls" || echo "--no-nls") \
-		$(use debug && echo "--stl-debug") \
+		$(use debug && echo "--stl-debug" || echo "--optimize") \
 		$((use altivec || use sse) && echo "--fpu-optimization" || echo "--no-fpu-optimization") \
 		$(use doc && echo "--docs")
 }

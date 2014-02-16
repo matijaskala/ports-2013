@@ -162,6 +162,11 @@ gnome2_src_configure() {
 		G2CONF="--enable-compile-warnings=minimum ${G2CONF}"
 	fi
 
+	# Pass --docdir with proper directory, bug #482646
+	if grep -q "^ *--docdir=" "${ECONF_SOURCE:-.}"/configure; then
+		G2CONF="--docdir="${EPREFIX}"/usr/share/doc/${PF} ${G2CONF}"
+	fi
+
 	# Avoid sandbox violations caused by gnome-vfs (bug #128289 and #345659)
 	addwrite "$(unset HOME; echo ~)/.gnome2"
 

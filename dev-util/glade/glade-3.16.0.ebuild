@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/glade/glade-3.16.0.ebuild,v 1.1 2013/12/24 15:53:01 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/glade/glade-3.16.0.ebuild,v 1.2 2014/02/09 20:28:44 eva Exp $
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -13,7 +13,7 @@ DESCRIPTION="A user interface designer for GTK+ and GNOME"
 HOMEPAGE="http://glade.gnome.org/"
 
 LICENSE="GPL-2+ FDL-1.1+"
-SLOT="3.10/4" # subslot = suffix of libgladeui-2.so
+SLOT="3.10/6" # subslot = suffix of libgladeui-2.so
 KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="+introspection python"
 

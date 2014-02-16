@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/virtual/mta/mta-0.ebuild,v 1.7 2012/04/26 14:23:30 aballier Exp $
+# $Header: /var/cvsroot/gentoo-x86/virtual/mta/mta-0.ebuild,v 1.9 2013/03/17 20:05:48 zx2c4 Exp $
 
 EAPI=3
 
@@ -16,8 +16,7 @@ IUSE=""
 DEPEND=""
 
 # mail-mta/citadel is from sunrise
-RDEPEND="|| (	mail-mta/postfix
-				>=mail-mta/ssmtp-2.64-r2[mta]
+RDEPEND="|| (	>=mail-mta/ssmtp-2.64-r2[mta]
 				<mail-mta/ssmtp-2.64-r2
 				mail-mta/courier
 				mail-mta/esmtp
@@ -28,7 +27,8 @@ RDEPEND="|| (	mail-mta/postfix
 				mail-mta/nbsmtp
 				mail-mta/netqmail
 				mail-mta/nullmailer
-				mail-mta/opensmtpd
+				mail-mta/postfix
 				mail-mta/qmail-ldap
 				mail-mta/sendmail
+				mail-mta/opensmtpd
 				mail-mta/citadel[-postfix] )"

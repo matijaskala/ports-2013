@@ -1,16 +1,18 @@
-# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-204-r1.ebuild,v 1.10 2013/11/11 13:56:48 mgorny Exp $
 
 EAPI=5
 
 AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
+AUTOTOOLS_AUTORECONF=yes
 PYTHON_COMPAT=( python2_7 )
-inherit autotools-utils bash-completion-r1 fcaps linux-info multilib pam python-single-r1 systemd toolchain-funcs udev user
+inherit autotools-utils bash-completion-r1 fcaps linux-info multilib \
+	multilib-minimal pam python-single-r1 systemd toolchain-funcs udev \
+	user
 
 DESCRIPTION="System and service manager for Linux"
 HOMEPAGE="http://www.freedesktop.org/wiki/Software/systemd"
-SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
+SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz
+	http://dev.gentoo.org/~pacho/${PN}/${P}-patches.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT"
 SLOT="0"
@@ -28,23 +30,23 @@ COMMON_DEPEND=">=sys-apps/dbus-1.6.8-r1
 	audit? ( >=sys-process/audit-2 )
 	cryptsetup? ( >=sys-fs/cryptsetup-1.4.2 )
 	gcrypt? ( >=dev-libs/libgcrypt-1.4.5 )
-	gudev? ( >=dev-libs/glib-2 )
+	gudev? ( >=dev-libs/glib-2[${MULTILIB_USEDEP}] )
 	http? ( net-libs/libmicrohttpd )
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
 	kmod? ( >=sys-apps/kmod-12 )
-	lzma? ( app-arch/xz-utils )
+	lzma? ( app-arch/xz-utils[${MULTILIB_USEDEP}] )
 	pam? ( virtual/pam )
 	python? ( ${PYTHON_DEPS} )
 	qrcode? ( media-gfx/qrencode )
 	selinux? ( sys-libs/libselinux )
 	tcpd? ( sys-apps/tcp-wrappers )
-	xattr? ( sys-apps/attr )"
+	xattr? ( sys-apps/attr )
+	abi_x86_32? ( !<=app-emulation/emul-linux-x86-baselibs-20130224-r9
+		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)] )"
 
 # baselayout-2.2 has /run
 RDEPEND="${COMMON_DEPEND}
 	>=sys-apps/baselayout-2.2
-	openrc? ( >=sys-fs/udev-init-scripts-25 )
-	policykit? ( sys-auth/polkit )
 	|| (
 		>=sys-apps/util-linux-2.22
 		<sys-apps/sysvinit-2.88-r4
@@ -54,6 +56,8 @@ RDEPEND="${COMMON_DEPEND}
 	!sys-fs/udev"
 
 PDEPEND=">=sys-apps/hwids-20130326.1[udev]
+	openrc? ( >=sys-fs/udev-init-scripts-25 )
+	policykit? ( sys-auth/polkit )
 	!vanilla? ( ~sys-apps/gentoo-systemd-integration-1 )"
 
 DEPEND="${COMMON_DEPEND}
@@ -124,26 +128,25 @@ pkg_setup() {
 
 src_prepare() {
 	local PATCHES=(
-		# race condition in polkit use, bug #485546
-		"${FILESDIR}"/204-0001-polkit-Avoid-race-condition-in-scraping-proc.patch
 		# localectl does not find keymaps, bug #474946
 		"${FILESDIR}"/204-0002-Add-usr-share-keymaps-to-localectl-supported-locatio.patch
-		# tabs do not work in EnvironmentFile=, bug #481554
-		"${FILESDIR}"/204-0003-Allow-tabs-in-environment-files.patch
-		"${FILESDIR}"/204-0004-Actually-allow-tabs-in-environment-files.patch
+		# Backports from newer versions pulled by Fedora maintainers
+		"${WORKDIR}/${P}-patches"/*.patch
 	)
+
+	# Bug 463376
+	sed -i -e 's/GROUP="dialout"/GROUP="uucp"/' rules/*.rules || die
 
 	autotools-utils_src_prepare
 }
 
-src_configure() {
+multilib_src_configure() {
 	local myeconfargs=(
 		--localstatedir=/var
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		# make sure we get /bin:/sbin in $PATH
-		--enable-split-usr
+		--disable-split-usr
 		# disable sysv compatibility
 		--with-sysvinit-path=
 		--with-sysvrcnd-path=
@@ -189,38 +192,94 @@ src_configure() {
 		)
 	fi
 
+	if ! multilib_is_native_abi; then
+		myeconfargs+=(
+			ac_cv_search_cap_init=
+			ac_cv_header_sys_capability_h=yes
+			DBUS_CFLAGS=' '
+			DBUS_LIBS=' '
+
+			--disable-acl
+			--disable-audit
+			--disable-gcrypt
+			--disable-gtk-doc
+			--disable-introspection
+			--disable-kmod
+			--disable-libcryptsetup
+			--disable-microhttpd
+			--disable-pam
+			--disable-polkit
+			--disable-qrencode
+			--disable-selinux
+			--disable-tcpwrap
+			--disable-tests
+			--disable-xattr
+			--disable-xz
+			--disable-python-devel
+		)
+	fi
+
 	# Work around bug 463846.
 	tc-export CC
 
 	autotools-utils_src_configure
 }
 
-src_compile() {
-	autotools-utils_src_compile \
+multilib_src_compile() {
+	local mymakeopts=(
 		udevlibexecdir="${MY_UDEVDIR}"
+	)
+
+	if multilib_is_native_abi; then
+		emake "${mymakeopts[@]}"
+	else
+		# prerequisites for gudev
+		use gudev && emake src/gudev/gudev{enumtypes,marshal}.{c,h}
+
+		echo 'gentoo: $(lib_LTLIBRARIES) $(pkgconfiglib_DATA)' | \
+		emake "${mymakeopts[@]}" -f Makefile -f - gentoo
+	fi
 }
 
-src_install() {
-	autotools-utils_src_install -j1 \
-		udevlibexecdir="${MY_UDEVDIR}" \
-		dist_udevhwdb_DATA=
+multilib_src_test() {
+	multilib_is_native_abi || continue
 
-	# keep udev working without initramfs, for openrc compat
-	dodir /bin /sbin
-	mv "${D}"/usr/lib/systemd/systemd-udevd "${D}"/sbin/udevd || die
-	mv "${D}"/usr/bin/udevadm "${D}"/bin/udevadm || die
-	dosym ../../../sbin/udevd /usr/lib/systemd/systemd-udevd
-	dosym ../../bin/udevadm /usr/bin/udevadm
+	default
+}
+
+multilib_src_install() {
+	local mymakeopts=(
+		udevlibexecdir="${MY_UDEVDIR}"
+		dist_udevhwdb_DATA=
+		DESTDIR="${D}"
+	)
+
+	if multilib_is_native_abi; then
+		emake "${mymakeopts[@]}" install
+	else
+		mymakeopts+=(
+			install-libLTLIBRARIES
+			install-pkgconfiglibDATA
+			install-includeHEADERS
+			# safe to call unconditionally, 'installs' empty list
+			install-libgudev_includeHEADERS
+			install-pkgincludeHEADERS
+		)
+
+		emake "${mymakeopts[@]}"
+	fi
+}
+
+multilib_src_install_all() {
+	prune_libtool_files --modules
+	einstalldocs
 
 	# zsh completion
 	insinto /usr/share/zsh/site-functions
 	newins shell-completion/systemd-zsh-completion.zsh "_${PN}"
 
-	# compat for init= use
-	dosym ../usr/lib/systemd/systemd /bin/systemd
+	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
 	dosym ../lib/systemd/systemd /usr/bin/systemd
-	# rsyslog.service depends on it...
-	dosym ../usr/bin/systemctl /bin/systemctl
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \
@@ -236,8 +295,7 @@ src_install() {
 
 	# Check whether we won't break user's system.
 	local x
-	for x in /bin/systemd /usr/bin/systemd \
-		/usr/bin/udevadm /usr/lib/systemd/systemd-udevd
+	for x in /usr/bin/systemd /usr/sbin/udevd
 	do
 		[[ -x ${D}${x} ]] || die "${x} symlink broken, aborting."
 	done
@@ -288,9 +346,6 @@ migrate_locale() {
 }
 
 pkg_postinst() {
-	# for udev rules
-	enewgroup dialout
-
 	enewgroup systemd-journal
 	if use http; then
 		enewgroup systemd-journal-gateway
