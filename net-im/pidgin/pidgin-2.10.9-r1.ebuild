@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/pidgin/pidgin-2.10.9-r1.ebuild,v 1.5 2014/02/12 12:39:34 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-im/pidgin/pidgin-2.10.9-r1.ebuild,v 1.7 2014/02/18 08:11:43 polynomial-c Exp $
 
 EAPI=5
 
@@ -42,7 +42,7 @@ RDEPEND="
 		prediction? ( >=dev-db/sqlite-3.3:3 ) )
 	gstreamer? ( =media-libs/gstreamer-0.10*
 		=media-libs/gst-plugins-good-0.10*
-		|| ( net-libs/farstream:0.1 net-libs/farsight2 )
+		|| ( net-libs/farstream:0.1 net-libs/farsight2:= )
 		media-plugins/gst-plugins-meta:0.10
 		media-plugins/gst-plugins-gconf:0.10 )
 	zeroconf? ( net-dns/avahi[dbus] )
@@ -138,8 +138,10 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-2.10.0-gold.patch" \
-		"${WORKDIR}/${PN}-eds-3.6.patch"
-
+		"${WORKDIR}/${PN}-eds-3.6.patch" \
+		"${FILESDIR}/${P}-fix-gtkmedia.patch" \
+		"${FILESDIR}/${P}-python3_fix1.patch" \
+		"${FILESDIR}/${P}-python3_fix2.patch"
 	epatch_user
 
 	eautoreconf

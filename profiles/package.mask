@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15402 2014/02/17 09:32:34 ulm Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15410 2014/02/18 20:17:13 ulm Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,10 +30,23 @@
 
 #--- END OF EXAMPLES ---
 
-# Ulrich Müller <ulm@gentoo.org> (17 Feb 2014)
-# Masked, until issue with XEmacs blocker is resolved.
-# Bug 177936.
-=app-emacs/gnuserv-3.12.8-r1
+# Ulrich Müller <ulm@gentoo.org> (18 Feb 2014)
+# Last upstream release in 1996.
+# Doesn't appear to work with Emacs 23 and 24.
+# Masked for removal in 30 days, bug 501660.
+app-emacs/view-process
+
+# Mike Gilbert <floppym@gentoo.org> (17 Feb 2014)
+# Masked for testing.
+dev-lang/python:3.4
+
+# Eray Aslan <eras@gentoo.org> (17 Feb 2014)
+# Security mask - bug #492494 until
+# mail-filter/dovecot-antispam and
+# mail-filter/dovecot_deleted_to_trash are punted/fixed
+=net-mail/dovecot-2.0*
+=net-mail/dovecot-2.1*
+mail-filter/dovecot_deleted_to_trash
 
 # Ulrich Müller <ulm@gentoo.org> (16 Feb 2014)
 # Last upstream release in 2005.
@@ -43,7 +56,7 @@ app-emacs/eperiodic
 
 # Jeroen Roovers <jer@gentoo.org> (16 Feb 2014)
 # Unmaintained, has several problems on modern systems,
-# superseded by net-analyzer/ifststatus (bug #501432)
+# superseded by net-analyzer/ifstatus (bug #501432)
 net-analyzer/ethstatus
 
 # Ulrich Müller <ulm@gentoo.org> (15 Feb 2014)
