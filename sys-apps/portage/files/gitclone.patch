@@ -1,0 +1,16 @@
+--- a/pym/_emerge/actions.py	2014-02-19 01:32:00.797735754 +0100
++++ b/pym/_emerge/actions.py	2014-02-19 01:38:38.053769370 +0100
+@@ -2165,6 +2165,13 @@
+ 	dosyncuri = syncuri
+ 	updatecache_flg = False
+ 	if repo.sync_type == "git":
++		if not os.path.exists(repo.location+"/.git"):
++			print(">>> This is not a git repostitory. The folder is either empty or has other data. Removing contents inside this folder...")
++			portage.process.spawn_bash("cd %s ; rm -rf .* > /dev/null 2>&1" % repo.location)
++			print(">>> Starting initial git clone with "+syncuri+"...")
++			if portage.process.spawn_bash("cd %s && git clone --depth=1 --no-checkout %s .SYNC" % ( repo.location,  portage._shell_quote(syncuri))) == os.EX_OK:
++				portage.process.spawn_bash("cd %s ; mv .SYNC/.* . > /dev/null 2>&1 ; rmdir .SYNC ; git checkout" % repo.location)
++
+ 		# Update existing git repository, and ignore the syncuri. We are
+ 		# going to trust the user and assume that the user is in the branch
+ 		# that he/she wants updated. We'll let the user manage branches with

@@ -232,6 +232,7 @@ src_prepare() {
 		-e "s|^\(sync-uri = \).*|\\1git://github.com/matijaskala/ports-2013.git|" \
 		-i cnf/repos.conf || die "sed failed"
 	epatch "${FILESDIR}/partylinux-usr-merge.patch"
+	epatch "${FILESDIR}/gitclone.patch"
 	einfo "Setting portage.VERSION to ${PVR} ..."
 	sed -e "s/^VERSION=.*/VERSION=\"${PVR}\"/" -i pym/portage/__init__.py || \
 		die "Failed to patch portage.VERSION"

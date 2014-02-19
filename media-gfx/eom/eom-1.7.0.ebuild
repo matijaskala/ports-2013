@@ -1,0 +1,64 @@
+# Copyright 1999-2012 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+EAPI="5"
+GCONF_DEBUG="yes"
+PYTHON_COMPAT=( python2_{6,7} )
+
+inherit mate python-single-r1
+
+DESCRIPTION="The MATE image viewer"
+HOMEPAGE="http://mate-desktop.org"
+
+LICENSE="GPL-2"
+SLOT="0"
+KEYWORDS="~amd64 ~arm ~x86"
+IUSE="dbus exif gtk3 jpeg lcms python svg tiff xmp"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+
+RDEPEND="x11-libs/gdk-pixbuf:2[jpeg?,tiff?]
+	>=dev-libs/glib-2.25.9:2
+	gtk3? ( x11-libs/gtk+:3 )
+	!gtk3? ( x11-libs/gtk+:2 )
+	>=dev-libs/libxml2-2
+	>=mate-base/mate-desktop-1.7.0
+	>=x11-themes/mate-icon-theme-1.6.0
+	>=x11-misc/shared-mime-info-0.20
+	x11-libs/libX11
+	dbus? ( >=dev-libs/dbus-glib-0.71 )
+	exif? (
+		>=media-libs/libexif-0.6.14
+		virtual/jpeg:0 )
+	jpeg? ( virtual/jpeg:0 )
+	lcms? ( media-libs/lcms:0 )
+	python? (
+		${PYTHON_DEPS}
+		>=dev-python/pygobject-2.15.1:2[${PYTHON_USEDEP}]
+		>=dev-python/pygtk-2.13[${PYTHON_USEDEP}] )
+	svg? ( >=gnome-base/librsvg-2.26 )
+	xmp? ( >=media-libs/exempi-2 )
+	!!media-gfx/mate-image-viewer"
+
+DEPEND="${RDEPEND}
+	sys-devel/gettext
+	>=dev-util/intltool-0.40
+	virtual/pkgconfig"
+
+src_configure() {
+	DOCS="AUTHORS ChangeLog HACKING NEWS README THANKS TODO"
+
+	G2CONF="${G2CONF}
+		$(use_enable python)
+		$(use_with jpeg libjpeg)
+		$(use_with exif libexif)
+		$(use_with dbus)
+		$(use_with lcms cms)
+		$(use_with xmp)
+		$(use_with svg librsvg)"
+
+	use gtk3 && G2CONF="${G2CONF} --with-gtk=3.0"
+	use !gtk3 && G2CONF="${G2CONF} --with-gtk=2.0"
+
+	gnome2_src_configure
+}

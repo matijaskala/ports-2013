@@ -21,16 +21,16 @@ RDEPEND=">=mate-base/libmatekbd-1.7.0[gtk3?]
 	>=mate-base/caja-1.7.0[gtk3?]
 	>=x11-themes/mate-backgrounds-1.7.0
 	>=mate-base/mate-menus-1.7.0
-	>=x11-wm/mate-window-manager-1.6.0
+	>=x11-wm/marco-1.7.0[gtk3?]
 	>=mate-extra/mate-polkit-1.7.0
 	>=mate-base/mate-settings-daemon-1.7.0[gtk3?]
-	>=mate-base/mate-control-center-1.6.0
+	>=mate-base/mate-control-center-1.7.0[gtk3?]
 	>=mate-base/mate-panel-1.7.0[gtk3?]
 	>=mate-base/mate-session-manager-1.7.0[gtk3?]
 	>=x11-themes/mate-themes-1.7.0
-	>=mate-extra/mate-utils-1.6.0
+	>=mate-extra/mate-utils-1.7.0
 	>=mate-extra/mate-media-1.7.0
-	>=x11-misc/mate-menu-editor-1.6.0
+	>=x11-misc/mozo-1.7.0
 	>=x11-terms/mate-terminal-1.7.0
 	>=mate-base/mate-applets-1.7.0
 	virtual/notification-daemon
@@ -38,7 +38,7 @@ RDEPEND=">=mate-base/libmatekbd-1.7.0[gtk3?]
 		>=mate-extra/mate-power-manager-1.7.0
 		>=app-editors/pluma-1.7.0
 		>=app-arch/engrampa-1.7.0
-		>=media-gfx/mate-image-viewer-1.6.0
+		>=media-gfx/eom-1.7.0
 		>=app-text/atril-1.7.0
 		>=mate-extra/mate-system-monitor-1.7.0
 		>=mate-extra/mate-calc-1.7.0
