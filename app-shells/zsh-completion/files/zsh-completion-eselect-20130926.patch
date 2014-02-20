@@ -7,20 +7,20 @@ diff -U 3 -H -d -r -N -- a/_eselect b/_eselect
  	local profilelist
 -        if (( $words[(I)(set)] )); then
 +        if (( $words[(I)(set-flavor)] )); then
-+	  profilelist=(${${${(M)${(f)"$(eselect profile list | grep /flavor/)"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
++	  profilelist=(${${${(M)${(f)"$(eselect profile list flavor)"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
 +	  _values -w "available profiles" $profilelist[@] && return 0
 +        fi
 +        if (( $words[(I)(set-build)] )); then
-+	  profilelist=(${${${(M)${(f)"$(eselect profile list | grep /build/)"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
++	  profilelist=(${${${(M)${(f)"$(eselect profile list build)"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
 +	  _values -w "available profiles" $profilelist[@] && return 0
 +        fi
 +        if (( $words[(I)(add)] )); then
-+	  profilelist=(${${${(M)${(f)"$(eselect profile list | grep /mix-ins/ | grep -v "*")"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
++	  profilelist=(${${${(M)${(f)"$(eselect profile list mix-ins | grep -v "*")"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
 +	  [[ -n ${profilelist} ]] && _values -w "available profiles" $profilelist[@]
 +	  return 0
 +        fi
 +        if (( $words[(I)(remove)] )); then
-+	  profilelist=(${${${(M)${(f)"$(eselect profile list | grep /mix-ins/ | grep "*")"}## *}// \**/}//(  \[*\]   |  \[*\]  )/})
++	  profilelist=(${${(f)"$(eselect profile show mix-ins)"}##*:})
 +	  [[ -n ${profilelist} ]] && _values -w "available profiles" $profilelist[@]
 +	  return 0
 +        fi

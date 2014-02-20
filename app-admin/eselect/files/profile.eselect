@@ -1296,6 +1296,14 @@ do_set-flavor() {
 # PRIVATE
 # Displays currently set profiles
 show_profiles() {
+	if [[ -n "${1}" ]] ; then
+		local list_type="${1}"
+		local profiles=( $(get_currently_set_profiles) )
+		for profile in ${profiles[@]} ; do
+			[[ "${list_type}" == "$(get_profile_type ${profile})" ]] && echo -e "${profile}"
+		done
+		return
+	fi
 
 	# Validate parent file so global vars are set
 	validate_parent_file
@@ -1380,6 +1388,6 @@ describe_show() {
 # PUBLIC
 # Called by eselect when passed show as action
 do_show() {
-	show_profiles
+	show_profiles "${1}"
 }
 
