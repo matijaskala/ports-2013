@@ -1,16 +1,16 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="4-python"
+EAPI="4"
 
-PYTHON_MULTIPLE_ABIS="1"
-PYTHON_RESTRICTED_ABIS="2.5 3.1 *-jython *-pypy-*"
+SUPPORT_PYTHON_ABIS="1"
+RESTRICT_PYTHON_ABIS="2.5 3.1"
 inherit multilib python
 
 DESCRIPTION="Funtoo Core Boot Framework for global boot loader configuration"
 HOMEPAGE="http://www.funtoo.org/en/funtoo/core/boot"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="amd64 x86"
 RESTRICT="mirror"
 GITHUB_REPO="boot-update"
 GITHUB_USER="funtoo"
