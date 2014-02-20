@@ -1,6 +1,6 @@
-# Copyright owners: Gentoo Foundation
-#                   Arfrever Frehtes Taifersar Arahesis
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License, v2 or later
+# $Header: /var/cvsroot/gentoo-x86/eclass/twisted.eclass,v 1.10 2011/12/27 06:54:23 floppym Exp $
 
 # @ECLASS: twisted.eclass
 # @MAINTAINER:
@@ -23,7 +23,8 @@ if [[ "${CATEGORY}/${PN}" == "dev-python/twisted"* ]]; then
 	MY_PV="${MY_PV:-${PV}}"
 	MY_P="Twisted${MY_PACKAGE}-${MY_PV}"
 
-	HOMEPAGE="http://twistedmatrix.com/trac/ https://pypi.python.org/pypi/Twisted"
+	HOMEPAGE="http://www.twistedmatrix.com/"
+	#SRC_URI="http://tmrc.mit.edu/mirror/twisted/${MY_PACKAGE}/$(get_version_component_range 1-2 ${MY_PV})/${MY_P}.tar.bz2"
 	SRC_URI="http://twistedmatrix.com/Releases/${MY_PACKAGE}/$(get_version_component_range 1-2 ${MY_PV})/${MY_P}.tar.bz2"
 
 	LICENSE="MIT"
@@ -49,14 +50,14 @@ twisted_src_test() {
 
 		# Copy modules of other Twisted packages from site-packages directory to temporary directory.
 		mkdir -p "${T}/${sitedir}"
-		cp -R "${ROOT}${sitedir}/twisted" "${T}/${sitedir}" || die "Copying of modules of other Twisted packages failed with $(python_get_implementation_and_version)"
+		cp -R "${ROOT}${sitedir}/twisted" "${T}/${sitedir}" || die "Copying of modules of other Twisted packages failed with $(python_get_implementation) $(python_get_version)"
 		rm -fr "${T}/${sitedir}/${PN/-//}"
 
 		# Install modules of current package to temporary directory.
-		python_execute "$(PYTHON)" setup.py build -b "build-${PYTHON_ABI}" install --force --no-compile --root="${T}" || die "Installation into temporary directory failed with $(python_get_implementation_and_version)"
+		"$(PYTHON)" setup.py build -b "build-${PYTHON_ABI}" install --force --no-compile --root="${T}" || die "Installation into temporary directory failed with $(python_get_implementation) $(python_get_version)"
 
 		pushd "${T}/${sitedir}" > /dev/null || return 1
-		python_execute PATH="${T}${EPREFIX}/usr/bin:${PATH}" PYTHONPATH="${T}/${sitedir}" trial ${PN/-/.} || return 1
+		PATH="${T}${EPREFIX}/usr/bin:${PATH}" PYTHONPATH="${T}/${sitedir}" trial ${PN/-/.} || return 1
 		popd > /dev/null || return 1
 
 		rm -fr "${T}/${sitedir}"
@@ -122,8 +123,8 @@ list(twisted.plugin.getPlugins(twisted.plugin.IPlugin, ${module}))" || exit_stat
 twisted_pkg_postinst() {
 	distutils_pkg_postinst
 	python_execute_function \
-		--action-message 'Regeneration of Twisted plugin cache with $(python_get_implementation_and_version)' \
-		--failure-message 'Regeneration of Twisted plugin cache failed with $(python_get_implementation_and_version)' \
+		--action-message 'Regeneration of Twisted plugin cache with $(python_get_implementation) $(python_get_version)' \
+		--failure-message 'Regeneration of Twisted plugin cache failed with $(python_get_implementation) $(python_get_version)' \
 		--nonfatal \
 		_twisted_update_plugin_cache
 }
@@ -131,8 +132,8 @@ twisted_pkg_postinst() {
 twisted_pkg_postrm() {
 	distutils_pkg_postrm
 	python_execute_function \
-		--action-message 'Regeneration of Twisted plugin cache with $(python_get_implementation_and_version)' \
-		--failure-message 'Regeneration of Twisted plugin cache failed with $(python_get_implementation_and_version)' \
+		--action-message 'Regeneration of Twisted plugin cache with $(python_get_implementation) $(python_get_version)' \
+		--failure-message 'Regeneration of Twisted plugin cache failed with $(python_get_implementation) $(python_get_version)' \
 		--nonfatal \
 		_twisted_update_plugin_cache
 }

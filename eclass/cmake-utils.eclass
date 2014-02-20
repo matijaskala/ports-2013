@@ -1,5 +1,6 @@
-# Copyright owners: Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/eclass/cmake-utils.eclass,v 1.103 2014/02/08 01:42:44 vapier Exp $
 
 # @ECLASS: cmake-utils.eclass
 # @MAINTAINER:
@@ -69,7 +70,7 @@ inherit toolchain-funcs multilib flag-o-matic eutils
 
 CMAKE_EXPF="src_compile src_test src_install"
 case ${EAPI:-0} in
-	2|3|4|4-python|5|5-progress) CMAKE_EXPF+=" src_prepare src_configure" ;;
+	2|3|4|5) CMAKE_EXPF+=" src_prepare src_configure" ;;
 	1|0) eerror "cmake-utils no longer supports EAPI 0-1." && die
 	;;
 	*) die "Unknown EAPI, bug eclass maintainers." ;;

@@ -1,5 +1,6 @@
-# Copyright owners: Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/eclass/multilib-minimal.eclass,v 1.7 2013/12/27 22:47:14 hasufell Exp $
 
 # @ECLASS: multilib-minimal.eclass
 # @MAINTAINER:
@@ -24,7 +25,7 @@
 
 # EAPI=4 is required for meaningful MULTILIB_USEDEP.
 case ${EAPI:-0} in
-	4|4-python|5|5-progress) ;;
+	4|5) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 

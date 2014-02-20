@@ -1,5 +1,6 @@
-# Copyright owners: Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/eclass/git-r3.eclass,v 1.23 2013/11/15 23:03:23 mgorny Exp $
 
 # @ECLASS: git-r3.eclass
 # @MAINTAINER:
@@ -11,7 +12,7 @@
 # clones and bare clones of submodules.
 
 case "${EAPI:-0}" in
-	0|1|2|3|4|4-python|5|5-progress)
+	0|1|2|3|4|5)
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}"
