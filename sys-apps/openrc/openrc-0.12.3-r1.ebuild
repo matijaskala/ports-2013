@@ -10,7 +10,7 @@ RESTRICT="mirror"
 
 LICENSE="BSD-2"
 SLOT="0"
-IUSE="debug elibc_glibc ncurses pam prefix selinux static-libs
+IUSE="debug elibc_glibc ncurses newnet pam prefix selinux static-libs
 	unicode kernel_linux kernel_FreeBSD"
 KEYWORDS="~alpha amd64 ~arm ~hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 
