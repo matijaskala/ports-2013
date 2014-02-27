@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd>funtoo</herd>
+<maintainer>
+<email>chutzpah@gentoo.org</email>
+<name>Patrick McLean</name>
+</maintainer>
 <longdescription lang="en">
 Salt is a powerful remote execution manager that can be used to administer
 servers in a fast and efficient way.
@@ -18,10 +21,11 @@ Between the remote execution system, and state management Salt addresses the
 backbone of cloud and data center management.
 </longdescription>
 	<use>
-		<flag name="jinja">Add support to use dev-python/jinja to parse Salt states.</flag>
+		<flag name="openssl">Add support for using TLS via OpenSSL.</flag>
 		<flag name="libvirt">Support managing virtual machines with app-emulation/libvirt.</flag>
 		<flag name="mongodb">Support returning data to a mongodb server.</flag>
 		<flag name="redis">Support returning data to a redis database.</flag>
+		<flag name="mako">Add support for using the mako template engine for parsing salt states.</flag>
 	</use>
 </pkgmetadata>
 

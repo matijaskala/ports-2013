@@ -20,7 +20,7 @@ SSP_STABLE="amd64 x86 mips ppc ppc64 arm"
 SSP_UCLIBC_STABLE="x86 amd64 mips ppc ppc64 arm"
 #end Hardened stuff
 
-GMP_VER="5.2.1"
+GMP_VER="5.1.3"
 MPFR_VER="3.1.2"
 MPC_VER="1.0.1"
 

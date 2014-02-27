@@ -865,6 +865,9 @@ toolchain_src_configure() {
 		--enable-secureplt
 		--disable-werror
 		--with-system-zlib
+	)
+
+	[[ -n ${MPFR_VER} ]] && confgcc+=(
 		--with-mpfr-include="${S}"/mpfr/src
 		--with-mpfr-lib="${WORKDIR}"/build/mpfr/src/.libs
 	)

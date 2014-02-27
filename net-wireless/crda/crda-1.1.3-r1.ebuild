@@ -1,53 +1,63 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/crda/crda-1.1.3-r1.ebuild,v 1.1 2014/02/12 21:01:37 vapier Exp $
 
 EAPI=4
-inherit eutils toolchain-funcs python
 
-DESCRIPTION="Central Regulatory Domain Agent for wireless networks."
+PYTHON_COMPAT=( python{2_5,2_6,2_7} )
+inherit eutils toolchain-funcs python-any-r1 udev
+
+DESCRIPTION="Central Regulatory Domain Agent for wireless networks"
 HOMEPAGE="http://wireless.kernel.org/en/developers/Regulatory"
 SRC_URI="http://linuxwireless.org/download/crda/${P}.tar.bz2"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
 IUSE=""
 
 RDEPEND="dev-libs/openssl:0
 	dev-libs/libnl:3
-	net-wireless/wireless-regdb
-	>=virtual/udev-171"
-DEPEND="${RDEPEND} virtual/pkgconfig"
+	net-wireless/wireless-regdb"
+DEPEND="${RDEPEND}
+	dev-python/m2crypto
+	=dev-lang/python-2*
+	virtual/pkgconfig"
 
 src_prepare() {
-	epatch "${FILESDIR}"/crda-1.1.3-missing-include.patch
-	#epatch "${FILESDIR}"/crda-1.1.3-nopython.patch
+	epatch "${FILESDIR}"/${P}-missing-include.patch
 	sed -i \
 		-e "s:\<pkg-config\>:$(tc-getPKG_CONFIG):" \
 		Makefile || die
-	# this eliminates a python dep.
-	cp ${FILESDIR}/keys-ssl.c . || die
+}
+
+_emake() {
+	# The source hardcodes /usr/lib/crda/ paths (ignoring all make vars
+	# that look like it should change it).  We want to use /usr/lib/
+	# anyways as this file is not ABI specific and we want to share it
+	# among all ABIs rather than pointlessly duplicate it.
+	#
+	# The trailing slash on SBINDIR is required by the source.
+	emake \
+		PREFIX="${EPREFIX}/usr" \
+		SBINDIR='$(PREFIX)/sbin/' \
+		UDEV_RULE_DIR="$(udev_get_udevdir)/rules.d" \
+		REG_BIN=/usr/lib/crda/regulatory.bin \
+		USE_OPENSSL=1 \
+		CC="$(tc-getCC)" \
+		V=1 \
+		"$@"
 }
 
 src_compile() {
-	emake \
-		UDEV_RULE_DIR="$($(tc-getPKG_CONFIG) --variable=udevdir udev)/rules.d" \
-		REG_BIN=/usr/$(get_libdir)/crda/regulatory.bin \
-		USE_OPENSSL=1 \
-		CC="$(tc-getCC)" \
-		all_noverify V=1
+	_emake all_noverify
 }
 
 src_test() {
-	emake USE_OPENSSL=1 CC="$(tc-getCC)" verify
+	_emake verify
 }
 
 src_install() {
-	emake \
-		UDEV_RULE_DIR="$($(tc-getPKG_CONFIG) --variable=udevdir udev)/rules.d" \
-		REG_BIN=/usr/$(get_libdir)/crda/regulatory.bin \
-		USE_OPENSSL=1 \
-		DESTDIR="${D}" \
-		install
-
+	_emake DESTDIR="${D}" install
 	keepdir /etc/wireless-regdb/pubkeys
 }

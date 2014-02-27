@@ -6,19 +6,19 @@ EAPI="4"
 inherit eutils mount-boot
 
 # Variables
-_LV="KS.03"						# Local Version
-_PLV="${PV}-${_LV}"				# Package Version + Local Version (Module Dir)
-_KN="linux-${_PLV}"				# Kernel Directory Name
-_KD="/usr/src/${_KN}"			# Kernel Directory
-_CONF="chinchilla.conf"				# Blacklisted Kernel Modules
-_BD="/boot/kernels/${_PLV}"		# Kernel /boot Directory
+_LV="KS.03"                     # Local Version
+_PLV="${PV}-${_LV}"             # Package Version + Local Version (Module Dir)
+_KN="linux-${_PLV}"             # Kernel Directory Name
+_KD="/usr/src/${_KN}"           # Kernel Directory
+_CONF="chinchilla.conf"         # Blacklisted Kernel Modules
+_BD="/boot/kernels/${_PLV}"     # Kernel /boot Directory
 
 # Main
 DESCRIPTION="Precompiled Vanilla Kernel (Kernel Ready-to-Eat [KRE])"
 HOMEPAGE="http://funtoo.org/"
-SRC_URI="http://medd.homeip.net:3333/funtoo/releases/14.1/kernels/${_PLV}/kernel-${_PLV}.tar.xz
-		 http://medd.homeip.net:3333/funtoo/releases/14.1/kernels/${_PLV}/modules-${_PLV}.tar.xz
-		 http://medd.homeip.net:3333/funtoo/releases/14.1/kernels/${_PLV}/headers-${_PLV}.tar.xz"
+SRC_URI="http://medd.homeip.net:3333/chinchilla/releases/14.1/kernels/${_PLV}/kernel-${_PLV}.tar.xz
+         http://medd.homeip.net:3333/chinchilla/releases/14.1/kernels/${_PLV}/modules-${_PLV}.tar.xz
+         http://medd.homeip.net:3333/chinchilla/releases/14.1/kernels/${_PLV}/headers-${_PLV}.tar.xz"
 
 RESTRICT="mirror strip"
 LICENSE="GPL-2"

@@ -21,7 +21,7 @@ fi
 
 LICENSE="GPL-2 LGPL-2.1 MIT"
 SLOT="0"
-IUSE="+cairo debug dbus fuse +gconf gnome gtk kde +python +svg"
+IUSE="debug dbus fuse +gconf gnome gtk kde +python +svg test"
 
 COMMONDEPEND="
 	!x11-wm/compiz-fusion
@@ -44,19 +44,19 @@ COMMONDEPEND="
 	media-libs/libpng:0=
 	>=media-libs/mesa-6.5.1-r1
 	>=x11-base/xorg-server-1.1.1-r1
+	>=x11-libs/cairo-1.0
 	>=x11-libs/libX11-1.4
 	x11-libs/libXcomposite
 	x11-libs/libXdamage
 	x11-libs/libXext
-	x11-libs/libXinerama
 	x11-libs/libXrandr
+	>=x11-libs/libXrender-0.9.3
+	x11-libs/libXinerama
 	x11-libs/libICE
 	x11-libs/libSM
-	>=x11-libs/libXrender-0.9.3
 	>=x11-libs/startup-notification-0.7
 	virtual/opengl
 	virtual/glu
-	cairo? ( x11-libs/cairo[X] )
 	fuse? ( sys-fs/fuse )  
 	gnome? (
 		gnome-base/gnome-desktop
@@ -68,23 +68,18 @@ COMMONDEPEND="
 		x11-libs/pango
 	)
 	gconf? ( gnome-base/gconf )
-	kde? (
-		|| (
-			>=kde-base/kwin-4.2.0
-		)
-	)
-	svg? (
-		>=gnome-base/librsvg-2.14.0:2
-		>=x11-libs/cairo-1.0
-	)
-	dbus? ( >=sys-apps/dbus-1.0 )"
+	kde? ( >=kde-base/kwin-4.2.0 )
+	svg? ( >=gnome-base/librsvg-2.14.0:2 )
+	dbus? ( >=sys-apps/dbus-1.0 )
+	test? ( dev-cpp/gtest
+		dev-cpp/gmock
+		sys-apps/xorg-gtest )"
 
 DEPEND="${COMMONDEPEND}
 	app-admin/chrpath
 	dev-util/pkgconfig
 	x11-proto/damageproto
-	x11-proto/xineramaproto
-	dev-cpp/gtest"
+	x11-proto/xineramaproto"
 
 RDEPEND="${COMMONDEPEND}
 	python? ( dev-python/pygtk )
@@ -113,6 +108,7 @@ src_configure() {
 		"$(cmake-utils_use_use gtk GTK)"
 		"$(cmake-utils_use_use kde KDE4)"
 		"$(cmake-utils_use_use python PYTHON)"
+		"$(cmake-utils_use test COMPIZ_BUILD_TESTING)"
 		"-DCMAKE_C_FLAGS=$(usex debug '-DDEBUG -ggdb' '')"
 		"-DCMAKE_CXX_FLAGS=$(usex debug '-DDEBUG -ggdb' '')"
 		"-DCOMPIZ_DEFAULT_PLUGINS=ccp"
