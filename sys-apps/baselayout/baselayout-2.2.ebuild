@@ -39,7 +39,7 @@ multilib_layout() {
 	# figure out which paths should be symlinks and which should be directories
 	local dirs syms exp d
 	for libdir in ${libdirs} ; do
-		exp=( {,usr/,usr/local/}${libdir} )
+		exp=( {usr/,usr/local/}${libdir} )
 		for d in "${exp[@]/#/${ROOT}}" ; do
 			# most things should be dirs
 			if [ "${SYMLINK_LIB}" = "yes" ] && [ "${libdir}" = "lib" ] ; then
@@ -62,7 +62,7 @@ multilib_layout() {
 	# setup symlinks and dirs where we expect them to be; do not migrate
 	# data ... just fall over in that case.
 	local prefix
-	for prefix in "${ROOT}"{,usr/,usr/local/} ; do
+	for prefix in "${ROOT}"{usr/,usr/local/} ; do
 		if [ "${SYMLINK_LIB}" = yes ] ; then
 			# we need to make sure "lib" points to the native libdir
 			if [ -h "${prefix}lib" ] ; then
@@ -124,6 +124,34 @@ multilib_layout() {
 	done
 }
 
+usrmerge_layout() {
+	local d
+	for d in bin sbin $(get_all_libdirs) ; do
+		if [ -h "${ROOT}${d}" ] ; then
+			continue
+		elif [ -d "${ROOT}${d}" ] ; then
+			if [ -h "${ROOT}usr/${d}" ] ; then
+				if [ "${SYMLINK_LIB}" = "yes" ] && [ "${d}" == "lib" ] ; then
+					mv ${ROOT}${d}/* ${ROOT}usr/${d}/
+					rmdir ${ROOT}${d}
+				else
+					die "${ROOT}usr/${d} is not a directory"
+				fi
+			elif [ -d "${ROOT}usr/${d}" ] ; then
+				# it is pointless to check for duplicate files
+				# if they don't exist everything is fine
+				# if they do they will reappear on first update
+				mv ${ROOT}${d}/* ${ROOT}usr/${d}/
+				rmdir ${ROOT}${d}
+			else
+				mv ${ROOT}${d} ${ROOT}usr/
+			fi
+		fi
+		ln -s usr/${d} ${ROOT}${d}
+		mkdir -p ${ROOT}usr/${d}
+	done
+}
+
 pkg_preinst() {
 	# Bug #217848 - Since the remap_dns_vars() called by pkg_preinst() of
 	# the baselayout-1.x ebuild copies all the real configs from the user's
@@ -141,6 +169,7 @@ pkg_preinst() {
 	# stages, but they cannot be in CONTENTS.
 	# Also, we cannot reference $S as binpkg will break so we do this.
 	multilib_layout
+	usrmerge_layout
 	if use build ; then
 		emake -C "${D}/usr/share/${PN}" DESTDIR="${ROOT}" layout || die
 	fi
@@ -171,7 +200,7 @@ src_install() {
 	echo "LDPATH='${ldpaths#:}'" >> "${D}"/etc/env.d/00basic
 
 	# rc-scripts version for testing of features that *should* be present
-	echo "Gentoo Base System release ${PV}" > "${D}"/etc/gentoo-release
+	echo "Party Linux System release ${PV}" > "${D}"/etc/gentoo-release
 }
 
 pkg_postinst() {

@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/libsecret/libsecret-0.16.ebuild,v 1.1 2013/09/01 21:30:41 eva Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-crypt/libsecret/libsecret-0.16.ebuild,v 1.3 2014/02/22 20:56:20 pacho Exp $
 
 EAPI="5"
 PYTHON_COMPAT=( python2_{6,7} )

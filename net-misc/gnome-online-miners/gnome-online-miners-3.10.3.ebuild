@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/gnome-online-miners/gnome-online-miners-3.10.3.ebuild,v 1.2 2014/02/15 10:44:23 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/gnome-online-miners/gnome-online-miners-3.10.3.ebuild,v 1.4 2014/02/22 22:31:03 pacho Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"

@@ -1,6 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/ia64/package.use.mask,v 1.138 2014/02/10 19:01:53 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/arch/ia64/package.use.mask,v 1.140 2014/02/23 10:49:49 pacho Exp $
+
+# Pacho Ramos <pacho@gentoo.org> (23 Feb 2013)
+# Needed dependencies cannot be installed on ia64, bug #498638
+dev-util/dbus-test-runner test
+
+# Pacho Ramos <pacho@gentoo.org> (22 Feb 2013)
+# Missing keywords, bug #495250
+>=gnome-base/gnome-extra-apps-3.10 tracker
 
 # Pacho Ramos <pacho@gentoo.org> (10 Feb 2014)
 # Missing keywords, bug #495254

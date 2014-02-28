@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-backup/deja-dup/deja-dup-29.5.ebuild,v 1.1 2014/01/31 08:25:49 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-backup/deja-dup/deja-dup-29.5.ebuild,v 1.3 2014/02/22 20:54:48 pacho Exp $
 
 EAPI=5
 

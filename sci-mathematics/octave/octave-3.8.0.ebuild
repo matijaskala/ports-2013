@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/octave/octave-3.8.0.ebuild,v 1.1 2014/02/19 00:52:33 gienah Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/octave/octave-3.8.0.ebuild,v 1.7 2014/02/24 11:16:44 gienah Exp $
 
 EAPI=5
 
@@ -32,7 +32,7 @@ RDEPEND="
 	hdf5? ( sci-libs/hdf5 )
 	imagemagick? ( || (
 			media-gfx/graphicsmagick[cxx]
-			>=media-gfx/imagemagick-6.8.8.5[cxx] ) )
+			media-gfx/imagemagick[cxx] ) )
 	opengl? (
 		media-libs/freetype:2
 		media-libs/fontconfig
@@ -77,12 +77,13 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-3.8.0-llvm-configure.patch
 	"${FILESDIR}"/${PN}-3.8.0-JIT-64-bit-indexing.patch
 	"${FILESDIR}"/${PN}-3.8.0-disable-getcwd-path-max-test-as-it-is-too-slow.patch
+	"${FILESDIR}"/${PN}-3.8.0-avoid-gui-sigsegv-if-curl-is-not-available.patch
 )
 
 pkg_pretend() {
 	if use qrupdate || use sparse; then
-		local blaslib=$(pkg-config --libs-only-l "blas" | sed -e 's@.*-l@lib@' | cut -d' ' -f 1)
-		einfo "Checking dependencies are built wtih the same blas lib = ${blaslib}"
+		local blaslib=$(pkg-config --libs-only-l blas | sed -e 's@-l\([^ \t]*\)@lib\1@' | cut -d' ' -f 1)
+		einfo "Checking dependencies are built with the same blas lib = ${blaslib}"
 		local usr_lib="${ROOT}usr/$(get_libdir)"
 		local libs=( )
 		use qrupdate && libs+=( "${usr_lib}"/libqrupdate.so )
@@ -98,10 +99,10 @@ pkg_pretend() {
 			# earlier versions of sci-libs/cholmod were not linked with blas, while as later
 			# versions are if built with the lapack use flag.
 			scanelf -n ${i} | grep -q "${blaslib}"
-			if [[ $? != 0 ]]; then
+			if [[ $? -ne 0 ]]; then
 				# Does it appear to be linked with some blas or lapack library?
 				scanelf -n ${i} | egrep -q "blas|lapack"
-				if [[ $? == 0 ]]; then
+				if [[ $? -eq 0 ]]; then
 					eerror "*******************************************************************************"
 					eerror "${i} must be rebuilt with ${blaslib}"
 					eerror ""
@@ -135,6 +136,12 @@ src_prepare() {
 		ewarn "with OpenGL graphics requires the gl2ps - but at the time of writing x11-libs/gl2ps"
 		ewarn "does not have the hppa keyword"
 	fi
+	# Fix bug 501756 - sci-mathematics/octave-3.8.0 LC_ALL=et_EE - octave.cc:485:56:
+	# error: 'Fallow_noninteger_range_as_index' was not declared in this scope
+	sed -e 's@A-Za-z0-9@[:alnum:]@g' \
+		-e 's@A-Za-z@[:alpha:]@g' \
+		-i "${S}/libinterp/mkbuiltins" \
+		|| die "Could not patch ${S}/libinterp/mkbuiltins for some non-English locales"
 	autotools-utils_src_prepare
 }
 
@@ -197,6 +204,6 @@ src_install() {
 	use doc && dodoc $(find doc -name \*.pdf)
 	[[ -e test/fntests.log ]] && dodoc test/fntests.log
 	use java && java-pkg_regjar "${ED}/usr/share/${PN}/${PV}/m/java/octave.jar"
-	echo "LDPATH=${EROOT%/}/usr/$(get_libdir)/${P}" > 99octave
+	echo "LDPATH=${EROOT}usr/$(get_libdir)/${PN}/${PV}" > 99octave
 	doenvd 99octave
 }

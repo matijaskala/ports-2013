@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/gtk-doc/gtk-doc-1.20.ebuild,v 1.1 2014/02/16 09:04:01 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/gtk-doc/gtk-doc-1.20.ebuild,v 1.3 2014/02/22 21:30:08 pacho Exp $
 
 EAPI=5
 GCONF_DEBUG="yes"

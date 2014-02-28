@@ -1,21 +1,26 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Header: /var/cvsroot/gentoo-x86/mate-base/mate-common/mate-common-1.6.2.ebuild,v 1.1 2014/02/26 21:52:22 tomwij Exp $
 
-EAPI=5
+EAPI="5"
 
-inherit base mate-desktop.org
+inherit versionator
 
+MATE_BRANCH="$(get_version_component_range 1-2)"
+
+SRC_URI="http://pub.mate-desktop.org/releases/${MATE_BRANCH}/${P}.tar.xz"
 DESCRIPTION="Common files for development of MATE packages"
 HOMEPAGE="http://mate-desktop.org"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
-IUSE=""
+KEYWORDS="~amd64"
 
 src_install() {
-	base_src_install
-	mv doc-build/README README.doc-build || die "renaming doc-build/README failed"
-	dodoc ChangeLog README* doc/usage.txt
+	mv doc-build/README README.doc-build \
+		|| die "Failed to rename doc-build/README."
+
+	default
+
+	dodoc doc/usage.txt
 }

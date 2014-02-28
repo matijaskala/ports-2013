@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-core-libs/gnome-core-libs-3.10.0.ebuild,v 1.2 2014/02/15 11:02:39 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-core-libs/gnome-core-libs-3.10.0.ebuild,v 1.4 2014/02/22 21:40:02 pacho Exp $
 
 EAPI="5"
 

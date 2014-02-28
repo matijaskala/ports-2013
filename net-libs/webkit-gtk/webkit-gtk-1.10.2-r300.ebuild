@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-1.10.2-r300.ebuild,v 1.17 2014/02/10 19:17:08 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-1.10.2-r300.ebuild,v 1.18 2014/02/21 06:34:57 pacho Exp $
 
 EAPI="5"
 
@@ -15,7 +15,7 @@ SRC_URI="http://www.webkitgtk.org/releases/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="3"
-KEYWORDS=" arm"
+KEYWORDS="arm"
 IUSE="aqua coverage debug +geoloc +gstreamer +introspection +jit spell +webgl"
 # bugs 372493, 416331
 REQUIRED_USE="introspection? ( geoloc gstreamer )"

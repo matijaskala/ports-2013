@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/telepathy-glib/telepathy-glib-0.22.1.ebuild,v 1.1 2014/02/09 11:45:23 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/telepathy-glib/telepathy-glib-0.22.1.ebuild,v 1.3 2014/02/22 22:28:38 pacho Exp $
 
 EAPI="5"
 PYTHON_COMPAT=( python2_{6,7} )

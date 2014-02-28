@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/light-themes/light-themes-0.1.93-r4.ebuild,v 1.1 2014/02/16 11:33:25 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-themes/light-themes/light-themes-0.1.93-r4.ebuild,v 1.3 2014/02/22 22:53:50 pacho Exp $
 
 EAPI=5
 inherit eutils
