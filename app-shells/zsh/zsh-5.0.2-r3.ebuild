@@ -175,10 +175,6 @@ pkg_postinst() {
 	if [[ -z ${REPLACING_VERSIONS} ]] ; then
 		# should link to http://www.gentoo.org/doc/en/zsh.xml
 		echo
-		elog "If you want to enable partylinux prompt, add"
-		elog "	prompt party"
-		elog "to your ~/.zshrc"
-		echo
 		elog "If you want to enable Portage completions,"
 		elog "emerge app-shells/zsh-completion and add"
 		elog "	autoload -U compinit"

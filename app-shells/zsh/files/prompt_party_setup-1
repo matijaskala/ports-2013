@@ -12,8 +12,8 @@ EOF
 prompt_party_setup () {
   local prompt_gentoo_prompt=${1:-'blue'}
   local prompt_gentoo_user=${2:-'green'}
-  local prompt_gentoo_root=${3:-'red'}
-  local prompt_gentoo_time=${4:-'magenta'}
+  local prompt_gentoo_machine=${3:-'red'}
+  local prompt_gentoo_time=${4:-'cyan'}
 
   if [ "$USER" = 'root' ]
   then
@@ -26,7 +26,7 @@ prompt_party_setup () {
   #setopt noxtrace localoptions
 
   local path_prompt="%B%F{$prompt_gentoo_prompt}%1~"
-  local machine_prompt="%B%F{$prompt_gentoo_rootf}%U%m%u%F{$prompt_gentoo_prompt}:%b%F{red}%T%f"
+  local machine_prompt="%B%F{$prompt_gentoo_machine}%U%m%u%F{$prompt_gentoo_prompt}:%b%F{$prompt_gentoo_time}%T%f"
   typeset -g PS1="$base_prompt$path_prompt %# $post_prompt"
   typeset -g PS2="$base_prompt$path_prompt %_> $post_prompt"
   typeset -g PS3="$base_prompt$path_prompt ?# $post_prompt"

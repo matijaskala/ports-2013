@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-210.ebuild,v 1.3 2014/02/26 03:36:44 floppym Exp $
 
 EAPI=5
 
@@ -18,7 +16,7 @@ LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
 KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
-	kdbus +kmod lzma pam policykit python qrcode +seccomp selinux tcpd
+	kdbus +kmod lzma +openrc pam policykit python qrcode +seccomp selinux tcpd
 	test vanilla xattr"
 
 MINKV="3.0"
@@ -53,12 +51,12 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	!sys-auth/nss-myhostname
 	!<sys-libs/glibc-2.14
+	!sys-apps/openrc
 	!sys-fs/udev"
 
-# sys-apps/daemon: the daemon only (+ build-time lib dep for tests)
 PDEPEND=">=sys-apps/dbus-1.6.8-r1:0
 	>=sys-apps/hwids-20130717-r1[udev]
-	>=sys-fs/udev-init-scripts-25
+	openrc? ( >=sys-fs/udev-init-scripts-25 )
 	policykit? ( sys-auth/polkit )
 	!vanilla? ( sys-apps/gentoo-systemd-integration )"
 
@@ -77,11 +75,6 @@ DEPEND="${COMMON_DEPEND}
 	test? ( >=sys-apps/dbus-1.6.8-r1:0 )"
 
 src_prepare() {
-	if use doc; then
-		gtkdocize --docdir docs/ || die
-	else
-		echo 'EXTRA_DIST =' > docs/gtk-doc.make
-	fi
 
 	# Bug 463376
 	sed -i -e 's/GROUP="dialout"/GROUP="uucp"/' rules/*.rules || die
@@ -101,14 +94,6 @@ pkg_pretend() {
 	use xattr && CONFIG_CHECK+=" ~TMPFS_XATTR"
 	kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
 	use firmware-loader || CONFIG_CHECK+=" ~!FW_LOADER_USER_HELPER"
-
-	if linux_config_exists; then
-		local uevent_helper_path=$(linux_chkconfig_string UEVENT_HELPER_PATH)
-			if [ -n "${uevent_helper_path}" ] && [ "${uevent_helper_path}" != '""' ]; then
-				ewarn "It's recommended to set an empty value to the following kernel config option:"
-				ewarn "CONFIG_UEVENT_HELPER_PATH=${uevent_helper_path}"
-			fi
-	fi
 
 	if [[ ${MERGE_TYPE} != binary ]]; then
 		if [[ $(gcc-major-version) -lt 4
@@ -146,8 +131,7 @@ multilib_src_configure() {
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		# make sure we get /bin:/sbin in $PATH
-		--enable-split-usr
+		--disable-split-usr
 		# disable sysv compatibility
 		--with-sysvinit-path=
 		--with-sysvrcnd-path=
@@ -266,9 +250,6 @@ multilib_src_install() {
 
 	if multilib_is_native_abi; then
 		emake "${mymakeopts[@]}" install
-		# Even with --enable-networkd, it's not right to have this running by default
-		# when it's unconfigured.
-		rm -f "${D}"/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
 	else
 		mymakeopts+=(
 			install-libLTLIBRARIES
@@ -281,16 +262,16 @@ multilib_src_install() {
 
 		emake "${mymakeopts[@]}"
 	fi
-
-	# install compat pkg-config files
-	local pcfiles=( src/compat-libs/libsystemd-{daemon,id128,journal,login}.pc )
-	emake "${mymakeopts[@]}" install-pkgconfiglibDATA \
-		pkgconfiglib_DATA="${pcfiles[*]}"
 }
 
 multilib_src_install_all() {
 	prune_libtool_files --modules
 	einstalldocs
+
+	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
+	dosym ../lib/systemd/systemd /usr/bin/systemd
+
+	newinitd "${FILESDIR}/functions.sh" "functions.sh"
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \

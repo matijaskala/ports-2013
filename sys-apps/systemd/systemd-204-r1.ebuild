@@ -53,6 +53,7 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	!sys-auth/nss-myhostname
 	!<sys-libs/glibc-2.10
+	!sys-apps/openrc
 	!sys-fs/udev"
 
 PDEPEND=">=sys-apps/hwids-20130326.1[udev]
@@ -280,6 +281,8 @@ multilib_src_install_all() {
 
 	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
 	dosym ../lib/systemd/systemd /usr/bin/systemd
+
+	newinitd "${FILESDIR}/functions.sh" "functions.sh"
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \

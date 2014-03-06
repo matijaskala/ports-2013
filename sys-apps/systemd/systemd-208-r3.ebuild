@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-208-r3.ebuild,v 1.2 2014/02/16 19:23:21 floppym Exp $
 
 EAPI=5
 
@@ -17,9 +15,9 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz -> ${P}-r1.tar.
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/1"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
-	+kmod lzma pam policykit python qrcode selinux tcpd test
+	+kmod lzma openrc pam policykit python qrcode selinux tcpd test
 	vanilla xattr"
 
 MINKV="3.0"
@@ -30,7 +28,7 @@ COMMON_DEPEND=">=sys-apps/dbus-1.6.8-r1
 	acl? ( sys-apps/acl )
 	audit? ( >=sys-process/audit-2 )
 	cryptsetup? ( >=sys-fs/cryptsetup-1.6 )
-	gcrypt? ( >=dev-libs/libgcrypt-1.4.5 )
+	gcrypt? ( >=dev-libs/libgcrypt-1.4.5:0 )
 	gudev? ( >=dev-libs/glib-2[${MULTILIB_USEDEP}] )
 	http? ( net-libs/libmicrohttpd )
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
@@ -54,10 +52,11 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	!sys-auth/nss-myhostname
 	!<sys-libs/glibc-2.10
+	!sys-apps/openrc
 	!sys-fs/udev"
 
 PDEPEND=">=sys-apps/hwids-20130717-r1[udev]
-	>=sys-fs/udev-init-scripts-25
+	openrc? ( >=sys-fs/udev-init-scripts-25 )
 	policykit? ( sys-auth/polkit )
 	!vanilla? ( sys-apps/gentoo-systemd-integration )"
 
@@ -88,14 +87,6 @@ pkg_pretend() {
 	use xattr && CONFIG_CHECK+=" ~TMPFS_XATTR"
 	kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
 	use firmware-loader || CONFIG_CHECK+=" ~!FW_LOADER_USER_HELPER"
-
-	if linux_config_exists; then
-		local uevent_helper_path=$(linux_chkconfig_string UEVENT_HELPER_PATH)
-			if [ -n "${uevent_helper_path}" ] && [ "${uevent_helper_path}" != '""' ]; then
-				ewarn "It's recommended to set an empty value to the following kernel config option:"
-				ewarn "CONFIG_UEVENT_HELPER_PATH=${uevent_helper_path}"
-			fi
-	fi
 
 	if [[ ${MERGE_TYPE} != binary ]]; then
 		if [[ $(gcc-major-version) -lt 4
@@ -143,8 +134,7 @@ multilib_src_configure() {
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		# make sure we get /bin:/sbin in $PATH
-		--enable-split-usr
+		--disable-split-usr
 		# disable sysv compatibility
 		--with-sysvinit-path=
 		--with-sysvrcnd-path=
@@ -274,6 +264,11 @@ multilib_src_install() {
 multilib_src_install_all() {
 	prune_libtool_files --modules
 	einstalldocs
+
+	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
+	dosym ../lib/systemd/systemd /usr/bin/systemd
+
+	newinitd "${FILESDIR}/functions.sh" "functions.sh"
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \

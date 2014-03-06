@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15432 2014/02/28 20:50:29 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15450 2014/03/05 21:15:02 maekke Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,16 +30,70 @@
 
 #--- END OF EXAMPLES ---
 
+# Manuel Rüger <mrueg@gentoo.org> (05 Mar 2014)
+# Mask further ruby18-only packages
+# Removal in 30 days
+dev-ruby/locale_rails
+dev-ruby/parsetree
+dev-ruby/pry:0
+dev-ruby/rack:0
+dev-ruby/rspec-rails:0
+dev-ruby/ruby2ruby:0
+dev-ruby/rubymail
+
+
+# Michał Górny <mgorny@gentoo.org> (05 Mar 2014)
+# Seems to cause more trouble than it fixes. Bugs #503470, #503472.
+=sys-apps/systemd-208.277
+
+# Mike Gilbert <floppym@gentoo.org> (04 Mar 2014)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+www-plugins/chrome-binary-plugins:unstable
+
+# Samuli Suominen <ssuominen@gentoo.org> (03 Mar 2014)
+# gnome-extra/polkit-gnome is the "GTK+ polkit agent" and has no extra
+# dependencies that installing lxde-base/lxpolkit would solve, thus
+# the only motivation for creation of lxpolkit was to drop the word
+# 'gnome' from the package's name. The packages are near identical
+# by the outlook, determined by the used GTK+ theme.
+#
+# Raise yourself above the word 'gnome' and install the de facto GTK+ agent:
+# emerge -C lxpolkit
+# emerge -1 polkit-gnome
+#
+# Removal will happen at later date, but since there is no hurry, give it
+# until rest of the year.
+lxde-base/lxpolkit
+
+# Ulrich Müller <ulm@gentoo.org> (1 Mar 2014)
+# Version 0.3 does not work with Emacs 24; git master
+# also fails, because of changed Delicious API.
+# According to upstream, a new release is "unlikely".
+# Masked for removal in 60 days, bug 502168.
+app-emacs/delicious
+
 # Michał Górny <mgorny@gentoo.org> (28 Feb 2014)
-# New multilib conversions waiting for emul-linux update and some
-# testing. Note: yngwin requested cairo being masked for 30 days
-# and at least one version bump.
+# New multilib conversions for testing, grouped with corresponding
+# emul-linux bumps. Please unmask in order, after getting ACK from
+# package maintainer.
+#
+# Note: yngwin explicitly requested 30 days + 1 version bump for cairo.
 >=dev-libs/libgcrypt-1.6.1-r1
 dev-libs/libgcrypt:11
 >=dev-libs/lzo-2.06-r1
->=x11-libs/cairo-1.12.16-r1
 >=app-emulation/emul-linux-x86-baselibs-20131008-r20
+>=dev-libs/libxslt-1.1.28-r2
+>=app-emulation/emul-linux-x86-baselibs-20131008-r21
+>=x11-libs/cairo-1.12.16-r1
 >=app-emulation/emul-linux-x86-gtklibs-20131008-r2
+>=x11-libs/gdk-pixbuf-2.30.6-r1
+>=app-emulation/emul-linux-x86-gtklibs-20131008-r3
+>=media-gfx/graphite2-1.2.4-r1
+>=media-libs/harfbuzz-0.9.26-r1
+>=x11-libs/pango-1.36.2-r1
+>=x11-libs/pangox-compat-0.0.2-r1
+>=app-emulation/emul-linux-x86-gtklibs-20131008-r4
 
 # Pawel Hajdan jr <phajdan.jr@gentoo.org> (27 Feb 2014)
 # Dev channel releases are only for people who are developers or want more
@@ -83,10 +137,15 @@ mate-base/libmatekbd
 mate-base/mate-common
 mate-base/mate-desktop
 mate-base/mate-menus
+mate-base/mate-panel
 mate-base/mate-session-manager
+mate-base/mate-settings-daemon
 mate-extra/mate-dialogs
 mate-extra/mate-polkit
+net-wireless/mate-bluetooth
 x11-libs/libmatewnck
+x11-themes/mate-icon-theme
+x11-wm/mate-window-manager
 
 # Tom Wijsman <TomWij@gentoo.org> (21 Feb 2014)
 # MATE Desktop Environment >=1.7 introduction mask:
@@ -99,10 +158,15 @@ x11-libs/libmatewnck
 >=mate-base/mate-common-1.7
 >=mate-base/mate-desktop-1.7
 >=mate-base/mate-menus-1.7
+>=mate-base/mate-panel-1.7
 >=mate-base/mate-session-manager-1.7
+>=mate-base/mate-settings-daemon-1.7
 >=mate-extra/mate-dialogs-1.7
 >=mate-extra/mate-polkit-1.7
+>=net-wireless/mate-bluetooth-1.7
 >=x11-libs/libmatewnck-1.7
+>=x11-themes/mate-icon-theme-1.7
+>=x11-wm/mate-window-manager-1.7
 
 # Ulrich Müller <ulm@gentoo.org> (21 Feb 2014)
 # Included with Emacs since version 23.
@@ -231,10 +295,6 @@ rox-extra/comicthumb
 # wrt bug #424255
 media-plugins/vdr-amarok
 
-# Patrick Lauer <patrick@gentoo.org> (07 Feb 2014)
-# Reliably makes cryptsetup segfault, breaking boot is not acceptable
-=dev-libs/libgcrypt-1.6.1
-
 # Tim Harder <radhermit@gentoo.org> (04 Feb 2014)
 # Masked for testing
 =media-sound/lilypond-2.19*
@@ -335,11 +395,6 @@ www-client/google-chrome:unstable
 # This is not for your production kit quite yet.
 =net-misc/asterisk-12*
 
-# Markus Meier <maekke@gentoo.org> (12 Jan 2014)
-# masked for testing
->=media-libs/libpano13-2.9.19_beta1
->=media-gfx/hugin-2014.0.0_beta1
-
 # Magnus Granberg <zorry@gentoo.org>
 # Gcc 4.8.2-r1 has default ssp and need testing,
 # See #484714
@@ -408,11 +463,6 @@ games-emulation/m64py
 # Causes build failures, bug #492800
 =media-libs/mesa-10.0*
 
-# Sergey Popov <pinkbyte@gentoo.org> (14 Nov 2013)
-# Masked for testing
-~dev-util/boost-build-1.55.0
-~dev-libs/boost-1.55.0
-
 # Ben de Groot <yngwin@gentoo.org> (11 Nov 2013)
 # Mask older roboto versions to give users a regular upgrade path
 # now that we've switched to upstream versioning
@@ -477,7 +527,7 @@ www-apache/mod_spdy
 # Mikle Kolyada <zlogene@gentoo.org> (08 Sep 2013)
 # Untested / unconfirmed major bump of perl #479064
 # Needs proper testing before being unleashed
-=dev-lang/perl-5.18.1
+=dev-lang/perl-5.18*
 =virtual/perl-Attribute-Handlers-0.940.0
 =virtual/perl-CPAN-2.0.0
 =virtual/perl-Devel-PPPort-3.200.0-r2
@@ -510,11 +560,6 @@ virtual/perl-B-Debug
 # Mask 5.1 series because the backport of the CVE-2012-5627
 # has not be done. bug #446240 comment 2
 =dev-db/mariadb-5.1.67
-
-# Sergey Popov <pinkbyte@gentoo.org> (27 Aug 2013)
-# Masked for testing
-~dev-util/boost-build-1.54.0
-~dev-libs/boost-1.54.0
 
 # Patrick Lauer <patrick@gentoo.org> (19 Aug 2013)
 # Masking live ebuilds
@@ -586,10 +631,6 @@ net-irc/xchat-otr
 dev-java/sun-jdk
 dev-java/sun-jre-bin
 dev-java/sun-jce-bin
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (30 Jun 2013)
-# temp masked for testing, wrt bug 474888
-=media-plugins/vdr-music-0.9.9
 
 # Alexis Ballier <aballier@gentoo.org> (26 Jun 2013)
 # New major release. Rev. deps need to be checked first.
