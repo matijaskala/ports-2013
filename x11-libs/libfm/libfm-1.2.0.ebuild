@@ -98,6 +98,8 @@ src_install() {
 	if [[ -h ${D}/usr/include/${PN} || -d ${D}/usr/include/${PN} ]]; then
 		rm -r "${D}"/usr/include/${PN}
 	fi
+
+	rm -f "${D}"/usr/bin/lxshortcut
 }
 
 pkg_preinst() {

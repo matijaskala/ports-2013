@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/dbf/dbf-2.0.7.ebuild,v 1.1 2013/12/27 07:10:53 graaff Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-ruby/dbf/dbf-2.0.7.ebuild,v 1.3 2014/03/08 12:15:02 pacho Exp $
 
 EAPI=5
 
-USE_RUBY="ruby18 ruby19 ruby20 jruby"
+USE_RUBY="ruby18 ruby19 jruby"
 
 RUBY_FAKEGEM_RECIPE_TEST="rspec"
 
@@ -21,7 +21,7 @@ HOMEPAGE="http://github.com/infused/dbf"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE=""
 
 USE_RUBY="ruby18" ruby_add_rdepend ">=dev-ruby/fastercsv-1.5.5"
