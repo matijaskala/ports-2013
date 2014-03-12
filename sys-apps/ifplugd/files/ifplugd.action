@@ -1,14 +1,19 @@
 #!/bin/sh
+# Copyright 1999-2004 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+#
+# Gentoo-specific ifplugd.action
+#
 # This file gets called by ifplugd when it wants to bring an interface
 # up or down.
+#
 
 if grep -q initng /proc/1/cmdline 
 then
     EXEC="/sbin/ngc"
     INITNG="yes"
 else
-    EXEC="/etc/init.d/netif.$1"
+    EXEC="/etc/init.d/net.$1"
     INITNG="no"
 fi
 
@@ -16,7 +21,7 @@ case "$2" in
     up)
 	if [ "${INITNG}" = "yes" ]
 	then
-	    ARGS="-u netif/$1"
+	    ARGS="-u net/$1"
 	else
 	    ARGS="--quiet start"
 	fi
@@ -24,7 +29,7 @@ case "$2" in
     down)
 	if [ "${INITNG}" = "yes" ]
 	then
-	    ARGS="-d netif/$1"
+	    ARGS="-d net/$1"
 	else
 	    ARGS="--quiet stop"
 	fi

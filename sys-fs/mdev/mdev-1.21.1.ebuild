@@ -1,3 +1,5 @@
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI="4"
 inherit eutils flag-o-matic toolchain-funcs multilib
 
@@ -8,7 +10,7 @@ base='busybox'
 MY_P=${base}-${PV/_/-}
 
 SRC_URI="http://www.busybox.net/downloads/${MY_P}.tar.bz2"
-KEYWORDS="~*"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
 SLOT="0"

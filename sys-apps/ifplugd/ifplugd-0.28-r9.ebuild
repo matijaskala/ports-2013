@@ -1,4 +1,6 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/ifplugd/ifplugd-0.28-r9.ebuild,v 1.8 2012/05/04 09:17:30 jdhore Exp $
 
 EAPI=4
 
@@ -10,7 +12,7 @@ SRC_URI="http://0pointer.de/lennart/projects/ifplugd/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~arm amd64 hppa ppc x86"
 IUSE="doc"
 
 DEPEND="virtual/pkgconfig
@@ -41,7 +43,7 @@ src_install() {
 	rm -rf "${D}/etc/ifplugd" "${D}/etc/init.d/${PN}"
 
 	exeinto "/etc/${PN}"
-	newexe "${FILESDIR}/${PN}.action-r1" "${PN}.action"
+	newexe "${FILESDIR}/${PN}.action" "${PN}.action"
 
 	cd "${S}/doc"
 	dodoc README SUPPORTED_DRIVERS
@@ -49,6 +51,11 @@ src_install() {
 }
 
 pkg_postinst() {
+	# Warn about old init script
+	einfo "baselayout now starts ifplugd automatically on wired interfaces"
+	einfo "If you do not want this behaviour then add !plug to your modules"
+	einfo "in /etc/conf.d/net like so"
+	einfo "   modules=( \"!plug\" )"
 
 	if [ -e "${ROOT}/etc/init.d/ifplugd" -o -e "${ROOT}/etc/conf.d/ifplugd" ] ; then
 		echo
