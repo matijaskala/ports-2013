@@ -17,6 +17,7 @@ COMMONDEPEND="
 	>=dev-util/cmake-2.8.4
 	>=dev-lang/vala-0.22
 	>=dev-libs/glib-2.36.4
+	>=dev-libs/gdl-3.4
 	dev-util/glade
 	>=dev-libs/libgee-0.10.5
 	>=x11-libs/gtk+-2.32

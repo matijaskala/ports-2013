@@ -11,14 +11,14 @@ SRC_URI="http://launchpad.net/${PN}-core/${MY_PV}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~exp"
-IUSE="gtk3 xcomposite"
+KEYWORDS="~amd64 ~x86"
+IUSE="+gtk3 xcomposite"
 
 RDEPEND="
 	dev-libs/dbus-glib
 	dev-libs/libxml2:2
 	net-misc/curl
-	x11-libs/gtk+:2
+	x11-libs/gtk+
 	x11-libs/gtkglext
 	x11-libs/libXrender
 	gtk3? ( x11-libs/gtk+:3 )

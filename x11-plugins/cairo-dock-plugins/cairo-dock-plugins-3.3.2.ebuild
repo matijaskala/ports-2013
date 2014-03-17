@@ -13,14 +13,14 @@ SRC_URI="http://launchpad.net/${MY_PN}/${MY_PV}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~exp"
-IUSE="alsa clock dbusmenu disks doncky exif gmenu gnome gtk3 impulse kde mail mono nwmon scooby sensors terminal tomboy upower vala webkit xfce xgamma xklavier xrandr zeitgeist"
+KEYWORDS="~amd64 ~x86"
+IUSE="alsa clock dbusmenu disks doncky exif gmenu gnome +gtk3 impulse kde mail mono nwmon scooby sensors terminal tomboy upower vala webkit xfce xgamma xklavier xrandr zeitgeist"
 
 RDEPEND="
 	dev-libs/dbus-glib
 	dev-libs/libxml2
 	gnome-base/librsvg
-	x11-libs/gtk+:2
+	x11-libs/gtk+
 	x11-libs/gtkglext
 	~x11-misc/cairo-dock-${PV}
 

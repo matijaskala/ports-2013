@@ -32,7 +32,7 @@ src_prepare() {
 src_configure() {
 	VALA_API_GEN="${VAPIGEN}" \
 	econf \
-		$(use_enable introspection)
+		$(use_enable introspection) \
 		$(use_enable webapps) \
 		--with-gtk=3
 }

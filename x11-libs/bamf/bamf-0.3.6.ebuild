@@ -35,7 +35,7 @@ src_prepare() {
 
 src_configure() {
 	econf \
-		$(use_enable introspection)
+		$(use_enable introspection) \
 		$(use_enable webapps) \
 		--with-gtk=$(usex gtk3 "3" "2")
 }
