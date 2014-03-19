@@ -1,10 +1,12 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/perl/perl-5.12.3-r1.ebuild,v 1.8 2012/01/02 22:52:21 zmedico Exp $
 
 EAPI=3
 
 inherit eutils alternatives flag-o-matic toolchain-funcs multilib
 
-PATCH_VER=1
+PATCH_VER=4
 
 PERL_OLDVERSEN="5.12.2 5.12.1 5.12.0"
 
@@ -18,25 +20,26 @@ SRC_URI="
 	mirror://cpan/src/${MY_P}.tar.bz2
 	mirror://cpan/authors/id/R/RJ/RJBS/${MY_P}.tar.bz2
 	mirror://gentoo/${MY_P}-${PATCH_VER}.tar.bz2
-	http://dev.gentoo.org/~tove/files/${MY_P}-${PATCH_VER}.tar.bz2"
+	http://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${MY_P}-${PATCH_VER}.tar.bz2"
 #	mirror://cpan/src/${MY_P}.tar.bz2
 #	mirror://gentoo/${MY_P}-${PATCH_VER}.tar.bz2
 HOMEPAGE="http://www.perl.org/"
 
 LICENSE="|| ( Artistic GPL-1 GPL-2 GPL-3 )"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd"
 IUSE="berkdb build debug doc gdbm ithreads"
 
 COMMON_DEPEND="berkdb? ( sys-libs/db )
 	gdbm? ( >=sys-libs/gdbm-1.8.3 )
+	>=sys-devel/libperl-5.10.1
+	!!<sys-devel/libperl-5.10.1
 	app-arch/bzip2
 	sys-libs/zlib"
 DEPEND="${COMMON_DEPEND}
 	elibc_FreeBSD? ( sys-freebsd/freebsd-mk-defs )"
 RDEPEND="${COMMON_DEPEND}"
 PDEPEND=">=app-admin/perl-cleaner-2.5"
-PROVIDE="sys-devel/libperl"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -147,6 +150,7 @@ src_configure() {
 	declare -a myconf
 
 	export LC_ALL="C"
+	[[ ${COLUMNS:-1} -ge 1 ]] || unset COLUMNS # bug #394091
 
 	# some arches and -O do not mix :)
 	use ppc && replace-flags -O? -O1
@@ -223,12 +227,7 @@ src_configure() {
 		# We need to use " and not ', as the written config.sh use ' ...
 		myconf "-Dlibpth=/usr/local/$(get_libdir) /$(get_libdir) /usr/$(get_libdir)"
 	fi
-	# if MANIFEST exists, perl will attempt to see if the source archive is intact and complete.
-	# This test uses "ls", which with recent coreutils can fail if run from a non-terminal (ie. cron).
-	# These failures started consistently happening around Dec 2011.
-	# An easy way to eliminate these redundant tests is to move the MANIFEST while Configure
-	# runs, then move it back in place after so later stages that look for it don't fail.
-	mv MANIFEST MANIFEST.hidden || die
+
 	sh Configure \
 		-des \
 		-Duseshrplib \
@@ -265,7 +264,6 @@ src_configure() {
 		-Ud_csh \
 		-Uusenm \
 		"${myconf[@]}" || die "Unable to configure"
-		mv MANIFEST.hidden MANIFEST || die
 }
 
 src_compile() {

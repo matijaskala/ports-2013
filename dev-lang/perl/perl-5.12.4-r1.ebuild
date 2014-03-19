@@ -1,4 +1,6 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/perl/perl-5.12.4-r1.ebuild,v 1.8 2012/01/02 22:52:21 zmedico Exp $
 
 EAPI=4
 
@@ -25,18 +27,19 @@ HOMEPAGE="http://www.perl.org/"
 
 LICENSE="|| ( Artistic GPL-1 GPL-2 GPL-3 )"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd"
 IUSE="berkdb build debug doc gdbm ithreads"
 
 COMMON_DEPEND="berkdb? ( sys-libs/db )
 	gdbm? ( >=sys-libs/gdbm-1.8.3 )
+	>=sys-devel/libperl-5.10.1
+	!!<sys-devel/libperl-5.10.1
 	app-arch/bzip2
 	sys-libs/zlib"
 DEPEND="${COMMON_DEPEND}
 	elibc_FreeBSD? ( sys-freebsd/freebsd-mk-defs )"
 RDEPEND="${COMMON_DEPEND}"
 PDEPEND=">=app-admin/perl-cleaner-2.5"
-PROVIDE="sys-devel/libperl"
 
 S="${WORKDIR}/${MY_P}"
 

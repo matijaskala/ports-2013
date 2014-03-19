@@ -1,4 +1,6 @@
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/perl/perl-5.14.2.ebuild,v 1.4 2012/03/03 12:29:38 grobian Exp $
 
 EAPI=4
 
@@ -26,18 +28,21 @@ HOMEPAGE="http://www.perl.org/"
 
 LICENSE="|| ( Artistic GPL-1 GPL-2 GPL-3 )"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~ppc-aix ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="berkdb build debug doc gdbm ithreads"
 
-COMMON_DEPEND="berkdb? ( sys-libs/db )
+COMMON_DEPEND="
+	berkdb? ( sys-libs/db )
 	gdbm? ( >=sys-libs/gdbm-1.8.3 )
 	app-arch/bzip2
-	sys-libs/zlib"
+	sys-libs/zlib
+"
 DEPEND="${COMMON_DEPEND}
-	elibc_FreeBSD? ( sys-freebsd/freebsd-mk-defs )"
-RDEPEND="${COMMON_DEPEND}"
+	!prefix? ( elibc_FreeBSD? ( sys-freebsd/freebsd-mk-defs ) )
+"
+RDEPEND="${COMMON_DEPEND}
+"
 PDEPEND=">=app-admin/perl-cleaner-2.5"
-PROVIDE="sys-devel/libperl"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -70,6 +75,7 @@ pkg_setup() {
 		*-netbsd*)    osname="netbsd" ;;
 		*-openbsd*)   osname="openbsd" ;;
 		*-darwin*)    osname="darwin" ;;
+		*-interix*)   osname="interix" ;;
 		*)            osname="linux" ;;
 	esac
 
@@ -86,8 +92,8 @@ pkg_setup() {
 	LIBPERL="libperl$(get_libname ${MY_PV} )"
 	PRIV_LIB="/usr/$(get_libdir)/perl5/${MY_PV}"
 	ARCH_LIB="/usr/$(get_libdir)/perl5/${MY_PV}/${myarch}${mythreading}"
-	SITE_LIB="/usr/$(get_libdir)/perl5/site_perl/${MY_PV}"
-	SITE_ARCH="/usr/$(get_libdir)/perl5/site_perl/${MY_PV}/${myarch}${mythreading}"
+	SITE_LIB="/usr/local/$(get_libdir)/perl5/${MY_PV}"
+	SITE_ARCH="/usr/local/$(get_libdir)/perl5/${MY_PV}/${myarch}${mythreading}"
 	VENDOR_LIB="/usr/$(get_libdir)/perl5/vendor_perl/${MY_PV}"
 	VENDOR_ARCH="/usr/$(get_libdir)/perl5/vendor_perl/${MY_PV}/${myarch}${mythreading}"
 
@@ -126,7 +132,6 @@ check_rebuild() {
 			ewarn "Use: perl-cleaner --modules ; perl-cleaner --force --libperl"
 		fi
 	fi
-	dual_scripts
 }
 
 src_prepare_update_patchlevel_h() {
@@ -148,8 +153,27 @@ src_prepare() {
 
 	# pod/perltoc.pod fails
 	# lib/ExtUtils/t/Embed.t fails
-	ln -s ${LIBPERL} libperl$(get_libname ${SHORT_PV})
-	ln -s ${LIBPERL} libperl$(get_libname )
+	if ! tc-is-static-only ; then
+		ln -s ${LIBPERL} libperl$(get_libname ${SHORT_PV}) || die
+		ln -s ${LIBPERL} libperl$(get_libname ) || die
+	fi
+
+	epatch "${FILESDIR}"/${PN}-5.12.3-aix-soname.patch
+	epatch "${FILESDIR}"/${PN}-5.8.8-solaris-relocation.patch
+	epatch "${FILESDIR}"/${PN}-5.8.8-solaris11.patch
+	epatch "${FILESDIR}"/${PN}-5.14.1-cleanup-paths.patch
+	epatch "${FILESDIR}"/${PN}-5.8.8-usr-local.patch
+	epatch "${FILESDIR}"/${PN}-5.10.1-hpux.patch
+	epatch "${FILESDIR}"/${PN}-5.8.8-darwin-cc-ld.patch
+	epatch "${FILESDIR}"/${PN}-5.12.3-mint.patch
+	epatch "${FILESDIR}"/${PN}-5.12.3-interix.patch
+
+	# rest of usr-local patch
+	sed -i \
+		-e '/^locincpth=/c\locincpth=""' \
+		-e '/^loclibpth=/c\loclibpth=""' \
+		-e '/^glibpth=.*\/local\//s: /usr/local/lib.*":":' \
+		Configure || die
 }
 
 myconf() {
@@ -178,12 +202,12 @@ src_configure() {
 
 	# 266337
 	export BUILD_BZIP2=0
-	export BZIP2_INCLUDE=/usr/include
-	export BZIP2_LIB=/usr/$(get_libdir)
+	export BZIP2_INCLUDE=${EPREFIX}/usr/include
+	export BZIP2_LIB=${EPREFIX}/usr/$(get_libdir)
 	cat <<-EOF > "${S}/cpan/Compress-Raw-Zlib/config.in"
 		BUILD_ZLIB = False
-		INCLUDE = /usr/include
-		LIB = /usr/$(get_libdir)
+		INCLUDE = ${EPREFIX}/usr/include
+		LIB = ${EPREFIX}/usr/$(get_libdir)
 
 		OLD_ZLIB = False
 		GZIP_OS_CODE = AUTO_DETECT
@@ -229,10 +253,31 @@ src_configure() {
 
 	[[ ${ELIBC} == "FreeBSD" ]] && myconf "-Dlibc=/usr/$(get_libdir)/libc.a"
 
-	if [[ $(get_libdir) != "lib" ]] ; then
+	# Prefix: the host system needs not to follow Gentoo multilib stuff, and in
+	# Prefix itself we don't do multilib either, so make sure perl can find
+	# something compatible.
+	if use prefix ; then
+		local ldir
+		local llib
+		local paths=""
+		echo "int main() {}" > "${T}"/t.c
+		# need to ensure dirs contain compatible libs, bug #358875
+		for ldir in /lib /usr/lib /lib64 /lib/64 /usr/lib64 /usr/lib/64 /lib32 /usr/lib32 ; do
+			[[ -d ${ldir} ]] || continue
+			# find a random lib from here
+			llib=( ${ldir}/*$(get_libname) )
+			[[ -e ${llib[0]} ]] || continue
+			$(tc-getCC) -o "${T}"/t "${T}"/t.c ${llib[0]} >& /dev/null \
+				&& paths="${paths} ${ldir}"
+		done
+		myconf "-Dlibpth=${EPREFIX}/$(get_libdir) ${EPREFIX}/usr/$(get_libdir) ${paths}"
+	elif [[ $(get_libdir) != "lib" ]] ; then
 		# We need to use " and not ', as the written config.sh use ' ...
 		myconf "-Dlibpth=/usr/local/$(get_libdir) /$(get_libdir) /usr/$(get_libdir)"
 	fi
+
+	# don't try building ODBM, bug #354453
+	myconf -Dnoextensions=ODBM_File
 
 	sh Configure \
 		-des \
@@ -241,26 +286,28 @@ src_configure() {
 		-Dcc="$(tc-getCC)" \
 		-Doptimize="${CFLAGS}" \
 		-Dldflags="${LDFLAGS}" \
-		-Dprefix='/usr' \
-		-Dsiteprefix='/usr' \
-		-Dvendorprefix='/usr' \
-		-Dscriptdir='/usr/bin' \
-		-Dprivlib="${PRIV_LIB}" \
-		-Darchlib="${ARCH_LIB}" \
-		-Dsitelib="${SITE_LIB}" \
-		-Dsitearch="${SITE_ARCH}" \
-		-Dvendorlib="${VENDOR_LIB}" \
-		-Dvendorarch="${VENDOR_ARCH}" \
-		-Dman1dir=/usr/share/man/man1 \
-		-Dman3dir=/usr/share/man/man3 \
-		-Dsiteman1dir=/usr/share/man/man1 \
-		-Dsiteman3dir=/usr/share/man/man3 \
-		-Dvendorman1dir=/usr/share/man/man1 \
-		-Dvendorman3dir=/usr/share/man/man3 \
+		-Dprefix="${EPREFIX}"'/usr' \
+		-Dinstallprefix="${EPREFIX}"'/usr' \
+		-Dsiteprefix="${EPREFIX}"'/usr' \
+		-Dvendorprefix="${EPREFIX}"'/usr' \
+		-Dscriptdir="${EPREFIX}"'/usr/bin' \
+		-Dprivlib="${EPREFIX}${PRIV_LIB}" \
+		-Darchlib="${EPREFIX}${ARCH_LIB}" \
+		-Dsitelib="${EPREFIX}${SITE_LIB}" \
+		-Dsitearch="${EPREFIX}${SITE_ARCH}" \
+		-Dvendorlib="${EPREFIX}${VENDOR_LIB}" \
+		-Dvendorarch="${EPREFIX}${VENDOR_ARCH}" \
+		-Dman1dir="${EPREFIX}"/usr/share/man/man1 \
+		-Dman3dir="${EPREFIX}"/usr/share/man/man3 \
+		-Dsiteman1dir="${EPREFIX}"/usr/share/man/man1 \
+		-Dsiteman3dir="${EPREFIX}"/usr/share/man/man3 \
+		-Dvendorman1dir="${EPREFIX}"/usr/share/man/man1 \
+		-Dvendorman3dir="${EPREFIX}"/usr/share/man/man3 \
 		-Dman1ext='1' \
 		-Dman3ext='3pm' \
 		-Dlibperl="${LIBPERL}" \
-		-Dlocincpth=' ' \
+		-Dlocincpth="${EPREFIX}"'/usr/include ' \
+		-Dglibpth="${EPREFIX}/$(get_libdir) ${EPREFIX}/usr/$(get_libdir)"' ' \
 		-Duselargefiles \
 		-Dd_semctl_semun \
 		-Dcf_by='Gentoo' \
@@ -270,11 +317,6 @@ src_configure() {
 		-Ud_csh \
 		-Uusenm \
 		"${myconf[@]}" || die "Unable to configure"
-}
-
-src_compile() {
-	# bug 331113
-	emake -j1 || die "emake failed"
 }
 
 src_test() {
@@ -295,20 +337,22 @@ src_install() {
 	if use build ; then
 		installtarget=install.perl
 	fi
-	make DESTDIR="${D}" ${installtarget} || die "Unable to make ${installtarget}"
+	emake DESTDIR="${D}" ${installtarget}
 
-	rm -f "${D}"/usr/bin/perl
-	ln -s perl${MY_PV} "${D}"/usr/bin/perl || die
+	rm -f "${ED}"/usr/bin/perl
+	ln -s perl${MY_PV} "${ED}"/usr/bin/perl || die
 
-	dolib.so "${D}"${coredir}/${LIBPERL}
-	dosym ${LIBPERL} /usr/$(get_libdir)/libperl$(get_libname ${SHORT_PV}) || die
-	dosym ${LIBPERL} /usr/$(get_libdir)/libperl$(get_libname) || die
-	rm -f "${D}"/${coredir}/${LIBPERL}
-	dosym ../../../../../$(get_libdir)/${LIBPERL} ${coredir}/${LIBPERL}
-	dosym ../../../../../$(get_libdir)/${LIBPERL} ${coredir}/libperl$(get_libname ${SHORT_PV})
-	dosym ../../../../../$(get_libdir)/${LIBPERL} ${coredir}/libperl$(get_libname)e
+	if ! tc-is-static-only ; then
+		dolib.so "${ED}"${coredir}/${LIBPERL}
+		rm -f "${ED}"${coredir}/${LIBPERL}
+		ln -sf ${LIBPERL} "${ED}"/usr/$(get_libdir)/libperl$(get_libname ${SHORT_PV}) || die
+		ln -sf ${LIBPERL} "${ED}"/usr/$(get_libdir)/libperl$(get_libname) || die
+		ln -sf ../../../../../$(get_libdir)/${LIBPERL} "${ED}"${coredir}/${LIBPERL} || die
+		ln -sf ../../../../../$(get_libdir)/${LIBPERL} "${ED}"${coredir}/libperl$(get_libname ${SHORT_PV}) || die
+		ln -sf ../../../../../$(get_libdir)/${LIBPERL} "${ED}"${coredir}/libperl$(get_libname) || die
+	fi
 
-	rm -rf "${D}"/usr/share/man/man3 || die "Unable to remove module man pages"
+	rm -rf "${ED}"/usr/share/man/man3 || die "Unable to remove module man pages"
 
 #	# A poor fix for the miniperl issues
 #	dosed 's:./miniperl:/usr/bin/perl:' /usr/$(get_libdir)/perl5/${MY_PV}/ExtUtils/xsubpp
@@ -322,11 +366,11 @@ src_install() {
 		sed -i -e "s:${D}::" "${i}" || die "Sed failed"
 	done
 
-	find "${D}" -type f -name .packlist -delete || die
+	find "${ED}" -type f -name .packlist -delete || die
 
 	# Note: find out from psm why we would need/want this.
 	# ( use berkdb && has_version '=sys-libs/db-1*' ) ||
-	#	find "${D}" -name "*NDBM*" | xargs rm -f
+	#	find "${ED}" -name "*NDBM*" | xargs rm -f
 
 	dodoc Changes* README AUTHORS
 
@@ -339,7 +383,7 @@ src_install() {
 			--podroot='.' \
 			--podpath='lib:ext:pod:vms' \
 			--recurse \
-			--htmldir="${D}/usr/share/doc/${PF}/html" \
+			--htmldir="${ED}/usr/share/doc/${PF}/html" \
 			--libpods='perlfunc:perlguts:perlvar:perlrun:perlop'
 	fi
 
@@ -355,7 +399,7 @@ pkg_postinst() {
 
 	if [[ "${ROOT}" = "/" ]] ; then
 		local INC DIR file
-		INC=$(perl -e 'for $line (@INC) { next if $line eq "."; next if $line =~ m/'${MY_PV}'|etc|local|perl$/; print "$line\n" }')
+		INC=$(perl -e 'for $line (@INC) { next if $line eq "."; next if $line =~ m/'${SHORT_PV}'|etc|local|perl$/; print "$line\n" }')
 		einfo "Removing old .ph files"
 		for DIR in ${INC} ; do
 			if [[ -d "${DIR}" ]] ; then
@@ -371,14 +415,15 @@ pkg_postinst() {
 				find "${DIR}" -depth -type d -print0 | xargs -0 -r rmdir &> /dev/null
 			fi
 		done
-		if ! use build ; then
-			ebegin "Generating ConfigLocal.pm (ignore any error)"
-			enc2xs -C
-		fi
+#		if ! use build ; then
+#			ebegin "Generating ConfigLocal.pm (ignore any error)"
+#			enc2xs -C
+#		fi
 
 		einfo "Converting C header files to the corresponding Perl format (ignore any error)"
+		# Prefix note: unprefixed as this is all kernel/libc stuff that we never provide
 		pushd /usr/include >/dev/null
-			h2ph -Q -a -d ${ARCH_LIB} \
+			h2ph -Q -a -d "${EPREFIX}"${ARCH_LIB} \
 				asm/termios.h syscall.h syslimits.h syslog.h sys/ioctl.h \
 				sys/socket.h sys/time.h wait.h sysexits.h
 		popd >/dev/null
@@ -436,7 +481,7 @@ src_remove_dual_file() {
 			;;
 		setup)
 			for i in "$@" ; do
-				if [[ -f ${ROOT}${i} && ! -h ${ROOT}${i} ]] ; then
+				if [[ -f ${EROOT}${i} && ! -h ${EROOT}${i} ]] ; then
 					has_version ${pkg} && ewarn "You must reinstall ${pkg} !"
 					break
 				fi
@@ -444,11 +489,11 @@ src_remove_dual_file() {
 			;;
 		install)
 			for i in "$@" ; do
-				if ! [[ -f "${D}"${i} ]] ; then
+				if ! [[ -f "${ED}"${i} ]] ; then
 					use build || ewarn "${i} does not exist!"
 					continue
 				fi
-				mv "${D}"${i}{,-${ver}-${P}} || die
+				mv "${ED}"${i}{,-${ver}-${P}} || die
 			done
 			;;
 	esac
@@ -462,18 +507,18 @@ src_remove_dual_man() {
 	case "${EBUILD_PHASE:-none}" in
 		postinst|postrm)
 			for i in "$@" ; do
-				ff=`echo "${ROOT}${i%.[0-9]}-${ver}-${P}${i#${i%.[0-9]}}"*`
+				ff=`echo "${EROOT}${i%.[0-9]}-${ver}-${P}${i#${i%.[0-9]}}"*`
 				ff=${ff##*${i#${i%.[0-9]}}}
 				alternatives_auto_makesym "${i}${ff}" "${i%.[0-9]}-[0-9]*"
 			done
 			;;
 		install)
 			for i in "$@" ; do
-				if ! [[ -f "${D}"${i} ]] ; then
+				if ! [[ -f "${ED}"${i} ]] ; then
 					use build || ewarn "${i} does not exist!"
 					continue
 				fi
-				mv "${D}"${i} "${D}"${i%.[0-9]}-${ver}-${P}${i#${i%.[0-9]}} || die
+				mv "${ED}"${i} "${ED}"${i%.[0-9]}-${ver}-${P}${i#${i%.[0-9]}} || die
 			done
 			;;
 	esac
@@ -654,7 +699,7 @@ src_remove_extra_files() {
 	.${ARCH_LIB}/threads.pm
 "
 
-	pushd "${D}" > /dev/null
+	pushd "${ED}" > /dev/null
 	# Remove cruft
 	einfo "Removing files that are not in the minimal install"
 	echo "${MINIMAL_PERL_INSTALL}"
