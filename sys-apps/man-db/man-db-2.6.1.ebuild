@@ -1,4 +1,6 @@
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/man-db/man-db-2.6.1.ebuild,v 1.5 2013/12/29 14:47:48 swift Exp $
 
 EAPI="4"
 
@@ -11,13 +13,14 @@ SRC_URI="mirror://nongnu/${PN}/${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
-IUSE="berkdb +gdbm nls static-libs zlib"
+IUSE="berkdb +gdbm nls selinux static-libs zlib"
 
 RDEPEND="dev-libs/libpipeline
 	berkdb? ( sys-libs/db )
 	gdbm? ( sys-libs/gdbm )
 	!berkdb? ( !gdbm? ( sys-libs/gdbm ) )
-	|| ( sys-apps/groff >=app-doc/heirloom-doctools-080407-r2 )
+	sys-apps/groff
+	selinux? ( sec-policy/selinux-mandb )
 	zlib? ( sys-libs/zlib )
 	!sys-apps/man"
 DEPEND="${RDEPEND}
@@ -44,46 +47,7 @@ src_configure() {
 }
 
 src_install() {
-	emake install DESTDIR="${D}" || die
-	dodoc README ChangeLog NEWS docs/{HACKING,TODO}
-	exeinto /etc/cron.daily
-	newexe $FILESDIR/man-db.cron man-db || die
+	default
+	dodoc docs/{HACKING,TODO}
+	use static-libs || find "${ED}"/usr/ -name '*.la' -delete
 }
-
-pkg_preinst() {
-	if [ -f "${ROOT}var/cache/man/whatis" ]
-	then
-	   einfo "Cleaning stale ${ROOT}var/cache/man directory..."
-	   rm -rf "${ROOT}var/cache/man"
-	fi
-	einfo "Ensuring ${ROOT}var/cache/man has correct permissions and
-	ownership..."
-	install -o man 0g root -m2775 -d man:root "$ROOT/var/cache/man" || die
-}
-
-pkg_postinst() {
-	if [ "$ROOT" = "/" ]
-	then
-		einfo  "Generating/updating man-db cache..."
-		/etc/cron.daily/man-db
-	fi
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

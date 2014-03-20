@@ -1,8 +1,9 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-admin/metalog/metalog-3-r1.ebuild,v 1.9 2014/01/18 04:33:54 vapier Exp $
 
 EAPI="3"
-
-inherit eutils
+inherit eutils systemd
 
 DESCRIPTION="A highly configurable replacement for syslogd/klogd"
 HOMEPAGE="http://metalog.sourceforge.net/"
@@ -10,12 +11,17 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~sparc-fbsd ~x86-fbsd"
 IUSE="unicode"
 
 RDEPEND=">=dev-libs/libpcre-3.4"
 DEPEND="${RDEPEND}
+	virtual/pkgconfig
 	app-arch/xz-utils"
+
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-0.9-metalog-conf.patch
+}
 
 src_configure() {
 	econf $(use_with unicode)
@@ -25,16 +31,12 @@ src_install() {
 	emake DESTDIR="${D}" install || die "make install failed"
 	dodoc AUTHORS ChangeLog README NEWS metalog.conf
 
-	# Replace stock metalog.conf with new one.
-	rm -f "${D}/etc/metalog.conf"
-	install "${FILESDIR}/metalog.conf" "${D}/etc/metalog.conf" -m 0600 -o root -g root
-
 	into /
 	dosbin "${FILESDIR}"/consolelog.sh || die
-	dosbin "${FILESDIR}/metalog-postrotate-compress.sh" || die
 
-	newinitd "${FILESDIR}"/metalog.initd-r1 metalog
+	newinitd "${FILESDIR}"/metalog.initd metalog
 	newconfd "${FILESDIR}"/metalog.confd metalog
+	systemd_newunit "${FILESDIR}/${PN}.service-r1" "${PN}.service"
 }
 
 pkg_preinst() {

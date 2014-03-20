@@ -1,24 +1,72 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/ca-certificates/ca-certificates-20140223.ebuild,v 1.1 2014/03/13 23:31:00 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-misc/ca-certificates/ca-certificates-20140223.ebuild,v 1.2 2014/03/19 22:05:21 vapier Exp $
+
+# The Debian ca-certificates package merely takes the CA database as it exists
+# in the nss package and repackages it for use by openssl.
+#
+# The issue with using the compiled debs directly is two fold:
+# - they do not update frequently enough for us to rely on them
+# - they pull the CA database from nss tip of tree rather than the release
+#
+# So we take the Debian source tools and combine them with the latest nss
+# release to produce (largely) the same end result.  The difference is that
+# now we know our cert database is kept in sync with nss and, if need be,
+# can be sync with nss tip of tree more frequently to respond to bugs.
+
+# When triaging bugs from users, here's some handy tips:
+# - To see what cert is hitting errors, use openssl:
+#   openssl s_client -port 443 -CApath /etc/ssl/certs/ -host $HOSTNAME
+#   Focus on the errors written to stderr.
+#
+# - Look at the upstream log as to why certs were added/removed:
+#   https://hg.mozilla.org/projects/nss/log/tip/lib/ckfw/builtins/certdata.txt
+#
+# - If people want to add/remove certs, tell them to file w/mozilla:
+#   https://bugzilla.mozilla.org/enter_bug.cgi?product=NSS&component=CA%20Certificates&version=trunk
 
 EAPI="4"
 
-inherit eutils unpacker
+inherit eutils
+
+if [[ ${PV} == *.* ]] ; then
+	# Compile from source ourselves.
+	PRECOMPILED=false
+	inherit versionator
+
+	DEB_VER=$(get_version_component_range 1)
+	NSS_VER=$(get_version_component_range 2-)
+	RTM_NAME="NSS_${NSS_VER//./_}_RTM"
+else
+	# Debian precompiled version.
+	PRECOMPILED=true
+	inherit unpacker
+fi
 
 DESCRIPTION="Common CA Certificates PEM files"
 HOMEPAGE="http://packages.debian.org/sid/ca-certificates"
-#NMU_PR="1"
-SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}${NMU_PR:++nmu}${NMU_PR}_all.deb"
+if ${PRECOMPILED} ; then
+	#NMU_PR="1"
+	SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}${NMU_PR:++nmu}${NMU_PR}_all.deb"
+else
+	SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${DEB_VER}${NMU_PR:++nmu}${NMU_PR}.tar.xz
+		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${RTM_NAME}/src/nss-${NSS_VER}.tar.gz
+		cacert? ( http://dev.gentoo.org/~anarchy/patches/nss-3.14.1-add_spi+cacerts_ca_certs.patch )"
+fi
 
 LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 IUSE=""
+${PRECOMPILED} || IUSE+=" +cacert"
 
-# platforms like AIX don't have a good ar
-DEPEND="kernel_AIX? ( app-arch/deb2targz )
-	!<sys-apps/portage-2.1.10.41"
+DEPEND=""
+if ${PRECOMPILED} ; then
+	# platforms like AIX don't have a good ar
+	DEPEND+="
+		kernel_AIX? ( app-arch/deb2targz )
+		!<sys-apps/portage-2.1.10.41"
+fi
 # openssl: we run `c_rehash`
 # debianutils: we run `run-parts`
 RDEPEND="${DEPEND}
@@ -35,16 +83,29 @@ pkg_setup() {
 }
 
 src_unpack() {
-	if [[ -n ${EPREFIX} ]] ; then
-		# need to perform everything in the offset, #381937
-		mkdir -p "./${EPREFIX}"
-		cd "./${EPREFIX}" || die
-	fi
-	unpack_deb ${A}
+	${PRECOMPILED} || default
+
+	# Do all the work in the image subdir to avoid conflicting with source
+	# dirs in $WORKDIR.  Need to perform everything in the offset #381937
+	mkdir "image/${EPREFIX}"
+	cd "image/${EPREFIX}" || die
+
+	${PRECOMPILED} && unpacker_src_unpack
 }
 
 src_prepare() {
-	cd "./${EPREFIX}" || die
+	cd "image/${EPREFIX}" || die
+	if ! ${PRECOMPILED} ; then
+		mkdir -p usr/sbin
+		cp -p "${S}"/${PN}/sbin/update-ca-certificates usr/sbin/ || die
+
+		if use cacert ; then
+			pushd "${S}"/nss-${NSS_VER} >/dev/null
+			epatch "${DISTDIR}"/nss-3.14.1-add_spi+cacerts_ca_certs.patch
+			popd >/dev/null
+		fi
+	fi
+
 	epatch "${FILESDIR}"/${PN}-20110502-root.patch
 	local relp=$(echo "${EPREFIX}" | sed -e 's:[^/]\+:..:g')
 	sed -i \
@@ -54,21 +115,43 @@ src_prepare() {
 }
 
 src_compile() {
+	cd "image/${EPREFIX}" || die
+	if ! ${PRECOMPILED} ; then
+		local d="${S}/${PN}/mozilla"
+		# Grab the database from the nss sources.
+		cp "${S}"/nss-${NSS_VER}/nss/lib/ckfw/builtins/{certdata.txt,nssckbi.h} "${d}" || die
+		emake -C "${d}"
+
+		# Now move the files to the same places that the precompiled would.
+		mkdir -p etc/ssl/certs etc/ca-certificates/update.d usr/share/ca-certificates/mozilla
+		if use cacert ; then
+			mkdir -p usr/share/ca-certificates/{cacert.org,spi-inc.org}
+			mv "${d}"/CAcert_Inc..crt usr/share/ca-certificates/cacert.org/cacert.org_root.crt || die
+			mv "${d}"/SPI_Inc..crt usr/share/ca-certificates/spi-inc.org/spi-cacert-2008.crt || die
+		fi
+		mv "${d}"/*.crt usr/share/ca-certificates/mozilla/ || die
+	else
+		mv usr/share/doc/{ca-certificates,${PF}} || die
+	fi
+
 	(
 	echo "# Automatically generated by ${CATEGORY}/${PF}"
 	echo "# $(date -u)"
 	echo "# Do not edit."
-	cd "${S}${EPREFIX}"/usr/share/ca-certificates
+	cd usr/share/ca-certificates
 	find * -name '*.crt' | LC_ALL=C sort
-	) > "${S}${EPREFIX}"/etc/ca-certificates.conf
+	) > etc/ca-certificates.conf
 
-	sh "${S}${EPREFIX}"/usr/sbin/update-ca-certificates --root "${S}" || die
+	sh usr/sbin/update-ca-certificates --root "${S}/image" || die
 }
 
 src_install() {
-	cp -pPR . "${D}"/ || die
-
-	mv "${ED}"/usr/share/doc/{ca-certificates,${PF}} || die
+	cp -pPR image/* "${D}"/ || die
+	if ! ${PRECOMPILED} ; then
+		cd ca-certificates
+		doman sbin/*.8
+		dodoc debian/README.* examples/ca-certificates-local/README
+	fi
 
 	echo 'CONFIG_PROTECT_MASK="/etc/ca-certificates.conf"' > 98ca-certificates
 	doenvd 98ca-certificates
