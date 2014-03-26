@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/ca-certificates/ca-certificates-20140223.3.15.5.ebuild,v 1.1 2014/03/19 22:05:21 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-misc/ca-certificates/ca-certificates-20140223.3.15.5.ebuild,v 1.4 2014/03/21 23:09:20 ottxor Exp $
 
 # The Debian ca-certificates package merely takes the CA database as it exists
 # in the nss package and repackages it for use by openssl.
@@ -26,8 +26,9 @@
 #   https://bugzilla.mozilla.org/enter_bug.cgi?product=NSS&component=CA%20Certificates&version=trunk
 
 EAPI="4"
+PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit eutils
+inherit eutils python-any-r1
 
 if [[ ${PV} == *.* ]] ; then
 	# Compile from source ourselves.
@@ -73,6 +74,10 @@ RDEPEND="${DEPEND}
 	dev-libs/openssl
 	sys-apps/debianutils"
 
+if ! ${PRECOMPILED}; then
+	DEPEND+=" ${PYTHON_DEPS}"
+fi
+
 S=${WORKDIR}
 
 pkg_setup() {
@@ -87,7 +92,7 @@ src_unpack() {
 
 	# Do all the work in the image subdir to avoid conflicting with source
 	# dirs in $WORKDIR.  Need to perform everything in the offset #381937
-	mkdir "image/${EPREFIX}"
+	mkdir -p "image/${EPREFIX}"
 	cd "image/${EPREFIX}" || die
 
 	${PRECOMPILED} && unpacker_src_unpack
@@ -117,6 +122,7 @@ src_prepare() {
 src_compile() {
 	cd "image/${EPREFIX}" || die
 	if ! ${PRECOMPILED} ; then
+		python_setup
 		local d="${S}/${PN}/mozilla"
 		# Grab the database from the nss sources.
 		cp "${S}"/nss-${NSS_VER}/nss/lib/ckfw/builtins/{certdata.txt,nssckbi.h} "${d}" || die

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/handbrake/handbrake-9999.ebuild,v 1.16 2014/03/19 15:19:44 tomwij Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-video/handbrake/handbrake-9999.ebuild,v 1.17 2014/03/26 15:39:56 tomwij Exp $
 
 EAPI="5"
 
@@ -54,6 +54,12 @@ RDEPEND="
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
+		media-libs/gst-plugins-good:1.0
+		media-libs/gst-plugins-bad:1.0
+		media-libs/gst-plugins-ugly:1.0
+		media-plugins/gst-plugins-a52dec:1.0
+		media-plugins/gst-plugins-libav:1.0
+		media-plugins/gst-plugins-x264:1.0
 		!ffmpeg? ( media-plugins/gst-plugins-mpeg2dec:1.0 )
 	)
 	gtk? (

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/glazedlists/glazedlists-1.8.0.ebuild,v 1.1 2014/03/18 03:34:27 nicolasbock Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-java/glazedlists/glazedlists-1.8.0.ebuild,v 1.3 2014/03/21 14:21:25 nicolasbock Exp $
 
 EAPI="5"
 JAVA_PKG_IUSE="doc source"
@@ -8,11 +8,11 @@ JAVA_PKG_IUSE="doc source"
 inherit eutils java-pkg-2 java-ant-2
 
 DESCRIPTION="A toolkit for list transformations"
-HOMEPAGE="http://publicobject.com/glazedlists/"
+HOMEPAGE="http://www.glazedlists.com/"
 SRC_URI="http://java.net/downloads/${PN}/${P}/${P}-source_java15.zip"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 # TODO: there are extensions, some supported in the java-experimental ebuild
 IUSE=""
 

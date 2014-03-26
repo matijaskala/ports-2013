@@ -1,14 +1,19 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.550 2014/03/14 17:47:21 mrueg Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.552 2014/03/21 07:43:12 yngwin Exp $
 
 # This file requires >=portage-2.1.1
 # New entries go on top.
 #
 
+# Ben de Groot <yngwin@gentoo.org> (21 Mar 2014)
+# harfbuzz multilib ebuild is still masked
+media-libs/freetype harfbuzz
+
 # Manuel Rüger <mrueg@gentoo.org> (07 Mar 2014)
 # Mask ruby18-only compatible flags
 # Bugs: 483104, 483102
+=dev-ruby/rubygems-1.8* server
 media-libs/libcaca ruby
 =dev-vcs/subversion-1.7* ruby
 media-sound/podcatcher bittorrent
@@ -131,7 +136,7 @@ app-editors/gvim luajit racket
 =media-video/ffmpeg-0.10* libass frei0r gnutls rtmp sdl openssl
 
 # Kacper Kowalik <xarthisius@gentoo.org> (09 Aug 2013)
-# Doesn't work on most profiles. Easier to mask here and 
+# Doesn't work on most profiles. Easier to mask here and
 # unmask in particular profiles
 sys-apps/hwloc cuda gl opencl
 

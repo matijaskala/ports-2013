@@ -2,7 +2,7 @@
 
 EAPI=5
 
-inherit cmake-utils eutils gnome2-utils versionator
+inherit cmake-utils eutils gnome2-utils python versionator
 
 DESCRIPTION="OpenGL window and compositing manager"
 HOMEPAGE="https://launchpad.net/compiz"
@@ -86,11 +86,14 @@ RDEPEND="${COMMONDEPEND}
 	x11-apps/mesa-progs
 	x11-apps/xvinfo"
 
+pkg_setup() {
+	python_set_active_version 2
+}
+
 src_prepare() {
 	default
 
 	epatch "${FILESDIR}/${PN}-sandbox.patch"
-	epatch "${FILESDIR}/python2.patch"
 	epatch "${FILESDIR}/use_python.patch"
 	epatch "${FILESDIR}/rotate_edge.patch"
 	epatch "${FILESDIR}/compiz_kde_4_11.patch"

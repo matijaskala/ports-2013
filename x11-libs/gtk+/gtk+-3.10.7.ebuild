@@ -4,7 +4,8 @@
 
 EAPI="5"
 
-inherit eutils flag-o-matic gnome.org gnome2-utils multilib virtualx
+inherit autotools eutils flag-o-matic gnome.org gnome2-utils multilib virtualx
+WANT_AUTOMAKE=1.14
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="http://www.gtk.org/"
@@ -28,7 +29,7 @@ KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~
 # Use gtk+:2 for gtk-update-icon-cache
 COMMON_DEPEND="
 	>=dev-libs/atk-2.7.5[introspection?]
-	>=dev-libs/glib-2.37.5:2
+	>=dev-libs/glib-2.37.5:2[utils]
 	media-libs/fontconfig
 	>=x11-libs/cairo-1.12[aqua?,glib,svg,X?]
 	>=x11-libs/gdk-pixbuf-2.27.1:2[introspection?,X?]
@@ -98,6 +99,9 @@ strip_builddir() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/ubuntu_gtk_custom_menu_items.patch"
+	eautoreconf
+
 	gnome2_environment_reset
 
 	# -O3 and company cause random crashes in applications. Bug #133469
@@ -119,8 +123,6 @@ src_prepare() {
 		strip_builddir SRC_SUBDIRS examples Makefile.am
 		strip_builddir SRC_SUBDIRS examples Makefile.in
 	fi
-
-	epatch "${FILESDIR}"/${P}-clang.patch
 }
 
 src_configure() {

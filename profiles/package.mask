@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15489 2014/03/19 18:24:12 zlogene Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15512 2014/03/26 12:11:58 chithanh Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,45 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (26 Mar 2014)
+# Affected by multiple vulnerabilities, #445916, #471098 and #472280
+<media-libs/mesa-9.1.4
+
+# Joerg Bornkessel <hd_brummy@gentoo.org (24 Mar 2014)
+# mask for removal, depending on wrt bug #502278
+# ~ 24 Apr 2014
+# not converted to xgettext handling, dead on upstream since ~2007
+media-plugins/vdr-eggtimer
+
+# Joerg Bornkessel <hd_brummy@gentoo.org (24 Mar 2014)
+# mask for removal, depending on wrt bug #502274
+# ~ 24 Apr 2014
+# not converted to xgettext handling, dead on upstream since ~2007
+media-plugins/vdr-ac3mode
+
+# Joerg Bornkessel <hd_brummy@gentoo.org (24 Mar 2014)
+# mask for removal, depending on wrt bug #502276
+# ~ 24 Apr 2014
+# not converted to xgettext handling, dead on upstream since ~2008
+media-plugins/vdr-bitstreamout
+
+# Rick Farina <zerochaos@gentoo.org> (22 Mar 2014)
+# Upstream has replaced dev-util/dissy with dev-util/emilpro
+# Please switch to emilpro or report issues in bug #505380
+# removal in 30 days.
+dev-util/dissy
+
+# Hans de Graaff <graaff@gentoo.org> (22 Mar 2014) Dead upstream (no
+# releases since 2008, website no longer available). Can only support
+# a single ruby version. Has security issues with shared code between
+# processes. Use a rack-based alternative instead.
+# Removal in 30 days.
+www-apache/mod_ruby
+
+# Sergey Popov <pinkbyte@gentoo.org> (20 Mar 2014)
+# Security mask of vulnerable versions, wrt bug #424167
+<net-nds/openldap-2.4.35
 
 # Mikle Kolyada <zlogene@gentoo.org> (19 Mar 2014)
 # Dead upstream (no releases since 2006),
@@ -172,38 +211,6 @@ lxde-base/lxpolkit
 # Masked for removal in 60 days, bug 502168.
 app-emacs/delicious
 
-# Ulrich Müller <ulm@gentoo.org> (24 Feb 2014)
-# Does not work any more, AOL has shut off
-# the TOC2 protocol for the AIM service.
-# Masked for removal in 30 days, bug 502322.
-app-emacs/tnt
-
-# Ulrich Müller <ulm@gentoo.org> (21 Feb 2014)
-# Included with Emacs since version 23.
-# Last stand-alone release in 2008.
-# Masked for removal in 30 days, bug 501964.
-app-emacs/mairix
-
-# Ulrich Müller <ulm@gentoo.org> (20 Feb 2014)
-# Abandoned by upstream: Last release in 2003, last visible
-# upstream activity in 2004. Does not work with Emacs 24.
-# File a bug for moving app-emacs/oddmuse (currently in emacs
-# overlay) to the main tree if you need a replacement.
-# Masked for removal in 30 days, bug 501926.
-app-emacs/http-emacs
-
-# Ulrich Müller <ulm@gentoo.org> (18 Feb 2014)
-# Last upstream release in 1996.
-# Doesn't appear to work with Emacs 23 and 24.
-# Masked for removal in 30 days, bug 501660.
-app-emacs/view-process
-
-# Ulrich Müller <ulm@gentoo.org> (16 Feb 2014)
-# Last upstream release in 2005.
-# Does not work with Emacs 24.
-# Masked for removal in 30 days, bug 501502.
-app-emacs/eperiodic
-
 # Ulrich Müller <ulm@gentoo.org> (15 Feb 2014)
 # Support library for app-emacs/prime-el, which is masked
 # for removal itself. No other reverse dependencies.
@@ -230,7 +237,6 @@ dev-libs/libgcrypt:11
 >=x11-libs/gdk-pixbuf-2.30.6-r1
 >=app-emulation/emul-linux-x86-gtklibs-20131008-r3
 >=media-gfx/graphite2-1.2.4-r1
->=media-libs/freetype-2.5.3-r1
 >=media-libs/harfbuzz-0.9.26-r1
 >=media-libs/libass-0.11
 >=x11-libs/pango-1.36.2-r1
@@ -253,68 +259,11 @@ media-gfx/kgraphviewer
 >=sys-apps/systemd-sysv-utils-210
 
 # Tom Wijsman <TomWij@gentoo.org> (21 Feb 2014)
-# MATE Desktop Environment 1.6 introduction mask:
-#
-# MATE is in the progress of being brought to the Portage tree; if you see this
-# mask message when you install it from the Portage tree, we suggest you to
-# wait a few days until MATE has been fully brought to the Portage tree.
-#
-# New ebuild request bug:
-#
-#     https://bugs.gentoo.org/show_bug.cgi?id=387487
-#
-# MATE overlay users that see this message can use the following package.unmask:
-#
-#     https://gist.github.com/TomWij/cf9cdd0fe90ac08b8ded
-#
-# If you use another overlay, replace the ::mate-overlay suffix by that overlay.
-app-arch/mate-file-archiver
-app-editors/mate-text-editor
-app-text/mate-doc-utils
-app-text/mate-document-viewer
-dev-libs/libmateweather
-dev-python/python-caja
-mate-base/libmatekbd
-mate-base/mate-applets
-mate-base/mate-common
-mate-base/mate-desktop
-mate-base/mate-file-manager
-mate-base/mate-menus
-mate-base/mate-panel
-mate-base/mate-session-manager
-mate-base/mate-settings-daemon
-mate-extra/caja-dropbox
-mate-extra/mate-calc
-mate-extra/mate-character-map
-mate-extra/mate-dialogs
-mate-extra/mate-file-manager-image-converter
-mate-extra/mate-file-manager-open-terminal
-mate-extra/mate-file-manager-sendto
-mate-extra/mate-file-manager-share
-mate-extra/mate-polkit
-mate-extra/mate-power-manager
-mate-extra/mate-screensaver
-mate-extra/mate-sensors-applet
-mate-extra/mate-system-monitor
-mate-extra/mate-utils
-media-gfx/mate-image-viewer
-net-analyzer/mate-netspeed
-net-wireless/mate-bluetooth
-x11-libs/libmatewnck
-x11-misc/mate-menu-editor
-x11-misc/mate-notification-daemon
-x11-terms/mate-terminal
-x11-themes/mate-backgrounds
-x11-themes/mate-icon-theme
-x11-themes/mate-icon-theme-faenza
-x11-themes/mate-themes
-x11-wm/mate-window-manager
-
-# Tom Wijsman <TomWij@gentoo.org> (21 Feb 2014)
 # MATE Desktop Environment >=1.7 introduction mask:
 #
 # Given that MATE Desktop Environment 1.8 will release soon, this mask is
 # placed in advance to allow to bump to it as soon as it hits.
+>=app-admin/mate-system-tools-1.7
 >=app-arch/mate-file-archiver-1.7
 >=app-editors/mate-text-editor-1.7
 >=app-text/mate-doc-utils-1.7
@@ -322,10 +271,14 @@ x11-wm/mate-window-manager
 >=dev-libs/libmateweather-1.7
 >=dev-python/python-caja-1.7
 >=mate-base/libmatekbd-1.7
+>=mate-base/libmatekeyring-1.7
+>=mate-base/mate-1.7
 >=mate-base/mate-applets-1.7
 >=mate-base/mate-common-1.7
+>=mate-base/mate-control-center-1.7
 >=mate-base/mate-desktop-1.7
 >=mate-base/mate-file-manager-1.7
+>=mate-base/mate-keyring-1.7
 >=mate-base/mate-menus-1.7
 >=mate-base/mate-panel-1.7
 >=mate-base/mate-session-manager-1.7
@@ -338,11 +291,13 @@ x11-wm/mate-window-manager
 >=mate-extra/mate-file-manager-open-terminal-1.7
 >=mate-extra/mate-file-manager-sendto-1.7
 >=mate-extra/mate-file-manager-share-1.7
+>=mate-extra/mate-media-1.7
 >=mate-extra/mate-polkit-1.7
 >=mate-extra/mate-power-manager-1.7
 >=mate-extra/mate-screensaver-1.7
 >=mate-extra/mate-sensors-applet-1.7
 >=mate-extra/mate-system-monitor-1.7
+>=mate-extra/mate-user-share-1.7
 >=mate-extra/mate-utils-1.7
 >=media-gfx/mate-image-viewer-1.7
 >=net-analyzer/mate-netspeed-1.7
@@ -385,26 +340,6 @@ dev-lang/python:3.4
 # superseded by net-analyzer/ifstatus (bug #501432)
 net-analyzer/ethstatus
 
-# Dion Moult <moult@gentoo.org> (13 Feb 2014)
-# Masked for removal in 30 days. Unclear license, desklets dead. (bug #446776)
-x11-plugins/desklet-sudoku
-
-# Dion Moult <moult@gentoo.org> (12 Feb 2014)
-# Masked for removal in 30 days. Removed as this was a compatibility hack
-# package, with equivalent functionality already implemented elsewhere (xdg-open
-# and co). (bug #480522)
-www-client/htmlview
-
-# Dion Moult <moult@gentoo.org> (10 Feb 2014)
-# Masked for removal in 30 days. Upstream dead for ages, no package maintainer.
-# (bug #471548)
-rox-extra/comicthumb
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (08 Feb 2014)
-# removal ~08/Mar/2014 , depend on i18n issues
-# wrt bug #424255
-media-plugins/vdr-amarok
-
 # Tim Harder <radhermit@gentoo.org> (04 Feb 2014)
 # Masked for testing
 =media-sound/lilypond-2.19*
@@ -430,11 +365,6 @@ dev-libs/suikyo
 # PHP 5.6 still in early development
 >=dev-lang/php-5.6
 
-# Dion Moult <moult@gentoo.org> (27 Jan 2014)
-# Mask for removal in 30 days. Used to be used by farsight1 but no longer. No
-# other reverse deps. (bug #489550)
-dev-libs/jrtplib
-
 # Mike Gilbert <floppym@gentoo.org> (26 Jan 2014)
 # Python library that has no reverse deps. Removal in 30 days.
 dev-python/certifi
@@ -447,16 +377,6 @@ dev-python/certifi
 # Christian Ruppert <idl0r@gentoo.org> (19 Jan 2014)
 # Experimental, for now
 =dev-vcs/gitolite-gentoo-3*
-
-# Dion Moult <moult@gentoo.org> (19 Jan 2014)
-# Mask for removal in 30 days. Packages now depend on dev-lang/mono directly and
-# not on virtual/monodoc (bug #471180)
-virtual/monodoc
-
-# Dion Moult <moult@gentoo.org> (19 Jan 2014)
-# Mask for removal in 30 days. Flyte service discontinued so package is useless.
-# (bug #495138)
-app-misc/flyte-download-manager
 
 # Mike Gilbert <floppym@gentoo.org> (19 Jan 2014)
 # To prevent accidental switching of release channels (bug 498306),
@@ -619,38 +539,6 @@ www-apache/mod_spdy
 # - do not compile in some USE-flag combinations
 # - requires at least gcc 4.7(and possibly even 4.8 for some features)
 >=dev-libs/botan-1.11.0
-
-# Mikle Kolyada <zlogene@gentoo.org> (08 Sep 2013)
-# Untested / unconfirmed major bump of perl #479064
-# Needs proper testing before being unleashed
-=dev-lang/perl-5.18*
-=virtual/perl-Attribute-Handlers-0.940.0
-=virtual/perl-CPAN-2.0.0
-=virtual/perl-Devel-PPPort-3.200.0-r2
-=virtual/perl-Dumpvalue-1.170.0-r1
-=virtual/perl-ExtUtils-Constant-0.230.0-r3
-=virtual/perl-Filter-Simple-0.890.0
-=virtual/perl-IO-Zlib-1.100.0-r3
-=virtual/perl-Locale-Maketext-Simple-0.210.0-r3
-=virtual/perl-Math-BigInt-FastCalc-0.300.0-r2
-=virtual/perl-Math-Complex-1.590.0-r2
-=virtual/perl-Module-Loaded-0.80.0-r2
-=virtual/perl-Package-Constants-0.20.0-r3
-=virtual/perl-Perl-OSType-1.3.0
-=virtual/perl-Pod-Escapes-1.40.0-r3
-=virtual/perl-Test-Simple-0.980.0-r3
-=virtual/perl-Text-Balanced-2.20.0-r3
-=virtual/perl-Text-ParseWords-3.280.0-r1
-=virtual/perl-Tie-RefHash-1.390.0-r1
-=virtual/perl-digest-base-1.170.0-r2
-=virtual/perl-if-0.60.200
-=virtual/perl-threads-1.860.0-r2
-=virtual/perl-ExtUtils-CBuilder-0.280.210
-=virtual/perl-IO-1.280.0
-=virtual/perl-Module-CoreList-2.900.0
-virtual/perl-Carp
-virtual/perl-B-Debug
-=virtual/perl-File-Temp-0.230.100
 
 # Agostino Sarubbo <ago@gentoo.org> (29 Aug 2013)
 # Mask 5.1 series because the backport of the CVE-2012-5627
@@ -842,10 +730,6 @@ net-wireless/madwifi-ng
 dev-vcs/gitosis
 dev-vcs/gitosis-gentoo
 
-# Joerg Bornkessel <hd_brummy@gentoo.org> (04 Nov 2012)
-# masked for testing, bug #422605
-=media-plugins/vdr-softdevice-0.5.0.20110417
-
 # Markos Chandras <hwoarang@gentoo.org> (03 Nov 2012)
 # Masked for testing
 app-benchmarks/ltp
@@ -926,10 +810,6 @@ dev-ml/ocamlduce
 # Maxim Koltsov <maksbotan@gentoo.org> (19 Apr 2012)
 # Broken, masking by maintainer's request
 app-leechcraft/lc-lcftp
-
-# Jeroen Roovers <jer@gentoo.org> (04 Apr 2012)
-# Alpha versions of dev-libs/libevent are considered unstable
->dev-libs/libevent-2.1
 
 # Andreas K. Huettel <dilfridge@gentoo.org> (22 Mar 2012)
 # Even its author admits that it's an ugly hack. Crashes e.g.
