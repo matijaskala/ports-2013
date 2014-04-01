@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.289 2014/03/26 06:13:06 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.292 2014/03/28 18:32:16 mgorny Exp $
 
 EAPI=5
 
@@ -31,7 +31,7 @@ RESTRICT="test"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
 	acl? ( sys-apps/acl )
-	gudev? ( >=dev-libs/glib-2.22 )
+	gudev? ( >=dev-libs/glib-2.22[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
@@ -62,8 +62,7 @@ fi
 RDEPEND="${COMMON_DEPEND}
 	!<sys-fs/lvm2-2.02.103
 	!<sec-policy/selinux-base-2.20120725-r10"
-PDEPEND=">=virtual/udev-208
-	>=sys-apps/hwids-20140304[udev]
+PDEPEND=">=sys-apps/hwids-20140304[udev]
 	openrc? ( >=sys-fs/udev-init-scripts-26 )"
 
 S=${WORKDIR}/systemd-${PV}
@@ -198,6 +197,7 @@ multilib_src_configure() {
 		--disable-logind
 		--disable-polkit
 		--disable-myhostname
+		$(use_enable gudev)
 		--enable-split-usr
 		--with-html-dir=/usr/share/doc/${PF}/html
 		--without-python
@@ -218,7 +218,6 @@ multilib_src_configure() {
 			$(use_enable acl)
 			$(use_enable kmod)
 			$(use_enable selinux)
-			$(use_enable gudev)
 			--with-rootlibdir=/$(get_libdir)
 		)
 	else
@@ -229,7 +228,6 @@ multilib_src_configure() {
 			--disable-acl
 			--disable-kmod
 			--disable-selinux
-			--disable-gudev
 			--disable-manpages
 			--with-rootlibdir=/usr/$(get_libdir)
 		)
@@ -285,6 +283,7 @@ multilib_src_compile() {
 		fi
 	else
 		local lib_targets=( libudev.la )
+		use gudev && lib_targets+=( libgudev-1.0.la )
 		emake "${lib_targets[@]}"
 	fi
 }
@@ -353,6 +352,11 @@ multilib_src_install() {
 			install-includeHEADERS
 			install-pkgconfiglibDATA
 		)
+
+		if use gudev; then
+			lib_LTLIBRARIES+=" libgudev-1.0.la"
+			pkgconfiglib_DATA+=" src/gudev/gudev-1.0.pc"
+		fi
 
 		targets+=(
 			lib_LTLIBRARIES="${lib_LTLIBRARIES}"

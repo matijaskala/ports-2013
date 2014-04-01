@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15512 2014/03/26 12:11:58 chithanh Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15527 2014/04/01 15:38:27 tomwij Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,17 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Tom Wijsman <TomWij@gentoo.org> (31 Mar 2014)
+# Prevent users from switching JDK / JRE implementation.
+#
+# Unmask this if you want to upgrade or switch to Oracle JDK / JRE 1.8.
+>=virtual/jdk-1.8
+>=virtual/jre-1.8
+
+# Luca Barbato <lu_zero@gentoo.org> (30 Mar 2014)
+# Current stable for upstream, pending a tinderbox run.
+~media-video/libav-10
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (26 Mar 2014)
 # Affected by multiple vulnerabilities, #445916, #471098 and #472280
@@ -226,6 +237,8 @@ app-emacs/mell
 # - yngwin explicitly requested 30 days + 1 version bump for cairo.
 # - always unmask in order, with emul-linux of choice and *all* packages
 # preceding it
+# - please update https://wiki.gentoo.org/wiki/Multilib_porting_status
+# (mark the packages as {{Yes|DONE}})
 >=dev-libs/libgcrypt-1.6.1-r1
 dev-libs/libgcrypt:11
 >=dev-libs/lzo-2.06-r1
@@ -234,29 +247,21 @@ dev-libs/libgcrypt:11
 >=app-emulation/emul-linux-x86-baselibs-20131008-r21
 >=x11-libs/cairo-1.12.16-r1
 >=app-emulation/emul-linux-x86-gtklibs-20131008-r2
->=x11-libs/gdk-pixbuf-2.30.6-r1
+>=x11-libs/gdk-pixbuf-2.30.7-r1
 >=app-emulation/emul-linux-x86-gtklibs-20131008-r3
 >=media-gfx/graphite2-1.2.4-r1
 >=media-libs/harfbuzz-0.9.26-r1
 >=media-libs/libass-0.11
->=x11-libs/pango-1.36.2-r1
+>=x11-libs/pango-1.36.3-r1
 >=x11-libs/pangox-compat-0.0.2-r1
 >=app-emulation/emul-linux-x86-gtklibs-20131008-r4
+>=sys-apps/file-5.18-r1
+>=app-emulation/emul-linux-x86-baselibs-20131008-r22
 
 # Pawel Hajdan jr <phajdan.jr@gentoo.org> (27 Feb 2014)
 # Dev channel releases are only for people who are developers or want more
 # experimental features and accept a more unstable release.
 >=www-client/chromium-35
-
-# Michael Palimaka <kensington@gentoo.org> (26 Feb 2014)
-# Doesn't build with recent graphviz. Dead upstream.
-# Masked for removal in 30 days. Bug #491760.
-media-gfx/kgraphviewer
-
-# Michał Górny <mgorny@gentoo.org> (25 Feb 2014)
-# Mask for testing.
->=sys-apps/systemd-210
->=sys-apps/systemd-sysv-utils-210
 
 # Tom Wijsman <TomWij@gentoo.org> (21 Feb 2014)
 # MATE Desktop Environment >=1.7 introduction mask:
@@ -322,10 +327,6 @@ media-gfx/kgraphviewer
 # me know such that we can continue to keep it around. Guess nobody even still
 # uses this package either, but that's for another day...
 =dev-java/jikes-1.22-r1
-
-# Mike Gilbert <floppym@gentoo.org> (17 Feb 2014)
-# Masked for testing.
-dev-lang/python:3.4
 
 # Eray Aslan <eras@gentoo.org> (17 Feb 2014)
 # Security mask - bug #492494 until
@@ -763,11 +764,6 @@ dev-ml/ocamlduce
 =sys-libs/db-5.2*
 =sys-libs/db-5.1*
 =sys-libs/db-5.0*
-
-# Richard Yao <ryao@gentoo.org> (06 Oct 2012)
-# sys-apps/grep-2.13 falsely reports some files as binary, causing build
-# failures. Bug #425668
-=sys-apps/grep-2.13
 
 # Ralph Sennhauser <sera@gentoo.org> (18 Jul 2012)
 # Unmaintained, multiple vulnarabilities. #351626

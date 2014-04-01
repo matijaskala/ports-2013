@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/virtual/pypy/pypy-2.2.1.ebuild,v 1.2 2014/03/12 09:27:43 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/virtual/pypy/pypy-2.2.1.ebuild,v 1.3 2014/03/30 21:00:58 mgorny Exp $
 
 EAPI=5
 
@@ -17,6 +17,6 @@ IUSE="bzip2 ncurses sqlite"
 
 RDEPEND="
 	|| (
-		>=dev-python/pypy-2.2.1:${SLOT}[bzip2?,ncurses?,sqlite?,ssl(+)]
-		>=dev-python/pypy-bin-2.2.1:${SLOT}[sqlite?]
+		>=dev-python/pypy-${PV}:${SLOT}[bzip2?,ncurses?,sqlite?,ssl(+)]
+		>=dev-python/pypy-bin-${PV}:${SLOT}[sqlite?]
 	)"

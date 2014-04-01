@@ -2,15 +2,13 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<herd>python</herd>
-	<maintainer>
-		<email>iksaif@gentoo.org</email>
-		<name>Corentin Chary</name>
-	</maintainer>
 	<upstream>
 		<remote-id type="pypi">kombu</remote-id>
 		<remote-id type="github">celery/kombu</remote-id>
 	</upstream>
 	<use>
 		<flag name="amqplib">Enable amqplib support</flag>
+		<flag name="sqs">enables Amazon SQS transport module for Kombu</flag>
+		<flag name="msgpack">enables MessagePack (de)serializer for Python</flag>
 	</use>
 </pkgmetadata>
