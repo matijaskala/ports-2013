@@ -38,6 +38,11 @@ src_compile() {
 src_install() {
 	default
 
+	cat >> ${ED}/usr/share/applications/defaults.list << EOF
+[Default Applications]
+inode/directory=file-manager.desktop
+EOF
+
 	# in prefix, install an env.d entry such that prefix patch is used/added
 	if use prefix; then
 		echo "XDG_DATA_DIRS=\"${EPREFIX}/usr/share\"" > "${T}"/50mimeinfo

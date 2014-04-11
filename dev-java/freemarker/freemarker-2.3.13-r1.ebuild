@@ -1,4 +1,6 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/dev-java/freemarker/freemarker-2.3.13-r1.ebuild,v 1.3 2014/03/10 16:56:19 johu Exp $
 
 EAPI="4"
 
@@ -13,11 +15,11 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="freemarker"
 SLOT="2.3"
-KEYWORDS="*"
+KEYWORDS="amd64 ~ppc x86"
 IUSE=""
 
 COMMON_DEP="
-	dev-java/jython:2.2
+	>=dev-java/jython-2.2:0
 	java-virtuals/servlet-api:2.3
 	java-virtuals/servlet-api:2.4
 	java-virtuals/servlet-api:2.5
@@ -49,7 +51,7 @@ src_compile() {
 	java-pkg_jar-from --virtual --into jsp-2.0 servlet-api-2.4
 	java-pkg_jar-from --virtual --into jsp-2.1 servlet-api-2.5
 	java-pkg_jar-from jaxen-1.1
-	java-pkg_jar-from jython-2.2
+	java-pkg_jar-from jython
 	java-pkg_jar-from --build-only javacc
 	java-pkg_jar-from juel
 	popd >/dev/null

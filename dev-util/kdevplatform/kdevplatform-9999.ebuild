@@ -1,13 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/kdevplatform/kdevplatform-1.5.2.ebuild,v 1.3 2014/01/26 11:38:50 ago Exp $
+# $Header: $
 
 EAPI=5
 
 KMNAME="kdevelop"
-KDE_MINIMAL="4.7"
-KDE_LINGUAS="bs ca ca@valencia da de el en_GB es et fi fr gl it kk nb nds nl pl
-pt pt_BR ru sk sl sv th uk zh_CN zh_TW"
+KDE_LINGUAS="bs ca ca@valencia da de el es et fi fr gl it kk nb nl pl pt pt_BR
+ru sk sl sv th uk zh_CN zh_TW"
 VIRTUALDBUS_TEST="true"
 VIRTUALX_REQUIRED="test"
 EGIT_REPONAME="${PN}"

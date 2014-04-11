@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/libfm/libfm-1.2.0.ebuild,v 1.1 2014/03/06 20:34:11 hwoarang Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-libs/libfm/libfm-1.2.0.ebuild,v 1.2 2014/03/16 10:32:42 hwoarang Exp $
 
 EAPI=5
 
@@ -21,6 +21,7 @@ COMMON_DEPEND=">=dev-libs/glib-2.18:2
 	>=x11-libs/gtk+-2.16:2
 	>=lxde-base/menu-cache-0.3.2:="
 RDEPEND="${COMMON_DEPEND}
+	!lxde-base/lxshortcut
 	x11-misc/shared-mime-info
 	automount? (
 		udisks? ( || (
@@ -98,8 +99,6 @@ src_install() {
 	if [[ -h ${D}/usr/include/${PN} || -d ${D}/usr/include/${PN} ]]; then
 		rm -r "${D}"/usr/include/${PN}
 	fi
-
-	rm -f "${D}"/usr/bin/lxshortcut
 }
 
 pkg_preinst() {
