@@ -41,10 +41,13 @@ SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system-icu system-jpeg system-sqlite test"
 
+URELEASE="trusty"
+UVER="+build2-0ubuntu2"
 # More URIs appended below...
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
-	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz"
+	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
+	https://launchpad.net/ubuntu/${URELEASE}/+source/${PN}/${PV}${UVER}/+files/${PN}_${PV}${UVER}.debian.tar.gz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -145,6 +148,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	epatch "${WORKDIR}/debian/patches/unity-menubar.patch"
 	# Apply our patches
 	EPATCH_EXCLUDE="7007_fix_missing_strings.patch" \
 	EPATCH_SUFFIX="patch" \

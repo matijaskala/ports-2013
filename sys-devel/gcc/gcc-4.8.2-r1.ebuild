@@ -30,7 +30,7 @@ DESCRIPTION="The GNU Compiler Collection"
 
 LICENSE="GPL-3+ LGPL-3+ || ( GPL-3+ libgcc libstdc++ gcc-runtime-library-exception-3.1 ) FDL-1.3+"
 
-KEYWORDS="~alpha ~amd64 ~arm arm64 ~hppa ~mips ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm arm64 hppa ~mips x86 ~amd64-fbsd ~x86-fbsd"
 
 RDEPEND=""
 DEPEND="${RDEPEND}

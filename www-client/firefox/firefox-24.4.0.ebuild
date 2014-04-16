@@ -41,11 +41,13 @@ SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system-icu system-jpeg system-sqlite test"
 
+URELEASE="trusty"
+UVER="24.0+build1-0ubuntu1"
 # More URIs appended below...
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
 	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
-	https://launchpad.net/ubuntu/trusty/+source/${PN}/${PV}+build1-0ubuntu1/+files/${PN}_${PV}+build1-0ubuntu1.debian.tar.gz"
+	https://launchpad.net/ubuntu/${URELEASE}/+source/${PN}/${UVER}/+files/${PN}_${UVER}.debian.tar.gz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
