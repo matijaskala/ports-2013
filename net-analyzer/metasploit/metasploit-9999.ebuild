@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-9999.ebuild,v 1.17 2014/04/11 03:32:23 zerochaos Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/metasploit/metasploit-9999.ebuild,v 1.20 2014/04/17 18:14:15 zerochaos Exp $
 
 EAPI="5"
 
@@ -32,6 +32,7 @@ RESTRICT="test"
 
 RUBY_COMMON_DEPEND="virtual/ruby-ssl
 	=dev-ruby/rkelly-remix-0.0.6
+	dev-ruby/bcrypt-ruby
 	dev-ruby/activesupport:3.2
 	dev-ruby/activerecord:3.2
 	dev-ruby/json
@@ -143,6 +144,9 @@ all_ruby_prepare() {
 	#remove the bundled readline
 	#https://github.com/rapid7/metasploit-framework/pull/3105
 	rm lib/rbreadline.rb
+	#fix for bug #507816 while waiting on upstream to actually set their own deps right
+	sed -i "s#gem 'activesupport', '>= 3.0.0'#gem 'activesupport', '~> 3.2'#" Gemfile || die
+	sed -i "s#gem 'activerecord'#gem 'activerecord', '~> 3.2'#" Gemfile || die
 	#now we edit the Gemfile based on use flags
 	#even if we pass --without=blah bundler still calculates the deps and messes us up
 	if ! use pcap; then
@@ -237,6 +241,9 @@ all_ruby_install() {
 }
 
 pkg_postinst() {
+	elog "Before use you should run 'env-update' and '. /etc/profile'"
+	elog "otherwise you may be missing important environmental variables."
+
 	elog "You need to prepare the database by running:"
 	elog "emerge --config postgresql-server"
 	elog "/etc/init.d/postgresql-<version> start"

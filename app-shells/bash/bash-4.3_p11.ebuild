@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.3_p11.ebuild,v 1.1 2014/04/12 15:36:27 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.3_p11.ebuild,v 1.2 2014/04/14 16:50:02 polynomial-c Exp $
 
 EAPI="4"
 
@@ -156,7 +156,7 @@ src_install() {
 	default
 
 	dodir /bin
-	mv "${D}"/usr/bin/bash "${D}"/bin/ || die
+	mv "${ED}"/usr/bin/bash "${ED}"/bin/ || die
 	dosym bash /bin/rbash
 
 	insinto /etc/bash
@@ -178,8 +178,8 @@ src_install() {
 	fi
 	sed -i \
 		"${sed_args[@]}" \
-		"${D}"/etc/skel/.bashrc \
-		"${D}"/etc/bash/bashrc || die
+		"${ED}"/etc/skel/.bashrc \
+		"${ED}"/etc/bash/bashrc || die
 
 	if use plugins ; then
 		exeinto /usr/$(get_libdir)/bash
@@ -209,24 +209,24 @@ src_install() {
 }
 
 pkg_preinst() {
-	if [ -e "${ROOT}/etc/bashrc" ] && [ ! -d "${ROOT}/etc/bash" ] ; then
-		mkdir -p "${ROOT}"/etc/bash
-		mv -f "${ROOT}"/etc/bashrc "${ROOT}"/etc/bash/
+	if [[ -e ${EROOT}/etc/bashrc ]] && [[ ! -d ${EROOT}/etc/bash ]] ; then
+		mkdir -p "${EROOT}"/etc/bash
+		mv -f "${EROOT}"/etc/bashrc "${EROOT}"/etc/bash/
 	fi
 
-	if [ -L "${ROOT}/bin/sh" ] ; then
+	if [[ -L ${EROOT}/bin/sh ]] ; then
 		# rewrite the symlink to ensure that its mtime changes. having /bin/sh
 		# missing even temporarily causes a fatal error with paludis.
-		local target=$(readlink "${ROOT}"/bin/sh)
-		local tmp=$(emktemp "${ROOT}"/bin)
+		local target=$(readlink "${EROOT}"/bin/sh)
+		local tmp=$(emktemp "${EROOT}"/bin)
 		ln -sf "${target}" "${tmp}"
-		mv -f "${tmp}" "${ROOT}"/bin/sh
+		mv -f "${tmp}" "${EROOT}"/bin/sh
 	fi
 }
 
 pkg_postinst() {
 	# If /bin/sh does not exist, provide it
-	if [ ! -e "${ROOT}/bin/sh" ] ; then
-		ln -sf bash "${ROOT}"/bin/sh
+	if [[ ! -e ${EROOT}/bin/sh ]] ; then
+		ln -sf bash "${EROOT}"/bin/sh
 	fi
 }

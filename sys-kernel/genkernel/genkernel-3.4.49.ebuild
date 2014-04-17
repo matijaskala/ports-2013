@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/genkernel/genkernel-3.4.49.ebuild,v 1.5 2014/04/11 16:37:23 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-kernel/genkernel/genkernel-3.4.49.ebuild,v 1.6 2014/04/14 01:39:06 robbat2 Exp $
 
 # genkernel-9999        -> latest Git branch "master"
 # genkernel-VERSION     -> normal genkernel release
@@ -38,7 +38,7 @@ then
 	inherit git-2 bash-completion-r1 eutils
 	S="${WORKDIR}/${PN}"
 	SRC_URI="${COMMON_URI}"
-	KEYWORDS="hppa"
+	KEYWORDS=""
 else
 	inherit bash-completion-r1 eutils
 	SRC_URI="mirror://gentoo/${P}.tar.bz2
