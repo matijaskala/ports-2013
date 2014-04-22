@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15572 2014/04/17 03:24:19 patrick Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15596 2014/04/21 14:16:32 mgorny Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,9 +30,9 @@
 
 #--- END OF EXAMPLES ---
 
-# Patrick Lauer <patrick@gentoo.org> (17 Apr 2014)
-# Mask uninstallable version #507358
-=razorqt-base/razorqt-lightdm-greeter-0.5.2-r1
+# Tim Harder <radhermit@gentoo.org> (18 Apr 2014)
+# Masked waiting for qt5
+>=media-video/mkvtoolnix-6.9.0
 
 # Mike Gilbert <floppym@gentoo.org> (16 Apr 2014)
 # Dev channel releases are only for people who are developers or want more
@@ -109,25 +109,6 @@ virtual/pypy:2.0
 # Old release, never stable, not working anymore
 # See bug #327837, #382667, #492474
 <media-video/pitivi-0.90
-
-# Pacho Ramos <pacho@gentoo.org> (06 Apr 2014)
-# They work ok when used without native multilib, still
-# need to be tested on setups using that.
->=app-emulation/emul-linux-x86-baselibs-20140406
->=app-emulation/emul-linux-x86-compat-20140406
->=app-emulation/emul-linux-x86-cpplibs-20140406
->=app-emulation/emul-linux-x86-db-20140406
->=app-emulation/emul-linux-x86-gstplugins-20140406
->=app-emulation/emul-linux-x86-gtklibs-20140406
->=app-emulation/emul-linux-x86-gtkmmlibs-20140406
->=app-emulation/emul-linux-x86-jna-20140406
->=app-emulation/emul-linux-x86-opengl-20140406
->=app-emulation/emul-linux-x86-medialibs-20140406
->=app-emulation/emul-linux-x86-motif-20140406
->=app-emulation/emul-linux-x86-qtlibs-20140406
->=app-emulation/emul-linux-x86-sdl-20140406
->=app-emulation/emul-linux-x86-soundlibs-20140406
->=app-emulation/emul-linux-x86-xlibs-20140406
 
 # Pacho Ramos <pacho@gentoo.org> (06 Apr 2014)
 # Masked since:
@@ -397,37 +378,31 @@ app-emacs/delicious
 
 # Michał Górny <mgorny@gentoo.org> (28 Feb 2014)
 # New multilib conversions for testing, grouped with corresponding
-# emul-linux bumps. Please unmask in order, after getting ACK from
-# package maintainer.
+# emul-linux bumps.
 #
 # Notes:
-# - yngwin explicitly requested 30 days + 1 version bump for cairo.
 # - always unmask in order, with emul-linux of choice and *all* packages
 # preceding it
 # - please update https://wiki.gentoo.org/wiki/Multilib_porting_status
 # (mark the packages as {{Yes|DONE}})
->=dev-libs/libgcrypt-1.6.1-r1
-dev-libs/libgcrypt:11
-# libaacs needs multilib libgcrypt, good to go asap (aballier@g.o)
->=media-libs/libaacs-0.7.0-r1
-# libbluray needs multilib libaacs, good to go asap (aballier@g.o)
->=media-libs/libbluray-0.5.0-r1
->=dev-libs/lzo-2.06-r1
->=app-emulation/emul-linux-x86-baselibs-20131008-r20
->=dev-libs/libxslt-1.1.28-r2
->=app-emulation/emul-linux-x86-baselibs-20131008-r21
->=x11-libs/cairo-1.12.16-r1
->=app-emulation/emul-linux-x86-gtklibs-20131008-r2
->=x11-libs/gdk-pixbuf-2.30.7-r1
->=app-emulation/emul-linux-x86-gtklibs-20131008-r3
->=media-gfx/graphite2-1.2.4-r1
->=media-libs/harfbuzz-0.9.26-r1
->=media-libs/libass-0.11
->=x11-libs/pango-1.36.3-r1
->=x11-libs/pangox-compat-0.0.2-r1
->=app-emulation/emul-linux-x86-gtklibs-20131008-r4
->=sys-apps/file-5.18-r1
->=app-emulation/emul-linux-x86-baselibs-20131008-r22
+>=sys-libs/slang-2.2.4-r1
+>=media-libs/giflib-4.2.3-r1
+>=app-emulation/emul-linux-x86-baselibs-20140406-r2
+>=media-libs/aalib-1.4_rc5-r6
+>=media-libs/imlib-1.9.15-r4
+>=app-emulation/emul-linux-x86-gtklibs-20140406-r1
+=media-libs/imlib2-1.4.6-r2
+>=media-libs/imlib2-9999-r1
+>=media-libs/libcaca-0.99_beta18-r2
+>=media-libs/libsdl-1.2.15-r5
+>=media-libs/sdl-image-1.2.12-r1
+>=media-libs/smpeg-0.4.4-r10
+>=media-libs/sdl-net-1.2.8-r1
+>=media-libs/sdl-ttf-2.0.11-r1
+>=media-libs/freealut-1.1.0-r3
+>=media-libs/sdl-sound-1.0.3-r1
+>=media-libs/sdl-gfx-2.0.24-r1
+>=app-emulation/emul-linux-x86-sdl-20140406-r1
 
 # Tom Wijsman <TomWij@gentoo.org> (21 Feb 2014)
 # MATE Desktop Environment >=1.7 introduction mask:
@@ -511,22 +486,9 @@ net-analyzer/ethstatus
 # Masked for testing
 =media-sound/lilypond-2.19*
 
-# Mike Gilbert <floppym@gentoo.org> (29 Jan 2014)
-# I suspect this package is not used. If you are using it, please contact me.
-# Otherwise, it will be removed in 30 days.
-dev-python/mozrunner
-dev-python/mozinfo
-dev-python/mozprofile
-dev-python/mozprocess
-dev-python/mozfile
-
 # Ole Markus With <olemarkus@gentoo.org> (28 Jan 2014)
 # PHP 5.6 still in early development
 >=dev-lang/php-5.6
-
-# Mike Gilbert <floppym@gentoo.org> (26 Jan 2014)
-# Python library that has no reverse deps. Removal in 30 days.
-dev-python/certifi
 
 # Samuli Suominen <ssuominen@gentoo.org> (24 Jan 2014)
 # Roll ~arch version back from .so.9 to .so.8 due to too many unresolved issues.
