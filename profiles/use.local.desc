@@ -175,6 +175,7 @@ app-admin/packagekit-base:entropy - Enable Entropy backend
 app-admin/packagekit-base:introspection - Use dev-libs/gobject-introspection Enable introspection
 app-admin/packagekit-base:pm-utils - Add pm-utils (suspend/resume) functionalities
 app-admin/pass:X - Use x11-misc/xclip to copy passwords to the clipboard.
+app-admin/pass:dmenu - Add support for x11-misc/dmenu with the 'passmenu' program.
 app-admin/pass:fish-completion - Enable fish completion support.
 app-admin/pass:git - Use dev-vcs/git for password revisions.
 app-admin/puppet:augeas - Enable augeas support
@@ -1156,6 +1157,7 @@ dev-db/mariadb:profiling - Add support for statement profiling (requires USE=com
 dev-db/mariadb:sphinx - Add suport for the sphinx full-text search engine
 dev-db/mariadb:systemtap - Build support for profiling and tracing using dev-util/systemtap
 dev-db/mariadb:test - Install upstream testsuites for end use.
+dev-db/mariadb:tokudb - Add support for TokuDB storage engine
 dev-db/mongodb:mms-agent - Install the MongoDB Monitoring Service agent
 dev-db/mongodb:sharedclient - build client shared library libmongoclient.so
 dev-db/mongodb:spidermonkey - Use embedded SpiderMonkey engine (dev-lang/spidermonkey) instead of v8
@@ -2022,6 +2024,7 @@ dev-python/restkit:cli - Install the restcli command line interface/tool, based 
 dev-python/scrapy:boto - Add support for Amazon S3 via dev-python/boto
 dev-python/scrapy:ibl - Use Instace Based Learning alrogirithm for automatic extraction
 dev-python/simplecv:shell - Enable the iPython SimpleCV shell
+dev-python/socketpool:gevent - Enable gevent as a backend
 dev-python/spyder:ipython - Add support for dev-python/ipython
 dev-python/spyder:matplotlib - Add support for dev-python/matplotlib
 dev-python/spyder:numpy - Add support for dev-python/numpy
@@ -2102,10 +2105,12 @@ dev-qt/qtbearer:exceptions - Add support for exceptions - like catching them ins
 dev-qt/qtcore:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtcore:glib - Enable dev-libs/glib eventloop support
 dev-qt/qtcore:qt3support - Enable the Qt3Support libraries for Qt4. Note that this does not mean you can compile pure Qt3 programs with Qt4.
-dev-qt/qtdbus:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
+dev-qt/qtdbus:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by Nokia)
 dev-qt/qtdeclarative:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
+dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
 dev-qt/qtdeclarative:qt3support - Enable the Qt3Support libraries for Qt4. Note that this does not mean you can compile pure Qt3 programs with Qt4.
 dev-qt/qtdeclarative:webkit - Build the WebView QML component
+dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtdemo:dbus - Build QtDBus examples and demos
 dev-qt/qtdemo:declarative - Build QtDeclarative examples and demos
 dev-qt/qtdemo:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
@@ -2133,12 +2138,19 @@ dev-qt/qtopenvg:qt3support - Enable the Qt3Support libraries for Qt4
 dev-qt/qtphonon:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtphonon:qt3support - Enable the Qt3Support libraries for Qt4. Note that this does not mean you can compile pure Qt3 programs with Qt4.
 dev-qt/qtscript:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
+dev-qt/qtscript:scripttools - Build the QtScriptTools module (requires QtWidgets)
 dev-qt/qtsql:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtsql:qt3support - Enable the Qt3Support libraries for Qt4
 dev-qt/qtsvg:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qttest:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtwebkit:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer
+dev-qt/qtwebkit:libxml2 - Use dev-libs/libxml2 for XML parsing
+dev-qt/qtwebkit:multimedia - Enable HTML5 audio/video support via dev-qt/qtmultimedia
+dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
+dev-qt/qtwebkit:webp - Add support for WebP image format
+dev-qt/qtwebkit:widgets - Build various things that depend on dev-qt/qtwidgets, e.g. the WebKitWidgets library
+dev-qt/qtwebkit:xslt - Enable XSLT support
 dev-ruby/barby:cairo - Add support for writing images (PNG, PS, EPS and, if supported, PDF and SVG) using dev-ruby/rcairo. Not available on JRuby.
 dev-ruby/barby:png - Add support for writing PNG images using dev-ruby/chunky_png.
 dev-ruby/barby:prawn - Add support for writing PDF documents using dev-ruby/prawn.
@@ -2837,6 +2849,7 @@ kde-base/krfb:telepathy - Enable desktop sharing through a telepathy client
 kde-base/ksnapshot:kipi - Support for the KDE Image Plugin Interface.
 kde-base/kstars:fits - Enable support for the FITS image format through cfitsio
 kde-base/kstars:indi - Enable support for Astronomical control library using libindi
+kde-base/kwalletd:gpg - Support wallets with GnuPG encryption additionally to default blowfish-encrypted file
 kde-base/kwin:gles - Enable support for GLES.
 kde-base/marble:designer-plugin - Enable designer plugin
 kde-base/marble:shapefile - Enable support for ESRI shapefiles
@@ -4954,6 +4967,7 @@ net-libs/cyassl:errorstrings - Enable error strings table
 net-libs/cyassl:extra - Enable extra OpenSSL API
 net-libs/cyassl:fortress - Enable fortress SSL build (requires extra and SHA512)
 net-libs/cyassl:hc128 - Enable HC-128 support
+net-libs/cyassl:hkdf - Enable HKDF (HMAC-KDF) support
 net-libs/cyassl:httpd - Enable features for yaSSL web server
 net-libs/cyassl:huge - Choose big cache size (excludes small or big)
 net-libs/cyassl:leanpsk - Enable lean PSK support (requires psk)
@@ -4966,6 +4980,7 @@ net-libs/cyassl:memory - Enable memory callbacks
 net-libs/cyassl:nullcipher - Enable nullcipher support
 net-libs/cyassl:ocsp - Enable Online Certificate Status Protocol
 net-libs/cyassl:pkcallbacks - Enable Public Key Callbacks
+net-libs/cyassl:pkcs7 - Enable PKCS7 standard
 net-libs/cyassl:psk - Enable Pre-Shared Key support
 net-libs/cyassl:pwdbased - Enable PWDBASED (requires extra)
 net-libs/cyassl:rabbit - Enable RABBIT cipher support
@@ -4973,6 +4988,7 @@ net-libs/cyassl:ripemd - Enable RIPEMD-160 support
 net-libs/cyassl:rsa - Enable RSA cihper support
 net-libs/cyassl:savecert - Support certificate saving
 net-libs/cyassl:savesession - Support session saving
+net-libs/cyassl:scep - Enable wolfSCEP
 net-libs/cyassl:sep - Enable sep extensions
 net-libs/cyassl:sessioncerts - Store session certificates
 net-libs/cyassl:sha - Enable SHA cipher support
@@ -4980,6 +4996,7 @@ net-libs/cyassl:sha512 - Enable SHA-160 support
 net-libs/cyassl:small - Choose small cache size (excludes big or huge)
 net-libs/cyassl:sni - Enable server name indication
 net-libs/cyassl:sniffer - Allow collection/decryption of SSL traffic
+net-libs/cyassl:supportedcurves - Enable Supported Elliptic Curves
 net-libs/cyassl:testcert - Enable certificate testing
 net-libs/cyassl:tlsx - Enable all TLS Extensions
 net-libs/cyassl:truncatedhmac - Enable Truncated HMAC
@@ -6981,6 +6998,9 @@ www-misc/monitorix:lm_sensors - Additional hardware mnitoring sensors with sys-a
 www-misc/monitorix:postfix - Analyze postfix logs with net-mail/pflogsumm.
 www-misc/vdradmin-am:vdr - Support for media-video/vdr. Disable this if the VDR you want to control runs at a remote machine.
 www-misc/xxv:themes - Enable more themes via x11-themes/xxv-skins
+www-misc/zoneminder:gcrypt - ...
+www-misc/zoneminder:openssl - ...
+www-misc/zoneminder:vlc - ...
 www-plugins/adobe-flash:kde - Enables a KCM plugin for configuring flash player preferences
 www-plugins/chrome-binary-plugins:flash - Install Chrome's native Pepper Flash.
 www-plugins/chrome-binary-plugins:pdf - Install Chrome's native PDF reader plugin.

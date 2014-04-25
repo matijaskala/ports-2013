@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-base/kwalletd/kwalletd-4.13.0.ebuild,v 1.2 2014/04/17 00:43:12 johu Exp $
+# $Header: /var/cvsroot/gentoo-x86/kde-base/kwalletd/kwalletd-4.13.0.ebuild,v 1.4 2014/04/23 22:43:26 reavertm Exp $
 
 EAPI=5
 
@@ -9,10 +9,10 @@ inherit kde4-meta
 
 DESCRIPTION="KDE Password Server"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
-IUSE="debug semantic-desktop"
+IUSE="debug gpg"
 
 DEPEND="
-	semantic-desktop? (
+	gpg? (
 		app-crypt/gpgme
 		$(add_kdebase_dep kdepimlibs)
 	)
@@ -24,8 +24,8 @@ RESTRICT="test"
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_find_package semantic-desktop Gpgme)
-		$(cmake-utils_use_find_package semantic-desktop QGpgme)
+		$(cmake-utils_use_find_package gpg Gpgme)
+		$(cmake-utils_use_find_package gpg QGpgme)
 	)
 
 	kde4-base_src_configure

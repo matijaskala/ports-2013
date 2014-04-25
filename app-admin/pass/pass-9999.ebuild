@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/pass/pass-9999.ebuild,v 1.6 2014/04/20 22:36:41 zx2c4 Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/pass/pass-9999.ebuild,v 1.11 2014/04/24 16:38:47 zx2c4 Exp $
 
 EAPI=4
 
@@ -13,18 +13,19 @@ EGIT_REPO_URI="http://git.zx2c4.com/password-store"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS=""
-IUSE="+git X +bash-completion zsh-completion fish-completion elibc_Darwin"
+IUSE="+git X +bash-completion zsh-completion fish-completion dmenu elibc_Darwin"
 
 RDEPEND="
 	app-crypt/gnupg
 	app-admin/pwgen
-	app-text/tree
+	>=app-text/tree-1.7.0
 	git? ( dev-vcs/git )
 	X? ( x11-misc/xclip )
 	elibc_Darwin? ( app-misc/getopt )
 	bash-completion? ( app-shells/bash-completion )
 	zsh-completion? ( app-shells/zsh )
 	fish-completion? ( app-shells/fish )
+	dmenu? ( x11-misc/dmenu )
 "
 
 S="${WORKDIR}/password-store-${PV}"
@@ -44,9 +45,9 @@ src_compile() {
 }
 
 src_install() {
-	local COMPS=( )
-	use bash-completion && COMPS+=( "FORCE_BASHCOMP=1" )
-	use zsh-completion && COMPS+=( "FORCE_ZSHCOMP=1" )
-	use fish-completion && COMPS+=( "FORCE_FISHCOMP=1" )
-	emake DESTDIR="${D}" "${COMPS[@]}" install
+	use bash-completion && export FORCE_BASHCOMP=1
+	use zsh-completion && export FORCE_ZSHCOMP=1
+	use fish-completion && export FORCE_FISHCOMP=1
+	default
+	use dmenu && dobin contrib/dmenu/passmenu
 }
