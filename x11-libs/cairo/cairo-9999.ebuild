@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/cairo/cairo-9999.ebuild,v 1.39 2014/04/28 17:50:00 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-libs/cairo/cairo-9999.ebuild,v 1.42 2014/05/02 21:51:12 tetromino Exp $
 
 EAPI=5
 
-inherit eutils flag-o-matic autotools multilib-minimal
+inherit check-reqs eutils flag-o-matic autotools multilib-minimal
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-2
@@ -20,7 +20,7 @@ DESCRIPTION="A vector graphics library with cross-device output support"
 HOMEPAGE="http://cairographics.org/"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-IUSE="X aqua debug directfb drm gallium gles2 +glib legacy-drivers opengl openvg qt4 static-libs +svg valgrind xcb xlib-xcb"
+IUSE="X aqua debug directfb drm gallium gles2 +glib legacy-drivers +lto opengl openvg qt4 static-libs +svg valgrind xcb xlib-xcb"
 # gtk-doc regeneration doesn't seem to work with out-of-source builds
 #[[ ${PV} == *9999* ]] && IUSE="${IUSE} doc" # API docs are provided in tarball, no need to regenerate
 
@@ -86,10 +86,37 @@ MULTILIB_WRAPPED_HEADERS=(
 	/usr/include/cairo/cairo-directfb.h
 )
 
+CHECKREQS_MEMORY="768M"
+
+pkg_pretend() {
+	if [[ ${MERGE_TYPE} != "binary" ]] && use lto; then
+		einfo "Checking for sufficient memory to build $PN with USE=lto"
+		check-reqs_pkg_pretend
+	fi
+}
+
+pkg_setup() {
+	if [[ ${MERGE_TYPE} != "binary" ]] && use lto; then
+		check-reqs_pkg_setup
+	fi
+}
+
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-1.8.8-interix.patch
 	use legacy-drivers && epatch "${FILESDIR}"/${PN}-1.10.0-buggy_gradients.patch
 	epatch "${FILESDIR}"/${PN}-respect-fontconfig.patch
+
+	# bug #507478, https://bugs.freedesktop.org/show_bug.cgi?id=77931
+	epatch "${FILESDIR}"/${PN}-1.12.16-all-clipped-3.patch
+
+	# allow the automagically injected -flto flag to be not injected
+	epatch "${FILESDIR}"/${PN}-1.12.16-lto-optional.patch
+
+	# tests and perf tools require X, bug #483574
+	if ! use X; then
+		sed -e '/^SUBDIRS/ s#boilerplate test perf# #' -i Makefile.am || die
+	fi
+
 	epatch_user
 
 	# Slightly messed build system YAY
@@ -139,6 +166,7 @@ multilib_src_configure() {
 		$(use_enable gallium) \
 		$(use_enable gles2 glesv2) \
 		$(use_enable glib gobject) \
+		$(use_enable lto) \
 		$(use_enable openvg vg) \
 		$(use_enable opengl gl) \
 		$(use_enable qt4 qt) \

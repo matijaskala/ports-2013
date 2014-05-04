@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15637 2014/05/01 08:19:18 slyfox Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15651 2014/05/03 18:21:57 hwoarang Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,15 +30,28 @@
 
 #--- END OF EXAMPLES ---
 
-# Justin Lecher <jlec@gentoo.org> (03 Apr 2014)
-# Wrong license 465690
-# Fails to build and no fixes after years, #147574
-# removal in 30 days
-sci-geosciences/gempak
+# Markos Chandras <hwoarang@gentoo.org> (03 May 2014)
+# Masked for further testing
+>=app-emulation/lxc-1.0.0
+
+# Tom Wijsman <TomWij@gentoo.org> (03 May 2014)
+# Needs to be further tested and revised by both Java and Ruby herds. 
+>=dev-java/jruby-1.7.12
+
+# Tom Wijsman <TomWij@gentoo.org> (02 May 2014)
+# Bluetooth support in MATE has incompatibilities with recent BlueZ versions.
+# If you want to try to get this working, unmask net-wireless/mate-bluetooth as 
+# well as the bluetooth USE flag on mate-extra/mate-user-share; I can't support 
+# this until the relevant upstreams have moved forward with their compatibility.
+#
+# https://bugs.gentoo.org/show_bug.cgi?id=508086
+# https://github.com/mate-desktop/mate-bluetooth/issues/22
+# http://mate-desktop.org/blog/2014-03-11-mate-desktop-singing-the-bluez
+net-wireless/mate-bluetooth
 
 # Mike Frysinger <vapier@gentoo.org> (28 Apr 2014)
 # Use app-emulation/qemu instead.  It has USE=static-user to support building
-# static user helpers.  See #508098 for more info.
+# static user helpers.  See #508098 for more info. Removal in a month
 app-emulation/qemu-user
 
 # Manuel Rüger <mrueg@gentoo.org> (28 Apr 2014)
@@ -193,10 +206,6 @@ dev-python/python-gnutls
 >=x11-themes/gnome-icon-theme-symbolic-3.12.0
 >=x11-themes/gnome-themes-standard-3.12.0
 >=x11-wm/mutter-3.12.1
-
-# Patrick Lauer <patrick@gentoo.org> (27 Apr 2014)
-# No longer installable with gnome-3.8 removal
-gnome-extra/evolution-kolab
 
 # Eray Aslan <eras@gentoo.org> (26 Apr 2014)
 # Non-functional and no longer needed - bug #450116
@@ -423,24 +432,9 @@ www-apache/mod_chroot
 # removal in 30 days.
 dev-util/dissy
 
-# Hans de Graaff <graaff@gentoo.org> (22 Mar 2014) Dead upstream (no
-# releases since 2008, website no longer available). Can only support
-# a single ruby version. Has security issues with shared code between
-# processes. Use a rack-based alternative instead.
-# Removal in 30 days.
-www-apache/mod_ruby
-
 # Sergey Popov <pinkbyte@gentoo.org> (20 Mar 2014)
 # Security mask of vulnerable versions, wrt bug #424167
 <net-nds/openldap-2.4.35
-
-# Samuli Suominen <ssuominnen@gentoo.org> (19 Mar 2014)
-# The ebuild is appending CFLAGS -O0 to prevent segfaulting
-# on 64bit, a workaround that doesn't always work.
-# The ebuild fails to build wrt bug #500408, but it's no use
-# to fix the build if the end result is just constantly crashing.
-# Removal in 30 days, use alternative panels like x11-misc/fbpanel
-x11-misc/suxpanel
 
 # Lars Wendler <polynomial-c@gentoo.org> (14 Mar 2014)
 # Masked for security reasons.
@@ -481,10 +475,6 @@ dev-libs/clens
 # Compatibility packages masked for removal in 30 days.
 <dev-lang/python-exec-0.3.1-r1:0
 <dev-lang/python-exec-2.0.1-r1:2
-
-# Michał Górny <mgorny@gentoo.org> (05 Mar 2014)
-# Seems to cause more trouble than it fixes. Bugs #503470, #503472.
-=sys-apps/systemd-208.277
 
 # Mike Gilbert <floppym@gentoo.org> (04 Mar 2014)
 # Dev channel releases are only for people who are developers or want more
@@ -533,6 +523,18 @@ lxde-base/lxpolkit
 >=media-libs/sdl-sound-1.0.3-r1
 >=media-libs/sdl-gfx-2.0.24-r1
 >=app-emulation/emul-linux-x86-sdl-20140406-r1
+>=sys-apps/acl-2.2.52-r1
+>=sys-apps/util-linux-2.24.1-r3
+>=sys-devel/libtool-2.4.2-r1
+>=virtual/acl-0-r2
+>=app-emulation/emul-linux-x86-baselibs-20140406-r3
+>=media-libs/ladspa-cmt-1.16-r4
+>=media-sound/lash-0.5.4-r2
+>=x11-libs/libSM-1.2.2-r1
+>=media-sound/fluidsynth-1.1.6-r1
+>=media-libs/sdl-mixer-1.2.12-r4
+>=media-libs/sdl2-mixer-2.0.0-r1
+>=app-emulation/emul-linux-x86-sdl-20140406-r2
 
 # Tom Wijsman <TomWij@gentoo.org> (21 Feb 2014)
 # MATE Desktop Environment >=1.7 introduction mask:

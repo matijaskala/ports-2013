@@ -518,6 +518,7 @@ app-emulation/libvirt:virtualbox - Support management of VirtualBox virtualisati
 app-emulation/libvirt:xen - Support management of Xen virtualisation (app-emulation/xen)
 app-emulation/libvirt-glib:introspection - Use dev-libs/gobject-introspection for introspection
 app-emulation/libvirt-glib:vala - Enable bindings for dev-lang/vala
+app-emulation/lxc:seccomp - Use seccomp syscall filters using sys-libs/libseccomp
 app-emulation/lxc:vanilla - Avoid adding Gentoo Linux-specific modifications, which include the custom init script. This is present as a flag to avoid forcing dependencies over users that might not want have them around as they use LXC in contexts where the init script is not useful.
 app-emulation/open-vm-tools:doc - Generate API documentation
 app-emulation/open-vm-tools:fuse - Build vmblock-fuse in favor of FUSE based blocking mechanism for DnD
@@ -972,6 +973,7 @@ app-office/scribus:scripts - Install the scripts
 app-office/scribus:templates - Document tamplates
 app-office/scribus:tk - Install tk based scripts e.g. FontSample.py
 app-office/texmacs:netpbm - Add support for media-libs/netpbm
+app-office/texmacs:pdf - Add the experimental native pdf export
 app-office/texstudio:video - Use phonon for video embedding
 app-pda/barry:boost - Enable boost support
 app-pda/barry:desktop - Install the GUI desktop control panel
@@ -1222,6 +1224,7 @@ dev-embedded/msp430-gcc:objc-gc - Build support for the Objective C code languag
 dev-embedded/msp430-gdb:multitarget - Support all known targets in one gdb binary
 dev-embedded/msp430-gdb:python - Enable support for the new internal scripting language, as well as extended pretty printers
 dev-embedded/openocd:blaster - Enable support for Altera USE-Blaster
+dev-embedded/openocd:cmsis-dap - Support for CMSIS-DAP compliant adapters
 dev-embedded/openocd:dummy - Build the dummy port driver
 dev-embedded/openocd:ftd2xx - Enable support for USB FTDI chips via dev-embedded/libftd2xx
 dev-embedded/openocd:ftdi - Enable support for USB FTDI chips via dev-embedded/libftdi
@@ -2699,6 +2702,11 @@ gnome-extra/gdesklets-core:dbus - Enable gDesklets Controls to use DBus
 gnome-extra/gnome-boxes:usbredir - Use sys-apps/usbredir to redirect USB devices to another machine over TCP
 gnome-extra/gnome-color-manager:clutter - Use media-libs/clutter to render color gamut representations
 gnome-extra/gnome-color-manager:packagekit - Enable support for the distro-neutral package manager GUI app-admin/packagekit
+gnome-extra/gnome-commander:chm - Enable metadata support for Microsoft Compiled HTML Help files
+gnome-extra/gnome-commander:gsf - Add metadata support for OLE, OLE2 and ODF
+gnome-extra/gnome-commander:pdf - Add metadata support for PDF
+gnome-extra/gnome-commander:python - Add support for python plugins"
+gnome-extra/gnome-commander:taglib - Add metadata support for ID3, Vorbis, FLAC and APE
 gnome-extra/gnome-do-plugins:banshee - Enables the Banshee (media-sound/banshee) plugin
 gnome-extra/gnome-dvb-daemon:totem - Build a plugin for media-video/totem
 gnome-extra/gnome-dvb-daemon:vala - Add support for dev-lang/vala
@@ -2771,6 +2779,7 @@ gnustep-base/gnustep-make:native-exceptions - Enables use of the native Objectiv
 gnustep-base/libobjc2:boehm-gc - Enable Hans Boehm's garbage collector (dev-libs/boehm-gc). Not recommended by upstream
 gpe-base/gpe:games - Builds and installs GPE games.
 kde-base/ark:archive - Enable support for a variety of archive formats through libarchive
+kde-base/baloo:alternatekcm - Use the alternate Systemsettings module by Lindsay Mathieson for better configurability
 kde-base/cantor:R - Enable dev-lang/R backend support
 kde-base/cantor:analitza - Enable kde-base/analitza backend support
 kde-base/cantor:qalculate - Enable sci-libs/libqalculate backend support
@@ -5711,7 +5720,6 @@ net-proxy/dansguardian:ntlm - Enable support for the NTLM auth plugin.
 net-proxy/dansguardian:orig-ip - Enable support for checking the client's original destination IP address against HTTP request details when deployed as a transparent proxy (US-CERT VU#435052).
 net-proxy/dansguardian:trickledm - Enable support for the trickle download manager.
 net-proxy/haproxy:tools - Install additional tools (halog, iprange).
-net-proxy/obfsproxy:daemon - Run obfsproxy as a standalone daemon
 net-proxy/rejik:banlists - Install upstream provided simple banlists
 net-proxy/squid:ecap - Adds support for loadable content adaptation modules (http://www.e-cap.org)
 net-proxy/squid:epoll - Enables Linux epoll() support
@@ -5811,6 +5819,7 @@ net-wireless/kismet:speech - Audio support using app-accessibility/flite
 net-wireless/kismet:suid - Install a setuid root helper binary with limited functionality; this allows running kismet as a normal user, significantly reducing security risks
 net-wireless/madwifi-ng:injection - Adds support for net-wireless/aircrack-ng aireplay-ng packet injection
 net-wireless/neard:tools - build and install extra helper utilities
+net-wireless/openbsc:gprs - Support GPRS via OpenGGSN
 net-wireless/osmocom-bb:transmit - Enable transmission capabilities.
 net-wireless/pyrit:cuda - Enable CUDA support via net-wireless/cpyrit-cuda
 net-wireless/pyrit:opencl - Enable OpenCL support via net-wireless/cpyrit-opencl
@@ -6882,6 +6891,7 @@ sys-process/fcron:debug - Enable debug code and output. Since version 3.0.5 this
 sys-process/fcron:mta - Enable mta support for sending emails from fcron
 sys-process/fcron:pam - Enable PAM support for fcron. This means that fcron will pass through the "fcron" stack before executing the jobs, and fcrontab will use the "fcrontab" stack to authenticate the user before editing its crontab file.
 sys-process/fcron:system-crontab - Set up fcron to respect /etc/crontab and /etc/cron.d. If this flag is disabled, /etc/cron.d and /etc/crontab will be ignored, but /etc/cron.{hourly,daily,weekly,monthly} will still be respected.
+sys-process/htop:oom - Add column to track the OOM-killer score of processes
 sys-process/htop:openvz - Enable openvz support
 sys-process/htop:vserver - Enable vserver support
 sys-process/lsof:rpc - support looking up RPC service info
@@ -7151,6 +7161,7 @@ x11-libs/cairo:gallium - Use Mesa's Gallium backend for acceleration
 x11-libs/cairo:gles2 - Use OpenGL ES 2 backend for acceleration.
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:legacy-drivers - Include the buggy gradients patch (for legacy drivers, such as nvidia-drivers older than 304.30)
+x11-libs/cairo:lto - Try to build with Link-Time Optimization if supported by the compiler. This is recommended by upstream, but can cause build failure in some environments and on machines with little memory.
 x11-libs/cairo:opengl - Use Mesa backend for acceleration
 x11-libs/cairo:openvg - Use OpenVG for backend acceleration
 x11-libs/cairo:valgrind - Built-in support to mark memory regions

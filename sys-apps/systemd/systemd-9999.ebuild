@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.104 2014/04/19 01:04:09 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.108 2014/05/03 17:35:41 mgorny Exp $
 
 EAPI=5
 
@@ -164,6 +164,15 @@ pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
 
+src_configure() {
+	# Keep using the one where the rules were installed.
+	MY_UDEVDIR=$(get_udevdir)
+	# Fix systems broken by bug #509454.
+	[[ ${MY_UDEVDIR} ]] || MY_UDEVDIR=/lib/udev
+
+	multilib-minimal_src_configure
+}
+
 multilib_src_configure() {
 	local myeconfargs=(
 		# disable -flto since it is an optimization flag
@@ -212,10 +221,13 @@ multilib_src_configure() {
 		# hardcode a few paths to spare some deps
 		QUOTAON=/usr/sbin/quotaon
 		QUOTACHECK=/usr/sbin/quotacheck
-	)
 
-	# Keep using the one where the rules were installed.
-	MY_UDEVDIR=$(get_udevdir)
+		# dbus paths
+		--with-dbuspolicydir="${EPREFIX}/etc/dbus-1/system.d"
+		--with-dbussessionservicedir="${EPREFIX}/usr/share/dbus-1/services"
+		--with-dbussystemservicedir="${EPREFIX}/usr/share/dbus-1/system-services"
+		--with-dbusinterfacedir="${EPREFIX}/usr/share/dbus-1/interfaces"
+	)
 
 	if use firmware-loader; then
 		myeconfargs+=(
