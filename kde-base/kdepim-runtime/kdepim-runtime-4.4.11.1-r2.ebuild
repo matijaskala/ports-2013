@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-base/kdepim-runtime/kdepim-runtime-4.4.11.1-r2.ebuild,v 1.3 2014/04/21 13:37:12 johu Exp $
+# $Header: /var/cvsroot/gentoo-x86/kde-base/kdepim-runtime/kdepim-runtime-4.4.11.1-r2.ebuild,v 1.5 2014/05/07 17:22:31 zlogene Exp $
 
 EAPI=5
 
@@ -13,7 +13,7 @@ else
 fi
 
 DESCRIPTION="KDE PIM runtime plugin collection"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug"
 
 RESTRICT="test"
