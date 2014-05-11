@@ -161,7 +161,6 @@ app-admin/glance:swift - Adds swift storage support
 app-admin/gnome-system-tools:nfs - Adds support for NFS shares
 app-admin/hddtemp:network-cron - Monthly cronjob to update hddtemp.db.
 app-admin/keepass:aot - Generate native code at build time, rather than runtime.
-app-admin/lcap:lids - If you have the Linux Intrusion Detection System
 app-admin/logrotate:acl - Installs acl support
 app-admin/logrotate:selinux - Installs Security Enhanced Linux support
 app-admin/mate-system-tools:caja - Adds support for the Caja file manager
@@ -3138,7 +3137,6 @@ media-gfx/assimp:tools - Build assimp tool binary
 media-gfx/asymptote:boehm-gc - Enables using the Boehm-Demers-Weiser conservative garbage collector
 media-gfx/asymptote:offscreen - Enables off-screen rendering
 media-gfx/asymptote:sigsegv - Enables using dev-libs/libsigsegv
-media-gfx/blender:3dmouse - Adds support for space navigator devices through package dev-libs/libspnav.
 media-gfx/blender:boost - Enable features depending on boost.
 media-gfx/blender:bullet - Enable Bullet (Physics Engine).
 media-gfx/blender:collada - Add support for Collada interchange format through media-libs/opencollada.
@@ -3153,7 +3151,6 @@ media-gfx/blender:openimageio - Enable OpenImageIO Support
 media-gfx/blender:opennl - Enable use of Open Numerical Library
 media-gfx/blender:player - Build the Blender Player. THis requires the Game engine.
 media-gfx/blender:redcode - This flag add support for RED CODE camera digital format (5K HD images *.r3d) - EXPERIMENTAL.
-media-gfx/blender:tweak-mode - This flag allows you to model without confirming each translation, in particular it lets you grab with left mouse button (LMB) and not having to confirm by another click. Blender 'Tweak Mode' is similar to the 'Tweak Mode' of the Wings modeller (media-gfx/wings).
 media-gfx/brlcad:benchmarks - Run benchmarks during test phase (need test option enabled)
 media-gfx/comix:rar - Pulls app-arch/unrar for rar file support
 media-gfx/darktable:colord - Support color management using x11-misc/colord
@@ -3710,6 +3707,8 @@ media-sound/denemo:fluidsynth - Enable Fluidsynth MIDI software synthesis
 media-sound/denemo:portmidi - Enable support for the portmidi backend
 media-sound/dir2ogg:mac - Add support for decoding Monkey's Audio files
 media-sound/dir2ogg:wma - Add support for wma files through mplayer
+media-sound/easytag:gtk2 - Enable GTK+:2 support and disable default GTK+:3 support
+media-sound/easytag:gtk3 - Enable GTK+:3 support (default) and disable GTK+:2 support
 media-sound/easytag:opus - Enable support for media-libs/opus and media-libs/opusfile (opus audio codec)
 media-sound/ecasound:lv2 - Add support for Ladspa V2
 media-sound/ecasound:oil - Use dev-libs/liboil for inner loop optimizations
@@ -3920,7 +3919,6 @@ media-tv/mythtv:hls - HTTP Live Streaming support
 media-tv/mythtv:ieee1394 - Allows MythTV to communicate and use Firewire enabled Cable boxes. These are typically found in the United States, where such support is required by law. This will also install Firewire test programs and external channel changers if the internal changer does not work.
 media-tv/mythtv:jack - Allows MythTV to use JACK as your sound output device. You will have to manually configure the path to your JACK settings.
 media-tv/mythtv:lcd - Tells MythTV that you have an instance of app-misc/lcdproc configured on your machine and it should output information such as current time, show name, episode name, etc to that LCD.
-media-tv/mythtv:libass - SRT/SSA/ASS (SubRip / SubStation Alpha) subtitle support
 media-tv/mythtv:lirc - Adds LIRC support directly to MythTV allowing for built in control via a LIRC device.
 media-tv/mythtv:perl - Builds the perl bindings for MythTV. Allows you to write scripts in Perl to control your MythTV setup or communicate with it.
 media-tv/mythtv:raop - Remote Audio Output Protocol (aka AirTunes/AirPlay)
@@ -6511,6 +6509,8 @@ sys-cluster/charm:numa - Support memory affinity with NUMA
 sys-cluster/charm:syncft - Compile with Charm++ fault tolerance support
 sys-cluster/charm:tcp - Use TCP (instead of UPD) for socket communication
 sys-cluster/cinder:api - Installs the initscripts for the cinder api service
+sys-cluster/cinder:iscsi - Allow using an iSCSI remote storage server as pool for disk image storage
+sys-cluster/cinder:lvm - Allow using the Logical Volume Manager (sys-apps/lvm2) as pool for disk image storage
 sys-cluster/cinder:scheduler - Installs the initscripts for the cinder scheduler service
 sys-cluster/cinder:volume - Installs the initscripts for the cinder volume service
 sys-cluster/cluster-glue:large-cluster - Extend messages length limits for resource heavy clusters
@@ -6540,9 +6540,10 @@ sys-cluster/mvapich2:large-cluster - Automatically generated description for lar
 sys-cluster/mvapich2:medium-cluster - Automatically generated description for medium-cluster
 sys-cluster/mvapich2:romio - Automatically generated description for romio
 sys-cluster/neutron:dhcp - Installs the initscripts for the neutron dhcp service
-sys-cluster/neutron:l3 - Installs the initscripts for the neutron l3 service
-sys-cluster/neutron:metadata - Installs the initscripts for the neutron metadata service
-sys-cluster/neutron:openvswitch - Installs the initscripts for the neutron openvswitch service
+sys-cluster/neutron:l3 - Installs the initscripts for the neutron l3 agent service
+sys-cluster/neutron:linuxbridge - Installs the initscripts for the neutron linuxbridge agent service
+sys-cluster/neutron:metadata - Installs the initscripts for the neutron metadata agent service
+sys-cluster/neutron:openvswitch - Installs the initscripts for the neutron openvswitch agent service
 sys-cluster/neutron:server - Installs the initscripts for the neutron server service
 sys-cluster/nova:api - Installs the initscripts for the nova api service
 sys-cluster/nova:cert - Installs the initscripts for the nova scheduler service
@@ -6837,9 +6838,6 @@ sys-libs/uclibc:ssp - Force the use of ssp to be built into a hardened uclibc se
 sys-libs/uclibc:uclibc-compat - Build uclibc with backwards compatible options
 sys-libs/uclibc:wordexp - Add support for word expansion (wordexp.h)
 sys-libs/zlib:minizip - include the minizip library for quick and dirty zip extraction
-sys-power/cpufreqd:nforce2 - Enable support for nforce2 voltage settings plug-in
-sys-power/cpufreqd:nvidia - Enable nvidia overclocking (media-video/nvclock) plug-in
-sys-power/cpufreqd:pmu - Enable Power Management Unit plug-in
 sys-power/cpupower:cpufreq_bench - Build and install the cpufreq_bench binary
 sys-power/nut:ipmi - Support IPMI-based UPSes.
 sys-power/nut:ups_drivers_al175 - Driver for Eltek UPS models with AL175 alarm module
@@ -7352,11 +7350,14 @@ x11-wm/compiz-fusion:emerald - Install the x11-wm/emerald package.
 x11-wm/compiz-fusion:unsupported - Install the x11-plugins/compiz-fusion-plugins-unsupported package.
 x11-wm/echinus:xrandr - Enable support for multihead configuration
 x11-wm/enlightenment:enlightenment_modules_access - Accessibility module designed to improve ease of use for the vision impaired and the blind
+x11-wm/enlightenment:enlightenment_modules_appmenu - Gadget that hold the toolbar of the foreground application
 x11-wm/enlightenment:enlightenment_modules_backlight - Backlight control slider gadget
 x11-wm/enlightenment:enlightenment_modules_battery - A gadget to visualize your battery status
+x11-wm/enlightenment:enlightenment_modules_bluez4 - Configure Bluetooth devices
 x11-wm/enlightenment:enlightenment_modules_clock - Nice clock gadget to show current time
 x11-wm/enlightenment:enlightenment_modules_comp - Enlightenment Composite Manager
 x11-wm/enlightenment:enlightenment_modules_conf-applications - Allows configuration of Ibar, Restart, and Startup applications
+x11-wm/enlightenment:enlightenment_modules_conf-comp - Configure default dialog properties
 x11-wm/enlightenment:enlightenment_modules_conf-dialogs - Configure default dialog properties
 x11-wm/enlightenment:enlightenment_modules_conf-display - Used to configure your screen
 x11-wm/enlightenment:enlightenment_modules_conf-edgebindings - Configure your edge bindings here
@@ -7369,9 +7370,11 @@ x11-wm/enlightenment:enlightenment_modules_conf-performance - Used to configure 
 x11-wm/enlightenment:enlightenment_modules_conf-randr - Used to configure your screen's resolution
 x11-wm/enlightenment:enlightenment_modules_conf-shelves - Shelf configuration dialog
 x11-wm/enlightenment:enlightenment_modules_conf-theme - Used to configure your theme preferences
+x11-wm/enlightenment:enlightenment_modules_conf-wallpaper2 - Used to configure your theme preferences
 x11-wm/enlightenment:enlightenment_modules_conf-window-manipulation - Configures window raise, resistance, and maximize policies
 x11-wm/enlightenment:enlightenment_modules_conf-window-remembers - Delete existing window remembers
 x11-wm/enlightenment:enlightenment_modules_connman - Control Wifi and wired networks as a user
+x11-wm/enlightenment:enlightenment_modules_contact - Enable the contact module
 x11-wm/enlightenment:enlightenment_modules_cpufreq - Gadget to monitor and change the CPU frequency
 x11-wm/enlightenment:enlightenment_modules_dropshadow - Module to add a dropshadow to windows
 x11-wm/enlightenment:enlightenment_modules_everything - The run command module provides an application launcher dialog
@@ -7383,6 +7386,7 @@ x11-wm/enlightenment:enlightenment_modules_ibox - A home for your iconified appl
 x11-wm/enlightenment:enlightenment_modules_illume2 - Illume2 - next generation of illume - special WM mode for embedded devices and set of plugins with same purpose
 x11-wm/enlightenment:enlightenment_modules_mixer - A module to provide a mixer for changing volume
 x11-wm/enlightenment:enlightenment_modules_msgbus - DBus Extension
+x11-wm/enlightenment:enlightenment_modules_music-control - Control your music in your shelf
 x11-wm/enlightenment:enlightenment_modules_notification - notification-daemon alternative. Popup if an event occur
 x11-wm/enlightenment:enlightenment_modules_pager - Gadget to allow you to visualize your virtual desktops and the windows they contain
 x11-wm/enlightenment:enlightenment_modules_quickaccess - Enlightenment Quickaccess Launcher
@@ -7391,10 +7395,13 @@ x11-wm/enlightenment:enlightenment_modules_start - Enlightenment's "Start" butto
 x11-wm/enlightenment:enlightenment_modules_syscon - This module provides a unified popup dialog for all the system actions in Enlightenment
 x11-wm/enlightenment:enlightenment_modules_systray - system tray that hold applications icons like Skype, Pidgin, Kopete and others
 x11-wm/enlightenment:enlightenment_modules_tasks - Gadget to allow you to switch tasks
+x11-wm/enlightenment:enlightenment_modules_teamwork - Enable teamwork module
 x11-wm/enlightenment:enlightenment_modules_temperature - Temperature monitor
 x11-wm/enlightenment:enlightenment_modules_tiling - Positions/resizes your windows tilingly
 x11-wm/enlightenment:enlightenment_modules_winlist - A module to show the list of client applications presently running
 x11-wm/enlightenment:enlightenment_modules_wizard - First Run Wizard
+x11-wm/enlightenment:enlightenment_modules_wl-desktop-shell - Enlightenment Wayland Desktop Shell
+x11-wm/enlightenment:enlightenment_modules_wl-screenshot - Enlightenment Wayland Screenshot module
 x11-wm/enlightenment:enlightenment_modules_xkbswitch - Keyboard layout configuration and switcher
 x11-wm/enlightenment:pango - Enable pango font rendering
 x11-wm/enlightenment:udev - Use sys-fs/udev to determine available devices
