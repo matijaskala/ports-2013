@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15674 2014/05/11 11:16:32 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15691 2014/05/15 18:03:12 mgorny Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,11 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (14 May 2014)
+# Depends on libevdev which still needs keywording, bug #487944
+>=x11-drivers/xf86-input-evdev-2.8.99
+>=x11-drivers/xf86-input-synaptics-1.7.99
 
 # Pacho Ramos <pacho@gentoo.org> (11 May 2014)
 # Dead for ages, now in mjpegtools, bug #492886
@@ -84,13 +89,13 @@ dev-db/mysql++:3
 >=app-emulation/lxc-1.0.0
 
 # Tom Wijsman <TomWij@gentoo.org> (03 May 2014)
-# Needs to be further tested and revised by both Java and Ruby herds. 
+# Needs to be further tested and revised by both Java and Ruby herds.
 >=dev-java/jruby-1.7.12
 
 # Tom Wijsman <TomWij@gentoo.org> (02 May 2014)
 # Bluetooth support in MATE has incompatibilities with recent BlueZ versions.
-# If you want to try to get this working, unmask net-wireless/mate-bluetooth as 
-# well as the bluetooth USE flag on mate-extra/mate-user-share; I can't support 
+# If you want to try to get this working, unmask net-wireless/mate-bluetooth as
+# well as the bluetooth USE flag on mate-extra/mate-user-share; I can't support
 # this until the relevant upstreams have moved forward with their compatibility.
 #
 # https://bugs.gentoo.org/show_bug.cgi?id=508086
@@ -301,14 +306,8 @@ app-admin/eselect-lua
 # Removal in 30 days wrt bug #380193
 dev-cpp/libsexymm
 
-# Ulrich Müller <ulm@gentoo.org> (12 Apr 2014)
-# No license, SRC_URI dead, unresponsive upstream.
-# Last release in 2002. No reverse dependencies.
-# Masked for removal in 30 days, bug 446162.
-dev-java/randomguid
-
 # Patrick Lauer <patrick@gentoo.org> (09 Apr 2014)
-# Dead upstream, has known dataloss bugs. 
+# Dead upstream, has known dataloss bugs.
 # Please use something more sane: rsnapshot, backuppc, obnam, ...
 app-backup/rdiff-backup
 app-backup/pybackpack
@@ -372,7 +371,7 @@ virtual/pypy:2.0
 
 # Luca Barbato <lu_zero@gentoo.org> (30 Mar 2014)
 # Current stable for upstream, pending a tinderbox run.
-~media-video/libav-10
+=media-video/libav-10*
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (26 Mar 2014)
 # Affected by multiple vulnerabilities, #445916, #471098 and #472280
@@ -387,11 +386,6 @@ virtual/pypy:2.0
 # Do NOT remove this mask or the affected packages without speaking to
 # bonsaikitten first! You have been warned!
 <net-fs/samba-3.6
-
-# Ulrich Müller <ulm@gentoo.org> (13 Mar 2014)
-# No reverse dependencies. Use dev-libs/libbsd instead.
-# Masked for removal in 60 days, bug 504456.
-dev-libs/clens
 
 # Michał Górny <mgorny@gentoo.org> (12 Mar 2014)
 # Masked for testing.
@@ -451,41 +445,38 @@ lxde-base/lxpolkit
 # preceding it
 # - please update https://wiki.gentoo.org/wiki/Multilib_porting_status
 # (mark the packages as {{Yes|DONE}})
->=sys-libs/slang-2.2.4-r1
->=media-libs/giflib-4.2.3-r1
->=app-emulation/emul-linux-x86-baselibs-20140406-r2
->=media-libs/aalib-1.4_rc5-r6
->=media-libs/imlib-1.9.15-r4
->=app-emulation/emul-linux-x86-gtklibs-20140406-r1
-=media-libs/imlib2-1.4.6-r2
->=media-libs/imlib2-9999-r1
->=media-libs/libcaca-0.99_beta18-r2
->=media-libs/libsdl-1.2.15-r5
->=media-libs/sdl-image-1.2.12-r1
->=media-libs/smpeg-0.4.4-r10
->=media-libs/sdl-net-1.2.8-r1
->=media-libs/sdl-ttf-2.0.11-r1
->=media-libs/freealut-1.1.0-r3
->=media-libs/sdl-sound-1.0.3-r1
->=media-libs/sdl-gfx-2.0.24-r1
->=app-emulation/emul-linux-x86-sdl-20140406-r1
->=sys-apps/acl-2.2.52-r1
->=sys-apps/util-linux-2.24.1-r3
->=sys-devel/libtool-2.4.2-r1
->=virtual/acl-0-r2
->=app-emulation/emul-linux-x86-baselibs-20140406-r3
->=media-libs/ladspa-cmt-1.16-r4
->=media-sound/lash-0.5.4-r2
->=x11-libs/libSM-1.2.2-r1
->=media-sound/fluidsynth-1.1.6-r1
->=media-libs/sdl-mixer-1.2.12-r4
->=media-libs/sdl2-mixer-2.0.0-r1
->=app-emulation/emul-linux-x86-sdl-20140406-r2
+>=dev-libs/openssl-1.0.1g-r1
+>=app-emulation/emul-linux-x86-baselibs-20140406-r4
 >=media-libs/alsa-oss-1.0.25-r1
 >=media-plugins/alsa-plugins-1.0.27-r2
 =net-wireless/bluez-4.101-r9
 >=net-wireless/bluez-5.18-r1
 >=app-emulation/emul-linux-x86-soundlibs-20140406-r1
+>=dev-libs/libdaemon-0.14-r2
+>=net-dns/avahi-0.6.31-r5
+>=net-libs/ldns-1.6.16-r1
+>=dev-libs/libevent-2.0.21-r1
+>=net-dns/unbound-1.4.21-r2
+>=net-libs/gnutls-3.3.1-r1
+>=net-print/cups-1.7.1-r2
+>=app-emulation/emul-linux-x86-baselibs-20140508-r1
+=dev-libs/atk-2.10.0-r1
+>=dev-libs/atk-2.12.0-r1
+>=x11-libs/gtk+-2.24.23-r1:2
+>=x11-themes/gtk-engines-2.20.2-r1
+>=x11-themes/gtk-engines-murrine-0.98.2-r1
+>=x11-themes/gtk-engines-xfce-3.0.1-r201:0
+>=app-emulation/emul-linux-x86-gtklibs-20140508-r1
+>=sys-libs/talloc-2.1.0-r1
+>=sys-libs/tevent-0.9.21-r1
+>=dev-libs/libverto-0.2.5-r1
+>=sys-apps/keyutils-1.5.9-r1
+>=app-crypt/mit-krb5-1.12.1-r1
+>=app-emulation/emul-linux-x86-baselibs-20140508-r2
+>=sys-libs/db-4.8.30-r1:4.8
+>=app-crypt/heimdal-1.5.3-r2
+>=virtual/krb5-0-r1
+>=app-emulation/emul-linux-x86-baselibs-20140508-r3
 
 # Luca Barbato <lu_zero@gentoo.org> (20 Feb 2014)
 # Beta ebuild, unmask to test the tree.
@@ -691,11 +682,6 @@ dev-java/itext:5
 # bugs and segfaults (all). Don't ask for a version bump unless
 # there is a working release.
 sci-geosciences/googleearth
-
-# Alexis Ballier <aballier@gentoo.org> (20 Jul 2013)
-# New major release and lots of packages fail to build.
-# Tracker bug is: https://bugs.gentoo.org/show_bug.cgi?id=476490
->=media-video/ffmpeg-2.0
 
 # Chris Reffett <creffett@gentoo.org> (20 Jul 2013)
 # Uses vulnerable versions of bzip2, but these versions are

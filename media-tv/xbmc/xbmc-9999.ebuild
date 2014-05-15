@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/xbmc/xbmc-9999.ebuild,v 1.156 2014/05/09 22:40:33 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-tv/xbmc/xbmc-9999.ebuild,v 1.158 2014/05/15 17:09:53 ulm Exp $
 
 EAPI="5"
 
@@ -11,6 +11,7 @@ PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 multiprocessing autotools
 
+CODENAME="Helix"
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
@@ -18,16 +19,24 @@ case ${PV} in
 	#SRC_URI="!java? ( mirror://gentoo/${P}-20130413-generated-addons.tar.xz )"
 	;;
 *_alpha*|*_beta*|*_rc*)
-	MY_PV="Helix_${PV#*_}"
+	MY_PV="${CODENAME}_${PV#*_}"
 	MY_P="${PN}-${MY_PV}"
 	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}.tar.gz -> ${P}.tar.gz
 		!java? ( mirror://gentoo/${P}-generated-addons.tar.xz )"
 	KEYWORDS="~amd64 ~x86"
+	S=${WORKDIR}/${MY_P}
 	;;
-*)
-	MY_P=${P/_/-*_}
-	SRC_URI="http://mirrors.xbmc.org/releases/source/${MY_P}.tar.gz"
+*|*_p*)
+	MY_PV=${PV/_p/_r}
+	MY_P="${PN}-${MY_PV}"
+	SRC_URI="http://mirrors.xbmc.org/releases/source/${MY_P}.tar.gz
+		http://mirrors.xbmc.org/releases/source/${MY_P}-generated-addons.tar.xz"
 	KEYWORDS="~amd64 ~x86"
+
+	S=${WORKDIR}/${PN}-
+	[[ ${PV} == *_p* ]] \
+		&& S+=${PV/_p/-${CODENAME}_r} \
+		|| S+=${MY_PV}
 	;;
 esac
 
@@ -78,7 +87,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/libpng
 	projectm? ( media-libs/libprojectm )
 	media-libs/libsamplerate
-	sdl? ( media-libs/libsdl[audio,opengl,video,X] )
+	sdl? ( media-libs/libsdl[sound,opengl,video,X] )
 	alsa? ( media-libs/libsdl[alsa] )
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
@@ -136,8 +145,6 @@ DEPEND="${COMMON_DEPEND}
 # Force java for latest git version to avoid having to hand maintain the
 # generated addons package.  #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
-
-S=${WORKDIR}/${MY_P}
 
 pkg_setup() {
 	python-single-r1_pkg_setup
