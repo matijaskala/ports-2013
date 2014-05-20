@@ -1,9 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/cherrypy/cherrypy-3.3.0.ebuild,v 1.1 2014/05/03 16:51:59 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/cherrypy/cherrypy-3.3.0.ebuild,v 1.3 2014/05/16 15:01:25 idella4 Exp $
 
 EAPI=5
-PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3,3_4} pypy pypy2_0 )
+PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} pypy )
 
 inherit distutils-r1
 
@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-ma
 IUSE="test"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
-	test? ( dev-python/nose[${PYTHON_USEDEP}] )"
+	test? ( >=dev-python/nose-1.3.3[${PYTHON_USEDEP}] )"
 RDEPEND=""
 S="${WORKDIR}/${MY_P}"
 
@@ -34,19 +34,22 @@ python_prepare_all() {
 }
 
 python_test() {
+	# suite requires current latest nose-1.3.3
+	# https://bitbucket.org/cherrypy/cherrypy/issue/1308
+	# https://bitbucket.org/cherrypy/cherrypy/issue/1306
 	local exclude=(
-		# https://bitbucket.org/cherrypy/cherrypy/issue/1306
-		-e test_session
-
-		# https://bitbucket.org/cherrypy/cherrypy/issue/1308
-		-e test_file_stream
-
-		# https://bitbucket.org/cherrypy/cherrypy/issue/1315
-		-e test_HTTP11_pipelining
+		-e test_file_stream -e test_4_File_deletion -e test_3_Redirect
+		-e test_2_File_Concurrency -e test_0_Session -e testStatic
 	)
 
 	# This really doesn't sit well with multiprocessing
-	nosetests "${exclude[@]}" < /dev/tty || die "Testing failed with ${EPYTHON}"
+	# The issue 1306 tells us some tests are subject to the deleterious effects of
+	# the 'race condition'.  Both the issues are unresolved / open
+	if [[ "${EPYTHON}" == pypy ]]; then
+		nosetests "${exclude[@]}" -I test_logging.py < /dev/tty || die "Testing failed with${EPYTHON}"
+	else
+		nosetests "${exclude[@]}" < /dev/tty || die "Testing failed with ${EPYTHON}"
+	fi
 }
 
 src_test() {

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/cinnamon/cinnamon-2.2.6.ebuild,v 1.1 2014/05/10 20:24:37 tetromino Exp $
+# $Header: /var/cvsroot/gentoo-x86/gnome-extra/cinnamon/cinnamon-2.2.6.ebuild,v 1.2 2014/05/16 02:15:08 tetromino Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -21,7 +21,7 @@ SRC_URI="https://github.com/linuxmint/Cinnamon/archive/${MY_PV}.tar.gz -> ${MY_P
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+bluetooth +networkmanager"
+IUSE="+bluetooth +l10n +networkmanager"
 KEYWORDS="~amd64 ~x86"
 
 COMMON_DEPEND="
@@ -73,6 +73,7 @@ COMMON_DEPEND="
 # 10. pygobject needed for menu editor
 # 11. nemo - default file manager, tightly integrated with cinnamon
 # TODO(lxnay): fix error: libgnome-desktop/gnome-rr-labeler.h: No such file or directory
+# note: needs gksu, not gksu-polkit, due to extensive use of --message/-m arg
 RDEPEND="${COMMON_DEPEND}
 	>=gnome-base/dconf-0.4.1
 	>=gnome-base/libgnomekbd-2.91.4[introspection]
@@ -86,6 +87,7 @@ RDEPEND="${COMMON_DEPEND}
 
 	>=app-accessibility/caribou-0.3
 
+	x11-libs/gksu
 	x11-misc/xdg-utils
 
 	dev-python/dbus-python[${PYTHON_USEDEP}]
@@ -105,6 +107,7 @@ RDEPEND="${COMMON_DEPEND}
 	gnome-extra/cinnamon-screensaver
 
 	bluetooth? ( net-wireless/cinnamon-bluetooth )
+	l10n? ( >=gnome-extra/cinnamon-translations-2.2 )
 	networkmanager? (
 		gnome-extra/nm-applet
 		net-misc/mobile-broadband-provider-info

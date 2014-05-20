@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15691 2014/05/15 18:03:12 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15706 2014/05/19 15:13:00 tetromino Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,55 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Alexandre Rostovtsev <tetromino@gentoo.org> (19 May 2014)
+# Masked until dev-libs/glib supports the new timezone format, bug #510422
+=sys-libs/timezone-data-2014c
+
+# Ryan Hill <rhill@gentoo.org> (18 May 2014)
+# Masked for testing.
+# Tracker: https://bugs.gentoo.org/495124
+>=sys-devel/gcc-4.9.0
+
+# Ulrich Müller <ulm@gentoo.org> (17 May 2014)
+# Last upstream release in 1997, does not work reliably with
+# Emacs 22 and later. Use app-emacs/redo+ as replacement.
+# Masked for removal in 30 days, bug 510568.
+app-emacs/redo
+
+# Ulrich Müller <ulm@gentoo.org> (17 May 2014)
+# SRC_URI dead and no license permitting redistribution.
+# HOMEPAGE gone, attempts to contact main upstream author failed.
+# Second upstream author does not have access to sources any more.
+# Masked for removal in 30 days, bug 505620.
+games-emulation/boycott-advance-sdl
+
+# Ulrich Müller <ulm@gentoo.org> (17 May 2014)
+# SRC_URI dead and no license permitting redistribution.
+# HOMEPAGE gone, attempts to contact upstream authors failed.
+# Masked for removal in 30 days, bug 505628.
+games-emulation/neopocott
+
+# Tom Wijsman <TomWij@gentoo.org> (16 May 2014)
+# Mask gentoo-sources ebuilds that are affected with security bug CVE-2014-0196.
+#
+# The n_tty_write function in drivers/tty/n_tty.c in the Linux kernel through 
+# 3.14.3 does not properly manage tty driver access in the "LECHO & !OPOST" 
+# case, which allows local users to cause a denial of service (memory corruption 
+# and system crash) or gain privileges by triggering a race condition involving 
+# read and write operations with long strings.
+#
+# https://bugs.gentoo.org/show_bug.cgi?id=CVE-2014-0196
+#
+# 3.2.58 and 3.4.90 have revision bumps, for the other there are newer versions.
+=sys-kernel/gentoo-sources-3.2.58
+~sys-kernel/gentoo-sources-3.4.89
+=sys-kernel/gentoo-sources-3.4.90
+~sys-kernel/gentoo-sources-3.10.39
+~sys-kernel/gentoo-sources-3.12.18
+~sys-kernel/gentoo-sources-3.12.19
+~sys-kernel/gentoo-sources-3.14.2
+~sys-kernel/gentoo-sources-3.14.3
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (14 May 2014)
 # Depends on libevdev which still needs keywording, bug #487944
@@ -61,24 +110,6 @@ dev-ruby/fastthread
 # Justin Lecher <jlec@gentoo.org> (07 May 2014)
 # Still doesn't work as expected
 =sci-chemistry/ccpn-2.4.0_p140425-r1
-
-# Pacho Ramos <pacho@gentoo.org> (06 May 2014)
-# Mask for testing
->=app-emulation/emul-linux-x86-baselibs-20140506
->=app-emulation/emul-linux-x86-compat-20140506
->=app-emulation/emul-linux-x86-cpplibs-20140506
->=app-emulation/emul-linux-x86-db-20140506
->=app-emulation/emul-linux-x86-gstplugins-20140506
->=app-emulation/emul-linux-x86-gtklibs-20140506
->=app-emulation/emul-linux-x86-gtkmmlibs-20140506
->=app-emulation/emul-linux-x86-jna-20140506
->=app-emulation/emul-linux-x86-medialibs-20140506
->=app-emulation/emul-linux-x86-motif-20140506
->=app-emulation/emul-linux-x86-opengl-20140506
->=app-emulation/emul-linux-x86-qtlibs-20140506
->=app-emulation/emul-linux-x86-sdl-20140506
->=app-emulation/emul-linux-x86-soundlibs-20140506
->=app-emulation/emul-linux-x86-xlibs-20140506
 
 # Brian Evans <grknight@gentoo.org> (05 May 2014)
 # Mask erroenous slot for removal in 30 days
@@ -315,25 +346,7 @@ sys-fs/rdiff-backup-fs
 
 # Markos Chandras <hwoarang@gentoo.org> (08 Apr 2014)
 # Masked for futher testing with various pam setups
-=x11-misc/lightdm-1.10*
-
-# Michał Górny <mgorny@gentoo.org> (08 Apr 2014)
-# Mask slotted versions of PyPy for removal. Since almost every release
-# of PyPy had its own slot, the slotting caused major maintenance issues
-# for Python package developers and unfriendly upgrade routine for
-# users. It also resulted in PyPy interpreter names incompatible with
-# other distributions (e.g. 'pypy-c2.0').
-#
-# Please switch to non-slotted dev-python/pypy:0 or /pypy-bin:0 instead,
-# and the corresponding PYTHON_TARGETS=pypy flag. You may also want to
-# consider unmasking >=dev-python/pypy-2.2 first (no binary package
-# yet).
-#
-# The ebuilds will be removed in 30 days. In case of any questions
-# or issues, please do not hesitate to write on bug #507090.
-dev-python/pypy:2.0
-dev-python/pypy-bin:2.0
-virtual/pypy:2.0
+=x11-misc/lightdm-1.11*
 
 # Sergey Popov <pinkbyte@gentoo.org> (08 Apr 2014)
 # Security mask of vulnerable versions, wrt bug #505278
@@ -388,10 +401,10 @@ virtual/pypy:2.0
 <net-fs/samba-3.6
 
 # Michał Górny <mgorny@gentoo.org> (12 Mar 2014)
-# Masked for testing.
->=dev-python/pypy-2.2
->=dev-python/pypy-bin-2.2
->=virtual/pypy-2.2
+# Masked for testing and binary package built.
+>=dev-python/pypy-2.3
+>=dev-python/pypy-bin-2.3
+>=virtual/pypy-2.3
 
 # Samuli Suominen <ssuominen@gentoo.org> (11 Mar 2014)
 # Xfce 4.12 unannounced prerelease, use at your own risk
@@ -410,11 +423,6 @@ virtual/pypy:2.0
 =xfce-extra/xfce4-indicator-plugin-2*
 =media-sound/pragha-1.3*
 =xfce-extra/xfce4-mixer-4.11*
-
-# Michał Górny <mgorny@gentoo.org> (06 Mar 2014)
-# Compatibility packages masked for removal in 30 days.
-<dev-lang/python-exec-0.3.1-r1:0
-<dev-lang/python-exec-2.0.1-r1:2
 
 # Mike Gilbert <floppym@gentoo.org> (04 Mar 2014)
 # Dev channel releases are only for people who are developers or want more
@@ -445,13 +453,6 @@ lxde-base/lxpolkit
 # preceding it
 # - please update https://wiki.gentoo.org/wiki/Multilib_porting_status
 # (mark the packages as {{Yes|DONE}})
->=dev-libs/openssl-1.0.1g-r1
->=app-emulation/emul-linux-x86-baselibs-20140406-r4
->=media-libs/alsa-oss-1.0.25-r1
->=media-plugins/alsa-plugins-1.0.27-r2
-=net-wireless/bluez-4.101-r9
->=net-wireless/bluez-5.18-r1
->=app-emulation/emul-linux-x86-soundlibs-20140406-r1
 >=dev-libs/libdaemon-0.14-r2
 >=net-dns/avahi-0.6.31-r5
 >=net-libs/ldns-1.6.16-r1
@@ -796,10 +797,6 @@ media-gfx/yafaray
 # Masked for development
 =sys-block/open-iscsi-2.0.873
 
-# Jeroen Roovers <jer@gentoo.org> (09 Jan 2013)
-# Testing branch, unstable upstream
->net-nntp/tin-2.1
-
 # Sergei Trofimovich <slyfox@gentoo.org> (05 Jan 2013)
 # Masked for testing. Is not compatible with cvsps-2 (bug #450424).
 # But can be used on it's own! Try 'cvsps --fast-export'.
@@ -1091,10 +1088,6 @@ net-misc/netcomics-cvs
 sys-kernel/zen-sources
 =www-plugins/google-talkplugin-9999
 ~x11-wm/openbox-9999
-
-# Andrey Grozin <grozin@gentoo.org> (09 Mar 2013)
-# Unmasking gcl-2.6.10
-<dev-lisp/gcl-2.6.9
 
 # Jeremy Olexa <darkside@gentoo.org> (28 Jul 2009)
 # On behalf of Robin H. Johnson <robbat2@gentoo.org>.
