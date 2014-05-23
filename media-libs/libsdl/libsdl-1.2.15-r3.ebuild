@@ -1,9 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libsdl/libsdl-1.2.15-r4.ebuild,v 1.12 2014/05/15 16:15:03 ulm Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/libsdl/libsdl-1.2.15-r3.ebuild,v 1.2 2014/05/15 16:15:03 ulm Exp $
 
-EAPI=5
-inherit autotools flag-o-matic multilib toolchain-funcs eutils
+EAPI=2
+inherit flag-o-matic multilib toolchain-funcs eutils libtool
 
 DESCRIPTION="Simple Direct Media Layer"
 HOMEPAGE="http://www.libsdl.org/"
@@ -11,7 +11,7 @@ SRC_URI="http://www.libsdl.org/release/SDL-${PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 # WARNING:
 # If you turn on the custom-cflags use flag in USE and something breaks,
 # you pick up the pieces.  Be prepared for bug reports to be marked INVALID.
@@ -58,6 +58,7 @@ pkg_setup() {
 		ewarn "Since you've chosen to use possibly unsafe CFLAGS,"
 		ewarn "don't bother filing libsdl-related bugs until trying to remerge"
 		ewarn "libsdl without the custom-cflags use flag in USE."
+		epause 10
 	fi
 }
 
@@ -66,9 +67,9 @@ src_prepare() {
 		"${FILESDIR}"/${P}-sdl-config.patch \
 		"${FILESDIR}"/${P}-resizing.patch \
 		"${FILESDIR}"/${P}-joystick.patch \
-		"${FILESDIR}"/${P}-gamma.patch \
-		"${FILESDIR}"/${P}-const-xdata32.patch
-	AT_M4DIR="/usr/share/aclocal acinclude" eautoreconf
+		"${FILESDIR}"/${P}-gamma.patch
+
+	elibtoolize
 }
 
 src_configure() {
@@ -139,7 +140,7 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	emake DESTDIR="${D}" install || die "emake install failed"
 	use static-libs || prune_libtool_files --all
 	dodoc BUGS CREDITS README README-SDL.txt README.HG TODO WhatsNew
 	dohtml -r ./
