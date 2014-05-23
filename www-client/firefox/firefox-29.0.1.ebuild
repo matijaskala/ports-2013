@@ -1,18 +1,18 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-24.4.0.ebuild,v 1.6 2014/03/24 14:33:59 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-29.0.1.ebuild,v 1.2 2014/05/10 02:18:15 anarchy Exp $
 
-EAPI=5
+EAPI="5"
 VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
-MOZ_ESR="1"
+MOZ_ESR=""
 
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
-MOZ_LANGS=(af ak ar as ast be bg bn-BD bn-IN br bs ca cs csb cy da de
-el en en-GB en-US en-ZA eo es-AR es-CL es-ES es-MX et eu fa fi fr
-fy-NL ga-IE gd gl gu-IN he hi-IN hr hu hy-AM id is it ja kk km kn ko ku
-lg lt lv mai mk ml mr nb-NO nl nn-NO nso or pa-IN pl pt-BR pt-PT rm ro
-ru si sk sl son sq sr sv-SE ta ta-LK te th tr uk vi zh-CN zh-TW zu )
+MOZ_LANGS=( af ar as ast be bg bn-BD bn-IN br bs ca cs csb cy da de el en
+en-GB en-US en-ZA eo es-AR es-CL es-ES es-MX et eu fa fi fr fy-NL ga-IE gd
+gl gu-IN he hi-IN hr hu hy-AM id is it ja kk km kn ko ku lt lv mai mk ml mr
+nb-NO nl nn-NO or pa-IN pl pt-BR pt-PT rm ro ru si sk sl son sq sr sv-SE ta te
+th tr uk vi xh zh-CN zh-TW zu )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
@@ -25,7 +25,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-24.0-patches-0.9"
+PATCH="${PN}-29.0-patches-0.1"
 # Upstream ftp release URI that's used by mozlinguas.eclass
 # We don't use the http mirror because it deletes old tarballs.
 MOZ_FTP_URI="ftp://ftp.mozilla.org/pub/${PN}/releases/"
@@ -36,18 +36,19 @@ inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-3 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
 
-KEYWORDS="~alpha amd64 ~arm hppa ~ia64 ppc ppc64 x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist gstreamer +jit +minimal pgo pulseaudio selinux system-cairo system-icu system-jpeg system-sqlite test"
+IUSE="bindist gstreamer hardened +jit metro +minimal pgo pulseaudio selinux system-cairo system-icu system-jpeg system-sqlite test"
 
+MY_PV="29.0"
 URELEASE="trusty"
-UVER="24.0+build1-0ubuntu1"
+UVER="+build1-0ubuntu0.14.04.2"
 # More URIs appended below...
 SRC_URI="${SRC_URI}
 	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
 	http://dev.gentoo.org/~nirbheek/mozilla/patchsets/${PATCH}.tar.xz
-	https://launchpad.net/ubuntu/${URELEASE}/+source/${PN}/${UVER}/+files/${PN}_${UVER}.debian.tar.gz"
+	https://launchpad.net/ubuntu/${URELEASE}/+source/${PN}/${MY_PV}${UVER}/+files/${PN}_${MY_PV}${UVER}.debian.tar.gz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -57,15 +58,15 @@ RDEPEND="
 	>=dev-libs/nspr-4.10.4
 	>=dev-libs/glib-2.26:2
 	>=media-libs/mesa-7.10
-	>=media-libs/libpng-1.5.13[apng]
+	>=media-libs/libpng-1.6.7[apng]
 	virtual/libffi
 	gstreamer? ( media-plugins/gst-plugins-meta:0.10[ffmpeg] )
 	pulseaudio? ( media-sound/pulseaudio )
 	system-cairo? ( >=x11-libs/cairo-1.12[X] )
 	system-icu? ( >=dev-libs/icu-51.1 )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
-	system-sqlite? ( >=dev-db/sqlite-3.7.17:3[secure-delete,debug=] )
-	>=media-libs/libvpx-1.0.0
+	system-sqlite? ( >=dev-db/sqlite-3.8.1.3:3[secure-delete,debug=] )
+	>=media-libs/libvpx-1.3.0
 	kernel_linux? ( media-libs/alsa-lib )
 	selinux? ( sec-policy/selinux-mozilla )"
 
@@ -150,6 +151,7 @@ src_unpack() {
 src_prepare() {
 	epatch "${WORKDIR}/debian/patches/unity-menubar.patch"
 	# Apply our patches
+	EPATCH_EXCLUDE="7007_fix_missing_strings.patch" \
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \
 	epatch "${WORKDIR}/firefox"
@@ -172,7 +174,6 @@ src_prepare() {
 	# Fix sandbox violations during make clean, bug 372817
 	sed -e "s:\(/no-such-file\):${T}\1:g" \
 		-i "${S}"/config/rules.mk \
-		-i "${S}"/js/src/config/rules.mk \
 		-i "${S}"/nsprpub/configure{.in,} \
 		|| die
 
@@ -208,8 +209,11 @@ src_configure() {
 	# It doesn't compile on alpha without this LDFLAGS
 	use alpha && append-ldflags "-Wl,--no-relax"
 
+	# Add full relro support for hardened
+	use hardened && append-ldflags "-Wl,-z,relro,-z,now"
+
 	# We must force enable jemalloc 3 threw .mozconfig
-	echo "export MOZ_JEMALLOC=1" >> ${S}/.mozconfig
+	echo "export MOZ_JEMALLOC=1" >> ${S}/.mozconfig || die
 
 	mozconfig_annotate '' --enable-jemalloc
 	mozconfig_annotate '' --enable-replace-malloc
@@ -220,6 +224,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-mailnews
 	mozconfig_annotate '' --with-system-png
 	mozconfig_annotate '' --enable-system-ffi
+	mozconfig_annotate '' --disable-gold
 
 	# Other ff-specific settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
@@ -235,6 +240,8 @@ src_configure() {
 	mozconfig_use_enable system-icu intl-api
 	# Feature is know to cause problems on hardened
 	mozconfig_use_enable jit ion
+
+	mozconfig_use_enable metro
 
 	# Allow for a proper pgo build
 	if use pgo; then
@@ -311,7 +318,7 @@ src_install() {
 	if ! use libnotify; then
 		echo "pref(\"browser.download.manager.showAlertOnComplete\", false);" \
 			>> "${S}/${obj_dir}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-			|| die
+		|| die
 	fi
 
 	echo "pref(\"extensions.autoDisableScopes\", 3);" >> \
@@ -355,8 +362,8 @@ src_install() {
 
 	# Add StartupNotify=true bug 237317
 	if use startup-notification ; then
-		echo "StartupNotify=true" \
-			>> "${ED}/usr/share/applications/${PN}.desktop" \
+		echo "StartupNotify=true"\
+			 >> "${ED}/usr/share/applications/${PN}.desktop" \
 			|| die
 	fi
 
@@ -372,7 +379,12 @@ src_install() {
 	# FIXME: is this still needed??
 	use sparc && { sed -e 's/Firefox/FirefoxGentoo/g' \
 					 -i "${ED}/${MOZILLA_FIVE_HOME}/application.ini" \
-					 || die "sparc sed failed"; }
+					|| die "sparc sed failed"; }
+
+	# revdep-rebuild entry
+	insinto /etc/revdep-rebuild
+	echo "SEARCH_DIRS_MASK=${MOZILLA_FIVE_HOME}" >> ${T}/10${PN}
+	doins "${T}"/10${PN} || die
 }
 
 pkg_preinst() {
