@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.108 2014/05/03 17:35:41 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.112 2014/06/01 07:33:11 mgorny Exp $
 
 EAPI=5
 
@@ -26,10 +26,10 @@ LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
 KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
-	kdbus +kmod lzma pam policykit python qrcode +seccomp selinux ssl
+	kdbus lzma pam policykit python qrcode +seccomp selinux ssl
 	test vanilla xattr"
 
-MINKV="3.0"
+MINKV="3.10"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20:0=
 	sys-libs/libcap:0=
@@ -43,7 +43,7 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.20:0=
 		ssl? ( >=net-libs/gnutls-3.1.4:0= )
 	)
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:0= )
-	kmod? ( >=sys-apps/kmod-15:0= )
+	>=sys-apps/kmod-15:0=
 	lzma? ( app-arch/xz-utils:0=[${MULTILIB_USEDEP}] )
 	pam? ( virtual/pam:= )
 	python? ( ${PYTHON_DEPS} )
@@ -203,7 +203,6 @@ multilib_src_configure() {
 		$(usex http $(use_enable ssl gnutls) --disable-gnutls)
 		$(use_enable introspection)
 		$(use_enable kdbus)
-		$(use_enable kmod)
 		$(use_enable lzma xz)
 		$(use_enable pam)
 		$(use_enable policykit polkit)
@@ -227,6 +226,8 @@ multilib_src_configure() {
 		--with-dbussessionservicedir="${EPREFIX}/usr/share/dbus-1/services"
 		--with-dbussystemservicedir="${EPREFIX}/usr/share/dbus-1/system-services"
 		--with-dbusinterfacedir="${EPREFIX}/usr/share/dbus-1/interfaces"
+
+		--with-ntp-servers="0.gentoo.pool.ntp.org 1.gentoo.pool.ntp.org 2.gentoo.pool.ntp.org 3.gentoo.pool.ntp.org"
 	)
 
 	if use firmware-loader; then
@@ -265,6 +266,7 @@ multilib_src_configure() {
 			--disable-qrencode
 			--disable-seccomp
 			--disable-selinux
+			--disable-timesyncd
 			--disable-tests
 			--disable-xattr
 			--disable-xz
@@ -431,6 +433,10 @@ migrate_net_name_slot() {
 
 pkg_postinst() {
 	enewgroup systemd-journal
+	enewgroup systemd-network
+	enewuser systemd-network -1 -1 -1 systemd-network
+	enewgroup systemd-timesync
+	enewuser systemd-timesync -1 -1 -1 systemd-timesync
 	if use http; then
 		enewgroup systemd-journal-gateway
 		enewuser systemd-journal-gateway -1 -1 -1 systemd-journal-gateway

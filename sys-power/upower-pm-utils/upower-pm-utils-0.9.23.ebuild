@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/upower-pm-utils/upower-pm-utils-0.9.23.ebuild,v 1.2 2014/05/26 19:38:36 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-power/upower-pm-utils/upower-pm-utils-0.9.23.ebuild,v 1.4 2014/06/02 12:48:21 ssuominen Exp $
 
 EAPI=5
 inherit eutils systemd
@@ -11,7 +11,7 @@ SRC_URI="http://upower.freedesktop.org/releases/upower-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd"
 IUSE="doc +introspection ios kernel_FreeBSD kernel_linux"
 
 COMMON_DEPEND=">=dev-libs/dbus-glib-0.100
@@ -21,7 +21,8 @@ COMMON_DEPEND=">=dev-libs/dbus-glib-0.100
 	introspection? ( dev-libs/gobject-introspection )
 	kernel_linux? (
 		virtual/libusb:1
-		>=virtual/udev-200[gudev]
+		virtual/libgudev:=
+		virtual/udev
 		ios? (
 			>=app-pda/libimobiledevice-1:=
 			>=app-pda/libplist-1:=
