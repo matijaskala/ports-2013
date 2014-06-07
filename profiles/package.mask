@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15757 2014/06/02 09:35:48 mrueg Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15764 2014/06/06 20:10:40 tomwij Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,14 +30,40 @@
 
 #--- END OF EXAMPLES ---
 
+# Tom Wijsman <TomWij@gentoo.org> (6 Jun 2014)
+# Mask gentoo-sources ebuilds that are affected with security bug CVE-2014-3153.
+#
+# Pinkie Pie discovered an issue in the futex subsystem that allows a
+# local user to gain ring 0 control via the futex syscall. An
+# unprivileged user could use this flaw to crash the kernel (resulting
+# in denial of service) or for privilege escalation.
+#
+# https://bugs.gentoo.org/show_bug.cgi?id=CVE-2014-3153
+=sys-kernel/gentoo-sources-3.2.58-r2
+~sys-kernel/gentoo-sources-3.4.90
+=sys-kernel/gentoo-sources-3.4.91
+~sys-kernel/gentoo-sources-3.10.40
+=sys-kernel/gentoo-sources-3.10.41
+~sys-kernel/gentoo-sources-3.12.20
+=sys-kernel/gentoo-sources-3.12.21
+~sys-kernel/gentoo-sources-3.14.4
+=sys-kernel/gentoo-sources-3.14.5
+
+# Hans de Graaff <graaff@gentoo.org> (2 Jun 2014)
+# Mask old slots and packages for removal in 30 days since SRC_URI
+# still points to rubyforge mirrors, bug 512132. These are all leaf
+# packages, have not seen releases in a long time, and only provide
+# their code on rubyforge.
+dev-ruby/deprecated:2
+dev-ruby/jruby-debug-base
+dev-ruby/rack:1.2
+dev-ruby/rack:1.3
+dev-ruby/text-format
+games-util/rubygfe
+
 # Hans de Graaff <graaff@gentoo.org> (1 Jun 2014)
 # Mask new rubinius version for testing
 =dev-lang/rubinius-2*
-
-# Patrick Lauer <patrick@gentoo.org> (31 May 2014)
-# Broken dependencies #511676
-dev-python/rackspace-monitoring
-dev-python/rackspace-monitoring-cli
 
 # Markos Chandras <hwoarang@gentoo.org> (30 May 2014)
 # Mask beta release
@@ -138,27 +164,6 @@ games-emulation/boycott-advance-sdl
 # HOMEPAGE gone, attempts to contact upstream authors failed.
 # Masked for removal in 30 days, bug 505628.
 games-emulation/neopocott
-
-# Tom Wijsman <TomWij@gentoo.org> (16 May 2014)
-# Mask gentoo-sources ebuilds that are affected with security bug CVE-2014-0196.
-#
-# The n_tty_write function in drivers/tty/n_tty.c in the Linux kernel through 
-# 3.14.3 does not properly manage tty driver access in the "LECHO & !OPOST" 
-# case, which allows local users to cause a denial of service (memory corruption 
-# and system crash) or gain privileges by triggering a race condition involving 
-# read and write operations with long strings.
-#
-# https://bugs.gentoo.org/show_bug.cgi?id=CVE-2014-0196
-#
-# 3.2.58 and 3.4.90 have revision bumps, for the other there are newer versions.
-=sys-kernel/gentoo-sources-3.2.58
-~sys-kernel/gentoo-sources-3.4.89
-=sys-kernel/gentoo-sources-3.4.90
-~sys-kernel/gentoo-sources-3.10.39
-~sys-kernel/gentoo-sources-3.12.18
-~sys-kernel/gentoo-sources-3.12.19
-~sys-kernel/gentoo-sources-3.14.2
-~sys-kernel/gentoo-sources-3.14.3
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (14 May 2014)
 # Depends on libevdev which still needs keywording, bug #487944
@@ -358,11 +363,9 @@ lxde-base/lxpolkit
 
 # Eray Aslan <eras@gentoo.org> (17 Feb 2014)
 # Security mask - bug #492494 until
-# mail-filter/dovecot-antispam and
-# mail-filter/dovecot_deleted_to_trash are punted/fixed
+# mail-filter/dovecot-antispam is punted/fixed
 =net-mail/dovecot-2.0*
 =net-mail/dovecot-2.1*
-<mail-filter/dovecot_deleted_to_trash-0.5-r1
 
 # Tim Harder <radhermit@gentoo.org> (04 Feb 2014)
 # Masked for testing

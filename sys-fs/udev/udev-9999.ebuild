@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.299 2014/05/30 16:08:19 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.301 2014/06/04 19:08:22 ssuominen Exp $
 
 EAPI=5
 
@@ -33,7 +33,7 @@ RESTRICT="test"
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
 	acl? ( sys-apps/acl )
 	gudev? ( >=dev-libs/glib-2.22[${MULTILIB_USEDEP}] )
-	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
+	introspection? ( >=dev-libs/gobject-introspection-1.38 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
 	!<sys-libs/glibc-2.11
@@ -189,7 +189,6 @@ multilib_src_configure() {
 		--disable-quotacheck
 		--disable-logind
 		--disable-polkit
-		--disable-networkd
 		--disable-myhostname
 		$(use_enable gudev)
 		--enable-split-usr

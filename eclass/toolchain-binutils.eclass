@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/toolchain-binutils.eclass,v 1.131 2014/01/06 16:10:56 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/toolchain-binutils.eclass,v 1.133 2014/06/07 05:08:19 vapier Exp $
 #
 # Maintainer: Toolchain Ninjas <toolchain@gentoo.org>
 #
@@ -99,7 +99,7 @@ if version_is_at_least 2.18 ; then
 else
 	LICENSE="|| ( GPL-2 LGPL-2 )"
 fi
-IUSE="cxx nls multitarget multislot static-libs test vanilla"
+IUSE="cxx multislot multitarget nls static-libs test vanilla"
 if version_is_at_least 2.19 ; then
 	IUSE+=" zlib"
 fi
@@ -281,6 +281,8 @@ toolchain-binutils_src_configure() {
 	has_version ">=${CATEGORY}/glibc-2.5" && myconf+=( --enable-secureplt )
 	has_version ">=sys-libs/glibc-2.5" && myconf+=( --enable-secureplt )
 
+	local pkgver="Gentoo ${BVER}"
+	[[ -n ${PATCHVER} ]] && pkgver+=" p${PATCHVER}"
 	myconf+=(
 		--prefix="${EPREFIX}"/usr
 		--host=${CHOST}
@@ -299,6 +301,7 @@ toolchain-binutils_src_configure() {
 		--enable-install-libiberty
 		--disable-werror
 		--with-bugurl=http://bugs.gentoo.org/
+		--with-pkgversion="${pkgver}"
 		$(use_enable static-libs static)
 		${EXTRA_ECONF}
 		# Disable modules that are in a combined binutils/gdb tree. #490566
