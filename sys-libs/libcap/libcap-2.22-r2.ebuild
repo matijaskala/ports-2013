@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libcap/libcap-2.22-r2.ebuild,v 1.9 2014/05/27 10:13:36 zlogene Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/libcap/libcap-2.22-r2.ebuild,v 1.11 2014/06/18 20:50:55 mgorny Exp $
 
 EAPI="4"
 
@@ -13,10 +13,10 @@ SRC_URI="mirror://gentoo/${P}.tar.bz2"
 # it's available under either of the licenses
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux"
 IUSE="pam"
 
-RDEPEND="sys-apps/attr[${MULTILIB_USEDEP}]
+RDEPEND=">=sys-apps/attr-2.4.47-r1[${MULTILIB_USEDEP}]
 	pam? ( virtual/pam )"
 DEPEND="${RDEPEND}
 	sys-kernel/linux-headers"

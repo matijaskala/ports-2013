@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-9999.ebuild,v 1.52 2014/06/01 18:29:22 blueness Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-9999.ebuild,v 1.57 2014/06/27 20:39:40 blueness Exp $
 
 EAPI="5"
 
@@ -21,10 +21,10 @@ HOMEPAGE="https://github.com/gentoo/eudev"
 
 LICENSE="LGPL-2.1 MIT GPL-2"
 SLOT="0"
-IUSE="doc gudev +hwdb kmod introspection +keymap +modutils +openrc +rule-generator selinux static-libs test"
+IUSE="doc gudev +hwdb +kmod introspection +keymap +modutils +openrc +rule-generator selinux static-libs test"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
-	gudev? ( dev-libs/glib:2[${MULTILIB_USEDEP}] )
+	gudev? ( >=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
@@ -133,6 +133,7 @@ multilib_src_configure() {
 		--with-rootprefix=
 		--docdir=/usr/share/doc/${PF}
 		--libdir=/usr/$(get_libdir)
+		--with-rootlibexecdir=/lib/udev
 		--with-firmware-path="${EPREFIX}usr/lib/firmware/updates:${EPREFIX}usr/lib/firmware:${EPREFIX}lib/firmware/updates:${EPREFIX}lib/firmware"
 		--with-html-dir="/usr/share/doc/${PF}/html"
 		--enable-split-usr
@@ -155,8 +156,16 @@ multilib_src_configure() {
 			$(use_enable selinux)
 			$(use_enable rule-generator)
 		)
-	else econf_args+=(
-		$(echo --disable-{gtk-doc,introspection,keymap,libkmod,modules,static,selinux,rule-generator})
+	else
+		econf_args+=(
+			--disable-static
+			--disable-gtk-doc
+			--disable-introspection
+			--disable-keymap
+			--disable-libkmod
+			--disable-modules
+			--disable-selinux
+			--disable-rule-generator
 		)
 	fi
 	ECONF_SOURCE="${S}" econf "${econf_args[@]}"

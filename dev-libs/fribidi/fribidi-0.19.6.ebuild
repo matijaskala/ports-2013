@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/fribidi/fribidi-0.19.6.ebuild,v 1.1 2014/05/03 10:11:56 thev00d00 Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/fribidi/fribidi-0.19.6.ebuild,v 1.3 2014/06/24 22:07:15 mgorny Exp $
 
 EAPI=5
 
@@ -19,7 +19,7 @@ IUSE="static-libs"
 
 RESTRICT="test" #397347
 
-RDEPEND=">=dev-libs/glib-2:2[${MULTILIB_USEDEP}]
+RDEPEND=">=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
 	abi_x86_32? ( !<=app-emulation/emul-linux-x86-medialibs-20130224-r10
 		!app-emulation/emul-linux-x86-medialibs[-abi_x86_32(-)] )"
 DEPEND="${RDEPEND}

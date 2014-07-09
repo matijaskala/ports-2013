@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/polarssl/polarssl-1.3.7.ebuild,v 1.1 2014/05/12 14:27:36 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/polarssl/polarssl-1.3.7.ebuild,v 1.5 2014/07/04 22:44:36 hasufell Exp $
 
 EAPI=5
 
@@ -12,20 +12,12 @@ SRC_URI="http://polarssl.org/download/${P}-gpl.tgz"
 
 LICENSE="GPL-2"
 SLOT="0/6"
-KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="~alpha amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~s390 ~sparc x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="doc havege programs sse2 static-libs test zlib"
 
 RDEPEND="
-	programs? (
-		dev-libs/openssl:0
-		amd64? ( abi_x86_32? (
-			|| (
-				dev-libs/openssl:0[abi_x86_32]
-				app-emulation/emul-linux-x86-baselibs
-			)
-		) )
-	)
-	zlib? ( sys-libs/zlib[${MULTILIB_USEDEP}] )"
+	programs? ( dev-libs/openssl:0 )
+	zlib? ( >=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	test? ( dev-lang/perl )"
@@ -46,7 +38,8 @@ src_prepare() {
 
 multilib_src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_enable programs PROGRAMS)
+		$(multilib_is_native_abi && cmake-utils_use_enable programs PROGRAMS \
+			|| echo -DENABLE_PROGRAMS=OFF)
 		$(cmake-utils_use_enable zlib ZLIB_SUPPORT)
 		$(cmake-utils_use_use static-libs STATIC_POLARSSL_LIBRARY)
 		$(cmake-utils_use_enable test TESTING)
@@ -82,7 +75,7 @@ multilib_src_install_all() {
 		local p e
 		for p in "${ED%/}"/usr/bin/* ; do
 			if [[ -x "${p}" && ! -d "${p}" ]] ; then
-				mv "${p}" "${ED%/}"/usr/bin/polarssl_`basename "${p}"` || die
+				mv "${p}" "${ED%/}"/usr/bin/polarssl_${p##*/} || die
 			fi
 		done
 		for e in aes hash pkey ssl test ; do

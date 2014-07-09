@@ -1,10 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/arm/package.use.mask,v 1.206 2014/05/29 17:55:50 jauhien Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/arch/arm/package.use.mask,v 1.210 2014/07/04 07:29:31 pacho Exp $
+
+# Markus Meier <maekke@gentoo.org> (24 Jun 2014)
+# Unkeyworded deps, bug #513108
+>=net-misc/spice-gtk-0.25 smartcard
 
 # Jauhien Piatlicki <jauhien@gentoo.org> (29 May 2014)
 # Unkeyworded deps
-lxqt-base/lxqt-meta lximage sddm
+lxqt-base/lxqt-meta lximage
 
 # Markus Meier <maekke@gentoo.org> (04 May 2014)
 # Unkeyworded deps, bug #509082
@@ -209,6 +213,7 @@ dev-vcs/subversion java
 =media-gfx/graphviz-2.26.3-r3 java
 =media-gfx/graphviz-2.26.3-r4 java
 =media-libs/libcaca-0.99_beta17 java
+=media-libs/libcaca-0.99_beta18-r2 java
 media-libs/libjpeg-turbo java
 net-dns/libidn java
 net-misc/tigervnc java
@@ -226,6 +231,7 @@ net-print/cups java
 =sys-libs/db-4.6.21_p4 java
 =sys-libs/db-4.7.25_p4 java
 =sys-libs/db-4.8.30 java
+=sys-libs/db-4.8.30-r1 java
 =www-client/seamonkey-2.0.14-r1 java
 
 # Michał Górny <mgorny@gentoo.org> (01 Feb 2013)

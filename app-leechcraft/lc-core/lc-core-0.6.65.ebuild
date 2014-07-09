@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-core/lc-core-0.6.65.ebuild,v 1.1 2014/04/10 17:51:51 maksbotan Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-core/lc-core-0.6.65.ebuild,v 1.3 2014/06/28 13:42:52 maksbotan Exp $
 
 EAPI="5"
 
@@ -33,6 +33,11 @@ RDEPEND="${COMMON_DEPEND}
 	 )"
 
 REQUIRED_USE="|| ( postgres sqlite )"
+
+PATCHES=(
+	"${FILESDIR}"/${P}-dbus-optional.patch
+	"${FILESDIR}"/${P}-gcc-4.9.patch
+)
 
 src_configure() {
 	local mycmakeargs=(

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/acroread/acroread-9.5.5.ebuild,v 1.5 2014/05/27 13:36:01 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-text/acroread/acroread-9.5.5.ebuild,v 1.7 2014/06/18 19:03:13 mgorny Exp $
 
 EAPI=5
 
@@ -38,18 +38,21 @@ RDEPEND="media-libs/fontconfig
 	)
 	amd64? (
 		|| (
-			app-emulation/emul-linux-x86-gtklibs
+			app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)]
 			(
-				x11-libs/gtk+:2[abi_x86_32(-)]
-				|| ( x11-libs/pangox-compat[abi_x86_32(-)] <x11-libs/pango-1.31[X,abi_x86_32(-)] )
+				>=x11-libs/gtk+-2.24.23:2[abi_x86_32(-)]
+				|| (
+					>=x11-libs/pangox-compat-0.0.2[abi_x86_32(-)]
+					<x11-libs/pango-1.31[X,abi_x86_32(-)]
+				)
 			)
 		)
 		|| (
-			app-emulation/emul-linux-x86-baselibs
+			app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
 			(
 				=dev-libs/openssl-0.9.8*[abi_x86_32(-)]
-				net-dns/libidn[abi_x86_32(-)]
-				ldap? ( net-nds/openldap[abi_x86_32(-)] )
+				>=net-dns/libidn-1.28[abi_x86_32(-)]
+				ldap? ( >=net-nds/openldap-2.4.38-r1[abi_x86_32(-)] )
 			)
 		)
 	)

@@ -1,0 +1,197 @@
+--- a/configure.in.in
++++ b/configure.in.in
+@@ -24,6 +24,14 @@
+ # liby2:Y2SerialComponent needs termios.h in glibc-devel
+ # (not term.h in ncurses-devel)
+ 
++# libycp: y2crypt needs xcrypt.h -> libxcrypt, libxcrypt-devel
++yast_found_xcrypt=no
++AC_CHECK_HEADER(xcrypt.h,[yast_found_xcrypt=yes])
++if [[ "$yast_found_xcrypt" = "no" ]]; then
++ AC_MSG_ERROR(Headers for xcrypt are missing. Please install the package libxcrypt-devel.)
++fi
++
++
+ Y2UTIL_CFLAGS='-I$(top_srcdir)/liby2util-r/src/include'
+ Y2UTIL_LIBS='$(top_builddir)/liby2util-r/src/liby2util.la'
+ AC_SUBST(Y2UTIL_CFLAGS)
+--- a/libycp/src/Makefile.am
++++ b/libycp/src/Makefile.am
+@@ -68,7 +68,7 @@
+ libycpvalues_la_LIBADD = ${Y2UTIL_LIBS} 
+ 
+ libycp_la_LDFLAGS = -version-info 5:0:0
+-libycp_la_LIBADD = ${Y2UTIL_LIBS} ${CRYPTO_LIBS} libycpvalues.la $(top_builddir)/debugger/liby2debug.la
++libycp_la_LIBADD = ${Y2UTIL_LIBS} -lxcrypt libycpvalues.la $(top_builddir)/debugger/liby2debug.la
+ 
+ CLEANFILES = parser.output parser.cc scanner.cc $(BUILT_SOURCES)
+ 
+--- a/libycp/src/YCPBuiltinString.cc
++++ b/libycp/src/YCPBuiltinString.cc
+@@ -19,6 +19,10 @@
+ 
+ /-*/
+ 
++#ifndef _XOPEN_SOURCE
++#define _XOPEN_SOURCE		// for crypt
++#endif
++
+ #ifndef _GNU_SOURCE
+ #define _GNU_SOURCE		// for snprintf
+ #endif
+@@ -1300,8 +1300,39 @@
+     }
+ }
+ 
+ 
++static YCPValue
++s_cryptbigcrypt(const YCPString& original)
++{
++    /**
++     * @builtin cryptbigcrypt
++     * @short Encrypts a string using bigcrypt
++     * @description
++     * Encrypts the string <tt>UNENCRYPTED</tt> using bigcrypt
++     * password encryption. The password is not truncated.
++     * @param string UNENCRYPTED
++     * @return string
++     *
++     * @usage cryptbigcrypt ("readable") -> "d4brTQmcVbtNg"
++     */
++
++    if (original.isNull ())
++	return YCPNull ();
++
++    string unencrypted = original->value();
++    string encrypted;
++
++    if (crypt_pass (unencrypted, YaST::BIGCRYPT, &encrypted))
++        return YCPString (encrypted);
++    else
++    {
++	ycp2error ("Encryption using bigcrypt failed");
++        return YCPNull ();
++    }
++}
++
++
+ static YCPValue
+ s_cryptblowfish(const YCPString& original)
+ {
+     /**
+@@ -1567,6 +1598,7 @@ YCPBuiltinString::YCPBuiltinString ()
+ 	{ "mergestring",   "string (const list <string>, string)", (void *)s_mergestring,		 ETC },
+ 	{ "crypt",	   "string (string)",			(void *)s_crypt,			 ETC },
+ 	{ "cryptmd5",	   "string (string)",			(void *)s_cryptmd5,			 ETC },
++	{ "cryptbigcrypt", "string (string)",			(void *)s_cryptbigcrypt,		 ETC },
+ 	{ "cryptblowfish", "string (string)",			(void *)s_cryptblowfish,                 ETC },
+ 	{ "cryptsha256",   "string (string)",			(void *)s_cryptsha256,                   ETC },
+ 	{ "cryptsha512",   "string (string)",			(void *)s_cryptsha512,                   ETC },
+--- a/libycp/src/y2crypt.h
++++ b/libycp/src/y2crypt.h
+@@ -14,7 +14,7 @@
+ using std::string;
+ 
+ 
+-enum crypt_t { CRYPT, MD5, BLOWFISH, SHA256, SHA512 };
++enum crypt_t { CRYPT, MD5, BIGCRYPT, BLOWFISH, SHA256, SHA512 };
+ 
+ bool
+ crypt_pass (string unencrypted, crypt_t use_crypt, string* encrypted);
+--- a/libycp/src/y2crypt.cc
++++ b/libycp/src/y2crypt.cc
+@@ -9,10 +9,6 @@
+ #define _GNU_SOURCE
+ #endif
+ 
+-#ifndef _OW_SOURCE
+-#define _OW_SOURCE
+-#endif
+-
+ #include <stdio.h>
+ #include <string.h>
+ #include <unistd.h>
+@@ -20,10 +16,7 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+-
+-extern "C" {
+-#include <crypt.h>
+-}
++#include <xcrypt.h>
+ 
+ #include "y2log.h"
+ #include "y2crypt.h"
+@@ -85,8 +78,11 @@
+     close (fd);
+ 
+     char output[CRYPT_GENSALT_OUTPUT_SIZE];
+-    char* retval = crypt_gensalt_rn (crypt_prefix, crypt_rounds, entropy,
+-				     sizeof(entropy), output, sizeof(output));
++#if !defined(crypt_gensalt_r)
++#define crypt_gensalt_r xcrypt_gensalt_rn
++#endif
++    char* retval = crypt_gensalt_r (crypt_prefix, crypt_rounds, entropy,
++				     sizeof (entropy), output, sizeof (output));
+ 
+     memset (entropy, 0, sizeof (entropy));
+ 
+@@ -118,7 +114,7 @@
+ 		y2error ("Cannot create salt for standard crypt");
+ 		return false;
+ 	    }
+-	    newencrypted = crypt_r (unencrypted.c_str (), salt, &output);
++	    newencrypted = xcrypt_r (unencrypted.c_str (), salt, &output);
+ 	    free (salt);
+ 	    break;
+ 
+@@ -129,9 +125,20 @@
+ 		y2error ("Cannot create salt for MD5 crypt");
+ 		return false;
+ 	    }
+-	    newencrypted = crypt_r (unencrypted.c_str (), salt, &output);
++	    newencrypted = xcrypt_r (unencrypted.c_str (), salt, &output);
+ 	    free (salt);
+ 	    break;
++
++	case BIGCRYPT:
++	    salt = make_crypt_salt ("", 0);
++	    if (!salt)
++	    {
++		y2error ("Cannot create salt for bigcrypt");
++		return false;
++	    }
++	    newencrypted = bigcrypt (unencrypted.c_str (), salt);
++	    free (salt);
++	    break;
+ 
+ 	case BLOWFISH:
+ 	    salt = make_crypt_salt ("$2y$", 0);
+@@ -153,7 +147,7 @@
+ 		y2error ("Cannot create salt for blowfish crypt");
+ 		return false;
+ 	    }
+-	    newencrypted = crypt_r (unencrypted.c_str (), salt, &output);
++	    newencrypted = xcrypt_r (unencrypted.c_str (), salt, &output);
+ 	    free (salt);
+ 	    break;
+ 
+@@ -164,7 +158,7 @@
+ 		y2error ("Cannot create salt for sha256 crypt");
+ 		return false;
+ 	    }
+-	    newencrypted = crypt_r (unencrypted.c_str (), salt, &output);
++	    newencrypted = xcrypt_r (unencrypted.c_str (), salt, &output);
+ 	    free (salt);
+ 	    break;
+ 
+@@ -175,7 +169,7 @@
+ 		y2error ("Cannot create salt for sha512 crypt");
+ 		return false;
+ 	    }
+-	    newencrypted = crypt_r (unencrypted.c_str (), salt, &output);
++	    newencrypted = xcrypt_r (unencrypted.c_str (), salt, &output);
+ 	    free (salt);
+ 	    break;
+ 

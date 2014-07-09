@@ -1,11 +1,11 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/nted/nted-1.10.18-r3.ebuild,v 1.2 2013/03/15 10:10:16 pinkbyte Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/nted/nted-1.10.18-r3.ebuild,v 1.5 2014/07/04 19:52:27 ago Exp $
 
 EAPI=5
-
 AUTOTOOLS_IN_SOURCE_BUILD=1
 AUTOTOOLS_AUTORECONF=1
+
 inherit autotools-utils eutils toolchain-funcs
 
 DESCRIPTION="WYSIWYG score editor for GTK+"
@@ -14,28 +14,33 @@ SRC_URI="http://vsr.informatik.tu-chemnitz.de/staff/jan/${PN}/sources/${P}.tar.g
 
 LICENSE="GPL-2 FDL-1.2 NTED_FONT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="doc debug nls"
 
-RDEPEND=">=dev-libs/glib-2
+RDEPEND="
+	>=dev-libs/glib-2:2
 	media-libs/alsa-lib
 	>=media-libs/freetype-2
 	x11-libs/cairo
 	>=x11-libs/gdk-pixbuf-2
 	x11-libs/gtk+:2
 	x11-libs/libX11
-	x11-libs/pango"
+	x11-libs/pango
+"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	doc? ( app-text/xmlto )
-	nls? ( sys-devel/gettext )"
+	nls? ( sys-devel/gettext )
+"
 
 DOCS=( ABOUT_THE_EXAMPLES.TXT AUTHORS FAQ README )
+
 PATCHES=(
 	"${FILESDIR}/${P}-gcc47.patch" # bug #424291
 	"${FILESDIR}/${P}-lilypond.patch" # bug #437540
 	"${FILESDIR}/${P}-lilypond-tremolo.patch" # bug #437540
 	"${FILESDIR}/${P}-automake-1.12.patch" # bug #459466
+	"${FILESDIR}/${P}-freetype.patch" # bug #514522
 )
 
 src_prepare() {

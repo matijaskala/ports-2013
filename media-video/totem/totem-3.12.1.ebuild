@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/totem/totem-3.12.1.ebuild,v 1.1 2014/05/31 15:33:27 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-video/totem/totem-3.12.1.ebuild,v 1.4 2014/06/30 15:18:39 pacho Exp $
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -39,7 +39,7 @@ RDEPEND="
 	>=dev-libs/libpeas-1.1.0[gtk]
 	x11-libs/cairo
 	>=dev-libs/libxml2-2.6:2
-	>=media-libs/clutter-1.17.3:1.0
+	>=media-libs/clutter-1.17.3:1.0[gtk]
 	>=media-libs/clutter-gst-1.5.5:2.0
 	>=media-libs/clutter-gtk-1.5.2:1.0
 	x11-libs/mx:1.0
@@ -84,7 +84,14 @@ DEPEND="${RDEPEND}
 	x11-proto/xextproto
 	x11-proto/xproto
 	virtual/pkgconfig
+
+	dev-libs/gobject-introspection-common
+	gnome-base/gnome-common
 "
+# eautoreconf needs:
+#	app-text/yelp-tools
+#	dev-libs/gobject-introspection-common
+#	gnome-base/gnome-common
 # docbook-xml-dtd is needed for user doc
 # Prevent dev-python/pylint dep, bug #482538
 pkg_setup() {
@@ -125,7 +132,6 @@ src_configure() {
 	gnome2_src_configure \
 		--disable-run-in-source-tree \
 		--disable-static \
-		--with-smclient=auto \
 		--enable-easy-codec-installation \
 		--enable-vala \
 		$(use_enable flash vegas-plugin) \

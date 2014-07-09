@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.301 2014/06/04 19:08:22 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.311 2014/07/04 12:19:46 ssuominen Exp $
 
 EAPI=5
 
-inherit autotools bash-completion-r1 eutils linux-info multilib toolchain-funcs versionator multilib-minimal
+inherit autotools bash-completion-r1 eutils linux-info multilib multilib-minimal toolchain-funcs user versionator
 
 if [[ ${PV} = 9999* ]]; then
 	EGIT_REPO_URI="git://anongit.freedesktop.org/systemd/systemd"
@@ -32,7 +32,7 @@ RESTRICT="test"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
 	acl? ( sys-apps/acl )
-	gudev? ( >=dev-libs/glib-2.22[${MULTILIB_USEDEP}] )
+	gudev? ( >=dev-libs/glib-2.34.3[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.38 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
@@ -58,8 +58,7 @@ if [[ ${PV} = 9999* ]]; then
 		app-text/docbook-xml-dtd:4.2
 		app-text/docbook-xml-dtd:4.5
 		app-text/docbook-xsl-stylesheets
-		dev-libs/libxslt
-		>=dev-util/intltool-0.50"
+		dev-libs/libxslt"
 fi
 RDEPEND="${COMMON_DEPEND}
 	!<sys-fs/lvm2-2.02.103
@@ -77,7 +76,7 @@ multilib_check_headers() { :; }
 check_default_rules() {
 	# Make sure there are no sudden changes to upstream rules file
 	# (more for my own needs than anything else ...)
-	local udev_rules_md5=6bd3d421b9b6acd0e2d87ad720d6a389
+	local udev_rules_md5=c18b74c4f8bf4a397ee667ee419f3a8e
 	MD5=$(md5sum < "${S}"/rules/50-udev-default.rules)
 	MD5=${MD5/  -/}
 	if [[ ${MD5} != ${udev_rules_md5} ]]; then
@@ -103,7 +102,7 @@ pkg_setup() {
 src_prepare() {
 	if ! [[ ${PV} = 9999* ]]; then
 		# secure_getenv() disable for non-glibc systems wrt bug #443030
-		if ! [[ $(grep -r secure_getenv * | wc -l) -eq 22 ]]; then
+		if ! [[ $(grep -r secure_getenv * | wc -l) -eq 28 ]]; then
 			eerror "The line count for secure_getenv() failed, see bug #443030"
 			die
 		fi
@@ -115,23 +114,10 @@ src_prepare() {
 	fi
 
 	cat <<-EOF > "${T}"/40-gentoo.rules
-	# Gentoo specific usb group
+	# Gentoo specific floppy and usb groups
+	SUBSYSTEM=="block", KERNEL=="fd[0-9]", GROUP="floppy"
 	SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", GROUP="usb"
 	EOF
-
-	# Remove requirements for gettext and intltool wrt bug #443028
-	if ! has_version dev-util/intltool && ! [[ ${PV} = 9999* ]]; then
-		sed -i \
-			-e '/INTLTOOL_APPLIED_VERSION=/s:=.*:=0.40.0:' \
-			-e '/XML::Parser perl module is required for intltool/s|^|:|' \
-			configure || die
-		eval export INTLTOOL_{EXTRACT,MERGE,UPDATE}=/bin/true
-		eval export {MSG{FMT,MERGE},XGETTEXT}=/bin/true
-	fi
-
-	# compile with older versions of gcc #451110
-	version_is_at_least 4.6 $(gcc-version) || \
-		sed -i 's:static_assert:alsdjflkasjdfa:' src/shared/macro.h
 
 	# change rules back to group uucp instead of dialout for now wrt #454556
 	sed -i -e 's/GROUP="dialout"/GROUP="uucp"/' rules/*.rules || die
@@ -189,6 +175,7 @@ multilib_src_configure() {
 		--disable-quotacheck
 		--disable-logind
 		--disable-polkit
+		--disable-nls
 		--disable-myhostname
 		$(use_enable gudev)
 		--enable-split-usr
@@ -491,6 +478,11 @@ pkg_postinst() {
 		fi
 		eend $?
 	fi
+
+	# http://cgit.freedesktop.org/systemd/systemd/commit/rules/50-udev-default.rules?id=3dff3e00e044e2d53c76fa842b9a4759d4a50e69
+	# http://bugs.gentoo.org/246847
+	# http://bugs.gentoo.org/514174
+	enewgroup input
 
 	# Update hwdb database in case the format is changed by udev version.
 	if has_version 'sys-apps/hwids[udev]'; then

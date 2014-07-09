@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation.
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/hardened/linux/musl/x86/make.defaults,v 1.4 2014/02/17 15:14:14 blueness Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/hardened/linux/musl/x86/make.defaults,v 1.6 2014/07/01 12:37:36 blueness Exp $
 
 ARCH="x86"
 ACCEPT_KEYWORDS="${ARCH}"
@@ -11,6 +11,11 @@ CXXFLAGS="${CFLAGS}"
 FFLAGS="${CFLAGS}"
 FCFLAGS="${CFLAGS}"
 
-# TODO: fix so musl doesn't generate this for all packages
-# that use a charset, it causes package collisons.
-INSTALL_MASK="charset.alias"
+# Anthony G. Basile <blueness@gentoo.org> (01 Jul 2014)
+# Multilib-related setup, bug #515130
+ABI="x86"
+DEFAULT_ABI="x86"
+MULTILIB_ABIS="x86"
+CHOST_x86=${CHOST}
+LIBDIR_x86="lib"
+IUSE_IMPLICIT="abi_x86_32"

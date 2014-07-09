@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/waffle/waffle-9999.ebuild,v 1.2 2014/01/24 02:38:01 patrick Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/waffle/waffle-9999.ebuild,v 1.4 2014/06/30 19:00:34 mattst88 Exp $
 
 EAPI=5
 
-EGIT_REPO_URI="git://people.freedesktop.org/~chadversary/waffle"
+EGIT_REPO_URI="git://github.com/waffle-gl/waffle.git"
 
 if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git-2"
@@ -27,14 +27,14 @@ SLOT="0"
 IUSE="doc egl gbm test wayland"
 
 RDEPEND="
-	media-libs/mesa[egl?,gbm?,${MULTILIB_USEDEP}]
-	virtual/opengl[${MULTILIB_USEDEP}]
-	wayland? ( >=dev-libs/wayland-1.0[${MULTILIB_USEDEP}] )
-	gbm? ( virtual/udev[${MULTILIB_USEDEP}] )
-	x11-libs/libX11[${MULTILIB_USEDEP}]
-	x11-libs/libxcb[${MULTILIB_USEDEP}]"
+	>=media-libs/mesa-9.1.6[egl?,gbm?,${MULTILIB_USEDEP}]
+	>=virtual/opengl-7.0-r1[${MULTILIB_USEDEP}]
+	wayland? ( >=dev-libs/wayland-1.0.6[${MULTILIB_USEDEP}] )
+	gbm? ( >=virtual/udev-208-r2[${MULTILIB_USEDEP}] )
+	>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
+	>=x11-libs/libxcb-1.9.1[${MULTILIB_USEDEP}]"
 DEPEND="${RDEPEND}
-	x11-proto/xcb-proto[${MULTILIB_USEDEP}]
+	>=x11-proto/xcb-proto-1.8-r3[${MULTILIB_USEDEP}]
 	doc? (
 		dev-libs/libxslt
 		app-text/docbook-xml-dtd:4.2

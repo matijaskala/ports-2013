@@ -1,11 +1,11 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pygobject/pygobject-3.10.2.ebuild,v 1.13 2014/04/21 10:28:58 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/pygobject/pygobject-3.10.2.ebuild,v 1.15 2014/07/06 12:48:44 mgorny Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{2_7,3_2,3_3} )
+PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} )
 
 inherit gnome2 python-r1 virtualx
 
@@ -38,7 +38,6 @@ DEPEND="${COMMON_DEPEND}
 		dev-libs/atk[introspection]
 		media-fonts/font-cursor-misc
 		media-fonts/font-misc-misc
-		virtual/python-unittest2[${PYTHON_USEDEP}]
 		x11-libs/cairo[glib]
 		x11-libs/gdk-pixbuf:2[introspection]
 		x11-libs/gtk+:3[introspection]

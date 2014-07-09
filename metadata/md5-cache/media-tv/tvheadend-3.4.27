@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst prepare setup
+DEPEND=dev-libs/openssl avahi? ( net-dns/avahi ) dvb? ( virtual/linuxtv-dvb-headers ) ffmpeg? ( virtual/ffmpeg ) imagecache? ( net-misc/curl ) zlib? ( sys-libs/zlib ) virtual/pkgconfig virtual/pkgconfig
+DESCRIPTION=Tvheadend is a TV streaming server and digital video recorder
+EAPI=5
+HOMEPAGE=https://tvheadend.org/
+IUSE=avahi +dvb +dvbscan ffmpeg imagecache inotify xmltv zlib
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=dev-libs/openssl avahi? ( net-dns/avahi ) dvb? ( virtual/linuxtv-dvb-headers ) ffmpeg? ( virtual/ffmpeg ) imagecache? ( net-misc/curl ) zlib? ( sys-libs/zlib ) virtual/pkgconfig dvbscan? ( media-tv/linuxtv-dvb-apps ) xmltv? ( media-tv/xmltv )
+REQUIRED_USE=dvbscan? ( dvb )
+SLOT=0
+SRC_URI=https://github.com/tvheadend/tvheadend/archive/3.4patch1.tar.gz -> tvheadend-3.4.27.tar.gz
+_eclasses_=eutils	76fc3c462065bb4ca959f939e6793f94	linux-info	2b8c53f6065bdee2d757472215a3088f	multilib	fac675dcccf94392371a6abee62d909f	systemd	090342761f573a8280dd5aa6b0345f3b	toolchain-funcs	48b38a216afb92db6314d6c3187abea3	user	1a9ecf501027961855b0320e8915a79c	versionator	a8a3963967d6140be9a14b08bb8f047f
+_md5_=4824e7d40186b3b8d9888ee86fb9b170

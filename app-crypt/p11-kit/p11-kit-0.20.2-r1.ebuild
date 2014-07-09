@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/p11-kit/p11-kit-0.20.2-r1.ebuild,v 1.2 2014/03/09 00:41:06 alonbl Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-crypt/p11-kit/p11-kit-0.20.2-r1.ebuild,v 1.4 2014/06/22 17:32:20 mgorny Exp $
 
 EAPI=5
 
@@ -16,7 +16,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~spar
 IUSE="+asn1 debug +trust"
 REQUIRED_USE="trust? ( asn1 )"
 
-RDEPEND="asn1? ( >=dev-libs/libtasn1-2.14[${MULTILIB_USEDEP}] )"
+RDEPEND="asn1? ( >=dev-libs/libtasn1-3.4[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
@@ -30,6 +30,11 @@ multilib_src_configure() {
 		$(use_enable trust trust-module) \
 		$(use_enable debug) \
 		$(use_with asn1 libtasn1)
+
+	if multilib_is_native_abi; then
+		# re-use provided documentation
+		ln -s "${S}"/doc/manual/html doc/manual/html || die
+	fi
 }
 
 multilib_src_install_all() {

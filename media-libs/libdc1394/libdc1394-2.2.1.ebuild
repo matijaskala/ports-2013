@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libdc1394/libdc1394-2.2.1.ebuild,v 1.3 2013/11/17 14:58:25 aballier Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/libdc1394/libdc1394-2.2.1.ebuild,v 1.6 2014/06/20 12:54:23 ssuominen Exp $
 
 EAPI=5
 
@@ -8,22 +8,26 @@ inherit autotools eutils multilib-minimal
 
 DESCRIPTION="Library to interface with IEEE 1394 cameras following the IIDC specification"
 HOMEPAGE="http://sourceforge.net/projects/libdc1394/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz
+	http://dev.gentoo.org/~ssuominen/sdl.m4-20140620.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="2"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="doc static-libs X"
 
-RDEPEND=">=sys-libs/libraw1394-1.2.0[${MULTILIB_USEDEP}]
-	virtual/libusb:1[${MULTILIB_USEDEP}]"
+RDEPEND=">=sys-libs/libraw1394-2.1.0-r1[${MULTILIB_USEDEP}]
+	>=virtual/libusb-1-r1:1[${MULTILIB_USEDEP}]"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	doc? ( app-doc/doxygen )"
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-includes.patch"
-	eautoreconf
+	epatch \
+		"${FILESDIR}"/${P}-includes.patch \
+		"${FILESDIR}"/${P}-pthread.patch
+
+	AT_M4DIR=${WORKDIR}/aclocal eautoreconf
 }
 
 multilib_src_configure() {

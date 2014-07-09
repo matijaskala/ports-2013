@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-2.24.2.ebuild,v 1.2 2014/05/28 18:01:28 hwoarang Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-2.24.2.ebuild,v 1.4 2014/06/18 20:46:09 mgorny Exp $
 
 EAPI="4"
 
@@ -39,7 +39,7 @@ RDEPEND="!sys-process/schedutils
 	ncurses? ( >=sys-libs/ncurses-5.2-r2 )
 	pam? ( sys-libs/pam )
 	python? ( ${PYTHON_DEPS} )
-	selinux? ( sys-libs/libselinux[${MULTILIB_USEDEP}] )
+	selinux? ( >=sys-libs/libselinux-2.2.2-r4[${MULTILIB_USEDEP}] )
 	slang? ( sys-libs/slang )
 	udev? ( virtual/udev )
 	abi_x86_32? (
@@ -66,6 +66,8 @@ src_prepare() {
 		eautoreconf
 	fi
 	epatch "${FILESDIR}"/${PN}-2.24-last-tests.patch #501408
+	# http://thread.gmane.org/gmane.linux.utilities.util-linux-ng/9237
+	epatch "${FILESDIR}"/${PN}-2.24-fix-fdisk-on-alpha.patch
 	find tests/ -name bigyear -delete #489794
 	elibtoolize
 }

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.113 2014/06/03 00:46:36 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.121 2014/07/04 17:51:02 floppym Exp $
 
 EAPI=5
 
@@ -25,32 +25,32 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
 KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
-IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
-	kdbus +kmod lzma pam policykit python qrcode +seccomp selinux ssl
-	test vanilla xattr"
+IUSE="acl audit cryptsetup doc elfutils +firmware-loader gcrypt gudev http
+	introspection kdbus +kmod lzma pam policykit python qrcode +seccomp selinux
+	ssl test vanilla"
 
-MINKV="3.10"
+MINKV="3.8"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20:0=
 	sys-libs/libcap:0=
 	acl? ( sys-apps/acl:0= )
 	audit? ( >=sys-process/audit-2:0= )
 	cryptsetup? ( >=sys-fs/cryptsetup-1.6:0= )
+	elfutils? ( >=dev-libs/elfutils-0.158:0= )
 	gcrypt? ( >=dev-libs/libgcrypt-1.4.5:0= )
-	gudev? ( dev-libs/glib:2=[${MULTILIB_USEDEP}] )
+	gudev? ( >=dev-libs/glib-2.34.3:2=[${MULTILIB_USEDEP}] )
 	http? (
 		>=net-libs/libmicrohttpd-0.9.33:0=
 		ssl? ( >=net-libs/gnutls-3.1.4:0= )
 	)
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:0= )
 	kmod? ( >=sys-apps/kmod-15:0= )
-	lzma? ( app-arch/xz-utils:0=[${MULTILIB_USEDEP}] )
+	lzma? ( >=app-arch/xz-utils-5.0.5-r1:0=[${MULTILIB_USEDEP}] )
 	pam? ( virtual/pam:= )
 	python? ( ${PYTHON_DEPS} )
 	qrcode? ( media-gfx/qrencode:0= )
 	seccomp? ( sys-libs/libseccomp:0= )
 	selinux? ( sys-libs/libselinux:0= )
-	xattr? ( sys-apps/attr:0= )
 	abi_x86_32? ( !<=app-emulation/emul-linux-x86-baselibs-20130224-r9
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)] )"
 
@@ -117,13 +117,11 @@ src_prepare() {
 pkg_pretend() {
 	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS ~DEVTMPFS ~DMIID
 		~EPOLL ~FANOTIFY ~FHANDLE ~INOTIFY_USER ~IPV6 ~NET ~NET_NS ~PROC_FS
-		~SECCOMP ~SIGNALFD ~SYSFS ~TIMERFD
+		~SECCOMP ~SIGNALFD ~SYSFS ~TIMERFD ~TMPFS_XATTR
 		~!IDE ~!SYSFS_DEPRECATED ~!SYSFS_DEPRECATED_V2
 		~!GRKERNSEC_PROC"
 
 	use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"
-	use pam && CONFIG_CHECK+=" ~AUDITSYSCALL"
-	use xattr && CONFIG_CHECK+=" ~TMPFS_XATTR"
 	kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
 	use firmware-loader || CONFIG_CHECK+=" ~!FW_LOADER_USER_HELPER"
 
@@ -179,6 +177,9 @@ multilib_src_configure() {
 		# and makes distcc less effective
 		cc_cv_CFLAGS__flto=no
 
+		# Workaround for bug 516346
+		--enable-dependency-tracking
+
 		--disable-maintainer-mode
 		--localstatedir=/var
 		--with-pamlibdir=$(getpam_mod_dir)
@@ -197,6 +198,7 @@ multilib_src_configure() {
 		$(use_enable audit)
 		$(use_enable cryptsetup libcryptsetup)
 		$(use_enable doc gtk-doc)
+		$(use_enable elfutils)
 		$(use_enable gcrypt)
 		$(use_enable gudev)
 		$(use_enable http microhttpd)
@@ -213,9 +215,9 @@ multilib_src_configure() {
 		$(use_enable seccomp)
 		$(use_enable selinux)
 		$(use_enable test tests)
-		$(use_enable xattr)
 
 		# not supported (avoid automagic deps in the future)
+		--disable-apparmor
 		--disable-chkconfig
 
 		# hardcode a few paths to spare some deps
@@ -252,8 +254,31 @@ multilib_src_configure() {
 			DBUS_CFLAGS=' '
 			DBUS_LIBS=' '
 
+			# Binaries
+			--disable-backlight
+			--disable-binfmt
+			--disable-bootchart
+			--disable-coredump
+			--disable-hostnamed
+			--disable-localed
+			--disable-logind
+			--disable-machined
+			--disable-networkd
+			--disable-quotacheck
+			--disable-randomseed
+			--disable-readahead
+			--disable-resolved
+			--disable-rfkill
+			--disable-sysusers
+			--disable-timedated
+			--disable-timesyncd
+			--disable-tmpfiles
+			--disable-vconsole
+
+			# Libraries
 			--disable-acl
 			--disable-audit
+			--disable-elfutils
 			--disable-gcrypt
 			--disable-gnutls
 			--disable-gtk-doc
@@ -261,17 +286,14 @@ multilib_src_configure() {
 			--disable-kmod
 			--disable-libcryptsetup
 			--disable-microhttpd
-			--disable-networkd
 			--disable-pam
 			--disable-polkit
+			--disable-python-devel
 			--disable-qrencode
 			--disable-seccomp
 			--disable-selinux
-			--disable-timesyncd
 			--disable-tests
-			--disable-xattr
 			--disable-xz
-			--disable-python-devel
 		)
 	fi
 
@@ -433,15 +455,19 @@ migrate_net_name_slot() {
 }
 
 pkg_postinst() {
+	newusergroup() {
+		enewgroup "$1"
+		enewuser "$1" -1 -1 -1 "$1"
+	}
+
+	enewgroup input
 	enewgroup systemd-journal
-	enewgroup systemd-network
-	enewuser systemd-network -1 -1 -1 systemd-network
-	enewgroup systemd-timesync
-	enewuser systemd-timesync -1 -1 -1 systemd-timesync
-	if use http; then
-		enewgroup systemd-journal-gateway
-		enewuser systemd-journal-gateway -1 -1 -1 systemd-journal-gateway
-	fi
+	newusergroup systemd-bus-proxy
+	newusergroup systemd-network
+	newusergroup systemd-resolve
+	newusergroup systemd-timesync
+	use http && newusergroup systemd-journal-gateway
+
 	systemd_update_catalog
 
 	# Keep this here in case the database format changes so it gets updated

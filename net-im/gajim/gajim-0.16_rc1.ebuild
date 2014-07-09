@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/gajim/gajim-0.16_rc1.ebuild,v 1.3 2014/05/08 11:49:43 johu Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-im/gajim/gajim-0.16_rc1.ebuild,v 1.5 2014/06/23 11:16:26 klausman Exp $
 
 EAPI=5
 

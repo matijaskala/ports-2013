@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/slang/slang-2.2.4-r1.ebuild,v 1.2 2014/04/18 14:31:03 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/slang/slang-2.2.4-r1.ebuild,v 1.4 2014/07/06 11:59:46 jer Exp $
 
 EAPI=5
 inherit eutils multilib-minimal
@@ -11,16 +11,16 @@ SRC_URI="mirror://slang/v${PV%.*}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
 IUSE="cjk pcre png readline static-libs zlib"
 
 # ncurses for ncurses5-config to get terminfo directory
 RDEPEND="sys-libs/ncurses
-	pcre? ( dev-libs/libpcre[${MULTILIB_USEDEP}] )
-	png? ( >=media-libs/libpng-1.2:0[${MULTILIB_USEDEP}] )
-	cjk? ( dev-libs/oniguruma[${MULTILIB_USEDEP}] )
-	readline? ( sys-libs/readline:0[${MULTILIB_USEDEP}] )
-	zlib? ( sys-libs/zlib[${MULTILIB_USEDEP}] )
+	pcre? ( >=dev-libs/libpcre-8.33-r1[${MULTILIB_USEDEP}] )
+	png? ( >=media-libs/libpng-1.6.10:0[${MULTILIB_USEDEP}] )
+	cjk? ( >=dev-libs/oniguruma-5.9.5[${MULTILIB_USEDEP}] )
+	readline? ( >=sys-libs/readline-6.2_p5-r1:0[${MULTILIB_USEDEP}] )
+	zlib? ( >=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}] )
 	abi_x86_32? (
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
 		!<=app-emulation/emul-linux-x86-baselibs-20140406-r1

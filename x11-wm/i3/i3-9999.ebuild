@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-wm/i3/i3-9999.ebuild,v 1.3 2014/05/08 12:43:40 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-wm/i3/i3-9999.ebuild,v 1.5 2014/06/25 08:41:42 xarthisius Exp $
 
 EAPI=5
 
@@ -10,15 +10,17 @@ DESCRIPTION="An improved dynamic tiling window manager"
 HOMEPAGE="http://i3wm.org/"
 SRC_URI=""
 EGIT_REPO_URI="git://code.i3wm.org/i3"
+EGIT_BRANCH="next"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
 IUSE="+pango"
 
-CDEPEND="dev-libs/libev
+CDEPEND="dev-lang/perl
+	dev-libs/libev
 	dev-libs/libpcre
-	dev-libs/yajl
+	>=dev-libs/yajl-2.0.3
 	x11-libs/libxcb
 	x11-libs/libX11
 	x11-libs/startup-notification
@@ -32,9 +34,10 @@ CDEPEND="dev-libs/libev
 	)"
 DEPEND="${CDEPEND}
 	app-text/asciidoc
-	dev-lang/perl
 	virtual/pkgconfig"
-RDEPEND="${CDEPEND}"
+RDEPEND="${CDEPEND}
+	dev-perl/AnyEvent-I3
+	dev-perl/JSON-XS"
 
 src_prepare() {
 	if ! use pango; then

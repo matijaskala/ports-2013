@@ -1,10 +1,26 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.577 2014/06/06 04:20:17 zmedico Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.mask,v 1.582 2014/07/05 13:48:41 aballier Exp $
 
 # This file requires >=portage-2.1.1
 # New entries go on top.
 #
+
+# Thomas Sachau <tommy@gentoo.org> (30 Jun 2014)
+# Mask pixman USE flag of dev-libs/efl for future removal, bug 501074
+dev-libs/efl pixman
+
+# Andreas K. Huettel <dilfridge@gentoo.org> (29 Jun 2014)
+# Mask use-flag firebird and package dev-db/firebird for bug 460780
+net-misc/stargazer module_store_firebird
+
+# Jeroen Roovers <jer@gentoo.org> (20 Jun 2014)
+# net-libs/adns is going away (bug #513982)
+net-analyzer/wireshark libadns
+
+# Anthony G. Basile <blueness@gentoo.org> (14 Jun 2014)
+# net-libs/cyassl is being tree cleaned, bug #495848
+net-misc/curl curl_ssl_cyassl
 
 # Zac Medico <zmedico@gentoo.org> (06 Jun 2014)
 # Needs hardmasked lua-5.2
@@ -221,7 +237,7 @@ app-editors/gvim luajit racket
 # Alexis Ballier <aballier@gentoo.org> (11 Aug 2013)
 # Multilib migrated version for binary compatibility.
 # Those useflags have deps that are not migrated yet.
-=media-video/ffmpeg-0.10* frei0r gnutls rtmp
+=media-video/ffmpeg-0.10* frei0r
 
 # Kacper Kowalik <xarthisius@gentoo.org> (09 Aug 2013)
 # Doesn't work on most profiles. Easier to mask here and

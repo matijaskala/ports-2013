@@ -1,11 +1,11 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/upower/upower-0.9.23-r3.ebuild,v 1.1 2014/06/02 18:45:13 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-power/upower/upower-0.9.23-r3.ebuild,v 1.3 2014/06/20 06:25:23 ssuominen Exp $
 
 EAPI=5
 inherit eutils systemd
 
-DESCRIPTION="D-Bus abstraction for enumerating power devices and querying history and statistics"
+DESCRIPTION="For hibernate and suspend, use sys-apps/systemd or sys-power/upower-pm-utils"
 HOMEPAGE="http://upower.freedesktop.org/"
 SRC_URI="http://${PN}.freedesktop.org/releases/${P}.tar.xz"
 
@@ -31,7 +31,6 @@ COMMON_DEPEND=">=dev-libs/dbus-glib-0.100
 RDEPEND="${COMMON_DEPEND}
 	kernel_linux? (
 		app-shells/bash
-		>=sys-apps/systemd-200
 	)"
 DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt

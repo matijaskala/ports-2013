@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-213.ebuild,v 1.2 2014/05/31 16:48:06 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-213.ebuild,v 1.5 2014/06/24 22:17:59 mgorny Exp $
 
 EAPI=5
 
@@ -29,14 +29,14 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.20:0=
 	audit? ( >=sys-process/audit-2:0= )
 	cryptsetup? ( >=sys-fs/cryptsetup-1.6:0= )
 	gcrypt? ( >=dev-libs/libgcrypt-1.4.5:0= )
-	gudev? ( dev-libs/glib:2=[${MULTILIB_USEDEP}] )
+	gudev? ( >=dev-libs/glib-2.34.3:2=[${MULTILIB_USEDEP}] )
 	http? (
 		>=net-libs/libmicrohttpd-0.9.33:0=
 		ssl? ( >=net-libs/gnutls-3.1.4:0= )
 	)
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:0= )
 	>=sys-apps/kmod-15:0=
-	lzma? ( app-arch/xz-utils:0=[${MULTILIB_USEDEP}] )
+	lzma? ( >=app-arch/xz-utils-5.0.5-r1:0=[${MULTILIB_USEDEP}] )
 	pam? ( virtual/pam:= )
 	python? ( ${PYTHON_DEPS} )
 	qrcode? ( media-gfx/qrencode:0= )
@@ -93,7 +93,6 @@ pkg_pretend() {
 		~!GRKERNSEC_PROC"
 
 	use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"
-	use pam && CONFIG_CHECK+=" ~AUDITSYSCALL"
 	use xattr && CONFIG_CHECK+=" ~TMPFS_XATTR"
 	kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
 	use firmware-loader || CONFIG_CHECK+=" ~!FW_LOADER_USER_HELPER"

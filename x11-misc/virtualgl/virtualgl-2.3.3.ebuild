@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/virtualgl/virtualgl-2.3.3.ebuild,v 1.1 2013/12/11 21:05:38 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-misc/virtualgl/virtualgl-2.3.3.ebuild,v 1.3 2014/06/18 21:16:07 mgorny Exp $
 
 EAPI=5
 inherit cmake-multilib multilib systemd
@@ -15,7 +15,7 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 SLOT="0"
 LICENSE="LGPL-2.1 wxWinLL-3.1 FLTK"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 x86"
 IUSE="ssl"
 
 RDEPEND="
@@ -26,21 +26,21 @@ RDEPEND="
 	x11-libs/libXv
 	amd64? ( abi_x86_32? (
 		|| (
-			media-libs/libjpeg-turbo[abi_x86_32]
+			>=media-libs/libjpeg-turbo-1.3.0-r3[abi_x86_32]
 			app-emulation/emul-linux-x86-baselibs[-abi_x86_32]
 		)
 		|| (
 			(
-				x11-libs/libX11[abi_x86_32]
-				x11-libs/libXext[abi_x86_32]
-				x11-libs/libXv[abi_x86_32]
+				>=x11-libs/libX11-1.6.2[abi_x86_32]
+				>=x11-libs/libXext-1.3.2[abi_x86_32]
+				>=x11-libs/libXv-1.0.10[abi_x86_32]
 			)
 			app-emulation/emul-linux-x86-xlibs[-abi_x86_32]
 		)
 		|| (
 			(
-				virtual/glu[abi_x86_32]
-				virtual/opengl[abi_x86_32]
+				>=virtual/glu-9.0-r1[abi_x86_32]
+				>=virtual/opengl-7.0-r1[abi_x86_32]
 			)
 			app-emulation/emul-linux-x86-opengl[-abi_x86_32]
 		)

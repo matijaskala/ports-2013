@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-1.7.ebuild,v 1.1 2014/06/01 18:29:22 blueness Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-1.7.ebuild,v 1.3 2014/06/24 22:17:02 mgorny Exp $
 
 EAPI="5"
 
@@ -24,7 +24,7 @@ SLOT="0"
 IUSE="doc gudev +hwdb kmod introspection +keymap +modutils +openrc +rule-generator selinux static-libs test"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
-	gudev? ( dev-libs/glib:2[${MULTILIB_USEDEP}] )
+	gudev? ( >=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )

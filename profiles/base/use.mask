@@ -1,6 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/use.mask,v 1.198 2014/05/16 11:10:18 grozin Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/use.mask,v 1.201 2014/06/29 18:43:56 dilfridge Exp $
+
+# Mask use-flag firebird and package dev-db/firebird for bug 460780
+firebird
+
+# CURL_SSL=winssl is for prefix/windows/winnt only
+curl_ssl_winssl
 
 # cuda only works on amd64/x86
 cuda
@@ -347,11 +353,14 @@ abi_ppc_64
 abi_s390_32
 abi_s390_64
 
-# Andrey Grozin <grozin@gentoo.org> (1 May 2013)
-# gcl, cmucl, clozurecl are available only on some arches
-gcl
-cmucl
+# Andrey Grozin <grozin@gentoo.org> (25 Jun 2014)
+# These lisps are available only on some arches
+clisp
 clozurecl
+cmucl
+ecls
+gcl
+sbcl
 
 # Michał Górny <mgorny@gentoo.org> (4 May 2013)
 # Mask systemd flag globally, unmasked on arches on which systemd

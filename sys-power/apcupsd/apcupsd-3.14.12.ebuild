@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/apcupsd/apcupsd-3.14.12.ebuild,v 1.1 2014/06/06 01:34:13 mattm Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-power/apcupsd/apcupsd-3.14.12.ebuild,v 1.3 2014/06/25 21:44:21 mattm Exp $
 
 EAPI=4
 
@@ -12,12 +12,13 @@ SRC_URI="mirror://sourceforge/apcupsd/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~ppc ~x86 ~x86-fbsd"
 IUSE="snmp +usb cgi nls gnome kernel_linux"
 
 DEPEND="
 	||	( >=sys-apps/util-linux-2.23[tty-helpers(-)]
 		  <=sys-apps/sysvinit-2.88-r4
+		  sys-freebsd/freebsd-ubin
 		)
 	cgi? ( >=media-libs/gd-1.8.4 )
 	nls? ( sys-devel/gettext )

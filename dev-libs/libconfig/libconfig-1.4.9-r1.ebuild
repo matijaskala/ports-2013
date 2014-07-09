@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libconfig/libconfig-1.4.9-r1.ebuild,v 1.8 2014/04/30 18:26:14 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/libconfig/libconfig-1.4.9-r1.ebuild,v 1.10 2014/07/02 06:08:47 dlan Exp $
 
 EAPI=5
 
@@ -13,7 +13,7 @@ SRC_URI="http://www.hyperrealm.com/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="amd64 ~mips ppc ppc64 sparc x86 ~x86-linux"
+KEYWORDS="amd64 ~arm ~mips ppc ppc64 sparc x86 ~x86-linux"
 IUSE="+cxx examples static-libs"
 
 DEPEND="
@@ -45,6 +45,7 @@ multilib_src_install_all() {
 	prune_libtool_files
 
 	if use examples; then
+		find examples/ -name "Makefile.*" -delete || die
 		local dir
 		for dir in examples/c examples/c++; do
 			insinto /usr/share/doc/${PF}/${dir}

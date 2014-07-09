@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rubygems/rubygems-2.0.14.ebuild,v 1.7 2014/05/07 18:02:00 maekke Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rubygems/rubygems-2.0.14.ebuild,v 1.13 2014/07/05 09:11:46 mrueg Exp $
 
 EAPI=5
 
-USE_RUBY="ruby18 ruby19 ruby20 jruby"
+USE_RUBY="ruby19 ruby20 jruby"
 
 inherit ruby-ng prefix
 
@@ -14,7 +14,7 @@ LICENSE="|| ( Ruby MIT )"
 
 SRC_URI="http://production.cf.rubygems.org/rubygems/${P}.tgz"
 
-KEYWORDS="~alpha ~amd64 arm hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x64-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~x64-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 SLOT="0"
 IUSE="server test"
 
@@ -58,11 +58,6 @@ all_ruby_prepare() {
 
 each_ruby_prepare() {
 	case ${RUBY} in
-		*ruby18)
-			# Remove test failing on ruby18. According to travis.yml
-			# upstream no longer cares.
-			sed -i -e '/test_install_location_extra_slash/,/^  end/ s:^:#:' test/rubygems/test_gem_package.rb || die
-			;;
 		*jruby)
 			sed -i -e '/test_install_location_extra_slash/,/^  end/ s:^:#:' test/rubygems/test_gem_package.rb || die
 			# Remove failing tests. Before we did not run any tests at
@@ -131,7 +126,7 @@ pkg_postinst() {
 
 	ewarn
 	ewarn "To switch between available Ruby profiles, execute as root:"
-	ewarn "\teselect ruby set ruby(18|19|...)"
+	ewarn "\teselect ruby set ruby(19|20|...)"
 	ewarn
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/python-utils-r1.eclass,v 1.56 2014/05/26 16:13:35 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/python-utils-r1.eclass,v 1.60 2014/07/06 11:45:20 mgorny Exp $
 
 # @ECLASS: python-utils-r1
 # @MAINTAINER:
@@ -43,7 +43,7 @@ _PYTHON_ALL_IMPLS=(
 	jython2_5 jython2_7
 	pypy
 	python3_2 python3_3 python3_4
-	python2_6 python2_7
+	python2_7
 )
 
 # @FUNCTION: _python_impl_supported
@@ -66,10 +66,10 @@ _python_impl_supported() {
 	# keep in sync with _PYTHON_ALL_IMPLS!
 	# (not using that list because inline patterns shall be faster)
 	case "${impl}" in
-		python2_[67]|python3_[234]|jython2_[57])
+		python2_7|python3_[234]|jython2_[57])
 			return 0
 			;;
-		pypy1_[89]|pypy2_0|python2_5|python3_1)
+		pypy1_[89]|pypy2_0|python2_[56]|python3_1)
 			return 1
 			;;
 		pypy)
@@ -98,7 +98,7 @@ _python_impl_supported() {
 #
 # Example value:
 # @CODE
-# /usr/bin/python2.6
+# /usr/bin/python2.7
 # @CODE
 
 # @ECLASS-VARIABLE: EPYTHON
@@ -117,7 +117,7 @@ _python_impl_supported() {
 #
 # Example value:
 # @CODE
-# python2.6
+# python2.7
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_SITEDIR
@@ -129,7 +129,7 @@ _python_impl_supported() {
 #
 # Example value:
 # @CODE
-# /usr/lib64/python2.6/site-packages
+# /usr/lib64/python2.7/site-packages
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_INCLUDEDIR
@@ -141,7 +141,7 @@ _python_impl_supported() {
 #
 # Example value:
 # @CODE
-# /usr/include/python2.6
+# /usr/include/python2.7
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_LIBPATH
@@ -154,7 +154,7 @@ _python_impl_supported() {
 #
 # Example value:
 # @CODE
-# /usr/lib64/libpython2.6.so
+# /usr/lib64/libpython2.7.so
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_CFLAGS
@@ -307,10 +307,6 @@ python_export() {
 				local val
 
 				case "${impl}" in
-					python2.5|python2.6)
-						# old versions support python-config only
-						val=$("${impl}-config" --includes)
-						;;
 					python*)
 						# python-2.7, python-3.2, etc.
 						val=$($(tc-getPKG_CONFIG) --cflags ${impl/n/n-})
@@ -327,10 +323,6 @@ python_export() {
 				local val
 
 				case "${impl}" in
-					python2.5|python2.6)
-						# old versions support python-config only
-						val=$("${impl}-config" --libs)
-						;;
 					python*)
 						# python-2.7, python-3.2, etc.
 						val=$($(tc-getPKG_CONFIG) --libs ${impl/n/n-})
@@ -346,8 +338,6 @@ python_export() {
 			PYTHON_PKG_DEP)
 				local d
 				case ${impl} in
-					python2.6)
-						PYTHON_PKG_DEP='>=dev-lang/python-2.6.8-r3:2.6';;
 					python2.7)
 						PYTHON_PKG_DEP='>=dev-lang/python-2.7.5-r2:2.7';;
 					python3.2)
@@ -542,6 +532,7 @@ python_optimize() {
 	[[ ${PYTHON} ]] || python_export PYTHON
 
 	# Note: python2.6 can't handle passing files to compileall...
+	# TODO: we do not support 2.6 any longer
 
 	# default to sys.path
 	if [[ ${#} -eq 0 ]]; then
@@ -670,8 +661,7 @@ python_newexe() {
 
 	# don't use this at home, just call python_doscript() instead
 	if [[ ${_PYTHON_REWRITE_SHEBANG} ]]; then
-		local _PYTHON_FIX_SHEBANG_QUIET=1
-		python_fix_shebang "${ED%/}/${d}/${newfn}"
+		python_fix_shebang -q "${ED%/}/${d}/${newfn}"
 	fi
 }
 
@@ -878,20 +868,11 @@ python_wrapper_setup() {
 			ln -s "${PYTHON}-config" "${workdir}"/bin/python-config || die
 
 			# Python 2.6+.
-			if [[ ${EPYTHON} != python2.5 ]]; then
-				ln -s "${PYTHON/python/2to3-}" "${workdir}"/bin/2to3 || die
-			else
-				nonsupp+=( 2to3 )
-			fi
+			ln -s "${PYTHON/python/2to3-}" "${workdir}"/bin/2to3 || die
 
 			# Python 2.7+.
-			if [[ ${EPYTHON} != python2.[56] ]]; then
-				ln -s "${EPREFIX}"/usr/$(get_libdir)/pkgconfig/${EPYTHON/n/n-}.pc \
-					"${workdir}"/pkgconfig/python.pc || die
-			else
-				# XXX?
-				ln -s /dev/null "${workdir}"/pkgconfig/python.pc || die
-			fi
+			ln -s "${EPREFIX}"/usr/$(get_libdir)/pkgconfig/${EPYTHON/n/n-}.pc \
+				"${workdir}"/pkgconfig/python.pc || die
 			ln -s python.pc "${workdir}"/pkgconfig/python${pyver}.pc || die
 		else
 			nonsupp+=( 2to3 python-config )
@@ -935,7 +916,7 @@ python_is_python3() {
 }
 
 # @FUNCTION: python_fix_shebang
-# @USAGE: <path>...
+# @USAGE: [-f|--force] [-q|--quiet] <path>...
 # @DESCRIPTION:
 # Replace the shebang in Python scripts with the current Python
 # implementation (EPYTHON). If a directory is passed, works recursively
@@ -947,12 +928,27 @@ python_is_python3() {
 #
 # Shebangs matching explicitly current Python version will be left
 # unmodified. Shebangs requesting another Python version will be treated
-# as fatal error.
+# as fatal error, unless --force is given.
+#
+# --force causes the function to replace even shebangs that require
+# incompatible Python version. --quiet causes the function not to list
+# modified files verbosely.
 python_fix_shebang() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	[[ ${1} ]] || die "${FUNCNAME}: no paths given"
 	[[ ${EPYTHON} ]] || die "${FUNCNAME}: EPYTHON unset (pkg_setup not called?)"
+
+	local force quiet
+	while [[ ${@} ]]; do
+		case "${1}" in
+			-f|--force) force=1; shift;;
+			-q|--quiet) quiet=1; shift;;
+			--) shift; break;;
+			*) break;;
+		esac
+	done
+
+	[[ ${1} ]] || die "${FUNCNAME}: no paths given"
 
 	local path f
 	for path; do
@@ -961,54 +957,88 @@ python_fix_shebang() {
 		[[ -d ${path} ]] && is_recursive=1
 
 		while IFS= read -r -d '' f; do
-			local shebang=$(head -n 1 "${f}")
-			local error
+			local shebang i
+			local error= from=
 
-			case "${shebang} " in
-				'#!'*"${EPYTHON} "*)
-					debug-print "${FUNCNAME}: in file ${f#${D}}"
-					debug-print "${FUNCNAME}: shebang matches EPYTHON: ${shebang}"
+			read shebang <"${f}"
 
-					# Nothing to do, move along.
-					any_correct=1
-					;;
-				'#!'*python" "*|'#!'*python[23]" "*)
-					debug-print "${FUNCNAME}: in file ${f#${D}}"
-					debug-print "${FUNCNAME}: rewriting shebang: ${shebang}"
+			# First, check if it's shebang at all...
+			if [[ ${shebang} == '#!'* ]]; then
+				# Match left-to-right in a loop, to avoid matching random
+				# repetitions like 'python2.7 python2'.
+				for i in ${shebang}; do
+					case "${i}" in
+						*"${EPYTHON}")
+							debug-print "${FUNCNAME}: in file ${f#${D}}"
+							debug-print "${FUNCNAME}: shebang matches EPYTHON: ${shebang}"
 
-					# Note: for internal use.
-					if [[ ! ${_PYTHON_FIX_SHEBANG_QUIET} ]]; then
-						einfo "Fixing shebang in ${f#${D}}."
-					fi
+							# Nothing to do, move along.
+							any_correct=1
+							from=${EPYTHON}
+							break
+							;;
+						*python|*python[23])
+							debug-print "${FUNCNAME}: in file ${f#${D}}"
+							debug-print "${FUNCNAME}: rewriting shebang: ${shebang}"
 
-					local from
-					if [[ "${shebang} " == *'python2 '* ]]; then
-						from=python2
-						python_is_python3 "${EPYTHON}" && error=1
-					elif [[ "${shebang} " == *'python3 '* ]]; then
-						from=python3
-						python_is_python3 "${EPYTHON}" || error=1
-					else
-						from=python
-					fi
+							if [[ ${i} == *python2 ]]; then
+								from=python2
+								if [[ ! ${force} ]]; then
+									python_is_python3 "${EPYTHON}" && error=1
+								fi
+							elif [[ ${i} == *python3 ]]; then
+								from=python3
+								if [[ ! ${force} ]]; then
+									python_is_python3 "${EPYTHON}" || error=1
+								fi
+							else
+								from=python
+							fi
+							break
+							;;
+						*python[23].[0123456789]|*pypy|*jython[23].[0123456789])
+							# Explicit mismatch.
+							if [[ ! ${force} ]]; then
+								error=1
+							else
+								case "${i}" in
+									*python[23].[0123456789])
+										from="python[23].[0123456789]";;
+									*pypy)
+										from="pypy";;
+									*jython[23].[0123456789])
+										from="jython[23].[0123456789]";;
+									*)
+										die "${FUNCNAME}: internal error in 2nd pattern match";;
+								esac
+							fi
+							break
+							;;
+					esac
+				done
+			fi
 
-					if [[ ! ${error} ]]; then
-						sed -i -e "1s:${from}:${EPYTHON}:" "${f}" || die
-						any_fixed=1
-					fi
-					;;
-				'#!'*python[23].[0123456789]" "*|'#!'*pypy" "*|'#!'*jython[23].[0123456789]" "*)
-					# Explicit mismatch.
-					error=1
-					;;
-				*)
-					# Non-Python shebang. Allowed in recursive mode,
-					# disallowed when specifying file explicitly.
-					[[ ${is_recursive} ]] || error=1
-					;;
-			esac
+			if [[ ! ${error} && ! ${from} ]]; then
+				# Non-Python shebang. Allowed in recursive mode,
+				# disallowed when specifying file explicitly.
+				[[ ${is_recursive} ]] && continue
+				error=1
+			fi
 
-			if [[ ${error} ]]; then
+			if [[ ! ${quiet} ]]; then
+				einfo "Fixing shebang in ${f#${D}}."
+			fi
+
+			if [[ ! ${error} ]]; then
+				# We either want to match ${from} followed by space
+				# or at end-of-string.
+				if [[ ${shebang} == *${from}" "* ]]; then
+					sed -i -e "1s:${from} :${EPYTHON} :" "${f}" || die
+				else
+					sed -i -e "1s:${from}$:${EPYTHON}:" "${f}" || die
+				fi
+				any_fixed=1
+			else
 				eerror "The file has incompatible shebang:"
 				eerror "  file: ${f#${D}}"
 				eerror "  current shebang: ${shebang}"
@@ -1060,6 +1090,41 @@ _python_get_wrapper_path() {
 	else
 		echo /usr/bin/python-exec
 	fi
+}
+
+# @FUNCTION: python_export_utf8_locale
+# @RETURN: 0 on success, 1 on failure.
+# @DESCRIPTION:
+# Attempts to export a usable UTF-8 locale in the LC_CTYPE variable. Does
+# nothing if LC_ALL is defined, or if the current locale uses a UTF-8 charmap.
+# This may be used to work around the quirky open() behavior of python3.
+python_export_utf8_locale() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	if [[ $(locale charmap) != UTF-8 ]]; then
+		if [[ -n ${LC_ALL} ]]; then
+			ewarn "LC_ALL is set to a locale with a charmap other than UTF-8."
+			ewarn "This may trigger build failures in some python packages."
+			return 1
+		fi
+
+		# Try English first, then everything else.
+		local lang locales="en_US.UTF-8 $(locale -a)"
+
+		for lang in ${locales}; do
+			if [[ $(LC_CTYPE=${lang} locale charmap 2>/dev/null) == UTF-8 ]]; then
+				export LC_CTYPE=${lang}
+				return 0
+			fi  
+		done
+
+		ewarn "Could not find a UTF-8 locale. This may trigger build failures in"
+		ewarn "some python packages. Please ensure that a UTF-8 locale is listed in"
+		ewarn "/etc/locale.gen and run locale-gen."
+		return 1
+	fi  
+
+	return 0
 }
 
 _PYTHON_UTILS_R1=1
