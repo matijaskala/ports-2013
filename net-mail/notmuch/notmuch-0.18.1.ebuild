@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/notmuch/notmuch-0.18.1.ebuild,v 1.1 2014/06/25 11:36:09 aidecoe Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-mail/notmuch/notmuch-0.18.1.ebuild,v 1.3 2014/07/21 19:06:43 dilfridge Exp $
 
 EAPI=5
 
@@ -44,11 +44,11 @@ DEPEND="${CDEPEND}
 RDEPEND="${CDEPEND}
 	bash-completion? ( >=app-shells/bash-completion-1.9 )
 	crypt? ( app-crypt/gnupg )
-	nmbug? ( dev-vcs/git virtual/perl-File-Temp virtual/perl-PodParser )
+	nmbug? ( dev-vcs/git virtual/perl-File-Temp virtual/perl-Pod-Parser )
 	mutt? ( dev-perl/File-Which dev-perl/Mail-Box dev-perl/MailTools
 		dev-perl/String-ShellQuote dev-perl/Term-ReadLine-Gnu
 		virtual/perl-Digest-SHA virtual/perl-File-Path virtual/perl-Getopt-Long
-		virtual/perl-PodParser
+		virtual/perl-Pod-Parser
 		)
 	zsh-completion? ( app-shells/zsh )
 	"
@@ -134,6 +134,7 @@ src_compile() {
 
 src_test() {
 	pax-mark -m notmuch
+	emake download-test-databases
 	LD_LIBRARY_PATH="${MY_LD_LIBRARY_PATH}" default
 	pax-mark -ze notmuch
 }

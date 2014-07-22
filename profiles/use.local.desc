@@ -223,6 +223,7 @@ app-admin/sysklogd:logrotate - use app-admin/logrotate for rotating logs rather 
 app-admin/syslog-ng:amqp - Enable support for AMQP destinations
 app-admin/syslog-ng:json - Enable support for JSON template formatting via dev-libs/json-glib
 app-admin/syslog-ng:mongodb - Enable support for mongodb destinations
+app-admin/syslog-ng:pacct - Enable support for reading Process Accounting files (EXPERIMENTAL, Linux only)
 app-admin/syslog-ng:smtp - Enable support for SMTP destinations
 app-admin/syslog-ng:spoof-source - Enable support for spoofed source addresses
 app-admin/sysstat:cron - Install /etc/cron.d script to periodically run sar
@@ -249,7 +250,7 @@ app-arch/cfv:bittorrent - Enable support for checking .torrent files
 app-arch/dpkg:dselect - Build the dselect package-management frontend
 app-arch/dpkg:update-alternatives - Install update-alternatives
 app-arch/dump:ermt - encrypted rmt support
-app-arch/engrampa:caja - Enable engrampa to integrate with mate-base/mate-file-manager by providing entries in its context menu
+app-arch/engrampa:caja - Enable engrampa to integrate with mate-base/caja by providing entries in its context menu
 app-arch/file-roller:nautilus - Enable file-roller to integrate with gnome-base/nautilus by providing entries in its context menu
 app-arch/file-roller:packagekit - Enable support for the distro-neutral package manager GUI app-admin/packagekit
 app-arch/gzip:pic - disable optimized assembly code that is not PIC friendly
@@ -875,11 +876,11 @@ app-misc/recoll:tex - Index TeX files
 app-misc/recoll:wordperfect - Index WordPerfect documents
 app-misc/recoll:xml - Index several XML-based formats (Abiword, FictionBook, Kword, Office OpenXML, OpenDocument, SVG)
 app-misc/roadnav:festival - Enable support for app-accessibility/festival
-app-misc/roadnav:flite - Enable support for app-accessibility/flite (festival-lite)
 app-misc/roadnav:openstreetmap - Enable openstreetmap support
 app-misc/roadnav:scripting - Enable scripting support
 app-misc/screen:multiuser - Enable multiuser support (by setting correct permissions)
 app-misc/screen:nethack - Express error messages in nethack style
+app-misc/screenfetch:X - Use the media-gfx/scrot package to take screenshots
 app-misc/sphinx:id64 - use 64-bit document and word IDs
 app-misc/sphinx:stemmer - Enable language stemming support
 app-misc/strigi:clucene - Enable dev-cpp/clucene backend support.
@@ -1094,6 +1095,7 @@ app-text/mate-document-viewer:ps - Enable build-in postscript viewer
 app-text/mate-document-viewer:t1lib - Enable the Type-1 fonts for the build-in DVI viewer (media-libs/t1lib)
 app-text/mate-document-viewer:xps - Enable XPS viewer using app-text/libxps
 app-text/mathtex:png - Generate png images by default instead of gif
+app-text/mupdf:openssl - Use dev-libs/openssl crypto backend
 app-text/pandoc:embed_data_files - Embed data files in binary for relocatable executable.
 app-text/pandoc:http-conduit - Enable downloading of resources over https.
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
@@ -2041,8 +2043,8 @@ dev-python/jinja:i18n - Enables support for i18n with dev-python/Babel
 dev-python/kaa-base:tls - SSL/TLS support via dev-python/tlslite
 dev-python/kazoo:gevent - Enable support for the gevent based handler
 dev-python/kombu:amqplib - Enable amqplib support
-dev-python/kombu:msgpack - enables MessagePack (de)serializer for Python
-dev-python/kombu:sqs - enables Amazon SQS transport module for Kombu
+dev-python/kombu:msgpack - Enables MessagePack (de)serializer for Python
+dev-python/kombu:sqs - Enables Amazon SQS transport module for Kombu
 dev-python/ldaptor:web - enable the web front end for ldaptor (uses dev-python/nevow)
 dev-python/lxml:beautifulsoup3 - Enable support for Beautiful Soup 3
 dev-python/markdown:pygments - Enable fancy pygments support
@@ -2401,6 +2403,7 @@ dev-vcs/bzr-gtk:gconf - Enable GConf support
 dev-vcs/bzr-gtk:gpg - Support signing with GnuPG.
 dev-vcs/bzr-gtk:nautilus - Integrate with Nautilus file manager
 dev-vcs/bzr-gtk:sourceview - Enable GtkSourceView support
+dev-vcs/cssc:valgrind - Enable usage of dev-util/valgrind in tests
 dev-vcs/cvs:server - Enable server support
 dev-vcs/cvs2svn:bazaar - Support for dev-vcs/bzr
 dev-vcs/fossil:json - Enable the JSON API of Fossil's wiki
@@ -2477,6 +2480,7 @@ games-action/hotline-miami:bundled-libs - Use bundled libraries.
 games-action/hotline-miami:launcher - Install qt launcher
 games-action/minetest:leveldb - Enable LevelDB backend
 games-action/minetest:luajit - Use dev-lang/luajit instead of dev-lang/lua
+games-action/minetest:redis - Enable redis backend via dev-libs/hiredis
 games-action/minetest:server - Build minetest server
 games-action/openlierox:breakpad - Compile with support for breakpad crash reporting system
 games-action/solar2:bundled-libs - Use the upstream provided bundled libraries.
@@ -2557,6 +2561,7 @@ games-fps/darkplaces:demo - Uses the demo data from quake1 (quake1-demodata)
 games-fps/darkplaces:lights - Install and setup the updated light maps
 games-fps/darkplaces:textures - Install and setup the updated textures
 games-fps/doom-data:doomsday - Add wrapper to run it within doomsday
+games-fps/doom3:dedicated - install only as a dedicated game server
 games-fps/doom3:roe - Adds support for the Resurrection of Evil expansion
 games-fps/doomsday:demo - Install launcher dor doom1.wad from games-fps/doom-data
 games-fps/doomsday:doom - Install launcher for jdoom game
@@ -2592,6 +2597,7 @@ games-fps/quake3:mumble - Adds player-location (positional audio) support to VoI
 games-fps/quake3:teamarena - Adds support for Team Arena expansion pack
 games-fps/quake3:voice - Adds VoIP support
 games-fps/quake3-bin:teamarena - Adds support for Team Arena expansion pack
+games-fps/quake3-demo:dedicated - install only as a dedicated game serer
 games-fps/quakeforge:wildmidi - enable libWildMidi support
 games-fps/quakeforge:xdg - enable XDG support
 games-fps/qudos:demo - Install the demo files (quake2-demodata) and configure for use
@@ -3151,6 +3157,7 @@ mail-filter/opendkim:opendbx - Use opendbx backend to facilitate dataset driven 
 mail-filter/opendkim:poll - Use poll() instead of select() for the provided asynchronous resolver library.
 mail-filter/opendkim:sasl - Used to authenticate to a LDAP server in various ways if required.
 mail-filter/opendkim:unbound - Use the unbound dnssec library to perform DKIM DNS queries.
+mail-filter/postfwd:tools - Install additional tools for testing postfwd
 mail-filter/postgrey:targrey - Enables the targrey patch
 mail-filter/qmail-scanner:spamassassin - Build faster mail-filter/spamassassin checks into qmail-scanner
 mail-filter/spamassassin:qmail - Build qmail functionality and docs
@@ -3191,10 +3198,11 @@ mail-mta/netqmail:highvolume - Prepare netqmail for high volume servers
 mail-mta/netqmail:noauthcram - If you do NOT want AUTHCRAM to be available
 mail-mta/opensmtpd:mta - Enable this to install as system-wide MTA
 mail-mta/postfix:dovecot-sasl - Enable net-mail/dovecot protocol version 1 (server only) SASL implementation
-mail-mta/postfix:ldap-bind - Adds support for binding to LDAP backend using dev-libs/cyrus-sasl
-mail-mta/postfix:lmdb - Adds support for using dev-db/lmdb for lookup tables
-mail-mta/postfix:memcached - Adds support for using net-misc/memcached for lookup tables
-mail-mta/postfix:vda - Adds support for virtual delivery agent quota enforcing
+mail-mta/postfix:eai - Add support for SMTPUTF8
+mail-mta/postfix:ldap-bind - Add support for binding to LDAP backend using dev-libs/cyrus-sasl
+mail-mta/postfix:lmdb - Add support for using dev-db/lmdb for lookup tables
+mail-mta/postfix:memcached - Add support for using net-misc/memcached for lookup tables
+mail-mta/postfix:vda - Add support for virtual delivery agent quota enforcing
 mail-mta/qmail-ldap:cluster - Enable this if you want to have cluster support in qmail-ldap
 mail-mta/qmail-ldap:gencertdaily - Generate SSL certificates daily instead of hourly
 mail-mta/qmail-ldap:highvolume - Prepare qmail for high volume servers
@@ -3631,7 +3639,6 @@ media-libs/x264:interlaced - enable interlaced encoding support, this can decrea
 media-libs/x264:opencl - Add support for OpenCL.
 media-libs/x264:pic - disable optimized assembly code that is not PIC friendly
 media-libs/x265:10bit - Set output bit depth to 10.
-media-libs/xine-lib:avformat - Enables libformat support for reading and writing various media containers. libavformat is part of FFmpeg.
 media-libs/xine-lib:bluray - Enable playback of Blu-ray filesystems using media-libs/libbluray
 media-libs/xine-lib:dxr3 - Enable support for DXR3 mpeg acceleration cards.
 media-libs/xine-lib:flac - Build the media-libs/flac based FLAC demuxer and decoder. This flag is not needed for playing FLAC content, neither standalone nor in Ogg container (OggFLAC), but might have better support for exotic features like 24-bit samples or 96kHz sample rates.
@@ -4314,6 +4321,7 @@ media-video/mpv:doc-pdf - Build documentation in pdf format
 media-video/mpv:dvdnav - Enable support for DVD navigation using media-libs/libdvdnav
 media-video/mpv:enca - Enables support for charset discovery and conversion using app-i18n/enca
 media-video/mpv:libguess - Enables support for charset discovery and conversion using app-i18n/libguess
+media-video/mpv:libmpv - Build mpv shared library
 media-video/mpv:luajit - Use dev-lang/luajit instead of dev-lang/lua
 media-video/mpv:mpg123 - Enable support for mp3 decoding over media-sound/mpg123 instead of relying on ffmpeg support.
 media-video/mpv:postproc - Enable image post-processing via libpostproc
@@ -4326,7 +4334,9 @@ media-video/mpv:vaapi - Enable VAAPI (Video Acceleration API) for hardware decod
 media-video/mpv:vf-dlopen - Install additional video filters for using with -vf dlopen
 media-video/ogmrip:ogm - Support for OGM container format
 media-video/ogmrip:srt - Support for SRT subtitle format
+media-video/parole:clutter - Compile in Clutter GTK+ support
 media-video/pgcedit:video - Add support for video preview
+media-video/plasma-mediacenter:nepomuk - Enable Nepomuk based semantic desktop support (deprecated)
 media-video/qgifer:imagemagick - Use imagemagick for image operations
 media-video/rtmpdump:gnutls - Use GnuTLS library instead of the default OpenSSL
 media-video/rtmpdump:polarssl - Use PolarSSL library instead of the default OpenSSL
@@ -4460,6 +4470,17 @@ net-analyzer/bmon:rrdtool - Enables net-analyzer/rrdtool support
 net-analyzer/bwm-ng:csv - Enable csv output
 net-analyzer/bwm-ng:html - Enable html output
 net-analyzer/cacti:doc - install html documentation
+net-analyzer/check_mk:agent-only - Install only the check_mk agent.
+net-analyzer/check_mk:apache_status - Install check_mk-agent apache-status plugin.
+net-analyzer/check_mk:dmi_sysinfo - Install check_mk-agent dmi_sysinfo plugin.
+net-analyzer/check_mk:livestatus - Enable livestatus.
+net-analyzer/check_mk:logwatch - Install check_mk-agent logwatch plugin.
+net-analyzer/check_mk:mysql - Install check_mk-agent mysql plugin.
+net-analyzer/check_mk:nfsexports - Install check_mk-agent nfsexports plugin.
+net-analyzer/check_mk:postgres - Install check_mk-agent postgres plugin.
+net-analyzer/check_mk:smart - Install check_mk-agent S.M.A.R.T plugin.
+net-analyzer/check_mk:wato - Enable check_mk WATO - check_mk's Web Administration Tool.
+net-analyzer/check_mk:zypper - Install check_mk-agent zypper plugin.
 net-analyzer/echoping:http - enable support for http protocol.
 net-analyzer/echoping:icp - enable support for ICP (used to monitor proxies).
 net-analyzer/echoping:priority - enable socket priority support.
@@ -4480,7 +4501,6 @@ net-analyzer/icinga:web - Adds generic web interface support
 net-analyzer/icinga-web:pnp - Enables pnp4nagios integration
 net-analyzer/icinga2:classicui - Adds support for the old interface
 net-analyzer/icinga2:plugins - Adds support for nagios plugins
-net-analyzer/lilac:nmap - Installs nmap which can be used to automatically discover devices to monitor.
 net-analyzer/linkchecker:bookmarks - Mozilla Bookmark parsing
 net-analyzer/linkchecker:login - login form submission
 net-analyzer/linkchecker:nagios - Install nagios cli plugin
@@ -5081,63 +5101,6 @@ net-libs/c-client:doc - Install RFCs related to IMAP
 net-libs/c-client:topal - Enable support for net-mail/topal for use with mail-client/alpine
 net-libs/courier-authlib:vpopmail - Enable vpopmail support
 net-libs/cvm:vpopmail - Enable vpopmail support
-net-libs/cyassl:aes - Enable AES cipher support
-net-libs/cyassl:aes-ccm - Eanble AES Counter with CBC-MAC mode
-net-libs/cyassl:aes-gcm - Enable AES Galois/Counter mode
-net-libs/cyassl:aes-ni - Enable Intel AES instruction support
-net-libs/cyassl:arc4 - Enable ARC4 cipher support
-net-libs/cyassl:asn - Enable ASN cipher support
-net-libs/cyassl:atomicuser - Enable Atomic User Record Layer
-net-libs/cyassl:big - Choose big cache size (excludes small or huge)
-net-libs/cyassl:blake2 - Enable CyaSSL BLAKE2 support
-net-libs/cyassl:camellia - Enable Camellia-CBC cipher support
-net-libs/cyassl:coding - Enable Coding base 16/64
-net-libs/cyassl:crl - Enable Certificate Revocation List
-net-libs/cyassl:crl-monitor - Enable Certificate Revocation List Directory Monitoring
-net-libs/cyassl:cyassl-hardening - Add hardening flags to CFLAGS/LDFLAGS
-net-libs/cyassl:des3 - Enable triple DES support
-net-libs/cyassl:dh - Enable DH cipher support
-net-libs/cyassl:dsa - Enable DSA cipher support
-net-libs/cyassl:dtls - Enable datagram TLS (must be disabled for tests)
-net-libs/cyassl:ecc - Enable Elliptic Curve support
-net-libs/cyassl:errorstrings - Enable error strings table
-net-libs/cyassl:extra - Enable extra OpenSSL API
-net-libs/cyassl:fortress - Enable fortress SSL build (requires extra and SHA512)
-net-libs/cyassl:hc128 - Enable HC-128 support
-net-libs/cyassl:hkdf - Enable HKDF (HMAC-KDF) support
-net-libs/cyassl:httpd - Enable features for yaSSL web server
-net-libs/cyassl:huge - Choose big cache size (excludes small or big)
-net-libs/cyassl:leanpsk - Enable lean PSK support (requires psk)
-net-libs/cyassl:maxfragment - Enable Maximum Fragment Length
-net-libs/cyassl:mcapi - Enable Microchip API
-net-libs/cyassl:md2 - Enable MD2 support
-net-libs/cyassl:md4 - Enable MD4 support
-net-libs/cyassl:md5 - Enable MD5 support
-net-libs/cyassl:memory - Enable memory callbacks
-net-libs/cyassl:nullcipher - Enable nullcipher support
-net-libs/cyassl:ocsp - Enable Online Certificate Status Protocol
-net-libs/cyassl:pkcallbacks - Enable Public Key Callbacks
-net-libs/cyassl:pkcs7 - Enable PKCS7 standard
-net-libs/cyassl:psk - Enable Pre-Shared Key support
-net-libs/cyassl:pwdbased - Enable PWDBASED (requires extra)
-net-libs/cyassl:rabbit - Enable RABBIT cipher support
-net-libs/cyassl:ripemd - Enable RIPEMD-160 support
-net-libs/cyassl:rsa - Enable RSA cihper support
-net-libs/cyassl:savecert - Support certificate saving
-net-libs/cyassl:savesession - Support session saving
-net-libs/cyassl:scep - Enable wolfSCEP
-net-libs/cyassl:sep - Enable sep extensions
-net-libs/cyassl:sessioncerts - Store session certificates
-net-libs/cyassl:sha - Enable SHA cipher support
-net-libs/cyassl:sha512 - Enable SHA-160 support
-net-libs/cyassl:small - Choose small cache size (excludes big or huge)
-net-libs/cyassl:smallstack - Enable Small Stack Usage (excludes big or huge)
-net-libs/cyassl:sni - Enable server name indication
-net-libs/cyassl:sniffer - Allow collection/decryption of SSL traffic
-net-libs/cyassl:supportedcurves - Enable Supported Elliptic Curves
-net-libs/cyassl:testcert - Enable certificate testing
-net-libs/cyassl:tlsx - Enable all TLS Extensions
-net-libs/cyassl:truncatedhmac - Enable Truncated HMAC
 net-libs/daq:afpacket - Build the AFPacket data acquisition module. Functions similar to the PCAP module but with better performance. Snort can run unprivileged when using this module. AFpacket supports both inline and passive modes.
 net-libs/daq:dump - Build the Dump data acquisition module. The dump DAQ allows you to test the various inline mode features available in 2.9 Snort like injection and normalization.
 net-libs/daq:ipq - Build the IPQ data acquisition module. IPQ is the old way to process iptables packets for inline deployments. Snort can not run unprivileged when using this module.
@@ -5166,7 +5129,7 @@ net-libs/libbtbb:pcap - Add support for network packet capture via net-libs/libp
 net-libs/libbtbb:wireshark-plugins - Build the wireshark plugins for bluetooth baseband sniffing
 net-libs/libcrafter:pcap - Use net-libs/libpcap for packet capturing
 net-libs/libeXosip:srv - enable support for SRV records DNS queries
-net-libs/libesmtp:ssl - Enable support for advanced SMTP authentication methods, like NTML and STARTTLS. Also use OpenSSL's MD5 implementation over internal version.
+net-libs/libesmtp:ntlm - Enable support for NTLM authentication
 net-libs/libetpan:liblockfile - Enable support for liblockfile library
 net-libs/libgsasl:gcrypt - Use dev-libs/libgcrypt for low-level crypto
 net-libs/libgsasl:ntlm - Add support for Microsoft's NTLM mechanism using net-libs/libntlm
@@ -5268,7 +5231,6 @@ net-libs/qxmpp:vpx - Enable VP8 codec support via media-libs/libvpx
 net-libs/rabbitmq-c:tools - Builds cli tools to interact with brokers
 net-libs/rest:gnome - Extract proxy information using net-libs/libsoup-gnome
 net-libs/telepathy-glib:vala - Enable bindings for dev-lang/vala
-net-libs/telepathy-qt:farsight - Enable support for farsight connection manager
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-libs/udns:tools - Build and install dnsget, ex-rdns and rblcheck tools
 net-libs/webkit-gtk:coverage - Enable code coverage support
@@ -5414,6 +5376,7 @@ net-misc/bfgminer:hashbuster - Enable support for mining with HashBuster nano bo
 net-misc/bfgminer:hashbuster2 - Enable support for mining with HashBuster micro boards
 net-misc/bfgminer:hashfast - Enable support for mining with HashFast devices
 net-misc/bfgminer:icarus - Enable support for mining with Icarus-compatible devices (including Block Erupter Sapphire ASICs)
+net-misc/bfgminer:jingtian - Enable support for mining on JingTian boards via SPI/GPIO
 net-misc/bfgminer:klondike - Enable support for mining with Klondike USB miners
 net-misc/bfgminer:libusb - Use libusb
 net-misc/bfgminer:littlefury - Enable support for mining with LittleFury USB sticks
@@ -5684,6 +5647,9 @@ net-misc/tigervnc:internal-fltk - Build+link internal and enhanced fltk library
 net-misc/tigervnc:server - Build TigerVNC server
 net-misc/tigervnc:xorgmodule - Build the Xorg module
 net-misc/tightvnc:server - Build vncserver. Allows us to only build server on one machine if set, build only viewer otherwise.
+net-misc/tinc:gcrypt - Add support for encrypted log files using dev-libs/libgcrypt
+net-misc/tinc:gui - Add GUI support, using dev-python/wxpython
+net-misc/tinc:openssl - Using dev-libs/openssl for cryptography-related functions
 net-misc/tinc:uml - Enable support for User Mode Linux Sockets
 net-misc/tinc:vde - Enable Virtual Distributed Ethernet (VDE) based networking
 net-misc/tor:bufferevents - Use libevent's buffered IO implementation (unstable, buggy)
@@ -6044,7 +6010,6 @@ sci-chemistry/gamess:neo - Enable NEO for nuclear basis support
 sci-chemistry/gamess:pax_kernel - Make this package work on PAX kernels
 sci-chemistry/gamess:qmmm-tinker - Enable tinker qmmm code
 sci-chemistry/ghemical:openbabel - Use sci-chemistry/openbabel for file conversions
-sci-chemistry/ghemical:toolbar - Build the shortcuts toolbar
 sci-chemistry/gromacs:avx128fma - Enable 128bit avx with fma (e.g. AMD BullDozer)
 sci-chemistry/gromacs:avx256 - Enable 256bit avx (e.g. Intel Sandy Bridge)
 sci-chemistry/gromacs:avx2_256 - Enable 256bit avx2 (e.g. Intel Haswell)
@@ -6581,6 +6546,8 @@ sys-auth/pambase:passwdqc - Enable pam_passwdqc module on system auth stack for 
 sys-auth/pambase:sha512 - Switch Linux-PAM's pam_unix module to use sha512 for passwords hashes rather than MD5. This option requires >=sys-libs/pam-1.0.1 built against >=sys-libs/glibc-2.7, if it's built against an earlier version, it will silently be ignored, and MD5 hashes will be used. All the passwords changed after this USE flag is enabled will be saved to the shadow file hashed using SHA512 function. The password previously saved will be left untouched. Please note that while SHA512-hashed passwords will still be recognised if the USE flag is removed, the shadow file will not be compatible with systems using an earlier glibc version.
 sys-auth/pambase:systemd - Use pam_systemd module to register user sessions in the systemd control group hierarchy.
 sys-auth/polkit:systemd - Use sys-apps/systemd instead of sys-auth/consolekit for session tracking
+sys-auth/sssd:acl - Build and use the cifsidmap plugin
+sys-auth/sssd:augeas - Build internal configuration library
 sys-auth/sssd:autofs - Build helper to let net-fs/autofs use sssd provided information
 sys-auth/sssd:locator - Install sssd's Kerberos plugin
 sys-auth/sssd:manpages - Build man pages with dev-libs/libxslt
@@ -6652,10 +6619,14 @@ sys-cluster/gearmand:drizzle - Support dev-db/libdrizzle for the queue storage. 
 sys-cluster/gearmand:memcache - Support memcache daemon (via dev-libs/libmemcached) for the queue storage.
 sys-cluster/gearmand:tokyocabinet - Support dev-db/tokyocabinet for the queue storage.
 sys-cluster/glusterfs:bd-xlator - Enable the blockdevice translator (requires sys-fs/lvm2)
+sys-cluster/glusterfs:crypt-xlator - Enable the encryption translator
 sys-cluster/glusterfs:extras - Install extra helper scripts
 sys-cluster/glusterfs:fuse - Add FUSE mount helper
 sys-cluster/glusterfs:georeplication - Enable support for georeplication (requires dev-lang/python)
+sys-cluster/glusterfs:glupy - Enable support for translators written in Python
 sys-cluster/glusterfs:infiniband - Add support for Infiniband ibverbs transport. Libraries can be found in science overlay
+sys-cluster/glusterfs:qemu-block - Transparently create files as QCow2/QED images in the backend, including the possibility to snapshot.
+sys-cluster/glusterfs:rsyslog - Install configuration snippet for app-admin/rsyslog
 sys-cluster/glusterfs:systemtap - Enable support for dev-util/systemtap
 sys-cluster/maui:pbs - Enable pbs integration
 sys-cluster/maui:slurm - Enable slurm integration

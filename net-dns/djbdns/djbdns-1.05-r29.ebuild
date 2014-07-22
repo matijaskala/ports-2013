@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dns/djbdns/djbdns-1.05-r29.ebuild,v 1.2 2014/06/04 00:43:22 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-dns/djbdns/djbdns-1.05-r29.ebuild,v 1.4 2014/07/21 01:39:05 mjo Exp $
 
 EAPI=5
 inherit eutils flag-o-matic readme.gentoo toolchain-funcs user
@@ -15,7 +15,7 @@ SRC_URI="http://cr.yp.to/djbdns/${P}.tar.gz
 
 SLOT="0"
 LICENSE="public-domain"
-KEYWORDS="~alpha ~amd64 hppa ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 hppa ~mips ~ppc ~ppc64 ~sparc ~x86"
 IUSE="ipv6 selinux"
 
 DEPEND="!app-doc/djbdns-man"
@@ -48,7 +48,7 @@ src_prepare() {
 		epatch \
 			"${FILESDIR}/CVE2008-4392_0001-dnscache-merge-similar-outgoing-queries-ipv6-${IPV6_PATCH}.patch" \
 			"${FILESDIR}/CVE2008-4392_0002-dnscache-cache-soa-records-ipv6.patch" \
-			"${FILESDIR}/makefile-parallel.patch"
+			"${FILESDIR}/makefile-parallel-${IPV6_PATCH}.patch"
 
 		cd "${S}-noipv6" || die
 	fi

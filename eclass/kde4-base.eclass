@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/kde4-base.eclass,v 1.137 2014/07/04 08:01:51 ulm Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/kde4-base.eclass,v 1.139 2014/07/16 17:18:32 johu Exp $
 
 # @ECLASS: kde4-base.eclass
 # @MAINTAINER:
@@ -13,8 +13,8 @@
 # NOTE: KDE 4 ebuilds currently support EAPIs 4 and 5.  This will be
 # reviewed over time as new EAPI versions are approved.
 
-if [[ ${___ECLASS_ONCE_KDE4_BASE} != "recur -_+^+_- spank" ]] ; then
-___ECLASS_ONCE_KDE4_BASE="recur -_+^+_- spank"
+if [[ -z ${_KDE4_BASE_ECLASS} ]]; then
+_KDE4_BASE_ECLASS=1
 
 # @ECLASS-VARIABLE: KDE_SELINUX_MODULE
 # @DESCRIPTION:
@@ -439,18 +439,15 @@ _calculate_src_uri() {
 				4.[1-7].[12345])
 					# Stable KDE SC with old .bz2 support
 					SRC_URI="mirror://kde/stable/${PV}/src/${_kmname_pv}.tar.bz2" ;;
-				4.11.7)
-					# Part of 4.12 actually, sigh. Not stable for next release!
-					SRC_URI="mirror://kde/stable/4.12.3/src/${_kmname_pv}.tar.xz" ;;
-				4.11.8)
-					# Part of 4.12 actually, sigh. Not stable for next release!
-					SRC_URI="mirror://kde/stable/4.12.4/src/${_kmname_pv}.tar.xz" ;;
 				4.11.9)
 					# Part of 4.12 actually, sigh. Not stable for next release!
 					SRC_URI="mirror://kde/stable/4.12.5/src/${_kmname_pv}.tar.xz" ;;
 				4.11.10)
 					# Part of 4.13 actually, sigh. Not stable for next release!
 					SRC_URI="mirror://kde/stable/4.13.2/src/${_kmname_pv}.tar.xz" ;;
+				4.11.11)
+					# Part of 4.13 actually, sigh. Not stable for next release!
+					SRC_URI="mirror://kde/stable/4.13.3/src/${_kmname_pv}.tar.xz" ;;
 				*)
 					# Stable KDE SC releases
 					SRC_URI="mirror://kde/stable/${PV}/src/${_kmname_pv}.tar.xz" ;;

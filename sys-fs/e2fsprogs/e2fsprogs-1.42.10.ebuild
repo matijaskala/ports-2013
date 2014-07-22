@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/e2fsprogs/e2fsprogs-1.42.10.ebuild,v 1.3 2014/07/06 17:08:35 grobian Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/e2fsprogs/e2fsprogs-1.42.10.ebuild,v 1.10 2014/07/18 02:11:00 mattst88 Exp $
 
 EAPI=4
 
@@ -9,16 +9,16 @@ case ${PV} in
 *)      UP_PV=${PV} ;;
 esac
 
-inherit eutils flag-o-matic multilib toolchain-funcs
+inherit autotools eutils flag-o-matic multilib toolchain-funcs
 
 DESCRIPTION="Standard EXT2/EXT3/EXT4 filesystem utilities"
 HOMEPAGE="http://e2fsprogs.sourceforge.net/"
 SRC_URI="mirror://sourceforge/e2fsprogs/${PN}-${UP_PV}.tar.gz
-	https://498412.bugs.gentoo.org/attachment.cgi?id=368058 -> ${PN}-1.42.9-mint-r1.patch"
+	elibc_mintlib? ( https://498412.bugs.gentoo.org/attachment.cgi?id=368058 -> ${PN}-1.42.9-mint-r1.patch )"
 
 LICENSE="GPL-2 BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 -x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~m68k-mint"
+KEYWORDS="alpha amd64 arm arm64 ~hppa ~ia64 ~m68k ~mips ppc ~ppc64 ~s390 ~sh ~sparc ~x86 -x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~m68k-mint"
 IUSE="nls static-libs elibc_FreeBSD"
 
 RDEPEND="~sys-libs/${PN}-libs-${PV}
@@ -46,6 +46,7 @@ src_prepare() {
 	if [[ ${CHOST} == *-mint* ]] ; then
 		epatch "${DISTDIR}"/${PN}-1.42.9-mint-r1.patch
 	fi
+	epatch "${FILESDIR}"/${P}-fix-build-cflags.patch
 	# blargh ... trick e2fsprogs into using e2fsprogs-libs
 	rm -rf doc
 	sed -i -r \
@@ -59,6 +60,7 @@ src_prepare() {
 
 	# Avoid rebuild
 	touch lib/ss/ss_err.h
+	eautoreconf
 }
 
 src_configure() {
@@ -90,12 +92,12 @@ src_configure() {
 }
 
 src_compile() {
-	emake COMPILE_ET=compile_et MK_CMDS=mk_cmds
+	emake V=1 COMPILE_ET=compile_et MK_CMDS=mk_cmds
 
 	# Build the FreeBSD helper
 	if use elibc_FreeBSD ; then
 		cp "${FILESDIR}"/fsck_ext2fs.c .
-		emake fsck_ext2fs
+		emake V=1 fsck_ext2fs
 	fi
 }
 

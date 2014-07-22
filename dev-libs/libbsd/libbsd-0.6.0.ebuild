@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libbsd/libbsd-0.6.0.ebuild,v 1.8 2014/06/20 14:04:14 klausman Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/libbsd/libbsd-0.6.0.ebuild,v 1.10 2014/07/20 13:36:08 klausman Exp $
 
 EAPI=5
 inherit eutils multilib
