@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-215-r1.ebuild,v 1.6 2014/07/21 17:52:42 floppym Exp $
 
 EAPI=5
 
@@ -16,7 +14,7 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 IUSE="acl audit cryptsetup doc elfutils +firmware-loader gcrypt gudev http
 	introspection kdbus +kmod lzma pam policykit python qrcode +seccomp selinux
 	ssl test vanilla"
@@ -55,12 +53,11 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	!sys-auth/nss-myhostname
 	!<sys-libs/glibc-2.14
+	!sys-apps/openrc
 	!sys-fs/udev"
 
-# sys-apps/daemon: the daemon only (+ build-time lib dep for tests)
 PDEPEND=">=sys-apps/dbus-1.6.8-r1:0
 	>=sys-apps/hwids-20130717-r1[udev]
-	>=sys-fs/udev-init-scripts-25
 	policykit? ( sys-auth/polkit )
 	!vanilla? ( sys-apps/gentoo-systemd-integration )"
 
@@ -176,8 +173,7 @@ multilib_src_configure() {
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		# make sure we get /bin:/sbin in $PATH
-		--enable-split-usr
+		--disable-split-usr
 		# disable sysv compatibility
 		--with-sysvinit-path=
 		--with-sysvrcnd-path=
@@ -250,14 +246,6 @@ multilib_src_configure() {
 	if use firmware-loader; then
 		myeconfargs+=(
 			--with-firmware-path="/lib/firmware/updates:/lib/firmware"
-		)
-	fi
-
-	# Added for testing; this is UNSUPPORTED by the Gentoo systemd team!
-	if [[ -n ${ROOTPREFIX+set} ]]; then
-		myeconfargs+=(
-			--with-rootprefix="${ROOTPREFIX}"
-			--with-rootlibdir="${ROOTPREFIX}/$(get_libdir)"
 		)
 	fi
 
@@ -338,6 +326,9 @@ multilib_src_install() {
 multilib_src_install_all() {
 	prune_libtool_files --modules
 	einstalldocs
+
+	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
+	dosym ../lib/systemd/systemd /usr/bin/systemd
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \

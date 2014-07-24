@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/rt/rt-4.2.4.ebuild,v 1.3 2014/05/29 09:32:14 titanofold Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-apps/rt/rt-4.2.4.ebuild,v 1.5 2014/07/23 00:07:38 dilfridge Exp $
 
 EAPI=5
 
@@ -51,7 +51,7 @@ DEPEND="
 	>=virtual/perl-File-Spec-0.8
 	>=virtual/perl-Getopt-Long-2.24
 	>=virtual/perl-Storable-2.08
-	>=virtual/perl-locale-maketext-1.06
+	>=virtual/perl-Locale-Maketext-1.06
 	dev-perl/CGI-Emulate-PSGI
 	dev-perl/CGI-PSGI
 	dev-perl/Cache-Simple-TimedExpiry
@@ -107,7 +107,7 @@ DEPEND="
 	virtual/perl-File-Temp
 	virtual/perl-Scalar-List-Utils
 	virtual/perl-Time-HiRes
-	virtual/perl-digest-base
+	virtual/perl-Digest
 	virtual/perl-libnet
 
 	fastcgi? (
