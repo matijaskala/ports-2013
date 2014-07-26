@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/gtk+/gtk+-3.10.8.ebuild,v 1.13 2014/05/02 09:11:41 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-libs/gtk+/gtk+-3.12.2.ebuild,v 1.3 2014/07/23 15:38:33 ago Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -19,7 +19,7 @@ SLOT="3"
 #  * http://mail.gnome.org/archives/gtk-devel-list/2010-November/msg00099.html
 # I tried this and got it all compiling, but the end result is unusable as it
 # horribly mixes up the backends -- grobian
-IUSE="aqua colord cups debug examples +introspection packagekit test vim-syntax wayland X xinerama"
+IUSE="aqua cloudprint colord cups debug examples +introspection test vim-syntax wayland X xinerama"
 REQUIRED_USE="
 	|| ( aqua wayland X )
 	xinerama? ( X )
@@ -32,7 +32,7 @@ KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~
 # Use gtk+:2 for gtk-update-icon-cache
 COMMON_DEPEND="
 	>=dev-libs/atk-2.7.5[introspection?]
-	>=dev-libs/glib-2.37.5:2[utils]
+	>=dev-libs/glib-2.39.5:2[utils]
 	media-libs/fontconfig
 	>=x11-libs/cairo-1.12[aqua?,glib,svg,X?]
 	>=x11-libs/gdk-pixbuf-2.27.1:2[introspection?,X?]
@@ -40,11 +40,14 @@ COMMON_DEPEND="
 	>=x11-libs/pango-1.32.4[introspection?]
 	x11-misc/shared-mime-info
 
+	cloudprint? (
+		>=net-libs/rest-0.7
+		>=dev-libs/json-glib-1.0 )
 	colord? ( >=x11-misc/colord-0.1.9:0= )
 	cups? ( >=net-print/cups-1.2 )
-	introspection? ( >=dev-libs/gobject-introspection-1.32 )
+	introspection? ( >=dev-libs/gobject-introspection-1.39 )
 	wayland? (
-		>=dev-libs/wayland-1.2
+		>=dev-libs/wayland-1.3.90
 		media-libs/mesa[wayland]
 		>=x11-libs/libxkbcommon-0.2
 	)
@@ -88,7 +91,6 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/gail-1000
 	!<x11-libs/vte-0.31.0:2.90
-	packagekit? ( app-admin/packagekit-base )
 	X? ( !<x11-base/xorg-server-1.11.4 )
 "
 PDEPEND="vim-syntax? ( app-vim/gtk-syntax )"
@@ -135,11 +137,11 @@ src_configure() {
 	# grok so well during install (// between $EPREFIX and usr ...)
 	gnome2_src_configure \
 		$(use_enable aqua quartz-backend) \
+		$(use_enable cloudprint) \
 		$(use_enable colord) \
 		$(use_enable cups cups auto) \
 		$(usex debug --enable-debug=yes "") \
 		$(use_enable introspection) \
-		$(use_enable packagekit) \
 		$(use_enable wayland wayland-backend) \
 		$(use_enable X x11-backend) \
 		$(use_enable X xcomposite) \

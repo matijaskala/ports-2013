@@ -20,11 +20,11 @@ It is needed by unity and should not be considered public API.
  create mode 100644 gtk/ubuntumenuitemfactory.c
  create mode 100644 gtk/ubuntumenuitemfactory.h
 
-Index: gtk+3.0-3.10.7/gtk/Makefile.am
+Index: gtk+3.0-3.12.2/gtk/Makefile.am
 ===================================================================
---- gtk+3.0-3.10.7.orig/gtk/Makefile.am	2014-02-27 12:44:39.405779725 +0100
-+++ gtk+3.0-3.10.7/gtk/Makefile.am	2014-02-27 12:44:39.397779725 +0100
-@@ -176,6 +176,8 @@
+--- gtk+3.0-3.12.2.orig/gtk/Makefile.am	2014-06-05 13:15:49.734082953 +0200
++++ gtk+3.0-3.12.2/gtk/Makefile.am	2014-06-05 13:15:49.726082953 +0200
+@@ -194,6 +194,8 @@
  
  gtk_public_h_sources = 		\
  	gtk.h			\
@@ -33,7 +33,7 @@ Index: gtk+3.0-3.10.7/gtk/Makefile.am
  	gtkx.h			\
  	gtk-a11y.h		\
  	gtkaboutdialog.h	\
-@@ -601,6 +603,7 @@
+@@ -613,6 +615,7 @@
  
  gtk_base_c_sources = 		\
  	$(deprecated_c_sources)	\
@@ -41,11 +41,11 @@ Index: gtk+3.0-3.10.7/gtk/Makefile.am
  	gtkactionmuxer.c	\
  	gtkactionobserver.c	\
  	gtkactionobservable.c	\
-Index: gtk+3.0-3.10.7/gtk/gtkmenushell.c
+Index: gtk+3.0-3.12.2/gtk/gtkmenushell.c
 ===================================================================
---- gtk+3.0-3.10.7.orig/gtk/gtkmenushell.c	2014-02-27 12:44:39.405779725 +0100
-+++ gtk+3.0-3.10.7/gtk/gtkmenushell.c	2014-02-27 12:45:00.689780434 +0100
-@@ -81,6 +81,8 @@
+--- gtk+3.0-3.12.2.orig/gtk/gtkmenushell.c	2014-06-05 13:15:49.734082953 +0200
++++ gtk+3.0-3.12.2/gtk/gtkmenushell.c	2014-06-05 13:15:56.000000000 +0200
+@@ -80,6 +80,8 @@
  
  #include "a11y/gtkmenushellaccessible.h"
  
@@ -54,7 +54,7 @@ Index: gtk+3.0-3.10.7/gtk/gtkmenushell.c
  
  #define MENU_SHELL_TIMEOUT   500
  #define MENU_POPUP_DELAY     225
-@@ -2041,6 +2043,58 @@
+@@ -2028,6 +2030,58 @@
    gtk_widget_destroy (child);
  }
  
@@ -113,7 +113,7 @@ Index: gtk+3.0-3.10.7/gtk/gtkmenushell.c
  static void
  gtk_menu_shell_tracker_insert_func (GtkMenuTrackerItem *item,
                                      gint                position,
-@@ -2048,6 +2102,9 @@
+@@ -2035,6 +2089,9 @@
  {
    GtkMenuShell *menu_shell = user_data;
    GtkWidget *widget;
@@ -123,7 +123,7 @@ Index: gtk+3.0-3.10.7/gtk/gtkmenushell.c
  
    if (gtk_menu_tracker_item_get_is_separator (item))
      {
-@@ -2107,6 +2164,18 @@
+@@ -2094,6 +2151,18 @@
  
        gtk_widget_show (widget);
      }
@@ -142,13 +142,13 @@ Index: gtk+3.0-3.10.7/gtk/gtkmenushell.c
    else
      {
        widget = gtk_model_menu_item_new ();
-Index: gtk+3.0-3.10.7/gtk/gtkmenutrackeritem.c
+Index: gtk+3.0-3.12.2/gtk/gtkmenutrackeritem.c
 ===================================================================
---- gtk+3.0-3.10.7.orig/gtk/gtkmenutrackeritem.c	2014-02-27 12:44:39.405779725 +0100
-+++ gtk+3.0-3.10.7/gtk/gtkmenutrackeritem.c	2014-02-27 12:44:39.397779725 +0100
-@@ -786,3 +786,19 @@
-   else
-     gtk_menu_tracker_item_set_submenu_shown (self, shown);
+--- gtk+3.0-3.12.2.orig/gtk/gtkmenutrackeritem.c	2014-06-05 13:15:49.734082953 +0200
++++ gtk+3.0-3.12.2/gtk/gtkmenutrackeritem.c	2014-06-05 13:15:56.000000000 +0200
+@@ -901,3 +901,19 @@
+ {
+   return self->hidden_when != HIDDEN_NEVER;
  }
 +
 +GMenuItem *
@@ -166,11 +166,11 @@ Index: gtk+3.0-3.10.7/gtk/gtkmenutrackeritem.c
 +
 +  return self->action_namespace;
 +}
-Index: gtk+3.0-3.10.7/gtk/gtkmenutrackeritem.h
+Index: gtk+3.0-3.12.2/gtk/gtkmenutrackeritem.h
 ===================================================================
---- gtk+3.0-3.10.7.orig/gtk/gtkmenutrackeritem.h	2014-02-27 12:44:39.405779725 +0100
-+++ gtk+3.0-3.10.7/gtk/gtkmenutrackeritem.h	2014-02-27 12:44:39.401779725 +0100
-@@ -81,4 +81,8 @@
+--- gtk+3.0-3.12.2.orig/gtk/gtkmenutrackeritem.h	2014-06-05 13:15:49.734082953 +0200
++++ gtk+3.0-3.12.2/gtk/gtkmenutrackeritem.h	2014-06-05 13:15:56.000000000 +0200
+@@ -87,4 +87,8 @@
  
  gboolean                gtk_menu_tracker_item_get_submenu_shown         (GtkMenuTrackerItem *self);
  
@@ -179,10 +179,10 @@ Index: gtk+3.0-3.10.7/gtk/gtkmenutrackeritem.h
 +const gchar *           gtk_menu_tracker_item_get_action_namespace      (GtkMenuTrackerItem *self);
 +
  #endif
-Index: gtk+3.0-3.10.7/gtk/ubuntu-private.h
+Index: gtk+3.0-3.12.2/gtk/ubuntu-private.h
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gtk+3.0-3.10.7/gtk/ubuntu-private.h	2014-02-27 12:44:39.401779725 +0100
++++ gtk+3.0-3.12.2/gtk/ubuntu-private.h	2014-06-05 13:15:49.730082953 +0200
 @@ -0,0 +1,32 @@
 +/*
 +* Copyright 2013 Canonical Ltd.
@@ -216,10 +216,10 @@ Index: gtk+3.0-3.10.7/gtk/ubuntu-private.h
 +#include "ubuntumenuitemfactory.h"
 +
 +#endif
-Index: gtk+3.0-3.10.7/gtk/ubuntumenuitemfactory.c
+Index: gtk+3.0-3.12.2/gtk/ubuntumenuitemfactory.c
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gtk+3.0-3.10.7/gtk/ubuntumenuitemfactory.c	2014-02-27 12:44:39.401779725 +0100
++++ gtk+3.0-3.12.2/gtk/ubuntumenuitemfactory.c	2014-06-05 13:15:49.730082953 +0200
 @@ -0,0 +1,70 @@
 +/*
 +* Copyright 2013 Canonical Ltd.
@@ -291,10 +291,10 @@ Index: gtk+3.0-3.10.7/gtk/ubuntumenuitemfactory.c
 +{
 +  return UBUNTU_MENU_ITEM_FACTORY_GET_IFACE (factory)->create_menu_item (factory, type, menuitem, actions);
 +}
-Index: gtk+3.0-3.10.7/gtk/ubuntumenuitemfactory.h
+Index: gtk+3.0-3.12.2/gtk/ubuntumenuitemfactory.h
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gtk+3.0-3.10.7/gtk/ubuntumenuitemfactory.h	2014-02-27 12:44:39.401779725 +0100
++++ gtk+3.0-3.12.2/gtk/ubuntumenuitemfactory.h	2014-06-05 13:15:49.730082953 +0200
 @@ -0,0 +1,61 @@
 +/*
 +* Copyright 2013 Canonical Ltd.
