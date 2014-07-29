@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-2.4.4.ebuild,v 1.4 2014/07/23 16:41:19 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/webkit-gtk/webkit-gtk-2.4.4.ebuild,v 1.6 2014/07/28 13:48:56 ago Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -15,7 +15,7 @@ SRC_URI="http://www.webkitgtk.org/releases/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="3/25" # soname version of libwebkit2gtk-3.0
-KEYWORDS="~alpha amd64 ~arm ~ia64 ~mips ~ppc ~ppc64 ~sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~x86-macos"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~mips ppc ~ppc64 ~sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~x86-macos"
 IUSE="aqua coverage debug +egl +geoloc gles2 +gstreamer +introspection +jit libsecret +opengl spell wayland +webgl +X"
 # bugs 372493, 416331
 REQUIRED_USE="
@@ -180,6 +180,10 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.2.5-{hppa,ia64}-platform.patch
 	# https://bugs.webkit.org/show_bug.cgi?id=129542
 	epatch "${FILESDIR}"/${PN}-2.4.1-ia64-malloc.patch
+
+	# Fix building on ppc (from OpenBSD, only needed on slot 3)
+	# https://bugs.webkit.org/show_bug.cgi?id=130837
+	epatch "${FILESDIR}"/${PN}-2.4.4-atomic-ppc.patch
 
 	AT_M4DIR=Source/autotools eautoreconf
 

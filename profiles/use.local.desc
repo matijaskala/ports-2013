@@ -453,6 +453,7 @@ app-editors/zile:valgrind - Enable usage of dev-util/valgrind in tests
 app-emacs/anything:extensions - Install optional extensions
 app-emacs/auctex:preview-latex - Use bundled preview-latex
 app-emacs/bbdb:tex - Install plain TeX support files
+app-emacs/bbdb:vm - Add support for app-emacs/vm
 app-emacs/calfw:howm - Add support for the app-emacs/howm note-taking tool
 app-emacs/company-mode:ropemacs - Install backend for dev-python/ropemacs
 app-emacs/emacs-common-gentoo:games - Support shared score files for games
@@ -770,6 +771,7 @@ app-leechcraft/lc-blogique:metida - Support for the LiveJournal blogging platfor
 app-leechcraft/lc-core:qwt - Support for QML plotting item through x11-libs/qwt
 app-leechcraft/lc-gmailnotifier:notify - Pull in a plugin to show notifications from GMail Notiifer
 app-leechcraft/lc-gmailnotifier:quark - Pull in a plugin to show GMail Notifier's quark
+app-leechcraft/lc-liznoo:systemd - Pull in correct UPower dependencies for systemd and non-systemd users.
 app-leechcraft/lc-lmp:fradj - Build FrAdj, the equalizer effect module
 app-leechcraft/lc-lmp:graffiti - Build media tags editor plugin
 app-leechcraft/lc-lmp:guess - Enable tags encoding guessing via the libguess library
@@ -793,8 +795,6 @@ app-leechcraft/lc-poshuku:onlinebookmarks - Build OnlineBookmarks for syncing bo
 app-leechcraft/lc-poshuku:pcre - Use dev-libs/libpcre for rules matching in CleanWeb instead of slower QRegExp.
 app-leechcraft/lc-poshuku:qrd - Build module for displaying the QR code of a web page.
 app-leechcraft/lc-poshuku:wyfv - Build WYFV for replacing Flash-based video players on some sites.
-app-leechcraft/lc-vrooby:udisks - Use sys-fs/udisks:0 for block device access (e.g., automounting)
-app-leechcraft/lc-vrooby:udisks2 - Use sys-fs/udisks:2 for block device access (e.g., automounting)
 app-leechcraft/leechcraft-meta:de - Install components, that allow using Leechcraft as Desktop Environment
 app-misc/anki:recording - Enable support for audio recording
 app-misc/anki:sound - Enable support for adding sound to cards
@@ -1226,9 +1226,7 @@ dev-db/pgbouncer:libevent - Use libevent 2.0+ and evdns as the DNS backend
 dev-db/pgbouncer:udns - Use udns as the DNS backend. Supports IPv4 only.
 dev-db/pgpool2:memcached - Use memcached for query caching.
 dev-db/phpmyadmin:setup - Installs the phpMyAdmin setup utility. Users who don't use the utility should disable this USE flag for security reasons as the setup tool was the target of various exploits in the past.
-dev-db/postgis:geos - Add the sci-libs/geos library for exact topological tests
 dev-db/postgis:gtk - Build shp2pgsql-gui a graphical interface to shp2pgsql
-dev-db/postgis:proj - Add the sci-libs/proj library for reprojection features
 dev-db/postgresql-base:pg_legacytimestamp - Use double precision floating-point numbers instead of 64-bit integers for timestamp storage.
 dev-db/postgresql-server:pg_legacytimestamp - Use double precision floating-point numbers instead of 64-bit integers for timestamp storage.
 dev-db/postgresql-server:uuid - Enable server side UUID generation (via dev-libs/ossp-uuid)
@@ -2308,6 +2306,8 @@ dev-tex/circuit_macros:script - Install cm2pdf to automatically create a correct
 dev-tex/dot2texi:pgf - Enable support for dev-tex/pgf (The TeX Portable Graphic Format)
 dev-tex/dot2texi:pstricks - Enable pstricks support
 dev-util/android-ndk:legacy-toolchains - Install legacy toolchains
+dev-util/android-ndk:target-32 - Support for 32-bit targets
+dev-util/android-ndk:target-64 - Support for 64-bit targets
 dev-util/anjuta:devhelp - Enable devhelp integration
 dev-util/anjuta:glade - Build glade plugin for anjuta
 dev-util/anjuta:packagekit - Use packagekit to search for missing tools
@@ -3026,6 +3026,7 @@ kde-misc/networkmanagement:openconnect - Build support for the OpenConnect VPN c
 kde-misc/plasma-nm:modemmanager - Enable support for mobile broadband devices
 kde-misc/plasma-nm:openconnect - Build support for the OpenConnect VPN client
 kde-misc/tellico:addressbook - Add support for kdepim addressbook (kabc)
+kde-misc/tellico:nepomuk - Enable Nepomuk based semantic desktop support (deprecated)
 lxde-base/lxdm:consolekit - Enables support for authorization using consolekit
 lxde-base/lxdm:gtk3 - Use GTK+3 instead of 2
 lxqt-base/lxqt-meta:icons - Install lxde-base/lxde-icon-theme icon theme
@@ -4145,6 +4146,7 @@ media-video/ffmpeg:avx - Adds support for Advanced Vector Extensions instruction
 media-video/ffmpeg:avx2 - Adds support for Advanced Vector Extensions 2 instructions (Intel Haswell and later chips)
 media-video/ffmpeg:bindist - Enforces license compatibility constraints via REQUIRED_USE.
 media-video/ffmpeg:bluray - Enable playback of Blu-ray filesystems
+media-video/ffmpeg:bs2b - Enables media-libs/libbs2b based Bauer stereo-to-binaural filter.
 media-video/ffmpeg:cdio - Enables audio CD grabbing with dev-libs/libcdio.
 media-video/ffmpeg:celt - Adds Xiph CELT audio decoding support via media-libs/celt
 media-video/ffmpeg:cpudetection - Enables runtime CPU detection (useful for bindist, compatibility on other CPUs)
@@ -4155,6 +4157,7 @@ media-video/ffmpeg:flite - Adds a text-to-speech filter based on app-accessibili
 media-video/ffmpeg:fma3 - Enables FMA3 optimizations: AMD processors starting with Piledriver architecture and Intel Haswell based processors or later.
 media-video/ffmpeg:fma4 - Enables FMA4 optimizations: AMD processors starting with Bulldozer architecture.
 media-video/ffmpeg:frei0r - Enable frei0r wrapping in libavfilter
+media-video/ffmpeg:fribidi - Enables fribidi support in the drawtext filter.
 media-video/ffmpeg:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
 media-video/ffmpeg:hardcoded-tables - Use pre-calculated tables rather than calculating them on the fly.
 media-video/ffmpeg:iec61883 - Support for FireWire DV/HDV input device using media-libs/libiec61883.
@@ -4182,6 +4185,7 @@ media-video/ffmpeg:vis - Adds support for SIMD optimizations for UltraSPARC proc
 media-video/ffmpeg:vpx - Enables vp8 codec support using libvpx: Decoding vp8 does not require this to be enabled but libvpx can also be used for decoding; encoding vp8 requires this useflag to be enabled though.
 media-video/ffmpeg:webp - Enables WebP encoding with media-libs/libwebp.
 media-video/ffmpeg:x265 - Enables HEVC encoding with media-libs/x265.
+media-video/ffmpeg:xop - Enables XOP (eXtended Operations) optimizations: AMD processors starting with Bulldozer architecture.
 media-video/ffmpeg:zvbi - Enables media-libs/zvbi based teletext decoder.
 media-video/ffmpeg2theora:kate - Adds support for Ogg Kate subtitles via libkate.
 media-video/gnome-mplayer:dconf - Enable support for gnome-base/dconf
@@ -4250,7 +4254,6 @@ media-video/mplayer:bs2b - Enable Bauer stereophonic-to-binaural headphone filte
 media-video/mplayer:cdio - Use libcdio for CD support (instead of cdparanoia)
 media-video/mplayer:cpudetection - Enables runtime CPU detection (useful for bindist, compatibility on other CPUs)
 media-video/mplayer:dvdnav - Use forked libdvdnav, navigate menus in GUIs
-media-video/mplayer:dxr3 - Enable DXR3/H+ video output
 media-video/mplayer:enca - Enables support for charset discovery and conversion
 media-video/mplayer:faac - Use external faac library for AAC encoding
 media-video/mplayer:faad - Use external faad library for AAC decoding
@@ -5385,6 +5388,7 @@ net-misc/bfgminer:scrypt - Enable support for scrypt mining algorithm
 net-misc/bfgminer:sse2_4way - Enable support for CPU SSE2 4way mining algorithm
 net-misc/bfgminer:sse4 - Enable support for CPU SSE4 mining algorithm
 net-misc/bfgminer:twinfury - Enable support for mining with Twinfury USB sticks
+net-misc/bfgminer:udev-broad-rules - Enable broader udev rules that may match non-mining devices
 net-misc/bfgminer:x6500 - Enable support for mining with X6500 FPGAs
 net-misc/bfgminer:zeusminer - Enable support for mining with ZeusMiner units
 net-misc/bfgminer:ztex - Enable support for mining with Ztex FPGAs
@@ -5530,6 +5534,7 @@ net-misc/ofono:provision - Enable GPRS provisioning support
 net-misc/ofono:qmimodem - Enable Qualcomm QMI modem support
 net-misc/ofono:tools - Enable testing tools
 net-misc/oidentd:masquerade - Enable support for masqueraded/NAT connections
+net-misc/openconnect:gssapi - Build GSSAPI support.
 net-misc/openconnect:java - Build JNI bindings using jni.h
 net-misc/openconnect:libproxy - Enable proxy support.
 net-misc/openssh:X509 - Adds support for X.509 certificate authentication
@@ -5888,6 +5893,7 @@ net-wireless/gnuradio:performance-counters - enable block performance counters
 net-wireless/gnuradio:uhd - install UHD source and sink blocks
 net-wireless/gnuradio:utils - install scripts to enable viewing and analysis of files produced by flow graphs
 net-wireless/gnuradio:wavelet - enable wavelet signal processing blocks
+net-wireless/gnuradio:zeromq - enable zeromq message passing blocks
 net-wireless/gr-osmosdr:bladerf - Build with Nuand BladeRF support
 net-wireless/gr-osmosdr:fcd - Build with Funcube Dongle support
 net-wireless/gr-osmosdr:hackrf - Build with Great Scott Gadgets HackRF support
@@ -6386,6 +6392,7 @@ sys-apps/busybox:mdev - Create the appropriate symlink in /sbin and install mdev
 sys-apps/busybox:sep-usr - Support a separate /usr without needing an initramfs by booting with init=/ginit
 sys-apps/busybox:static - Make the system rescue shell (/bin/bb) static so you can recover even when glibc is broken
 sys-apps/busybox:systemd - Support systemd
+sys-apps/coreutils:multicall - Build all tools into a single `coreutils` program akin to busybox to save space
 sys-apps/dbus:systemd - Build with sys-apps/systemd at_console support
 sys-apps/dmtcp:fast - Enable experimental performance options such as mmap allocator.
 sys-apps/dmtcp:trace - Enable ptrace support (only valid with debug enabled).
@@ -6508,6 +6515,7 @@ sys-apps/systemd:gudev - enable libudev gobject interface
 sys-apps/systemd:http - Enable embedded HTTP server in journald
 sys-apps/systemd:kdbus - Connect to kernel dbus (KDBUS) instead of userspace dbus if available
 sys-apps/systemd:kmod - Enable kernel module loading via sys-apps/kmod
+sys-apps/systemd:lz4 - Enable lz4 compression for the journal
 sys-apps/systemd:qrcode - Enable qrcode output support in journal
 sys-apps/systemd:seccomp - Enable system call filtering via seccomp
 sys-apps/systemd:vanilla - Disable Gentoo-specific behavior and compatibility quirks
@@ -7254,6 +7262,7 @@ www-servers/uwsgi:zeromq - Enable logging and deployment via ZeroMQ.
 www-servers/varnish:jemalloc - Use dev-libs/jemalloc for allocations
 www-servers/varnish:tools - Build additional tools: varnishhist, varnishstat, varnishtop, varnishsizes
 x11-apps/ardesia:cwiid - cwiid support: collection of Linux tools written in C for interfacing to the Nintendo Wiimote.
+x11-apps/intel-gpu-tools:python - Install python based register dumper utilities
 x11-apps/mesa-progs:egl - Build EGL utilities
 x11-apps/mesa-progs:gles1 - Build OpenGL ES 1 utilities
 x11-apps/mesa-progs:gles2 - Build OpenGL ES 2 utilities
