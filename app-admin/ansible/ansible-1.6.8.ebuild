@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/ansible/ansible-1.6.8.ebuild,v 1.2 2014/07/23 12:06:48 pinkbyte Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/ansible/ansible-1.6.8.ebuild,v 1.4 2014/07/31 06:04:14 pinkbyte Exp $
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ DESCRIPTION="Radically simple deployment, model-driven configuration management,
 HOMEPAGE="http://ansible.com/"
 SRC_URI="https://github.com/ansible/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 LICENSE="GPL-3"
 SLOT="0"
 IUSE="test"
@@ -34,9 +34,9 @@ Examples of config files installed in /usr/share/doc/${PF}/examples\n\n
 You have to create ansible hosts file!\n
 More info on http://docs.ansible.com/intro_getting_started.html
 
-Some optional dependencies, you might want to install:
-dev-python/keyczar - needed to support accelerated mode
-dev-python/paramiko - alternative SSH backend"
+Some optional dependencies, you might want to install:\n
+dev-python/keyczar - needed to support accelerated mode\n
+dev-python/paramiko - alternative SSH backend"\
 
 python_test() {
 	make tests || die "tests failed"

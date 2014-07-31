@@ -149,6 +149,7 @@ app-admin/diradm:automount - Support for automount data in LDAP
 app-admin/diradm:irixpasswd - Support for storing separate IRIX passwords
 app-admin/elektra:gcov - Enable coverage support
 app-admin/elektra:simpleini - Enable simpleini support
+app-admin/elektra:uname - Enable uname information for the key database
 app-admin/elektra:yajl - Enable yajl support
 app-admin/eselect-php:fpm - Enable the FastCGI Process Manager SAPI
 app-admin/gkrellm:X - Build both the X11 gui (gkrellm) and the server (gkrellmd). Disabling this flag builds the server only.
@@ -1653,6 +1654,7 @@ dev-lang/ruby:rubytests - Install ruby tests that can only be run after ruby is 
 dev-lang/ruby:yaml - Use the dev-libs/libyaml library to build the psych extension, available since Ruby 1.9.2_rc2, in alternative to the bundled syck-based parser.
 dev-lang/rust:binary-bootstrap - Download precompiled rust for compilator bootstrap
 dev-lang/rust:clang - Use sys-devel/clang for building
+dev-lang/rust:libcxx - Use sys-libs/libcxx as standard library when building with sys-devel/clang
 dev-lang/scala:binary - Install from (Gentoo-compiled) binary instead of building from sources. Set this when you run out of memory during build.
 dev-lang/spidermonkey:debug - Enable assertions to allow for easier debugging of programs that link to spidermonkey -- note this will often crash software on regular end-user systems
 dev-lang/spidermonkey:system-icu - Use the system-wide dev-libs/icu instead of bundled -- note, only takes effect when icu flag is enabled
@@ -4877,6 +4879,7 @@ net-im/centerim:irc - Enable support for the IRC protocol
 net-im/centerim:lj - Enable support for the LiveJournal weblog system
 net-im/centerim:otr - Enable encrypted conversations
 net-im/climm:otr - Enable encrypted conversations
+net-im/corebird:glade - Install glade catalogs for corebird
 net-im/ejabberd:captcha - Support for CAPTCHA Forms (XEP-158)
 net-im/ejabberd:mod_irc - Build irc gateway
 net-im/ejabberd:mod_muc - Build Multi User Chat module
@@ -6668,6 +6671,10 @@ sys-cluster/glusterfs:infiniband - Add support for Infiniband ibverbs transport.
 sys-cluster/glusterfs:qemu-block - Transparently create files as QCow2/QED images in the backend, including the possibility to snapshot.
 sys-cluster/glusterfs:rsyslog - Install configuration snippet for app-admin/rsyslog
 sys-cluster/glusterfs:systemtap - Enable support for dev-util/systemtap
+sys-cluster/hpx:jemalloc - Use dev-libs/jemalloc for memory allocation
+sys-cluster/hpx:papi - Use dev-libs/papi for NaCl
+sys-cluster/hpx:perftools - Use dev-util/google-perftools for memory allocation
+sys-cluster/hpx:tbb - Use dev-cpp/tbb for memory allocation
 sys-cluster/maui:pbs - Enable pbs integration
 sys-cluster/maui:slurm - Enable slurm integration
 sys-cluster/moosefs:cgi - Install CGI server and scripts.
