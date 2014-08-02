@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.314 2014/07/30 18:11:23 ssuominen Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/udev/udev-9999.ebuild,v 1.316 2014/08/02 00:29:29 ssuominen Exp $
 
 EAPI=5
 
@@ -160,12 +160,18 @@ multilib_src_configure() {
 		ac_cv_search_cap_init=
 		--libdir=/usr/$(get_libdir)
 		--docdir=/usr/share/doc/${PF}
+		$(multilib_native_use_enable static-libs static)
 		--disable-nls
+		$(multilib_native_use_enable doc gtk-doc)
+		$(multilib_native_use_enable introspection)
 		--disable-python-devel
 		--disable-dbus
+		$(multilib_native_use_enable kmod)
 		--disable-seccomp
+		$(multilib_native_use_enable selinux)
 		--disable-xz
 		--disable-pam
+		$(multilib_native_use_enable acl)
 		--disable-gcrypt
 		--disable-audit
 		--disable-libcryptsetup
@@ -176,44 +182,20 @@ multilib_src_configure() {
 		--disable-quotacheck
 		--disable-logind
 		--disable-polkit
-		--disable-nls
 		--disable-myhostname
 		$(use_enable gudev)
+		$(multilib_is_native_abi || echo "--disable-manpages")
 		--enable-split-usr
 		--with-html-dir=/usr/share/doc/${PF}/html
 		--without-python
 		--with-bashcompletiondir="$(get_bashcompdir)"
+		$(use firmware-loader && echo "--with-firmware-path=/lib/firmware/updates:/lib/firmware")
 		--with-rootprefix=
+		$(multilib_is_native_abi && echo "--with-rootlibdir=/$(get_libdir)")
 	)
+
 	# Use pregenerated copies when possible wrt #480924
-	if ! [[ ${PV} = 9999* ]]; then
-		econf_args+=(
-			--disable-manpages
-		)
-	fi
-	if multilib_is_native_abi; then
-		econf_args+=(
-			$(use_enable static-libs static)
-			$(use_enable doc gtk-doc)
-			$(use_enable introspection)
-			$(use_enable acl)
-			$(use_enable kmod)
-			$(use_enable selinux)
-			--with-rootlibdir=/$(get_libdir)
-		)
-	else
-		econf_args+=(
-			--disable-static
-			--disable-gtk-doc
-			--disable-introspection
-			--disable-acl
-			--disable-kmod
-			--disable-selinux
-			--disable-manpages
-			--with-rootlibdir=/usr/$(get_libdir)
-		)
-	fi
-	use firmware-loader && econf_args+=( --with-firmware-path="/lib/firmware/updates:/lib/firmware" )
+	[[ ${PV} = 9999* ]] || econf_args+=( --disable-manpages )
 
 	ECONF_SOURCE=${S} econf "${econf_args[@]}"
 }
@@ -250,10 +232,11 @@ multilib_src_compile() {
 
 		if [[ ${PV} = 9999* ]]; then
 			local man_targets=(
+				man/udev.conf.5
 				man/systemd.link.5
 				man/udev.7
-				man/udevadm.8
 				man/systemd-udevd.service.8
+				man/udevadm.8
 			)
 			emake "${man_targets[@]}"
 		fi
@@ -319,9 +302,9 @@ multilib_src_install() {
 		fi
 
 		if [[ ${PV} = 9999* ]]; then
-			doman man/{systemd.link.5,udev.7,udevadm.8,systemd-udevd.service.8}
+			doman man/{udev.conf.5,systemd.link.5,udev.7,systemd-udevd.service.8,udevadm.8}
 		else
-			doman "${S}"/man/{systemd.link.5,udev.7,udevadm.8,systemd-udevd.service.8}
+			doman "${S}"/man/{udev.conf.5,systemd.link.5,udev.7,systemd-udevd.service.8,udevadm.8}
 		fi
 	else
 		local lib_LTLIBRARIES="libudev.la" \

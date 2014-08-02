@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-215-r3.ebuild,v 1.4 2014/07/28 16:20:35 pacho Exp $
 
 EAPI=5
 
@@ -16,7 +14,7 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86"
+KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 IUSE="acl audit cryptsetup doc elfutils +firmware-loader gcrypt gudev http
 	introspection kdbus +kmod lzma pam policykit python qrcode +seccomp selinux
 	ssl test vanilla"
@@ -177,8 +175,7 @@ multilib_src_configure() {
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		# make sure we get /bin:/sbin in $PATH
-		--enable-split-usr
+		--disable-split-usr
 		# disable sysv compatibility
 		--with-sysvinit-path=
 		--with-sysvrcnd-path=
@@ -254,14 +251,6 @@ multilib_src_configure() {
 		)
 	fi
 
-	# Added for testing; this is UNSUPPORTED by the Gentoo systemd team!
-	if [[ -n ${ROOTPREFIX+set} ]]; then
-		myeconfargs+=(
-			--with-rootprefix="${ROOTPREFIX}"
-			--with-rootlibdir="${ROOTPREFIX}/$(get_libdir)"
-		)
-	fi
-
 	if ! multilib_is_native_abi; then
 		myeconfargs+=(
 			ac_cv_search_cap_init=
@@ -329,17 +318,14 @@ multilib_src_install() {
 	local pcfiles=( src/compat-libs/libsystemd-{daemon,id128,journal,login}.pc )
 	emake "${mymakeopts[@]}" install-pkgconfiglibDATA \
 		pkgconfiglib_DATA="${pcfiles[*]}"
-
-	# Create symlinks for old libs
-	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-daemon.so"
-	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-id128.so"
-	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-journal.so"
-	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-login.so"
 }
 
 multilib_src_install_all() {
 	prune_libtool_files --modules
 	einstalldocs
+
+	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
+	dosym ../lib/systemd/systemd /usr/bin/systemd
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \
