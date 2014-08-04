@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15937 2014/07/30 13:26:40 zlogene Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15944 2014/08/04 04:36:26 robbat2 Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -197,12 +197,6 @@ app-emacs/sawfish
 # If you use ffmpeg instead of libav, sorry!
 =media-video/mpv-0.4*
 
-# Andreas K. Huettel <dilfridge@gentoo.org> (7 Jul 2014)
-# Filter never was part of core Perl, no idea why we have a virtual.
-# It was moved from perl-core to dev-perl and the virtual will be
-# removed. Please depend on dev-perl/Filter directly.
-virtual/perl-Filter
-
 # Michał Górny <mgorny@gentoo.org> (6 Jul 2014)
 # (on behalf of python@gentoo.org)
 # The modules provided by those virtuals are built-in in all currently
@@ -215,12 +209,6 @@ virtual/python-unittest2
 # Mask old slot for removal in 30 days since there are no longer
 # dependencies on it.
 dev-ruby/builder:0
-
-# Andreas K. Huettel <dilfridge@gentoo.org> (05 Jul 2014)
-# Class::ISA is long gone from core Perl, thus the package
-# was moved from perl-core to dev-perl and the virtual will be
-# removed. Please depend on dev-perl/Class-ISA directly.
-virtual/perl-Class-ISA
 
 # Michael Sterrett <mr_bones_@gentoo.org> (02 Jul 2014)
 # No longer maintained upstream.
@@ -796,11 +784,6 @@ net-wireless/madwifi-ng
 # don't work with it.
 =media-libs/libsfml-2*
 
-# Robin H. Johnson <robbat2@gentoo.org> (18 Nov 2012)
-# Dead upstream, replaced by gitolite
-dev-vcs/gitosis
-dev-vcs/gitosis-gentoo
-
 # Markos Chandras <hwoarang@gentoo.org> (03 Nov 2012)
 # Masked for testing
 app-benchmarks/ltp
@@ -829,11 +812,8 @@ dev-ml/ocamlduce
 
 # Robin H. Johnson <robbat2@gentoo.org> (08 Oct 2012)
 # Masked for testing
-=sys-libs/db-6.0*
-=sys-libs/db-5.3*
+# 2014/08/03: Cleanup in progress, as they pass testsuite, they are being unmasked
 =sys-libs/db-5.2*
-=sys-libs/db-5.1*
-=sys-libs/db-5.0*
 
 # Ralph Sennhauser <sera@gentoo.org> (18 Jul 2012)
 # Unmaintained, multiple vulnarabilities. #351626
@@ -986,11 +966,6 @@ net-misc/asterisk-spandsp_codec_g726
 # No actual Gentoo support yet. If you're interested, please see bug #295993
 net-misc/netcf
 
-# Robin H. Johnson <robbat2@gentoo.org> (09 Jun 2010)
-# Fails to self-verify/sign in FIPS mode, pending upstream response before
-# usage for GSoC project.
-app-crypt/hmaccalc
-
 # Patrick Lauer <patrick@gentoo.org> (07 Apr 2010)
 # Lars Wendler <polynomial-c@gentoo.org> (14 Oct 2013)
 # Keeping samba-4.0 masked until bug #447022 is fixed. 4.1 masked for testing.
@@ -1059,14 +1034,6 @@ net-misc/netcomics-cvs
 sys-kernel/zen-sources
 =www-plugins/google-talkplugin-9999
 ~x11-wm/openbox-9999
-
-# Jeremy Olexa <darkside@gentoo.org> (28 Jul 2009)
-# On behalf of Robin H. Johnson <robbat2@gentoo.org>.
-# These versions are vulnerable to GLSA's and should not be used. They will stay
-# in the tree because they are useful to tracking down bugs. You have been
-# warned. bug 271686
-<dev-db/mysql-5.1.56
-<virtual/mysql-5.1
 
 # Tiziano Müller <dev-zero@gentoo.org> (08 Apr 2009)
 # pre-releases

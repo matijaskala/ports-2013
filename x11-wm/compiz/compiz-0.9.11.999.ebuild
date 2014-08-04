@@ -96,7 +96,6 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-sandbox.patch"
 	epatch "${FILESDIR}/use_python.patch"
 	epatch "${FILESDIR}/rotate_edge.patch"
-	epatch "${FILESDIR}/compiz_kde_4_11.patch"
 	epatch "${FILESDIR}/untest.diff"
 	epatch "${FILESDIR}/gsettings_schemas.diff"
 
