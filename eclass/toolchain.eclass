@@ -146,7 +146,7 @@ fi
 #---->> DEPEND <<----
 
 RDEPEND="sys-libs/zlib
-	nls? ( sys-devel/gettext )"
+	nls? ( virtual/libintl )"
 
 tc_version_is_at_least 3 && RDEPEND+=" virtual/libiconv"
 
