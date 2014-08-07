@@ -7,11 +7,11 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit autotools eutils python-r1
 
-MY_PV="${PV}+14.04.20140213.2"
+MY_PV="${PV}+14.10.20140716"
 S="${WORKDIR}/${PN}-${MY_PV}"
 DESCRIPTION="GTK+ module for exporting old-style menus as GMenuModels"
 HOMEPAGE="https://launchpad.net/unity-gtk-module"
-SRC_URI="https://launchpadlibrarian.net/166211240/${PN}_${MY_PV}.orig.tar.gz"
+SRC_URI="https://launchpadlibrarian.net/180086658/${PN}_${MY_PV}.orig.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
