@@ -340,7 +340,6 @@ app-crypt/gnupg:mta - Build mta support using virtual/mta.
 app-crypt/gnupg:smartcard - Build scdaemon software. Enables usage of OpenPGP cards. For other type of smartcards, try app-crypt/gnupg-pkcs11-scd.
 app-crypt/gnupg:usb - Build direct CCID access for scdaemon; requires dev-libs/libusb.
 app-crypt/gpgme:common-lisp - Install common-lisp files
-app-crypt/gpgme:pth - Enable support for GNU Portable Threads multithreading library
 app-crypt/hashcat-gui:cuda - Install oclhashcat-{plus,lite}-bin to take advantage of hardware cuda support.
 app-crypt/hashcat-gui:opencl - Install oclhashcat-{plus,lite}-bin to take advantage of hardware opencl support.
 app-crypt/heimdal:hdb-ldap - Adds support for LDAP as a database backend
@@ -549,6 +548,7 @@ app-emulation/lxc:vanilla - Avoid adding Gentoo Linux-specific modifications, wh
 app-emulation/open-vm-tools:doc - Generate API documentation
 app-emulation/open-vm-tools:fuse - Build vmblock-fuse in favor of FUSE based blocking mechanism for DnD
 app-emulation/open-vm-tools:pic - Force shared libraries to be built as PIC
+app-emulation/open-vm-tools-kmod:vmhgfs - Build the vmhgfs module for file sharing support with the host
 app-emulation/playonlinux:winbind - Enables support for the winbind auth daemon
 app-emulation/q4wine:gnome - Use the gksu sudo GUI for managing the devices
 app-emulation/q4wine:icoutils - Enable icoutils support
@@ -2910,7 +2910,6 @@ gnustep-base/gnustep-make:native-exceptions - Enables use of the native Objectiv
 gnustep-base/libobjc2:boehm-gc - Enable Hans Boehm's garbage collector (dev-libs/boehm-gc). Not recommended by upstream
 gpe-base/gpe:games - Builds and installs GPE games.
 kde-base/ark:archive - Enable support for a variety of archive formats through libarchive
-kde-base/baloo:alternatekcm - Use the alternate Systemsettings module by Lindsay Mathieson for better configurability
 kde-base/cantor:R - Enable dev-lang/R backend support
 kde-base/cantor:analitza - Enable kde-base/analitza backend support
 kde-base/cantor:qalculate - Enable sci-libs/libqalculate backend support
@@ -4658,10 +4657,8 @@ net-analyzer/tcpreplay:tcpdump - Use net-analyzer/tcpdump for packet decoding fe
 net-analyzer/wireshark:adns - Use the GNU net-dns/c-ares library to resolve DNS names
 net-analyzer/wireshark:crypt - Use dev-libs/libgcrypt to decrypt traffic
 net-analyzer/wireshark:doc-pdf - Build documentation in pdf format (US and a4 paper sizes)
-net-analyzer/wireshark:gtk - Build the wireshark executable with a GTK+ UI version 2.
 net-analyzer/wireshark:gtk2 - Build the wireshark executable with a GTK+ UI version 2.
 net-analyzer/wireshark:gtk3 - Build the wireshark executable with a GTK+ UI version 3.
-net-analyzer/wireshark:libadns - Use net-lib/adns (DEPRECATED) instead of net-dns/c-ares to resolve DNS names
 net-analyzer/wireshark:netlink - Use dev-libs/libnl
 net-analyzer/wireshark:pcap - Use net-libs/libpcap for network packet capturing (build dumpcap, rawshark)
 net-analyzer/wireshark:qt4 - Build the wireshark executable with an experimental Qt UI instead of GTK+.
@@ -5494,6 +5491,7 @@ net-misc/freerdp:server - Build server binaries
 net-misc/gsasl:gcrypt - Use dev-libs/libgcrypt for low-level crypto
 net-misc/gsasl:ntlm - Add support for Microsoft's NTLM mechanism using net-libs/libntlm
 net-misc/guacamole-server:ssh - enable support for ssh connections
+net-misc/guacamole-server:telnet - enable support for telnet connections
 net-misc/gwget:epiphany - Build epiphany extensions
 net-misc/hotot:chrome - Build chrome browser extension
 net-misc/htbinit:esfq - Add support for Enhanced Stochastic Fairness queueing discipline.
@@ -5680,8 +5678,6 @@ net-misc/strongswan:farp - Enable faking of ARP responses for virtual IP address
 net-misc/strongswan:gcrypt - Enable dev-libs/libgcrypt plugin which provides 3DES, AES, Blowfish, Camellia, CAST, DES, Serpent and Twofish ciphers along with MD4, MD5 and SHA1/2 hash algorithms, RSA and DH groups 1,2,5,14-18 and 22-24(4.4+). Also includes a software random number generator.
 net-misc/strongswan:non-root - Force IKEv1/IKEv2 daemons to normal user privileges. This might impose some restrictions mainly to the IKEv1 daemon. Disable only if you really require superuser privileges.
 net-misc/strongswan:openssl - Enable dev-libs/openssl plugin which is required for Elliptic Curve Cryptography (DH groups 19-21,25,26) and ECDSA. Also provides 3DES, AES, Blowfish, Camellia, CAST, DES, IDEA and RC5 ciphers along with MD2, MD4, MD5 and SHA1/2 hash algorithms, RSA and DH groups 1,2,5,14-18 and 22-24(4.4+) dev-libs/openssl has to be compiled with USE="-bindist".
-net-misc/stunnel:listen-queue - Enable Listen Queue support for Stunnel
-net-misc/stunnel:xforward - Enable X-Forwarded-For support for Stunnel
 net-misc/teamviewer:system-wine - Use app-emulation/wine instead of bundled one.
 net-misc/termpkg:uucp - Adds support for uucp style device locking
 net-misc/tigervnc:internal-fltk - Build+link internal and enhanced fltk library
@@ -6366,6 +6362,7 @@ sci-physics/bullet:double-precision - Build libraries in double precision
 sci-physics/bullet:extras - Build additional libraries
 sci-physics/cernlib-montecarlo:herwig - Build Herwig internal event generator, newer version available in sci-physics/herwig
 sci-physics/clhep:exceptions - Enable zoom exceptions for user intervention
+sci-physics/espresso:cuda - Enable cuda support
 sci-physics/espresso:examples - Installs the examples
 sci-physics/espresso:packages - Installs extra subpackages
 sci-physics/espresso++:system-boost - Use system boost (dev-libs/boost) instead of bundled one
@@ -6613,8 +6610,10 @@ sys-auth/sssd:ssh - Build helper to let net-misc/openssh use sssd provided infor
 sys-auth/sssd:sudo - Build helper to let app-admin/sudo use sssd provided information
 sys-auth/ykpers:consolekit - Use sys-auth/consolekit and virtual/udev to allow access to the YubiKey HID device to the console user.
 sys-block/fio:aio - Enable AIO ioengine
+sys-block/fio:glusterfs - Enable GlusterFS gfapi support via sys-cluster/glusterfs
 sys-block/fio:gnuplot - Install tools for generating gnuplots
 sys-block/fio:numa - Enable numa support
+sys-block/fio:rbd - Enable Rados block device support via sys-cluster/ceph
 sys-block/gparted:btrfs - Include Btrfs support (sys-fs/btrfs-progs)
 sys-block/gparted:dmraid - Support for dmraid devices, also known as ATA-RAID, or Fake RAID.
 sys-block/gparted:f2fs - Include F2FS support (sys-fs/f2fs-tools)
@@ -7235,7 +7234,6 @@ www-plugins/gnash:sdl-sound - Enable SDL audio output for the standalone player
 www-plugins/gnash:ssh - Enable using SSH for network authentication in libnet
 www-plugins/gnash:ssl - Enable directly using OpenSSL in libnet (not needed for nsplugin ssl support)
 www-plugins/gnash:vaapi - Enables VAAPI (Video Acceleration API) for hardware decoding
-www-plugins/google-talkplugin:system-libCg - Use system libCg instead of bundled one
 www-plugins/lightspark:gles - Replace default OpenGL renderer with GLESv2
 www-plugins/lightspark:rtmp - Enable Real Time Messaging Protocol using librtmp
 www-servers/apache:apache2_modules_access_compat - Group authorizations based on host (name or IP address). Available as a compatibility module with previous versions.

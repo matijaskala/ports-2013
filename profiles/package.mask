@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15957 2014/08/07 10:47:08 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.15964 2014/08/12 07:25:28 vapier Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,7 +30,27 @@
 
 #--- END OF EXAMPLES ---
 
-# William Hubbs <williamh@gentoo.org> (5 Aug 2014)
+# Tiziano Müller <dev-zero@gentoo.org> (10 Aug 2014)
+# Bundles an old (2.0.0) and vulnerable, but modified version of expat.
+# Testsuite is completely broken and upstream seems to be working on the
+# next rewrite instead of fixing this one. Nothing in the tree depends on it.
+# Removal in a month.
+dev-python/amara
+
+# Samuli Suominen <ssuominen@gentoo.org> (09 Aug 2014)
+# usleep command is part of the app-admin/killproc package,
+# and adding this separate usleep package was a mistake
+# emerge -C sys-apps/usleep
+# emerge app-admin/killproc
+# removal in about 30 days wrt bug #467212
+sys-apps/usleep
+
+# Lars Wendler <polynomial-c@gentoo.org> (08 Aug 2014)
+# Depends on >=dev-libs/protobuf-c-1.0.0_rc2 which is masked.
+# Can be unmasked when protobuf-c mask is gone.
+>=media-sound/umurmur-0.2.15
+
+# William Hubbs <williamh@gentoo.org> (05 Aug 2014)
 # Masked by QA for removal in 30 days.
 # The unmasked version is very old, there are multiple open security
 # bugs and several version bumps. The package appears to be abandoned.
@@ -207,11 +227,6 @@ sys-block/afacli
 # Masked for removal in 30 days, bug #493114.
 app-emacs/sawfish
 
-# Sergei Trofimovich <slyfox@gentoo.org> (10 Jul 2014)
-# Masked as experimental major ghc release.
-=dev-lang/ghc-7.8.3*
-=dev-haskell/deepseq-1.3.0.2*
-
 # Michael Weber <xmw@gentoo.org> (10 Jul 2014)
 # Masked for removal in 30 days.
 # Upstream released bugfixes against buffer overflows
@@ -222,14 +237,6 @@ app-emacs/sawfish
 # Requires >=libav-10, which is masked, or >=ffmpeg-2.1.4
 # If you use ffmpeg instead of libav, sorry!
 =media-video/mpv-0.4*
-
-# Michał Górny <mgorny@gentoo.org> (6 Jul 2014)
-# (on behalf of python@gentoo.org)
-# The modules provided by those virtuals are built-in in all currently
-# supported Python implementations. If your ebuild depends on either
-# of them, please just remove the dependency. Removal in 30 days.
-virtual/python-argparse
-virtual/python-unittest2
 
 # Hans de Graaff <graaff@gentoo.org> (6 Jul 2014)
 # Mask old slot for removal in 30 days since there are no longer
@@ -414,15 +421,6 @@ dev-java/ibm-jdk-bin:1.5
 # Masked until py3.4 support is added to media-gfx/cairosvg
 =dev-python/weasyprint-0.22
 
-# Alexandre Rostovtsev <tetromino@gentoo.org> (19 May 2014)
-# Masked until dev-libs/glib supports the new timezone format, bug #510422
-=sys-libs/timezone-data-2014c
-
-# Ryan Hill <rhill@gentoo.org> (18 May 2014)
-# Masked for testing.
-# Tracker: https://bugs.gentoo.org/495124
->=sys-devel/gcc-4.9.0
-
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (14 May 2014)
 # Depends on libevdev which still needs keywording, bug #487944
 >=x11-drivers/xf86-input-evdev-2.8.99
@@ -448,8 +446,8 @@ dev-java/ibm-jdk-bin:1.5
 net-wireless/mate-bluetooth
 
 # Tim Harder <radhermit@gentoo.org> (25 Apr 2014)
-# Mask development releases
-=dev-libs/protobuf-c-1.0.0*
+# Mask new releases for testing
+=dev-libs/protobuf-c-1*
 
 # Matti Bickel <mabi@gentoo.org> (22 Apr 2014)
 # Masked slotted lua for testing

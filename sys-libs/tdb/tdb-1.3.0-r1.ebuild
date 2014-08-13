@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/tdb/tdb-1.3.0-r1.ebuild,v 1.5 2014/07/28 13:49:40 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/tdb/tdb-1.3.0-r1.ebuild,v 1.7 2014/08/11 03:36:14 patrick Exp $
 
 EAPI=5
 
@@ -14,7 +14,7 @@ SRC_URI="http://samba.org/ftp/tdb/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="~alpha amd64 ~arm hppa ~ia64 ~mips ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
 IUSE="python"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
@@ -39,6 +39,12 @@ multilib_src_configure() {
 
 	waf-utils_src_configure \
 		"${extra_opts[@]}"
+}
+
+multilib_src_compile() {
+	# need to avoid parallel building, this looks like the sanest way with waf-utils/multiprocessing eclasses
+	unset MAKEOPTS
+	waf-utils_src_compile
 }
 
 multilib_src_test() {
