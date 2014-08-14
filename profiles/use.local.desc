@@ -1008,6 +1008,7 @@ app-office/scribus:linguas_sk_SK - Language support for sk_SK
 app-office/scribus:linguas_th_TH - Language support for th_TH
 app-office/scribus:minimal - Don't install headers (only required for e.g. plug-in developers)
 app-office/scribus:osg - 3D redering via dev-games/openscenegraph
+app-office/scribus:poppler - Native pdf import
 app-office/scribus:scripts - Install the scripts
 app-office/scribus:templates - Document tamplates
 app-office/scribus:tk - Install tk based scripts e.g. FontSample.py
@@ -2412,7 +2413,6 @@ dev-util/monkeystudio:plugins - Build and install additional plugins
 dev-util/nemiver:memoryview - Enable the optional hexadecimal memory inspection with app-editors/ghex.
 dev-util/nsis:config-log - Enable the logging facility (useful in debugging installers)
 dev-util/nvidia-cuda-sdk:cuda - Build CUDA binaries.
-dev-util/nvidia-cuda-sdk:emulation - Build binaries for device emulation mode. These binaries will not require a CUDA-capable GPU to run.
 dev-util/nvidia-cuda-sdk:opencl - Build OpenCL binaries.
 dev-util/nvidia-cuda-toolkit:debugger - Installs the CUDA debugger.
 dev-util/nvidia-cuda-toolkit:eclipse - Install the dev-util/eclipse-sdk plugins
@@ -2706,10 +2706,8 @@ games-simulation/corsix-th:sdl - Use SDL for rendering.
 games-simulation/corsix-th:sound - Use SDL mixer for in-game sound.
 games-simulation/corsix-th:truetype - Use high quality fonts.
 games-simulation/flightgear:dbus - Enable screensaver DBus interaction
-games-simulation/flightgear:fgpanel - Enables standalone lightweight 2D-panel rendering utility
 games-simulation/flightgear:jsbsim - Enables JSBSim Flight Dynamics Model (default)
 games-simulation/flightgear:oldfdm - Enables deprecated Flight Dynamics Models (LaRCsim, UIUC)
-games-simulation/flightgear:subversion - Enables terrasync scenery downloader
 games-simulation/flightgear:udev - Enables event-based Input devices through virtual/udev
 games-simulation/flightgear:utils - Builds various utilities (fgpanel, terrasync, fgviewer among others)
 games-simulation/flightgear:yasim - Enables YASim Flight Dynamics Model
@@ -2927,6 +2925,7 @@ kde-base/kdeartwork-kscreensaver:eigen - Enable various arithmetic screensavers 
 kde-base/kdeartwork-kscreensaver:kexiv2 - Enable image rotation based on exif tags with libkexiv2.
 kde-base/kdebase-data:wallpapers - Install the KDE wallpapers
 kde-base/kdebase-kioslaves:sftp - Enable SFTP protocol support using net-libs/libssh
+kde-base/kdebase-meta:display-manager - Pull in a graphical display manager
 kde-base/kdebase-meta:wallpapers - Install the KDE wallpapers
 kde-base/kdebase-runtime-meta:crash-reporter - Builds a gui tool to submit crash information to the upstream backtracker
 kde-base/kdebase-runtime-meta:nepomuk - Enable Nepomuk based semantic desktop support (deprecated)
@@ -3902,6 +3901,7 @@ media-sound/jack-audio-connection-kit:pam - Add basic realime configuration via 
 media-sound/jalv:gtk2 - Adds support for GTK+2 in addition to GTK+3 controlled by the gtk useflag.
 media-sound/jalv:gtkmm - Adds support for dev-cpp/gtkmm: C++ interface for GTK+2
 media-sound/kid3:acoustid - Enable support for acoustic fingerprinting plugin using (media-libs/chromaprint)
+media-sound/kid3:phonon - Enable sound support via media-libs/phonon or dev-qt/qtphonon
 media-sound/kwave:opus - Enable Opus audio codec support
 media-sound/kwave:phonon - Enable playback via Phonon
 media-sound/lame:mp3rtp - Build the mp3-to-RTP streaming utility. **UNSUPPORTED**
