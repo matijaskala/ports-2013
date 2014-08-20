@@ -1042,9 +1042,11 @@ app-portage/eix:tools - Create separate binary for script helper tools; useful i
 app-portage/layman:bazaar - Support dev-vcs/bzr based overlays
 app-portage/layman:cvs - Support dev-vcs/cvs based overlays
 app-portage/layman:darcs - Support dev-vcs/darcs based overlays
+app-portage/layman:g-sorcery - Support app-portage/g-sorcery based overlays
 app-portage/layman:git - Support dev-vcs/git based overlays
 app-portage/layman:gpg - Support app-crypt/gnupg signed overlays lists and manifests
 app-portage/layman:mercurial - Support dev-vcs/mercurial based overlays
+app-portage/layman:squashfs - Support mounting squashfs image overlays locally read-only
 app-portage/layman:subversion - Support dev-vcs/subversion based overlays
 app-portage/pfl:network-cron - Adds a cron job which does a weekly submit of the package database
 app-portage/tatt:templates - Install template scripts to be used with tatt
@@ -3407,7 +3409,6 @@ media-gfx/k3d:cuda - Use nvidia cuda toolkit for speeding up computations
 media-gfx/k3d:gts - Add Support for the GNU Triangulated Surface Library sci-libs/gts
 media-gfx/kphotoalbum:geolocation - Add support for kde-base/marble
 media-gfx/kphotoalbum:kipi - Support for the KDE Image Plugin Interface
-media-gfx/kphotoalbum:nepomuk - Enable Nepomuk based semantic desktop support (deprecated)
 media-gfx/librecad:tools - Build additional tool programs
 media-gfx/nip2:goffice - use x11-libs/goffice to show plots
 media-gfx/nomacs:webp - Build support for WEBP image format
@@ -3847,7 +3848,9 @@ media-sound/clementine:wiimote - Enable support for Wii remote
 media-sound/cmus:cdio - use libcdio for CD support
 media-sound/cmus:cue - enable CUE sheet parsing
 media-sound/cmus:discid - enable reading the ID of the inserted CD
+media-sound/cmus:opus - enable support for media-libs/opusfile
 media-sound/cmus:pidgin - install support script for net-im/pidgin
+media-sound/cmus:tremor - use libivorbis from media-libs/tremor instead of media-libs/libvorbis
 media-sound/cmus:wma - add support for Windows Media Audio
 media-sound/csound:beats - Build the beats score frontend
 media-sound/csound:chua - Build the chua opcodes
@@ -4503,7 +4506,6 @@ net-analyzer/barnyard:sguil - Enable sguil (The Analyst Console for Network Secu
 net-analyzer/barnyard2:aruba - Enable Aruba support
 net-analyzer/barnyard2:gre - Enable GRE support
 net-analyzer/barnyard2:mpls - Enable support for mpls networks
-net-analyzer/bmon:rrdtool - Enables net-analyzer/rrdtool support
 net-analyzer/bwm-ng:csv - Enable csv output
 net-analyzer/bwm-ng:html - Enable html output
 net-analyzer/cacti:doc - install html documentation
@@ -4711,6 +4713,7 @@ net-dns/bind:filter-aaaa - Enable filtering of AAAA records over IPv4
 net-dns/bind:fixed-rrset - Enables fixed rrset-order option
 net-dns/bind:gost - Enables gost OpenSSL engine support
 net-dns/bind:gssapi - Enable gssapi support
+net-dns/bind:nslint - Build and install the nslint util
 net-dns/bind:rpz - Enable response policy rewriting (rpz)
 net-dns/bind:rrl - Response Rate Limiting (RRL) - Experimental
 net-dns/bind:sdb-ldap - Enables ldap-sdb backend
@@ -5107,6 +5110,7 @@ net-irc/rbot:translator - Add dependency over dev-ruby/mechanize, which is neede
 net-irc/shadowircd:largenet - Enable support/tweaks for large networks
 net-irc/srvx:bahamut - Choose bahamut protocol over p10 protocol
 net-irc/supybot:twisted - Allows supybot to use dev-python/twisted as driver
+net-irc/unrealircd:class-nofakelag - Enable an unsupported class::options flag called “nofakelag” allowing you to grant fakelag exemption to normal user (instead of just opers).
 net-irc/unrealircd:extban-stacking - Enable extended channel bans (such as +b ~c: and +b ~n:) to contain other extended bans instead of just hostmasks.
 net-irc/unrealircd:operoverride - Enable OperOverride extension
 net-irc/unrealircd:operoverride-verify - Enable requiring opers to invite themselves to +s/+p channels
@@ -6042,6 +6046,7 @@ sci-biology/yass:lowmem - Build for environments with low amounts of memory
 sci-calculators/units:units_cur - Install the units_cur python script that updates currencies
 sci-chemistry/PyMca:matplotlib - Support for plotting through matplotlib
 sci-chemistry/apbs:arpack - Include support for arpack libs
+sci-chemistry/apbs:fast - APBS fast mode (experimental)
 sci-chemistry/apbs:fetk - Include support for FeTK
 sci-chemistry/apbs:tools - Install optional tools
 sci-chemistry/avogadro:glsl - Enable glsl features via GLEW.

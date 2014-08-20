@@ -1,9 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/cucumber/cucumber-1.3.16.ebuild,v 1.1 2014/08/14 06:01:03 graaff Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/cucumber/cucumber-1.3.16.ebuild,v 1.3 2014/08/16 07:45:06 graaff Exp $
 
 EAPI=5
-USE_RUBY="ruby19 ruby20"
+USE_RUBY="ruby19 ruby20 ruby21"
 
 # Documentation task depends on sdoc which we currently don't have.
 RUBY_FAKEGEM_TASK_DOC=""
@@ -18,7 +18,7 @@ DESCRIPTION="Executable feature scenarios"
 HOMEPAGE="http://github.com/aslakhellesoy/cucumber/wikis"
 LICENSE="Ruby"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 SLOT="0"
 IUSE="examples test"
 
@@ -47,9 +47,10 @@ all_ruby_prepare() {
 	# need or can't satisfy.
 	sed -i -e '/\(spork\|simplecov\|bcat\|kramdown\|yard\|capybara\|rack-test\|ramaze\|sinatra\|webrat\)/d' ${RUBY_FAKEGEM_GEMSPEC} || die
 
-	# Fix too-strict nokogiri test dependency
-	sed -i -e 's/~> 1.5.2/>= 1.5.2/' ${RUBY_FAKEGEM_GEMSPEC} || die
-	sed -i -e '/rake/ s/10.2/10.4/' ${RUBY_FAKEGEM_GEMSPEC} || die
+	# Fix too-strict test dependencies
+	sed -e '/nokogiri/ s/~> 1.5.2/>= 1.5.2/' \
+		-e '/aruba/ s/0.5.2/0.5/' \
+		-e '/rake/ s/10.2/10.4/' -i ${RUBY_FAKEGEM_GEMSPEC} || die
 
 	# Make sure spork is run in the right interpreter
 	sed -i -e 's/#{Spork::BINARY}/-S #{Spork::BINARY}/' features/support/env.rb || die
