@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-2.1.0.ebuild,v 1.1 2014/08/19 19:10:15 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-2.1.0.ebuild,v 1.4 2014/08/26 17:00:01 polynomial-c Exp $
 
 EAPI=5
 
@@ -67,7 +67,7 @@ RDEPEND="${CDEPEND}
 			dev-perl/Net-SMTP-SSL
 			dev-perl/Authen-SASL
 			cgi? ( virtual/perl-CGI highlight? ( app-text/highlight ) )
-			cvs? ( >=dev-vcs/cvsps-2.1 dev-perl/DBI dev-perl/DBD-SQLite )
+			cvs? ( >=dev-vcs/cvsps-2.1:0 dev-perl/DBI dev-perl/DBD-SQLite )
 			subversion? ( dev-vcs/subversion[-dso,perl] dev-perl/libwww-perl dev-perl/TermReadKey )
 			)
 	python? ( gtk?
@@ -110,6 +110,8 @@ REQUIRED_USE="
 	gtk? ( python )
 	python? ( ${PYTHON_REQUIRED_USE} )
 "
+
+RESTRICT="test" # 520270
 
 pkg_setup() {
 	if use subversion && has_version "dev-vcs/subversion[dso]"; then
@@ -420,10 +422,6 @@ src_install() {
 		cd "${S}"
 	fi
 
-	# git-diffall
-	dobin contrib/diffall/git-diffall
-	newdoc contrib/diffall/README git-diffall.txt
-
 	# diff-highlight
 	dobin contrib/diff-highlight/diff-highlight
 	newdoc contrib/diff-highlight/README README.diff-highlight
@@ -463,7 +461,6 @@ src_install() {
 	# completion - installed above
 	# credential/gnome-keyring TODO
 	# diff-highlight - done above
-	# diffall - done above
 	# emacs - installed above
 	# examples - these are stuff that is not used in Git anymore actually
 	# git-jump - done above
@@ -478,7 +475,7 @@ src_install() {
 	for i in \
 		buildsystems convert-objects fast-import \
 		hg-to-git hooks remotes2config.sh rerere-train.sh \
-		stats vim workdir \
+		stats workdir \
 		; do
 		cp -rf \
 			"${S}"/contrib/${i} \
@@ -526,7 +523,6 @@ src_install() {
 }
 
 src_test() {
-	# t7004 segfaults
 	local disabled=""
 	local tests_cvs="t9200-git-cvsexportcommit.sh \
 					t9400-git-cvsserver-server.sh \

@@ -1,13 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/nx/nx-3.5.0.27.ebuild,v 1.1 2014/08/05 09:11:37 voyageur Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/nx/nx-3.5.0.27.ebuild,v 1.3 2014/08/22 08:20:03 voyageur Exp $
 
 EAPI=5
 inherit autotools eutils multilib readme.gentoo
 
 DESCRIPTION="NX compression technology core libraries"
-HOMEPAGE="http://www.nomachine.com/developers.php
-	http://www.x2go.org/doku.php/wiki:libs:nx-libs"
+HOMEPAGE="http://www.x2go.org/doku.php/wiki:libs:nx-libs"
 
 SRC_URI="http://code.x2go.org/releases/source/nx-libs/nx-libs-${PV}-full.tar.gz"
 
@@ -38,6 +37,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-3.2.0-nxproxy_read_from_stdin.patch
 
 	cd "${S}"
+	epatch "${FILESDIR}"/${P}-jpeg-9a.patch #481360
 	# -fPIC
 	epatch "${FILESDIR}"/1.5.0/nxcomp-1.5.0-pic.patch
 	# Drop force -O3, set AR/RANLIB and

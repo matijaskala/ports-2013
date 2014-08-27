@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License, v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/sparc/use.mask,v 1.116 2014/06/25 14:22:29 grozin Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/arch/sparc/use.mask,v 1.119 2014/08/25 12:25:46 armin76 Exp $
 
 # Unmask the flag which corresponds to ARCH.
 -sparc
@@ -133,6 +133,9 @@ clang
 metalink
 tremor
 fdk
+tcmalloc
+jemalloc
+zmq
 
 # No hardware to test
 ifp
@@ -161,6 +164,7 @@ ots
 frei0r
 libvirt
 prelude
+redis
 
 # Asterisk use flag masking
 bri

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dns/avahi/avahi-0.6.31-r5.ebuild,v 1.5 2014/08/03 17:45:35 tgall Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-dns/avahi/avahi-0.6.31-r5.ebuild,v 1.8 2014/08/25 19:20:50 jer Exp $
 
 EAPI="5"
 
@@ -18,7 +18,7 @@ SRC_URI="http://avahi.org/download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-linux"
 IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test utils"
 
 REQUIRED_USE="
@@ -122,6 +122,9 @@ src_prepare() {
 
 	# allow building client without the daemon
 	epatch "${FILESDIR}"/${P}-build-client-without-daemon.patch
+
+	# Fix build under various locales, bug #501664
+	epatch "${FILESDIR}"/${P}-fix-locale-build.patch
 
 	# Drop DEPRECATED flags, bug #384743
 	sed -i -e 's:-D[A-Z_]*DISABLE_DEPRECATED=1::g' avahi-ui/Makefile.am || die

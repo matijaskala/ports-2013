@@ -562,7 +562,6 @@ app-emulation/qemu:fdt - Enables firmware device tree support
 app-emulation/qemu:glusterfs - Enables GlusterFS cluster fileystem via sys-cluster/glusterfs
 app-emulation/qemu:iscsi - Enable direct iSCSI support via net-libs/libiscsi instead of indirectly via the Linux block layer that sys-block/open-iscsi does.
 app-emulation/qemu:jpeg - Enable jpeg image support for the VNC console server
-app-emulation/qemu:mixemu - Enable audio mixer emulation. On Fedora, known to cause performance problems when using SDL output and ALSA. For OSS, locks the sound device from other applications.
 app-emulation/qemu:ncurses - Enable the ncurses-based console
 app-emulation/qemu:nfs - Enable NFS support
 app-emulation/qemu:numa - Enable NUMA support
@@ -1337,8 +1336,10 @@ dev-games/crystalspace:cg - NVIDIA toolkit plugin
 dev-games/crystalspace:ode - include support for Open Dynamics Engine
 dev-games/guichan:allegro - Build the Allegro frontend
 dev-games/mygui:linguas_ru - Install some additional russian docs if 'doc' useflag enabled
+dev-games/mygui:ogre - Use the ogre render subsystem. (cannot combine with opengl)
+dev-games/mygui:opengl - Use the opengl render subsystem. (cannot combine with ogre)
 dev-games/mygui:plugins - Build MyGUI plugins
-dev-games/mygui:samples - Install MyGUI demos
+dev-games/mygui:samples - Install MyGUI demos (needs ogre USE flag)
 dev-games/mygui:tools - Build the tools for development
 dev-games/ode:double-precision - more precise calculations at the expense of speed
 dev-games/ode:gyroscopic - enable gyroscopic term (may cause instability)
@@ -1354,7 +1355,6 @@ dev-games/ogre:tools - build+install helper tools
 dev-games/ogre:zip - support zip archives
 dev-games/openscenegraph:fox - Build examples using x11-libs/fox library
 dev-games/openscenegraph:gdal - Enable support for sci-libs/gdal library
-dev-games/openscenegraph:itk - Build dev-tcltk/itk plugin
 dev-games/openscenegraph:openinventor - Build OpenInventor plugin
 dev-games/openscenegraph:osgapps - Build osg applications
 dev-games/openscenegraph:xrandr - Enable support for the X xrandr extension
@@ -1656,6 +1656,7 @@ dev-lang/php:opcache - Enables built-in opcode cache, replacing pecl-apc et.al
 dev-lang/php:pdo - Enable the bundled PDO extensions
 dev-lang/php:phar - Enables the phar extension to provide phar archive support
 dev-lang/php:sqlite2 - Add sqlite2 support. Will be removed
+dev-lang/php:vpx - Enable webp suppoprt for GD
 dev-lang/php:xmlreader - Enable XMLReader support
 dev-lang/php:xmlwriter - Enable XMLWriter support
 dev-lang/php:xslt - Enable the XSL extension
@@ -1867,6 +1868,11 @@ dev-libs/m17n-lib:athena - Enable the MIT Athena widget set (x11-libs/libXaw)
 dev-libs/m17n-lib:gd - Build API and utilities based on media-libs/gd. This flag is only meaningful if the X USE flag is also enabled.
 dev-libs/m17n-lib:libotf - Use dev-libs/libotf to handle OpenType fonts
 dev-libs/m17n-lib:libxml2 - Use dev-libs/libxml2 to parse XML
+dev-libs/marisa:popcnt - Enable popcnt instruction support
+dev-libs/marisa:sse4 - Enable sse4 instruction support
+dev-libs/marisa:sse4.1 - Enable sse4.1 instruction support
+dev-libs/marisa:sse4.2 - Enable sse4.2 instruction support
+dev-libs/marisa:sse4a - Enable sse4a instruction support
 dev-libs/nss:cacert - Include root certs from CAcert (http://http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 dev-libs/nss:nss-pem - Add support for libnsspem
 dev-libs/nss:utils - Install utilities included with the library
@@ -2598,7 +2604,8 @@ games-engines/odamex:server - Build server target.
 games-engines/renpy:development - Install IDE for game developers and an empty game template
 games-engines/scummvm:fluidsynth - compile with support for fluidsynth
 games-engines/scummvm:mpeg2 - enable mpeg2 codec for cutscenes
-games-engines/solarus:luajit - Use LuaJIT instead of default Lua
+games-engines/solarus:doc - Install doxygen developer documentation.
+games-engines/solarus:luajit - Use LuaJIT instead of default Lua.
 games-fps/alienarena:vidmode - Link against x11-libs/libXxf86vm. Required for full-screen support.
 games-fps/darkplaces:cdsound - Enables using CD audio in the engine
 games-fps/darkplaces:demo - Uses the demo data from quake1 (quake1-demodata)
@@ -2817,7 +2824,6 @@ gnome-base/nautilus:sendto - Enable the nautilus-sendto extension to send files 
 gnome-base/nautilus:tracker - Add support for app-misc/tracker search
 gnome-base/orbit:pic - Force libname-server-2 to be built as PIC; needed on hardened systems
 gnome-extra/avant-window-navigator:gconf - Enable GConf as configuration backend
-gnome-extra/avant-window-navigator:vala - Enable installation of dev-lang/vala binding
 gnome-extra/avant-window-navigator-extras:gconf - Enable GConf as configuration backend
 gnome-extra/cinnamon:l10n - Pull in gnome-extra/cinnamon-translations for localization support
 gnome-extra/cinnamon-control-center:colord - Support color management using x11-misc/colord
@@ -2998,6 +3004,7 @@ kde-base/korundum:nepomuk - Compile bindings for Nepomuk
 kde-base/korundum:okular - Compile bindings for kde-base/okular
 kde-base/krdc:rdesktop - Enable runtime dependency for net-misc/rdesktop
 kde-base/krdc:telepathy - Enable desktop sharing through a telepathy client
+kde-base/krfb:ktp - Enable displaying of KDE Telepathy contacts
 kde-base/krfb:telepathy - Enable desktop sharing through a telepathy client
 kde-base/ksnapshot:kipi - Support for the KDE Image Plugin Interface.
 kde-base/kstars:fits - Enable support for the FITS image format through cfitsio
@@ -3971,10 +3978,13 @@ media-sound/picard:acoustid - Use media-libs/chromaprint for acoustic fingerprin
 media-sound/pms:regex - Enable regular expression searches using dev-libs/boost
 media-sound/podcatcher:bittorrent - Enable support for bittorrent downloads
 media-sound/pragha:glyr - Enable music metadata searchengine support using media-libs/glyr
+media-sound/pragha:grilo - Play songs on DLNA servers using media-libs/grilo
 media-sound/pragha:keybinder - Enable shortcut support using dev-libs/keybinder
 media-sound/pragha:lastfm - Enable last.fm support using media-libs/libclastfm
 media-sound/pragha:peas - Enable various plugins that will pull in dev-libs/libpeas as a dependency
 media-sound/pragha:playlist - Enable enhanced playlist support using dev-libs/totem-pl-parser
+media-sound/pragha:rygel - Share music on DLNA using net-misc/rygel
+media-sound/pragha:soup - Search metadata on AcoustID and radios on TuneIn using net-libs/libsoup
 media-sound/puddletag:acoustid - Use media-libs/chromaprint for acoustic fingerprinting
 media-sound/puddletag:cover - Enables editing of FLAC cover art
 media-sound/puddletag:musicbrainz - Enables support for musicbrainz, needs dev-python/python-musicbrainz
@@ -5173,7 +5183,6 @@ net-libs/libetpan:liblockfile - Enable support for liblockfile library
 net-libs/libgsasl:gcrypt - Use dev-libs/libgcrypt for low-level crypto
 net-libs/libgsasl:ntlm - Add support for Microsoft's NTLM mechanism using net-libs/libntlm
 net-libs/libinfinity:server - Build and install the server binary including init.d/conf.d-scripts. Needed if you want to host an infinote server for gobby.
-net-libs/libkgapi:oldpim - Allow the use of non-akonadi kdepim-4.4
 net-libs/libkolabxml:csharp - Enable C# language bindings
 net-libs/libmicrohttpd:epoll - use epoll() system call
 net-libs/libmicrohttpd:messages - enable error messages
@@ -5927,17 +5936,24 @@ net-wireless/bluez:obex - Enable OBEX transfer support.
 net-wireless/bluez:test-programs - Install tools for testing of various Bluetooth functions
 net-wireless/gnome-bluetooth:nautilus - Build the gnome-extra/nautilus-sendto plugin
 net-wireless/gnuradio:analog - enable analog signal processing blocks
+net-wireless/gnuradio:atsc - enable ATSC (HDTV) transmitter and receiver blocks
+net-wireless/gnuradio:audio - enable blocks to connect to audio sources (mic-in) and sinks (speaker-out) ports on a computer
 net-wireless/gnuradio:channels - enable channel mode blocks
 net-wireless/gnuradio:ctrlport - enable ControlPort rpc
 net-wireless/gnuradio:digital - enable digital signal processing blocks
+net-wireless/gnuradio:dtv - enable digital tv signal processing blocks
 net-wireless/gnuradio:fcd - enable Funcube Dongle source block
+net-wireless/gnuradio:fec - enable block for convolutional encoding using the CCSDS standard polynomial ("Voyager")
 net-wireless/gnuradio:filter - enable filter signal processing blocks
 net-wireless/gnuradio:grc - enable GNU Radio Companion graphical tool to design signal processing flow graphs
 net-wireless/gnuradio:log - enable logging to console and files
+net-wireless/gnuradio:noaa - enable NOAA POES HRPT receiver blocks
 net-wireless/gnuradio:pager - enable pager signal processing blocks
 net-wireless/gnuradio:performance-counters - enable block performance counters
+net-wireless/gnuradio:trellis - enable trellis blocks for FSM
 net-wireless/gnuradio:uhd - install UHD source and sink blocks
 net-wireless/gnuradio:utils - install scripts to enable viewing and analysis of files produced by flow graphs
+net-wireless/gnuradio:vocoder - enable blocks for audio voice encoders
 net-wireless/gnuradio:wavelet - enable wavelet signal processing blocks
 net-wireless/gnuradio:zeromq - enable zeromq message passing blocks
 net-wireless/gr-osmosdr:bladerf - Build with Nuand BladeRF support
@@ -5972,7 +5988,6 @@ net-wireless/spectools:debug - Build the raw output client for spectools. (for d
 net-wireless/spectools:gtk - Build the gtk-2 based client for spectools
 net-wireless/spectools:ncurses - Build the ncurses based client for spectools
 net-wireless/ubertooth:bluez - use bluez to support clock following and scanning
-net-wireless/ubertooth:clock_debug - support for clock following an existing local bluetooth connection with bluez
 net-wireless/ubertooth:dfu - Install ubertooth-dfu (needed for read/write of firmware)
 net-wireless/ubertooth:pcap - Use libpcap for packet capture and read/write
 net-wireless/ubertooth:specan - Enable the ubertooth spectrum analyzer
@@ -6849,7 +6864,6 @@ sys-fs/aufs3:nfs - Enable support for nfs export
 sys-fs/aufs3:pax_kernel - Apply patch needed for pax enabled kernels
 sys-fs/aufs3:ramfs - Enable initramfs/rootfs support
 sys-fs/btrfs-progs:debug-utils - Build additional utils for debugging
-sys-fs/cryptsetup:dynamic - Build cryptsetup dynamically
 sys-fs/cryptsetup:gcrypt - Use dev-libs/libgcrypt crypto backend
 sys-fs/cryptsetup:kernel - Use kernel crypto backend (mainly for embedded systems)
 sys-fs/cryptsetup:nettle - Use dev-libs/nettle crypto backend
@@ -7117,7 +7131,6 @@ www-apps/gallery:zip - Add app-arch/zip for the zip download module
 www-apps/gitit:plugins - enables optional plugin runtime loader
 www-apps/horde-passwd:clearpasswd - Enables cleartext password storage in the vpopmail files
 www-apps/ikiwiki:extras - Installs additional modules used by ikiwiki plugins
-www-apps/lxr:freetext - Adds support for freetext search using swish-e
 www-apps/nikola:assets - Support web asset management through dev-python/assets
 www-apps/nikola:charts - Support chart generation through dev-python/pygal
 www-apps/nikola:hyphenation - Add hyphenation support through dev-python/pyphen
@@ -7279,7 +7292,6 @@ www-servers/lighttpd:webdav - Enable webdav properties
 www-servers/monkeyd:debug - Enable lots of debugging info
 www-servers/monkeyd:jemalloc - Use dev-libs/jemalloc for allocations
 www-servers/monkeyd:minimal - Do not install shared lib and include files
-www-servers/monkeyd:musl - Enable musl compatibility mode
 www-servers/nginx:aio - Enables file AIO support
 www-servers/nginx:http - Enable HTTP core support
 www-servers/nginx:http-cache - Enable HTTP cache support
@@ -7635,6 +7647,7 @@ xfce-extra/xfce4-mixer:keybinder - Enable shortcut support using dev-libs/keybin
 xfce-extra/xfce4-mpc-plugin:libmpd - Build using media-libs/libmpd backend, instead of native fallback which is preferred
 xfce-extra/xfce4-playercontrol-plugin:audacious - Enable Audacious support
 xfce-extra/xfce4-playercontrol-plugin:mpd - Enable Music Player Daemon support
+xfce-extra/xfce4-power-manager:lxpanel - Build the applet for lxde-base/lxpanel, you can set XFCE_PLUGINS="" if you don't want the Xfce dependencies.
 xfce-extra/xfce4-power-manager:udisks - Pull in sys-fs/udisks:0 for spindown support (DEPRECATED)
 xfce-extra/xfce4-soundmenu-plugin:glyr - Enable music metadata searchengine support using media-libs/glyr
 xfce-extra/xfce4-soundmenu-plugin:keybinder - Enable shortcut support using dev-libs/keybinder
