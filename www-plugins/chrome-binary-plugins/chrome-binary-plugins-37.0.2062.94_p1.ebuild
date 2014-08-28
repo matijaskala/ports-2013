@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-plugins/chrome-binary-plugins/chrome-binary-plugins-37.0.2062.94_p1.ebuild,v 1.1 2014/08/27 03:12:41 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-plugins/chrome-binary-plugins/chrome-binary-plugins-37.0.2062.94_p1.ebuild,v 1.3 2014/08/28 00:21:05 floppym Exp $
 
 EAPI=4
 
@@ -12,14 +12,17 @@ HOMEPAGE="http://www.google.com/chrome"
 case ${PV} in
 	*_alpha*)
 		SLOT="unstable"
+		CHROMEDIR="opt/google/chrome-${SLOT}"
 		MY_PV=${PV/_alpha/-}
 		;;
 	*_beta*)
 		SLOT="beta"
+		CHROMEDIR="opt/google/chrome-${SLOT}"
 		MY_PV=${PV/_beta/-}
 		;;
 	*_p*)
 		SLOT="stable"
+		CHROMEDIR="opt/google/chrome"
 		MY_PV=${PV/_p/-}
 		;;
 	*)
@@ -41,7 +44,7 @@ SRC_URI="
 
 LICENSE="google-chrome"
 KEYWORDS="~amd64 ~x86"
-IUSE="+flash +pdf"
+IUSE="+flash"
 RESTRICT="bindist mirror strip"
 
 for x in 0 beta stable unstable; do
@@ -50,7 +53,7 @@ for x in 0 beta stable unstable; do
 	fi
 done
 
-S="${WORKDIR}/opt/google/chrome"
+S="${WORKDIR}/${CHROMEDIR}"
 QA_PREBUILT="*"
 
 pkg_nofetch() {
@@ -61,8 +64,6 @@ src_install() {
 	local version flapper
 
 	insinto /usr/$(get_libdir)/chromium-browser/
-
-	use pdf && doins libpdf.so
 
 	if use flash; then
 		doins -r PepperFlash
