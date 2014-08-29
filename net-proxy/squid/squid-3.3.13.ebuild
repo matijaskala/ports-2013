@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-proxy/squid/squid-3.3.13.ebuild,v 1.1 2014/08/28 07:17:03 eras Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-proxy/squid/squid-3.3.13.ebuild,v 1.3 2014/08/28 13:49:13 jer Exp $
 
 EAPI=5
 inherit autotools eutils linux-info pam toolchain-funcs user versionator
@@ -11,7 +11,7 @@ SRC_URI="ftp://ftp.squid-cache.org/pub/archive/3.3/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="caps ipv6 pam ldap samba sasl kerberos nis radius ssl snmp selinux logrotate test \
 	ecap icap-client ssl-crtd \
 	mysql postgres sqlite \
@@ -121,8 +121,14 @@ src_configure() {
 	local digest_modules="file"
 	use ldap && digest_modules+=",LDAP,eDirectory"
 
-	local negotiate_modules="none"
-	use kerberos && negotiate_modules="kerberos,wrapper"
+	local negotiate_modules myconf
+	if use kerberos ; then
+		negotiate_modules="kerberos,wrapper"
+		myconf="--with-krb5-config=yes"
+	else
+		negotiate_modules="none"
+		myconf="--with-krb5-config=no"
+	fi
 
 	local ntlm_modules="none"
 	use samba && ntlm_modules="smb_lm"
@@ -186,7 +192,8 @@ src_configure() {
 		$(use_enable ssl-crtd) \
 		$(use_enable icap-client) \
 		$(use_enable ecap) \
-		${transparent}
+		${transparent} \
+		${myconf}
 }
 
 src_install() {
