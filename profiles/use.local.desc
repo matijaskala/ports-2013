@@ -511,6 +511,8 @@ app-emulation/ganeti:haskell-daemons - Build haskell daemons instead of python
 app-emulation/ganeti:htools - Enable htools support
 app-emulation/ganeti:kvm - Enable KVM support
 app-emulation/ganeti:lxc - Enable Linux Countainers support
+app-emulation/ganeti:monitoring - Enable the ganeti monitoring daemon
+app-emulation/ganeti:multiple-users - Enable support for running VMs as different users.
 app-emulation/ganeti:rbd - Enable rados block device support via sys-cluster/ceph
 app-emulation/ganeti:sharedstorage - Enable Shared Storage support
 app-emulation/ganeti:xen - Enable Xen support
@@ -809,7 +811,7 @@ app-misc/binwalk:graph - Enable support for generating entropy graphs
 app-misc/brewtarget:phonon - Enable sound support via media-libs/phonon or dev-qt/qtphonon
 app-misc/byobu:screen - Use app-misc/screen as the default backend
 app-misc/ca-certificates:cacert - Include root certs from CAcert (http://http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
-app-misc/ddccontrol:ddcpci - enable direct PCI memory access (the setuid ddcpci util)
+app-misc/ddccontrol:pci - enable direct PCI memory access (the setuid ddcpci util)
 app-misc/digitemp:ds2490 - Build support for the ds2490 sensor
 app-misc/digitemp:ds9097 - Build support for the ds9097 sensor
 app-misc/digitemp:ds9097u - Build support for the ds9097u sensor
@@ -833,12 +835,10 @@ app-misc/geoclue:plazes - Install plazes.com provider
 app-misc/geoclue:server - Install geoip server
 app-misc/geoclue:skyhook - Install skyhookwireless.com provider
 app-misc/geoclue:yahoo-geo - Install Yahoo geolocation provider
-app-misc/gourmet:gnome-print - <=app-misc/gourmet-0.15.9 Enable pretty Python printing with Gnome
 app-misc/gourmet:i18n - >app-misc/gourmet-0.16 Enable support for i18n through elib.intl
 app-misc/gourmet:ipython - >app-misc/gourmet-0.16 Enable support for the interactive Python console plugin
 app-misc/gourmet:pdf - Enable export to PDF
 app-misc/gourmet:print - >app-misc/gourmet-0.16 Enable pretty Python printing
-app-misc/gourmet:rtf - <=app-misc/gourmet-0.15.9 Enable export to RTF
 app-misc/gourmet:spell - >app-misc/gourmet-0.16 Enable support for the spell check plugin
 app-misc/gourmet:web - >app-misc/gourmet-0.16 Enable support for the web import plugin
 app-misc/gramps:reports - All external software that is needed for graphical reports will be installed
@@ -905,7 +905,6 @@ app-misc/tracker:firefox-bookmarks - Install bookmark data miner plugin for www-
 app-misc/tracker:gsf - Enable gnome-extra/libgsf based data extractor and for ODT.
 app-misc/tracker:iptc - Enable extraction of IPTC data from pictures
 app-misc/tracker:iso - Enable extraction of metadata from ISO disk images
-app-misc/tracker:libsecret - Enable libsecret support to store login credentials
 app-misc/tracker:miner-fs - Enable tracker-miner-fs (required for filesystem indexing)
 app-misc/tracker:nautilus - Enable tracker to integrate with gnome-base/nautilus by providing entries in its context menu
 app-misc/tracker:playlist - Add support for playlists
@@ -1672,7 +1671,6 @@ dev-lang/ruby:rdoc - Install dev-ruby/rdoc after installing Ruby.
 dev-lang/ruby:readline - Use the sys-libs/readline library to provide the readline extension, used for instance by the irb tool. This flag is meaningful only if the libedit USE flag is disabled. If neither libedit nor readline USE flags are enabled, the readline extension will not be built (and irb will lose line editing functionality).
 dev-lang/ruby:rubytests - Install ruby tests that can only be run after ruby is installed
 dev-lang/ruby:yaml - Use the dev-libs/libyaml library to build the psych extension, available since Ruby 1.9.2_rc2, in alternative to the bundled syck-based parser.
-dev-lang/rust:binary-bootstrap - Download precompiled rust for compilator bootstrap
 dev-lang/rust:clang - Use sys-devel/clang for building
 dev-lang/rust:libcxx - Use sys-libs/libcxx as standard library when building with sys-devel/clang
 dev-lang/scala:binary - Install from (Gentoo-compiled) binary instead of building from sources. Set this when you run out of memory during build.
@@ -1841,7 +1839,6 @@ dev-libs/libpcre:pcre32 - Build 32 bit PCRE library.
 dev-libs/libpcre:readline - Add support for command line editing to pcretest, through sys-libs/readline.
 dev-libs/libpcre:recursion-limit - Limit match recursion to 8192; if disabled, the default limit is used, which is the same as the match limit.
 dev-libs/libpcre:zlib - Add support for pcregrep command to search within gzip-compressed files, through app-arch/gzip.
-dev-libs/libpeas:gjs - Build support for loading JavaScript plugins using dev-libs/gjs
 dev-libs/libpeas:glade - Install the glade catalog
 dev-libs/libpeas:python - Build support for loading dev-lang/python plugins
 dev-libs/libpeas:seed - Build support for loading JavaScript plugins using dev-libs/seed
@@ -2402,6 +2399,8 @@ dev-util/google-perftools:largepages - Use (experimental) larger pages for tcmal
 dev-util/google-perftools:minimal - Only build the tcmalloc_minimal library, ignoring the heap checker and the profilers.
 dev-util/gtk-doc:highlight - Enable source code highlighting
 dev-util/gtk-doc:vim - Enable source code highlighting through app-editors/vim
+dev-util/intel-ocl-sdk:android - Install android related files
+dev-util/intel-ocl-sdk:bundled_libs - Keep bundled-libs (not recommended)
 dev-util/intel-ocl-sdk:tools - Install Intel Offline Compiler
 dev-util/kdevelop:cmake - Enable support for CMake build system
 dev-util/kdevelop:okteta - Enable hex editor plugin
@@ -2806,7 +2805,6 @@ gnome-base/gvfs:afp - Enables support for accessing AFP (Apple Filing Protocol) 
 gnome-base/gvfs:archive - Enables support for accessing files in archives transparently via app-arch/libarchive
 gnome-base/gvfs:bluray - Enable playback of Blu-ray filesystems using media-libs/libbluray
 gnome-base/gvfs:fuse - Enables fuse mount points in $HOME/.gvfs for legacy application access
-gnome-base/gvfs:gdu - Enable sys-apps/gnome-disk-utility integration (DEPRECATED, use USE flag "udisks" instead)
 gnome-base/gvfs:gnome-online-accounts - Enable configuration panel for net-libs/gnome-online-accounts accounts
 gnome-base/gvfs:http - Enable the HTTP/DAV backend using net-libs/libsoup-gnome
 gnome-base/gvfs:libsecret - Enable app-crypt/libsecret support to store login credentials.
@@ -3721,6 +3719,7 @@ media-plugins/grilo-plugins:flickr - Enable Flickr support
 media-plugins/grilo-plugins:freebox - Build support for viewing TV channels using Freebox
 media-plugins/grilo-plugins:gnome-online-accounts - Enable net-libs/gnome-online-accounts support
 media-plugins/grilo-plugins:pocket - Support for showing content from Pocket
+media-plugins/grilo-plugins:thetvdb - Build support for thetvdb.com
 media-plugins/grilo-plugins:tracker - Build support for content discovery using the app-misc/tracker indexer
 media-plugins/grilo-plugins:vimeo - Build support for Vimeo content discovery using net-libs/libsoup and dev-libs/libgcrypt
 media-plugins/grilo-plugins:youtube - Build support for YouTube content discovery using dev-libs/libgdata
@@ -3746,6 +3745,7 @@ media-plugins/mediastreamer-ilbc:20ms-frames - enable 20ms frame size (default i
 media-plugins/mythplugins:cdr - Allows MythMusic to burn CD-Rs
 media-plugins/mythplugins:exif - Allows MythGallery to read EXIF data from photos
 media-plugins/mythplugins:fftw - Adds visual effects to MythMusic when playing back music
+media-plugins/mythplugins:hls - HTTP Live Streaming support
 media-plugins/mythplugins:mytharchive - Allows you to archive recorded content to CD or DVD
 media-plugins/mythplugins:mythbrowser - Adds a web browser within MythTV
 media-plugins/mythplugins:mythgallery - Adds a picture viewing gallery within MythTV
@@ -3878,8 +3878,6 @@ media-sound/csound:utils - Build stand-alone executables for utilities that can 
 media-sound/darkice:aacplus - AAC+ encoding via media-libs/libaacplus
 media-sound/darkice:opus - Enable Opus audio codec support
 media-sound/darkice:twolame - Build with twolame support
-media-sound/decibel-audio-player:gnome - Adds Gnome media keys support, so you can control Decibel using hotkeys.
-media-sound/decibel-audio-player:gnome-keyring - Adds support for storing your Last.fm password using gnome-keyring.
 media-sound/denemo:fluidsynth - Enable Fluidsynth MIDI software synthesis
 media-sound/denemo:portmidi - Enable support for the portmidi backend
 media-sound/dir2ogg:mac - Add support for decoding Monkey's Audio files
@@ -4264,7 +4262,6 @@ media-video/libav:avx - Adds support for Advanced Vector Extensions instructions
 media-video/libav:bindist - Build binary redistributable version without including nonfree decoders and encoders.
 media-video/libav:cdio - Enable audio CD grabbing with dev-libs/libcdio.
 media-video/libav:cpudetection - Enables runtime CPU detection (useful for bindist, compatibility on other CPUs).
-media-video/libav:dirac - Enable Dirac video support (an advanced royalty-free video compression format) via the reference library: dirac.
 media-video/libav:faac - Use external faac library for AAC encoding
 media-video/libav:fdk - Use external fdk-aac library for AAC encoding
 media-video/libav:frei0r - Enable frei0r wrapping in libavfilter
@@ -4276,7 +4273,6 @@ media-video/libav:openssl - Prefer dev-libs/openssl over net-libs/gnutls to prov
 media-video/libav:opus - Use the external opus library for encoding and decoding.
 media-video/libav:pic - Force shared libraries to be built as PIC (this is slower).
 media-video/libav:pulseaudio - Enable pulseaudio input support.
-media-video/libav:qt-faststart - Build and install qt-faststart application.
 media-video/libav:rtmp - Enable Real Time Messaging Protocol using librtmp instead the native implementation.
 media-video/libav:schroedinger - Enable Dirac video support (an advanced royalty-free video compression format) via libschroedinger (high-speed implementation in C of the Dirac codec).
 media-video/libav:ssl - Enable SSL/TLS support using dev-libs/openssl or dev-libs/gnutls.
@@ -4393,7 +4389,6 @@ media-video/rtmpdump:polarssl - Use PolarSSL library instead of the default Open
 media-video/smplayer2:download-subs - Enable subtitle downloader (requires QuaZip)
 media-video/totem:bluetooth - Enable support for user-presence detection via the user's bluetooth handset using net-wireless/bluez
 media-video/totem:flash - Install browser plugin for playing embedded Adobe Flash videos. Warning: breaks non-video Flash objects on many websites.
-media-video/totem:grilo - Use media-libs/grilo to browse media content from various sources
 media-video/totem:iplayer - Enable BBC player support
 media-video/totem:lirc - Enable support for controlling Totem with a remote control using app-misc/lirc
 media-video/totem:nautilus - Enable the nautilus extension
@@ -4549,6 +4544,7 @@ net-analyzer/icinga:plugins - Adds support for nagios plugins
 net-analyzer/icinga:web - Adds generic web interface support
 net-analyzer/icinga-web:pnp - Enables pnp4nagios integration
 net-analyzer/icinga2:classicui - Adds support for the old interface
+net-analyzer/icinga2:nano-syntax - Adds support for syntax used in the nano editor
 net-analyzer/icinga2:plugins - Adds support for nagios plugins
 net-analyzer/linkchecker:bookmarks - Mozilla Bookmark parsing
 net-analyzer/linkchecker:login - login form submission
@@ -4994,7 +4990,6 @@ net-im/qutim:vkontakte - Enable vkontakte protocol support
 net-im/qutim:webkit - Enable Adium-like WebView plugin
 net-im/qutim:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/skype:pax_kernel - Triggers a paxmarking of the main skype binary
-net-im/skype:qt-static - Install the main skype binary with internal copy of Qt
 net-im/telepathy-connection-managers:irc - Enable Internet Relay Chat (IRC) support.
 net-im/telepathy-connection-managers:jabber - Enable XMPP protocol handler (this is also Google Talk).
 net-im/telepathy-connection-managers:sip - Enable SIP/SIMPLE messaging and calling.
@@ -5295,7 +5290,6 @@ net-libs/wt:server - Compile in stand-alone httpd connector
 net-libs/wvstreams:boost - Use dev-libs/boost to provide TR1-compatible functional interface. This USE flag is only needed with GCC earlier than version 4.1, or with other compilares not providing said interface.
 net-libs/xrootd:fuse - Enable the sys-fs/fuse filesystem driver
 net-libs/zeromq:pgm - 0MQ is build with 'Pragmatic General Multicast' (RFC 3208) support using the excellent OpenPGM implementation.
-net-mail/amavis-logwatch:logwatch - Install filters for use with sys-apps/logwatch.
 net-mail/automx:memcached - Enable memcached support
 net-mail/automx:sql - Enable support for SQL backends
 net-mail/automx:tools - Install additional automx-test tool
@@ -5545,6 +5539,7 @@ net-misc/mediatomb:magic - Use libmagic to determine file types
 net-misc/mediatomb:mysql - Use dev-db/mysql as backend rather than SQLite3
 net-misc/mediatomb:taglib - Use media-libs/taglib for reading files' metadata rather than id3lib
 net-misc/mediatomb:thumbnail - Enables video thumbnails generation throughmedia-video/ffmpegthumbnailer
+net-misc/megatools:fuse - Enables support for the filesystem in userspace plugin through sys-fs/fuse.
 net-misc/memcached:slabs-reassign - Allow manual reassignment of memory slabs at the cost of slab optimizations.
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
@@ -6590,10 +6585,8 @@ sys-apps/usermode-utilities:fuse - Build tools (currently umlmount) needing fuse
 sys-apps/util-linux:caps - build setpriv helper (run programs with diff capabilities)
 sys-apps/util-linux:cramfs - build mkfs/fsck helpers for cramfs filesystems
 sys-apps/util-linux:cytune - build cytune for Cyclades-Z multiport serial cards
-sys-apps/util-linux:ddate - build ddate helper (Discordian dates)
 sys-apps/util-linux:fdformat - build fdformat (floppy disk format)
 sys-apps/util-linux:pam - build runuser helper
-sys-apps/util-linux:perl - install the chkdupexe helper script
 sys-apps/util-linux:suid - install mount/umount as setuid so non-root users may mount/umount devices, and wall/write as setgid so non-root users can notify other users
 sys-apps/util-linux:tty-helpers - install the mesg/wall/write tools for talking to local users
 sys-apps/v86d:x86emu - Use x86emu for Video BIOS calls
@@ -7238,8 +7231,7 @@ www-misc/zoneminder:gcrypt - ...
 www-misc/zoneminder:openssl - ...
 www-misc/zoneminder:vlc - Enable using media-libs/vlc for streaming from cameras
 www-plugins/adobe-flash:kde - Enables a KCM plugin for configuring flash player preferences
-www-plugins/chrome-binary-plugins:flash - Install Chrome's native Pepper Flash.
-www-plugins/chrome-binary-plugins:pdf - Install Chrome's native PDF reader plugin.
+www-plugins/chrome-binary-plugins:flash - Install Chrome's native Pepper Flash
 www-plugins/gnash:agg - Rendering based on the Anti-Grain Geometry Rendering Engine library
 www-plugins/gnash:cygnal - Enable building of the cygnal server
 www-plugins/gnash:dump - Enable dump output module for creating video from SWF
@@ -7483,10 +7475,13 @@ x11-terms/eterm:utempter - Include libutempter support
 x11-terms/gnome-terminal:gnome-shell - Integrate with gnome-base/gnome-shell search
 x11-terms/gnome-terminal:nautilus - Build gnome-base/nautilus extension
 x11-terms/hanterm:utempter - Records user logins. Useful on multi-user systems
+x11-terms/mlterm:fcitx - Enable app-i18n/fcitx support
 x11-terms/mlterm:ibus - Enable app-i18n/ibus support
 x11-terms/mlterm:libssh2 - Enable net-libs/libssh2 support
+x11-terms/mlterm:regis - Enable ReGIS support
 x11-terms/mlterm:scim - Enable app-i18n/scim support
 x11-terms/mlterm:uim - Enable app-i18n/uim support
+x11-terms/mlterm:utempter - Enable sys-libs/libutempter support
 x11-terms/mrxvt:menubar - Enable mrxvt menubar
 x11-terms/mrxvt:utempter - REcords user logins. Useful on multi-user systems
 x11-terms/rxvt:linuxkeys - Define LINUX_KEYS (changes Home/End key)
@@ -7624,6 +7619,7 @@ x11-wm/subtle:xtest - Enable support for the XTest extension
 x11-wm/vtwm:rplay - Enable rplay support, needed for sound.
 x11-wm/windowmaker:modelock - Enable XKB language status lock support. README says: "If you don't know what it is you probably don't need it."
 x11-wm/windowmaker:vdesktop - Enable dynamic virtual desktop (conflicts with software that works on the edges of the screen)
+x11-wm/windowmaker:webp - Enables WebP image format support using media-libs/libwebp
 x11-wm/windowmaker:xrandr - Enable XRandR window extension support
 x11-wm/xmonad:default-term - Pull terminal specified in default xmonad config to be a bit less hostile by default.
 x11-wm/xpra:client - Build client-side code
