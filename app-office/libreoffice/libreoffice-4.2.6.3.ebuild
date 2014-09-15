@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-4.2.6.3.ebuild,v 1.1 2014/09/09 21:31:59 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-4.2.6.3.ebuild,v 1.9 2014/09/14 09:11:47 dilfridge Exp $
 
 EAPI=5
 
@@ -100,11 +100,11 @@ COMMON_DEPEND="
 	=app-text/libabw-0.0*
 	>=app-text/libexttextcat-3.2
 	=app-text/libebook-0.0*
-	app-text/libetonyek
+	=app-text/libetonyek-0.0*
 	app-text/liblangtag
-	app-text/libmspub
-	>=app-text/libmwaw-0.2
-	>=app-text/libodfgen-0.0.3
+	=app-text/libmspub-0.0*
+	=app-text/libmwaw-0.2*
+	=app-text/libodfgen-0.0*
 	app-text/libwpd:0.9[tools]
 	app-text/libwpg:0.2
 	=app-text/libwps-0.2*
@@ -117,7 +117,7 @@ COMMON_DEPEND="
 	>=dev-libs/hyphen-2.7.1
 	>=dev-libs/icu-4.8.1.1:=
 	>=dev-libs/libatomic_ops-7.2d
-	=dev-libs/liborcus-0.5*:=
+	=dev-libs/liborcus-0.5*
 	>=dev-libs/nspr-4.8.8
 	>=dev-libs/nss-3.12.9
 	>=dev-lang/perl-5.0
@@ -129,9 +129,9 @@ COMMON_DEPEND="
 	>=media-libs/harfbuzz-0.9.18:=[icu(+)]
 	media-libs/lcms:2
 	>=media-libs/libpng-1.4
-	>=media-libs/libcdr-0.0.5
-	media-libs/libfreehand
-	media-libs/libvisio
+	=media-libs/libcdr-0.0*
+	=media-libs/libfreehand-0.0*
+	=media-libs/libvisio-0.0*
 	>=net-misc/curl-7.21.4
 	net-nds/openldap
 	sci-mathematics/lpsolve

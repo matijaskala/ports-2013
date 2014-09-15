@@ -24,7 +24,6 @@ RDEPEND="|| (	>=mail-mta/ssmtp-2.64-r2[mta]
 				mail-mta/mini-qmail
 				>=mail-mta/msmtp-1.4.19-r1[mta]
 				<mail-mta/msmtp-1.4.19-r1
-				mail-mta/nbsmtp
 				mail-mta/netqmail
 				mail-mta/nullmailer
 				mail-mta/postfix
