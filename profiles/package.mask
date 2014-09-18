@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16039 2014/09/16 09:04:05 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16046 2014/09/18 06:39:26 dilfridge Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,10 +30,10 @@
 
 #--- END OF EXAMPLES ---
 
-# Andreas K. Huettel <dilfridge@gentoo.org> (16 Sep 2014)
-# Masked for an inital (short) testing period
-=app-office/libreoffice-4.3*
-=app-office/libreoffice-l10n-4.3*
+# Michael Orlitzky <mjo@gentoo.org> (16 Sep 2014)
+# Superseded by app-text/dos2unix, use that instead.
+# Masked for removal in 30 days (bug #522804).
+app-text/unix2dos
 
 # Michał Górny <mgorny@gentoo.org> (15 Sep 2014)
 # Causes undefined references few layers down (in mediastreamer),
@@ -71,43 +71,43 @@ dev-php/PEAR-MDB2_Driver_ibase
 # Davide Pesavento <pesa@gentoo.org> (11 Sep 2014)
 # Mask Qt 5.3.x for wider testing to ensure that it does
 # not break or conflict with other packages (bug #454132)
+=dev-qt/assistant-5.3.2*
+=dev-qt/designer-5.3.2*
+=dev-qt/linguist-5.3.2*
+=dev-qt/linguist-tools-5.3.2*
+=dev-qt/pixeltool-5.3.2*
+=dev-qt/qdbus-5.3.2*
+=dev-qt/qdbusviewer-5.3.2*
+=dev-qt/qdoc-5.3.2*
+=dev-qt/qtconcurrent-5.3.2*
+=dev-qt/qtcore-5.3.2*
+=dev-qt/qtdbus-5.3.2*
+=dev-qt/qtdeclarative-5.3.2*
+=dev-qt/qtdiag-5.3.2*
+=dev-qt/qtgraphicaleffects-5.3.2*
+=dev-qt/qtgui-5.3.2*
+=dev-qt/qthelp-5.3.2*
+=dev-qt/qtimageformats-5.3.2*
+=dev-qt/qtmultimedia-5.3.2*
+=dev-qt/qtnetwork-5.3.2*
+=dev-qt/qtopengl-5.3.2*
+=dev-qt/qtpaths-5.3.2*
+=dev-qt/qtprintsupport-5.3.2*
+=dev-qt/qtquick1-5.3.2*
+=dev-qt/qtquickcontrols-5.3.2*
+=dev-qt/qtscript-5.3.2*
+=dev-qt/qtserialport-5.3.2*
+=dev-qt/qtsql-5.3.2*
+=dev-qt/qtsvg-5.3.2*
+=dev-qt/qttest-5.3.2*
+=dev-qt/qttranslations-5.3.2*
+=dev-qt/qtwebkit-5.3.2*
+=dev-qt/qtwebsockets-5.3.2*
+=dev-qt/qtwidgets-5.3.2*
+=dev-qt/qtx11extras-5.3.2*
+=dev-qt/qtxml-5.3.2*
+=dev-qt/qtxmlpatterns-5.3.2*
 www-client/otter
-=dev-qt/assistant-5.3.1*
-=dev-qt/designer-5.3.1*
-=dev-qt/linguist-5.3.1*
-=dev-qt/linguist-tools-5.3.1*
-=dev-qt/pixeltool-5.3.1*
-=dev-qt/qdbus-5.3.1*
-=dev-qt/qdbusviewer-5.3.1*
-=dev-qt/qdoc-5.3.1*
-=dev-qt/qtconcurrent-5.3.1*
-=dev-qt/qtcore-5.3.1*
-=dev-qt/qtdbus-5.3.1*
-=dev-qt/qtdeclarative-5.3.1*
-=dev-qt/qtdiag-5.3.1*
-=dev-qt/qtgraphicaleffects-5.3.1*
-=dev-qt/qtgui-5.3.1*
-=dev-qt/qthelp-5.3.1*
-=dev-qt/qtimageformats-5.3.1*
-=dev-qt/qtmultimedia-5.3.1*
-=dev-qt/qtnetwork-5.3.1*
-=dev-qt/qtopengl-5.3.1*
-=dev-qt/qtpaths-5.3.1*
-=dev-qt/qtprintsupport-5.3.1*
-=dev-qt/qtquick1-5.3.1*
-=dev-qt/qtquickcontrols-5.3.1*
-=dev-qt/qtscript-5.3.1*
-=dev-qt/qtserialport-5.3.1*
-=dev-qt/qtsql-5.3.1*
-=dev-qt/qtsvg-5.3.1*
-=dev-qt/qttest-5.3.1*
-=dev-qt/qttranslations-5.3.1*
-=dev-qt/qtwebkit-5.3.1*
-=dev-qt/qtwebsockets-5.3.1*
-=dev-qt/qtwidgets-5.3.1*
-=dev-qt/qtx11extras-5.3.1*
-=dev-qt/qtxml-5.3.1*
-=dev-qt/qtxmlpatterns-5.3.1*
 
 # Ulrich Müller <ulm@gentoo.org> (10 Sep 2014)
 # Multiple security vulnerabilities, bug #510960.
@@ -125,12 +125,6 @@ app-doc/djbdns-man
 # Dead upstream
 # Masked for removal in 30 days, bug #355797
 x11-plugins/pidgin-facebookchat
-
-# Michał Górny <mgorny@gentoo.org> (05 Sep 2014)
-# New version is built using C++11, and reverse dependencies may
-# require being switched to C++11 as well. Mask for testing.
-~sys-devel/clang-3.5.0
-~sys-devel/llvm-3.5.0
 
 # Sergey Popov <pinkbyte@gentoo.org> (04 Sep 2014)
 # Security mask, wrt bugs #488212, #498164, #500260,
@@ -533,6 +527,7 @@ sys-fs/rdiff-backup-fs
 # Current stable for upstream, pending a tinderbox run.
 # Note: mask restored because of #509294, #519258.
 =media-video/libav-10*
+=media-video/libav-11*
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (26 Mar 2014)
 # Affected by multiple vulnerabilities, #445916, #471098 and #472280
