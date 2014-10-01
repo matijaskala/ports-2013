@@ -1148,7 +1148,9 @@ toolchain_src_configure() {
 		if use_if_iuse libssp ; then
 			confgcc+=( --enable-libssp )
 		else
-			export gcc_cv_libc_provides_ssp=yes
+			if hardened_gcc_is_stable ssp; then
+				export gcc_cv_libc_provides_ssp=yes
+			fi
 			confgcc+=( --disable-libssp )
 		fi
 
@@ -2217,7 +2219,7 @@ hardened_gcc_is_stable() {
 	elif [[ $1 == "ssp" ]] ; then
 		if [[ ${CTARGET} == *-uclibc* ]] ; then
 			tocheck=${SSP_UCLIBC_STABLE}
-		else
+		elif  [[ ${CTARGET} == *-gnu* ]] ; then
 			tocheck=${SSP_STABLE}
 		fi
 	else
