@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst prepare unpack
+DEPEND=net-firewall/iptables sys-apps/ed >=sys-apps/iproute2-3.3.0 >=sys-fs/vzquota-3.1 ploop? ( >=sys-cluster/ploop-1.9 sys-block/parted sys-fs/quota ) >=dev-libs/libcgroup-0.38 net-misc/openssh net-misc/rsync[xattr] virtual/pkgconfig virtual/pkgconfig !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.13:1.13 >=sys-devel/automake-1.14:1.14 ) >=sys-devel/autoconf-2.69 sys-devel/libtool
+DESCRIPTION=OpenVZ Containers control utility
+EAPI=5
+HOMEPAGE=http://openvz.org/
+IUSE=+ploop
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=net-firewall/iptables sys-apps/ed >=sys-apps/iproute2-3.3.0 >=sys-fs/vzquota-3.1 ploop? ( >=sys-cluster/ploop-1.9 sys-block/parted sys-fs/quota ) >=dev-libs/libcgroup-0.38 net-misc/openssh net-misc/rsync[xattr]
+SLOT=0
+SRC_URI=https://github.com/funtoo/vzctl/tarball/vzctl-4.5.1-20130928-funtoo -> vzctl-4.5.1-20130928-funtoo.tar.gz
+_eclasses_=autotools	ebea507d219855923e3438c953cf4ab8	base	87f7447ccfc06fd0729ff4684e11e0d6	bash-completion-r1	c8399c7c7ecbcf7ed6e5bd3abb3d4af3	eutils	32548a82e42dc26e3312581476d2f20c	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	multiprocessing	d7f2985a2c76c365ee20269db5261414	toolchain-funcs	0f1760274637a138b99bb649202ea402	udev	da001465a2e939c93f7ae16947ce3438
+_md5_=ddf638cdd41b566c6283e86151a10f5f

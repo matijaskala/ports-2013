@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install prepare
+DEPEND=debug? ( x11-libs/wxGTK:2.8[debug] ) mysql? ( virtual/mysql ) postgres? ( dev-db/postgresql-base )
+DESCRIPTION=Cross platform IDE for the C/C++ programming languages
+EAPI=4
+HOMEPAGE=http://www.codelite.org/
+IUSE=debug mysql pch postgres
+KEYWORDS=-* ~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=x11-libs/wxGTK:2.8[X]
+SLOT=0
+SRC_URI=mirror://sourceforge/codelite/codelite-4.1.5770-gtk.src.tar.gz
+_eclasses_=eutils	32548a82e42dc26e3312581476d2f20c	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0f1760274637a138b99bb649202ea402
+_md5_=fe566086ea691e0fda5a57674f1e409d
