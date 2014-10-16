@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/wsgiproxy2/wsgiproxy2-0.4.1.ebuild,v 1.4 2014/07/05 02:48:00 idella4 Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/wsgiproxy2/wsgiproxy2-0.4.1.ebuild,v 1.6 2014/10/15 23:15:11 blueness Exp $
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_2,3_3} )
+PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} )
 
 inherit distutils-r1
 
@@ -16,7 +16,7 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.zip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 IUSE="doc test"
 
 RDEPEND="dev-python/urllib3[${PYTHON_USEDEP}]

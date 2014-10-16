@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/cups/cups-9999.ebuild,v 1.63 2014/09/07 20:48:21 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/cups/cups-9999.ebuild,v 1.66 2014/10/16 19:31:03 tamiko Exp $
 
 EAPI=5
 
@@ -32,10 +32,10 @@ HOMEPAGE="http://www.cups.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="acl dbus debug gnutls java kerberos lprng-compat pam
+IUSE="acl dbus debug java kerberos lprng-compat pam
 	python selinux +ssl static-libs systemd +threads usb X xinetd zeroconf"
 
-LANGS="ca es fr it ja pt_BR ru"
+LANGS="ca cs de es fr it ja pt_BR ru"
 for X in ${LANGS} ; do
 	IUSE="${IUSE} +linguas_${X}"
 done
@@ -56,12 +56,10 @@ RDEPEND="
 	python? ( ${PYTHON_DEPS} )
 	selinux? ( sec-policy/selinux-cups )
 	ssl? (
-		gnutls? (
-			>=dev-libs/libgcrypt-1.5.3:0[${MULTILIB_USEDEP}]
-			>=net-libs/gnutls-2.12.23-r6[${MULTILIB_USEDEP}]
-		)
-		!gnutls? ( >=dev-libs/openssl-1.0.1h-r2[${MULTILIB_USEDEP}] )
+		>=dev-libs/libgcrypt-1.5.3:0[${MULTILIB_USEDEP}]
+		>=net-libs/gnutls-2.12.23-r6[${MULTILIB_USEDEP}]
 	)
+	systemd? ( sys-apps/systemd )
 	usb? ( virtual/libusb:1 )
 	X? ( x11-misc/xdg-utils )
 	xinetd? ( sys-apps/xinetd )
@@ -83,7 +81,6 @@ PDEPEND="
 "
 
 REQUIRED_USE="
-	gnutls? ( ssl )
 	python? ( ${PYTHON_REQUIRED_USE} )
 	usb? ( threads )
 "
@@ -97,6 +94,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-1.6.0-dont-compress-manpages.patch"
 	"${FILESDIR}/${PN}-1.6.0-fix-install-perms.patch"
 	"${FILESDIR}/${PN}-1.4.4-nostrip.patch"
+	"${FILESDIR}/${PN}-2.0.0-rename-systemd-service-files.patch"
 )
 
 MULTILIB_CHOST_TOOLS=(
@@ -149,7 +147,9 @@ pkg_setup() {
 
 src_prepare() {
 	base_src_prepare
-	use systemd && epatch "${FILESDIR}/${PN}-1.7.2-systemd-socket-2.patch"
+
+	# Remove ".SILENT" rule for verbose output (bug 524338).
+	sed 's#^.SILENT:##g' -i "${S}"/Makedefs.in || die "sed failed"
 
 	# Fix install-sh, posix sh does not have 'function'.
 	sed 's#function gzipcp#gzipcp()#g' -i "${S}/install-sh"
@@ -168,17 +168,6 @@ multilib_src_configure() {
 	einfo LINGUAS=\"${LINGUAS}\"
 
 	local myconf=()
-	if use ssl ; then
-		myconf+=(
-			$(use_enable gnutls)
-			$(use_enable !gnutls openssl)
-		)
-	else
-		myconf+=(
-			--disable-gnutls
-			--disable-openssl
-		)
-	fi
 
 	if tc-is-static-only; then
 		myconf+=(
@@ -186,15 +175,13 @@ multilib_src_configure() {
 		)
 	fi
 
-	if use systemd; then
-		myconf+=(
-			--with-systemdsystemunitdir="$(systemd_get_unitdir)"
-		)
-	fi
-
+	# explicitly specify compiler wrt bug 524340
+	#
 	# need to override KRB5CONFIG for proper flags
 	# https://www.cups.org/str.php?L4423
 	econf \
+		CC="$(tc-getCC)" \
+		CXX="$(tc-getCXX)" \
 		KRB5CONFIG="${EPREFIX}"/usr/bin/${CHOST}-krb5-config \
 		--libdir="${EPREFIX}"/usr/$(get_libdir) \
 		--localstatedir="${EPREFIX}"/var \
@@ -205,21 +192,23 @@ multilib_src_configure() {
 		--with-languages="${LINGUAS}" \
 		--with-system-groups=lpadmin \
 		$(multilib_native_use_enable acl) \
-		$(use_enable zeroconf avahi) \
 		$(use_enable dbus) \
 		$(use_enable debug) \
 		$(use_enable debug debug-guards) \
+		$(multilib_native_use_with java) \
 		$(use_enable kerberos gssapi) \
 		$(multilib_native_use_enable pam) \
+		$(multilib_native_use_with python python "${PYTHON}") \
 		$(use_enable static-libs static) \
 		$(use_enable threads) \
+		$(use_enable ssl gnutls) \
+		$(use_enable systemd) \
 		$(multilib_native_use_enable usb libusb) \
+		$(multilib_native_use_with xinetd xinetd /etc/xinetd.d) \
+		$(use_enable zeroconf avahi) \
 		--disable-dnssd \
-		$(multilib_native_use_with java) \
 		--without-perl \
 		--without-php \
-		$(multilib_native_use_with python python "${PYTHON}") \
-		$(multilib_native_use_with xinetd xinetd /etc/xinetd.d) \
 		$(multilib_is_native_abi && echo --enable-libpaper || echo --disable-libpaper) \
 		"${myconf[@]}"
 

@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/webtest/webtest-2.0.15.ebuild,v 1.3 2014/10/10 16:11:53 idella4 Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/webtest/webtest-2.0.15.ebuild,v 1.5 2014/10/15 23:15:54 blueness Exp $
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_2,3_3} )
+PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} )
 
 inherit distutils-r1
 
@@ -17,7 +17,7 @@ SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 IUSE="doc test"
 
 #nose<1.3.0
@@ -36,7 +36,7 @@ DEPEND="${RDEPEND}
 		dev-python/pastedeploy[${PYTHON_USEDEP}]
 		dev-python/wsgiproxy2[${PYTHON_USEDEP}]
 		dev-python/coverage[${PYTHON_USEDEP}]
-		dev-python/mock[${PYTHON_USEDEP}]
+		$(python_gen_cond_dep 'dev-python/mock[${PYTHON_USEDEP}]' python{2_7,3_2} )
 	)"
 
 S="${WORKDIR}/${MY_P}"
@@ -64,15 +64,6 @@ python_test() {
 	# Tests raise ImportErrors with our default PYTHONPATH.
 	local -x PYTHONPATH=
 	nosetests || die "Tests fail with ${EPYTHON}"
-}
-
-python_install() {
-	distutils-r1_python_install
-
-	# Why is it so?
-	if python_is_python3; then
-		rm -f "${D}$(python_get_sitedir)"/webtest/lint3.py
-	fi
 }
 
 python_install_all() {

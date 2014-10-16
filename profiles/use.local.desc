@@ -499,7 +499,6 @@ app-emulation/emul-linux-x86-baselibs:development - Install pkgconfig files
 app-emulation/emul-linux-x86-baselibs:kerberos - Pull in virtual/krb5 if using USE=abi_x86_32. Disabling it is unsupported, use on your own responsibility. Irrelevant when using USE=-abi_x86_32.
 app-emulation/emul-linux-x86-baselibs:ldap - Pull in net-nds/openldap if using USE=abi_x86_32. Disabling it is unsupported, use on your own responsibility. Irrelevant when using USE=-abi_x86_32.
 app-emulation/emul-linux-x86-baselibs:pam - Pull in virtual/pam if using USE=abi_x86_32. Disabling it is unsupported, use on your own responsibility. Irrelevant when using USE=-abi_x86_32.
-app-emulation/emul-linux-x86-compat:development - Install pkgconfig files
 app-emulation/emul-linux-x86-cpplibs:development - Install pkgconfig files
 app-emulation/emul-linux-x86-db:development - Install pkgconfig files
 app-emulation/emul-linux-x86-gstplugins:development - Install pkgconfig files
@@ -673,7 +672,6 @@ app-emulation/xen-tools:qemu - Enable IOEMU support via the use of qemu-dm
 app-emulation/xen-tools:screen - Enable support for running domain U console in an app-misc/screen session
 app-emulation/xen-tools:system-qemu - Using app-emulation/qemu instead of the bundled one
 app-emulation/xen-tools:system-seabios - Using sys-firmware/seabios instead of the bundled one
-app-emulation/xen-tools:xend - Enable support the xend and xm to manage xen
 app-emulation/xtrs:ls-dos - Install LS-DOS disk images for Model 4P
 app-forensics/afflib:fuse - Enable extra fuse thingies
 app-forensics/afflib:qemu - Enable qemu stuff
@@ -2052,20 +2050,42 @@ dev-php/smarty-docs:pdf - Install the documentation in PDF format
 dev-python/Kivy:camera - Install libraries needed to support camera
 dev-python/Kivy:garden - Install garden tool to manage user maintained widgets
 dev-python/PyFoam:extras - Enable optional dependencies
-dev-python/PyQt4:X - Build QtGui and QtTest modules
-dev-python/PyQt4:declarative - Build QtDeclarative module
-dev-python/PyQt4:designer - Build QtDesigner module
-dev-python/PyQt4:help - Build QtHelp module
+dev-python/PyQt4:X - Build bindings for the QtGui module
+dev-python/PyQt4:dbus - Build bindings for the QtDBus module
+dev-python/PyQt4:declarative - Build bindings for the QtDeclarative module
+dev-python/PyQt4:designer - Build bindings for the QtDesigner module and enable the designer plugin
+dev-python/PyQt4:help - Build bindings for the QtHelp module
 dev-python/PyQt4:kde - Select media-libs/phonon as Phonon variant (needed for KDE)
-dev-python/PyQt4:multimedia - Build QtMultimedia module
-dev-python/PyQt4:opengl - Build QtOpenGL module
-dev-python/PyQt4:phonon - Build phonon module
-dev-python/PyQt4:script - Build QtScript module
-dev-python/PyQt4:scripttools - Build QtScriptTools module
-dev-python/PyQt4:sql - Build QtSql module
-dev-python/PyQt4:svg - Build QtSvg module
-dev-python/PyQt4:webkit - Build QtWebKit module
-dev-python/PyQt4:xmlpatterns - Build QtXmlPatterns module
+dev-python/PyQt4:multimedia - Build bindings for the QtMultimedia module
+dev-python/PyQt4:opengl - Build bindings for the QtOpenGL module
+dev-python/PyQt4:phonon - Build bindings for the phonon module
+dev-python/PyQt4:script - Build bindings for the QtScript module
+dev-python/PyQt4:scripttools - Build bindings for the QtScriptTools module
+dev-python/PyQt4:sql - Build bindings for the QtSql module
+dev-python/PyQt4:svg - Build bindings for the QtSvg module
+dev-python/PyQt4:testlib - Build bindings for the QtTest module
+dev-python/PyQt4:webkit - Build bindings for the QtWebKit module
+dev-python/PyQt4:xmlpatterns - Build bindings for the QtXmlPatterns module
+dev-python/PyQt5:dbus - Build bindings for the QtDBus module
+dev-python/PyQt5:declarative - Build bindings for the QtQml/QtQuick modules and enable the qmlscene plugin
+dev-python/PyQt5:designer - Build bindings for the QtDesigner module and enable the designer plugin
+dev-python/PyQt5:gui - Build bindings for the QtGui module
+dev-python/PyQt5:help - Build bindings for the QtHelp module
+dev-python/PyQt5:multimedia - Build bindings for the QtMultimedia module
+dev-python/PyQt5:network - Build bindings for the QtNetwork module
+dev-python/PyQt5:opengl - Build bindings for the QtOpenGL module
+dev-python/PyQt5:positioning - Build bindings for the QtPositioning module
+dev-python/PyQt5:printsupport - Build bindings for the QtPrintSupport module
+dev-python/PyQt5:sensors - Build bindings for the QtSensors module
+dev-python/PyQt5:serialport - Build bindings for the QtSerialPort module
+dev-python/PyQt5:sql - Build bindings for the QtSql module
+dev-python/PyQt5:svg - Build bindings for the QtSvg module
+dev-python/PyQt5:testlib - Build bindings for the QtTest module
+dev-python/PyQt5:webkit - Build bindings for the QtWebKit module
+dev-python/PyQt5:websockets - Build bindings for the QtWebSockets module
+dev-python/PyQt5:widgets - Build bindings for the QtWidgets module
+dev-python/PyQt5:x11extras - Build bindings for the QtX11Extras module
+dev-python/PyQt5:xmlpatterns - Build bindings for the QtXmlPatterns module
 dev-python/PyQtMobility:contacts - Build bindings for the QtContacts module
 dev-python/PyQtMobility:feedback - Build bindings for the QtFeedback module
 dev-python/PyQtMobility:gallery - Build bindings for the QtGallery module
@@ -2235,7 +2255,6 @@ dev-qt/qt-creator:valgrind - Add support for memory debugging using dev-util/val
 dev-qt/qt-meta:kde - Select media-libs/phonon as Phonon variant (needed for KDE)
 dev-qt/qt-meta:openvg - Enable the QtOpenVG module
 dev-qt/qt-meta:qt3support - Enable the Qt3Support library for Qt4
-dev-qt/qt-mobility:bearer - Build the QtBearer module
 dev-qt/qt-mobility:bluetooth - Enable Bluetooth support in QtConnectivity and QtSystemInfo modules
 dev-qt/qt-mobility:connectivity - Build the QtConnectivity module
 dev-qt/qt-mobility:contacts - Build the QtContacts module
@@ -2760,6 +2779,7 @@ games-rpg/sumwars:tools - Builds editor tools
 games-rpg/to-the-moon:bundled-libs - Use bundled libraries
 games-rpg/valyriatear:editor - Compile the Qt editor along with the game
 games-simulation/corsix-th:ffmpeg - Use ffmpeg for playing in-game cutscenes.
+games-simulation/corsix-th:mapeditor - Build the map editor (needs opengl enabled!).
 games-simulation/corsix-th:midi - Use SDL mixer and timidity for in-game music.
 games-simulation/corsix-th:opengl - Use OpenGL for rendering.
 games-simulation/corsix-th:sdl - Use SDL for rendering.
@@ -2780,6 +2800,7 @@ games-sports/speed-dreams:xrandr - Enable support for the X xrandr extension
 games-sports/xmoto:editor - Depend on inkscape, scripts to convert svg to level (svg2lvl)
 games-strategy/0ad:editor - Include Atlas scenario editor projects
 games-strategy/0ad:lobby - Enable the use of net-libs/gloox and the multiplayer lobby
+games-strategy/0ad:nvtt - Support for some uncompressed data formats via media-gfx/nvidia-texture-tools (might be needed for some mods)
 games-strategy/dark-oberon:fmod - Add sound support (fmod)
 games-strategy/defcon-demo:system-libs - Use system libraries instead of the ones included in the upstream distribution.
 games-strategy/freeciv:aimodules - Support for dynamically loadable AI modules (server-side)
@@ -3116,6 +3137,15 @@ kde-base/smokeqt:qwt - Compile bindings for x11-libs/qwt.
 kde-base/smokeqt:webkit - Compile bindings for dev-qt/qtwebkit.
 kde-base/step:qalculate - Enable the libqalculate library for unit conversion
 kde-base/systemsettings:nepomuk - Enable Nepomuk based semantic desktop support (deprecated)
+kde-frameworks/kdesignerplugin:designer - Build KF5 widgets plugin for QtDesigner
+kde-frameworks/kdesignerplugin:webkit - Build kdewebkit plugin for QtDesigner
+kde-frameworks/kimageformats:eps - Support the EPS graphics file format
+kde-frameworks/kinit:caps - Capabilities support for improved security and better OOM handling
+kde-frameworks/knotifyconfig:phonon - Add sound support via media-libs/phonon
+kde-frameworks/kxmlgui:attica - Enable support for kde-frameworks/attica
+kde-frameworks/plasma:egl - Enable EGL support
+kde-frameworks/sonnet:aspell - Enable the app-text/aspell spell-checking backend
+kde-frameworks/sonnet:hunspell - Enable the app-text/hunspell spell-checking backend
 kde-misc/kcm-grub2:hwinfo - Used to work out supported framebuffer resolutions
 kde-misc/kcm-grub2:imagemagick - Create splash images compatible with GRUB2
 kde-misc/kcm-grub2:packagekit - Add support for packagekit integration
@@ -3207,9 +3237,10 @@ mail-client/thunderbird:ipc - Use inter-process communication between tabs and p
 mail-client/thunderbird:lightning - Enable calendar support
 mail-client/thunderbird:minimal - Remove the software development kit and headers
 mail-client/thunderbird:mozdom - Enable Mozilla's DOM inspector
-mail-client/thunderbird:system-cairo - Use the system-wide x11-libs/cairo Use system cairo instead of bundled.
-mail-client/thunderbird:system-icu - Use the system-wide dev-libs/icu Use system icu instead of bundled.
-mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-turbo Use system jpeg instead of bundled.
+mail-client/thunderbird:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
+mail-client/thunderbird:system-icu - Use the system-wide dev-libs/icu instead of bundled.
+mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
+mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 mail-client/thunderbird:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
 mail-client/thunderbird-bin:crashreporter - Enable crash reporter for bugs
 mail-client/trojita:password - Store passwords securely via dev-libs/qtkeychain
@@ -4660,6 +4691,8 @@ net-analyzer/nsca:crypt - Build support for crypted communication with nsca, thr
 net-analyzer/nsca:minimal - Only build and install the send_nsca command and not the daemon. This allows a very minimal install with no overhead when setting up a node.
 net-analyzer/openvas:pdf - Enable pdf report creation
 net-analyzer/pchar:pcap - Use the net-libs/libpcap library
+net-analyzer/pinger:gtk2 - Install the gtkpinger GUI utility based on x11-libs/gtk:2
+net-analyzer/pinger:gtk3 - Install the gtkpinger GUI utility based on x11-libs/gtk:3
 net-analyzer/pmacct:64bit - Use 64bit counters instead of 32bit ones
 net-analyzer/pmacct:mongodb - Add support for mongodb backend
 net-analyzer/pmacct:ulog - Enable ULOG support
@@ -6895,7 +6928,7 @@ sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' ter
 sys-devel/llvm:static-analyzer - Install the Clang static analyzer (requires USE=clang)
 sys-devel/llvm:udis86 - Enable support for dev-libs/udis86 disassembler library
 sys-devel/sparse:gtk - Build the test-inspect utility (requires x11-libs/gtk+ version 2)
-sys-devel/sparse:llvm - support llvm
+sys-devel/sparse:llvm - Build the sparse-llvm utility
 sys-devel/sparse:xml - Build the c2xml utility (requires dev-libs/libxml2).
 sys-firmware/ipxe:iso - Build a bootable ISO for using PXE
 sys-firmware/ipxe:qemu - Build the required PXE ROM images for app-emulation/qemu and app-emulation/qemu-kvm
@@ -7170,6 +7203,7 @@ virtual/ffmpeg:vaapi - Enables VAAPI (Video Acceleration API) for hardware decod
 virtual/linux-sources:firmware - Install linux kernel firmware
 virtual/mpi:romio - Enable romio, a high-performance portable MPI-IO
 virtual/mysql:embedded - Build embedded server (libmysqld)
+virtual/podofo-build:boost - Add support for boost
 www-apache/mod_extract_forwarded:mod_proxy - Enable support for Apache's internal proxy
 www-apache/mod_musicindex:archive - Add archive support
 www-apache/mod_musicindex:cache - Add File cache support
@@ -7243,11 +7277,12 @@ www-client/firefox:custom-optimization - Fine-tune custom compiler optimizations
 www-client/firefox:ipc - Use inter-process communication between tabs and plugins. Allows for greater stability in case of plugin crashes
 www-client/firefox:minimal - Prevent sdk and headers from being installed
 www-client/firefox:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
-www-client/firefox:system-cairo - Use the system-wide x11-libs/cairo Use system cairo instead of bundled.
-www-client/firefox:system-icu - Use the system-wide dev-libs/icu Use system icu instead of bundled.
-www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo Use system jpeg instead of bundled.
+www-client/firefox:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
+www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bundled.
+www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
+www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
-www-client/firefox:webm - Use system media-libs/libvpx for HTML5 WebM video support.
+www-client/firefox:webm - Support HTML5 WebM with media-libs/libvpx on firefox-10.
 www-client/google-chrome:plugins - Add system plugins path to launcher
 www-client/google-chrome-beta:plugins - Add system plugins path to launcher
 www-client/google-chrome-unstable:plugins - Add system plugins path to launcher
