@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/cups/cups-2.0.0-r2.ebuild,v 1.1 2014/10/16 19:31:03 tamiko Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-print/cups/cups-2.0.0-r2.ebuild,v 1.3 2014/10/17 08:30:50 tamiko Exp $
 
 EAPI=5
 
@@ -24,7 +24,7 @@ if [[ ${PV} == *9999 ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="http://www.cups.org/software/${MY_PV}/${MY_P}-source.tar.bz2"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~m68k-mint" # ~x86-fbsd
 fi
 
 DESCRIPTION="The Common Unix Printing System"
@@ -191,6 +191,7 @@ multilib_src_configure() {
 		--with-docdir="${EPREFIX}"/usr/share/cups/html \
 		--with-languages="${LINGUAS}" \
 		--with-system-groups=lpadmin \
+		--with-xinetd=/etc/xinetd.d \
 		$(multilib_native_use_enable acl) \
 		$(use_enable dbus) \
 		$(use_enable debug) \
@@ -204,7 +205,6 @@ multilib_src_configure() {
 		$(use_enable ssl gnutls) \
 		$(use_enable systemd) \
 		$(multilib_native_use_enable usb libusb) \
-		$(multilib_native_use_with xinetd xinetd /etc/xinetd.d) \
 		$(use_enable zeroconf avahi) \
 		--disable-dnssd \
 		--without-perl \
@@ -275,6 +275,8 @@ multilib_src_install_all() {
 		# write permission for file owner (root), bug #296221
 		fperms u+w /etc/xinetd.d/cups-lpd || die "fperms failed"
 	else
+		# always configure with --with-xinetd= and clean up later,
+		# bug #525604
 		rm -rf "${ED}"/etc/xinetd.d
 	fi
 
