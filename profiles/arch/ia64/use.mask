@@ -269,3 +269,12 @@ llvm
 # Pacho Ramos <pacho@gentoo.org> (08 Jan 2014)
 # Unmask systemd since it is keyworded here.
 -systemd
+
+# sys-libs/libseccomp has not been ported to this arch yet #524148
+seccomp
+
+# need to test sys-cluster/glusterfs #519618
+glusterfs
+
+# need to test ceph and friends #519618
+rbd
