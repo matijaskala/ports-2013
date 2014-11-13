@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>                                                           
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-    <herd>no-herd</herd>
-    <maintainer>
-        <email>zcarterc@gmail.com</email>
-        <name>Carter Charbonneau</name>
-    </maintainer>
-    <upstream>
-        <changelog>https://github.com/mozilla/rust/commits/master</changelog>
-    </upstream>
+  <maintainer>
+    <email>jauhien@gentoo.org</email>
+    <name>Jauhien Piatlicki</name>
+  </maintainer>
+  <maintainer>
+    <email>Heather@Cynede.net</email>
+  </maintainer>
+  <use>
+    <flag name="clang">Use <pkg>sys-devel/clang</pkg> for building</flag>
+    <flag name="libcxx">Use <pkg>sys-libs/libcxx</pkg> as standard
+    library when building with <pkg>sys-devel/clang</pkg></flag>
+  </use>
 </pkgmetadata>
