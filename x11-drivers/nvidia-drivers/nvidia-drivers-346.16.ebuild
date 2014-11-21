@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/nvidia-drivers/nvidia-drivers-346.16.ebuild,v 1.1 2014/11/14 14:25:08 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/nvidia-drivers/nvidia-drivers-346.16.ebuild,v 1.5 2014/11/15 17:44:35 jer Exp $
 
 EAPI=5
 
@@ -25,9 +25,13 @@ SRC_URI="
 LICENSE="GPL-2 NVIDIA-r2"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86 ~amd64-fbsd ~x86-fbsd"
-IUSE="acpi multilib kernel_FreeBSD kernel_linux pax_kernel +tools +X uvm"
 RESTRICT="bindist mirror strip"
 EMULTILIB_PKG="true"
+
+IUSE="acpi multilib kernel_FreeBSD kernel_linux pax_kernel +tools gtk2 gtk3 +X uvm"
+REQUIRED_USE="
+	tools? ( X || ( gtk2 gtk3 ) )
+"
 
 COMMON="
 	app-admin/eselect-opencl
@@ -48,13 +52,14 @@ RDEPEND="
 		dev-libs/atk
 		dev-libs/glib
 		x11-libs/gdk-pixbuf
-		>=x11-libs/gtk+-2.4:2
+		gtk2? ( >=x11-libs/gtk+-2.4:2 )
+		gtk3? ( x11-libs/gtk+:3 )
 		x11-libs/libX11
 		x11-libs/libXext
 		x11-libs/pango[X]
 	)
 	X? (
-		<x11-base/xorg-server-1.16.99
+		<x11-base/xorg-server-1.16.99:=
 		>=x11-libs/libvdpau-0.3-r1
 		multilib? (
 			|| (
@@ -67,8 +72,6 @@ RDEPEND="
 		)
 	)
 "
-
-REQUIRED_USE="tools? ( X )"
 
 QA_PREBUILT="opt/* usr/lib*"
 
@@ -189,7 +192,7 @@ src_compile() {
 		MAKE="$(get_bmake)" CFLAGS="-Wno-sign-compare" emake CC="$(tc-getCC)" \
 			LD="$(tc-getLD)" LDFLAGS="$(raw-ldflags)" || die
 	elif use kernel_linux; then
-		use uvm && MAKEOPTS=-j1
+		MAKEOPTS=-j1
 		linux-mod_src_compile
 	fi
 }
@@ -283,8 +286,10 @@ src_install() {
 			/usr/$(get_libdir)/opengl/nvidia/extensions
 
 		# Xorg nvidia.conf
-		insinto /usr/share/X11/xorg.conf.d
-		newins {,50-}nvidia-drm-outputclass.conf
+		if has_version '>=x11-base/xorg-server-1.16'; then
+			insinto /usr/share/X11/xorg.conf.d
+			newins {,50-}nvidia-drm-outputclass.conf
+		fi
 	fi
 
 	# OpenCL ICD for NVIDIA
@@ -339,6 +344,8 @@ src_install() {
 
 	if use tools; then
 		doexe ${NV_OBJ}/nvidia-settings
+		use gtk2 && donvidia libnvidia-gtk2.so ${PV}
+		use gtk3 && donvidia libnvidia-gtk3.so ${PV}
 		insinto /usr/share/nvidia/
 		doins nvidia-application-profiles-${PV}-key-documentation
 		insinto /etc/nvidia

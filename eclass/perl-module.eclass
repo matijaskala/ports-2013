@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/perl-module.eclass,v 1.150 2014/11/12 23:26:36 monsieurp Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/perl-module.eclass,v 1.156 2014/11/21 01:21:44 dilfridge Exp $
 
 # @ECLASS: perl-module.eclass
 # @MAINTAINER:
@@ -319,44 +319,66 @@ perl-module_src_install() {
 # @FUNCTION: perl-module_pkg_setup
 # @USAGE: perl-module_pkg_setup
 # @DESCRIPTION:
-# This function is to be called during the pkg_setup() phase.
+# This function was to be called during the pkg_setup() phase.
+# Deprecated, to be removed. Where it is called, place a call to perl_set_version instead.
 perl-module_pkg_setup() {
 	debug-print-function $FUNCNAME "$@"
+	ewarn "perl-modules.eclass: perl-module_pkg_setup is deprecated and will be removed. Please use perl_set_version instead."
 	perl_set_version
 }
 
 # @FUNCTION: perl-module_pkg_preinst
 # @USAGE: perl-module_pkg_preinst
 # @DESCRIPTION:
-# This function is to be called during the pkg_preinst() phase.
+# This function was to be called during the pkg_preinst() phase.
+# Deprecated, to be removed. Where it is called, place a call to perl_set_version instead.
 perl-module_pkg_preinst() {
 	debug-print-function $FUNCNAME "$@"
+	ewarn "perl-modules.eclass: perl-module_pkg_preinst is deprecated and will be removed. Please use perl_set_version instead."
 	perl_set_version
 }
 
 # @FUNCTION: perl-module_pkg_postinst
 # @USAGE: perl-module_pkg_postinst
 # @DESCRIPTION:
-# This function is to be called during the pkg_postinst() phase.
+# This function is to be called during the pkg_postinst() phase. It only does 
+# useful things for the perl-core category, where it handles the file renaming and symbolic
+# links that prevent file collisions for dual-life packages installing scripts. 
+# In any other category it immediately exits.
 perl-module_pkg_postinst() {
 	debug-print-function $FUNCNAME "$@"
+	if [[ ${CATEGORY} != perl-core ]] ; then
+		eqawarn "perl-module.eclass: You are calling perl-module_pkg_postinst outside the perl-core category."
+		eqawarn "   This does not do anything; the call can be safely removed."
+		return 0
+	fi
 	perl_link_duallife_scripts
 }
 
 # @FUNCTION: perl-module_pkg_prerm
 # @USAGE: perl-module_pkg_prerm
 # @DESCRIPTION:
-# This function is to be called during the pkg_prerm() phase.
+# This function was to be called during the pkg_prerm() phase.
+# It does not do anything. Deprecated, to be removed.
 perl-module_pkg_prerm() {
 	debug-print-function $FUNCNAME "$@"
+	eqawarn "perl-module.eclass: perl-module_pkg_prerm does not do anything and will be removed. Please remove the call."
 }
 
 # @FUNCTION: perl-module_pkg_postrm
 # @USAGE: perl-module_pkg_postrm
 # @DESCRIPTION:
-# This function is to be called during the pkg_postrm() phase.
+# This function is to be called during the pkg_postrm() phase. It only does 
+# useful things for the perl-core category, where it handles the file renaming and symbolic
+# links that prevent file collisions for dual-life packages installing scripts. 
+# In any other category it immediately exits.
 perl-module_pkg_postrm() {
 	debug-print-function $FUNCNAME "$@"
+	if [[ ${CATEGORY} != perl-core ]] ; then
+		eqawarn "perl-module.eclass: You are calling perl-module_pkg_postrm outside the perl-core category."
+		eqawarn "   This does not do anything; the call can be safely removed."
+		return 0
+	fi
 	perl_link_duallife_scripts
 }
 
@@ -394,7 +416,7 @@ perl_set_version() {
 # Please use the function above instead, perl_set_version().
 perlinfo() {
 	debug-print-function $FUNCNAME "$@"
-	eqawarn "perl-modules.eclass: perlinfo is deprecated and will be removed. Please use perl_set_version instead."
+	ewarn "perl-modules.eclass: perlinfo is deprecated and will be removed. Please use perl_set_version instead."
 	perl_set_version
 }
 
@@ -419,7 +441,7 @@ perl_delete_localpod() {
 # Please use the function above instead, perl_delete_localpod().
 fixlocalpod() {
 	debug-print-function $FUNCNAME "$@"
-	eqawarn "perl-modules.eclass: fixlocalpod is deprecated and will be removed. Please use perl_delete_localpod instead."
+	ewarn "perl-modules.eclass: fixlocalpod is deprecated and will be removed. Please use perl_delete_localpod instead."
 	perl_delete_localpod
 }
 
@@ -524,12 +546,9 @@ perl_rm_files() {
 # @FUNCTION: perl_link_duallife_scripts
 # @USAGE: perl_link_duallife_scripts
 # @DESCRIPTION:
-# This function contains the bulk of perl-module_pkg_postinst()'s logic
-# and will be soon deprecated. 
-#
-# Please use perl-module_pkg_postinst() instead.
-#
-# TODO: Move code to perl-module_pkg_postinst().
+# Moves files and generates symlinks so dual-life packages installing scripts do not
+# lead to file collisions. Mainly for use in pkg_postinst and pkg_postrm, and makes 
+# only sense for perl-core packages.
 perl_link_duallife_scripts() {
 	debug-print-function $FUNCNAME "$@"
 	if [[ ${CATEGORY} != perl-core ]] || ! has_version ">=dev-lang/perl-5.8.8-r8" ; then

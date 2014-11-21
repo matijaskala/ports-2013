@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16163 2014/11/13 13:15:01 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16173 2014/11/20 02:15:08 pesa Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,34 +30,17 @@
 
 #--- END OF EXAMPLES ---
 
-# Davide Pesavento <pesa@gentoo.org> (13 Nov 2014)
-# Multilib ebuilds based on the new qt4-build-multilib eclass.
-# Added dependency on dev-qt/qtchooser, which must be keyworded.
-# See bugs 498010 and 510042.
-=dev-qt/assistant-4.8.6*
-=dev-qt/designer-4.8.6*
-=dev-qt/linguist-4.8.6*
-=dev-qt/pixeltool-4.8.6*
-=dev-qt/qdbusviewer-4.8.6*
-=dev-qt/qt3support-4.8.6*
-=dev-qt/qtbearer-4.8.6*
-=dev-qt/qtcore-4.8.6*
-=dev-qt/qtdbus-4.8.6*
-=dev-qt/qtdeclarative-4.8.6*
-=dev-qt/qtdemo-4.8.6*
-=dev-qt/qtgui-4.8.6*
-=dev-qt/qthelp-4.8.6*
-=dev-qt/qtmultimedia-4.8.6*
-=dev-qt/qtopengl-4.8.6*
-=dev-qt/qtopenvg-4.8.6*
-=dev-qt/qtphonon-4.8.6*
-=dev-qt/qtscript-4.8.6*
-=dev-qt/qtsql-4.8.6*
-=dev-qt/qtsvg-4.8.6*
-=dev-qt/qttest-4.8.6*
-=dev-qt/qttranslations-4.8.6*
-=dev-qt/qtwebkit-4.8.6*
-=dev-qt/qtxmlpatterns-4.8.6*
+# Fabian Groffen <grobian@gentoo.org> (18 Nov 2014)
+# Mask Exim 4.85 release candidate
+=mail-mta/exim-4.85_rc1
+
+# Markos Chandras <hwoarang@gentoo.org> (18 Nov 2014)
+# Mask latest development version for testing
+=x11-misc/lightdm-1.13*
+
+# Rémi Cardona <remi@gentoo.org> (15 Nov 2014)
+# Masked until decision is made about binary slot
+=x11-base/xorg-server-1.16.2
 
 # Eray Aslan <eras@gentoo.org> (11 Nov 2014)
 # Mask beta releases
@@ -96,12 +79,6 @@ dev-ruby/prawn-core
 # Use kde-base/oxygen-fonts instead
 # Masked for removal in 30 days
 media-fonts/oxygen-fonts
-
-# Ulrich Müller <ulm@gentoo.org> (5 Nov 2014)
-# Does not build with Emacs 24.4.
-# Last visible upstream activity in 2011.
-# Masked for removal in 30 days, bug #528374.
-app-emacs/csharp-mode
 
 # Samuli Suominen <ssuominen@gentoo.org> (05 Nov 2014)
 # ConsoleKit2 from github by Eric Koegel, auth of xfce4-power-manager
@@ -197,10 +174,6 @@ dev-perl/DateTime-Format-DateManip
 # Masked for removal in 30 days
 dev-perl/SVN-Mirror
 
-# Rick Farina <zerochaos@gentoo.org> (19 Oct 2014)
-# Masked for removal on 19 Nov 2014, use sys-apps/hwids instead.
-net-misc/ieee-oui
-
 # Markos Chandras <18 Oct 2014>
 # Not quite ready yet. Reverse deps seem to be broken
 # at the moment. Masked until most of them are fixed
@@ -229,17 +202,9 @@ app-dicts/gnuvd
 # experimental features and accept a more unstable release.
 >=www-client/chromium-40
 
-# Manuel Rüger <mrueg@gentoo.org> (11 Oct 2014)
-# Dead upstream use kde-misc/kcm-touchpad instead
-kde-misc/kcm_touchpad
-
 # Brian Evans <grknight@gentoo.org> (8 Oct 2014)
 # Mask all versions of suhosin until upstream revival is sustained and tested
 dev-php/suhosin
-
-# Manuel Rüger <mrueg@gentoo.org> (6 Oct 2014)
-# Mask texlive-2014
-=dev-tex/luatex-0.79.1
 
 # Jauhien Piatlicki <jauhien@gentoo.org> (5 Oct 2014)
 # Masked because of bug 524390: privilege escalation
@@ -647,10 +612,6 @@ app-backup/rdiff-backup
 app-backup/pybackpack
 sys-fs/rdiff-backup-fs
 
-# Markos Chandras <hwoarang@gentoo.org> (08 Apr 2014)
-# Masked for futher testing with various pam setups
-=x11-misc/lightdm-1.12*
-
 # Gilles Dartiguelongue <eva@gentoo.org> (06 Apr 2014)
 # Old release, never stable, not working anymore
 # See bug #327837, #382667, #492474
@@ -813,10 +774,6 @@ www-apache/mod_spdy
 # Dependencies are unable to satisfy current version,
 # broken; needs a version bump from bug #475552.
 dev-java/itext:5
-
-# Jeroen Roovers <jer@gentoo.org> (31 Jul 2013)
-# Needs >=dev-lang/lua-5.2
->net-analyzer/nmap-6.40
 
 # Julian Ospald <hasufell@gentoo.org> (21 Jul 2013)
 # Mask all unfetchable versions and those with tons of random
