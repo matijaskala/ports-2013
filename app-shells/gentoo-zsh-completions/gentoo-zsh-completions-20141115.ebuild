@@ -14,6 +14,10 @@ KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~s
 
 RDEPEND=">=app-shells/zsh-4.3.5"
 
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-eselect.patch
+}
+
 src_install() {
 	insinto /usr/share/zsh/site-functions
 	doins _*

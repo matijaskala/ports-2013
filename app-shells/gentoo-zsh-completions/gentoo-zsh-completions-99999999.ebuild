@@ -16,6 +16,10 @@ SLOT="0"
 
 RDEPEND=">=app-shells/zsh-4.3.5"
 
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-eselect.patch
+}
+
 src_install() {
 	insinto /usr/share/zsh/site-functions
 	doins src/_*

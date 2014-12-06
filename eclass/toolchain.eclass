@@ -166,7 +166,21 @@ RDEPEND="sys-libs/zlib
 
 tc_version_is_at_least 3 && RDEPEND+=" virtual/libiconv"
 
+if tc_version_is_at_least 4 ; then
+	GMP_MPFR_DEPS=""
+	[[ -z ${GMP_VER} ]] && \
+		GMP_MPFR_DEPS="${GMP_MPFR_DEPS} >=dev-libs/gmp-4.3.2"
+	[[ -z ${MPFR_VER} ]] && \
+		GMP_MPFR_DEPS="${GMP_MPFR_DEPS} >=dev-libs/mpfr-2.4.2"
+	if tc_version_is_at_least 4.3 ; then
+		RDEPEND+=" ${GMP_MPFR_DEPS}"
+	elif in_iuse fortran ; then
+		RDEPEND+=" fortran? ( ${GMP_MPFR_DEPS} )"
+	fi
+fi
 
+[[ -z ${MPC_VER} ]] && \
+tc_version_is_at_least 4.5 && RDEPEND+=" >=dev-libs/mpc-0.8.1"
 
 if in_iuse graphite ; then
 	if tc_version_is_at_least 4.8 ; then
@@ -600,6 +614,17 @@ toolchain_src_prepare() {
 				einfo "  ${f%%...}"
 			done
 	fi
+
+	case ${CTARGET} in
+		*-musl*)
+			cd "${S}"
+			sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
+			mv 'libstdc++-v3/config/os/gnu-linux' 'libstdc++-v3/config/os/gnu-linux.org'
+			cp -r 'libstdc++-v3/config/os/generic' 'libstdc++-v3/config/os/gnu-linux'
+			mv 'libitm/config/linux/x86' 'libitm/config/linux/x86_glibc'
+			cp -r 'libtim/config/generic' 'libtim/config/linux/x86'
+		;;
+	esac
 }
 
 guess_patch_type_in_dir() {
@@ -974,10 +999,14 @@ toolchain_src_configure() {
 			elif built_with_use --hidden --missing false ${CATEGORY}/${needed_libc} crosscompile_opts_headers-only ; then
 				confgcc+=(
 					"${confgcc_no_libc[@]}"
+					--enable-threads=posix
 					--with-sysroot=${PREFIX}/${CTARGET}
 				)
 			else
-				confgcc+=( --with-sysroot=${PREFIX}/${CTARGET} )
+				confgcc+=(
+					--enable-threads=posix
+					--with-sysroot=${PREFIX}/${CTARGET}
+				)
 			fi
 		fi
 
@@ -1429,24 +1458,6 @@ gcc_do_filter_flags() {
 	strip-unsupported-flags
 
 	# these are set here so we have something sane at configure time
-
-	# CFLAGS logic (verified with 3.4.3):
-	# CFLAGS:
-	#	This conflicts when creating a crosscompiler, so set to a sane
-	#	  default in this case:
-	#	used in ./configure and elsewhere for the native compiler
-	#	used by gcc when creating libiberty.a
-	#	used by xgcc when creating libstdc++ (and probably others)!
-	#	  this behavior should be removed...
-	#
-	# CXXFLAGS:
-	#	used by xgcc when creating libstdc++
-	#
-	# STAGE1_CFLAGS (not used in creating a crosscompile gcc):
-	#	used by ${CHOST}-gcc for building stage1 compiler
-	#
-	# BOOT_CFLAGS (not used in creating a crosscompile gcc):
-	#	used by xgcc for building stage2/3 compiler
 	if is_crosscompile ; then
 		# Set this to something sane for both native and target
 		CFLAGS="-O2 -pipe"
@@ -1540,22 +1551,7 @@ gcc_do_make() {
 	# An example of how to use this function:
 	#
 	#	gcc_do_make all-target-libstdc++-v3
-	#
-	# In addition to the target to be used, the following variables alter the
-	# behavior of this function:
-	#
-	#	LDFLAGS
-	#			Flags to pass to ld
-	#
-	#	STAGE1_CFLAGS
-	#			CFLAGS to use during stage1 of a gcc bootstrap
-	#
-	#	BOOT_CFLAGS
-	#			CFLAGS to use during stages 2+3 of a gcc bootstrap.
-	#
-	# Travis Tilley <lv@gentoo.org> (04 Sep 2004)
-	#
-	# Set make target to $1 if passed
+
 	[[ -n ${1} ]] && GCC_MAKE_TARGET=${1}
 
 	# default target
