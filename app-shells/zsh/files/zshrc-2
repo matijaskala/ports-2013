@@ -1,8 +1,8 @@
-#init prompt
-autoload -U promptinit
-promptinit
-#set up default gentoo prompt
-prompt gentoo
+#set up prompt
+typeset -g PS1="%B%F{green}%n%k %B%F{magenta}%32<...<%~ %# %b%f%k"
+typeset -g PS2="%B%F{green}%n%k %B%F{magenta}%32<...<%~ %_> %b%f%k"
+typeset -g PS3="%B%F{green}%n%k %B%F{magenta}%32<...<%~ ?# %b%f%k"
+typeset -g RPS1="%B%F{red}%m%F{white}:%b%F{cyan}%T%f"
 
 #enable emacs mode
 bindkey -e
@@ -30,10 +30,14 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   history-beginning-search-backward
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" history-beginning-search-forward
 
+bindkey "[1;5C" forward-word
+bindkey "[1;5D" backward-word
+
 #enable history saving
-export HISTSIZE=200
+export HISTSIZE=500
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
+export LESSOPEN="|LESSCOLOR=always lesspipe %s"
 setopt hist_ignore_all_dups
 
 #some aliases

@@ -124,7 +124,6 @@ src_install() {
 	keepdir /usr/share/zsh/site-functions
 	insinto /usr/share/zsh/${PV%_*}/functions/Prompts
 	newins "${FILESDIR}"/prompt_gentoo_setup-1 prompt_gentoo_setup
-	newins "${FILESDIR}"/prompt_party_setup-1 prompt_party_setup
 
 	# install miscellaneous scripts; bug #54520
 	local i
@@ -154,7 +153,7 @@ pkg_postinst() {
 		# should link to http://www.gentoo.org/doc/en/zsh.xml
 		echo
 		elog "If you want to enable Portage completions,"
-		elog "emerge app-shells/zsh-completion and add"
+		elog "emerge app-shells/gentoo-zsh-completions and add"
 		elog "	autoload -U compinit"
 		elog "	compinit"
 		elog "to your ~/.zshrc"
