@@ -1,3 +1,6 @@
+# Copyright 1999-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/net-proxy/tsocks/tsocks-1.8_beta5-r6.ebuild,v 1.1 2011/11/19 16:24:03 naota Exp $
 
 EAPI="2"
 
@@ -5,20 +8,20 @@ inherit multilib eutils autotools toolchain-funcs
 
 DESCRIPTION="Transparent SOCKS v4 proxying library"
 HOMEPAGE="http://tsocks.sourceforge.net/"
-SRC_URI="mirror://sourceforge/tsocks/${PN}-${PV/_}.tar.gz"
+SRC_URI="mirror://sourceforge/tsocks/${PN}-${PV/_}.tar.gz
+	tordns? ( http://dev.gentoo.org/~naota/patch/${PN}-${PV/_beta/b}-tordns1-gentoo-r2.patch.gz )"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="tordns"
 
 S="${WORKDIR}/${P%%_*}"
 
 src_prepare() {
-	epatch "${FILESDIR}/gentoo-r3.patch"
-	epatch "${FILESDIR}/bsd.patch"
-	epatch "${FILESDIR}/poll.patch"
-	use tordns && epatch "${FILESDIR}/tordns1-r2.patch"
+	epatch "${FILESDIR}/${P}-gentoo-r3.patch"
+	epatch "${FILESDIR}/${P}-bsd.patch"
+	use tordns && epatch "../${PN}-${PV/_beta/b}-tordns1-gentoo-r2.patch"
 	eautoreconf
 }
 

@@ -1,4 +1,6 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-misc/workrave/workrave-1.10.ebuild,v 1.6 2014/02/22 21:00:34 pacho Exp $
 
 EAPI=5
 GCONF_DEBUG="yes"
@@ -12,15 +14,15 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="dbus doc distribution gstreamer nls pulseaudio test"
 
-RDEPEND=">=dev-libs/glib-2.28.0:2
+RDEPEND="
+	>=dev-libs/glib-2.28.0:2
 	>=x11-libs/gtk+-3.0:3
 	>=dev-cpp/gtkmm-3.0.0:3.0
 	>=dev-cpp/glibmm-2.28.0:2
 	>=dev-libs/libsigc++-2.2.4.2:2
-	>=gnome-base/gnome-shell-3.6.2
 	dbus? (
 		>=sys-apps/dbus-1.2
 		dev-libs/dbus-glib )
@@ -34,8 +36,7 @@ RDEPEND=">=dev-libs/glib-2.28.0:2
 	x11-libs/libXtst
 	x11-libs/libXt
 	x11-libs/libXmu
-	x11-libs/libXScrnSaver"
-
+"
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.40.0
 	x11-proto/xproto
@@ -46,7 +47,8 @@ DEPEND="${RDEPEND}
 	doc? (
 		app-text/docbook-sgml-utils
 		app-text/xmlto )
-	nls? ( >=sys-devel/gettext-0.17 )"
+	nls? ( >=sys-devel/gettext-0.17 )
+"
 
 pkg_setup() {
 	python-single-r1_pkg_setup

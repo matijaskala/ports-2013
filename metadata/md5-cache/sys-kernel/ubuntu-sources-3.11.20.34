@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare prerm setup
+DEPEND=binary? ( >=sys-kernel/genkernel-3.4.12.6-r4 )
+DESCRIPTION=Ubuntu patched kernel sources
+EAPI=5
+HOMEPAGE=https://launchpad.net/ubuntu/+source/linux
+IUSE=binary
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=binary? ( virtual/udev )
+RESTRICT=binchecks mirror strip
+SLOT=3.11.20.34
+SRC_URI=mirror://kernel/linux/kernel/v3.x/linux-3.11.tar.bz2 http://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux_3.11.0-20.34.diff.gz amd64? ( http://kernel.ubuntu.com/~kernel-ppa/configs/trusty/amd64-config.flavour.generic ) x86? ( http://kernel.ubuntu.com/~kernel-ppa/configs/trusty/i386-config.flavour.generic )
+_eclasses_=eutils	6faef4c127028ccbba3a11400d24ae34	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac	versionator	cd0bcdb170807e4a1984115e9d53a26f
+_md5_=4ec95c5456ada2581af000431b012188

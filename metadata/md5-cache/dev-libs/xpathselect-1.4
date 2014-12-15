@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=test? ( dev-cpp/gtest ) dev-libs/boost sys-devel/make >=dev-util/cmake-2.8.12 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=Select objects in an object tree using XPath queries
+EAPI=5
+HOMEPAGE=https://launchpad.net/xpathselect
+IUSE=test
+KEYWORDS=amd64 x86
+LICENSE=GPL-3
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/xpathselect_1.4+14.04.20140303.orig.tar.gz test? ( http://googletest.googlecode.com/files/gtest-1.6.0.zip )
+_eclasses_=cmake-utils	e2cc76ea65ae78da8e4696dad93f5d29	eutils	6faef4c127028ccbba3a11400d24ae34	flag-o-matic	eda1c0b5ba85b3eeb555a071d69eb819	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac	ubuntu	dae0afb6488d6ff869c368b73789fd64
+_md5_=6c9080056f0ae2184ed86fd51eb5cc4b
