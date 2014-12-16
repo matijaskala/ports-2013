@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
+DEPEND=>=dev-libs/glib-2.32.3 dev-qt/qtcore:4 dev-qt/qtdeclarative:4 gnome-base/dconf app-arch/xz-utils >=sys-apps/sed-4 sys-devel/make >=dev-util/cmake-2.8.12 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=Dconf Qt bindings for the Unity desktop
+EAPI=4
+HOMEPAGE=https://launchpad.net/dconf-qt
+IUSE=debug
+KEYWORDS=x86 amd64
+LICENSE=LGPL-3
+RDEPEND=>=dev-libs/glib-2.32.3 dev-qt/qtcore:4 dev-qt/qtdeclarative:4 gnome-base/dconf
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/dconf-qt_0.0.0.110722.orig.tar.bz2
+_eclasses_=base	87f7447ccfc06fd0729ff4684e11e0d6	cmake-utils	e2cc76ea65ae78da8e4696dad93f5d29	eutils	6faef4c127028ccbba3a11400d24ae34	fdo-mime	0acfe1a88fd8751a1d5dc671168219fa	flag-o-matic	eda1c0b5ba85b3eeb555a071d69eb819	gnome.org	8fef8f967214f56e08fa92d61163d891	gnome2	29582087e5f16ca16b1c6815c2ae2b65	gnome2-utils	5cdfd22a2163c9d3a891648bd19453a7	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac	ubuntu	2b63da0894d24d55fb46c2b38f518e59	versionator	cd0bcdb170807e4a1984115e9d53a26f
+_md5_=9615f461d3e98315ef9b5c925c457928

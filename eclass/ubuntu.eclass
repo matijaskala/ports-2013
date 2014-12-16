@@ -3,7 +3,8 @@
 # $Header: $
 
 UURL="https://launchpad.net/ubuntu/+archive/primary/+files/"
-SRC_URI="${UURL}${PN}_${PV}${UVER_PREFIX}.orig.tar.gz"
+: ${SRC_SUFFIX:="tar.gz"}
+SRC_URI="${UURL}${PN}_${PV}${UVER_PREFIX}.orig.${SRC_SUFFIX}"
 RESTRICT="mirror"
 
 S="${WORKDIR}/${P}${UVER_PREFIX}"
