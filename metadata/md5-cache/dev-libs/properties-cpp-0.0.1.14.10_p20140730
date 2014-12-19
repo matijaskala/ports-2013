@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare setup test
+DEPEND=test? ( dev-cpp/gtest ) dev-libs/boost >=sys-devel/gcc-4.8 sys-devel/make >=dev-util/cmake-2.8.12 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=Simple convenience library for handling properties and signals in C++11
+EAPI=5
+HOMEPAGE=https://launchpad.net/properties-cpp
+IUSE=test
+KEYWORDS=~amd64 ~x86
+LICENSE=LGPL-3
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/properties-cpp_0.0.1+14.10.20140730.orig.tar.gz
+_eclasses_=cmake-utils	0e29eadbd656185bce30d2449ab48035	eutils	6faef4c127028ccbba3a11400d24ae34	flag-o-matic	eda1c0b5ba85b3eeb555a071d69eb819	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac	ubuntu	50d2a865e492d428fea88d0e95801996
+_md5_=feda50419a8453c5c0a334eef5236a2f

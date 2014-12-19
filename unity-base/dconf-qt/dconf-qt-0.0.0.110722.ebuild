@@ -6,7 +6,7 @@ EAPI=4
 GNOME2_LA_PUNT="yes"
 GCONF_DEBUG="yes"
 
-SRC_SUFFIX="tar.bz2"
+SRC_SUFFIX="orig.tar.bz2"
 
 inherit base gnome2 cmake-utils ubuntu
 

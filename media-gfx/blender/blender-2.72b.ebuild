@@ -1,6 +1,23 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/blender/blender-2.72b.ebuild,v 1.1 2014/10/27 20:53:30 hasufell Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/blender/blender-2.72b.ebuild,v 1.3 2014/12/17 16:45:22 hasufell Exp $
+
+## BUNDLED-DEPS:
+# extern/recastnavigation
+# extern/libmv
+# extern/clew
+# extern/bullet2
+# extern/wcwidth
+# extern/cuew
+# extern/carve
+# extern/xdnd
+# extern/binreloc
+# extern/libredcode
+# extern/gtest
+# extern/rangetree
+# extern/lzma
+# extern/libmv/third_party/ceres
+# extern/libmv/third_party/msinttypes
 
 # TODO:
 #   bundled-deps: bullet is modified
@@ -115,7 +132,8 @@ src_prepare() {
 		"${FILESDIR}"/06-${PN}-2.68-fix-install-rules.patch \
 		"${FILESDIR}"/07-${PN}-2.70-sse2.patch \
 		"${FILESDIR}"/08-${PN}-2.71-gflags.patch \
-		"${FILESDIR}"/09-${PN}-2.72b-unbundle-minilzo.patch
+		"${FILESDIR}"/09-${PN}-2.72b-unbundle-minilzo.patch \
+		"${FILESDIR}"/${PN}-2.72-T42797.diff
 
 	epatch_user
 

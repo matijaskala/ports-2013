@@ -5,7 +5,7 @@
 EAPI="5"
 GCONF_DEBUG="no"
 
-inherit gnome2
+inherit eutils gnome2
 
 DESCRIPTION="Collection of GSettings schemas for GNOME desktop"
 HOMEPAGE="https://git.gnome.org/browse/gsettings-desktop-schemas"
@@ -25,6 +25,12 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig
 "
+
+src_prepare() {
+	epatch "${FILESDIR}/ubuntu_lock-on-suspend.patch"
+
+	gnome2_src_prepare
+}
 
 src_configure() {
 	DOCS="AUTHORS HACKING NEWS README"

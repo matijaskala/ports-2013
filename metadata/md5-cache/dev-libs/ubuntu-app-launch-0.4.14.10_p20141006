@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=dev-libs/glib:2 dev-libs/cgmanager dev-libs/json-glib dev-libs/libzeitgeist dev-libs/libupstart >=dev-util/lttng-tools-2.5.0 dev-util/dbus-test-runner sys-apps/click sys-libs/libnih[dbus] sys-devel/make >=dev-util/cmake-2.8.12 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=An Upstart Job that is used to launch applications in a controlled and predictable manner. This is a small project, but there are *a lot* of different parts from different people, so we need a place to collaborate.
+EAPI=5
+HOMEPAGE=https://launchpad.net/ubuntu-app-launch
+IUSE=+minimal +threads
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+REQUIRED_USE=minimal
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/ubuntu-app-launch_0.4+14.10.20141006.orig.tar.gz
+_eclasses_=cmake-utils	0e29eadbd656185bce30d2449ab48035	eutils	6faef4c127028ccbba3a11400d24ae34	flag-o-matic	eda1c0b5ba85b3eeb555a071d69eb819	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac	ubuntu	50d2a865e492d428fea88d0e95801996
+_md5_=b5dfb0d0356db42abaf18b98470f1958

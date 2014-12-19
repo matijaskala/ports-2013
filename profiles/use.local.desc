@@ -549,6 +549,7 @@ app-emulation/libspectrum:gcrypt - Use dev-libs/libgcrypt for low-level crypto o
 app-emulation/libvirt:audit - support sys-process/audit
 app-emulation/libvirt:firewalld - DBus interface to iptables/ebtables allowing for better runtime management of your firewall.
 app-emulation/libvirt:fuse - Allow LXC to use sys-fs/fuse for mount points
+app-emulation/libvirt:glusterfs - Enable GlusterFS support via sys-cluster/glusterfs
 app-emulation/libvirt:iscsi - Allow using an iSCSI remote storage server as pool for disk image storage
 app-emulation/libvirt:libvirtd - Builds the libvirtd daemon as well as the client utilities instead of just the client utilities
 app-emulation/libvirt:lvm - Allow using the Logical Volume Manager (sys-apps/lvm2) as pool for disk image storage
@@ -1537,6 +1538,7 @@ dev-haskell/snap-server:portable - no non-haskell unportable code.
 dev-haskell/tagsoup:download - Build with Download module.
 dev-haskell/tagsoup:testprog - Build the test program.
 dev-haskell/tasty:colors - Enable colorful output
+dev-haskell/tasty-quickcheck:old-quickcheck - Use Quick-Check < 2.7.
 dev-haskell/texmath:executable - Compile test executable.
 dev-haskell/text:developer - operate in developer mode
 dev-haskell/tls:compat - Accept SSLv2 compatible handshake
@@ -4803,6 +4805,7 @@ net-analyzer/wireshark:gtk3 - Build the wireshark executable with a GTK+ UI vers
 net-analyzer/wireshark:netlink - Use dev-libs/libnl
 net-analyzer/wireshark:pcap - Use net-libs/libpcap for network packet capturing (build dumpcap, rawshark)
 net-analyzer/wireshark:qt4 - Build the wireshark executable with an experimental Qt UI instead of GTK+.
+net-analyzer/wireshark:sbc - Use media-libs/sbc for playing back SBC encoded packets
 net-analyzer/wireshark:smi - Use net-libs/libsmi to resolve numeric OIDs into human readable format
 net-analyzer/wireshark:sse4_2 - Support SSE4.2 (Streaming SIMD Extensions 4.2) instructions
 net-analyzer/zabbix:agent - Enable zabbix agent (for to-be-monitored machines)
@@ -5599,11 +5602,13 @@ net-misc/cgminer:ants1 - Enable support for Antminer S1 Bitmain
 net-misc/cgminer:ants2 - Enable support for Antminer S2 Bitmain
 net-misc/cgminer:avalon - Enable support for Avalon ASICs
 net-misc/cgminer:avalon2 - Enable support for Avalon2 ASICs
+net-misc/cgminer:avalon4 - Enable support for Avalon4 ASICs
 net-misc/cgminer:bab - Enable support for BlackArrow Bitfury
 net-misc/cgminer:bflsc - Enable support for BFL ASICs
 net-misc/cgminer:bitforce - Enable support for mining with ButterFly Labs BitFORCE FPGAs
 net-misc/cgminer:bitfury - Enable support for mining with BitFury ASICs
 net-misc/cgminer:bitmine_A1 - Enable support for mining with Bitmine.ch A1 ASICs
+net-misc/cgminer:blockerupter - Enable support for mining with BlockRupter ASICs
 net-misc/cgminer:cointerra - Enable support for mining with Cointerra ASICs
 net-misc/cgminer:drillbit - Enable support for mining with Drillbit BitFury ASICs
 net-misc/cgminer:hashfast - Enable support for mining with Hashfast
@@ -6585,7 +6590,6 @@ sci-physics/geant:vrml - Enable output of geant4 in vrml formats
 sci-physics/hepmc:cm - Build with cm instead of default mm for length units
 sci-physics/hepmc:gev - Build with GeV instead of default MeV for momentum units
 sci-physics/lammps:lammps-memalign - Enables the use of the posix_memalign() call instead of malloc() when large chunks or memory are allocated by LAMMPS
-sci-physics/lammps:lammps-package-voronoi - Voronoi tesselations
 sci-physics/lammps:package-dipole - point dipole particles
 sci-physics/lammps:package-meam - modified EAM potential
 sci-physics/lammps:package-rigid - rigid bodies

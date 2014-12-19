@@ -12,7 +12,6 @@ LICENSE="CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
-SRC_URI="${SRC_URI%.orig*}.${SRC_SUFFIX}"
 RESTRICT="mirror"
 
 RDEPEND="x11-themes/gnome-icon-theme
