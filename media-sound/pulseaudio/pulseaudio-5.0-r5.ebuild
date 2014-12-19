@@ -16,7 +16,7 @@ SRC_URI="http://freedesktop.org/software/pulseaudio/releases/${P}.tar.xz"
 LICENSE="!gdbm? ( LGPL-2.1 ) gdbm? ( GPL-2 )"
 
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 ~sh sparc x86 ~amd64-linux ~x86-linux"
 
 IUSE="+alsa +asyncns bluetooth +caps dbus doc equalizer +gdbm +glib gnome
 gtk ipv6 jack libsamplerate lirc neon +orc oss qt4 realtime ssl systemd
@@ -140,6 +140,9 @@ src_prepare() {
 
 	# Fix module-zeroconf-publish crashes, bug #504612 (from 'master')
 	epatch "${FILESDIR}"/${P}-zeroconf-crash-{1,2,3}.patch
+
+	# Fix indicator-sound compilation error
+	epatch "${FILESDIR}"/${P}-libpulse.vapi-add-missing-fields.patch
 
 	epatch_user
 	eautoreconf

@@ -4,6 +4,8 @@
 
 EAPI=5
 
+inherit eutils
+
 DESCRIPTION="Gentoo specific zsh completion support (includes emerge and ebuild commands)"
 HOMEPAGE="https://github.com/radhermit/gentoo-zsh-completions"
 SRC_URI="http://dev.gentoo.org/~radhermit/dist/${P}.tar.xz"
