@@ -5,7 +5,7 @@
 EAPI="5"
 GCONF_DEBUG="yes"
 
-inherit gnome2
+inherit eutils gnome2
 
 DESCRIPTION="Libraries for the gnome desktop that are not part of the UI"
 HOMEPAGE="https://git.gnome.org/browse/gnome-desktop"
@@ -46,6 +46,10 @@ DEPEND="${COMMON_DEPEND}
 # Includes X11/Xatom.h in libgnome-desktop/gnome-bg.c which comes from xproto
 # Includes X11/extensions/Xrandr.h that includes randr.h from randrproto (and
 # eventually libXrandr shouldn't RDEPEND on randrproto)
+
+src_prepare() {
+	epatch "${FILESDIR}"/git_revert_draw_background.patch
+}
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog HACKING NEWS README"

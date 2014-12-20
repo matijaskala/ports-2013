@@ -1,0 +1,101 @@
+From a256e037a85447b58f9aab8fd3cc7a8056a3f375 Mon Sep 17 00:00:00 2001
+From: Tim Lunn <tim@feathertop.org>
+Date: Thu, 21 Mar 2013 11:23:33 +1100
+Subject: [PATCH] Revert "GnomeBG: remove the ability not to draw the
+ background"
+
+This reverts commit ac536ef65ee399c3267b29049c62c70074b0a97d.
+
+
+https://bugzilla.gnome.org/show_bug.cgi?id=690378
+---
+ libgnome-desktop/gnome-bg.c | 27 +++++++++++++++++++++++++++
+ libgnome-desktop/gnome-bg.h |  4 +++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+
+diff --git a/libgnome-desktop/gnome-bg.c b/libgnome-desktop/gnome-bg.c
+index 13e4ace..36e4a5f 100644
+--- a/libgnome-desktop/gnome-bg.c
++++ b/libgnome-desktop/gnome-bg.c
+@@ -47,6 +47,7 @@ Author: Soren Sandmann <sandmann@redhat.com>
+ #include "gnome-bg-slide-show.h"
+ #include "gnome-bg-crossfade.h"
+ 
++#define BG_KEY_DRAW_BACKGROUND    "draw-background"
+ #define BG_KEY_PRIMARY_COLOR      "primary-color"
+ #define BG_KEY_SECONDARY_COLOR    "secondary-color"
+ #define BG_KEY_COLOR_TYPE         "color-shading-type"
+@@ -78,6 +79,7 @@ struct _GnomeBG
+ 	GDesktopBackgroundShading	color_type;
+ 	GdkColor		primary;
+ 	GdkColor		secondary;
++	gboolean		is_enabled;
+ 
+ 	GFileMonitor *		file_monitor;
+ 
+@@ -304,6 +306,8 @@ gnome_bg_load_from_preferences (GnomeBG   *bg,
+ 	g_return_if_fail (GNOME_IS_BG (bg));
+ 	g_return_if_fail (G_IS_SETTINGS (settings));
+ 
++	bg->is_enabled = g_settings_get_boolean (settings, BG_KEY_DRAW_BACKGROUND);
++
+ 	/* Filename */
+ 	filename = g_settings_get_mapped (settings, BG_KEY_PICTURE_URI, bg_gsettings_mapping, NULL);
+ 
+@@ -350,6 +354,7 @@ gnome_bg_save_to_preferences (GnomeBG   *bg,
+ 		uri = g_filename_to_uri (bg->filename, NULL, NULL);
+ 	if (uri == NULL)
+ 		uri = g_strdup ("");
++	g_settings_set_boolean (settings, BG_KEY_DRAW_BACKGROUND, bg->is_enabled);
+ 	g_settings_set_string (settings, BG_KEY_PICTURE_URI, uri);
+ 	g_settings_set_string (settings, BG_KEY_PRIMARY_COLOR, primary);
+ 	g_settings_set_string (settings, BG_KEY_SECONDARY_COLOR, secondary);
+@@ -504,6 +509,28 @@ gnome_bg_get_color (GnomeBG                   *bg,
+ 		*secondary = bg->secondary;
+ }
+ 
++void
++gnome_bg_set_draw_background (GnomeBG  *bg,
++			      gboolean  draw_background)
++{
++	g_return_if_fail (bg != NULL);
++	
++	if (bg->is_enabled != draw_background) {
++		bg->is_enabled = draw_background;
++		
++		queue_changed (bg);
++	}
++}
++
++gboolean
++gnome_bg_get_draw_background (GnomeBG *bg)
++{
++	g_return_val_if_fail (bg != NULL, FALSE);
++
++	return bg->is_enabled;
++}
++
++
+ const gchar *
+ gnome_bg_get_filename (GnomeBG *bg)
+ {
+diff --git a/libgnome-desktop/gnome-bg.h b/libgnome-desktop/gnome-bg.h
+index 69d1bef..fdd4cc4 100644
+--- a/libgnome-desktop/gnome-bg.h
++++ b/libgnome-desktop/gnome-bg.h
+@@ -63,9 +63,11 @@ void             gnome_bg_set_color             (GnomeBG               *bg,
+ 						 GDesktopBackgroundShading type,
+ 						 GdkColor              *primary,
+ 						 GdkColor              *secondary);
+-
++void             gnome_bg_set_draw_background   (GnomeBG               *bg,
++						 gboolean               draw_background);
+ /* Getters */
+ GDesktopBackgroundStyle gnome_bg_get_placement  (GnomeBG               *bg);
++gboolean         gnome_bg_get_draw_background   (GnomeBG               *bg);
+ void		 gnome_bg_get_color             (GnomeBG               *bg,
+ 						 GDesktopBackgroundShading *type,
+ 						 GdkColor              *primary,
+-- 
+1.8.1.2
+
