@@ -13,8 +13,3 @@ KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="app-doc/doxygen"
-
-src_prepare() {
-	epatch "${FILESDIR}"/libxcrypt.patch
-	yast_src_prepare
-}

@@ -6,7 +6,6 @@ EAPI=5
 inherit autotools eutils multilib toolchain-funcs
 
 MISCSPLASH="miscsplashutils-0.1.8"
-GENTOOSPLASH="splashutils-gentoo-1.0.17"
 V_JPEG="8a"
 V_PNG="1.4.3"
 V_ZLIB="1.2.3"
@@ -24,7 +23,6 @@ DESCRIPTION="Framebuffer splash utilities"
 HOMEPAGE="http://fbsplash.berlios.de"
 SRC_URI="
 	mirror://berlios/fbsplash/${PN}-lite-${PV}.tar.bz2
-	mirror://berlios/fbsplash/${GENTOOSPLASH}.tar.bz2
 	mirror://gentoo/${MISCSPLASH}.tar.bz2
 	mirror://sourceforge/libpng/libpng-${V_PNG}.tar.bz2
 	ftp://ftp.uu.net/graphics/jpeg/jpegsrc.v${V_JPEG}.tar.gz
@@ -34,7 +32,7 @@ SRC_URI="
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 
 RDEPEND="
 	gpm? ( sys-libs/gpm[static-libs(+)] )
@@ -62,7 +60,6 @@ DEPEND="${RDEPEND}
 "
 
 S="${WORKDIR}/${P/_/-}"
-SG="${WORKDIR}/${GENTOOSPLASH}"
 SM="${WORKDIR}/${MISCSPLASH}"
 
 pkg_setup() {
@@ -81,9 +78,6 @@ src_prepare() {
 	# is being configured. Either that, or we end up with a segfaulting kernel
 	# helper.
 	rm "${S}/libs/zlib-${V_ZLIB}/Makefile"
-
-	cd "${SG}"
-	epatch "${FILESDIR}/splashutils-1.5.4.4-gentoo-typo-fix.patch"
 
 	if use truetype ; then
 		cd "${SM}"
@@ -123,8 +117,6 @@ src_prepare() {
 
 src_configure() {
 	tc-export CC
-	cd "${SM}"
-	emake CC="${CC}" LIB=$(get_libdir) STRIP=true
 
 	cd "${S}"
 	econf \
@@ -145,8 +137,8 @@ src_configure() {
 src_compile() {
 	emake CC="${CC}" STRIP="true"
 
-	cd "${SG}"
-	emake LIB=$(get_libdir)
+	cd "${SM}"
+	emake CC="${CC}" LIB=$(get_libdir) STRIP=true
 }
 
 src_install() {
@@ -164,20 +156,8 @@ src_install() {
 	echo 'CONFIG_PROTECT_MASK="/etc/splash"' > 99splash
 	doenvd 99splash
 
-	if use fbcondecor ; then
-		newinitd "${SG}"/init-fbcondecor fbcondecor
-		newconfd "${SG}"/fbcondecor.conf fbcondecor
-	fi
-	newconfd "${SG}"/splash.conf splash
-
-	insinto /usr/share/${PN}
-	doins "${SG}"/initrd.splash
-
 	insinto /etc/splash
 	doins "${SM}"/fbtruetype/luxisri.ttf
-
-	cd "${SG}"
-	make DESTDIR="${D}" LIB=${LIB} install
 
 	sed -i -e "s#/lib/splash#/${LIB}/splash#" "${D}"/sbin/splash-functions.sh
 	keepdir /${LIB}/splash/{tmp,cache,bin,sys}

@@ -1388,6 +1388,6 @@ describe_show() {
 # PUBLIC
 # Called by eselect when passed show as action
 do_show() {
-	show_profiles "${1}"
+	show_profiles $@
 }
 
