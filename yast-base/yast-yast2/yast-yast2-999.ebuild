@@ -16,6 +16,7 @@ DEPEND="dev-tcltk/expect
 	dev-util/dejagnu"
 
 src_install() {
+	MAKEOPTS="${MAKEOPTS} -j1"
 	default
 	rm -rf ${ED}/sbin || die
 }
