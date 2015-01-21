@@ -8,6 +8,7 @@
 	<use>
 		<flag name='apparmor'>Enable AppArmor support</flag>
 		<flag name='audit'>Enable support for <pkg>sys-process/audit</pkg></flag>
+		<flag name='curl'>Enable support for uploading journals and import of container images</flag>
 		<flag name='cryptsetup'>Enable cryptsetup tools (includes unit generator for crypttab)</flag>
 		<flag name='firmware-loader'>Enable user-space firmware loader (for kernels prior to 3.8)</flag>
 		<flag name='elfutils'>Enable coredump stacktraces in the journal</flag>
@@ -19,7 +20,7 @@
 		<flag name='lz4'>Enable lz4 compression for the journal</flag>
 		<flag name='qrcode'>Enable qrcode output support in journal</flag>
 		<flag name='seccomp'>Enable system call filtering via seccomp</flag>
-		<flag name='sysv-utils'>Install sysvinit compatibility symlinks and manpages</flag>
+		<flag name='sysv-utils'>Install sysvinit compatibility symlinks and manpages for init, telinit, halt, poweroff, reboot, runlevel, and shutdown</flag>
 		<flag name='terminal'>Enable experimental userspace virtual terminal support</flag>
 		<flag name='vanilla'>Disable Gentoo-specific behavior and compatibility quirks</flag>
 		<flag name='xkb'>Validate XKB keymap in logind</flag>
