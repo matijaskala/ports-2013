@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/tomahawk/tomahawk-9999.ebuild,v 1.28 2015/01/16 23:34:20 johu Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-sound/tomahawk/tomahawk-9999.ebuild,v 1.30 2015/01/29 22:44:23 johu Exp $
 
 EAPI=5
 
@@ -25,24 +25,18 @@ IUSE="debug +hatchet jabber kde qt5 telepathy"
 
 REQUIRED_USE="telepathy? ( kde )"
 
-# TODO
-# qt5 use flag needs some work:
-# - deps with missing qt4/qt5 use flags
-# - does not build with in-tree only deps
 DEPEND="
-	app-crypt/qca:2
 	dev-cpp/lucene++
 	dev-cpp/sparsehash
 	dev-libs/boost
 	dev-libs/quazip
-	>=media-libs/libechonest-2.2.0:=
-	media-libs/liblastfm
 	>=media-libs/taglib-1.8.0
 	>=net-libs/gnutls-3.2
 	x11-libs/libX11
 	hatchet? ( dev-cpp/websocketpp )
 	jabber? ( net-libs/jreen )
 	!qt5? (
+		app-crypt/qca:2[qt4]
 		>=dev-libs/libattica-0.4.0
 		dev-libs/qjson
 		dev-libs/qtkeychain[qt4]
@@ -54,9 +48,12 @@ DEPEND="
 		dev-qt/qtsvg:4
 		dev-qt/qtwebkit:4
 		media-libs/phonon[qt4]
+		>=media-libs/libechonest-2.3.0:=[qt4]
+		media-libs/liblastfm[qt4]
 		telepathy? ( net-libs/telepathy-qt[qt4] )
 	)
 	qt5? (
+		app-crypt/qca:2[qt5]
 		dev-libs/qtkeychain[qt5]
 		dev-qt/designer:5
 		dev-qt/qtcore:5
@@ -65,11 +62,13 @@ DEPEND="
 		dev-qt/qtwidgets:5
 		kde-frameworks/attica:5
 		media-libs/phonon[qt5]
+		>=media-libs/libechonest-2.3.0:=[qt5]
+		media-libs/liblastfm[qt5]
 		telepathy? ( net-libs/telepathy-qt[qt5] )
 	)
 "
 RDEPEND="${DEPEND}
-	app-crypt/qca-ossl
+	|| ( app-crypt/qca-ossl:2 app-crypt/qca:2[openssl] )
 "
 
 DOCS=( AUTHORS ChangeLog README.md )
