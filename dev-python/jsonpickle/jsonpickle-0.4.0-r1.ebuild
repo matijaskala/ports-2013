@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/jsonpickle/jsonpickle-0.4.0-r1.ebuild,v 1.5 2014/03/31 20:33:21 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/jsonpickle/jsonpickle-0.4.0-r1.ebuild,v 1.7 2015/02/08 08:12:07 idella4 Exp $
 
 EAPI=5
 

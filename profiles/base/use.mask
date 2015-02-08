@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/use.mask,v 1.216 2015/01/28 19:21:45 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/base/use.mask,v 1.219 2015/02/04 17:40:39 chithanh Exp $
 
 # CURL_SSL=winssl is for prefix/windows/winnt only
 curl_ssl_winssl
@@ -175,6 +175,7 @@ video_cards_exynos
 video_cards_freedreno
 video_cards_omap
 video_cards_omapfb
+video_cards_tegra
 
 # linux-only drivers
 video_cards_qxl
@@ -182,6 +183,9 @@ video_cards_qxl
 # not needed on non-x86, non-amd64, non-ppc systems
 input_devices_synaptics
 input_devices_wacom
+
+# awaiting keywording, bug #538828
+input_devices_libinput
 
 # psyco only works on x86
 psyco
@@ -383,11 +387,6 @@ sbcl
 # Mask systemd flag globally, unmasked on arches on which systemd
 # is keyworded.
 systemd
-
-# Michael Palimaka <kensington@gentoo.org> (1 May 2013)
-# Mask until Qt 5 is in portage. (The flag is here already
-# to permit the neccessary package preparation.)
-qt5
 
 # Pacho Ramos <pacho@gentoo.org> (28 Sep 2013)
 # This USE flag is available after long dicussion in
