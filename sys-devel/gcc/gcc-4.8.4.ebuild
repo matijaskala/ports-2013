@@ -1,8 +1,8 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc/gcc-4.8.4.ebuild,v 1.1 2014/12/26 21:08:59 zorry Exp $
+# $Header: $
 
-EAPI="4"
+EAPI=5
 
 PATCH_VER="1.0"
 UCLIBC_VER="1.0"
@@ -19,6 +19,10 @@ SSP_STABLE="amd64 x86 mips ppc ppc64 arm"
 # uclibc need to be >= 0.9.33
 SSP_UCLIBC_STABLE="x86 amd64 mips ppc ppc64 arm"
 #end Hardened stuff
+
+GMP_VER="5.1.3"
+MPFR_VER="3.1.2"
+MPC_VER="1.0.1"
 
 inherit eutils toolchain
 

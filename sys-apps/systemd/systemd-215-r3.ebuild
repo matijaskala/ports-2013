@@ -1,10 +1,12 @@
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-215-r3.ebuild,v 1.16 2015/01/01 15:09:29 floppym Exp $
 
 EAPI=5
 
 AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
-PYTHON_COMPAT=( python{2_7,3_2,3_3} )
-inherit autotools-utils bash-completion-r1 fcaps linux-info multilib \
+PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} )
+inherit autotools-utils bash-completion-r1 linux-info multilib \
 	multilib-minimal pam python-single-r1 systemd toolchain-funcs udev \
 	user
 
@@ -55,8 +57,8 @@ RDEPEND="${COMMON_DEPEND}
 	!<sys-libs/glibc-2.14
 	!sys-fs/udev"
 
-# sys-apps/daemon: the daemon only (+ build-time lib dep for tests)
-PDEPEND=">=sys-apps/dbus-1.6.8-r1:0
+# sys-apps/dbus: the daemon only (+ build-time lib dep for tests)
+PDEPEND=">=sys-apps/dbus-1.6.8-r1:0[systemd]
 	>=sys-apps/hwids-20130717-r1[udev]
 	>=sys-fs/udev-init-scripts-25
 	policykit? ( sys-auth/polkit )
@@ -99,7 +101,7 @@ src_prepare() {
 pkg_pretend() {
 	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS ~DEVTMPFS ~DMIID
 		~EPOLL ~FANOTIFY ~FHANDLE ~INOTIFY_USER ~IPV6 ~NET ~NET_NS ~PROC_FS
-		~SECCOMP ~SIGNALFD ~SYSFS ~TIMERFD ~TMPFS_XATTR
+		~SECCOMP ~SIGNALFD ~SYSFS ~TIMERFD ~TMPFS_XATTR ~DEVPTS_MULTIPLE_INSTANCES
 		~!IDE ~!SYSFS_DEPRECATED ~!SYSFS_DEPRECATED_V2
 		~!GRKERNSEC_PROC"
 
@@ -175,7 +177,8 @@ multilib_src_configure() {
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		--disable-split-usr
+		# make sure we get /bin:/sbin in $PATH
+		--enable-split-usr
 		# disable sysv compatibility
 		--with-sysvinit-path=
 		--with-sysvrcnd-path=
@@ -251,6 +254,14 @@ multilib_src_configure() {
 		)
 	fi
 
+	# Added for testing; this is UNSUPPORTED by the Gentoo systemd team!
+	if [[ -n ${ROOTPREFIX+set} ]]; then
+		myeconfargs+=(
+			--with-rootprefix="${ROOTPREFIX}"
+			--with-rootlibdir="${ROOTPREFIX}/$(get_libdir)"
+		)
+	fi
+
 	if ! multilib_is_native_abi; then
 		myeconfargs+=(
 			ac_cv_search_cap_init=
@@ -318,14 +329,17 @@ multilib_src_install() {
 	local pcfiles=( src/compat-libs/libsystemd-{daemon,id128,journal,login}.pc )
 	emake "${mymakeopts[@]}" install-pkgconfiglibDATA \
 		pkgconfiglib_DATA="${pcfiles[*]}"
+
+	# Create symlinks for old libs
+	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-daemon.so"
+	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-id128.so"
+	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-journal.so"
+	dosym libsystemd.so "/usr/$(get_libdir)/libsystemd-login.so"
 }
 
 multilib_src_install_all() {
 	prune_libtool_files --modules
 	einstalldocs
-
-	dosym ../lib/systemd/systemd-udevd /usr/sbin/udevd
-	dosym ../lib/systemd/systemd /usr/bin/systemd
 
 	# we just keep sysvinit tools, so no need for the mans
 	rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \
@@ -446,9 +460,6 @@ pkg_postinst() {
 
 	udev_reload || FAIL=1
 
-	# Bug 468876
-	fcaps cap_dac_override,cap_sys_ptrace=ep usr/bin/systemd-detect-virt
-
 	# Bug 465468, make sure locales are respect, and ensure consistency
 	# between OpenRC & systemd
 	migrate_locale
@@ -482,6 +493,12 @@ pkg_postinst() {
 		elog "To get additional features, a number of optional runtime dependencies may"
 		elog "be installed:"
 		elog "- sys-apps/systemd-ui: for GTK+ systemadm UI and gnome-ask-password-agent"
+	fi
+
+	if has_version sys-apps/openrc &&
+		! has_version sys-fs/udev-init-scripts; then
+		elog "If you plan to boot using OpenRC and udev or eudev, you"
+		elog "need to install the udev-init-scripts package."
 	fi
 }
 

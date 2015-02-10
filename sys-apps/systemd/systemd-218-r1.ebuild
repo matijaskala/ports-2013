@@ -1,6 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-218-r1.ebuild,v 1.5 2015/01/01 15:09:29 floppym Exp $
 
 EAPI=5
 
@@ -16,7 +14,7 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 IUSE="acl apparmor audit cryptsetup curl doc elfutils gcrypt gudev http
 	idn introspection kdbus +kmod lz4 lzma pam policykit python qrcode +seccomp
 	selinux ssl sysv-utils terminal test vanilla xkb"
@@ -149,14 +147,6 @@ src_configure() {
 	multilib-minimal_src_configure
 }
 
-multilib_native_enable() {
-	if multilib_is_native_abi; then
-		echo "--enable-${1}"
-	else
-		echo "--disable-${1}"
-	fi
-}
-
 multilib_src_configure() {
 	local myeconfargs=(
 		# disable -flto since it is an optimization flag
@@ -171,9 +161,7 @@ multilib_src_configure() {
 		--with-pamlibdir=$(getpam_mod_dir)
 		# avoid bash-completion dep
 		--with-bashcompletiondir="$(get_bashcompdir)"
-		# make sure we get /bin:/sbin in $PATH
-		--enable-split-usr
-		# For testing.
+		--disable-split-usr
 		--with-rootprefix="${ROOTPREFIX-/usr}"
 		--with-rootlibdir="${ROOTPREFIX-/usr}/$(get_libdir)"
 		# disable sysv compatibility
@@ -212,28 +200,6 @@ multilib_src_configure() {
 		$(multilib_native_use_enable test tests)
 		$(multilib_native_use_enable test dbus)
 		$(multilib_native_use_enable xkb xkbcommon)
-
-		# Disable optional binaries for non-native abis
-		$(multilib_native_enable backlight)
-		$(multilib_native_enable binfmt)
-		$(multilib_native_enable bootchart)
-		$(multilib_native_enable coredump)
-		$(multilib_native_enable firstboot)
-		$(multilib_native_enable hibernate)
-		$(multilib_native_enable hostnamed)
-		$(multilib_native_enable localed)
-		$(multilib_native_enable logind)
-		$(multilib_native_enable machined)
-		$(multilib_native_enable networkd)
-		$(multilib_native_enable quotacheck)
-		$(multilib_native_enable randomseed)
-		$(multilib_native_enable resolved)
-		$(multilib_native_enable rfkill)
-		$(multilib_native_enable sysusers)
-		$(multilib_native_enable timedated)
-		$(multilib_native_enable timesyncd)
-		$(multilib_native_enable tmpfiles)
-		$(multilib_native_enable vconsole)
 
 		# not supported (avoid automagic deps in the future)
 		--disable-chkconfig
@@ -352,10 +318,10 @@ multilib_src_install_all() {
 
 	# If we install these symlinks, there is no way for the sysadmin to remove them
 	# permanently.
-	rm -f "${D}"/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-	rm -f "${D}"/etc/systemd/system/multi-user.target.wants/systemd-resolved.service
-	rm -f "${D}"/etc/systemd/system/multi-user.target.wants/systemd-timesyncd.service
-	rm -rf "${D}"/etc/systemd/system/network-online.target.wants
+	rm "${D}"/etc/systemd/system/multi-user.target.wants/systemd-networkd.service || die
+	rm "${D}"/etc/systemd/system/multi-user.target.wants/systemd-resolved.service || die
+	rm -r "${D}"/etc/systemd/system/network-online.target.wants || die
+	rm -r "${D}"/etc/systemd/system/sysinit.target.wants || die
 }
 
 migrate_locale() {
