@@ -87,7 +87,6 @@ python_prepare_all() {
 		-e "s|^\(sync-uri = \).*|\\1git://github.com/matijaskala/ports-2013.git|" \
 		-i cnf/repos.conf || die "sed failed"
 	epatch "${FILESDIR}/partylinux-usr-merge.patch"
-	epatch "${FILESDIR}/gitclone.patch"
 
 	if ! use ipc ; then
 		einfo "Disabling ipc..."
@@ -203,7 +202,7 @@ python_install_all() {
 	dodir /usr/sbin
 	for target in ${sbin_relocations}; do
 		einfo "Moving /usr/bin/${target} to /usr/sbin/${target}"
-		mv "${ED}usr/bin/${target}" "${ED}usr/sbin/${target}"
+		mv "${ED}usr/bin/${target}" "${ED}usr/sbin/${target}" || die "sbin scripts move failed!"
 	done
 }
 

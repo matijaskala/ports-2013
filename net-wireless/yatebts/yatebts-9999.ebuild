@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/yatebts/yatebts-9999.ebuild,v 1.4 2015/01/28 23:02:21 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/yatebts/yatebts-9999.ebuild,v 1.6 2015/02/11 15:31:51 zerochaos Exp $
 
 EAPI=5
 
@@ -12,10 +12,11 @@ ESVN_REPO_URI="http://voip.null.ro/svn/yatebts/trunk"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="rad1 usrp1 uhd bladerf cpu_flags_x86_sse3 cpu_flags_x86_sse4_1"
+IUSE="rad1 usrp1 uhd +bladerf cpu_flags_x86_sse3 cpu_flags_x86_sse4_1"
 
 RDEPEND="
 	>=net-voip/yate-5.4.0[gsm]
+	bladerf? ( net-wireless/bladerf:= )
 	uhd? ( net-wireless/uhd )
 	virtual/libusb:1"
 DEPEND="virtual/pkgconfig
