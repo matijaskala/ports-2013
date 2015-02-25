@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-9999.ebuild,v 1.28 2015/02/15 19:58:47 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-9999.ebuild,v 1.30 2015/02/22 10:16:33 mgorny Exp $
 
 EAPI=5
 
@@ -188,7 +188,7 @@ RDEPEND="${COMMON_DEPEND}
 	!app-office/libreoffice-bin-debug
 	!<app-office/openoffice-bin-3.4.0-r1
 	!app-office/openoffice
-	media-fonts/libertine-ttf
+	media-fonts/libertine
 	media-fonts/liberation-fonts
 	media-fonts/urw-fonts
 	java? ( >=virtual/jre-1.6 )
@@ -214,7 +214,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-util/cppunit
 	>=dev-util/gperf-3
 	dev-util/intltool
-	>=dev-util/mdds-0.10.3:=
+	>=dev-util/mdds-0.12.0:=
 	media-libs/glm
 	net-misc/npapi-sdk
 	>=sys-apps/findutils-4.4.2
@@ -519,6 +519,11 @@ src_configure() {
 }
 
 src_compile() {
+	# more and more LO stuff tries to use OpenGL, including tests during build
+	# bug 501508, bug 540624 and probably more
+	addpredict /dev/dri
+	addpredict /dev/nvidiactl
+
 	# hack for offlinehelp, this needs fixing upstream at some point
 	# it is broken because we send --without-help
 	# https://bugs.freedesktop.org/show_bug.cgi?id=46506

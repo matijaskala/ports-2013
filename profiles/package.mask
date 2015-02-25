@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16370 2015/02/18 13:15:09 voyageur Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16385 2015/02/24 18:01:59 ulm Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -30,9 +30,81 @@
 
 #--- END OF EXAMPLES ---
 
+# Ulrich Müller <ulm@gentoo.org> (24 Feb 2015)
+# Does not work with Emacs 24 or later. Last visible upstream
+# activity in 2010. Use app-emacs/wgrep as replacement.
+# Masked for removal in 30 days, bug 541234.
+app-emacs/grep-edit
+
+# Hans de Graaff <graaff@gentoo.org> (23 Feb 2015)
+# Mask chef and its dependencies for removal in 60 days.
+# This package lacks a maintainer and the version currently
+# in the tree is very much out-of-date. Several calls for a
+# new maintainer have gone unanswered. The version of chef
+# in the gentoo tree depends on old versions of various ruby
+# packages, one of which has an open security bug. It is also
+# only available for ruby 1.9 which reached end-of-life.
+app-admin/chef
+app-admin/chef-expander
+app-admin/chef-server
+app-admin/chef-server-api
+app-admin/chef-server-webui
+app-admin/chef-solr
+dev-ruby/merb-assets
+dev-ruby/merb-core
+dev-ruby/merb-haml
+dev-ruby/merb-helpers
+dev-ruby/merb-param-protection
+dev-ruby/mixlib-authentication
+dev-ruby/mixlib-cli
+dev-ruby/mixlib-config
+dev-ruby/mixlib-log
+dev-ruby/mixlib-shellout
+dev-ruby/ohai
+=dev-ruby/rest-client-1.6.7-r1
+
+# Ian Delaney <idella4@gentoo.org> (23 Feb 2015)
+# ancient and abandonned packages
+# Masked for removal in 30 days.
+dev-python/py-freebsd
+dev-util/spe
+
+# Alex Brandt <alunduil@gentoo.org> (21 Feb 2015)
+# Upstream renamed to docker-compose for all future releases
+app-emulation/fig
+
+# Ben de Groot <yngwin@gentoo.org> (21 Feb 2015)
+# Duplicates media-fonts/culmus[ancient] (bug #486814).
+# Masked for removal in 30 days.
+media-fonts/culmus-ancient
+
+# Joerg BOrnkessel <hd_brummy@gentoo.org> (20 Feb 2015)
+# masked for removal around 20/Mar/2015
+# dead on upstream, no other package relies on this
+# wrt bug 540788
+media-plugins/vdr-setup
+
+# Ian Delaney <idella4@gentoo.org> (19 Feb 2015)
+# Some no longer fetch and upstream dead. genetic was to be
+# used by sci-chemistry/pymss but this is absent from portage.
+# For g-pypi, maintainer has lost interest and abandonned the package.
+# Masked for removal in 30 days
+dev-python/cherryflow
+dev-python/colubrid
+dev-python/genetic
+dev-python/gnosis-utils
+dev-python/g-pypi
+dev-python/ldaptor
+
+# Michael Palimaka <kensington@gentoo.org> (19 Feb 2015)
+# Doesn't work with current version of ruby. Dead upstream.
+# Masked for removal in 30 days.
+games-board/kaya
+
 # Bernard Cafarelli <voyageur@gentoo.org> (18 Feb 2015)
 # Masked release candidates for testing
-=sys-devel/llvm-3.6.0_rc*
+=sys-devel/llvm-3.6.0*
+=sys-devel/clang-3.6.0*
 
 # Michael Sterrett <mr_bones_@gentoo.org> (18 Feb 2015)
 # Integrated into games-engines/scummvm
@@ -151,22 +223,6 @@ games-rpg/morrowind-data
 # No one uses it anymore. You can
 # use dev-perl/Geo-IP instead.
 dev-perl/IP-Country
-
-# Hans de Graaff <graaff@gentoo.org> (19 Jan 2015)
-# virtual/ruby-rdoc is a no-op in that it always pulls in
-# dev-ruby/rdoc, and nothing in the tree depends on it anymore. This
-# also fixes part of bug 421497.
-# Removal in 30 days.
-virtual/ruby-rdoc
-
-# Manuel Rüger <mrueg@gentoo.org> (18 Jan 2015)
-# Ruby 1.9 only packages, do not build with later rubies
-# Removal in 30 days.
-dev-ruby/flickr
-dev-ruby/gemcutter
-dev-ruby/ruby_parser:0
-dev-ruby/drydock
-dev-ruby/net-dns
 
 # Manuel Rüger <mrueg@gentoo.org> (17 Jan 2015)
 # Unmaintained. Old eclasses, EAPIs and various bugs.
@@ -973,7 +1029,6 @@ games-roguelike/slashem
 
 # Tavis Ormandy <taviso@gentoo.org> (21 Mar 2006)
 # masked pending unresolved security issues #125902
-games-roguelike/nethack
 games-util/hearse
 
 # Robin H. Johnson <robbat2@gentoo.org> (11 Feb 2006)

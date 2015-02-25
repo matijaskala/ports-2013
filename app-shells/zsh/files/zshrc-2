@@ -1,13 +1,15 @@
-#set up prompt
-typeset -g PS1="%B%F{green}%n%k %B%F{magenta}%32<...<%~ %# %b%f%k"
-typeset -g PS2="%B%F{green}%n%k %B%F{magenta}%32<...<%~ %_> %b%f%k"
-typeset -g PS3="%B%F{green}%n%k %B%F{magenta}%32<...<%~ ?# %b%f%k"
+# Set up the prompt
+typeset -g PS1="%B%(?,%F{green},%F{yellow})%n%k %B%F{magenta}%32<...<%~ %# %b%f%k"
+typeset -g PS2="%B%(?,%F{green},%F{yellow})%n%k %B%F{magenta}%32<...<%~ %_> %b%f%k"
+typeset -g PS3="%B%(?,%F{green},%F{yellow})%n%k %B%F{magenta}%32<...<%~ ?# %b%f%k"
 typeset -g RPS1="%B%F{red}%m%F{white}:%b%F{cyan}%T%f"
 
-#enable emacs mode
+setopt histignorealldups sharehistory
+
+# Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
-#set up keys
+# Set up keys
 typeset -A key
 key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
@@ -33,14 +35,13 @@ key[PageDown]=${terminfo[knp]}
 bindkey "[1;5C" forward-word
 bindkey "[1;5D" backward-word
 
-#enable history saving
-export HISTSIZE=500
-export HISTFILE="$HOME/.history"
-export SAVEHIST=$HISTSIZE
-export LESSOPEN="|LESSCOLOR=always lesspipe %s"
-setopt hist_ignore_all_dups
+# Keep 1000 lines of history within the shell and save it to ~/.history:
+HISTSIZE=1000
+SAVEHIST=$HISTSIZE
+HISTFILE=~/.history
+LESSOPEN="|LESSCOLOR=always lesspipe %s"
 
-#some aliases
+# Some aliases
 alias l='ls -F'
 alias la='ls -A'
 alias ll='ls -alF'

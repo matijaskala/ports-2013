@@ -1,11 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jflex/jflex-1.4.3.ebuild,v 1.8 2013/10/20 16:32:51 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-java/jflex/jflex-1.4.3.ebuild,v 1.10 2015/02/23 10:37:47 monsieurp Exp $
 
 # Currently, this package uses an included JFlex.jar file to bootstrap.
 # Upstream was contacted and this bootstrap is really needed. The only way to avoid it would be to use a supplied pre-compiled .scanner file.
 
 EAPI="3"
+
 JAVA_PKG_IUSE="source"
 
 inherit java-pkg-2 java-ant-2
@@ -56,7 +57,7 @@ src_compile() {
 
 src_install() {
 	java-pkg_dojar lib/JFlex.jar
-	java-pkg_dolauncher "${PN}" --main JFlex.Main
+	java-pkg_dolauncher "${P}" --main JFlex.Main
 	java-pkg_register-ant-task
 
 	dodoc doc/manual.pdf doc/manual.ps.gz src/changelog

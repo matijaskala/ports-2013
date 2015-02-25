@@ -25,9 +25,6 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	mv py-compile py-compile.orig || die
 	ln -s "$(type -P true)" py-compile || die
-	python_convert_shebangs 2 engine/tabcreatedb.py || die
-	sed -i -e "s/python/python2/" \
-		engine/ibus-table-createdb.in engine/ibus-engine-table.in || die
 }
 
 src_configure() {
