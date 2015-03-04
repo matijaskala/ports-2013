@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16394 2015/03/01 15:44:33 hwoarang Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16399 2015/03/04 17:55:10 voyageur Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,16 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Manuel Rüger <mrueg@gentoo.org> (2 Mar 2015)
+# MSNp18 clients are not able to connect anymore
+# See also: http://ismsndeadyet.com
+# Masked for removal in 30 days
+net-libs/libmsn
+net-im/pebrot
+net-im/msnlib
+net-im/pymsn-t
+
 # Joerg Bornkessel <hd_brummy@gentoo.org (1 Mar 2015)
 # masked for removal around 1 Apr 2015
 # dead on upstream since 2009
@@ -185,11 +195,6 @@ app-office/openerp-web
 # Qt support is provided by app-crypt/pinentry[qt4]
 app-crypt/pinentry-qt
 
-# Anthony G. Basile <blueness@gentoo.org> (09 Feb 2015)
-# Dead upstream, will be removed in 30 days.
-# https://lists.torproject.org/pipermail/tor-dev/2015-February/008244.html
-net-misc/vidalia
-
 # Hanno Boeck <hanno@gentoo.org> (08 Feb 2015)
 # Dead upstream, will be removed in 30 days if nobody
 # complains.
@@ -203,12 +208,6 @@ app-portage/portage-mod_jabber
 # No upstream anymore; nothing in the tree uses it.
 # masked for removal on 20150306
 media-libs/sdl-flic
-
-# Bernard Cafarelli <voyageur@gentoo.org> (03 Feb 2015)
-# Masked for removal in 30 days
-# Requires GTK+2 audacious (<=3.2) with audclient (<=3.4)
-# Bugs #411077 and #538464
-x11-plugins/wmauda
 
 # Eray Aslan <eras@gentoo.org> (03 Feb 2015)
 # Mask experimental software
@@ -801,12 +800,6 @@ app-text/cuneiform
 # stable wpa_supplicant sometimes wants madwifi-ng-tools
 #net-wireless/madwifi-ng-tools
 net-wireless/madwifi-ng
-
-# Markos Chandras <hwoarang@gentoo.org> (03 Nov 2012)
-# Kernel module support is disabled due to sandbox violations.
-# As a result of which, the package is not fully working at the moment
-# but it can still be used to track userland regressions.
-=app-benchmarks/ltp-ltp-2014082
 
 # Pacho Ramos <pacho@gentoo.org> (25 Oct 2012)
 # obexd changed its API without any warning, it's recommended to ship

@@ -413,8 +413,9 @@ app-doc/linuxfromscratch:htmlsingle - Install all-on-one-page HTML version.
 app-doc/pms:binary - Download pre-built files instead of building from sources
 app-doc/pms:html - Generate PMS as .html as well
 app-doc/root-docs:api - Generate html API documentation
-app-doc/root-docs:math - Downloads all math related documentation
-app-doc/root-docs:metric - Default to A4 paper size and metric measurement
+app-doc/root-docs:http - Build HttpServer documentation
+app-doc/root-docs:math - Provide all math related documentation
+app-doc/root-docs:metric - Default to A4 paper size and metric measurement. Letter will be used otherwise
 app-doc/tldp-howto:html - Install multi-chapter HTML docs
 app-doc/tldp-howto:htmlsingle - Install all-on-one-page HTML docs
 app-doc/tldp-howto:pdf - Install pdf docs
@@ -512,6 +513,7 @@ app-emulation/docker:btrfs - Enables dependencies for the "btrfs" graph driver, 
 app-emulation/docker:contrib - Install additional contrib scripts and components.
 app-emulation/docker:device-mapper - Enables dependencies for the "devicemapper" graph driver, including necessary kernel flags.
 app-emulation/docker:lxc - Enables dependencies for the "lxc" execution driver.
+app-emulation/docker:overlay - Enables dependencies for the "overlay" graph driver, including necessary kernel flags.
 app-emulation/dosemu:fluidsynth - use media-sound/fluidsynth for MIDI emulation
 app-emulation/e-uae:capslib - Add CAPS library support
 app-emulation/e-uae:sdl-sound - Use media-libs/sdl-sound for audio output
@@ -3161,7 +3163,7 @@ kde-base/okular:chm - Enable support for Microsoft Compiled HTML Help files
 kde-base/okular:dpi - DPI detection support for PDF rendering via x11-libs/libkscreen
 kde-base/okular:ebook - Add E-Book support
 kde-base/okular:mobi - Add mobipocket support
-kde-base/oxygen-icons:bindist - Additionally install the svg sources of the bitmap icons (needed for redistribution)
+kde-base/oxygen-icons:sources - Additionally install the svg sources of the bitmap icons (needed for redistribution)
 kde-base/perlkde:akonadi - Compile bindings for Akonadi
 kde-base/perlkde:attica - Compile bindings for dev-libs/libattica
 kde-base/perlkde:kate - Compile bindings for KDE Advanced Text Editor
@@ -3561,7 +3563,9 @@ media-gfx/kphotoalbum:geolocation - Add support for kde-base/marble
 media-gfx/kphotoalbum:kipi - Support for the KDE Image Plugin Interface
 media-gfx/librecad:tools - Build additional tool programs
 media-gfx/nip2:goffice - use x11-libs/goffice to show plots
+media-gfx/nomacs:opencv - Build support for media-libs/opencv
 media-gfx/nomacs:webp - Build support for WEBP image format
+media-gfx/nomacs:zip - Build support for zip archives
 media-gfx/nvidia-texture-tools:cg - Enable NVIDIA C graphics compiler toolkit plug-in
 media-gfx/nvidia-texture-tools:cuda - Enable NVIDIA CUDA toolkit support
 media-gfx/nvidia-texture-tools:glew - Enable support for The OpenGL Extension Wrangler Library (media-libs/glew)
@@ -5245,6 +5249,7 @@ net-irc/kvirc:ipc - Support inter-process communication between KVIrc processes
 net-irc/kvirc:phonon - Support Phonon for audio output
 net-irc/kvirc:qt-dbus - Support Qt-DBus
 net-irc/kvirc:transparency - Support pseudo-transparency
+net-irc/limnoria:crypt - Enables user authentication with GPG
 net-irc/ngircd:ident - Enables support for net-libs/libident
 net-irc/psybnc:multinetwork - Adds support for multiple networks
 net-irc/psybnc:oidentd - Adds support for oidentd
@@ -5645,13 +5650,18 @@ net-misc/dropbear:multicall - Build all the programs as one little binary (to sa
 net-misc/dropbear:shadow - Enable shadow password support
 net-misc/dropbox:librsync-bundled - Use bundled librsync library
 net-misc/electrum:aliases - Enable plugin for looking up aliases
+net-misc/electrum:amodem - Enable plugin for air-gapped transaction signing using dev-python/amodem
 net-misc/electrum:cli - Enables the CLI interface
 net-misc/electrum:coinbase_com - Enable plugin to use Coinbase.com's buyback program
+net-misc/electrum:cosign - Enable plugin to support multisig wallets between multiple Electrum clients
 net-misc/electrum:fiat - Enable plugin for looking up fiat values of bitcoin
+net-misc/electrum:graph - Enable plugin to generate transaction graphs
+net-misc/electrum:greenaddress_it - Enable plugin to verify GreenAddress.it instant transactions
 net-misc/electrum:gtk3 - Enable support for gtk+3
 net-misc/electrum:pos - Enable plugin for point-of-sale operation
-net-misc/electrum:qrcode - Enable QR code scanning with media-gfx/zbar/
+net-misc/electrum:qrcode - Enable QR code scanning with media-gfx/zbar
 net-misc/electrum:sync - Enable plugin to sync wallet metadata across multiple Electrum clients
+net-misc/electrum:trustedcoin_com - Enable plugin to use two-factor service by TrustedCoin.com
 net-misc/electrum:vkb - Enable plugin for virtual keyboard
 net-misc/fatrat:bittorrent - Use the bittorrent protocol via net-libs/rb_libtorrent.
 net-misc/fatrat:webinterface - Enable builtin webinterface.
@@ -5895,7 +5905,6 @@ net-misc/tor:web - Build a tor2web service instead of a tor client
 net-misc/uftp:server - Install uftp server daemon
 net-misc/vde:pcap - Enable the pcap-based plugin that allows creating a switch against a real interface.
 net-misc/vde:ssl - Enable the cryptcab plugin that allows creating an encrypted virtual cable.
-net-misc/vidalia:tor - Allow to use a local tor setup
 net-misc/vinagre:rdp - Enable access to Windows RDP protocol using net-misc/rdesktop
 net-misc/vinagre:spice - Enable access to SPICE-enabled virtual machines
 net-misc/vinagre:ssh - Enable ssh plugin using x11-libs/vte
@@ -6156,6 +6165,7 @@ net-wireless/blueman:thunar - Install the sendto-plugin for xfce-base/thunar
 net-wireless/bluez:hid2hci - The HID proxying makes the keyboard / mouse show up as regular USB HID devices, but needs them to be paired before enabling this, otherwise they won't be detected
 net-wireless/bluez:obex - Enable OBEX transfer support.
 net-wireless/bluez:test-programs - Install tools for testing of various Bluetooth functions
+net-wireless/crda:gcrypt - Use libgcrypt instead of openssl for key checking
 net-wireless/gnuradio:analog - enable analog signal processing blocks
 net-wireless/gnuradio:atsc - enable ATSC (HDTV) transmitter and receiver blocks
 net-wireless/gnuradio:audio - enable blocks to connect to audio sources (mic-in) and sinks (speaker-out) ports on a computer
@@ -6622,12 +6632,13 @@ sci-physics/lammps:package-rigid - rigid bodies
 sci-physics/lhapdf:octave - Add bindings for sci-mathematics/octave
 sci-physics/meep:mpb - Enable build against sci-physics/mpb
 sci-physics/pythia:hepmc - Adds support for High Energy Physics Monte Carlo Generators sci-physics/hepmc
-sci-physics/root:c++0x - Build ROOT using the C++11 standard. Not supported, requires sys-devel/gcc>=4.7.0
+sci-physics/root:c++11 - Build ROOT using the C++11 standard
+sci-physics/root:c++14 - Build ROOT using the C++14 standard
 sci-physics/root:clarens - Build the Clarens and PEAC plug-ins, to use in a GRID enabled analysis
 sci-physics/root:fits - Support for images and data from FITS files with sci-libs/cfitsio
 sci-physics/root:htmldoc - Generate html documentation
+sci-physics/root:http - Enable http server support including but not limited to fastcgi support
 sci-physics/root:math - Build all math related libraries plugins, needs sci-libs/gsl
-sci-physics/root:metric - Default to A4 paper size and metric measurement
 sci-physics/root:pythia6 - Build the interface for sci-physics/pythia version 6.x
 sci-physics/root:pythia8 - Build the interface for sci-physics/pythia version 8.x
 sci-physics/root:reflex - Build the reflection database for the C++ interpreter
@@ -6649,6 +6660,7 @@ sci-visualization/paraview:nvcontrol - Add NVCONTROL support for OpenGL options
 sci-visualization/paraview:plugins - Build and install additional plugins
 sci-visualization/veusz:emf - Add FITS format via dev-python/pyemf
 sci-visualization/veusz:fits - Add FITS format via dev-python/astropy
+sci-visualization/veusz:minuit - Use Minuit during fitting viadev-python/pyminuit
 sci-visualization/veusz:vo - Add Virtual Observatory tools via dev-python/astropy
 sci-visualization/visit:cgns - Builds the reader for the CFD General Notation System file format.
 sci-visualization/visit:silo - Adds support for reading .silo files.
@@ -6810,6 +6822,8 @@ sys-auth/consolekit:systemd-units - Install systemd unit files to replace the mo
 sys-auth/fingerprint-gui:upekbsapi - Add UPEK BSAPI drivers for identify functions on some readers
 sys-auth/munge:gcrypt - Use libgcrypt instead of openssl
 sys-auth/nss-mdns:search-domains - Honour search domains from /etc/resolv.conf (see bug #201948 for possible side effects)
+sys-auth/oath-toolkit:pam - Build PAM module for pluggable login authentication for OATH
+sys-auth/oath-toolkit:pskc - Build tools & library for the Portable Symmetric Key Container (PSKC) format per RFC6030
 sys-auth/pam_mktemp:prevent-removal - If supported, set EXT2_APPEND_FL on /tmp/.private to prevent temporary directories from being removed
 sys-auth/pam_mysql:openssl - Use OpenSSL for md5 and sha1 support
 sys-auth/pam_pkcs11:nss - Use Mozilla NSS (dev-libs/nss) as provider for PKCS#11 access, rather than using OpenSSL with a custom implementation of the PKC#11 protocol.
@@ -6876,10 +6890,12 @@ sys-boot/lilo:pxeserial - Avoid character echo on PXE serial console
 sys-boot/plymouth:gdm - Enables smooth transition to GDM
 sys-boot/plymouth:libkms - Provides abstraction to the DRM drivers (intel, nouveau and vmwgfx at this moment)
 sys-boot/plymouth:pango - Adds support for printing text on splash screen and text prompts, e.g. for password
+sys-cluster/ceph:babeltrace - Add support for LTTng babeltrace
 sys-cluster/ceph:cryptopp - Use dev-libs/crypto++ for cryptography
 sys-cluster/ceph:fuse - Build fuse client
 sys-cluster/ceph:libaio - Use libaio as asynchronous input/output library
 sys-cluster/ceph:libatomic - Use libatomic instead of builtin atomic operations
+sys-cluster/ceph:lttng - Add support for LTTng
 sys-cluster/ceph:nss - Use dev-libs/nss for cryptography
 sys-cluster/ceph:radosgw - Add radosgw support
 sys-cluster/ceph:xfs - Add xfs support
