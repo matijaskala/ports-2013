@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16399 2015/03/04 17:55:10 voyageur Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16413 2015/03/11 09:37:50 aballier Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,55 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Markos Chandras <hwoarang@gentoo.org> (10 Mar 2015)
+# Mask broken and untested ebuild.
+# See #542434 and #539368
+=net-libs/rb_libtorrent-0.16.17-r2
+
+# Alice Ferrazzi <alicef@gentoo.org> (10 Mar 2015)
+# Masked new version of pypy as experimental.
+# Not to unmask before -bin is ready.
+=virtual/pypy-2.5.0
+=dev-python/pypy-2.5.0
+=dev-python/pypy-bin-2.5.0
+
+# Ulrich Müller <ulm@gentoo.org> (9 Mar 2015)
+# Broken multilib dependencies causing blockers, bug 542728.
+# Masked by QA until maintainer will sort this out.
+=net-misc/teamviewer-10.0.36281
+
+# Lars Wendler <polynomial-c@gentoo.org> (8 Mar 2015)
+# Masked for testing
+>=net-fs/samba-4.2.0
+
+# Hans de Graaff <graaff@gentoo.org> (8 Mar 2015)
+# Mask various ruby19-only packages for removal.
+#
+# Failing tests with ruby20 due to encoding issues
+dev-ruby/compass:0
+# Old slots that are no longer in use
+dev-ruby/jquery-rails:0
+dev-ruby/simplecov:0
+dev-ruby/simplecov-html:0
+dev-ruby/sprockets:2.1
+# Upstream indicates that this is no longer maintained.
+dev-ruby/right_aws
+# test-spec does not work properly even with ruby19 and has been
+# discontinued upstream. amazon-ec2 depends on this and currently has
+# no maintainer.
+dev-ruby/amazon-ec2
+dev-ruby/test-spec
+
+# Christoph Junghans <ottxor@gentoo.org> (7 Mar 2015)
+# Fails to build (bug #536406); nothing in the tree uses it.
+# Masked for removal in 30 days
+sci-libs/openmm
+
+# James Le Cuirot <chewi@gentoo.org> (6 Mar 2015)
+# A Jackon library that was part of v1 but not v2. Nothing in the tree
+# has ever required v1. Removal in 30 days.
+dev-java/jackson-mapper
 
 # Manuel Rüger <mrueg@gentoo.org> (2 Mar 2015)
 # MSNp18 clients are not able to connect anymore
@@ -190,11 +239,6 @@ app-office/openerp-web
 # Potentially destructive to @world, bug #539746.
 =sys-apps/portage-2.2.16
 
-# Kristian Fiskerstrand <k_f@gentoo.org> (09 Feb 2015)
-# Dead upstream, will be removed in 30 days.
-# Qt support is provided by app-crypt/pinentry[qt4]
-app-crypt/pinentry-qt
-
 # Hanno Boeck <hanno@gentoo.org> (08 Feb 2015)
 # Dead upstream, will be removed in 30 days if nobody
 # complains.
@@ -204,20 +248,9 @@ app-portage/portage-mod_jabber
 # Depends on >=dev-libs/isl-0.14:0/14 currently masked.
 >=dev-libs/cloog-0.18.3
 
-# Michael Sterrett <mr_bones_@gentoo.org> (04 Feb 2015)
-# No upstream anymore; nothing in the tree uses it.
-# masked for removal on 20150306
-media-libs/sdl-flic
-
 # Eray Aslan <eras@gentoo.org> (03 Feb 2015)
 # Mask experimental software
 =mail-mta/postfix-3.1*
-
-# Brian Evans <grknight@gentoo.org> (02 Feb 2015)
-# Last rites bug 538584
-# >=dev-lang/php-5.4 no longer includes the extension needed
-# In preparation of dev-lang/php:5.3 removal, Removal in 30 days
-dev-php/PEAR-MDB2_Driver_sqlite
 
 # Sergei Trofimovich <slyfox@gentoo.org> (29 Jan 2015)
 # Mask live ebuild
@@ -291,10 +324,6 @@ rox-extra/songer
 rox-extra/videothumbnail
 rox-extra/wallpaper
 rox-extra/weather
-
-# Tim Harder <radhermit@gentoo.org> (10 Jan 2015)
-# Masked until protobuf-2.6.0 is unmasked
->=dev-libs/protobuf-c-1.1.0
 
 # Anthony G. Basile <blueness@gentoo.org> (9 Jan 2015)
 # p.mask the -9999 version
@@ -384,10 +413,6 @@ www-apps/trac-downloads
 =sys-kernel/vanilla-sources-3.17.0
 =sys-kernel/gentoo-sources-3.17.0
 =sys-kernel/aufs-sources-3.17.0
-
-# Pawel Hajdan jr <phajdan.jr@gentoo.org> (30 Sep 2014)
-# Reverse dependencies need to be tested and fixed, bug #521406.
->=dev-libs/protobuf-2.6.0
 
 # Michał Górny <mgorny@gentoo.org> (15 Sep 2014)
 # Causes undefined references few layers down (in mediastreamer),
@@ -527,10 +552,6 @@ dev-java/ibm-jdk-bin:1.5
 # Big API break.  Masked until something needs it.
 >=dev-libs/isl-0.13
 
-# Justin Lecher <jlec@gentoo.org> (07 May 2014)
-# Still doesn't work as expected
-=sci-chemistry/ccpn-2.4.0_p140425-r1
-
 # Tom Wijsman <TomWij@gentoo.org> (03 May 2014)
 # Needs to be further tested and revised by both Java and Ruby herds.
 >=dev-java/jruby-1.7.12
@@ -624,10 +645,6 @@ lxde-base/lxpolkit
 www-client/google-chrome:beta
 www-client/google-chrome:stable
 www-client/google-chrome:unstable
-
-# Alexis Ballier <aballier@gentoo.org> (18 Jan 2014)
-# Rev. deps fail to build
->=media-libs/aubio-0.4
 
 # Tony Vroon <chainsaw@gentoo.org> (13 Jan 2014)
 # Asterisk 12 is a short term "standard" release
@@ -813,10 +830,6 @@ net-wireless/madwifi-ng
 # seden overlay. A more recent binary is available in the java-overlay.
 <=dev-util/eclipse-sdk-3.5.1-r1
 
-# Michael Weber <xmw@gentoo.org> (07 Jul 2012)
-# Masked for testing only beta (bug 424866)
-=sci-electronics/eagle-6.2.1_beta
-
 # Ian Stakenvicius <axs@gentoo.org> (19 Jun 2012)
 # Mask new spidermonkeys until rdeps can accept it
 # 1.8.7 will be masked indefinitely and will be removed
@@ -921,12 +934,6 @@ net-misc/asterisk-spandsp_codec_g726
 # Doug Goldstein <cardoe@gentoo.org> (07 Jul 2010)
 # No actual Gentoo support yet. If you're interested, please see bug #295993
 net-misc/netcf
-
-# Patrick Lauer <patrick@gentoo.org> (07 Apr 2010)
-# Lars Wendler <polynomial-c@gentoo.org> (14 Oct 2013)
-# Keeping samba-4.0 masked until bug #447022 is fixed. 4.1 masked for testing.
-=net-fs/samba-4.0*
-=net-fs/samba-4.1*
 
 # Mike Frysinger <vapier@gentoo.org> (07 Mar 2010)
 # Very old packages that people should have upgraded away from

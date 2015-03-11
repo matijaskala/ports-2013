@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-9999.ebuild,v 1.4 2015/03/03 14:37:22 tupone Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-9999.ebuild,v 1.6 2015/03/06 20:59:31 tupone Exp $
 
 EAPI="5"
 
@@ -33,7 +33,7 @@ HOMEPAGE="http://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba sftp test udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs raspberry-pi rtmp +samba sftp test udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
@@ -47,10 +47,13 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-i18n/enca
 	airplay? ( app-pda/libplist )
 	dev-libs/boost
+	dev-libs/expat
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
 	cec? ( >=dev-libs/libcec-2.2 )
 	dev-libs/libpcre[cxx]
+	dev-libs/libxml2
+	dev-libs/libxslt
 	>=dev-libs/lzo-2.04
 	dev-libs/tinyxml[stl]
 	dev-libs/yajl
@@ -61,7 +64,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/flac
 	media-libs/fontconfig
 	media-libs/freetype
-	>=media-libs/glew-1.5.6
 	media-libs/jasper
 	media-libs/jbigkit
 	>=media-libs/libass-0.9.7
@@ -98,9 +100,9 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	opengl? (
 		virtual/glu
 		virtual/opengl
+		>=media-libs/glew-1.5.6
 	)
 	gles? (
-		virtual/opengl
 		media-libs/mesa[gles2]
 	)
 	vaapi? ( x11-libs/libva[opengl] )
@@ -196,7 +198,14 @@ src_configure() {
 	# Requiring java is asine #434662
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
+	local myconf=""
+	if use raspberry-pi; then
+		myconf="--with-platform=raspberry-pi"
+		myconf="$myconf --enable-player=omxplayer"
+	fi
+
 	econf \
+		$myconf \
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
@@ -232,6 +241,10 @@ src_configure() {
 		$(use_enable webserver) \
 		$(use_enable X x11) \
 		$(use_enable xrandr)
+}
+
+src_compile() {
+	emake V=1
 }
 
 src_install() {

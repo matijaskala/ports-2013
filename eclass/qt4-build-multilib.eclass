@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/qt4-build-multilib.eclass,v 1.4 2015/01/18 01:49:43 pesa Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/qt4-build-multilib.eclass,v 1.6 2015/03/11 14:07:56 dlan Exp $
 
 # @ECLASS: qt4-build-multilib.eclass
 # @MAINTAINER:
@@ -291,7 +291,7 @@ qt4_multilib_src_configure() {
 		x86-macos)		  arch=x86 ;;
 		x86*)			  arch=i386 ;;
 		alpha|arm|ia64|mips|s390) arch=$(tc-arch) ;;
-		hppa|sh)		  arch=generic ;;
+		arm64|hppa|sh)	  arch=generic ;;
 		*) die "qt4-build-multilib.eclass: unsupported tc-arch '$(tc-arch)'" ;;
 	esac
 
