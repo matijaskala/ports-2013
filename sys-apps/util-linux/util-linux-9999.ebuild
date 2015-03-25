@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-9999.ebuild,v 1.60 2015/02/20 09:01:07 polynomial-c Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/util-linux/util-linux-9999.ebuild,v 1.62 2015/03/21 09:37:17 mgorny Exp $
 
-EAPI="4"
+EAPI="5"
 
-PYTHON_COMPAT=( python2_7 python3_{2,3,4} )
+PYTHON_COMPAT=( python2_7 python3_{3,4} )
 
 inherit eutils toolchain-funcs libtool flag-o-matic bash-completion-r1 \
 	python-single-r1 multilib-minimal systemd
@@ -42,7 +42,7 @@ RDEPEND="!sys-process/schedutils
 	selinux? ( >=sys-libs/libselinux-2.2.2-r4[${MULTILIB_USEDEP}] )
 	slang? ( sys-libs/slang )
 	systemd? ( sys-apps/systemd )
-	udev? ( virtual/udev )
+	udev? ( virtual/libudev )
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-baselibs-20140406-r2
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32]

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-9999.ebuild,v 1.6 2015/03/06 20:59:31 tupone Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-9999.ebuild,v 1.9 2015/03/19 12:48:23 tupone Exp $
 
 EAPI="5"
 
@@ -33,9 +33,8 @@ HOMEPAGE="http://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs raspberry-pi rtmp +samba sftp test udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba sftp test udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
-	pvr? ( mysql )
 	rsxs? ( X )
 	xrandr? ( X )
 "
@@ -60,7 +59,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-python/simplejson[${PYTHON_USEDEP}]
 	media-fonts/corefonts
 	media-fonts/roboto
-	media-libs/alsa-lib
+	alsa? ( media-libs/alsa-lib )
 	media-libs/flac
 	media-libs/fontconfig
 	media-libs/freetype
@@ -82,7 +81,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/tiff
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
-	>=media-video/ffmpeg-2.4:=[encode]
+	>=media-video/ffmpeg-2.6:=[encode]
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	nfs? ( net-fs/libnfs )
@@ -143,16 +142,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-9999-nomythtv.patch
-	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
-	epatch "${FILESDIR}"/${PN}-14.0-dvddemux-ffmpeg.patch #526992#36
-	# The mythtv patch touches configure.ac, so force a regen
-	rm -f configure
-	mv xbmc/visualizations/Goom/goom2k4-0/configure.{in,ac}
-	mv configure.{in,ac}
-	sed -i -e "s:configure.in:configure.ac:" \
-		bootstrap.mk || die "sed failed"
-	epatch "${FILESDIR}"/${P}-gentoo.patch
+	epatch "${FILESDIR}"/${P}-no-arm-flags.patch #400617
+	epatch "${FILESDIR}"/${P}-texturepacker.patch
 
 	# some dirs ship generated autotools, some dont
 	multijob_init
@@ -210,6 +201,7 @@ src_configure() {
 		--disable-ccache \
 		--disable-optimizations \
 		--with-ffmpeg=shared \
+		$(use_enable alsa) \
 		$(use_enable airplay) \
 		$(use_enable avahi) \
 		$(use_enable bluray libbluray) \
@@ -228,7 +220,6 @@ src_configure() {
 		$(use_enable profile profiling) \
 		$(use_enable projectm) \
 		$(use_enable pulseaudio pulse) \
-		$(use_enable pvr mythtv) \
 		$(use_enable rsxs) \
 		$(use_enable rtmp) \
 		$(use_enable samba) \

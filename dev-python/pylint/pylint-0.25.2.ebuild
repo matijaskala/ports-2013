@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pylint/pylint-0.25.2.ebuild,v 1.4 2014/11/18 21:34:45 prometheanfire Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/pylint/pylint-0.25.2.ebuild,v 1.6 2015/03/23 05:28:21 patrick Exp $
 
 EAPI=5
 
