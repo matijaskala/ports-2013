@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qt-creator/qt-creator-3.3.2.ebuild,v 1.2 2015/03/18 20:43:28 pesa Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-qt/qt-creator/qt-creator-3.3.2.ebuild,v 1.4 2015/04/01 20:57:55 pesa Exp $
 
 EAPI=5
 
@@ -9,14 +9,14 @@ PLOCALES="cs de fr ja pl ru sl uk zh_CN zh_TW"
 inherit eutils l10n multilib qmake-utils virtualx
 
 DESCRIPTION="Lightweight IDE for C++/QML development centering around Qt"
-HOMEPAGE="http://qt-project.org/wiki/Category:Tools::QtCreator"
+HOMEPAGE="http://doc.qt.io/qtcreator/"
 LICENSE="|| ( LGPL-2.1 LGPL-3 )"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI=(
-		"git://gitorious.org/${PN}/${PN}.git"
-		"https://git.gitorious.org/${PN}/${PN}.git"
+		"git://code.qt.io/${PN}/${PN}.git"
+		"https://code.qt.io/git/${PN}/${PN}.git"
 	)
 else
 	MY_PV=${PV/_/-}

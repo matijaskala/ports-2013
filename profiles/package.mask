@@ -1,5 +1,5 @@
 ####################################################################
-# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16439 2015/03/25 07:45:14 bircoph Exp $
+# $Header: /var/cvsroot/gentoo-x86/profiles/package.mask,v 1.16472 2015/04/10 07:38:28 patrick Exp $
 #
 # When you add an entry to the top of this file, add your name, the date, and
 # an explanation of why something is getting masked. Please be extremely
@@ -29,6 +29,240 @@
 ## app-misc/some-package
 
 #--- END OF EXAMPLES ---
+
+# Patrick Lauer <patrick@gentoo.org> (10 Apr 2015)
+# Breaks pretty much all consumers, like samba
+# Mask until it's more usable
+>=net-libs/gnutls-3.4.0
+
+# Michael Sterrett <mr_bones_@gentoo.org> (08 Apr 2015)
+# Upstream went away; GPL but no source.
+# masked for removal on 20150508
+games-arcade/mtp-target-bin
+
+# Andreas K. Huettel <dilfridge@gentoo.org) (07 Apr 2015)
+# EAPI=1, last upstream release 2007, last significant
+# ebuild commit 2007. Masked for removal in 30 days.
+# Bug 540796 and bug 540812
+app-laptop/gtkpbbuttons
+app-laptop/gkrellm-pmu
+
+# Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (07 Apr 2015)
+# Masked for testing.
+>=media-libs/libvpx-1.4.0
+
+# Aaron Bauman <bman@gentoo.org> (6 Apr 2015)
+# Superseded by net-misc/gns3-gui and net-misc/gns3-server.
+# Removal in 30 days.
+net-misc/gns3
+
+# Maciej Mrozowski <reavertm@gentoo.org> (06 Apr 2015)
+# Does not link against latest ncurses and no interest to fix it.
+# Superseded by LVM2 and all clusters should be migrated by now.
+# Removal in 30 days.
+sys-fs/evms
+
+# James Le Cuirot <chewi@gentoo.org> (05 Apr 2015)
+# A 32-on-64 Java VM is no longer considered necessary and a multilib
+# icedtea-bin would be preferred anyway. sun-j2me-bin depends on this
+# but it has been superseded by Oracle's JME and I doubt we'll ever
+# need that either. Removal in 30 days.
+app-emulation/emul-linux-x86-java
+dev-java/sun-j2me-bin
+
+# Christoph Junghans <ottxor@gentoo.org> (3 Apr 2015)
+# Dead upstream. Fails to build (bug #543644).
+>=sys-devel/dragonegg-3.6
+
+# Mikle Kolyada <zlogene@gentoo.org> (2 Apr 2015)
+# Dead upstream. Fails tests (byg #442770).
+# Doesn't build with never perl versions.
+# Masked for removal in 30 days.
+dev-perl/Apache-AuthTicket
+
+# Matthew Thode <prometheanfire@gentoo.org> (2 Apr 2015)
+# removing firmware package I accidently added
+# people should move to linux-firmware
+# Masked for removal in 30 days
+sys-firmware/iwl7265-ucode
+
+# Andreas K. Huettel <dilfridge@gentoo.org> (2 Apr 2015)
+# Ancient, dead upstream. File collisions (bug 535700)
+# and build failures (bug 277670). Masked for removal in
+# 30 days.
+dev-perl/Eidetic
+app-admin/rackview
+
+# Michael Sterrett <mr_bones_@gentoo.org> (30 Mar 2015)
+# Not used by anything in the tree and no upstream anymore.
+# masked for removal on 20150429
+dev-games/libgrapple
+
+# Michael Sterrett <mr_bones_@gentoo.org> (30 Mar 2015)
+# Masked since 2011 because of fmod:0 dep.  Things haven't
+# improved so...
+# masked for removal on 20150429
+games-simulation/stoned-bin
+games-sports/racer-bin
+games-strategy/savage-bin
+games-puzzle/drod-bin
+
+# Michael Sterrett <mr_bones_@gentoo.org> (30 Mar 2015)
+# Last release in 2004; doesn't work with newer tcl
+# masked for removal on 20150429
+games-strategy/xconq
+
+# Michael Sterrett <mr_bones_@gentoo.org> (30 Mar 2015)
+# Last release in 2001; doesn't build on modern systems.
+# masked for removal on 20150429
+games-emulation/tuxnes
+
+# Michael Sterrett <mr_bones_@gentoo.org> (30 Mar 2015)
+# Unfetchable.
+# masked for removal on 20150429
+games-action/descent1-maps
+games-fps/doom3-phantasm
+games-fps/enemy-territory-fortress
+games-fps/quake1-ctf
+games-fps/quake3-brainworks
+games-fps/ut2004-da2
+games-fps/ut2004-damnation
+games-rpg/rain-slick
+games-server/bf1942-desertcombat
+games-strategy/dominions2-demo
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (30 Mar 2015)
+# Does not build against glibc-2.20 or modern X servers, bug #544904.
+# Removal in 30 days.
+<x11-drivers/xf86-input-synaptics-1.7
+
+# Andreas K. Huettel <dilfridge@gentoo.org> (29 Mar 2015)
+# Mask Perl 5.18 for removal. Please upgrade to Perl 5.20
+=dev-lang/perl-5.18.2-r2
+=virtual/perl-Archive-Tar-1.900.0-r2
+=virtual/perl-Attribute-Handlers-0.940.0-r1
+=virtual/perl-AutoLoader-5.730.0-r2
+=virtual/perl-B-Debug-1.180.0-r2
+=virtual/perl-CGI-3.630.0-r2
+=virtual/perl-CPAN-Meta-Requirements-2.122.0-r2
+=virtual/perl-CPAN-Meta-YAML-0.8.0-r2
+=virtual/perl-CPAN-Meta-2.120.921-r2
+=virtual/perl-CPAN-2.0.0-r1
+=virtual/perl-Carp-1.290.0-r1
+=virtual/perl-Compress-Raw-Bzip2-2.60.0-r2
+=virtual/perl-Compress-Raw-Zlib-2.60.0-r2
+=virtual/perl-DB_File-1.827.0-r2
+=virtual/perl-Devel-PPPort-3.200.0-r4
+=virtual/perl-Digest-MD5-2.520.0-r2
+=virtual/perl-Encode-2.490.0-r2
+=virtual/perl-Exporter-5.680.0-r2
+=virtual/perl-ExtUtils-CBuilder-0.280.210-r1
+=virtual/perl-ExtUtils-Command-1.170.0-r6
+=virtual/perl-ExtUtils-Install-1.590.0-r1
+=virtual/perl-ExtUtils-MakeMaker-6.660.0-r1
+=virtual/perl-ExtUtils-ParseXS-3.180.0-r2
+=virtual/perl-File-Spec-3.400.0-r2
+=virtual/perl-File-Temp-0.230.0-r1
+=virtual/perl-Filter-Simple-0.890.0-r1
+=virtual/perl-Getopt-Long-2.390.0-r1
+=virtual/perl-I18N-LangTags-0.390.0
+=virtual/perl-IO-Compress-2.60.0-r1
+=virtual/perl-IO-1.280.0-r1
+=virtual/perl-IPC-Cmd-0.800.0-r1
+=virtual/perl-JSON-PP-2.272.20-r1
+=virtual/perl-Locale-Maketext-1.230.0-r1
+=virtual/perl-MIME-Base64-3.130.0-r4
+=virtual/perl-Math-BigInt-FastCalc-0.300.0-r4
+=virtual/perl-Math-BigInt-1.999.100
+=virtual/perl-Math-BigRat-0.260.400
+=virtual/perl-Module-Build-0.400.300-r1
+=virtual/perl-Module-CoreList-3.30.0
+=virtual/perl-Module-Load-Conditional-0.540.0-r1
+=virtual/perl-Module-Load-0.240.0-r1
+=virtual/perl-Module-Metadata-1.0.11-r1
+=virtual/perl-Net-Ping-2.41-r1
+=virtual/perl-Package-Constants-0.20.0-r5
+=virtual/perl-Params-Check-0.360.0-r1
+=virtual/perl-Parse-CPAN-Meta-1.440.400-r1
+=virtual/perl-Perl-OSType-1.3.0-r1
+=virtual/perl-Pod-Escapes-1.40.0-r5
+=virtual/perl-Pod-Parser-1.600.0
+=virtual/perl-Safe-2.350.0-r2
+=virtual/perl-Scalar-List-Utils-1.270.0-r2
+=virtual/perl-Socket-2.9.0-r2
+=virtual/perl-Storable-2.410.0-r1
+=virtual/perl-Sys-Syslog-0.320.0-r2
+=virtual/perl-Term-ReadLine-1.120.0
+=virtual/perl-Test-Harness-3.260.0-r2
+=virtual/perl-Test-Simple-0.980.0-r6
+=virtual/perl-Text-ParseWords-3.280.0-r2
+=virtual/perl-Thread-Queue-3.20.0-r1
+=virtual/perl-Time-HiRes-1.972.500-r3
+=virtual/perl-Time-Piece-1.20-r2
+=virtual/perl-XSLoader-0.160.0-r2
+=virtual/perl-bignum-0.330.0
+=virtual/perl-if-0.60.200-r2
+=virtual/perl-libnet-1.220.0-r3
+=virtual/perl-parent-0.225.0-r5
+=virtual/perl-threads-shared-1.430.0-r1
+=virtual/perl-threads-1.860.0-r4
+=virtual/perl-version-0.990.200-r1
+
+# Ben de Groot <yngwin@gentoo.org> (29 Mar 2015)
+# Merged with qtcurve-qt4 into x11-themes/qtcurve (with gtk useflag)
+# Removal in 30 days. See also bug #544406.
+x11-themes/gtk-engines-qtcurve
+
+# Michał Górny <mgorny@gentoo.org> (28 Mar 2015)
+# on behalf of gx86-multilib project <multilib@gentoo.org>
+# Mask emul-linux-x86 packages along with unported old versions
+# of reverse dependencies for removal in 60 days, bug #544876.
+# Please use multilib ebuilds with abi_x86_32 instead.
+app-emulation/emul-linux-x86-baselibs
+app-emulation/emul-linux-x86-cpplibs
+app-emulation/emul-linux-x86-db
+app-emulation/emul-linux-x86-gstplugins
+app-emulation/emul-linux-x86-gtklibs
+app-emulation/emul-linux-x86-gtkmmlibs
+app-emulation/emul-linux-x86-medialibs
+app-emulation/emul-linux-x86-motif
+app-emulation/emul-linux-x86-opengl
+app-emulation/emul-linux-x86-qtlibs
+app-emulation/emul-linux-x86-sdl
+app-emulation/emul-linux-x86-soundlibs
+app-emulation/emul-linux-x86-xlibs
+app-emulation/emul-linux-x86-jna
+<app-emulation/wine-1.6.1
+<x11-drivers/ati-drivers-14
+
+# James Le Cuirot <chewi@gentoo.org> (28 Mar 2015)
+# Formerly required by NetBeans. Upstream has been dead for
+# years. Removal in 30 days.
+dev-java/jna-posix
+
+# Ian Delaney <idella4@gentoo.org> (28 Mar 2015)
+# old package with no active maintainers
+# No evidence of support or use.
+# Masked for removal in 30 days.
+sci-geosciences/LatLongUTMconversion
+
+# Bernard Cafarelli <voyageur@gentoo.org> (26 Mar 2015)
+# Dead upstreams, not working in some use cases,
+# compatibility with current net-misc/nx not guaranteed,
+# some bundle old binary Xorg code that may be vulnerable,
+# modern alternative exist:
+# net-misc/x2go{client,server} and proprietary NX 4 (bug #488334)
+# These packages are now available in the NX overlay
+# Removal in a month (bug #537774)
+app-admin/eselect-nxserver
+net-misc/neatx
+net-misc/nxcl
+net-misc/nxclient
+net-misc/nxnode
+net-misc/nxsadmin
+net-misc/nxserver-freeedition
+net-misc/nxserver-freenx
+net-misc/qtnx
 
 # Michael Sterrett <mr_bones_@gentoo.org> (24 Mar 2015)
 # no need for the -bin version when we have a source build
@@ -233,7 +467,7 @@ net-misc/geekcredit
 
 # Pacho Ramos <pacho@gentoo.org> (19 Mar 2015)
 # Removal in a month, bug #346791
-# Justin Lecher <jlec@gentoo.org> (27 Jun 2011)  
+# Justin Lecher <jlec@gentoo.org> (27 Jun 2011)
 # Only avalable version isn't in the tree.
 # Mask until it is bumped
 sci-chemistry/webmo
@@ -351,16 +585,6 @@ dev-ruby/right_aws
 dev-ruby/amazon-ec2
 dev-ruby/test-spec
 
-# Christoph Junghans <ottxor@gentoo.org> (7 Mar 2015)
-# Fails to build (bug #536406); nothing in the tree uses it.
-# Masked for removal in 30 days
-sci-libs/openmm
-
-# James Le Cuirot <chewi@gentoo.org> (6 Mar 2015)
-# A Jackon library that was part of v1 but not v2. Nothing in the tree
-# has ever required v1. Removal in 30 days.
-dev-java/jackson-mapper
-
 # Manuel Rüger <mrueg@gentoo.org> (2 Mar 2015)
 # MSNp18 clients are not able to connect anymore
 # See also: http://ismsndeadyet.com
@@ -390,12 +614,6 @@ dev-libs/libzypp
 # #536586
 =dev-python/django-1.5*
 
-# Ulrich Müller <ulm@gentoo.org> (24 Feb 2015)
-# Does not work with Emacs 24 or later. Last visible upstream
-# activity in 2010. Use app-emacs/wgrep as replacement.
-# Masked for removal in 30 days, bug 541234.
-app-emacs/grep-edit
-
 # Hans de Graaff <graaff@gentoo.org> (23 Feb 2015)
 # Mask chef and its dependencies for removal in 60 days.
 # This package lacks a maintainer and the version currently
@@ -421,19 +639,6 @@ dev-ruby/mixlib-config
 dev-ruby/mixlib-log
 dev-ruby/ohai
 =dev-ruby/rest-client-1.6.7-r1
-
-# Ben de Groot <yngwin@gentoo.org> (21 Feb 2015)
-# Duplicates media-fonts/culmus[ancient] (bug #486814).
-# Masked for removal in 30 days.
-media-fonts/culmus-ancient
-
-# Hans de Graaff <graaff@gentoo.org> (15 Feb 2015)
-# Masked for removal due to licensing issues, bug 539778
-dev-ruby/gemoji
-
-# Matthew Thode <prometheanfire@gentoo.org> (12 Feb 2015)
-# Dead upstream and no deps
-dev-python/rax-backup-schedule-python-novaclient-ext
 
 # Joerg Bornkessel <hd_brummy@gentoo.org> (12 Feb 2015)
 # dead on upstream since years,
@@ -474,14 +679,6 @@ dev-perl/IP-Country
 # Anthony G. Basile <blueness@gentoo.org> (9 Jan 2015)
 # p.mask the -9999 version
 =dev-misc/i2pd-9999
-
-# Aaron W. Swenson <titanofold@gentoo.org) (7 Jan 2015)
-# pgtune is masked for removal 2015-03-08. It's dead upstream, has a
-# critical bug 530868, and doesn't use a real distribution
-# model. Adopt the package upstream to save it.
-# An online alternative lives at:
-#    http://pgtune.leopard.in.ua/
-dev-db/pgtune
 
 # Tony Vroon <chainsaw@gentoo.org> (5 Jan 2015)
 # Asterisk 13 is an LTS release but has not seen
@@ -536,7 +733,7 @@ www-apps/trac-downloads
 
 # Markos Chandras <hwoarang@gentoo.org> (18 Nov 2014)
 # Mask latest development version for testing
-=x11-misc/lightdm-1.13*
+=x11-misc/lightdm-1.14*
 
 # Samuli Suominen <ssuominen@gentoo.org> (05 Nov 2014)
 # ConsoleKit2 from github by Eric Koegel, auth of xfce4-power-manager
@@ -696,7 +893,7 @@ dev-ruby/weakling
 
 # Matti Bickel <mabi@gentoo.org> (22 Apr 2014)
 # Masked slotted lua for testing
-app-admin/eselect-lua
+app-eselect/eselect-lua
 =dev-lang/lua-5.1.5-r2
 =dev-lang/lua-5.1.5-r100
 =dev-lang/lua-5.2.3
@@ -799,11 +996,6 @@ games-emulation/mupen64plus-video-glide64mk2
 games-emulation/mupen64plus-video-rice
 games-emulation/m64py
 
-# Ben de Groot <yngwin@gentoo.org> (11 Nov 2013)
-# Mask older roboto versions to give users a regular upgrade path
-# now that we've switched to upstream versioning
->media-fonts/roboto-9999
-
 # Tiziano Müller <dev-zero@gentoo.org> (24 Oct 2013)
 # Mask mainline version branch
 =www-servers/nginx-1.5*
@@ -856,8 +1048,6 @@ sci-geosciences/googleearth
 
 # Michael Weber <xmw@gentoo.org> (17 Jul 2013)
 # Upstream next versions
->=sys-kernel/raspberrypi-image-3.7_pre
->=sys-kernel/raspberrypi-sources-3.7_pre
 >=sys-boot/raspberrypi-firmware-1_pre
 
 # Sergey Popov <pinkbyte@gentoo.org> (12 Jul 2013)

@@ -1,19 +1,17 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
-inherit eutils flag-o-matic ubuntu vala
-
-UVER_PREFIX="+14.10.20140610"
+inherit autotools eutils flag-o-matic ubuntu vala
 
 DESCRIPTION="Library to pass menu structure across DBus"
 HOMEPAGE="https://launchpad.net/dbusmenu"
 
 LICENSE="LGPL-3"
 SLOT="3"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~alpha amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~sparc x86"
 IUSE="debug gtk +introspection"	# We force 'gtk' and 'introspection', but keep these in IUSE for main portage tree ebuilds
 RESTRICT="mirror"
 
@@ -24,8 +22,8 @@ RDEPEND=">=dev-libs/glib-2.35.4
 	dev-util/gtk-doc
 	sys-apps/dbus
 	x11-libs/gtk+:2
-	x11-libs/gtk+:3"
-	dev-libs/gobject-introspection
+	x11-libs/gtk+:3
+	dev-libs/gobject-introspection"
 
 DEPEND="${RDEPEND}
 	app-text/gnome-doc-utils
@@ -38,6 +36,8 @@ MAKEOPTS="${MAKEOPTS} -j1"
 src_prepare() {
 	vala_src_prepare
 	export VALA_API_GEN="$VAPIGEN"
+
+	eautoreconf
 }
 
 src_configure() {

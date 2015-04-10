@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/ujson/ujson-1.33.ebuild,v 1.6 2015/03/09 00:01:31 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/ujson/ujson-1.33.ebuild,v 1.8 2015/04/08 08:05:24 mgorny Exp $
 
 EAPI="5"
 
 # One test; FAIL: test_encodeToUTF8 (__main__.UltraJSONTests) under py2.5.
 # Fix and repair and re-insert if it's REALLY needed
-PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 
 inherit distutils-r1
 
@@ -30,7 +30,7 @@ PATCHES=(
 
 python_test() {
 	# See setup.py; line 72. Again "${S}" is used for reading tests
-	# Since py3_2 is first in the queue it needs its own copy 
+	# Since py3_2 is first in the queue it needs its own copy
 	# or else all py2s to follow will be reading read py3 tests
 	if [[ "${EPYTHON}" =~ 'python3' ]]; then
 		cd "${BUILD_DIR}"/lib || die

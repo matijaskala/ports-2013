@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-14.1.ebuild,v 1.4 2015/03/19 12:48:23 tupone Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-14.1.ebuild,v 1.7 2015/04/08 18:15:30 mgorny Exp $
 
 EAPI="5"
 
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
-PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 multiprocessing autotools
@@ -33,11 +33,12 @@ HOMEPAGE="http://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba sftp test udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="airplay avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio pvr +rsxs rtmp +samba sdl sftp test +texturepacker udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	pvr? ( mysql )
 	rsxs? ( X )
 	xrandr? ( X )
+	joystick? ( sdl )
 "
 
 COMMON_DEPEND="${PYTHON_DEPS}
@@ -47,10 +48,13 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-i18n/enca
 	airplay? ( app-pda/libplist )
 	dev-libs/boost
+	dev-libs/expat
 	dev-libs/fribidi
 	dev-libs/libcdio[-minimal]
 	cec? ( >=dev-libs/libcec-2.2 )
 	dev-libs/libpcre[cxx]
+	dev-libs/libxml2
+	dev-libs/libxslt
 	>=dev-libs/lzo-2.04
 	dev-libs/tinyxml[stl]
 	dev-libs/yajl
@@ -74,7 +78,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/libpng
 	projectm? ( media-libs/libprojectm )
 	media-libs/libsamplerate
-	joystick? ( media-libs/libsdl2 )
+	sdl? ( media-libs/libsdl2 )
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
 	media-libs/tiff
@@ -123,6 +127,11 @@ DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-util/gperf
+	texturepacker? (
+		media-libs/libsdl
+		media-libs/sdl-image
+	)
+	sdl? ( media-libs/sdl-image )
 	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
@@ -218,9 +227,11 @@ src_configure() {
 		$(use_enable rsxs) \
 		$(use_enable rtmp) \
 		$(use_enable samba) \
+		$(use_enable sdl) \
 		$(use_enable sftp ssh) \
 		$(use_enable usb libusb) \
 		$(use_enable test gtest) \
+		$(use_enable texturepacker) \
 		$(use_enable upnp) \
 		$(use_enable vaapi) \
 		$(use_enable vdpau) \

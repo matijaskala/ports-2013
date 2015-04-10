@@ -1,29 +1,29 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools eutils python-r1
+UVER_PREFIX="+14.10.20140716"
 
-MY_PV="${PV}+14.10.20140716"
-S="${WORKDIR}/${PN}-${MY_PV}"
+inherit autotools eutils python-r1 ubuntu
+
 DESCRIPTION="GTK+ module for exporting old-style menus as GMenuModels"
 HOMEPAGE="https://launchpad.net/unity-gtk-module"
-SRC_URI="https://launchpadlibrarian.net/180086658/${PN}_${MY_PV}.orig.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="+gtk3"
+IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/libdbusmenu:=[gtk,gtk3?]"
+RDEPEND="dev-libs/libdbusmenu:="
 DEPEND="${RDEPEND}
 	>=dev-libs/glib-2.38
 	x11-libs/libX11
 	x11-libs/gtk+:2
+	x11-libs/gtk+:3
 	!x11-misc/appmenu-gtk"
 
 pkg_setup() {
@@ -44,7 +44,6 @@ src_configure() {
 			--with-gtk=2 || die
 	popd
 
-	if use gtk3; then
 	# Build GTK3 support #
 	[[ -d build-gtk3 ]] || mkdir build-gtk3
 	pushd build-gtk3
@@ -52,7 +51,6 @@ src_configure() {
 		--sysconfdir=/etc \
 		--disable-static || die
 	popd
-	fi
 }
 
 src_compile() {
@@ -61,12 +59,10 @@ src_compile() {
 		emake || die
 	popd
 
-	if use gtk3; then
 	# Build GTK3 support #
 	pushd build-gtk3
 		emake || die
 	popd
-	fi
 }
 
 src_install() {
@@ -75,12 +71,10 @@ src_install() {
 		emake DESTDIR="${D}" install || die
 	popd
 
-	if use gtk3; then
 	# Install GTK3 support #
 	pushd build-gtk3
 		emake DESTDIR="${D}" install || die
 	popd
-	fi
 
 	rm -rf "${D}etc" &> /dev/null
 	exeinto /etc/X11/xinit/xinitrc.d/

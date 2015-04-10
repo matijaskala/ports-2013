@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/gnuradio/gnuradio-3.7.6.1-r2.ebuild,v 1.2 2015/02/21 22:42:15 zerochaos Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-wireless/gnuradio/gnuradio-3.7.6.1-r2.ebuild,v 1.4 2015/04/08 10:28:02 chithanh Exp $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
 CMAKE_BUILD_TYPE="None"
-inherit cmake-utils fdo-mime gnome2-utils python-single-r1
+inherit cmake-utils fdo-mime gnome2-utils python-single-r1 eutils
 
 DESCRIPTION="Toolkit that provides signal processing blocks to implement software radios"
 HOMEPAGE="http://gnuradio.org/"
@@ -32,6 +32,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 		portaudio? ( audio )
 		analog? ( filter )
 		digital? ( filter analog )
+		dtv? ( fec )
 		pager? ( filter analog )
 		qt4? ( filter )
 		uhd? ( filter analog )
@@ -106,9 +107,8 @@ src_prepare() {
 
 	# Useless UI element would require qt3support, bug #365019
 	sed -i '/qPixmapFromMimeSource/d' "${S}"/gr-qtgui/lib/spectrumdisplayform.ui || die
-	#epatch "${FILESDIR}"/${PN}-3.6.1-automagic-audio.patch
-	#epatch "${FILESDIR}/${P}-build-type-nonfatal.patch"
 	epatch "${FILESDIR}/${P}-qwt-with-qt5-support.patch"
+	epatch_user
 }
 
 src_configure() {

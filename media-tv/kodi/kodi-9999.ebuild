@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-9999.ebuild,v 1.9 2015/03/19 12:48:23 tupone Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-tv/kodi/kodi-9999.ebuild,v 1.14 2015/04/08 18:15:30 mgorny Exp $
 
 EAPI="5"
 
 # Does not work with py3 here
 # It might work with py:2.5 but I didn't test that
-PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
 inherit eutils python-single-r1 multiprocessing autotools
@@ -33,7 +33,7 @@ HOMEPAGE="http://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs raspberry-pi rtmp +samba sftp test udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba sftp test +texturepacker udisks upnp upower +usb vaapi vdpau webserver +X +xrandr"
 REQUIRED_USE="
 	rsxs? ( X )
 	xrandr? ( X )
@@ -124,6 +124,10 @@ DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
 	dev-util/gperf
+	texturepacker? (
+		media-libs/libsdl
+		media-libs/sdl-image
+	)
 	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
@@ -189,14 +193,7 @@ src_configure() {
 	# Requiring java is asine #434662
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
-	local myconf=""
-	if use raspberry-pi; then
-		myconf="--with-platform=raspberry-pi"
-		myconf="$myconf --enable-player=omxplayer"
-	fi
-
 	econf \
-		$myconf \
 		--docdir=/usr/share/doc/${PF} \
 		--disable-ccache \
 		--disable-optimizations \
@@ -226,6 +223,7 @@ src_configure() {
 		$(use_enable sftp ssh) \
 		$(use_enable usb libusb) \
 		$(use_enable test gtest) \
+		$(use_enable texturepacker) \
 		$(use_enable upnp) \
 		$(use_enable vaapi) \
 		$(use_enable vdpau) \

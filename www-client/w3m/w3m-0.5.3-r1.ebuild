@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/w3m/w3m-0.5.3-r1.ebuild,v 1.13 2015/03/21 14:11:35 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-client/w3m/w3m-0.5.3-r1.ebuild,v 1.15 2015/03/29 05:26:46 mrueg Exp $
 
 EAPI="3"
 inherit eutils

@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.4.39.ebuild,v 1.1 2015/03/20 11:38:06 olemarkus Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.4.39.ebuild,v 1.10 2015/04/05 22:15:41 sping Exp $
 
 EAPI=5
 
 inherit eutils autotools flag-o-matic versionator depend.apache apache-module db-use libtool systemd
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS="alpha amd64 arm hppa ~ia64 ~mips ~ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 
 function php_get_uri ()
 {
@@ -85,7 +85,7 @@ IUSE="${IUSE} bcmath berkdb bzip2 calendar cdb cjk
 	+xml xmlreader xmlwriter xmlrpc xpm xslt zip zlib"
 
 DEPEND="
-	>=app-admin/eselect-php-0.7.1-r3[apache2?,fpm?]
+	>=app-eselect/eselect-php-0.7.1-r3[apache2?,fpm?]
 	>=dev-libs/libpcre-8.32[unicode]
 	apache2? ( || ( >=www-servers/apache-2.4[apache2_modules_unixd,threads=]
 		<www-servers/apache-2.4[threads=] ) )
@@ -757,7 +757,7 @@ pkg_postinst() {
 	# Output some general info to the user
 	if use apache2 ; then
 		APACHE2_MOD_DEFINE="PHP5"
-		APACHE2_MOD_CONF="70_mod_php5"
+		APACHE2_MOD_CONF="70_mod_php5"  # actually provided by app-eselect/eselect-php
 		apache-module_pkg_postinst
 	fi
 

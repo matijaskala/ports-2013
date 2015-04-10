@@ -5,10 +5,10 @@ EAPI=5
 inherit check-reqs eutils mount-boot
 
 SLOT=$PVR
-CKV=3.16.7-ckt4
+CKV=3.16.7-ckt7
 KV_FULL=${PN}-${PVR}
-EXTRAVERSION=-ckt4-1
-KERNEL_ARCHIVE="linux_${PV}-ckt4.orig.tar.xz"
+EXTRAVERSION=-ckt7-1
+KERNEL_ARCHIVE="linux_${PV}-ckt7.orig.tar.xz"
 PATCH_ARCHIVE="linux_${PV}${EXTRAVERSION}.debian.tar.xz"
 RESTRICT="binchecks strip mirror"
 # based on : http://packages.ubuntu.com/maverick/linux-image-2.6.35-22-server
@@ -146,13 +146,13 @@ src_install() {
 }
 
 pkg_postinst() {
-	if [[ -h "${ROOT}"usr/src/linux ]]; 
-	then 
+	if use binary && [[ -h "${ROOT}"usr/src/linux ]]; then 
 		rm "${ROOT}"usr/src/linux
 	fi
 
-	if [[ ! -e "${ROOT}"usr/src/linux ]];
-	then
+	if use binary && [[ ! -e "${ROOT}"usr/src/linux ]]; then
+		ewarn "With binary use flag enabled /usr/src/linux"
+		ewarn "symlink automatically set to debian kernel"
 		ln -sf linux-${P} "${ROOT}"usr/src/linux
 	fi
 

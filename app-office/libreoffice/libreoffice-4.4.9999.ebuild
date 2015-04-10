@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-4.4.9999.ebuild,v 1.9 2015/02/28 12:15:26 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-office/libreoffice/libreoffice-4.4.9999.ebuild,v 1.11 2015/04/05 19:59:31 dilfridge Exp $
 
 EAPI=5
 
@@ -175,7 +175,7 @@ COMMON_DEPEND="
 		dev-java/tomcat-servlet-api:3.0
 	)
 	mysql? ( >=dev-db/mysql-connector-c++-1.1.0 )
-	postgres? ( >=dev-db/postgresql-9.0[kerberos] )
+	postgres? ( >=dev-db/postgresql-9.0:*[kerberos] )
 	telepathy? (
 		dev-libs/glib:2
 		>=net-libs/telepathy-glib-0.18.0
@@ -215,7 +215,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-util/cppunit
 	>=dev-util/gperf-3
 	dev-util/intltool
-	>=dev-util/mdds-0.10.3:=
+	>=dev-util/mdds-0.11.2:=
 	media-libs/glm
 	net-misc/npapi-sdk
 	>=sys-apps/findutils-4.4.2

@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/vim/vim-7.4.273.ebuild,v 1.13 2015/03/19 16:24:20 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/vim/vim-7.4.273.ebuild,v 1.15 2015/04/08 07:30:35 mgorny Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
-PYTHON_COMPAT=( python{2_6,2_7,3_2,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 PYTHON_REQ_USE=threads
 inherit eutils vim-doc flag-o-matic fdo-mime versionator bash-completion-r1 python-single-r1
 
@@ -32,7 +32,7 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	>=app-admin/eselect-vi-1.1
+	>=app-eselect/eselect-vi-1.1
 	>=sys-libs/ncurses-5.2-r2
 	nls? ( virtual/libintl )
 	acl? ( kernel_linux? ( sys-apps/acl ) )
@@ -55,7 +55,6 @@ RDEPEND="
 	X? ( x11-libs/libXt )
 "
 DEPEND="${RDEPEND}
-	>=app-admin/eselect-vi-1.1
 	sys-devel/autoconf
 	>=sys-libs/ncurses-5.2-r2
 	nls? ( sys-devel/gettext )

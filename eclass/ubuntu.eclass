@@ -25,7 +25,6 @@ then
 		else
 			UVER_PREFIX="+${UVER_PREFIX}"
 		fi
-		UP=${UPN}-${UPV}
 	fi
 fi
 
@@ -33,4 +32,4 @@ UURL="https://launchpad.net/ubuntu/+archive/primary/+files/"
 SRC_URI="${UURL}${UPN}_${UPV}${UVER_PREFIX}.${SRC_SUFFIX}"
 RESTRICT="mirror"
 
-S="${WORKDIR}/${UP}${UVER_PREFIX}"
+S="${WORKDIR}/${UPN}-${UPV}${UVER_PREFIX}"

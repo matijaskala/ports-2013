@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.6.5.ebuild,v 1.1 2015/01/23 09:18:48 olemarkus Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.6.5.ebuild,v 1.3 2015/04/05 22:15:41 sping Exp $
 
 EAPI=5
 
@@ -76,7 +76,7 @@ IUSE="${IUSE} bcmath berkdb bzip2 calendar cdb cjk
 	+xml xmlreader xmlwriter xmlrpc xpm xslt zip zlib"
 
 DEPEND="
-	>=app-admin/eselect-php-0.7.1-r3[apache2?,fpm?]
+	>=app-eselect/eselect-php-0.7.1-r3[apache2?,fpm?]
 	>=dev-libs/libpcre-8.32[unicode]
 	apache2? ( || ( >=www-servers/apache-2.4[apache2_modules_unixd,threads=]
 		<www-servers/apache-2.4[threads=] ) )
@@ -739,7 +739,7 @@ pkg_postinst() {
 	# Output some general info to the user
 	if use apache2 ; then
 		APACHE2_MOD_DEFINE="PHP5"
-		APACHE2_MOD_CONF="70_mod_php5"
+		APACHE2_MOD_CONF="70_mod_php5"  # actually provided by app-eselect/eselect-php
 		apache-module_pkg_postinst
 	fi
 
