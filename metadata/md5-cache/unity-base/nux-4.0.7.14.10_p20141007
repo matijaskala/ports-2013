@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare unpack
+DEPEND=media-libs/glew:= app-i18n/ibus dev-libs/boost >=dev-libs/glib-2.32.3 dev-libs/libpcre dev-libs/libsigc++:2 gnome-base/gnome-common media-libs/glew media-libs/libpng:0 sys-apps/pciutils unity-base/geis x11-libs/cairo x11-libs/gdk-pixbuf x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXxf86vm x11-libs/pango x11-proto/dri2proto x11-proto/glproto >=sys-devel/gcc-4.7 dev-cpp/gmock dev-cpp/gtest !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.13:1.13 >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Visual rendering toolkit for the Unity desktop
+EAPI=5
+HOMEPAGE=http://launchpad.net/nux
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3 LGPL-3
+RDEPEND=media-libs/glew:= app-i18n/ibus dev-libs/boost >=dev-libs/glib-2.32.3 dev-libs/libpcre dev-libs/libsigc++:2 gnome-base/gnome-common media-libs/glew media-libs/libpng:0 sys-apps/pciutils unity-base/geis x11-libs/cairo x11-libs/gdk-pixbuf x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXxf86vm x11-libs/pango x11-proto/dri2proto x11-proto/glproto
+RESTRICT=mirror
+SLOT=0/4
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/nux_4.0.7+14.10.20141007.orig.tar.gz
+_eclasses_=autotools	999c8f6cf5d91495cb0779588f20716c	base	87f7447ccfc06fd0729ff4684e11e0d6	eutils	9fb270e417e0e83d64ca52586c4a79de	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	c961250d50160cd37d6b7fd9e8429c92	ubuntu	3b06d9e2f4fe95d1d88e24fbb8779c68
+_md5_=691264de4566fd43e11b898f3411db95
