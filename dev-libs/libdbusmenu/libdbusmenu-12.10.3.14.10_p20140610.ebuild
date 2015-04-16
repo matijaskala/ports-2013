@@ -10,9 +10,9 @@ DESCRIPTION="Library to pass menu structure across DBus"
 HOMEPAGE="https://launchpad.net/dbusmenu"
 
 LICENSE="LGPL-3"
-SLOT="3"
+SLOT="0"
 KEYWORDS="~alpha amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~sparc x86"
-IUSE="debug gtk +introspection"	# We force 'gtk' and 'introspection', but keep these in IUSE for main portage tree ebuilds
+IUSE="debug gtk3 +introspection"	# We force building both GTK2, GTK3, and 'introspection', but keep these in IUSE for main portage tree ebuilds
 RESTRICT="mirror"
 
 RDEPEND=">=dev-libs/glib-2.35.4
