@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/glibc/glibc-2.20-r2.ebuild,v 1.2 2015/03/22 20:38:54 zlogene Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/glibc/glibc-2.20-r2.ebuild,v 1.8 2015/04/27 03:44:16 vapier Exp $
 
 EAPI="4"
 
@@ -10,7 +10,7 @@ DESCRIPTION="GNU libc6 (also called glibc2) C library"
 HOMEPAGE="http://www.gnu.org/software/libc/libc.html"
 
 LICENSE="LGPL-2.1+ BSD HPND ISC inner-net rc PCRE"
-KEYWORDS="~alpha amd64 ~arm ~arm64 -hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="~alpha amd64 arm ~arm64 -hppa ~ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86"
 RESTRICT="strip" # strip ourself #46186
 EMULTILIB_PKG="true"
 
@@ -185,4 +185,12 @@ eblit-src_prepare-post() {
 			-e 's:-fstack-protector$:-fstack-protector-all:' \
 			*/Makefile || die
 	fi
+
+	case $(gcc-fullversion) in
+	4.8.[0-3]|4.9.0)
+		eerror "You need to switch to a newer compiler; gcc-4.8.[0-3] and gcc-4.9.0 miscompile"
+		eerror "glibc.  See https://bugs.gentoo.org/547420 for details."
+		die "need to switch compilers #547420"
+		;;
+	esac
 }

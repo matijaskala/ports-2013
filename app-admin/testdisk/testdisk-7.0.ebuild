@@ -1,8 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/testdisk/testdisk-7.0.ebuild,v 1.3 2015/04/20 18:39:48 nicolasbock Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/testdisk/testdisk-7.0.ebuild,v 1.6 2015/04/26 16:47:21 pacho Exp $
 
 EAPI=5
+
+AUTOTOOLS_AUTORECONF=1
 
 inherit autotools-utils eutils flag-o-matic
 
@@ -12,7 +14,7 @@ SRC_URI="http://www.cgsecurity.org/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
+KEYWORDS="~amd64 ~arm ~ppc x86"
 IUSE="jpeg ntfs reiserfs static"
 
 # WARNING: reiserfs support does NOT work with reiserfsprogs
@@ -21,7 +23,7 @@ DEPEND="
 		static? (
 			sys-apps/util-linux[static-libs]
 			>=sys-libs/ncurses-5.2[static-libs]
-			jpeg? ( virtual/jpeg[static-libs] )
+			jpeg? ( virtual/jpeg:*[static-libs] )
 			ntfs? ( <=sys-fs/ntfs3g-2013.1.13[static-libs] )
 			reiserfs? ( >=sys-fs/progsreiserfs-0.3.1_rc8[static-libs] )
 			>=sys-fs/e2fsprogs-1.35[static-libs]
@@ -30,7 +32,7 @@ DEPEND="
 		!static? (
 			sys-apps/util-linux
 			>=sys-libs/ncurses-5.2
-			jpeg? ( virtual/jpeg )
+			jpeg? ( virtual/jpeg:* )
 			ntfs? ( <=sys-fs/ntfs3g-2013.1.13 )
 			reiserfs? ( >=sys-fs/progsreiserfs-0.3.1_rc8 )
 			>=sys-fs/e2fsprogs-1.35
@@ -38,13 +40,9 @@ DEPEND="
 			)"
 RDEPEND="!static? ( ${DEPEND} )"
 
-AUTOTOOLS_AUTORECONF=1
-BUILD_DIR="${S}"
-
-src_prepare() {
-	epatch "${FILESDIR}/install-gentoo.patch"
-	autotools-utils_src_prepare
-}
+AUTOTOOLS_IN_SOURCE_BUILD=1
+DOCS=( )
+PATCHES=( "${FILESDIR}/install-gentoo.patch" )
 
 src_configure() {
 	local myconf
@@ -61,7 +59,6 @@ src_configure() {
 	use jpeg || myconf+=" --without-jpeg"
 
 	econf \
-		--docdir="${ED}/usr/share/doc/${PF}" \
 		--disable-qt \
 		--without-ewf \
 		--enable-sudo \
