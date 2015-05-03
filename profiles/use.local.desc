@@ -321,7 +321,6 @@ app-backup/snapper:btrfs - Include Btrfs support sys-fs/btrfs-progs
 app-backup/snapper:ext4 - Include Ext4 support sys-fs/e2fsprogs
 app-backup/snapper:lvm - Enable LVM thinprovisioned snapshots support sys-fs/lvm2
 app-backup/snapper:xattr - Add support for getting and setting POSIX extended attributes, through sys-apps/attr.
-app-backup/spideroak-bin:headless - Build without graphic frontend
 app-backup/tsm:hsm - Installs Tivoli Storage Manager for Space Management
 app-backup/tsm:tsm_cit - IBM Tivoli Common Inventory Technology
 app-backup/tsm:tsm_hw - Difference snapshot support for NetApp and N-Series file servers
@@ -1107,6 +1106,7 @@ app-shells/scsh-install-lib:scsh - Use a non-FHS directory layout
 app-shells/shish:diet - Use dev-libs/dietlibc
 app-shells/tcsh:catalogs - Add support for NLS catalogs
 app-text/acroread:html - HTML support and help reading capability (only for x86).
+app-text/apvlv:html - Build binary with html format support
 app-text/asciidoc:highlight - Enable source code highlighting
 app-text/atril:caja - Enable property page extension in mate-base/mate-file-manager
 app-text/atril:dvi - Enable build-in DVI viewer
@@ -2415,7 +2415,7 @@ dev-qt/qthelp:exceptions - Add support for exceptions - like catching them insid
 dev-qt/qtmultimedia:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtmultimedia:qml - Build QML/QtQuick bindings and imports
 dev-qt/qtmultimedia:widgets - Build the QtMultimediaWidgets module
-dev-qt/qtnetwork:bindist - Enable EC support via dev-libs/openssl
+dev-qt/qtnetwork:bindist - Disable EC support via dev-libs/openssl
 dev-qt/qtnetwork:connman - Enable net-misc/connman-based bearer plugin
 dev-qt/qtnetwork:networkmanager - Enable net-misc/networkmanager-based bearer plugin
 dev-qt/qtopengl:egl - Use EGL instead of default GLX to manage OpenGL contexts on the desktop
@@ -2766,6 +2766,7 @@ games-emulation/higan:profile_balanced - Compile a binary with balanced optimiza
 games-emulation/higan:profile_performance - Compile a binary optimized for performance
 games-emulation/higan:udev - Enable udev based input
 games-emulation/mednafen:debugger - Build with internal debugger
+games-emulation/mednafen:pax_kernel - Triggers a paxmarking of the binary
 games-emulation/mupen64plus:audio-sdl - Enable SDL audio plugin.
 games-emulation/mupen64plus:input-sdl - Enable SDL input plugin.
 games-emulation/mupen64plus:rsp-hle - Enable HLE RSP plugin.
@@ -4666,6 +4667,7 @@ net-analyzer/flowgrind:pcap - Enable packet capturing support using net-libs/lib
 net-analyzer/fprobe:messages - enable console messages
 net-analyzer/goaccess:btree - Enable Tokyo Cabinet's on-disk B+ Tree database backend
 net-analyzer/goaccess:memhash - Enable Tokyo Cabinet's on-memory hash database backend
+net-analyzer/goaccess:tokyocabinet - Enable Tokyo Cabinet's on-memory hash database backend
 net-analyzer/gr-fosphor:glfw - enable GLFW based interface
 net-analyzer/graphite-web:memcached - Enable memcached support
 net-analyzer/httping:tfo - Enable support for TCP Fast Open
@@ -4926,6 +4928,7 @@ net-firewall/fwknop:extras - Install example apparmor policy
 net-firewall/fwknop:gdbm - Replace file digest-cache with gdbm
 net-firewall/fwknop:gpg - Enable GPG support via app-crypt/gpgme
 net-firewall/fwknop:server - Build fwknopd server
+net-firewall/fwknop:udp-server - Build fwknopd with UDP server mode only
 net-firewall/ipsec-tools:hybrid - Makes available both mode-cfg and xauth support
 net-firewall/ipsec-tools:idea - Enable support for the IDEA algorithm
 net-firewall/ipsec-tools:nat - Enable NAT-Traversal
@@ -6191,6 +6194,9 @@ net-wireless/gnuradio:utils - install scripts to enable viewing and analysis of 
 net-wireless/gnuradio:vocoder - enable blocks for audio voice encoders
 net-wireless/gnuradio:wavelet - enable wavelet signal processing blocks
 net-wireless/gnuradio:zeromq - enable zeromq message passing blocks
+net-wireless/gr-baz:armadillo - install MUSIC DOA estimator block
+net-wireless/gr-baz:rtlsdr - install rtlsdr source block
+net-wireless/gr-baz:uhd - install UHD aware blocks
 net-wireless/gr-osmosdr:bladerf - Build with Nuand BladeRF support
 net-wireless/gr-osmosdr:fcd - Build with Funcube Dongle support
 net-wireless/gr-osmosdr:hackrf - Build with Great Scott Gadgets HackRF support
@@ -6841,6 +6847,8 @@ sys-apps/xinetd:rpc - support RPC services
 sys-auth/consolekit:policykit - Use the PolicyKit framework (sys-auth/polkit) to get authorization for suspend/shutdown.
 sys-auth/consolekit:systemd-units - Install systemd unit files to replace the modern functionality of logind in sys-apps/systemd. Not recommended.
 sys-auth/fingerprint-gui:upekbsapi - Add UPEK BSAPI drivers for identify functions on some readers
+sys-auth/keystone:memcached - Installs dependencies needed for using memcached as a backend
+sys-auth/keystone:mongo - Installs dependencies needed for using mongo as a backend
 sys-auth/munge:gcrypt - Use libgcrypt instead of openssl
 sys-auth/nss-mdns:search-domains - Honour search domains from /etc/resolv.conf (see bug #201948 for possible side effects)
 sys-auth/nss-pam-ldapd:utils - Install the command-line utilities
