@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/mosh/mosh-9999.ebuild,v 1.14 2013/07/20 13:08:23 xmw Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-misc/mosh/mosh-9999.ebuild,v 1.16 2015/06/24 10:31:21 mrueg Exp $
 
 EAPI=5
 
-inherit autotools bash-completion-r1 git-2
+inherit autotools bash-completion-r1 git-r3
 
 DESCRIPTION="Mobile shell that supports roaming and intelligent local echo"
 HOMEPAGE="http://mosh.mit.edu"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/glance/glance-2015.1.0.ebuild,v 1.2 2015/04/30 20:19:50 prometheanfire Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/glance/glance-2015.1.0.ebuild,v 1.5 2015/05/22 06:08:33 prometheanfire Exp $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -33,8 +33,8 @@ DEPEND="
 			>=dev-python/sphinx-1.1.2[${PYTHON_USEDEP}]
 			!~dev-python/sphinx-1.2.0[${PYTHON_USEDEP}]
 			<dev-python/sphinx-1.3[${PYTHON_USEDEP}]
-			>=dev-python/requests-2.1.0[${PYTHON_USEDEP}]
-			<dev-python/requests-2.4.0[${PYTHON_USEDEP}]
+			>=dev-python/requests-2.2.0[${PYTHON_USEDEP}]
+			!~dev-python/requests-2.4.0[${PYTHON_USEDEP}]
 			>=dev-python/testrepository-0.0.18[${PYTHON_USEDEP}]
 			>=dev-python/testtools-0.9.36[${PYTHON_USEDEP}]
 			!~dev-python/testtools-1.2.0[${PYTHON_USEDEP}]
@@ -174,15 +174,9 @@ python_install() {
 
 	insinto /etc/glance
 	insopts -m 0640 -o glance -g glance
-	doins "etc/glance-api-paste.ini"
-	doins "etc/glance-api.conf"
-	doins "etc/glance-cache.conf"
-	doins "etc/glance-registry-paste.ini"
-	doins "etc/glance-registry.conf"
-	doins "etc/glance-scrubber.conf"
-	doins "etc/logging.cnf.sample"
-	doins "etc/policy.json"
-	doins "etc/schema-image.json"
+	doins etc/*.ini
+	doins etc/*.conf
+	doins etc/*.sample
 }
 
 python_install_all() {

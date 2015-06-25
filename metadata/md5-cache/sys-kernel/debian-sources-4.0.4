@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare prerm pretend setup
+DEPEND=binary? ( >=sys-kernel/genkernel-3.4.40.7 )
+DESCRIPTION=Debian Sources (and optional binary kernel)
+EAPI=5
+HOMEPAGE=http://www.debian.org
+IUSE=binary rt
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RESTRICT=binchecks strip mirror
+SLOT=4.0.4
+SRC_URI=mirror://funtoo/linux_4.0.4.orig.tar.xz mirror://funtoo/linux_4.0.4-1.debian.tar.xz
+_eclasses_=check-reqs	a7f404bfb16e0a996700c5d3ac4edad3	eutils	9fb270e417e0e83d64ca52586c4a79de	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	62927b3db3a589b0806255f3a002d5d3	toolchain-funcs	42408102d713fbad60ca21349865edb4
+_md5_=3e0745f5d20b8dce12aeae66ed925bf8

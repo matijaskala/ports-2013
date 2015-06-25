@@ -1,38 +1,38 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.164 2015/04/18 23:54:18 floppym Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild,v 1.173 2015/06/21 15:29:53 floppym Exp $
 
 EAPI=5
 
-#if LIVE
-AUTOTOOLS_AUTORECONF=yes
-EGIT_REPO_URI="git://anongit.freedesktop.org/${PN}/${PN}
-	http://cgit.freedesktop.org/${PN}/${PN}/"
-
-inherit git-r3
-#endif
-
 AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+
+if [[ ${PV} == 9999 ]]; then
+	AUTOTOOLS_AUTORECONF=yes
+	EGIT_REPO_URI="https://github.com/systemd/systemd.git"
+	inherit git-r3
+else
+	SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
+	KEYWORDS="~amd64 ~arm ~ia64 ~x86"
+fi
+
 inherit autotools-utils bash-completion-r1 linux-info multilib \
 	multilib-minimal pam python-single-r1 systemd toolchain-funcs udev \
 	user
 
 DESCRIPTION="System and service manager for Linux"
 HOMEPAGE="http://www.freedesktop.org/wiki/Software/systemd"
-SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
-IUSE="acl apparmor audit cryptsetup curl doc elfutils gcrypt gnuefi gudev http
-	idn importd introspection kdbus +kmod +lz4 lzma nat pam policykit python
+IUSE="acl apparmor audit cryptsetup curl elfutils gcrypt gnuefi http
+	idn importd +kdbus +kmod +lz4 lzma nat pam policykit python
 	qrcode +seccomp selinux ssl sysv-utils terminal test vanilla xkb"
 REQUIRED_USE="importd? ( curl gcrypt lzma )"
 
 MINKV="3.8"
 
-COMMON_DEPEND=">=sys-apps/util-linux-2.25:0=
+COMMON_DEPEND=">=sys-apps/util-linux-2.26:0=
 	sys-libs/libcap:0=
 	!<sys-libs/glibc-2.16
 	acl? ( sys-apps/acl:0= )
@@ -42,7 +42,6 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.25:0=
 	curl? ( net-misc/curl:0= )
 	elfutils? ( >=dev-libs/elfutils-0.158:0= )
 	gcrypt? ( >=dev-libs/libgcrypt-1.4.5:0=[${MULTILIB_USEDEP}] )
-	gudev? ( >=dev-libs/glib-2.34.3:2=[${MULTILIB_USEDEP}] )
 	http? (
 		>=net-libs/libmicrohttpd-0.9.33:0=
 		ssl? ( >=net-libs/gnutls-3.1.4:0= )
@@ -52,7 +51,6 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.25:0=
 		app-arch/bzip2:0=
 		sys-libs/zlib:0=
 	)
-	introspection? ( >=dev-libs/gobject-introspection-1.31.1:0= )
 	kmod? ( >=sys-apps/kmod-15:0= )
 	lz4? ( >=app-arch/lz4-0_p119:0=[${MULTILIB_USEDEP}] )
 	lzma? ( >=app-arch/xz-utils-5.0.5-r1:0=[${MULTILIB_USEDEP}] )
@@ -97,24 +95,19 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-kernel/linux-headers-${MINKV}
 	ia64? ( >=sys-kernel/linux-headers-3.9 )
 	virtual/pkgconfig
-	doc? ( >=dev-util/gtk-doc-1.18 )
 	gnuefi? ( >=sys-boot/gnu-efi-3.0.2 )
 	python? ( dev-python/lxml[${PYTHON_USEDEP}] )
 	terminal? ( media-fonts/unifont[utils(+)] )
 	test? ( >=sys-apps/dbus-1.6.8-r1:0 )"
 
-#if LIVE
-DEPEND="${DEPEND}
-	app-text/docbook-xml-dtd:4.2
-	app-text/docbook-xml-dtd:4.5
-	app-text/docbook-xsl-stylesheets
-	dev-libs/libxslt:0
-	dev-libs/gobject-introspection
-	>=dev-libs/libgcrypt-1.4.5:0"
-
-SRC_URI=
-KEYWORDS=
-#endif
+if [[ -n ${AUTOTOOLS_AUTORECONF} ]]; then
+	DEPEND="${DEPEND}
+		app-text/docbook-xml-dtd:4.2
+		app-text/docbook-xml-dtd:4.5
+		app-text/docbook-xsl-stylesheets
+		dev-libs/libxslt:0
+		>=dev-libs/libgcrypt-1.4.5:0"
+fi
 
 pkg_pretend() {
 	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS
@@ -159,14 +152,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-#if LIVE
-	if use doc; then
-		gtkdocize --docdir docs/ || die
-	else
-		echo 'EXTRA_DIST =' > docs/gtk-doc.make
-	fi
-
-#endif
 	# Bug 463376
 	sed -i -e 's/GROUP="dialout"/GROUP="uucp"/' rules/*.rules || die
 
@@ -214,18 +199,15 @@ multilib_src_configure() {
 		$(multilib_native_use_enable audit)
 		$(multilib_native_use_enable cryptsetup libcryptsetup)
 		$(multilib_native_use_enable curl libcurl)
-		$(multilib_native_use_enable doc gtk-doc)
 		$(multilib_native_use_enable elfutils)
 		$(use_enable gcrypt)
 		$(multilib_native_use_enable gnuefi)
-		$(use_enable gudev)
 		$(multilib_native_use_enable http microhttpd)
 		$(usex http $(multilib_native_use_enable ssl gnutls) --disable-gnutls)
 		$(multilib_native_use_enable idn libidn)
 		$(multilib_native_use_enable importd)
 		$(multilib_native_use_enable importd bzip2)
 		$(multilib_native_use_enable importd zlib)
-		$(multilib_native_use_enable introspection)
 		$(use_enable kdbus)
 		$(multilib_native_use_enable kmod)
 		$(use_enable lz4)
@@ -242,9 +224,6 @@ multilib_src_configure() {
 		$(multilib_native_use_enable test tests)
 		$(multilib_native_use_enable test dbus)
 		$(multilib_native_use_enable xkb xkbcommon)
-
-		# not supported (avoid automagic deps in the future)
-		--disable-chkconfig
 
 		# hardcode a few paths to spare some deps
 		QUOTAON=/usr/sbin/quotaon
@@ -284,9 +263,6 @@ multilib_src_compile() {
 	if multilib_is_native_abi; then
 		emake "${mymakeopts[@]}"
 	else
-		# prerequisites for gudev
-		use gudev && emake src/gudev/gudev{enumtypes,marshal}.{c,h}
-
 		echo 'gentoo: $(BUILT_SOURCES)' | \
 		emake "${mymakeopts[@]}" -f Makefile -f - gentoo
 		echo 'gentoo: $(lib_LTLIBRARIES) $(pkgconfiglib_DATA)' | \
@@ -319,7 +295,6 @@ multilib_src_install() {
 			install-pkgconfiglibDATA
 			install-includeHEADERS
 			# safe to call unconditionally, 'installs' empty list
-			install-libgudev_includeHEADERS
 			install-pkgincludeHEADERS
 		)
 
@@ -481,31 +456,11 @@ pkg_postinst() {
 		eerror
 	fi
 
-	if [[ ! -L "${ROOT}"/etc/mtab ]]; then
-		ewarn "Upstream mandates the /etc/mtab file should be a symlink to /proc/mounts."
-		ewarn "Not having it is not supported by upstream and will cause tools like 'df'"
-		ewarn "and 'mount' to not work properly. Please run:"
-		ewarn "	# ln -sf '${ROOT}proc/self/mounts' '${ROOT}etc/mtab'"
-		ewarn
-	fi
-
 	if [[ $(readlink "${ROOT}"/etc/resolv.conf) == */run/systemd/network/resolv.conf ]]; then
 		ewarn "resolv.conf is now generated by systemd-resolved. To use it, enable"
 		ewarn "systemd-resolved.service, and create a symlink from /etc/resolv.conf"
 		ewarn "to /run/systemd/resolve/resolv.conf"
 		ewarn
-	fi
-
-	if ! has_version sys-apps/systemd-ui; then
-		elog "To get additional features, a number of optional runtime dependencies may"
-		elog "be installed:"
-		elog "- sys-apps/systemd-ui: for GTK+ systemadm UI and gnome-ask-password-agent"
-	fi
-
-	if has_version sys-apps/openrc &&
-		! has_version sys-fs/udev-init-scripts; then
-		elog "If you plan to boot using OpenRC and udev or eudev, you"
-		elog "need to install the udev-init-scripts package."
 	fi
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/dolphin/dolphin-9999.ebuild,v 1.25 2015/04/30 22:42:32 twitch153 Exp $
+# $Header: /var/cvsroot/gentoo-x86/games-emulation/dolphin/dolphin-9999.ebuild,v 1.30 2015/06/22 21:08:35 twitch153 Exp $
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit cmake-utils eutils pax-utils toolchain-funcs versionator wxwidgets games
 if [[ ${PV} == 9999* ]]
 then
 	EGIT_REPO_URI="https://github.com/dolphin-emu/dolphin"
-	inherit git-2
+	inherit git-r3
 	KEYWORDS=""
 else
 	SRC_URI="http://${PN}-emu.googlecode.com/files/${P}-src.zip"
@@ -23,7 +23,7 @@ HOMEPAGE="https://www.dolphin-emu.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="alsa ao bluetooth doc ffmpeg +lzo openal opengl openmp portaudio pulseaudio"
+IUSE="alsa ao bluetooth doc ffmpeg lto +lzo openal opengl openmp portaudio pulseaudio"
 
 RDEPEND=">=media-libs/glew-1.10
 	>=media-libs/libsfml-2.1
@@ -49,13 +49,14 @@ DEPEND="${RDEPEND}
 	media-gfx/nvidia-cg-toolkit
 	media-libs/freetype
 	media-libs/libsoundtouch
-	>=sys-devel/gcc-4.6.0
+	>net-libs/enet-1.3.7
+	>=sys-devel/gcc-4.9.0
 	x11-libs/wxGTK:${WX_GTK_VER}
 	"
 
 pkg_pretend() {
 
-	local ver=4.6.0
+	local ver=4.9.0
 	local msg="${PN} needs at least GCC ${ver} set to compile."
 
 	if [[ ${MERGE_TYPE} != binary ]]; then
@@ -93,20 +94,17 @@ src_prepare() {
 	# - SOIL: The sources are not public.
 	# - Bochs-disasm: Don't know what it is.
 	# - GL: A custom gl.h file is used.
-	# - enet: Not fully supported yet.
 	# - gtest: Their build set up solely relies on the build in gtest.
 	# - xxhash: Not on the tree.
 	mv Externals/SOIL . || die
 	mv Externals/Bochs_disasm . || die
 	mv Externals/GL . || die
-	mv Externals/enet . || die
 	mv Externals/gtest . || die
 	mv Externals/xxhash . || die
 	rm -r Externals/* || die "Failed to delete Externals dir."
 	mv Bochs_disasm Externals || die
 	mv SOIL Externals || die
 	mv GL Externals || die
-	mv enet Externals || die
 	mv gtest Externals || die
 	mv xxhash Externals || die
 }
@@ -119,7 +117,9 @@ src_configure() {
 		"-Dprefix=${GAMES_PREFIX}"
 		"-Ddatadir=${GAMES_DATADIR}/${PN}"
 		"-Dplugindir=$(games_get_libdir)/${PN}"
+		"-DUSE_SHARED_ENET=ON"
 		$( cmake-utils_use ffmpeg ENCODE_FRAMEDUMPS )
+		$( cmake-utils_use_enable lto LTO )
 		$( cmake-utils_use openmp OPENMP )
 	)
 

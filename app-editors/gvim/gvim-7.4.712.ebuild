@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-7.4.712.ebuild,v 1.1 2015/05/03 07:05:05 radhermit Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-7.4.712.ebuild,v 1.3 2015/06/18 06:17:53 radhermit Exp $
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -375,6 +375,7 @@ src_install() {
 
 	newmenu "${FILESDIR}"/gvim.desktop-r2 gvim.desktop
 	doicon "${FILESDIR}"/gvim.xpm
+	doicon -s scalable "${FILESDIR}"/gvim.svg
 
 	# bash completion script, bug #79018.
 	newbashcomp "${FILESDIR}"/${PN}-completion ${PN}

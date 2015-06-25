@@ -1,8 +1,8 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-arch/p7zip/p7zip-9.20.1-r5.ebuild,v 1.5 2015/04/07 10:10:39 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-arch/p7zip/p7zip-9.20.1-r5.ebuild,v 1.14 2015/06/24 07:54:16 ago Exp $
 
-EAPI=5
+EAPI=4
 
 WX_GTK_VER="2.8"
 
@@ -14,8 +14,8 @@ SRC_URI="mirror://sourceforge/${PN}/${PN}_${PV}_src_all.tar.bz2"
 
 LICENSE="LGPL-2.1 rar? ( unRAR )"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sparc ~x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris"
-IUSE="doc kde rar +pch static wxwidgets abi_x86_x32"
+KEYWORDS="alpha amd64 ~arm hppa ~ia64 ppc ppc64 ~s390 sparc x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris"
+IUSE="doc kde rar +pch static wxwidgets"
 
 REQUIRED_USE="kde? ( wxwidgets )"
 
@@ -24,7 +24,6 @@ RDEPEND="
 	wxwidgets? ( x11-libs/wxGTK:2.8[X,-odbc] )"
 DEPEND="${RDEPEND}
 	amd64? ( dev-lang/yasm )
-	abi_x86_x32? ( >=dev-lang/yasm-1.2.0-r1 )
 	x86? ( dev-lang/nasm )"
 
 S=${WORKDIR}/${PN}_${PV}
@@ -33,7 +32,7 @@ src_prepare() {
 	epatch \
 		"${FILESDIR}"/${P}-execstack.patch \
 		"${FILESDIR}"/${P}-QA.patch \
-		"${FILESDIR}"/${P}-long_rar_pwd.patch
+		"${FILESDIR}"/${P}-CVE-2015-1038.patch
 
 	if ! use pch; then
 		sed "s:PRE_COMPILED_HEADER=StdAfx.h.gch:PRE_COMPILED_HEADER=:g" -i makefile.* || die
@@ -63,10 +62,7 @@ src_prepare() {
 		-e '/ALLFLAGS/s:-s ::' \
 		makefile* || die "changing makefiles"
 
-	if use abi_x86_x32; then
-		sed -i -e "/^ASM=/s:amd64:x32:" makefile*
-		cp -f makefile.linux_amd64_asm makefile.machine || die
-	elif use amd64; then
+	if use amd64; then
 		cp -f makefile.linux_amd64_asm makefile.machine || die
 	elif use x86; then
 		cp -f makefile.linux_x86_asm_gcc_4.X makefile.machine || die
@@ -87,7 +83,9 @@ src_prepare() {
 		sed -e 's/-lc_r/-pthread/' makefile.freebsd > makefile.machine
 	fi
 
-	use static && sed -i -e '/^LOCAL_LIBS=/s/LOCAL_LIBS=/&-static /' makefile.machine
+	if use static; then
+		sed -i -e '/^LOCAL_LIBS=/s/LOCAL_LIBS=/&-static /' makefile.machine || die
+	fi
 
 	if use kde || use wxwidgets; then
 		einfo "Preparing dependency list"
@@ -121,7 +119,7 @@ src_install() {
 
 		dobin GUI/p7zipForFilemanager
 		exeinto /usr/$(get_libdir)/${PN}
-		doexe bin/7zFM
+		doexe bin/7z{G,FM}
 
 		insinto /usr/$(get_libdir)/${PN}
 		doins -r GUI/{Lang,help}
@@ -130,9 +128,8 @@ src_install() {
 		newins GUI/p7zip_16_ok.png p7zip.png
 
 		if use kde; then
-
-			rm GUI/kde4/p7zip_compress.desktop
-			insinto  /usr/share/kde4/services/ServiceMenus
+			rm GUI/kde4/p7zip_compress.desktop || die
+			insinto /usr/share/kde4/services/ServiceMenus
 			doins GUI/kde4/*.desktop
 		fi
 	fi

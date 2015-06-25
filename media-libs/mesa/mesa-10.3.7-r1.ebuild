@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-10.3.7-r1.ebuild,v 1.15 2015/04/08 17:59:35 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-10.3.7-r1.ebuild,v 1.17 2015/06/13 23:25:22 chithanh Exp $
 
 EAPI=5
 
@@ -51,7 +51,7 @@ done
 
 IUSE="${IUSE_VIDEO_CARDS}
 	bindist +classic debug +dri3 +egl +gallium +gbm gles1 gles2 +llvm +nptl
-	opencl openvg osmesa pax_kernel openmax pic r600-llvm-compiler selinux
+	opencl openvg osmesa pax_kernel openmax pic selinux
 	+udev vdpau wayland xvmc xa kernel_FreeBSD kernel_linux"
 
 REQUIRED_USE="
@@ -60,14 +60,10 @@ REQUIRED_USE="
 	opencl? (
 		gallium
 		llvm
-		video_cards_r600? ( r600-llvm-compiler )
-		video_cards_radeon? ( r600-llvm-compiler )
-		video_cards_radeonsi? ( r600-llvm-compiler )
 	)
 	openmax? ( gallium )
 	gles1?  ( egl )
 	gles2?  ( egl )
-	r600-llvm-compiler? ( gallium llvm || ( video_cards_r600 video_cards_radeonsi video_cards_radeon ) )
 	wayland? ( egl gbm )
 	xa?  ( gallium )
 	video_cards_freedreno?  ( gallium )
@@ -148,7 +144,6 @@ done
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	llvm? (
-		r600-llvm-compiler? ( sys-devel/llvm[video_cards_radeon] )
 		video_cards_radeonsi? ( sys-devel/llvm[video_cards_radeon] )
 	)
 	opencl? (
@@ -210,6 +205,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}"/${PN}-10.3.7-dont-use-clrsb.patch
 	epatch "${FILESDIR}"/${PN}-10.3.7-format_utils.c.patch
+	epatch "${FILESDIR}"/${PN}-10.5.1-fstat-include.patch
 
 	# relax the requirement that r300 must have llvm, bug 380303
 	epatch "${FILESDIR}"/${PN}-10.2-dont-require-llvm-for-r300.patch
@@ -265,7 +261,6 @@ multilib_src_configure() {
 			$(use_enable openvg)
 			$(use_enable openvg gallium-egl)
 			$(use_enable openmax omx)
-			$(use_enable r600-llvm-compiler)
 			$(use_enable vdpau)
 			$(use_enable xa)
 			$(use_enable xvmc)

@@ -6,7 +6,7 @@
 #
 # Licensed under the GNU General Public License, v2
 #
-# $Header: /var/cvsroot/gentoo-x86/eclass/java-utils-2.eclass,v 1.160 2015/05/02 20:23:56 chewi Exp $
+# $Header: /var/cvsroot/gentoo-x86/eclass/java-utils-2.eclass,v 1.164 2015/06/19 14:11:24 chewi Exp $
 
 # @ECLASS: java-utils-2.eclass
 # @MAINTAINER:
@@ -43,7 +43,7 @@ has "${EAPI}" 0 1 && JAVA_PKG_PORTAGE_DEP=">=sys-apps/portage-2.1.2.7"
 # This is a convience variable to be used from the other java eclasses. This is
 # the version of java-config we want to use. Usually the latest stable version
 # so that ebuilds can use new features without depending on specific versions.
-JAVA_PKG_E_DEPEND=">=dev-java/java-config-2.1.9-r1 ${JAVA_PKG_PORTAGE_DEP}"
+JAVA_PKG_E_DEPEND=">=dev-java/java-config-2.2.0 ${JAVA_PKG_PORTAGE_DEP}"
 has source ${JAVA_PKG_IUSE} && JAVA_PKG_E_DEPEND="${JAVA_PKG_E_DEPEND} source? ( app-arch/zip )"
 
 # @ECLASS-VARIABLE: JAVA_PKG_WANT_BOOTCLASSPATH
@@ -217,6 +217,37 @@ java-pkg_doexamples() {
 	dosym "${dest}" "${JAVA_PKG_SHAREPATH}/examples" || die
 }
 
+# @FUNCTION: java-pkg_addres
+# @USAGE: <jar> <dir> [<find arguments> ...]
+# @DESCRIPTION:
+# Adds resource files to an existing jar.
+# It is important that the directory given is actually the root of the
+# corresponding resource tree. The target directory as well as
+# sources.lst, MANIFEST.MF, *.class, *.jar, and *.java files are
+# automatically excluded. Symlinks are always followed. Additional
+# arguments are passed through to find.
+#
+# @CODE
+#	java-pkg_addres ${PN}.jar resources ! -name "*.html"
+# @CODE
+#
+# @param $1 - jar file
+# @param $2 - resource tree directory
+# @param $* - arguments to pass to find
+java-pkg_addres() {
+	debug-print-function ${FUNCNAME} $*
+
+	[[ ${#} -lt 2 ]] && die "at least two arguments needed"
+
+	local jar=$(realpath "$1" || die "realpath $1 failed")
+	local dir="$2"
+	shift 2
+
+	pushd "${dir}" > /dev/null || die "pushd ${dir} failed"
+	find -L -type f ! -path "./target/*" ! -path "./sources.lst" ! -name "MANIFEST.MF" ! -regex ".*\.\(class\|jar\|java\)" "${@}" -print0 | xargs -0 jar uf "${jar}" || die "jar failed"
+	popd > /dev/null || die "popd failed"
+}
+
 # @FUNCTION: java-pkg_dojar
 # @USAGE: <jar1> [<jar2> ...]
 # @DESCRIPTION:
@@ -280,18 +311,6 @@ java-pkg_dojar() {
 	done
 
 	java-pkg_do_write_
-}
-
-# @FUNCTION: depend-java-query
-# @INTERNAL
-# @DESCRIPTION:
-# Wrapper for the depend-java-query binary to enable passing USE in env.
-# Using env variables keeps this eclass working with java-config versions that
-# do not handle use flags.
-depend-java-query() {
-	# Used to have a which call here but it caused endless loops for some people
-	# that had some weird bashrc voodoo for which.
-	USE="${USE}" /usr/bin/depend-java-query "${@}"
 }
 
 # @FUNCTION: java-pkg_regjar
@@ -1915,17 +1934,15 @@ eant() {
 	local cp
 
 	for atom in ${gcp}; do
-		cp="${cp}:$(java-pkg_getjars ${getjarsarg} ${atom})"
+		cp+=":$(java-pkg_getjars ${getjarsarg} ${atom})"
 	done
 
-	[[ -n "${EANT_NEEDS_TOOLS}" ]] && cp="${cp}:$(java-config --tools)"
+	[[ ${EANT_NEEDS_TOOLS} ]] && cp+=":$(java-config --tools)"
+	[[ ${EANT_GENTOO_CLASSPATH_EXTRA} ]] && cp+=":${EANT_GENTOO_CLASSPATH_EXTRA}"
 
-	if [[ ${cp} ]]; then
+	if [[ ${cp#:} ]]; then
 		# It seems ant does not like single quotes around ${cp}
-		cp=${cp#:}
-		[[ ${EANT_GENTOO_CLASSPATH_EXTRA} ]] && \
-			cp="${cp}:${EANT_GENTOO_CLASSPATH_EXTRA}"
-		antflags="${antflags} -Dgentoo.classpath=\"${cp}\""
+		antflags="${antflags} -Dgentoo.classpath=\"${cp#:}\""
 	fi
 
 	[[ -n ${JAVA_PKG_DEBUG} ]] && echo ant ${antflags} "${@}"

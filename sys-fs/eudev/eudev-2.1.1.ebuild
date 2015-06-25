@@ -1,10 +1,11 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-2.1.1.ebuild,v 1.1 2014/10/29 20:54:34 blueness Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-2.1.1.ebuild,v 1.4 2015/06/10 02:33:47 floppym Exp $
 
 EAPI="5"
 
 KV_min=2.6.39
+WANT_AUTOMAKE=1.13
 
 inherit autotools eutils linux-info multilib multilib-minimal user
 
@@ -13,7 +14,7 @@ if [[ ${PV} = 9999* ]]; then
 	inherit git-2
 else
 	SRC_URI="http://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~x86"
+	KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 sparc ~x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
@@ -53,7 +54,8 @@ RDEPEND="${COMMON_DEPEND}
 	!<sys-fs/lvm2-2.02.103
 	!<sec-policy/selinux-base-2.20120725-r10
 	!sys-fs/udev
-	!sys-apps/systemd"
+	!sys-apps/systemd
+	gudev? ( !dev-libs/libgudev )"
 
 PDEPEND=">=sys-fs/udev-init-scripts-26
 	hwdb? ( >=sys-apps/hwids-20140304[udev] )
@@ -111,8 +113,6 @@ src_prepare() {
 	else
 		echo 'EXTRA_DIST =' > docs/gtk-doc.make
 	fi
-	# This may break without WANT_AUTOMAKE=1.13, but we
-	# we want this so we can fix problems upstream.
 	eautoreconf
 }
 

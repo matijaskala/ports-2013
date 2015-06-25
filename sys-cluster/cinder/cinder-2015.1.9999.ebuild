@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/cinder/cinder-2015.1.9999.ebuild,v 1.1 2015/04/30 20:29:16 prometheanfire Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-cluster/cinder/cinder-2015.1.9999.ebuild,v 1.5 2015/06/17 21:16:47 prometheanfire Exp $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -15,7 +15,7 @@ EGIT_BRANCH="stable/kilo"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="+api +scheduler +volume iscsi lvm mysql postgres sqlite test"
+IUSE="+api +scheduler +volume iscsi lvm +memcached mysql postgres sqlite test"
 REQUIRED_USE="|| ( mysql postgres sqlite )"
 
 #sudo is a build dep because I want the sudoers.d directory to exist, lazy.
@@ -51,7 +51,7 @@ RDEPEND="
 	>=dev-python/anyjson-0.3.3[${PYTHON_USEDEP}]
 	>=dev-python/Babel-1.3[${PYTHON_USEDEP}]
 	>=dev-python/eventlet-0.16.1[${PYTHON_USEDEP}]
-	<dev-python/eventlet-0.17.0[${PYTHON_USEDEP}]
+	!~dev-python/eventlet-0.17.0[${PYTHON_USEDEP}]
 	>=dev-python/greenlet-0.3.2[${PYTHON_USEDEP}]
 	>=dev-python/iso8601-0.1.9[${PYTHON_USEDEP}]
 	>=dev-python/keystonemiddleware-1.5.0[${PYTHON_USEDEP}]
@@ -60,7 +60,7 @@ RDEPEND="
 	>=dev-python/lxml-2.3[${PYTHON_USEDEP}]
 	>=dev-python/netaddr-0.7.12[${PYTHON_USEDEP}]
 	>=dev-python/oslo-config-1.9.3[${PYTHON_USEDEP}]
-	>=dev-python/oslo-config-1.10.0[${PYTHON_USEDEP}]
+	<dev-python/oslo-config-1.10.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-concurrency-1.8.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-concurrency-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-context-0.2.0[${PYTHON_USEDEP}]
@@ -76,7 +76,7 @@ RDEPEND="
 	>=dev-python/oslo-rootwrap-1.6.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-rootwrap-1.7.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-serialization-1.4.0[${PYTHON_USEDEP}]
-	>=dev-python/oslo-serialization-1.5.0[${PYTHON_USEDEP}]
+	<dev-python/oslo-serialization-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-utils-1.4.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-utils-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/osprofiler-0.3.0[${PYTHON_USEDEP}]
@@ -128,6 +128,7 @@ RDEPEND="
 		|| ( >=sys-block/iscsitarget-1.4.20.2_p20130821 sys-block/tgt )
 		sys-block/open-iscsi )
 	lvm? ( sys-fs/lvm2 )
+	memcached? ( net-misc/memcached )
 	sys-fs/sysfsutils"
 
 PATCHES=( )
@@ -144,9 +145,12 @@ pkg_setup() {
 	enewuser cinder -1 -1 /var/lib/cinder cinder
 }
 
-#python_compile_all() { leave for next attempt
-#	use doc && emake -C doc html
-#}
+python_compile() {
+		distutils-r1_python_compile
+		mv cinder/test.py cinder/test.py.bak || die
+		./tools/config/generate_sample.sh -b ./ -p cinder -o etc/cinder || die
+		mv cinder/test.py.bak cinder/test.py || die
+}
 
 python_test() {
 	# Let's track progress of this # https://bugs.launchpad.net/swift/+bug/1249727

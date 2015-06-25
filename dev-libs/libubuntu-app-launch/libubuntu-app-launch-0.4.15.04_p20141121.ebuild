@@ -5,7 +5,7 @@
 EAPI=5
 
 UPN="ubuntu-app-launch"
-inherit cmake-utils ubuntu
+inherit cmake-utils ubuntu-versionator
 
 DESCRIPTION="Session init system job for launching applications, libraries only"
 HOMEPAGE="https://launchpad.net/ubuntu-app-launch"

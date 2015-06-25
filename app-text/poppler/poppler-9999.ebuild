@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/poppler/poppler-9999.ebuild,v 1.5 2015/03/20 15:18:23 dilfridge Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-text/poppler/poppler-9999.ebuild,v 1.10 2015/06/21 11:59:02 johu Exp $
 
 EAPI=5
 
@@ -9,19 +9,18 @@ inherit cmake-utils toolchain-funcs
 if [[ "${PV}" == "9999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="git://git.freedesktop.org/git/${PN}/${PN}"
-	KEYWORDS=""
 	SLOT="0/9999"
 else
 	SRC_URI="http://poppler.freedesktop.org/${P}.tar.xz"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-	SLOT="0/47"   # CHECK THIS WHEN BUMPING!!! SUBSLOT IS libpoppler.so SOVERSION
+	SLOT="0/52"   # CHECK THIS WHEN BUMPING!!! SUBSLOT IS libpoppler.so SOVERSION
 fi
 
 DESCRIPTION="PDF rendering library based on the xpdf-3.0 code base"
 HOMEPAGE="http://poppler.freedesktop.org/"
 
 LICENSE="GPL-2"
-IUSE="cairo cjk curl cxx debug doc +introspection +jpeg jpeg2k +lcms png qt4 qt5 tiff +utils"
+IUSE="cairo cjk curl cxx debug doc +introspection +jpeg +jpeg2k +lcms png qt4 qt5 tiff +utils"
 
 # No test data provided
 RESTRICT="test"
@@ -37,7 +36,7 @@ COMMON_DEPEND="
 	)
 	curl? ( net-misc/curl )
 	jpeg? ( virtual/jpeg:0 )
-	jpeg2k? ( media-libs/openjpeg:0 )
+	jpeg2k? ( media-libs/openjpeg:2= )
 	lcms? ( media-libs/lcms:2 )
 	png? ( media-libs/libpng:0= )
 	qt4? (
@@ -62,7 +61,20 @@ DOCS=(AUTHORS NEWS README README-XPDF TODO)
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.26.0-qt5-dependencies.patch"
-	"${FILESDIR}/${PN}-0.28.1-respect-cflags.patch" )
+	"${FILESDIR}/${PN}-0.28.1-fix-multilib-configuration.patch"
+	"${FILESDIR}/${PN}-0.28.1-respect-cflags.patch"
+	"${FILESDIR}/${PN}-0.33.0-openjpeg2.patch"
+)
+
+src_prepare() {
+	cmake-utils_src_prepare
+
+	# Clang doesn't grok this flag, the configure nicely tests that, but
+	# cmake just uses it, so remove it if we use clang
+	if [[ ${CC} == clang ]] ; then
+		sed -i -e 's/-fno-check-new//' cmake/modules/PopplerMacros.cmake || die
+	fi
+}
 
 src_configure() {
 	local mycmakeargs=(
@@ -85,7 +97,7 @@ src_configure() {
 		$(cmake-utils_use_with tiff)
 	)
 	if use jpeg2k; then
-		mycmakeargs+=(-DENABLE_LIBOPENJPEG=openjpeg1)
+		mycmakeargs+=(-DENABLE_LIBOPENJPEG=openjpeg2)
 	else
 		mycmakeargs+=(-DENABLE_LIBOPENJPEG=)
 	fi
@@ -101,10 +113,10 @@ src_configure() {
 src_install() {
 	cmake-utils_src_install
 
-	if use cairo && use doc; then
+	# live version doesn't provide html documentation
+	if use cairo && use doc && [[ ${PV} != 9999 ]]; then
 		# For now install gtk-doc there
 		insinto /usr/share/gtk-doc/html/poppler
-		# nonfatal, because live version doesn't provide html documentation.
-		nonfatal doins -r "${S}"/glib/reference/html/*
+		doins -r "${S}"/glib/reference/html/*
 	fi
 }

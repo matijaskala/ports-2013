@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/neutron/neutron-2015.1.9999.ebuild,v 1.2 2015/05/01 17:27:21 prometheanfire Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-cluster/neutron/neutron-2015.1.9999.ebuild,v 1.6 2015/05/17 23:25:00 prometheanfire Exp $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -15,8 +15,10 @@ EGIT_BRANCH="stable/kilo"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="dhcp doc l3 metadata openvswitch linuxbridge server test sqlite mysql postgres"
-REQUIRED_USE="|| ( mysql postgres sqlite )"
+IUSE="compute-only dhcp doc l3 metadata openvswitch linuxbridge server test sqlite mysql postgres"
+REQUIRED_USE="!compute-only? ( || ( mysql postgres sqlite ) )
+						compute-only? ( !mysql !postgres !sqlite !dhcp !l3 !metadata !server
+						|| ( openvswitch linuxbridge ) )"
 
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
@@ -69,6 +71,10 @@ RDEPEND="
 	<dev-python/python-neutronclient-3.5.0[${PYTHON_USEDEP}]
 	>=dev-python/retrying-1.2.3[${PYTHON_USEDEP}]
 	!~dev-python/retrying-1.3.0[${PYTHON_USEDEP}]
+	compute-only? (
+		>=dev-python/sqlalchemy-0.9.7[${PYTHON_USEDEP}]
+		<=dev-python/sqlalchemy-0.9.99[${PYTHON_USEDEP}]
+	)
 	sqlite? (
 		>=dev-python/sqlalchemy-0.9.7[sqlite,${PYTHON_USEDEP}]
 		<=dev-python/sqlalchemy-0.9.99[sqlite,${PYTHON_USEDEP}]
@@ -118,6 +124,8 @@ RDEPEND="
 	sys-apps/iproute2
 	net-misc/bridge-utils
 	net-firewall/ipset
+	net-firewall/iptables
+	net-firewall/ebtables
 	openvswitch? ( net-misc/openvswitch )
 	dhcp? ( net-dns/dnsmasq[dhcp-tools] )"
 
@@ -212,6 +220,7 @@ python_install() {
 	doins "etc/rootwrap.conf"
 	doins -r "etc/neutron/rootwrap.d"
 
+	insopts -m 0644
 	insinto "/usr/lib64/python2.7/site-packages/neutron/db/migration/alembic_migrations/"
 	doins -r "neutron/db/migration/alembic_migrations/versions"
 
@@ -227,4 +236,14 @@ python_install() {
 python_install_all() {
 	use doc && local HTML_DOCS=( doc/build/html/. )
 	distutils-r1_python_install_all
+}
+
+pkg_postinst() {
+	elog
+	elog "neutron-server's conf.d file may need updating to include additional ini files"
+	elog "We currently assume the ml2 plugin will be used but do not make assumptions"
+	elog "on if you will use openvswitch or linuxbridge (or something else)"
+	elog
+	elog "Other conf.d files may need updating too, but should be good for the default use case"
+	elog
 }

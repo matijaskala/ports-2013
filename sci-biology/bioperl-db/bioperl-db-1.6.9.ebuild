@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/bioperl-db/bioperl-db-1.6.9.ebuild,v 1.4 2015/04/26 16:10:17 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/sci-biology/bioperl-db/bioperl-db-1.6.9.ebuild,v 1.6 2015/06/13 19:16:38 dilfridge Exp $
 
 EAPI="5"
 
@@ -15,7 +15,7 @@ DESCRIPTION="Perl tools for bioinformatics - Perl API that accesses the BioSQL s
 HOMEPAGE="http://www.bioperl.org/"
 
 SLOT="0"
-KEYWORDS="~amd64 x86"
+KEYWORDS="amd64 x86"
 IUSE="test"
 SRC_TEST="do"
 
@@ -25,7 +25,7 @@ CDEPEND="
 	dev-perl/DBI
 	sci-biology/biosql"
 DEPEND="${CDEPEND}
-	virtual/perl-Module-Build"
+	dev-perl/Module-Build"
 RDEPEND="${CDEPEND}"
 
 src_install() {

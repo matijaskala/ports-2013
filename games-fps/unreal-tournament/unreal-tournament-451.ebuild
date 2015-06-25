@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-fps/unreal-tournament/unreal-tournament-451.ebuild,v 1.31 2014/10/15 11:47:05 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/games-fps/unreal-tournament/unreal-tournament-451.ebuild,v 1.33 2015/06/14 17:23:12 ulm Exp $
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit eutils unpacker cdrom games
 
 DESCRIPTION="Futuristic FPS"
 HOMEPAGE="http://www.unrealtournament.com/ http://utpg.org/"
-SRC_URI="ftp://ftp.lokigames.com/pub/patches/ut/ut-install-436.run
+SRC_URI="http://www.ibiblio.org/osg/Downloads/Linux/Installers/ut-install-436.run
 	http://utpg.org/patches/UTPGPatch${PV}.tar.bz2"
 
 LICENSE="all-rights-reserved"
@@ -18,21 +18,12 @@ IUSE="3dfx opengl"
 RESTRICT="mirror bindist"
 
 RDEPEND="
-	|| (
-		(
-			>=media-libs/libsdl-1.2.15-r5[abi_x86_32(-)]
-			x11-libs/libX11[abi_x86_32(-)]
-			x11-libs/libXau[abi_x86_32(-)]
-			x11-libs/libXdmcp[abi_x86_32(-)]
-			x11-libs/libXext[abi_x86_32(-)]
-			opengl? ( virtual/opengl[abi_x86_32(-)] )
-		)
-		amd64? (
-			app-emulation/emul-linux-x86-sdl[-abi_x86_32(-)]
-			app-emulation/emul-linux-x86-xlibs[-abi_x86_32(-)]
-			opengl? ( app-emulation/emul-linux-x86-opengl[-abi_x86_32(-)] )
-		)
-	)
+	>=media-libs/libsdl-1.2.15-r5[abi_x86_32(-)]
+	x11-libs/libX11[abi_x86_32(-)]
+	x11-libs/libXau[abi_x86_32(-)]
+	x11-libs/libXdmcp[abi_x86_32(-)]
+	x11-libs/libXext[abi_x86_32(-)]
+	opengl? ( virtual/opengl[abi_x86_32(-)] )
 "
 DEPEND="${RDEPEND}
 	!games-fps/unreal-tournament-goty

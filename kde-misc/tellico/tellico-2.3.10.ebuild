@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/tellico/tellico-2.3.10.ebuild,v 1.1 2015/02/19 07:59:07 kensington Exp $
+# $Header: /var/cvsroot/gentoo-x86/kde-misc/tellico/tellico-2.3.10.ebuild,v 1.4 2015/06/09 07:13:11 ago Exp $
 
 EAPI=5
 
@@ -17,7 +17,7 @@ SRC_URI="http://tellico-project.org/files/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="4"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="addressbook cddb debug nepomuk pdf scanner taglib v4l xmp yaz"
 
 RDEPEND="
@@ -27,10 +27,10 @@ RDEPEND="
 	dev-qt/qtdbus:4
 	media-libs/qimageblitz
 	addressbook? ( $(add_kdebase_dep kdepimlibs) )
-	cddb? ( $(add_kdebase_dep libkcddb) )
+	cddb? ( $(add_kdeapps_dep libkcddb) )
 	nepomuk? ( $(add_kdebase_dep kdelibs 'nepomuk?') )
 	pdf? ( app-text/poppler[qt4] )
-	scanner? ( $(add_kdebase_dep libksane) )
+	scanner? ( $(add_kdeapps_dep libksane) )
 	taglib? ( >=media-libs/taglib-1.5 )
 	v4l? ( >=media-libs/libv4l-0.8.3 )
 	xmp? ( >=media-libs/exempi-2 )

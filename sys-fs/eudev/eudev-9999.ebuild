@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-9999.ebuild,v 1.66 2015/03/27 15:49:37 blueness Exp $
+# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-9999.ebuild,v 1.69 2015/06/10 02:33:47 floppym Exp $
 
 EAPI="5"
 
 KV_min=2.6.39
+WANT_AUTOMAKE=1.13
 
 inherit autotools eutils linux-info multilib multilib-minimal user
 
@@ -54,7 +55,8 @@ RDEPEND="${COMMON_DEPEND}
 	!<sys-fs/lvm2-2.02.103
 	!<sec-policy/selinux-base-2.20120725-r10
 	!sys-fs/udev
-	!sys-apps/systemd"
+	!sys-apps/systemd
+	gudev? ( !dev-libs/libgudev )"
 
 PDEPEND=">=sys-fs/udev-init-scripts-26
 	hwdb? ( >=sys-apps/hwids-20140304[udev] )"
@@ -104,8 +106,6 @@ src_prepare() {
 	else
 		echo 'EXTRA_DIST =' > docs/gtk-doc.make
 	fi
-	# This may break without WANT_AUTOMAKE=1.13, but we
-	# we want this so we can fix problems upstream.
 	eautoreconf
 }
 
@@ -128,6 +128,8 @@ multilib_src_configure() {
 		--with-rootlibexecdir=/lib/udev
 		--with-html-dir="/usr/share/doc/${PF}/html"
 		--enable-split-usr
+		--enable-manpages
+		--disable-hwdb
 		--exec-prefix=/
 
 		$(use_enable gudev)
@@ -192,9 +194,6 @@ multilib_src_test() {
 multilib_src_install_all() {
 	prune_libtool_files --all
 	rm -rf "${ED}"/usr/share/doc/${PF}/LICENSE.*
-
-	# drop distributed hwdb files, they override sys-apps/hwids
-	rm -f "${ED}"/etc/udev/hwdb.d/*.hwdb
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/40-gentoo.rules

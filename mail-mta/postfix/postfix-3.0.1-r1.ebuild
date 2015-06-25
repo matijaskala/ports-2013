@@ -1,14 +1,16 @@
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/mail-mta/postfix/postfix-3.0.1-r1.ebuild,v 1.7 2015/06/21 10:47:53 maekke Exp $
 
-EAPI="5"
-inherit eutils flag-o-matic multilib pam ssl-cert toolchain-funcs user versionator
+EAPI=5
+inherit eutils flag-o-matic multilib pam ssl-cert systemd toolchain-funcs user versionator
 
 MY_PV="${PV/_rc/-RC}"
 MY_SRC="${PN}-${MY_PV}"
 MY_URI="ftp://ftp.porcupine.org/mirrors/postfix-release/official"
 VDA_PV="2.10.0"
 VDA_P="${PN}-vda-v13-${VDA_PV}"
-RC_VER="2.8"
+RC_VER="2.7"
 
 DESCRIPTION="A fast and secure drop-in replacement for sendmail"
 HOMEPAGE="http://www.postfix.org/"
@@ -17,24 +19,23 @@ SRC_URI="${MY_URI}/${MY_SRC}.tar.gz
 
 LICENSE="IBM"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~alpha amd64 arm ~hppa ia64 ppc ~ppc64 ~sh ~sparc x86 ~x86-fbsd"
 IUSE="+berkdb cdb doc dovecot-sasl +eai hardened ldap ldap-bind lmdb memcached mbox mysql nis pam postgres sasl selinux sqlite ssl vda"
 
 DEPEND=">=dev-libs/libpcre-3.4
 	dev-lang/perl
-	berkdb? ( >=sys-libs/db-3.2 )
+	berkdb? ( >=sys-libs/db-3.2:* )
 	cdb? ( || ( >=dev-db/tinycdb-0.76 >=dev-db/cdb-0.75-r1 ) )
-	eai? ( dev-libs/icu )
+	eai? ( dev-libs/icu:= )
 	ldap? ( net-nds/openldap )
 	ldap-bind? ( net-nds/openldap[sasl] )
 	lmdb? ( >=dev-db/lmdb-0.9.11 )
 	mysql? ( virtual/mysql )
 	pam? ( virtual/pam )
-	postgres? ( dev-db/postgresql )
+	postgres? ( dev-db/postgresql:* )
 	sasl? (  >=dev-libs/cyrus-sasl-2 )
-	selinux? ( sec-policy/selinux-postfix )
 	sqlite? ( dev-db/sqlite:3 )
-	ssl? ( >=dev-libs/openssl-0.9.6g )"
+	ssl? ( >=dev-libs/openssl-0.9.6g:* )"
 
 RDEPEND="${DEPEND}
 	dovecot-sasl? ( net-mail/dovecot )
@@ -52,7 +53,8 @@ RDEPEND="${DEPEND}
 	!mail-mta/opensmtpd
 	!<mail-mta/ssmtp-2.64-r2
 	!>=mail-mta/ssmtp-2.64-r2[mta]
-	!net-mail/fastforward"
+	!net-mail/fastforward
+	selinux? ( sec-policy/selinux-postfix )"
 
 # No vda support for postfix-3.0
 REQUIRED_USE="ldap-bind? ( ldap sasl )
@@ -68,6 +70,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/${PN}-linux4.patch"
 	if use vda; then
 		epatch "${DISTDIR}"/${VDA_P}.patch
 	fi
@@ -78,11 +81,7 @@ src_prepare() {
 	# change default paths to better comply with portage standard paths
 	sed -i -e "s:/usr/local/:/usr/:g" conf/master.cf || die "sed failed"
 
-	# change to unix socket and use chrooted deamon
-	epatch "${FILESDIR}"/patches/funtoo.patch
-
-	# linux-4.x support
-	epatch "${FILESDIR}"/${PN}-linux4.patch
+	epatch_user
 }
 
 src_configure() {
@@ -242,6 +241,7 @@ src_install () {
 	doman man/man1/smtp-{source,sink}.1 man/man1/qmqp-{source,sink}.1
 
 	# Set proper permissions on required files/directories
+	dodir /var/lib/postfix
 	keepdir /var/lib/postfix
 	fowners -R postfix:postfix /var/lib/postfix
 	fperms 0750 /var/lib/postfix
@@ -290,22 +290,8 @@ src_install () {
 		# let the sysadmin decide when to change the compatibility_level
 		sed -i -e /^compatibility_level/"s/^/#/" "${D}"/etc/postfix/main.cf || die
 	fi
-}
 
-add_init() {
-	local runl=$1
-	shift
-		if [ ! -e ${ROOT}etc/runlevels/${runl} ]
-		then
-			install -d -m0755 ${ROOT}etc/runlevels/${runl}
-		fi
-		for initd in $*
-		do
-			einfo "Auto-adding '${initd}' service to your ${runl} runlevel"
-			[[ -e ${ROOT}etc/runlevels/${runl}/${initd} ]] && continue
-			[[ ! -e ${ROOT}etc/init.d/${initd} ]] && die "initscript $initd not found; aborting"
-			ln -snf /etc/init.d/${initd} "${ROOT}etc/runlevels/${runl}/${initd}"
-		done
+	systemd_dounit "${FILESDIR}/${PN}.service"
 }
 
 pkg_postinst() {
@@ -318,13 +304,10 @@ pkg_postinst() {
 	fi
 
 	if [[ ! -e /etc/mail/aliases.db ]] ; then
-		elog "Creating aliases database"
-		/usr/bin/newaliases
+		ewarn
+		ewarn "You must edit /etc/mail/aliases to suit your needs"
+		ewarn "and then run /usr/bin/newaliases. Postfix will not"
+		ewarn "work correctly without it."
+		ewarn
 	fi
-
-	# Change owner of /var/spool/postfix
-	chown root:0 "${ROOT}"var/spool/postfix
-	elog "Correcting permission of spool directory"
-	add_init default postfix
-	ewarn "Postfix automatically added to defaut runlevel. To start daemon, run /sbin/rc"
 }
