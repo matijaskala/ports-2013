@@ -1,9 +1,9 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/meanwhile/meanwhile-1.0.2-r1.ebuild,v 1.9 2013/03/14 07:09:39 ago Exp $
+# $Id$
 
 EAPI=4
-inherit eutils
+inherit eutils flag-o-matic
 
 DESCRIPTION="Meanwhile (Sametime protocol) library"
 HOMEPAGE="http://meanwhile.sourceforge.net/"
@@ -30,6 +30,7 @@ src_prepare(){
 }
 
 src_configure() {
+	append-flags "-fno-tree-vrp"
 	local myconf
 	use doc || myconf="${myconf} --enable-doxygen=no"
 

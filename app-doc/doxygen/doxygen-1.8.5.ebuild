@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-doc/doxygen/doxygen-1.8.5.ebuild,v 1.16 2015/04/08 07:30:32 mgorny Exp $
+# $Id$
 
 EAPI=4
 PYTHON_COMPAT=( python2_7 )
@@ -10,7 +10,7 @@ inherit eutils fdo-mime flag-o-matic python-any-r1 qt4-r2 toolchain-funcs
 DESCRIPTION="Documentation system for most programming languages"
 HOMEPAGE="http://www.doxygen.org/"
 SRC_URI="http://ftp.stack.nl/pub/users/dimitri/${P}.src.tar.gz
-	http://dev.gentoo.org/~xarthisius/distfiles/doxywizard.png"
+	https://dev.gentoo.org/~xarthisius/distfiles/doxywizard.png"
 
 LICENSE="GPL-2"
 SLOT="0"

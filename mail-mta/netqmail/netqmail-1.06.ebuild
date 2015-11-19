@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-mta/netqmail/netqmail-1.06.ebuild,v 1.14 2012/11/06 11:17:40 eras Exp $
+# $Id$
 
 GENQMAIL_PV=20080406
 QMAIL_SPP_PV=0.42
@@ -20,7 +20,7 @@ HOMEPAGE="
 	http://qmail.org
 "
 SRC_URI="mirror://qmail/${P}.tar.gz
-	http://dev.gentoo.org/~hollow/distfiles/${GENQMAIL_F}
+	https://dev.gentoo.org/~hollow/distfiles/${GENQMAIL_F}
 	!vanilla? (
 		highvolume? ( mirror://qmail/${QMAIL_BIGTODO_F} )
 		qmail-spp? ( mirror://sourceforge/qmail-spp/${QMAIL_SPP_F} )
@@ -126,7 +126,7 @@ pkg_postinst() {
 	qmail_supervise_config_notice
 	elog
 	elog "If you are looking for documentation, check those links:"
-	elog "http://www.gentoo.org/doc/en/qmail-howto.xml"
+	elog "https://www.gentoo.org/doc/en/qmail-howto.xml"
 	elog "  -- qmail/vpopmail Virtual Mail Hosting System Guide"
 	elog "http://www.lifewithqmail.com/"
 	elog "  -- Life with qmail"

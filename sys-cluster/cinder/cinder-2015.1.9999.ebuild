@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/cinder/cinder-2015.1.9999.ebuild,v 1.5 2015/06/17 21:16:47 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -15,7 +15,7 @@ EGIT_BRANCH="stable/kilo"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="+api +scheduler +volume iscsi lvm +memcached mysql postgres sqlite test"
+IUSE="+api +scheduler +volume iscsi lvm mysql +memcached postgres sqlite test"
 REQUIRED_USE="|| ( mysql postgres sqlite )"
 
 #sudo is a build dep because I want the sudoers.d directory to exist, lazy.
@@ -25,11 +25,11 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 		app-admin/sudo
 		test? (
 			${RDEPEND}
-			>=dev-python/hacking-0.10.0[${PYTHON_USEDEP}]
-			<dev-python/hacking-0.11[${PYTHON_USEDEP}]
 			>=dev-python/coverage-3.6[${PYTHON_USEDEP}]
 			>=dev-python/fixtures-0.3.14[${PYTHON_USEDEP}]
+			<dev-python/fixtures-1.3.0[${PYTHON_USEDEP}]
 			>=dev-python/mock-1.0[${PYTHON_USEDEP}]
+			<dev-python/mock-1.1.0[${PYTHON_USEDEP}]
 			>=dev-python/mox-0.5.3[${PYTHON_USEDEP}]
 			dev-python/mysql-python[${PYTHON_USEDEP}]
 			dev-python/psycopg[${PYTHON_USEDEP}]
@@ -45,6 +45,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 			>=dev-python/oslo-sphinx-2.5.0[${PYTHON_USEDEP}]
 			<dev-python/oslo-sphinx-2.6.0[${PYTHON_USEDEP}]
 			>=dev-python/tempest-lib-0.4.0[${PYTHON_USEDEP}]
+			<dev-python/tempest-lib-0.5.0[${PYTHON_USEDEP}]
 		)"
 
 RDEPEND="
@@ -61,7 +62,7 @@ RDEPEND="
 	>=dev-python/netaddr-0.7.12[${PYTHON_USEDEP}]
 	>=dev-python/oslo-config-1.9.3[${PYTHON_USEDEP}]
 	<dev-python/oslo-config-1.10.0[${PYTHON_USEDEP}]
-	>=dev-python/oslo-concurrency-1.8.0[${PYTHON_USEDEP}]
+	>=dev-python/oslo-concurrency-1.8.2[${PYTHON_USEDEP}]
 	<dev-python/oslo-concurrency-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-context-0.2.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-context-0.3.0[${PYTHON_USEDEP}]
@@ -78,6 +79,7 @@ RDEPEND="
 	>=dev-python/oslo-serialization-1.4.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-serialization-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-utils-1.4.0[${PYTHON_USEDEP}]
+	!~dev-python/oslo-utils-1.4.1[${PYTHON_USEDEP}]
 	<dev-python/oslo-utils-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/osprofiler-0.3.0[${PYTHON_USEDEP}]
 	>=dev-python/paramiko-1.13.0[${PYTHON_USEDEP}]
@@ -116,6 +118,8 @@ RDEPEND="
 		<=dev-python/sqlalchemy-0.9.99[${PYTHON_USEDEP}]
 	)
 	>=dev-python/sqlalchemy-migrate-0.9.5[${PYTHON_USEDEP}]
+	!~dev-python/sqlalchemy-migrate-0.9.8[${PYTHON_USEDEP}]
+	<dev-python/sqlalchemy-migrate-0.10.0[${PYTHON_USEDEP}]
 	>=dev-python/stevedore-1.3.0[${PYTHON_USEDEP}]
 	<dev-python/stevedore-1.4.0[${PYTHON_USEDEP}]
 	>=dev-python/suds-0.4[${PYTHON_USEDEP}]
@@ -125,13 +129,18 @@ RDEPEND="
 	>=dev-python/oslo-vmware-0.11.1[${PYTHON_USEDEP}]
 	<dev-python/oslo-vmware-0.12.0[${PYTHON_USEDEP}]
 	iscsi? (
-		|| ( >=sys-block/iscsitarget-1.4.20.2_p20130821 sys-block/tgt )
-		sys-block/open-iscsi )
+		sys-block/tgt
+		sys-block/open-iscsi
+	)
 	lvm? ( sys-fs/lvm2 )
 	memcached? ( net-misc/memcached )
+	app-emulation/qemu
 	sys-fs/sysfsutils"
+# qemu is needed for image conversion
 
-PATCHES=( )
+PATCHES=(
+
+)
 
 pkg_setup() {
 	linux-info_pkg_setup
@@ -143,6 +152,11 @@ pkg_setup() {
 	fi
 	enewgroup cinder
 	enewuser cinder -1 -1 /var/lib/cinder cinder
+}
+
+python_prepare_all() {
+	sed -i '/^hacking/d' test-requirements.txt || die
+	distutils-r1_python_prepare_all
 }
 
 python_compile() {
@@ -167,6 +181,7 @@ python_install() {
 	done
 
 	insinto /etc/cinder
+	insopts -m0640 -o cinder -g cinder
 	newins "${S}/etc/cinder/cinder.conf.sample" "cinder.conf"
 	newins "${S}/etc/cinder/api-paste.ini" "api-paste.ini"
 	newins "${S}/etc/cinder/logging_sample.conf" "logging_sample.conf"
@@ -182,4 +197,11 @@ python_install() {
 	insinto /etc/sudoers.d/
 	insopts -m 0440 -o root -g root
 	newins "${FILESDIR}/cinder.sudoersd" cinder
+}
+
+pkg_postinst() {
+	if use iscsi ; then
+		elog "Cinder needs tgtd to be installed and running to work with iscsi"
+		elog "it also needs 'include /var/lib/cinder/volumes/*' in /etc/tgt/targets.conf"
+	fi
 }

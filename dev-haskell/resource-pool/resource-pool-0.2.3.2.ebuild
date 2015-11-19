@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/resource-pool/resource-pool-0.2.3.2.ebuild,v 1.1 2014/12/22 06:28:38 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="A high-performance striped resource pooling implementation"
-HOMEPAGE="http://github.com/bos/pool"
+HOMEPAGE="https://github.com/bos/pool"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

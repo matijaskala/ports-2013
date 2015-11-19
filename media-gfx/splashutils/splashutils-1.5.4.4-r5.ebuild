@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/splashutils/splashutils-1.5.4.4-r4.ebuild,v 1.2 2014/08/26 10:22:31 slyfox Exp $
+# $Header: /var/cvsroot/gentoo-x86/media-gfx/splashutils/splashutils-1.5.4.4-r5.ebuild,v 1.4 2015/02/02 15:38:01 pinkbyte Exp $
 
 EAPI=5
 inherit autotools eutils multilib toolchain-funcs
@@ -17,12 +17,12 @@ JPEGSRC="libs/jpeg-${V_JPEG}"
 FT2SRC="libs/freetype-${V_FT}"
 
 RESTRICT="test"
-IUSE="hardened +png +truetype +mng gpm fbcondecor"
+IUSE="hardened +png +truetype gpm fbcondecor"
 
 DESCRIPTION="Framebuffer splash utilities"
-HOMEPAGE="http://fbsplash.berlios.de"
+HOMEPAGE="http://sourceforge.net/projects/fbsplash.berlios/"
 SRC_URI="
-	mirror://berlios/fbsplash/${PN}-lite-${PV}.tar.bz2
+	mirror://sourceforge/fbsplash.berlios/${PN}-lite-${PV}.tar.bz2
 	mirror://gentoo/${MISCSPLASH}.tar.bz2
 	mirror://sourceforge/libpng/libpng-${V_PNG}.tar.bz2
 	ftp://ftp.uu.net/graphics/jpeg/jpegsrc.v${V_JPEG}.tar.gz
@@ -44,10 +44,6 @@ RDEPEND="
 	png? (
 		>=media-libs/libpng-1.4.3[static-libs]
 		sys-libs/zlib[static-libs(+)]
-	)
-	mng? (
-		media-libs/lcms:0[static-libs]
-		media-libs/libmng[static-libs(+)]
 	)
 	virtual/jpeg:0[static-libs]
 	app-arch/cpio
@@ -82,7 +78,7 @@ src_prepare() {
 	if use truetype ; then
 		cd "${SM}"
 		epatch "${FILESDIR}/splashutils-1.5.4.4-freetype-bz2.patch"
-		#cd "${S}"
+		cd "${WORKDIR}"
 		epatch "${FILESDIR}/splashutils-1.5.4.4-ft25.patch"
 	fi
 
@@ -112,6 +108,7 @@ src_prepare() {
 	fi
 
 	rm -f m4/*
+	epatch_user
 	eautoreconf
 }
 
@@ -121,7 +118,7 @@ src_configure() {
 	cd "${S}"
 	econf \
 		$(use_with png) \
-		$(use_with mng) \
+		--without-mng \
 		$(use_with gpm) \
 		$(use_with truetype ttf) \
 		$(use_with truetype ttf-kernel) \
@@ -178,7 +175,7 @@ pkg_postinst() {
 		elog "devfs or a static /dev tree might work, but are generally discouraged and"
 		elog "not supported. If you decide to switch to udev, you might want to have a"
 		elog "look at 'The Gentoo udev Guide', which can be found at"
-		elog "  http://www.gentoo.org/doc/en/udev-guide.xml"
+		elog "  http://wiki.gentoo.org/wiki/Udev"
 		elog ""
 	fi
 

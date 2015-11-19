@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/more/more-2.12r.ebuild,v 1.6 2013/05/24 20:33:56 aballier Exp $
+# $Id$
 
 EAPI=2
 
 inherit eutils flag-o-matic
 
 DESCRIPTION="Primitive text file viewer"
-HOMEPAGE="http://www.kernel.org/pub/linux/utils/util-linux/"
+HOMEPAGE="https://www.kernel.org/pub/linux/utils/util-linux/"
 SRC_URI="mirror://kernel/linux/utils/util-linux/util-linux-${PV}.tar.bz2"
 S=${WORKDIR}/util-linux-${PV}
 

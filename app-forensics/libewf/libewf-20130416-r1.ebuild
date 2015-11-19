@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-forensics/libewf/libewf-20130416-r1.ebuild,v 1.3 2014/08/08 14:00:42 blueness Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools-utils
 
 DESCRIPTION="Implementation of the EWF (SMART and EnCase) image format"
-HOMEPAGE="http://code.google.com/p/libewf/"
-SRC_URI="http://libewf.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/libyal/libewf"
+SRC_URI="https://libewf.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/2"

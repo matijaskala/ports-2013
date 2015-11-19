@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apache/mod_fastcgi_handler/mod_fastcgi_handler-0.6.ebuild,v 1.1 2011/06/05 15:42:41 hollow Exp $
+# $Id$
 
 EAPI="3"
 
@@ -11,8 +11,8 @@ GITHUB_COMMIT="c5e075b"
 inherit apache-module
 
 DESCRIPTION="A simple FastCGI handler module"
-HOMEPAGE="http://github.com/hollow/mod_fastcgi_handler"
-SRC_URI="http://nodeload.github.com/${GITHUB_AUTHOR}/${GITHUB_PROJECT}/tarball/v${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/hollow/mod_fastcgi_handler"
+SRC_URI="https://nodeload.github.com/${GITHUB_AUTHOR}/${GITHUB_PROJECT}/tarball/v${PV} -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

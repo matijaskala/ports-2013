@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/accerciser/accerciser-3.12.0.ebuild,v 1.4 2015/04/08 07:30:33 mgorny Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -10,7 +10,7 @@ PYTHON_REQ_USE="xml"
 inherit gnome2 python-r1
 
 DESCRIPTION="Interactive Python accessibility explorer"
-HOMEPAGE="http://live.gnome.org/Accerciser"
+HOMEPAGE="https://live.gnome.org/Accerciser"
 
 LICENSE="BSD CC-BY-SA-3.0"
 SLOT="0"

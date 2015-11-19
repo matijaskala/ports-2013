@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/pidgintex/pidgintex-1.1.1.ebuild,v 1.6 2014/08/10 20:02:59 slyfox Exp $
+# $Id$
 
 EAPI="2"
 inherit toolchain-funcs multilib
@@ -8,8 +8,8 @@ inherit toolchain-funcs multilib
 MY_P=pidginTeX-${PV}
 
 DESCRIPTION="Pidgin plugin to render LaTeX expressions in messages"
-HOMEPAGE="http://code.google.com/p/pidgintex"
-SRC_URI="http://pidgintex.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://github.com/Micket/pidgintex"
+SRC_URI="https://pidgintex.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,6 +1,22 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/powerpc/package.use.mask,v 1.248 2015/06/12 10:56:52 mgorny Exp $
+# $Id$
+
+# Pacho Ramos <pacho@gentoo.org> (15 Nov 2015)
+# Missing keywords
+media-sound/rhythmbox upnp-av
+
+# Pacho Ramos <pacho@gentoo.org> (27 Oct 2015)
+# Missing keywords
+net-wireless/blueman appindicator
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (26 Oct 2015)
+# x11-drivers/xf86-video-amdgpu is not keyworded
+x11-base/xorg-drivers video_cards_amdgpu
+
+# Bernard Cafarelli <voyageur@gentoo.org> (06 Aug 2015)
+# Dependencies missing keywords, bug #543604
+sys-devel/llvm ocaml
 
 # Gilles Dartiguelongue <eva@gentoo.org> (10 Jun 2015)
 # net-libs/dleyna-connector-dbus lack ppc/ppc64 keyword, bug #551634
@@ -21,10 +37,7 @@ sys-auth/sssd samba
 # Mike Frysinger <vapier@gentoo.org> (16 Mar 2015)
 # Needs sci-physics/bullet & media-libs/libsdl2 tested #499974
 dev-libs/efl physics sdl
-
-# Ben de Groot <yngwin@gentoo.org> (15 Mar 2015)
-# Waiting for keywording in bug 543398
->=media-sound/picard-1.3.2 cdda
+media-libs/elementary sdl
 
 # Michał Górny <mgorny@gentoo.org> (21 Feb 2015)
 # The external QCA plugins are not keyworded on this arch. Since
@@ -66,6 +79,7 @@ sys-apps/systemd xkb
 # Needs libepoxy keywording, bug #510940
 x11-base/xorg-server glamor wayland
 x11-drivers/xf86-video-nouveau glamor
+x11-drivers/xf86-video-ati glamor
 
 # Anthony G. Basile <blueness@gentoo.org> (17 Aug 2014)
 # This pulls in qemu[smartcard] which is masked
@@ -112,10 +126,6 @@ media-video/mpv doc-pdf
 # dependency sci-libs/vtk not keyworded on ppc yet
 media-libs/opencv vtk
 
-# Markos Chandras <hwoarang@gentoo.org> (03 May 2014)
-# sys-libs/libseccomp suppors amd64, x86, ARM and MIPS.
-app-emulation/lxc seccomp
-
 # Julian Ospald <hasufell@gentoo.org> (20 Apr 2014)
 # Missing keywords, bug #508226
 media-video/mpv sdl
@@ -125,10 +135,6 @@ media-video/mpv sdl
 kde-apps/gwenview semantic-desktop
 kde-apps/okular dpi
 kde-base/nepomuk-core migrator
-
-# Pacho Ramos <pacho@gentoo.org> (12 Apr 2014)
-# Missing keywords, bug #507490
-net-misc/modemmanager mbim
 
 # Pacho Ramos <pacho@gentoo.org> (22 Feb 2013)
 # Missing keywords, bug #495250
@@ -197,11 +203,6 @@ net-misc/modemmanager qmi qmi-newest
 # Alexandre Rostovtsev <tetromino@gentoo.org> (22 Jan 2013)
 # remove mask if/when media-gfx/argyllcms is keywored here.
 x11-misc/colord argyllcms extra-print-profiles
-
-# Sergei Trofimovich <slyfox@gentoo.org> (11 Jan 2013)
-# Current sys-libs/libseccomp (up to 1.0.1) support
-# only x86/amd64. Relies on hardcoded syscall numbers.
-app-emulation/qemu seccomp
 
 # Anthony G. Basile <blueness@gentoo.org> (15 Nove 2012)
 # Mask telepathy, no stable net-libs/telepathy-qt, bug #441456
@@ -303,12 +304,6 @@ mail-client/claws-mail pda
 # No media-sound/lilypond here, yet (bug #356069)
 app-text/asciidoc test
 
-# Kacper Kowalik <xarthisius@gentoo.org> (16 Jan 2011)
-# bug 303931
-# dev-lang/icc is not available for ppc
-# sci-chemistry/arp-warp-bin is not available for ppc
-sci-chemistry/ccp4 arpwarp
-
 # Justin Lecher <jlec@gentoo.org> (01 Nov 2010)
 # Deps not Keyworded
 sci-chemistry/apbs fetk
@@ -321,10 +316,6 @@ dev-java/icedtea systemtap
 # Alexey Shvetsov <alexxy@gentoo.org> (22 Aug 2010)
 # sci-chemistry/msms not available for this arch
 sci-chemistry/vmd msms
-
-# Justin Lecher <jlec@gentoo.org> (13 Aug 2010)
-# MKL not available on this arch
-media-gfx/povray mkl
 
 # Bernard Cafarelli <voyageur@gentoo.org> (26 Apr 2010)
 # This is for x86/amd64 only

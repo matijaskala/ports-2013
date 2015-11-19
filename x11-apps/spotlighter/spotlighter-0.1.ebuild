@@ -1,12 +1,12 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-apps/spotlighter/spotlighter-0.1.ebuild,v 1.1 2011/01/22 18:48:35 lxnay Exp $
+# $Id$
 
 EAPI=3
 
-SRC_URI="http://ardesia.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://ardesia.googlecode.com/files/${P}.tar.gz"
 DESCRIPTION="Shows a movable and resizable spotlight on the screen"
-HOMEPAGE="http://code.google.com/p/ardesia/"
+HOMEPAGE="https://code.google.com/p/ardesia/"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/e3/e3-2.8.ebuild,v 1.6 2014/01/01 16:42:11 ulm Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="Very tiny editor in ASM with emacs, pico, wordstar, and vi keybindings"
-HOMEPAGE="http://sites.google.com/site/e3editor/"
-SRC_URI="http://sites.google.com/site/e3editor/Home/${P}.tgz"
+HOMEPAGE="https://sites.google.com/site/e3editor/"
+SRC_URI="https://sites.google.com/site/e3editor/Home/${P}.tgz"
 
 LICENSE="GPL-2+"
 SLOT="0"

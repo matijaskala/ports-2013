@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-vim/conque/conque-2.3-r1.ebuild,v 1.2 2015/02/19 20:17:15 radhermit Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -10,8 +10,8 @@ inherit python-single-r1 vim-plugin
 
 MY_P="${PN}_${PV}"
 DESCRIPTION="vim plugin: Run interactive commands inside a Vim buffer"
-HOMEPAGE="http://code.google.com/p/conque/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/conque/"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tar.gz"
 LICENSE="MIT"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

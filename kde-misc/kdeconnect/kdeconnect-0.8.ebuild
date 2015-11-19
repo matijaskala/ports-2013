@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/kdeconnect/kdeconnect-0.8.ebuild,v 1.2 2015/02/22 18:41:23 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ else
 fi
 
 DESCRIPTION="Adds communication between KDE and your smartphone"
-HOMEPAGE="http://www.kde.org/"
+HOMEPAGE="https://www.kde.org/"
 
 LICENSE="GPL-2+"
 SLOT="4"
@@ -41,6 +41,8 @@ DEPEND="${COMMON_DEPEND}
 "
 
 [[ ${KDE_BUILD_TYPE} != live ]] && S=${WORKDIR}/${MY_P}
+
+PATCHES=( "${FILESDIR}/${P}-ninja.patch" )
 
 pkg_postinst(){
 	elog

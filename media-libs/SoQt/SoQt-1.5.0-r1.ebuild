@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/SoQt/SoQt-1.5.0-r1.ebuild,v 1.7 2013/05/27 23:18:21 reavertm Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ SRC_URI="http://ftp.coin3d.org/coin/src/all/${P}.tar.gz"
 HOMEPAGE="http://www.coin3d.org/"
 
 LICENSE="|| ( GPL-2 PEL )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 SLOT="0"
 IUSE="debug doc static-libs"
 

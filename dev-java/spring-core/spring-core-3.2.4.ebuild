@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/spring-core/spring-core-3.2.4.ebuild,v 1.4 2015/06/25 15:09:38 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ inherit java-pkg-2 java-ant-2
 DESCRIPTION="A comprehensive programming and configuration model for modern enterprise applications"
 HOMEPAGE="http://www.springsource.org/spring-framework"
 SRC_URI="https://github.com/SpringSource/spring-framework/archive/v${PV}.RELEASE.tar.gz -> spring-framework-${PV}.tar.gz
-		http://dev.gentoo.org/~ercpe/distfiles/dev-java/spring-framework/spring-framework-${PV}-buildscripts.tar.bz2"
+		https://dev.gentoo.org/~ercpe/distfiles/dev-java/spring-framework/spring-framework-${PV}-buildscripts.tar.bz2"
 
 LICENSE="Apache-2.0"
 SLOT="3.2"

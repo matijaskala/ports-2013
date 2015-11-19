@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libdnet/libdnet-1.12.ebuild,v 1.22 2014/12/28 19:10:26 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,9 +11,9 @@ DISTUTILS_OPTIONAL=1
 inherit autotools distutils-r1 eutils
 
 DESCRIPTION="simplified, portable interface to several low-level networking routines"
-HOMEPAGE="http://code.google.com/p/libdnet/"
-SRC_URI="http://libdnet.googlecode.com/files/${P}.tgz
-	ipv6? ( http://fragroute-ipv6.googlecode.com/files/${P}.ipv6-1.patch.gz )"
+HOMEPAGE="https://github.com/dugsong/libdnet"
+SRC_URI="https://libdnet.googlecode.com/files/${P}.tgz
+	ipv6? ( https://fragroute-ipv6.googlecode.com/files/${P}.ipv6-1.patch.gz )"
 
 LICENSE="LGPL-2"
 SLOT="0"

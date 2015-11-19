@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pygooglevoice/pygooglevoice-0.5-r2.ebuild,v 1.1 2015/01/02 23:18:33 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,9 +8,9 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="Python Bindings for the Google Voice API"
-HOMEPAGE="http://code.google.com/p/pygooglevoice/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz
-	http://${PN}.googlecode.com/files/${P}-extras.zip"
+HOMEPAGE="https://code.google.com/p/pygooglevoice/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz
+	https://${PN}.googlecode.com/files/${P}-extras.zip"
 
 LICENSE="BSD"
 SLOT="0"

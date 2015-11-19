@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/aufs3/aufs3-3_p20150420.ebuild,v 1.1 2015/04/22 06:25:04 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ KERN_MIN_VER=14
 
 DESCRIPTION="An entirely re-designed and re-implemented Unionfs"
 HOMEPAGE="http://aufs.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/aufs3-standalone-${PV}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/aufs3-standalone-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -56,7 +56,7 @@ pkg_setup() {
 	if [[ "${KV_MINOR}" -gt "${PATCH_MAX_VER}" ]]; then
 		PATCH_BRANCH="x-rcN"
 	elif [[ "${KV_MINOR}" == "14" ]] && [[ "${KV_PATCH}" -ge "21" ]]; then
-		PATCH_BRANCH="${KV_MINOR}".12+
+		PATCH_BRANCH="${KV_MINOR}".21+
 	elif [[ "${KV_MINOR}" == "18" ]] && [[ "${KV_PATCH}" -ge "1" ]]; then
 		PATCH_BRANCH="${KV_MINOR}".1+
 	else

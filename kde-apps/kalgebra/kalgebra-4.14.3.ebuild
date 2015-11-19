@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/kalgebra/kalgebra-4.14.3.ebuild,v 1.1 2015/06/04 18:44:42 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ OPENGL_REQUIRED="optional"
 inherit kde4-base
 
 DESCRIPTION="MathML-based graph calculator for KDE"
-HOMEPAGE="http://www.kde.org/applications/education/kalgebra
-http://edu.kde.org/kalgebra"
+HOMEPAGE="https://www.kde.org/applications/education/kalgebra
+https://edu.kde.org/kalgebra"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug"
 

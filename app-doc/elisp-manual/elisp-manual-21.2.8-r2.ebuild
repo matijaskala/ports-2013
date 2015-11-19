@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-doc/elisp-manual/elisp-manual-21.2.8-r2.ebuild,v 1.14 2014/10/20 22:23:44 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,9 +8,9 @@ inherit eutils
 
 MY_P=${PN}-${PV/./-}
 DESCRIPTION="The GNU Emacs Lisp Reference Manual"
-HOMEPAGE="http://www.gnu.org/software/emacs/manual/"
+HOMEPAGE="https://www.gnu.org/software/emacs/manual/"
 SRC_URI="mirror://gnu/emacs/${MY_P}.tar.gz
-	http://dev.gentoo.org/~ulm/emacs/${P}-patches.tar.gz"
+	https://dev.gentoo.org/~ulm/emacs/${P}-patches.tar.gz"
 
 LICENSE="FDL-1.1+"
 SLOT="21"

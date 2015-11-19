@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/Class-Std/Class-Std-0.11.0-r1.ebuild,v 1.3 2015/06/13 21:39:24 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ MODULE_VERSION=0.011
 inherit perl-module
 
 DESCRIPTION='Support for creating standard "inside-out" classes'
-SRC_URI+=" http://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${P}-patch.tar.bz2"
+SRC_URI+=" https://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${P}-patch.tar.bz2"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"

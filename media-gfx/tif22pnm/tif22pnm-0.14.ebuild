@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/tif22pnm/tif22pnm-0.14.ebuild,v 1.1 2012/03/02 17:47:54 ssuominen Exp $
+# $Id$
 
 EAPI=4
 inherit autotools eutils
 
 DESCRIPTION="tif22pnm and png22pnm command-line converters"
-HOMEPAGE="http://pts.szit.bme.hu/ http://code.google.com/p/sam2p/"
-SRC_URI="http://sam2p.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="http://pts.szit.bme.hu/ https://code.google.com/p/sam2p/"
+SRC_URI="https://sam2p.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

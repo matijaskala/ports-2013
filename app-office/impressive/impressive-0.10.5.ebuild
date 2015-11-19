@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/impressive/impressive-0.10.5.ebuild,v 1.6 2015/04/20 20:11:51 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -21,8 +21,9 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${PYTHON_DEPS}
+	!>=dev-python/pillow-3.0.0
 	app-text/pdftk
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pygame[${PYTHON_USEDEP}]
 	dev-python/pyopengl[${PYTHON_USEDEP}]
 	x11-misc/xdg-utils

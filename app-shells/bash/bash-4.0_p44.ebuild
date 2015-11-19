@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.0_p44.ebuild,v 1.5 2014/10/19 20:30:15 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -72,6 +72,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-4.0-ldflags-for-build.patch #211947
 	epatch "${FILESDIR}"/${PN}-4.0-negative-return.patch
 	epatch "${FILESDIR}"/${PN}-4.0-parallel-build.patch #267613
+	epatch "${FILESDIR}"/${PN}-4.2-dev-fd-buffer-overflow.patch #431850
 	sed -i '/\.o: .*shell\.h/s:$: pathnames.h:' Makefile.in #267613
 
 	epatch_user

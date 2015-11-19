@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-eselect/eselect-opencl/eselect-opencl-1.1.0-r2.ebuild,v 1.1 2015/03/31 16:52:53 ulm Exp $
+# $Id$
 
 EAPI=4
 
 inherit multilib
 
 DESCRIPTION="Utility to change the OpenCL implementation being used"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 
 # Source:
 # http://www.khronos.org/registry/cl/api/${CL_ABI}/opencl.h
@@ -20,9 +20,9 @@ HOMEPAGE="http://www.gentoo.org/"
 
 # Using copy by Mario Kicherer #496418
 
-#MIRROR="http://dev.gentoo.org/~xarthisius/distfiles/"
+#MIRROR="https://dev.gentoo.org/~xarthisius/distfiles/"
 SRC_URI="https://github.com/anyc/opencl-headers/archive/opencl-headers-1.2.tar.gz
-	http://dev.gentoo.org/~xarthisius/distfiles/${P}-r1.tar.xz"
+	https://dev.gentoo.org/~xarthisius/distfiles/${P}-r1.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

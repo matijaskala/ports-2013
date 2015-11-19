@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/guice/guice-2.0-r1.ebuild,v 1.4 2015/06/13 11:37:25 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,8 +9,8 @@ JAVA_PKG_IUSE="doc source"
 inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="Guice is a lightweight dependency injection framework for Java 5 and above"
-HOMEPAGE="http://code.google.com/p/google-guice/"
-SRC_URI="http://google-guice.googlecode.com/files/${P}-src.zip"
+HOMEPAGE="https://code.google.com/p/google-guice/"
+SRC_URI="https://google-guice.googlecode.com/files/${P}-src.zip"
 
 LICENSE="Apache-2.0"
 SLOT="2"

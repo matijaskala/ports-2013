@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/oslo-db/oslo-db-1.7.1.ebuild,v 1.1 2015/03/18 03:21:13 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,13 +8,13 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="OpenStack Common DB Code"
-HOMEPAGE="http://launchpad.net/oslo"
+HOMEPAGE="https://launchpad.net/oslo"
 SRC_URI="mirror://pypi/${PN:0:1}/oslo.db/oslo.db-${PV}.tar.gz"
 S="${WORKDIR}/oslo.db-${PV}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+sqlite mysql postgres"
 REQUIRED_USE="|| ( mysql postgres sqlite )"
 

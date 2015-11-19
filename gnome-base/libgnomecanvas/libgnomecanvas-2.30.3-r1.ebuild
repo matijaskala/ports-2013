@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/libgnomecanvas/libgnomecanvas-2.30.3-r1.ebuild,v 1.9 2014/10/11 12:12:00 maekke Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -10,7 +10,7 @@ GNOME2_LA_PUNT="yes"
 inherit gnome2 multilib multilib-minimal virtualx
 
 DESCRIPTION="The Gnome 2 Canvas library"
-HOMEPAGE="http://library.gnome.org/devel/libgnomecanvas/stable/"
+HOMEPAGE="https://library.gnome.org/devel/libgnomecanvas/stable/"
 
 LICENSE="LGPL-2"
 SLOT="0"

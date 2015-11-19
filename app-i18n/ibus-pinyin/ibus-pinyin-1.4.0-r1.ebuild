@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-pinyin/ibus-pinyin-1.4.0-r1.ebuild,v 1.1 2014/06/19 15:19:47 dlan Exp $
+# $Id$
 
 EAPI=4
 
@@ -11,9 +11,9 @@ inherit python
 
 PYDB_TAR="pinyin-database-1.2.99.tar.bz2"
 DESCRIPTION="Chinese PinYin IMEngine for IBus Framework"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${P}.tar.gz
-	http://ibus.googlecode.com/files/${PYDB_TAR}"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${P}.tar.gz
+	https://ibus.googlecode.com/files/${PYDB_TAR}"
 
 LICENSE="GPL-2"
 SLOT="0"

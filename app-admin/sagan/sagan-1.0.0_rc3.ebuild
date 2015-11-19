@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/sagan/sagan-1.0.0_rc3.ebuild,v 1.1 2014/12/05 19:19:55 maksbotan Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ SRC_URI="http://sagan.quadrantsec.com/download/sagan-1.0.0RC3.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="geoip +libdnet +lognorm mysql +pcap smtp snort"
 
 RDEPEND="dev-libs/libpcre
@@ -38,7 +38,7 @@ DEPEND="virtual/pkgconfig
 	${RDEPEND}"
 
 DOCS=( AUTHORS ChangeLog FAQ INSTALL README NEWS TODO )
-PATCHES=( "${FILESDIR}"/json_header_location.patch )
+PATCHES=( "${FILESDIR}"/${PN}-1.0.0-liblognorm-json-c.patch )
 S="${WORKDIR}/sagan-1.0.0RC3/"
 
 pkg_setup() {

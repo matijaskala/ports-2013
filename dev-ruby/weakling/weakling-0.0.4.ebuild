@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/weakling/weakling-0.0.4.ebuild,v 1.3 2014/03/04 20:19:19 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ RUBY_FAKEGEM_TASK_TEST=""
 inherit java-pkg-2 java-pkg-simple ruby-fakegem
 
 DESCRIPTION="weakling: a collection of weakref utilities for Ruby"
-HOMEPAGE="http://github.com/headius/weakling"
+HOMEPAGE="https://github.com/headius/weakling"
 LICENSE="Apache-2.0"
 
 KEYWORDS="amd64 x86"

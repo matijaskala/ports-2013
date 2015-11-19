@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/osgi-core-api/osgi-core-api-5.0.0.ebuild,v 1.6 2014/02/12 02:36:33 radhermit Exp $
+# $Id$
 
 EAPI=4
 
@@ -12,7 +12,7 @@ DESCRIPTION="OSGi Service Platform Core API (Companion Code)"
 HOMEPAGE="http://www.osgi.org/Specifications/HomePage"
 SRC_URI="http://www.osgi.org/download/r5/osgi.core-${PV}.jar"
 
-LICENSE="Apache-2.0 OSGi-Specification-2.0"
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""

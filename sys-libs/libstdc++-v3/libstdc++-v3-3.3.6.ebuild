@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libstdc++-v3/libstdc++-v3-3.3.6.ebuild,v 1.31 2014/01/27 14:54:25 jer Exp $
+# $Id$
 
 inherit eutils flag-o-matic libtool multilib
 
@@ -110,7 +110,7 @@ do_filter_flags() {
 PATCH_VER="1.6"
 
 DESCRIPTION="Compatibility package for running binaries linked against a pre gcc 3.4 libstdc++"
-HOMEPAGE="http://gcc.gnu.org/libstdc++/"
+HOMEPAGE="https://gcc.gnu.org/libstdc++/"
 SRC_URI="ftp://gcc.gnu.org/pub/gcc/releases/gcc-${PV}/gcc-${PV}.tar.bz2
 	mirror://gentoo/gcc-${PV}-patches-${PATCH_VER}.tar.bz2"
 

@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/openvpn-auth-ldap/openvpn-auth-ldap-2.0.4_pre20131110.ebuild,v 1.1 2013/11/12 17:42:23 ercpe Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils autotools flag-o-matic
 
 DESCRIPTION="LDAP authentication and authorization plugin for OpenVPN 2.x"
-HOMEPAGE="https://code.google.com/p/openvpn-auth-ldap/"
-SRC_URI="http://dev.gentoo.org/~ercpe/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
+HOMEPAGE="https://github.com/threerings/openvpn-auth-ldap"
+SRC_URI="https://dev.gentoo.org/~ercpe/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"

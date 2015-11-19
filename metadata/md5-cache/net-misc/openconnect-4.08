@@ -8,6 +8,6 @@ KEYWORDS=amd64 ppc64 x86
 LICENSE=LGPL-2.1 GPL-2
 RDEPEND=dev-libs/libxml2 net-libs/libproxy sys-libs/zlib !gnutls? ( dev-libs/openssl[static-libs?] ) gnutls? ( || ( ( >=net-libs/gnutls-3[static-libs?] dev-libs/nettle ) ( =net-libs/gnutls-2.12*[nettle,static-libs?] dev-libs/nettle ) ( =net-libs/gnutls-2.12*[-nettle,static-libs?] dev-libs/libgcrypt:0[static-libs?] ) ) app-misc/ca-certificates ) doc? ( || ( >=dev-lang/python-2.7.5-r2:2.7 ) ) sys-apps/iproute2
 SLOT=0/2
-SRC_URI=ftp://ftp.infradead.org/pub/openconnect/openconnect-4.08.tar.gz http://dev.gentoo.org/~hwoarang/distfiles/openconnect-script-20121108205904.tar.gz
-_eclasses_=eutils	9fb270e417e0e83d64ca52586c4a79de	linux-info	8cbc678e083c23e4ad546ca6509cf304	multilib	62927b3db3a589b0806255f3a002d5d3	python-any-r1	da352ea9da8eb9bf158d56cca65d6c82	python-utils-r1	096f8247eae93026af13ab88cf4305cd	toolchain-funcs	42408102d713fbad60ca21349865edb4	versionator	cd0bcdb170807e4a1984115e9d53a26f
-_md5_=2b178aa819c81cf4206c37c26587909e
+SRC_URI=ftp://ftp.infradead.org/pub/openconnect/openconnect-4.08.tar.gz https://dev.gentoo.org/~hwoarang/distfiles/openconnect-script-20121108205904.tar.gz
+_eclasses_=eutils	f813d23e417656bf3917483643165d5a	linux-info	8f92e5ac1a1da684c5450b1b21a1f56a	multilib	3972ca401cf7dbb430df9995f5d8d580	python-any-r1	60a62ae0ee8cd93b4ba99a4c1371eb8b	python-utils-r1	7d52f592fc09a002ea150d69507b5bad	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=5a448f4a2d1d0971e0c6eb707da60664

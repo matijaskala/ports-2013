@@ -1,8 +1,8 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/python-single-r1.eclass,v 1.38 2015/03/22 13:41:16 mgorny Exp $
+# $Id$
 
-# @ECLASS: python-single-r1
+# @ECLASS: python-single-r1.eclass
 # @MAINTAINER:
 # Python team <python@gentoo.org>
 # @AUTHOR:
@@ -28,8 +28,8 @@
 # in the packages using python-single-r1, and there is no need ever
 # to inherit both.
 #
-# For more information, please see the python-r1 Developer's Guide:
-# http://www.gentoo.org/proj/en/Python/python-r1/dev-guide.xml
+# For more information, please see the wiki:
+# https://wiki.gentoo.org/wiki/Project:Python/python-single-r1
 
 case "${EAPI:-0}" in
 	0|1|2|3)
@@ -88,10 +88,18 @@ if [[ ! ${_PYTHON_SINGLE_R1} ]]; then
 #
 # Example:
 # @CODE
-# PYTHON_COMPAT=( python{2_5,2_6,2_7} )
+# PYTHON_COMPAT=( python2_7 python3_3 python3_4} )
+# @CODE
+#
+# Please note that you can also use bash brace expansion if you like:
+# @CODE
+# PYTHON_COMPAT=( python2_7 python3_{3,4} )
 # @CODE
 if ! declare -p PYTHON_COMPAT &>/dev/null; then
 	die 'PYTHON_COMPAT not declared.'
+fi
+if [[ $(declare -p PYTHON_COMPAT) != "declare -a"* ]]; then
+	die 'PYTHON_COMPAT must be an array.'
 fi
 
 # @ECLASS-VARIABLE: PYTHON_REQ_USE
@@ -131,8 +139,8 @@ fi
 # Example value:
 # @CODE
 # dev-lang/python-exec:=
-# python_single_target_python2_6? ( dev-lang/python:2.6[gdbm] )
 # python_single_target_python2_7? ( dev-lang/python:2.7[gdbm] )
+# python_single_target_pypy? ( virtual/pypy[gdbm] )
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_USEDEP
@@ -152,7 +160,7 @@ fi
 #
 # Example value:
 # @CODE
-# python_targets_python2_7(-)?,python_single_target_python2_7(+)?
+# python_targets_python2_7(-)?,python_single_target_python3_4(+)?
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_REQUIRED_USE
@@ -172,9 +180,9 @@ fi
 #
 # Example value:
 # @CODE
-# python_single_target_python2_6? ( python_targets_python2_6 )
 # python_single_target_python2_7? ( python_targets_python2_7 )
-# ^^ ( python_single_target_python2_6 python_single_target_python2_7 )
+# python_single_target_python3_3? ( python_targets_python3_3 )
+# ^^ ( python_single_target_python2_7 python_single_target_python3_3 )
 # @CODE
 
 _python_single_set_globals() {
@@ -349,17 +357,17 @@ python_gen_useflags() {
 #
 # Example:
 # @CODE
-# PYTHON_COMPAT=( python{2_5,2_6,2_7} )
+# PYTHON_COMPAT=( python{2_7,3_{3,4}} pypy )
 # RDEPEND="$(python_gen_cond_dep \
-#   'dev-python/unittest2[${PYTHON_USEDEP}]' python{2_5,2_6})"
+#   'dev-python/unittest2[${PYTHON_USEDEP}]' python2_7 pypy )"
 # @CODE
 #
 # It will cause the variable to look like:
 # @CODE
-# RDEPEND="python_single_target_python2_5? (
-#     dev-python/unittest2[python_targets_python2_5(-)?,...] )
-#	python_single_target_python2_6? (
-#     dev-python/unittest2[python_targets_python2_6(-)?,...] )"
+# RDEPEND="python_single_target_python2_7? (
+#     dev-python/unittest2[python_targets_python2_7(-)?,...] )
+#	python_single_target_pypy? (
+#     dev-python/unittest2[python_targets_pypy(-)?,...] )"
 # @CODE
 python_gen_cond_dep() {
 	debug-print-function ${FUNCNAME} "${@}"

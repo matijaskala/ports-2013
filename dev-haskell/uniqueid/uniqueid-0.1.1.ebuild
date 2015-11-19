@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/uniqueid/uniqueid-0.1.1.ebuild,v 1.2 2015/01/02 18:26:47 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit eutils haskell-cabal
 
 DESCRIPTION="Splittable Unique Identifier Supply"
-HOMEPAGE="http://github.com/sebfisch/uniqueid/wikis"
+HOMEPAGE="https://github.com/sebfisch/uniqueid/wikis"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

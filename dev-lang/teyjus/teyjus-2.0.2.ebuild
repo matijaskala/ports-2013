@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/teyjus/teyjus-2.0.2.ebuild,v 1.2 2012/12/12 10:42:06 gienah Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ MY_P=$(version_format_string '${MY_PN}-$1.$2-b$3')
 
 DESCRIPTION="Higher-order logic programming language Lambda Prolog"
 HOMEPAGE="http://teyjus.cs.umn.edu/"
-SRC_URI="http://teyjus.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="https://teyjus.googlecode.com/files/${MY_P}.tar.gz"
 
 SLOT="0/${PV}"
 KEYWORDS="~amd64 ~x86"

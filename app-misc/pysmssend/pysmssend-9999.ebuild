@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/pysmssend/pysmssend-9999.ebuild,v 1.6 2012/09/09 08:08:54 hwoarang Exp $
+# $Id$
 
 EAPI="3"
 PYTHON_DEPEND="2:2.5"
 SUPPORT_PYTHON_ABIS="1"
 RESTRICT_PYTHON_ABIS="2.4 3.*"
 EGIT_REPO_URI="git://github.com/hwoarang/${PN}.git
-	http://github.com/hwoarang/${PN}.git"
+	https://github.com/hwoarang/${PN}.git"
 
 inherit distutils eutils git-2
 

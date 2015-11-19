@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-nds/rpcbind/rpcbind-9999.ebuild,v 1.14 2015/04/28 01:50:51 vapier Exp $
+# $Id$
 
 EAPI="5"
 
@@ -21,14 +21,14 @@ LICENSE="BSD"
 SLOT="0"
 IUSE="debug selinux systemd tcpd warmstarts"
 
-CDEPEND=">=net-libs/libtirpc-0.2.3
+CDEPEND=">=net-libs/libtirpc-0.2.3:=
 	systemd? ( sys-apps/systemd:= )
 	tcpd? ( sys-apps/tcp-wrappers )"
 DEPEND="${CDEPEND}
 	virtual/pkgconfig"
 RDEPEND="${CDEPEND}
-	selinux? ( sec-policy/selinux-rpcbind )
-"
+	selinux? ( sec-policy/selinux-rpcbind )"
+
 src_prepare() {
 	[[ ${PV} == "9999" ]] && eautoreconf
 	epatch_user

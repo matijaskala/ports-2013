@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/ethumb/ethumb-1.7.8.ebuild,v 1.1 2013/08/28 03:24:24 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit enlightenment
 
 DESCRIPTION="Enlightenment thumbnailing library (meant to replace epsilon)"
-HOMEPAGE="http://trac.enlightenment.org/e/wiki/Ethumb"
-SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+HOMEPAGE="https://trac.enlightenment.org/e/wiki/Ethumb"
+SRC_URI="https://download.enlightenment.org/releases/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 KEYWORDS="~amd64 ~x86"

@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/imhangul/imhangul-3.1.1.ebuild,v 1.2 2013/04/21 10:32:24 lxnay Exp $
+# $Id$
 
 EAPI="3"
 inherit multilib
 
 DESCRIPTION="Gtk+-3.0 Hangul Input Modules"
-HOMEPAGE="http://code.google.com/p/imhangul/"
-SRC_URI="http://imhangul.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/imhangul/"
+SRC_URI="https://imhangul.googlecode.com/files/${P}.tar.bz2"
 
 SLOT="3"
 LICENSE="LGPL-2.1"

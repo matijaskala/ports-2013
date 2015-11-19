@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/split2flac/split2flac-9999.ebuild,v 1.5 2013/10/21 07:56:37 tomwij Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ inherit bash-completion-r1
 DESCRIPTION="sh script to split one big APE/FLAC/WV/WAV audio image with CUE sheet into tracks"
 HOMEPAGE="https://github.com/ftrvxmtrx/split2flac"
 [[ ${PV} == *9999* ]] || \
-SRC_URI="http://rion-overlay.googlecode.com/files/${P}.tar.xz"
+SRC_URI="https://rion-overlay.googlecode.com/files/${P}.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"

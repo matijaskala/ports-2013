@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/arb/arb-5.3.ebuild,v 1.2 2012/10/24 19:28:55 ulm Exp $
+# $Id$
 
 EAPI=4
 
@@ -10,7 +10,7 @@ DESCRIPTION="Tools for DNA/RNA sequence database handling and data analysis, phy
 HOMEPAGE="http://www.arb-home.de/"
 SRC_URI="
 	http://download.arb-home.de/release/arb_${PV}/arbsrc.tgz -> ${P}.tgz
-	http://dev.gentoo.org/~jlec/distfiles/${P}-linker.patch.xz"
+	https://dev.gentoo.org/~jlec/distfiles/${P}-linker.patch.xz"
 
 SLOT="0"
 LICENSE="arb"

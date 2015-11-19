@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/cipher-aes/cipher-aes-0.2.9.ebuild,v 1.2 2015/01/28 20:03:10 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Fast AES cipher implementation with advanced mode of operations"
-HOMEPAGE="http://github.com/vincenthz/hs-cipher-aes"
+HOMEPAGE="https://github.com/vincenthz/hs-cipher-aes"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

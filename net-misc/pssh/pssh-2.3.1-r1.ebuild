@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/pssh/pssh-2.3.1-r1.ebuild,v 1.4 2015/03/28 21:25:02 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ DISTUTILS_SINGLE_IMPL=1
 inherit distutils-r1
 
 DESCRIPTION="PSSH provides parallel versions of OpenSSH and related tools"
-HOMEPAGE="http://code.google.com/p/parallel-ssh/"
-SRC_URI="http://parallel-ssh.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/parallel-ssh/"
+SRC_URI="https://parallel-ssh.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

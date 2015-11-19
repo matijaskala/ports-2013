@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rspec-core/rspec-core-2.99.2-r1.ebuild,v 1.2 2015/02/21 09:37:16 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21 ruby22"
@@ -20,7 +20,7 @@ RUBY_FAKEGEM_GEMSPEC="rspec-core.gemspec"
 inherit ruby-fakegem
 
 DESCRIPTION="A Behaviour Driven Development (BDD) framework for Ruby"
-HOMEPAGE="http://github.com/rspec/rspec-core"
+HOMEPAGE="https://github.com/rspec/rspec-core"
 SRC_URI="https://github.com/rspec/${PN}/archive/v${PV}.tar.gz -> ${P}-git.tgz"
 
 LICENSE="MIT"

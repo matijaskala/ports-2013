@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/memcached/memcached-1.4.17-r3.ebuild,v 1.1 2014/02/17 17:52:50 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils flag-o-matic systemd user
@@ -9,7 +9,7 @@ MY_PV="${PV/_rc/-rc}"
 MY_P="${PN}-${MY_PV}"
 
 DESCRIPTION="High-performance, distributed memory object caching system"
-HOMEPAGE="http://code.google.com/p/memcached/"
+HOMEPAGE="http://memcached.org/"
 SRC_URI="http://www.memcached.org/files/${MY_P}.tar.gz"
 
 LICENSE="BSD"

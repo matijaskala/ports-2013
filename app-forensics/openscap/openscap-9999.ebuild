@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-forensics/openscap/openscap-9999.ebuild,v 1.7 2015/04/08 07:30:34 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -88,6 +88,8 @@ src_prepare() {
 
 	if [[ "${PV}" == "9999" ]];
 	then
+		# fix automake failure about missing 'config/config.rpath'
+		touch config/config.rpath
 		eautoreconf
 	fi
 

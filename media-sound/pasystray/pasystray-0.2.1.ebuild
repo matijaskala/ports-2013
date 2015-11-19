@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/pasystray/pasystray-0.2.1.ebuild,v 1.2 2014/10/12 17:28:06 pacho Exp $
+# $Id$
 
 EAPI=4
 inherit gnome2-utils
 
 DESCRIPTION="A system tray for pulseaudio controls (replacement for the deprecated padevchooser)"
-HOMEPAGE="http://github.com/christophgysin/pasystray"
+HOMEPAGE="https://github.com/christophgysin/pasystray"
 SRC_URI="mirror://github/christophgysin/${PN}/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"

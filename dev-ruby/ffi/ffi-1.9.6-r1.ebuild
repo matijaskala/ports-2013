@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/ffi/ffi-1.9.6-r1.ebuild,v 1.10 2015/02/16 10:08:29 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,9 +17,9 @@ RUBY_FAKEGEM_EXTRADOC="README.md"
 inherit ruby-fakegem
 
 DESCRIPTION="Ruby extension for programmatically loading dynamic libraries"
-HOMEPAGE="http://wiki.github.com/ffi/ffi"
+HOMEPAGE="https://wiki.github.com/ffi/ffi"
 
-SRC_URI="http://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${PN}-git-${PV}.tgz"
+SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${PN}-git-${PV}.tgz"
 
 IUSE=""
 LICENSE="BSD"

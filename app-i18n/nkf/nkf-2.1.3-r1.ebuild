@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/nkf/nkf-2.1.3-r1.ebuild,v 1.2 2015/04/08 07:30:30 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -9,8 +9,8 @@ inherit eutils distutils-r1 perl-module toolchain-funcs
 DESCRIPTION="Network Kanji code conversion Filter with UTF-8/16 support"
 HOMEPAGE="http://sourceforge.jp/projects/nkf/"
 SRC_URI="mirror://sourceforge.jp/nkf/59912/${P}.tar.gz
-	linguas_ja? ( http://dev.gentoo.org/~naota/files/nkf.1j )
-	python? ( http://dev.gentoo.org/~naota/files/NKF_python20090602.tgz )"
+	linguas_ja? ( https://dev.gentoo.org/~naota/files/nkf.1j )
+	python? ( https://dev.gentoo.org/~naota/files/NKF_python20090602.tgz )"
 
 LICENSE="ZLIB"
 SLOT="0"

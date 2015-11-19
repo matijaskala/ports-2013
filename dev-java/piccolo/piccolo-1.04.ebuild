@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/piccolo/piccolo-1.04.ebuild,v 1.2 2014/08/10 20:22:14 slyfox Exp $
+# $Id$
 
 EAPI="5"
 
@@ -14,10 +14,10 @@ SRC_URI="mirror://sourceforge/${PN}/${P}-src.zip"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 
-RDEPEND=">=virtual/jre-1.4"
-DEPEND=">=virtual/jdk-1.4
+RDEPEND=">=virtual/jre-1.6"
+DEPEND=">=virtual/jdk-1.6
 	app-arch/unzip"
 
 EANT_BUILD_TARGET="build"

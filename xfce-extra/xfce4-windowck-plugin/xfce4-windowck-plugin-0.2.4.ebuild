@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/xfce4-windowck-plugin/xfce4-windowck-plugin-0.2.4.ebuild,v 1.3 2014/01/28 14:18:11 ago Exp $
+# $Id$
 
 EAPI=5
 EAUTORECONF=1
 inherit xfconf
 
 DESCRIPTION="Xfce panel plugin which allows to put the maximized window title and windows buttons on the panel"
-HOMEPAGE="http://github.com/cedl38/xfce4-windowck-plugin"
-SRC_URI="http://github.com/cedl38/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/cedl38/xfce4-windowck-plugin"
+SRC_URI="https://github.com/cedl38/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

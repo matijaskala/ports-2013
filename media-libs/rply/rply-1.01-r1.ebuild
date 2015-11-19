@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/rply/rply-1.01-r1.ebuild,v 1.3 2012/05/21 19:06:42 tetromino Exp $
+# $Id$
 
 EAPI="4"
 
@@ -10,7 +10,7 @@ DESCRIPTION="A library to read and write PLY files"
 HOMEPAGE="http://w3.impa.br/~diego/software/rply/"
 # SRC_URI="http://w3.impa.br/~diego/software/rply/${P}.tar.gz"
 # Tarball no longer available from upstream website
-SRC_URI="http://dev.gentoo.org/~tetromino/distfiles/${PN}/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~tetromino/distfiles/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

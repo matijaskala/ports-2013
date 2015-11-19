@@ -1,9 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/kwave/kwave-0.8.10.ebuild,v 1.8 2015/06/04 19:04:15 kensington Exp $
+# $Id$
 
 EAPI=5
 
+CMAKE_MAKEFILE_GENERATOR="emake"
 KDE_LINGUAS="cs de fr"
 KDE_HANDBOOK="optional"
 inherit kde4-base
@@ -41,7 +42,7 @@ RDEPEND="
 	)
 "
 DEPEND="${RDEPEND}
-	$(add_kdeapps_dep poxml extras)
+	$(add_kdeapps_dep poxml)
 	|| ( media-gfx/imagemagick[png,svg] media-gfx/graphicsmagick[imagemagick,png,svg] )
 "
 

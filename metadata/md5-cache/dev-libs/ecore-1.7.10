@@ -9,6 +9,6 @@ LICENSE=BSD-2
 RDEPEND=>=dev-libs/eina-1.7.10 ares? ( net-dns/c-ares ) glib? ( dev-libs/glib ) curl? ( net-misc/curl ) gnutls? ( net-libs/gnutls ) !gnutls? ( ssl? ( dev-libs/openssl ) ) evas? ( >=media-libs/evas-1.7.10[directfb?,fbcon?,opengl?,X?,xcb?] opengl? ( virtual/opengl ) wayland? ( >=media-libs/evas-1.7.10[directfb?,fbcon?,gles?,opengl?,wayland?,X?,xcb?] ) ) directfb? ( >=dev-libs/DirectFB-0.9.16 ) tslib? ( x11-libs/tslib ) sdl? ( media-libs/libsdl ) wayland? ( dev-libs/wayland ) X? ( x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXcursor x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXi x11-libs/libXrender x11-libs/libXtst xinerama? ( x11-libs/libXinerama x11-libs/libXrandr ) xprint? ( x11-libs/libXp ) xscreensaver? ( x11-libs/libXScrnSaver ) ) !X? ( xcb? ( x11-libs/pixman x11-libs/xcb-util ) ) nls? ( sys-devel/gettext )
 RESTRICT=test
 SLOT=0
-SRC_URI=http://download.enlightenment.org/releases/ecore-1.7.10.tar.bz2
-_eclasses_=enlightenment	98392d364f7f4c6cde8a516cbc298472	eutils	9fb270e417e0e83d64ca52586c4a79de	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	62927b3db3a589b0806255f3a002d5d3	toolchain-funcs	42408102d713fbad60ca21349865edb4
-_md5_=fb6487e4cc4eb4aeb1ce020b3a8d185f
+SRC_URI=https://download.enlightenment.org/releases/ecore-1.7.10.tar.bz2
+_eclasses_=enlightenment	c185b1fa0d87798fd07fb1cd85866b23	eutils	f813d23e417656bf3917483643165d5a	libtool	7f78cd7d403808a350c9ae23f5821fb4	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
+_md5_=8b38ba807a99aed6c116ca53608d8c61

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/votca-csg/votca-csg-1.2.4-r1.ebuild,v 1.3 2015/03/16 08:23:47 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,9 +9,9 @@ inherit bash-completion-r1 cmake-utils multilib
 IUSE="doc examples extras +gromacs"
 PDEPEND="extras? ( =sci-chemistry/votca-csgapps-${PV} )"
 if [ "${PV}" != "9999" ]; then
-	SRC_URI="http://downloads.votca.googlecode.com/hg/${P}.tar.gz
-		doc? ( http://downloads.votca.googlecode.com/hg/${PN}-manual-${PV}.pdf )
-		examples? (	http://downloads.votca.googlecode.com/hg/${PN}-tutorials-${PV}.tar.gz )"
+	SRC_URI="https://downloads.votca.googlecode.com/hg/${P}.tar.gz
+		doc? ( https://downloads.votca.googlecode.com/hg/${PN}-manual-${PV}.pdf )
+		examples? (	https://downloads.votca.googlecode.com/hg/${PN}-tutorials-${PV}.tar.gz )"
 else
 	SRC_URI=""
 	inherit mercurial

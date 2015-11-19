@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/mandelbulber/mandelbulber-1.21.1.ebuild,v 1.1 2014/02/08 07:20:50 radhermit Exp $
+# $Id$
 
 EAPI=5
 inherit eutils toolchain-funcs versionator
@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs versionator
 MY_P=${PN}$(replace_version_separator 2 '-' ).orig
 
 DESCRIPTION="Tool to render 3D fractals"
-HOMEPAGE="http://sites.google.com/site/mandelbulber/home"
+HOMEPAGE="https://sites.google.com/site/mandelbulber/home"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"

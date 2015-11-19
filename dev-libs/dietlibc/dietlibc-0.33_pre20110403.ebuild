@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/dietlibc/dietlibc-0.33_pre20110403.ebuild,v 1.11 2014/01/26 12:23:29 ago Exp $
+# $Id$
 
 EAPI="3"
 
@@ -12,7 +12,7 @@ GITHUB_COMMIT="4e86d5e"
 
 DESCRIPTION="A libc optimized for small size"
 HOMEPAGE="http://www.fefe.de/dietlibc/"
-SRC_URI="http://nodeload.github.com/${GITHUB_AUTHOR}/${GITHUB_PROJECT}/tarball/v${PV} -> ${P}.tar.gz"
+SRC_URI="https://nodeload.github.com/${GITHUB_AUTHOR}/${GITHUB_PROJECT}/tarball/v${PV} -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

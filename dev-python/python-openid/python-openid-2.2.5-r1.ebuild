@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-openid/python-openid-2.2.5-r1.ebuild,v 1.10 2015/04/08 08:05:19 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="OpenID support for servers and consumers"
-HOMEPAGE="http://www.openidenabled.com/openid/libraries/python/ http://pypi.python.org/pypi/python-openid"
-# Downloaded from http://github.com/openid/python-openid/downloads
+HOMEPAGE="http://www.openidenabled.com/openid/libraries/python/ https://pypi.python.org/pypi/python-openid"
+# Downloaded from https://github.com/openid/python-openid/downloads
 SRC_URI="mirror://gentoo/${P}.tar.gz"
 
 LICENSE="Apache-2.0"

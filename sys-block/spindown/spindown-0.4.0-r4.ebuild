@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/spindown/spindown-0.4.0-r4.ebuild,v 1.1 2012/03/11 11:38:51 wschlich Exp $
+# $Id$
 
 inherit eutils
 
 DESCRIPTION="Spindown is a daemon that can spin down idle disks"
-HOMEPAGE="http://code.google.com/p/spindown"
-SRC_URI="http://spindown.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/spindown"
+SRC_URI="https://spindown.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

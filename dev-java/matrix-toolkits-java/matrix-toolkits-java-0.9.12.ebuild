@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/matrix-toolkits-java/matrix-toolkits-java-0.9.12.ebuild,v 1.2 2013/02/17 09:46:48 jlec Exp $
+# $Id$
 
 EAPI="2"
 
@@ -12,8 +12,8 @@ JAVA_ANT_REWRITE_CLASSPATH="true"
 inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="BLAS and LAPACK-derived matrix data structures and linear algebra methods"
-HOMEPAGE="http://code.google.com/p/matrix-toolkits-java/"
-SRC_URI="http://matrix-toolkits-java.googlecode.com/files/mtj-${PV}.zip"
+HOMEPAGE="https://github.com/fommil/matrix-toolkits-java"
+SRC_URI="https://matrix-toolkits-java.googlecode.com/files/mtj-${PV}.zip"
 
 LICENSE="LGPL-3"
 SLOT="0"

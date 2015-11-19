@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/pcsxr/pcsxr-1.9.94-r1.ebuild,v 1.1 2014/08/14 10:37:38 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ DESCRIPTION="PCSX-Reloaded: a fork of PCSX, the discontinued Playstation emulato
 HOMEPAGE="http://pcsxr.codeplex.com"
 # codeplex doesn't support direct downloads but GPL-2 doesn't mind me
 # mirroring it.
-SRC_URI="http://dev.gentoo.org/~mgorny/dist/${P}.zip"
+SRC_URI="https://dev.gentoo.org/~mgorny/dist/${P}.zip"
 
 LICENSE="GPL-2 public-domain"
 SLOT="0"

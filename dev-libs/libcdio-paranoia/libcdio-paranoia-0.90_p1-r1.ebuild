@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libcdio-paranoia/libcdio-paranoia-0.90_p1-r1.ebuild,v 1.14 2015/03/31 19:14:39 ulm Exp $
+# $Id$
 
 EAPI=5
 MY_P=${PN}-10.2+${PV/_p/+}
@@ -10,7 +10,7 @@ AUTOTOOLS_AUTORECONF=yes
 inherit eutils autotools-multilib
 
 DESCRIPTION="an advanced CDDA reader with error correction"
-HOMEPAGE="http://www.gnu.org/software/libcdio/"
+HOMEPAGE="https://www.gnu.org/software/libcdio/"
 SRC_URI="mirror://gnu/${PN%-*}/${MY_P}.tar.gz"
 
 # COPYING-GPL from cdparanoia says "2 or later"

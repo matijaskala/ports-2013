@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/securemem/securemem-0.1.3.ebuild,v 1.4 2014/07/25 09:16:19 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="abstraction to an auto scrubbing and const time eq, memory chunk"
-HOMEPAGE="http://github.com/vincenthz/hs-securemem"
+HOMEPAGE="https://github.com/vincenthz/hs-securemem"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

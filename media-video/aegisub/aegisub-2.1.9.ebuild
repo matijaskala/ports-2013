@@ -1,15 +1,15 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/aegisub/aegisub-2.1.9.ebuild,v 1.6 2012/09/24 13:51:49 pinkbyte Exp $
+# $Id$
 
 EAPI="4"
 
 WX_GTK_VER="2.8"
 inherit autotools wxwidgets
 
-DESCRIPTION="Advanced SSA/ASS subtitle editor"
+DESCRIPTION="Advanced subtitle editor"
 HOMEPAGE="http://www.aegisub.org/"
-SRC_URI="http://rion-overlay.googlecode.com/files/${P}.tar.xz"
+SRC_URI="https://rion-overlay.googlecode.com/files/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

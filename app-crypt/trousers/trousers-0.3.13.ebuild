@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/trousers/trousers-0.3.13.ebuild,v 1.2 2015/04/27 06:15:58 alonbl Exp $
+# $Id$
 
 EAPI=5
 
@@ -78,6 +78,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-nouseradd.patch
+	epatch "${FILESDIR}"/${P}-build.patch
 	mv configure.in configure.ac || die
 	eautoreconf
 }

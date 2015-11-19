@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/freeverb3/freeverb3-3.1.1-r1.ebuild,v 1.1 2015/06/08 23:57:54 sping Exp $
+# $Id$
 
 EAPI=5
 inherit eutils multilib versionator
@@ -21,7 +21,7 @@ _GTK_DEPEND=">=dev-libs/glib-2.4.7:2
 	x11-libs/cairo"
 
 RDEPEND=">=sci-libs/fftw-3.0.1
-	audacious? ( >=media-sound/audacious-3.5
+	audacious? ( =media-sound/audacious-3.5*
 		${_GTK_DEPEND}
 		media-libs/libsndfile )
 	jack? ( media-sound/jack-audio-connection-kit

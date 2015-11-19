@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/bitset/bitset-2.8.4-r1.ebuild,v 1.3 2013/11/24 13:14:10 pinkbyte Exp $
+# $Id$
 
 EAPI="5"
 
@@ -8,7 +8,7 @@ AUTOTOOLS_AUTORECONF=1
 inherit autotools-utils
 
 DESCRIPTION="A compressed bitset with supporting data structures and algorithms"
-HOMEPAGE="http://github.com/chriso/bitset"
+HOMEPAGE="https://github.com/chriso/bitset"
 SRC_URI="https://github.com/chriso/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL-2.1"

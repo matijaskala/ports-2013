@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/nmap/nmap-9999.ebuild,v 1.14 2015/06/14 10:32:59 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,12 +14,12 @@ DESCRIPTION="A utility for network discovery and security auditing"
 HOMEPAGE="http://nmap.org/"
 
 EGIT_REPO_URI="https://github.com/nmap/nmap"
-SRC_URI="http://dev.gentoo.org/~jer/nmap-logo-64.png"
+SRC_URI="https://dev.gentoo.org/~jer/nmap-logo-64.png"
 
 LICENSE="GPL-2"
 SLOT="0"
 
-IUSE="ipv6 +nse system-lua ncat ndiff nls nmap-update nping ssl zenmap"
+IUSE="ipv6 libressl +nse system-lua ncat ndiff nls nmap-update nping ssl zenmap"
 NMAP_LINGUAS=( de fr hr it ja pl pt_BR ru zh )
 IUSE+=" ${NMAP_LINGUAS[@]/#/linguas_}"
 
@@ -30,7 +30,7 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	dev-libs/liblinear
+	dev-libs/liblinear:=
 	dev-libs/libpcre
 	net-libs/libpcap[ipv6?]
 	zenmap? (
@@ -41,7 +41,10 @@ RDEPEND="
 	ndiff? ( ${PYTHON_DEPS} )
 	nls? ( virtual/libintl )
 	nmap-update? ( dev-libs/apr dev-vcs/subversion )
-	ssl? ( dev-libs/openssl:0= )
+	ssl? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:= )
+	)
 "
 DEPEND="
 	${RDEPEND}
@@ -61,12 +64,10 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-4.75-nolua.patch \
 		"${FILESDIR}"/${PN}-5.10_beta1-string.patch \
 		"${FILESDIR}"/${PN}-5.21-python.patch \
-		"${FILESDIR}"/${PN}-6.01-make.patch \
 		"${FILESDIR}"/${PN}-6.25-liblua-ar.patch \
 		"${FILESDIR}"/${PN}-6.46-uninstaller.patch \
 		"${FILESDIR}"/${PN}-6.47-no-libnl.patch \
-		"${FILESDIR}"/${PN}-no-FORTIFY_SOURCE.patch \
-		"${FILESDIR}"/${PN}-6.47-ncat-lua.patch
+		"${FILESDIR}"/${PN}-no-FORTIFY_SOURCE.patch
 
 	if use nls; then
 		local lingua=''
@@ -118,9 +119,16 @@ src_configure() {
 }
 
 src_compile() {
+	local dep deps="build-dnet build-nbase build-nsock build-netutil"
+	use system-lua || deps="build-lua ${deps}"
+
+	for dep in ${deps}; do
+		emake makefile.dep ${dep}
+	done
+
 	emake \
 		AR=$(tc-getAR) \
-		RANLIB=$(tc-getRANLIB )
+		RANLIB=$(tc-getRANLIB)
 }
 
 src_install() {

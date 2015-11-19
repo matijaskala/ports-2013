@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/bless/bless-0.6.0-r2.ebuild,v 1.1 2014/12/02 16:16:00 pacho Exp $
+# $Id$
 
 EAPI=5
 GCONF_DEBUG="no"
@@ -19,7 +19,8 @@ IUSE="debug"
 RDEPEND="
 	>=dev-lang/mono-1.1.14
 	>=dev-dotnet/gtk-sharp-2.12
-	>=dev-dotnet/glade-sharp-2.12
+	|| ( >=dev-dotnet/gtk-sharp-2.12.21
+	     >=dev-dotnet/glade-sharp-2.12 )
 "
 DEPEND="${RDEPEND}
 	app-text/scrollkeeper
@@ -42,6 +43,7 @@ src_prepare() {
 	( "${T}/gettextize" -f --no-changelog > /dev/null ) || die "gettexize failed"
 	epatch "${FILESDIR}/${P}-pixmap.patch"
 	epatch "${FILESDIR}/${P}-docpath.patch"
+	epatch "${FILESDIR}/${P}-mono-4.patch"
 	eautoreconf
 	gnome2_src_prepare
 }

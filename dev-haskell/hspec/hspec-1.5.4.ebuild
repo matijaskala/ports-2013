@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/hspec/hspec-1.5.4.ebuild,v 1.1 2013/06/21 02:47:23 patrick Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Behavior-Driven Development for Haskell"
-HOMEPAGE="http://hspec.github.com/"
+HOMEPAGE="https://hspec.github.com/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
@@ -19,7 +19,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND=">=dev-haskell/ansi-terminal-0.5:=[profile?]
-		dev-haskell/deepseq:=[profile?]
 		=dev-haskell/hspec-expectations-0.3.2*:=[profile?]
 		>=dev-haskell/hunit-1.2.5:=[profile?]
 		>=dev-haskell/quickcheck-2.5.1:=[profile?]

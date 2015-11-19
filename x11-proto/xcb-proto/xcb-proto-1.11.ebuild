@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-proto/xcb-proto/xcb-proto-1.11.ebuild,v 1.11 2015/04/08 17:27:25 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -33,7 +33,7 @@ multilib_src_configure() {
 	autotools-utils_src_configure
 
 	if multilib_is_native_abi; then
-		python_parallel_foreach_impl autotools-utils_src_configure
+		python_foreach_impl autotools-utils_src_configure
 	fi
 }
 

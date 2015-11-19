@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/photofilmstrip/photofilmstrip-1.9.91-r1.ebuild,v 1.2 2015/04/08 18:16:25 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -18,7 +18,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="cairo sdl"
 
 RDEPEND="dev-python/wxpython:2.8[cairo?,${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	media-video/mplayer[encode]
 	sdl? ( dev-python/pygame[${PYTHON_USEDEP}] )"
 

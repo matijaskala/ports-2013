@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/larry-backgrounds/larry-backgrounds-20110822.ebuild,v 1.5 2013/02/07 22:58:16 ulm Exp $
+# $Id$
 
 EAPI="3"
 
 DESCRIPTION="Wallpapers featuring Gentoo mascot Larry the cow"
-HOMEPAGE="http://www.gentoo.org/main/en/graphics.xml#wallpapers"
-web_home='http://www.gentoo.org/images/backgrounds'
+HOMEPAGE="https://www.gentoo.org/main/en/graphics.xml#wallpapers"
+web_home='https://www.gentoo.org/images/backgrounds'
 SRC_URI="
 	${web_home}/gentoo-abducted-800x600.png
 	${web_home}/gentoo-abducted-1024x768.png

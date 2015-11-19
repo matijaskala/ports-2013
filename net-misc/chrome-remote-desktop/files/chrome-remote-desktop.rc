@@ -1,7 +1,7 @@
 #!/sbin/runscript
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/chrome-remote-desktop/files/chrome-remote-desktop.rc,v 1.1 2015/01/06 20:15:37 vapier Exp $
+# $Id$
 
 extra_started_commands="checkconfig reload"
 
@@ -33,9 +33,6 @@ for_users() {
 	local user ret msg log
 	msg=$1; shift
 
-	set -- -- "$@"
-	[ "${CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES+set}" = "set" ] \
-		&& set -- -e CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES="${CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES}" "$@"
 	: ${CHROME_REMOTE_DESKTOP_LOG_DIR:=/var/log}
 
 	for user in ${CHROME_REMOTING_USERS} ; do
@@ -51,9 +48,11 @@ for_users() {
 			-u "${user}" \
 			-x "${CRD}" \
 			-e "CHROME_REMOTE_DESKTOP_LOG_FILE=${log}" \
+			-- \
+			${OPTIONS} \
 			"$@"
 		eend $?
-		: $(( ret += $? ))
+		: $(( ret |= $? ))
 	done
 
 	return ${ret}

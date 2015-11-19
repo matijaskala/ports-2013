@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/jmol/jmol-12.0.45-r1.ebuild,v 1.1 2014/08/06 19:01:49 creffett Exp $
+# $Id$
 
 EAPI=5
 WEBAPP_OPTIONAL="yes"
@@ -13,7 +13,7 @@ DESCRIPTION="Java molecular viever for 3-D chemical structures"
 HOMEPAGE="http://jmol.sourceforge.net/"
 SRC_URI="
 	mirror://sourceforge/${PN}/${MY_P}-${PV}-full.tar.gz
-	http://dev.gentoo.org/~jlec/distfiles/${PN}-selfSignedCertificate.store.tar"
+	https://dev.gentoo.org/~jlec/distfiles/${PN}-selfSignedCertificate.store.tar"
 
 WEBAPP_MANUAL_SLOT="yes"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyev/pyev-0.8.1.ebuild,v 1.9 2015/06/07 09:34:50 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit distutils-r1
 MY_P=${P}-4.04
 
 DESCRIPTION="Python libev interface, an event loop"
-HOMEPAGE="http://code.google.com/p/pyev/
+HOMEPAGE="https://code.google.com/p/pyev/
 	http://pythonhosted.org/pyev/"
 SRC_URI="mirror://pypi/p/pyev/${MY_P}.tar.gz"
 

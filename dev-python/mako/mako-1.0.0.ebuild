@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/mako/mako-1.0.0.ebuild,v 1.13 2015/06/07 09:33:08 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_PN="Mako"
 MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="A Python templating language"
-HOMEPAGE="http://www.makotemplates.org/ http://pypi.python.org/pypi/Mako"
+HOMEPAGE="http://www.makotemplates.org/ https://pypi.python.org/pypi/Mako"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

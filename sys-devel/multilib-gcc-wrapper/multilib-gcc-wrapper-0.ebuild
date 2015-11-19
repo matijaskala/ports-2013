@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/multilib-gcc-wrapper/multilib-gcc-wrapper-0.ebuild,v 1.1 2014/06/30 20:17:54 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils multilib
 
 DESCRIPTION="Wrappers for gcc tools to be used on non-native CHOSTs"
-HOMEPAGE="http://www.gentoo.org"
+HOMEPAGE="https://www.gentoo.org"
 SRC_URI=""
 
 LICENSE="public-domain"

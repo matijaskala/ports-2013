@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/ecryptfs-utils/ecryptfs-utils-104.ebuild,v 1.3 2014/11/12 00:46:24 blueness Exp $
+# $Id$
 
 EAPI="4"
 PYTHON_DEPEND="python? 2:2.5"
@@ -11,7 +11,7 @@ inherit flag-o-matic pam python linux-info autotools
 
 DESCRIPTION="eCryptfs userspace utilities"
 HOMEPAGE="https://launchpad.net/ecryptfs"
-SRC_URI="http://launchpad.net/ecryptfs/trunk/${PV}/+download/${PN}_${PV}.orig.tar.gz"
+SRC_URI="https://launchpad.net/ecryptfs/trunk/${PV}/+download/${PN}_${PV}.orig.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

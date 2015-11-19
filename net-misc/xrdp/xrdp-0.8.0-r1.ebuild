@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/xrdp/xrdp-0.8.0-r1.ebuild,v 1.1 2015/02/19 16:58:37 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit autotools eutils pam systemd
 DESCRIPTION="An open source Remote Desktop Protocol server"
 HOMEPAGE="http://www.xrdp.org/"
 # mirrored from https://github.com/neutrinolabs/xrdp/releases
-SRC_URI="http://dev.gentoo.org/~mgorny/dist/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~mgorny/dist/${P}.tar.xz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

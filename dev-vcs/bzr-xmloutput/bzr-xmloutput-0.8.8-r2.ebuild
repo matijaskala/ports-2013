@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/bzr-xmloutput/bzr-xmloutput-0.8.8-r2.ebuild,v 1.1 2015/03/10 14:40:42 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit distutils-r1
 
 DESCRIPTION="A Bazaar plugin that provides a option to generate XML output forbuiltin commands."
 HOMEPAGE="http://bazaar-vcs.org/XMLOutput"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

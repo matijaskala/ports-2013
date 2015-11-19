@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-board/gmchess/gmchess-0.29.6-r1.ebuild,v 1.4 2013/12/24 12:53:48 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools libtool gnome2-utils games
 
 DESCRIPTION="Chinese chess with gtkmm and c++"
-HOMEPAGE="http://code.google.com/p/gmchess/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/gmchess/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 RESTRICT="test"
 
 LICENSE="GPL-2"

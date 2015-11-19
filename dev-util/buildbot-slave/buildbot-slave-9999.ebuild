@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/buildbot-slave/buildbot-slave-9999.ebuild,v 1.3 2014/12/28 18:30:10 floppym Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -10,7 +10,7 @@ EGIT_REPO_URI="https://github.com/buildbot/buildbot.git"
 inherit distutils-r1 readme.gentoo user
 
 DESCRIPTION="BuildBot Slave Daemon"
-HOMEPAGE="http://trac.buildbot.net/ http://code.google.com/p/buildbot/ http://pypi.python.org/pypi/buildbot-slave"
+HOMEPAGE="http://trac.buildbot.net/ https://code.google.com/p/buildbot/ https://pypi.python.org/pypi/buildbot-slave"
 
 MY_PV="${PV/_p/p}"
 MY_P="${PN}-${MY_PV}"

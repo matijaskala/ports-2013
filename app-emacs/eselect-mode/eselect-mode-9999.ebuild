@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/eselect-mode/eselect-mode-9999.ebuild,v 1.6 2015/04/25 16:09:08 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ EGIT_CHECKOUT_DIR="${WORKDIR}/${MY_PN}"
 inherit elisp git-r3
 
 DESCRIPTION="Emacs major mode for editing eselect files"
-HOMEPAGE="http://wiki.gentoo.org/wiki/Project:Eselect"
+HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Eselect"
 
 LICENSE="GPL-2+"
 SLOT="0"

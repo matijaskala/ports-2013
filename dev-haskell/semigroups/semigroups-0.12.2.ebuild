@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/semigroups/semigroups-0.12.2.ebuild,v 1.1 2014/03/04 15:33:07 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,12 +10,12 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Anything that associates"
-HOMEPAGE="http://github.com/ekmett/semigroups/"
+HOMEPAGE="https://github.com/ekmett/semigroups/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND=">=dev-haskell/hashable-1.1:=[profile?] <dev-haskell/hashable-1.3:=[profile?]

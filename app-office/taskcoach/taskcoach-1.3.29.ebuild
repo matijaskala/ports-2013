@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/taskcoach/taskcoach-1.3.29.ebuild,v 1.1 2013/04/28 20:57:06 ago Exp $
+# $Id$
 
 EAPI=3
 
@@ -15,7 +15,7 @@ MY_PN="TaskCoach"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Simple personal tasks and todo lists manager"
-HOMEPAGE="http://www.taskcoach.org http://pypi.python.org/pypi/TaskCoach"
+HOMEPAGE="http://www.taskcoach.org https://pypi.python.org/pypi/TaskCoach"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"

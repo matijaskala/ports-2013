@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/kuickshow/kuickshow-0.9.1-r2.ebuild,v 1.3 2015/02/25 15:43:00 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ KDE_VERSION=4.4.0
 MY_P=${P}-kde${KDE_VERSION}
 
 DESCRIPTION="KDE program to view images"
-HOMEPAGE="http://userbase.kde.org/KuickShow"
+HOMEPAGE="https://userbase.kde.org/KuickShow"
 SRC_URI="mirror://kde/stable/${KDE_VERSION}/src/extragear/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"

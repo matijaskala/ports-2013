@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/fabric/fabric-1.10.1.ebuild,v 1.1 2015/02/07 06:20:19 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_PN="Fabric"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A simple pythonic tool for remote execution and deployment"
-HOMEPAGE="http://fabfile.org http://pypi.python.org/pypi/Fabric"
+HOMEPAGE="http://fabfile.org https://pypi.python.org/pypi/Fabric"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"

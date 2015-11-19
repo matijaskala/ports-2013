@@ -1,11 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/gnat-gcc/gnat-gcc-4.3.6.ebuild,v 1.8 2015/05/15 14:15:58 pacho Exp $
+# $Id$
 
+EAPI=5
 inherit gnatbuild
 
 DESCRIPTION="GNAT Ada Compiler - gcc version"
-HOMEPAGE="http://gcc.gnu.org/"
+HOMEPAGE="https://gcc.gnu.org/"
 LICENSE="GMGPL"
 
 IUSE="doc lto" # doc and lto from gnatbuild.eclass
@@ -14,18 +15,18 @@ IUSE="doc lto" # doc and lto from gnatbuild.eclass
 # so the URI's are static.
 SRC_URI="ftp://gcc.gnu.org/pub/gcc/releases/gcc-${PV}/gcc-core-${PV}.tar.bz2
 	ftp://gcc.gnu.org/pub/gcc/releases/gcc-${PV}/gcc-ada-${PV}.tar.bz2
-	amd64? ( http://dev.gentoo.org/~george/src/gnatboot-${SLOT}-amd64.tar.bz2 )
-	x86?   ( http://dev.gentoo.org/~george/src/gnatboot-${SLOT}-i686.tar.bz2 )
-	ppc?   ( http://dev.gentoo.org/~george/src/gnatboot-4.1-ppc.tar.bz2 )"
+	amd64? ( https://dev.gentoo.org/~george/src/gnatboot-${SLOT}-amd64.tar.bz2 )
+	x86?   ( https://dev.gentoo.org/~george/src/gnatboot-${SLOT}-i686.tar.bz2 )
+	ppc?   ( https://dev.gentoo.org/~george/src/gnatboot-4.1-ppc.tar.bz2 )"
 #	sparc? ( mirror://gentoo/gnatboot-${BOOT_SLOT}-sparc.tar.bz2 )
 
 KEYWORDS="amd64 ~ppc x86"
 
 # starting with 4.3.0 gnat needs these libs
-RDEPEND=">=dev-libs/mpfr-2.3.1
-	>=dev-libs/gmp-4.2.2
+RDEPEND=">=dev-libs/mpfr-2.3.1:*
+	>=dev-libs/gmp-4.2.2:*
 	>=sys-libs/zlib-1.1.4
-	>=sys-libs/ncurses-5.2-r2"
+	>=sys-libs/ncurses-5.2-r2:*"
 
 DEPEND="${RDEPEND}
 	<sys-apps/texinfo-5.1

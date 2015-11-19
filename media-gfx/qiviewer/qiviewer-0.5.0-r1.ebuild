@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/qiviewer/qiviewer-0.5.0-r1.ebuild,v 1.3 2013/03/02 21:39:47 hwoarang Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,8 +9,8 @@ PLOCALES="el es_AR es_ES"
 inherit l10n qt4-r2 readme.gentoo
 
 DESCRIPTION="Lightweight image viewer, similar to eog or viewnior for Gnome"
-HOMEPAGE="http://code.google.com/p/qiviewer"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://github.com/samkpo/qiviewer"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,7 +24,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/${PN}/src"
 
 DOC_CONTENTS="If you want support for gif and tiff images
-make sure that you build dev-qt/qtgui
+make sure that you build dev-qt/qtgui:4
 with apropriate USE flags"
 
 src_prepare() {

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-mta/nullmailer/nullmailer-1.13-r5.ebuild,v 1.5 2015/02/02 11:50:13 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ DESCRIPTION="Simple relay-only local mail transport agent"
 HOMEPAGE="http://untroubled.org/nullmailer/"
 SRC_URI="
 	http://untroubled.org/${PN}/archive/${MY_P}.tar.gz
-	http://dev.gentoo.org/~jlec/distfiles/${PN}-patches-${PV}.tar.xz"
+	https://dev.gentoo.org/~jlec/distfiles/${PN}-patches-${PV}.tar.xz"
 #		mirror://debian/pool/main/n/${PN}/${DEBIAN_SRC}"
 
 SLOT="0"

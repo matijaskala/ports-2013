@@ -1,13 +1,13 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/beast-mcmc/beast-mcmc-9999.ebuild,v 1.2 2009/10/19 03:55:31 weaver Exp $
+# $Id$
 
 EAPI="2"
 
-ESVN_REPO_URI="http://beast-mcmc.googlecode.com/svn/trunk/"
+ESVN_REPO_URI="https://beast-mcmc.googlecode.com/svn/trunk/"
 
 WANT_ANT_TASKS="ant-junit4"
-EANT_GENTOO_CLASSPATH="colt,jdom-1.0,itext,junit-4,jebl,matrix-toolkits-java,commons-math-2,jdom-jaxen-1.0"
+EANT_GENTOO_CLASSPATH="colt,jdom,itext,junit-4,jebl,matrix-toolkits-java,commons-math-2,jdom-jaxen-1.0"
 JAVA_ANT_REWRITE_CLASSPATH="true"
 JAVA_ANT_ENCODING="latin1"
 JAVA_PKG_BSFIX_NAME="build.xml build_BEAST_MCMC.xml build_coalsim.xml build_development.xml build_pathogen.xml build_release.xml build_treestat.xml build_vcs.xml"
@@ -15,7 +15,7 @@ JAVA_PKG_BSFIX_NAME="build.xml build_BEAST_MCMC.xml build_coalsim.xml build_deve
 inherit java-pkg-2 java-ant-2 eutils subversion
 
 DESCRIPTION="Bayesian MCMC of Evolution & Phylogenetics using Molecular Sequences"
-HOMEPAGE="http://code.google.com/p/beast-mcmc/"
+HOMEPAGE="https://github.com/beast-dev/beast-mcmc"
 SRC_URI=""
 #SRC_URI="mirror://gentoo/${P}.tar.bz2"
 
@@ -26,7 +26,7 @@ IUSE=""
 
 # TODO: sys-cluster/mpijava
 COMMON_DEPS="dev-java/colt:0
-	dev-java/jdom:1.0
+	dev-java/jdom:0
 	dev-java/itext:0
 	dev-java/junit:4
 	dev-java/jebl:0
@@ -44,7 +44,7 @@ src_prepare() {
 	sed -i '/BEAST_LIB/ s|$BEAST|/usr/share/beast|' "${S}"/scripts/* || die
 	cd lib
 	rm -v colt.jar junit-*.jar itext-*.jar jdom.jar jebl.jar mtj.jar commons-math-*.jar || die
-	java-pkg_jar-from jdom-1.0
+	java-pkg_jar-from jdom
 	java-pkg_jar-from colt
 	java-pkg_jar-from itext
 	java-pkg_jar-from jebl

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/docutils/docutils-0.11.ebuild,v 1.2 2015/04/08 08:05:08 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
 inherit distutils-r1
 
 DESCRIPTION="Python Documentation Utilities"
-HOMEPAGE="http://docutils.sourceforge.net/ http://pypi.python.org/pypi/docutils"
+HOMEPAGE="http://docutils.sourceforge.net/ https://pypi.python.org/pypi/docutils"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="BSD-2 GPL-3 public-domain"
@@ -18,8 +18,6 @@ IUSE=""
 
 DEPEND="dev-python/pygments[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
-
-DISTUTILS_NO_PARALLEL_BUILD=1
 
 PATCHES=( "${FILESDIR}"/docutils-0.11-python3.3-odt-writer.patch )
 

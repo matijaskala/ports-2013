@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/gource/gource-0.39.ebuild,v 1.2 2013/03/04 07:07:14 flameeyes Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ MY_P=${MY_P/_/-}
 MY_DATE=${PV/*_p}
 
 DESCRIPTION="A software version control visualization tool"
-HOMEPAGE="http://code.google.com/p/gource/"
-SRC_URI="http://gource.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="http://gource.io/"
+SRC_URI="https://gource.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

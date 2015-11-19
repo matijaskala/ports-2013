@@ -1,15 +1,16 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-servers/tornado/tornado-3.1.1-r1.ebuild,v 1.12 2015/05/31 10:59:01 maekke Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
-DESCRIPTION="Scalable, non-blocking web server and tools"
-HOMEPAGE="http://www.tornadoweb.org/ http://pypi.python.org/pypi/tornado"
+DESCRIPTION="Python web framework and asynchronous networking library"
+HOMEPAGE="http://www.tornadoweb.org/ https://pypi.python.org/pypi/tornado"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
@@ -32,15 +33,6 @@ PATCHES=(
 	"${FILESDIR}/unittest2-import-issue-1005.patch"
 	"${FILESDIR}/${P}-py2_6-tests-fix.patch"
 )
-
-src_test() {
-	# The test server tries to bind at an unused port but suffers
-	# a race condition in it. Seems to be fixed already.
-	# https://github.com/facebook/tornado/blob/master/tornado/test/process_test.py#L64
-	local DISTUTILS_NO_PARALLEL_BUILD=1
-
-	distutils-r1_src_test
-}
 
 python_test() {
 	cd "${TMPDIR}" || die

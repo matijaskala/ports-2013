@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/openstack-guest-agents-unix/openstack-guest-agents-unix-1.39.1.ebuild,v 1.1 2014/11/09 03:46:59 alunduil Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit autotools eutils python-single-r1 vcs-snapshot
 
 DESCRIPTION="Openstack Unix Guest Agent"
-HOMEPAGE="http://github.com/rackerlabs/openstack-guest-agents-unix"
+HOMEPAGE="https://github.com/rackerlabs/openstack-guest-agents-unix"
 SRC_URI="https://github.com/rackerlabs/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"

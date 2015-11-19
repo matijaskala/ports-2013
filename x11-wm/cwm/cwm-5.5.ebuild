@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-wm/cwm/cwm-5.5.ebuild,v 1.1 2014/03/13 18:48:10 xmw Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs
 
 DESCRIPTION="OpenBSD fork of calmwm, a clean and lightweight window manager"
 HOMEPAGE="http://www.openbsd.org/cgi-bin/cvsweb/xenocara/app/cwm/
-	http://github.com/chneukirchen/cwm"
+	https://github.com/chneukirchen/cwm"
 SRC_URI="vanilla? ( http://chneukirchen.org/releases/${P}.tar.gz -> ${P}-chneukirchen.tar.gz )
 	!vanilla? ( https://github.com/xmw/cwm/tarball/67cc266 -> ${P}-xmw.tar.gz )"
 

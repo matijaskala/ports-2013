@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/comix/comix-4.0.4-r1.ebuild,v 1.6 2015/04/08 17:58:14 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ KEYWORDS="amd64 ppc x86 ~x86-fbsd"
 IUSE="rar"
 
 DEPEND="${PYTHON_DEPS}
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	>=dev-python/pygtk-2.12[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	rar? ( || ( app-arch/unrar app-arch/rar ) )"

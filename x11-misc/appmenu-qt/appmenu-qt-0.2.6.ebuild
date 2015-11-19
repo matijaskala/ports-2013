@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/appmenu-qt/appmenu-qt-0.2.6.ebuild,v 1.5 2014/12/31 12:29:54 kensington Exp $
+# $Id$
 
 EAPI=4
 
@@ -8,7 +8,7 @@ inherit cmake-utils
 
 DESCRIPTION="Application menu module for Qt"
 HOMEPAGE="https://launchpad.net/appmenu-qt"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${PN}-${PV}.tar.bz2"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${PN}-${PV}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

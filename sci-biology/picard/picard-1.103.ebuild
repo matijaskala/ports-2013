@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/picard/picard-1.103.ebuild,v 1.2 2015/04/02 18:31:24 mr_bones_ Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="Java-based command-line utilities that manipulate SAM files"
 HOMEPAGE="http://picard.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~ercpe/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~ercpe/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
 
 LICENSE="Apache-2.0"
 SLOT="0"

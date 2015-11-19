@@ -1,43 +1,39 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/pymol/pymol-1.7.6.0.ebuild,v 1.1 2015/05/05 07:56:30 jlec Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="tk"
 
-inherit distutils-r1 fdo-mime flag-o-matic versionator
+inherit distutils-r1 eutils fdo-mime flag-o-matic versionator
 
 DESCRIPTION="A Python-extensible molecular graphics system"
 HOMEPAGE="http://www.pymol.org/"
 SRC_URI="
-	http://dev.gentoo.org/~jlec/distfiles/${PN}-1.7.0.0.png.xz
-	http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz
+	https://dev.gentoo.org/~jlec/distfiles/${PN}-1.7.0.0.png.xz
+	https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz
 "
 #	mirror://sourceforge/project/${PN}/${PN}/$(get_version_component_range 1-2)/${PN}-v${PV}.tar.bz2
 # git archive -v --prefix=${P}/ master -o ${P}.tar.xz
 
 LICENSE="PSF-2.2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
-IUSE="apbs web"
+KEYWORDS="amd64 ~ppc x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
+IUSE="web"
 
 DEPEND="
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/pyopengl[${PYTHON_USEDEP}]
 	media-libs/freeglut
 	media-libs/freetype:2
-	media-libs/glew
+	media-libs/glew:0=
 	media-libs/libpng:0=
 	media-video/mpeg-tools
 	sys-libs/zlib
-	virtual/pmw[${PYTHON_USEDEP}]
-	apbs? (
-		sci-chemistry/apbs[${PYTHON_USEDEP}]
-		sci-chemistry/pdb2pqr[${PYTHON_USEDEP}]
-		!sci-chemistry/pymol-apbs-plugin[${PYTHON_USEDEP}]
-	)
+	virtual/python-pmw[${PYTHON_USEDEP}]
+	!sci-chemistry/pymol-apbs-plugin[${PYTHON_USEDEP}]
 	web? ( !dev-python/webpy[${PYTHON_USEDEP}] )"
 RDEPEND="${DEPEND}"
 
@@ -105,6 +101,7 @@ python_install_all() {
 pkg_postinst() {
 	fdo-mime_desktop_database_update
 	fdo-mime_mime_database_update
+	optfeature "Electrostatic calculations" sci-chemistry/apbs sci-chemistry/pdb2pqr
 }
 
 pkg_postrm() {

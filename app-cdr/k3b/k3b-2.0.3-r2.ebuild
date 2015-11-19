@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-cdr/k3b/k3b-2.0.3-r2.ebuild,v 1.4 2015/06/09 07:23:13 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -71,6 +71,13 @@ REQUIRED_USE="
 	mp3? ( encode )
 	sox? ( encode )
 "
+
+src_prepare() {
+	kde4-base_src_prepare
+
+	# bug 558640
+	sed -i -e "/^add_subdirectory( doc )/d" CMakeLists.txt || die
+}
 
 src_configure() {
 	mycmakeargs=(

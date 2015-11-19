@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/granite/granite-0.1.0.ebuild,v 1.4 2013/07/27 21:29:21 jlec Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,8 +9,8 @@ VALA_MIN_API_VERSION="0.14"
 inherit cmake-utils multilib vala
 
 DESCRIPTION="A development library for elementary development"
-HOMEPAGE="http://launchpad.net/granite"
-SRC_URI="http://launchpad.net/${PN}/${PV%.*.*}.x/${PV%.*}/+download/${P}.tar.gz"
+HOMEPAGE="https://launchpad.net/granite"
+SRC_URI="https://launchpad.net/${PN}/${PV%.*.*}.x/${PV%.*}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

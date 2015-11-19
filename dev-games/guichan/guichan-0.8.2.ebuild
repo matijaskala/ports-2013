@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-games/guichan/guichan-0.8.2.ebuild,v 1.8 2015/03/31 19:03:28 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit eutils autotools
 
 DESCRIPTION="a portable C++ GUI library designed for games using Allegro, SDL and/or OpenGL"
 HOMEPAGE="http://guichan.sourceforge.net/"
-SRC_URI="http://guichan.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://guichan.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

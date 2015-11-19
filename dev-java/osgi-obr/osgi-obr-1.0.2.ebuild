@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/osgi-obr/osgi-obr-1.0.2.ebuild,v 1.1 2013/10/15 22:59:31 tomwij Exp $
+# $Id$
 
 EAPI="5"
 
@@ -17,15 +17,15 @@ SRC_URI="mirror://apache/dist/felix/${MY_P}-project.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 CDEPEND="dev-java/osgi-core-api:0"
 
-DEPEND=">=virtual/jdk-1.5
+DEPEND=">=virtual/jdk-1.6
 	${CDEPEND}
 	app-arch/unzip"
 
-RDEPEND=">=virtual/jre-1.5
+RDEPEND=">=virtual/jre-1.6
 	${CDEPEND}"
 
 S="${WORKDIR}/${MY_P}"

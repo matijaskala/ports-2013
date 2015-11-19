@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/gst-plugins-vaapi/gst-plugins-vaapi-0.5.10.ebuild,v 1.1 2015/02/03 10:33:08 pacho Exp $
+# $Id$
 
 EAPI="5"
 inherit eutils multilib-minimal
 
 MY_PN="gstreamer-vaapi"
 DESCRIPTION="Hardware accelerated video decoding through VA-API plugin"
-HOMEPAGE="http://gitorious.org/vaapi/gstreamer-vaapi"
+HOMEPAGE="https://github.com/01org/gstreamer-vaapi"
 SRC_URI="http://www.freedesktop.org/software/vaapi/releases/${MY_PN}/${MY_PN}-${PV}.tar.bz2"
 
 LICENSE="LGPL-2.1"

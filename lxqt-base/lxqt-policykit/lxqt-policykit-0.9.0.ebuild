@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/lxqt-base/lxqt-policykit/lxqt-policykit-0.9.0.ebuild,v 1.4 2015/04/15 06:47:53 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -21,7 +21,6 @@ SLOT="0"
 
 RDEPEND="
 	dev-libs/glib:2
-	dev-qt/linguist-tools:5
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -32,6 +31,7 @@ RDEPEND="
 	>=dev-libs/libqtxdg-1.0.0
 	sys-auth/polkit-qt[qt5(-)]"
 DEPEND="${RDEPEND}
+	dev-qt/linguist-tools:5
 	virtual/pkgconfig"
 
 src_install(){

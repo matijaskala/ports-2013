@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-eselect/eselect-mpg123/eselect-mpg123-0.1.ebuild,v 1.1 2015/03/31 16:51:42 ulm Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="Manage /usr/bin/mpg123 symlink"
-HOMEPAGE="http://www.gentoo.org/proj/en/eselect/"
+HOMEPAGE="https://www.gentoo.org/proj/en/eselect/"
 SRC_URI=""
 
 LICENSE="GPL-2"

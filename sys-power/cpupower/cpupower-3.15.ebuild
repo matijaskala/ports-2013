@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/cpupower/cpupower-3.15.ebuild,v 1.2 2014/07/15 05:33:30 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit multilib toolchain-funcs
 
 DESCRIPTION="Shows and sets processor power related values"
-HOMEPAGE="http://www.kernel.org/"
+HOMEPAGE="https://www.kernel.org/"
 SRC_URI="mirror://kernel/linux/kernel/v3.x/linux-${PV}.tar.xz"
 
 LICENSE="GPL-2"

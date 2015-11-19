@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-xemacs/ebuild-mode/ebuild-mode-1.19.ebuild,v 1.2 2014/08/10 18:51:26 slyfox Exp $
+# $Id$
 
 inherit xemacs-elisp eutils
 
 MY_PN="gentoo-syntax"
 DESCRIPTION="An Emacs mode for editing ebuilds and other Gentoo specific files"
-HOMEPAGE="http://www.gentoo.org/proj/en/lisp/emacs/index.xml"
+HOMEPAGE="https://www.gentoo.org/proj/en/lisp/emacs/index.xml"
 SRC_URI="mirror://gentoo/${MY_PN}-${PV}.tar.bz2"
 
 LICENSE="GPL-2+"

@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/gforth/gforth-0.7.3.ebuild,v 1.1 2014/09/04 10:08:32 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 
 inherit elisp-common eutils
 
 DESCRIPTION="GNU Forth is a fast and portable implementation of the ANSI Forth language"
-HOMEPAGE="http://www.gnu.org/software/gforth"
+HOMEPAGE="https://www.gnu.org/software/gforth"
 SRC_URI="mirror://gnu/gforth/${P}.tar.gz"
 
 LICENSE="GPL-3"

@@ -1,6 +1,6 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmacpi/wmacpi-1.34.ebuild,v 1.14 2008/06/29 13:08:38 drac Exp $
+# $Id$
 
 inherit eutils
 
@@ -13,7 +13,8 @@ SLOT="0"
 KEYWORDS="amd64 ppc -sparc x86"
 IUSE="acpi apm"
 
-DEPEND="x11-libs/libdockapp"
+DEPEND="<x11-libs/libdockapp-0.7"
+RDEPEND="${DEPEND}"
 
 src_unpack() {
 	unpack ${A}

@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-base/xorg-drivers/xorg-drivers-1.17.ebuild,v 1.2 2015/03/03 10:56:50 dlan Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="Meta package containing deps on all xorg drivers"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI=""
 
 LICENSE="metapackage"
@@ -32,6 +32,7 @@ IUSE_INPUT_DEVICES="
 	input_devices_wacom
 "
 IUSE_VIDEO_CARDS="
+	video_cards_amdgpu
 	video_cards_apm
 	video_cards_ast
 	video_cards_chips
@@ -104,6 +105,7 @@ PDEPEND="
 	input_devices_synaptics?   ( x11-drivers/xf86-input-synaptics )
 	input_devices_wacom?       ( x11-drivers/xf86-input-wacom )
 
+	video_cards_amdgpu?        ( x11-drivers/xf86-video-amdgpu )
 	video_cards_apm?           ( x11-drivers/xf86-video-apm )
 	video_cards_ast?           ( x11-drivers/xf86-video-ast )
 	video_cards_chips?         ( x11-drivers/xf86-video-chips )

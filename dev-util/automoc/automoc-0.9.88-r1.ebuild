@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/automoc/automoc-0.9.88-r1.ebuild,v 1.12 2015/05/27 12:38:05 zlogene Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ MY_P="${MY_PN}-${PV}"
 inherit cmake-utils flag-o-matic
 
 DESCRIPTION="KDE Meta Object Compiler"
-HOMEPAGE="http://www.kde.org"
+HOMEPAGE="https://www.kde.org"
 SRC_URI="mirror://kde/stable/${MY_PN}/${PV}/${MY_P}.tar.bz2"
 
 LICENSE="BSD-2"

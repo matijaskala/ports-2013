@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/geniplate/geniplate-0.6.0.5.ebuild,v 1.1 2014/12/14 10:11:08 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -24,3 +24,8 @@ RDEPEND="dev-haskell/mtl:=[profile?]
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.8
 "
+
+src_prepare() {
+	cabal_chdeps \
+		'template-haskell < 2.10' 'template-haskell'
+}

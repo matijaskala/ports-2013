@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/icinga2/icinga2-9999.ebuild,v 1.5 2015/03/27 19:47:42 prometheanfire Exp $
+# $Id$
 
 EAPI=5
-inherit cmake-utils depend.apache eutils git-2 systemd toolchain-funcs user versionator
+inherit cmake-utils depend.apache eutils git-2 systemd toolchain-funcs user
 
 DESCRIPTION="Distributed, general purpose, network monitoring engine"
 HOMEPAGE="http://icinga.org/icinga2"
-EGIT_REPO_URI="http://github.com/Icinga/icinga2.git"
+EGIT_REPO_URI="https://github.com/Icinga/icinga2.git"
 EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
@@ -16,13 +16,12 @@ KEYWORDS=""
 IUSE="+mysql postgres classicui minimal nano-syntax +plugins +vim-syntax"
 
 DEPEND="
-	dev-util/cmake
-	dev-libs/openssl
+	dev-libs/openssl:0
 	>=dev-libs/boost-1.41
 	sys-devel/bison
 	>=sys-devel/flex-2.5.35
 	mysql? ( virtual/mysql )
-	postgres? ( dev-db/postgresql )"
+	postgres? ( dev-db/postgresql:= )"
 
 RDEPEND="
 	${DEPEND}
@@ -37,19 +36,16 @@ REQUIRED_USE="!minimal? ( || ( mysql postgres ) )"
 want_apache2
 
 pkg_setup() {
+	depend.apache_pkg_setup
 	enewgroup icinga
 	enewgroup icingacmd
 	enewgroup nagios  # for plugins
 	enewuser icinga -1 -1 /var/lib/icinga2 "icinga,icingacmd,nagios"
 }
 
-src_prepare() {
-#	epatch "${FILESDIR}/${P}-create_var_cache.patch"
-	epatch_user
-}
-
 src_configure() {
 	local mycmakeargs=(
+		-DICINGA2_UNITY_BUILD=FALSE
 		-DCMAKE_VERBOSE_MAKEFILE=ON
 		-DCMAKE_BUILD_TYPE=None
 		-DCMAKE_INSTALL_PREFIX=/usr
@@ -62,22 +58,16 @@ src_configure() {
 		-DICINGA2_COMMAND_GROUP=icingacmd
 		-DINSTALL_SYSTEMD_SERVICE_AND_INITSCRIPT=yes
 	)
-	if use postgres; then
-		mycmakeargs+=(
-			-DICINGA2_WITH_PGSQL=ON
-		)
-	else
-		mycmakeargs+=(
-			-DICINGA2_WITH_PGSQL=OFF
-		)
-	fi
-	if use mysql; then
-		mycmakeargs+=(
-			-DICINGA2_WITH_MYSQL=ON
-		)
-	else
+	# default to off if minimal, allow the flags to be set otherwise
+	if use minimal; then
 		mycmakeargs+=(
 			-DICINGA2_WITH_MYSQL=OFF
+			-DICINGA2_WITH_PGSQL=OFF
+		)
+	else
+		mycmakeargs+=(
+			-DICINGA2_WITH_PGSQL=$(usex postgres ON OFF)
+			-DICINGA2_WITH_MYSQL=$(usex mysql ON OFF)
 		)
 	fi
 	cmake-utils_src_configure
@@ -85,25 +75,11 @@ src_configure() {
 
 src_install() {
 	BUILDDIR="${WORKDIR}"/icinga2-${PV}_build
-	cd $BUILDDIR
+	cd "${BUILDDIR}" || die
 
-	#if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]] ; then
+	emake DESTDIR="${D}" install
 
-		emake DESTDIR="${D}" install
-	#fi
-
-	cd "${WORKDIR}"/icinga2-${PV}
-	if ! declare -p DOCS >/dev/null 2>&1 ; then
-		local d
-		for d in README* ChangeLog AUTHORS NEWS TODO CHANGES THANKS BUGS \
-				FAQ CREDITS CHANGELOG ; do
-			[[ -s "${d}" ]] && dodoc "${d}"
-		done
-	elif declare -p DOCS | grep -q "^declare -a " ; then
-		dodoc "${DOCS[@]}"
-	else
-		dodoc ${DOCS}
-	fi
+	einstalldocs
 
 	newinitd "${FILESDIR}"/icinga2.initd icinga2
 	newconfd "${FILESDIR}"/icinga2.confd icinga2
@@ -112,12 +88,12 @@ src_install() {
 		docinto schema
 		newdoc "${WORKDIR}"/icinga2-${PV}/lib/db_ido_mysql/schema/mysql.sql mysql.sql
 		docinto schema/upgrade
-		#newdoc "${WORKDIR}"/icinga2-${PV}/components/db_ido_mysql/schema/upgrade/0.0.11.sql mysql-upgrade-1.12.0.sql
+		dodoc "${WORKDIR}"/icinga2-${PV}/lib/db_ido_mysql/schema/upgrade/*
 	elif use postgres ; then
 		docinto schema
 		newdoc "${WORKDIR}"/icinga2-${PV}/lib/db_ido_pgsql/schema/pgsql.sql pgsql.sql
 		docinto schema/upgrade
-		#newdoc "${WORKDIR}"/icinga2-${PV}/components/db_ido_pgsql/schema/upgrade/0.0.11.sql pgsql-upgrade-1.12.0.sql
+		dodoc "${WORKDIR}"/icinga2-${PV}/lib/db_ido_pgsql/schema/upgrade/*
 	fi
 
 	keepdir /etc/icinga2
@@ -126,8 +102,8 @@ src_install() {
 	keepdir /var/lib/icinga2/api/log
 	keepdir /var/spool/icinga2/perfdata
 
-	rm -r "${D}var/run" || die "failed to remove /var/run"
-	rm -r "${D}var/cache" || die "failed to remove /var/cache"
+	rm -r "${D}/var/run" || die "failed to remove /var/run"
+	rm -r "${D}/var/cache" || die "failed to remove /var/cache"
 
 	fowners icinga:icinga /etc/icinga2
 	fowners icinga:icinga /var/lib/icinga2
@@ -142,13 +118,13 @@ src_install() {
 
 	if use vim-syntax; then
 		insinto /usr/share/vim/vimfiles
-		doins -r tools/syntax/vim/ftdetect
-		doins -r tools/syntax/vim/syntax
+		doins -r "${WORKDIR}"/${P}/tools/syntax/vim/ftdetect
+		doins -r "${WORKDIR}"/${P}/tools/syntax/vim/syntax
 	fi
 
 	if use nano-syntax; then
 		insinto /usr/share/nano
-		doins tools/syntax/nano/icinga2.nanorc
+		doins "${WORKDIR}"/${P}/tools/syntax/nano/icinga2.nanorc
 	fi
 }
 

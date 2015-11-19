@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/qpdfview/qpdfview-0.4.15.ebuild,v 1.2 2015/06/16 10:18:48 yngwin Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ PLOCALES="ast az be bg bs ca cs da de el en_GB eo es eu fi fr gl he hr id it kk 
 inherit eutils l10n multilib qmake-utils
 
 DESCRIPTION="A tabbed document viewer"
-HOMEPAGE="http://launchpad.net/qpdfview"
+HOMEPAGE="https://launchpad.net/qpdfview"
 SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -29,8 +29,7 @@ RDEPEND="cups? ( net-print/cups )
 		pdf? ( app-text/poppler[qt4] )
 		sqlite? ( dev-qt/qtsql:4[sqlite] )
 		svg? ( dev-qt/qtsvg:4 ) )
-	qt5? ( dev-qt/linguist-tools:5
-		dev-qt/qtconcurrent:5
+	qt5? ( dev-qt/qtconcurrent:5
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtprintsupport:5
@@ -40,6 +39,7 @@ RDEPEND="cups? ( net-print/cups )
 		svg? ( dev-qt/qtsvg:5 ) )
 	!svg? ( virtual/freedesktop-icon-theme )"
 DEPEND="${RDEPEND}
+	qt5? ( dev-qt/linguist-tools:5 )
 	virtual/pkgconfig"
 
 DOCS=( CHANGES CONTRIBUTORS README TODO )

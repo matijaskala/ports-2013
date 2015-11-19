@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/gdbm/gdbm-1.10.ebuild,v 1.4 2014/01/18 03:55:06 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit libtool flag-o-matic
 
 EX_P="${PN}-1.8.3"
 DESCRIPTION="Standard GNU database libraries"
-HOMEPAGE="http://www.gnu.org/software/gdbm/"
+HOMEPAGE="https://www.gnu.org/software/gdbm/"
 SRC_URI="mirror://gnu/gdbm/${P}.tar.gz
 	exporter? ( mirror://gnu/gdbm/${EX_P}.tar.gz )"
 

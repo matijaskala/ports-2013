@@ -1,6 +1,18 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/mips/package.use.mask,v 1.73 2015/05/24 04:32:58 mattst88 Exp $
+# $Id$
+
+# Davide Pesavento <pesa@gentoo.org> (26 Oct 2015)
+# Tests require non-keyworded qt5
+dev-qt/qtchooser test
+
+# Mike Frysinger <vapier@gentoo.org> (10 Sep 2015)
+# Requires matplotlib which requires a bit more.
+dev-python/numpydoc test
+
+# Anthony G. Basile <blueness@gentoo.org> (10 Sep 2015)
+# # seccomp code is currently broken, bug #560098
+app-misc/pax-utils seccomp
 
 # Mikle Kolyada <zlogene@gentoo.org> (12 Apr 2015)
 # GNOME Shell does not work on mips
@@ -17,6 +29,7 @@ app-doc/doxygen clang
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (16 Sep 2014)
 # Needs libepoxy keywording, bug #510940
 x11-base/xorg-server glamor wayland
+x11-drivers/xf86-video-ati glamor
 
 # Davide Pesavento <pesa@gentoo.org> (02 Jun 2014)
 # dev-qt/qtdeclarative:4 is not keyworded on mips

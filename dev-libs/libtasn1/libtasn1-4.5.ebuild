@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libtasn1/libtasn1-4.5.ebuild,v 1.10 2015/05/27 13:00:52 ago Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools-multilib
 
 DESCRIPTION="ASN.1 library"
-HOMEPAGE="http://www.gnu.org/software/libtasn1/"
+HOMEPAGE="https://www.gnu.org/software/libtasn1/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3 LGPL-2.1"

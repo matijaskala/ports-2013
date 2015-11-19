@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/baselayout/baselayout-2.2.ebuild,v 1.17 2014/01/18 09:05:09 vapier Exp $
+# $Id$
 
 inherit eutils multilib
 
 DESCRIPTION="Filesystem baselayout and init scripts"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI="mirror://gentoo/${P}.tar.bz2
-	http://dev.gentoo.org/~vapier/dist/${P}.tar.bz2"
+	https://dev.gentoo.org/~vapier/dist/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -251,7 +251,7 @@ pkg_postinst() {
 		fi
 	fi
 
-	# http://bugs.gentoo.org/361349
+	# https://bugs.gentoo.org/361349
 	if use kernel_linux; then
 		mkdir -p "${ROOT}"/run
 

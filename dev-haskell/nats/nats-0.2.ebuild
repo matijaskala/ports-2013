@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/nats/nats-0.2.ebuild,v 1.3 2015/01/26 09:54:00 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Natural numbers"
-HOMEPAGE="http://github.com/ekmett/nats/"
+HOMEPAGE="https://github.com/ekmett/nats/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
@@ -18,7 +18,7 @@ SLOT="0/${PV}"
 KEYWORDS="amd64 x86"
 IUSE="+hashable"
 
-RDEPEND=">=dev-lang/ghc-7.4.1:=
+RDEPEND=">=dev-lang/ghc-7.4.1:= <dev-lang/ghc-7.10:=
 	hashable? ( >=dev-haskell/hashable-1.1:=[profile?] <dev-haskell/hashable-1.3:=[profile?] )
 "
 DEPEND="${RDEPEND}

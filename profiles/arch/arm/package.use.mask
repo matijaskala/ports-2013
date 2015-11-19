@@ -1,13 +1,38 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/arm/package.use.mask,v 1.257 2015/06/04 18:46:48 kensington Exp $
+# $Id$
+
+# Pacho Ramos <pacho@gentoo.org> (15 Nov 2015)
+# Missing keywords
+>=media-plugins/grilo-plugins-0.2.16 upnp-av
+
+# Alexis Ballier <aballier@gentoo.org> (14 Nov 2015)
+# MMAL is available on the Raspberry Pi (armv6 & armv7 so far)
+media-video/ffmpeg -mmal
+
+# Markus Meier <maekke@gentoo.org> (10 Nov 2015)
+# unkeyworded deps, bug #555896
+sci-libs/armadillo mkl
+
+# James Le Cuirot <chewi@gentoo.org> (19 Oct 2015)
+# Issue with keywording sub-dependency jflex but this should be
+# resolved very shortly. Masking this now to unbreak the tree.
+dev-java/rhino test
+
+# Pawel Hajdan jr <phajdan.jr@gentoo.org> (15 Oct 2015)
+# Repoman reports dependency issues on arm.
+www-client/chromium system-ffmpeg
+
+# Markus Meier <maekke@gentoo.org> (10 Oct 2015)
+# unkeyworded deps, bug #552330
+app-portage/g-sorcery bson
 
 # Ben de Groot <yngwin@gentoo.org> (03 May 2015)
 # media-libs/rubberband lacks arm keyword, bug 548446
 media-video/mpv rubberband
 
 # Patrick Lauer <patrick@gentoo.org> (20 Apr 2015)
-# qt5/kf5 not keyworded on arm
+# kde-frameworks/*:5 not keyworded on arm
 net-irc/quassel qt5
 
 # Markos Chandras <hwoarang@gentoo.org> (18 Apr 2015)
@@ -217,7 +242,7 @@ media-gfx/fim graphicsmagick svg
 
 # Markus Meier <maekke@gentoo.org> (04 Aug 2013)
 # Unkeyworded deps, bug #474026
-app-admin/conky lua-cairo lua-imlib xmms2 audacious moc
+app-admin/conky audacious cmus irc lua-cairo lua-imlib lua-rsvg moc xmms2
 
 # Sergey Popov <pinkbyte@gentoo.org> (30 Jul 2013)
 # Not tested
@@ -277,7 +302,7 @@ dev-libs/xapian-bindings java
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (20 Feb 2013)
 # Mask flags of calligra and dependencies due to lack of keywords
-app-office/calligra openexr postgres spacenav vc
+app-office/calligra color-management openexr postgres spacenav vc
 media-gfx/pstoedit emf
 
 # Rick Farina <zerochaos@gentoo.org> (05 Feb 2013)
@@ -390,8 +415,9 @@ app-admin/syslog-ng json
 net-misc/tinc vde
 
 # Davide Pesavento <pesa@gentoo.org> (30 Nov 2011)
-# JavaScriptCore JIT is supported only on amd64/arm/x86,
-# so it's masked in base profile and unmasked here.
+# The QML (V4) and JSC JITs are supported only on amd64/arm/x86,
+# so the flag is masked in the base profile and unmasked here.
+dev-qt/qtdeclarative -jit
 dev-qt/qtscript -jit
 dev-qt/qtwebkit -jit
 

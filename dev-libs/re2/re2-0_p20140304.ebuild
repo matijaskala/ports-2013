@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/re2/re2-0_p20140304.ebuild,v 1.3 2015/03/03 06:42:12 dlan Exp $
+# $Id$
 
 EAPI=5
 
 inherit flag-o-matic eutils multilib multilib-minimal toolchain-funcs
 
 DESCRIPTION="An efficent, principled regular expression library"
-HOMEPAGE="http://code.google.com/p/re2/"
-SRC_URI="http://re2.googlecode.com/files/${PN}-${PV##*_p}.tgz"
+HOMEPAGE="https://code.google.com/p/re2/"
+SRC_URI="https://re2.googlecode.com/files/${PN}-${PV##*_p}.tgz"
 
 LICENSE="BSD"
 # Symbols removed in version 20140110

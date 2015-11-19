@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/xmlrpc-c/xmlrpc-c-1.32.05-r1.ebuild,v 1.11 2013/06/30 18:08:07 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -19,12 +19,12 @@ inherit eutils multilib
 
 DESCRIPTION="A lightweigt RPC library based on XML and HTTP"
 HOMEPAGE="http://xmlrpc-c.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~maksbotan/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~maksbotan/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~x86-fbsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
-IUSE="abyss +cgi +curl +cxx +libxml2 static-libs threads tools"
+IUSE="abyss +cgi +curl +cxx +libxml2 static-libs threads test tools"
 
 REQUIRED_USE="test? ( static-libs abyss curl cxx ) tools? ( curl )"
 
@@ -42,14 +42,14 @@ pkg_setup() {
 	use curl || ewarn "Curl support disabled: No client library will be built"
 }
 
-#Bug 214137: We need to filter this.
-unset SRCDIR
-
-# Bug 255440
-export LC_ALL=C
-export LANG=C
-
 src_prepare() {
+	#Bug 214137: We need to filter this.
+	unset SRCDIR
+
+	# Bug 255440
+	export LC_ALL=C
+	export LANG=C
+
 	epatch "${FILESDIR}"/${PN}-1.32.05-Wimplicit.patch
 	sed -i \
 		-e "/CFLAGS_COMMON/s|-g -O3$||" \

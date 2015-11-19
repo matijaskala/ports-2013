@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/kfax/kfax-3.3.6-r1.ebuild,v 1.4 2014/03/21 20:43:06 johu Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ KDE_VERSION=4.4.0
 MY_P=${P}-kde${KDE_VERSION}
 
 DESCRIPTION="A fax file viewer"
-HOMEPAGE="http://www.kde.org/"
+HOMEPAGE="https://www.kde.org/"
 SRC_URI="mirror://kde/stable/${KDE_VERSION}/src/extragear/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"

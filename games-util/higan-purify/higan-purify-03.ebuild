@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-util/higan-purify/higan-purify-03.ebuild,v 1.6 2015/03/22 19:28:10 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ MY_P=purify_v${PV}-source
 
 DESCRIPTION="Rom purifier for higan"
 HOMEPAGE="http://byuu.org/higan/"
-SRC_URI="http://higan.googlecode.com/files/${MY_P}.tar.xz"
+SRC_URI="https://higan.googlecode.com/files/${MY_P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"

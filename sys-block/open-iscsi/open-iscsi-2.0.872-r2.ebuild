@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/open-iscsi/open-iscsi-2.0.872-r2.ebuild,v 1.9 2014/02/02 15:24:49 ago Exp $
+# $Id$
 
 EAPI=2
 inherit versionator linux-info eutils flag-o-matic toolchain-funcs
@@ -29,7 +29,7 @@ pkg_setup() {
 	# Needs to be done, as iscsid currently only starts, when having the iSCSI
 	# support loaded as module. Kernel builtion options don't work. See this for
 	# more information:
-	# http://groups.google.com/group/open-iscsi/browse_thread/thread/cc10498655b40507/fd6a4ba0c8e91966
+	# https://groups.google.com/group/open-iscsi/browse_thread/thread/cc10498655b40507/fd6a4ba0c8e91966
 	# If there's a new release, check whether this is still valid!
 	CONFIG_CHECK_MODULES="SCSI_ISCSI_ATTRS ISCSI_TCP"
 	if linux_config_exists; then

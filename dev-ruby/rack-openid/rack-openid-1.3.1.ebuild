@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rack-openid/rack-openid-1.3.1.ebuild,v 1.3 2014/08/02 02:00:56 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ RUBY_FAKEGEM_EXTRADOC="README.rdoc"
 inherit ruby-fakegem
 
 DESCRIPTION="Provides a more HTTPish API around the ruby-openid library"
-HOMEPAGE="http://github.com/josh/rack-openid"
+HOMEPAGE="https://github.com/josh/rack-openid"
 LICENSE="MIT"
 
 KEYWORDS="~amd64 ~x86"

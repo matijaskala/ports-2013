@@ -1,26 +1,24 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/screen/screen-9999.ebuild,v 1.5 2014/11/01 11:47:25 swegener Exp $
+# $Id$
 
 EAPI=5
 
 EGIT_REPO_URI="git://git.savannah.gnu.org/screen.git"
-EGIT_BOOTSTRAP="cd src; ./autogen.sh"
-EGIT_SOURCEDIR="${WORKDIR}/${P}" # needed for setting S later on
+EGIT_CHECKOUT_DIR="${WORKDIR}/${P}" # needed for setting S later on
 
-WANT_AUTOCONF="2.5"
-
-inherit eutils flag-o-matic toolchain-funcs pam autotools user git-2
+inherit eutils flag-o-matic toolchain-funcs pam autotools user git-r3
 
 DESCRIPTION="Full-screen window manager that multiplexes physical terminals between several processes"
-HOMEPAGE="http://www.gnu.org/software/screen/"
+HOMEPAGE="https://www.gnu.org/software/screen/"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="debug nethack pam selinux multiuser"
 
-CDEPEND=">=sys-libs/ncurses-5.2
+CDEPEND="
+	>=sys-libs/ncurses-5.2:0=
 	pam? ( virtual/pam )"
 RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-screen )"
@@ -36,7 +34,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Don't use utempter even if it is found on the system
-	epatch "${FILESDIR}"/4.0.2-no-utempter.patch
+	epatch "${FILESDIR}"/${PN}-4.3.0-no-utempter.patch
 
 	# sched.h is a system header and causes problems with some C libraries
 	mv sched.h _sched.h || die
@@ -69,15 +67,12 @@ src_configure() {
 		--with-sys-screenrc="${EPREFIX}/etc/screenrc" \
 		--with-pty-mode=0620 \
 		--with-pty-group=5 \
-		--enable-rxvt_osc \
 		--enable-telnet \
-		--enable-colors256 \
 		$(use_enable pam)
 }
 
 src_compile() {
 	LC_ALL=POSIX emake comm.h term.h
-	emake osdef.h
 
 	emake -C doc screen.info
 	default
@@ -114,7 +109,7 @@ src_install() {
 	pamd_mimic_system screen auth
 
 	dodoc \
-		README ChangeLog INSTALL TODO NEWS* patchlevel.h \
+		README ChangeLog INSTALL TODO NEWS* \
 		doc/{FAQ,README.DOTSCREEN,fdpat.ps,window_to_display.ps}
 
 	doman doc/screen.1

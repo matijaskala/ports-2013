@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/cciss_vol_status/cciss_vol_status-1.11.ebuild,v 1.2 2014/08/10 20:23:26 slyfox Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,7 +9,7 @@ DESCRIPTION="Shows status of logical drives attached to HP SmartArray controller
 HOMEPAGE="http://cciss.sourceforge.net/#cciss_utils"
 LICENSE="GPL-2"
 SRC_URI="mirror://sourceforge/cciss/${P}.tar.gz"
-KEYWORDS="~amd64 ~ia64 ~x86"
+KEYWORDS="amd64 ia64 x86"
 SLOT="0"
 RDEPEND=""
 DEPEND=""

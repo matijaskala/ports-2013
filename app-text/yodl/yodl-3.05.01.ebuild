@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/yodl/yodl-3.05.01.ebuild,v 1.1 2015/06/13 20:19:21 radhermit Exp $
+# $Id$
 
 EAPI=5
 
 inherit toolchain-funcs
 
 DESCRIPTION="Your Own Document Language: a pre-document language and tools to process it"
-HOMEPAGE="http://yodl.sourceforge.net/"
+HOMEPAGE="https://fbb-git.github.io/yodl/ https://github.com/fbb-git/yodl"
 SRC_URI="mirror://sourceforge/${PN}/${P/-/_}.orig.tar.gz"
 
 LICENSE="GPL-3"

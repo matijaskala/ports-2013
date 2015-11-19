@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/wxGTK/wxGTK-2.9.4.1-r1.ebuild,v 1.3 2015/03/31 20:05:20 ulm Exp $
+# $Id$
 
 EAPI="5"
 
@@ -91,7 +91,7 @@ src_configure() {
 	# apps can disable these features by building w/ -NDEBUG or wxDEBUG_LEVEL_0.
 	# wxDEBUG_LEVEL=2 enables assertions that have expensive runtime costs.
 	# http://docs.wxwidgets.org/2.9/overview_debugging.html
-	# http://groups.google.com/group/wx-dev/browse_thread/thread/c3c7e78d63d7777f/05dee25410052d9c
+	# https://groups.google.com/group/wx-dev/browse_thread/thread/c3c7e78d63d7777f/05dee25410052d9c
 	use debug \
 		&& myconf="${myconf} --enable-debug=max"
 

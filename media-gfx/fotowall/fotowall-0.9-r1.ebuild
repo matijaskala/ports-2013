@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/fotowall/fotowall-0.9-r1.ebuild,v 1.6 2013/03/02 21:35:24 hwoarang Exp $
+# $Id$
 
 EAPI="2"
 
@@ -10,7 +10,7 @@ MY_P="${P/f/F}"
 
 DESCRIPTION="Qt4 tool for creating wallpapers"
 HOMEPAGE="http://www.enricoros.com/opensource/fotowall/"
-SRC_URI="http://fotowall.googlecode.com/files/${MY_P}.tar.bz2"
+SRC_URI="https://fotowall.googlecode.com/files/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

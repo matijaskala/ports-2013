@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/sbc/sbc-1.3.ebuild,v 1.10 2015/01/13 10:20:09 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils multilib multilib-minimal
 
 DESCRIPTION="An audio codec to connect bluetooth high quality audio devices like headphones or loudspeakers"
-HOMEPAGE="http://git.kernel.org/?p=bluetooth/sbc.git http://www.bluez.org/sbc-10/"
+HOMEPAGE="https://git.kernel.org/?p=bluetooth/sbc.git http://www.bluez.org/sbc-10/"
 SRC_URI="mirror://kernel/linux/bluetooth/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"

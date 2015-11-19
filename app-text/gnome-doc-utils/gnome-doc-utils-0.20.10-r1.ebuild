@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/gnome-doc-utils/gnome-doc-utils-0.20.10-r1.ebuild,v 1.17 2015/04/08 07:30:35 mgorny Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit gnome2 multibuild python-r1
 
 DESCRIPTION="A collection of documentation utilities for the Gnome project"
-HOMEPAGE="http://live.gnome.org/GnomeDocUtils"
+HOMEPAGE="https://live.gnome.org/GnomeDocUtils"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

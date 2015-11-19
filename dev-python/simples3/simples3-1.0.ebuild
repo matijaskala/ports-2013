@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/simples3/simples3-1.0.ebuild,v 1.5 2015/04/08 08:05:15 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 pypy )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 pypy )
 inherit distutils-r1
 
 DESCRIPTION="A fairly simple, decently quick python interface to Amazon's S3 storage service"
-HOMEPAGE="http://sendapatch.se/projects/simples3/ http://pypi.python.org/pypi/simples3/"
+HOMEPAGE="http://sendapatch.se/projects/simples3/ https://pypi.python.org/pypi/simples3/"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"

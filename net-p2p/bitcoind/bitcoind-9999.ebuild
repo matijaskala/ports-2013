@@ -1,10 +1,10 @@
 # Copyright 2010-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/bitcoind/bitcoind-9999.ebuild,v 1.4 2015/03/04 00:11:48 blueness Exp $
+# $Id$
 
 EAPI=5
 
-BITCOINCORE_IUSE="examples logrotate test upnp +wallet"
+BITCOINCORE_IUSE="examples test upnp +wallet"
 BITCOINCORE_NEED_LEVELDB=1
 BITCOINCORE_NEED_LIBSECP256K1=1
 inherit bash-completion-r1 bitcoincore user systemd
@@ -14,21 +14,18 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
 
-RDEPEND="
-	logrotate? (
-		app-admin/logrotate
-	)
-"
-DEPEND="${RDEPEND}"
-
 pkg_setup() {
 	local UG='bitcoin'
 	enewgroup "${UG}"
 	enewuser "${UG}" -1 -1 /var/lib/bitcoin "${UG}"
 }
 
+src_prepare() {
+	sed -i 's/have bitcoind &&//;s/^\(complete -F _bitcoind bitcoind\) bitcoin-cli$/\1/' contrib/${PN}.bash-completion || die
+	bitcoincore_src_prepare
+}
+
 src_configure() {
-	# NOTE: --enable-zmq actually disables it
 	bitcoincore_conf \
 		--with-daemon
 }
@@ -41,8 +38,8 @@ src_install() {
 	fowners bitcoin:bitcoin /etc/bitcoin/bitcoin.conf
 	fperms 600 /etc/bitcoin/bitcoin.conf
 
-	newconfd "${FILESDIR}/bitcoin.confd" ${PN}
-	newinitd "${FILESDIR}/bitcoin.initd-r1" ${PN}
+	newconfd "contrib/init/bitcoind.openrcconf" ${PN}
+	newinitd "contrib/init/bitcoind.openrc" ${PN}
 	systemd_dounit "${FILESDIR}/bitcoind.service"
 
 	keepdir /var/lib/bitcoin/.bitcoin
@@ -51,18 +48,16 @@ src_install() {
 	fowners bitcoin:bitcoin /var/lib/bitcoin/.bitcoin
 	dosym /etc/bitcoin/bitcoin.conf /var/lib/bitcoin/.bitcoin/bitcoin.conf
 
-	dodoc doc/assets-attribution.md doc/tor.md
+	dodoc doc/assets-attribution.md doc/bips.md doc/tor.md
 	doman contrib/debian/manpages/{bitcoind.1,bitcoin.conf.5}
 
 	newbashcomp contrib/${PN}.bash-completion ${PN}
 
 	if use examples; then
 		docinto examples
-		dodoc -r contrib/{bitrpc,pyminer,qos,spendfrom,tidy_datadir.sh}
+		dodoc -r contrib/{bitrpc,qos,spendfrom,tidy_datadir.sh}
 	fi
 
-	if use logrotate; then
-		insinto /etc/logrotate.d
-		newins "${FILESDIR}/bitcoind.logrotate" bitcoind
-	fi
+	insinto /etc/logrotate.d
+	newins "${FILESDIR}/bitcoind.logrotate-r1" bitcoind
 }

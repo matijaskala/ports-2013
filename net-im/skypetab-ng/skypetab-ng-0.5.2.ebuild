@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/skypetab-ng/skypetab-ng-0.5.2.ebuild,v 1.6 2015/06/14 17:29:40 ulm Exp $
+# $Id$
 
 EAPI=4
 
@@ -16,11 +16,11 @@ inherit qt4-r2 multilib ${UNPACKER_ECLASS}
 
 if [[ -z ${LIVE_EBUILD} ]]; then
 	KEYWORDS="-* ~x86 ~amd64"
-	SRC_URI="http://github.com/kekekeks/${PN}/tarball/v${PV} -> ${P}.tar.gz"
+	SRC_URI="https://github.com/kekekeks/${PN}/tarball/v${PV} -> ${P}.tar.gz"
 fi
 
 DESCRIPTION="An LD_PRELOAD wrapper that adds tabs to Skype for Linux"
-HOMEPAGE="http://github.com/kekekeks/skypetab-ng"
+HOMEPAGE="https://github.com/kekekeks/skypetab-ng"
 LICENSE="LGPL-3"
 SLOT="0"
 IUSE=""

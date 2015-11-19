@@ -1,11 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/gnat-gcc/gnat-gcc-4.6.4.ebuild,v 1.7 2015/05/15 14:15:58 pacho Exp $
+# $Id$
 
+EAPI=5
 inherit gnatbuild
 
 DESCRIPTION="GNAT Ada Compiler - gcc version"
-HOMEPAGE="http://gcc.gnu.org/"
+HOMEPAGE="https://gcc.gnu.org/"
 LICENSE="GMGPL"
 
 IUSE="doc lto openmp"
@@ -16,9 +17,9 @@ BOOT_SLOT="4.4"
 # so the URI's are static.
 SRC_URI="ftp://gcc.gnu.org/pub/gcc/releases/gcc-${PV}/gcc-core-${PV}.tar.bz2
 	ftp://gcc.gnu.org/pub/gcc/releases/gcc-${PV}/gcc-ada-${PV}.tar.bz2
-	amd64? ( http://dev.gentoo.org/~george/src/gnatboot-${BOOT_SLOT}-amd64.tar.bz2 )
-	sparc? ( http://dev.gentoo.org/~george/src/gnatboot-${BOOT_SLOT}-sparc.tar.bz2 )
-	x86?   ( http://dev.gentoo.org/~george/src/gnatboot-${BOOT_SLOT}-i686.tar.bz2 )"
+	amd64? ( https://dev.gentoo.org/~george/src/gnatboot-${BOOT_SLOT}-amd64.tar.bz2 )
+	sparc? ( https://dev.gentoo.org/~george/src/gnatboot-${BOOT_SLOT}-sparc.tar.bz2 )
+	x86?   ( https://dev.gentoo.org/~george/src/gnatboot-${BOOT_SLOT}-i686.tar.bz2 )"
 #	ppc?   ( mirror://gentoo/gnatboot-${BOOT_SLOT}-ppc.tar.bz2 )
 
 KEYWORDS="amd64 x86"
@@ -28,7 +29,7 @@ RDEPEND=">=dev-libs/mpfr-3.1.2
 	>=dev-libs/gmp-5.1.3
 	>=dev-libs/mpc-1.0.1
 	>=sys-libs/zlib-1.2
-	>=sys-libs/ncurses-5.7"
+	>=sys-libs/ncurses-5.7:*"
 
 DEPEND="${RDEPEND}
 	doc? ( >=sys-apps/texinfo-5 )

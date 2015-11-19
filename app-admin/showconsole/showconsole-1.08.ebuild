@@ -1,10 +1,10 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/showconsole/showconsole-1.08.ebuild,v 1.15 2012/05/31 02:42:49 zmedico Exp $
+# $Id$
 
 # This tarball is extracted from SuSe's sysvinit-2.86-#.src.rpm
 # You can find said src rpm via opensuse.org:
-# http://mirrors.kernel.org/opensuse/distribution/SL-OSS-*/inst-source/suse/src/
+# https://mirrors.kernel.org/opensuse/distribution/SL-OSS-*/inst-source/suse/src/
 
 inherit eutils multilib toolchain-funcs
 

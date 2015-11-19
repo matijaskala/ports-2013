@@ -1,9 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-rpg/twclone/twclone-0.14.ebuild,v 1.7 2015/03/24 17:25:31 ago Exp $
+# $Id$
 
 EAPI=5
-inherit games
+inherit games eutils
 
 MY_P="${PN}-source-${PV}"
 DESCRIPTION="Clone of BBS Door game Trade Wars 2002"
@@ -16,6 +16,10 @@ KEYWORDS="amd64 ~ppc x86"
 IUSE=""
 
 S=${WORKDIR}/${MY_P}
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-format.patch
+}
 
 src_install() {
 	DOCS="AUTHORS ChangeLog PROTOCOL README TODO" \

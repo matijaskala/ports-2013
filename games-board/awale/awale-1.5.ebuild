@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-board/awale/awale-1.5.ebuild,v 1.9 2015/03/25 15:32:37 jlec Exp $
+# $Id$
 
 # do not use autotools related stuff in stable ebuilds
 # unless you like random breakage: 469796, 469798, 424041
@@ -12,7 +12,7 @@ inherit autotools eutils gnome2-utils games
 DESCRIPTION="Free Awale - The game of all Africa"
 HOMEPAGE="http://www.nongnu.org/awale/"
 SRC_URI="mirror://nongnu/awale/${P}.tar.gz"
-SRC_URI="${SRC_URI} http://dev.gentoo.org/~hasufell/distfiles/${P}-no-autoreconf2.patch.xz" # STABLE ARCH
+SRC_URI="${SRC_URI} https://dev.gentoo.org/~hasufell/distfiles/${P}-no-autoreconf2.patch.xz" # STABLE ARCH
 
 LICENSE="GPL-2"
 SLOT="0"

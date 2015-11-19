@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-laptop/batti/batti-0.3.8-r2.ebuild,v 1.5 2014/09/01 16:48:09 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ RESTRICT_PYTHON_ABIS="3.*"
 inherit python distutils gnome2-utils eutils
 
 DESCRIPTION="A upower based battery monitor for the system tray, similar to batterymon"
-HOMEPAGE="http://code.google.com/p/batti-gtk/"
-SRC_URI="http://batti-gtk.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/batti-gtk/"
+SRC_URI="https://batti-gtk.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

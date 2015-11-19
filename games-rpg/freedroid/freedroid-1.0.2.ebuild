@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-rpg/freedroid/freedroid-1.0.2.ebuild,v 1.14 2015/03/24 17:27:51 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils games
@@ -21,6 +21,10 @@ DEPEND="media-libs/libsdl[joystick,sound,video]
 	media-libs/sdl-image[jpeg,png]
 	media-libs/sdl-mixer[mod,vorbis]
 	media-libs/libvorbis"
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-format.patch
+}
 
 src_install() {
 	default

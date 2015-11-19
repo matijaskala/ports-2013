@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/parassign/parassign-20130522.ebuild,v 1.4 2015/04/08 18:22:13 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -56,7 +56,7 @@ src_compile() {
 }
 
 src_install() {
-	python_parallel_foreach_impl python_doscript code/* || die
+	python_foreach_impl python_doscript code/* || die
 
 	dodoc PARAssign_Tutorial.pdf README
 

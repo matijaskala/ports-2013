@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/xpad/xpad-4.2.ebuild,v 1.4 2014/08/03 18:37:52 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
 
 DESCRIPTION="a sticky note application for jotting down things to remember"
 HOMEPAGE="http://mterry.name/xpad"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"

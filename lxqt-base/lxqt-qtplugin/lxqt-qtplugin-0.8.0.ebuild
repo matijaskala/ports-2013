@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/lxqt-base/lxqt-qtplugin/lxqt-qtplugin-0.8.0.ebuild,v 1.3 2015/01/30 16:32:20 kensington Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -19,14 +19,14 @@ fi
 LICENSE="LGPL-2.1+"
 SLOT="0"
 
-DEPEND="
-	dev-qt/linguist-tools:5
+RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
 	~lxqt-base/liblxqt-${PV}
 	x11-libs/libX11"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	dev-qt/linguist-tools:5"
 
 src_configure() {
 	local mycmakeargs=(

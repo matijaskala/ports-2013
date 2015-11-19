@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/raspberrypi-sources/raspberrypi-sources-3.10.1_pre-r20130719.ebuild,v 1.1 2013/07/22 06:53:57 xmw Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,6 +20,6 @@ HOMEPAGE="https://github.com/raspberrypi/linux"
 # https://github.com/raspberrypi/linux/tarball/${MY_COMMIT} ->
 #		raspberrypi-sources-${MY_COMMIT}.tar.gz
 SRC_URI="${KERNEL_URI}
-	http://dev.gentoo.org/~xmw/${PN}/${PF}.patch.xz"
+	https://dev.gentoo.org/~xmw/${PN}/${PF}.patch.xz"
 
 KEYWORDS="~arm"

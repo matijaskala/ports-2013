@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/blocks/blocks-0.1.4_pre131210-r1.ebuild,v 1.2 2015/04/04 11:09:53 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Conversion tools for block devices"
 HOMEPAGE="https://github.com/g2p/blocks"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 SLOT="0"
 LICENSE="GPL-3+"

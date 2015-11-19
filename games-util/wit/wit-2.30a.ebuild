@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-util/wit/wit-2.30a.ebuild,v 1.1 2014/12/14 00:10:51 radhermit Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs
 
 DESCRIPTION="A set of command line tools to manipulate Wii/GameCube ISO images and WBFS containers"
 HOMEPAGE="http://wit.wiimm.de/"
-SRC_URI="http://dev.gentoo.org/~radhermit/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~radhermit/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

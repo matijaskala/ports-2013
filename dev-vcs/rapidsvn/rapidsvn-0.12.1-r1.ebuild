@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/rapidsvn/rapidsvn-0.12.1-r1.ebuild,v 1.8 2015/04/18 20:39:49 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ DESCRIPTION="Cross-platform GUI front-end for the Subversion revision system"
 HOMEPAGE="http://rapidsvn.tigris.org/"
 SRC_URI="
 	http://www.rapidsvn.org/download/release/${PV}/${P}.tar.gz
-	doc? ( http://dev.gentoo.org/~jlec/distfiles/svncpp.dox.xz )"
+	doc? ( https://dev.gentoo.org/~jlec/distfiles/svncpp.dox.xz )"
 
 LICENSE="GPL-2 LGPL-2.1 FDL-1.2"
 SLOT="0"

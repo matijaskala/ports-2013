@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/pymol-plugins-dssp/pymol-plugins-dssp-110430.ebuild,v 1.1 2011/05/01 09:45:37 jlec Exp $
+# $Id$
 
 EAPI="3"
 
@@ -12,7 +12,7 @@ inherit python
 
 DESCRIPTION="DSSP Plugin for PyMOL"
 HOMEPAGE="http://www.biotec.tu-dresden.de/~hongboz/dssp_pymol/dssp_pymol.html"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.py.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.py.xz"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"

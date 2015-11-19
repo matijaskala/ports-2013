@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/bones/bones-3.8.3.ebuild,v 1.1 2015/04/13 11:53:59 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,7 +17,7 @@ RUBY_FAKEGEM_EXTRAINSTALL="default version.txt"
 inherit ruby-fakegem
 
 DESCRIPTION="Tool that creates new Ruby projects from a code skeleton"
-HOMEPAGE="http://github.com/TwP/bones"
+HOMEPAGE="https://github.com/TwP/bones"
 
 IUSE="test"
 LICENSE="MIT"

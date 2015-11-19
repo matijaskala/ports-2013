@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/amsynth/amsynth-1.3.2.ebuild,v 1.4 2014/08/10 21:03:44 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ inherit autotools
 MY_P=${P/ams/amS}
 
 DESCRIPTION="Virtual analogue synthesizer"
-HOMEPAGE="http://code.google.com/p/amsynth/"
-SRC_URI="http://amsynth.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/amsynth/"
+SRC_URI="https://amsynth.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

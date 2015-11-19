@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-action/minetest_game/minetest_game-0.4.10.ebuild,v 1.3 2015/04/19 06:59:01 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit vcs-snapshot games
 
 DESCRIPTION="The main game for the Minetest game engine"
-HOMEPAGE="http://github.com/minetest/minetest_game"
-SRC_URI="http://github.com/minetest/minetest_game/tarball/${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/minetest/minetest_game"
+SRC_URI="https://github.com/minetest/minetest_game/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="GPL-2 CC-BY-SA-3.0"
 SLOT="0"

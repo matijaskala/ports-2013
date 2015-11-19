@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/courier-imap/courier-imap-4.15-r1.ebuild,v 1.15 2015/03/21 21:35:09 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -169,8 +169,8 @@ src_install() {
 	done
 
 	cd ../share || die
-	mv -f * ../sbin || die
-	mv -f ../sbin/man . || die
+	mv -f * ../sbin || die
+	mv -f ../sbin/man . || die
 	cd .. || die
 
 	for x in mkimapdcert mkpop3dcert ; do

@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/hp2xx/hp2xx-3.4.4-r1.ebuild,v 1.1 2015/03/29 13:37:30 idella4 Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils base
 
 DESCRIPTION="Versatile tool to convert Hewlett-Packard's HP-GL plotter language into other graphics formats"
-HOMEPAGE="http://www.gnu.org/software/hp2xx/"
+HOMEPAGE="https://www.gnu.org/software/hp2xx/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"

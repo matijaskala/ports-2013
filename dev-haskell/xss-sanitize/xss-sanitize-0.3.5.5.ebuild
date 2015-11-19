@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/xss-sanitize/xss-sanitize-0.3.5.5.ebuild,v 1.1 2015/02/09 19:47:23 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="sanitize untrusted HTML to prevent XSS attacks"
-HOMEPAGE="http://github.com/yesodweb/haskell-xss-sanitize"
+HOMEPAGE="https://github.com/yesodweb/haskell-xss-sanitize"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

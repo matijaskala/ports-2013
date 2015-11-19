@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-nds/openldap/openldap-2.3.43-r4.ebuild,v 1.4 2014/11/08 05:09:25 robbat2 Exp $
+# $Id$
 
 EAPI="2"
 
@@ -527,7 +527,7 @@ pkg_postinst() {
 	elog
 	elog "Getting started using OpenLDAP? There is some documentation available:"
 	elog "Gentoo Guide to OpenLDAP Authentication"
-	elog "(http://www.gentoo.org/doc/en/ldap-howto.xml)"
+	elog "(https://www.gentoo.org/doc/en/ldap-howto.xml)"
 	elog
 
 	# note to bug #110412

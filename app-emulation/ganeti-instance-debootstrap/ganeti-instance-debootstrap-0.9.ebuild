@@ -1,14 +1,14 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/ganeti-instance-debootstrap/ganeti-instance-debootstrap-0.9.ebuild,v 1.3 2012/05/13 05:47:45 ramereth Exp $
+# $Id$
 
 EAPI=2
 
 inherit eutils
 
 DESCRIPTION="Scripts to build Ganeti VMs with debootstrap"
-HOMEPAGE="http://code.google.com/p/ganeti/"
-SRC_URI="http://ganeti.googlecode.com/files/ganeti-instance-debootstrap-${PV}.tar.gz"
+HOMEPAGE="http://www.ganeti.org/"
+SRC_URI="https://ganeti.googlecode.com/files/ganeti-instance-debootstrap-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

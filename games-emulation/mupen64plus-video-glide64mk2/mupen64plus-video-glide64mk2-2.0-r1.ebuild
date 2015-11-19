@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/mupen64plus-video-glide64mk2/mupen64plus-video-glide64mk2-2.0-r1.ebuild,v 1.2 2015/01/28 19:54:45 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ MY_P=${PN}-src-${PV}
 inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="A fork of Mupen64 Nintendo 64 emulator, glide64mk2 video plugin"
-HOMEPAGE="http://code.google.com/p/mupen64plus/"
+HOMEPAGE="http://www.mupen64plus.org/"
 SRC_URI="https://github.com/mupen64plus/${PN}/releases/download/${PV}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2 LGPL-2.1"

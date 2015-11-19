@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/argus/argus-3.0.8.1.ebuild,v 1.1 2015/05/09 07:41:20 jer Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils user
@@ -11,7 +11,7 @@ SRC_URI="http://qosient.com/argus/src/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="amd64 ppc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
 IUSE="debug sasl tcpd"
 
 RDEPEND="
@@ -28,6 +28,7 @@ DEPEND="
 "
 
 src_prepare() {
+	find . -type f -execdir chmod +w {} \; #561360
 	sed -e 's:/etc/argus.conf:/etc/argus/argus.conf:' \
 		-i argus/argus.c \
 		-i support/Config/argus.conf \

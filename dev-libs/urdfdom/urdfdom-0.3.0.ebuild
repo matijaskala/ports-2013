@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/urdfdom/urdfdom-0.3.0.ebuild,v 1.1 2015/04/14 12:37:32 aballier Exp $
+# $Id$
 
 EAPI=5
 
@@ -30,6 +30,7 @@ IUSE=""
 
 RDEPEND="dev-libs/urdfdom_headers
 	dev-libs/console_bridge
+	dev-libs/tinyxml
 	dev-libs/boost:=[threads]"
 DEPEND="${RDEPEND}"
 

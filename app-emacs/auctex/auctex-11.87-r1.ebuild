@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/auctex/auctex-11.87-r1.ebuild,v 1.7 2014/11/01 16:33:18 ulm Exp $
+# $Id$
 
 EAPI=5
 
 inherit elisp latex-package
 
 DESCRIPTION="Extended support for writing, formatting and using (La)TeX, Texinfo and BibTeX files"
-HOMEPAGE="http://www.gnu.org/software/auctex/"
+HOMEPAGE="https://www.gnu.org/software/auctex/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3+ FDL-1.3+"

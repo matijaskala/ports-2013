@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-pda/gtkpod/gtkpod-2.1.4.ebuild,v 1.3 2014/04/01 11:25:11 zlogene Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit autotools eutils gnome2-utils
 DESCRIPTION="A graphical user interface to the Apple productline"
 HOMEPAGE="http://gtkpod.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz
-	http://dev.gentoo.org/~ssuominen/gst-element-check-0.10.m4.xz"
+	https://dev.gentoo.org/~ssuominen/gst-element-check-0.10.m4.xz"
 
 LICENSE="GPL-2 FDL-1.2"
 SLOT="0"

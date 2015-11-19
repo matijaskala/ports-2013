@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/behave/behave-1.2.4.ebuild,v 1.1 2014/10/22 01:12:16 alunduil Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="behaviour-driven development, Python style"
-HOMEPAGE="http://github.com/behave/behave"
+HOMEPAGE="https://github.com/behave/behave"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
@@ -39,8 +39,6 @@ python_compile_all() {
 
 python_test() {
 	nosetests || die "nosetests failed under ${EPYTHON}"
-
-	local DISTUTILS_NO_PARALLEL_BUILD=TRUE
 
 	rm -f "${HOME}"/.pydistutils.cfg || die "Couldn't remove pydistutils.cfg"
 

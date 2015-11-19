@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/stow/stow-2.2.0-r2.ebuild,v 1.1 2015/03/06 12:28:58 maksbotan Exp $
+# $Id$
 
 EAPI="5"
 
 inherit eutils
 
 DESCRIPTION="Manage installation of software in /var/lib/"
-HOMEPAGE="http://www.gnu.org/software/stow/"
+HOMEPAGE="https://www.gnu.org/software/stow/"
 SRC_URI="mirror://gnu/stow/${P}.tar.gz"
 
 LICENSE="GPL-2"

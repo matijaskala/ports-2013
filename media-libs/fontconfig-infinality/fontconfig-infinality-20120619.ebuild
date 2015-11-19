@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/fontconfig-infinality/fontconfig-infinality-20120619.ebuild,v 1.5 2015/03/31 19:32:52 ulm Exp $
+# $Id$
 
 EAPI="4"
 
 DESCRIPTION="Configuration to be used in conjunction with the freetype-infinality subpixel hinting"
 HOMEPAGE="http://www.infinality.net/blog/infinality-freetype-patches/"
-SRC_URI="http://dev.gentoo.org/~yngwin/distfiles/${P}.tar.xz
-	nyx? ( http://dev.gentoo.org/~yngwin/distfiles/fontconfig-nyx-1.tar.xz )"
+SRC_URI="https://dev.gentoo.org/~yngwin/distfiles/${P}.tar.xz
+	nyx? ( https://dev.gentoo.org/~yngwin/distfiles/fontconfig-nyx-1.tar.xz )"
 
 LICENSE="MIT"
 SLOT="0"

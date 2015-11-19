@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qtdemo/qtdemo-4.8.6-r1.ebuild,v 1.8 2015/05/30 11:07:30 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ DESCRIPTION="Demonstration module and examples for the Qt toolkit"
 if [[ ${QT4_BUILD_TYPE} == live ]]; then
 	KEYWORDS="arm ppc ppc64"
 else
-	KEYWORDS="amd64 arm ppc ppc64 x86 ~x64-macos"
+	KEYWORDS="amd64 arm ppc ppc64 x86"
 fi
 
 IUSE="dbus declarative kde multimedia opengl openvg phonon webkit xmlpatterns"

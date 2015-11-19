@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/lxqt-base/lxqt-openssh-askpass/lxqt-openssh-askpass-0.9.0.ebuild,v 1.4 2015/04/15 06:49:32 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -19,8 +19,7 @@ fi
 LICENSE="LGPL-2.1+"
 SLOT="0"
 
-DEPEND="
-	dev-qt/linguist-tools:5
+RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -31,7 +30,9 @@ DEPEND="
 	>=dev-libs/libqtxdg-1.0.0
 	x11-libs/libX11
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	dev-qt/linguist-tools:5
+"
 
 src_install(){
 	cmake-utils_src_install

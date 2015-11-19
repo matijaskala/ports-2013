@@ -1,20 +1,21 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyzmq/pyzmq-14.7.0.ebuild,v 1.2 2015/06/22 07:44:56 jlec Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_{3,4} )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1 toolchain-funcs
 
 DESCRIPTION="Lightweight and super-fast messaging library built on top of the ZeroMQ library"
-HOMEPAGE="http://www.zeromq.org/bindings:python http://pypi.python.org/pypi/pyzmq"
+HOMEPAGE="http://www.zeromq.org/bindings:python https://pypi.python.org/pypi/pyzmq"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS="~amd64 ~arm ~mips ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 IUSE="doc examples green test"
 
 # Ensures installation of gevent for test phase

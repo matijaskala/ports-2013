@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/virtual/fortran/fortran-0.ebuild,v 1.10 2014/01/17 05:47:46 vapier Exp $
+# $Id$
 
 EAPI=4
 
@@ -19,6 +19,5 @@ RDEPEND="
 		sys-devel/gcc-apple[fortran,openmp?]
 		dev-lang/ekopath
 		dev-lang/ifc
-		dev-lang/path64[openmp?]
 		)"
 DEPEND="${RDEPEND}"

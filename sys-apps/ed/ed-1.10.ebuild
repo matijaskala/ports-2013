@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/ed/ed-1.10.ebuild,v 1.13 2015/05/27 12:34:17 zlogene Exp $
+# $Id$
 
 EAPI="4"
 
 inherit toolchain-funcs unpacker
 
 DESCRIPTION="Your basic line editor"
-HOMEPAGE="http://www.gnu.org/software/ed/"
+HOMEPAGE="https://www.gnu.org/software/ed/"
 SRC_URI="mirror://gnu/ed/${P}.tar.lz"
 
 LICENSE="GPL-2"

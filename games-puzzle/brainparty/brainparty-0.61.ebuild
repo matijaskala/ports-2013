@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-puzzle/brainparty/brainparty-0.61.ebuild,v 1.6 2015/01/23 21:44:21 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit eutils games
 
 DESCRIPTION="A puzzle-solving, brain-stretching game for all ages"
 HOMEPAGE="http://www.tuxradar.com/brainparty"
-SRC_URI="http://launchpad.net/brainparty/trunk/${PV}/+download/${PN}${PV}.tar.gz"
+SRC_URI="https://launchpad.net/brainparty/trunk/${PV}/+download/${PN}${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

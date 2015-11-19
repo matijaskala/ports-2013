@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/test-framework/test-framework-0.8.ebuild,v 1.8 2013/08/03 07:30:21 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Framework for running and organising tests, with HUnit and QuickCheck support"
-HOMEPAGE="http://batterseapower.github.com/test-framework/"
+HOMEPAGE="https://batterseapower.github.com/test-framework/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

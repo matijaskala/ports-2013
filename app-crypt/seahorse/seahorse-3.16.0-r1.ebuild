@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/seahorse/seahorse-3.16.0-r1.ebuild,v 1.1 2015/06/19 16:56:56 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -13,7 +13,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Seahorse"
 LICENSE="GPL-2+ FDL-1.1+"
 SLOT="0"
 IUSE="debug ldap zeroconf"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86 ~x86-fbsd"
 
 COMMON_DEPEND="
 	>=app-crypt/gcr-3.11.91:=
@@ -31,7 +31,10 @@ COMMON_DEPEND="
 	zeroconf? ( >=net-dns/avahi-0.6:= )
 "
 DEPEND="${COMMON_DEPEND}
+	app-text/yelp-tools
+	dev-util/gdbus-codegen
 	>=dev-util/intltool-0.35
+	dev-util/itstool
 	sys-devel/gettext
 	virtual/pkgconfig
 "

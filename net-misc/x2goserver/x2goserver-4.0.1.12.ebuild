@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/x2goserver/x2goserver-4.0.1.12.ebuild,v 1.5 2014/08/22 09:26:25 voyageur Exp $
+# $Id$
 
 EAPI=4
 inherit eutils multilib systemd toolchain-funcs user
@@ -23,7 +23,7 @@ RDEPEND="dev-perl/Capture-Tiny
 	dev-perl/File-BaseDir
 	dev-perl/File-ReadBackwards
 	media-fonts/font-cursor-misc
-	media-fonts/font-misc-misc
+	media-fonts/font-misc-misc[nls]
 	net-misc/nx
 	net-misc/openssh
 	x11-apps/xauth

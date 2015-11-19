@@ -1,6 +1,6 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/vkeybd/vkeybd-0.1.18d.ebuild,v 1.5 2010/07/13 14:38:29 fauli Exp $
+# $Id$
 
 EAPI=2
 inherit eutils toolchain-funcs
@@ -62,5 +62,5 @@ pkg_postinst() {
 	elog "vkeybdmap-\$LANG is searched in prior. For example, /etc/vkeybdmap-de"
 	elog "can be used for the german locale. See the localization guide:"
 	elog
-	elog "http://www.gentoo.org/doc/en/guide-localization.xml"
+	elog "https://www.gentoo.org/doc/en/guide-localization.xml"
 }

@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/ssl-fetch/ssl-fetch-9999.ebuild,v 1.6 2015/02/09 02:51:38 mrueg Exp $
+# $Id$
 
-EAPI="5"
+EAPI=5
 
-PYTHON_COMPAT=(python{2_7,3_3,3_4} pypy)
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} pypy )
 
 EGIT_BRANCH="master"
 

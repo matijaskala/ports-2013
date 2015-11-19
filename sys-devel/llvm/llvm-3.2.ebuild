@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/llvm/llvm-3.2.ebuild,v 1.10 2015/04/08 18:25:48 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ inherit eutils flag-o-matic multilib python-any-r1 toolchain-funcs pax-utils
 DESCRIPTION="Low Level Virtual Machine"
 HOMEPAGE="http://llvm.org/"
 SRC_URI="http://llvm.org/releases/${PV}/${P}.src.tar.gz
-	!doc? ( http://dev.gentoo.org/~voyageur/distfiles/${P}-manpages.tar.bz2 )"
+	!doc? ( https://dev.gentoo.org/~voyageur/distfiles/${P}-manpages.tar.bz2 )"
 
 LICENSE="UoI-NCSA"
 SLOT="0/${PV}"

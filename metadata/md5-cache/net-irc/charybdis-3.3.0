@@ -1,5 +1,5 @@
 DEFINED_PHASES=configure install postinst prepare setup
-DEPEND=ssl? ( dev-libs/openssl ) zlib? ( sys-libs/zlib ) virtual/yacc sys-devel/flex !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.14.1:1.14 >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEPEND=ssl? ( dev-libs/openssl ) zlib? ( sys-libs/zlib ) virtual/yacc sys-devel/flex !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DESCRIPTION=The atheme project's IRCd based on ratbox
 EAPI=4
 HOMEPAGE=http://atheme.org/project/charybdis http://www.stack.nl/~jilles/irc/#charybdis
@@ -8,6 +8,6 @@ KEYWORDS=amd64 x86
 LICENSE=GPL-2
 RDEPEND=ssl? ( dev-libs/openssl ) zlib? ( sys-libs/zlib )
 SLOT=0
-SRC_URI=http://www.stack.nl/~jilles/irc/charybdis-3.3.0.tbz2 http://dev.gentoo.org/~binki/distfiles/net-irc/charybdis/charybdis-3.3.0-patches.tar.bz2
-_eclasses_=autotools	a9597abac7226d89ad9d010abeef6cfb	eutils	9fb270e417e0e83d64ca52586c4a79de	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	62927b3db3a589b0806255f3a002d5d3	toolchain-funcs	42408102d713fbad60ca21349865edb4	user	f54e098dd38ba1c0847a13e685b87747
-_md5_=25308f0a79118133d8567a51cb541017
+SRC_URI=http://www.stack.nl/~jilles/irc/charybdis-3.3.0.tbz2 https://dev.gentoo.org/~binki/distfiles/net-irc/charybdis/charybdis-3.3.0-patches.tar.bz2
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	f813d23e417656bf3917483643165d5a	libtool	7f78cd7d403808a350c9ae23f5821fb4	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85	user	906f3c8eb3a2350a4f1191a89baa3e46
+_md5_=c9cd6196f0171acc9f7c96f83abd909f

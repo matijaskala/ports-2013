@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/google-perftools/google-perftools-2.0-r2.ebuild,v 1.6 2014/08/11 22:10:08 blueness Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ MY_P="gperftools-${PV}"
 inherit toolchain-funcs eutils flag-o-matic autotools-utils
 
 DESCRIPTION="Fast, multi-threaded malloc() and nifty performance analysis tools"
-HOMEPAGE="http://code.google.com/p/gperftools/"
-SRC_URI="http://gperftools.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://github.com/gperftools/gperftools"
+SRC_URI="https://gperftools.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0/4"
@@ -19,7 +19,7 @@ SLOT="0/4"
 # linux x86/amd64/ppc/ppc64/arm
 # OSX ppc/amd64
 # AIX ppc/ppc64
-KEYWORDS="-* amd64 arm ~ppc ~ppc64 x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="-* amd64 arm ~ppc ppc64 x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 IUSE="largepages +debug minimal test static-libs"
 
 DEPEND="sys-libs/libunwind"
@@ -63,7 +63,7 @@ src_test() {
 	case "${LD_PRELOAD}" in
 		*libsandbox*)
 			ewarn "Unable to run tests when sanbox is enabled."
-			ewarn "See http://bugs.gentoo.org/290249"
+			ewarn "See https://bugs.gentoo.org/290249"
 			return 0
 			;;
 	esac

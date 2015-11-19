@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-kids/crayon-physics/crayon-physics-55.ebuild,v 1.11 2015/06/01 21:35:46 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit eutils gnome2-utils games
@@ -19,9 +19,7 @@ MYGAMEDIR=${GAMES_PREFIX_OPT}/${PN}
 QA_PREBUILT="${MYGAMEDIR#/}/crayon
 	${MYGAMEDIR#/}/lib32/*"
 
-# fuck this pulseaudio linkage
 RDEPEND="
-	media-sound/pulseaudio[abi_x86_32(-)]
 	dev-qt/qtcore:4[abi_x86_32(-)]
 	dev-qt/qtgui:4[abi_x86_32(-)]
 	virtual/glu[abi_x86_32(-)]
@@ -36,7 +34,7 @@ RDEPEND="
 			media-libs/sdl-mixer[vorbis,wav]
 			media-libs/smpeg[X,opengl]
 			media-libs/tiff:0
-			virtual/jpeg
+			virtual/jpeg:0
 		)
 	)"
 

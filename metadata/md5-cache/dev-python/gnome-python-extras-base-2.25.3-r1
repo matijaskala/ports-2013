@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare setup unpack
-DEPEND=>=x11-libs/gtk+-2.4:2 >=dev-libs/glib-2.6:2 || ( ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-python/pygtk-2.10.3:2[python_targets_python2_7(-),python_single_target_python2_7(+)] ) ) !<=dev-python/gnome-python-extras-2.19.1-r2 virtual/pkgconfig gnome-base/gnome-common !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.14.1:1.14 >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 app-arch/xz-utils >=sys-apps/sed-4
+DEPEND=>=x11-libs/gtk+-2.4:2 >=dev-libs/glib-2.6:2 || ( ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-python/pygtk-2.10.3:2[python_targets_python2_7(-),python_single_target_python2_7(+)] ) ) !<=dev-python/gnome-python-extras-2.19.1-r2 virtual/pkgconfig gnome-base/gnome-common !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 app-arch/xz-utils >=sys-apps/sed-4
 DESCRIPTION=Provides python the base files for the Gnome Python Desktop bindings
 EAPI=5
 HOMEPAGE=http://pygtk.org/
@@ -10,5 +10,5 @@ RDEPEND=>=x11-libs/gtk+-2.4:2 >=dev-libs/glib-2.6:2 || ( ( >=dev-lang/python-2.7
 RESTRICT=test
 SLOT=0
 SRC_URI=mirror://gnome/sources/gnome-python-extras/2.25/gnome-python-extras-2.25.3.tar.bz2
-_eclasses_=autotools	a9597abac7226d89ad9d010abeef6cfb	eutils	9fb270e417e0e83d64ca52586c4a79de	fdo-mime	0acfe1a88fd8751a1d5dc671168219fa	gnome.org	8fef8f967214f56e08fa92d61163d891	gnome2	10c513def52488230abb60a4b19a03b9	gnome2-utils	5cdfd22a2163c9d3a891648bd19453a7	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	62927b3db3a589b0806255f3a002d5d3	python-any-r1	da352ea9da8eb9bf158d56cca65d6c82	python-utils-r1	096f8247eae93026af13ab88cf4305cd	toolchain-funcs	42408102d713fbad60ca21349865edb4	versionator	cd0bcdb170807e4a1984115e9d53a26f
-_md5_=489de3ead84c4b41d41a5f57f50c6303
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	f813d23e417656bf3917483643165d5a	fdo-mime	92d07846ea8ea54172f8c0112a47ae3d	gnome.org	ad34f378a3d57a6f2f2b8b4aaca4543e	gnome2	56d268cae832738430a9de86a5765fa1	gnome2-utils	588052cacdf74572e68bdfeaece20534	libtool	7f78cd7d403808a350c9ae23f5821fb4	multilib	3972ca401cf7dbb430df9995f5d8d580	python-any-r1	60a62ae0ee8cd93b4ba99a4c1371eb8b	python-utils-r1	7d52f592fc09a002ea150d69507b5bad	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=5773c38fe4c8f4595c41a8e2c78363f2

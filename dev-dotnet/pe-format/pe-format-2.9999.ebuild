@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-dotnet/pe-format/pe-format-2.9999.ebuild,v 1.5 2014/07/06 13:17:51 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 #if LIVE
 AUTOTOOLS_AUTORECONF=yes
-EGIT_REPO_URI="http://bitbucket.org/mgorny/${PN}2.git"
+EGIT_REPO_URI="https://bitbucket.org/mgorny/${PN}2.git"
 
 inherit git-r3
 #endif
@@ -27,8 +27,6 @@ RDEPEND="!<sys-apps/openrc-0.9.4"
 #if LIVE
 KEYWORDS=
 SRC_URI=
-
-DEPEND="sys-devel/systemd-m4"
 #endif
 
 src_configure() {

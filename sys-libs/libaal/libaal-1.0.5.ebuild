@@ -1,11 +1,11 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libaal/libaal-1.0.5.ebuild,v 1.6 2008/10/26 06:53:28 vapier Exp $
+# $Id$
 
 inherit toolchain-funcs
 
 DESCRIPTION="library required by reiser4progs"
-HOMEPAGE="http://www.kernel.org/pub/linux/utils/fs/reiser4/libaal/"
+HOMEPAGE="https://www.kernel.org/pub/linux/utils/fs/reiser4/libaal/"
 SRC_URI="mirror://kernel/linux/utils/fs/reiser4/libaal/${P}.tar.gz"
 
 LICENSE="GPL-2"

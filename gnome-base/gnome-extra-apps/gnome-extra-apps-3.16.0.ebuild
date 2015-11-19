@@ -1,18 +1,18 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-extra-apps/gnome-extra-apps-3.16.0.ebuild,v 1.2 2015/06/10 01:57:50 tetromino Exp $
+# $Id$
 
 EAPI="5"
 
 DESCRIPTION="Sub-meta package for the applications of GNOME 3"
-HOMEPAGE="http://www.gnome.org/"
+HOMEPAGE="https://www.gnome.org/"
 LICENSE="metapackage"
 SLOT="3.0"
 IUSE="+games +share +shotwell +tracker"
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 # Note to developers:
 # This is a wrapper for the extra apps integrated with GNOME 3

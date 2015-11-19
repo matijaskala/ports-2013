@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pandas/pandas-9999.ebuild,v 1.13 2015/05/15 11:30:51 jlec Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 python3_{3,4} )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1 eutils flag-o-matic git-r3 virtualx
 
@@ -78,10 +79,6 @@ RDEPEND="${CDEPEND}
 			dev-python/html5lib[${PYTHON_USEDEP}] )
 	)
 	R? ( dev-python/rpy[${PYTHON_USEDEP}] )"
-
-PATCHES=(
-	"${FILESDIR}"/${P}-zoneinfo.patch
-)
 
 python_prepare_all() {
 	# Prevent un-needed download during build

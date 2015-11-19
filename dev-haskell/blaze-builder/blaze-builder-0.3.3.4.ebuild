@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/blaze-builder/blaze-builder-0.3.3.4.ebuild,v 1.1 2014/12/13 13:26:35 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Efficient buffered output"
-HOMEPAGE="http://github.com/meiersi/blaze-builder"
+HOMEPAGE="https://github.com/meiersi/blaze-builder"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

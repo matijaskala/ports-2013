@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/hastache/hastache-0.6.1.ebuild,v 1.1 2014/12/24 03:30:39 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,13 +10,15 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Haskell implementation of Mustache templates"
-HOMEPAGE="http://github.com/lymar/hastache"
+HOMEPAGE="https://github.com/lymar/hastache"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
+
+RESTRICT=test # fails to build with ghc-7.10
 
 RDEPEND="dev-haskell/blaze-builder:=[profile?]
 	dev-haskell/ieee754:=[profile?]

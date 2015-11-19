@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-base/qtruby/qtruby-4.14.3-r2.ebuild,v 1.5 2015/02/17 11:06:45 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ inherit kde4-base ruby-ng
 DESCRIPTION="Qt Ruby bindings"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug phonon qscintilla qwt webkit"
-HOMEPAGE="http://techbase.kde.org/Development/Languages/Ruby"
+HOMEPAGE="https://techbase.kde.org/Development/Languages/Ruby"
 
 DEPEND="
 	$(add_kdebase_dep smokeqt 'declarative?,opengl,phonon?,qscintilla?,qwt?,webkit?')

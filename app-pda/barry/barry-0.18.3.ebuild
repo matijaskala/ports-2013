@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-pda/barry/barry-0.18.3.ebuild,v 1.3 2013/02/07 21:40:25 ulm Exp $
+# $Id$
 
 EAPI=5
 inherit bash-completion-r1 eutils gnome2-utils udev
@@ -12,7 +12,7 @@ SRC_URI="mirror://sourceforge/barry/${P}.tar.bz2"
 LICENSE="CC-BY-SA-3.0 GPL-2" #See logo/README for CCPL
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="boost desktop doc gui opensync nls static-libs"
+IUSE="boost desktop doc gui nls static-libs"
 
 RDEPEND=">=dev-cpp/libxmlpp-2.6
 	>=dev-libs/glib-2
@@ -27,8 +27,7 @@ RDEPEND=">=dev-cpp/libxmlpp-2.6
 		dev-cpp/glibmm:2
 		dev-cpp/gtkmm:2.4
 		dev-cpp/libglademm:2.4
-		)
-	opensync? ( ~app-pda/libopensync-0.22 )"
+		)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	doc? ( >=app-doc/doxygen-1.5.6 )
@@ -47,7 +46,6 @@ src_configure() {
 		$(use_enable static-libs static) \
 		$(use_enable boost) \
 		$(use_enable gui) \
-		$(use_enable opensync opensync-plugin) \
 		$(use_enable desktop) \
 		--disable-rpath
 }

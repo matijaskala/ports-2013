@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libcli/libcli-1.9.4-r1.ebuild,v 1.3 2013/02/27 13:46:53 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,7 +9,7 @@ inherit eutils multilib toolchain-funcs
 DESCRIPTION="Cisco-style (telnet) command-line interface library"
 
 HOMEPAGE="http://sites.dparrish.com/libcli"
-SRC_URI="http://libcli.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://libcli.googlecode.com/files/${P}.tar.gz"
 LICENSE="LGPL-2.1"
 
 SLOT="0"

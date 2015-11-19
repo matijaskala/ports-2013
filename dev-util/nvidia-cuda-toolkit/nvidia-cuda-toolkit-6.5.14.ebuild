@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/nvidia-cuda-toolkit/nvidia-cuda-toolkit-6.5.14.ebuild,v 1.10 2015/05/12 11:06:19 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -23,13 +23,13 @@ IUSE="debugger doc eclipse profiler"
 DEPEND=""
 RDEPEND="${DEPEND}
 	<sys-devel/gcc-4.9[cxx]
-	>=x11-drivers/nvidia-drivers-340.32[uvm]
 	debugger? (
 		sys-libs/libtermcap-compat
 		sys-libs/ncurses[tinfo]
 		)
 	eclipse? ( >=virtual/jre-1.6 )
 	profiler? ( >=virtual/jre-1.6 )
+	amd64? ( >=x11-drivers/nvidia-drivers-340.32[uvm] )
 	x86? ( <x11-drivers/nvidia-drivers-346.35[uvm] )
 	"
 
@@ -47,7 +47,7 @@ pkg_setup() {
 		ewarn "Starting with version 6.5 NVIDIA dropped more and more"
 		ewarn "the support for 32bit linux."
 		ewarn "Be aware that bugfixes and new features may not be available."
-		ewarn "http://dev.gentoo.org/~jlec/distfiles/CUDA_Toolkit_Release_Notes.pdf"
+		ewarn "https://dev.gentoo.org/~jlec/distfiles/CUDA_Toolkit_Release_Notes.pdf"
 	fi
 }
 

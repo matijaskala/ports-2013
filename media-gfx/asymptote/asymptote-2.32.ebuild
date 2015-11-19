@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/asymptote/asymptote-2.32.ebuild,v 1.4 2015/03/21 17:11:55 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/asymptote/${P}.src.tgz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="amd64 x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
 IUSE="+boehm-gc doc emacs examples fftw gsl +imagemagick latex offscreen +opengl python sigsegv svg vim-syntax X"
 
 REQUIRED_USE="
@@ -22,7 +22,7 @@ REQUIRED_USE="
 	offscreen? ( opengl )"
 
 RDEPEND="
-	>=sys-libs/ncurses-5.4-r5
+	>=sys-libs/ncurses-5.4-r5:0=
 	>=sys-libs/readline-4.3-r5:0=
 	imagemagick? ( media-gfx/imagemagick[png] )
 	opengl? ( >=media-libs/mesa-8 )
@@ -36,7 +36,7 @@ RDEPEND="
 	X? (
 		${PYTHON_DEPS}
 		x11-misc/xdg-utils
-		virtual/python-imaging[tk,${PYTHON_USEDEP}]
+		dev-python/pillow[tk,${PYTHON_USEDEP}]
 		)
 	latex? (
 		virtual/latex-base

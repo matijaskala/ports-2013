@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/wai-extra/wai-extra-1.3.4.5.ebuild,v 1.2 2014/07/25 09:16:24 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Provides some basic WAI handlers and middleware"
-HOMEPAGE="http://github.com/yesodweb/wai"
+HOMEPAGE="https://github.com/yesodweb/wai"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="MIT"

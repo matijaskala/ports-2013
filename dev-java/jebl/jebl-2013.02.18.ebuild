@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jebl/jebl-2013.02.18.ebuild,v 1.1 2013/02/18 12:06:09 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,7 +17,7 @@ inherit java-pkg-2 java-ant-2
 DESCRIPTION="Java Evolutionary Biology Library"
 HOMEPAGE="http://jebl.sourceforge.net/"
 #SRC_URI=""
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 KEYWORDS="~amd64 ~x86"
 SLOT="0"

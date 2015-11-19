@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-m17n/ibus-m17n-1.3.3.ebuild,v 1.4 2012/05/03 19:24:28 jdhore Exp $
+# $Id$
 
 EAPI="3"
 
 DESCRIPTION="The M17N engine IMEngine for IBus Framework"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

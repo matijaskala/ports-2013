@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/qimageblitz/qimageblitz-0.0.6-r1.ebuild,v 1.8 2015/01/29 17:55:03 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 inherit cmake-utils
 
 DESCRIPTION="A graphical effect and filter library for KDE4"
-HOMEPAGE="http://websvn.kde.org/trunk/kdesupport/qimageblitz/"
+HOMEPAGE="https://websvn.kde.org/trunk/kdesupport/qimageblitz/"
 SRC_URI="mirror://kde/stable/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2"

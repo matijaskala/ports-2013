@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/notmuch/notmuch-0.18.2.ebuild,v 1.6 2015/04/18 15:56:03 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,9 @@ HOMEPAGE="http://notmuchmail.org/"
 SRC_URI="${HOMEPAGE%/}/releases/${P}.tar.gz"
 
 LICENSE="GPL-3"
-SLOT="0"
+# Sub-slot corresponds to major wersion of libnotmuch.so.X.Y.  Bump of Y is
+# meant to be binary backward compatible.
+SLOT="0/3"
 KEYWORDS="amd64 x86"
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )

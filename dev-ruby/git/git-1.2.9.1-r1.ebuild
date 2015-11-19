@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/git/git-1.2.9.1-r1.ebuild,v 1.1 2015/03/14 05:31:16 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21 ruby22"
@@ -14,7 +14,7 @@ RUBY_FAKEGEM_GEMSPEC="git.gemspec"
 inherit ruby-fakegem
 
 DESCRIPTION="Library for using Git in Ruby"
-HOMEPAGE="http://github.com/schacon/ruby-git"
+HOMEPAGE="https://github.com/schacon/ruby-git"
 SRC_URI="https://github.com/schacon/ruby-git/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 RUBY_S="ruby-git-${PV}"
 

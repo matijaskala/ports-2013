@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-unikey/ibus-unikey-0.6.1.ebuild,v 1.2 2012/05/03 19:24:33 jdhore Exp $
+# $Id$
 
 EAPI="4"
 inherit eutils
 
 DESCRIPTION="Vietnamese Input Method Engine for IBUS using Unikey IME"
-HOMEPAGE="http://code.google.com/p/ibus-unikey/"
-SRC_URI="http://ibus-unikey.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/ibus-unikey/"
+SRC_URI="https://ibus-unikey.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

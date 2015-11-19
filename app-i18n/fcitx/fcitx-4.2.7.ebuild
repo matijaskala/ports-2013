@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/fcitx/fcitx-4.2.7.ebuild,v 1.10 2013/10/01 21:06:56 pesa Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit cmake-utils eutils gnome2-utils fdo-mime multilib readme.gentoo
 
 DESCRIPTION="Flexible Contect-aware Input Tool with eXtension support"
 HOMEPAGE="http://fcitx-im.org/"
-SRC_URI="http://fcitx.googlecode.com/files/${P}_dict.tar.xz"
+SRC_URI="https://fcitx.googlecode.com/files/${P}_dict.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

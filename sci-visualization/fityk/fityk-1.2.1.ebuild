@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-visualization/fityk/fityk-1.2.1.ebuild,v 1.5 2015/04/12 16:25:37 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit autotools-utils fdo-mime python-r1 wxwidgets
 
 DESCRIPTION="General-purpose nonlinear curve fitting and data analysis"
 HOMEPAGE="http://fityk.nieto.pl/"
-SRC_URI="http://github.com/downloads/${GITHUB_USER}/${PN}/${P}.tar.bz2"
+SRC_URI="https://github.com/downloads/${GITHUB_USER}/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

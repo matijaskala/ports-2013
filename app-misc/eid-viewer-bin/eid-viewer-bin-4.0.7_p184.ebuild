@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/eid-viewer-bin/eid-viewer-bin-4.0.7_p184.ebuild,v 1.2 2014/08/10 18:03:21 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,7 +20,7 @@ SRC_URI="http://eid.belgium.be/en/binaries/eid-viewer-4%2E0%2E7-184%2Esrc%2Etar_
 HOMEPAGE="http://eid.belgium.be"
 
 RDEPEND="
-	virtual/jre
+	virtual/jre:*
 	sys-apps/pcsc-lite"
 DEPEND="${RDEPEND}"
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/java-sdk-docs/java-sdk-docs-1.6.0.30.ebuild,v 1.1 2012/03/10 08:12:20 caster Exp $
+# $Id$
 
 EAPI="4"
 
@@ -33,7 +33,7 @@ pkg_nofetch() {
 	einfo "If emerge fails because of a checksum error it is possible that"
 	einfo "the upstream release changed without renaming. Try downloading the file"
 	einfo "again (or a newer revision if available). Otherwise report this to"
-	einfo "http://bugs.gentoo.org/67266 and we will make a new revision."
+	einfo "https://bugs.gentoo.org/67266 and we will make a new revision."
 }
 
 src_install(){

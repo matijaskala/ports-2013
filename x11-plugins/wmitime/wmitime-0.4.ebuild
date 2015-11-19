@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmitime/wmitime-0.4.ebuild,v 1.1 2015/01/12 13:59:58 voyageur Exp $
+# $Id$
 
 EAPI=5
 inherit toolchain-funcs
@@ -8,7 +8,7 @@ inherit toolchain-funcs
 DESCRIPTION="Overglorified clock dockapp w/time, date, and internet time"
 HOMEPAGE="http://windowmaker.org/dockapps/?name=wmitime"
 # Grab from http://windowmaker.org/dockapps/?download=${P}.tar.gz
-SRC_URI="http://dev.gentoo.org/~voyageur/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~voyageur/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

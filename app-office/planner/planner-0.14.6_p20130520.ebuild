@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/planner/planner-0.14.6_p20130520.ebuild,v 1.10 2015/06/13 10:05:40 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -10,8 +10,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit gnome2 python-single-r1
 
 DESCRIPTION="Project manager for Gnome"
-HOMEPAGE="http://live.gnome.org/Planner/"
-SRC_URI="http://dev.gentoo.org/~eva/distfiles/${PN}/${P}.tar.xz"
+HOMEPAGE="https://live.gnome.org/Planner/"
+SRC_URI="https://dev.gentoo.org/~eva/distfiles/${PN}/${P}.tar.xz"
 
 SLOT="0"
 LICENSE="GPL-2"

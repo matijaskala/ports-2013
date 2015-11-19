@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-distutils-extra/python-distutils-extra-2.37-r1.ebuild,v 1.7 2015/04/08 08:05:09 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Gettext support, themed icons and scrollkeeper-based documentation in distutils"
 HOMEPAGE="https://launchpad.net/python-distutils-extra"
-SRC_URI="http://launchpad.net/python-distutils-extra/trunk/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/python-distutils-extra/trunk/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

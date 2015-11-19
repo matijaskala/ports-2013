@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/keystone/keystone-2015.1.9999.ebuild,v 1.1 2015/04/30 17:23:27 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 
@@ -25,25 +25,25 @@ DEPEND="
 	<dev-python/pbr-1.0[${PYTHON_USEDEP}]
 	test? (
 		${RDEPEND}
-		>=dev-python/hacking-0.10.0[${PYTHON_USEDEP}]
-		<dev-python/hacking-0.11[${PYTHON_USEDEP}]
 		>=dev-python/bashate-0.2[${PYTHON_USEDEP}]
 		dev-lang/python[sqlite]
 		memcached? (
 			>=dev-python/python-memcached-1.48[${PYTHON_USEDEP}]
 		)
 		mongo? (
-			>=dev-python/pymongo-2.5[${PYTHON_USEDEP}]
+			>=dev-python/pymongo-2.6.3[${PYTHON_USEDEP}]
 			<dev-python/pymongo-3.0[${PYTHON_USEDEP}]
 		)
 		ldap? (
-			dev-python/python-ldap[${PYTHON_USEDEP}]
+			>=dev-python/python-ldap-2.4[${PYTHON_USEDEP}]
 			>=dev-python/ldappool-1.0[${PYTHON_USEDEP}]
 		)
 		>=dev-python/coverage-3.6[${PYTHON_USEDEP}]
 		>=dev-python/fixtures-0.3.14[${PYTHON_USEDEP}]
+		<dev-python/fixtures-1.3.0[${PYTHON_USEDEP}]
 		>=dev-python/lxml-2.3[${PYTHON_USEDEP}]
 		>=dev-python/mock-1.0[${PYTHON_USEDEP}]
+		<dev-python/mock-1.1.0[${PYTHON_USEDEP}]
 		>=dev-python/oslotest-1.5.1[${PYTHON_USEDEP}]
 		<dev-python/oslotest-1.6.0[${PYTHON_USEDEP}]
 		>=dev-python/sphinx-1.1.2[${PYTHON_USEDEP}]
@@ -57,6 +57,7 @@ DEPEND="
 		>=dev-python/oslo-sphinx-2.5.0[${PYTHON_USEDEP}]
 		<dev-python/oslo-sphinx-2.6.0[${PYTHON_USEDEP}]
 		>=dev-python/tempest-lib-0.4.0[${PYTHON_USEDEP}]
+		<dev-python/tempest-lib-0.5.0[${PYTHON_USEDEP}]
 	)"
 RDEPEND="
 	>=dev-python/webob-1.2.3-r1[${PYTHON_USEDEP}]
@@ -68,6 +69,7 @@ RDEPEND="
 	dev-python/paste[${PYTHON_USEDEP}]
 	>=dev-python/routes-1.12.3[${PYTHON_USEDEP}]
 	!~dev-python/routes-2.0[${PYTHON_USEDEP}]
+	>=dev-python/cryptography-0.8[${PYTHON_USEDEP}]
 	>=dev-python/six-1.9.0[${PYTHON_USEDEP}]
 	sqlite? (
 		>=dev-python/sqlalchemy-0.9.7[sqlite,${PYTHON_USEDEP}]
@@ -84,13 +86,15 @@ RDEPEND="
 		<=dev-python/sqlalchemy-0.9.99[${PYTHON_USEDEP}]
 	)
 	>=dev-python/sqlalchemy-migrate-0.9.5[${PYTHON_USEDEP}]
+	!~dev-python/sqlalchemy-migrate-0.9.8[${PYTHON_USEDEP}]
+	<dev-python/sqlalchemy-migrate-0.10.0[${PYTHON_USEDEP}]
 	dev-python/passlib[${PYTHON_USEDEP}]
 	>=dev-python/iso8601-0.1.9[${PYTHON_USEDEP}]
-	>=dev-python/python-keystoneclient-1.1.0[${PYTHON_USEDEP}]
+	>=dev-python/python-keystoneclient-1.2.0[${PYTHON_USEDEP}]
 	<dev-python/python-keystoneclient-1.4.0[${PYTHON_USEDEP}]
 	>=dev-python/keystonemiddleware-1.5.0[${PYTHON_USEDEP}]
 	<dev-python/keystonemiddleware-1.6.0[${PYTHON_USEDEP}]
-	>=dev-python/oslo-concurrency-1.8.0[${PYTHON_USEDEP}]
+	>=dev-python/oslo-concurrency-1.8.2[${PYTHON_USEDEP}]
 	<dev-python/oslo-concurrency-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-config-1.9.3[${PYTHON_USEDEP}]
 	<dev-python/oslo-config-1.10.0[${PYTHON_USEDEP}]
@@ -109,6 +113,7 @@ RDEPEND="
 	>=dev-python/oslo-serialization-1.4.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-serialization-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-utils-1.4.0[${PYTHON_USEDEP}]
+	!~dev-python/oslo-utils-1.4.1[${PYTHON_USEDEP}]
 	<dev-python/oslo-utils-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oauthlib-0.6.0[${PYTHON_USEDEP}]
 	dev-python/pysaml2[${PYTHON_USEDEP}]
@@ -130,6 +135,7 @@ pkg_setup() {
 
 python_prepare_all() {
 	# it's in git, but not in the tarball.....
+	sed -i '/^hacking/d' test-requirements.txt test-requirements-py3.txt || die
 	mkdir -p ${PN}/tests/tmp/ || die
 	cp etc/keystone-paste.ini ${PN}/tests/tmp/ || die
 	distutils-r1_python_prepare_all
@@ -153,6 +159,7 @@ python_install() {
 	diropts -m 0750
 	keepdir /etc/keystone /var/log/keystone
 	insinto /etc/keystone
+	insopts -m0640 -okeystone -gkeystone
 	doins etc/keystone.conf.sample etc/logging.conf.sample
 	doins etc/default_catalog.templates etc/policy.json
 	doins etc/policy.v3cloudsample.json etc/keystone-paste.ini

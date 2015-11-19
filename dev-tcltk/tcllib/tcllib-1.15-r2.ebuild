@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tcltk/tcllib/tcllib-1.15-r2.ebuild,v 1.11 2015/03/30 10:02:20 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ inherit eutils virtualx
 DESCRIPTION="Tcl Standard Library"
 HOMEPAGE="http://www.tcl.tk/software/tcllib/"
 SRC_URI="
-	http://dev.gentoo.org/~jlec/distfiles/${P}-manpage-rename.patch.xz
-	http://dev.gentoo.org/~jlec/distfiles/${P}-test.patch.xz
+	https://dev.gentoo.org/~jlec/distfiles/${P}-manpage-rename.patch.xz
+	https://dev.gentoo.org/~jlec/distfiles/${P}-test.patch.xz
 	mirror://sourceforge/tcllib/${P}.tar.bz2"
 
 LICENSE="BSD"

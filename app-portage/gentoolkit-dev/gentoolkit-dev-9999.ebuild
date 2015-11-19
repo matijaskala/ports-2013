@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/gentoolkit-dev/gentoolkit-dev-9999.ebuild,v 1.17 2015/05/22 16:39:00 floppym Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,10 +12,10 @@ inherit python-r1
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="git://anongit.gentoo.org/proj/gentoolkit.git
-		http://anongit.gentoo.org/git/proj/gentoolkit.git"
+		https://anongit.gentoo.org/git/proj/gentoolkit.git"
 	EGIT_BRANCH="gentoolkit-dev"
 else
-	SRC_URI="http://dev.gentoo.org/~floppym/dist/${P}.tar.gz"
+	SRC_URI="https://dev.gentoo.org/~floppym/dist/${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
 
@@ -36,6 +36,28 @@ DEPEND="${PYTHON_DEPS}
 	test? ( ${CDEPEND} )"
 RDEPEND="${PYTHON_DEPS}
 	${CDEPEND}"
+
+src_prepare() {
+	if [[ -n ${EPREFIX} ]] ; then
+		# fix shebangs of scripts
+		local d p
+		ebegin "Fixing shebangs"
+		for d in src/* ; do
+			p=${d#*/}
+			sed -i \
+				-e "1s:\(\(/usr\)\?/bin/\):${EPREFIX}\1:" \
+				${d}/${p}* \
+				|| die "failed to fix ${d}/${p}"
+		done
+		eend $?
+
+		# fix repo location
+		sed -i \
+			-e "s:portage\.db\['/'\]:portage.db['${EPREFIX}/']:g" \
+			src/ekeyword/ekeyword.py \
+			|| die "failed to set EPREFIX in ekeyword"
+	fi
+}
 
 src_test() {
 	# echangelog test is not able to run as root

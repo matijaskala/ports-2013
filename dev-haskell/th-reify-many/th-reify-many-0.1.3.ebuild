@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/th-reify-many/th-reify-many-0.1.3.ebuild,v 1.1 2015/04/03 10:07:37 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,12 +10,12 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Recurseively reify template haskell datatype info"
-HOMEPAGE="http://github.com/mgsloan/th-reify-many"
+HOMEPAGE="https://github.com/mgsloan/th-reify-many"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="dev-haskell/mtl:=[profile?]

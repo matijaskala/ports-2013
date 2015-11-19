@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/about-distro/about-distro-1.1.0.ebuild,v 1.1 2014/07/28 21:58:22 johu Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit kde4-base
 
 DESCRIPTION="KCM displaying distribution and system information"
 HOMEPAGE="https://projects.kde.org/projects/playground/base/about-distro"
-SRC_URI="http://www.gentoo.org/images/glogo-small.png"
+SRC_URI="https://www.gentoo.org/images/glogo-small.png"
 
 if [[ ${KDE_BUILD_TYPE} != live ]]; then
 	SRC_URI+=" mirror://kde/stable/${PN}/${PV}/src/${P}.tar.xz"

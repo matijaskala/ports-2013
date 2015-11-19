@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libatasmart/libatasmart-0.19-r1.ebuild,v 1.11 2015/03/03 06:24:35 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
@@ -24,7 +24,7 @@ DEPEND="${RDEPEND}
 DOCS="README"
 
 src_prepare() {
-	# http://bugs.gentoo.org/470874
+	# https://bugs.gentoo.org/470874
 	local d="${WORKDIR}"/debian/patches
 	sed -i -e '/#/d' "${d}"/series || die
 	EPATCH_SOURCE="${d}" epatch $(<"${d}"/series)

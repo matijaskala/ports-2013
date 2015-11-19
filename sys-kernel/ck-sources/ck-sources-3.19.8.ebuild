@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/ck-sources/ck-sources-3.19.8.ebuild,v 1.1 2015/05/16 02:44:45 yngwin Exp $
+# $Id$
 
 EAPI="5"
 ETYPE="sources"
 KEYWORDS="~amd64 ~x86"
 IUSE="bfsonly"
 
-HOMEPAGE="http://dev.gentoo.org/~mpagano/genpatches/
+HOMEPAGE="https://dev.gentoo.org/~mpagano/genpatches/
 	http://users.on.net/~ckolivas/kernel/"
 
 K_WANT_GENPATCHES="base extras experimental"
@@ -100,6 +100,6 @@ pkg_postinst() {
 	kernel-2_pkg_postinst
 
 	elog
-	elog "For more info on this patchset, see: http://forums.gentoo.org/viewtopic-t-941030-start-0.html"
+	elog "For more info on this patchset, see: https://forums.gentoo.org/viewtopic-t-941030-start-0.html"
 	elog
 }

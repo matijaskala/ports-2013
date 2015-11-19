@@ -1,6 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/base/package.use.force,v 1.56 2015/06/09 22:57:57 eva Exp $
+# $Id$
+
+# Lars Wendler <polynomial-c@gentoo.org> (11 Sep 2015)
+# Package fails to build with dbus USE flag being disabled (bug #560208)
+=x11-wm/afterstep-2.2.12 dbus
 
 # Gilles Dartiguelongue <eva@gentoo.org> (25 May 2015)
 # webkit fails to build with USE=wayland, bug #549228
@@ -30,11 +34,7 @@ app-shells/bash:0 readline
 # Michał Górny <mgorny@gentoo.org> (14 Oct 2012)
 # Force-enable all PYTHON_TARGETS for python-exec to avoid using private
 # API. Please remember to keep it in sync with python_targets.desc.
-dev-lang/python-exec python_targets_python2_7 python_targets_python3_2 python_targets_python3_3 python_targets_python3_4 python_targets_jython2_5 python_targets_jython2_7 python_targets_pypy python_targets_pypy3
-
-# Samuli Suominen <ssuominen@gentoo.org> (23 Jan 2012)
-# Forcing enabled while waiting for eselect-notify-send wrt #379941
-x11-libs/libnotify symlink
+dev-lang/python-exec python_targets_python2_7 python_targets_python3_2 python_targets_python3_3 python_targets_python3_4 python_targets_python3_5 python_targets_jython2_5 python_targets_jython2_7 python_targets_pypy python_targets_pypy3
 
 # Zac Medico <zmedico@gentoo.org> (20 Oct 2010)
 # Force ipc USE flag since it should remain enabled unless
@@ -60,32 +60,4 @@ dev-libs/libpcre unicode
 # implementation that cannot, thus, be turned off.
 dev-ruby/bitescript ruby_targets_jruby
 dev-ruby/duby ruby_targets_jruby
-dev-ruby/jruby-debug-base ruby_targets_jruby
 dev-ruby/jruby-openssl ruby_targets_jruby
-=dev-ruby/test-unit-1* ruby_targets_ruby19
-
-# Diego E. Pettenò <flameeyes@gentoo.org> (14 Jan 2010)
-# Multi-version Ruby virtuals for sanity
-~virtual/ruby-ssl-0 ruby_targets_ruby18
-~virtual/ruby-ssl-1 ruby_targets_ruby19
-~virtual/ruby-ssl-2 ruby_targets_jruby
-~virtual/ruby-ssl-3 ruby_targets_ruby20
-~virtual/ruby-ssl-4 ruby_targets_ruby21
-~virtual/ruby-rdoc-0 ruby_targets_ruby18
-~virtual/ruby-rdoc-1 ruby_targets_ruby19
-~virtual/ruby-rdoc-2 ruby_targets_jruby
-~virtual/ruby-rdoc-3 ruby_targets_ruby20
-~virtual/ruby-rdoc-4 ruby_targets_ruby21
-~virtual/ruby-threads-0 ruby_targets_ruby18
-~virtual/ruby-threads-1 ruby_targets_ruby19
-~virtual/ruby-threads-2 ruby_targets_jruby
-~virtual/ruby-threads-3 ruby_targets_ree18
-~virtual/ruby-threads-4 ruby_targets_ruby20
-~virtual/ruby-threads-5 ruby_targets_ruby21
-~virtual/rubygems-1 ruby_targets_ruby18
-~virtual/rubygems-2 ruby_targets_jruby
-~virtual/rubygems-3 ruby_targets_ree18
-~virtual/rubygems-4 ruby_targets_ruby19
-~virtual/rubygems-5 ruby_targets_rbx
-~virtual/rubygems-6 ruby_targets_ruby20
-~virtual/rubygems-7 ruby_targets_ruby21

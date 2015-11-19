@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/xfce4-sensors-plugin/xfce4-sensors-plugin-1.2.6.ebuild,v 1.1 2015/04/12 19:35:20 mgorny Exp $
+# $Id$
 
 EAPI=5
 EAUTORECONF=yes
@@ -12,7 +12,7 @@ SRC_URI="mirror://xfce/src/panel-plugins/${PN}/${PV%.*}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="+acpi debug hddtemp libnotify lm_sensors video_cards_nvidia"
 
 REQUIRED_USE="|| ( hddtemp lm_sensors acpi )"
@@ -50,9 +50,9 @@ src_prepare() {
 	# Use flags from xfce4-dev-tools instead of defining them again in
 	# configure.in wrt #386979
 	# Remove AC_PROG_LIBTOOL because LT_INIT([disable-static]) is also present:
-	# http://bugzilla.xfce.org/show_bug.cgi?id=8888
+	# https://bugzilla.xfce.org/show_bug.cgi?id=8888
 	# Use AC_CONFIG_HEADERS for automake-1.13 compability, see:
-	# http://bugzilla.xfce.org/show_bug.cgi?id=10031
+	# https://bugzilla.xfce.org/show_bug.cgi?id=10031
 	sed -i \
 		-e '/PLATFORM_CFLAGS/s:-Werror::' \
 		configure.ac || die

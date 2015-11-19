@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-embedded/gnusim8085/gnusim8085-1.3.7.ebuild,v 1.5 2012/05/03 02:35:37 jdhore Exp $
+# $Id$
 
 EAPI=4
 
@@ -8,7 +8,7 @@ inherit eutils autotools
 
 DESCRIPTION="A GTK2 8085 Simulator"
 HOMEPAGE="http://gnusim8085.org"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libpostproc/libpostproc-10.20140517-r1.ebuild,v 1.13 2015/06/02 05:17:32 jmorgan Exp $
+# $Id$
 
 EAPI="5"
 
@@ -19,13 +19,13 @@ if [ "${PV#9999}" != "${PV}" ] ; then
 elif [ "${PV%_p*}" != "${PV}" ] ; then # Snapshot
 	SRC_URI="mirror://gentoo/${P}.tar.xz"
 else # Release
-	SRC_URI="http://dev.gentoo.org/~lu_zero/distfiles/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~lu_zero/distfiles/${P}.tar.xz"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 if [ "${PV#9999}" = "${PV}" ] ; then
-	KEYWORDS="alpha amd64 arm ~arm64 hppa ~ia64 ppc ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+	KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ppc ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 fi
 IUSE="pic static-libs"
 

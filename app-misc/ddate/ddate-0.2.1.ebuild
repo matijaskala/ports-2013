@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/ddate/ddate-0.2.1.ebuild,v 1.1 2013/05/13 10:08:28 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
 
 DESCRIPTION="Perpetual date converter from gregorian to poee calendar"
-HOMEPAGE="http://github.com/bo0ts/ddate"
-SRC_URI="http://github.com/bo0ts/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/bo0ts/ddate"
+SRC_URI="https://github.com/bo0ts/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="public-domain"
 SLOT="0"

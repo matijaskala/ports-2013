@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/libgda/libgda-5.2.2.ebuild,v 1.8 2015/04/18 08:08:07 pacho Exp $
+# $Id$
 
 EAPI="5"
 GNOME2_LA_PUNT="yes"
@@ -33,8 +33,8 @@ RDEPEND="
 	>=dev-libs/glib-2.32:2
 	>=dev-libs/libxml2-2
 	dev-libs/libxslt
-	sys-libs/readline:=
-	sys-libs/ncurses:=
+	sys-libs/readline:0=
+	sys-libs/ncurses:0=
 	berkdb?   ( sys-libs/db )
 	firebird? ( dev-db/firebird )
 	gtk? (

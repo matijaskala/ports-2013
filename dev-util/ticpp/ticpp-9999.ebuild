@@ -1,16 +1,16 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/ticpp/ticpp-9999.ebuild,v 1.5 2013/05/11 13:56:33 ago Exp $
+# $Id$
 
 EAPI=5
 
 inherit subversion
 
-ESVN_REPO_URI="http://${PN}.googlecode.com/svn/trunk/"
+ESVN_REPO_URI="https://${PN}.googlecode.com/svn/trunk/"
 MY_PV=cvs
 
 DESCRIPTION="A completely new interface to TinyXML that uses MANY of the C++ strengths"
-HOMEPAGE="http://code.google.com/p/ticpp/"
+HOMEPAGE="https://github.com/rjpcomputing/ticpp"
 SRC_URI=""
 
 LICENSE="MIT"

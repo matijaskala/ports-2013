@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/stardict/stardict-3.0.6.ebuild,v 1.5 2015/06/11 14:31:28 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,12 +18,12 @@ inherit eutils gnome2
 DESCRIPTION="A international dictionary supporting fuzzy and glob style matching"
 HOMEPAGE="http://stardict-4.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}-4/${P}.tar.bz2
-	pronounce? ( http://${PN}-3.googlecode.com/files/WyabdcRealPeopleTTS.tar.bz2 )
+	pronounce? ( https://${PN}-3.googlecode.com/files/WyabdcRealPeopleTTS.tar.bz2 )
 	qqwry? ( mirror://gentoo/QQWry.Dat.bz2 )"
 
 LICENSE="CPL-1.0 GPL-3 LGPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64 ppc ~ppc64 ~sparc x86"
+KEYWORDS="amd64 ~arm ~arm64 ppc ppc64 sparc x86"
 IUSE="espeak gucharmap qqwry pronounce spell tools"
 
 RESTRICT="test"

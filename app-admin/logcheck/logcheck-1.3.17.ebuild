@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/logcheck/logcheck-1.3.17.ebuild,v 1.1 2015/01/02 21:48:16 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -47,6 +47,6 @@ src_install() {
 pkg_postinst() {
 	chown -R logcheck:logcheck /etc/logcheck /var/lib/logcheck || die
 
-	elog "Please read the guide ad http://www.gentoo.org/doc/en/logcheck.xml"
+	elog "Please read the guide ad https://www.gentoo.org/doc/en/logcheck.xml"
 	elog "for installation instructions."
 }

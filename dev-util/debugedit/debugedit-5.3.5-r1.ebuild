@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/debugedit/debugedit-5.3.5-r1.ebuild,v 1.9 2013/02/21 02:57:16 zmedico Exp $
+# $Id$
 
 # To recreate this tarball, just grab latest rpm5 release:
 #	http://rpm5.org/files/rpm/
@@ -13,8 +13,8 @@ inherit toolchain-funcs eutils
 
 DESCRIPTION="standalone debugedit taken from rpm"
 HOMEPAGE="http://www.rpm5.org/"
-SRC_URI="http://dev.gentoo.org/~swegener/distfiles/${P}.tar.bz2
-	http://dev.gentoo.org/~vapier/distfiles/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~swegener/distfiles/${P}.tar.bz2
+	https://dev.gentoo.org/~vapier/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

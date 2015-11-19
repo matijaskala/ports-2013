@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/aubio/aubio-0.4.1.ebuild,v 1.4 2015/05/17 20:04:35 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ DISTUTILS_OPTIONAL=1
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE='threads(+)'
 
-inherit distutils-r1 waf-utils multilib
+inherit distutils-r1 waf-utils multilib eutils
 
 DESCRIPTION="Library for audio labelling"
 HOMEPAGE="http://aubio.org/"
@@ -16,7 +16,7 @@ SRC_URI="http://aubio.org//pub/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~ppc ppc64 ~sparc x86"
+KEYWORDS="amd64 ~ppc ppc64 sparc x86"
 IUSE="doc double-precision examples ffmpeg fftw jack libsamplerate sndfile python"
 
 RDEPEND="
@@ -39,6 +39,7 @@ PYTHON_SRC_DIR="${S}/python"
 src_prepare() {
 	sed -i -e "s:\/lib:\/$(get_libdir):" src/wscript_build || die
 	sed -i -e "s:doxygen:doxygen_disabled:" wscript || die
+	has_version '>=media-video/ffmpeg-2.8' && epatch "${FILESDIR}/${PN}-0.4.1-ffmpeg29.patch"
 }
 
 src_configure() {

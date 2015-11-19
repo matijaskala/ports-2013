@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/p9m4/p9m4-05-r1.ebuild,v 1.1 2015/05/01 14:14:44 gienah Exp $
+# $Id$
 
 EAPI="5"
 
@@ -15,7 +15,7 @@ MY_P="${MY_PN}${PV}"
 DESCRIPTION="This is a Graphical User Interface for Prover9 and Mace4"
 HOMEPAGE="http://www.cs.unm.edu/~mccune/mace4/"
 SRC_URI="http://www.cs.unm.edu/~mccune/prover9/gui/${MY_P}.tar.gz
-		http://dev.gentoo.org/~gienah/2big4tree/sci-mathematics/p9m4/p9m4-v05-64bit.patch.bz2"
+		https://dev.gentoo.org/~gienah/2big4tree/sci-mathematics/p9m4/p9m4-v05-64bit.patch.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

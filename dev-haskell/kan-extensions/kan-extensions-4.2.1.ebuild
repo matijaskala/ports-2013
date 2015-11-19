@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/kan-extensions/kan-extensions-4.2.1.ebuild,v 1.1 2015/04/03 12:56:39 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Kan extensions, Kan lifts, various forms of the Yoneda lemma, and (co)density (co)monads"
-HOMEPAGE="http://github.com/ekmett/kan-extensions/"
+HOMEPAGE="https://github.com/ekmett/kan-extensions/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

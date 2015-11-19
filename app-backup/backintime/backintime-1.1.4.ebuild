@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-backup/backintime/backintime-1.1.4.ebuild,v 1.2 2015/06/08 13:40:28 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -28,6 +28,8 @@ DEPEND="${RDEPEND}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 src_prepare() {
+	epatch "${FILESDIR}"/${P}-python-version-stderr.patch
+
 	#fix doc install location
 	sed -e "s:/doc/${PN}-common:/doc/${PF}:g" \
 		-i common/Makefile.template || die

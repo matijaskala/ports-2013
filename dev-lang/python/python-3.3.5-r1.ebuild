@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/python/python-3.3.5-r1.ebuild,v 1.12 2015/03/31 18:46:33 ulm Exp $
+# $Id$
 
 EAPI="4"
 WANT_AUTOMAKE="none"
@@ -14,7 +14,7 @@ PATCHSET_VERSION="${PV}-0"
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="http://www.python.org/"
 SRC_URI="http://www.python.org/ftp/python/${PV}/${MY_P}.tar.xz
-	http://dev.gentoo.org/~floppym/python/python-gentoo-patches-${PATCHSET_VERSION}.tar.xz
+	https://dev.gentoo.org/~floppym/python/python-gentoo-patches-${PATCHSET_VERSION}.tar.xz
 	mirror://gentoo/python-gentoo-patches-${PATCHSET_VERSION}.tar.xz"
 
 LICENSE="PSF-2"
@@ -280,15 +280,18 @@ src_install() {
 		-i "${ED}etc/conf.d/pydoc-${SLOT}" "${ED}etc/init.d/pydoc-${SLOT}" || die "sed failed"
 
 	# for python-exec
-	python_export python${SLOT} EPYTHON PYTHON PYTHON_SITEDIR
+	local vars=( EPYTHON PYTHON_SITEDIR )
 
 	# if not using a cross-compiler, use the fresh binary
 	if ! tc-is-cross-compiler; then
-		local PYTHON=./python
+		local -x PYTHON=./python
 		local -x LD_LIBRARY_PATH=${LD_LIBRARY_PATH+${LD_LIBRARY_PATH}:}.
+	else
+		vars=( PYTHON "${vars[@]}" )
 	fi
 
-	echo "EPYTHON='${EPYTHON}'" > epython.py
+	python_export "python${PYVER}" "${vars[@]}"
+	echo "EPYTHON='${EPYTHON}'" > epython.py || die
 	python_domodule epython.py
 }
 

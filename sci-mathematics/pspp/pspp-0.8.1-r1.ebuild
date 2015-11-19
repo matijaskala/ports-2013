@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/pspp/pspp-0.8.1-r1.ebuild,v 1.5 2014/12/28 16:54:20 titanofold Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ AUTOTOOLS_AUTORECONF=1
 inherit eutils elisp-common autotools-utils multilib
 
 DESCRIPTION="Program for statistical analysis of sampled data"
-HOMEPAGE="http://www.gnu.org/software/pspp/pspp.html"
+HOMEPAGE="https://www.gnu.org/software/pspp/pspp.html"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-firmware/ipxe/ipxe-1.0.0_p20130925.ebuild,v 1.6 2015/03/16 21:23:59 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,10 +16,9 @@ SRC_URI="https://git.ipxe.org/ipxe.git/snapshot/${GIT_REV}.tar.bz2 -> ${P}-${GIT
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="iso +qemu undi usb vmware"
+IUSE="iso lkrn +qemu undi usb vmware"
 
-DEPEND="sys-devel/make
-	dev-lang/perl
+DEPEND="dev-lang/perl
 	sys-libs/zlib
 	iso? (
 		sys-boot/syslinux
@@ -81,6 +80,7 @@ src_compile() {
 	use iso && ipxemake bin/ipxe.iso
 	use undi && ipxemake bin/undionly.kpxe
 	use usb && ipxemake bin/ipxe.usb
+	use lkrn && ipxemake bin/ipxe.lkrn
 }
 
 src_install() {
@@ -93,4 +93,5 @@ src_install() {
 	use iso && doins bin/*.iso
 	use undi && doins bin/*.kpxe
 	use usb && doins bin/*.usb
+	use lkrn && doins bin/*.lkrn
 }

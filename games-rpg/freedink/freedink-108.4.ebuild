@@ -1,9 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-rpg/freedink/freedink-108.4.ebuild,v 1.4 2015/02/25 15:56:57 ago Exp $
+# $Id$
 
 EAPI=5
-inherit games
+inherit flag-o-matic games
 
 DESCRIPTION="Dink Smallwood is an adventure/role-playing game, similar to Zelda (2D top view)"
 HOMEPAGE="http://www.freedink.org/"
@@ -32,6 +32,9 @@ src_prepare() {
 	sed -i \
 		-e 's#^datarootdir =.*$#datarootdir = /usr/share#' \
 		share/Makefile.in || die
+	# seems like the code is fragile (bug #559548)
+	filter-flags
+	replace-flags -O? -O0
 }
 
 src_configure() {

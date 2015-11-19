@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apache/mod_vhost_ldap/mod_vhost_ldap-2.4.0.ebuild,v 1.1 2014/12/18 02:11:23 mjo Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit apache-module depend.apache
 
 DESCRIPTION="Store and configure Apache virtual hosts using LDAP"
 HOMEPAGE="http://modvhostldap.alioth.debian.org/"
-SRC_URI="http://dev.gentoo.org/~mjo/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~mjo/distfiles/${P}.tar.xz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

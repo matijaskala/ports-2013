@@ -1,12 +1,13 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-scheme/gauche-gl/gauche-gl-0.6.ebuild,v 1.1 2014/11/15 13:59:15 hattya Exp $
+# $Id$
 
 EAPI="5"
 
 inherit eutils
 
-MY_P="${P^g}"
+# Switch to ^g when we switch to EAPI=6.
+MY_P="G${P:1}"
 
 DESCRIPTION="OpenGL binding for Gauche"
 HOMEPAGE="http://practical-scheme.net/gauche/"

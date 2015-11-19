@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/plasma-widget-menubar/plasma-widget-menubar-0.2.0.ebuild,v 1.4 2014/12/31 12:34:18 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit kde4-base
 
 DESCRIPTION="A Plasma widget to display menubar of application windows"
 HOMEPAGE="https://launchpad.net/plasma-widget-menubar"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="4"

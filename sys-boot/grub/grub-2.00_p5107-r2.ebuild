@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/grub-2.00_p5107-r2.ebuild,v 1.12 2015/03/17 02:07:08 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,7 +20,7 @@ if [[ ${PV} != 9999 ]]; then
 	else
 		SRC_URI="mirror://gnu/${PN}/${P}.tar.xz
 			mirror://gentoo/${P}.tar.xz
-			http://dev.gentoo.org/~floppym/dist/${P}.tar.xz"
+			https://dev.gentoo.org/~floppym/dist/${P}.tar.xz"
 		S=${WORKDIR}/${P%_*}
 	fi
 	KEYWORDS="amd64 x86"
@@ -41,7 +41,7 @@ SRC_URI+=" truetype? (
 )"
 
 DESCRIPTION="GNU GRUB boot loader"
-HOMEPAGE="http://www.gnu.org/software/grub/"
+HOMEPAGE="https://www.gnu.org/software/grub/"
 
 # Includes licenses for dejavu and unifont
 LICENSE="GPL-3 truetype? ( BitstreamVera GPL-2-with-font-exception )"
@@ -279,7 +279,7 @@ pkg_postinst() {
 	mount-boot_pkg_postinst
 
 	elog "For information on how to configure GRUB2 please refer to the guide:"
-	elog "    http://wiki.gentoo.org/wiki/GRUB2_Quick_Start"
+	elog "    https://wiki.gentoo.org/wiki/GRUB2_Quick_Start"
 
 	if has_version 'sys-boot/grub:0'; then
 		elog "A migration guide for GRUB Legacy users is available:"

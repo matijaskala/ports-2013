@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/librime/librime-0.9.9.ebuild,v 1.5 2015/04/19 11:37:13 blueness Exp $
+# $Id$
 
 EAPI=5
 
 inherit cmake-utils multilib
 
 DESCRIPTION="Rime Input Method Engine library"
-HOMEPAGE="http://code.google.com/p/rimeime/"
-SRC_URI="http://rimeime.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="http://rime.im/"
+SRC_URI="https://rimeime.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

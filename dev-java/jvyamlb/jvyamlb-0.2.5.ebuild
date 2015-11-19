@@ -1,14 +1,14 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jvyamlb/jvyamlb-0.2.5.ebuild,v 1.5 2010/01/03 21:16:23 fauli Exp $
+# $Id$
 
 EAPI=2
 JAVA_PKG_IUSE="source test"
 inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="JvYAMLb, YAML processor extracted from JRuby"
-HOMEPAGE="http://code.google.com/p/jvyamlb/"
-SRC_URI="http://jvyamlb.googlecode.com/files/jvyamlb-src-${PV}.tar.gz"
+HOMEPAGE="https://github.com/olabini/jvyamlb"
+SRC_URI="https://jvyamlb.googlecode.com/files/jvyamlb-src-${PV}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 ~ppc x86 ~amd64-linux ~x86-linux ~x86-solaris"

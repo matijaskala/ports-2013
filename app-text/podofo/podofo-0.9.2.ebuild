@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/podofo/podofo-0.9.2.ebuild,v 1.13 2014/08/10 18:29:11 slyfox Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils flag-o-matic multilib toolchain-funcs
@@ -8,7 +8,7 @@ inherit cmake-utils flag-o-matic multilib toolchain-funcs
 DESCRIPTION="PoDoFo is a C++ library to work with the PDF file format"
 HOMEPAGE="http://sourceforge.net/projects/podofo/"
 SRC_URI="mirror://sourceforge/podofo/${P}.tar.gz
-	http://dev.gentoo.org/~polynomial-c/${PN}-0.9.2-freetype251.patch"
+	https://dev.gentoo.org/~polynomial-c/${PN}-0.9.2-freetype251.patch"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

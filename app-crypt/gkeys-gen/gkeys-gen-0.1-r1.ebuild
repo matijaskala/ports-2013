@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/gkeys-gen/gkeys-gen-0.1-r1.ebuild,v 1.2 2015/01/09 21:44:07 dolsen Exp $
+# $Id$
 
 EAPI="5"
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Tool for generating OpenPGP/GPG keys using a specifications file"
 HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Gentoo-keys"
-SRC_URI="http://dev.gentoo.org/~dolsen/releases/${PN}/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~dolsen/releases/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/commons-io/commons-io-2.4.ebuild,v 1.3 2015/05/18 13:42:01 monsieurp Exp $
+# $Id$
 
 EAPI=5
 JAVA_PKG_IUSE="doc source"
@@ -28,6 +28,7 @@ S=${WORKDIR}/${MY_P}
 
 EANT_EXTRA_ARGS="-Dcomponent.version=${PV}"
 JAVA_ANT_REWRITE_CLASSPATH="yes"
+JAVA_ANT_ENCODING="ISO-8859-1"
 
 java_prepare() {
 	# Setting java.io.tmpdir doesn't have effect unless we do this because the vm is forked

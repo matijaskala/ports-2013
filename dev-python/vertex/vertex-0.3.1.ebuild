@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/vertex/vertex-0.3.1.ebuild,v 1.2 2015/04/08 08:04:54 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit twisted-r1
 
 DESCRIPTION="An implementation of the Q2Q protocol"
-HOMEPAGE="http://divmod.org/trac/wiki/DivmodVertex http://pypi.python.org/pypi/Vertex"
+HOMEPAGE="http://divmod.org/trac/wiki/DivmodVertex https://pypi.python.org/pypi/Vertex"
 SRC_URI="mirror://pypi/${TWISTED_PN:0:1}/${TWISTED_PN}/${TWISTED_P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"

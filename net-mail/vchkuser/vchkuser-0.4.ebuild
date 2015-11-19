@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/vchkuser/vchkuser-0.4.ebuild,v 1.2 2015/02/12 14:19:15 vapier Exp $
+# $Id$
 
 EAPI="3"
 
 inherit autotools qmail
 
 DESCRIPTION="qmail-spp plugin to check recipient existance with vpopmail"
-HOMEPAGE="http://github.com/hollow/vchkuser"
-SRC_URI="http://github.com/hollow/vchkuser/tarball/v${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/hollow/vchkuser"
+SRC_URI="https://github.com/hollow/vchkuser/tarball/v${PV} -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

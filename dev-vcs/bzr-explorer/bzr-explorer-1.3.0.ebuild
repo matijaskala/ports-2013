@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/bzr-explorer/bzr-explorer-1.3.0.ebuild,v 1.3 2013/05/20 08:22:40 ago Exp $
+# $Id$
 
 EAPI="3"
 
@@ -17,7 +17,7 @@ MY_P=${PN}-${MY_PV}
 
 DESCRIPTION="A high level interface to all commonly used Bazaar features"
 HOMEPAGE="https://launchpad.net/bzr-explorer"
-SRC_URI="http://launchpad.net/${PN}/1.3/${LPV}/+download/${MY_P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/1.3/${LPV}/+download/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 
 SLOT="0"

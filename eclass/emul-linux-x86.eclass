@@ -1,6 +1,8 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/emul-linux-x86.eclass,v 1.24 2014/05/09 07:13:47 mgorny Exp $
+# $Id$
+
+# @DEAD
 
 #
 # Original Author: Mike Doty <kingtaco@gentoo.org>
@@ -17,10 +19,14 @@ case "${EAPI:-0}" in
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
+eqawarn "emul-linux-x86.eclass is last rited and will be removed on 2015-11-24."
+eqawarn "Please remove your copies of emul-linux-x86 ebuilds as they are"
+eqawarn "no longer supported."
+
 DESCRIPTION="Provides precompiled 32bit libraries"
-#HOMEPAGE="http://amd64.gentoo.org/emul/content.xml"
-HOMEPAGE="http://dev.gentoo.org/~pacho/emul.html"
-SRC_URI="http://dev.gentoo.org/~pacho/emul/${P}.tar.xz"
+#HOMEPAGE="https://amd64.gentoo.org/emul/content.xml"
+HOMEPAGE="https://dev.gentoo.org/~pacho/emul.html"
+SRC_URI="https://dev.gentoo.org/~pacho/emul/${P}.tar.xz"
 
 IUSE="+development"
 

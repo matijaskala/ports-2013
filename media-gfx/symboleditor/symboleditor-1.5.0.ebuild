@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/symboleditor/symboleditor-1.5.0.ebuild,v 1.1 2014/08/26 10:40:37 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ MY_P="SymbolEditor-${PV}"
 inherit kde4-base
 
 DESCRIPTION="Program to create libraries of QPainterPath objects with hints on how to render them"
-HOMEPAGE="http://userbase.kde.org/SymbolEditor"
+HOMEPAGE="https://userbase.kde.org/SymbolEditor"
 SRC_URI="mirror://kde/stable/${PN}/${PV}/src/${MY_P}-1.tar.bz2"
 
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/kio_gopher/kio_gopher-0.1.4.ebuild,v 1.4 2015/06/04 18:57:33 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ inherit kde4-base
 MY_P=${PN/_/-}-${PV}
 
 DESCRIPTION="Gopher Kioslave for Konqueror"
-HOMEPAGE="http://userbase.kde.org/Kio_gopher"
+HOMEPAGE="https://userbase.kde.org/Kio_gopher"
 SRC_URI="mirror://kde/stable/extragear/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"

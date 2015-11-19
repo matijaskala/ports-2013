@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/pambase/pambase-20150213.ebuild,v 1.11 2015/05/17 05:23:58 vapier Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
 
 DESCRIPTION="PAM base configuration files"
-HOMEPAGE="http://www.gentoo.org/proj/en/base/pam/"
-SRC_URI="http://dev.gentoo.org/~vapier/dist/${P}.tar.xz"
+HOMEPAGE="https://www.gentoo.org/proj/en/base/pam/"
+SRC_URI="https://dev.gentoo.org/~vapier/dist/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

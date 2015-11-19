@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/mtl/mtl-2.1.2.ebuild,v 1.8 2012/12/30 15:02:05 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Monad classes, using functional dependencies"
-HOMEPAGE="http://github.com/ekmett/mtl"
+HOMEPAGE="https://github.com/ekmett/mtl"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

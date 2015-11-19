@@ -1,20 +1,20 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/tesseract/tesseract-3.03_rc1-r1.ebuild,v 1.4 2015/05/10 18:20:41 jer Exp $
+# $Id$
 
 EAPI=5
 
 MY_PN="${PN}-ocr"
 DL_P="${MY_PN}-3.02"
-URI_PREFIX="http://${MY_PN}.googlecode.com/files"
+URI_PREFIX="https://${MY_PN}.googlecode.com/files"
 
 inherit eutils autotools autotools-utils versionator
 
 S="${WORKDIR}/${PN}-$(get_version_component_range 1-2 )"
 
 DESCRIPTION="An OCR Engine that was developed at HP and now at Google"
-HOMEPAGE="http://code.google.com/p/tesseract-ocr/"
-SRC_URI="http://dev.gentoo.org/~tomka/files/${PN}-3.03-rc1.tar.gz
+HOMEPAGE="https://code.google.com/p/tesseract-ocr/"
+SRC_URI="https://dev.gentoo.org/~tomka/files/${PN}-3.03-rc1.tar.gz
 	${URI_PREFIX}/${DL_P}.eng.tar.gz
 	doc? ( ${URI_PREFIX}/${DL_P}.02-doc-html.tar.gz )
 	linguas_ar? ( ${URI_PREFIX}/${DL_P}.ara.tar.gz )

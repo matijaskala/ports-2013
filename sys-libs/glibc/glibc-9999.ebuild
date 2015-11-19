@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/glibc/glibc-9999.ebuild,v 1.30 2015/06/22 04:51:20 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils versionator toolchain-funcs flag-o-matic gnuconfig multilib systemd unpacker multiprocessing
 
 DESCRIPTION="GNU libc6 (also called glibc2) C library"
-HOMEPAGE="http://www.gnu.org/software/libc/libc.html"
+HOMEPAGE="https://www.gnu.org/software/libc/libc.html"
 
 LICENSE="LGPL-2.1+ BSD HPND ISC inner-net rc PCRE"
 #KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
@@ -93,7 +93,7 @@ upstream_uris() {
 }
 gentoo_uris() {
 	local devspace="HTTP~vapier/dist/URI HTTP~azarah/glibc/URI"
-	devspace=${devspace//HTTP/http://dev.gentoo.org/}
+	devspace=${devspace//HTTP/https://dev.gentoo.org/}
 	echo mirror://gentoo/$1 ${devspace//URI/$1}
 }
 SRC_URI=$(
@@ -161,10 +161,6 @@ eblit-src_prepare-post() {
 	cd "${S}"
 
 	if use hardened ; then
-		einfo "Patching to get working PIE binaries on PIE (hardened) platforms"
-		gcc-specs-pie && epatch "${FILESDIR}"/2.17/glibc-2.17-hardened-pie.patch
-		epatch "${FILESDIR}"/2.20/glibc-2.20-hardened-inittls-nosysenter.patch
-
 		# We don't enable these for non-hardened as the output is very terse --
 		# it only states that a crash happened.  The default upstream behavior
 		# includes backtraces and symbols.

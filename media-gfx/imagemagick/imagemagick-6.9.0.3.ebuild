@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/imagemagick/imagemagick-6.9.0.3.ebuild,v 1.10 2015/01/16 08:08:33 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -74,7 +74,7 @@ src_prepare() {
 
 	elibtoolize # for Darwin modules
 
-	# For testsuite, see http://bugs.gentoo.org/show_bug.cgi?id=500580#c3
+	# For testsuite, see https://bugs.gentoo.org/show_bug.cgi?id=500580#c3
 	shopt -s nullglob
 	mesa_cards=$(echo -n /dev/dri/card* | sed 's/ /:/g')
 	if test -n "${mesa_cards}"; then

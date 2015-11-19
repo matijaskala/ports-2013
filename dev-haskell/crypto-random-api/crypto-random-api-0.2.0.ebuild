@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/crypto-random-api/crypto-random-api-0.2.0.ebuild,v 1.1 2013/08/26 04:02:15 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Simple random generators API for cryptography related code"
-HOMEPAGE="http://github.com/vincenthz/hs-crypto-random-api"
+HOMEPAGE="https://github.com/vincenthz/hs-crypto-random-api"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

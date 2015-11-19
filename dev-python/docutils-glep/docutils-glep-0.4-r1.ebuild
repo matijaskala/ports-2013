@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/docutils-glep/docutils-glep-0.4-r1.ebuild,v 1.18 2015/04/08 08:05:22 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit eutils python-r1
 MY_P=${PF/docutils-/}
 
 DESCRIPTION="Gentoo GLEP support for docutils"
-HOMEPAGE="http://www.gentoo.org/proj/en/glep/"
+HOMEPAGE="https://www.gentoo.org/proj/en/glep/"
 SRC_URI="mirror://gentoo/${MY_P}.tbz2"
 
 LICENSE="public-domain"

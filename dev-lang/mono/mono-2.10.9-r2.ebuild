@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-2.10.9-r2.ebuild,v 1.7 2014/12/11 03:50:00 prometheanfire Exp $
+# $Id$
 
 EAPI="4"
 
@@ -43,13 +43,13 @@ pkg_setup() {
 				einfo "CONFIG_SYSVIPC is set, looking good."
 			else
 				eerror "If CONFIG_SYSVIPC is not set in your kernel .config, mono will hang while compiling."
-				eerror "See http://bugs.gentoo.org/261869 for more info."
+				eerror "See https://bugs.gentoo.org/261869 for more info."
 				eerror "Please set CONFIG_SYSVIPC in your kernel .config if build fails."
 			fi
 		else
 			ewarn "Was unable to determine your kernel .config"
 			ewarn "Please note that if CONFIG_SYSVIPC is not set in your kernel .config, mono will hang while compiling."
-			ewarn "See http://bugs.gentoo.org/261869 for more info."
+			ewarn "See https://bugs.gentoo.org/261869 for more info."
 		fi
 	fi
 	PATCHES=( "${FILESDIR}/${PN}-2.10.2-threads-access.patch"
@@ -78,7 +78,7 @@ src_configure() {
 	append-flags -fno-strict-aliasing
 
 	# NOTE: We need the static libs for now so mono-debugger works.
-	# See http://bugs.gentoo.org/show_bug.cgi?id=256264 for details
+	# See https://bugs.gentoo.org/show_bug.cgi?id=256264 for details
 	#
 	# --without-moonlight since www-plugins/moonlight is not the only one
 	# using mono: https://bugzilla.novell.com/show_bug.cgi?id=641005#c3

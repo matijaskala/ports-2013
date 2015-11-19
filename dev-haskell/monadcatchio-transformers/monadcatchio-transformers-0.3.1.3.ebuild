@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/monadcatchio-transformers/monadcatchio-transformers-0.3.1.3.ebuild,v 1.1 2014/12/24 03:33:15 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="alpha amd64 ppc sparc x86"
 IUSE=""
 
 RDEPEND=">=dev-haskell/extensible-exceptions-0.1:=[profile?] <dev-haskell/extensible-exceptions-0.2:=[profile?]

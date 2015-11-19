@@ -1,13 +1,13 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/yasnippet/yasnippet-0.6.0c.ebuild,v 1.1 2009/08/28 16:11:04 ulm Exp $
+# $Id$
 
 inherit elisp
 
 DESCRIPTION="Yet another snippet extension for Emacs"
-HOMEPAGE="http://code.google.com/p/yasnippet/"
-SRC_URI="http://yasnippet.googlecode.com/files/${P}.tar.bz2
-	doc? ( http://yasnippet.googlecode.com/files/${PN}-doc-${PV}.tar.bz2 )"
+HOMEPAGE="https://github.com/capitaomorte/yasnippet"
+SRC_URI="https://yasnippet.googlecode.com/files/${P}.tar.bz2
+	doc? ( https://yasnippet.googlecode.com/files/${PN}-doc-${PV}.tar.bz2 )"
 
 # Homepage says MIT licence, source contains GPL-2 copyright notice
 LICENSE="MIT GPL-2"

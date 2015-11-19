@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/pymol-plugins-msms/pymol-plugins-msms-100415-r1.ebuild,v 1.1 2013/12/02 11:10:59 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -37,6 +37,6 @@ src_prepare() {
 
 src_install() {
 	python_moduleinto pmg_tk/startup
-	python_parallel_foreach_impl python_domodule ${P}.py
-	python_parallel_foreach_impl python_optimize
+	python_foreach_impl python_domodule ${P}.py
+	python_foreach_impl python_optimize
 }

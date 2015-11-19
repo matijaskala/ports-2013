@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/bpython/bpython-0.14.2.ebuild,v 1.1 2015/05/29 10:38:06 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,11 +11,8 @@ PYTHON_REQ_USE="ncurses"
 inherit distutils-r1
 
 DESCRIPTION="Syntax highlighting and autocompletion for the Python interpreter"
-HOMEPAGE="http://www.bpython-interpreter.org/ https://bitbucket.org/bobf/bpython/ http://pypi.python.org/pypi/bpython"
-SRC_URI="
-	http://www.bpython-interpreter.org/releases/${P}.tar.gz
-	mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz
-	"
+HOMEPAGE="http://www.bpython-interpreter.org/ https://github.com/bpython/bpython https://pypi.python.org/pypi/bpython"
+SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

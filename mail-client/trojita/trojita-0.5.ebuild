@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-client/trojita/trojita-0.5.ebuild,v 1.1 2015/03/04 11:05:42 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -30,7 +30,6 @@ done
 
 RDEPEND="
 	qt5? (
-		dev-qt/linguist-tools:5
 		dev-qt/qtgui:5
 		dev-qt/qtnetwork:5
 		dev-qt/qtsql:5[sqlite]
@@ -49,6 +48,7 @@ DEPEND="${RDEPEND}
 		qt5?	( dev-libs/qtkeychain[qt5] )
 		!qt5?	( dev-libs/qtkeychain[qt4] )
 	)
+	qt5? ( dev-qt/linguist-tools:5 )
 	test? (
 		qt5?	( dev-qt/qttest:5 )
 		!qt5?	( >=dev-qt/qttest-${QT4_REQUIRED}:4 )
@@ -60,6 +60,7 @@ DEPEND="${RDEPEND}
 "
 
 DOCS="README LICENSE"
+PATCHES=( "${FILESDIR}/${P}-qt5.5-includes.patch" )
 
 src_configure() {
 	local mycmakeargs=(

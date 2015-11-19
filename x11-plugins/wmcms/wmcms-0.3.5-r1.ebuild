@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmcms/wmcms-0.3.5-r1.ebuild,v 1.10 2014/08/10 20:05:31 slyfox Exp $
+# $Id$
 
 inherit eutils
 
@@ -13,7 +13,8 @@ SLOT="0"
 KEYWORDS="amd64 ppc ppc64 sparc x86"
 IUSE=""
 
-DEPEND="x11-libs/libdockapp"
+RDEPEND="<x11-libs/libdockapp-0.7"
+DEPEND="${RDEPEND}"
 
 src_unpack() {
 	unpack ${A}

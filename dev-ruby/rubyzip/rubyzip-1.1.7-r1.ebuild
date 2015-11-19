@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rubyzip/rubyzip-1.1.7-r1.ebuild,v 1.2 2015/06/07 09:12:15 graaff Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ SRC_URI="https://github.com/rubyzip/rubyzip/archive/v${PV}.tar.gz -> ${P}-git.tg
 
 LICENSE="Ruby"
 SLOT="1"
-KEYWORDS="~amd64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE=""
 
 RDEPEND=""

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/pdf-reader/pdf-reader-1.3.3.ebuild,v 1.7 2015/05/05 06:35:49 graaff Exp $
+# $Id$
 
 EAPI=5
 
@@ -21,7 +21,7 @@ HOMEPAGE="https://github.com/yob/pdf-reader/"
 
 # We cannot use the gem distributions because they don't contain the
 # tests' data, we have to rely on the git tags.
-SRC_URI="http://github.com/${GITHUB_USER}/${PN}/tarball/v${PV} -> ${PN}-git-${PV}.tgz"
+SRC_URI="https://github.com/${GITHUB_USER}/${PN}/tarball/v${PV} -> ${PN}-git-${PV}.tgz"
 RUBY_S="${GITHUB_USER}-${PN}-*"
 
 LICENSE="MIT"

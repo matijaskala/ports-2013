@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/tasty-rerun/tasty-rerun-1.1.2.ebuild,v 1.1 2014/03/14 14:06:40 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit haskell-cabal
 
 DESCRIPTION="Run tests by filtering the test tree depending on the result of previous test
 runs"
-HOMEPAGE="http://github.com/ocharles/tasty-rerun"
+HOMEPAGE="https://github.com/ocharles/tasty-rerun"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

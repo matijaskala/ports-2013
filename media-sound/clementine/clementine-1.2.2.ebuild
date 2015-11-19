@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/clementine/clementine-1.2.2.ebuild,v 1.6 2015/01/29 00:16:40 johu Exp $
+# $Id$
 
 EAPI=5
 
@@ -60,7 +60,7 @@ COMMON_DEPEND="
 # https://github.com/clementine-player/Clementine/tree/master/3rdparty/libprojectm/patches
 # r1966 "Compile with a static sqlite by default, since Qt 4.7 doesn't seem to expose the symbols we need to use FTS"
 RDEPEND="${COMMON_DEPEND}
-	dbus? ( udisks? ( sys-fs/udisks:0 ) )
+	dbus? ( udisks? ( sys-fs/udisks:2 ) )
 	mms? ( media-plugins/gst-plugins-libmms:0.10 )
 	mtp? ( gnome-base/gvfs )
 	projectm? ( >=media-libs/libprojectm-1.2.0 )
@@ -87,8 +87,9 @@ DOCS="Changelog"
 # https://github.com/clementine-player/Clementine/issues/3935
 RESTRICT="test"
 
+# Switch to ^ when we switch to EAPI=6.
 [[ ${PV} == *9999* ]] || \
-S="${WORKDIR}/${P^}"
+S="${WORKDIR}/C${P:1}"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-fix-build.patch

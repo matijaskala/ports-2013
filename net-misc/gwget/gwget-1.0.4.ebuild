@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/gwget/gwget-1.0.4.ebuild,v 1.8 2012/07/21 16:18:17 pacho Exp $
+# $Id$
 
 EAPI="4"
 GCONF_DEBUG="no"
@@ -10,7 +10,7 @@ GNOME_TARBALL_SUFFIX="bz2"
 inherit eutils gnome2
 
 DESCRIPTION="GTK2 WGet Frontend"
-HOMEPAGE="http://gnome.org/projects/gwget/"
+HOMEPAGE="https://gnome.org/projects/gwget/"
 
 KEYWORDS="amd64 ppc x86"
 LICENSE="GPL-2"

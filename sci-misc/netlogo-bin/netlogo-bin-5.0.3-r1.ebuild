@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-misc/netlogo-bin/netlogo-bin-5.0.3-r1.ebuild,v 1.3 2013/07/04 12:24:01 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_P=${MY_PN}-${PV}
 DESCRIPTION="Cross-platform multi-agent programmable modeling environment"
 HOMEPAGE="http://ccl.northwestern.edu/netlogo/"
 SRC_URI="
-	http://dev.gentoo.org/~jlec/distfiles/${PN/-bin}.gif.tar
+	https://dev.gentoo.org/~jlec/distfiles/${PN/-bin}.gif.tar
 	http://ccl.northwestern.edu/netlogo/${PV}/${MY_P}.tar.gz"
 LICENSE="netlogo GPL-2 LGPL-2.1 LGPL-3 BSD Apache-2.0"
 SLOT="0"

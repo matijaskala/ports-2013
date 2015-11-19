@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/gdata/gdata-2.0.14.ebuild,v 1.11 2013/05/04 21:22:22 floppym Exp $
+# $Id$
 
 EAPI="4"
 PYTHON_DEPEND="2"
@@ -13,8 +13,8 @@ inherit distutils
 MY_P="gdata-${PV}"
 
 DESCRIPTION="Python client library for Google data APIs"
-HOMEPAGE="http://code.google.com/p/gdata-python-client/ http://pypi.python.org/pypi/gdata"
-SRC_URI="http://gdata-python-client.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/gdata-python-client/ https://pypi.python.org/pypi/gdata"
+SRC_URI="https://gdata-python-client.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

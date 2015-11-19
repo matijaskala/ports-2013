@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/shellcheck/shellcheck-0.3.6.ebuild,v 1.2 2015/06/17 09:28:53 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ DESCRIPTION="Shell script analysis tool"
 HOMEPAGE="http://www.shellcheck.net/"
 SRC_URI="
 	mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
-#	http://dev.gentoo.org/~mjo/distfiles/${PN}-man-${PV}.tar.xz"
+#	https://dev.gentoo.org/~mjo/distfiles/${PN}-man-${PV}.tar.xz"
 
 LICENSE="AGPL-3"
 SLOT="0/${PV}"

@@ -1,23 +1,23 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/lvm2/lvm2-2.02.109.ebuild,v 1.10 2015/05/29 05:25:23 jmorgan Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils linux-info multilib systemd toolchain-funcs udev flag-o-matic
 
 DESCRIPTION="User-land utilities for LVM2 (device-mapper) software"
-HOMEPAGE="http://sources.redhat.com/lvm2/"
+HOMEPAGE="https://sources.redhat.com/lvm2/"
 SRC_URI="ftp://sources.redhat.com/pub/lvm2/${PN/lvm/LVM}.${PV}.tgz
 	ftp://sources.redhat.com/pub/lvm2/old/${PN/lvm/LVM}.${PV}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~x86-linux"
 IUSE="readline static static-libs systemd clvm cman lvm1 lvm2create_initrd selinux +udev +thin device-mapper-only"
 REQUIRED_USE="device-mapper-only? ( !clvm !cman !lvm1 !lvm2create_initrd !thin )"
 
 DEPEND_COMMON="clvm? ( cman? ( =sys-cluster/cman-3* ) =sys-cluster/libdlm-3* )
-	readline? ( sys-libs/readline )
+	readline? ( sys-libs/readline:0= )
 	udev? ( >=virtual/libudev-208:=[static-libs?] )"
 # /run is now required for locking during early boot. /var cannot be assumed to
 # be available -- thus, pull in recent enough baselayout for /run.

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyplusplus/pyplusplus-9999.ebuild,v 1.2 2015/01/01 23:43:25 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit subversion
 	S=${WORKDIR}/${PN}_dev
 else
-	SRC_URI="http://dev.gentoo.org/~heroxbd/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~heroxbd/${P}.tar.xz"
 	KEYWORDS="~amd64 ~x86"
 fi
 

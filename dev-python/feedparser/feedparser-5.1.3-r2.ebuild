@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/feedparser/feedparser-5.1.3-r2.ebuild,v 1.13 2015/06/02 05:10:35 jmorgan Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_{3,4}} pypy )
@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python{2_7,3_{3,4}} pypy )
 inherit distutils-r1 eutils
 
 DESCRIPTION="Parse RSS and Atom feeds in Python"
-HOMEPAGE="http://code.google.com/p/feedparser/ http://pypi.python.org/pypi/feedparser"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://github.com/kurtmckee/feedparser https://pypi.python.org/pypi/feedparser"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 
 # sgmllib is licensed under PSF-2.
 LICENSE="BSD-2 PSF-2"

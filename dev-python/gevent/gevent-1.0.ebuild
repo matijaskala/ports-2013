@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/gevent/gevent-1.0.ebuild,v 1.7 2015/04/08 08:05:13 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
-PYTHON_REQ_USE="ssl"
+PYTHON_REQ_USE="ssl,threads(+)"
 
 inherit distutils-r1 flag-o-matic
 
@@ -12,7 +12,7 @@ MY_PV=${PV/_/}
 MY_P=${PN}-${MY_PV}
 
 DESCRIPTION="Python networking library that uses greenlet to provide synchronous API"
-HOMEPAGE="http://gevent.org/ http://pypi.python.org/pypi/gevent/"
+HOMEPAGE="http://gevent.org/ https://pypi.python.org/pypi/gevent/"
 SRC_URI="https://github.com/surfly/${PN}/releases/download/${MY_PV}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

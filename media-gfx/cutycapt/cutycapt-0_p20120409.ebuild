@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/cutycapt/cutycapt-0_p20120409.ebuild,v 1.3 2013/03/02 21:34:27 hwoarang Exp $
+# $Id$
 
 EAPI=4
 inherit qt4-r2
 
 DESCRIPTION="Qt WebKit Web Page Rendering Capture Utility"
 HOMEPAGE="http://cutycapt.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~mattm/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~mattm/${P}.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 

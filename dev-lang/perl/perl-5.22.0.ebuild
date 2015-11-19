@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/perl/perl-5.22.0.ebuild,v 1.3 2015/06/16 13:20:30 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -21,7 +21,7 @@ SRC_URI="
 	mirror://cpan/src/5.0/${MY_P}.tar.bz2
 	mirror://cpan/authors/id/${MODULE_AUTHOR:0:1}/${MODULE_AUTHOR:0:2}/${MODULE_AUTHOR}/${MY_P}.tar.bz2
 	mirror://gentoo/${MY_P}-patches-${PATCH_VER}.tar.xz
-	http://dev.gentoo.org/~civil/distfiles/${MY_P}-patches-${PATCH_VER}.tar.xz
+	https://dev.gentoo.org/~civil/distfiles/${MY_P}-patches-${PATCH_VER}.tar.xz
 "
 HOMEPAGE="http://www.perl.org/"
 

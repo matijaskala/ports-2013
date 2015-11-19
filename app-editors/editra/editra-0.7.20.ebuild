@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/editra/editra-0.7.20.ebuild,v 1.4 2014/08/10 17:41:03 slyfox Exp $
+# $Id$
 
 EAPI=5
 SUPPORT_PYTHON_ABIS=1
@@ -12,7 +12,7 @@ inherit distutils eutils fdo-mime python
 MY_PN=${PN/e/E}
 
 DESCRIPTION="Multi-platform text editor supporting over 50 programming languages"
-HOMEPAGE="http://editra.org http://pypi.python.org/pypi/Editra"
+HOMEPAGE="http://editra.org https://pypi.python.org/pypi/Editra"
 SRC_URI="http://editra.org/uploads/src/${MY_PN}-${PV}.tar.gz"
 
 LICENSE="wxWinLL-3.1"
@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}"/${MY_PN}-${PV}
 
 src_compile() {
-	distutils_src_compile --no-clean # http://code.google.com/p/editra/issues/detail?id=481
+	distutils_src_compile --no-clean # https://code.google.com/p/editra/issues/detail?id=481
 }
 
 src_install() {

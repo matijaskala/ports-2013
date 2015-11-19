@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-fs/smbtad/smbtad-1.2.6.ebuild,v 1.1 2012/09/13 18:53:38 scarabeus Exp $
+# $Id$
 
 EAPI=4
 
 inherit cmake-utils
 
 DESCRIPTION="Data receiver of the SMB Traffic Analyzer project"
-HOMEPAGE="http://github.com/hhetter/smbtad"
+HOMEPAGE="https://github.com/hhetter/smbtad"
 SRC_URI="http://morelias.org/smbta/${P}.tar.bz2"
 
 LICENSE="GPL-3"
@@ -17,7 +17,7 @@ IUSE="debug"
 
 DEPEND="
 	dev-db/libdbi
-	dev-libs/iniparser
+	dev-libs/iniparser:0
 	sys-libs/talloc
 "
 RDEPEND="${DEPEND}

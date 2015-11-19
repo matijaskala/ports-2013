@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gstreamer-editing-services/gstreamer-editing-services-1.2.1.ebuild,v 1.1 2014/05/31 14:15:41 pacho Exp $
+# $Id$
 
 EAPI="5"
 
@@ -48,7 +48,7 @@ src_configure() {
 		--disable-gtk-doc \
 		--without-gtk \
 	        --with-package-name="GStreamer editing services ebuild for Gentoo" \
-        	--with-package-origin="http://packages.gentoo.org/package/media-libs/gstreamer-editing-services"
+        	--with-package-origin="https://packages.gentoo.org/package/media-libs/gstreamer-editing-services"
 }
 
 src_install() {

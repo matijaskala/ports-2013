@@ -1,8 +1,17 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/hppa/package.use.mask,v 1.160 2015/05/24 04:35:58 mattst88 Exp $
+# $Id$
 
 # DON'T TOUCH THIS FILE. Instead, file a bug and assign it to <hppa@gentoo.org>.
+
+# Jeroen Roovers <jer@gentoo.org> (16 Aug 2015)
+# Bundles luajit which has not been ported to HPPA (bug #554376)
+app-text/texlive-core luajittex
+dev-texlive/texlive-basic luajittex
+
+# Jeroen Roovers <jer@gentoo.org> (3 Jul 2015) 
+# net-libs/nghttp2 fails to compile (bug #552898)
+net-libs/nghttp2 cxx
 
 # Jeroen Roovers <jer@gentoo.org> (17 May 2015)
 # Mask USE=rados for net-analyzer/rrdtool since sys-cluster/ceph is not
@@ -22,10 +31,6 @@ dev-libs/efl physics
 # dev-python/gevent requires dev-python/greenlet which has not been ported to
 # HPPA (bug #538510)
 dev-python/pyzor gevent
-
-# Jeroen Roovers <jer@gentoo.org> (29 Nov 2014)
-# Needs dev-libs/protobuf{-c} which has not been ported to HPPA (bug #531068)
-net-dns/unbound dnstap
 
 # Jeroen Roovers <jer@gentoo.org> (19 Oct 2014)
 # requires dev-python/restkit which requires
@@ -145,10 +150,6 @@ net-p2p/mldonkey guionly gtk
 dev-vcs/git gtk
 app-cdr/cdrdao gcdmaster
 net-im/pidgin eds
-
-# Ben de Groot <yngwin@gentoo.org> (16 Jan 2010)
-# qtmultimedia is not keyworded, bug 293671
-dev-python/PyQt4 multimedia
 
 # Jeroen Roovers <jer@gentoo.org> (15 Apr 2008)
 # media-sound/fluidsynth fails to build with stable libtool, so it can't be

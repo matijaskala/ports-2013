@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/gio/gio-0.12.5.3.ebuild,v 1.2 2014/07/25 09:16:24 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0/${PV}"
-KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~ia64 ppc ppc64 sparc x86"
 IUSE=""
 
 RDEPEND=">=dev-haskell/glib-0.12.5.3:0=[profile?] <dev-haskell/glib-0.13:0=[profile?]

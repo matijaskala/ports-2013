@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/virt-manager/virt-manager-9999.ebuild,v 1.29 2015/05/05 19:21:04 tamiko Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ if [[ ${PV} = *9999* ]]; then
 	inherit git-2
 	SRC_URI=""
 	KEYWORDS=""
-	EGIT_REPO_URI="git://git.fedorahosted.org/virt-manager.git"
+	EGIT_REPO_URI="https://github.com/virt-manager/virt-manager.git"
 else
 	SRC_URI="http://virt-manager.org/download/sources/${PN}/${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
@@ -33,8 +33,8 @@ RDEPEND="!app-emulation/virtinst
 	dev-libs/libxml2[python,${PYTHON_USEDEP}]
 	dev-python/ipaddr[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
-	dev-python/urlgrabber[${PYTHON_USEDEP}]
-	sys-libs/libosinfo[introspection]
+	dev-python/requests[${PYTHON_USEDEP}]
+	>=sys-libs/libosinfo-0.2.10[introspection]
 	gtk? (
 		x11-libs/gtk+:3[introspection]
 		gnome-base/dconf

@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/libnxml/libnxml-0.18.3.ebuild,v 1.6 2012/06/29 12:54:53 ranger Exp $
+# $Id$
 
 EAPI="4"
 
@@ -10,7 +10,7 @@ SRC_URI="http://www.autistici.org/bakunin/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="amd64 ppc ~sparc x86"
+KEYWORDS="amd64 ~arm ~mips ppc ~sparc x86"
 IUSE="doc examples static-libs"
 
 RDEPEND="net-misc/curl"
@@ -44,5 +44,5 @@ src_install() {
 		doins test/*.c
 	fi
 
-	find "${D}" -name '*.la' -exec rm -f {} +
+	find "${D}" -name '*.la' -delete
 }

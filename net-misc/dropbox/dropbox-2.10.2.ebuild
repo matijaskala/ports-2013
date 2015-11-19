@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/dropbox/dropbox-2.10.2.ebuild,v 1.3 2014/09/01 10:47:49 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -45,6 +45,10 @@ RDEPEND="
 	net-misc/wget
 	>=sys-devel/gcc-4.2.0
 	sys-libs/zlib
+	|| (
+		sys-libs/ncurses:5/5
+		sys-libs/ncurses:0/5
+	)
 "
 
 src_unpack() {

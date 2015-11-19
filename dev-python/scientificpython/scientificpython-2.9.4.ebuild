@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/scientificpython/scientificpython-2.9.4.ebuild,v 1.1 2014/10/24 09:52:20 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -51,7 +51,7 @@ python_compile() {
 
 python_test() {
 	cd "${S}"/Tests || die
-	python_foreach_impl nosetests
+	nosetests -v -v || die
 }
 
 python_install() {

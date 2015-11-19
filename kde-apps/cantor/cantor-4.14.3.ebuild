@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/cantor/cantor-4.14.3.ebuild,v 1.1 2015/06/04 18:44:50 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit kde4-base python-single-r1
 
 DESCRIPTION="KDE4 interface for doing mathematics and scientific computing"
-HOMEPAGE="http://www.kde.org/applications/education/cantor http://edu.kde.org/cantor"
+HOMEPAGE="https://www.kde.org/applications/education/cantor https://edu.kde.org/cantor"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="analitza debug postscript python qalculate +R"
 

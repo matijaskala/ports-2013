@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/editra/editra-0.7.20-r1.ebuild,v 1.1 2014/12/26 22:43:47 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,12 +11,12 @@ inherit distutils-r1 eutils fdo-mime
 MY_PN=${PN/e/E}
 
 DESCRIPTION="Multi-platform text editor supporting over 50 programming languages"
-HOMEPAGE="http://editra.org http://pypi.python.org/pypi/Editra"
+HOMEPAGE="http://editra.org https://pypi.python.org/pypi/Editra"
 SRC_URI="http://editra.org/uploads/src/${MY_PN}-${PV}.tar.gz"
 
 LICENSE="wxWinLL-3.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="spell"
 
 DEPEND="
@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}"/${MY_PN}-${PV}
 
 python_compile() {
-	# http://code.google.com/p/editra/issues/detail?id=481
+	# https://code.google.com/p/editra/issues/detail?id=481
 	distutils-r1_python_compile --no-clean
 }
 

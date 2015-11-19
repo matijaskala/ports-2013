@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/cantata/cantata-1.5.1.ebuild,v 1.3 2015/06/04 19:04:14 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PLOCALES="cs de en_GB es hu ko pl ru zh_CN"
 inherit kde4-base l10n
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
-HOMEPAGE="https://code.google.com/p/cantata/"
+HOMEPAGE="https://github.com/cdrummond/cantata"
 SRC_URI="https://drive.google.com/uc?export=download&id=0Bzghs6gQWi60UktwaTRMTjRIUW8 -> ${P}.tar.bz2"
 
 LICENSE="GPL-2"
@@ -30,7 +30,7 @@ REQUIRED_USE="
 RDEPEND="
 	sys-libs/zlib
 	x11-libs/libX11
-	kde-apps/oxygen-icons
+	kde-frameworks/oxygen-icons
 	cdda? ( media-sound/cdparanoia )
 	cddb? ( media-libs/libcddb )
 	kde? ( $(add_kdeapps_dep kwalletd) )
@@ -66,6 +66,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	sys-devel/gettext
+	qt5? ( dev-qt/linguist-tools:5 )
 "
 RDEPEND="${RDEPEND}
 	dynamic? (

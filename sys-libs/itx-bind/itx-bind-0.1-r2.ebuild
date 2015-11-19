@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/itx-bind/itx-bind-0.1-r2.ebuild,v 1.2 2013/03/08 16:05:21 haubi Exp $
+# $Id$
 
 EAPI=2
 
 inherit toolchain-funcs
 
 DESCRIPTION="the bind library for interix"
-HOMEPAGE="http://dev.gentoo.org/~mduft"
+HOMEPAGE="https://dev.gentoo.org/~mduft"
 SRC_URI=""
 
 LICENSE="ISC BSD-4"

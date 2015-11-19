@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/libgcal/libgcal-0.9.6-r1.ebuild,v 1.1 2015/04/04 17:02:02 kensington Exp $
+# $Id$
 
 EAPI=5
 
 inherit cmake-utils
 
 DESCRIPTION="C/C++ interface to the Google Data API"
-HOMEPAGE="http://code.google.com/p/libgcal/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/libgcal/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"

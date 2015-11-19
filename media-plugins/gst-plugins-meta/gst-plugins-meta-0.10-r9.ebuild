@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/gst-plugins-meta/gst-plugins-meta-0.10-r9.ebuild,v 1.11 2014/10/11 12:23:08 maekke Exp $
+# $Id$
 
 EAPI="5"
 
 inherit multilib-build
 
 DESCRIPTION="Meta ebuild to pull in gst plugins for apps"
-HOMEPAGE="http://www.gentoo.org"
+HOMEPAGE="https://www.gentoo.org"
 
 LICENSE="metapackage"
 SLOT="0.10"

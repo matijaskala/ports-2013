@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/transformers-compat/transformers-compat-0.4.0.4.ebuild,v 1.1 2015/04/03 13:33:48 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,26 +11,33 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="A small compatibility shim for dev-haskell/transformers"
-HOMEPAGE="http://github.com/ekmett/transformers-compat/"
+HOMEPAGE="https://github.com/ekmett/transformers-compat/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
-IUSE="three"
+KEYWORDS="alpha amd64 ppc ~ppc64 sparc x86"
+IUSE=""
 
 RDEPEND=">=dev-lang/ghc-7.4.1:=
-	three? ( >=dev-haskell/mtl-2.1:=[profile?] <dev-haskell/mtl-2.2:=[profile?]
-			>=dev-haskell/transformers-0.3:=[profile?] <dev-haskell/transformers-0.4:=[profile?] )
-	!three? ( >=dev-haskell/transformers-0.4.1:=[profile?] <dev-haskell/transformers-0.5:=[profile?] )
+	>=dev-haskell/mtl-2.1:=[profile?]
+	>=dev-haskell/transformers-0.3:=[profile?] <dev-haskell/transformers-0.5:=[profile?]
 "
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.8
 "
 
 src_configure() {
+	local tf_arg=()
+
+	has_version '=dev-haskell/transformers-0.3*' && \
+		tf_arg+=(--flag=three)
+
+	has_version '=dev-haskell/transformers-0.4*' && \
+		tf_arg+=(--flag=-three)
+
 	haskell-cabal_src_configure \
 		--flag=mtl \
-		$(cabal_flag three three) \
-		--flag=-two
+		--flag=-two \
+		${tf_arg[@]}
 }

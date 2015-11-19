@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libmemcached/libmemcached-1.0.14.ebuild,v 1.10 2013/08/23 14:05:44 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit eutils multilib
 
 DESCRIPTION="a C client library to the memcached server"
 HOMEPAGE="http://libmemcached.org/libMemcached.html"
-SRC_URI="http://launchpad.net/${PN}/1.0/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/1.0/${PV}/+download/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/seqan/seqan-1.3.1-r1.ebuild,v 1.4 2015/04/08 18:20:42 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,10 +20,18 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
-	sci-biology/samtools"
+	~sci-biology/samtools-0.1.19"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}"/${P}/cmake
+
+pkg_setup() {
+	if [[ ${MERGE_TYPE} != binary ]]; then
+		[[ $(gcc-major-version) -gt 4 ]] || \
+		( [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -gt 8 ]] ) \
+		&& die "Sorry, but gcc 4.9 or higher is unsupported"
+	fi
+}
 
 src_prepare() {
 	append-cppflags -I"${EPREFIX}/usr/include/bam"

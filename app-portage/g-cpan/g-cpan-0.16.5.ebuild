@@ -1,15 +1,15 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/g-cpan/g-cpan-0.16.5.ebuild,v 1.9 2014/09/11 12:17:27 zlogene Exp $
+# $Id$
 
 EAPI=5
 
 inherit perl-module
 
 DESCRIPTION="g-cpan: generate and install CPAN modules using portage"
-HOMEPAGE="http://www.gentoo.org/proj/en/perl/g-cpan.xml"
+HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Perl/g-cpan"
 SRC_URI="mirror://gentoo/${P}.tar.gz
-		 http://dev.gentoo.org/~chainsaw/distfiles/${P}.tar.gz"
+		 https://dev.gentoo.org/~chainsaw/distfiles/${P}.tar.gz"
 
 LICENSE="|| ( Artistic GPL-2 )"
 SLOT="0"

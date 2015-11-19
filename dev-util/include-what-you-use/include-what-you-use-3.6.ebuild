@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/include-what-you-use/include-what-you-use-3.6.ebuild,v 1.1 2015/06/10 20:38:47 slyfox Exp $
+# $Id$
 
 EAPI=5
 inherit eutils cmake-utils flag-o-matic
@@ -8,7 +8,7 @@ inherit eutils cmake-utils flag-o-matic
 WEIRD_UPSREAM_VERSION=0.4
 
 DESCRIPTION="find unused include directives in C/C++ programs"
-HOMEPAGE="https://code.google.com/p/include-what-you-use/"
+HOMEPAGE="https://github.com/include-what-you-use/include-what-you-use"
 SRC_URI="http://include-what-you-use.org/downloads/${PN}-${WEIRD_UPSREAM_VERSION}.src.tar.gz -> ${P}.src.tar.gz"
 
 LICENSE="GPL-2"

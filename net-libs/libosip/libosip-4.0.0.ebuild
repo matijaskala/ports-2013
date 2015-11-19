@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/libosip/libosip-4.0.0.ebuild,v 1.4 2013/08/18 13:25:30 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -10,7 +10,7 @@ MY_PV=${PV%.?}-${PV##*.}
 MY_PV=${PV}
 MY_P=${PN}2-${MY_PV}
 DESCRIPTION="a simple way to support the Session Initiation Protocol"
-HOMEPAGE="http://www.gnu.org/software/osip/"
+HOMEPAGE="https://www.gnu.org/software/osip/"
 SRC_URI="mirror://gnu/osip/${MY_P}.tar.gz"
 
 LICENSE="LGPL-2"

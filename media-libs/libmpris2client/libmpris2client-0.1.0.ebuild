@@ -1,17 +1,17 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libmpris2client/libmpris2client-0.1.0.ebuild,v 1.1 2014/08/20 11:43:38 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit eutils gnome2-utils
 
 DESCRIPTION="An library to control MPRIS2 compatible players"
-HOMEPAGE="http://github.com/matiasdelellis/libmpris2client"
-SRC_URI="http://github.com/matiasdelellis/${PN}/releases/download/V${PV}/${P}.tar.bz2"
+HOMEPAGE="https://github.com/matiasdelellis/libmpris2client"
+SRC_URI="https://github.com/matiasdelellis/${PN}/releases/download/V${PV}/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND=">=dev-libs/glib-2

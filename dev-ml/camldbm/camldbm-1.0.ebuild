@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ml/camldbm/camldbm-1.0.ebuild,v 1.8 2013/07/23 17:59:00 aballier Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="http://forge.ocamlcore.org/frs/download.php/728/${P}.tgz"
 
 LICENSE="LGPL-2-with-linking-exception"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~arm ~ppc ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="amd64 ~arm ppc x86 ~amd64-fbsd ~x86-fbsd"
 IUSE=""
 
 DEPEND="|| ( >=sys-libs/gdbm-1.9.1-r2[berkdb] <sys-libs/gdbm-1.9.1-r2 )

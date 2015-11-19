@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/perf/perf-3.8-r1.ebuild,v 1.4 2014/10/09 19:47:46 dilfridge Exp $
+# $Id$
 
 EAPI="4"
 
@@ -11,7 +11,7 @@ MY_PV="${PV/_/-}"
 MY_PV="${MY_PV/-pre/-git}"
 
 DESCRIPTION="Userland tools for Linux Performance Counters"
-HOMEPAGE="http://perf.wiki.kernel.org/"
+HOMEPAGE="https://perf.wiki.kernel.org/"
 
 LINUX_V="${PV:0:1}.x"
 if [[ ${PV/_rc} != ${PV} ]] ; then

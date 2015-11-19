@@ -1,10 +1,10 @@
 # Copyright 1999-2007 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/gentoo-artwork-livecd/gentoo-artwork-livecd-2006.1.ebuild,v 1.4 2007/03/10 21:32:09 wolf31o2 Exp $
+# $Id$
 
 DESCRIPTION="A collection of Gentoo Linux wallpapers for the LiveCD"
-SRC_URI="http://dev.gentoo.org/~wolf31o2/sources/${PN}/${P}.tar.bz2"
-HOMEPAGE="http://www.gentoo.org/"
+SRC_URI="https://dev.gentoo.org/~wolf31o2/sources/${PN}/${P}.tar.bz2"
+HOMEPAGE="https://www.gentoo.org/"
 
 KEYWORDS="alpha amd64 ia64 ppc x86 ~x86-fbsd"
 LICENSE="GPL-2"

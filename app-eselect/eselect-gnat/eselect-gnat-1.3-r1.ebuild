@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-eselect/eselect-gnat/eselect-gnat-1.3-r1.ebuild,v 1.1 2015/03/31 16:48:57 ulm Exp $
+# $Id$
 
 inherit eutils
 
 DESCRIPTION="gnat module for eselect"
-HOMEPAGE="http://www.gentoo.org"
+HOMEPAGE="https://www.gentoo.org"
 SRC_URI=""
 
 LICENSE="GPL-2"

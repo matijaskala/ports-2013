@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kmod/kmod-20.ebuild,v 1.11 2015/06/08 03:39:57 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ else
 fi
 
 DESCRIPTION="library and tools for managing linux kernel modules"
-HOMEPAGE="http://git.kernel.org/?p=utils/kernel/kmod/kmod.git"
+HOMEPAGE="https://git.kernel.org/?p=utils/kernel/kmod/kmod.git"
 
 LICENSE="LGPL-2"
 SLOT="0"
@@ -98,7 +98,7 @@ src_configure() {
 	kmod_configure --disable-python
 
 	if use python; then
-		python_parallel_foreach_impl kmod_configure --enable-python
+		python_foreach_impl kmod_configure --enable-python
 	fi
 }
 

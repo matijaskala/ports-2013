@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/icmake/icmake-7.22.01.ebuild,v 1.1 2015/06/13 20:17:04 radhermit Exp $
+# $Id$
 
 EAPI=5
 
 inherit multilib toolchain-funcs eutils
 
 DESCRIPTION="Hybrid between a make utility and a shell scripting language"
-HOMEPAGE="http://icmake.sourceforge.net/"
+HOMEPAGE="https://fbb-git.github.io/icmake/ https://github.com/fbb-git/icmake"
 SRC_URI="mirror://sourceforge/${PN}/${P/-/_}.orig.tar.gz"
 
 LICENSE="GPL-3"

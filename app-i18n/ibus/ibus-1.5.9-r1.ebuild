@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus/ibus-1.5.9-r1.ebuild,v 1.3 2015/01/19 09:36:21 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ UPSTREAM_VER=0
 inherit autotools bash-completion-r1 eutils gnome2-utils multilib python-single-r1 readme.gentoo vala virtualx
 
 DESCRIPTION="Intelligent Input Bus for Linux / Unix OS"
-HOMEPAGE="http://code.google.com/p/ibus/"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -29,7 +29,7 @@ REQUIRED_USE="
 		|| ( deprecated ( gtk3 introspection ) ) )" #342903
 
 [[ -n ${UPSTREAM_VER} ]] && \
-	UPSTRAM_PATCHSET_URI="http://dev.gentoo.org/~dlan/distfiles/${P}-upstream-patches-${UPSTREAM_VER}.tar.xz"
+	UPSTRAM_PATCHSET_URI="https://dev.gentoo.org/~dlan/distfiles/${P}-upstream-patches-${UPSTREAM_VER}.tar.xz"
 
 SRC_URI="https://github.com/ibus/ibus/releases/download/${PV}/${P}.tar.gz
 	${UPSTRAM_PATCHSET_URI}"

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/pavuk/pavuk-0.9.36_pre20120215-r2.ebuild,v 1.2 2013/02/04 18:44:47 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit eutils autotools-utils
 
 DESCRIPTION="Web spider and website mirroring tool"
 HOMEPAGE="http://www.pavuk.org/"
-SRC_URI="http://dev.gentoo.org/~pacho/maintainer-needed/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~pacho/maintainer-needed/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

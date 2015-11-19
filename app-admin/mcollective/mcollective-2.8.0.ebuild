@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/mcollective/mcollective-2.8.0.ebuild,v 1.3 2015/04/19 09:37:04 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -55,5 +55,5 @@ pkg_postinst() {
 	einfo "is a new installation"
 	einfo
 	einfo "[1] http://activemq.apache.org/"
-	einfo "[2] http://code.google.com/p/mcollective/wiki/GettingStarted"
+	einfo "[2] https://code.google.com/p/mcollective/wiki/GettingStarted"
 }

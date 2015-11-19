@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/python-mode/python-mode-6.1.2.ebuild,v 1.8 2014/11/23 20:36:27 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit readme.gentoo elisp
 MY_P="${PN}.el-${PV}"
 DESCRIPTION="An Emacs major mode for editing Python source"
 HOMEPAGE="https://launchpad.net/python-mode"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${MY_P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${MY_P}.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"

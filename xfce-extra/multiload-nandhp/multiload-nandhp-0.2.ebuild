@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/multiload-nandhp/multiload-nandhp-0.2.ebuild,v 1.4 2014/05/07 14:54:25 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils
@@ -8,12 +8,12 @@ inherit autotools eutils
 MY_PV=version-${PV/./-}
 
 DESCRIPTION="A port of the GNOME multiload applet for the Xfce and LXDE panels"
-HOMEPAGE="http://github.com/nandhp/multiload-nandhp"
-SRC_URI="http://github.com/nandhp/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/nandhp/multiload-nandhp"
+SRC_URI="https://github.com/nandhp/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 x86"
 IUSE="lxpanel +xfce_plugins_multiload-nandhp"
 
 RDEPEND=">=x11-libs/gtk+-2.14:2

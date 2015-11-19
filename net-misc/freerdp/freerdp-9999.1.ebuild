@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/freerdp/freerdp-9999.1.ebuild,v 1.27 2015/05/07 14:27:47 floppym Exp $
+# $Id$
 
 EAPI="5"
 
 inherit cmake-utils vcs-snapshot
 
 if [[ ${PV} != 9999* ]]; then
-	COMMIT="aa2181dcf2dd98693767ba738c5b2ad8c3d742d4"
+	COMMIT=""
 	SRC_URI="https://github.com/FreeRDP/FreeRDP/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86"
 else
@@ -22,11 +22,11 @@ HOMEPAGE="http://www.freerdp.com/"
 
 LICENSE="Apache-2.0"
 SLOT="0/1.2"
-IUSE="alsa +client cpu_flags_x86_sse2 cups debug doc ffmpeg gstreamer jpeg
-	neon pulseaudio server smartcard test usb wayland X xinerama xv"
+IUSE="alsa +client cpu_flags_x86_sse2 cups debug doc ffmpeg gstreamer jpeg libressl neon pulseaudio server smartcard systemd test usb wayland X xinerama xv"
 
 RDEPEND="
-	dev-libs/openssl:0
+	!libressl? ( dev-libs/openssl:0 )
+	libressl? ( dev-libs/libressl )
 	sys-libs/zlib:0
 	alsa? ( media-libs/alsa-lib )
 	cups? ( net-print/cups )
@@ -64,6 +64,7 @@ RDEPEND="
 		)
 	)
 	smartcard? ( sys-apps/pcsc-lite )
+	systemd? ( sys-apps/systemd:0= )
 	wayland? ( dev-libs/wayland )
 	X? (
 		x11-libs/libX11
@@ -94,6 +95,7 @@ src_configure() {
 		$(cmake-utils_use_with pulseaudio PULSE)
 		$(cmake-utils_use_with server SERVER)
 		$(cmake-utils_use_with smartcard PCSC)
+		$(cmake-utils_use_with systemd LIBSYSTEMD)
 		$(cmake-utils_use_with cpu_flags_x86_sse2 SSE2)
 		$(cmake-utils_use usb CHANNEL_URBDRC)
 		$(cmake-utils_use_with X X11)

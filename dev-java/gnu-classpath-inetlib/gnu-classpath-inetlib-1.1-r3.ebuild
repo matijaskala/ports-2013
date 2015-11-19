@@ -1,13 +1,13 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/gnu-classpath-inetlib/gnu-classpath-inetlib-1.1-r3.ebuild,v 1.4 2011/12/21 08:39:20 phajdan.jr Exp $
+# $Id$
 
 inherit java-pkg-2 java-ant-2
 
 MY_PN="inetlib"
 MY_P="${MY_PN}-${PV}"
 DESCRIPTION="Network extensions library for GNU classpath and classpathx"
-HOMEPAGE="http://www.gnu.org/software/classpath/"
+HOMEPAGE="https://www.gnu.org/software/classpath/"
 SRC_URI="mirror://gnu/classpath/${MY_P}.tar.gz"
 LICENSE="GPL-2-with-linking-exception"
 SLOT="1.1"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/hashable/hashable-1.2.3.1.ebuild,v 1.2 2015/01/30 17:55:27 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="A class for types that can be converted to a hash value"
-HOMEPAGE="http://github.com/tibbe/hashable"
+HOMEPAGE="https://github.com/tibbe/hashable"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

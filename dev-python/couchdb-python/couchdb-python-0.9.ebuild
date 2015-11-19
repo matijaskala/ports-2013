@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/couchdb-python/couchdb-python-0.9.ebuild,v 1.6 2015/04/08 08:05:26 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_PN="CouchDB"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Python library for working with CouchDB"
-HOMEPAGE="http://code.google.com/p/couchdb-python/ http://pypi.python.org/pypi/CouchDB"
+HOMEPAGE="https://code.google.com/p/couchdb-python/ https://pypi.python.org/pypi/CouchDB"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

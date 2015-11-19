@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/phantomjs/phantomjs-2.0.0.ebuild,v 1.3 2015/05/31 06:15:53 graaff Exp $
+# $Id$
 
 EAPI=5
 
@@ -27,11 +27,13 @@ RDEPEND="dev-libs/icu:=
 	virtual/jpeg:0"
 DEPEND="${RDEPEND}
 	${RUBY_DEPS}
+	net-misc/openssh[-bindist]
 	app-arch/unzip
 	virtual/pkgconfig"
 
 src_prepare() {
 	epatch "${FILESDIR}/phantomjs-python3-udis86-itab.patch"
+	epatch "${FILESDIR}/phantomjs-gcc5-compile-fix.patch"
 
 	# Respect CC, CXX, {C,CXX,LD}FLAGS in .qmake.cache
 	sed -i \

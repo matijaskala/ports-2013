@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/paint-mono/paint-mono-0.1.63.ebuild,v 1.5 2014/08/10 21:15:52 slyfox Exp $
+# $Id$
 
 EAPI=2
 
 inherit mono multilib
 
 DESCRIPTION="An unofficial effort to port Paint.NET 3.0 to Linux using Mono"
-HOMEPAGE="http://code.google.com/p/paint-mono/"
-SRC_URI="http://${PN}.googlecode.com/files/paintdotnet-${PV}.tar.gz"
+HOMEPAGE="https://github.com/shana/paint-mono"
+SRC_URI="https://${PN}.googlecode.com/files/paintdotnet-${PV}.tar.gz"
 
 LICENSE="MIT CC-BY-NC-ND-2.5"
 SLOT="0"

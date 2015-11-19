@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/myghtyutils/myghtyutils-0.52-r1.ebuild,v 1.1 2014/12/31 04:36:53 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_PN="MyghtyUtils"
 MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="Set of utility classes used by Myghty templating"
-HOMEPAGE="http://www.myghty.org http://pypi.python.org/pypi/MyghtyUtils"
+HOMEPAGE="http://www.myghty.org https://pypi.python.org/pypi/MyghtyUtils"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="MIT"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/qbittorrent/qbittorrent-3.2.0.ebuild,v 1.2 2015/06/04 18:19:35 pesa Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -38,7 +38,6 @@ CDEPEND="
 		X? ( dev-qt/qtgui:4 )
 	)
 	qt5? (
-		dev-qt/linguist-tools:5
 		dev-qt/qtcore:5
 		dev-qt/qtnetwork:5
 		dev-qt/qtxml:5
@@ -48,6 +47,7 @@ CDEPEND="
 	)
 "
 DEPEND="${CDEPEND}
+	qt5? ( dev-qt/linguist-tools:5 )
 	virtual/pkgconfig
 "
 RDEPEND="${CDEPEND}

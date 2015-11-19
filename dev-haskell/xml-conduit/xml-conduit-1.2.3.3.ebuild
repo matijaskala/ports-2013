@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/xml-conduit/xml-conduit-1.2.3.3.ebuild,v 1.1 2015/04/04 23:55:34 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Pure-Haskell utilities for dealing with XML with the conduit package"
-HOMEPAGE="http://github.com/snoyberg/xml"
+HOMEPAGE="https://github.com/snoyberg/xml"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

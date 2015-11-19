@@ -1,8 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/sc/sc-7.16-r1.ebuild,v 1.9 2014/10/30 21:59:57 jer Exp $
+# $Id$
 
 EAPI=5
+
 inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="sc is a free curses-based spreadsheet program that uses key bindings similar to vi and less"
@@ -17,9 +18,7 @@ COMMON_DEPEND=">=sys-libs/ncurses-5.2"
 DEPEND="virtual/pkgconfig"
 RDEPEND="
 	${COMMON_DEPEND}
-	!dev-lang/stratego
-	!<sci-chemistry/ccp4-apps-6.1.3-r4
-"
+	!dev-lang/stratego"
 
 src_prepare() {
 	epatch \

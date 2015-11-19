@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-rpg/nwn/nwn-1.68-r5.ebuild,v 1.8 2015/06/14 17:08:19 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ HOU_NAME=_linuxclient${MY_PV}_xp2.tar.gz
 
 DESCRIPTION="Epic role-playing game set in a huge medieval fantasy world of Dungeons and Dragons"
 HOMEPAGE="http://nwn.bioware.com/downloads/linuxclient.html"
-SRC_URI="http://dev.gentoo.org/~calchan/distfiles/nwn-libs-1.tar.bz2
+SRC_URI="https://dev.gentoo.org/~calchan/distfiles/nwn-libs-1.tar.bz2
 	linguas_fr? (
 		!sou? ( !hou? ( ${PATCH_URL_BASE}/French${PACKAGE_NAME} ) )
 		sou? ( ${PATCH_URL_BASE}/French${SOU_NAME} )

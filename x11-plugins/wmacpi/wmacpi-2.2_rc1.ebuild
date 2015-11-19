@@ -1,6 +1,6 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmacpi/wmacpi-2.2_rc1.ebuild,v 1.3 2008/06/28 06:36:16 maekke Exp $
+# $Id$
 
 inherit eutils toolchain-funcs
 
@@ -16,8 +16,9 @@ SLOT="0"
 KEYWORDS="amd64 -ppc -sparc x86"
 IUSE=""
 
-DEPEND="x11-libs/libdockapp
+DEPEND="<x11-libs/libdockapp-0.7
 	x11-libs/libX11"
+RDEPEND="${DEPEND}"
 
 src_unpack() {
 	unpack ${A}

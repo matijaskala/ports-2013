@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/openpyxl/openpyxl-9999.ebuild,v 1.1 2015/05/13 12:50:14 jlec Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_{3,4} )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
 
 inherit distutils-r1 mercurial
 
@@ -18,7 +18,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE="test"
 
-RDEPEND="dev-python/jdcal[${PYTHON_USEDEP}]"
+RDEPEND="
+	dev-python/jdcal[${PYTHON_USEDEP}]
+	dev-python/et_xmlfile[${PYTHON_USEDEP}]
+"
 DEPEND="
 	test? (
 		${RDEPEND}

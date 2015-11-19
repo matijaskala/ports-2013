@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-plugins/lightspark/lightspark-0.7.2-r1.ebuild,v 1.3 2014/01/11 10:22:03 mgorny Exp $
+# $Id$
 
 EAPI=4
 inherit cmake-utils nsplugins multilib toolchain-funcs
 
 DESCRIPTION="High performance flash player"
 HOMEPAGE="http://lightspark.sourceforge.net/"
-SRC_URI="http://launchpad.net/${PN}/trunk/${P}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${P}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"

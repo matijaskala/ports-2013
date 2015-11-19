@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qtwebkit/qtwebkit-5.4.2.ebuild,v 1.1 2015/06/17 15:24:04 pesa Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -9,7 +9,7 @@ inherit python-any-r1 qt5-build
 DESCRIPTION="WebKit rendering library for the Qt5 framework"
 
 if [[ ${QT5_BUILD_TYPE} == release ]]; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+	KEYWORDS="amd64 arm ~arm64 ppc64 ~x86"
 fi
 
 # TODO: qttestlib, geolocation, orientation/sensors
@@ -69,6 +69,12 @@ PATCHES=(
 src_prepare() {
 	# ensure bundled library cannot be used
 	rm -r Source/ThirdParty/leveldb || die
+
+	# bug 466216
+	sed -i -e '/CONFIG +=/s/rpath//' \
+		Source/WebKit/qt/declarative/{experimental/experimental,public}.pri \
+		Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
+		|| die
 
 	if use gstreamer010; then
 		epatch "${FILESDIR}/${PN}-5.3.2-use-gstreamer010.patch"

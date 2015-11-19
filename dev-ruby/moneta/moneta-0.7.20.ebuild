@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/moneta/moneta-0.7.20.ebuild,v 1.1 2014/12/29 12:45:10 naota Exp $
+# $Id$
 
 EAPI="4"
 USE_RUBY="ruby19 ruby20"
@@ -16,8 +16,8 @@ inherit ruby-fakegem
 GITHUB_USER="minad"
 
 DESCRIPTION="A unified interface to key/value stores"
-HOMEPAGE="http://github.com/minad/moneta"
-SRC_URI="http://github.com/${GITHUB_USER}/moneta/tarball/v${PV} -> ${P}.tgz"
+HOMEPAGE="https://github.com/minad/moneta"
+SRC_URI="https://github.com/${GITHUB_USER}/moneta/tarball/v${PV} -> ${P}.tgz"
 
 LICENSE="MIT"
 SLOT="0"

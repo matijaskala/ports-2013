@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/bokeh/bokeh-0.7.1.ebuild,v 1.3 2015/03/09 00:03:17 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -59,8 +59,6 @@ DEPEND="
 DOCS=( CHANGELOG QUICKSTART.md README.md )
 
 PATCHES=( "${FILESDIR}"/${P}-setup.patch )
-
-DISTUTILS_NO_PARALLEL_BUILD=1
 
 python_prepare_all() {
 	DOC_CONTENTS="websockets work only with python2_7"

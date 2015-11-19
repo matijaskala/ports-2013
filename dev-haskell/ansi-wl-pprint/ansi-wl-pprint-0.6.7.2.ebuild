@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/ansi-wl-pprint/ansi-wl-pprint-0.6.7.2.ebuild,v 1.1 2015/03/31 01:11:12 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="The Wadler/Leijen Pretty Printer for colored ANSI terminal output"
-HOMEPAGE="http://github.com/batterseapower/ansi-wl-pprint"
+HOMEPAGE="https://github.com/batterseapower/ansi-wl-pprint"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-games/aseprite/aseprite-0.9.5-r1.ebuild,v 1.4 2015/03/27 10:20:54 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -8,7 +8,7 @@ inherit cmake-utils flag-o-matic
 
 DESCRIPTION="Animated sprite editor & pixel art tool"
 HOMEPAGE="http://www.aseprite.org"
-SRC_URI="http://aseprite.googlecode.com/files/aseprite-${PV}.tar.xz"
+SRC_URI="https://aseprite.googlecode.com/files/aseprite-${PV}.tar.xz"
 
 LICENSE="GPL-2 FTL"
 SLOT="0"

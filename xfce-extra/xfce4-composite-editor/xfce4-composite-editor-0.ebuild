@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/xfce4-composite-editor/xfce4-composite-editor-0.ebuild,v 1.1 2012/12/11 12:07:42 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit xfconf
@@ -13,7 +13,7 @@ SRC_URI="http://keithhedger.hostingsiteforfree.com/zips/${MY_PN}.tar.gz -> ${MY_
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 x86"
 IUSE=""
 
 RDEPEND="app-shells/bash

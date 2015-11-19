@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/freeglut/freeglut-3.0.0.ebuild,v 1.1 2015/03/27 00:43:55 chithanh Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-multilib
@@ -34,6 +34,7 @@ HTML_DOCS=( doc/. )
 src_configure() {
 	local mycmakeargs=(
 		"-DFREEGLUT_GLES=OFF"
+		"-DFREEGLUT_BUILD_STATIC_LIBS=$(usex static-libs ON OFF)"
 	)
 #	$(cmake-utils_use gles FREEGLUT_GLES)
 	cmake-multilib_src_configure

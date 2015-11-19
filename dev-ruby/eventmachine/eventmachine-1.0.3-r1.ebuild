@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/eventmachine/eventmachine-1.0.3-r1.ebuild,v 1.8 2015/06/09 07:20:16 ago Exp $
+# $Id$
 
 EAPI=5
 # jruby → has shims for Java handling but tests fail badly, remaining
@@ -22,9 +22,9 @@ KEYWORDS="amd64 ~ppc ~ppc64 x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x
 IUSE=""
 
 DEPEND="${DEPEND}
-	dev-libs/openssl"
+	dev-libs/openssl:0"
 RDEPEND="${RDEPEND}
-	dev-libs/openssl"
+	dev-libs/openssl:0"
 
 ruby_add_bdepend "doc? ( dev-ruby/yard )"
 

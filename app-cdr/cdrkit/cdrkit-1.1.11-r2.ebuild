@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-cdr/cdrkit/cdrkit-1.1.11-r2.ebuild,v 1.9 2015/04/18 20:38:52 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils eutils
@@ -8,7 +8,7 @@ inherit cmake-utils eutils
 DESCRIPTION="A set of tools for CD/DVD reading and recording, including cdrecord"
 HOMEPAGE="http://cdrkit.org"
 SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}.orig.tar.gz
-	http://dev.gentoo.org/~ssuominen/${P}-libcdio-paranoia.tar.xz"
+	https://dev.gentoo.org/~ssuominen/${P}-libcdio-paranoia.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

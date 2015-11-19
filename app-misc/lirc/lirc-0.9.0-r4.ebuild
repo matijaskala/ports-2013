@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/lirc/lirc-0.9.0-r4.ebuild,v 1.1 2013/10/06 14:43:06 zzam Exp $
+# $Id$
 
 EAPI=4
 
@@ -37,7 +37,7 @@ RDEPEND="
 # 2012-07-17, Ian Stakenvicius
 # A helper script that scrapes out values for nearly all of the variables below
 # from lirc's configure.ac is available at
-# http://dev.gentoo.org/~axs/helper-for-lirc-iuse.sh
+# https://dev.gentoo.org/~axs/helper-for-lirc-iuse.sh
 
 # This are drivers with names matching the
 # parameter --with-driver=NAME

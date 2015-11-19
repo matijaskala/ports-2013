@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apache/mod_auth_token/mod_auth_token-1.0.6_beta.ebuild,v 1.5 2014/08/10 20:14:27 slyfox Exp $
+# $Id$
 
 EAPI=3
 
@@ -8,8 +8,8 @@ inherit apache-module eutils
 
 MY_P="${PN}-${PV/_/-}"
 DESCRIPTION="Token based URI access module for Apache2"
-HOMEPAGE="http://code.google.com/p/mod-auth-token/"
-SRC_URI="http://mod-auth-token.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/mod-auth-token/"
+SRC_URI="https://mod-auth-token.googlecode.com/files/${MY_P}.tar.gz"
 
 KEYWORDS="~amd64"
 LICENSE="Apache-2.0"

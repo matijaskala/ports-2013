@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/semigroupoids/semigroupoids-3.1.ebuild,v 1.1 2013/08/26 09:03:10 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Haskell 98 semigroupoids: Category sans id"
-HOMEPAGE="http://github.com/ekmett/semigroupoids"
+HOMEPAGE="https://github.com/ekmett/semigroupoids"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/clientsession/clientsession-0.9.1.1.ebuild,v 1.1 2014/12/14 10:49:44 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Securely store session data in a client-side cookie"
-HOMEPAGE="http://github.com/yesodweb/clientsession/tree/master"
+HOMEPAGE="https://github.com/yesodweb/clientsession/tree/master"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

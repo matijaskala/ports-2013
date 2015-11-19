@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/upower-pm-utils/upower-pm-utils-0.9.23-r2.ebuild,v 1.2 2014/06/23 04:07:23 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit eutils systemd
@@ -35,6 +35,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt
 	app-text/docbook-xsl-stylesheets
 	dev-util/intltool
+	>=sys-devel/gettext-0.17
 	virtual/pkgconfig"
 
 QA_MULTILIB_PATHS="usr/lib/upower/.*"
@@ -47,7 +48,7 @@ src_prepare() {
 	sed -i -e '/DISABLE_DEPRECATED/d' configure || die
 
 	# http://bugs.freedesktop.org/show_bug.cgi?id=79565
-	# http://bugzilla.xfce.org/show_bug.cgi?id=10931
+	# https://bugzilla.xfce.org/show_bug.cgi?id=10931
 	# Same effect as Debian -no_deprecation_define.patch, they patch .h, we patch .pc
 	sed -i -e 's|Cflags: |&-DUPOWER_ENABLE_DEPRECATED |' upower-glib.pc.in || die
 
@@ -91,7 +92,7 @@ src_configure() {
 src_install() {
 	default
 
-	# http://bugs.gentoo.org/487400
+	# https://bugs.gentoo.org/487400
 	insinto /usr/share/doc/${PF}/html/UPower
 	doins doc/html/*
 	dosym /usr/share/doc/${PF}/html/UPower /usr/share/gtk-doc/html/UPower

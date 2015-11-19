@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/fragroute/fragroute-1.2.6.ebuild,v 1.3 2014/07/12 13:11:35 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ MY_P="${P}-ipv6"
 inherit autotools-utils
 
 DESCRIPTION="Testing of network intrusion detection systems, firewalls and TCP/IP stacks"
-HOMEPAGE="http://code.google.com/p/fragroute-ipv6/"
-SRC_URI="http://fragroute-ipv6.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://github.com/stsi/fragroute-ipv6"
+SRC_URI="https://fragroute-ipv6.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

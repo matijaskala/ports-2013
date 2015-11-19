@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/nas/nas-1.9.4-r1.ebuild,v 1.1 2015/04/29 16:40:13 blueness Exp $
+# $Id$
 
 EAPI=5
 inherit eutils multilib toolchain-funcs multilib-minimal
@@ -11,7 +11,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.src.tar.gz"
 
 LICENSE="HPND MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~x86-fbsd"
 IUSE="doc static-libs"
 
 RDEPEND="x11-libs/libICE

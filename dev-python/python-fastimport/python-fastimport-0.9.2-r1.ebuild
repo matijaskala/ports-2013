@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-fastimport/python-fastimport-0.9.2-r1.ebuild,v 1.5 2015/05/27 11:25:50 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Library for parsing the fastimport VCS serialization format"
 HOMEPAGE="https://launchpad.net/python-fastimport"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

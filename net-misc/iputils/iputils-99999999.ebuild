@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/iputils/iputils-99999999.ebuild,v 1.20 2015/05/04 02:35:57 vapier Exp $
+# $Id$
 
 # For released versions, we precompile the man/html pages and store
 # them in a tarball on our mirrors.  This avoids ugly issues while
@@ -24,7 +24,7 @@ HOMEPAGE="http://www.linuxfoundation.org/collaborate/workgroups/networking/iputi
 
 LICENSE="BSD-4"
 SLOT="0"
-IUSE="arping caps clockdiff doc gnutls idn ipv6 rarpd rdisc SECURITY_HAZARD ssl static tftpd tracepath traceroute"
+IUSE="arping caps clockdiff doc gnutls idn ipv6 libressl rarpd rdisc SECURITY_HAZARD ssl static tftpd tracepath traceroute"
 
 LIB_DEPEND="caps? ( sys-libs/libcap[static-libs(+)] )
 	idn? ( net-dns/libidn[static-libs(+)] )
@@ -33,7 +33,10 @@ LIB_DEPEND="caps? ( sys-libs/libcap[static-libs(+)] )
 			net-libs/gnutls[openssl(+)]
 			net-libs/gnutls[static-libs(+)]
 		)
-		!gnutls? ( dev-libs/openssl:0[static-libs(+)] )
+		!gnutls? (
+			!libressl? ( dev-libs/openssl:0[static-libs(+)] )
+			libressl? ( dev-libs/libressl[static-libs(+)] )
+		)
 	) )"
 RDEPEND="arping? ( !net-misc/arping )
 	rarpd? ( !net-misc/rarpd )

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/uevt/uevt-2.3-r1.ebuild,v 1.8 2014/06/04 09:04:18 ssuominen Exp $
+# $Id$
 
 EAPI=5
 VALA_MIN_API_VERSION="0.16"
@@ -40,7 +40,7 @@ src_prepare() {
 		"${FILESDIR}"/${P}-support_for_more_than_one_CPU.patch \
 		"${FILESDIR}"/${P}-vala-0.24.patch
 
-	# See http://bugs.gentoo.org/ wrt #428438
+	# See https://bugs.gentoo.org/ wrt #428438
 	echo src/configurator.c >> po/POTFILES.skip
 	echo src/power-infos.c >> po/POTFILES.skip
 

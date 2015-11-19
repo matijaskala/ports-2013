@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/nose/nose-9999.ebuild,v 1.11 2015/04/04 20:12:11 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,15 +11,16 @@ inherit git-2
 #endif
 
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy pypy3 )
+PYTHON_REQ_USE="threads(+)"
 inherit distutils-r1 eutils
 
 DESCRIPTION="A unittest extension offering automatic test suite discovery and easy test authoring"
-HOMEPAGE="http://pypi.python.org/pypi/nose http://readthedocs.org/docs/nose/ https://github.com/nose-devs/nose"
+HOMEPAGE="https://pypi.python.org/pypi/nose http://readthedocs.org/docs/nose/ https://github.com/nose-devs/nose"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS=""
 IUSE="doc examples test"
 
 RDEPEND="dev-python/coverage[${PYTHON_USEDEP}]
@@ -68,14 +69,6 @@ python_compile() {
 
 python_compile_all() {
 	use doc && emake -C doc html
-}
-
-src_test() {
-	# nosetests use heavy multiprocessing during the tests.
-	# this shall make them less likely to kill your system or timeout.
-	local DISTUTILS_NO_PARALLEL_BUILD=1
-
-	distutils-r1_src_test
 }
 
 python_test() {

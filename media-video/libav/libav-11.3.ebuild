@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/libav/libav-11.3.ebuild,v 1.9 2015/05/29 10:37:25 zlogene Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,18 +19,18 @@ HOMEPAGE="https://libav.org/"
 if [[ ${PV} == *9999 ]] ; then
 	SRC_URI=""
 elif [[ ${PV%_p*} != ${PV} ]] ; then # Gentoo snapshot
-	SRC_URI="http://dev.gentoo.org/~lu_zero/libav/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~lu_zero/libav/${P}.tar.xz"
 else # Official release
 	SRC_URI="https://libav.org/releases/${P}.tar.xz"
-	SRC_URI+=" http://dev.gentoo.org/~lu_zero/libav/patches/0001-x86-Put-COPY3_IF_LT-under-HAVE_6REGS.patch.gz"
+	SRC_URI+=" https://dev.gentoo.org/~lu_zero/libav/patches/0001-x86-Put-COPY3_IF_LT-under-HAVE_6REGS.patch.gz"
 fi
 # 9999 does not have fate-*.tar.xz
-[[ ${PV%9999} != "" ]] && SRC_URI+=" test? ( http://dev.gentoo.org/~lu_zero/libav/fate-${PV%%.*}.tar.xz )"
+[[ ${PV%9999} != "" ]] && SRC_URI+=" test? ( https://dev.gentoo.org/~lu_zero/libav/fate-${PV%%.*}.tar.xz )"
 
 LICENSE="LGPL-2.1  gpl? ( GPL-3 )"
 SLOT="0/11"
 [[ ${PV} == *9999 ]] || \
-KEYWORDS="~alpha amd64 arm hppa ~ia64 ~mips ppc ppc64 ~sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE="aac alsa amr bs2b +bzip2 cdio cpudetection custom-cflags debug doc +encode faac fdk
 	frei0r fontconfig +gpl gsm +hardcoded-tables ieee1394 jack jpeg2k mp3
 	+network openssl opus oss pic pulseaudio rtmp schroedinger sdl speex ssl

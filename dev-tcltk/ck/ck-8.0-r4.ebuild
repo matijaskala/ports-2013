@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tcltk/ck/ck-8.0-r4.ebuild,v 1.4 2014/10/28 12:32:57 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ DESCRIPTION="A curses based toolkit for tcl"
 HOMEPAGE="http://www.ch-werner.de/ck/"
 SRC_URI="
 	http://www.ch-werner.de/ck/${MY_P}.tar.gz
-	http://dev.gentoo.org/~jlec/distfiles/${P}-tcl8.6.patch.xz"
+	https://dev.gentoo.org/~jlec/distfiles/${P}-tcl8.6.patch.xz"
 
 LICENSE="BSD"
 SLOT="0"

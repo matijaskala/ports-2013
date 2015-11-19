@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/icu4j/icu4j-3.8.1-r1.ebuild,v 1.9 2014/08/10 20:15:08 slyfox Exp $
+# $Id$
 
 # We currently download the Javadoc documentation.
 # It could optionally be built using the Ant build file.
@@ -26,7 +26,7 @@ KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~pp
 RDEPEND=">=virtual/jre-1.4"
 
 # build.xml does file version detection that fails for 1.7
-# http://bugs.gentoo.org/show_bug.cgi?id=213555
+# https://bugs.gentoo.org/show_bug.cgi?id=213555
 DEPEND="|| ( =virtual/jdk-1.6* =virtual/jdk-1.5* =virtual/jdk-1.4* )
 	app-arch/unzip"
 

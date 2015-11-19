@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/net-snmp/net-snmp-5.7.3_pre5-r1.ebuild,v 1.14 2015/04/08 18:01:22 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -15,7 +15,7 @@ DESCRIPTION="Software for generating and retrieving SNMP data"
 HOMEPAGE="http://net-snmp.sourceforge.net/"
 SRC_URI="
 	mirror://sourceforge/${PN}/${PN}/${PV/_pre*/}-pre-releases/${P/_pre*/}.${PV/*_}.tar.gz
-	http://dev.gentoo.org/~jer/${PN}-5.7.3-patches-${PATCHSET}.tar.xz
+	https://dev.gentoo.org/~jer/${PN}-5.7.3-patches-${PATCHSET}.tar.xz
 "
 
 S=${WORKDIR}/${P/_/.}

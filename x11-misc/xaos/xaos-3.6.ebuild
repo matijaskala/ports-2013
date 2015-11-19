@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/xaos/xaos-3.6.ebuild,v 1.1 2014/06/09 18:43:33 bicatali Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit autotools-utils eutils
 DESCRIPTION="Very fast real-time fractal zoomer"
 HOMEPAGE="http://matek.hu/xaos/doku.php"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz
-	http://dev.gentoo.org/~jlec/distfiles/${PN}.png.tar"
+	https://dev.gentoo.org/~jlec/distfiles/${PN}.png.tar"
 
 SLOT="0"
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/django-evolution/django-evolution-0.7.5.ebuild,v 1.2 2015/04/17 08:29:33 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ MY_P=${MY_PN}-${PV}
 RELEASE="0.7"
 
 DESCRIPTION="A Django application that will run cron jobs for other django apps"
-HOMEPAGE="http://code.google.com/p/django-evolution/ http://pypi.python.org/pypi/django_evolution/"
+HOMEPAGE="https://code.google.com/p/django-evolution/ https://pypi.python.org/pypi/django_evolution/"
 SRC_URI="http://downloads.reviewboard.org/releases/${PN}/${RELEASE}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

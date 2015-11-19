@@ -1,11 +1,11 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-skk/ibus-skk-1.4.1-r1.ebuild,v 1.1 2014/12/27 10:56:52 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="Japanese input method Anthy IMEngine for IBus Framework"
-HOMEPAGE="http://github.com/ueno/ibus-skk"
+HOMEPAGE="https://github.com/ueno/ibus-skk"
 SRC_URI="mirror://github/ueno/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/vlc/vlc-2.2.9999.ebuild,v 1.16 2015/04/24 05:48:12 idella4 Exp $
+# $Id$
 
 EAPI="5"
 
@@ -80,7 +80,7 @@ RDEPEND="
 		dc1394? ( >=sys-libs/libraw1394-2.0.1:0 >=media-libs/libdc1394-2.1:2 )
 		directfb? ( dev-libs/DirectFB:0 sys-libs/zlib:0 )
 		dts? ( >=media-libs/libdca-0.0.5:0 )
-		dvbpsi? ( >=media-libs/libdvbpsi-1.0.0:0 )
+		dvbpsi? ( >=media-libs/libdvbpsi-1.0.0:0= )
 		dvd? ( >=media-libs/libdvdread-4.9:0 >=media-libs/libdvdnav-4.9:0 )
 		elibc_glibc? ( >=sys-libs/glibc-2.8:2.2 )
 		faad? ( >=media-libs/faad2-2.6.1:0 )
@@ -112,7 +112,7 @@ RDEPEND="
 		mpeg? ( >=media-libs/libmpeg2-0.3.2:0 )
 		mtp? ( >=media-libs/libmtp-1:0 )
 		musepack? ( >=media-sound/musepack-tools-444:0 )
-		ncurses? ( sys-libs/ncurses:5[unicode] )
+		ncurses? ( sys-libs/ncurses:0=[unicode] )
 		ogg? ( >=media-libs/libogg-1:0 )
 		opencv? ( >media-libs/opencv-2:0 )
 		opengl? ( virtual/opengl:0 >=x11-libs/libX11-1.3.99.901:0 )
@@ -232,7 +232,7 @@ src_prepare() {
 	# config.h:792: warning: ignoring #pragma STDC FENV_ACCESS [-Wunknown-pragmas]
 	# config.h:793: warning: ignoring #pragma STDC FP_CONTRACT [-Wunknown-pragmas]
 	#
-	# http://gcc.gnu.org/c99status.html
+	# https://gcc.gnu.org/c99status.html
 	if [[ "$(tc-getCC)" == *"gcc"* ]] ; then
 		sed -i 's/ifndef __FAST_MATH__/if 0/g' configure.ac || die
 	fi

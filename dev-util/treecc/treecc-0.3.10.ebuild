@@ -1,9 +1,9 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/treecc/treecc-0.3.10.ebuild,v 1.12 2010/09/30 20:32:00 ranger Exp $
+# $Id$
 
 DESCRIPTION="compiler-compiler tool for aspect-oriented programming"
-HOMEPAGE="http://www.gnu.org/software/dotgnu"
+HOMEPAGE="https://www.gnu.org/software/dotgnu"
 SRC_URI="http://download.savannah.gnu.org/releases/dotgnu-pnet/${P}.tar.gz"
 
 LICENSE="GPL-2"

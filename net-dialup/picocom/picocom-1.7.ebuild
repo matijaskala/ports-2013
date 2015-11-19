@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/picocom/picocom-1.7.ebuild,v 1.3 2012/10/17 03:26:35 phajdan.jr Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils toolchain-funcs
 
 DESCRIPTION="minimal dumb-terminal emulation program"
-HOMEPAGE="http://code.google.com/p/picocom/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/npat-efault/picocom"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

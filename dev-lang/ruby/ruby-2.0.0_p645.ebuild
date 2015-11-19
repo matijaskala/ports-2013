@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/ruby/ruby-2.0.0_p645.ebuild,v 1.12 2015/05/27 13:05:51 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -30,7 +30,7 @@ fi
 DESCRIPTION="An object-oriented scripting language"
 HOMEPAGE="http://www.ruby-lang.org/"
 SRC_URI="mirror://ruby/2.0/${MY_P}.tar.xz
-		 http://dev.gentoo.org/~flameeyes/ruby-team/${PN}-patches-${PATCHSET}.tar.bz2"
+		 https://dev.gentoo.org/~flameeyes/ruby-team/${PN}-patches-${PATCHSET}.tar.bz2"
 
 LICENSE="|| ( Ruby-BSD BSD-2 )"
 KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
@@ -41,7 +41,7 @@ RDEPEND="
 	gdbm? ( sys-libs/gdbm )
 	ssl? ( dev-libs/openssl:0 )
 	socks5? ( >=net-proxy/dante-1.1.13 )
-	ncurses? ( sys-libs/ncurses )
+	ncurses? ( sys-libs/ncurses:0= )
 	readline?  ( sys-libs/readline:0 )
 	dev-libs/libyaml
 	virtual/libffi

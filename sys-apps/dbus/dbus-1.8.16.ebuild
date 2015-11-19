@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/dbus/dbus-1.8.16.ebuild,v 1.12 2015/04/18 07:57:20 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -223,7 +223,7 @@ pkg_postinst() {
 	# for DBUS_MACHINE_UUID_FILE (see tools/dbus-launch.c) and reverse
 	# dependencies with hardcoded paths (although the known ones got fixed already)
 	dbus-uuidgen --ensure="${EROOT%/}"/etc/machine-id
-	ln -sf "${EROOT%/}"/etc/machine-id "${EROOT%/}"/var/lib/dbus/machine-id
+	ln -sf "${EPREFIX}"/etc/machine-id "${EROOT%/}"/var/lib/dbus/machine-id
 
 	if [[ ${CHOST} == *-darwin* ]]; then
 		local plist="org.freedesktop.dbus-session.plist"

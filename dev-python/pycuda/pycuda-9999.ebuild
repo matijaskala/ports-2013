@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pycuda/pycuda-9999.ebuild,v 1.15 2014/12/02 11:33:53 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 python3_{3,4} )
 inherit cuda distutils-r1 git-r3 multilib
 
 DESCRIPTION="Python wrapper for NVIDIA CUDA"
-HOMEPAGE="http://mathema.tician.de/software/pycuda/ http://pypi.python.org/pypi/pycuda"
+HOMEPAGE="http://mathema.tician.de/software/pycuda/ https://pypi.python.org/pypi/pycuda"
 SRC_URI=""
 EGIT_REPO_URI="http://git.tiker.net/trees/pycuda.git"
 
@@ -53,7 +53,7 @@ python_configure() {
 	local myopts=()
 	use opengl && myopts+=( --cuda-enable-gl )
 
-	mkdir "${BUILD_DIR}" || die
+	mkdir "${BUILD_DIR}" || die
 	cd "${BUILD_DIR}" || die
 	[[ -e ./siteconf.py ]] && rm -f ./siteconf.py
 	"${EPYTHON}" "${S}"/configure.py \

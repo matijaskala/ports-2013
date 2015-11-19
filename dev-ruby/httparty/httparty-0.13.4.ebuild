@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/httparty/httparty-0.13.4.ebuild,v 1.1 2015/05/16 08:16:18 graaff Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ RUBY_FAKEGEM_EXTRADOC="README.md History"
 inherit ruby-fakegem
 
 DESCRIPTION="Makes http fun! Also, makes consuming restful web services dead easy"
-HOMEPAGE="http://jnunemaker.github.com/httparty"
+HOMEPAGE="https://jnunemaker.github.com/httparty"
 
 LICENSE="MIT"
 SLOT="0"

@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm setup test
-DEPEND=>=dev-haskell/polyparse-1.9:=[profile?] dev-haskell/random:=[profile?] >=dev-lang/ghc-6.10.4:= >=dev-haskell/cabal-1.6.0.3 doc? ( dev-haskell/haddock ) hscolour? ( dev-haskell/hscolour ) >=dev-haskell/cabal-1.1.4
+DEPEND=>=dev-haskell/polyparse-1.9:=[profile?] dev-haskell/random:=[profile?] >=dev-lang/ghc-6.10.4:= >=dev-haskell/cabal-1.6.0.3 doc? ( || ( dev-haskell/haddock >=dev-lang/ghc-7.10.2 ) ) hscolour? ( dev-haskell/hscolour ) >=dev-haskell/cabal-1.1.4
 DESCRIPTION=Utilities for manipulating XML documents
 EAPI=5
 HOMEPAGE=http://www.cs.york.ac.uk/fp/HaXml/
@@ -9,5 +9,5 @@ LICENSE=LGPL-2.1
 RDEPEND=>=dev-haskell/polyparse-1.9:=[profile?] dev-haskell/random:=[profile?] >=dev-lang/ghc-6.10.4:=
 SLOT=0/1.24.1
 SRC_URI=mirror://hackage/packages/archive/HaXml/1.24.1/HaXml-1.24.1.tar.gz
-_eclasses_=eutils	9fb270e417e0e83d64ca52586c4a79de	ghc-package	48ae4e0fd75e1c8047c4b7f507d5debc	haskell-cabal	eee03ecca8dca7a927272dcea2ca53f4	multilib	62927b3db3a589b0806255f3a002d5d3	multiprocessing	d7f2985a2c76c365ee20269db5261414	toolchain-funcs	42408102d713fbad60ca21349865edb4	versionator	cd0bcdb170807e4a1984115e9d53a26f
-_md5_=e7c078670b4210d4ec682862976e1960
+_eclasses_=eutils	f813d23e417656bf3917483643165d5a	ghc-package	6165faf4ae46df43d5a9b0dd28ec8654	haskell-cabal	2d9bae28d8a91ec04d1bb1ef0071c64f	multilib	3972ca401cf7dbb430df9995f5d8d580	multiprocessing	d769539d9bace6eaca30af23bc2b4dde	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=bad814aa78bed989132d20ffd4a5bd97

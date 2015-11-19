@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmtz/wmtz-0.7.ebuild,v 1.22 2014/08/10 20:09:33 slyfox Exp $
+# $Id$
 
 EAPI=3
 
 inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="dockapp that shows the time in multiple timezones"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI="mirror://gentoo/${P}.tar.gz"
 
 LICENSE="GPL-2"

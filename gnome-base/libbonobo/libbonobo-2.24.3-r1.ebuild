@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/libbonobo/libbonobo-2.24.3-r1.ebuild,v 1.9 2015/01/02 12:09:41 ago Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -10,7 +10,7 @@ GNOME_TARBALL_SUFFIX="bz2"
 inherit gnome2
 
 DESCRIPTION="GNOME CORBA framework"
-HOMEPAGE="http://developer.gnome.org/libbonobo/stable/"
+HOMEPAGE="https://developer.gnome.org/libbonobo/stable/"
 
 LICENSE="LGPL-2.1 GPL-2"
 SLOT="0"

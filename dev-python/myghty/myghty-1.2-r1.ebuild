@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/myghty/myghty-1.2-r1.ebuild,v 1.1 2014/12/26 00:03:46 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_PN="Myghty"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Template and view-controller framework derived from HTML::Mason"
-HOMEPAGE="http://www.myghty.org/ http://pypi.python.org/pypi/Myghty"
+HOMEPAGE="http://www.myghty.org/ https://pypi.python.org/pypi/Myghty"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

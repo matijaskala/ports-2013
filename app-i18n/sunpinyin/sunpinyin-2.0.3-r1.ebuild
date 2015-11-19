@@ -1,16 +1,16 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/sunpinyin/sunpinyin-2.0.3-r1.ebuild,v 1.5 2015/04/19 11:33:18 blueness Exp $
+# $Id$
 
 EAPI="3"
 
 inherit eutils multilib scons-utils toolchain-funcs
 
 DESCRIPTION="SunPinyin is a SLM (Statistical Language Model) based IME"
-HOMEPAGE="http://sunpinyin.googlecode.com"
+HOMEPAGE="https://sunpinyin.googlecode.com"
 SRC_URI="${HOMEPAGE}/files/${P}.tar.gz
-		http://open-gram.googlecode.com/files/dict.utf8.tar.bz2
-		http://open-gram.googlecode.com/files/lm_sc.t3g.arpa.tar.bz2"
+		https://open-gram.googlecode.com/files/dict.utf8.tar.bz2
+		https://open-gram.googlecode.com/files/lm_sc.t3g.arpa.tar.bz2"
 
 LICENSE="LGPL-2.1 CDDL"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/session/session-3.1.2.ebuild,v 1.13 2014/11/26 02:23:51 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,7 +17,7 @@ DESCRIPTION="A set of classes to drive external programs via pipe"
 HOMEPAGE="http://codeforpeople.com/lib/ruby/session/"
 #SRC_URI="http://codeforpeople.com/lib/ruby/session/${P}.tgz"
 
-# License info based on http://github.com/ahoward/session as indicated
+# License info based on https://github.com/ahoward/session as indicated
 # by author.
 LICENSE="Ruby"
 SLOT="0"

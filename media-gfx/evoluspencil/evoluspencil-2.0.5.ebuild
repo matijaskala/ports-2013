@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/evoluspencil/evoluspencil-2.0.5.ebuild,v 1.3 2014/08/10 21:14:08 slyfox Exp $
+# $Id$
 
 EAPI=5
 MY_P="pencil-${PV}"
@@ -9,7 +9,7 @@ inherit fdo-mime
 
 DESCRIPTION="A simple GUI prototyping tool to create mockups"
 HOMEPAGE="http://pencil.evolus.vn/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

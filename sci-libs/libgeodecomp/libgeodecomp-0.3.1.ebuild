@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/libgeodecomp/libgeodecomp-0.3.1.ebuild,v 1.3 2015/05/06 05:35:19 slis Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,16 +13,20 @@ SRC_URI="http://www.libgeodecomp.org/archive/${P}.tar.bz2"
 SLOT="0"
 LICENSE="Boost-1.0"
 KEYWORDS="~amd64 ~ppc ~x86"
-IUSE="doc"
+IUSE="doc examples"
 
 RDEPEND=">=dev-libs/boost-1.48"
 DEPEND="${RDEPEND}
-	dev-libs/libflatarray"
+	dev-libs/libflatarray
+	examples? ( !sys-cluster/mpich2 )"
 
 S="${WORKDIR}/${P}/src"
 
 src_prepare() {
 	epatch "${FILESDIR}/libflatarray.patch"
+	if ! use examples ; then
+		sed -i 's/examples//g' CMakeLists.txt
+	fi
 }
 
 src_compile() {

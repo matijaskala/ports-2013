@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/google-api-adwords-perl/google-api-adwords-perl-2.7.3-r1.ebuild,v 1.2 2015/06/13 22:22:29 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,8 +19,8 @@ SRC_TEST="do"
 RESTRICT="test"
 
 DESCRIPTION="Google AdWords API Perl Client"
-HOMEPAGE="http://code.google.com/p/google-api-adwords-perl/"
-SRC_URI="http://google-api-adwords-perl.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://github.com/googleads/googleads-perl-lib"
+SRC_URI="https://google-api-adwords-perl.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

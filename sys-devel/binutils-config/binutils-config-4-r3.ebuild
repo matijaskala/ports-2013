@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/binutils-config/binutils-config-4-r3.ebuild,v 1.1 2015/05/25 06:07:20 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 DESCRIPTION="Utility to change the binutils version being used"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI=""
 
 LICENSE="GPL-2"

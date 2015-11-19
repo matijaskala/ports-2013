@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/acpype/acpype-374.ebuild,v 1.2 2012/02/15 14:11:47 xarthisius Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,8 +9,8 @@ PYTHON_DEPEND="2:2.5"
 inherit python
 
 DESCRIPTION="AnteChamber PYthon Parser interfacE"
-HOMEPAGE="http://code.google.com/p/acpype/"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+HOMEPAGE="https://code.google.com/p/acpype/"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"

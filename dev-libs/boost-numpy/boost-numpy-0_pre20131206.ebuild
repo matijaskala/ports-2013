@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/boost-numpy/boost-numpy-0_pre20131206.ebuild,v 1.3 2014/12/26 12:06:12 patrick Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ if [ ${PV} == 9999 ]; then
 	EGIT_REPO_URI="git://github.com/ndarray/Boost.NumPy.git \
 		https://github.com/ndarray/Boost.NumPy.git"
 else
-	SRC_URI="http://dev.gentoo.org/~heroxbd/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~heroxbd/${P}.tar.xz"
 fi
 
 LICENSE="Boost-1.0"

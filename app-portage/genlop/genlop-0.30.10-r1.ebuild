@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/genlop/genlop-0.30.10-r1.ebuild,v 1.2 2015/03/03 05:53:40 dlan Exp $
+# $Id$
 
 EAPI=5
 
 inherit base bash-completion-r1
 
 DESCRIPTION="A nice emerge.log parser"
-HOMEPAGE="http://www.gentoo.org/proj/en/perl"
-SRC_URI="http://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.gz"
+HOMEPAGE="https://www.gentoo.org/proj/en/perl"
+SRC_URI="https://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

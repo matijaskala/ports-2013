@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/thor/thor-0.19.1.ebuild,v 1.3 2014/11/25 11:34:25 mrueg Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21"
@@ -16,7 +16,7 @@ inherit ruby-fakegem
 DESCRIPTION="A scripting framework that replaces rake and sake"
 HOMEPAGE="http://whatisthor.com/"
 
-SRC_URI="http://github.com/erikhuda/${PN}/archive/v${PV}.tar.gz -> ${PN}-git-${PV}.tgz"
+SRC_URI="https://github.com/erikhuda/${PN}/archive/v${PV}.tar.gz -> ${PN}-git-${PV}.tgz"
 
 LICENSE="MIT"
 SLOT="0"

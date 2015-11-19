@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/atomic-install/atomic-install-9999.ebuild,v 1.1 2012/12/15 12:45:07 mgorny Exp $
+# $Id$
 
 EAPI=4
 
 #if LIVE
 AUTOTOOLS_AUTORECONF=yes
 EGIT_REPO_URI="git://github.com/mgorny/${PN}.git
-	http://github.com/mgorny/${PN}.git"
+	https://github.com/mgorny/${PN}.git"
 
 inherit git-2
 #endif

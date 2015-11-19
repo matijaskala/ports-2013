@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pivy/pivy-0.5_alpha20110303-r1.ebuild,v 1.3 2015/04/08 08:05:09 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Coin3d binding for Python"
 HOMEPAGE="http://pivy.coin3d.org/"
-SRC_URI="http://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.xz"
 #identical to latest debian tarball at
 # http://ftp.de.debian.org/debian/pool/main/p/pivy/pivy_0.5.0~v609hg.orig.tar.bz2
 

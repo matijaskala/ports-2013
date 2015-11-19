@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/shutter/shutter-0.93.1.ebuild,v 1.1 2015/01/08 19:13:48 hwoarang Exp $
+# $Id$
 
 EAPI="5"
 
@@ -67,4 +67,16 @@ src_install() {
 		|| die "failed to make plugins executables"
 	find "${D}"/usr/share/shutter/resources/system/upload_plugins/upload -type f \
 		-name "*.pm" -exec chmod 755 {} \; || die "failed to make upload plugins executables"
+}
+
+pkg_postinst() {
+	elog ""
+	elog "The following optional dependencies can be used to provide"
+	elog "additional functionality:"
+	elog ""
+	elog "- media-libs/exiftool            : Writing Exif information"
+	elog "- dev-libs/libappindicator       : Status icon support for Unity"
+	elog "- dev-perl/{Net-OAuth,Path-Class}: Dropbox support"
+	elog "- dev-perl/JSON-XS               : vgy.me image hosting support"
+	elog""
 }

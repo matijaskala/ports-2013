@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/struts/struts-2.3.15.2.ebuild,v 1.1 2013/10/02 23:02:51 tomwij Exp $
+# $Id$
 
 EAPI="5"
 
@@ -13,7 +13,7 @@ MY_P="${P}-src"
 
 DESCRIPTION="A powerful Model View Controller Framework for JSP/Servlets"
 SRC_URI="mirror://apache/struts/source/${MY_P}.zip
-	http://dev.gentoo.org/~tomwij/files/dist/${PN}-build.xml-${PV}.tar.xz"
+	https://dev.gentoo.org/~tomwij/files/dist/${PN}-build.xml-${PV}.tar.xz"
 HOMEPAGE="http://struts.apache.org/index.html"
 
 LICENSE="Apache-2.0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/daemon_controller/daemon_controller-1.1.8.ebuild,v 1.5 2014/08/25 16:05:44 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ RUBY_FAKEGEM_EXTRADOC="README.markdown"
 inherit ruby-fakegem
 
 DESCRIPTION="A library for starting and stopping specific daemons programmatically in a robust manner"
-HOMEPAGE="http://github.com/FooBarWidget/daemon_controller"
+HOMEPAGE="https://github.com/FooBarWidget/daemon_controller"
 
 LICENSE="MIT"
 SLOT="0"

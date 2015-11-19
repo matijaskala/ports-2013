@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/FusionSound/FusionSound-1.1.1-r1.ebuild,v 1.16 2015/02/08 10:37:53 aballier Exp $
+# $Id$
 
 EAPI=4
 inherit autotools eutils
@@ -11,7 +11,7 @@ SRC_URI="http://www.directfb.org/downloads/Core/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 hppa ppc x86"
+KEYWORDS="alpha amd64 hppa ppc ppc64 x86"
 IUSE="alsa cddb ffmpeg mad oss timidity vorbis"
 
 RDEPEND=">=dev-libs/DirectFB-${PV}

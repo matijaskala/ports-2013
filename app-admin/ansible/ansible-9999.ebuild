@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/ansible/ansible-9999.ebuild,v 1.25 2015/06/06 09:50:13 jlec Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit distutils-r1 git-r3 readme.gentoo
+inherit distutils-r1 eutils git-r3 readme.gentoo
 
 DESCRIPTION="Radically simple deployment, model-driven configuration management, and command execution framework"
 HOMEPAGE="http://ansible.com/"
@@ -41,6 +41,13 @@ DEPEND="
 
 python_test() {
 	nosetests -d -w test/units -v --with-coverage --cover-package=ansible --cover-branches || die
+}
+
+python_compile_all() {
+	local _man
+	for _man in ansible{,-{galaxy,playbook,pull,vault}}; do
+		a2x -f manpage docs/man/man1/${_man}.1.asciidoc.in || die "Failed generating man page (${_man})"
+	done
 }
 
 python_install_all() {

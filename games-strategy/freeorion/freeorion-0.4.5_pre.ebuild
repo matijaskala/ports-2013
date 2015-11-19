@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-strategy/freeorion/freeorion-0.4.5_pre.ebuild,v 1.3 2015/05/26 07:49:18 tomka Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit cmake-utils python-any-r1 games
 
 DESCRIPTION="A free turn-based space empire and galactic conquest game"
 HOMEPAGE="http://www.freeorion.org"
-SRC_URI="http://dev.gentoo.org/~tomka/files/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~tomka/files/${P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1 CC-BY-SA-3.0"
 SLOT="0"
@@ -45,6 +45,10 @@ pkg_setup() {
 }
 
 src_prepare() {
+
+	epatch "${FILESDIR}/${P}-boost-1.57.patch"
+	epatch "${FILESDIR}/${P}-boost-1.58.patch"
+
 	# parse subdir sets -O3
 	sed -e "s:-O3::" -i parse/CMakeLists.txt
 

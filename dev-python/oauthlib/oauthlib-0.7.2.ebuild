@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/oauthlib/oauthlib-0.7.2.ebuild,v 1.4 2015/03/08 23:54:36 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 inherit distutils-r1
 
 DESCRIPTION="A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
-HOMEPAGE="https://github.com/idan/oauthlib http://pypi.python.org/pypi/oauthlib"
+HOMEPAGE="https://github.com/idan/oauthlib https://pypi.python.org/pypi/oauthlib"
 SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"

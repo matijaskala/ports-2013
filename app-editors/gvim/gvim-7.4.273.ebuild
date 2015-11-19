@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/gvim/gvim-7.4.273.ebuild,v 1.14 2015/04/08 07:30:36 mgorny Exp $
+# $Id$
 
 EAPI=5
 VIM_VERSION="7.4"
@@ -16,7 +16,7 @@ else
 	VIM_ORG_PATCHES="vim-patches-${PV}.patch.bz2"
 
 	SRC_URI="ftp://ftp.vim.org/pub/vim/unix/vim-${VIM_VERSION}.tar.bz2
-		http://dev.gentoo.org/~radhermit/vim/${VIM_ORG_PATCHES}"
+		https://dev.gentoo.org/~radhermit/vim/${VIM_ORG_PATCHES}"
 	KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sparc x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x86-solaris"
 fi
 

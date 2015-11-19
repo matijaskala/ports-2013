@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/sushi/sushi-3.16.0.ebuild,v 1.1 2015/06/09 14:32:37 eva Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -8,11 +8,11 @@ GCONF_DEBUG="no"
 inherit gnome2
 
 DESCRIPTION="A quick previewer for Nautilus, the GNOME file manager"
-HOMEPAGE="http://git.gnome.org/browse/sushi"
+HOMEPAGE="https://git.gnome.org/browse/sushi"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86"
 IUSE="office"
 
 # Optional app-office/unoconv support (OOo to pdf)

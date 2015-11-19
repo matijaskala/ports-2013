@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/maatkit/maatkit-7540-r1.ebuild,v 1.4 2014/11/27 23:46:23 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit perl-app perl-module toolchain-funcs
 
 DESCRIPTION="essential command-line utilities for MySQL"
 HOMEPAGE="http://www.maatkit.org/"
-SRC_URI="http://maatkit.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://maatkit.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

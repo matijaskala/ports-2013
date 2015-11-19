@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/ccze/ccze-0.2.1-r3.ebuild,v 1.9 2014/11/23 10:01:06 jer Exp $
+# $Id$
 
 EAPI=5
 
 inherit fixheadtails autotools eutils toolchain-funcs
 
 DESCRIPTION="A flexible and fast logfile colorizer"
-HOMEPAGE="http://dev.gentoo.org/~joker/ccze/ccze.txt"
+HOMEPAGE="https://dev.gentoo.org/~joker/ccze/ccze.txt"
 SRC_URI="mirror://gentoo/${P}.tar.gz"
 
 RESTRICT="test"

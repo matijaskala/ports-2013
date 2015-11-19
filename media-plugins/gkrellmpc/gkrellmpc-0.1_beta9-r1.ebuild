@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/gkrellmpc/gkrellmpc-0.1_beta9-r1.ebuild,v 1.7 2012/04/18 08:48:29 voyageur Exp $
+# $Id$
 
 EAPI=2
 inherit eutils gkrellm-plugin toolchain-funcs
@@ -34,6 +34,6 @@ src_compile() {
 pkg_postinst() {
 	if use threads; then
 		elog "If you can't connect MPD, please unset USE threads."
-		elog "See, http://bugs.gentoo.org/276970 for information."
+		elog "See, https://bugs.gentoo.org/276970 for information."
 	fi
 }

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/celementtree/celementtree-1.0.5-r2.ebuild,v 1.11 2015/04/08 08:05:20 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit distutils-r1
 MY_P="cElementTree-${PV}-20051216"
 
 DESCRIPTION="The cElementTree module is a C implementation of the ElementTree API"
-HOMEPAGE="http://effbot.org/zone/celementtree.htm http://pypi.python.org/pypi/cElementTree"
+HOMEPAGE="http://effbot.org/zone/celementtree.htm https://pypi.python.org/pypi/cElementTree"
 SRC_URI="http://effbot.org/downloads/${MY_P}.tar.gz"
 
 LICENSE="ElementTree"

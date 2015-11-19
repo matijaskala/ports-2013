@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/linuxtv-dvb-firmware/linuxtv-dvb-firmware-2009.09.19.ebuild,v 1.4 2014/05/01 12:45:50 ulm Exp $
+# $Id$
 
 DESCRIPTION="Firmware files needed for operation of some dvb-devices"
 HOMEPAGE="http://www.linuxtv.org"
@@ -22,7 +22,7 @@ PACKET_SRC_URI="http://www.linuxtv.org/downloads/firmware/${PACKET_NAME}"
 TEVII_NAME=Tevii_linuxdriver_0815.rar
 TEVII_SRC_URI="http://tevii.com/${TEVII_NAME}"
 get_dvb_firmware="${FILESDIR}/get_dvb_firmware-${PV}"
-# from http://git.kernel.org/?p=linux/kernel/git/stable/linux-2.6-stable.git;a=history;f=Documentation/dvb/get_dvb_firmware
+# from https://git.kernel.org/?p=linux/kernel/git/stable/linux-2.6-stable.git;a=history;f=Documentation/dvb/get_dvb_firmware
 
 FW_USE_FLAGS=(
 # packet
@@ -275,7 +275,7 @@ pkg_setup() {
 		elog "in ${ROOT%/}/etc/make.conf. This way only the firmwares you own"
 		elog "the hardware will be installed."
 	fi
-	# according to http://devmanual.gentoo.org/general-concepts/use-flags/index.html
+	# according to https://devmanual.gentoo.org/general-concepts/use-flags/index.html
 	# we should not die here. However, there is no sensible fallback choice to make
 	# because the user may have either the one or the other. WYGIWYG
 	if use dvb_cards_tda10046 && use dvb_cards_tda10046lifeview; then

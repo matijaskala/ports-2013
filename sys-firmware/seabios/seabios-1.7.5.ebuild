@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-firmware/seabios/seabios-1.7.5.ebuild,v 1.6 2015/04/08 18:25:12 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -22,7 +22,7 @@ else
 	KEYWORDS="amd64 ~ppc ~ppc64 x86 ~amd64-fbsd ~x86-fbsd"
 	SRC_URI="!binary? ( http://code.coreboot.org/p/seabios/downloads/get/${P}.tar.gz )
 		binary? ( http://code.coreboot.org/p/seabios/downloads/get/bios.bin-${PV}.gz )
-		${BACKPORTS:+http://dev.gentoo.org/~cardoe/distfiles/${P}-${BACKPORTS}.tar.xz}"
+		${BACKPORTS:+https://dev.gentoo.org/~cardoe/distfiles/${P}-${BACKPORTS}.tar.xz}"
 fi
 
 DESCRIPTION="Open Source implementation of a 16-bit x86 BIOS"

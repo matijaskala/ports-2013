@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-embedded/arduino/arduino-1.0.5-r1.ebuild,v 1.1 2015/04/16 23:04:19 chewi Exp $
+# $Id$
 
 EAPI=4
 JAVA_PKG_IUSE="doc examples"
@@ -8,8 +8,8 @@ JAVA_PKG_IUSE="doc examples"
 inherit eutils java-pkg-2 java-ant-2
 
 DESCRIPTION="An open-source AVR electronics prototyping platform"
-HOMEPAGE="http://arduino.cc/ http://arduino.googlecode.com/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}-src.tar.gz
+HOMEPAGE="http://arduino.cc/ https://arduino.googlecode.com/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}-src.tar.gz
 mirror://gentoo/arduino-icons.tar.bz2"
 LICENSE="GPL-2 GPL-2+ LGPL-2 CC-BY-SA-3.0"
 SLOT="0"

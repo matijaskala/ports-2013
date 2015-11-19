@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-terms/guake/guake-0.5.1.ebuild,v 1.1 2014/11/17 13:37:33 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit autotools gnome2 python-single-r1
 
 DESCRIPTION="Drop-down terminal for GTK+ desktops"
 HOMEPAGE="https://github.com/Guake/guake"
-SRC_URI="https://github.com/${PN^}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/${PN}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

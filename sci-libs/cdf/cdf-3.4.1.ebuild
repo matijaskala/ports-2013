@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/cdf/cdf-3.4.1.ebuild,v 1.6 2015/04/21 18:57:55 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -114,7 +114,7 @@ src_install() {
 	fi
 
 	if use java; then
-		cd cdfjava || die
+		cd cdfjava || die
 		dolib.so jni/libcdfNativeLibrary.so.${PV_SO}
 		dosym libcdfNativeLibrary.so.${PV_SO} \
 			/usr/$(get_libdir)/libcdfNativeLibrary.so

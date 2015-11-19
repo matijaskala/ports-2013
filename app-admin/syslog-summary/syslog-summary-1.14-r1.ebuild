@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/syslog-summary/syslog-summary-1.14-r1.ebuild,v 1.4 2015/06/09 07:17:03 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils python-single-r1
 
 DESCRIPTION="Summarizes the contents of a syslog log file"
-HOMEPAGE="http://github.com/dpaleino/syslog-summary"
+HOMEPAGE="https://github.com/dpaleino/syslog-summary"
 SRC_URI="mirror://github/dpaleino/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"

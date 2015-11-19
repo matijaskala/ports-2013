@@ -1,13 +1,18 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/cssc/cssc-1.4.0.ebuild,v 1.3 2014/10/10 10:58:58 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils
 
+# Switch to ^^ when we switch to EAPI=6.
+#MY_PN="${PN^^}"
+MY_PN="CSSC"
+MY_P="${MY_PN}-${PV}"
+
 DESCRIPTION="The GNU Project's replacement for SCCS"
-SRC_URI="mirror://gnu/${PN}/${P^^}.tar.gz"
-HOMEPAGE="http://www.gnu.org/software/cssc/"
+SRC_URI="mirror://gnu/${PN}/${MY_P}.tar.gz"
+HOMEPAGE="https://www.gnu.org/software/cssc/"
 SLOT="0"
 LICENSE="GPL-3"
 
@@ -20,7 +25,7 @@ DEPEND="
 
 DOCS=( AUTHORS ChangeLog NEWS README )
 
-S="${WORKDIR}/${P^^}"
+S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	epatch \

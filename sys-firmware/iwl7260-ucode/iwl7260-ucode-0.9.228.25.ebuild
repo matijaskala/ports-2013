@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-firmware/iwl7260-ucode/iwl7260-ucode-0.9.228.25.ebuild,v 1.1 2015/01/14 12:15:50 gienah Exp $
+# $Id$
 
 EAPI=5
 inherit linux-info versionator
@@ -11,8 +11,8 @@ MY_PV="${vc[6]}.${vc[4]}.${vc[2]}.${vc[0]}"
 MY_PN="iwlwifi-${DEV_N}-ucode"
 
 DESCRIPTION="Firmware for Intel (R) Dual Band Wireless-AC ${DEV_N}"
-HOMEPAGE="http://wireless.kernel.org/en/users/Drivers/iwlwifi"
-SRC_URI="http://wireless.kernel.org/en/users/Drivers/iwlwifi?action=AttachFile&do=get&target=${MY_PN}-${MY_PV}.tgz -> ${P}.tgz"
+HOMEPAGE="https://wireless.kernel.org/en/users/Drivers/iwlwifi"
+SRC_URI="https://wireless.kernel.org/en/users/Drivers/iwlwifi?action=AttachFile&do=get&target=${MY_PN}-${MY_PV}.tgz -> ${P}.tgz"
 
 LICENSE="ipw3945"
 SLOT="${vc[2]}"

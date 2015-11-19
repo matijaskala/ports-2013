@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/lmms/lmms-1.1.3.ebuild,v 1.1 2015/03/17 10:53:37 aballier Exp $
+# $Id$
 
 EAPI=5
 
@@ -43,6 +43,8 @@ RDEPEND="${RDEPEND}
 	media-libs/ladspa-cmt"
 
 DOCS="README AUTHORS TODO"
+
+PATCHES=( "${FILESDIR}/gcc52.patch" )
 
 src_configure() {
 	mycmakeargs="${mycmakeargs}

@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/pymazon/pymazon-0.9.1.ebuild,v 1.1 2011/12/09 14:38:36 lack Exp $
+# $Id$
 
 EAPI=4
 PYTHON_DEPEND="2"
@@ -8,8 +8,8 @@ inherit eutils distutils fdo-mime
 
 MY_P="Pymazon-${PV}"
 DESCRIPTION="Downloader for the Amazon.com MP3 music store"
-HOMEPAGE="http://code.google.com/p/pymazon/"
-SRC_URI="http://pymazon.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/pymazon/"
+SRC_URI="https://pymazon.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

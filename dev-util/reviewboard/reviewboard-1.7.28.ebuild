@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/reviewboard/reviewboard-1.7.28.ebuild,v 1.2 2014/09/30 11:32:26 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -59,7 +59,7 @@ python_prepare_all() {
 }
 
 python_compile_all() {
-	# See http://code.google.com/p/reviewboard/issues/ #3009
+	# See https://code.google.com/p/reviewboard/issues/ #3009
 	# until build of manual can find and use ROOT_URLCONF, only possible build path for manual
 	# requires sacrificing the resources section, all of which call on ROOT_URLCONF
 	local msg="Generating docs for"

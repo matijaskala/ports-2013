@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/gource/gource-0.43.ebuild,v 1.3 2015/04/19 10:14:29 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ MY_P=${MY_P/_/-}
 MY_DATE=${PV/*_p}
 
 DESCRIPTION="A software version control visualization tool"
-HOMEPAGE="http://code.google.com/p/gource/"
+HOMEPAGE="http://gource.io/"
 SRC_URI="https://github.com/acaudwell/Gource/releases/download/${P}/${P}.tar.gz"
 
 LICENSE="GPL-3"

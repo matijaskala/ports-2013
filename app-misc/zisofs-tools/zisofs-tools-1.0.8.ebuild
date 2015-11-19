@@ -1,11 +1,11 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/zisofs-tools/zisofs-tools-1.0.8.ebuild,v 1.13 2014/03/19 13:47:44 ago Exp $
+# $Id$
 
 inherit flag-o-matic
 
 DESCRIPTION="User utilities for zisofs"
-HOMEPAGE="http://www.kernel.org/pub/linux/utils/fs/zisofs/"
+HOMEPAGE="https://www.kernel.org/pub/linux/utils/fs/zisofs/"
 SRC_URI="mirror://kernel/linux/utils/fs/zisofs/${P}.tar.bz2"
 
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/kuroo4/kuroo4-0.90.4.ebuild,v 1.2 2015/06/04 19:00:36 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 SLOT="4"
 IUSE="debug"
 
-DEPEND="dev-db/sqlite"
+DEPEND="dev-db/sqlite:3"
 
 RDEPEND="${DEPEND}
 	app-portage/gentoolkit

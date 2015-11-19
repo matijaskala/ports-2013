@@ -1,15 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/pidgin-opensteamworks/pidgin-opensteamworks-1.5.1.ebuild,v 1.1 2015/05/26 13:52:58 mrueg Exp $
+# $Id$
 
 EAPI=5
 
 inherit toolchain-funcs
 
 DESCRIPTION="Steam protocol plugin for pidgin"
-HOMEPAGE="http://code.google.com/p/pidgin-opensteamworks/"
-SRC_URI="http://pidgin-opensteamworks.googlecode.com/svn/trunk/steam-mobile/releases/steam-mobile-${PV}.tar.bz2
-	http://pidgin-opensteamworks.googlecode.com/files/icons.zip
+HOMEPAGE="https://github.com/eionrobb/pidgin-opensteamworks"
+SRC_URI="https://pidgin-opensteamworks.googlecode.com/svn/trunk/steam-mobile/releases/steam-mobile-${PV}.tar.bz2
+	https://pidgin-opensteamworks.googlecode.com/files/icons.zip
 	-> ${PN}-icons.zip"
 
 LICENSE="GPL-3"
@@ -35,7 +35,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# see http://code.google.com/p/pidgin-opensteamworks/issues/detail?id=31
+	# see https://code.google.com/p/pidgin-opensteamworks/issues/detail?id=31
 	cp "${FILESDIR}"/${PN}-1.3-Makefile "${S}"/Makefile || die
 }
 

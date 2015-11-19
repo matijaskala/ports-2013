@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/isight-firmware-tools/isight-firmware-tools-1.6-r1.ebuild,v 1.5 2014/03/01 22:17:56 mgorny Exp $
+# $Id$
 
 EAPI=5
 inherit eutils versionator udev
@@ -9,7 +9,7 @@ MY_MAJORV="$(get_version_component_range 1).6"
 
 DESCRIPTION="Extract, load or export firmware for the iSight webcams"
 HOMEPAGE="https://launchpad.net/isight-firmware-tools"
-SRC_URI="http://launchpad.net/${PN}/main/${MY_MAJORV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/main/${MY_MAJORV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

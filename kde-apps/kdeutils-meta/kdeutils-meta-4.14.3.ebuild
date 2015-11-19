@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/kdeutils-meta/kdeutils-meta-4.14.3.ebuild,v 1.1 2015/06/04 18:44:38 kensington Exp $
+# $Id$
 
 EAPI=5
 inherit kde4-meta-pkg
 
 DESCRIPTION="kdeutils - merge this to pull in all kdeutils-derived packages"
-HOMEPAGE="http://www.kde.org/applications/utilities http://utils.kde.org"
+HOMEPAGE="https://www.kde.org/applications/utilities https://utils.kde.org"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="cups floppy lirc"
 

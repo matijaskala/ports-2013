@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/isabelle/isabelle-2012-r1.ebuild,v 1.2 2015/03/25 01:46:06 gienah Exp $
+# $Id$
 
 EAPI="5"
 
@@ -17,7 +17,7 @@ JEDIT_P="${JEDIT_PN}-${JEDIT_PV}"
 DESCRIPTION="Isabelle is a generic proof assistant"
 HOMEPAGE="http://www.cl.cam.ac.uk/research/hvg/isabelle/index.html"
 SRC_URI="http://www.cl.cam.ac.uk/research/hvg/isabelle/dist/${MY_P}.tar.gz
-		doc? ( http://dev.gentoo.org/~gienah/snapshots/${MY_P}-doc-src.tar.gz )
+		doc? ( https://dev.gentoo.org/~gienah/snapshots/${MY_P}-doc-src.tar.gz )
 		pide? ( http://www4.in.tum.de/~wenzelm/test/${JEDIT_P}.tar.gz )"
 
 LICENSE="BSD"

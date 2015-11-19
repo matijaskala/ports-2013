@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-strategy/liquidwar6/liquidwar6-0.4.3681.ebuild,v 1.7 2015/01/26 17:41:27 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ MY_PV=${PV/_beta/beta}
 MY_P=${PN}-${MY_PV}
 
 DESCRIPTION="Unique multiplayer wargame between liquids"
-HOMEPAGE="http://www.gnu.org/software/liquidwar6/"
+HOMEPAGE="https://www.gnu.org/software/liquidwar6/"
 SRC_URI="http://www.ufoot.org/download/liquidwar/v6/${MY_PV}/${MY_P}.tar.gz
 	maps? ( http://www.ufoot.org/download/liquidwar/v6/${MY_PV}/${PN}-extra-maps-${MY_PV}.tar.gz )"
 

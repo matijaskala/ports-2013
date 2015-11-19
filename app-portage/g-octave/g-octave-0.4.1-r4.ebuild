@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/g-octave/g-octave-0.4.1-r4.ebuild,v 1.2 2014/12/04 06:22:33 rafaelmartins Exp $
+# $Id$
 
 EAPI="2"
 SUPPORT_PYTHON_ABIS="1"
@@ -15,7 +15,7 @@ DESCRIPTION="A tool that generates and installs ebuilds for Octave-Forge"
 HOMEPAGE="https://github.com/rafaelmartins/g-octave"
 
 SRC_URI="mirror://github/rafaelmartins/${PN}/${P}.tar.gz
-	http://github.com/rafaelmartins/${PN}-db/tarball/${DB_COMMIT} ->
+	https://github.com/rafaelmartins/${PN}-db/tarball/${DB_COMMIT} ->
 		${PN}-db-${DB_COMMIT:0:7}.tar.gz"
 
 LICENSE="GPL-2"

@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/nova/nova-2015.1.9999.ebuild,v 1.13 2015/06/17 21:10:37 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-inherit distutils-r1 eutils git-2 linux-info multilib udev user
+inherit distutils-r1 eutils git-r3 linux-info multilib user
 
-DESCRIPTION="A cloud computing fabric controller (main part of an IaaS system) written in Python"
+DESCRIPTION="Cloud computing fabric controller (main part of an IaaS system) in Python"
 HOMEPAGE="https://launchpad.net/nova"
 EGIT_REPO_URI="https://github.com/openstack/nova.git"
 EGIT_BRANCH="stable/kilo"
@@ -15,15 +15,50 @@ EGIT_BRANCH="stable/kilo"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="+compute compute-only +kvm +memcached +novncproxy openvswitch +rabbitmq sqlite mysql postgres xen iscsi"
-REQUIRED_USE="!compute-only? ( || ( mysql postgres sqlite ) )
-						compute-only? ( compute !rabbitmq !memcached !mysql !postgres !sqlite )
-						compute? ( ^^ ( kvm xen ) )"
+IUSE="+compute compute-only iscsi +kvm +memcached mysql +novncproxy openvswitch postgres +rabbitmq sqlite test xen"
+REQUIRED_USE="
+	!compute-only? ( || ( mysql postgres sqlite ) )
+	compute-only? ( compute !rabbitmq !memcached !mysql !postgres !sqlite )
+	compute? ( ^^ ( kvm xen ) )"
 
-DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
-		>=dev-python/pbr-0.8[${PYTHON_USEDEP}]
-		<dev-python/pbr-1.0[${PYTHON_USEDEP}]
-		app-admin/sudo"
+DEPEND="
+	dev-python/setuptools[${PYTHON_USEDEP}]
+	>=dev-python/pbr-0.8[${PYTHON_USEDEP}]
+	<dev-python/pbr-1.0[${PYTHON_USEDEP}]
+	app-admin/sudo
+	test? (
+		${RDEPEND}
+		>=dev-python/coverage-3.6[${PYTHON_USEDEP}]
+		>=dev-python/fixtures-0.3.14[${PYTHON_USEDEP}]
+		<dev-python/fixtures-1.3.0[${PYTHON_USEDEP}]
+		>=dev-python/mock-1.0[${PYTHON_USEDEP}]
+		<dev-python/mock-1.1.0[${PYTHON_USEDEP}]
+		>=dev-python/mox3-0.7.0[${PYTHON_USEDEP}]
+		<dev-python/mox3-0.8.0[${PYTHON_USEDEP}]
+		dev-python/mysql-python[${PYTHON_USEDEP}]
+		dev-python/psycopg[${PYTHON_USEDEP}]
+		>=dev-python/python-barbicanclient-3.0.1[${PYTHON_USEDEP}]
+		<dev-python/python-barbicanclient-3.1.0[${PYTHON_USEDEP}]
+		>=dev-python/python-ironicclient-0.4.1[${PYTHON_USEDEP}]
+		<dev-python/python-ironicclient-0.6.0[${PYTHON_USEDEP}]
+		>=dev-python/subunit-0.0.18[${PYTHON_USEDEP}]
+		>=dev-python/requests-mock-0.6.0[${PYTHON_USEDEP}]
+		>=dev-python/sphinx-1.1.2[${PYTHON_USEDEP}]
+		!~dev-python/sphinx-1.2.0[${PYTHON_USEDEP}]
+		<dev-python/sphinx-1.3[${PYTHON_USEDEP}]
+		>=dev-python/oslo-sphinx-2.5.0[${PYTHON_USEDEP}]
+		<dev-python/oslo-sphinx-2.6.0[${PYTHON_USEDEP}]
+		>=dev-python/oslotest-1.5.1[${PYTHON_USEDEP}]
+		<dev-python/oslotest-1.6.0[${PYTHON_USEDEP}]
+		>=dev-python/testrepository-0.0.18[${PYTHON_USEDEP}]
+		>=dev-python/testtools-0.9.36[${PYTHON_USEDEP}]
+		!~dev-python/testtools-1.2.0[${PYTHON_USEDEP}]
+		>=dev-python/tempest-lib-0.4.0[${PYTHON_USEDEP}]
+		<dev-python/tempest-lib-0.5.0[${PYTHON_USEDEP}]
+		>=dev-python/suds-0.4[${PYTHON_USEDEP}]
+		>=dev-python/oslo-vmware-0.11.1[${PYTHON_USEDEP}]
+		<dev-python/oslo-vmware-0.12.0[${PYTHON_USEDEP}]
+	)"
 
 # barbicanclient is in here for doc generation
 RDEPEND="
@@ -59,7 +94,9 @@ RDEPEND="
 	>=dev-python/greenlet-0.3.2[${PYTHON_USEDEP}]
 	>=dev-python/pastedeploy-1.5.0-r1[${PYTHON_USEDEP}]
 	dev-python/paste[${PYTHON_USEDEP}]
-	~dev-python/sqlalchemy-migrate-0.9.5[${PYTHON_USEDEP}]
+	>=dev-python/sqlalchemy-migrate-0.9.5[${PYTHON_USEDEP}]
+	!~dev-python/sqlalchemy-migrate-0.9.8[${PYTHON_USEDEP}]
+	<dev-python/sqlalchemy-migrate-0.10.0[${PYTHON_USEDEP}]
 	>=dev-python/netaddr-0.7.12[${PYTHON_USEDEP}]
 	>=dev-python/paramiko-1.13.0[${PYTHON_USEDEP}]
 	dev-python/pyasn1[${PYTHON_USEDEP}]
@@ -69,7 +106,7 @@ RDEPEND="
 	<dev-python/jsonschema-3.0.0[${PYTHON_USEDEP}]
 	>=dev-python/python-cinderclient-1.1.0[${PYTHON_USEDEP}]
 	<dev-python/python-cinderclient-1.2.0[${PYTHON_USEDEP}]
-	>=dev-python/python-neutronclient-2.3.11[${PYTHON_USEDEP}]
+	>=dev-python/python-neutronclient-2.4.0[${PYTHON_USEDEP}]
 	<dev-python/python-neutronclient-2.5.0[${PYTHON_USEDEP}]
 	>=dev-python/python-glanceclient-0.15.0[${PYTHON_USEDEP}]
 	<dev-python/python-glanceclient-0.18.0[${PYTHON_USEDEP}]
@@ -80,7 +117,7 @@ RDEPEND="
 	<dev-python/stevedore-1.4.0[${PYTHON_USEDEP}]
 	>=dev-python/websockify-0.6.0[${PYTHON_USEDEP}]
 	<dev-python/websockify-0.7.0[${PYTHON_USEDEP}]
-	>=dev-python/oslo-concurrency-1.8.0[${PYTHON_USEDEP}]
+	>=dev-python/oslo-concurrency-1.8.2[${PYTHON_USEDEP}]
 	<dev-python/oslo-concurrency-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-config-1.9.3[${PYTHON_USEDEP}]
 	<dev-python/oslo-config-1.10.0[${PYTHON_USEDEP}]
@@ -91,6 +128,7 @@ RDEPEND="
 	>=dev-python/oslo-serialization-1.4.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-serialization-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-utils-1.4.0[${PYTHON_USEDEP}]
+	!~dev-python/oslo-utils-1.4.1[${PYTHON_USEDEP}]
 	<dev-python/oslo-utils-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-db-1.7.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-db-1.8.0[${PYTHON_USEDEP}]
@@ -106,11 +144,13 @@ RDEPEND="
 	>=dev-python/psutil-1.1.1[${PYTHON_USEDEP}]
 	<dev-python/psutil-2.0.0[${PYTHON_USEDEP}]
 	dev-python/libvirt-python[${PYTHON_USEDEP}]
+	app-emulation/libvirt[iscsi?]
 	novncproxy? ( www-apps/novnc )
 	sys-apps/iproute2
 	openvswitch? ( net-misc/openvswitch )
 	rabbitmq? ( net-misc/rabbitmq-server )
-	memcached? ( net-misc/memcached )
+	memcached? ( net-misc/memcached
+	dev-python/python-memcached )
 	sys-fs/sysfsutils
 	sys-fs/multipath-tools
 	net-misc/bridge-utils
@@ -122,6 +162,7 @@ RDEPEND="
 	)
 	iscsi? (
 		sys-fs/lsscsi
+		>=sys-block/open-iscsi-2.0.872-r3
 	)"
 
 PATCHES=(
@@ -142,14 +183,20 @@ pkg_setup() {
 	enewuser nova -1 -1 /var/lib/nova nova
 }
 
-python_prepare() {
-	distutils-r1_python_prepare
+python_prepare_all() {
+	sed -i '/^hacking/d' test-requirements.txt || die
 	sed -i 's/python/python2\.7/g' tools/config/generate_sample.sh || die
+	distutils-r1_python_prepare_all
 }
 
 python_compile() {
 	distutils-r1_python_compile
 	./tools/config/generate_sample.sh -b ./ -p nova -o etc/nova || die
+}
+
+python_test() {
+	testr init
+	testr run --parallel || die "failed testsuite under python2.7"
 }
 
 python_install() {
@@ -197,5 +244,11 @@ python_install() {
 
 		insinto /etc/nova/
 		doins "${FILESDIR}/scsi-openscsi-link.sh"
+	fi
+}
+
+pkg_postinst() {
+	if use iscsi ; then
+		elog "iscsid needs to be running if you want cinder to connect"
 	fi
 }

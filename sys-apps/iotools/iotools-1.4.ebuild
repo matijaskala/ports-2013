@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/iotools/iotools-1.4.ebuild,v 1.3 2013/02/18 19:24:46 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils toolchain-funcs
 
 DESCRIPTION="Simple commands to access hardware device registers"
-HOMEPAGE="http://code.google.com/p/iotools/"
-SRC_URI="http://iotools.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/iotools/"
+SRC_URI="https://iotools.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

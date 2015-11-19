@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-irc/charybdis/charybdis-3.3.0.ebuild,v 1.4 2012/04/05 20:36:52 jdhore Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,7 +9,7 @@ inherit autotools eutils multilib user
 DESCRIPTION="The atheme project's IRCd based on ratbox"
 HOMEPAGE="http://atheme.org/project/charybdis http://www.stack.nl/~jilles/irc/#charybdis"
 SRC_URI="http://www.stack.nl/~jilles/irc/${P}.tbz2
-	http://dev.gentoo.org/~binki/distfiles/${CATEGORY}/${PN}/${P}-patches.tar.bz2"
+	https://dev.gentoo.org/~binki/distfiles/${CATEGORY}/${PN}/${P}-patches.tar.bz2"
 LICENSE="GPL-2"
 
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/goffice/goffice-0.8.17-r1.ebuild,v 1.10 2015/05/17 09:14:03 pacho Exp $
+# $Id$
 
 EAPI="4"
 GCONF_DEBUG="no"
@@ -9,7 +9,7 @@ GNOME2_LA_PUNT="yes"
 inherit autotools eutils gnome2 flag-o-matic
 
 DESCRIPTION="A library of document-centric objects and utilities"
-HOMEPAGE="http://git.gnome.org/browse/goffice/"
+HOMEPAGE="https://git.gnome.org/browse/goffice/"
 
 LICENSE="GPL-2"
 SLOT="0.8"

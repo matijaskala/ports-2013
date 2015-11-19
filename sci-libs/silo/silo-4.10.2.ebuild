@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/silo/silo-4.10.2.ebuild,v 1.1 2015/01/08 12:31:38 slis Exp $
+# $Id$
 
 EAPI=5
 
-inherit eutils
+inherit eutils fortran-2
 
 DESCRIPTION="A mesh and field I/O library and scientific database"
 HOMEPAGE="https://wci.llnl.gov/simulation/computer-codes/silo"

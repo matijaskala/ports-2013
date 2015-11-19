@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/tokumx/tokumx-1.5.0.ebuild,v 1.1 2014/08/01 13:08:05 chainsaw Exp $
+# $Id$
 
 EAPI=5
 CMAKE_BUILD_TYPE=Release
@@ -20,6 +20,7 @@ IUSE=""
 
 RDEPEND="
 	!dev-libs/jemalloc
+	!dev-libs/mongo-cxx-driver
 	>=dev-libs/boost-1.50[threads(+)]
 	>=dev-libs/libpcre-8.30[cxx]
 	net-libs/libpcap"

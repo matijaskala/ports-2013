@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ml/camlp4/camlp4-4.02.1_p3.ebuild,v 1.1 2015/03/05 17:46:09 aballier Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/ocaml/camlp4/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="LGPL-2-with-linking-exception"
 SLOT="0/${PV}"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-fbsd ~x86-linux"
+KEYWORDS="~alpha amd64 ~arm hppa ~ia64 ~mips ppc ppc64 ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 IUSE="+ocamlopt"
 
 DEPEND=">=dev-lang/ocaml-4.02:=[ocamlopt?]"

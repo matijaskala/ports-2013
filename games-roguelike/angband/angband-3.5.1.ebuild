@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-roguelike/angband/angband-3.5.1.ebuild,v 1.3 2015/02/25 16:00:12 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils versionator games
@@ -18,8 +18,8 @@ KEYWORDS="amd64 ~ppc x86"
 IUSE="ncurses sdl +sound X"
 
 RDEPEND="X? ( x11-libs/libX11 )
-	!ncurses? ( !X? ( !sdl? ( sys-libs/ncurses ) ) )
-	ncurses? ( sys-libs/ncurses )
+	!ncurses? ( !X? ( !sdl? ( sys-libs/ncurses[unicode] ) ) )
+	ncurses? ( sys-libs/ncurses[unicode] )
 	sdl? ( media-libs/libsdl[video,X]
 		media-libs/sdl-ttf
 		media-libs/sdl-image

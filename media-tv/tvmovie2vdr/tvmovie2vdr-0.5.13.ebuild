@@ -1,6 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/tvmovie2vdr/tvmovie2vdr-0.5.13.ebuild,v 1.7 2009/07/19 17:55:56 tove Exp $
+# $Id$
 
 inherit eutils
 
@@ -12,7 +12,7 @@ VAR_DIR="/var/vdr/tvmovie2vdr"
 SHARE_DIR="/usr/share/${PN}"
 
 DESCRIPTION="load the program guide from tvmovie and others to vdr"
-HOMEPAGE="http://steckrue.be/tvm2vdr/"
+HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
 SRC_URI="http://steckrue.be/download/${P}.tar.gz"
 
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyorbit/pyorbit-2.24.0-r1.ebuild,v 1.13 2015/04/08 08:05:19 mgorny Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -32,7 +32,7 @@ src_prepare() {
 }
 
 src_configure() {
-	python_parallel_foreach_impl run_in_build_dir gnome2_src_configure
+	python_foreach_impl run_in_build_dir gnome2_src_configure
 }
 
 src_compile() {

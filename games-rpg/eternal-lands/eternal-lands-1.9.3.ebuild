@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-rpg/eternal-lands/eternal-lands-1.9.3.ebuild,v 1.2 2015/03/31 17:53:41 ulm Exp $
+# $Id$
 
 EAPI=2
 inherit eutils flag-o-matic games
@@ -8,7 +8,7 @@ inherit eutils flag-o-matic games
 DESCRIPTION="An online MMORPG written in C and SDL"
 HOMEPAGE="http://www.eternal-lands.com"
 SRC_URI="mirror://gentoo/elc_1.9.3-20120213.tar.bz2
-	http://dev.gentoo.org/~rich0/distfiles/eternal-lands.png"
+	https://dev.gentoo.org/~rich0/distfiles/eternal-lands.png"
 
 LICENSE="eternal_lands"
 SLOT="0"

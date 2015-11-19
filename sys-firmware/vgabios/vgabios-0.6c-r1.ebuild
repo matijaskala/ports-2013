@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-firmware/vgabios/vgabios-0.6c-r1.ebuild,v 1.2 2013/11/26 20:21:18 hwoarang Exp $
+# $Id$
 
 EAPI=4
 
@@ -13,8 +13,8 @@ inherit eutils
 DESCRIPTION="VGA BIOS implementation"
 HOMEPAGE="http://www.nongnu.org/vgabios/"
 SRC_URI="http://savannah.gnu.org/download/${PN}/${P}.tgz
-	http://dev.gentoo.org/~cardoe/distfiles/${P}-bins.tar.xz
-	http://dev.gentoo.org/~cardoe/distfiles/${P}-fixes-${FIXES}.tar.bz2"
+	https://dev.gentoo.org/~cardoe/distfiles/${P}-bins.tar.xz
+	https://dev.gentoo.org/~cardoe/distfiles/${P}-fixes-${FIXES}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

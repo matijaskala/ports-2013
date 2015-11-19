@@ -1,16 +1,16 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-apps/python-whiteboard/python-whiteboard-20101012.ebuild,v 1.1 2011/02/01 22:04:50 lxnay Exp $
+# $Id$
 
 EAPI="3"
 
 inherit python multilib
 
-SRC_URI="http://dev.gentoo.org/~lxnay/${PN}/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~lxnay/${PN}/${P}.tar.bz2"
 
 KEYWORDS="~x86 ~amd64"
 DESCRIPTION="Build and operate a electronic whiteboard Wiimote and IR Pen"
-HOMEPAGE="http://github.com/pnegre/python-whiteboard"
+HOMEPAGE="https://github.com/pnegre/python-whiteboard"
 
 LICENSE="GPL-3"
 SLOT="0"

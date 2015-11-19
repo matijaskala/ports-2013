@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/sha1-polyml/sha1-polyml-5.5.0.ebuild,v 1.1 2012/12/08 08:05:32 gienah Exp $
+# $Id$
 
 EAPI="5"
 
@@ -62,7 +62,9 @@ src_prepare() {
 src_compile() {
 	arch=$(uname -m)
 	uos=$(uname)
-	los=${uos,,}
+	# Switch to ,, when we switch to EAPI=6.
+	#local los=${uos,,}
+	los=$(tr '[:upper:]' '[:lower:]' <<<"${uos}")
 	./build "${arch}-${los}" || die "build failed"
 }
 

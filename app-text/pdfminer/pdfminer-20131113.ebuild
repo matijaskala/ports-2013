@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/pdfminer/pdfminer-20131113.ebuild,v 1.1 2014/04/07 14:35:18 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="Python tool for extracting information from PDF documents"
-HOMEPAGE="http://www.unixuser.org/~euske/python/pdfminer/ http://pypi.python.org/pypi/pdfminer/"
+HOMEPAGE="http://www.unixuser.org/~euske/python/pdfminer/ https://pypi.python.org/pypi/pdfminer/"
 SRC_URI="mirror://pypi/p/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"

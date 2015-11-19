@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/dracut/dracut-040-r3.ebuild,v 1.2 2015/03/31 10:54:29 aidecoe Exp $
+# $Id$
 
 EAPI=4
 
 inherit bash-completion-r1 eutils linux-info multilib systemd
 
 DESCRIPTION="Generic initramfs generation tool"
-HOMEPAGE="http://dracut.wiki.kernel.org"
+HOMEPAGE="https://dracut.wiki.kernel.org"
 SRC_URI="mirror://kernel/linux/utils/boot/${PN}/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
@@ -76,24 +76,6 @@ rm_module() {
 		fi
 	done
 }
-
-# Grabbed from net-misc/netctl ebuild.
-optfeature() {
-	local desc=$1
-	shift
-	while (( $# )); do
-		if has_version "$1"; then
-			elog "  [I] $1 to ${desc}"
-		else
-			elog "  [ ] $1 to ${desc}"
-		fi
-		shift
-	done
-}
-
-#
-# ebuild functions
-#
 
 src_prepare() {
 	epatch "${PATCHES[@]}"
@@ -198,7 +180,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	if linux-info_get_any_version && linux_config_src_exists; then
+	if linux-info_get_any_version && linux_config_exists; then
 		ewarn ""
 		ewarn "If the following test report contains a missing kernel"
 		ewarn "configuration option, you should reconfigure and rebuild your"

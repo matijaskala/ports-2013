@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pypax/pypax-0.9.0.ebuild,v 1.9 2015/06/02 05:12:50 jmorgan Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,9 +9,9 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
 inherit distutils-r1
 
 DESCRIPTION="Python module to get or set either PT_PAX and/or XATTR_PAX flags"
-HOMEPAGE="http://dev.gentoo.org/~blueness/elfix/
-	http://www.gentoo.org/proj/en/hardened/pax-quickstart.xml"
-SRC_URI="http://dev.gentoo.org/~blueness/elfix/elfix-${PV}.tar.gz"
+HOMEPAGE="https://dev.gentoo.org/~blueness/elfix/
+	https://www.gentoo.org/proj/en/hardened/pax-quickstart.xml"
+SRC_URI="https://dev.gentoo.org/~blueness/elfix/elfix-${PV}.tar.gz"
 
 S="${WORKDIR}/elfix-${PV}/scripts"
 

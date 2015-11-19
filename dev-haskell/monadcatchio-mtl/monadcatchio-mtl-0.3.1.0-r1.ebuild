@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/monadcatchio-mtl/monadcatchio-mtl-0.3.1.0-r1.ebuild,v 1.1 2014/07/02 11:37:53 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="alpha amd64 ppc sparc x86"
 IUSE=""
 
 RDEPEND="dev-haskell/extensible-exceptions:=[profile?]

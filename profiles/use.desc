@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/use.desc,v 1.526 2015/06/20 23:04:05 chewi Exp $
+# $Id$
 
 # Keep them sorted
 
@@ -24,6 +24,7 @@ apm - Add APM (Advanced Power Management) support
 aqua - Include support for the Mac OS X Aqua (Carbon/Cocoa) GUI
 atm - Enable Asynchronous Transfer Mode protocol support
 audiofile - Add support for libaudiofile where applicable
+audit - Enable support for Linux audit subsystem using sys-process/audit
 avahi - Add avahi/Zeroconf support
 ayatana - Build in support for Ayatana notification using the libindicate or libappindicator plugin
 bash-completion - Enable bash-completion support
@@ -153,7 +154,6 @@ ios - Enable support for Apple's iDevice with iOS operating system (iPad, iPhone
 ipod - Enable support for iPod device access
 ipv6 - Add support for IP version 6
 iwmmxt - Add support for optimizations for ARM iwMMXt instructions
-jabber - Enable jabber IM protocol support
 jack - Add support for the JACK Audio Connection Kit
 java - Add support for Java
 javascript - Enable javascript support
@@ -180,6 +180,7 @@ libcaca - Add support for colored ASCII-art graphics
 libedit - Use the libedit library (replacement for readline)
 libffi - Enable support for Foreign Function Interface library
 libnotify - Enable desktop notification support
+libressl - Use dev-libs/libressl as SSL provider (might need ssl USE flag), packages should not depend on this USE flag
 libsamplerate - Build with support for converting sample rates using libsamplerate
 libwww - Add libwww support (General purpose WEB API)
 lirc - Add support for lirc (Linux's Infra-Red Remote Control)
@@ -295,7 +296,7 @@ savedconfig - Use this to restore your config from /etc/portage/savedconfig ${CA
 scanner - Add support for scanner hardware (e.g. build the sane frontend in kdegraphics)
 sdl - Add support for Simple Direct Layer (media library)
 seamonkey - Add support for the Seamonkey web-browser
-seccomp - Enable seccomp for system call filtering
+seccomp - Enable seccomp (secure computing mode) to perform system call filtering at runtime to increase security of programs
 selinux - !!internal use only!! Security Enhanced Linux support, this must be set by the selinux profile or breakage will occur
 semantic-desktop - Cross-KDE support for semantic search and information retrieval
 session - Add persistent session support
@@ -318,7 +319,6 @@ sox - Add support for Sound eXchange (SoX)
 speex - Add support for the speex audio codec (used for speech)
 spell - Add dictionary support
 sqlite - Add support for sqlite - embedded sql database
-sqlite3 - Add support for sqlite3 - embedded sql database
 ssl - Add support for Secure Socket Layer connections
 startup-notification - Enable application startup event feedback mechanism
 static - !!do not set this during bootstrap!! Causes binaries to be statically linked instead of dynamically

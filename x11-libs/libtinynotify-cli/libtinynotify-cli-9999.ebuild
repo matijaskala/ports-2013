@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/libtinynotify-cli/libtinynotify-cli-9999.ebuild,v 1.3 2014/07/06 13:24:03 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 #if LIVE
 AUTOTOOLS_AUTORECONF=yes
-EGIT_REPO_URI="http://bitbucket.org/mgorny/tinynotify-send.git"
+EGIT_REPO_URI="https://bitbucket.org/mgorny/tinynotify-send.git"
 
 inherit git-r3
 #endif

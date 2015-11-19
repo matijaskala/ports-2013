@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jruby/jruby-1.7.12.ebuild,v 1.1 2014/05/03 21:31:48 tomwij Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ inherit eutils java-pkg-2 java-ant-2
 DESCRIPTION="Java-based Ruby interpreter implementation"
 HOMEPAGE="http://jruby.codehaus.org/"
 SRC_URI="http://jruby.org.s3.amazonaws.com/downloads/${PV}/${PN}-src-${PV}.tar.gz
-	http://dev.gentoo.org/~tomwij/files/dist/${P}-mvn-ant-ant.patch"
+	https://dev.gentoo.org/~tomwij/files/dist/${P}-mvn-ant-ant.patch"
 
 LICENSE="|| ( EPL-1.0 GPL-2 LGPL-2.1 )"
 SLOT="0"
@@ -91,7 +91,7 @@ pkg_setup() {
 			echo "rm ${directory}"
 			echo 'emerge -1 $(< /tmp/jruby.fix)'
 
-			eerror "For more information, please see http://bugs.gentoo.org/show_bug.cgi?id=302187"
+			eerror "For more information, please see https://bugs.gentoo.org/show_bug.cgi?id=302187"
 			fail="true"
 		fi
 	done

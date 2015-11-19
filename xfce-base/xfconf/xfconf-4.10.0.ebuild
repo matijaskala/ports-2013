@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-base/xfconf/xfconf-4.10.0.ebuild,v 1.14 2015/05/01 12:51:57 dilfridge Exp $
+# $Id$
 
 EAPI=5
 inherit xfconf
@@ -42,7 +42,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# http://bugzilla.xfce.org/show_bug.cgi?id=9556
+	# https://bugzilla.xfce.org/show_bug.cgi?id=9556
 	cat <<-EOF >> po/POTFILES.skip
 	xfconf-perl/xs/Xfconf.c
 	xfconf-perl/xs/XfconfBinding.c

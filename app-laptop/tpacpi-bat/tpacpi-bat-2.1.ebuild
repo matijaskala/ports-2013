@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-laptop/tpacpi-bat/tpacpi-bat-2.1.ebuild,v 1.1 2014/01/17 16:10:03 ottxor Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit eutils systemd
 
 if [ "${PV}" = "9999" ]; then
 	inherit git-2
-	EGIT_REPO_URI="git://github.com/teleshoes/tpacpi-bat.git http://github.com/teleshoes/tpacpi-bat.git"
+	EGIT_REPO_URI="git://github.com/teleshoes/tpacpi-bat.git https://github.com/teleshoes/tpacpi-bat.git"
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/teleshoes/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"

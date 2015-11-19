@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/utf8-string/utf8-string-1.ebuild,v 1.1 2015/04/05 02:17:05 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Support for reading and writing UTF8 Strings"
-HOMEPAGE="http://github.com/glguy/utf8-string/"
+HOMEPAGE="https://github.com/glguy/utf8-string/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

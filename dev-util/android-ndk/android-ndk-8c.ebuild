@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/android-ndk/android-ndk-8c.ebuild,v 1.1 2012/12/27 09:21:21 kumba Exp $
+# $Id$
 
 EAPI=3
 
@@ -8,7 +8,7 @@ MY_P="${PN}-r${PV}"
 
 DESCRIPTION="Open Handset Alliance's Android NDK (Native Dev Kit)"
 HOMEPAGE="http://developer.android.com/sdk/ndk/"
-SRC_URI="http://dl.google.com/android/ndk/${MY_P}-linux-x86.tar.bz2"
+SRC_URI="https://dl.google.com/android/ndk/${MY_P}-linux-x86.tar.bz2"
 
 LICENSE="android"
 SLOT="0"
@@ -32,6 +32,7 @@ ANDROID_TC_X86_ANDROID_4_4="${ANDROID_NDK_DIR}/toolchains/x86-4.4.3/prebuilt/lin
 ANDROID_TC_X86_ANDROID_4_6="${ANDROID_NDK_DIR}/toolchains/x86-4.6/prebuilt/linux-x86"
 
 QA_PREBUILT="*"
+PYTHON_UPDATER_IGNORE="1"
 
 src_configure() {
 	:

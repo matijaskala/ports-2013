@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/tremor/tremor-0_pre20130223.ebuild,v 1.3 2013/05/12 18:03:00 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit autotools eutils
 
 DESCRIPTION="A fixed-point version of the Ogg Vorbis decoder (also known as libvorbisidec)"
 HOMEPAGE="http://wiki.xiph.org/Tremor"
-SRC_URI="http://dev.gentoo.org/~ssuominen/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~ssuominen/${P}.tar.xz"
 
 LICENSE="BSD"
 SLOT="0"

@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/e_dbus/e_dbus-1.7.10.ebuild,v 1.5 2014/05/31 19:02:27 pacho Exp $
+# $Id$
 
 EAPI="4"
 
 inherit enlightenment
 
 DESCRIPTION="Enlightenment's (Ecore) integration to DBus"
-SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+SRC_URI="https://download.enlightenment.org/releases/${P}.tar.bz2"
 
 LICENSE="BSD-2"
 KEYWORDS="amd64 ~arm x86"

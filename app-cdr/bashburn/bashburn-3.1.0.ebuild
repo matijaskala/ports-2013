@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-cdr/bashburn/bashburn-3.1.0.ebuild,v 1.6 2013/01/23 11:56:17 ssuominen Exp $
+# $Id$
 
 EAPI=4
 
@@ -32,7 +32,7 @@ S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	# Fix for "warning: jobserver unavailable: using -j1."
-	sed -i -e 's:make -C:$(MAKE) -C:' Makefile || die
+	sed -i -e 's:make -C:$(MAKE) -C:' Makefile || die
 }
 
 src_install() {

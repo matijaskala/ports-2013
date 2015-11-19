@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libzeitgeist/libzeitgeist-0.3.18.ebuild,v 1.11 2013/12/08 19:58:56 pacho Exp $
+# $Id$
 
 EAPI=4
 
@@ -11,8 +11,8 @@ inherit autotools-utils eutils versionator
 MY_PV=$(get_version_component_range 1-2)
 
 DESCRIPTION="Client library to interact with zeitgeist"
-HOMEPAGE="http://launchpad.net/libzeitgeist/"
-SRC_URI="http://launchpad.net/libzeitgeist/${MY_PV}/${PV}/+download/${P}.tar.gz"
+HOMEPAGE="https://launchpad.net/libzeitgeist/"
+SRC_URI="https://launchpad.net/libzeitgeist/${MY_PV}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

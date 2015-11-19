@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/gmime/gmime-2.6.20.ebuild,v 1.12 2014/06/20 14:44:54 ago Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -9,7 +9,7 @@ VALA_USE_DEPEND="vapigen"
 inherit eutils mono-env gnome2 vala
 
 DESCRIPTION="Utilities for creating and parsing messages using MIME"
-HOMEPAGE="http://spruce.sourceforge.net/gmime/ http://developer.gnome.org/gmime/stable/"
+HOMEPAGE="http://spruce.sourceforge.net/gmime/ https://developer.gnome.org/gmime/stable/"
 
 SLOT="2.6"
 LICENSE="LGPL-2.1"

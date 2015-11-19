@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libofa/libofa-0.9.3-r1.ebuild,v 1.8 2014/09/15 08:21:35 ago Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils flag-o-matic multilib-minimal
 
 DESCRIPTION="Open Fingerprint Architecture"
-HOMEPAGE="http://code.google.com/p/musicip-libofa/"
-SRC_URI="http://musicip-libofa.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/musicip-libofa/"
+SRC_URI="https://musicip-libofa.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="|| ( APL-1.0 GPL-2 )"
 SLOT="0"

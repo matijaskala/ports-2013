@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-visualization/qtiplot/qtiplot-0.9.8.9-r2.ebuild,v 1.11 2015/04/08 18:23:57 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,8 +12,8 @@ DESCRIPTION="Qt based clone of the Origin plotting package"
 HOMEPAGE="http://soft.proindependent.com/qtiplot.html
 	http://www.staff.science.uu.nl/~zeven101/qtiplot.html"
 SRC_URI="
-	http://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.bz2
-	http://dev.gentoo.org/~dilfridge/distfiles/${P}-origin.patch.bz2"
+	https://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.bz2
+	https://dev.gentoo.org/~dilfridge/distfiles/${P}-origin.patch.bz2"
 
 LICENSE="GPL-2 GPL-3"
 SLOT="0"
@@ -44,7 +44,7 @@ CDEPEND="
 	>=dev-libs/boost-1.35.0:=
 	dev-libs/quazip
 	media-libs/libpng:=
-	sci-libs/alglib
+	sci-libs/alglib:=
 	sci-libs/gsl
 	sci-libs/tamu_anova
 	latex? ( dev-tex/qtexengine )
@@ -224,12 +224,8 @@ src_install() {
 
 pkg_postinst() {
 	if use python; then
-		elog "You might want to emerge"
-		elog "\t dev-python/pygsl"
-		elog "\t dev-python/rpy"
-		elog "\t sci-libs/scipy and"
-		elog "\t dev-python/sympy"
-		elog "to gain full python support."
+		optfeature "Enhanced python support" \
+			dev-python/pygsl dev-python/rpy sci-libs/scipy dev-python/sympy
 	fi
 
 	fdo-mime_desktop_database_update

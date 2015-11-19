@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/ps3mediaserver/ps3mediaserver-1.90.1.ebuild,v 1.1 2014/01/01 15:15:51 floppym Exp $
+# $Id$
 
 EAPI="5"
 
 inherit eutils
 
 DESCRIPTION="DLNA compliant UPNP server for streaming media to Playstation 3"
-HOMEPAGE="http://code.google.com/p/ps3mediaserver"
+HOMEPAGE="https://github.com/ps3mediaserver/ps3mediaserver"
 SRC_URI="mirror://sourceforge/project/ps3mediaserver/pms-${PV}-generic-linux-unix.tar.gz"
 
 LICENSE="GPL-2"

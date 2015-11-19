@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-fonts/source-han-sans/source-han-sans-1.001.ebuild,v 1.2 2015/04/28 09:07:14 yngwin Exp $
+# $Id$
 
 EAPI=5
 inherit font
@@ -11,10 +11,10 @@ inherit font
 
 DESCRIPTION="Pan-CJK OpenType/CFF font family"
 HOMEPAGE="https://github.com/adobe-fonts/source-han-sans/"
-SRC_URI="linguas_ja? ( http://dev.gentoo.org/~yngwin/distfiles/${PN}-ja-${PV}.tar.xz )
-	linguas_ko? ( http://dev.gentoo.org/~yngwin/distfiles/${PN}-ko-${PV}.tar.xz )
-	linguas_zh_CN? ( http://dev.gentoo.org/~yngwin/distfiles/${PN}-zh_CN-${PV}.tar.xz )
-	linguas_zh_TW? ( http://dev.gentoo.org/~yngwin/distfiles/${PN}-zh_TW-${PV}.tar.xz )"
+SRC_URI="linguas_ja? ( https://dev.gentoo.org/~yngwin/distfiles/${PN}-ja-${PV}.tar.xz )
+	linguas_ko? ( https://dev.gentoo.org/~yngwin/distfiles/${PN}-ko-${PV}.tar.xz )
+	linguas_zh_CN? ( https://dev.gentoo.org/~yngwin/distfiles/${PN}-zh_CN-${PV}.tar.xz )
+	linguas_zh_TW? ( https://dev.gentoo.org/~yngwin/distfiles/${PN}-zh_TW-${PV}.tar.xz )"
 
 LICENSE="Apache-2.0"
 SLOT="0"

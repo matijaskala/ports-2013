@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/aacgain/aacgain-1.9.ebuild,v 1.4 2014/08/10 21:03:11 slyfox Exp $
+# $Id$
 
 EAPI=4
 
@@ -13,7 +13,7 @@ MP3GAIN_PV="1.5.2"
 DESCRIPTION="AACGain normalizes the volume of digital music files using the Replay Gain algorithm"
 HOMEPAGE="http://aacgain.altosdesign.com/"
 SRC_URI="http://sbriesen.de/gentoo/distfiles/${P}.tar.xz
-	http://mp4v2.googlecode.com/files/mp4v2-${MP4V2_PV}.tar.bz2
+	https://mp4v2.googlecode.com/files/mp4v2-${MP4V2_PV}.tar.bz2
 	mirror://sourceforge/mp3gain/mp3gain-${MP3GAIN_PV//./_}-src.zip
 	mirror://sourceforge/faac/faad2-${FAAD2_PV}.tar.gz"
 

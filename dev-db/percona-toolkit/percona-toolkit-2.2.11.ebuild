@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/percona-toolkit/percona-toolkit-2.2.11.ebuild,v 1.1 2014/10/19 09:33:41 idl0r Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="http://www.percona.com/downloads/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="|| ( GPL-2 Artistic )"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 x86 ~amd64-linux ~x86-linux"
 # Package warrants IUSE doc
 IUSE=""
 

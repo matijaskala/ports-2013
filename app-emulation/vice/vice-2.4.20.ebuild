@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/vice/vice-2.4.20.ebuild,v 1.2 2015/06/15 07:38:33 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils toolchain-funcs flag-o-matic games
@@ -11,7 +11,7 @@ SRC_URI="mirror://sourceforge/vice-emu/releases/${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~sparc ~x86"
+KEYWORDS="amd64 ppc ~sparc x86"
 IUSE="Xaw3d alsa ethernet ffmpeg fullscreen +gtk2 ipv6 lame nls oss png pulseaudio sdl +sdlsound threads vte zlib"
 
 # upstream says gtk3 and sdl2 shouldn't be exposed yet.
@@ -87,7 +87,9 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch \
-		"${FILESDIR}"/${P}-autotools.patch
+		"${FILESDIR}"/${P}-autotools.patch \
+		"${FILESDIR}"/${P}-format.patch \
+		"${FILESDIR}"/${P}-xf86extensions.patch
 	sed -i \
 		-e 's/building//' \
 		doc/Makefile.am || die

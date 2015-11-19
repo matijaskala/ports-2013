@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/sqlitebrowser/sqlitebrowser-3.5.1.ebuild,v 1.4 2015/06/16 00:39:31 pesa Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ IUSE="qt4 qt5 test"
 
 REQUIRED_USE="^^ ( qt4 qt5 )"
 
-DEPEND="
+RDEPEND="
 	dev-db/sqlite:3
 	dev-java/antlr:0[cxx]
 	dev-libs/qcustomplot[qt5=]
@@ -28,13 +28,12 @@ DEPEND="
 		dev-qt/qtgui:4
 	)
 	qt5? (
-		dev-qt/linguist:5
-		dev-qt/linguist-tools:5
 		dev-qt/qtnetwork:5
 		dev-qt/qttest:5
 		dev-qt/qtwidgets:5
 	)"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	qt5? ( dev-qt/linguist-tools:5 )"
 
 PATCHES=( "${FILESDIR}"/${P}-unbundle.patch )
 

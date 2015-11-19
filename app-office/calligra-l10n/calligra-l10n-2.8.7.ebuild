@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/calligra-l10n/calligra-l10n-2.8.7.ebuild,v 1.1 2014/12/04 13:18:51 kensington Exp $
+# $Id$
 
 EAPI=5
 
 inherit kde4-base
 
 DESCRIPTION="Calligra localization package"
-HOMEPAGE="http://www.kde.org/"
+HOMEPAGE="https://www.kde.org/"
 LICENSE="GPL-2"
 
 DEPEND="sys-devel/gettext"

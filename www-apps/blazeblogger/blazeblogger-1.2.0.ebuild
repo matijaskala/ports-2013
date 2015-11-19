@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/blazeblogger/blazeblogger-1.2.0.ebuild,v 1.2 2013/06/21 19:33:51 xmw Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="simple-to-use, capable content management system for the cmdline producing static content"
 HOMEPAGE="http://blaze.blackened.cz/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz
-	doc? ( http://${PN}.googlecode.com/files/${PN}-doc-${PV}.tar.gz ) "
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz
+	doc? ( https://${PN}.googlecode.com/files/${PN}-doc-${PV}.tar.gz ) "
 
 LICENSE="FDL-1.3 GPL-3"
 SLOT="0"

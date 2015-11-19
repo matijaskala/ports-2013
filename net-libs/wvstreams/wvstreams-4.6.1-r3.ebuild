@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/wvstreams/wvstreams-4.6.1-r3.ebuild,v 1.9 2013/07/04 12:18:19 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils flag-o-matic toolchain-funcs versionator
 
 DESCRIPTION="A network programming library in C++"
 HOMEPAGE="http://alumnit.ca/wiki/?WvStreams"
-SRC_URI="http://wvstreams.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://wvstreams.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

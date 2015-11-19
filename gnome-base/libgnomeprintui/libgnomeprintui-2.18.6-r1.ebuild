@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/libgnomeprintui/libgnomeprintui-2.18.6-r1.ebuild,v 1.9 2014/10/11 12:13:12 maekke Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -9,7 +9,7 @@ GNOME_TARBALL_SUFFIX="bz2"
 inherit gnome2 multilib-minimal
 
 DESCRIPTION="User interface libraries for gnome print"
-HOMEPAGE="http://www.gnome.org/"
+HOMEPAGE="https://www.gnome.org/"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="2.2"

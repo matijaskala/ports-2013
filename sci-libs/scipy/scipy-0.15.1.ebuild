@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/scipy/scipy-0.15.1.ebuild,v 1.5 2015/05/13 06:56:26 jmorgan Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 python3_{3,4} )
+PYTHON_REQ_USE="threads(+)"
 
 DOC_PV=0.15.1
 
@@ -39,7 +40,7 @@ DEPEND="${CDEPEND}
 	"
 
 RDEPEND="${CDEPEND}
-	virtual/python-imaging[${PYTHON_USEDEP}]"
+	dev-python/pillow[${PYTHON_USEDEP}]"
 
 DOCS=( HACKING.rst.txt THANKS.txt )
 

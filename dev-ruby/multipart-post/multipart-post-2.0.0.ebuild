@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/multipart-post/multipart-post-2.0.0.ebuild,v 1.6 2015/03/03 06:59:30 graaff Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ RUBY_FAKEGEM_EXTRADOC="History.txt README.md"
 inherit ruby-fakegem eutils
 
 DESCRIPTION="Adds a streamy multipart form post capability to Net::HTTP"
-HOMEPAGE="http://github.com/nicksieger/multipart-post"
+HOMEPAGE="https://github.com/nicksieger/multipart-post"
 
 LICENSE="MIT"
 SLOT="0"

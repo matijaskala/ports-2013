@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/ncdc/ncdc-9999.ebuild,v 1.12 2014/05/30 12:53:02 xmw Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ RDEPEND="app-arch/bzip2
 	dev-db/sqlite:3
 	dev-libs/glib:2
 	net-libs/gnutls
-	sys-libs/ncurses:5[unicode]
+	sys-libs/ncurses:0[unicode]
 	sys-libs/zlib
 	geoip? ( dev-libs/geoip )"
 DEPEND="${RDEPEND}

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/jsoncpp/jsoncpp-0.10.2-r1.ebuild,v 1.5 2015/06/16 12:21:03 zlogene Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/open-source-parsers/${PN}/archive/${PV}.tar.gz -> ${
 
 LICENSE="|| ( public-domain MIT )"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~arm64 hppa ~mips ppc64 x86"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 sparc x86"
 IUSE="doc test"
 
 DEPEND="
@@ -29,6 +29,7 @@ RDEPEND=""
 PATCHES=(
 	# fix broken path subst in .pc file
 	"${FILESDIR}"/jsoncpp-1.6.2-fix-pkgconfig.patch
+	"${FILESDIR}/${P}-arm.patch"
 )
 
 pkg_setup() {

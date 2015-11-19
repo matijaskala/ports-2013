@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/step/step-4.14.3.ebuild,v 1.1 2015/06/04 18:44:45 kensington Exp $
+# $Id$
 
 EAPI=5
 
 KDE_HANDBOOK="optional"
-inherit kde4-base
+inherit flag-o-matic kde4-base
 
 DESCRIPTION="The KDE physics simulator"
-HOMEPAGE="http://edu.kde.org/step"
+HOMEPAGE="https://edu.kde.org/step"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug +gsl +qalculate"
 
@@ -20,6 +20,9 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
+	# bug 560884
+	use ppc64 && append-flags -mno-altivec
+
 	local mycmakeargs=(
 		$(cmake-utils_use_with gsl)
 		$(cmake-utils_use_with qalculate)

@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/kdegames-meta/kdegames-meta-4.14.3.ebuild,v 1.1 2015/06/04 18:44:51 kensington Exp $
+# $Id$
 
 EAPI=5
 inherit kde4-meta-pkg
 
 DESCRIPTION="kdegames - merge this to pull in all kdegames-derived packages"
-HOMEPAGE="http://games.kde.org/"
+HOMEPAGE="https://games.kde.org/"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="opengl python"
 

@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/basqet/basqet-0.2.0.ebuild,v 1.2 2013/03/02 23:47:25 hwoarang Exp $
+# $Id$
 
 EAPI=4
 
 inherit qt4-r2
 
 DESCRIPTION="Keep your notes, pictures, ideas, and information in Baskets"
-HOMEPAGE="http://code.google.com/p/basqet/"
-SRC_URI="http://basqet.googlecode.com/files/${PN}_${PV}-src.tgz"
+HOMEPAGE="https://bitbucket.org/ridderby/basqet"
+SRC_URI="https://basqet.googlecode.com/files/${PN}_${PV}-src.tgz"
 
 LICENSE="GPL-3"
 SLOT="0"

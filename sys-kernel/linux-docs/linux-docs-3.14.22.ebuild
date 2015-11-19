@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/linux-docs/linux-docs-3.14.22.ebuild,v 1.1 2014/10/17 13:15:09 mpagano Exp $
+# $Id$
 
 EAPI=5
 inherit toolchain-funcs
@@ -9,7 +9,7 @@ MY_P=linux-${PV}
 S=${WORKDIR}/${MY_P}
 
 DESCRIPTION="Developer documentation generated from the Linux kernel"
-HOMEPAGE="http://www.kernel.org/"
+HOMEPAGE="https://www.kernel.org/"
 SRC_URI="mirror://kernel/linux/kernel/v3.x/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"

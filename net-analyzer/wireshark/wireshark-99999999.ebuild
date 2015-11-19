@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/wireshark/wireshark-99999999.ebuild,v 1.15 2015/06/24 05:31:48 jer Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils fcaps flag-o-matic git-r3 multilib qmake-utils qt4-r2 user
@@ -48,7 +48,7 @@ CDEPEND="
 		)
 	qt5? (
 		dev-qt/qtcore:5
-		dev-qt/qtgui:5[accessibility]
+		dev-qt/qtgui:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtwidgets:5
 		x11-misc/xdg-utils
@@ -98,7 +98,8 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.6.13-ldflags.patch \
 		"${FILESDIR}"/${PN}-1.11.0-oldlibs.patch \
 		"${FILESDIR}"/${PN}-1.99.0.1975-sse4_2.patch \
-		"${FILESDIR}"/${PN}-99999999-pkgconfig.patch
+		"${FILESDIR}"/${PN}-99999999-pkgconfig.patch \
+		"${FILESDIR}"/${PN}-1.99.8-qtchooser.patch
 
 	epatch_user
 
@@ -195,7 +196,7 @@ src_install() {
 		dohtml -r docbook/{release-notes.html,ws{d,u}g_html{,_chunked}}
 		if use doc-pdf; then
 			insinto /usr/share/doc/${PF}/pdf/
-			doins docbook/{{developer,user}-guide,release-notes}-{a4,us}.pdf
+			doins docbook/{developer,user}-guide-{a4,us}.pdf docbook/release-notes.pdf
 		fi
 	fi
 
@@ -227,7 +228,7 @@ src_install() {
 	insinto /usr/include/wiretap
 	doins wiretap/wtap.h
 
-	if use gtk3 || use qt4; then
+	if use gtk3 || use qt4 || use qt5; then
 		local c d
 		for c in hi lo; do
 			for d in 16 32 48; do
@@ -235,14 +236,22 @@ src_install() {
 				newins image/${c}${d}-app-wireshark.png wireshark.png
 			done
 		done
+		for d in 16 24 32 48 64 128 256 ; do
+			insinto /usr/share/icons/hicolor/${d}x${d}/mimetypes
+			newins image/WiresharkDoc-${d}.png application-vnd.tcpdump.pcap.png
+		done
 	fi
 
 	if use gtk3; then
 		domenu wireshark.desktop
 	fi
 
-	if use qt4; then
-		sed -e '/Exec=/s|wireshark|&-qt|g' wireshark.desktop > wireshark-qt.desktop || die
+	if use qt4 || use qt5; then
+		sed \
+			-e '/Exec=/s|wireshark|&-qt|g' \
+			-e 's|^Name.*=Wireshark|& (Qt)|g' \
+			wireshark.desktop > wireshark-qt.desktop \
+			|| die
 		domenu wireshark-qt.desktop
 	fi
 

@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/cgminer/cgminer-4.8.0.ebuild,v 1.1 2014/11/26 20:38:48 blueness Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools eutils flag-o-matic
 
 DESCRIPTION="Bitcoin CPU/GPU/FPGA/ASIC miner in C"
-HOMEPAGE="http://bitcointalk.org/?topic=28402.msg357369 http://github.com/ckolivas/cgminer"
+HOMEPAGE="http://bitcointalk.org/?topic=28402.msg357369 https://github.com/ckolivas/cgminer"
 SRC_URI="http://ck.kolivas.org/apps/cgminer/${P}.tar.bz2"
 #SRC_URI="http://ck.kolivas.org/apps/cgminer/4.5/${P}.tar.bz2"
 

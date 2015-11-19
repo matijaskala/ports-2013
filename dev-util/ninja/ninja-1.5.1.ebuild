@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/ninja/ninja-1.5.1.ebuild,v 1.11 2015/04/08 17:54:03 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit bash-completion-r1 elisp-common python-any-r1 toolchain-funcs
 
 if [ "${PV}" = "999999" ]; then
-	EGIT_REPO_URI="git://github.com/martine/ninja.git http://github.com/martine/ninja.git"
+	EGIT_REPO_URI="git://github.com/martine/ninja.git https://github.com/martine/ninja.git"
 	inherit git-2
 	KEYWORDS=""
 else
@@ -18,7 +18,7 @@ else
 fi
 
 DESCRIPTION="A small build system similar to make"
-HOMEPAGE="http://github.com/martine/ninja"
+HOMEPAGE="https://github.com/martine/ninja"
 
 LICENSE="Apache-2.0"
 SLOT="0"

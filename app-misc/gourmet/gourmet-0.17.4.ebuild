@@ -1,17 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/gourmet/gourmet-0.17.4.ebuild,v 1.4 2015/01/26 10:17:09 ago Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
-# Parallel builds fail when building translations
-DISTUTILS_NO_PARALLEL_BUILD=1
 
 inherit distutils-r1
 
 DESCRIPTION="Recipe Organizer and Shopping List Generator for Gnome"
-HOMEPAGE="http://thinkle.github.com/gourmet/"
+HOMEPAGE="https://thinkle.github.com/gourmet/"
 SRC_URI="https://github.com/thinkle/gourmet/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -21,13 +19,17 @@ IUSE="-i18n -ipython pdf print spell sound web"
 
 RDEPEND=">=dev-python/pygtk-2.22.0:2[${PYTHON_USEDEP}]
 	>=dev-python/sqlalchemy-0.7.9-r1[${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	i18n? ( dev-python/elib-intl[${PYTHON_USEDEP}] )
 	ipython? ( >=dev-python/ipython-0.13.2[${PYTHON_USEDEP}] )
-	pdf? ( >=dev-python/reportlab-2.6[${PYTHON_USEDEP}]
-	       >=dev-python/python-poppler-0.12.1-r4[${PYTHON_USEDEP}] )
-	print? ( >=dev-python/reportlab-2.6[${PYTHON_USEDEP}]
-	         >=dev-python/python-poppler-0.12.1-r4[${PYTHON_USEDEP}] )
+	pdf? (
+		>=dev-python/reportlab-2.6[${PYTHON_USEDEP}]
+		>=dev-python/python-poppler-0.12.1-r4[${PYTHON_USEDEP}]
+	)
+	print? (
+		>=dev-python/reportlab-2.6[${PYTHON_USEDEP}]
+		>=dev-python/python-poppler-0.12.1-r4[${PYTHON_USEDEP}]
+	)
 	spell? ( >=dev-python/gtkspell-python-2.25.3-r1[${PYTHON_USEDEP}] )
 	sound? ( >=dev-python/gst-python-0.10.22-r1:0.10[${PYTHON_USEDEP}] )
 	web? ( >=dev-python/beautifulsoup-3.2.1-r1:python-2[${PYTHON_USEDEP}] )"
@@ -53,7 +55,7 @@ python_prepare() {
 	sed -i "s:\(lib_dir = \)'../gourmet':\1'$(python_get_sitedir)':" gourmet/settings.py || die
 }
 
-src_install() {
-	distutils-r1_src_install
+python_install_all() {
+	distutils-r1_python_install_all
 	doman gourmet.1
 }

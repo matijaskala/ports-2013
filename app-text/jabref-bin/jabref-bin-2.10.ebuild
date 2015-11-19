@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/jabref-bin/jabref-bin-2.10.ebuild,v 1.2 2015/06/14 03:38:30 nicolasbock Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ SRC_URI="mirror://sourceforge/jabref/JabRef-${MY_PV}.jar"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 x86"
 
 RDEPEND=">=virtual/jre-1.6"
 

@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-filter/imapfilter/imapfilter-2.5.7.ebuild,v 1.1 2014/12/19 03:36:06 radhermit Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,15 +14,15 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 
-RDEPEND="dev-libs/openssl
+RDEPEND="dev-libs/openssl:0
 	dev-libs/libpcre
-	>=dev-lang/lua-5.1"
+	dev-lang/lua:*"
 DEPEND="${RDEPEND}"
 
 DOCS="AUTHORS NEWS README samples/*"
 
 src_prepare() {
-	sed -i -e "/^PREFIX/s:/local::" \
+	sed -i -e "/^PREFIX/s:/usr/local:${EPREFIX}/usr:" \
 		-e "/^MANDIR/s:man:share/man:" \
 		-e "/^CFLAGS/s:CFLAGS =:CFLAGS +=:" \
 		-e "/^CFLAGS/s/-O//" \

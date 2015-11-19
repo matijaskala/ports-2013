@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/eeze/eeze-9999.ebuild,v 1.1 2015/03/17 00:39:28 vapier Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,14 +9,14 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_URI_APPEND=${PN}
 	EGIT_BRANCH=${PN}-1.7
 else
-	SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+	SRC_URI="https://download.enlightenment.org/releases/${P}.tar.bz2"
 	EKEY_STATE="snap"
 fi
 
 inherit enlightenment
 
 DESCRIPTION="library to simplify the use of devices"
-HOMEPAGE="http://trac.enlightenment.org/e/wiki/Eeze"
+HOMEPAGE="https://trac.enlightenment.org/e/wiki/Eeze"
 
 LICENSE="BSD-2"
 IUSE="static-libs utilities"

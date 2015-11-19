@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-fps/enemy-territory/enemy-territory-2.60b-r1.ebuild,v 1.6 2015/06/14 20:05:27 ulm Exp $
+# $Id$
 
 EAPI=5
 inherit eutils unpacker games
@@ -12,7 +12,7 @@ SRC_URI="mirror://3dgamers/wolfensteinet/et-linux-2.60.x86.run
 	ftp://ftp.red.telefonica-wholesale.net/GAMES/ET/linux/et-linux-2.60.x86.run
 	mirror://idsoftware/et/ET-${PV}.zip
 	dedicated? (
-		http://dev.gentoo.org/~wolf31o2/sources/dump/${PN}-all-0.1.tar.bz2
+		https://dev.gentoo.org/~wolf31o2/sources/dump/${PN}-all-0.1.tar.bz2
 		mirror://gentoo/${PN}-all-0.1.tar.bz2
 	)"
 

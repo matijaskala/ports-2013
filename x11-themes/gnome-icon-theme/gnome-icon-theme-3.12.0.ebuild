@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/gnome-icon-theme/gnome-icon-theme-3.12.0.ebuild,v 1.10 2015/03/03 12:52:54 dlan Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -8,7 +8,7 @@ GCONF_DEBUG="no"
 inherit gnome2
 
 DESCRIPTION="GNOME default icon theme"
-HOMEPAGE="http://www.gnome.org/ http://people.freedesktop.org/~jimmac/icons/#git"
+HOMEPAGE="https://www.gnome.org/ http://people.freedesktop.org/~jimmac/icons/#git"
 
 SRC_URI="${SRC_URI}
 	branding? ( http://www.mail-archive.com/tango-artists@lists.freedesktop.org/msg00043/tango-gentoo-v1.1.tar.gz )"

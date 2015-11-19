@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/lightdm-gtk-greeter/lightdm-gtk-greeter-1.3.1-r1.ebuild,v 1.6 2013/02/07 22:44:07 ulm Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="LightDM GTK+ Greeter"
-HOMEPAGE="http://launchpad.net/lightdm-gtk-greeter"
-SRC_URI="http://launchpad.net/lightdm-gtk-greeter/1.4/${PV}/+download/${P}.tar.gz branding? (
-http://dev.gentoo.org/~hwoarang/distfiles/lightdm-gentoo-patch-2.tar.gz )"
+HOMEPAGE="https://launchpad.net/lightdm-gtk-greeter"
+SRC_URI="https://launchpad.net/lightdm-gtk-greeter/1.4/${PV}/+download/${P}.tar.gz branding? (
+https://dev.gentoo.org/~hwoarang/distfiles/lightdm-gentoo-patch-2.tar.gz )"
 
 LICENSE="GPL-3 LGPL-3
 	branding? ( CC-BY-3.0 )"
@@ -21,7 +21,7 @@ RDEPEND="!!<x11-misc/lightdm-1.1.1
 	x11-libs/gtk+:3
 	>=x11-misc/lightdm-1.2.2
 	x11-themes/gnome-themes-standard
-	x11-themes/gnome-icon-theme"
+	|| ( >=x11-themes/adwaita-icon-theme-3.14.1 x11-themes/gnome-icon-theme )"
 
 GENTOO_BG="gentoo-bg_65.jpg"
 

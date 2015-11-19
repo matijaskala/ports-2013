@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/webpy/webpy-0.37.ebuild,v 1.5 2012/10/17 05:24:07 patrick Exp $
+# $Id$
 
 EAPI="3"
 PYTHON_DEPEND="2"
@@ -12,7 +12,7 @@ inherit distutils
 MY_PN="web.py"
 
 DESCRIPTION="A small and simple web framework for Python"
-HOMEPAGE="http://www.webpy.org http://pypi.python.org/pypi/web.py"
+HOMEPAGE="http://www.webpy.org https://pypi.python.org/pypi/web.py"
 SRC_URI="http://www.webpy.org/static/${MY_PN}-${PV}.tar.gz"
 
 LICENSE="public-domain"

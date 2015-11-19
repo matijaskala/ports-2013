@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-embedded/gnap/gnap-2.0.ebuild,v 1.2 2013/09/15 23:14:29 chithanh Exp $
+# $Id$
 
 MY_P="${P/gnap/gnap-tools}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="Gentoo-based Network Appliance building system"
-HOMEPAGE="http://embedded.gentoo.org/gnap.xml"
+HOMEPAGE="https://embedded.gentoo.org/gnap.xml"
 
 SRC_URI="mirror://gentoo/${MY_P}.tar.bz2
 	!minimal? ( mirror://gentoo/${PN}-core-${PV}.tar )"

@@ -1,9 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-board/mt_dolphin_ia/mt_dolphin_ia-0.1.98.ebuild,v 1.9 2015/04/14 09:32:49 ago Exp $
+# $Id$
 
 EAPI=5
-inherit games
+inherit games eutils
 
 DESCRIPTION="client for the french tarot game maitretarot"
 HOMEPAGE="http://www.nongnu.org/maitretarot/"
@@ -19,6 +19,10 @@ DEPEND="dev-libs/glib:2
 	dev-games/libmaitretarot
 	dev-games/libmt_client"
 RDEPEND=${DEPEND}
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-formatsecurity.patch
+}
 
 src_install() {
 	default

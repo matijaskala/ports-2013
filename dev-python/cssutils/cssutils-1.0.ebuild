@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/cssutils/cssutils-1.0.ebuild,v 1.1 2015/06/10 08:26:35 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
 inherit distutils-r1 vcs-snapshot
 
 DESCRIPTION="A CSS Cascading Style Sheets library"
-HOMEPAGE="http://pypi.python.org/pypi/cssutils/ https://bitbucket.org/cthedot/cssutils"
+HOMEPAGE="https://pypi.python.org/pypi/cssutils/ https://bitbucket.org/cthedot/cssutils"
 # Missing test data
 # https://bitbucket.org/cthedot/cssutils/pull-request/11
 #SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip"

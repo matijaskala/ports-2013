@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/aegisub/aegisub-3.1.3.ebuild,v 1.2 2014/07/18 08:50:30 maksbotan Exp $
+# $Id$
 
 EAPI="5"
 
@@ -10,13 +10,13 @@ WX_GTK_VER="3.0"
 PLOCALES="ar bg ca cs da de el es eu fa fi fr_FR gl hu id it ja ko nl pl pt_BR pt_PT ru sr_RS@latin sr_RS vi zh_CN zh_TW"
 inherit autotools-utils wxwidgets l10n fdo-mime gnome2-utils
 
-DESCRIPTION="Advanced SSA/ASS subtitle editor"
+DESCRIPTION="Advanced subtitle editor"
 HOMEPAGE="http://www.aegisub.org/"
 SRC_URI="http://ftp.aegisub.org/pub/releases/${P}.tar.xz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="alsa debug +ffmpeg +fftw openal oss portaudio pulseaudio spell"
 
 REQUIRED_USE="

@@ -1,17 +1,17 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-physics/bullet/bullet-2.81.ebuild,v 1.1 2013/03/04 22:32:13 bicatali Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils cmake-utils
 
-# version release, check http://code.google.com/p/bullet/downloads/list
+# version release, check https://code.google.com/p/bullet/downloads/list
 MYP=${P}-rev2613
 
 DESCRIPTION="Continuous Collision Detection and Physics Library"
 HOMEPAGE="http://www.bulletphysics.com/"
-SRC_URI="http://bullet.googlecode.com/files/${MYP}.tgz"
+SRC_URI="https://bullet.googlecode.com/files/${MYP}.tgz"
 
 LICENSE="ZLIB"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/libgnome/libgnome-2.32.1-r1.ebuild,v 1.10 2015/01/07 20:01:30 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -10,7 +10,7 @@ GNOME_TARBALL_SUFFIX="bz2"
 inherit gnome2 eutils
 
 DESCRIPTION="Essential Gnome Libraries"
-HOMEPAGE="http://library.gnome.org/devel/libgnome/stable/"
+HOMEPAGE="https://library.gnome.org/devel/libgnome/stable/"
 
 LICENSE="LGPL-2"
 SLOT="0"

@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/spotify/spotify-0.9.17.1-r1.ebuild,v 1.1 2015/04/03 01:42:41 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 inherit eutils fdo-mime gnome2-utils pax-utils unpacker
 
 DESCRIPTION="Spotify is a social music platform"
-HOMEPAGE="https://www.spotify.com/ch-de/download/previews/"
+HOMEPAGE="https://www.spotify.com/download/previews/"
 MY_PV="${PV}.g9b85d43.7-1"
 MY_P="${PN}-client_${MY_PV}"
 SRC_BASE="http://repository.spotify.com/pool/non-free/${PN:0:1}/${PN}/"
@@ -125,7 +125,7 @@ src_install() {
 		pax-mark z "${ED}${SPOTIFY_HOME}/Data/SpotifyHelper" || die
 		pax-mark m "${ED}${SPOTIFY_HOME}/${PN}" || die
 		pax-mark m "${ED}${SPOTIFY_HOME}/Data/SpotifyHelper" || die
-		eqawarn "You have set USE=pax_kernel meaning that you intendto run"
+		eqawarn "You have set USE=pax_kernel meaning that you intend to run"
 		eqawarn "${PN} under a PaX enabled kernel.  To do so, we must modify"
 		eqawarn "the ${PN} binary itself and this *may* lead to breakage!  If"
 		eqawarn "you suspect that ${PN} is being broken by this modification,"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/tasty-quickcheck/tasty-quickcheck-0.8.3.2.ebuild,v 1.1 2014/12/17 13:18:03 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="old-quickcheck"
 
 RDEPEND="dev-haskell/tagged:=[profile?]

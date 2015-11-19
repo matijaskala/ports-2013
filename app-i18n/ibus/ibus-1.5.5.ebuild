@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus/ibus-1.5.5.ebuild,v 1.11 2015/04/08 07:30:32 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -12,8 +12,8 @@ VALA_USE_DEPEND="vapigen"
 inherit bash-completion-r1 eutils gnome2-utils multilib python-single-r1 readme.gentoo vala virtualx
 
 DESCRIPTION="Intelligent Input Bus for Linux / Unix OS"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

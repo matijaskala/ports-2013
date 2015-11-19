@@ -1,18 +1,18 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/qxmpp/qxmpp-0.8.0.ebuild,v 1.3 2014/08/10 20:50:11 slyfox Exp $
+# $Id$
 
 EAPI=5
 
 inherit qt4-r2 multilib
 
 DESCRIPTION="A cross-platform C++ XMPP client library based on the Qt framework"
-HOMEPAGE="http://code.google.com/p/qxmpp/"
+HOMEPAGE="https://code.google.com/p/qxmpp/"
 SRC_URI="http://download.qxmpp.org/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~amd64-linux"
+KEYWORDS="amd64 ~x86 ~amd64-linux"
 IUSE="debug doc +speex test theora vpx"
 
 RDEPEND="dev-qt/qtcore:4

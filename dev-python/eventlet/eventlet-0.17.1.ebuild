@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/eventlet/eventlet-0.17.1.ebuild,v 1.2 2015/02/26 17:09:59 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,12 +9,12 @@ PYTHON_COMPAT=( python2_7 python3_3 python3_4 )
 inherit distutils-r1
 
 DESCRIPTION="Highly concurrent networking library"
-HOMEPAGE="http://pypi.python.org/pypi/eventlet https://github.com/eventlet/eventlet/"
+HOMEPAGE="https://pypi.python.org/pypi/eventlet https://github.com/eventlet/eventlet/"
 SRC_URI="mirror://pypi/e/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="doc examples test"
 
 RDEPEND=">=dev-python/greenlet-0.3[${PYTHON_USEDEP}]"

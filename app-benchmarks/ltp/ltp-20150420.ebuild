@@ -1,17 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-benchmarks/ltp/ltp-20150420.ebuild,v 1.1 2015/06/13 18:55:44 hwoarang Exp $
+# $Id$
 
 EAPI="5"
 
 inherit autotools eutils readme.gentoo
 
-MY_PN="${PN}-full"
-MY_P="${MY_PN}-${PV}"
-
 DESCRIPTION="A testsuite for the linux kernel"
-HOMEPAGE="http://ltp.sourceforge.net/"
-SRC_URI="mirror://sourceforge/ltp/LTP%20Source/${P}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
+HOMEPAGE="http://linux-test-project.github.io/"
+SRC_URI="https://github.com/linux-test-project/ltp/archive/20150420.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
@@ -23,8 +20,6 @@ DEPEND="expect? ( dev-tcltk/expect )
 	python? ( dev-lang/python )"
 
 RESTRICT="test"
-
-S="${WORKDIR}"/${MY_P}
 
 pkg_setup() {
 	# Don't create groups
@@ -55,8 +50,9 @@ src_configure() {
 
 	# Better put it into /opt/${PN} as everything needs to
 	# be under the same directory..
-
-	econf --prefix=/opt/${PN} ${myconf}
+	# Avoid depending on external libtirpc (#552386)
+	ac_cv_lib_tirpc_rpcb_set=no \
+		econf --prefix=/opt/${PN} ${myconf}
 }
 
 src_compile() {

@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/lilypond/lilypond-2.18.2.ebuild,v 1.4 2014/10/10 10:56:21 ago Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -34,7 +34,7 @@ DEPEND="${RDEPEND}
 		<dev-texlive/texlive-metapost-2013
 	)
 	virtual/pkgconfig
-	media-gfx/fontforge
+	media-gfx/fontforge[png]
 	>=sys-apps/texinfo-4.11
 	>=sys-devel/bison-2.0
 	sys-devel/flex
@@ -58,6 +58,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.17.2-tex-docs.patch
+	epatch "${FILESDIR}"/${P}-fontforge.patch
 
 	if ! use vim-syntax ; then
 		sed -i 's/vim//' GNUmakefile.in || die

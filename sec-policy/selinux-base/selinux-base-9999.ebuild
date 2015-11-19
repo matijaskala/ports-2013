@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sec-policy/selinux-base/selinux-base-9999.ebuild,v 1.18 2015/04/21 10:34:30 perfinion Exp $
+# $Id$
 EAPI="5"
 
 inherit eutils
@@ -15,15 +15,15 @@ if [[ ${PV} == 9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="https://raw.githubusercontent.com/wiki/TresysTechnology/refpolicy/files/refpolicy-${PV}.tar.bz2
-			http://dev.gentoo.org/~swift/patches/selinux-base-policy/patchbundle-selinux-base-policy-${PVR}.tar.bz2"
+			https://dev.gentoo.org/~swift/patches/selinux-base-policy/patchbundle-selinux-base-policy-${PVR}.tar.bz2"
 
 	KEYWORDS="~amd64 ~x86"
 fi
 
-IUSE="+peer_perms +open_perms +ubac +unconfined doc"
+IUSE="doc +open_perms +peer_perms systemd +ubac +unconfined"
 
 DESCRIPTION="Gentoo base policy for SELinux"
-HOMEPAGE="http://www.gentoo.org/proj/en/hardened/selinux/"
+HOMEPAGE="https://www.gentoo.org/proj/en/hardened/selinux/"
 LICENSE="GPL-2"
 SLOT="0"
 
@@ -35,10 +35,6 @@ DEPEND="${RDEPEND}
 	>=sys-apps/checkpolicy-2.3"
 
 S=${WORKDIR}/
-
-#src_unpack() {
-#	git-2_src_unpack
-#}
 
 src_prepare() {
 	if [[ ${PV} != 9999* ]]; then
@@ -64,12 +60,12 @@ src_configure() {
 
 	if ! use peer_perms; then
 		sed -i -e '/network_peer_controls/d' \
-			"${S}/refpolicy/policy/policy_capabilities"
+			"${S}/refpolicy/policy/policy_capabilities" || die
 	fi
 
 	if ! use open_perms; then
 		sed -i -e '/open_perms/d' \
-			"${S}/refpolicy/policy/policy_capabilities"
+			"${S}/refpolicy/policy/policy_capabilities" || die
 	fi
 
 	if ! use ubac; then
@@ -77,20 +73,25 @@ src_configure() {
 			|| die "Failed to disable User Based Access Control"
 	fi
 
-	echo "DISTRO = gentoo" >> "${S}/refpolicy/build.conf"
+	if use systemd; then
+		sed -i -e '/^SYSTEMD/s/n/y/' "${S}/refpolicy/build.conf" \
+			|| die "Failed to enable SystemD"
+	fi
+
+	echo "DISTRO = gentoo" >> "${S}/refpolicy/build.conf" || die
 
 	# Prepare initial configuration
-	cd "${S}/refpolicy";
+	cd "${S}/refpolicy" || die
 	make conf || die "Make conf failed"
 
 	# Setup the policies based on the types delivered by the end user.
 	# These types can be "targeted", "strict", "mcs" and "mls".
 	for i in ${POLICY_TYPES}; do
-		cp -a "${S}/refpolicy" "${S}/${i}"
-		cd "${S}/${i}";
+		cp -a "${S}/refpolicy" "${S}/${i}" || die
+		cd "${S}/${i}" || die
 
 		#cp "${FILESDIR}/modules-2.20120215.conf" "${S}/${i}/policy/modules.conf"
-		sed -i -e "/= module/d" "${S}/${i}/policy/modules.conf"
+		sed -i -e "/= module/d" "${S}/${i}/policy/modules.conf" || die
 
 		sed -i -e '/^QUIET/s/n/y/' -e "/^NAME/s/refpolicy/$i/" \
 			"${S}/${i}/build.conf" || die "build.conf setup failed."
@@ -120,10 +121,10 @@ src_compile() {
 	[ -z "${POLICY_TYPES}" ] && local POLICY_TYPES="targeted strict mls mcs"
 
 	for i in ${POLICY_TYPES}; do
-		cd "${S}/${i}"
-		emake base || die "${i} compile failed"
+		cd "${S}/${i}" || die
+		emake base
 		if use doc; then
-			make html || die
+			emake html
 		fi
 	done
 }
@@ -132,7 +133,7 @@ src_install() {
 	[ -z "${POLICY_TYPES}" ] && local POLICY_TYPES="targeted strict mls mcs"
 
 	for i in ${POLICY_TYPES}; do
-		cd "${S}/${i}"
+		cd "${S}/${i}" || die
 
 		make DESTDIR="${D}" install \
 			|| die "${i} install failed."
@@ -140,9 +141,9 @@ src_install() {
 		make DESTDIR="${D}" install-headers \
 			|| die "${i} headers install failed."
 
-		echo "run_init_t" > "${D}/etc/selinux/${i}/contexts/run_init_type"
+		echo "run_init_t" > "${D}/etc/selinux/${i}/contexts/run_init_type" || die
 
-		echo "textrel_shlib_t" >> "${D}/etc/selinux/${i}/contexts/customizable_types"
+		echo "textrel_shlib_t" >> "${D}/etc/selinux/${i}/contexts/customizable_types" || die
 
 		# libsemanage won't make this on its own
 		keepdir "/etc/selinux/${i}/policy"
@@ -162,9 +163,7 @@ src_install() {
 
 	insinto /etc/selinux
 	doins "${FILESDIR}/config"
-}
 
-pkg_preinst() {
-	has_version "<${CATEGORY}/${PN}-2.20101213-r13"
-	previous_less_than_r13=$?
+	insinto /usr/share/portage/config/sets
+	doins "${FILESDIR}/selinux.conf"
 }

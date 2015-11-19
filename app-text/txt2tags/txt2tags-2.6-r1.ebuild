@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/txt2tags/txt2tags-2.6-r1.ebuild,v 1.1 2015/06/12 20:30:10 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit eutils elisp-common python-single-r1
 
 DESCRIPTION="A tool for generating marked up documents (HTML, SGML, ...) from a plain text file with markup"
 HOMEPAGE="http://txt2tags.org/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tgz"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"

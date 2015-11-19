@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/echoping/echoping-6.0.2_p434.ebuild,v 1.6 2014/12/28 16:02:50 titanofold Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils
 
 DESCRIPTION="Small program to test performances of remote servers"
 HOMEPAGE="http://echoping.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~jer/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~jer/${P}.tar.gz"
 LICENSE="GPL-2"
 
 SLOT="0"
@@ -32,7 +32,6 @@ DOCS=( README AUTHORS ChangeLog DETAILS NEWS TODO )
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-6.0.2_p434-fix_implicit_declarations.patch
 
-	cp /usr/share/libtool/config/ltmain.sh .
 	eautoreconf
 }
 

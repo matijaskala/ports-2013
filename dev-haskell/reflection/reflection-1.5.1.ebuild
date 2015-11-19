@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/reflection/reflection-1.5.1.ebuild,v 1.1 2014/12/14 08:59:01 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Reifies arbitrary terms into types that can be reflected back into terms"
-HOMEPAGE="http://github.com/ekmett/reflection"
+HOMEPAGE="https://github.com/ekmett/reflection"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

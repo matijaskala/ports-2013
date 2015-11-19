@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/redirfs/redirfs-0.10.20120313.ebuild,v 1.1 2012/10/30 14:27:18 bicatali Exp $
+# $Id$
 
 EAPI=4
 
 inherit linux-mod
 
 KEYWORDS="~amd64 ~x86"
-SRC_URI="http://dev.gentoo.org/~bicatali/distfiles/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~bicatali/distfiles/${P}.tar.bz2"
 
 DESCRIPTION="Layer between virtual file system switch and file system drivers"
 HOMEPAGE="http://www.redirfs.org/"

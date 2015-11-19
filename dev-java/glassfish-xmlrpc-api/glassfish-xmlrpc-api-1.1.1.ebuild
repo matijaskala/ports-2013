@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/glassfish-xmlrpc-api/glassfish-xmlrpc-api-1.1.1.ebuild,v 1.4 2015/06/08 21:27:03 monsieurp Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,11 +12,11 @@ TOMEE_PV="1.5.2"
 
 DESCRIPTION="Project GlassFish XML RPC API"
 HOMEPAGE="https://glassfish.java.net/"
-SRC_URI="http://dev.gentoo.org/~tomwij/files/dist/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~tomwij/files/dist/${P}.tar.xz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="amd64 x86"
 
 CDEPEND="java-virtuals/servlet-api:3.0"
 

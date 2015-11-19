@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/bluecloth/bluecloth-2.2.0-r1.ebuild,v 1.13 2014/11/18 11:47:01 ago Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20"
@@ -27,6 +27,7 @@ ruby_add_bdepend "
 	dev-ruby/hoe
 	dev-ruby/rake-compiler
 	test? (
+		dev-ruby/rspec:2
 		dev-ruby/diff-lcs
 		dev-ruby/tidy-ext
 	)"

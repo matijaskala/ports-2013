@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/folks/folks-0.10.1-r1.ebuild,v 1.3 2015/03/15 13:17:16 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -28,8 +28,8 @@ COMMON_DEPEND="
 	dev-libs/dbus-glib
 	>=dev-libs/libgee-0.10:0.8[introspection]
 	dev-libs/libxml2
-	sys-libs/ncurses:=
-	sys-libs/readline:=
+	sys-libs/ncurses:0=
+	sys-libs/readline:0=
 
 	bluetooth? ( >=net-wireless/bluez-5 )
 	eds? ( >=gnome-extra/evolution-data-server-3.8:=[vala] )

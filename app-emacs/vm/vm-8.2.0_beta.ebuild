@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/vm/vm-8.2.0_beta.ebuild,v 1.3 2013/04/04 21:17:46 ulm Exp $
+# $Id$
 
 EAPI=4
 
@@ -10,7 +10,7 @@ MY_PV="${PV/_beta/b}"
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="The VM mail reader for Emacs"
 HOMEPAGE="http://www.nongnu.org/viewmail/"
-SRC_URI="http://launchpad.net/vm/${PV%.*}.x/${MY_PV}/+download/${MY_P}.tgz"
+SRC_URI="https://launchpad.net/vm/${PV%.*}.x/${MY_PV}/+download/${MY_P}.tgz"
 
 LICENSE="GPL-2+"
 SLOT="0"

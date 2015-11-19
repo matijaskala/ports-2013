@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/plan9port/plan9port-20140304.ebuild,v 1.2 2014/11/21 09:56:37 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit eutils multiprocessing
 
 DESCRIPTION="Port of many Plan 9 programs and libraries"
 HOMEPAGE="http://swtch.com/plan9port/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tgz"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tgz"
 
 LICENSE="9base BSD-4 MIT LGPL-2.1 BigelowHolmes"
 SLOT="0"

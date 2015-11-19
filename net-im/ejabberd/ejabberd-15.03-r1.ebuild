@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/ejabberd/ejabberd-15.03-r1.ebuild,v 1.1 2015/04/14 03:39:56 radhermit Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit eutils multilib pam ssl-cert systemd
 
 DESCRIPTION="The Erlang Jabber Daemon"
 HOMEPAGE="http://www.ejabberd.im/ https://github.com/processone/ejabberd/"
-SRC_URI="http://dev.gentoo.org/~radhermit/dist/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~radhermit/dist/${P}.tar.xz"
 # upstream tarball missing bundled erlang libs that are fetched via git
 #SRC_URI="https://www.process-one.net/downloads/downloads-action.php?file=/${PN}/${PV}/${P}.tgz -> ${P}.tar.gz"
 

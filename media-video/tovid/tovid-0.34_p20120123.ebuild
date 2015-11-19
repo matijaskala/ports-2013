@@ -1,8 +1,8 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/tovid/tovid-0.34_p20120123.ebuild,v 1.2 2013/09/09 04:43:08 floppym Exp $
+# $Id$
 
-# svn checkout http://tovid.googlecode.com/svn/trunk/tovid tovid-${PV}
+# svn checkout https://tovid.googlecode.com/svn/trunk/tovid tovid-${PV}
 # note: see quickrelease file in the top source directory
 
 EAPI=3
@@ -16,8 +16,8 @@ inherit distutils gnome2-utils
 
 DESCRIPTION="A collection of DVD authoring tools"
 HOMEPAGE="http://tovid.wikia.com/wiki/Tovid_Wiki"
-SRC_URI="http://dev.gentoo.org/~ssuominen/${P}.tar.gz"
-#SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~ssuominen/${P}.tar.gz"
+#SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

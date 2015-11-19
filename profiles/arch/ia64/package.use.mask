@@ -1,15 +1,54 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/ia64/package.use.mask,v 1.172 2015/06/13 16:03:46 pacho Exp $
+# $Id$
+
+# Justin Lecher <jlec@gentoo.org> (18 Nov 2015)
+# requires dev-python/restkit which requires
+# dev-python/socketpool which requires dev-python/gevent which requires
+# dev-python/greenlet which has not been ported
+dev-python/wsgiproxy2 test
+dev-python/pyquery test
+
+# Pacho Ramos <pacho@gentoo.org> (15 Nov 2015)
+# Missing keywords
+>=media-plugins/grilo-plugins-0.2.16 upnp-av
+
+# Davide Pesavento <pesa@gentoo.org> (26 Oct 2015)
+# Tests require non-keyworded qt5
+dev-qt/qtchooser test
+
+# Justin Lecher <jlec@gentoo.org> (14 Oct 2015)
+# Requires dev-python/ipython which triggers a long dep chain
+dev-python/restkit cli
+
+# Brian Evans <grknight@gentoo.org> (17 Sep 2015)
+# Mask new USE flags for percona-server which are not available on ia64
+dev-db/percona-server tokudb tokudb-backup-plugin
+
+# Brian Evans <grknight@gentoo.org> (14 Sep 2015)
+# Mask new USE flags for mariadb which all arches do not yet have dependencies
+>=dev-db/mariadb-10.1.0 innodb-snappy
+
+# Alexandre Rostovtsev <tetromino@gentoo.org> (10 Sep 2015)
+# Requires wifi USE flag, which is masked for this arch
+net-misc/networkmanager wext
+
+# Pacho Ramos <pacho@gentoo.org> (06 Sep 2015)
+# Missing keywords
+media-sound/pulseaudio ofono-headset
+
+# Mike Gilbert <floppym@gentoo.org> (05 Sep 2015)
+# sys-boot/gnu-efi is not supported on all archs.
+sys-apps/systemd -gnuefi
+
+# James Le Cuirot <chewi@gentoo.org> (11 Jul 2015)
+# Requires dev-java/fop but we don't support java on ia64.
+gnome-extra/libgda reports
+net-analyzer/wireshark doc-pdf
 
 # Pacho Ramos <pacho@gentoo.org> (13 Jun 2015)
 # Missing keywords, bug #513108
 net-misc/spice-gtk smartcard webdav
-
-# James Le Cuirot <chewi@gentoo.org> (11 Jun 2015)
-# Temporarily mask rdeps of rhino, which has EAPI 1, until I have a
-# chance to drop Java support on ia64 entirely.
-dev-java/icedtea javascript
 
 # Gilles Dartiguelongue <eva@gentoo.org> (09 Jun 2015)
 # net-fs/libnfs lacks ia64 keyword, bug #551576
@@ -19,14 +58,10 @@ gnome-base/gvfs nfs
 # dev-lang/luajit and dev-lua/lgi and lack ia64 keyword, bug #551540
 dev-libs/libpeas lua jit
 
-# James Le Cuirot <chewi@gentoo.org> (20 May 2015)
-# Temporarily mask rdeps of icedtea-web to deal with bug #549134 until
-# I have a chance to drop Java support on ia64 entirely.
-dev-java/icedtea nsplugin webstart
-
 # Mike Frysinger <vapier@gentoo.org> (16 Mar 2015)
 # Needs sci-physics/bullet & media-libs/libsdl2 tested #499974
 dev-libs/efl physics sdl
+media-libs/elementary sdl
 
 # Michał Górny <mgorny@gentoo.org> (08 Mar 2015)
 # Dependency not keyworded on this arch, bug #542570.
@@ -68,6 +103,7 @@ sys-apps/systemd xkb
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (16 Sep 2014)
 # Needs libepoxy keywording, bug #510940
 x11-base/xorg-server glamor wayland
+x11-drivers/xf86-video-ati glamor
 
 # Maciej Mrozowski <reavertm@gentoo.org> (13 Aug 2014)
 # Missing keywords on dev-libs/protobuf-c (bug 519772)
@@ -141,10 +177,6 @@ dev-haskell/dataenc test
 # Fix per-arch mask of phonon[zeitgeist] #460140
 media-libs/phonon zeitgeist
 
-# Tom Wijsman <TomWij@gentoo.org> (9 May 2013)
-# Unmasking dev-java/antlr[java] as per bug #412223, acked by sera.
-dev-java/antlr -java
-
 # Dirkjan Ochtman <djc@gentoo.org> (3 May 2013)
 # depends on net-libs/polarssl
 >=net-misc/openvpn-2.3.1 polarssl
@@ -183,10 +215,6 @@ app-misc/tracker thunderbird
 # keyworded here. Remove mask if this situation changes.
 gnome-extra/sushi office
 
-# Alexandre Rostovtsev <tetromino@gentoo.org> (27 Dec 2012)
-# remove mask when dev-java/fop is keyworded here
-gnome-extra/libgda reports
-
 # Alexandre Rostovtsev <tetromino@gentoo.org> (26 Dec 2012)
 # remove when app-accessibility/at-spi2-core is stable for ia64
 =net-libs/webkit-gtk-1.8.3-r300 webkit2
@@ -209,39 +237,9 @@ media-libs/phonon gstreamer vlc
 # Needs x11-misc/lightdm(which also requires some other deps)
 x11-misc/xscreensaver new-login
 
-# Mike Frysinger <vapier@gentoo.org> (10 May 2012)
-# We only want java available for unstable ebuilds, but we can't do that
-# currently, so we have to mask it from packages that go stable :(.  #412223
-app-accessibility/brltty java
-app-pda/pilot-link java
-app-text/hyperestraier java
-dev-db/qdbm java
-dev-lang/R java
-dev-libs/beecrypt java
-dev-libs/cyrus-sasl java
-dev-libs/link-grammar java
-dev-ruby/fakeweb java
-dev-ruby/net-scp java
-dev-ruby/net-ssh java
-dev-ruby/test-spec java
-dev-ruby/tmail java
-dev-tex/tex4ht java
-dev-vcs/subversion java
-gnome-extra/libgda java
-media-libs/libcaca java
-net-dns/libidn java
-net-print/cups java
-sys-libs/db java
-www-client/firefox java
-www-client/seamonkey java
-
 # Alexandre Rostovtsev <tetromino@gentoo.org> (12 Apr 2012)
 # Requires gnutls[pkcs11], which is use.masked on ia64
 net-libs/glib-networking smartcard
-
-# Ralph Sennhauser <sera@gentoo.org> (31 Dec 2011)
-# Needs dev-java/fop which is not available for ia64 due to missing JVM #345433
-net-analyzer/wireshark doc-pdf
 
 # Alexey Shvetsov <alexxy@gentoo.org> (17 Dec 2011)
 # Mask use numa for openmpi
@@ -280,8 +278,6 @@ app-text/asciidoc test
 sys-apps/smartmontools caps
 
 # Raúl Porcel <armin76@gentoo.org> (5 Dec 2010)
-# Mask doc-pdf because of Java dependencies (bug #347259)
-net-analyzer/wireshark doc-pdf
 # Needs testing
 www-client/elinks javascript
 
@@ -307,13 +303,13 @@ x11-wm/fvwm lock
 # net-libs/webkit-gtk segfaults but dev-qt/qtwebkit doesn't
 dev-python/PyQt4 -webkit
 
-# Jean-Noel Rivasseau <elvanor@gentoo.org> (28 Jul 2008)
-# icu4j tests need jdk-1.6
-dev-java/icu4j test
-
 # Raúl Porcel <armin76@gentoo.org> (07 Jul 2008)
 # Make clisp deps minimal
 dev-lisp/clisp hyperspec pari svm
 
 # missing keywords
 media-plugins/gst-plugins-meta dts dv lame libvisual modplug mms taglib vcd wavpack
+
+# Marius Brehler <marfbre@linux.sungazer.de> (13 Aug 2015)
+# missing keyword
+>=sci-misc/boinc-7.4.42-r1 X

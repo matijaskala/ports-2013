@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/orbit/orbit-2.14.19-r4.ebuild,v 1.9 2014/10/11 13:35:50 maekke Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -11,7 +11,7 @@ GNOME2_LA_PUNT="yes"
 inherit eutils gnome2 toolchain-funcs autotools
 
 DESCRIPTION="ORBit2 is a high-performance CORBA ORB"
-HOMEPAGE="http://projects.gnome.org/ORBit2/"
+HOMEPAGE="https://projects.gnome.org/ORBit2/"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="2"
@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	# Fix wrong process kill, bug #268142
 	sed "s:killall lt-timeout-server:killall timeout-server:" \
-		-i test/timeout.sh || die "sed 1 failed"
+		-i test/timeout.sh || die "sed 1 failed"
 
 	# Do not mess with CFLAGS
 	sed 's/-ggdb -O0//' -i configure.in configure || die "sed 2 failed"

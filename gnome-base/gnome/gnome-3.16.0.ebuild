@@ -1,18 +1,18 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome/gnome-3.16.0.ebuild,v 1.1 2015/06/09 23:13:19 eva Exp $
+# $Id$
 
 EAPI="5"
 
 DESCRIPTION="Meta package for GNOME 3, merge this package to install"
-HOMEPAGE="http://www.gnome.org/"
+HOMEPAGE="https://www.gnome.org/"
 
 LICENSE="metapackage"
 SLOT="2.0" # Cannot be installed at the same time as gnome-2
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~ia64 ~ppc ~ppc64 x86"
 
 IUSE="accessibility +bluetooth +classic +cdr cups +extras"
 
@@ -45,3 +45,9 @@ RDEPEND="
 DEPEND=""
 
 PDEPEND=">=gnome-base/gvfs-1.24[udisks]"
+
+pkg_postinst() {
+	# Remember people where to find our project information
+	elog "Please remember to look at https://wiki.gentoo.org/wiki/Project:GNOME"
+	elog "for information about the project and documentation."
+}

@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/logstalgia/logstalgia-1.0.6.ebuild,v 1.1 2015/04/23 10:09:34 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils
 
 DESCRIPTION="Replays or streams an access_log as a retro arcade game-like simulation"
-HOMEPAGE="http://code.google.com/p/logstalgia/"
+HOMEPAGE="http://logstalgia.io/"
 SRC_URI="https://github.com/acaudwell/Logstalgia/releases/download/${P}/${P}.tar.gz"
 
 LICENSE="GPL-3"

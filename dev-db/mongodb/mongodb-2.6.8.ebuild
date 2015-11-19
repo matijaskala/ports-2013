@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/mongodb/mongodb-2.6.8.ebuild,v 1.4 2015/03/29 12:07:55 ago Exp $
+# $Id$
 
 EAPI=5
 SCONS_MIN_VERSION="1.2.0"
@@ -15,7 +15,7 @@ MY_P=${PN}-src-r${PV/_rc/-rc}
 DESCRIPTION="A high-performance, open source, schema-free document-oriented database"
 HOMEPAGE="http://www.mongodb.org"
 SRC_URI="http://downloads.mongodb.org/src/${MY_P}.tar.gz
-	mms-agent? ( http://dev.gentoo.org/~ultrabug/20140409-mms-monitoring-agent.zip )"
+	mms-agent? ( https://dev.gentoo.org/~ultrabug/20140409-mms-monitoring-agent.zip )"
 
 LICENSE="AGPL-3 Apache-2.0"
 SLOT="0"
@@ -74,6 +74,7 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-2.6.2-fix-scons.patch"
 	epatch "${FILESDIR}/${PN}-2.4-fix-v8-pythonpath.patch"
+	epatch "${FILESDIR}/${PN}-2.6.10-fix-boost-1.57.patch"
 
 	# fix yaml-cpp detection
 	sed -i -e "s/\[\"yaml\"\]/\[\"yaml-cpp\"\]/" SConstruct || die

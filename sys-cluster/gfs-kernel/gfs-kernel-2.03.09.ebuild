@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/gfs-kernel/gfs-kernel-2.03.09.ebuild,v 1.7 2011/04/28 18:59:44 ulm Exp $
+# $Id$
 
 inherit eutils linux-mod versionator
 
@@ -11,7 +11,7 @@ MAJ_PV="$(get_major_version)"
 MIN_PV="$(get_version_component_range 2).$(get_version_component_range 3)"
 
 DESCRIPTION="GFS kernel module"
-HOMEPAGE="http://sources.redhat.com/cluster/wiki/"
+HOMEPAGE="https://sources.redhat.com/cluster/wiki/"
 SRC_URI="ftp://sources.redhat.com/pub/cluster/releases/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"

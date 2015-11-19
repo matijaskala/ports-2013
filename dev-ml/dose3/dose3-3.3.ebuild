@@ -1,8 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ml/dose3/dose3-3.3.ebuild,v 1.1 2015/01/26 13:51:24 aballier Exp $
+# $Id$
 
 EAPI=5
+
+inherit eutils
 
 MY_P="${P/_beta/-beta}"
 DESCRIPTION="Library and a collection of tools to perform la large spectrum of analysis on package repositories"
@@ -39,6 +41,7 @@ S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	sed -e 's/INSTALLOPTS=-s/INSTALLOPTS=/' -i Makefile.config.in || die
+	has_version '>=dev-ml/extlib-1.7' && epatch "${FILESDIR}/extlib.patch"
 }
 
 src_configure() {

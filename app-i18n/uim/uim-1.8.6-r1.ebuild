@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/uim/uim-1.8.6-r1.ebuild,v 1.6 2014/06/22 12:39:57 ago Exp $
+# $Id$
 
 EAPI="5"
 inherit autotools eutils multilib elisp-common gnome2-utils
 
 DESCRIPTION="Simple, secure and flexible input method library"
-HOMEPAGE="http://code.google.com/p/uim/"
-SRC_URI="http://uim.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://github.com/uim/uim/"
+SRC_URI="https://uim.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="BSD GPL-2 LGPL-2.1"
 SLOT="0"

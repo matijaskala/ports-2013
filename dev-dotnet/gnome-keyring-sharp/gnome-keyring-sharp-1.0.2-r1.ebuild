@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-dotnet/gnome-keyring-sharp/gnome-keyring-sharp-1.0.2-r1.ebuild,v 1.4 2013/12/21 16:27:05 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils mono-env
@@ -34,7 +34,7 @@ src_prepare() {
 
 src_compile() {
 	# This dies without telling in docs with anything not -j1
-	# CSC=gmcs needed for http://bugs.gentoo.org/show_bug.cgi?id=250069
+	# CSC=gmcs needed for https://bugs.gentoo.org/show_bug.cgi?id=250069
 	emake -j1 CSC=gmcs
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-arch/rzip/rzip-2.1-r2.ebuild,v 1.6 2012/05/23 14:41:02 jer Exp $
+# $Id$
 
 EAPI="2"
 
@@ -31,7 +31,7 @@ pkg_postinst() {
 	ewarn "compression of large files it didn't set the right file size, so"
 	ewarn "if you have any reason to believe that your archive was compressed "
 	ewarn "with an old Gentoo rzip, please refer to "
-	ewarn "     http://bugs.gentoo.org/show_bug.cgi?id=217552 "
+	ewarn "     https://bugs.gentoo.org/show_bug.cgi?id=217552 "
 	ewarn "for the rzip-handle-broken-archive.patch patch to rescue your"
 	ewarn "data."
 	ewarn

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/llvm/llvm-3.5.2.ebuild,v 1.4 2015/05/31 14:38:44 grobian Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ SRC_URI="http://llvm.org/releases/${PV}/${P}.src.tar.xz
 	clang? ( http://llvm.org/releases/${PV}/compiler-rt-${PV}.src.tar.xz
 		http://llvm.org/releases/${PV}/cfe-${PV}.src.tar.xz
 		http://llvm.org/releases/${PV}/clang-tools-extra-${PV}.src.tar.xz )
-	!doc? ( http://dev.gentoo.org/~voyageur/distfiles/${PN}-3.5.0-manpages.tar.bz2 )"
+	!doc? ( https://dev.gentoo.org/~voyageur/distfiles/${PN}-3.5.0-manpages.tar.bz2 )"
 
 LICENSE="UoI-NCSA"
 SLOT="0/3.5"
@@ -37,7 +37,7 @@ COMMON_DEPEND="
 	gold? ( >=sys-devel/binutils-2.22:*[cxx] )
 	libedit? ( dev-libs/libedit:0=[${MULTILIB_USEDEP}] )
 	libffi? ( >=virtual/libffi-3.0.13-r1:0=[${MULTILIB_USEDEP}] )
-	ncurses? ( >=sys-libs/ncurses-5.9-r3:5=[${MULTILIB_USEDEP}] )
+	ncurses? ( >=sys-libs/ncurses-5.9-r3:0=[${MULTILIB_USEDEP}] )
 	ocaml? ( dev-lang/ocaml:0= )"
 # configparser-3.2 breaks the build (3.3 or none at all are fine)
 DEPEND="${COMMON_DEPEND}
@@ -147,6 +147,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-3.2-nodoctargz.patch
 	epatch "${FILESDIR}"/${PN}-3.5-gcc-4.9.patch
 	epatch "${FILESDIR}"/${PN}-3.5-gentoo-install.patch
+	epatch "${FILESDIR}"/${P}-gcc-5.1.patch
 	# Make ocaml warnings non-fatal, bug #537308
 	sed -e "/RUN/s/-warn-error A//" -i test/Bindings/Ocaml/*ml  || die
 

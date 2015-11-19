@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/phpvirtualbox/phpvirtualbox-4.2.7.ebuild,v 1.1 2013/09/11 20:29:44 hwoarang Exp $
+# $Id$
 
 EAPI="5"
 
@@ -19,12 +19,11 @@ IUSE=""
 
 RDEPEND="
 	dev-lang/php[session,unicode,soap,gd]
+	virtual/httpd-php:*
 "
 DEPEND="app-arch/unzip"
 
 S="${WORKDIR}"/${MY_P}
-
-need_php_httpd
 
 DISABLE_AUTOFORMATTING="yes"
 DOC_CONTENTS="

@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/zukitwo/zukitwo-2013.12.10.ebuild,v 1.5 2014/03/09 12:05:33 pacho Exp $
+# $Id$
 
 EAPI="5"
 
 DESCRIPTION="Theme for GNOME 2 and 3"
 HOMEPAGE="http://gnome-look.org/content/show.php/Zukitwo?content=140562"
 # Upstream download URI updates file contents without changing the filename
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"

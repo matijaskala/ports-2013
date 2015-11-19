@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/traceroute-nanog/traceroute-nanog-6.4.2-r1.ebuild,v 1.6 2014/07/17 22:44:16 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ DEB_PL="1"
 DESCRIPTION="Traceroute with AS lookup, TOS support, MTU discovery and other features"
 HOMEPAGE="http://packages.debian.org/traceroute-nanog"
 SRC_URI="
-	http://dev.gentoo.org/~jer/${MY_P}.orig.tar.gz
-	http://dev.gentoo.org/~jer/${MY_P}-${DEB_PL}.diff.gz
+	https://dev.gentoo.org/~jer/${MY_P}.orig.tar.gz
+	https://dev.gentoo.org/~jer/${MY_P}-${DEB_PL}.diff.gz
 "
 RESTRICT="mirror"
 

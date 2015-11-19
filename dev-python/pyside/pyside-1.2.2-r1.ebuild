@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyside/pyside-1.2.2-r1.ebuild,v 1.2 2015/06/15 15:20:24 pesa Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
 
 inherit cmake-utils multilib python-r1 virtualx
 

@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/xdsstat-bin/xdsstat-bin-140225.ebuild,v 1.3 2014/11/13 07:37:53 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ SRC_URI="
 
 LICENSE="all-rights-reserved"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~amd64-linux"
 IUSE=""
 
 RDEPEND="sci-chemistry/xds-bin"

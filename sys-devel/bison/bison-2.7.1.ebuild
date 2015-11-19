@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/bison/bison-2.7.1.ebuild,v 1.2 2014/01/18 03:19:42 vapier Exp $
+# $Id$
 
 EAPI=4
 
 inherit flag-o-matic
 
 DESCRIPTION="A general-purpose (yacc-compatible) parser generator"
-HOMEPAGE="http://www.gnu.org/software/bison/"
+HOMEPAGE="https://www.gnu.org/software/bison/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"

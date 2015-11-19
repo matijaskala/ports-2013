@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/heartbeat/heartbeat-3.0.5-r2.ebuild,v 1.4 2015/05/21 11:58:29 ago Exp $
+# $Id$
 
 EAPI="2"
 
@@ -43,7 +43,7 @@ pkg_setup() {
 	python_pkg_setup
 
 	ewarn "If you're upgrading from heartbeat-2.x please follow:"
-	ewarn "http://www.gentoo.org/proj/en/cluster/ha-cluster/heartbeat-upgrade.xml"
+	ewarn "https://www.gentoo.org/proj/en/cluster/ha-cluster/heartbeat-upgrade.xml"
 }
 
 src_prepare() {

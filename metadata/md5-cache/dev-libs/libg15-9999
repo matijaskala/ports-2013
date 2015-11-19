@@ -1,10 +1,10 @@
 DEFINED_PHASES=compile configure install preinst prepare unpack
-DEPEND==virtual/libusb-0* || ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] ) net-misc/rsync !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.14.1:1.14 >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEPEND==virtual/libusb-0* || ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] ) net-misc/rsync !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DESCRIPTION=The libg15 library gives low-level access to the Logitech G15 keyboard
 EAPI=4
 HOMEPAGE=http://g15tools.sourceforge.net/
 LICENSE=GPL-2
 RDEPEND==virtual/libusb-0*
 SLOT=0
-_eclasses_=autotools	a9597abac7226d89ad9d010abeef6cfb	base	87f7447ccfc06fd0729ff4684e11e0d6	eutils	9fb270e417e0e83d64ca52586c4a79de	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	62927b3db3a589b0806255f3a002d5d3	subversion	c12bdf4fcc82f86ad89b14c8f76c4026	toolchain-funcs	42408102d713fbad60ca21349865edb4
-_md5_=acdb7fba4e185ea0e8a801d6399f8c4a
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	base	3fe4f8980633fd7bc69e9887209ba2fe	eutils	f813d23e417656bf3917483643165d5a	libtool	7f78cd7d403808a350c9ae23f5821fb4	multilib	3972ca401cf7dbb430df9995f5d8d580	subversion	4fee0a764150bb4dda27ed4d2c4ed7ce	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
+_md5_=d81f248582db1d2e2aeacfc033139ba0

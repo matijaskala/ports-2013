@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/dbutils/dbutils-1.1-r1.ebuild,v 1.4 2015/03/08 23:43:17 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_PN="DBUtils"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Database connections for multi-threaded environments"
-HOMEPAGE="http://www.webwareforpython.org/DBUtils http://pypi.python.org/pypi/DBUtils"
+HOMEPAGE="http://www.webwareforpython.org/DBUtils https://pypi.python.org/pypi/DBUtils"
 SRC_URI="http://www.webwareforpython.org/downloads/DBUtils/${MY_P}.tar.gz"
 
 LICENSE="OSL-2.0"

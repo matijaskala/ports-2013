@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/clementine/clementine-9999.ebuild,v 1.5 2015/05/29 05:57:10 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -88,8 +88,9 @@ DOCS="Changelog"
 # https://github.com/clementine-player/Clementine/issues/3935
 RESTRICT="test"
 
+# Switch to ^ when we switch to EAPI=6.
 [[ ${PV} == *9999* ]] || \
-S="${WORKDIR}/${P^}"
+S="${WORKDIR}/C${P:1}"
 
 src_prepare() {
 	cmake-utils_src_prepare

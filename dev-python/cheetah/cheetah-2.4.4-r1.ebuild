@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/cheetah/cheetah-2.4.4-r1.ebuild,v 1.11 2015/04/08 08:04:59 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_PN="Cheetah"
 MY_P="${MY_PN}-${PV/_}"
 
 DESCRIPTION="Python-powered template engine and code generator"
-HOMEPAGE="http://www.cheetahtemplate.org/ http://rtyler.github.com/cheetah/ http://pypi.python.org/pypi/Cheetah"
+HOMEPAGE="http://www.cheetahtemplate.org/ https://rtyler.github.com/cheetah/ https://pypi.python.org/pypi/Cheetah"
 SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

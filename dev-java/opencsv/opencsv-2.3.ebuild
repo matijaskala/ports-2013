@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/opencsv/opencsv-2.3.ebuild,v 1.2 2015/04/02 18:15:18 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,20 +14,20 @@ SRC_URI="mirror://sourceforge/${PN}/${P}-src-with-libs.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~ppc ~ppc64"
 
 IUSE=""
 
 S="${WORKDIR}/${P}"
 
+RDEPEND=">=virtual/jre-1.6"
 DEPEND="app-arch/unzip
 	>=virtual/jdk-1.6"
-RDEPEND=">=virtual/jre-1.6"
 
 RESTRICT="test"
 
 java_prepare() {
-	rm lib/* || die
+	java-pkg_clean
 }
 
 src_install() {

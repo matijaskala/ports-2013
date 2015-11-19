@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/qtermwidget/qtermwidget-0.6.0.ebuild,v 1.1 2015/02/03 09:02:33 yngwin Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -11,7 +11,7 @@ SRC_URI="https://github.com/qterminal/${PN}/releases/download/${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 IUSE="debug qt4 qt5"
 REQUIRED_USE="^^ ( qt4 qt5 )"
 

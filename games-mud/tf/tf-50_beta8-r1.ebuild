@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-mud/tf/tf-50_beta8-r1.ebuild,v 1.8 2014/09/06 05:36:16 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit games
@@ -20,7 +20,7 @@ SLOT="0"
 KEYWORDS="amd64 ~ppc ~sparc x86"
 IUSE="+atcp debug doc +gmcp ipv6 +option102 ssl"
 
-RDEPEND="ssl? ( dev-libs/openssl )
+RDEPEND="ssl? ( dev-libs/openssl:0= )
 	dev-libs/libpcre"
 DEPEND=${RDEPEND}
 

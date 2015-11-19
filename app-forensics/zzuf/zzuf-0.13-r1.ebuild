@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-forensics/zzuf/zzuf-0.13-r1.ebuild,v 1.4 2012/10/31 18:25:20 kensington Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,7 +9,7 @@ inherit autotools eutils
 DESCRIPTION="Transparent application input fuzzer"
 HOMEPAGE="http://libcaca.zoy.org/wiki/zzuf/"
 SRC_URI="http://caca.zoy.org/files/${PN}/${P}.tar.gz
-	http://dev.gentoo.org/~cardoe/distfiles/${P}-zzcat-zzat-rename.patch.bz2"
+	https://dev.gentoo.org/~cardoe/distfiles/${P}-zzcat-zzat-rename.patch.bz2"
 
 LICENSE="WTFPL-2"
 SLOT="0"

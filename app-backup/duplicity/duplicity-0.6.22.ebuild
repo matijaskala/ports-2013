@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-backup/duplicity/duplicity-0.6.22.ebuild,v 1.6 2015/04/08 07:30:37 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="Secure backup system using gnupg to encrypt data"
 HOMEPAGE="http://www.nongnu.org/duplicity/"
-SRC_URI="http://code.launchpad.net/${PN}/0.6-series/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://code.launchpad.net/${PN}/0.6-series/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

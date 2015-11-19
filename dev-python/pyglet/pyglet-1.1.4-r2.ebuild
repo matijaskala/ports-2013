@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyglet/pyglet-1.1.4-r2.ebuild,v 1.6 2015/05/28 14:11:54 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Cross-platform windowing and multimedia library for Python"
 HOMEPAGE="http://www.pyglet.org/"
-SRC_URI="http://pyglet.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://pyglet.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

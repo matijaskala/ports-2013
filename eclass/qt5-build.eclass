@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/qt5-build.eclass,v 1.20 2015/06/17 15:48:58 pesa Exp $
+# $Id$
 
 # @ECLASS: qt5-build.eclass
 # @MAINTAINER:
@@ -195,6 +195,10 @@ qt5-build_src_prepare() {
 		find config.tests/unix -name '*.test' -type f \
 			-execdir sed -i -e '/bin\/qmake/ s/-nocache //' '{}' + \
 			|| die "sed failed (config.tests)"
+
+		# Don't add -O3 to CXXFLAGS (bug 549140)
+		sed -i -e '/CONFIG\s*+=/ s/optimize_full//' \
+			src/{corelib/corelib,gui/gui}.pro || die "sed failed (optimize_full)"
 	fi
 
 	# apply patches
@@ -225,8 +229,10 @@ qt5-build_src_compile() {
 # @DESCRIPTION:
 # Runs tests in the target directories.
 qt5-build_src_test() {
-	# '-after SUBDIRS-=...' disables broken cmake tests (bug 474004)
-	qt5_foreach_target_subdir qt5_qmake -after SUBDIRS-=cmake SUBDIRS-=installed_cmake
+	# disable broken cmake tests (bug 474004)
+	local myqmakeargs=("${myqmakeargs[@]}" -after SUBDIRS-=cmake SUBDIRS-=installed_cmake)
+
+	qt5_foreach_target_subdir qt5_qmake
 	qt5_foreach_target_subdir emake
 
 	# create a custom testrunner script that correctly sets
@@ -535,27 +541,26 @@ qt5_base_configure() {
 		-system-zlib
 		-system-pcre
 
-		# don't specify -no-gif because there is no way to override it later
-		#-no-gif
-
 		# disable everything to prevent automagic deps (part 1)
 		-no-mtdev
 		-no-journald
+		$([[ ${QT5_MINOR_VERSION} -ge 6 ]] && echo -no-syslog)
 		-no-libpng -no-libjpeg
 		-no-freetype -no-harfbuzz
 		-no-openssl
 		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-libproxy)
+		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-xkbcommon-{x11,evdev})
 		-no-xinput2 -no-xcb-xlib
+
+		# don't specify -no-gif because there is no way to override it later
+		#-no-gif
 
 		# always enable glib event loop support
 		-glib
 
 		# disable everything to prevent automagic deps (part 2)
 		-no-pulseaudio -no-alsa
-
-		# override in qtgui and qtwidgets where x11-libs/cairo[qt4] is blocked
-		# to avoid adding qt4 include paths (bug 433826)
-		-no-gtkstyle
+		$([[ ${QT5_MINOR_VERSION} -ge 7 ]] && echo -no-gtk || echo -no-gtkstyle)
 
 		# exclude examples and tests from default build
 		-nomake examples
@@ -578,7 +583,10 @@ qt5_base_configure() {
 		-iconv
 
 		# disable everything to prevent automagic deps (part 3)
-		-no-cups -no-evdev -no-icu -no-fontconfig -no-dbus
+		-no-cups -no-evdev
+		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-tslib)
+		-no-icu -no-fontconfig
+		-no-dbus
 
 		# don't strip
 		-no-strip
@@ -596,7 +604,8 @@ qt5_base_configure() {
 		#-use-gold-linker
 
 		# disable all platform plugins by default, override in qtgui
-		-no-xcb -no-eglfs -no-directfb -no-linuxfb -no-kms
+		-no-xcb -no-eglfs -no-kms -no-directfb -no-linuxfb
+		$([[ ${QT5_MINOR_VERSION} -ge 6 ]] && echo -no-mirclient)
 
 		# disable undocumented X11-related flags, override in qtgui
 		# (not shown in ./configure -help output)
@@ -614,8 +623,15 @@ qt5_base_configure() {
 		# typedef qreal to double (warning: changing this flag breaks the ABI)
 		-qreal double
 
-		# disable opengl and egl by default, override in qtgui and qtopengl
+		# disable OpenGL and EGL support by default, override in qtgui,
+		# qtopengl, qtprintsupport and qtwidgets
 		-no-opengl -no-egl
+
+		# disable libinput-based generic plugin by default, override in qtgui
+		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-libinput)
+
+		# disable gstreamer by default, override in qtmultimedia
+		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-gstreamer)
 
 		# use upstream default
 		#-no-system-proxies
@@ -650,6 +666,7 @@ qt5_qmake() {
 	fi
 
 	"${qmakepath}"/qmake \
+		"${projectdir}" \
 		CONFIG+=$(usex debug debug release) \
 		CONFIG-=$(usex debug release debug) \
 		QMAKE_AR="$(tc-getAR) cqs" \
@@ -671,9 +688,8 @@ qt5_qmake() {
 		QMAKE_LFLAGS="${LDFLAGS}" \
 		QMAKE_LFLAGS_RELEASE= \
 		QMAKE_LFLAGS_DEBUG= \
-		"${projectdir}" \
-		"$@" \
-		|| die "qmake failed (${projectdir})"
+		"${myqmakeargs[@]}" \
+		|| die "qmake failed (${projectdir#${S}/})"
 }
 
 # @FUNCTION: qt5_install_module_qconfigs

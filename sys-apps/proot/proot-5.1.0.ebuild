@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/proot/proot-5.1.0.ebuild,v 1.1 2015/01/15 18:10:54 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 MY_PN="PRoot"
@@ -64,6 +64,6 @@ pkg_postinst() {
 		elog "Upstream does NOT support such way of building CARE,"
 		elog "it provides only prebuilt binaries."
 		elog "CARE also has known problems on hardened systems"
-		elog "Please do NOT file bugs about them to http://bugs.gentoo.org"
+		elog "Please do NOT file bugs about them to https://bugs.gentoo.org"
 	fi
 }

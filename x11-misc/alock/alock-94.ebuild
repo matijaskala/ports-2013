@@ -1,14 +1,14 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/alock/alock-94.ebuild,v 1.6 2011/07/13 19:49:48 maekke Exp $
+# $Id$
 
 EAPI=2
 inherit eutils toolchain-funcs
 
 DESCRIPTION="locks the local X display until a password is entered"
-HOMEPAGE="http://code.google.com/p/alock/
+HOMEPAGE="https://code.google.com/p/alock/
 	http://darkshed.net/projects/alock"
-SRC_URI="http://alock.googlecode.com/files/alock-svn-${PV}.tar.bz2"
+SRC_URI="https://alock.googlecode.com/files/alock-svn-${PV}.tar.bz2"
 
 LICENSE="MIT"
 SLOT="0"

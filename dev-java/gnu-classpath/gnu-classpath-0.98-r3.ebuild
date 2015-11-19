@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/gnu-classpath/gnu-classpath-0.98-r3.ebuild,v 1.11 2014/04/30 21:38:15 tomwij Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,7 +9,7 @@ inherit eutils java-pkg-2 multilib
 MY_P=${P/gnu-/}
 DESCRIPTION="Free core class libraries for use with virtual machines and compilers for the Java language"
 SRC_URI="mirror://gnu/classpath/${MY_P}.tar.gz"
-HOMEPAGE="http://www.gnu.org/software/classpath"
+HOMEPAGE="https://www.gnu.org/software/classpath"
 
 LICENSE="GPL-2-with-linking-exception"
 SLOT="0.98"

@@ -1,16 +1,16 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/grep/grep-2.21-r1.ebuild,v 1.10 2015/03/21 17:12:32 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils flag-o-matic toolchain-funcs
 
 DESCRIPTION="GNU regular expression matcher"
-HOMEPAGE="http://www.gnu.org/software/grep/"
+HOMEPAGE="https://www.gnu.org/software/grep/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.xz
 	mirror://gentoo/${P}.tar.xz
-	http://dev.gentoo.org/~polynomial-c/${P}-heap_buffer_overrun.patch"
+	https://dev.gentoo.org/~polynomial-c/${P}-heap_buffer_overrun.patch"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -29,6 +29,11 @@ DEPEND="${RDEPEND}
 DOCS=( AUTHORS ChangeLog NEWS README THANKS TODO )
 
 src_prepare() {
+	# Disable gnulib build test that has no impact on the source.
+	# Re-enable w/next version bump (and gnulib is updated). #554728
+	[[ ${PV} != "2.21" ]] && die "re-enable test #554728"
+	echo 'exit 0' > gnulib-tests/test-update-copyright.sh || die
+
 	sed -i \
 		-e "s:@SHELL@:${EPREFIX}/bin/sh:g" \
 		src/egrep.sh || die #523898

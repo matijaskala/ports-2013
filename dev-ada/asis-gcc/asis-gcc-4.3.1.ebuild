@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ada/asis-gcc/asis-gcc-4.3.1.ebuild,v 1.2 2014/07/13 16:23:26 ulm Exp $
+# $Id$
 
 inherit eutils flag-o-matic gnatbuild
 
@@ -8,7 +8,7 @@ ACT_Ver=2009
 Gnat_Name="gnat-gcc"
 
 DESCRIPTION="The Ada Semantic Interface Specification (semantic analysis and tools tied to compiler)"
-SRC_URI="http://dev.gentoo.org/~george/src/asis-gpl-${ACT_Ver}-src.tgz"
+SRC_URI="https://dev.gentoo.org/~george/src/asis-gpl-${ACT_Ver}-src.tgz"
 HOMEPAGE="https://libre.adacore.com/"
 LICENSE="GPL-2"
 

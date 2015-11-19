@@ -1,17 +1,17 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/xfce4-soundmenu-plugin/xfce4-soundmenu-plugin-0.7.0.ebuild,v 1.1 2014/08/20 11:47:18 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit xfconf
 
 DESCRIPTION="A panel plug-in to control MPRIS2 compatible players like Pragha (from the same authors)"
-HOMEPAGE="http://github.com/matiasdelellis/xfce4-soundmenu-plugin"
-SRC_URI="http://github.com/matiasdelellis/${PN}/releases/download/v${PV}/${P}.tar.bz2"
+HOMEPAGE="https://github.com/matiasdelellis/xfce4-soundmenu-plugin"
+SRC_URI="https://github.com/matiasdelellis/${PN}/releases/download/v${PV}/${P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="debug +glyr lastfm +keybinder"
 
 RDEPEND=">=dev-libs/glib-2.28

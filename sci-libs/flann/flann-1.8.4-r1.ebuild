@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/flann/flann-1.8.4-r1.ebuild,v 1.4 2015/04/19 10:05:00 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ DESCRIPTION="Library for performing fast approximate nearest neighbor searches i
 HOMEPAGE="http://www.cs.ubc.ca/research/flann/"
 SRC_URI="
 	http://people.cs.ubc.ca/~mariusm/uploads/FLANN/${P}-src.zip
-	test? ( http://dev.gentoo.org/~bicatali/distfiles/${P}-testdata.tar.xz )"
+	test? ( https://dev.gentoo.org/~bicatali/distfiles/${P}-testdata.tar.xz )"
 
 LICENSE="BSD"
 SLOT="0"

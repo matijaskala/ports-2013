@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-strategy/s25rttr/s25rttr-0.8.1.ebuild,v 1.4 2015/02/25 15:56:39 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils cmake-utils gnome2-utils games
@@ -9,7 +9,7 @@ DESCRIPTION="Open Source remake of The Settlers II game (needs original game fil
 HOMEPAGE="http://www.siedler25.org/"
 # no upstream source tarball yet
 # https://bugs.launchpad.net/s25rttr/+bug/1069546
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -30,7 +30,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-cmake.patch \
-		"${FILESDIR}"/${P}-soundconverter.patch
+		"${FILESDIR}"/${P}-soundconverter.patch \
+		"${FILESDIR}"/${P}-fpic.patch
 }
 
 src_configure() {

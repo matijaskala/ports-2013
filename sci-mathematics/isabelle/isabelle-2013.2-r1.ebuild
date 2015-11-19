@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/isabelle/isabelle-2013.2-r1.ebuild,v 1.1 2015/04/17 14:41:21 gienah Exp $
+# $Id$
 
 EAPI="5"
 
@@ -35,7 +35,7 @@ HOMEPAGE="http://www.cl.cam.ac.uk/research/hvg/Isabelle/index.html"
 SRC_URI="http://www.cl.cam.ac.uk/users/lcp/archive/${MY_P}.tar.gz
 		http://isabelle.in.tum.de/components/${JEDIT_P}.tar.gz -> ${JEDIT_IC_P}.tar.gz
 		http://isabelle.in.tum.de/dist/contrib/${JFREECHART_P}.tar.gz -> ${JFREECHART_IC_P}.tar.gz
-		http://dev.gentoo.org/~gienah/snapshots/${POLYML_IC_P}.tar.gz"
+		https://dev.gentoo.org/~gienah/snapshots/${POLYML_IC_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"

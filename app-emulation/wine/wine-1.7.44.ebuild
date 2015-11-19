@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-1.7.44.ebuild,v 1.1 2015/05/31 22:07:17 tetromino Exp $
+# $Id$
 
 EAPI="5"
 
@@ -37,8 +37,8 @@ SRC_URI="${SRC_URI}
 		abi_x86_64? ( mirror://sourceforge/${PN}/Wine%20Gecko/${GV}/wine_gecko-${GV}-x86_64.msi )
 	)
 	mono? ( mirror://sourceforge/${PN}/Wine%20Mono/${MV}/wine-mono-${MV}.msi )
-	gstreamer? ( http://dev.gentoo.org/~tetromino/distfiles/${PN}/${GST_P}.patch.bz2 )
-	http://dev.gentoo.org/~tetromino/distfiles/${PN}/${WINE_GENTOO}.tar.bz2"
+	gstreamer? ( https://dev.gentoo.org/~tetromino/distfiles/${PN}/${GST_P}.patch.bz2 )
+	https://dev.gentoo.org/~tetromino/distfiles/${PN}/${WINE_GENTOO}.tar.bz2"
 
 if [[ ${PV} == "9999" ]] ; then
 	STAGING_EGIT_REPO_URI="git://github.com/wine-compholio/wine-staging.git"
@@ -67,7 +67,7 @@ RESTRICT="test"
 COMMON_DEPEND="
 	truetype? ( >=media-libs/freetype-2.0.0[${MULTILIB_USEDEP}] )
 	capi? ( net-dialup/capi4k-utils )
-	ncurses? ( >=sys-libs/ncurses-5.2:=[${MULTILIB_USEDEP}] )
+	ncurses? ( >=sys-libs/ncurses-5.2:0=[${MULTILIB_USEDEP}] )
 	udisks? ( sys-apps/dbus[${MULTILIB_USEDEP}] )
 	fontconfig? ( media-libs/fontconfig:=[${MULTILIB_USEDEP}] )
 	gphoto2? ( media-libs/libgphoto2:=[${MULTILIB_USEDEP}] )
@@ -165,10 +165,18 @@ wine_build_environment_check() {
 	[[ ${MERGE_TYPE} = "binary" ]] && return 0
 
 	# bug #549768
-	if [[ $(gcc-major-version) = 5 ]]; then
-		eerror "You need gcc-4.x to build wine; see https://bugs.gentoo.org/549768"
-		eerror
-		return 1
+	if use abi_x86_64 && [[ $(gcc-major-version) = 5 && $(gcc-minor-version) -le 2 ]]; then
+		einfo "Checking for gcc-5 ms_abi compiler bug ..."
+		$(tc-getCC) -O2 "${FILESDIR}"/pr66838.c -o "${T}"/pr66838 || die
+		# Run in subshell to prevent "Aborted" message
+		if ! ( "${T}"/pr66838 || false ) >/dev/null 2>&1; then
+			eerror "64-bit wine cannot be built with gcc-5.1 or initial patchset of 5.2.0"
+			eerror "due to compiler bugs; please re-emerge the latest gcc-5.2.x ebuild,"
+			eerror "or use gcc-config to select a different compiler version."
+			eerror "See https://bugs.gentoo.org/549768"
+			eerror
+			return 1
+		fi
 	fi
 
 	if use abi_x86_64 && [[ $(( $(gcc-major-version) * 100 + $(gcc-minor-version) )) -lt 404 ]]; then

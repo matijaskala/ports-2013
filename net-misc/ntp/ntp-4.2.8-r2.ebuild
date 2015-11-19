@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/ntp/ntp-4.2.8-r2.ebuild,v 1.4 2015/04/04 07:54:58 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -135,6 +135,6 @@ pkg_postinst() {
 		eerror "The notrust option was found in your /etc/ntp.conf!"
 		ewarn "If your ntpd starts sending out weird responses,"
 		ewarn "then make sure you have keys properly setup and see"
-		ewarn "http://bugs.gentoo.org/41827"
+		ewarn "https://bugs.gentoo.org/41827"
 	fi
 }

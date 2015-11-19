@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/kajongg/kajongg-4.14.3.ebuild,v 1.1 2015/06/04 18:44:48 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1 kde4-base
 
 DESCRIPTION="The classical Mah Jongg for four players"
-HOMEPAGE="http://www.kde.org/applications/games/kajongg/"
+HOMEPAGE="https://www.kde.org/applications/games/kajongg/"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug"
 

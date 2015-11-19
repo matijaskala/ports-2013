@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/initsplit/initsplit-1.7_pre20140203.ebuild,v 1.3 2014/03/24 14:57:19 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit readme.gentoo elisp
 DESCRIPTION="Split customizations into different files"
 HOMEPAGE="http://www.emacswiki.org/emacs/InitSplit"
 # taken from https://github.com/dabrahams/${PN}
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.el.xz"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.el.xz"
 
 LICENSE="GPL-2+"
 SLOT="0"

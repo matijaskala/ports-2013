@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libprojectm/libprojectm-2.1.0-r1.ebuild,v 1.12 2015/03/03 08:50:30 dlan Exp $
+# $Id$
 
 EAPI=5
 
@@ -21,7 +21,7 @@ RDEPEND="media-fonts/dejavu
 	>=media-libs/ftgl-2.1.3_rc5
 	media-libs/freetype:2
 	media-libs/mesa
-	media-libs/glew
+	media-libs/glew:=
 	sys-libs/zlib
 	video_cards_nvidia? ( media-gfx/nvidia-cg-toolkit )"
 DEPEND="${RDEPEND}

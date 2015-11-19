@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/wireless-regdb/wireless-regdb-20130213.ebuild,v 1.7 2013/03/31 10:25:34 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit multilib
 
 MY_P="wireless-regdb-${PV:0:4}.${PV:4:2}.${PV:6:2}"
 DESCRIPTION="Binary regulatory database for CRDA"
-HOMEPAGE="http://wireless.kernel.org/en/developers/Regulatory"
+HOMEPAGE="https://wireless.kernel.org/en/developers/Regulatory"
 SRC_URI="https://www.kernel.org/pub/software/network/${PN}/${MY_P}.tar.xz"
 LICENSE="ISC"
 SLOT="0"

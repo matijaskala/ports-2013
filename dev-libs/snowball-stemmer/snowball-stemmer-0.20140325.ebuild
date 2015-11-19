@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/snowball-stemmer/snowball-stemmer-0.20140325.ebuild,v 1.4 2014/12/05 10:17:14 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ PVDATE=$(get_after_major_version)
 
 DESCRIPTION="This contains all you need to include the snowball stemming algorithms into a C project of your own"
 HOMEPAGE="http://snowball.tartarus.org/download.php"
-SRC_URI="http://dev.gentoo.org/~graaff/libstemmer_c-${PVDATE}.tgz"
+SRC_URI="https://dev.gentoo.org/~graaff/libstemmer_c-${PVDATE}.tgz"
 
 # This will probably be different if this ebuild ends up being used for both
 # Java and C.

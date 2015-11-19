@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qt-mobility/qt-mobility-1.2.2_p20130703-r1.ebuild,v 1.6 2015/06/14 23:15:19 pesa Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit multilib qt4-r2
 
 DESCRIPTION="Additional Qt APIs for mobile devices and desktop platforms"
 HOMEPAGE="http://doc-snapshots.qt.io/qt-mobility/index.html"
-SRC_URI="http://dev.gentoo.org/~pesa/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~pesa/distfiles/${P}.tar.xz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"

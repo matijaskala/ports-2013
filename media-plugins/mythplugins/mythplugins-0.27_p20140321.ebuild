@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/mythplugins/mythplugins-0.27_p20140321.ebuild,v 1.3 2015/03/22 07:46:18 nativemad Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ inherit eutils python
 DESCRIPTION="Official MythTV plugins"
 HOMEPAGE="http://www.mythtv.org"
 SRC_URI="https://github.com/MythTV/mythtv/archive/v0.27.tar.gz -> mythtv-0.27.tar.gz
-	${BACKPORTS:+http://dev.gentoo.org/~rich0/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
+	${BACKPORTS:+https://dev.gentoo.org/~rich0/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -36,7 +36,7 @@ DEPEND="!media-plugins/mytharchive
 	=media-tv/mythtv-${PV}*:=[python]
 	mytharchive? (
 		app-cdr/dvd+rw-tools
-		virtual/python-imaging:=
+		dev-python/pillow:=
 		media-video/dvdauthor
 		media-video/mjpegtools[png]
 		media-video/transcode

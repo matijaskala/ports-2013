@@ -1,13 +1,13 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libpgf/libpgf-6.11.32.ebuild,v 1.3 2011/12/07 22:09:18 hwoarang Exp $
+# $Id$
 
 EAPI=4
 inherit autotools
 
 DESCRIPTION="Library to load, handle and manipulate images in the PGF format"
 HOMEPAGE="http://www.libpgf.org/"
-SRC_URI="http://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

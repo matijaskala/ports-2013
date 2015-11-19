@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/aaphoto/aaphoto-0.43.1.ebuild,v 1.2 2013/12/13 14:21:18 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ AM_OPTS="--force-missing" # overwrite old 'missing' script
 inherit autotools-utils
 
 DESCRIPTION="Automatic color correction and resizing of photos"
-HOMEPAGE="http://log69.com/aaphoto.html http://github.com/log69/aaphoto"
-SRC_URI="http://github.com/log69/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="http://log69.com/aaphoto.html https://github.com/log69/aaphoto"
+SRC_URI="https://github.com/log69/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

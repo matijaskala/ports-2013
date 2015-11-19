@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/compton/compton-9999.ebuild,v 1.12 2015/06/05 05:00:25 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_3 python3_4 )
 inherit toolchain-funcs python-r1 git-2
 
 DESCRIPTION="A compositor for X, and a fork of xcompmgr-dana"
-HOMEPAGE="http://github.com/chjj/compton"
+HOMEPAGE="https://github.com/chjj/compton"
 SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/chjj/compton.git"

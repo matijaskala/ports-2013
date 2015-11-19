@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/warp-tls/warp-tls-3.0.1.1.ebuild,v 1.1 2014/12/22 11:56:36 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="HTTP over SSL/TLS support for Warp via the TLS package"
-HOMEPAGE="http://github.com/yesodweb/wai"
+HOMEPAGE="https://github.com/yesodweb/wai"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="MIT"

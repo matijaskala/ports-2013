@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/mozc/mozc-2.16.2037.102.ebuild,v 1.6 2015/04/08 07:30:31 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PLOCALES="de ja zh_CN zh_TW"
 inherit elisp-common eutils l10n multilib multiprocessing python-single-r1 toolchain-funcs
 
 DESCRIPTION="The Mozc engine for IBus Framework"
-HOMEPAGE="http://code.google.com/p/mozc/"
+HOMEPAGE="https://github.com/google/mozc"
 
 PROTOBUF_VER="2.5.0"
 GMOCK_VER="1.6.0"
@@ -18,13 +18,13 @@ GYP_DATE="20140602"
 JAPANESE_USAGE_DICT_VER="10"
 FCITX_PATCH_VER="2"
 FCITX_PATCH="fcitx-mozc-${PV}.${FCITX_PATCH_VER}.patch"
-MOZC_URL="http://dev.gentoo.org/~naota/files/${P}.tar.bz2"
-PROTOBUF_URL="http://protobuf.googlecode.com/files/protobuf-${PROTOBUF_VER}.tar.bz2"
+MOZC_URL="https://dev.gentoo.org/~naota/files/${P}.tar.bz2"
+PROTOBUF_URL="https://protobuf.googlecode.com/files/protobuf-${PROTOBUF_VER}.tar.bz2"
 GMOCK_URL="https://googlemock.googlecode.com/files/gmock-${GMOCK_VER}.zip"
 GTEST_URL="https://googletest.googlecode.com/files/gtest-${GTEST_VER}.zip"
 JSONCPP_URL="mirror://sourceforge/jsoncpp/jsoncpp-src-${JSONCPP_VER}.tar.gz"
-GYP_URL="http://dev.gentoo.org/~naota/files/gyp-${GYP_DATE}.tar.bz2"
-JAPANESE_USAGE_DICT_URL="http://dev.gentoo.org/~naota/files/japanese-usage-dictionary-${JAPANESE_USAGE_DICT_VER}.tar.bz2"
+GYP_URL="https://dev.gentoo.org/~naota/files/gyp-${GYP_DATE}.tar.bz2"
+JAPANESE_USAGE_DICT_URL="https://dev.gentoo.org/~naota/files/japanese-usage-dictionary-${JAPANESE_USAGE_DICT_VER}.tar.bz2"
 FCITX_PATCH_URL="http://download.fcitx-im.org/fcitx-mozc/${FCITX_PATCH}"
 SRC_URI="${MOZC_URL} ${PROTOBUF_URL} ${GYP_URL} ${JAPANESE_USAGE_DICT_URL}
 	fcitx? ( ${FCITX_PATCH_URL} )

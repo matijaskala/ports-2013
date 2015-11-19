@@ -1,32 +1,31 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-servers/pshs/pshs-9999.ebuild,v 1.5 2014/12/23 18:16:45 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 #if LIVE
-AUTOTOOLS_AUTORECONF=yes
-EGIT_REPO_URI="http://bitbucket.org/mgorny/${PN}.git"
+EGIT_REPO_URI="https://bitbucket.org/mgorny/${PN}.git"
 
-inherit git-r3
+inherit autotools git-r3
 #endif
 
-inherit autotools-utils
-
-DESCRIPTION="Pretty small HTTP server - a command-line tool to share files"
+DESCRIPTION="Pretty small HTTP server -- a command-line tool to share files"
 HOMEPAGE="https://bitbucket.org/mgorny/pshs/"
 SRC_URI="https://www.bitbucket.org/mgorny/${PN}/downloads/${P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+magic +netlink qrcode ssl upnp"
+IUSE="libressl +magic +netlink qrcode ssl upnp"
 
 RDEPEND=">=dev-libs/libevent-2:0=
 	magic? ( sys-apps/file:0= )
 	qrcode? ( media-gfx/qrencode:0= )
 	ssl? ( >=dev-libs/libevent-2.1:0=[ssl]
-		dev-libs/openssl:0= )
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:= )
+	)
 	upnp? ( net-libs/miniupnpc:0= )"
 DEPEND="${RDEPEND}
 	netlink? ( sys-apps/iproute2
@@ -36,10 +35,12 @@ DEPEND="${RDEPEND}
 #if LIVE
 KEYWORDS=
 SRC_URI=
+
+src_prepare() { eautoreconf; }
 #endif
 
 src_configure() {
-	myeconfargs=(
+	local myconf=(
 		$(use_enable magic libmagic)
 		$(use_enable netlink)
 		$(use_enable qrcode qrencode)
@@ -47,5 +48,5 @@ src_configure() {
 		$(use_enable upnp)
 	)
 
-	autotools-utils_src_configure
+	econf "${myconf[@]}"
 }

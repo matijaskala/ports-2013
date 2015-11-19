@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/elfutils/elfutils-0.163.ebuild,v 1.1 2015/06/21 18:51:49 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -13,7 +13,7 @@ SRC_URI="https://fedorahosted.org/releases/e/l/${PN}/${PV}/${P}.tar.bz2
 
 LICENSE="GPL-2-with-exceptions"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-linux ~arm-linux ~x86-linux"
 IUSE="bzip2 lzma nls static-libs test +threads +utils zlib"
 
 # This pkg does not actually seem to compile currently in a uClibc

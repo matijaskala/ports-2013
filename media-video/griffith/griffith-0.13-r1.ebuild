@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/griffith/griffith-0.13-r1.ebuild,v 1.1 2015/02/26 15:18:56 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,14 +13,14 @@ ARTWORK_PV="0.9.4"
 
 DESCRIPTION="Movie collection manager"
 HOMEPAGE="http://www.griffith.cc/"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz
-	http://dev.gentoo.org/~hwoarang/distfiles/${PN}-extra-artwork-${ARTWORK_PV}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.gz
+	https://dev.gentoo.org/~hwoarang/distfiles/${PN}-extra-artwork-${ARTWORK_PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~x86-fbsd"
 IUSE="doc"
 
-RDEPEND="virtual/python-imaging
+RDEPEND="dev-python/pillow
 	gnome-base/libglade
 	dev-python/pyxml[${PYTHON_USEDEP}]
 	>=dev-python/pygtk-2.6.1:2[${PYTHON_USEDEP}]

@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-anthy/ibus-anthy-1.5.4.ebuild,v 1.4 2015/04/08 07:30:32 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 inherit eutils python-single-r1 autotools gnome2-utils
 
 DESCRIPTION="Japanese input method Anthy IMEngine for IBus Framework"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${P}.tar.gz
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${P}.tar.gz
 	https://raw.github.com/ibus/ibus-anthy/${PV}/engine/anthy.i"
 
 LICENSE="GPL-2"

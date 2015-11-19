@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/emhacks/emhacks-20070920.ebuild,v 1.3 2014/02/23 16:01:18 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit elisp
 DESCRIPTION="Useful Emacs Lisp libraries, including gdiff, jjar, jmaker, swbuff, and tabbar"
 HOMEPAGE="http://emhacks.sourceforge.net/"
 # CVS snapshot
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2+"
 SLOT="0"

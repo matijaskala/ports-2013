@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/mg/mg-20110905-r1.ebuild,v 1.7 2013/05/25 14:24:04 ago Exp $
+# $Id$
 
 EAPI=4
 
@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="alpha amd64 hppa ppc ~ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos"
 IUSE="livecd"
 
-RDEPEND="sys-libs/ncurses"
+RDEPEND="sys-libs/ncurses:0"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 

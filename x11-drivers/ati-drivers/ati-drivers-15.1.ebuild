@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/ati-drivers/ati-drivers-15.1.ebuild,v 1.1 2015/04/08 09:38:30 chithanh Exp $
+# $Id$
 
 EAPI=5
 
@@ -225,7 +225,7 @@ pkg_setup() {
 	elog
 	elog "If your card is older then use ${CATEGORY}/xf86-video-ati"
 	elog "For migration informations please refer to:"
-	elog "http://www.gentoo.org/proj/en/desktop/x/x11/ati-migration-guide.xml"
+	elog "https://www.gentoo.org/proj/en/desktop/x/x11/ati-migration-guide.xml"
 	einfo
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/transmission/transmission-2.84-r1.ebuild,v 1.3 2015/03/25 20:25:27 grknight Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils fdo-mime gnome2-utils qmake-utils systemd user
@@ -71,6 +71,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.80-translations-path-fix.patch
 	# http://trac.transmissionbt.com/ticket/5700
 	sed -i -e '1iQMAKE_CXXFLAGS += -std=c++11' qt/qtr.pro || die
+
+	epatch "${FILESDIR}/2.84-miniupnp14.patch"
 
 	epatch_user
 	eautoreconf

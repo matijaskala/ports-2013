@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-mud/crystal/crystal-0.2.4.ebuild,v 1.6 2015/01/04 05:56:51 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils games
@@ -15,8 +15,8 @@ KEYWORDS="amd64 ppc x86"
 IUSE=""
 
 RDEPEND="sys-libs/zlib
-	sys-libs/ncurses
-	dev-libs/openssl
+	sys-libs/ncurses:0=
+	dev-libs/openssl:0=
 	virtual/libiconv"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"

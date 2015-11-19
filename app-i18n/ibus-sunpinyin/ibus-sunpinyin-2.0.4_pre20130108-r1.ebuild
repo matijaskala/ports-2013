@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-sunpinyin/ibus-sunpinyin-2.0.4_pre20130108-r1.ebuild,v 1.1 2013/01/31 10:23:45 yngwin Exp $
+# $Id$
 
 EAPI=5
 PYTHON_DEPEND="2:2.5"
@@ -8,7 +8,7 @@ inherit python scons-utils toolchain-funcs
 
 DESCRIPTION="The SunPinYin IMEngine for IBus Framework"
 HOMEPAGE="https://sunpinyin.googlecode.com/"
-SRC_URI="http://dev.gentoo.org/~yngwin/distfiles/sunpinyin-${PV}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~yngwin/distfiles/sunpinyin-${PV}.tar.xz"
 
 LICENSE="LGPL-2.1 CDDL"
 SLOT="0"

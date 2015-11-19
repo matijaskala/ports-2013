@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/testtools/testtools-1.5.0.ebuild,v 1.2 2015/03/03 07:25:54 dlan Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_3 python3_4 pypy )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} pypy pypy3 )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
@@ -34,7 +35,7 @@ python_compile_all() {
 }
 
 python_test() {
-	esetup.py test || die "tests failed under ${EPYTHON}"
+	esetup.py test
 }
 
 python_install_all() {

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/libsrtp/libsrtp-1.4.4_p20121108-r1.ebuild,v 1.7 2013/10/24 06:11:16 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -11,7 +11,7 @@ MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Open-source implementation of the Secure Real-time Transport Protocol (SRTP)"
 HOMEPAGE="http://srtp.sourceforge.net/srtp.html"
-SRC_URI="http://dev.gentoo.org/~phajdan.jr/${MY_P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~phajdan.jr/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

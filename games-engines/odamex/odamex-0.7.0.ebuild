@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-engines/odamex/odamex-0.7.0.ebuild,v 1.2 2014/05/15 16:42:25 ulm Exp $
+# $Id$
 
 EAPI=5
 WX_GTK_VER="3.0"
@@ -13,7 +13,7 @@ SRC_URI="mirror://sourceforge/${PN}/Odamex/${PV}/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="dedicated +odalaunch master portmidi server"
 
 RDEPEND="

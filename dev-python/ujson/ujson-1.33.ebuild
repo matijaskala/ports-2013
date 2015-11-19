@@ -1,17 +1,17 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/ujson/ujson-1.33.ebuild,v 1.9 2015/06/07 09:15:43 maekke Exp $
+# $Id$
 
-EAPI="5"
+EAPI=5
 
 # One test; FAIL: test_encodeToUTF8 (__main__.UltraJSONTests) under py2.5.
 # Fix and repair and re-insert if it's REALLY needed
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
 
 inherit distutils-r1
 
 DESCRIPTION="Ultra fast JSON encoder and decoder for Python"
-HOMEPAGE="http://pypi.python.org/pypi/ujson/"
+HOMEPAGE="https://pypi.python.org/pypi/ujson/"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.zip"
 
 LICENSE="BSD"
@@ -35,7 +35,7 @@ python_test() {
 	if [[ "${EPYTHON}" =~ 'python3' ]]; then
 		cd "${BUILD_DIR}"/lib || die
 		cp -a "${S}"/tests/ .  || die
-		2to3 -w tests/tests.py
+		2to3 -w tests/tests.py || die
 		"${PYTHON}" tests/tests.py || die
 		rm -rf tests/ || die
 	else

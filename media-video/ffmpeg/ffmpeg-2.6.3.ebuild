@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/ffmpeg/ffmpeg-2.6.3.ebuild,v 1.4 2015/06/14 19:42:22 maekke Exp $
+# $Id$
 
 EAPI="5"
 
@@ -55,7 +55,7 @@ LICENSE="
 	samba? ( GPL-3 )
 "
 if [ "${PV#9999}" = "${PV}" ] ; then
-	KEYWORDS="~alpha amd64 arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
+	KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
 fi
 
 # Options to use as use_enable in the foo[:bar] form.
@@ -75,7 +75,7 @@ FFMPEG_FLAG_MAP=(
 		# decoders
 		amr:libopencore-amrwb amr:libopencore-amrnb fdk:libfdk-aac
 		jpeg2k:libopenjpeg bluray:libbluray celt:libcelt gme:libgme gsm:libgsm
-		modplug:libmodplug opus:libopus quvi:libquvi rtmp:librtmp ssh:libssh
+		modplug:libmodplug opus:libopus quvi:libquvi librtmp ssh:libssh
 		schroedinger:libschroedinger speex:libspeex vorbis:libvorbis vpx:libvpx
 		zvbi:libzvbi
 		# libavfilter options
@@ -207,7 +207,7 @@ RDEPEND="
 	opus? ( >=media-libs/opus-1.0.2-r2[${MULTILIB_USEDEP}] )
 	pulseaudio? ( >=media-sound/pulseaudio-2.1-r1[${MULTILIB_USEDEP}] )
 	quvi? ( media-libs/libquvi:0.4[${MULTILIB_USEDEP}] )
-	rtmp? ( >=media-video/rtmpdump-2.4_p20131018[${MULTILIB_USEDEP}] )
+	librtmp? ( >=media-video/rtmpdump-2.4_p20131018[${MULTILIB_USEDEP}] )
 	samba? ( >=net-fs/samba-3.6.23-r1[${MULTILIB_USEDEP}] )
 	schroedinger? ( >=media-libs/schroedinger-1.0.11-r1[${MULTILIB_USEDEP}] )
 	sdl? ( >=media-libs/libsdl-1.2.15-r4[sound,video,${MULTILIB_USEDEP}] )
@@ -243,7 +243,7 @@ DEPEND="${RDEPEND}
 	ladspa? ( >=media-libs/ladspa-sdk-1.13-r2[${MULTILIB_USEDEP}] )
 	libv4l? ( >=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}] )
 	cpu_flags_x86_mmx? ( >=dev-lang/yasm-1.2 )
-	rtmp? ( >=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}] )
+	librtmp? ( >=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}] )
 	schroedinger? ( >=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}] )
 	test? ( net-misc/wget sys-devel/bc )
 	truetype? ( >=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}] )
@@ -364,7 +364,7 @@ multilib_src_configure() {
 	# We need to do this so that features of that CPU will be better used
 	# If they contain an unknown CPU it will not hurt since ffmpeg's configure
 	# will just ignore it.
-	for i in $(get-flag mcpu) $(get-flag mtune) $(get-flag march) ; do
+	for i in $(get-flag mcpu) $(get-flag march) $(get-flag mtune) ; do
 		[[ ${i} = native ]] && i="host" # bug #273421
 		myconf+=( --cpu=${i} )
 		break

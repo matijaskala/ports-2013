@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/qxkb/qxkb-0.4.6.ebuild,v 1.1 2014/02/26 13:56:33 yngwin Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
 
 DESCRIPTION="Qt4-based keyboard layout switcher"
-HOMEPAGE="http://code.google.com/p/qxkb/"
-SRC_URI="http://qxkb.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://github.com/disels/qxkb"
+SRC_URI="https://qxkb.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

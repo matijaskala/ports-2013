@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/sshkit/sshkit-1.6.1.ebuild,v 1.1 2014/12/18 06:11:21 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21"
@@ -14,7 +14,7 @@ RUBY_FAKEGEM_EXTRADOC="CHANGELOG.md FAQ.md README.md"
 inherit ruby-fakegem
 
 DESCRIPTION="SSHKit makes it easy to write structured, testable SSH commands in Ruby"
-HOMEPAGE="http://github.com/capistrano/sshkit"
+HOMEPAGE="https://github.com/capistrano/sshkit"
 
 LICENSE="GPL-3"
 SLOT="0"

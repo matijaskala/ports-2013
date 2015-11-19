@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-dotnet/gnome-keyring-sharp/gnome-keyring-sharp-1.0.2.ebuild,v 1.7 2014/01/19 20:58:53 moult Exp $
+# $Id$
 
 EAPI="2"
 
@@ -32,7 +32,7 @@ src_configure() {
 
 src_compile() {
 	# This dies without telling in docs with anything not -j1
-	# CSC=gmcs needed for http://bugs.gentoo.org/show_bug.cgi?id=250069
+	# CSC=gmcs needed for https://bugs.gentoo.org/show_bug.cgi?id=250069
 	emake -j1 CSC=gmcs || die "emake failed"
 }
 

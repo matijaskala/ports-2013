@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/netbeans-enterprise/netbeans-enterprise-8.0.2.ebuild,v 1.4 2015/05/21 09:51:17 ago Exp $
+# $Id$
 
 EAPI="4"
 inherit eutils java-pkg-2 java-ant-2
@@ -10,7 +10,7 @@ HOMEPAGE="http://netbeans.org/"
 SLOT="8.0"
 SOURCE_URL="http://download.netbeans.org/netbeans/8.0.2/final/zip/netbeans-8.0.2-201411181905-src.zip"
 SRC_URI="${SOURCE_URL}
-	http://dev.gentoo.org/~fordfrog/distfiles/netbeans-8.0.2-build.xml.patch.bz2
+	https://dev.gentoo.org/~fordfrog/distfiles/netbeans-8.0.2-build.xml.patch.bz2
 	http://hg.netbeans.org/binaries/8BFEBCD4B39B87BBE788B4EECED068C8DBE75822-aws-java-sdk-1.2.1.jar
 	http://hg.netbeans.org/binaries/BA8A45A96AFE07D914DE153E0BB137DCDC7734F6-el-impl.jar
 	http://hg.netbeans.org/binaries/33B0D0945555A06B74931DEACF9DB1A4AE2A3EC4-glassfish-jspparser-4.0.jar

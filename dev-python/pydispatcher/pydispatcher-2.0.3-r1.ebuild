@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pydispatcher/pydispatcher-2.0.3-r1.ebuild,v 1.1 2015/01/02 08:20:23 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_PN="PyDispatcher"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Multi-producer-multi-consumer signal dispatching mechanism"
-HOMEPAGE="http://pydispatcher.sourceforge.net/ http://pypi.python.org/pypi/PyDispatcher"
+HOMEPAGE="http://pydispatcher.sourceforge.net/ https://pypi.python.org/pypi/PyDispatcher"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

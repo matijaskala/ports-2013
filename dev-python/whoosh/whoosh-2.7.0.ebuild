@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/whoosh/whoosh-2.7.0.ebuild,v 1.1 2015/04/19 09:10:44 idella4 Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ MY_PN="Whoosh"
 inherit distutils-r1
 
 DESCRIPTION="Fast, pure-Python full text indexing, search and spell checking library"
-HOMEPAGE="http://bitbucket.org/mchaput/whoosh/wiki/Home/ http://pypi.python.org/pypi/Whoosh/"
+HOMEPAGE="https://bitbucket.org/mchaput/whoosh/wiki/Home/ https://pypi.python.org/pypi/Whoosh/"
 SRC_URI="mirror://pypi/W/${MY_PN}/${MY_PN}-${PV}.zip"
 
 DEPEND="app-arch/unzip

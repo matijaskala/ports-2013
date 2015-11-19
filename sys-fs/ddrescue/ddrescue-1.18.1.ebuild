@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/ddrescue/ddrescue-1.18.1.ebuild,v 1.4 2014/10/18 14:22:27 ago Exp $
+# $Id$
 
 EAPI=5
 
 inherit toolchain-funcs flag-o-matic unpacker
 
 DESCRIPTION="Copy data from one file or block device to another with read-error recovery"
-HOMEPAGE="http://www.gnu.org/software/ddrescue/ddrescue.html"
+HOMEPAGE="https://www.gnu.org/software/ddrescue/ddrescue.html"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.lz"
 
 LICENSE="GPL-2"

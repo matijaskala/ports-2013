@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/notification-daemon/notification-daemon-3.16.1.ebuild,v 1.1 2015/06/09 23:08:38 eva Exp $
+# $Id$
 
 EAPI=5
 
 inherit gnome.org
 
 DESCRIPTION="Notification daemon"
-HOMEPAGE="http://git.gnome.org/browse/notification-daemon/"
+HOMEPAGE="https://git.gnome.org/browse/notification-daemon/"
 
 LICENSE="GPL-2"
 SLOT="0"

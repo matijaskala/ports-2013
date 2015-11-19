@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/skype/skype-4.3.0.37-r5.ebuild,v 1.5 2015/06/20 08:17:08 amynka Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ SRC_URI="http://download.${PN}.com/linux/${P}.tar.bz2"
 LICENSE="skype-4.0.0.7-copyright BSD MIT RSA W3C regexp-UofT no-source-code"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="apulse pax_kernel +pulseaudio selinux"
+IUSE="apulse pax_kernel plasma +pulseaudio selinux"
 REQUIRED_USE="apulse? ( !pulseaudio )"
 
 QA_PREBUILT=opt/bin/${PN}
@@ -33,6 +33,7 @@ RDEPEND="
 	x11-libs/libXScrnSaver[abi_x86_32(-)]
 	x11-libs/libXv[abi_x86_32(-)]
 	apulse? ( media-sound/apulse[abi_x86_32(-)] )
+	plasma? ( dev-libs/sni-qt[abi_x86_32(-)] )
 	pulseaudio? ( media-sound/pulseaudio[abi_x86_32(-)] )
 	selinux? ( sec-policy/selinux-skype )"
 
@@ -101,7 +102,7 @@ pkg_preinst() {
 pkg_postinst() {
 	gnome2_icon_cache_update
 
-	# http://bugs.gentoo.org/360815
+	# https://bugs.gentoo.org/360815
 	elog "For webcam support, see \"LD_PRELOAD\" section of \"README.lib\" document provided by"
 	elog "media-libs/libv4l package and \"README\" document of this package."
 

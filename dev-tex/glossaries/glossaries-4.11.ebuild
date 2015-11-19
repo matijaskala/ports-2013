@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tex/glossaries/glossaries-4.11.ebuild,v 1.1 2014/10/10 04:34:56 radhermit Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit latex-package
 
 DESCRIPTION="Create glossaries and lists of acronyms"
 HOMEPAGE="http://www.ctan.org/pkg/glossaries/"
-SRC_URI="http://dev.gentoo.org/~radhermit/dist/${P}.zip"
+SRC_URI="https://dev.gentoo.org/~radhermit/dist/${P}.zip"
 
 LICENSE="LPPL-1.2"
 SLOT="0"

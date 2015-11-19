@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/libdesktop-agnostic/libdesktop-agnostic-0.3.92-r1.ebuild,v 1.4 2015/01/26 09:39:51 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit python-single-r1 waf-utils vala
 
 DESCRIPTION="A desktop-agnostic library for GLib-based projects"
 HOMEPAGE="https://launchpad.net/libdesktop-agnostic"
-SRC_URI="http://launchpad.net/${PN}/0.4/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/0.4/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

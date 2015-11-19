@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-3.2_p57.ebuild,v 1.5 2014/10/19 20:16:14 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -75,6 +75,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-3.2-ulimit.patch
 	epatch "${FILESDIR}"/${PN}-3.0-trap-fg-signals.patch
 	epatch "${FILESDIR}"/${PN}-3.2-dev-fd-test-as-user.patch #131875
+	epatch "${FILESDIR}"/${PN}-4.2-dev-fd-buffer-overflow.patch #431850
 
 	epatch_user
 }

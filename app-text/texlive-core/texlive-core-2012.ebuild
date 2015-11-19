@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/texlive-core/texlive-core-2012.ebuild,v 1.3 2012/07/30 20:30:04 jer Exp $
+# $Id$
 
 EAPI=3
 
@@ -336,7 +336,7 @@ pkg_postinst() {
 	elog
 	ewarn "If you are migrating from an older TeX distribution"
 	ewarn "Please make sure you have read:"
-	ewarn "http://www.gentoo.org/proj/en/tex/texlive-migration-guide.xml"
+	ewarn "https://www.gentoo.org/proj/en/tex/texlive-migration-guide.xml"
 	ewarn "in order to avoid possible problems"
 	elog
 	elog "TeXLive has been split in various ebuilds. If you are missing a"

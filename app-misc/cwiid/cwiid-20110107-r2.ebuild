@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/cwiid/cwiid-20110107-r2.ebuild,v 1.1 2014/12/27 14:01:42 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ if [[ ${PV} == "9999" ]]; then
 else
 	# git archive --prefix=cwiid-$(date +%Y%m%d)/ \
 	#	--format=tar HEAD | bzip2 > cwiid-$(date +%Y%m%d).tar.bz2
-	SRC_URI="http://dev.gentoo.org/~lxnay/cwiid/cwiid-${PV}.tar.bz2"
+	SRC_URI="https://dev.gentoo.org/~lxnay/cwiid/cwiid-${PV}.tar.bz2"
 	KEYWORDS="~x86 ~amd64"
 fi
 

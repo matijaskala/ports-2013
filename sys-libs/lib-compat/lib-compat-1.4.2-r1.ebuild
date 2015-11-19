@@ -1,11 +1,11 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/lib-compat/lib-compat-1.4.2-r1.ebuild,v 1.2 2014/09/07 10:34:26 ulm Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="Compatibility C++ and libc5 and libc6 libraries for very old programs"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI="mirror://gentoo/${P}.tar.bz2"
 
 LICENSE="GPL-2"

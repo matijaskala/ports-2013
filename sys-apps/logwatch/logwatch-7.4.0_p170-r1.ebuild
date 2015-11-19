@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/logwatch/logwatch-7.4.0_p170-r1.ebuild,v 1.11 2015/04/03 06:15:37 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit eutils
 DESCRIPTION="Analyzes and Reports on system logs"
 HOMEPAGE="http://www.logwatch.org/"
 #SRC_URI="mirror://sourceforge/${PN}/${P}/${P}.tar.gz"
-SRC_URI="http://dev.gentoo.org/~polynomial-c/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~polynomial-c/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/piccolo2d/piccolo2d-1.2.1-r2.ebuild,v 1.3 2010/08/01 14:12:03 hwoarang Exp $
+# $Id$
 
 EAPI=2
 JAVA_PKG_IUSE="doc examples source"
@@ -9,8 +9,8 @@ inherit eutils java-pkg-2 java-ant-2
 
 MY_PN="piccolo"
 DESCRIPTION="A Structured 2D Graphics Framework"
-HOMEPAGE="http://code.google.com/p/piccolo2d/"
-SRC_URI="http://piccolo2d.googlecode.com/files/Piccolo2D.Java-${PV}.zip"
+HOMEPAGE="http://piccolo2d.info/community.html"
+SRC_URI="https://piccolo2d.googlecode.com/files/Piccolo2D.Java-${PV}.zip"
 
 LICENSE="BSD"
 SLOT="0"

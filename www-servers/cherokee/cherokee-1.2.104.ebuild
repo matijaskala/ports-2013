@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-servers/cherokee/cherokee-1.2.104.ebuild,v 1.3 2015/04/08 18:30:55 mgorny Exp $
+# $Id$
 
 EAPI="5"
 
@@ -17,7 +17,7 @@ HOMEPAGE="http://www.cherokee-project.com/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~mips ~ppc ~ppc64 ~x86"
-IUSE="admin ffmpeg debug geoip ipv6 kernel_linux ldap mysql nls pam php rrdtool ssl static static-libs"
+IUSE="admin ffmpeg debug geoip ipv6 kernel_linux ldap libressl mysql nls pam php rrdtool ssl static static-libs"
 
 COMMON_DEPEND="dev-libs/libpcre
 	>=sys-libs/zlib-1.1.4-r1
@@ -28,10 +28,14 @@ COMMON_DEPEND="dev-libs/libpcre
 	nls? ( virtual/libintl )
 	pam? ( virtual/pam )
 	php? ( || (
-		dev-lang/php[fpm]
-		dev-lang/php[cgi]
+		dev-lang/php:*[fpm]
+		dev-lang/php:*[cgi]
 	) )
-	ssl? ( dev-libs/openssl )"
+	ssl? (
+		!libressl? ( dev-libs/openssl:0 )
+		libressl? ( dev-libs/libressl )
+	)
+	"
 DEPEND="${COMMON_DEPEND}
 	nls? ( sys-devel/gettext )"
 RDEPEND="${COMMON_DEPEND}

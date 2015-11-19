@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libRocket/libRocket-1.2.1_p20130110.ebuild,v 1.8 2015/04/08 17:51:55 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit cmake-utils eutils python-r1
 
 DESCRIPTION="A HTML/CSS User Interface library"
 HOMEPAGE="http://librocket.com/"
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"

@@ -1,13 +1,13 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-fonts/mikachan-font-otf/mikachan-font-otf-9.1-r1.ebuild,v 1.9 2010/08/03 16:08:00 ssuominen Exp $
+# $Id$
 
 inherit font
 
 DESCRIPTION="Mikachan Japanese TrueType Collection fonts"
 HOMEPAGE="http://mikachan-font.com/"
 SRC_URI="mirror://gentoo/${P}.tar.bz2
-	http://dev.gentoo.org/~flameeyes/dist/${P}.tar.bz2"
+	https://dev.gentoo.org/~flameeyes/dist/${P}.tar.bz2"
 
 LICENSE="free-noncomm"
 SLOT="0"

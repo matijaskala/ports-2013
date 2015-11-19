@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/Curses/Curses-1.320.0.ebuild,v 1.1 2015/03/18 16:29:37 monsieurp Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,16 +20,20 @@ RDEPEND="${DEPEND}"
 
 SRC_TEST="do"
 
-my_curses_version() {
+my_curses_unicode() {
 	echo ncurses$(use unicode && echo w)
+}
+
+my_curses_version() {
+	echo ncurses$(use unicode && echo w)$(has_version '>sys-libs/ncurses-6' && echo 6 || echo 5)
 }
 
 pkg_setup() {
 	myconf="${myconf} FORMS PANELS MENUS"
 	mydoc=HISTORY
-	export CURSES_LIBTYPE=$(my_curses_version)
-	export CURSES_LDFLAGS=$($(my_curses_version)5-config --libs)
-	export CURSES_CFLAGS=$( $(my_curses_version)5-config --cflags)
+	export CURSES_LIBTYPE=$(my_curses_unicode)
+	export CURSES_LDFLAGS=$($(my_curses_version)-config --libs)
+	export CURSES_CFLAGS=$( $(my_curses_version)-config --cflags)
 }
 
 src_configure(){

@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/exfat-utils/exfat-utils-1.0.1.ebuild,v 1.4 2013/10/25 13:53:28 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit scons-utils toolchain-funcs
 
 DESCRIPTION="exFAT filesystem utilities"
-HOMEPAGE="http://code.google.com/p/exfat/"
-SRC_URI="http://exfat.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/relan/exfat"
+SRC_URI="https://exfat.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

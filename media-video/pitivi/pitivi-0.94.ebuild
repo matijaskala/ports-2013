@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/pitivi/pitivi-0.94.ebuild,v 1.4 2015/05/26 22:38:56 eva Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -15,7 +15,7 @@ HOMEPAGE="http://www.pitivi.org"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="v4l test"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

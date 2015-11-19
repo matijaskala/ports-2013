@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/kiwi/kiwi-1.9.39.2.ebuild,v 1.4 2014/12/31 16:19:39 ago Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -10,7 +10,7 @@ inherit distutils-r1 versionator virtualx
 DESCRIPTION="Kiwi is a pure Python framework and set of enhanced PyGTK widgets"
 HOMEPAGE="http://www.async.com.br/projects/kiwi/
 	https://launchpad.net/kiwi
-	http://pypi.python.org/pypi/kiwi-gtk"
+	https://pypi.python.org/pypi/kiwi-gtk"
 MY_PN="${PN}-gtk"
 MY_P="${MY_PN}-${PV}"
 SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"

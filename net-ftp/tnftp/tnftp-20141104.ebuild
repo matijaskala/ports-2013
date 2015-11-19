@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-ftp/tnftp/tnftp-20141104.ebuild,v 1.1 2014/12/21 20:07:56 swegener Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ HOMEPAGE="ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/"
 
 SLOT="0"
 LICENSE="BSD-4 BSD ISC"
-KEYWORDS="~amd64 ~ppc ~x86 ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="amd64 ppc x86 ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos"
 IUSE="ipv6 socks5"
 
 DEPEND=">=sys-libs/ncurses-5.1

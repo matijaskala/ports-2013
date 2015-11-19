@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/dd-rescue/dd-rescue-1.46.ebuild,v 1.2 2015/01/28 22:34:03 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ SRC_URI="http://www.garloff.de/kurt/linux/ddrescue/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~mips ~ppc ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="amd64 ~arm ~mips ppc ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos"
 IUSE="cpu_flags_x86_avx2 lzo cpu_flags_x86_sse4_2 static xattr"
 
 RDEPEND="lzo? ( dev-libs/lzo )

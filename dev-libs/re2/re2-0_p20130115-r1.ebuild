@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/re2/re2-0_p20130115-r1.ebuild,v 1.1 2013/04/06 23:01:55 floppym Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils multilib multilib-build toolchain-funcs
 
 DESCRIPTION="An efficent, principled regular expression library"
-HOMEPAGE="http://code.google.com/p/re2/"
-SRC_URI="http://re2.googlecode.com/files/${PN}-${PV##*_p}.tgz"
+HOMEPAGE="https://code.google.com/p/re2/"
+SRC_URI="https://re2.googlecode.com/files/${PN}-${PV##*_p}.tgz"
 
 LICENSE="BSD"
 SLOT="0"

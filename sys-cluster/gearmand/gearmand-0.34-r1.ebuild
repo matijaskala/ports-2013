@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/gearmand/gearmand-0.34-r1.ebuild,v 1.4 2014/12/28 16:57:22 titanofold Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit flag-o-matic libtool user autotools-utils
 
 DESCRIPTION="Generic framework to farm out work to other machines"
 HOMEPAGE="http://www.gearman.org/"
-SRC_URI="http://launchpad.net/gearmand/trunk/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/gearmand/trunk/${PV}/+download/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -51,6 +51,9 @@ src_configure() {
 		# preprocessor then.
 		append-cppflags -DDEBUG
 	fi
+
+	# Explicitly enable c++11 mode
+	append-cxxflags -std=c++11
 
 	autotools-utils_src_configure
 }

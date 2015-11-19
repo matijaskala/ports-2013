@@ -1,13 +1,13 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kbd/kbd-2.0.1-r1.ebuild,v 1.1 2014/04/23 16:51:22 polynomial-c Exp $
+# $Id$
 
 EAPI=5
 
 SCM=""
 if [[ ${PV} == "9999" ]] ; then
 	SCM="git-r3"
-	EGIT_REPO_URI="http://git.kernel.org/cgit/linux/kernel/git/legion/${PN}.git"
+	EGIT_REPO_URI="https://git.kernel.org/cgit/linux/kernel/git/legion/${PN}.git"
 	EGIT_BRANCH="master"
 else
 	SRC_URI="ftp://ftp.kernel.org/pub/linux/utils/kbd/${P}.tar.xz"
@@ -45,7 +45,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-2.0.0-tests.patch
+	epatch "${FILESDIR}"/${PN}-2.0.0-tests.patch #485116
 	epatch "${FILESDIR}"/${P}-stdarg.patch #497200
 	epatch "${FILESDIR}"/${P}-big_endian.patch #508436
 	eautoreconf

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/distcc/distcc-3.1-r10.ebuild,v 1.4 2015/03/20 17:04:06 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit eutils fdo-mime flag-o-matic multilib python-single-r1 systemd toolchain
 
 DESCRIPTION="Distribute compilation of C code across several machines on a network"
 HOMEPAGE="http://distcc.org/"
-SRC_URI="http://distcc.googlecode.com/files/${P}.tar.bz2"
+SRC_URI="https://distcc.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -130,12 +130,12 @@ src_install() {
 		newins "doc/example/xinetd" distcc
 	fi
 
-	rm -rf "${D}/etc/default" || die
-	rm -f "${D}/etc/distcc/clients.allow" || die
-	rm -f "${D}/etc/distcc/commands.allow.sh" || die
+	rm -rf "${ED}/etc/default" || die
+	rm -f "${ED}/etc/distcc/clients.allow" || die
+	rm -f "${ED}/etc/distcc/commands.allow.sh" || die
 
 	python_fix_shebang "${ED}"
-	python_optimize "${ED}"/$(python_get_sitedir)
+	python_optimize
 }
 
 pkg_postinst() {
@@ -147,7 +147,7 @@ pkg_postinst() {
 	fi
 	elog
 	elog "Tips on using distcc with Gentoo can be found at"
-	elog "http://www.gentoo.org/doc/en/distcc.xml"
+	elog "https://wiki.gentoo.org/wiki/Distcc"
 	elog
 	elog "How to use pump mode with Gentoo:"
 	elog "# distcc-config --set-hosts \"foo,cpp,lzo bar,cpp,lzo baz,cpp,lzo\""

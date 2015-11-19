@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/ganeti/ganeti-2.10.5-r4.ebuild,v 1.2 2015/04/08 07:30:34 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=(python2_7)
@@ -30,7 +30,7 @@ else
 fi
 
 DESCRIPTION="Ganeti is a virtual server management software tool"
-HOMEPAGE="http://code.google.com/p/ganeti/"
+HOMEPAGE="https://code.google.com/p/ganeti/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -44,7 +44,6 @@ HASKELL_DEPS=">=dev-lang/ghc-6.12:0=
 	dev-haskell/parallel:3=
 	dev-haskell/hslogger:0=
 	dev-haskell/utf8-string:0=
-	dev-haskell/deepseq:0=
 	dev-haskell/attoparsec:0=
 	dev-haskell/crypto:0="
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/propka/propka-3.1_p140511.ebuild,v 1.4 2015/02/11 17:03:13 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Prediction of the pKa values of ionizable groups in proteins and protein-ligand complexes"
 HOMEPAGE="http://propka.ki.ku.dk/"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 SLOT="0"
 LICENSE="all-rights-reserved"

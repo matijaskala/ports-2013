@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-games/etrophy/etrophy-0.5.1.ebuild,v 1.3 2014/02/16 14:10:29 tommy Exp $
+# $Id$
 
 EAPI=3
 
@@ -8,7 +8,7 @@ inherit enlightenment
 
 DESCRIPTION="Library for managing scores, trophies and unlockables,stores them and provides views to display them"
 
-SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+SRC_URI="https://download.enlightenment.org/releases/${P}.tar.bz2"
 LICENSE="BSD-2"
 
 KEYWORDS="~amd64 ~x86"

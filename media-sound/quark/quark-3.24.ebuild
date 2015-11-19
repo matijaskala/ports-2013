@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/quark/quark-3.24.ebuild,v 1.4 2012/10/04 21:40:11 ranger Exp $
+# $Id$
 
 EAPI=4
 # I don't want gnome2 eclass
 inherit autotools eutils fdo-mime gnome2-utils
 
 DESCRIPTION="Quark is the Anti-GUI Music Player with a cool Docklet!"
-HOMEPAGE="http://hsgg.github.com/quark/"
-SRC_URI="http://hsgg.github.com/${PN}/${P}.tar.gz"
+HOMEPAGE="https://hsgg.github.com/quark/"
+SRC_URI="https://hsgg.github.com/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

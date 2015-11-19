@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/gtk2hs-buildtools/gtk2hs-buildtools-0.12.5.1-r1.ebuild,v 1.7 2014/07/25 09:16:42 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -23,6 +23,7 @@ DEPEND="${RDEPEND}
 	dev-haskell/alex
 	>=dev-haskell/cabal-1.8
 	dev-haskell/happy
+	dev-haskell/hashtables
 	dev-haskell/random
 	>=dev-lang/ghc-6.10.4
 "

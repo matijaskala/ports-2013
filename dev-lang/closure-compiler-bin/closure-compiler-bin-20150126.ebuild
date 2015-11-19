@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/closure-compiler-bin/closure-compiler-bin-20150126.ebuild,v 1.1 2015/03/11 02:47:15 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit java-pkg-2
 
 DESCRIPTION="JavaScript optimizing compiler"
 HOMEPAGE="https://github.com/google/closure-compiler"
-SRC_URI="http://dl.google.com/closure-compiler/compiler-${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://dl.google.com/closure-compiler/compiler-${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/jpeg/jpeg-8d-r1.ebuild,v 1.17 2014/06/09 23:22:38 vapier Exp $
+# $Id$
 
 EAPI=5
 inherit eutils libtool toolchain-funcs multilib-minimal
@@ -66,4 +66,6 @@ multilib_src_install_all() {
 		DESTDIR="${D}" prefix="${EPREFIX}"/usr \
 		INSTALL="install -m755" INSTALLDIR="install -d -m755" \
 		install
+	# Remove +x bits from man pages.
+	find "${ED}"/usr/share/man/ -type f -perm /1 -exec chmod a-x {} + || die
 }

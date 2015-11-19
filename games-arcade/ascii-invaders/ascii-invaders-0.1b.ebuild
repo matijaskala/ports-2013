@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-arcade/ascii-invaders/ascii-invaders-0.1b.ebuild,v 1.23 2015/03/26 22:19:03 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit games
 
 DESCRIPTION="Space invaders clone, using ncurses library"
-HOMEPAGE="http://packages.gentoo.org/package/games-arcade/ascii-invaders"
+HOMEPAGE="https://packages.gentoo.org/package/games-arcade/ascii-invaders"
 SRC_URI="mirror://gentoo/invaders${PV}.tgz"
 
 LICENSE="GPL-2"

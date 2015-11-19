@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/scala/scala-2.9.2-r1.ebuild,v 1.2 2015/05/18 21:15:40 monsieurp Exp $
+# $Id$
 
 EAPI="5"
 JAVA_PKG_IUSE="doc examples source"
@@ -19,7 +19,7 @@ SV="$(get_version_component_range 1-2)"
 DESCRIPTION="The Scala Programming Language"
 HOMEPAGE="http://www.scala-lang.org/"
 SRC_URI="!binary? ( ${HOMEPAGE}downloads/distrib/files/${MY_P}.tgz -> ${P}.tar.gz )
-	binary? ( http://dev.gentoo.org/~ali_bush/distfiles/${P}-gentoo-binary.tar.bz2 )"
+	binary? ( https://dev.gentoo.org/~ali_bush/distfiles/${P}-gentoo-binary.tar.bz2 )"
 LICENSE="BSD"
 SLOT="${SV}/${PV}"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~x86-macos"

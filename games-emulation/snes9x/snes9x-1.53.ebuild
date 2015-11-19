@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/snes9x/snes9x-1.53.ebuild,v 1.13 2015/01/17 16:48:55 tupone Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils flag-o-matic multilib gnome2-utils games
 
 DESCRIPTION="Super Nintendo Entertainment System (SNES) emulator"
-HOMEPAGE="http://code.google.com/p/snes9x-gtk/"
-SRC_URI="http://snes9x-gtk.googlecode.com/files/${P}-src.tar.bz2"
+HOMEPAGE="https://code.google.com/p/snes9x-gtk/"
+SRC_URI="https://snes9x-gtk.googlecode.com/files/${P}-src.tar.bz2"
 
 LICENSE="Snes9x GPL-2 GPL-2+ LGPL-2.1 LGPL-2.1+ ISC MIT ZLIB Info-ZIP"
 SLOT="0"

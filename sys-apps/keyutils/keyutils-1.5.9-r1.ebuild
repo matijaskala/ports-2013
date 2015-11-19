@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/keyutils/keyutils-1.5.9-r1.ebuild,v 1.12 2015/01/05 13:45:19 jlec Exp $
+# $Id$
 
 EAPI="5"
 
 inherit multilib eutils toolchain-funcs linux-info multilib-minimal
 
 DESCRIPTION="Linux Key Management Utilities"
-HOMEPAGE="http://people.redhat.com/dhowells/keyutils/"
-SRC_URI="http://people.redhat.com/dhowells/${PN}/${P}.tar.bz2"
+HOMEPAGE="https://people.redhat.com/dhowells/keyutils/"
+SRC_URI="https://people.redhat.com/dhowells/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

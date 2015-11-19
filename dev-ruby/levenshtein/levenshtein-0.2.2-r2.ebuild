@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/levenshtein/levenshtein-0.2.2-r2.ebuild,v 1.5 2015/03/22 16:21:50 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21 ruby22"
@@ -13,7 +13,7 @@ RUBY_FAKEGEM_EXTRADOC="CHANGELOG README"
 inherit multilib ruby-fakegem
 
 DESCRIPTION="Levenshtein distance algorithm"
-HOMEPAGE="http://github.com/mbleigh/mash"
+HOMEPAGE="https://github.com/mbleigh/mash"
 
 LICENSE="GPL-2"
 SLOT="0"

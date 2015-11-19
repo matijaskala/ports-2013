@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/gcap/gcap-0.1.1-r1.ebuild,v 1.1 2014/08/27 16:57:29 axs Exp $
+# $Id$
 
 EAPI=5
 
 inherit perl-module
 
 DESCRIPTION="Command line tool for downloading Youtube closed captions"
-HOMEPAGE="http://code.google.com/p/gcap/"
-SRC_URI="http://gcap.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/gcap/"
+SRC_URI="https://gcap.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

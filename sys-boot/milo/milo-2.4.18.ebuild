@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/milo/milo-2.4.18.ebuild,v 1.10 2011/04/03 19:40:48 mr_bones_ Exp $
+# $Id$
 
 inherit flag-o-matic eutils
 
@@ -27,9 +27,9 @@ ldmilo_patch="20010430"
 
 SRC_URI="http://www.suse.de/~stepan/source/milo-${milo_version}.tar.bz2
 	mirror://kernel/linux/kernel/v2.2/linux-${kernel_version}.tar.bz2
-	http://dev.gentoo.org/~taviso/milo/ldmilo-patched-${ldmilo_patch}
+	https://dev.gentoo.org/~taviso/milo/ldmilo-patched-${ldmilo_patch}
 	http://ftp.namesys.com/pub/reiserfs-for-2.2/linux-2.2.20-reiserfs-3.5.35.diff.bz2
-	http://dev.gentoo.org/~taviso/milo/linload.exe
+	https://dev.gentoo.org/~taviso/milo/linload.exe
 	http://www.ibiblio.org/pub/Linux/docs/HOWTO/MILO-HOWTO"
 
 #

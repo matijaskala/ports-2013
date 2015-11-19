@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-core/lc-core-0.6.70.ebuild,v 1.4 2015/06/04 18:59:50 kensington Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ inherit eutils confutils leechcraft
 DESCRIPTION="Core of LeechCraft, the modular network client"
 
 SLOT="0"
-KEYWORDS=" ~amd64 ~x86"
+KEYWORDS=" amd64 ~x86"
 IUSE="debug doc +sqlite postgres +qwt"
 
 COMMON_DEPEND=">=dev-libs/boost-1.46
@@ -30,7 +30,7 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	dev-qt/qtsvg:4
 	|| (
-		kde-apps/oxygen-icons
+		kde-frameworks/oxygen-icons
 		x11-themes/kfaenza
 	 )"
 

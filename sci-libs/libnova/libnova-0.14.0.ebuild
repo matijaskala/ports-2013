@@ -1,13 +1,13 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/libnova/libnova-0.14.0.ebuild,v 1.1 2011/08/07 00:34:18 bicatali Exp $
+# $Id$
 
 EAPI=4
 inherit eutils
 
 DESCRIPTION="Celestial Mechanics and Astronomical Calculation Library"
 HOMEPAGE="http://libnova.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~bicatali/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~bicatali/${P}.tar.gz"
 # bad tar ball on sf, rebuild it from svn
 #SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 

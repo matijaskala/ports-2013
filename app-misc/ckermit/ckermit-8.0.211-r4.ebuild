@@ -1,8 +1,8 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/ckermit/ckermit-8.0.211-r4.ebuild,v 1.5 2013/06/10 17:42:53 vapier Exp $
+# $Id$
 
-EAPI="4"
+EAPI="5"
 
 inherit versionator eutils flag-o-matic toolchain-funcs
 
@@ -12,14 +12,14 @@ MY_P="cku$( get_version_component_range 3 ${PV} )"
 
 DESCRIPTION="combined serial and network communication software package"
 SRC_URI="ftp://kermit.columbia.edu/kermit/archives/${MY_P}.tar.gz"
-HOMEPAGE="http://www.kermit-project.org/"
+HOMEPAGE="http://www.kermitproject.org/"
 
 LICENSE="Kermit"
 SLOT="0"
 KEYWORDS="amd64 arm ~hppa ppc ppc64 x86"
 IUSE="ncurses"
 
-DEPEND="ncurses? ( >=sys-libs/ncurses-5.2 )"
+DEPEND="ncurses? ( >=sys-libs/ncurses-5.2:= )"
 RDEPEND="${DEPEND}
 	net-dialup/lrzsz"
 
@@ -46,7 +46,7 @@ src_compile() {
 
 	local libs
 	ck_use ncurses -DCK_NCURSES -lncurses
-	append-cppflags -DHAVE_PTMX -D_XOPEN_SOURCE -D_BSD_SOURCE #202840
+	append-cppflags -DHAVE_PTMX -D_XOPEN_SOURCE -D_BSD_SOURCE -D_DEFAULT_SOURCE #202840
 	append-cppflags -DHAVE_CRYPT_H
 	emake \
 		CC="$(tc-getCC)" \

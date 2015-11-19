@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/mupen64plus-audio-sdl/mupen64plus-audio-sdl-2.0-r1.ebuild,v 1.1 2014/08/15 10:18:56 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ MY_P=${PN}-src-${PV}
 inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="A fork of Mupen64 Nintendo 64 emulator, SDL audio plugin"
-HOMEPAGE="http://code.google.com/p/mupen64plus/"
+HOMEPAGE="http://www.mupen64plus.org/"
 SRC_URI="https://github.com/mupen64plus/${PN}/releases/download/${PV}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2 LGPL-2.1"

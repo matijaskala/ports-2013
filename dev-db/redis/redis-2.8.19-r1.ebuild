@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/redis/redis-2.8.19-r1.ebuild,v 1.2 2015/03/25 08:04:11 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -104,7 +104,7 @@ src_install() {
 	systemd_dounit "${FILESDIR}/redis.service"
 	systemd_newtmpfilesd "${FILESDIR}/redis.tmpfiles" redis.conf
 
-	nonfatal dodoc 00-RELEASENOTES BUGS CONTRIBUTING MANIFESTO README
+	dodoc 00-RELEASENOTES BUGS CONTRIBUTING MANIFESTO README
 
 	dobin src/redis-cli
 	dosbin src/redis-benchmark src/redis-server src/redis-check-aof src/redis-check-dump

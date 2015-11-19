@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/sandbox/sandbox-1.6-r2.ebuild,v 1.18 2013/11/14 21:36:59 vapier Exp $
+# $Id$
 
 #
 # don't monkey with this ebuild unless contacting portage devs.
@@ -10,9 +10,9 @@
 inherit eutils flag-o-matic toolchain-funcs multilib unpacker
 
 DESCRIPTION="sandbox'd LD_PRELOAD hack"
-HOMEPAGE="http://www.gentoo.org/proj/en/portage/sandbox/"
+HOMEPAGE="https://www.gentoo.org/proj/en/portage/sandbox/"
 SRC_URI="mirror://gentoo/${P}.tar.lzma
-	http://dev.gentoo.org/~vapier/dist/${P}.tar.lzma"
+	https://dev.gentoo.org/~vapier/dist/${P}.tar.lzma"
 
 LICENSE="GPL-2"
 SLOT="0"

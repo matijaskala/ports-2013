@@ -14,6 +14,7 @@
   open-sourced by HP and UNLV in 2005.</longdescription>
   <upstream>
     <remote-id type="google-code">tesseract-ocr</remote-id>
+    <remote-id type="github">tesseract-ocr/tessdata</remote-id>
   </upstream>
   <use>
     <flag name="webp"> Enable support for webp image format.</flag>
@@ -23,6 +24,9 @@
     <flag name="linguas_jp"> Enable support for Japanese.</flag>
     <flag name="osd"> Enable support orientation and script
     detection.</flag>
-    <flag name="opencl">Enable opencl support for speedup using GPU computation.</flag>
+    <flag name="opencl">Enable opencl support for speedup using GPU
+    computation.</flag>
+    <flag name="training">Install training applications to add support
+    for new languages.</flag>
   </use>
 </pkgmetadata>

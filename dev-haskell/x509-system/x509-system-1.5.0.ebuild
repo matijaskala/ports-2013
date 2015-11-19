@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/x509-system/x509-system-1.5.0.ebuild,v 1.1 2014/12/14 07:12:31 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,12 +10,12 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Handle per-operating-system X.509 accessors and storage"
-HOMEPAGE="http://github.com/vincenthz/hs-certificate"
+HOMEPAGE="https://github.com/vincenthz/hs-certificate"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="dev-haskell/mtl:=[profile?]

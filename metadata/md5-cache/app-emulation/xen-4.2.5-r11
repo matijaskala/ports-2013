@@ -1,4 +1,4 @@
-DEFINED_PHASES=compile configure install postinst postrm preinst prepare prerm setup
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare prerm pretend setup
 DEPEND=|| ( >=dev-lang/python-2.7.5-r2:2.7 ) efi? ( >=sys-devel/binutils-2.22[multitarget] ) !efi? ( >=sys-devel/binutils-2.22[-multitarget] )
 DESCRIPTION=The Xen virtual machine monitor
 EAPI=5
@@ -10,6 +10,6 @@ PDEPEND=~app-emulation/xen-tools-4.2.5
 REQUIRED_USE=flask? ( xsm )
 RESTRICT=test
 SLOT=0
-SRC_URI=http://bits.xensource.com/oss-xen/release/4.2.5/xen-4.2.5.tar.gz http://dev.gentoo.org/~dlan/distfiles/xen-4.2.5-upstream-patches-9.tar.xz http://dev.gentoo.org/~dlan/distfiles/xen-security-patches-3.tar.xz
-_eclasses_=eutils	9fb270e417e0e83d64ca52586c4a79de	flag-o-matic	c9602887773166fe300444712fc7ff98	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	62927b3db3a589b0806255f3a002d5d3	python-any-r1	da352ea9da8eb9bf158d56cca65d6c82	python-utils-r1	096f8247eae93026af13ab88cf4305cd	toolchain-funcs	42408102d713fbad60ca21349865edb4
-_md5_=89d95793e2583dc6a166c9088becc71f
+SRC_URI=http://bits.xensource.com/oss-xen/release/4.2.5/xen-4.2.5.tar.gz https://dev.gentoo.org/~dlan/distfiles/xen-4.2.5-upstream-patches-9.tar.xz https://dev.gentoo.org/~dlan/distfiles/xen-security-patches-3.tar.xz
+_eclasses_=eutils	f813d23e417656bf3917483643165d5a	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	mount-boot	41ed556fa5641393d5323e421c8e5bcf	multilib	3972ca401cf7dbb430df9995f5d8d580	python-any-r1	60a62ae0ee8cd93b4ba99a4c1371eb8b	python-utils-r1	7d52f592fc09a002ea150d69507b5bad	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
+_md5_=6446d5ee84df9a35fa88a4a575760792

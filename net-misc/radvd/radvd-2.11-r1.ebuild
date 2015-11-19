@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/radvd/radvd-2.11-r1.ebuild,v 1.1 2015/06/14 12:09:14 xmw Exp $
+# $Id$
 
 EAPI=4
 
-inherit systemd user eutils readme.gentoo
+inherit autotools systemd user eutils readme.gentoo
 
 DESCRIPTION="Linux IPv6 Router Advertisement Daemon"
 HOMEPAGE="http://v6web.litech.org/radvd/"
@@ -36,6 +36,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.10-musl-libc-fix.patch
+	eautoreconf
 }
 
 src_configure() {

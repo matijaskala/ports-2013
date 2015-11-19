@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/turbocheetah/turbocheetah-1.0-r1.ebuild,v 1.1 2015/01/10 07:46:39 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ MY_PN="TurboCheetah"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="TurboGears plugin to support use of Cheetah templates"
-HOMEPAGE="http://docs.turbogears.org/TurboCheetah http://pypi.python.org/pypi/TurboCheetah"
+HOMEPAGE="http://docs.turbogears.org/TurboCheetah https://pypi.python.org/pypi/TurboCheetah"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

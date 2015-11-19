@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/pam_bioapi/pam_bioapi-0.4.0-r1.ebuild,v 1.2 2012/11/04 06:35:21 vapier Exp $
+# $Id$
 
 inherit eutils
 
 DESCRIPTION="PAM interface to bioapi package"
-HOMEPAGE="http://code.google.com/p/pam-bioapi/"
-SRC_URI="http://pam-bioapi.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/pam-bioapi/"
+SRC_URI="https://pam-bioapi.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

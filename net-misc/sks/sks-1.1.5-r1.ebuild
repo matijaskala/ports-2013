@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/sks/sks-1.1.5-r1.ebuild,v 1.1 2015/02/02 23:18:26 k_f Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,10 +8,10 @@ inherit multilib user readme.gentoo systemd
 
 DESCRIPTION="An OpenPGP keyserver which is decentralized and provides highly reliable synchronization"
 HOMEPAGE="https://bitbucket.org/skskeyserver/sks-keyserver"
-SRC_URI="http://bitbucket.org/skskeyserver/sks-keyserver/downloads/${P}.tgz"
+SRC_URI="https://bitbucket.org/skskeyserver/sks-keyserver/downloads/${P}.tgz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="optimize test"
 DOC_CONTENTS="To get sks running, first build the database,
 start the databse, import atleast one key, then
@@ -59,6 +59,7 @@ src_prepare() {
 		sks_build.sh || die
 
 	epatch "${FILESDIR}/${P}-eddsa.patch"
+	epatch "${FILESDIR}/${P}-disable-warn-error-a.patch"
 }
 
 src_compile() {

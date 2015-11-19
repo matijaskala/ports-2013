@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/semantik/semantik-0.9.4-r1.ebuild,v 1.1 2015/05/09 18:46:08 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ CMAKE_REQUIRED="never"
 NO_WAF_LIBDIR="true"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="xml"
-inherit python-single-r1 kde4-base waf-utils
+inherit eutils python-single-r1 kde4-base waf-utils
 
 DESCRIPTION="Mindmapping-like tool for document generation"
 HOMEPAGE="http://freehackers.org/~tnagy/semantik.html https://code.google.com/p/semantik/"
@@ -31,9 +31,12 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 DOCS=( ChangeLog README TODO )
-PATCHES=( "${FILESDIR}"/${PN}-0.9.0-wscript_ldconfig.patch )
 
 pkg_setup() {
 	python-single-r1_pkg_setup
 	kde4-base_pkg_setup
+}
+
+src_prepare() {
+	epatch "${FILESDIR}/${PN}-0.9.0-wscript_ldconfig.patch"
 }

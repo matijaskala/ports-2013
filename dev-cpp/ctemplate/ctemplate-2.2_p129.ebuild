@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-cpp/ctemplate/ctemplate-2.2_p129.ebuild,v 1.4 2015/03/02 09:21:17 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,8 +11,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit autotools-utils elisp-common python-any-r1
 
 DESCRIPTION="A simple but powerful template language for C++"
-HOMEPAGE="http://code.google.com/p/ctemplate/"
-SRC_URI="http://dev.gentoo.org/~pinkbyte/distfiles/snapshots/${P}.tar.bz2"
+HOMEPAGE="https://github.com/olafvdspek/ctemplate"
+SRC_URI="https://dev.gentoo.org/~pinkbyte/distfiles/snapshots/${P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"

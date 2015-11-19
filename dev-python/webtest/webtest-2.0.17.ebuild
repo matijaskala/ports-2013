@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/webtest/webtest-2.0.17.ebuild,v 1.2 2014/12/27 04:16:42 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,12 +12,12 @@ MY_PN="WebTest"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Helper to test WSGI applications"
-HOMEPAGE="http://pythonpaste.org/webtest/ http://pypi.python.org/pypi/WebTest"
+HOMEPAGE="http://pythonpaste.org/webtest/ https://pypi.python.org/pypi/WebTest"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 IUSE="doc test"
 
 # nose<1.3.0 appears a leftover never updated in requires.txt. tests pass fine with latest

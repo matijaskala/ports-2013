@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/mplayer/mplayer-9999.ebuild,v 1.168 2015/03/15 17:45:19 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -57,17 +57,17 @@ X_RDEPS="
 # Rar: althrought -gpl version is nice, it cant do most functions normal rars can
 #	nemesi? ( net-libs/libnemesi )
 RDEPEND+="
-	sys-libs/ncurses
+	sys-libs/ncurses:0=
 	app-arch/bzip2
 	sys-libs/zlib
-	>=media-video/ffmpeg-2.0:0
+	>=media-video/ffmpeg-2.8:0=[vdpau?]
 	a52? ( media-libs/a52dec )
 	aalib? ( media-libs/aalib )
 	alsa? ( media-libs/alsa-lib )
 	bidi? ( dev-libs/fribidi )
 	bluray? ( >=media-libs/libbluray-0.2.1 )
 	bs2b? ( media-libs/libbs2b )
-	cdio? ( dev-libs/libcdio )
+	cdio? ( dev-libs/libcdio dev-libs/libcdio-paranoia )
 	cdparanoia? ( !cdio? ( media-sound/cdparanoia ) )
 	dga? ( x11-libs/libXxf86dga )
 	directfb? ( dev-libs/DirectFB )
@@ -94,7 +94,7 @@ RDEPEND+="
 	jpeg? ( virtual/jpeg:0 )
 	jpeg2k? ( media-libs/openjpeg:0 )
 	ladspa? ( media-libs/ladspa-sdk )
-	libass? ( >=media-libs/libass-0.9.10:=[enca?] )
+	libass? ( >=media-libs/libass-0.9.10:= )
 	libcaca? ( media-libs/libcaca )
 	libmpeg2? ( media-libs/libmpeg2 )
 	lirc? ( app-misc/lirc )

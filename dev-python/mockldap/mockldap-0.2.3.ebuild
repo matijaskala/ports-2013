@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/mockldap/mockldap-0.2.3.ebuild,v 1.3 2015/03/08 23:53:48 pacho Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 pypy )
 
-inherit distutils-r1
+inherit distutils-r1 eutils
 
 DESCRIPTION="A simple mock implementation of python-ldap"
 HOMEPAGE="https://bitbucket.org/psagers/mockldap/ https://pypi.python.org/pypi/mockldap"
@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="doc"
 
-RDEPEND="~dev-python/funcparserlib-0.3.6[${PYTHON_USEDEP}]
+RDEPEND="
+	~dev-python/funcparserlib-0.3.6[${PYTHON_USEDEP}]
 	dev-python/mock[${PYTHON_USEDEP}]
 	dev-python/python-ldap[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
@@ -41,7 +42,5 @@ python_install_all() {
 }
 
 pkg_postinst() {
-	if ! has_version dev-python/passlib; then
-		elog "Please install dev-python/passlib for hashed password support."
-	fi
+	optfeature "hashed password support" dev-python/passlib
 }

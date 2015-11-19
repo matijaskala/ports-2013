@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/mongodb/mongodb-2.4.14.ebuild,v 1.1 2015/04/30 09:19:44 ultrabug Exp $
+# $Id$
 
 EAPI=4
 SCONS_MIN_VERSION="1.2.0"
@@ -14,7 +14,7 @@ MY_P=${PN}-src-r${PV/_rc/-rc}
 DESCRIPTION="A high-performance, open source, schema-free document-oriented database"
 HOMEPAGE="http://www.mongodb.org"
 SRC_URI="http://downloads.mongodb.org/src/${MY_P}.tar.gz
-	mms-agent? ( http://dev.gentoo.org/~ultrabug/20140409-mms-monitoring-agent.zip )"
+	mms-agent? ( https://dev.gentoo.org/~ultrabug/20140409-mms-monitoring-agent.zip )"
 
 LICENSE="AGPL-3 Apache-2.0"
 SLOT="0"

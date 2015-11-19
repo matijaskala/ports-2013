@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-geosciences/cdat-lite/cdat-lite-6.0_rc2.ebuild,v 1.2 2015/04/08 18:49:15 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -25,7 +25,7 @@ COMMON_DEPEND=">=sci-libs/netcdf-4.0.1
 	>=sci-libs/hdf5-1.6.4
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/wxpython:2.8[${PYTHON_USEDEP}]
-	virtual/pmw[${PYTHON_USEDEP}]"
+	virtual/python-pmw[${PYTHON_USEDEP}]"
 DEPEND="${COMMON_DEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${COMMON_DEPEND}

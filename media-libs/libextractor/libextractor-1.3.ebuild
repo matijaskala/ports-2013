@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libextractor/libextractor-1.3.ebuild,v 1.8 2015/03/31 07:51:31 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils flag-o-matic multilib toolchain-funcs
 
 DESCRIPTION="A library used to extract metadata from files of arbitrary type"
-HOMEPAGE="http://www.gnu.org/software/libextractor/"
+HOMEPAGE="https://www.gnu.org/software/libextractor/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"

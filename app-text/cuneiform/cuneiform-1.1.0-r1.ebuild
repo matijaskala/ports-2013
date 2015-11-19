@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/cuneiform/cuneiform-1.1.0-r1.ebuild,v 1.1 2012/03/19 06:09:27 pva Exp $
+# $Id$
 
 EAPI="4"
 inherit cmake-utils versionator
@@ -10,7 +10,7 @@ MY_P=${PN}-linux-${PV}
 
 DESCRIPTION="An enterprise quality optical character recognition (OCR) engine by Cognitive Technologies"
 HOMEPAGE="https://launchpad.net/cuneiform-linux"
-SRC_URI="http://launchpad.net/${PN}-linux/${PV_MAJ}/${PV_MAJ}/+download/${MY_P}.tar.bz2"
+SRC_URI="https://launchpad.net/${PN}-linux/${PV_MAJ}/${PV_MAJ}/+download/${MY_P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"

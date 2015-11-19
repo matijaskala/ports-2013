@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/kryo/kryo-2.22.ebuild,v 1.1 2013/11/11 22:42:56 radhermit Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,7 +9,7 @@ JAVA_PKG_IUSE="source doc test"
 inherit java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Fast, efficient Java serialization and cloning"
-HOMEPAGE="https://code.google.com/p/kryo/"
+HOMEPAGE="https://github.com/EsotericSoftware/kryo"
 SRC_URI="https://${PN}.googlecode.com/files/${P}.zip"
 
 LICENSE="BSD-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/Fiona/Fiona-9999.ebuild,v 1.7 2015/06/04 11:05:28 jlec Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ inherit distutils-r1 git-r3
 DESCRIPTION="OGR's neat, nimble, no-nonsense API"
 HOMEPAGE="https://pypi.python.org/pypi/Fiona"
 SRC_URI=""
-EGIT_REPO_URI="http://github.com/Toblerity/${PN}.git"
+EGIT_REPO_URI="https://github.com/Toblerity/${PN}.git"
 
 LICENSE="BSD"
 SLOT="0"

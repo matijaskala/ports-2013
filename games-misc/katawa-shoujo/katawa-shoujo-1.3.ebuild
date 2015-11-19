@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-misc/katawa-shoujo/katawa-shoujo-1.3.ebuild,v 1.3 2015/05/27 11:12:18 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ inherit eutils gnome2-utils games
 DESCRIPTION="Bishoujo-style visual novel set in the fictional Yamaku High School for disabled children"
 HOMEPAGE="http://katawa-shoujo.com/"
 SRC_URI="http://dl.katawa-shoujo.com/gold_1.3/%5b4ls%5d_katawa_shoujo_1.3-%5blinux-x86%5d%5bFCF758CC%5d.tar.bz2 -> ${P}.tar.bz2
-	http://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-48.png
-	http://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-256.png"
+	https://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-48.png
+	https://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-256.png"
 
 # bundled renpy includes licenses of all libraries
 LICENSE="CC-BY-NC-ND-3.0

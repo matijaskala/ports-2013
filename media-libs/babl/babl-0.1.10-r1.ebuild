@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/babl/babl-0.1.10-r1.ebuild,v 1.12 2015/01/29 17:27:42 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -32,7 +32,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${P}-clang.patch
 
 	# fix compilation on OSX, can be dropped on next release:
-	# http://mail.gnome.org/archives/commits-list/2012-April/msg02589.html
+	# https://mail.gnome.org/archives/commits-list/2012-April/msg02589.html
 	sed -i -e 's/values\.h/limits.h/' babl/babl-palette.c || die
 	epatch "${FILESDIR}"/${P}-introspection.patch
 	epatch "${FILESDIR}"/${P}-g-ir-compiler-crash.patch

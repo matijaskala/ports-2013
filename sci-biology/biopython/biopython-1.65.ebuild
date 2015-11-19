@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/biopython/biopython-1.65.ebuild,v 1.6 2015/03/28 21:39:49 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 python3_{3,4} pypy )
 inherit distutils-r1 eutils
 
 DESCRIPTION="Python modules for computational molecular biology"
-HOMEPAGE="http://www.biopython.org/ http://pypi.python.org/pypi/biopython/"
+HOMEPAGE="http://www.biopython.org/ https://pypi.python.org/pypi/biopython/"
 SRC_URI="http://www.biopython.org/DIST/${P}.tar.gz"
 
 LICENSE="HPND"

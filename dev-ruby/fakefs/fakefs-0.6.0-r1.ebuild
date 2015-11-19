@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/fakefs/fakefs-0.6.0-r1.ebuild,v 1.1 2015/04/13 18:37:22 graaff Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ RUBY_FAKEGEM_EXTRADOC="CONTRIBUTORS README.markdown"
 inherit ruby-fakegem eutils
 
 DESCRIPTION="A fake filesystem. Use it in your tests"
-HOMEPAGE="http://github.com/defunkt/fakefs"
+HOMEPAGE="https://github.com/defunkt/fakefs"
 
 LICENSE="MIT"
 SLOT="0"

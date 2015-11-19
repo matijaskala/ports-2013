@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/light-themes/light-themes-15.04_p20150410.ebuild,v 1.2 2015/06/21 14:09:45 zlogene Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
@@ -12,12 +12,12 @@ DESCRIPTION="GTK2/GTK3 Ambiance and Radiance themes from Ubuntu"
 HOMEPAGE="https://launchpad.net/light-themes"
 SRC_URI="
 	mirror://ubuntu/pool/main/${MY_PN:0:1}/${MY_PN}/${MY_PN}_${MY_PV}.orig.tar.gz
-	http://dev.gentoo.org/~pacho/${PN}/Gentoo-Buttons-r1.tar.xz
+	https://dev.gentoo.org/~pacho/${PN}/Gentoo-Buttons-r1.tar.xz
 "
 
 LICENSE="CC-BY-SA-3.0 CC-BY-SA-4.0"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="gtk3"
 
 DEPEND="app-arch/xz-utils"

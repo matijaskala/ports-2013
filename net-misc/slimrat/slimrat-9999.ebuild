@@ -1,15 +1,15 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/slimrat/slimrat-9999.ebuild,v 1.3 2011/05/31 10:28:38 scarabeus Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils subversion
 
 DESCRIPTION="Linux Rapidshare downloader"
-HOMEPAGE="http://code.google.com/p/slimrat/"
+HOMEPAGE="https://code.google.com/p/slimrat/"
 SRC_URI=""
-ESVN_REPO_URI="http://${PN}.googlecode.com/svn/trunk/"
+ESVN_REPO_URI="https://${PN}.googlecode.com/svn/trunk/"
 
 LICENSE="MIT"
 SLOT="0"

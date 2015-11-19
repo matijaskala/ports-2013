@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/dleyna-connector-dbus/dleyna-connector-dbus-0.2.0.ebuild,v 1.1 2015/06/09 22:49:03 eva Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="https://01.org/sites/default/files/downloads/dleyna/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="1.0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="

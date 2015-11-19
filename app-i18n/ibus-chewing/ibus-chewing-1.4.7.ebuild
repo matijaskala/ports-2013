@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-chewing/ibus-chewing-1.4.7.ebuild,v 1.1 2014/04/08 06:38:22 naota Exp $
+# $Id$
 
 EAPI=4
 inherit cmake-utils
@@ -8,8 +8,8 @@ inherit cmake-utils
 MY_P=${P}-Source
 
 DESCRIPTION="The Chewing IMEngine for IBus Framework"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

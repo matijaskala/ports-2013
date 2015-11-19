@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/git/git-1.9.5.ebuild,v 1.13 2015/06/13 17:16:03 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -22,7 +22,7 @@ DESCRIPTION="GIT - the stupid content tracker, the revision control system heavi
 HOMEPAGE="http://www.git-scm.com/"
 if [[ ${PV} != *9999 ]]; then
 	SRC_URI_SUFFIX="gz"
-	SRC_URI_GOOG="http://git-core.googlecode.com/files"
+	SRC_URI_GOOG="https://git-core.googlecode.com/files"
 	SRC_URI_KORG="mirror://kernel/software/scm/git"
 	SRC_URI="${SRC_URI_GOOG}/${MY_P}.tar.${SRC_URI_SUFFIX}
 			${SRC_URI_KORG}/${MY_P}.tar.${SRC_URI_SUFFIX}
@@ -41,11 +41,11 @@ IUSE="+blksha1 +curl cgi doc emacs gnome-keyring +gpg gtk highlight +iconv media
 
 # Common to both DEPEND and RDEPEND
 CDEPEND="
-	dev-libs/openssl
+	dev-libs/openssl:0
 	sys-libs/zlib
 	pcre? ( dev-libs/libpcre )
 	perl? ( dev-lang/perl:=[-build(-)] )
-	tk? ( dev-lang/tk )
+	tk? ( dev-lang/tk:0 )
 	curl? (
 		net-misc/curl
 		webdav? ( dev-libs/expat )

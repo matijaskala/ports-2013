@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-dotnet/zeitgeist-sharp/zeitgeist-sharp-0.8.0.0-r1.ebuild,v 1.4 2013/12/08 20:06:30 pacho Exp $
+# $Id$
 
 EAPI=4
 
@@ -14,8 +14,8 @@ DIR_PV2=$(get_version_component_range 1-3)
 DESCRIPTION="Mono DBus API wrapper for Zeitgeist"
 HOMEPAGE="https://launchpad.net/zeitgeist-sharp/"
 SRC_URI="
-	http://launchpad.net/zeitgeist-sharp/${DIR_PV}/${DIR_PV2}/+download/${P}.tar.gz
-	doc? ( http://launchpad.net/zeitgeist-sharp/${DIR_PV}/${DIR_PV2}/+download/${PN}-docs-${DIR_PV2}.tar.gz )"
+	https://launchpad.net/zeitgeist-sharp/${DIR_PV}/${DIR_PV2}/+download/${P}.tar.gz
+	doc? ( https://launchpad.net/zeitgeist-sharp/${DIR_PV}/${DIR_PV2}/+download/${PN}-docs-${DIR_PV2}.tar.gz )"
 
 SLOT="0"
 KEYWORDS="amd64 ~ppc x86 ~amd64-linux ~x86-linux"
@@ -23,8 +23,8 @@ LICENSE="GPL-3"
 IUSE="doc"
 
 RDEPEND="
-	dev-dotnet/dbus-sharp
-	dev-dotnet/dbus-sharp-glib
+	dev-dotnet/dbus-sharp:1.0
+	dev-dotnet/dbus-sharp-glib:1.0
 	dev-dotnet/glib-sharp
 	dev-lang/mono
 	gnome-extra/zeitgeist"

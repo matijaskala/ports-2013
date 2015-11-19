@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/ruby-ldap/ruby-ldap-0.9.17.ebuild,v 1.1 2015/02/16 06:29:14 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21 ruby22"
@@ -19,7 +19,7 @@ KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-macos"
 IUSE="ssl"
 DEPEND=">=net-nds/openldap-2
 	dev-libs/cyrus-sasl
-	ssl? ( dev-libs/openssl )"
+	ssl? ( dev-libs/openssl:0 )"
 RDEPEND="${DEPEND}"
 
 # Current test set is interactive due to certificate generation and requires

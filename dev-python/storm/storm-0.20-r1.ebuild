@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/storm/storm-0.20-r1.ebuild,v 1.2 2015/02/21 09:21:42 idella4 Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,11 +8,11 @@ PYTHON_COMPAT=( python2_7 )
 DISTUTILS_SINGLE_IMPL=1
 PYTHON_REQ_USE="sqlite?"
 
-inherit distutils-r1
+inherit distutils-r1 flag-o-matic
 
 DESCRIPTION="An object-relational mapper for Python developed at Canonical"
-HOMEPAGE="https://storm.canonical.com/ http://pypi.python.org/pypi/storm"
-SRC_URI="http://launchpad.net/storm/trunk/${PV}/+download/${P}.tar.bz2"
+HOMEPAGE="https://storm.canonical.com/ https://pypi.python.org/pypi/storm"
+SRC_URI="https://launchpad.net/storm/trunk/${PV}/+download/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -24,11 +24,10 @@ RDEPEND="mysql? ( dev-python/mysql-python[${PYTHON_USEDEP}] )
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 	test? ( dev-python/fixtures[${PYTHON_USEDEP}] )"
 
-CFLAGS="${CFLAGS} -fno-strict-aliasing"
-
 DOCS="tests/tutorial.txt"
 
 pkg_setup() {
+	append-cflags -fno-strict-aliasing
 	python-single-r1_pkg_setup
 }
 
@@ -61,5 +60,5 @@ python_test() {
 	fi
 
 	# Some tests require a server instance which is absent
-	"${PYTHON}" test --verbose
+	"${PYTHON}" test --verbose || die
 }

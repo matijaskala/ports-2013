@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/trang/trang-20091111-r1.ebuild,v 1.1 2015/04/05 21:01:00 monsieurp Exp $
+# $Id$
 
 EAPI=5
 JAVA_PKG_IUSE="doc source"
@@ -9,7 +9,7 @@ inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="Multi-format schema converter based on RELAX NG"
 HOMEPAGE="http://thaiopensource.com/relaxng/trang.html"
-SRC_URI="http://jing-trang.googlecode.com/files/${P}.zip"
+SRC_URI="https://jing-trang.googlecode.com/files/${P}.zip"
 LICENSE="BSD"
 
 SLOT="0"

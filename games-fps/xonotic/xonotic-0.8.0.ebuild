@@ -1,11 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-fps/xonotic/xonotic-0.8.0.ebuild,v 1.4 2015/05/21 10:46:50 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils check-reqs games
 
-MY_PN="${PN^}"
+# Switch to ^ when we switch to EAPI=6.
+MY_PN="X${PN:1}"
 DESCRIPTION="Fork of Nexuiz, Deathmatch FPS based on DarkPlaces, an advanced Quake 1 engine"
 HOMEPAGE="http://www.xonotic.org/"
 SRC_URI="http://dl.xonotic.org/${P}.zip"

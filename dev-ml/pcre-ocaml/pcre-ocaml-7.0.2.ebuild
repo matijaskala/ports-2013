@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ml/pcre-ocaml/pcre-ocaml-7.0.2.ebuild,v 1.4 2013/08/26 15:07:27 aballier Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ OASIS_BUILD_DOCS=1
 inherit oasis
 
 DESCRIPTION="Perl Compatibility Regular Expressions for O'Caml"
-HOMEPAGE="http://bitbucket.org/mmottl/pcre-ocaml"
-SRC_URI="http://bitbucket.org/mmottl/pcre-ocaml/downloads/${P}.tar.gz"
+HOMEPAGE="https://bitbucket.org/mmottl/pcre-ocaml"
+SRC_URI="https://bitbucket.org/mmottl/pcre-ocaml/downloads/${P}.tar.gz"
 LICENSE="LGPL-2.1-with-linking-exception"
 IUSE="examples"
 SLOT="0/${PV}"

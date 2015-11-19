@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-physics/pythia/pythia-6.4.28.ebuild,v 1.3 2015/04/19 09:42:16 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ HOMEPAGE="http://pythia6.hepforge.org/"
 # svn export http://svn.hepforge.org/pythia6/tags/v_6_4_x/ pythia-6.4.x
 # tar cJf pythia-6.4.x.tar.xz
 SRC_URI="
-	http://dev.gentoo.org/~bicatali/distfiles/${P}.tar.xz
+	https://dev.gentoo.org/~bicatali/distfiles/${P}.tar.xz
 	ftp://root.cern.ch/root/pythia6.tar.gz
 	doc? ( http://home.thep.lu.se/~torbjorn/pythia/lutp${DOC_PV}man2.pdf )
 	examples? ( mirror://gentoo/${PN}-${EX_PV}-examples.tar.bz2 )"

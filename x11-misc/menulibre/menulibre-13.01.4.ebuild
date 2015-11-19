@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/menulibre/menulibre-13.01.4.ebuild,v 1.5 2014/04/26 08:30:46 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit eutils gnome2-utils distutils-r1
 
 DESCRIPTION="An advanced menu editor that provides modern features in a clean, easy-to-use interface"
 HOMEPAGE="http://www.smdavis.us/projects/menulibre/"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${PN}_${PV}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${PN}_${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/hdbc-postgresql/hdbc-postgresql-2.3.2.3.ebuild,v 1.1 2015/04/04 06:45:00 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ MY_PN="HDBC-postgresql"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="PostgreSQL driver for HDBC"
-HOMEPAGE="http://github.com/hdbc/hdbc-postgresql"
+HOMEPAGE="https://github.com/hdbc/hdbc-postgresql"
 SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

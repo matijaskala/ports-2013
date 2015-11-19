@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/replicatorg/replicatorg-40-r1.ebuild,v 1.2 2014/01/08 06:44:31 vapier Exp $
+# $Id$
 
 EAPI="3"
 
@@ -10,7 +10,7 @@ MY_P="${PN}-00${PV}"
 
 DESCRIPTION="ReplicatorG is a simple, open source 3D printing program"
 HOMEPAGE="http://replicat.org/start"
-SRC_URI="http://replicatorg.googlecode.com/files/${MY_P}-linux.tgz"
+SRC_URI="https://replicatorg.googlecode.com/files/${MY_P}-linux.tgz"
 
 SLOT="0"
 LICENSE="GPL-2"
@@ -77,7 +77,7 @@ src_install() {
 
 	insinto /usr/share/replicatorg
 	doins -r \
-   		contributors.txt \
+		contributors.txt \
 		license.txt \
 		readme.txt \
 		todo.txt

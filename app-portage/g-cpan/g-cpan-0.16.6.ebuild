@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/g-cpan/g-cpan-0.16.6.ebuild,v 1.2 2014/12/20 17:31:03 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,12 +10,12 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	SRC_URI=""
 else
-	SRC_URI="http://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.gz"
+	SRC_URI="https://dev.gentoo.org/~dilfridge/distfiles/${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 fi
 
 DESCRIPTION="g-cpan: generate and install CPAN modules using portage"
-HOMEPAGE="http://www.gentoo.org/proj/en/perl/g-cpan.xml"
+HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Perl/g-cpan"
 
 LICENSE="|| ( Artistic GPL-2 )"
 SLOT="0"

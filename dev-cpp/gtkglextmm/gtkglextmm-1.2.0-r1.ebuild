@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-cpp/gtkglextmm/gtkglextmm-1.2.0-r1.ebuild,v 1.8 2014/12/02 22:31:38 pacho Exp $
+# $Id$
 
 EAPI=5
 GCONF_DEBUG="yes"
@@ -8,7 +8,7 @@ GCONF_DEBUG="yes"
 inherit gnome2
 
 DESCRIPTION="C++ bindings for gtkglext"
-HOMEPAGE="http://projects.gnome.org/gtkglext/"
+HOMEPAGE="https://projects.gnome.org/gtkglext/"
 SRC_URI="mirror://sourceforge/gtkglext/${P}.tar.bz2"
 
 KEYWORDS="amd64 ppc x86"

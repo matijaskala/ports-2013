@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-news/blam/blam-1.8.12.ebuild,v 1.1 2013/06/21 09:20:49 pacho Exp $
+# $Id$
 
 EAPI=5
 GCONF_DEBUG="no"
@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="
 	>=dev-lang/mono-2.6.0
-	dev-dotnet/dbus-sharp-glib
+	dev-dotnet/dbus-sharp-glib:1.0
 	>=dev-dotnet/gtk-sharp-2.12.6
 	>=dev-dotnet/glade-sharp-2.12.6
 	>=dev-dotnet/gconf-sharp-2.8.2

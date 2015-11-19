@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/liborigin/liborigin-20110829.ebuild,v 1.4 2015/06/24 10:19:59 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,11 +8,11 @@ inherit eutils multilib qt4-r2
 
 DESCRIPTION="Library for reading OriginLab OPJ project files"
 HOMEPAGE="http://soft.proindependent.com/liborigin2/"
-SRC_URI="http://dev.gentoo.org/~dilfridge/distfiles/${PN}2-${PV}.zip"
+SRC_URI="https://dev.gentoo.org/~dilfridge/distfiles/${PN}2-${PV}.zip"
 
 LICENSE="GPL-3"
 SLOT="2"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 x86 ~amd64-linux ~x86-linux"
 IUSE="doc"
 
 RDEPEND="

@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-misc/vitables/vitables-2.1.ebuild,v 1.3 2012/08/04 19:07:00 bicatali Exp $
+# $Id$
 
 EAPI=4
 
@@ -15,7 +15,7 @@ inherit distutils eutils
 
 DESCRIPTION="A graphical tool for browsing and editing files in both PyTables and HDF5 formats"
 HOMEPAGE="http://vitables.org/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

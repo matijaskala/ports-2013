@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/pptpclient/pptpclient-1.7.2-r3.ebuild,v 1.7 2013/10/25 09:27:10 pinkbyte Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ MY_CMD="pptp-command-20130515"
 DESCRIPTION="Linux client for PPTP"
 HOMEPAGE="http://pptpclient.sourceforge.net/"
 SRC_URI="mirror://sourceforge/pptpclient/${MY_P}.tar.gz
-	http://dev.gentoo.org/~pinkbyte/distfiles/pptpclient/${MY_CMD}.bz2"
+	https://dev.gentoo.org/~pinkbyte/distfiles/pptpclient/${MY_CMD}.bz2"
 
 SLOT="0"
 LICENSE="GPL-2"

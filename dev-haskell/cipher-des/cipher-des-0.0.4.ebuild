@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/cipher-des/cipher-des-0.0.4.ebuild,v 1.1 2013/09/13 05:43:11 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="DES and 3DES primitives"
-HOMEPAGE="http://github.com/vincenthz/hs-crypto-cipher"
+HOMEPAGE="https://github.com/vincenthz/hs-crypto-cipher"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

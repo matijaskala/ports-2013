@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/minitube/minitube-2.3-r1.ebuild,v 1.3 2015/05/10 13:05:17 pesa Exp $
+# $Id$
 
 EAPI=5
 PLOCALES="ar ca ca_ES da de_DE el en es es_AR es_ES fi fi_FI fr he_IL hr hu
@@ -12,7 +12,7 @@ inherit l10n qt4-r2
 DESCRIPTION="Qt4 YouTube Client"
 HOMEPAGE="http://flavio.tordini.org/minitube"
 # As usual, upstream never releases proper tarballs
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libuv/libuv-1.5.0.ebuild,v 1.1 2015/05/18 15:43:15 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,6 +14,7 @@ LICENSE="BSD BSD-2 ISC MIT"
 SLOT="0/1"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
 IUSE="static-libs"
+RESTRICT="test"
 
 DEPEND="sys-devel/libtool
 	virtual/pkgconfig[${MULTILIB_USEDEP}]"

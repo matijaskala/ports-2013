@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/chasingbottoms/chasingbottoms-1.3.0.11-r1.ebuild,v 1.1 2015/04/04 09:11:09 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RESTRICT=test # takes a lot

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-arch/createrepo/createrepo-0.10.3.ebuild,v 1.2 2014/12/25 11:12:05 alonbl Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit python-single-r1 bash-completion-r1 eutils
 DESCRIPTION="Creates a common rpm-metadata repository"
 HOMEPAGE="http://createrepo.baseurl.org/"
 SRC_URI="http://createrepo.baseurl.org/download/${P}.tar.gz
-	http://dev.gentoo.org/~pacho/maintainer-needed/${PN}-0.9.9-head.patch.bz2"
+	https://dev.gentoo.org/~pacho/maintainer-needed/${PN}-0.9.9-head.patch.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

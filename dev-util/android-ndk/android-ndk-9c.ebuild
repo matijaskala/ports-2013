@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/android-ndk/android-ndk-9c.ebuild,v 1.1 2014/01/03 17:14:54 cardoe Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,8 +8,8 @@ MY_P="${PN}-r${PV}"
 
 DESCRIPTION="Open Handset Alliance's Android NDK (Native Dev Kit)"
 HOMEPAGE="http://developer.android.com/sdk/ndk/"
-SRC_URI="x86? ( http://dl.google.com/android/ndk/${MY_P}-linux-x86.tar.bz2 )
-	amd64? ( http://dl.google.com/android/ndk/${MY_P}-linux-x86_64.tar.bz2 )"
+SRC_URI="x86? ( https://dl.google.com/android/ndk/${MY_P}-linux-x86.tar.bz2 )
+	amd64? ( https://dl.google.com/android/ndk/${MY_P}-linux-x86_64.tar.bz2 )"
 
 LICENSE="android"
 SLOT="0"
@@ -25,6 +25,7 @@ S="${WORKDIR}/${MY_P}"
 ANDROID_NDK_DIR="opt/${PN}"
 
 QA_PREBUILT="*"
+PYTHON_UPDATER_IGNORE="1"
 
 src_configure() {
 	:

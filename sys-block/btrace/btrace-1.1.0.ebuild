@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/btrace/btrace-1.1.0.ebuild,v 1.1 2015/02/07 09:28:58 polynomial-c Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils toolchain-funcs flag-o-matic linux-info
 
 DESCRIPTION="btrace can show detailed info about what is happening on a block device io queue"
-HOMEPAGE="http://www.kernel.org/pub/linux/kernel/people/axboe/blktrace/"
+HOMEPAGE="https://www.kernel.org/pub/linux/kernel/people/axboe/blktrace/"
 MY_PN="blktrace"
 MY_P="${MY_PN}-${PV}"
 SRC_URI="http://brick.kernel.dk/snaps/${MY_P}.tar.bz2"

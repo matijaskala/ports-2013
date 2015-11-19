@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/xombrero/xombrero-1.6.3.ebuild,v 1.2 2014/03/01 22:22:26 mgorny Exp $
+# $Id$
 
 EAPI="5"
 
@@ -57,7 +57,7 @@ src_prepare() {
 		-e 's,install: all,install: all\n\tinstall -m 755 -d $(DESTDIR)$(PREFIX)/share/applications,g' \
 		Makefile || die 'sed Makefile failed.'
 	sed -i \
-		-e 's#https://www\.cyphertite\.com#http://www.gentoo.org/#' \
+		-e 's#https://www\.cyphertite\.com#https://www.gentoo.org/#' \
 		-e "s#/usr/local#/usr#" \
 		../xombrero.h || die 'sed ../xombrero.c failed.'
 	sed -i \

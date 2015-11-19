@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/elementary/elementary-1.12.2.ebuild,v 1.4 2015/04/19 09:55:39 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,14 +10,14 @@ if [[ "${PV}" == "9999" ]] ; then
 	EGIT_SUB_PROJECT="core"
 	EGIT_URI_APPEND="${PN}"
 else
-	SRC_URI="http://download.enlightenment.org/rel/libs/${PN}/${MY_P}.tar.bz2"
+	SRC_URI="https://download.enlightenment.org/rel/libs/${PN}/${MY_P}.tar.bz2"
 	EKEY_STATE="snap"
 fi
 
 inherit enlightenment
 
 DESCRIPTION="Basic widget set, based on EFL for mobile touch-screen devices"
-HOMEPAGE="http://trac.enlightenment.org/e/wiki/Elementary"
+HOMEPAGE="https://trac.enlightenment.org/e/wiki/Elementary"
 
 LICENSE="LGPL-2.1"
 KEYWORDS="amd64 arm x86"

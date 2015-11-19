@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-doc/abs-guide/abs-guide-6.6.ebuild,v 1.2 2013/03/11 00:57:27 dirtyepic Exp $
+# $Id$
 
 EAPI="4"
 
@@ -10,8 +10,8 @@ HOMEPAGE="http://www.tldp.org/LDP/abs/html"
 # Upstream likes to update the tarballs without changing the names.
 # - http://bash.deta.in/abs-guide-${PV}.tar.bz2
 # - http://bash.deta.in/abs-guide.pdf <- remember to rename with ${PV}
-SRC_URI="http://dev.gentoo.org/~dirtyepic/dist/${P}.tar.bz2
-	pdf? ( http://dev.gentoo.org/~dirtyepic/dist/${P}.pdf )"
+SRC_URI="https://dev.gentoo.org/~dirtyepic/dist/${P}.tar.bz2
+	pdf? ( https://dev.gentoo.org/~dirtyepic/dist/${P}.pdf )"
 
 LICENSE="OPL"
 IUSE="pdf"

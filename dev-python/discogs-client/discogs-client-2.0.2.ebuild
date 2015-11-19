@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/discogs-client/discogs-client-2.0.2.ebuild,v 1.3 2015/03/08 23:43:42 pacho Exp $
+# $Id$
 
 EAPI=5
 # Not py3 capable due to oauth2 supports py2 pypy only
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 pypy )
 inherit distutils-r1
 
 DESCRIPTION="Official Python API client for Discogs"
-HOMEPAGE="http://github.com/discogs/discogs_client http://pypi.python.org/pypi/discogs-client"
+HOMEPAGE="https://github.com/discogs/discogs_client https://pypi.python.org/pypi/discogs-client"
 #SRC_URI="mirror://pypi/${P:0:1}/${PN}/${P}.tar.gz"
 SRC_URI="https://github.com/discogs/${PN/-/_}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 

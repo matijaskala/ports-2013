@@ -1,18 +1,17 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-ldap/python-ldap-9999.ebuild,v 1.7 2015/04/08 08:05:10 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 # pypy: bug #458558 (wrong linker options due to not respecting CC)
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_IN_SOURCE_BUILD=1
-DISTUTILS_NO_PARALLEL_BUILD=1
 
 inherit distutils-r1 git-2 multilib
 
 DESCRIPTION="Various LDAP-related Python modules"
-HOMEPAGE="http://www.python-ldap.org http://pypi.python.org/pypi/python-ldap"
+HOMEPAGE="http://www.python-ldap.org https://pypi.python.org/pypi/python-ldap"
 EGIT_REPO_URI="https://github.com/xmw/python-ldap.git"
 
 LICENSE="PSF-2"
@@ -29,6 +28,7 @@ RDEPEND=">=net-nds/openldap-2.4
 DEPEND="${RDEPEND}
 	doc? ( dev-python/sphinx[${PYTHON_USEDEP}]
 		dev-python/pyasn1-modules[${PYTHON_USEDEP}] )"
+RDEPEND+=" !dev-python/pyldap"
 
 python_prepare_all() {
 	sed -e "s:^library_dirs =.*:library_dirs = /usr/$(get_libdir) /usr/$(get_libdir)/sasl2:" \

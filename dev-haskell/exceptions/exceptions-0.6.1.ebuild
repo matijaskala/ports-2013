@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/exceptions/exceptions-0.6.1.ebuild,v 1.1 2014/06/18 19:06:18 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,12 +10,12 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Extensible optionally-pure exceptions"
-HOMEPAGE="http://github.com/ekmett/exceptions/"
+HOMEPAGE="https://github.com/ekmett/exceptions/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="alpha amd64 ppc sparc x86"
 IUSE=""
 
 RDEPEND=">=dev-haskell/mtl-2.0:=[profile?] <dev-haskell/mtl-2.3:=[profile?]

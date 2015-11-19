@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/hjsmin/hjsmin-0.1.4.6.ebuild,v 1.1 2014/07/02 10:07:07 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Haskell implementation of a javascript minifier"
-HOMEPAGE="http://github.com/alanz/hjsmin"
+HOMEPAGE="https://github.com/alanz/hjsmin"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

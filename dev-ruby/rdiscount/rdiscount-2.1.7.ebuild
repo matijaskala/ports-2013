@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rdiscount/rdiscount-2.1.7.ebuild,v 1.2 2014/04/05 23:05:50 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ RUBY_FAKEGEM_EXTRADOC="README.markdown"
 inherit multilib ruby-fakegem
 
 DESCRIPTION="Implementation of John Gruber's Markdown"
-HOMEPAGE="http://github.com/rtomayko/rdiscount"
+HOMEPAGE="https://github.com/rtomayko/rdiscount"
 
 LICENSE="MIT"
 SLOT="0"

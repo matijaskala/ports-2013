@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kexec-tools/kexec-tools-9999.ebuild,v 1.13 2015/04/15 08:37:14 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ AUTOTOOLS_AUTORECONF=true
 inherit autotools-utils linux-info systemd git-r3
 
 DESCRIPTION="Load another kernel from the currently executing Linux kernel"
-HOMEPAGE="http://kernel.org/pub/linux/utils/kernel/kexec/"
+HOMEPAGE="https://kernel.org/pub/linux/utils/kernel/kexec/"
 SRC_URI=""
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
 

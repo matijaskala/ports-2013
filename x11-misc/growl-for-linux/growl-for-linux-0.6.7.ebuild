@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/growl-for-linux/growl-for-linux-0.6.7.ebuild,v 1.1 2013/02/16 17:50:15 tomwij Exp $
+# $Id$
 
 EAPI=5
 AUTOTOOLS_AUTORECONF=1
 inherit autotools-utils
 
 DESCRIPTION="Growl Implementation For Linux"
-HOMEPAGE="http://mattn.github.com/growl-for-linux/"
+HOMEPAGE="https://mattn.github.com/growl-for-linux/"
 SRC_URI="mirror://github/mattn/growl-for-linux/${P}.tar.gz"
 
 LICENSE="BSD-2"

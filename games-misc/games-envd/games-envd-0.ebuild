@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-misc/games-envd/games-envd-0.ebuild,v 1.1 2014/03/12 18:47:03 hasufell Exp $
+# $Id$
 
 EAPI=5
 
 inherit multilib games
 
 DESCRIPTION="Environment file for gentoo games"
-HOMEPAGE="http://www.gentoo.org/proj/en/desktop/games/index.xml"
+HOMEPAGE="https://www.gentoo.org/proj/en/desktop/games/index.xml"
 SRC_URI=""
 
 LICENSE="GPL-2"

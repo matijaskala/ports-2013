@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/XML-RSS-Feed/XML-RSS-Feed-2.400.0-r1.ebuild,v 1.1 2014/08/24 01:56:04 axs Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ MODULE_VERSION=2.4
 inherit perl-module
 
 DESCRIPTION="Persistant XML RSS Encapsulation"
-SRC_URI+="  http://dev.gentoo.org/~tove/distfiles/dev-perl/XML-RSS-Feed/XML-RSS-Feed-2.320.0-patch.tar.bz2"
+SRC_URI+="  https://dev.gentoo.org/~tove/distfiles/dev-perl/XML-RSS-Feed/XML-RSS-Feed-2.320.0-patch.tar.bz2"
 
 SLOT="0"
 KEYWORDS="amd64 x86"

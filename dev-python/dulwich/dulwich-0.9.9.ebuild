@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/dulwich/dulwich-0.9.9.ebuild,v 1.3 2015/03/24 08:52:30 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="Pure-Python implementation of the Git file formats and protocols"
-HOMEPAGE="https://github.com/jelmer/dulwich/ http://pypi.python.org/pypi/dulwich"
+HOMEPAGE="https://github.com/jelmer/dulwich/ https://pypi.python.org/pypi/dulwich"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"

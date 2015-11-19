@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/tmux-mem-cpu-load/tmux-mem-cpu-load-2.2.1-r1.ebuild,v 1.1 2015/06/05 14:57:31 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ else
 fi
 
 DESCRIPTION="CPU, RAM memory, and load monitor for use with tmux"
-HOMEPAGE="http://github.com/thewtex/tmux-mem-cpu-load/"
+HOMEPAGE="https://github.com/thewtex/tmux-mem-cpu-load/"
 
 LICENSE="Apache-2.0"
 SLOT="0"

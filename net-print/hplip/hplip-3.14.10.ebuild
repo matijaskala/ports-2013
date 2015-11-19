@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/hplip/hplip-3.14.10.ebuild,v 1.10 2015/04/04 09:35:38 billie Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ inherit eutils fdo-mime linux-info python-single-r1 udev autotools toolchain-fun
 DESCRIPTION="HP Linux Imaging and Printing. Includes printer, scanner, fax drivers and service tools"
 HOMEPAGE="http://hplipopensource.com/hplip-web/index.html"
 SRC_URI="mirror://sourceforge/hplip/${P}.tar.gz
-		http://dev.gentoo.org/~billie/distfiles/${PN}-3.14.10-patches-1.tar.xz"
+		https://dev.gentoo.org/~billie/distfiles/${PN}-3.14.10-patches-1.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -57,7 +57,7 @@ RDEPEND="${COMMON_DEPEND}
 		kernel_linux? ( virtual/udev !<sys-fs/udev-114 )
 		scanner? (
 			>=dev-python/reportlab-2.6[${PYTHON_USEDEP}]
-			>=virtual/python-imaging-1[${PYTHON_USEDEP}]
+			>=dev-python/pillow-1[${PYTHON_USEDEP}]
 			X? ( || (
 				kde? ( kde-misc/skanlite )
 				media-gfx/xsane

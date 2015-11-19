@@ -1,8 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/djvu/djvu-3.5.27.ebuild,v 1.1 2015/03/09 07:57:23 aballier Exp $
+# $Id$
 
 EAPI=5
+
 inherit eutils fdo-mime flag-o-matic
 
 MY_P="${PN}libre-${PV#*_p}"
@@ -54,9 +55,8 @@ src_install() {
 
 pkg_postinst() {
 	fdo-mime_mime_database_update
-	if ! has_version app-text/djview; then
-		elog "For djviewer or browser plugin, emerge app-text/djview."
-	fi
+	has_version app-text/djview || \
+		optfeature "For djviewer or browser plugin" app-text/djview
 }
 
 pkg_postrm() {

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/spl/spl-0.6.3-r1.ebuild,v 1.4 2015/05/15 18:25:55 blueness Exp $
+# $Id$
 
 EAPI="4"
 AUTOTOOLS_AUTORECONF="1"
@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	inherit eutils versionator
 	SRC_URI="https://github.com/zfsonlinux/${PN}/archive/${P}.tar.gz
-		http://dev.gentoo.org/~ryao/dist/${P}-patches-${PR}.tar.xz"
+		https://dev.gentoo.org/~ryao/dist/${P}-patches-${PR}.tar.xz"
 	S="${WORKDIR}/${PN}-${P}"
 	KEYWORDS="~amd64 ~arm ~ppc ~ppc64"
 fi
@@ -79,7 +79,7 @@ src_prepare() {
 	fi
 
 	# splat is unnecessary unless we are debugging
-	use debug || sed -e 's/^subdir-m += splat$//' -i "${S}/module/Makefile.in"
+	use debug || { sed -e 's/^subdir-m += splat$//' -i "${S}/module/Makefile.in" || die ; }
 
 	# Set module revision number
 	[ ${PV} != "9999" ] && \

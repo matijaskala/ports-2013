@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/subsurface/subsurface-4.2.ebuild,v 1.3 2015/06/04 19:00:13 kensington Exp $
+# $Id$
 
 EAPI="5"
 
@@ -32,7 +32,7 @@ IUSE="debug doc usb"
 RDEPEND="dev-db/sqlite:3
 	dev-libs/glib:2
 	>=dev-libs/libdivecomputer-${LIBDC_V}[usb?]
-	dev-libs/libgit2:=
+	dev-libs/libgit2:0/21
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-libs/libzip
@@ -59,7 +59,7 @@ src_unpack() {
 }
 
 rm_trans() {
-	rm "${ED}/usr/share/${PN}/translations/${PN}_${1}.qm" || die "rm ${PN}_${1}.qm failed"
+	rm "${D}usr/share/${PN}/translations/${PN}_${1}.qm" || die "rm ${PN}_${1}.qm failed"
 }
 
 src_install() {
@@ -68,9 +68,9 @@ src_install() {
 	l10n_for_each_disabled_locale_do rm_trans
 
 	# this is not a translation but present (no need to die if not present)
-	rm "${ED}/usr/share/${PN}/translations/${PN}_source.qm"
+	rm "${D}usr/share/${PN}/translations/${PN}_source.qm"
 
 	if ! use doc; then
-		rm -R "${ED}/usr/share/${PN}/Documentation"* || die "rm doc failed"
+		rm -R "${D}usr/share/${PN}"/Documentation/* || die "rm doc failed"
 	fi
 }

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-arcade/berusky/berusky-1.7.1.ebuild,v 1.3 2015/04/19 10:06:38 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils gnome2-utils games
@@ -10,7 +10,7 @@ DESCRIPTION="free logic game based on an ancient puzzle named Sokoban"
 HOMEPAGE="http://anakreon.cz/?q=node/1"
 SRC_URI="http://www.anakreon.cz/download/${P}.tar.gz
 	http://www.anakreon.cz/download/${DATAFILE}.tar.gz
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
 
 LICENSE="GPL-2"
 SLOT="0"

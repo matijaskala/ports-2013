@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/kphotoalbum/kphotoalbum-4.6.2.ebuild,v 1.3 2015/06/05 17:36:28 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -26,10 +26,10 @@ COMMON_DEPEND="
 	media-libs/phonon[qt4]
 	virtual/jpeg:0
 	exif? ( >=media-gfx/exiv2-0.17 )
-	face? ( >=media-libs/libkface-4.7.0 )
+	face? ( >=kde-apps/libkface-4.7.0 )
 	geolocation? ( $(add_kdeapps_dep marble) )
 	kipi? ( $(add_kdeapps_dep libkipi '' 4.9.58) )
-	map? ( >=media-libs/libkgeomap-4.7.0 )
+	map? ( >=kde-apps/libkgeomap-4.7.0:4 )
 	raw? ( $(add_kdeapps_dep libkdcraw '' 4.9.58) )
 "
 DEPEND="${COMMON_DEPEND}
@@ -40,6 +40,7 @@ RDEPEND="${COMMON_DEPEND}
 	kipi? ( >=media-plugins/kipi-plugins-4.7.0 )
 "
 
+PATCHES=( "${FILESDIR}/${P}-bump-min-cmake.patch" )
 DOCS=( ChangeLog README )
 
 src_configure() {

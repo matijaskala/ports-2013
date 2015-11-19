@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/pcmanfm-qt/pcmanfm-qt-0.8.0.ebuild,v 1.1 2014/11/08 17:51:43 jauhien Exp $
+# $Id$
 
 EAPI=5
 
@@ -21,7 +21,6 @@ LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
 CDEPEND=">=dev-libs/glib-2.18:2
-	dev-qt/linguist-tools:5
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -36,6 +35,7 @@ RDEPEND="${CDEPEND}
 	virtual/eject
 	virtual/freedesktop-icon-theme"
 DEPEND="${CDEPEND}
+	dev-qt/linguist-tools:5
 	>=dev-util/intltool-0.40
 	sys-devel/gettext
 	virtual/pkgconfig"

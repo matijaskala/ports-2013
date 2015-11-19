@@ -1,11 +1,11 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-arcade/opentyrian/opentyrian-20110517-r1.ebuild,v 1.1 2011/06/07 13:45:40 chainsaw Exp $
+# $Id$
 
 inherit base games
 
 DESCRIPTION="Open-source port of the DOS game Tyrian, vertical scrolling shooter"
-HOMEPAGE="http://code.google.com/p/opentyrian/"
+HOMEPAGE="https://bitbucket.org/opentyrian/opentyrian/wiki/Home"
 SRC_URI="http://darklomax.org/tyrian/tyrian21.zip
 	 mirror://gentoo/${P}.tar.bz2"
 

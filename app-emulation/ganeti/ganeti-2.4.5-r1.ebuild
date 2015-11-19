@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/ganeti/ganeti-2.4.5-r1.ebuild,v 1.7 2014/07/02 23:57:25 chutzpah Exp $
+# $Id$
 
 EAPI=4
 
@@ -10,8 +10,8 @@ MY_PV="${PV/_rc/~rc}"
 #MY_PV="${PV/_beta/~beta}"
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="Ganeti is a virtual server management software tool"
-HOMEPAGE="http://code.google.com/p/ganeti/"
-SRC_URI="http://ganeti.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/ganeti/"
+SRC_URI="https://ganeti.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

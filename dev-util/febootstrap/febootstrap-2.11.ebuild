@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/febootstrap/febootstrap-2.11.ebuild,v 1.2 2013/03/11 15:47:51 maksbotan Exp $
+# $Id$
 
 EAPI="2"
 
 inherit eutils autotools
 
 DESCRIPTION="Fedora bootstrap scripts"
-HOMEPAGE="http://people.redhat.com/~rjones/febootstrap/"
-SRC_URI="http://people.redhat.com/~rjones/febootstrap/files/${P}.tar.gz"
+HOMEPAGE="https://people.redhat.com/~rjones/febootstrap/"
+SRC_URI="https://people.redhat.com/~rjones/febootstrap/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

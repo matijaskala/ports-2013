@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/strigi/strigi-0.7.8-r1.ebuild,v 1.6 2015/05/28 15:27:22 jmorgan Exp $
+# $Id$
 
 EAPI=5
 
@@ -20,7 +20,7 @@ HOMEPAGE="https://projects.kde.org/projects/kdesupport/strigi/strigi"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="clucene +dbus debug exif fam ffmpeg inotify libav log +qt4 test"
+IUSE="clucene +dbus debug exif fam ffmpeg +inotify libav log +qt4 test"
 
 RDEPEND="
 	app-arch/bzip2
@@ -51,6 +51,7 @@ DEPEND="${RDEPEND}
 PATCHES=(
 	"${FILESDIR}/${P}-gcc-4.8.patch"
 	"${FILESDIR}/${P}-libav10.patch"
+	"${FILESDIR}/${P}-ffmpeg29.patch"
 )
 
 if [[ ${PV} == 9999 ]] ; then

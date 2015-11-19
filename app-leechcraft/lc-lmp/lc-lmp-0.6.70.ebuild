@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-leechcraft/lc-lmp/lc-lmp-0.6.70.ebuild,v 1.2 2014/08/10 17:56:30 slyfox Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,7 +9,7 @@ inherit leechcraft
 DESCRIPTION="LeechCraft Media Player, Phonon-based audio/video player"
 
 SLOT="0"
-KEYWORDS=" ~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="debug +fradj +graffiti +guess +mpris +mp3tunes potorchu"
 
 # depend on gstreamer:0.10 to match current Qt deps

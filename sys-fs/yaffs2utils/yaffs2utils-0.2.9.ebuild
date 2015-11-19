@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/yaffs2utils/yaffs2utils-0.2.9.ebuild,v 1.1 2014/12/31 02:32:37 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils toolchain-funcs
 
 DESCRIPTION="tools for generating YAFFS images"
-HOMEPAGE="http://code.google.com/p/yaffs2utils/"
+HOMEPAGE="https://code.google.com/p/yaffs2utils/"
 SRC_URI="https://yaffs2utils.googlecode.com/files/0.2.9.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"

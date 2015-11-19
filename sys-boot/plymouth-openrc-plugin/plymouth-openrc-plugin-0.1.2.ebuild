@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/plymouth-openrc-plugin/plymouth-openrc-plugin-0.1.2.ebuild,v 1.9 2013/04/29 10:43:43 lxnay Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,7 +9,7 @@ inherit multilib
 DESCRIPTION="Plymouth plugin for OpenRC"
 HOMEPAGE="https://github.com/aidecoe/plymouth-openrc-plugin"
 SRC_URI="
-http://dev.gentoo.org/~aidecoe/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
+https://dev.gentoo.org/~aidecoe/distfiles/${CATEGORY}/${PN}/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"

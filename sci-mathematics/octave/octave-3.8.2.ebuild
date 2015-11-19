@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/octave/octave-3.8.2.ebuild,v 1.8 2015/01/07 11:33:22 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -22,7 +22,7 @@ KEYWORDS="amd64 ~arm hppa ppc ppc64 x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 RDEPEND="
 	app-text/ghostscript-gpl
 	dev-libs/libpcre:3=
-	sys-libs/ncurses:5=
+	sys-libs/ncurses:0=
 	virtual/lapack
 	curl? ( net-misc/curl:0= )
 	fftw? ( sci-libs/fftw:3.0= )
@@ -31,14 +31,14 @@ RDEPEND="
 	gui? ( x11-libs/qscintilla:0= )
 	hdf5? ( sci-libs/hdf5:0= )
 	imagemagick? ( || (
-			media-gfx/graphicsmagick:=[cxx]
-			media-gfx/imagemagick:=[cxx] ) )
-	java? ( >=virtual/jre-1.6.0 )
+			media-gfx/graphicsmagick[cxx]
+			media-gfx/imagemagick[cxx] ) )
+	java? ( >=virtual/jre-1.6.0:* )
 	jit? ( <sys-devel/llvm-3.5:0= )
 	opengl? (
 		media-libs/freetype:2=
 		media-libs/fontconfig:1.0=
-		>=x11-libs/fltk-1.3:1=[opengl]
+		>=x11-libs/fltk-1.3:1=[opengl,xft]
 		x11-libs/gl2ps:0=
 		virtual/glu )
 	postscript? (

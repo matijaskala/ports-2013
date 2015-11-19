@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/gtypist/gtypist-2.9.2.ebuild,v 1.1 2013/01/13 14:58:18 ago Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils elisp-common
 
 DESCRIPTION="Universal typing tutor"
-HOMEPAGE="http://www.gnu.org/software/gtypist/"
+HOMEPAGE="https://www.gnu.org/software/gtypist/"
 SRC_URI="mirror://gnu/gtypist/${P}.tar.xz
 	http://colemak.com/pub/learn/colemak.typ"
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/bibletime/bibletime-2.10.1.ebuild,v 1.3 2015/03/20 20:52:19 creffett Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -21,7 +21,6 @@ RDEPEND="
 	>=app-text/sword-1.6.0
 	>=dev-cpp/clucene-2.3.3.4
 	qt5? (
-		dev-qt/linguist-tools:5
 		dev-qt/qtcore:5
 		dev-qt/qtdbus:5
 		dev-qt/qtprintsupport:5
@@ -42,6 +41,7 @@ DEPEND="
 	net-misc/curl
 	sys-libs/zlib
 	qt5? (
+		dev-qt/linguist-tools:5
 		dev-qt/qttest:5
 	)
 	!qt5? (

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/r10k/r10k-1.5.1.ebuild,v 1.1 2015/05/24 22:58:40 robbat2 Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
 inherit ruby-fakegem
 
 DESCRIPTION="Puppet environment and module deployment"
-HOMEPAGE="http://github.com/adrienthebo/r10k"
+HOMEPAGE="https://github.com/adrienthebo/r10k"
 
 LICENSE="Apache-2.0"
 SLOT="0"

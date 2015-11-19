@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/indent/indent-2.2.11-r1.ebuild,v 1.12 2014/01/06 20:44:37 jer Exp $
+# $Id$
 
-EAPI=4
+EAPI=5
 
 inherit autotools eutils
 
 DESCRIPTION="Indent program source files"
-HOMEPAGE="http://indent.isidore-it.eu/beautify.html http://www.gnu.org/software/indent/"
+HOMEPAGE="http://indent.isidore-it.eu/beautify.html https://www.gnu.org/software/indent/"
 SRC_URI="http://${PN}.isidore-it.eu/${P}.tar.gz"
 
 LICENSE="GPL-3"

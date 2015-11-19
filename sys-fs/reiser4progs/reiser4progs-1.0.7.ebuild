@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/reiser4progs/reiser4progs-1.0.7.ebuild,v 1.9 2014/03/13 22:37:54 vapier Exp $
+# $Id$
 
 inherit multilib eutils toolchain-funcs
 
 MY_P=${PN}-${PV/_p/-}
 DESCRIPTION="reiser4progs: mkfs, fsck, etc..."
-HOMEPAGE="http://www.kernel.org/pub/linux/utils/fs/reiser4/reiser4progs/"
+HOMEPAGE="https://www.kernel.org/pub/linux/utils/fs/reiser4/reiser4progs/"
 SRC_URI="mirror://kernel/linux/utils/fs/reiser4/reiser4progs/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"

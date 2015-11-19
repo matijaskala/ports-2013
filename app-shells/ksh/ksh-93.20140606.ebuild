@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/ksh/ksh-93.20140606.ebuild,v 1.1 2014/06/25 04:12:43 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ HOMEPAGE="http://www.kornshell.com/"
 
 KSH_PV=${PV:3:4}-${PV:7:2}-${PV:9:2}
 
-SRC_URI="http://dev.gentoo.org/~floppym/distfiles/INIT.${KSH_PV}.tgz
-	http://dev.gentoo.org/~floppym/distfiles/ast-base.${KSH_PV}.tgz"
+SRC_URI="https://dev.gentoo.org/~floppym/distfiles/INIT.${KSH_PV}.tgz
+	https://dev.gentoo.org/~floppym/distfiles/ast-base.${KSH_PV}.tgz"
 
 LICENSE="CPL-1.0 EPL-1.0"
 SLOT="0"

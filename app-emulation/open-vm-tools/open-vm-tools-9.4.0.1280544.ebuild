@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/open-vm-tools/open-vm-tools-9.4.0.1280544.ebuild,v 1.2 2015/06/03 16:13:58 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -60,7 +60,7 @@ src_prepare() {
 }
 
 src_configure() {
-	# http://bugs.gentoo.org/402279
+	# https://bugs.gentoo.org/402279
 	if has_version '>=sys-process/procps-3.3.2'; then
 		export CUSTOM_PROCPS_NAME=procps
 		export CUSTOM_PROCPS_LIBS="$($(tc-getPKG_CONFIG) --libs libprocps)"

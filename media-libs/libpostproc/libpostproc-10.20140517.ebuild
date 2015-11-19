@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libpostproc/libpostproc-10.20140517.ebuild,v 1.2 2015/01/30 17:00:05 mgorny Exp $
+# $Id$
 
 EAPI="4"
 
@@ -19,7 +19,7 @@ if [ "${PV#9999}" != "${PV}" ] ; then
 elif [ "${PV%_p*}" != "${PV}" ] ; then # Snapshot
 	SRC_URI="mirror://gentoo/${P}.tar.xz"
 else # Release
-	SRC_URI="http://dev.gentoo.org/~lu_zero/distfiles/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~lu_zero/distfiles/${P}.tar.xz"
 fi
 
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-3.1_p23.ebuild,v 1.6 2014/10/19 20:31:56 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -73,6 +73,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-3.0-trap-fg-signals.patch
 	epatch "${FILESDIR}"/${PN}-3.1-fix-dash-login-shell.patch #118257
 	epatch "${FILESDIR}"/${PN}-3.1-dev-fd-test-as-user.patch #131875
+	epatch "${FILESDIR}"/${PN}-3.1-dev-fd-buffer-overflow.patch #431850
 
 	epatch_user
 }

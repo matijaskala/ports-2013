@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-strategy/widelands/widelands-0.17.ebuild,v 1.10 2015/03/28 21:50:41 tupone Exp $
+# $Id$
 
 EAPI=5
 inherit eutils versionator toolchain-funcs flag-o-matic cmake-utils games
@@ -9,7 +9,7 @@ MY_PV=build$(get_version_component_range 2)
 MY_P=${PN}-${MY_PV}-src
 DESCRIPTION="A game similar to Settlers 2"
 HOMEPAGE="http://www.widelands.org/"
-SRC_URI="http://launchpad.net/widelands/${MY_PV}/build-$(get_version_component_range 2)/+download/${MY_P}.tar.bz2"
+SRC_URI="https://launchpad.net/widelands/${MY_PV}/build-$(get_version_component_range 2)/+download/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

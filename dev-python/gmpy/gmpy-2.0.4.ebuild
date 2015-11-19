@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/gmpy/gmpy-2.0.4.ebuild,v 1.4 2015/05/17 07:44:06 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,18 +12,18 @@ MY_PN="${PN}2"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Python bindings for GMP, MPC, MPFR and MPIR libraries"
-HOMEPAGE="http://code.google.com/p/gmpy/"
+HOMEPAGE="https://github.com/aleaxit/gmpy"
 SRC_URI="mirror://pypi/${PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="LGPL-2.1"
 SLOT="2"
-KEYWORDS="~amd64 ~arm ~ia64 ppc ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="amd64 ~arm ia64 ppc ppc64 x86 ~amd64-linux ~x86-linux ~ppc-macos"
 IUSE="doc mpir"
 
 RDEPEND="
 	>=dev-libs/mpc-1.0.2
 	>=dev-libs/mpfr-3.1.2
-	!mpir? ( dev-libs/gmp )
+	!mpir? ( dev-libs/gmp:0= )
 	mpir? ( sci-libs/mpir )"
 DEPEND="${RDEPEND}
 	app-arch/unzip

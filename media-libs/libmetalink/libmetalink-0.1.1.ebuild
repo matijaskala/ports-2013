@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libmetalink/libmetalink-0.1.1.ebuild,v 1.7 2013/05/26 15:57:16 ago Exp $
+# $Id$
 
 EAPI="5"
 
 DESCRIPTION="Library for handling Metalink files"
-HOMEPAGE="http://launchpad.net/libmetalink"
+HOMEPAGE="https://launchpad.net/libmetalink"
 SRC_URI="https://launchpad.net/${PN}/trunk/${P}/+download/${P}.tar.bz2"
 
 LICENSE="MIT"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/sure/sure-1.2.5-r1.ebuild,v 1.4 2015/03/09 00:05:04 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 python3_{3,4} pypy )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 python3_{3,4} pypy )
 inherit distutils-r1 vcs-snapshot
 
 DESCRIPTION="utility belt for automated testing in python for python"
-HOMEPAGE="http://github.com/gabrielfalcao/sure"
+HOMEPAGE="https://github.com/gabrielfalcao/sure"
 SRC_URI="https://github.com/gabrielfalcao/${PN}/archive/${PV}.tar.gz -> ${P}-r1.tar.gz"
 
 S="${WORKDIR}/${P}-r1"

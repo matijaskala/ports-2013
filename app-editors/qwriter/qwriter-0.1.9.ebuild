@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/qwriter/qwriter-0.1.9.ebuild,v 1.6 2013/03/02 19:21:50 hwoarang Exp $
+# $Id$
 
 EAPI="2"
 LANGS="ru"
@@ -12,7 +12,7 @@ MY_P="${P}-src"
 DESCRIPTION="Advanced text editor with syntax highlighting"
 HOMEPAGE="http://qt-apps.org/content/show.php/QWriter?content=106377"
 #upstream failed to provide a sane url
-SRC_URI="http://qwriter.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="https://qwriter.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

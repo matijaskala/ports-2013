@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/db/db-3.2.9_p2.ebuild,v 1.14 2014/01/18 04:14:32 vapier Exp $
+# $Id$
 
 inherit eutils db multilib
 
@@ -33,12 +33,12 @@ IUSE="doc"
 DEPEND="${RDEPEND}
 	=sys-libs/db-1.85*"
 
-# This doesn't build without exceptions
-export CXXFLAGS="${CXXFLAGS/-fno-exceptions/-fexceptions}"
-
 S="${WORKDIR}/${MY_P}"
 
 src_unpack() {
+	# This doesn't build without exceptions
+	export CXXFLAGS="${CXXFLAGS/-fno-exceptions/-fexceptions}"
+
 	unpack "${MY_P}".tar.gz
 
 	chmod -R ug+w *

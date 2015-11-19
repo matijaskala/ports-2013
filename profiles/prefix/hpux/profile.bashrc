@@ -1,6 +1,6 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/prefix/hpux/profile.bashrc,v 1.5 2010/12/23 15:15:34 haubi Exp $
+# $Id$
 
 # /bin/sh is korn shell, incompatible with bash used by makefiles later.
 # This is a problem with recent libtool detecting non-bashism 'print' fex.
@@ -104,7 +104,7 @@ prefix_hpux-pre_pkg_postinst() {
 }
 
 # These are because of
-# http://archives.gentoo.org/gentoo-dev/msg_529a0806ed2cf841a467940a57e2d588.xml
+# https://archives.gentoo.org/gentoo-dev/msg_529a0806ed2cf841a467940a57e2d588.xml
 # The profile-* ones are meant to be used in etc/portage/profile.bashrc by user
 # until there is the registration mechanism.
 profile-post_pkg_preinst() { prefix_hpux-post_pkg_preinst ; }

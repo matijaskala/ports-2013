@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-4.1_p17.ebuild,v 1.4 2014/10/08 06:21:18 armin76 Exp $
+# $Id$
 
 EAPI="4"
 
@@ -68,6 +68,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-4.1-fbsd-eaccess.patch #303411
 	sed -i '1i#define NEED_FPURGE_DECL' execute_cmd.c # needs fpurge() decl
 	epatch "${FILESDIR}"/${PN}-4.1-parallel-build.patch
+	epatch "${FILESDIR}"/${PN}-4.2-dev-fd-buffer-overflow.patch #431850
 
 	epatch_user
 }

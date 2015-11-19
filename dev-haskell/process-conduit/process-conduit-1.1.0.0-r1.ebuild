@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/process-conduit/process-conduit-1.1.0.0-r1.ebuild,v 1.1 2014/07/02 12:23:07 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit base haskell-cabal
 
 DESCRIPTION="Conduits for processes"
-HOMEPAGE="http://github.com/tanakh/process-conduit"
+HOMEPAGE="https://github.com/tanakh/process-conduit"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

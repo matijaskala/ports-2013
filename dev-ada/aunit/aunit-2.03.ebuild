@@ -1,13 +1,13 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ada/aunit/aunit-2.03.ebuild,v 1.2 2009/03/24 14:34:23 george Exp $
+# $Id$
 
 inherit gnat
 
 IUSE=""
 
 DESCRIPTION="Aunit, Ada unit testing framework"
-SRC_URI="http://dev.gentoo.org/~george/src/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~george/src/${P}.tar.bz2"
 HOMEPAGE="https://libre.adacore.com/aunit/"
 
 LICENSE="GPL-2"

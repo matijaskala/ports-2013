@@ -1,9 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/mp3fs/mp3fs-0.32.ebuild,v 1.4 2014/10/13 21:31:25 tamiko Exp $
+# $Id$
 
 DESCRIPTION="a read-only FUSE filesystem which transcodes FLAC audio files to MP3 when read"
-HOMEPAGE="http://khenriks.github.com/mp3fs/"
+HOMEPAGE="https://khenriks.github.com/mp3fs/"
 SRC_URI="mirror://github/khenriks/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"

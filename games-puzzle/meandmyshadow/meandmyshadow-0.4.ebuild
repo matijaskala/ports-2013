@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-puzzle/meandmyshadow/meandmyshadow-0.4.ebuild,v 1.7 2015/04/23 21:38:04 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils gnome2-utils games
@@ -19,7 +19,7 @@ DEPEND="media-libs/libsdl[sound,video]
 	media-libs/sdl-ttf
 	media-libs/sdl-mixer[vorbis]
 	media-libs/sdl-image[png]
-	dev-libs/openssl
+	dev-libs/openssl:0=
 	net-misc/curl
 	app-arch/libarchive
 	x11-libs/libX11

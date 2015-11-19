@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/tvheadend/tvheadend-9999.ebuild,v 1.2 2014/06/22 20:05:06 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ KEYWORDS=""
 
 IUSE="avahi ccache +dvb +dvbscan ffmpeg imagecache inotify uriparser xmltv zlib"
 
-DEPEND="dev-libs/openssl
+DEPEND="dev-libs/openssl:0=
 	avahi? ( net-dns/avahi )
 	ccache? ( dev-util/ccache )
 	dvb? ( virtual/linuxtv-dvb-headers )

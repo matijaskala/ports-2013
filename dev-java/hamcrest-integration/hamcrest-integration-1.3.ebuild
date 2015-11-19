@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/hamcrest-integration/hamcrest-integration-1.3.ebuild,v 1.2 2015/05/19 09:47:38 monsieurp Exp $
+# $Id$
 
 EAPI="5"
 
@@ -13,8 +13,8 @@ MY_P="${MY_PN}-${PV}"
 S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="Integration library of hamcrest"
-HOMEPAGE="http://code.google.com/p/${MY_PN}/"
-SRC_URI="http://${MY_PN}.googlecode.com/files/${MY_P}.tgz"
+HOMEPAGE="https://github.com/hamcrest"
+SRC_URI="https://${MY_PN}.googlecode.com/files/${MY_P}.tgz"
 
 LICENSE="BSD-2"
 SLOT="${PV}"

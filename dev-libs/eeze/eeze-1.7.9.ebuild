@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/eeze/eeze-1.7.9.ebuild,v 1.2 2014/07/09 03:52:10 patrick Exp $
+# $Id$
 
 EAPI=5
 
 inherit enlightenment
 
 DESCRIPTION="library to simplify the use of devices"
-HOMEPAGE="http://trac.enlightenment.org/e/wiki/Eeze"
-SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+HOMEPAGE="https://trac.enlightenment.org/e/wiki/Eeze"
+SRC_URI="https://download.enlightenment.org/releases/${P}.tar.bz2"
 
 LICENSE="BSD-2"
 KEYWORDS="~amd64 ~arm ~x86"

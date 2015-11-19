@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/lxqt-base/lxqt-powermanagement/lxqt-powermanagement-0.9.0.ebuild,v 1.4 2015/04/15 06:48:40 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -20,7 +20,6 @@ LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
 CDEPEND="
-	dev-qt/linguist-tools:5
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -33,6 +32,7 @@ CDEPEND="
 	x11-libs/libX11
 	x11-libs/libxcb:="
 DEPEND="${CDEPEND}
+	dev-qt/linguist-tools:5
 	virtual/pkgconfig"
 RDEPEND="${CDEPEND}
 	|| ( sys-power/upower sys-power/upower-pm-utils )"

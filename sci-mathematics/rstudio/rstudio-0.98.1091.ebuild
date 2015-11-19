@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/rstudio/rstudio-0.98.1091.ebuild,v 1.2 2015/02/28 04:39:43 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -31,9 +31,9 @@ SRC_URI="https://github.com/rstudio/rstudio/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	https://s3.amazonaws.com/rstudio-buildtools/selenium-server-standalone-${SELENIUMVER}.jar
 	https://s3.amazonaws.com/rstudio-buildtools/chromedriver-linux
 	https://s3.amazonaws.com/rstudio-dictionaries/core-dictionaries.zip
-	http://dev.gentoo.org/~gienah/distfiles/packrat-${PACKRAT_VER}.tar.gz
-	http://dev.gentoo.org/~gienah/distfiles/rmarkdown-${RMARKDOWN_VER}.tar.gz
-	http://dev.gentoo.org/~gienah/distfiles/shinyapps-${SHINYAPPS_VER}.tar.gz"
+	https://dev.gentoo.org/~gienah/distfiles/packrat-${PACKRAT_VER}.tar.gz
+	https://dev.gentoo.org/~gienah/distfiles/rmarkdown-${RMARKDOWN_VER}.tar.gz
+	https://dev.gentoo.org/~gienah/distfiles/shinyapps-${SHINYAPPS_VER}.tar.gz"
 
 LICENSE="AGPL-3"
 SLOT="0"

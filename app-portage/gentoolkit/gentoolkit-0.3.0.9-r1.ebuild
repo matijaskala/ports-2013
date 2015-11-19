@@ -1,16 +1,16 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/gentoolkit/gentoolkit-0.3.0.9-r1.ebuild,v 1.7 2015/05/27 15:23:25 floppym Exp $
+# $Id$
 
 EAPI="5"
 
 PYTHON_COMPAT=(python{2_7,3_3} pypy)
-PYTHON_REQ_USE="xml(+)"
+PYTHON_REQ_USE="xml(+),threads(+)"
 
 inherit distutils-r1
 
 DESCRIPTION="Collection of administration scripts for Gentoo"
-HOMEPAGE="http://www.gentoo.org/proj/en/portage/tools/index.xml"
+HOMEPAGE="https://www.gentoo.org/proj/en/portage/tools/index.xml"
 SRC_URI="mirror://gentoo/${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -71,7 +71,7 @@ pkg_postinst() {
 	if [[ ! ${REPLACING_VERSIONS} ]]; then
 		elog
 		elog "For further information on gentoolkit, please read the gentoolkit"
-		elog "guide: http://www.gentoo.org/doc/en/gentoolkit.xml"
+		elog "guide: https://www.gentoo.org/doc/en/gentoolkit.xml"
 		elog
 		elog "Another alternative to equery is app-portage/portage-utils"
 		elog

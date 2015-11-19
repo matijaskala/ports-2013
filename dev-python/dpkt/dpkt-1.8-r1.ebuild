@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/dpkt/dpkt-1.8-r1.ebuild,v 1.3 2015/03/08 23:45:48 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="Fast, simple packet creation / parsing, with definitions for the basic TCP/IP protocols"
-HOMEPAGE="http://code.google.com/p/dpkt/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/kbandla/dpkt"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

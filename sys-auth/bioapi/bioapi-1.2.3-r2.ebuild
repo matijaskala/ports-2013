@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/bioapi/bioapi-1.2.3-r2.ebuild,v 1.6 2012/05/24 05:03:44 vapier Exp $
+# $Id$
 
 EAPI="2"
 
 inherit eutils multilib user
 
 DESCRIPTION="Framework for biometric-based authentication"
-HOMEPAGE="http://code.google.com/p/bioapi-linux/"
-SRC_URI="http://bioapi-linux.googlecode.com/files/${PN}_${PV}.tar.gz"
+HOMEPAGE="https://github.com/mr-c/bioapi-linux"
+SRC_URI="https://bioapi-linux.googlecode.com/files/${PN}_${PV}.tar.gz"
 
 LICENSE="bioapi"
 SLOT="0"

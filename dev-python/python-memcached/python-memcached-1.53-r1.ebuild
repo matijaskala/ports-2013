@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-memcached/python-memcached-1.53-r1.ebuild,v 1.7 2015/04/08 08:04:56 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 pypy )
 inherit distutils-r1
 
 DESCRIPTION="Pure python memcached client"
-HOMEPAGE="http://www.tummy.com/Community/software/python-memcached/ http://pypi.python.org/pypi/python-memcached"
+HOMEPAGE="http://www.tummy.com/Community/software/python-memcached/ https://pypi.python.org/pypi/python-memcached"
 SRC_URI="ftp://ftp.tummy.com/pub/python-memcached/old-releases/${P}.tar.gz"
 
 LICENSE="OSL-2.0"

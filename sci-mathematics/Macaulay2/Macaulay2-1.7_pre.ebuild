@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/Macaulay2/Macaulay2-1.7_pre.ebuild,v 1.5 2015/04/21 17:40:45 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ DESCRIPTION="Research tool for commutative algebra and algebraic geometry"
 HOMEPAGE="http://www.math.uiuc.edu/Macaulay2/"
 BASE_URI="http://www.math.uiuc.edu/Macaulay2/Downloads/OtherSourceCode/trunk"
 SRC_URI="
-	http://dev.gentoo.org/~tomka/files/${P}.tar.bz2
+	https://dev.gentoo.org/~tomka/files/${P}.tar.bz2
 	${BASE_URI}/${FACTORY}.tar.gz
 	${BASE_URI}/${FACTORY_GFTABLES}.tar.gz
 	${BASE_URI}/gtest-1.7.0.tar.gz"

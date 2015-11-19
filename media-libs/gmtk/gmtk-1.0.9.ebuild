@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gmtk/gmtk-1.0.9.ebuild,v 1.3 2015/06/09 07:15:05 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
 
 DESCRIPTION="GTK+ widget and function libraries for gnome-mplayer"
-HOMEPAGE="http://code.google.com/p/gmtk/"
-SRC_URI="http://${PN}.googlecode.com/svn/packages/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/gmtk/"
+SRC_URI="https://${PN}.googlecode.com/svn/packages/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

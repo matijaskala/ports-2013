@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/boost/boost-1.57.0.ebuild,v 1.4 2015/04/08 17:51:55 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -75,10 +75,19 @@ create_user-config.jam() {
 	fi
 
 	if python_bindings_needed; then
+		# boost expects libpython$(pyver) and doesn't allow overrides
+		# and the build system is so creepy that it's easier just to
+		# provide a symlink (linker's going to use SONAME anyway)
+		# TODO: replace it with proper override one day
+		ln -f -s "$(python_get_library_path)" "${T}/lib${EPYTHON}$(get_libname)" || die
+
 		if tc-is-cross-compiler; then
 			python_configuration="using python : ${EPYTHON#python} : : ${SYSROOT:-${EROOT}}/usr/include/${EPYTHON} : ${SYSROOT:-${EROOT}}/usr/$(get_libdir) ;"
 		else
-			python_configuration="using python : : ${PYTHON} ;"
+			# note: we need to provide version explicitly because of
+			# a bug in the build system:
+			# https://github.com/boostorg/build/pull/104
+			python_configuration="using python : ${EPYTHON#python} : ${PYTHON} : $(python_get_includedir) : ${T} ;"
 		fi
 	fi
 

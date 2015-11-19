@@ -1,15 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/asciidoc/asciidoc-9999.ebuild,v 1.17 2015/04/08 07:30:31 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 pypy )
 
 [ "$PV" == "9999" ] && inherit mercurial autotools
-inherit python-single-r1
+inherit readme.gentoo python-single-r1
 
-DESCRIPTION="A text document format for writing short documents, articles, books and UNIX man pages"
+DESCRIPTION="AsciiDoc is a plain text human readable/writable document format"
 HOMEPAGE="http://www.methods.co.nz/asciidoc/"
 if [ "$PV" == "9999" ]; then
 	EHG_REPO_URI="https://asciidoc.googlecode.com/hg/"
@@ -30,7 +30,10 @@ RDEPEND=">=app-text/docbook-xsl-stylesheets-1.75
 		dev-libs/libxslt
 		graphviz? ( media-gfx/graphviz )
 		app-text/docbook-xml-dtd:4.5
-		highlight? ( || ( dev-python/pygments[${PYTHON_USEDEP}] dev-util/source-highlight ) )
+		highlight? ( || ( dev-util/source-highlight \
+			dev-python/pygments[${PYTHON_USEDEP}] \
+			app-text/highlight )
+		)
 		${PYTHON_DEPS}
 "
 DEPEND="test? ( dev-util/source-highlight
@@ -40,6 +43,11 @@ DEPEND="test? ( dev-util/source-highlight
 			app-text/dvipng
 			media-gfx/graphviz
 			${PYTHON_DEPS} )
+"
+
+DOC_CONTENTS="
+If you are going to use a2x, please also look at a2x(1) under
+REQUISITES for a list of runtime dependencies.
 "
 
 if [ "$PV" == "9999" ]; then
@@ -95,6 +103,7 @@ src_install() {
 		dosym ../../../asciidoc/images /usr/share/doc/${PF}/examples
 	fi
 
+	readme.gentoo.create_doc
 	dodoc BUGS CHANGELOG README docbook-xsl/asciidoc-docbook-xsl.txt \
 			dblatex/dblatex-readme.txt filters/code/code-filter-readme.txt
 }

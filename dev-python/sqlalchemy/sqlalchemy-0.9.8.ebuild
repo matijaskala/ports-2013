@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/sqlalchemy/sqlalchemy-0.9.8.ebuild,v 1.13 2015/06/02 05:13:52 jmorgan Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
@@ -12,7 +12,7 @@ MY_PN="SQLAlchemy"
 MY_P="${MY_PN}-${PV/_}"
 
 DESCRIPTION="Python SQL toolkit and Object Relational Mapper"
-HOMEPAGE="http://www.sqlalchemy.org/ http://pypi.python.org/pypi/SQLAlchemy"
+HOMEPAGE="http://www.sqlalchemy.org/ https://pypi.python.org/pypi/SQLAlchemy"
 SRC_URI="mirror://pypi/${MY_P:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

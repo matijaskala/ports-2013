@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/openssh/openssh-6.8_p1-r5.ebuild,v 1.1 2015/04/28 04:39:35 vapier Exp $
+# $Id$
 
 EAPI="4"
 inherit eutils user flag-o-matic multilib autotools pam systemd versionator
@@ -19,7 +19,7 @@ SRC_URI="mirror://openbsd/OpenSSH/portable/${PARCH}.tar.gz
 	mirror://gentoo/${P}-sctp.patch.xz
 	${HPN_PATCH:+hpn? (
 		mirror://gentoo/${HPN_PATCH}
-		http://dev.gentoo.org/~vapier/dist/${HPN_PATCH}
+		https://dev.gentoo.org/~vapier/dist/${HPN_PATCH}
 		mirror://sourceforge/hpnssh/${HPN_PATCH}
 	)}
 	${LDAP_PATCH:+ldap? ( mirror://gentoo/${LDAP_PATCH} )}
@@ -182,7 +182,6 @@ src_prepare() {
 
 src_configure() {
 	addwrite /dev/ptmx
-	addpredict /etc/skey/skeykeys # skey configure code triggers this
 
 	use debug && append-cppflags -DSANDBOX_SECCOMP_FILTER_DEBUG
 	use static && append-ldflags -static

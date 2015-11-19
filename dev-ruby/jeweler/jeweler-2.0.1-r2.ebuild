@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/jeweler/jeweler-2.0.1-r2.ebuild,v 1.2 2015/06/07 07:09:46 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21"
@@ -18,7 +18,7 @@ RUBY_FAKEGEM_GEMSPEC="jeweler.gemspec"
 inherit ruby-fakegem
 
 DESCRIPTION="Rake tasks for managing gems and versioning and a generator for creating a new project"
-HOMEPAGE="http://wiki.github.com/technicalpickles/jeweler"
+HOMEPAGE="https://wiki.github.com/technicalpickles/jeweler"
 
 LICENSE="MIT"
 SLOT="0"

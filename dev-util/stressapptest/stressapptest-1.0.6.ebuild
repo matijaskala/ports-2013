@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/stressapptest/stressapptest-1.0.6.ebuild,v 1.1 2013/05/13 01:49:22 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 MY_P="${P}_autoconf"
 DESCRIPTION="Stressful Application Test"
-HOMEPAGE="http://code.google.com/p/stressapptest/"
-SRC_URI="http://stressapptest.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/stressapptest/"
+SRC_URI="https://stressapptest.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

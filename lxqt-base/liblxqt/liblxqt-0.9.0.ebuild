@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/lxqt-base/liblxqt/liblxqt-0.9.0.ebuild,v 1.2 2015/04/15 04:52:31 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -19,8 +19,7 @@ fi
 LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
-DEPEND=">=dev-libs/libqtxdg-1.0.0
-	dev-qt/linguist-tools:5
+RDEPEND=">=dev-libs/libqtxdg-1.0.0
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -29,7 +28,11 @@ DEPEND=">=dev-libs/libqtxdg-1.0.0
 	dev-qt/qtxml:5
 	kde-frameworks/kwindowsystem:5
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	dev-qt/linguist-tools:5
+"
+
+PATCHES=( "${FILESDIR}/${P}-qt55.patch" )
 
 pkg_pretend() {
 	if [[ ${MERGE_TYPE} != binary ]]; then

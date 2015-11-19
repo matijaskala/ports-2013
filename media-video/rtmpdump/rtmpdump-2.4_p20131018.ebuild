@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/rtmpdump/rtmpdump-2.4_p20131018.ebuild,v 1.10 2015/02/11 22:34:21 mgorny Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit multilib toolchain-funcs multilib-minimal
 
 DESCRIPTION="Open source command-line RTMP client intended to stream audio or video flash content"
 HOMEPAGE="http://rtmpdump.mplayerhq.hu/"
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
 
 # the library is LGPL-2.1, the command is GPL-2
 LICENSE="GPL-2 LGPL-2.1"

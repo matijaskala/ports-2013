@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/alsa-plugins/alsa-plugins-1.0.29-r1.ebuild,v 1.1 2015/06/22 18:59:33 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils flag-o-matic multilib multilib-minimal
@@ -35,6 +35,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-1.0.23-automagic.patch
 	epatch "${FILESDIR}"/${PN}-1.0.28-libav10.patch
+	has_version '>=media-video/ffmpeg-2.8' && epatch "${FILESDIR}"/${PN}-1.0.29-ffmpeg29.patch
 
 	epatch_user
 

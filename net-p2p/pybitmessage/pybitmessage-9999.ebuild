@@ -1,13 +1,13 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/pybitmessage/pybitmessage-9999.ebuild,v 1.3 2013/08/05 16:12:28 hasufell Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils python-r1 gnome2-utils git-2
+inherit eutils python-r1 gnome2-utils git-r3
 
 DESCRIPTION="P2P communications protocol"
 HOMEPAGE="https://bitmessage.org"
@@ -16,18 +16,19 @@ EGIT_REPO_URI="https://github.com/Bitmessage/PyBitmessage.git"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="libressl"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${DEPEND}
-	dev-libs/openssl[-bindist]
+	!libressl? ( dev-libs/openssl:0[-bindist] )
+	libressl? ( dev-libs/libressl )
 	dev-python/PyQt4[${PYTHON_USEDEP}]"
 
 src_compile() { :; }
 
 src_install () {
-	cat >> "${T}"/${PN}-wrapper <<-EOF
+	cat >> "${T}"/${PN}-wrapper <<-EOF || die
 	#!/usr/bin/env python
 	import os
 	import sys
@@ -51,12 +52,12 @@ src_install () {
 
 	python_foreach_impl install_python
 
-	nonfatal dodoc README.md debian/changelog
-	nonfatal doman man/*
+	dodoc README.md debian/changelog
+	doman man/*
 
-	nonfatal newicon -s 24 desktop/icon24.png ${PN}.png
-	nonfatal newicon -s scalable desktop/can-icon.svg ${PN}.svg
-	nonfatal domenu desktop/${PN}.desktop
+	newicon -s 24 desktop/icon24.png ${PN}.png
+	newicon -s scalable desktop/can-icon.svg ${PN}.svg
+	domenu desktop/${PN}.desktop
 }
 
 pkg_preinst() {

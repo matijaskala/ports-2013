@@ -1,9 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pbr/pbr-0.8.2-r1.ebuild,v 1.8 2015/04/14 12:50:24 ago Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
@@ -29,7 +30,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 		>=dev-python/testresources-0.2.4[${PYTHON_USEDEP}]
 		>=dev-python/testscenarios-0.4[${PYTHON_USEDEP}]
 		>=dev-python/testtools-0.9.34[${PYTHON_USEDEP}] )"
-RDEPEND=">dev-python/pip-1.4[${PYTHON_USEDEP}]"
+PDEPEND=">dev-python/pip-1.4[${PYTHON_USEDEP}]"
 
 # Requ'd for testsuite
 DISTUTILS_IN_SOURCE_BUILD=1

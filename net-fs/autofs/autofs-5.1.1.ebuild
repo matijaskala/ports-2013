@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-fs/autofs/autofs-5.1.1.ebuild,v 1.1 2015/04/24 08:14:42 dlan Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit autotools-utils linux-info multilib systemd toolchain-funcs
 
 PATCH_VER=
 [[ -n ${PATCH_VER} ]] && \
-	PATCHSET_URI="http://dev.gentoo.org/~jlec/distfiles/${P}-patches-${PATCH_VER}.tar.lzma"
+	PATCHSET_URI="https://dev.gentoo.org/~jlec/distfiles/${P}-patches-${PATCH_VER}.tar.lzma"
 
 DESCRIPTION="Kernel based automounter"
 HOMEPAGE="http://www.linux-consulting.com/Amd_AutoFS/autofs.html"

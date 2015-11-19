@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/kgraphviewer/kgraphviewer-2.2.0.ebuild,v 1.1 2014/11/20 11:44:26 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ KDE_HANDBOOK="optional"
 inherit kde4-base
 
 DESCRIPTION="KDE graphviz dot graph file viewer"
-HOMEPAGE="http://www.kde.org/applications/graphics/kgraphviewer/
-http://extragear.kde.org/apps/kgraphviewer/"
+HOMEPAGE="https://www.kde.org/applications/graphics/kgraphviewer/
+https://extragear.kde.org/apps/kgraphviewer/"
 SRC_URI="mirror://kde/stable/${PN}/${PV}/src/${P}.tar.xz"
 
 LICENSE="GPL-2 FDL-1.2"

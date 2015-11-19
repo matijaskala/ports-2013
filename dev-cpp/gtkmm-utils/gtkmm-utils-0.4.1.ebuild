@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-cpp/gtkmm-utils/gtkmm-utils-0.4.1.ebuild,v 1.1 2012/12/23 09:46:25 hwoarang Exp $
+# $Id$
 
 EAPI=4
 
@@ -8,8 +8,8 @@ inherit eutils
 
 DESCRIPTION="Utility functions, classes and widgets written on top of gtkmm and
 glibmm."
-HOMEPAGE="http://code.google.com/p/gtkmm-utils/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/gtkmm-utils/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 LICENSE="LGPL-2"
 
 SLOT="0"

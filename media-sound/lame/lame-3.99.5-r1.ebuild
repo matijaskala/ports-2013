@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/lame/lame-3.99.5-r1.ebuild,v 1.13 2015/01/29 18:54:46 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,8 @@ IUSE="debug cpu_flags_x86_mmx mp3rtp sndfile static-libs"
 
 # These deps are without MULTILIB_USEDEP and are correct since we only build
 # libmp3lame for multilib and these deps apply to the lame frontend executable.
-RDEPEND=">=sys-libs/ncurses-5.7-r7
+RDEPEND="
+	>=sys-libs/ncurses-5.7-r7:0=
 	sndfile? ( >=media-libs/libsndfile-1.0.2 )
 	abi_x86_32? ( !app-emulation/emul-linux-x86-medialibs[-abi_x86_32(-)] )"
 DEPEND="${RDEPEND}
@@ -30,6 +31,7 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-3.96-ccc.patch \
 		"${FILESDIR}"/${PN}-3.98-gtk-path.patch \
 		"${FILESDIR}"/${PN}-3.99.5-tinfo.patch \
+		"${FILESDIR}"/${PN}-3.99.5-msse.patch \
 		"${WORKDIR}"/${P}-automake-2.12.patch
 
 	mkdir libmp3lame/i386/.libs || die #workaround parallel build with nasm

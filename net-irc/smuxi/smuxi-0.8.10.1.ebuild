@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-irc/smuxi/smuxi-0.8.10.1.ebuild,v 1.5 2014/08/10 20:53:50 slyfox Exp $
+# $Id$
 
 EAPI=4
 inherit base mono eutils
@@ -18,8 +18,8 @@ RDEPEND=">=dev-lang/mono-2.0
 	>=dev-dotnet/smartirc4net-0.4.5.1
 	>=dev-dotnet/nini-1.1.0-r2
 	>=dev-dotnet/log4net-1.2.10-r2
-	dbus? (	dev-dotnet/dbus-sharp
-		dev-dotnet/dbus-sharp-glib
+	dbus? (	dev-dotnet/dbus-sharp:1.0
+		dev-dotnet/dbus-sharp-glib:1.0
 		dev-dotnet/ndesk-dbus
 		dev-dotnet/ndesk-dbus-glib )
 	gnome? ( >=dev-dotnet/gtk-sharp-2.12

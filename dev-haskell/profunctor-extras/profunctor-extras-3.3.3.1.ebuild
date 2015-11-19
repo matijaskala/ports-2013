@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/profunctor-extras/profunctor-extras-3.3.3.1.ebuild,v 1.1 2013/08/26 10:35:25 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Profunctor extras"
-HOMEPAGE="http://github.com/ekmett/profunctor-extras/"
+HOMEPAGE="https://github.com/ekmett/profunctor-extras/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

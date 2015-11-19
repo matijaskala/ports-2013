@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/gtk-engines-unico/gtk-engines-unico-1.0.3_pre20121212.ebuild,v 1.5 2014/02/22 22:53:31 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
@@ -11,7 +11,7 @@ MY_P=${MY_PN}-${PV}
 DESCRIPTION="The Unico GTK+ 3.x theming engine"
 HOMEPAGE="https://launchpad.net/unico"
 #SRC_URI="https://launchpad.net/${MY_PN}/${PV%.*}/${PV}/+download/${MY_P}.tar.gz"
-SRC_URI="http://dev.gentoo.org/~tetromino/distfiles/${PN}/${MY_P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~tetromino/distfiles/${PN}/${MY_P}.tar.bz2"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"

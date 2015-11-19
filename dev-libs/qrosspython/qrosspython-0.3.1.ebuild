@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/qrosspython/qrosspython-0.3.1.ebuild,v 1.3 2014/08/10 20:39:18 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit python-single-r1 cmake-utils
 
 DESCRIPTION="Python scripting backend for Qross"
-HOMEPAGE="http://github.com/0xd34df00d/Qross"
+HOMEPAGE="https://github.com/0xd34df00d/Qross"
 SRC_URI="https://github.com/0xd34df00d/Qross/archive/${PV}.tar.gz -> qrosscore-${PV}.tar.gz"
 
 LICENSE="GPL-2"

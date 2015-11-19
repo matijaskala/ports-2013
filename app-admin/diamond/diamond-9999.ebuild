@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/diamond/diamond-9999.ebuild,v 1.4 2015/04/08 07:30:34 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ if [[ ${PV} = 9999* ]]; then
 	S=${WORKDIR}/diamond-${PV}
 else
 	SRC_URI="https://github.com/python-diamond/Diamond/archive/v${PV}.tar.gz -> python-diamond-${PV}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
+	KEYWORDS="~amd64 ~x86 ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 	S=${WORKDIR}/Diamond-${PV}
 fi
 
@@ -30,7 +30,8 @@ RDEPEND="dev-python/configobj
 	mongo? ( dev-python/pymongo )
 	mysql? ( dev-python/mysql-python )
 	snmp? ( dev-python/pysnmp )
-	redis? ( dev-python/redis-py )"
+	redis? ( dev-python/redis-py )
+	!kernel_linux? ( >=dev-python/psutil-3 )"
 DEPEND="${RDEPEND}
 	test? ( dev-python/mock )"
 

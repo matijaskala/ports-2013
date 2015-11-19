@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lisp/clozurecl/clozurecl-1.9_p1-r1.ebuild,v 1.2 2015/03/21 14:21:02 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,8 +12,8 @@ MY_P=${MY_PN}-${PV}
 DESCRIPTION="Common Lisp implementation, derived from Digitool's MCL product"
 HOMEPAGE="http://ccl.clozure.com/"
 SRC_URI="
-	x86?   ( http://dev.gentoo.org/~grozin/${MY_P}-linuxx86.tar.bz2 )
-	amd64? ( http://dev.gentoo.org/~grozin/${MY_P}-linuxx86.tar.bz2 )"
+	x86?   ( https://dev.gentoo.org/~grozin/${MY_P}-linuxx86.tar.bz2 )
+	amd64? ( https://dev.gentoo.org/~grozin/${MY_P}-linuxx86.tar.bz2 )"
 	# ppc?   ( ftp://ftp.clozure.com/pub/release/${PV}/${MY_P}-linuxppc.tar.gz )
 	# ppc64? ( ftp://ftp.clozure.com/pub/release/${PV}/${MY_P}-linuxppc.tar.gz )"
 

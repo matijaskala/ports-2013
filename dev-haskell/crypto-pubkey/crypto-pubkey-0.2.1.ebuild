@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/crypto-pubkey/crypto-pubkey-0.2.1.ebuild,v 1.3 2013/11/24 19:37:16 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Public Key cryptography"
-HOMEPAGE="http://github.com/vincenthz/hs-crypto-pubkey"
+HOMEPAGE="https://github.com/vincenthz/hs-crypto-pubkey"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

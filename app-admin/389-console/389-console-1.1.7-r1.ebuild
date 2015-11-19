@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/389-console/389-console-1.1.7-r1.ebuild,v 1.1 2014/08/18 19:47:08 creffett Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit java-pkg-2 eutils java-ant-2
 DESCRIPTION="A Java based console for remote management 389 server"
 HOMEPAGE="http://port389.org/"
 SRC_URI="http://directory.fedoraproject.org/sources/${P}.tar.bz2
-	http://dev.gentoo.org/~lxnay/${PN}/fedora.png"
+	https://dev.gentoo.org/~lxnay/${PN}/fedora.png"
 
 LICENSE="LGPL-2.1"
 SLOT="1.1"

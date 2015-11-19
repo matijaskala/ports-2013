@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-pinyin/ibus-pinyin-1.5.0-r2.ebuild,v 1.2 2014/12/27 10:51:34 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ PYTHON_REQ_USE="sqlite"
 inherit python-single-r1 eutils
 
 DESCRIPTION="Chinese PinYin IMEngine for IBus Framework"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/guiloader-c++/guiloader-c++-2.99.0.ebuild,v 1.2 2012/05/04 18:35:47 jdhore Exp $
+# $Id$
 
 EAPI="4"
 
 DESCRIPTION="C++ binding to GuiLoader library"
 HOMEPAGE="http://www.crowdesigner.org"
-SRC_URI="http://nothing-personal.googlecode.com/files/${P}.tar.xz"
+SRC_URI="https://nothing-personal.googlecode.com/files/${P}.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"

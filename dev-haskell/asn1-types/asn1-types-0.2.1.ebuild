@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/asn1-types/asn1-types-0.2.1.ebuild,v 1.1 2013/11/14 18:12:59 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="ASN.1 types"
-HOMEPAGE="http://github.com/vincenthz/hs-asn1-types"
+HOMEPAGE="https://github.com/vincenthz/hs-asn1-types"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

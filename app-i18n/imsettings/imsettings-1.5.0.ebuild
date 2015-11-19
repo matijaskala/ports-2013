@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/imsettings/imsettings-1.5.0.ebuild,v 1.3 2015/02/07 13:41:34 naota Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils autotools
 
 DESCRIPTION="Delivery framework for general Input Method configuration"
-HOMEPAGE="http://tagoh.github.com/imsettings/"
+HOMEPAGE="https://tagoh.github.com/imsettings/"
 SRC_URI="https://bitbucket.org/tagoh/imsettings/downloads/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"

@@ -1,13 +1,13 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-fonts/intlfonts/intlfonts-1.2.1.ebuild,v 1.19 2010/09/18 06:07:33 dirtyepic Exp $
+# $Id$
 
 inherit font
 
 IUSE="bdf"
 
 DESCRIPTION="International X11 fixed fonts"
-HOMEPAGE="http://www.gnu.org/directory/intlfonts.html"
+HOMEPAGE="https://www.gnu.org/directory/intlfonts.html"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"

@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/xfce4-volumed-pulse/xfce4-volumed-pulse-0.2.0.ebuild,v 1.3 2014/01/28 14:18:08 ago Exp $
+# $Id$
 
 EAPI=5
 inherit xfconf
 
 DESCRIPTION="Daemon to control volume up/down and mute keys for pulseaudio"
-HOMEPAGE="http://launchpad.net/xfce4-volumed-pulse"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
+HOMEPAGE="https://launchpad.net/xfce4-volumed-pulse"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"

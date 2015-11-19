@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/nvidia-texture-tools/nvidia-texture-tools-2.0.8-r2.ebuild,v 1.5 2013/05/20 08:38:27 ago Exp $
+# $Id$
 
 EAPI=4
 inherit cmake-utils eutils multilib toolchain-funcs
 
 DESCRIPTION="A set of cuda-enabled texture tools and compressors"
 HOMEPAGE="http://developer.nvidia.com/object/texture_tools.html"
-SRC_URI="http://${PN}.googlecode.com/files/${P}-1.tar.gz
-	http://dev.gentoo.org/~ssuominen/${P}-patchset-1.tar.xz"
+SRC_URI="https://${PN}.googlecode.com/files/${P}-1.tar.gz
+	https://dev.gentoo.org/~ssuominen/${P}-patchset-1.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"

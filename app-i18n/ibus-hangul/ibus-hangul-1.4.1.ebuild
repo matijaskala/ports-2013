@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/ibus-hangul/ibus-hangul-1.4.1.ebuild,v 1.2 2012/06/13 07:04:16 naota Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,8 +9,8 @@ PYTHON_DEPEND="2:2.5"
 inherit python
 
 DESCRIPTION="The Hangul engine for IBus input platform"
-HOMEPAGE="http://code.google.com/p/ibus/"
-SRC_URI="http://ibus.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/ibus/ibus/wiki"
+SRC_URI="https://ibus.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/mythweb/mythweb-0.26.0.ebuild,v 1.3 2014/08/10 20:14:07 slyfox Exp $
+# $Id$
 
 EAPI=4
 
@@ -15,7 +15,7 @@ DESCRIPTION="PHP scripts intended to manage MythTV from a web browser"
 HOMEPAGE="http://www.mythtv.org"
 LICENSE="GPL-2"
 SRC_URI="ftp://ftp.osuosl.org/pub/mythtv/${MY_P}.tar.bz2
-	${BACKPORTS:+http://dev.gentoo.org/~cardoe/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
+	${BACKPORTS:+https://dev.gentoo.org/~cardoe/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
 IUSE=""
 KEYWORDS="~amd64 ~ppc ~x86"
 

@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/sphinx/sphinx-1.2.3.ebuild,v 1.6 2015/03/03 07:22:40 dlan Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy pypy3 )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} pypy pypy3 )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1 eutils versionator
 
@@ -12,7 +13,7 @@ MY_PN="Sphinx"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Python documentation generator"
-HOMEPAGE="http://sphinx.pocoo.org/ http://pypi.python.org/pypi/Sphinx"
+HOMEPAGE="http://sphinx.pocoo.org/ https://pypi.python.org/pypi/Sphinx"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

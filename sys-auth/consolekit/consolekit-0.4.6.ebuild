@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/consolekit/consolekit-0.4.6.ebuild,v 1.19 2015/03/03 09:53:46 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils linux-info pam systemd
@@ -46,7 +46,7 @@ QA_MULTILIB_PATHS="usr/lib/ConsoleKit/.*"
 
 pkg_setup() {
 	if use kernel_linux; then
-		# This is from http://bugs.gentoo.org/376939
+		# This is from https://bugs.gentoo.org/376939
 		use acl && CONFIG_CHECK="~TMPFS_POSIX_ACL"
 		# This is required to get login-session-id string with pam_ck_connector.so
 		use pam && CONFIG_CHECK+=" ~AUDITSYSCALL"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/aiohttp/aiohttp-0.14.4-r1.ebuild,v 1.1 2015/03/16 11:08:45 bman Exp $
+# $Id$
 
 EAPI="5"
 
@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-RDEPEND="dev-python/asyncio[${PYTHON_USEDEP}]"
+RDEPEND="virtual/python-asyncio[${PYTHON_USEDEP}]"
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
 	test? (
 		${RDEPEND}

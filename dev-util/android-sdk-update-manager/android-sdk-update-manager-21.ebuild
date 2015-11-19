@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/android-sdk-update-manager/android-sdk-update-manager-21.ebuild,v 1.4 2015/06/14 16:34:38 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ MY_P="android-sdk_r${PV}-linux"
 
 DESCRIPTION="Open Handset Alliance's Android SDK"
 HOMEPAGE="http://developer.android.com"
-SRC_URI="http://dl.google.com/android/${MY_P}.tgz"
+SRC_URI="https://dl.google.com/android/${MY_P}.tgz"
 IUSE=""
 RESTRICT="mirror"
 
@@ -94,7 +94,7 @@ pkg_postinst() {
 	elog "Just run 'gpasswd -a <USER> android', then have <USER> re-login."
 	elog "See http://developer.android.com/sdk/adding-components.html for more"
 	elog "information."
-	elog "If you have problems downloading the SDK, see http://code.google.com/p/android/issues/detail?id=4406"
+	elog "If you have problems downloading the SDK, see https://code.google.com/p/android/issues/detail?id=4406"
 	elog "You need to run env-update and source /etc/profile in any open shells"
 	elog "if you get an SWT error."
 }

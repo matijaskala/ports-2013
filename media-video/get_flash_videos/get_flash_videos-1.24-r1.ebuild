@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/get_flash_videos/get_flash_videos-1.24-r1.ebuild,v 1.7 2014/11/27 23:44:22 dilfridge Exp $
+# $Id$
 
 EAPI=5
 inherit eutils perl-module readme.gentoo
@@ -9,8 +9,8 @@ MY_PN="App-${PN}"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Downloads videos from various Flash-based video hosting sites"
-HOMEPAGE="http://code.google.com/p/get-flash-videos/"
-SRC_URI="http://get-flash-videos.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/get-flash-videos/"
+SRC_URI="https://get-flash-videos.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/ieee754/ieee754-0.7.4.ebuild,v 1.1 2014/12/13 14:51:30 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Utilities for dealing with IEEE floating point numbers"
-HOMEPAGE="http://github.com/patperry/hs-ieee754"
+HOMEPAGE="https://github.com/patperry/hs-ieee754"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

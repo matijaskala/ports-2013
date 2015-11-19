@@ -1,6 +1,6 @@
 # Copyright 2010-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/bitcoind/bitcoind-0.10.2.ebuild,v 1.1 2015/05/27 01:35:06 blueness Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ inherit bash-completion-r1 bitcoincore user systemd
 DESCRIPTION="Original Bitcoin crypto-currency wallet for automated services"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 arm ~arm64 x86 ~amd64-linux ~x86-linux"
 
 RDEPEND="
 	logrotate? (
@@ -32,6 +32,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/miniupnpc-14.patch"
 	epatch "${FILESDIR}/0.10.0-openrc-compat.patch"
 	bitcoincore_src_prepare
 }

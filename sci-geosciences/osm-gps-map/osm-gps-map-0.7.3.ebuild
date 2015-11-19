@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-geosciences/osm-gps-map/osm-gps-map-0.7.3.ebuild,v 1.7 2015/04/08 18:49:16 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ DISTUTILS_OPTIONAL=1
 inherit eutils autotools gnome2 distutils-r1
 
 DESCRIPTION="A gtk+ viewer for OpenStreetMap files"
-HOMEPAGE="http://nzjrs.github.com/osm-gps-map/"
+HOMEPAGE="https://nzjrs.github.com/osm-gps-map/"
 SRC_URI="http://www.johnstowers.co.nz/files/${PN}/${P}.tar.gz
 python? ( http://www.johnstowers.co.nz/files/${PN}/python-osmgpsmap-${PV}.tar.gz )"
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/setools/setools-3.3.8-r7.ebuild,v 1.6 2015/05/10 09:06:14 perfinion Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 python3_4 )
@@ -10,7 +10,7 @@ inherit autotools java-pkg-opt-2 python-r1 eutils toolchain-funcs
 DESCRIPTION="SELinux policy tools"
 HOMEPAGE="http://www.tresys.com/selinux/selinux_policy_tools.shtml"
 SRC_URI="http://oss.tresys.com/projects/setools/chrome/site/dists/${P}/${P}.tar.bz2
-	http://dev.gentoo.org/~perfinion/patches/setools/${P}-04-gentoo-patches.tar.bz2"
+	https://dev.gentoo.org/~perfinion/patches/setools/${P}-04-gentoo-patches.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

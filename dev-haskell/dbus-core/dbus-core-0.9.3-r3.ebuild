@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/dbus-core/dbus-core-0.9.3-r3.ebuild,v 1.1 2014/03/09 05:12:09 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -31,6 +31,8 @@ DEPEND="${RDEPEND}
 		>=dev-haskell/cabal-1.6"
 
 src_prepare() {
+	epatch "${FILESDIR}"/${P}-ghc-7.10.patch
+
 	if has_version "<dev-haskell/haddock-2.9.2"; then
 		# Workaround http://hackage.haskell.org/trac/hackage/ticket/626
 		# The haddock --hoogle option does not like unicode characters, which causes

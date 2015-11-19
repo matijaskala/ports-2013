@@ -1,11 +1,11 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/ranpwd/ranpwd-1.2.ebuild,v 1.9 2012/11/20 20:05:45 ago Exp $
+# $Id$
 
 EAPI=3
 
 DESCRIPTION="Generate random passwords using the in-kernel cryptographically secure random number generator"
-HOMEPAGE="http://www.kernel.org/pub/software/utils/admin/ranpwd/"
+HOMEPAGE="https://www.kernel.org/pub/software/utils/admin/ranpwd/"
 SRC_URI="mirror://kernel/software/utils/admin/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"

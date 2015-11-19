@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/julia/julia-0.2.0-r1.ebuild,v 1.3 2014/03/14 19:53:58 calchan Exp $
+# $Id$
 EAPI=5
 
 inherit eutils multilib pax-utils
@@ -17,7 +17,7 @@ HOMEPAGE="http://julialang.org/"
 # dSFMT is not meant to be packaged
 SRC_URI="http://gentooexperimental.org/~patrick/${P}.tar.bz2
 	http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/SFMT/dSFMT-src-2.2.tar.gz -> dsfmt-2.2.tar.gz
-	http://double-conversion.googlecode.com/files/double-conversion-1.1.1.tar.gz"
+	https://double-conversion.googlecode.com/files/double-conversion-1.1.1.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

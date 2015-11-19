@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/gnome2-utils.eclass,v 1.38 2014/11/23 21:46:29 mgorny Exp $
+# $Id$
 
 # @ECLASS: gnome2-utils.eclass
 # @MAINTAINER:
@@ -15,7 +15,7 @@
 #  * GConf schemas management
 #  * scrollkeeper (old Gnome help system) management
 
-inherit multilib
+inherit eutils multilib
 
 case "${EAPI:-0}" in
 	0|1|2|3|4|5) ;;
@@ -431,7 +431,7 @@ gnome2_gdk_pixbuf_update() {
 	fi
 
 	ebegin "Updating gdk-pixbuf loader cache"
-	local tmp_file=$(mktemp -t tmp.XXXXXXXXXX_gdkpixbuf)
+	local tmp_file=$(emktemp)
 	${updater} 1> "${tmp_file}" &&
 	chmod 0644 "${tmp_file}" &&
 	cp -f "${tmp_file}" "${EROOT}usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache" &&
@@ -447,7 +447,10 @@ gnome2_query_immodules_gtk2() {
 	local updater=${EPREFIX}/usr/bin/${CHOST}-gtk-query-immodules-2.0
 	[[ ! -x ${updater} ]] && updater=${EPREFIX}/usr/bin/gtk-query-immodules-2.0
 
-	"${updater}" --update-cache
+	ebegin "Updating gtk2 input method module cache"
+	GTK_IM_MODULE_FILE="${EROOT}usr/$(get_libdir)/gtk-2.0/2.10.0/immodules.cache" \
+		"${updater}" --update-cache
+	eend $?
 }
 
 # @FUNCTION: gnome2_query_immodules_gtk3
@@ -458,7 +461,10 @@ gnome2_query_immodules_gtk3() {
 	local updater=${EPREFIX}/usr/bin/${CHOST}-gtk-query-immodules-3.0
 	[[ ! -x ${updater} ]] && updater=${EPREFIX}/usr/bin/gtk-query-immodules-3.0
 
-	"${updater}" --update-cache
+	ebegin "Updating gtk3 input method module cache"
+	GTK_IM_MODULE_FILE="${EROOT}usr/$(get_libdir)/gtk-3.0/3.0.0/immodules.cache" \
+		"${updater}" --update-cache
+	eend $?
 }
 
 # @FUNCTION: gnome2_disable_deprecation_warning

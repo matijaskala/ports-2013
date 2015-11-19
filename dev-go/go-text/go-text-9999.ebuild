@@ -1,17 +1,26 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-go/go-text/go-text-9999.ebuild,v 1.6 2015/06/25 17:43:02 williamh Exp $
+# $Id$
 
 EAPI=5
 
-inherit golang-build golang-vcs
 EGO_PN=golang.org/x/text/...
 EGO_SRC=golang.org/x/text
+
+if [[ ${PV} = *9999* ]]; then
+	inherit golang-vcs
+else
+	KEYWORDS="~amd64"
+	EGIT_COMMIT="df923bbb63f8ea3a26bb743e2a497abd0ab585f7"
+	SRC_URI="https://github.com/golang/text/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	inherit golang-vcs-snapshot
+fi
+inherit golang-build
 
 DESCRIPTION="Go text processing support"
 HOMEPAGE="https://godoc.org/golang.org/x/text"
 LICENSE="BSD"
-SLOT="0"
+SLOT="0/${PV}"
 IUSE=""
 DEPEND=""
 RDEPEND=""

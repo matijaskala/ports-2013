@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/paperwork/paperwork-0.2.4.ebuild,v 1.1 2015/05/16 19:29:45 voyageur Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -30,6 +30,6 @@ RDEPEND="app-text/poppler[introspection]
 	dev-util/glade[introspection,python]
 	sci-libs/scikits_learn[${PYTHON_USEDEP}]
 	sci-libs/scikits_image[${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	x11-libs/gtk+:3[introspection]"
 DEPEND="${RDEPEND}"

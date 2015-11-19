@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-scheme/guile-gnome-platform/guile-gnome-platform-2.16.1.ebuild,v 1.13 2012/08/27 17:56:22 armin76 Exp $
+# $Id$
 
 EAPI="3"
 
 inherit autotools eutils multilib
 
 DESCRIPTION="Guile Scheme code that wraps the GNOME developer platform"
-HOMEPAGE="http://www.gnu.org/software/guile-gnome"
-SRC_URI="http://ftp.gnu.org/pub/gnu/guile-gnome/${PN}/${P}.tar.gz"
+HOMEPAGE="https://www.gnu.org/software/guile-gnome"
+SRC_URI="https://ftp.gnu.org/pub/gnu/guile-gnome/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

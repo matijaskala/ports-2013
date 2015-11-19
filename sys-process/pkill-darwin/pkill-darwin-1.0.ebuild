@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-process/pkill-darwin/pkill-darwin-1.0.ebuild,v 1.2 2011/05/18 18:27:47 grobian Exp $
+# $Id$
 
 EAPI=3
 
@@ -8,7 +8,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="pgrep(1) and pkill(1) for Darwin"
 HOMEPAGE="http://prefix.gentooexperimental.org:8000/pkill-darwin/"
-SRC_URI="http://www.gentoo.org/~grobian/distfiles/${P}.tar.xz"
+SRC_URI="https://www.gentoo.org/~grobian/distfiles/${P}.tar.xz"
 
 LICENSE="BSD"
 SLOT="0"

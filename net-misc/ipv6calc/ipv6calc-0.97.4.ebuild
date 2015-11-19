@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/ipv6calc/ipv6calc-0.97.4.ebuild,v 1.1 2014/08/03 23:34:19 blueness Exp $
+# $Id$
 
 EAPI="5"
 inherit eutils
@@ -11,11 +11,11 @@ SRC_URI="ftp://ftp.bieringer.de/pub/linux/IPv6/ipv6calc/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~hppa ~ppc ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 hppa ppc sparc x86 ~amd64-linux ~x86-linux"
 IUSE="geoip test"
 
 RDEPEND="
-	dev-libs/openssl
+	dev-libs/openssl:=
 	geoip? ( >=dev-libs/geoip-1.4.7 )
 "
 DEPEND="${RDEPEND}

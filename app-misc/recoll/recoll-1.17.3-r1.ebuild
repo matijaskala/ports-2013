@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/recoll/recoll-1.17.3-r1.ebuild,v 1.7 2015/02/17 10:40:40 kensington Exp $
+# $Id$
 
 EAPI="4"
 
 PYTHON_DEPEND="2"
-inherit toolchain-funcs qt4-r2 linux-info python
+inherit toolchain-funcs qmake-utils qt4-r2 linux-info python
 
 DESCRIPTION="A personal full text search package"
 HOMEPAGE="http://www.lesbonscomptes.com/recoll/"
@@ -103,7 +103,7 @@ src_prepare() {
 src_configure() {
 	local qtconf
 
-	use qt4 && qtconf="QMAKEPATH=/usr/bin/qmake"
+	use qt4 && qtconf="QMAKEPATH=$(qt4_get_bindir)/qmake"
 
 	econf \
 		$(use_with spell aspell) \

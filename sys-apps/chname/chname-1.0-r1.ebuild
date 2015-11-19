@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/chname/chname-1.0-r1.ebuild,v 1.3 2014/08/10 20:23:33 slyfox Exp $
+# $Id$
 
 inherit toolchain-funcs
 
 DESCRIPTION="Run a command with a new system hostname"
-HOMEPAGE="http://code.google.com/p/chname"
-SRC_URI="http://chname.googlecode.com/files/chname-1.0.tar.gz"
+HOMEPAGE="https://github.com/marineam/chname"
+SRC_URI="https://chname.googlecode.com/files/chname-1.0.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

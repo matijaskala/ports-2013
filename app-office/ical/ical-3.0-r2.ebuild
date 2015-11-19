@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/ical/ical-3.0-r2.ebuild,v 1.4 2015/03/28 21:33:09 ago Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools eutils multilib virtualx
 
 DESCRIPTION="Tk-based Calendar program"
-HOMEPAGE="http://launchpad.net/ical-tcl"
-SRC_URI="http://launchpad.net/ical-tcl/3.x/${PV}/+download/${P}.tar.gz"
+HOMEPAGE="https://launchpad.net/ical-tcl"
+SRC_URI="https://launchpad.net/ical-tcl/3.x/${PV}/+download/${P}.tar.gz"
 
 LICENSE="HPND"
 SLOT="0"

@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/openjpeg/openjpeg-1.5.2.ebuild,v 1.11 2014/09/19 10:30:56 ago Exp $
+# $Id$
 
 EAPI=5
 inherit multilib cmake-utils multilib-minimal
 
 DESCRIPTION="An open-source JPEG 2000 library"
-HOMEPAGE="http://code.google.com/p/openjpeg/"
+HOMEPAGE="https://github.com/uclouvain/openjpeg"
 SRC_URI="mirror://sourceforge/${PN}.mirror/${P}.tar.gz"
 
 LICENSE="BSD-2"

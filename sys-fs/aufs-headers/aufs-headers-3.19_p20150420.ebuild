@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/aufs-headers/aufs-headers-3.19_p20150420.ebuild,v 1.1 2015/04/20 07:48:22 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ HOMEPAGE="http://aufs.sourceforge.net/"
 # make headers_install INSTALL_HDR_PATH=${T}
 # find ${T} -type f \( ! -name "*aufs*" \) -delete
 # find ${T} -type d -empty -delete
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 SLOT="0"
 LICENSE="GPL-2"

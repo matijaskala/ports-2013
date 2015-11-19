@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/samuel/samuel-0.3.3-r1.ebuild,v 1.8 2015/04/03 10:54:19 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ RUBY_FAKEGEM_TASK_DOC=""
 inherit ruby-fakegem
 
 DESCRIPTION="An automatic logger for HTTP requests in Ruby"
-HOMEPAGE="http://github.com/chrisk/samuel"
+HOMEPAGE="https://github.com/chrisk/samuel"
 
 LICENSE="MIT"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/guava/guava-07.ebuild,v 1.5 2013/01/30 18:09:18 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -10,8 +10,8 @@ inherit java-pkg-2 java-pkg-simple
 
 MY_P="${PN}-r${PV}"
 DESCRIPTION="A collection of Google's core Java libraries"
-HOMEPAGE="http://code.google.com/p/guava-libraries/"
-SRC_URI="http://guava-libraries.googlecode.com/files/${MY_P}.zip"
+HOMEPAGE="https://code.google.com/p/guava-libraries/"
+SRC_URI="https://guava-libraries.googlecode.com/files/${MY_P}.zip"
 
 LICENSE="Apache-2.0"
 SLOT="0"

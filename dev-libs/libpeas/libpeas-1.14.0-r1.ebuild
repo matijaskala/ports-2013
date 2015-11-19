@@ -1,20 +1,20 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libpeas/libpeas-1.14.0-r1.ebuild,v 1.2 2015/06/12 14:24:09 tetromino Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 
 inherit autotools eutils gnome2 multilib python-r1 virtualx
 
 DESCRIPTION="A GObject plugins library"
-HOMEPAGE="http://developer.gnome.org/libpeas/stable/"
+HOMEPAGE="https://developer.gnome.org/libpeas/stable/"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86 ~amd64-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux"
 IUSE="+gtk glade jit lua +python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} ?? ( $(python_gen_useflags 'python3*') ) )"
 
@@ -77,7 +77,7 @@ src_configure() {
 			"--enable-python${v}"
 			# it is just 'PYTHON' for py3 in the build system
 			"PYTHON${v#3}=${PYTHON}"
-			"PYTHON${v}_CONFIG=${PYTHON}-config"
+			"PYTHON${v}_CONFIG=$(python_get_PYTHON_CONFIG)"
 		)
 	}
 	use python && python_foreach_impl python_configure

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/gtk/gtk-0.12.5.7.2.ebuild,v 1.2 2014/07/25 09:16:29 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -22,7 +22,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="LGPL-2.1"
 SLOT="${GTK_MAJ_VER}/${PV}"
-KEYWORDS="~alpha ~amd64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~ia64 ppc ppc64 sparc x86"
 IUSE="+fmode-binary +gio"
 
 RDEPEND="fmode-binary? ( >=dev-haskell/glib-0.12.5.4:0=[profile?] <dev-haskell/glib-0.13:0=[profile?]

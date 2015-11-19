@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/wine/wine-1.6.2.ebuild,v 1.9 2015/06/14 16:18:11 ulm Exp $
+# $Id$
 
 EAPI="5"
 
@@ -34,8 +34,8 @@ SRC_URI="${SRC_URI}
 		abi_x86_64? ( mirror://sourceforge/${PN}/Wine%20Gecko/${GV}/wine_gecko-${GV}-x86_64.msi )
 	)
 	mono? ( mirror://sourceforge/${PN}/Wine%20Mono/${MV}/wine-mono-${MV}.msi )
-	pulseaudio? ( http://dev.gentoo.org/~tetromino/distfiles/${PN}/${PULSE_PATCHES}.tar.bz2 )
-	http://dev.gentoo.org/~tetromino/distfiles/${PN}/${WINE_GENTOO}.tar.bz2"
+	pulseaudio? ( https://dev.gentoo.org/~tetromino/distfiles/${PN}/${PULSE_PATCHES}.tar.bz2 )
+	https://dev.gentoo.org/~tetromino/distfiles/${PN}/${WINE_GENTOO}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -53,7 +53,7 @@ RESTRICT="test"
 NATIVE_DEPEND="
 	truetype? ( >=media-libs/freetype-2.0.0  )
 	capi? ( net-dialup/capi4k-utils )
-	ncurses? ( >=sys-libs/ncurses-5.2:= )
+	ncurses? ( >=sys-libs/ncurses-5.2:0= )
 	udisks? ( sys-apps/dbus )
 	fontconfig? ( media-libs/fontconfig:= )
 	gphoto2? ( media-libs/libgphoto2:= )
@@ -96,7 +96,7 @@ COMMON_DEPEND="
 		abi_x86_64? ( ${NATIVE_DEPEND} )
 		abi_x86_32? (
 			truetype? ( >=media-libs/freetype-2.5.0.1[abi_x86_32(-)] )
-			ncurses? ( >=sys-libs/ncurses-5.9-r3[abi_x86_32(-)] )
+			ncurses? ( >=sys-libs/ncurses-5.9-r3:0[abi_x86_32(-)] )
 			udisks? ( >=sys-apps/dbus-1.6.18-r1[abi_x86_32(-)] )
 			fontconfig? ( >=media-libs/fontconfig-2.10.92[abi_x86_32(-)] )
 			gphoto2? ( >=media-libs/libgphoto2-2.5.3.1[abi_x86_32(-)] )
@@ -172,6 +172,21 @@ usr/share/applications/wine-winecfg.desktop"
 
 wine_build_environment_check() {
 	[[ ${MERGE_TYPE} = "binary" ]] && return 0
+
+	# bug #549768
+	if use abi_x86_64 && [[ $(gcc-major-version) = 5 && $(gcc-minor-version) -le 2 ]]; then
+		einfo "Checking for gcc-5 ms_abi compiler bug ..."
+		$(tc-getCC) -O2 "${FILESDIR}"/pr66838.c -o "${T}"/pr66838 || die
+		# Run in subshell to prevent "Aborted" message
+		if ! ( "${T}"/pr66838 || false ) >/dev/null 2>&1; then
+			eerror "64-bit wine cannot be built with gcc-5.1 or initial patchset of 5.2.0"
+			eerror "due to compiler bugs; please re-emerge the latest gcc-5.2.x ebuild,"
+			eerror "or use gcc-config to select a different compiler version."
+			eerror "See https://bugs.gentoo.org/549768"
+			eerror
+			return 1
+		fi
+	fi
 
 	if use abi_x86_64 && [[ $(( $(gcc-major-version) * 100 + $(gcc-minor-version) )) -lt 404 ]]; then
 		eerror "You need gcc-4.4+ to build 64-bit wine"

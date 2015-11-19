@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/dogtail/dogtail-0.9.0-r2.ebuild,v 1.1 2015/06/09 14:47:49 eva Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ SRC_URI="https://fedorahosted.org/released/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="
@@ -22,7 +22,7 @@ RDEPEND="
 	dev-python/pyatspi[${PYTHON_USEDEP}]
 	dev-python/pycairo[${PYTHON_USEDEP}]
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	x11-libs/gdk-pixbuf:2[introspection]
 	x11-libs/gtk+:3[introspection]
 	x11-libs/libwnck:3[introspection]

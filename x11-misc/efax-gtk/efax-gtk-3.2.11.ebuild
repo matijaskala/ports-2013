@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/efax-gtk/efax-gtk-3.2.11.ebuild,v 1.1 2013/05/31 15:45:07 xmw Exp $
+# $Id$
 
 EAPI=4
 
@@ -43,7 +43,7 @@ src_configure() {
 
 src_install() {
 	default
-	# http://bugs.gentoo.org/401221
+	# https://bugs.gentoo.org/401221
 	mv -vf "${ED}"usr/share/man/man1/efax{,-0.9a}.1 || die
 	mv -vf "${ED}"usr/share/man/man1/efix{,-0.9a}.1 || die
 }

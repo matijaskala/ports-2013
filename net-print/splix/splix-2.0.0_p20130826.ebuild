@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-print/splix/splix-2.0.0_p20130826.ebuild,v 1.1 2014/06/07 19:45:32 voyageur Exp $
+# $Id$
 
 EAPI=5
 inherit eutils toolchain-funcs
 
 DESCRIPTION="A set of CUPS printer drivers for SPL (Samsung Printer Language) printers"
 HOMEPAGE="http://splix.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~voyageur/distfiles/${P}.tar.bz2
-	http://dev.gentoo.org/~voyageur/samsung-cms-20120312.tar.xz"
+SRC_URI="https://dev.gentoo.org/~voyageur/distfiles/${P}.tar.bz2
+	https://dev.gentoo.org/~voyageur/samsung-cms-20120312.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

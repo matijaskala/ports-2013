@@ -1,14 +1,16 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libhugetlbfs/libhugetlbfs-2.19.ebuild,v 1.1 2015/05/29 07:32:54 polynomial-c Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="easy hugepage access"
-HOMEPAGE="http://libhugetlbfs.sourceforge.net/"
+HOMEPAGE="https://github.com/libhugetlbfs/libhugetlbfs"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+# Switch to github tarball w/next release.
+#SRC_URI="https://github.com/libhugetlbfs/libhugetlbfs/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

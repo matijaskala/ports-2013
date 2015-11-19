@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/monkeysign/monkeysign-2.0.2-r1.ebuild,v 1.2 2015/03/20 07:39:47 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -22,7 +22,7 @@ CDEPEND="
 	dev-python/pygtk:2[${PYTHON_USEDEP}]
 	media-gfx/zbar:0[python,gtk,imagemagick,${PYTHON_USEDEP}]
 	media-gfx/qrencode-python[${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]"
+	dev-python/pillow[${PYTHON_USEDEP}]"
 
 DEPEND="
 	dev-python/docutils[${PYTHON_USEDEP}]

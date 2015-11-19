@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/oslo-utils/oslo-utils-1.0.0.ebuild,v 1.1 2014/11/08 21:51:51 alunduil Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 python3_3 )
@@ -11,7 +11,7 @@ inherit distutils-r1
 MY_PN=${PN/-/.}
 
 DESCRIPTION="Oslo Utility library"
-HOMEPAGE="http://launchpad.net/oslo"
+HOMEPAGE="https://launchpad.net/oslo"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_PN}-${PV}.tar.gz"
 S="${WORKDIR}/${MY_PN}-${PV}"
 

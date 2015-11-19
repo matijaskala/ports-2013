@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/wvdial/wvdial-1.61.ebuild,v 1.3 2012/05/03 03:54:07 jdhore Exp $
+# $Id$
 
 EAPI="3"
 
@@ -8,7 +8,7 @@ inherit eutils
 
 DESCRIPTION="Excellent program to automatically configure PPP sessions"
 HOMEPAGE="http://alumnit.ca/wiki/?WvDial"
-SRC_URI="http://wvstreams.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://wvstreams.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"

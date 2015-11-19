@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/coin/coin-3.1.3-r2.ebuild,v 1.8 2014/08/10 21:08:18 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ HOMEPAGE="http://www.coin3d.org/"
 SRC_URI="ftp://ftp.coin3d.org/pub/coin/src/all/${MY_P}.tar.gz"
 
 LICENSE="|| ( GPL-2 PEL )"
-KEYWORDS="amd64 ppc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ~arm ppc x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 IUSE="bzip2 debug doc javascript openal simage static-libs threads zlib"
 

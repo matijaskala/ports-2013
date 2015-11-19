@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/shoutcast-search/shoutcast-search-0.3.1.ebuild,v 1.2 2011/03/13 16:02:27 hwoarang Exp $
+# $Id$
 
 EAPI=3
 
@@ -14,7 +14,7 @@ inherit distutils
 
 DESCRIPTION="A command-line tool for searching SHOUTcast stations"
 HOMEPAGE="http://www.k2h.se/code/shoutcast-search.html"
-SRC_URI="http://github.com/halhen/${PN}/tarball/${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/halhen/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

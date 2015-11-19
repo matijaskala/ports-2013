@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/gtg/gtg-0.3.ebuild,v 1.2 2015/04/08 07:30:35 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -10,7 +10,7 @@ inherit eutils fdo-mime gnome2-utils distutils-r1 versionator
 MY_PV="$(get_version_component_range 1-2)"
 DESCRIPTION="Personal organizer for the GNOME desktop environment"
 HOMEPAGE="http://gtg.fritalk.com/"
-SRC_URI="http://launchpad.net/${PN}/${MY_PV}/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/${MY_PV}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

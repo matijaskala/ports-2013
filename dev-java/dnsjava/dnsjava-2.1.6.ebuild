@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/dnsjava/dnsjava-2.1.6.ebuild,v 1.2 2015/04/02 18:04:29 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,11 +14,11 @@ SRC_URI="http://www.dnsjava.org/download/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND=">=virtual/jre-1.4"
-DEPEND=">=virtual/jdk-1.4
+RDEPEND=">=virtual/jre-1.6"
+DEPEND=">=virtual/jdk-1.6
 		test? (
 			dev-java/junit:0
 			dev-java/ant-junit:0

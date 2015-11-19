@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/spectools/spectools-2011.08.1_p20140618.ebuild,v 1.1 2014/06/18 20:42:56 zerochaos Exp $
+# $Id$
 
 EAPI=5
 inherit udev toolchain-funcs
@@ -27,8 +27,9 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="debug +ncurses +gtk"
 
-RDEPEND="virtual/libusb:0
-	ncurses? ( sys-libs/ncurses )
+RDEPEND="
+	virtual/libusb:0
+	ncurses? ( sys-libs/ncurses:0= )
 	gtk? ( x11-libs/gtk+:2 )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-backup/bareos/bareos-13.2.4-r1.ebuild,v 1.1 2015/05/05 16:03:52 mschiff Exp $
+# $Id$
 
 EAPI="5"
 
@@ -42,14 +42,14 @@ DEPEND="
 		acl? ( virtual/acl[static-libs] )
 		sys-libs/zlib[static-libs]
 		dev-libs/lzo[static-libs]
-		sys-libs/ncurses[static-libs]
+		sys-libs/ncurses:=[static-libs]
 		ssl? ( dev-libs/openssl:0[static-libs] )
 	)
 	!static? (
 		acl? ( virtual/acl )
 		dev-libs/lzo
 		ssl? ( dev-libs/openssl:0 )
-		sys-libs/ncurses
+		sys-libs/ncurses:=
 		sys-libs/zlib
 	)
 	python? ( ${PYTHON_DEPS} )

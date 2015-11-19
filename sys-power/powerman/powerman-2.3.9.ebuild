@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/powerman/powerman-2.3.9.ebuild,v 1.2 2014/05/12 10:19:16 ssuominen Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="RPC/PDU control and monitoring service for data center or compute cluster power management"
-HOMEPAGE="http://code.google.com/p/powerman/"
-SRC_URI="http://powerman.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/powerman/"
+SRC_URI="https://powerman.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

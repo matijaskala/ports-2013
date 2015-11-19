@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/lxc/lxc-1.0.7.ebuild,v 1.7 2015/06/14 20:07:42 zlogene Exp $
+# $Id$
 
 EAPI="5"
 
@@ -14,7 +14,7 @@ DESCRIPTION="LinuX Containers userspace utilities"
 HOMEPAGE="https://linuxcontainers.org/"
 SRC_URI="https://github.com/lxc/lxc/archive/${MY_P}.tar.gz"
 
-KEYWORDS="amd64 ~arm ~arm64 ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ppc64 x86"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -56,6 +56,7 @@ CONFIG_CHECK="~CGROUPS ~CGROUP_DEVICE
 	~!GRKERNSEC_CHROOT_PIVOT
 	~!GRKERNSEC_CHROOT_CHMOD
 	~!GRKERNSEC_CHROOT_CAPS
+	~!GRKERNSEC_PROC
 "
 
 ERROR_DEVPTS_MULTIPLE_INSTANCES="CONFIG_DEVPTS_MULTIPLE_INSTANCES:	needed for pts inside container"
@@ -77,6 +78,7 @@ ERROR_GRKERNSEC_CHROOT_DOUBLE=":CONFIG_GRKERNSEC_CHROOT_DOUBLE	some GRSEC featur
 ERROR_GRKERNSEC_CHROOT_PIVOT=":CONFIG_GRKERNSEC_CHROOT_PIVOT	some GRSEC features make LXC unusable see postinst notes"
 ERROR_GRKERNSEC_CHROOT_CHMOD=":CONFIG_GRKERNSEC_CHROOT_CHMOD	some GRSEC features make LXC unusable see postinst notes"
 ERROR_GRKERNSEC_CHROOT_CAPS=":CONFIG_GRKERNSEC_CHROOT_CAPS	some GRSEC features make LXC unusable see postinst notes"
+ERROR_GRKERNSEC_PROC=":CONFIG_GRKERNSEC_PROC:  this GRSEC feature is incompatible with unprivileged containers"
 
 DOCS=(AUTHORS CONTRIBUTING MAINTAINERS NEWS README doc/FAQ.txt)
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/freecad/freecad-0.13.1830-r1.ebuild,v 1.5 2015/04/08 17:58:14 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ IUSE=""
 
 COMMON_DEPEND="dev-cpp/eigen:3
 	dev-games/ode
-	dev-libs/boost
+	<dev-libs/boost-1.57
 	dev-libs/libf2c
 	dev-libs/libspnav[X]
 	dev-libs/xerces-c[icu]
@@ -32,8 +32,7 @@ COMMON_DEPEND="dev-cpp/eigen:3
 	dev-qt/qtxmlpatterns:4
 	media-libs/SoQt
 	media-libs/coin[doc]
-	sci-libs/gts
-	sci-libs/opencascade
+	sci-libs/opencascade:6.7.1
 	sys-libs/zlib
 	virtual/glu
 	${PYTHON_DEPS}"
@@ -47,8 +46,8 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	>=dev-lang/swig-2.0.4-r1:0"
 
-# http://bugs.gentoo.org/show_bug.cgi?id=352435
-# http://www.gentoo.org/foundation/en/minutes/2011/20110220_trustees.meeting_log.txt
+# https://bugs.gentoo.org/show_bug.cgi?id=352435
+# https://www.gentoo.org/foundation/en/minutes/2011/20110220_trustees.meeting_log.txt
 RESTRICT="bindist mirror"
 
 # TODO:
@@ -59,6 +58,8 @@ RESTRICT="bindist mirror"
 pkg_setup() {
 	fortran-2_pkg_setup
 	python-single-r1_pkg_setup
+
+	[ -z "${CASROOT}" ] && die "empty \$CASROOT, run eselect opencascade set or define otherwise"
 }
 
 src_prepare() {
@@ -75,11 +76,8 @@ src_prepare() {
 	# and also because the same module has been removed upstream (commit c0e2c9)
 	epatch "${FILESDIR}"/${P}-no-machdist.patch
 
-	local my_cas_version=$(eselect opencascade show 2>/dev/null || echo 6.5)
-	if [ "${my_cas_version}" \> "6.5.0" ] ; then
-		epatch  "${FILESDIR}"/${PN}-0.12.5284-occ-6.6.patch
-		epatch  "${FILESDIR}"/${P}-occ-6.7.patch
-	fi
+	epatch  "${FILESDIR}"/${PN}-0.12.5284-occ-6.6.patch
+	epatch  "${FILESDIR}"/${P}-occ-6.7.patch
 
 	einfo "Patching cMake/FindCoin3DDoc.cmake ..."
 	local my_coin_version=$(best_version media-libs/coin)
@@ -89,12 +87,6 @@ src_prepare() {
 }
 
 src_configure() {
-	local my_occ_env=${EROOT}etc/env.d/50opencascade
-	if [ -e "${EROOT}etc//env.d/51opencascade" ] ; then
-		my_occ_env=${EROOT}etc/env.d/51opencascade
-	fi
-	export CASROOT=$(sed -ne '/^CASROOT=/{s:.*=:: ; p}' $my_occ_env)
-
 	local mycmakeargs=(
 		-DOCC_INCLUDE_DIR="${CASROOT}"/inc
 		-DOCC_INCLUDE_PATH="${CASROOT}"/inc

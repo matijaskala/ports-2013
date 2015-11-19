@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/xfce-extra/thunar-vcs-plugin/thunar-vcs-plugin-0.1.4.ebuild,v 1.9 2013/04/11 18:06:50 ago Exp $
+# $Id$
 
 EAPI=5
 inherit xfconf
@@ -8,11 +8,11 @@ inherit xfconf
 DESCRIPTION="adds Subversion and GIT actions to the context menu of thunar"
 HOMEPAGE="http://goodies.xfce.org/projects/thunar-plugins/thunar-vcs-plugin"
 SRC_URI="mirror://xfce/src/thunar-plugins/${PN}/${PV%.*}/${P}.tar.bz2
-	http://dev.gentoo.org/~ssuominen/${P}-el.po.bz2
-	http://dev.gentoo.org/~ssuominen/${P}-eu.po.bz2
+	https://dev.gentoo.org/~ssuominen/${P}-el.po.bz2
+	https://dev.gentoo.org/~ssuominen/${P}-eu.po.bz2
 	mirror://gentoo/${P}-ru.po.bz2
-	http://dev.gentoo.org/~ssuominen/${P}-ug.po.bz2
-	http://dev.gentoo.org/~ssuominen/${P}-uk.po.bz2"
+	https://dev.gentoo.org/~ssuominen/${P}-ug.po.bz2
+	https://dev.gentoo.org/~ssuominen/${P}-uk.po.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -48,7 +48,7 @@ src_prepare() {
 	# http://git.xfce.org/thunar-plugins/thunar-vcs-plugin/commit/?id=e87584f7b87627a322f6e41025e5e52d65ebb4d8
 	local lang
 	for lang in el eu ru ug uk; do
-		mv "${WORKDIR}"/${P}-${lang}.po po/${lang}.po || die
+		mv "${WORKDIR}"/${P}-${lang}.po po/${lang}.po || die
 	done
 	xfconf_src_prepare
 }

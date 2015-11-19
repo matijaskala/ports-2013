@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/iconbox/iconbox-0.2.ebuild,v 1.8 2012/05/17 14:23:19 ssuominen Exp $
+# $Id$
 
 EAPI=4
 
 MY_P=${P/-/_}
 
 DESCRIPTION="App for placing icons in a menu which auto-hides"
-HOMEPAGE="http://packages.gentoo.org/"
+HOMEPAGE="https://packages.gentoo.org/"
 SRC_URI="mirror://gentoo/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"

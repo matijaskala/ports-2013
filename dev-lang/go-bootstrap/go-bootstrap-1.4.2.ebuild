@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/go-bootstrap/go-bootstrap-1.4.2.ebuild,v 1.1 2015/03/18 00:51:29 williamh Exp $
+# $Id$
 
 EAPI=5
 
@@ -26,9 +26,11 @@ RDEPEND=""
 QA_MULTILIB_PATHS="usr/lib/go1.4/pkg/tool/.*/.*"
 
 # The go language uses *.a files which are _NOT_ libraries and should not be
-# stripped.
-STRIP_MASK="/usr/lib/go1.4/pkg/linux*/*.a
-	/usr/lib/go1.4/pkg/freebsd*/*.a /usr/lib/go1.4/pkg/darwin*/*.a"
+# stripped. The test data objects should also be left alone and unstripped.
+STRIP_MASK="/usr/lib/go1.4/pkg/*.a
+	/usr/lib/go1.4/src/debug/elf/testdata/*
+	/usr/lib/go1.4/src/debug/dwarf/testdata/*
+	/usr/lib/go1.4/src/runtime/race/*.syso"
 
 S="${WORKDIR}"/go
 
@@ -63,7 +65,7 @@ src_install()
 {
 	dodir /usr/lib/go1.4
 	exeinto /usr/lib/go1.4/bin
-doexe bin/*
+	doexe bin/*
 	insinto /usr/lib/go1.4
 	doins -r lib pkg src
 	fperms -R +x /usr/lib/go1.4/pkg/tool

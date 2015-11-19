@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/gv/gv-3.7.3.90.ebuild,v 1.1 2013/01/10 20:22:10 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
 
 DESCRIPTION="Viewer for PostScript and PDF documents using Ghostscript"
-HOMEPAGE="http://www.gnu.org/software/gv/"
+HOMEPAGE="https://www.gnu.org/software/gv/"
 # Change 'gnu-alpha' to 'gnu' for final release, like 3.7.4
 SRC_URI="mirror://gnu-alpha/gv/${P}.tar.gz"
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/qxmledit/qxmledit-0.8.8.1.ebuild,v 1.3 2014/03/12 05:20:38 phajdan.jr Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ MY_PV="$(replace_version_separator 3 '-')"
 MY_P="qxmledit-${MY_PV}-src"
 
 DESCRIPTION="Qt4 XML Editor"
-HOMEPAGE="http://code.google.com/p/qxmledit/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tgz"
+HOMEPAGE="http://qxmledit.org/"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tgz"
 
 LICENSE="LGPL-2"
 SLOT="0"

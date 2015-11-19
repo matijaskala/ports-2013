@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apache/pwauth/pwauth-2.3.10.ebuild,v 1.1 2013/01/01 16:26:41 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 
 inherit base flag-o-matic pam toolchain-funcs
 
 DESCRIPTION="A Unix Web Authenticator"
-HOMEPAGE="http://code.google.com/p/pwauth/"
-SRC_URI="http://pwauth.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/phokz/pwauth/tree/master/pwauth"
+SRC_URI="https://pwauth.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="Apache-1.1"
 SLOT="0"

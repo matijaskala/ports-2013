@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/graphy/graphy-1.0-r1.ebuild,v 1.8 2015/04/08 08:05:21 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ inherit distutils-r1
 MY_P=${PN}_${PV}
 
 DESCRIPTION="Simple Chart Library for Python"
-HOMEPAGE="http://code.google.com/p/graphy/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/graphy/"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tar.bz2"
 
 LICENSE="Apache-2.0"
 SLOT="0"

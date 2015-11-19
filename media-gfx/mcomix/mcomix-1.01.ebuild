@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/mcomix/mcomix-1.01.ebuild,v 1.1 2015/04/21 05:40:16 rhill Exp $
+# $Id$
 
 EAPI="5"
 
@@ -22,7 +22,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	>=dev-python/pygtk-2.14[${PYTHON_USEDEP}]
 	virtual/jpeg
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	x11-libs/gdk-pixbuf
 	!media-gfx/comix"
 

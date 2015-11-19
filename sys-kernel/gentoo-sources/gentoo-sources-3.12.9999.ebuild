@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/gentoo-sources/gentoo-sources-3.12.9999.ebuild,v 1.3 2015/01/14 13:30:02 mpagano Exp $
+# $Id$
 
 EAPI="5"
 ETYPE="sources"
@@ -10,7 +10,7 @@ detect_version
 detect_arch
 
 KEYWORDS=""
-HOMEPAGE="http://dev.gentoo.org/~mpagano/genpatches"
+HOMEPAGE="https://dev.gentoo.org/~mpagano/genpatches"
 IUSE="deblob experimental"
 
 DESCRIPTION="Full sources including the Gentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
@@ -18,7 +18,7 @@ SRC_URI="https://www.kernel.org/pub/linux/kernel/v3.x/linux-${KV_MAJOR}.${KV_MIN
 ESVN_REPO_URI="svn://anonsvn.gentoo.org/linux-patches/genpatches-2.6/trunk/${KV_MAJOR}.${KV_MINOR}"
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/stable/stable-queue.git
 	https://git.kernel.org/pub/scm/linux/kernel/git/stable/stable-queue.git
-	http://git.kernel.org/pub/scm/linux/kernel/git/stable/stable-queue.git"
+	https://git.kernel.org/pub/scm/linux/kernel/git/stable/stable-queue.git"
 
 S="${WORKDIR}/linux-${KV_MAJOR}.${KV_MINOR}.9999"
 

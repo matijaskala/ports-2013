@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qthelp/qthelp-4.8.6-r3.ebuild,v 1.7 2015/05/30 10:54:40 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,13 +10,13 @@ DESCRIPTION="The Help module for the Qt toolkit"
 SRC_URI+="
 	compat? (
 		http://download.qt.io/archive/qt/4.6/qt-assistant-qassistantclient-library-compat-src-4.6.3.tar.gz
-		http://dev.gentoo.org/~pesa/distfiles/qt-assistant-compat-headers-4.7.tar.gz
+		https://dev.gentoo.org/~pesa/distfiles/qt-assistant-compat-headers-4.7.tar.gz
 	)"
 
 if [[ ${QT4_BUILD_TYPE} == live ]]; then
-	KEYWORDS="arm ppc ppc64"
+	KEYWORDS="alpha arm ia64 ppc ppc64 sparc"
 else
-	KEYWORDS="~alpha amd64 arm ~ia64 ppc ppc64 ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos"
+	KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 fi
 
 IUSE="compat doc"

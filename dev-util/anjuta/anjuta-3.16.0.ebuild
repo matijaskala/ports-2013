@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/anjuta/anjuta-3.16.0.ebuild,v 1.1 2015/06/09 15:07:18 eva Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -18,7 +18,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Anjuta"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="amd64 ~ppc ~sparc x86 ~x86-fbsd"
 
 IUSE="debug devhelp glade +introspection packagekit subversion terminal test vala"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -95,10 +95,6 @@ will need to:
 
 	# Conflicts with -pg in a plugin, bug #266777
 	filter-flags -fomit-frame-pointer
-
-	# python2.7-configure in Fedora vs. python-configure in Gentoo
-	sed -e 's:$PYTHON-config:$PYTHON$PYTHON_VERSION-config:g' \
-		-i plugins/am-project/tests/anjuta.lst || die "sed failed"
 
 	# Do not build benchmarks, they are not installed and for dev purpose only
 	sed -e '/SUBDIRS =/ s/benchmark//' \

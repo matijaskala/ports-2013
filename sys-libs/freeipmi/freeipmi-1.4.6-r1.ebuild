@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/freeipmi/freeipmi-1.4.6-r1.ebuild,v 1.1 2014/11/12 01:16:31 flameeyes Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ AT_M4DIR="config"
 inherit eutils multilib autotools-utils
 
 DESCRIPTION="Provides Remote-Console and System Management Software as per IPMI v1.5/2.0"
-HOMEPAGE="http://www.gnu.org/software/freeipmi/"
+HOMEPAGE="https://www.gnu.org/software/freeipmi/"
 
 MY_P="${P/_/.}"
 S="${WORKDIR}"/${MY_P}

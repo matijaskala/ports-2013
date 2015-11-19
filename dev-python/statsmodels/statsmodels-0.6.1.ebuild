@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/statsmodels/statsmodels-0.6.1.ebuild,v 1.5 2015/03/08 23:59:55 pacho Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_{3,4} )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
 
 inherit distutils-r1 virtualx
 
@@ -34,6 +34,11 @@ DEPEND="${CDEPEND}
 		dev-python/ipython[${PYTHON_USEDEP}]
 		)
 	test? ( dev-python/nose[${PYTHON_USEDEP}] )"
+
+PATCHES=(
+	"${FILESDIR}"/${P}-pandas-0.17.0.patch
+	"${FILESDIR}"/${P}-numpy-1.10.patch
+)
 
 pkg_setup() {
 	export MPLCONFIGDIR="${T}" HOME="${T}"

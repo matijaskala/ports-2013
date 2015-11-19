@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/conduit/conduit-1.0.15.1.ebuild,v 1.2 2014/07/25 09:16:31 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,12 +10,12 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Streaming data processing library"
-HOMEPAGE="http://github.com/snoyberg/conduit"
+HOMEPAGE="https://github.com/snoyberg/conduit"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="nohandles"
 
 RDEPEND=">=dev-haskell/lifted-base-0.1:=[profile?]

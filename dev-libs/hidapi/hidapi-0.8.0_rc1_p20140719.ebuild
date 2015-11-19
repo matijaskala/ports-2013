@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/hidapi/hidapi-0.8.0_rc1_p20140719.ebuild,v 1.1 2015/03/03 23:32:53 blueness Exp $
+# $Id$
 
 EAPI=5
 
@@ -24,20 +24,20 @@ SRC_URI="https://github.com/signal11/${PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}
 
 LICENSE="|| ( BSD GPL-3 HIDAPI )"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
-IUSE="doc static-libs X"
+KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86"
+IUSE="doc fox static-libs"
 
 RDEPEND="virtual/libusb:1[${MULTILIB_USEDEP}]
 	virtual/libudev:0[${MULTILIB_USEDEP}]"
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 	virtual/pkgconfig
-	X? ( x11-libs/fox )"
+	fox? ( x11-libs/fox )"
 
 S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 
 src_prepare() {
-	if ! use X; then
+	if ! use fox; then
 		sed -i -e 's:PKG_CHECK_MODULES(\[fox\], .*):AC_SUBST(fox_CFLAGS,[ ])AC_SUBST(fox_LIBS,[ ]):' configure.ac || die
 	fi
 
@@ -53,7 +53,7 @@ src_prepare() {
 
 multilib_src_configure() {
 	local myeconfargs=(
-		$(multilib_native_use_enable X testgui)
+		$(multilib_native_use_enable fox testgui)
 	)
 
 	autotools-utils_src_configure

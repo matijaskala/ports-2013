@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tex/dot2tex/dot2tex-2.8.7-r1.ebuild,v 1.5 2015/04/08 18:09:45 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="A Graphviz to LaTeX converter"
 HOMEPAGE="http://www.fauskes.net/code/dot2tex/"
-SRC_URI="http://dot2tex.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://dot2tex.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

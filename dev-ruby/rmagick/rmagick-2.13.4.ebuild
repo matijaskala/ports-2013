@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/rmagick/rmagick-2.13.4.ebuild,v 1.2 2014/12/30 08:33:08 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21 ruby22"
@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/gemhome/rmagick"
 
 LICENSE="Artistic"
 SLOT="0"
-KEYWORDS="~amd64 ~hppa ~mips ~ppc ~ppc64 ~x86 ~x86-macos"
+KEYWORDS="amd64 hppa ~mips ppc ppc64 x86 ~x86-macos"
 IUSE="doc"
 
 # Since 2.13.3 rmagick now supports HDRI enabled, but with it enabled

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/imaxima/imaxima-1.0-r3.ebuild,v 1.8 2015/04/28 17:18:30 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit elisp
 
 MY_P="${PN}-imath-${PV/_}"
 DESCRIPTION="Imaxima enables graphical output in Maxima sessions with emacs"
-HOMEPAGE="http://sites.google.com/site/imaximaimath/"
+HOMEPAGE="https://sites.google.com/site/imaximaimath/"
 SRC_URI="https://sites.google.com/site/imaximaimath/download-and-install/${MY_P}.tar.gz"
 
 LICENSE="GPL-2+"

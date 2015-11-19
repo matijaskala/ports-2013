@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/thin-provisioning-tools/thin-provisioning-tools-0.2.8-r1.ebuild,v 1.10 2014/08/10 20:22:49 slyfox Exp $
+# $Id$
 
 EAPI=5
 inherit autotools
@@ -8,7 +8,7 @@ inherit autotools
 DESCRIPTION="A suite of tools for thin provisioning on Linux"
 HOMEPAGE="https://github.com/jthornber/thin-provisioning-tools"
 EXT=.tar.gz
-SRC_URI="http://github.com/jthornber/${PN}/archive/v${PV}${EXT} -> ${P}${EXT}"
+SRC_URI="https://github.com/jthornber/${PN}/archive/v${PV}${EXT} -> ${P}${EXT}"
 
 LICENSE="GPL-3"
 SLOT="0"

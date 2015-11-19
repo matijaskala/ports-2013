@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmbutton/wmbutton-0.7.0.ebuild,v 1.2 2014/11/05 13:07:53 voyageur Exp $
+# $Id$
 
 EAPI=5
 inherit eutils toolchain-funcs
@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs
 DESCRIPTION="a dockapp application that displays nine configurable buttons"
 HOMEPAGE="http://windowmaker.org/dockapps/?name=wmbutton"
 # Grab from http://windowmaker.org/dockapps/?download=${P}.tar.gz
-SRC_URI="http://dev.gentoo.org/~voyageur/distfiles/${P}.tar.gz
+SRC_URI="https://dev.gentoo.org/~voyageur/distfiles/${P}.tar.gz
 	branding? ( mirror://gentoo/${PN}-buttons.xpm )"
 
 LICENSE="GPL-2"

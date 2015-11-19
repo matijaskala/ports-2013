@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libgit2/libgit2-0.20.0-r1.ebuild,v 1.4 2014/03/09 11:55:27 pacho Exp $
+# $Id$
 
 EAPI=5
 
 inherit cmake-utils multilib
 
 DESCRIPTION="A linkable library for Git"
-HOMEPAGE="http://libgit2.github.com/"
+HOMEPAGE="https://libgit2.github.com/"
 SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2-with-linking-exception"
@@ -58,7 +58,7 @@ src_install() {
 	cmake-utils_src_install
 
 	if use examples ; then
-		find examples -name .gitignore -delete || die
+		find examples -name .gitignore -delete || die
 		dodoc -r examples
 		docompress -x /usr/share/doc/${PF}/examples
 	fi

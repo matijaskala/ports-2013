@@ -1,19 +1,19 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/gentoo-vdr-scripts/gentoo-vdr-scripts-2.7.3.ebuild,v 1.1 2015/05/08 13:12:43 hd_brummy Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils user
 
 DESCRIPTION="Scripts necessary for use of vdr as a set-top-box"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI="mirror://gentoo/${P}.tar.bz2
-	http://dev.gentoo.org/~hd_brummy/distfiles/${P}.tar.bz2"
+	https://dev.gentoo.org/~hd_brummy/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
+KEYWORDS="amd64 ~arm ~ppc x86"
 IUSE="nvram"
 
 RDEPEND="nvram? ( sys-power/nvram-wakeup )
@@ -40,7 +40,7 @@ src_prepare() {
 
 src_install() {
 	default
-	nonfatal dodoc README* TODO ChangeLog
+	dodoc README* TODO ChangeLog
 
 	# create necessary directories
 	diropts -ovdr -gvdr

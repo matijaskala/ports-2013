@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/man-pages-posix/man-pages-posix-2013a.ebuild,v 1.4 2014/07/06 23:22:04 kumba Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit eutils
 
 MY_P="${PN}-${PV:0:4}-${PV:0-1}"
 DESCRIPTION="POSIX man-pages (0p, 1p, 3p)"
-HOMEPAGE="http://www.kernel.org/doc/man-pages/"
+HOMEPAGE="https://www.kernel.org/doc/man-pages/"
 SRC_URI="mirror://kernel/linux/docs/man-pages/${PN}/${MY_P}.tar.xz"
 
 LICENSE="man-pages-posix-2013"

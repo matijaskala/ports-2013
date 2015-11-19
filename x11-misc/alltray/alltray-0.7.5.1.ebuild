@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/alltray/alltray-0.7.5.1.ebuild,v 1.9 2013/05/12 12:07:14 pacho Exp $
+# $Id$
 
 EAPI=4
 VALA_MIN_API_VERSION="0.14"
@@ -11,7 +11,7 @@ MY_P=${P}dev
 
 DESCRIPTION="An application which allows any application to be docked into the system notification area"
 HOMEPAGE="http://alltray.trausch.us/"
-SRC_URI="http://code.launchpad.net/${PN}/trunk/${PV}dev/+download/${MY_P}.tar.gz"
+SRC_URI="https://code.launchpad.net/${PN}/trunk/${PV}dev/+download/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -40,7 +40,7 @@ src_prepare() {
 		-e '/Encoding/d' \
 		-e '/Categories/s:Application;::' \
 		-e '/Icon/s:.png::' \
-		data/alltray.desktop{,.in} || die
+		data/alltray.desktop{,.in} || die
 
 	vala_src_prepare
 	sed -i -e '/AC_PATH_PROG/s:valac:${VALAC}:g' configure.ac || die

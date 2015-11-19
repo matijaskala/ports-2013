@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/idutils/idutils-4.6.ebuild,v 1.2 2013/11/24 08:17:42 pacho Exp $
+# $Id$
 
 EAPI=4
 inherit elisp-common eutils
 
 DESCRIPTION="Fast, high-capacity, identifier database tool"
-HOMEPAGE="http://www.gnu.org/software/idutils/"
+HOMEPAGE="https://www.gnu.org/software/idutils/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"

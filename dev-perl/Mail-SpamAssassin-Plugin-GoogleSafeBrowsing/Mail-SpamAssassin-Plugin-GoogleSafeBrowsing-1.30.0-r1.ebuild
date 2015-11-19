@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/Mail-SpamAssassin-Plugin-GoogleSafeBrowsing/Mail-SpamAssassin-Plugin-GoogleSafeBrowsing-1.30.0-r1.ebuild,v 1.1 2014/08/26 19:44:04 axs Exp $
+# $Id$
 
 EAPI=5
 
@@ -40,7 +40,7 @@ pkg_postinst() {
 	fi
 	elog "To use this package:"
 	elog "1. You MUST apply for a free apikey at:"
-	elog "   http://code.google.com/apis/safebrowsing/key_signup.html"
+	elog "   https://code.google.com/apis/safebrowsing/key_signup.html"
 	elog "2. Place the key into /etc/mail/spamassassin/24_google_safebrowsing.cf"
 	elog "3. Manually run the script /usr/sbin/update_google_safebrowsing.sh"
 	elog "4. Enable the plugin by uncommenting the loadplugin entry in"

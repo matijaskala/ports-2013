@@ -1,11 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-nss/python-nss-0.16.0.ebuild,v 1.1 2015/02/04 09:16:17 idella4 Exp $
+# $Id$
 
 EAPI=5
+
 PYTHON_COMPAT=( python2_7 )	# still only supports py2
 
-inherit distutils-r1 versionator
+inherit distutils-r1 flag-o-matic versionator
 
 MY_PV="$(replace_all_version_separators  '_' )"
 DESCRIPTION="Python bindings for Network Security Services (NSS)"
@@ -17,16 +18,20 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc examples"
 
-DEPEND="dev-libs/nss
+RDEPEND="
 	dev-libs/nspr
-	doc? ( dev-python/docutils[${PYTHON_USEDEP}]
-			dev-python/epydoc[${PYTHON_USEDEP}] )"
-RDEPEND="${DEPEND}"
+	dev-libs/nss
+"
+DEPEND="${RDEPEND}
+	doc? (
+		dev-python/docutils[${PYTHON_USEDEP}]
+		dev-python/epydoc[${PYTHON_USEDEP}]
+	)"
 
-CFLAGS="${CFLAGS} -fno-strict-aliasing"
 DOCS="README doc/ChangeLog"
 
 python_prepare_all() {
+	append-cflags -fno-strict-aliasing
 	# Remove test file using a dep, called nss-tools, unavailable in portage
 	rm -f test/test_pkcs12.py || die
 	sed -e '/import test_pkcs12/d' \

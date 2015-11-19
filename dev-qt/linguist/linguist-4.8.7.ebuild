@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/linguist/linguist-4.8.7.ebuild,v 1.1 2015/05/26 18:16:46 pesa Exp $
+# $Id$
 
 EAPI=5
 inherit eutils qt4-build-multilib
@@ -8,7 +8,7 @@ inherit eutils qt4-build-multilib
 DESCRIPTION="Graphical tool for translating Qt applications"
 
 if [[ ${QT4_BUILD_TYPE} == release ]]; then
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 fi
 
 IUSE=""

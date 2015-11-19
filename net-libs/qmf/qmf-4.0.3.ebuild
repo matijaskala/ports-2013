@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/qmf/qmf-4.0.3.ebuild,v 1.7 2015/06/14 23:29:01 pesa Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ if [[ ${PV} == *9999 ]]; then
 		"https://code.qt.io/git/qt-labs/messagingframework.git"
 	)
 else
-	SRC_URI="http://dev.gentoo.org/~pesa/distfiles/${P}.tar.gz"
+	SRC_URI="https://dev.gentoo.org/~pesa/distfiles/${P}.tar.gz"
 	S=${WORKDIR}/qt-labs-messagingframework
 fi
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/openconnect/openconnect-7.06-r1.ebuild,v 1.1 2015/05/12 01:11:06 floppym Exp $
+# $Id$
 
 EAPI="5"
 
@@ -17,8 +17,8 @@ SRC_URI="ftp://ftp.infradead.org/pub/${PN}/${P}.tar.gz
 
 LICENSE="LGPL-2.1 GPL-2"
 SLOT="0/5"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-IUSE="doc +gnutls gssapi java libproxy nls static-libs"
+KEYWORDS="amd64 arm ~arm64 ppc64 x86"
+IUSE="doc +gnutls gssapi java libproxy nls smartcard static-libs"
 ILINGUAS="ar cs de el en_GB en_US es eu fi fr gl id lt nl pa pl pt pt_BR sk sl tg ug uk zh_CN zh_TW"
 for lang in $ILINGUAS; do
 	IUSE="${IUSE} linguas_${lang}"
@@ -35,7 +35,8 @@ DEPEND="dev-libs/libxml2
 	)
 	gssapi? ( virtual/krb5 )
 	libproxy? ( net-libs/libproxy )
-	nls? ( virtual/libintl )"
+	nls? ( virtual/libintl )
+	smartcard? ( sys-apps/pcsc-lite:0= )"
 RDEPEND="${DEPEND}
 	sys-apps/iproute2
 	!<sys-apps/openrc-0.13"
@@ -45,19 +46,10 @@ DEPEND="${DEPEND}
 	java? ( >=virtual/jdk-1.6 )
 	nls? ( sys-devel/gettext )"
 
-tun_tap_check() {
-	ebegin "Checking for TUN/TAP support"
-	if { ! linux_chkconfig_present TUN; }; then
-		eerror "Please enable TUN/TAP support in your kernel config, found at:"
-		eerror
-		eerror "  Device Drivers  --->"
-		eerror "    [*] Network device support  --->"
-		eerror "      <*>   Universal TUN/TAP device driver support"
-		eerror
-		eerror "and recompile your kernel ..."
-		die "no CONFIG_TUN support detected!"
-	fi
-	eend $?
+CONFIG_CHECK="~TUN"
+
+pkg_pretend() {
+	check_extra_config
 }
 
 pkg_setup() {
@@ -65,19 +57,6 @@ pkg_setup() {
 
 	if use doc; then
 		python-any-r1_pkg_setup
-	fi
-
-	if use kernel_linux; then
-		get_version
-		if linux_config_exists; then
-			tun_tap_check
-		else
-			ewarn "Was unable to determine your kernel .config"
-			ewarn "Please note that OpenConnect requires CONFIG_TUN to be set in your"
-			ewarn "kernel .config, Without it, it will not work correctly."
-			# We don't die here, so it's possible to compile this package without
-			# kernel sources available. Required for cross-compilation.
-		fi
 	fi
 }
 
@@ -99,6 +78,7 @@ src_configure() {
 		$(use_with libproxy) \
 		--without-stoken \
 		$(use_with gssapi) \
+		$(use_with smartcard libpcsclite) \
 		$(use_with java)
 }
 

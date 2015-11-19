@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/kipi-plugins/kipi-plugins-4.4.0.ebuild,v 1.8 2015/06/04 19:07:45 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -39,7 +39,7 @@ COMMONDEPEND="
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-libs/qjson
-	gpssync?	( >=media-libs/libkgeomap-4.2.0 )
+	gpssync?	( >=kde-apps/libkgeomap-4.2.0:4 )
 	media-libs/libpng:0=
 	media-libs/tiff
 	virtual/jpeg

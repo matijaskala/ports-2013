@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lua/lua-zlib/lua-zlib-0.4.ebuild,v 1.2 2015/06/06 19:41:11 jlec Exp $
+# $Id$
 
 EAPI=5
 
 inherit cmake-utils
 
 DESCRIPTION="Lua bindings to zlib"
-HOMEPAGE="http://github.com/brimworks/lua-zlib"
+HOMEPAGE="https://github.com/brimworks/lua-zlib"
 SRC_URI="https://github.com/brimworks/${PN}/tarball/v${PV} -> ${P}.tgz"
 
 LICENSE="MIT"

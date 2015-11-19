@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-libs/libfm/libfm-1.2.3.ebuild,v 1.6 2015/04/02 20:03:59 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ MY_PV=${PV/_/}
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="A library for file management"
 HOMEPAGE="http://pcmanfm.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${MY_P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${MY_P}.tar.xz"
 
 KEYWORDS="~alpha amd64 arm ~arm64 ~mips ppc x86 ~amd64-linux ~x86-linux"
 LICENSE="GPL-2"

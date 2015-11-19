@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-visualization/mayavi/mayavi-4.3.0.ebuild,v 1.2 2015/03/06 22:43:56 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit distutils-r1 virtualx
 DESCRIPTION="Enthought Tool Suite: Scientific data 3-dimensional visualizer"
 HOMEPAGE="
 	http://code.enthought.com/projects/mayavi/
-	http://pypi.python.org/pypi/mayavi/"
+	https://pypi.python.org/pypi/mayavi/"
 SRC_URI="http://www.enthought.com/repo/ets/${P}.tar.gz"
 
 LICENSE="BSD"

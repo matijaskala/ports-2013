@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/colorcvs/colorcvs-1.4-r1.ebuild,v 1.5 2012/12/27 19:46:05 jlec Exp $
+# $Id$
 
 EAPI=3
 
 inherit eutils prefix
 
 DESCRIPTION="A tool based on colorgcc to beautify cvs output"
-HOMEPAGE="http://packages.gentoo.org/package/dev-vcs/colorcvs"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.bz2"
+HOMEPAGE="https://packages.gentoo.org/package/dev-vcs/colorcvs"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

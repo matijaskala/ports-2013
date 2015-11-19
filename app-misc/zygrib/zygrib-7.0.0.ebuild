@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/zygrib/zygrib-7.0.0.ebuild,v 1.3 2015/03/25 18:51:22 mschiff Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ MY_PN="zyGrib"
 DESCRIPTION="GRIB File Viewer - Weather data visualization"
 HOMEPAGE="http://www.zygrib.org/"
 SRC_URI="http://www.zygrib.org/getfile.php?file=${MY_PN}-${PV}.tgz -> ${P}.tgz
-	http://dev.gentoo.org/~mschiff/distfiles/${PN}-icon.png
+	https://dev.gentoo.org/~mschiff/distfiles/${PN}-icon.png
 	maps?   (
 		http://zygrib.org/getfile.php?file=zyGrib_maps2.4.tgz -> zygrib-maps2.4.tgz
 		http://www.zygrib.org/getfile.php?file=cities_1k-3k.txt.gz -> zygrib-cities_1k-3k.txt.gz

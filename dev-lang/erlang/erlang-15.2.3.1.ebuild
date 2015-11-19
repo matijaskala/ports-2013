@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/erlang/erlang-15.2.3.1.ebuild,v 1.9 2013/11/16 08:54:30 dirtyepic Exp $
+# $Id$
 
 EAPI=3
 WX_GTK_VER="2.8"
@@ -164,7 +164,7 @@ pkg_postinst() {
 	use emacs && elisp-site-regen
 	elog
 	elog "If you need a symlink to one of Erlang's binaries,"
-	elog "please open a bug on http://bugs.gentoo.org/"
+	elog "please open a bug on https://bugs.gentoo.org/"
 	elog
 	elog "Gentoo's versioning scheme differs from the author's, so please refer to this version as ${MY_PV}"
 	elog

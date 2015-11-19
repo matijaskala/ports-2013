@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/cinelerra/cinelerra-20140710.ebuild,v 1.3 2015/02/08 16:21:49 aballier Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils multilib flag-o-matic
 
 DESCRIPTION="The most advanced non-linear video editor and compositor"
 HOMEPAGE="http://www.cinelerra.org/"
-SRC_URI="http://dev.gentoo.org/~ssuominen/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~ssuominen/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -61,10 +61,17 @@ src_prepare() {
 		"${FILESDIR}"/${P}-underlinking.patch \
 		"${FILESDIR}"/${P}-ffmpeg-0.11.patch \
 		"${FILESDIR}"/${PN}-libav9.patch \
-		"${FILESDIR}"/${PN}-pngtoh.patch
+		"${FILESDIR}"/${PN}-pngtoh.patch \
+		"${FILESDIR}"/${PN}-nofindobject.patch \
+		"${FILESDIR}"/${PN}-asm-gcc52.patch \
+		"${FILESDIR}"/${PN}-putbits-gcc52.patch
 
 	if has_version '>=media-video/ffmpeg-2' ; then
 		epatch "${FILESDIR}"/${PN}-ffmpeg2.patch
+	fi
+
+	if has_version '>=media-video/ffmpeg-2.9' ; then
+		epatch "${FILESDIR}"/${PN}-ffmpeg29.patch
 	fi
 
 	eautoreconf

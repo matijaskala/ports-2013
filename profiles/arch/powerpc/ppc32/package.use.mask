@@ -1,8 +1,20 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/powerpc/ppc32/package.use.mask,v 1.44 2015/06/02 18:24:49 pacho Exp $
+# $Id$
 
 # This file requires >=portage-2.1.1
+
+# Anthony G. Basile <blueness@gentoo.org> (26 Oct 2015)
+# Mask x265 on vlc for bug #564138
+media-video/vlc x265
+
+# Davide Pesavento <pesa@gentoo.org> (26 Oct 2015)
+# Tests require non-keyworded qt5
+dev-qt/qtchooser test
+
+# Ben de Groot <yngwin@gentoo.org> (20 Jul 2015)
+# missing keyword
+media-sound/audacity midi
 
 # Pacho Ramos <pacho@gentoo.org> (02 Jun 2015)
 # Missing keywords (02 Jun 2015)
@@ -23,6 +35,10 @@ app-misc/workrave mate
 # Patrick Lauer <patrick@gentoo.org> (13 Jan 2015)
 # Dependencies lack keywords
 games-fps/lsdldoom shareware
+
+# Pacho Ramos <pacho@gentoo.org> (12 Apr 2014)
+# Missing keywords, bug #507490
+net-misc/modemmanager mbim
 
 # Julian Ospald <hasufell@gentoo.org> (23 Nov 2013)
 # FIXME: app-arch/innoextract not available under ppc yet

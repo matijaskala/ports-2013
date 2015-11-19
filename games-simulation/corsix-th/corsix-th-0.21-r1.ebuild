@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-simulation/corsix-th/corsix-th-0.21-r1.ebuild,v 1.2 2013/07/28 21:02:57 miknix Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ inherit eutils cmake-utils games
 MY_P="CorsixTH-${PV}-Source"
 
 DESCRIPTION="Open source clone of Theme Hospital"
-HOMEPAGE="http://code.google.com/p/corsix-th/"
-SRC_URI="http://corsix-th.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/corsix-th/"
+SRC_URI="https://corsix-th.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

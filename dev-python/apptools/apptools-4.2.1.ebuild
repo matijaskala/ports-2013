@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/apptools/apptools-4.2.1.ebuild,v 1.4 2015/03/08 23:39:13 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 virtualx
 
 DESCRIPTION="Enthought Tool Suite: Application tools"
-HOMEPAGE="http://code.enthought.com/projects/app_tools/ http://pypi.python.org/pypi/apptools"
+HOMEPAGE="http://code.enthought.com/projects/app_tools/ https://pypi.python.org/pypi/apptools"
 SRC_URI="http://www.enthought.com/repo/ets/${P}.tar.gz"
 
 LICENSE="BSD"

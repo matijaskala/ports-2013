@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/python-any-r1.eclass,v 1.18 2014/11/09 22:27:58 mgorny Exp $
+# $Id$
 
-# @ECLASS: python-any-r1
+# @ECLASS: python-any-r1.eclass
 # @MAINTAINER:
 # Python team <python@gentoo.org>
 # @AUTHOR:
@@ -33,8 +33,8 @@
 # packages using python-any-r1, and there is no need ever to inherit
 # both.
 #
-# For more information, please see the python-r1 Developer's Guide:
-# http://www.gentoo.org/proj/en/Python/python-r1/dev-guide.xml
+# For more information, please see the wiki:
+# https://wiki.gentoo.org/wiki/Project:Python/python-any-r1
 
 case "${EAPI:-0}" in
 	0|1|2|3|4|5)
@@ -74,6 +74,9 @@ if [[ ! ${_PYTHON_ANY_R1} ]]; then
 # @CODE
 if ! declare -p PYTHON_COMPAT &>/dev/null; then
 	die 'PYTHON_COMPAT not declared.'
+fi
+if [[ $(declare -p PYTHON_COMPAT) != "declare -a"* ]]; then
+	die 'PYTHON_COMPAT must be an array.'
 fi
 
 # @ECLASS-VARIABLE: PYTHON_REQ_USE
@@ -191,10 +194,10 @@ _python_build_set_globals
 #			dev-python/baz[python_targets_python2_7(-)?,python_single_target_python2_7(+)?] )
 #	)
 #	(
-#		dev-lang/python:2.6
-#		dev-python/foo[python_targets_python2_6(-)?,python_single_target_python2_6(+)?]
-#		|| ( dev-python/bar[python_targets_python2_6(-)?,python_single_target_python2_6(+)?]
-#			dev-python/baz[python_targets_python2_6(-)?,python_single_target_python2_6(+)?] )
+#		dev-lang/python:3.3
+#		dev-python/foo[python_targets_python3_3(-)?,python_single_target_python3_3(+)?]
+#		|| ( dev-python/bar[python_targets_python3_3(-)?,python_single_target_python3_3(+)?]
+#			dev-python/baz[python_targets_python3_3(-)?,python_single_target_python3_3(+)?] )
 #	)
 # )
 # @CODE

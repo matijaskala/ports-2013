@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/flam3/flam3-9999.ebuild,v 1.3 2013/05/02 03:25:24 patrick Exp $
+# $Id$
 
 EAPI=2
 
@@ -9,7 +9,7 @@ inherit autotools subversion
 DESCRIPTION="Tools and a library for creating fractal flames"
 HOMEPAGE="http://flam3.com/"
 SRC_URI=""
-ESVN_REPO_URI="http://flam3.googlecode.com/svn/trunk/src/"
+ESVN_REPO_URI="https://flam3.googlecode.com/svn/trunk/src/"
 
 LICENSE="GPL-2"
 SLOT="0"

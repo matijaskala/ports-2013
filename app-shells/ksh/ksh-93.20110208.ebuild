@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/ksh/ksh-93.20110208.ebuild,v 1.7 2012/04/01 17:17:28 armin76 Exp $
+# $Id$
 
 EAPI=4
 
@@ -15,8 +15,8 @@ ksh_release() {
 	echo "${v:0:4}-${v:4:2}-${v:6:2}"
 }
 
-SRC_URI="http://dev.gentoo.org/~floppym/distfiles/INIT.${INIT_RELEASE}.tgz
-	http://dev.gentoo.org/~floppym/distfiles/ast-base.$(ksh_release).tgz"
+SRC_URI="https://dev.gentoo.org/~floppym/distfiles/INIT.${INIT_RELEASE}.tgz
+	https://dev.gentoo.org/~floppym/distfiles/ast-base.$(ksh_release).tgz"
 
 LICENSE="CPL-1.0 EPL-1.0"
 SLOT="0"

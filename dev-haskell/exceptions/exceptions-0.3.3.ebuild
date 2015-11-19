@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/exceptions/exceptions-0.3.3.ebuild,v 1.1 2014/03/09 07:40:44 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Extensible optionally-pure exceptions"
-HOMEPAGE="http://github.com/ekmett/exceptions/"
+HOMEPAGE="https://github.com/ekmett/exceptions/"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"

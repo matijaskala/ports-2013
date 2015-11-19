@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/efl/efl-9999.ebuild,v 1.2 2015/03/17 17:34:56 vapier Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,10 +11,10 @@ if [[ "${PV}" == "9999" ]] ; then
 	EGIT_URI_APPEND="${PN}"
 elif [[ *"${PV}" == *"_pre"* ]] ; then
 	MY_P=${P%%_*}
-	SRC_URI="http://download.enlightenment.org/pre-releases/${MY_P}.tar.xz"
+	SRC_URI="https://download.enlightenment.org/pre-releases/${MY_P}.tar.xz"
 	EKEY_STATE="snap"
 else
-	SRC_URI="http://download.enlightenment.org/rel/libs/${PN}/${MY_P}.tar.xz"
+	SRC_URI="https://download.enlightenment.org/rel/libs/${PN}/${MY_P}.tar.xz"
 	EKEY_STATE="snap"
 fi
 
@@ -23,7 +23,7 @@ inherit enlightenment
 DESCRIPTION="Enlightenment Foundation Libraries all-in-one package"
 
 LICENSE="BSD-2 GPL-2 LGPL-2.1 ZLIB"
-IUSE="+bmp debug drm +eet egl fbcon +fontconfig fribidi gif gles glib gnutls gstreamer harfbuzz +ico ibus jpeg2k neon oldlua opengl ssl physics pixman +png +ppm +psd pulseaudio scim sdl sound systemd tga tiff tslib v4l2 valgrind wayland webp X xim xine xpm"
+IUSE="+bmp debug drm +eet egl fbcon +fontconfig fribidi gif gles glib gnutls gstreamer harfbuzz +ico ibus jpeg2k libressl neon oldlua opengl ssl physics pixman +png +ppm +psd pulseaudio scim sdl sound systemd tga tiff tslib v4l2 valgrind wayland webp X xim xine xpm"
 
 REQUIRED_USE="
 	pulseaudio?	( sound )
@@ -48,14 +48,19 @@ RDEPEND="
 	gif? ( media-libs/giflib )
 	glib? ( dev-libs/glib:2 )
 	gnutls? ( net-libs/gnutls )
-	!gnutls? ( ssl? ( dev-libs/openssl:0 ) )
+	!gnutls? (
+		ssl? (
+			!libressl? ( dev-libs/openssl:0 )
+			libressl? ( dev-libs/libressl )
+		)
+	)
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
 	)
 	harfbuzz? ( media-libs/harfbuzz )
 	ibus? ( app-i18n/ibus )
-	jpeg2k? ( media-libs/openjpeg )
+	jpeg2k? ( media-libs/openjpeg:0 )
 	!oldlua? ( >=dev-lang/luajit-2.0.0 )
 	oldlua? ( dev-lang/lua )
 	physics? ( >=sci-physics/bullet-2.80 )
@@ -73,7 +78,7 @@ RDEPEND="
 	tslib? ( x11-libs/tslib )
 	valgrind? ( dev-util/valgrind )
 	wayland? (
-		>=dev-libs/wayland-1.3.0
+		>=dev-libs/wayland-1.8.0
 		>=x11-libs/libxkbcommon-0.3.1
 		media-libs/mesa[gles2,wayland]
 	)
@@ -160,7 +165,7 @@ S=${WORKDIR}/${MY_P}
 
 src_configure() {
 	if use ssl && use gnutls ; then
-		einfo "You enabled both USEssl and USE=gnutls, but only one can be used;"
+		einfo "You enabled both USE=ssl and USE=gnutls, but only one can be used;"
 		einfo "gnutls has been selected for you."
 	fi
 	if use opengl && use gles ; then
@@ -222,7 +227,6 @@ src_configure() {
 		$(use_enable xine)
 		$(use_enable xpm image-loader-xpm)
 		--enable-cserve
-		--enable-gui
 		--enable-image-loader-generic
 		--enable-image-loader-jpeg
 
@@ -239,18 +243,6 @@ src_configure() {
 	)
 
 	enlightenment_src_configure
-}
-
-src_compile() {
-	ewarn "If the following compile phase fails with a message including"
-	ewarn "lib/edje/.libs/libedje.so: undefined reference to 'eet_mmap'"
-	ewarn "then most likely the @preserved-rebuild feature of portage"
-	ewarn "preserved the 1.7 libraries, which cause the build failure."
-	ewarn "As a workaround, either remove those libs manually or"
-	ewarn "uninstall all packages still using those old libs with"
-	ewarn "emerge -aC @preserved-rebuild"
-
-	enlightenment_src_compile
 }
 
 src_install() {

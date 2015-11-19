@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/nikto/nikto-2.1.5.ebuild,v 1.6 2015/03/21 14:37:40 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -28,7 +28,7 @@ src_prepare() {
 	sed -i -e 's:/etc/nikto.conf:/etc/nikto/nikto.conf:;
 	s:# EXECDIR=/usr/local/nikto:EXECDIR=/usr/share/nikto:;
 	s:# use LW2:use LW2:;
-	s:require "$CONFIGFILE{'\''PLUGINDIR'\''}/LW2.pm":# require "$CONFIGFILE{'\''PLUGINDIR'\''}/LW2.pm":;' nikto.pl || die
+	s:require "$CONFIGFILE{'\''PLUGINDIR'\''}/LW2.pm":# require "$CONFIGFILE{'\''PLUGINDIR'\''}/LW2.pm":;' nikto.pl || die
 }
 
 src_compile() { :; }

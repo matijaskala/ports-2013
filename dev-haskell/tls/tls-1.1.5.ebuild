@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/tls/tls-1.1.5.ebuild,v 1.3 2013/11/24 19:39:28 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="TLS/SSL protocol native implementation (Server and Client)"
-HOMEPAGE="http://github.com/vincenthz/hs-tls"
+HOMEPAGE="https://github.com/vincenthz/hs-tls"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

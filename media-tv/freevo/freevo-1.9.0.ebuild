@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/freevo/freevo-1.9.0.ebuild,v 1.22 2015/06/18 02:29:37 patrick Exp $
+# $Id$
 
 EAPI="3"
 PYTHON_DEPEND="2:2.5"
@@ -18,7 +18,7 @@ KEYWORDS="amd64 ppc x86"
 IUSE="cdparanoia doc dvd encode fbcon flac gphoto2 jpeg lame lirc matrox mixer nls tv vorbis xine X"
 
 RDEPEND="dev-python/beautifulsoup:python-2
-	virtual/python-imaging
+	dev-python/pillow
 	dev-python/pygame
 	>=dev-python/twisted-core-2.5
 	>=dev-python/twisted-web-0.6

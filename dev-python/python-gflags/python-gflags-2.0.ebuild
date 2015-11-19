@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-gflags/python-gflags-2.0.ebuild,v 1.19 2015/06/07 09:21:46 maekke Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,12 +9,12 @@ PYTHON_COMPAT=( python2_7 pypy )
 inherit distutils-r1
 
 DESCRIPTION="Google's Python argument parsing library"
-HOMEPAGE="http://code.google.com/p/python-gflags/"
-SRC_URI="http://python-gflags.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/gflags/python-gflags"
+SRC_URI="https://python-gflags.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 arm ~arm64 ~ia64 ~m68k ~mips ~ppc64 ~s390 ~sh x86"
+KEYWORDS="alpha amd64 arm ~arm64 ~hppa ia64 ~m68k ~mips ~ppc64 ~s390 ~sh x86"
 IUSE=""
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
@@ -28,7 +28,7 @@ PATCHES=(
 )
 
 python_test() {
-	# http://code.google.com/p/python-gflags/issues/detail?id=15&thanks=15&ts=1372948007
+	# https://code.google.com/p/python-gflags/issues/detail?id=15&thanks=15&ts=1372948007
 	local t
 	cd tests || die
 	for t in *.py; do

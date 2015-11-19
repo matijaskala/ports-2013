@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/check-reqs.eclass,v 1.15 2014/03/29 16:06:44 ulm Exp $
+# $Id$
 
 # @ECLASS: check-reqs.eclass
 # @MAINTAINER:
@@ -233,7 +233,7 @@ check-reqs_output() {
 	[[ ${EBUILD_PHASE} == "pretend" && -z ${I_KNOW_WHAT_I_AM_DOING} ]] && msg="eerror"
 	if [[ -n ${CHECKREQS_FAILED} ]]; then
 		${msg}
-		${msg} "Space constrains set in the ebuild were not met!"
+		${msg} "Space constraints set in the ebuild were not met!"
 		${msg} "The build will most probably fail, you should enhance the space"
 		${msg} "as per failed tests."
 		${msg}

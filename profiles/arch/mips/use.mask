@@ -1,9 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/mips/use.mask,v 1.83 2015/04/16 22:05:25 vapier Exp $
+# $Id$
 
 # Unmask the flag which corresponds to ARCH.
 -mips
+
+# Anthony G. Basile <blueness@gentoo.org> (01 Aug 2015)
+# There is no luajit support on mips.  Bug #554376.
+luajittex
 
 # Markos Chandras <hwoarang@gentoo.org>
 # app-arch/lz4 does not seem to build on MIPS
@@ -146,6 +150,7 @@ video_cards_voodoo
 
 # Matt Turner <mattst88@gentoo.org>
 # Mask more VIDEO_CARDs added with mesa-8.0
+video_cards_amdgpu
 video_cards_r100
 video_cards_r200
 video_cards_r300
@@ -372,9 +377,6 @@ opencl
 
 # Unmask once sys-libs/libunwind gets keyworded.
 unwind
-
-# sys-libs/libseccomp has not been ported to this arch yet #524148
-seccomp
 
 # Ben de Groot <yngwin@gentoo.org> (01 Feb 2015)
 # please remove when keyworded

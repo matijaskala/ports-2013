@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/midori/midori-0.5.10.ebuild,v 1.2 2015/06/25 06:55:19 polynomial-c Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="git://git.xfce.org/apps/${PN}"
 	_live_inherits=git-2
 else
-	KEYWORDS="~amd64 ~arm ~mips ~x86 ~x86-fbsd"
+	KEYWORDS="~amd64 ~arm ~mips x86 ~x86-fbsd"
 	SRC_URI="http://www.${PN}-browser.org/downloads/${PN}_${PV}_all_.tar.bz2"
 fi
 
@@ -27,7 +27,7 @@ SLOT="0"
 IUSE="deprecated doc granite introspection +jit +webkit2 zeitgeist"
 
 RDEPEND="
-	>=app-crypt/gcr-3
+	>=app-crypt/gcr-3[gtk]
 	>=dev-db/sqlite-3.6.19:3
 	>=dev-libs/glib-2.32.3
 	dev-libs/libxml2

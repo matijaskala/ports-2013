@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/sgml-common/sgml-common-0.6.3-r5.ebuild,v 1.29 2014/04/06 14:52:58 vapier Exp $
+# $Id$
 
 EAPI="3"
 
@@ -9,7 +9,7 @@ inherit eutils prefix
 DESCRIPTION="Base ISO character entities and utilities for SGML"
 HOMEPAGE="http://www.iso.ch/cate/3524030.html"
 #SRC_URI="mirror://kde/devel/docbook/SOURCES/${P}.tgz"
-SRC_URI="http://dev.gentoo.org/~floppym/dist/${PN}/${P}-gentoo.tar.gz"
+SRC_URI="https://dev.gentoo.org/~floppym/dist/${PN}/${P}-gentoo.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

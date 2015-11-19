@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/leveldb/leveldb-1.17.ebuild,v 1.4 2015/02/21 18:18:13 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ GITCRAP="e353fbc7ea81"
 DESCRIPTION="a fast key-value storage library written at Google"
 HOMEPAGE="https://github.com/google/leveldb"
 #SRC_URI="https://${PN}.googlecode.com/archive/${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="http://dev.gentoo.org/~floppym/dist/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~floppym/dist/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

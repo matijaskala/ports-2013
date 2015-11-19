@@ -1,15 +1,15 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/groff/groff-1.22.2.ebuild,v 1.13 2014/01/18 19:29:26 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit autotools eutils toolchain-funcs
 
 DESCRIPTION="Text formatter used for man pages"
-HOMEPAGE="http://www.gnu.org/software/groff/groff.html"
+HOMEPAGE="https://www.gnu.org/software/groff/groff.html"
 SRC_URI="mirror://gnu/groff/${P}.tar.gz
-	linguas_ja? ( http://dev.gentoo.org/~naota/patch/${PN}-1.22.1-japanese.patch.bz2 )"
+	linguas_ja? ( https://dev.gentoo.org/~naota/patch/${PN}-1.22.1-japanese.patch.bz2 )"
 
 LICENSE="GPL-2"
 SLOT="0"

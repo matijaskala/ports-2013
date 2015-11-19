@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-mta/exim/exim-4.84.ebuild,v 1.17 2015/03/21 21:18:34 jlec Exp $
+# $Id$
 
 EAPI="5"
 
@@ -499,7 +499,7 @@ pkg_postinst() {
 		einfo "Starting from Exim 4.83, DSN support comes from upstream."
 		einfo "DSN support is an experimental feature.  If you used DSN"
 		einfo "support prior to 4.83, make sure to remove all dsn_process"
-		einfo "switches from your routers, see http://bugs.gentoo.org/511818"
+		einfo "switches from your routers, see https://bugs.gentoo.org/511818"
 	fi
 	einfo "Exim maintains some db files under its spool directory that need"
 	einfo "cleaning from time to time.  (${EROOT}var/spool/exim/db)"

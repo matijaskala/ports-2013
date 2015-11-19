@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jnr-ffi/jnr-ffi-0.6.0.ebuild,v 1.3 2012/05/28 14:52:53 johu Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,8 +9,8 @@ JAVA_PKG_IUSE="doc source test"
 inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="An abstracted interface to invoking native functions from java"
-HOMEPAGE="http://github.com/jnr"
-SRC_URI="http://github.com/jnr/${PN}/tarball/${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/jnr"
+SRC_URI="https://github.com/jnr/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="|| ( Apache-2.0 LGPL-3 )"
 SLOT="0.6"

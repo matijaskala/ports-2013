@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/reptyr/reptyr-0.6.2.ebuild,v 1.1 2015/02/07 21:38:47 radhermit Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="https://github.com/nelhage/${PN}/archive/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ~arm x86 ~amd64-linux ~x86-linux"
 
 RESTRICT="test"
 

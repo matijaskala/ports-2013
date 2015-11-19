@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/speech-dispatcher/speech-dispatcher-0.8.1.ebuild,v 1.13 2015/04/08 07:30:31 mgorny Exp $
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_3 python3_4 )
+PYTHON_COMPAT=( python3_3 python3_4 python3_5 )
+PYTHON_REQ_USE="threads(+)"
 
 inherit eutils python-r1
 

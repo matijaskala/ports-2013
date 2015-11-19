@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/vala/vala-0.20.1.ebuild,v 1.12 2014/06/20 14:44:52 ago Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -8,7 +8,7 @@ GCONF_DEBUG="no"
 inherit gnome2
 
 DESCRIPTION="Compiler for the GObject type system"
-HOMEPAGE="http://live.gnome.org/Vala"
+HOMEPAGE="https://live.gnome.org/Vala"
 
 LICENSE="LGPL-2.1"
 SLOT="0.20"

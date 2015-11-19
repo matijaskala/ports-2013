@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/ecb/ecb-2.41_pre20140215-r1.ebuild,v 1.6 2014/12/29 13:53:21 blueness Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit readme.gentoo elisp eutils
 DESCRIPTION="Source code browser for Emacs"
 HOMEPAGE="http://ecb.sourceforge.net/"
 # snapshot of https://github.com/alexott/ecb.git, created with "make distrib"
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2+"
 SLOT="0"

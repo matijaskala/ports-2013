@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/chess/chess-2.0.4.ebuild,v 1.3 2015/06/05 14:31:41 zlogene Exp $
+# $Id$
 
 EAPI=5
 NEED_EMACS=24
@@ -8,10 +8,10 @@ NEED_EMACS=24
 inherit elisp
 
 DESCRIPTION="A chess client and library for Emacs"
-HOMEPAGE="http://elpa.gnu.org/packages/chess.html
+HOMEPAGE="https://elpa.gnu.org/packages/chess.html
 	http://www.emacswiki.org/emacs/ChessMode"
-# Taken from http://elpa.gnu.org/packages/${P}.tar
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.tar.xz
+# Taken from https://elpa.gnu.org/packages/${P}.tar
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.tar.xz
 	mirror://gentoo/emacs-chess-sounds-${PV%.*}.tar.bz2
 	mirror://gentoo/emacs-chess-pieces-${PV%.*}.tar.bz2"
 

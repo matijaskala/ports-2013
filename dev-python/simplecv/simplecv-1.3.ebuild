@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/simplecv/simplecv-1.3.ebuild,v 1.5 2014/08/10 21:22:08 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -27,7 +27,7 @@ RDEPEND="
 	>=media-libs/opencv-2.4.8[python,${PYTHON_USEDEP}]
 	dev-python/numpy[${PYTHON_USEDEP}]
 	sci-libs/scipy[${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pygame[${PYTHON_USEDEP}]
 	shell? ( dev-python/ipython[${PYTHON_USEDEP}] )"
 

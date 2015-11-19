@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/projectx/projectx-0.91.0.10.ebuild,v 1.6 2015/01/29 19:16:42 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ XDG_P="xdg-20100731"
 
 DESCRIPTION="Converts, splits and demuxes DVB and other MPEG recordings"
 HOMEPAGE="http://project-x.sourceforge.net/"
-SRC_URI="http://dev.gentoo.org/~billie/distfiles/${P}.tar.xz
+SRC_URI="https://dev.gentoo.org/~billie/distfiles/${P}.tar.xz
 	http://sbriesen.de/gentoo/distfiles/${PN}-idctfast.tar.xz
 	http://sbriesen.de/gentoo/distfiles/${XDG_P}.java.xz
 	http://sbriesen.de/gentoo/distfiles/${PN}-icon.png"

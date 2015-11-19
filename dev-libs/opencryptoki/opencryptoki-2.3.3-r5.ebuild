@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/opencryptoki/opencryptoki-2.3.3-r5.ebuild,v 1.4 2012/06/06 03:43:03 zmedico Exp $
+# $Id$
 
 EAPI="2"
 
@@ -14,7 +14,7 @@ DESCRIPTION="PKCS#11 provider cryptographic hardware"
 HOMEPAGE="http://sourceforge.net/projects/opencryptoki"
 SRC_URI="mirror://sourceforge/opencryptoki/${P}.tar.bz2
 	${BACKPORTS:+
-		http://dev.gentoo.org/~flameeyes/${PN}/${P}-backports-${BACKPORTS}.tar.bz2}"
+		https://dev.gentoo.org/~flameeyes/${PN}/${P}-backports-${BACKPORTS}.tar.bz2}"
 
 # Upstream is looking into relicensing it into CPL-1.0 entirely; the CCA
 # token sources are under CPL-1.0 already.

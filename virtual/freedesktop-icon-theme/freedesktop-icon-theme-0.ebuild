@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/virtual/freedesktop-icon-theme/freedesktop-icon-theme-0.ebuild,v 1.13 2015/06/04 19:04:26 kensington Exp $
+# $Id$
 
 EAPI=4
 
@@ -18,7 +18,7 @@ RDEPEND="|| (
 	x11-themes/faenza-icon-theme
 	lxde-base/lxde-icon-theme
 	x11-themes/tango-icon-theme
-	kde-apps/oxygen-icons
+	kde-frameworks/oxygen-icons
 	x11-themes/mate-icon-theme
 )
 "

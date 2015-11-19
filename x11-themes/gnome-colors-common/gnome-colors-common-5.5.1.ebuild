@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/gnome-colors-common/gnome-colors-common-5.5.1.ebuild,v 1.5 2013/02/07 22:49:26 ulm Exp $
+# $Id$
 
 EAPI=2
 inherit gnome2-utils
 
 DESCRIPTION="Colorized icons shared between all gnome-colors iconsets"
-HOMEPAGE="http://code.google.com/p/gnome-colors/"
+HOMEPAGE="https://code.google.com/p/gnome-colors/"
 
-SRC_URI="http://gnome-colors.googlecode.com/files/gnome-colors-${PV}.tar.gz
+SRC_URI="https://gnome-colors.googlecode.com/files/gnome-colors-${PV}.tar.gz
 	branding? ( http://www.mail-archive.com/tango-artists@lists.freedesktop.org/msg00043/tango-gentoo-v1.1.tar.gz )"
 
 LICENSE="GPL-2

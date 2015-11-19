@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-radio/tlf/tlf-1.2.1.ebuild,v 1.3 2014/10/10 11:08:44 ago Exp $
+# $Id$
 
 EAPI="5"
 
@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 
-RDEPEND="sys-libs/ncurses
+RDEPEND="sys-libs/ncurses:=
 	dev-libs/glib:2
 	media-libs/hamlib
 	media-sound/sox"

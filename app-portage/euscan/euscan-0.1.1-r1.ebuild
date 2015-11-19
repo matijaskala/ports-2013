@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/euscan/euscan-0.1.1-r1.ebuild,v 1.4 2015/04/08 07:30:33 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit distutils-r1
 
 DESCRIPTION="Ebuild upstream scan utility"
 HOMEPAGE="http://euscan.iksaif.net"
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

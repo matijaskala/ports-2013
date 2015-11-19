@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tex/feynmf/feynmf-1.08-r3.ebuild,v 1.18 2014/03/25 13:00:47 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ inherit eutils latex-package
 DESCRIPTION="Combined LaTeX/Metafont package for drawing of Feynman diagrams"
 HOMEPAGE="http://www.ctan.org/tex-archive/macros/latex/contrib/feynmf/"
 #Taken from: ftp.tug.ctan.org/tex-archive/macros/latex/contrib/${PN}.tar.gz
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.tar.gz
-	doc? ( http://dev.gentoo.org/~ulm/distfiles/${PN}-cnl.tar.gz )"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.tar.gz
+	doc? ( https://dev.gentoo.org/~ulm/distfiles/${PN}-cnl.tar.gz )"
 
 LICENSE="GPL-2+"
 SLOT="0"

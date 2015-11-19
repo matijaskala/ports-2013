@@ -1,9 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/amd64-fbsd/package.use.mask,v 1.28 2015/01/28 00:35:01 johu Exp $
+# $Id$
+
+# Davide Pesavento <pesa@gentoo.org> (26 Oct 2015)
+# Tests require non-keyworded qt5
+dev-qt/qtchooser test
 
 # Johannes Huber <johu@gentoo.org> (28 Jan 2015)
-# Missing keyword on dev-libs/botan,dev-libs/pkcs11-helper
+# Missing keyword on dev-libs/botan and dev-libs/pkcs11-helper
 app-crypt/qca botan pkcs11
 
 # Michael Palimaka <kensington@gentoo.org) (26 Dec 2014)

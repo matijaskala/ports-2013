@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/clang/clang-3.0-r4.ebuild,v 1.3 2014/06/06 12:41:45 jer Exp $
+# $Id$
 
 EAPI=3
 
@@ -163,7 +163,7 @@ src_install() {
 		install-scan-view() {
 			insinto "$(python_get_sitedir)"/clang
 			doins Reporter.py Resources ScanView.py startfile.py
-			touch "${ED}"/"$(python_get_sitedir)"/clang/__init__.py
+			touch "${D}"/"$(python_get_sitedir)"/clang/__init__.py
 		}
 		python_execute_function install-scan-view
 	fi

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-servers/lighttpd/lighttpd-1.4.35-r2.ebuild,v 1.1 2015/02/21 21:11:57 hwoarang Exp $
+# $Id$
 
 EAPI="5"
 inherit base autotools eutils depend.php readme.gentoo user systemd
@@ -26,7 +26,7 @@ CDEPEND="
 	memcache? ( dev-libs/libmemcache )
 	mysql?    ( >=virtual/mysql-4.0 )
 	pcre?     ( >=dev-libs/libpcre-3.1 )
-	php?      ( dev-lang/php:=[cgi] )
+	php?      ( dev-lang/php:*[cgi] )
 	rrdtool?  ( net-analyzer/rrdtool )
 	ssl?    ( >=dev-libs/openssl-0.9.7:=[kerberos?] )
 	webdav? (

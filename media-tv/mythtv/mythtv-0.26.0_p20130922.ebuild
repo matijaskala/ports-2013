@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/mythtv/mythtv-0.26.0_p20130922.ebuild,v 1.3 2014/01/26 18:59:02 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ MYTHTV_BRANCH="fixes/0.26"
 DESCRIPTION="Homebrew PVR project"
 HOMEPAGE="http://www.mythtv.org"
 SRC_URI="ftp://ftp.osuosl.org/pub/mythtv/${MY_P}.tar.bz2
-	${BACKPORTS:+http://dev.gentoo.org/~rich0/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
+	${BACKPORTS:+https://dev.gentoo.org/~rich0/distfiles/${MY_P}-${BACKPORTS}.tar.xz}"
 
 SLOT="0"
 LICENSE="GPL-2"
@@ -65,7 +65,7 @@ COMMON="
 	fftw? ( sci-libs/fftw:3.0= )
 	hls? (
 		media-libs/faac:=
-		media-libs/libvpx:=
+		<media-libs/libvpx-1.5.0:=
 		>=media-libs/x264-0.0.20111220:=
 		>=media-sound/lame-3.93.1
 	)
@@ -327,7 +327,7 @@ pkg_postinst() {
 
 	elog "Want mythfrontend to start automatically?"
 	elog "Set USE=autostart. Details can be found at:"
-	elog "http://dev.gentoo.org/~cardoe/mythtv/autostart.html"
+	elog "https://dev.gentoo.org/~cardoe/mythtv/autostart.html"
 }
 
 pkg_postrm() {

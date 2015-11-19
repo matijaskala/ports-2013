@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/genshi/genshi-0.7.ebuild,v 1.10 2015/04/08 08:04:55 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
@@ -10,7 +10,7 @@ inherit distutils-r1
 MY_P="Genshi-${PV}"
 
 DESCRIPTION="Python toolkit for stream-based generation of output for the web"
-HOMEPAGE="http://genshi.edgewall.org/ http://pypi.python.org/pypi/Genshi"
+HOMEPAGE="http://genshi.edgewall.org/ https://pypi.python.org/pypi/Genshi"
 SRC_URI="http://ftp.edgewall.com/pub/genshi/${MY_P}.tar.gz"
 
 LICENSE="BSD"

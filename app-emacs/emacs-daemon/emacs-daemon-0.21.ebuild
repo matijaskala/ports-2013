@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/emacs-daemon/emacs-daemon-0.21.ebuild,v 1.1 2014/02/02 11:28:25 ulm Exp $
+# $Id$
 
 EAPI=5
 
 inherit elisp
 
 DESCRIPTION="Gentoo support for Emacs running as a server in the background"
-HOMEPAGE="http://wiki.gentoo.org/wiki/Project:Emacs"
-SRC_URI="http://dev.gentoo.org/~ulm/emacs/${P}.tar.xz"
+HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Emacs"
+SRC_URI="https://dev.gentoo.org/~ulm/emacs/${P}.tar.xz"
 
 LICENSE="GPL-2+"
 SLOT="0"
@@ -34,7 +34,7 @@ pkg_setup() {
 		while read line; do ewarn "${line}"; done <<-EOF
 		Your current Emacs is compiled with GTK+. There is a long-standing bug
 		in GTK+ that prevents Emacs from recovering from X disconnects:
-		<http://bugzilla.gnome.org/show_bug.cgi?id=85715>
+		<https://bugzilla.gnome.org/show_bug.cgi?id=85715>
 		If you run Emacs as a daemon, then it is strongly recommended that you
 		compile it with the Lucid or the Motif toolkit instead, i.e. with
 		USE="athena Xaw3d -gtk -motif" or USE="motif -gtk -athena -Xaw3d".

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/yandex-disk/yandex-disk-0.1.5.870_p1.ebuild,v 1.1 2015/03/25 12:18:24 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,7 +17,7 @@ SRC_URI="
 
 LICENSE="YDSLA"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86"
+KEYWORDS="-* amd64 x86"
 
 DEPEND=""
 RDEPEND="sys-libs/zlib"

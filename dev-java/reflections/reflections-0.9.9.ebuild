@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/reflections/reflections-0.9.9.ebuild,v 1.1 2015/03/19 23:25:25 chewi Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ JAVA_PKG_IUSE="doc source"
 inherit java-pkg-2 java-pkg-simple
 
 DESCRIPTION="Java runtime metadata analysis"
-HOMEPAGE="http://code.google.com/p/reflections/"
+HOMEPAGE="https://github.com/ronmamo/reflections"
 SRC_URI="http://search.maven.org/remotecontent?filepath=org/${PN}/${PN}/${PV}/${P}-sources.jar"
 LICENSE="WTFPL-2"
 SLOT="0"

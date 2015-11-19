@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/python.eclass,v 1.171 2015/03/31 18:43:33 ulm Exp $
+# $Id$
 
 # @ECLASS: python.eclass
 # @MAINTAINER:
@@ -11,6 +11,10 @@
 #
 # This eclass is DEPRECATED. Please use python-r1, python-single-r1
 # or python-any-r1 instead.
+
+if [[ ${EAPI} == 6 ]]; then
+	die "${ECLASS}.eclass is banned in EAPI ${EAPI}"
+fi
 
 if [[ ${_PYTHON_UTILS_R1} ]]; then
 	die 'python.eclass can not be used with python-r1 suite eclasses.'

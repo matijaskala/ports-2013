@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-news/newsbeuter/newsbeuter-2.9.ebuild,v 1.1 2015/02/20 03:33:21 radhermit Exp $
+# $Id$
 
 EAPI="5"
 
-inherit toolchain-funcs
+inherit eutils toolchain-funcs
 
 DESCRIPTION="A RSS/Atom feed reader for the text console"
 HOMEPAGE="http://www.newsbeuter.org/index.html"
@@ -12,7 +12,7 @@ SRC_URI="http://www.${PN}.org/downloads/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="test"
 
 RDEPEND=">=dev-db/sqlite-3.5:3
@@ -34,6 +34,7 @@ DEPEND="${RDEPEND}
 RESTRICT="test"
 
 src_prepare() {
+	epatch "${FILESDIR}"/${PN}-2.9-ncurses6.patch
 	sed -i 's:-ggdb::' Makefile || die
 }
 

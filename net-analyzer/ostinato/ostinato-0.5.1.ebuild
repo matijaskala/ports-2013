@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/ostinato/ostinato-0.5.1.ebuild,v 1.7 2014/01/23 14:06:16 zerochaos Exp $
+# $Id$
 
 EAPI=5
 inherit qt4-r2
 
 DESCRIPTION="A packet generator and analyzer"
-HOMEPAGE="http://code.google.com/p/ostinato/"
-SRC_URI="http://ostinato.googlecode.com/files/${PN}-src-${PV}.tar.gz"
+HOMEPAGE="http://ostinato.org/"
+SRC_URI="https://ostinato.googlecode.com/files/${PN}-src-${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

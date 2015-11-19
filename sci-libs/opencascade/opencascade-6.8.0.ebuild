@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/opencascade/opencascade-6.8.0.ebuild,v 1.3 2015/03/31 20:17:21 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -27,12 +27,12 @@ DEPEND="app-eselect/eselect-opencascade
 	x11-libs/libXmu
 	freeimage? ( media-libs/freeimage )
 	gl2ps? ( x11-libs/gl2ps )
-	java? ( virtual/jdk:= )
+	java? ( >=virtual/jdk-0:= )
 	tbb? ( dev-cpp/tbb )"
 RDEPEND="${DEPEND}"
 
-# http://bugs.gentoo.org/show_bug.cgi?id=352435
-# http://www.gentoo.org/foundation/en/minutes/2011/20110220_trustees.meeting_log.txt
+# https://bugs.gentoo.org/show_bug.cgi?id=352435
+# https://www.gentoo.org/foundation/en/minutes/2011/20110220_trustees.meeting_log.txt
 RESTRICT="bindist mirror"
 
 CHECKREQS_MEMORY="256M"

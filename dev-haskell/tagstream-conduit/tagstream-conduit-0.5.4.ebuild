@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/tagstream-conduit/tagstream-conduit-0.5.4.ebuild,v 1.1 2013/09/13 06:35:14 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="streamlined html tag parser"
-HOMEPAGE="http://github.com/yihuang/tagstream-conduit"
+HOMEPAGE="https://github.com/yihuang/tagstream-conduit"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

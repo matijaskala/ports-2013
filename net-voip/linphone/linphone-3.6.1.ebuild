@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-voip/linphone/linphone-3.6.1.ebuild,v 1.2 2015/04/28 08:20:02 bircoph Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit autotools eutils multilib pax-utils versionator
 DESCRIPTION="Video softphone based on the SIP protocol"
 HOMEPAGE="http://www.linphone.org/"
 SRC_URI="mirror://nongnu/${PN}/$(get_version_component_range 1-2).x/sources/${P}.tar.gz
-	http://dev.gentoo.org/~hasufell/distfiles/${P}-exosip-4.patch"
+	https://dev.gentoo.org/~hasufell/distfiles/${P}-exosip-4.patch"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-fs/samba/samba-3.5.21.ebuild,v 1.16 2015/06/03 17:03:40 vapier Exp $
+# $Id$
 
 EAPI=4
 
@@ -12,7 +12,7 @@ MY_P="${PN}-${MY_PV}"
 DESCRIPTION="Library bits of the samba network filesystem"
 HOMEPAGE="http://www.samba.org/"
 SRC_URI="mirror://samba/stable/${P}.tar.gz
-	http://dev.gentoo.org/~dagger/files/smb_traffic_analyzer_v2.diff.bz2"
+	https://dev.gentoo.org/~dagger/files/smb_traffic_analyzer_v2.diff.bz2"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd"
@@ -33,12 +33,12 @@ DEPEND="dev-libs/popt
 	avahi? ( net-dns/avahi[dbus] )
 	caps? ( sys-libs/libcap )
 	client? ( !net-fs/mount-cifs
-		dev-libs/iniparser )
+		dev-libs/iniparser:0 )
 	cluster? ( >=dev-db/ctdb-1.0.114_p1 )
 	fam? ( virtual/fam )
 	ldap? ( net-nds/openldap )
 	pam? ( virtual/pam
-		winbind? ( dev-libs/iniparser )
+		winbind? ( dev-libs/iniparser:0 )
 	)
 	readline? ( >=sys-libs/readline-5.2 )
 	selinux? ( sec-policy/selinux-samba )
@@ -151,7 +151,7 @@ src_configure() {
 	fi
 
 	#bug #399141 wrap newer iniparser version
-	has_version ">=dev-libs/iniparser-3.0.0" && \
+	has_version ">=dev-libs/iniparser-3.0.0:0" && \
 		export CPPFLAGS+=" -Diniparser_getstr\(d,i\)=iniparser_getstring\(d,i,NULL\)"
 
 	# Notes:

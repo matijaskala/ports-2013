@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/qt-gstreamer/qt-gstreamer-1.2.0-r1.ebuild,v 1.3 2015/05/30 11:39:48 johu Exp $
+# $Id$
 
 EAPI=5
 
 if [[ ${PV} != *9999* ]]; then
 	SRC_URI="http://gstreamer.freedesktop.org/src/${PN}/${P}.tar.xz"
-	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 else
 	GIT_ECLASS="git-r3"
 	EGIT_REPO_URI=( "git://anongit.freedesktop.org/gstreamer/${PN}" )
@@ -53,7 +53,10 @@ DEPEND="
 	)
 "
 
-PATCHES=( "${FILESDIR}/${P}-boost157.patch" )
+PATCHES=(
+	"${FILESDIR}/${P}-boost157.patch"
+	"${FILESDIR}/${P}-gstreamer15.patch"
+)
 
 # bug 497880
 RESTRICT="test"

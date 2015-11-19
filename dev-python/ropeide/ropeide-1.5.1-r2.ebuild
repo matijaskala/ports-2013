@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/ropeide/ropeide-1.5.1-r2.ebuild,v 1.1 2015/01/07 02:59:28 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -9,7 +9,7 @@ inherit distutils-r1
 PYTHON_REQ_USE="tk"
 
 DESCRIPTION="Python refactoring IDE"
-HOMEPAGE="http://rope.sourceforge.net/ropeide.html http://pypi.python.org/pypi/ropeide"
+HOMEPAGE="http://rope.sourceforge.net/ropeide.html https://pypi.python.org/pypi/ropeide"
 SRC_URI="mirror://sourceforge/rope/${P}.tar.gz"
 
 LICENSE="GPL-2"

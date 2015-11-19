@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/squeezeslave/squeezeslave-1.1_p381.ebuild,v 1.2 2015/02/06 14:24:50 aballier Exp $
+# $Id$
 
 EAPI="5"
 
 inherit eutils toolchain-funcs
 
 DESCRIPTION="A lightweight streaming audio player for Logitech Media Server"
-HOMEPAGE="http://squeezeslave.googlecode.com"
-SRC_URI="http://dev.gentoo.org/~radhermit/dist/${P}.tar.xz"
+HOMEPAGE="https://squeezeslave.googlecode.com"
+SRC_URI="https://dev.gentoo.org/~radhermit/dist/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libmms/libmms-0.6.2-r1.ebuild,v 1.10 2014/06/24 22:11:25 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
 inherit autotools-multilib
 
 DESCRIPTION="Common library for accessing Microsoft Media Server (MMS) media streaming protocol"
-HOMEPAGE="http://sourceforge.net/projects/libmms/ http://launchpad.net/libmms/"
+HOMEPAGE="http://sourceforge.net/projects/libmms/ https://launchpad.net/libmms/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"

@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/tw_cli/tw_cli-9.5.3.ebuild,v 1.2 2011/08/05 21:28:38 mattst88 Exp $
+# $Id$
 
 DESCRIPTION="3ware SATA+PATA RAID controller Command Line Interface tool"
 HOMEPAGE="https://www.3ware.com/3warekb/article.aspx?id=14847"
@@ -88,7 +88,7 @@ pkg_nofetch() {
 	#einfo "amd64-fbsd - ${SRC_URI_amd64_fbsd}"
 	einfo ""
 	einfo "However, they have given permission to redistribute."
-	einfo "http://bugs.gentoo.org/show_bug.cgi?id=60690#c106"
+	einfo "https://bugs.gentoo.org/show_bug.cgi?id=60690#c106"
 	einfo ""
 	supportedcards
 }

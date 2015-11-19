@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/jubler/jubler-4.6.1-r3.ebuild,v 1.11 2014/07/09 07:40:33 ercpe Exp $
+# $Id$
 
 EAPI="2"
 WANT_ANT_TASKS="ant-nodeps ant-contrib"
@@ -9,7 +9,7 @@ inherit fdo-mime eutils java-pkg-2 java-ant-2 toolchain-funcs
 MY_PN=${PN/#j/J}
 DESCRIPTION="Java subtitle editor"
 HOMEPAGE="http://www.jubler.org/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_PN}-source-${PV}.tar.bz2"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_PN}-source-${PV}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -83,7 +83,7 @@ src_install() {
 	java-pkg_dolauncher jubler --main Jubler
 	dohtml ChangeLog.html || die "dohtml failed"
 	dodoc README || die "dodoc failed"
-	doman resources/installers/linux/jubler.1 || die "doman fialed"
+	doman resources/installers/linux/jubler.1 || die "doman failed"
 	insinto /usr/share/jubler/help
 	doins dist/help/* || die "doins failed"
 }

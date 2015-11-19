@@ -1,15 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/inxi/inxi-2.2.19.ebuild,v 1.1 2015/03/03 12:38:22 dastergon Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="A newer, better system information script for irc, administration, and system troubleshooters."
-HOMEPAGE="http://code.google.com/p/inxi/"
+HOMEPAGE="https://github.com/smxi/inxi"
 SRC_URI="https://inxi.googlecode.com/svn/tarballs/${PN}_${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 DEPEND=""

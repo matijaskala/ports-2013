@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/ruby-shout/ruby-shout-2.2.1-r1.ebuild,v 1.4 2015/03/25 20:07:58 graaff Exp $
+# $Id$
 
 EAPI=5
 
 # ruby22 -> Does not compile
-USE_RUBY="ruby19 ruby20 ruby21"
+USE_RUBY="ruby19 ruby20"
 
 RUBY_FAKEGEM_TASK_TEST=""
 RUBY_FAKEGEM_TASK_DOC=""
@@ -19,7 +19,7 @@ HOMEPAGE="https://github.com/niko/ruby-shout"
 
 LICENSE="Ruby"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~ppc x86"
 IUSE=""
 
 RDEPEND+=" >=media-libs/libshout-2.0"

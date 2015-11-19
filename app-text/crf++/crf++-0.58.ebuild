@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/crf++/crf++-0.58.ebuild,v 1.1 2013/07/02 02:08:16 naota Exp $
+# $Id$
 
 EAPI="3"
 inherit autotools eutils
 
 MY_P="${P/crf/CRF}"
 DESCRIPTION="Yet Another CRF toolkit for segmenting/labelling sequential data"
-HOMEPAGE="http://crfpp.googlecode.com/svn/trunk/doc/index.html"
-SRC_URI="http://crfpp.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://crfpp.googlecode.com/svn/trunk/doc/index.html"
+SRC_URI="https://crfpp.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="|| ( BSD LGPL-2.1 )"
 SLOT="0"

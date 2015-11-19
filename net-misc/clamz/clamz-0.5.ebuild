@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/clamz/clamz-0.5.ebuild,v 1.3 2014/03/01 22:39:08 mgorny Exp $
+# $Id$
 
 EAPI=4
 inherit fdo-mime
 
 DESCRIPTION="Command-line downloader for the Amazon.com MP3 music store"
-HOMEPAGE="http://code.google.com/p/clamz/"
-SRC_URI="http://clamz.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/clamz/"
+SRC_URI="https://clamz.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

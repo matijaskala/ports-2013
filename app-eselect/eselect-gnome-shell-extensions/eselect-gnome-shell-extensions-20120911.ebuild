@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-eselect/eselect-gnome-shell-extensions/eselect-gnome-shell-extensions-20120911.ebuild,v 1.1 2015/03/31 16:49:11 ulm Exp $
+# $Id$
 
 EAPI="4"
 
 DESCRIPTION="Manages system defaults for GNOME Shell extensions"
-HOMEPAGE="http://www.gentoo.org"
-SRC_URI="http://dev.gentoo.org/~tetromino/distfiles/${PN}/${P}.tar.xz"
+HOMEPAGE="https://www.gentoo.org"
+SRC_URI="https://dev.gentoo.org/~tetromino/distfiles/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

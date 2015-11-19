@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/bti/bti-031-r1.ebuild,v 1.1 2013/06/02 11:58:02 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit bash-completion-r1 eutils
 
 DESCRIPTION="A command line twitter/identi.ca client"
-HOMEPAGE="http://gregkh.github.com/bti/"
+HOMEPAGE="https://gregkh.github.com/bti/"
 SRC_URI="mirror://kernel/software/web/bti/${P}.tar.bz2"
 
 LICENSE="GPL-2"

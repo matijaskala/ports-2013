@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/setools/setools-3.3.8-r5.ebuild,v 1.3 2015/03/16 21:34:05 vapier Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -10,8 +10,8 @@ inherit autotools java-pkg-opt-2 python-r1 eutils toolchain-funcs
 DESCRIPTION="SELinux policy tools"
 HOMEPAGE="http://www.tresys.com/selinux/selinux_policy_tools.shtml"
 SRC_URI="http://oss.tresys.com/projects/setools/chrome/site/dists/${P}/${P}.tar.bz2
-	http://dev.gentoo.org/~swift/patches/setools/${P}-01-fedora-patches.tar.gz
-	http://dev.gentoo.org/~swift/patches/setools/${P}-03-gentoo-patches.tar.gz"
+	https://dev.gentoo.org/~swift/patches/setools/${P}-01-fedora-patches.tar.gz
+	https://dev.gentoo.org/~swift/patches/setools/${P}-03-gentoo-patches.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -45,7 +45,7 @@ RDEPEND=">=sys-libs/libsepol-2.1.4
 	dev-libs/libxml2:2
 	java? ( >=virtual/jre-1.4 )
 	X? (
-		>=dev-lang/tk-8.4.9
+		>=dev-lang/tk-8.4.9:0=
 		>=dev-tcltk/bwidget-1.8
 		>=gnome-base/libglade-2.0
 		>=x11-libs/gtk+-2.8:2

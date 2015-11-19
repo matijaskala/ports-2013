@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/yajl/yajl-2.0.3.ebuild,v 1.13 2013/04/13 08:15:05 ago Exp $
+# $Id$
 
 EAPI=4
 
 inherit base cmake-utils
 
 DESCRIPTION="Small event-driven (SAX-style) JSON parser"
-HOMEPAGE="http://lloyd.github.com/yajl/"
-SRC_URI="http://github.com/lloyd/yajl/tarball/${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://lloyd.github.com/yajl/"
+SRC_URI="https://github.com/lloyd/yajl/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

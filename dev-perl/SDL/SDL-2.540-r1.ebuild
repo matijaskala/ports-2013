@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/SDL/SDL-2.540-r1.ebuild,v 1.3 2015/06/13 22:41:26 dilfridge Exp $
+# $Id$
 
 EAPI=5
 MODULE_AUTHOR=JTPALMER
 inherit perl-module
 
 DESCRIPTION="Simple DirectMedia Layer (SDL) bindings for perl"
-HOMEPAGE="http://sdl.perl.org/ http://search.cpan.org/dist/SDL/ http://github.com/PerlGameDev/SDL"
+HOMEPAGE="http://sdl.perl.org/ http://search.cpan.org/dist/SDL/ https://github.com/PerlGameDev/SDL"
 
 LICENSE="GPL-2 OFL-1.1"
 SLOT="0"

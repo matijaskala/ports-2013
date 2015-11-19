@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-puzzle/ksokoban/ksokoban-9999.ebuild,v 1.2 2015/01/10 04:15:32 bircoph Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ if [[ ${PV} == "9999" ]]; then
 	inherit mercurial
 	EHG_REPO_URI="http://hg.code.sf.net/p/ksokoban/code"
 else
-	SRC_URI="http://dev.gentoo.org/~bircoph/distfiles/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~bircoph/distfiles/${P}.tar.xz"
 	KEYWORDS="~amd64 ~x86"
 fi
 

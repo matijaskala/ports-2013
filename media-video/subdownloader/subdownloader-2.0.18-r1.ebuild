@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-video/subdownloader/subdownloader-2.0.18-r1.ebuild,v 1.1 2013/07/29 22:04:36 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,11 +10,11 @@ inherit python-single-r1 eutils
 
 DESCRIPTION="GUI application for automatic downloading/uploading of subtitles for videofiles"
 HOMEPAGE="http://www.subdownloader.net/"
-SRC_URI="http://launchpad.net/${PN}/trunk/${PV}/+download/${PN}_2.0.18.orig.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${PN}_2.0.18.orig.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="${PYTHON_DEPS}

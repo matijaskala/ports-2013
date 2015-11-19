@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/sitecopy/sitecopy-0.16.6-r1.ebuild,v 1.3 2015/03/25 14:05:39 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils
 
 DESCRIPTION="Maintain remote web sites with ease"
 SRC_URI="http://www.manyfish.co.uk/sitecopy/${P}.tar.gz
-	http://dev.gentoo.org/~idella4/sitecopy-0.16.6-04-manpages-addition-fixes.patch"
+	https://dev.gentoo.org/~idella4/sitecopy-0.16.6-04-manpages-addition-fixes.patch"
 HOMEPAGE=" http://www.manyfish.co.uk/sitecopy/"
 # Removed all Debian related stuff.  If you want more patches, they can be ported from
 # http://ftp.debian.org/debian/pool/main/s/sitecopy/

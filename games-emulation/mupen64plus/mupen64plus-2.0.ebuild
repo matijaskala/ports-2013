@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/mupen64plus/mupen64plus-2.0.ebuild,v 1.1 2013/12/15 13:36:42 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="A fork of Mupen64 Nintendo 64 emulator, meta-package"
-HOMEPAGE="http://code.google.com/p/mupen64plus/"
+HOMEPAGE="http://www.mupen64plus.org/"
 SRC_URI=""
 
 LICENSE="metapackage"

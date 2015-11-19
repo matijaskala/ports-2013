@@ -1,6 +1,6 @@
 # Copyright 2010-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/bitcoin-qt/bitcoin-qt-0.10.2.ebuild,v 1.4 2015/05/30 17:47:11 blueness Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,7 +17,7 @@ inherit bitcoincore eutils fdo-mime gnome2-utils kde4-functions qt4-r2
 DESCRIPTION="An end-user Qt GUI for the Bitcoin crypto-currency"
 LICENSE="MIT GPL-3 LGPL-2.1 || ( CC-BY-SA-3.0 LGPL-2.1 )"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 arm ~arm64 x86 ~amd64-linux ~x86-linux"
 
 RDEPEND="
 	dev-libs/protobuf
@@ -25,16 +25,20 @@ RDEPEND="
 		media-gfx/qrencode
 	)
 	qt4? ( dev-qt/qtgui:4 )
-	qt5? ( dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 dev-qt/linguist-tools:5 )
+	qt5? ( dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 )
 	dbus? (
 		qt4? ( dev-qt/qtdbus:4 )
 		qt5? ( dev-qt/qtdbus:5 )
 	)
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	qt5? ( dev-qt/linguist-tools:5 )
+"
 REQUIRED_USE="${REQUIRED_USE} ^^ ( qt4 qt5 )"
 
 src_prepare() {
+	epatch "${FILESDIR}/miniupnpc-14.patch"
+
 	bitcoincore_prepare
 
 	local filt= yeslang= nolang=

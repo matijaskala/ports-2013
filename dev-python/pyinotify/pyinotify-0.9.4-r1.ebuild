@@ -1,14 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyinotify/pyinotify-0.9.4-r1.ebuild,v 1.12 2015/04/08 08:05:16 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
 DESCRIPTION="Python module used for monitoring filesystems events"
-HOMEPAGE="http://trac.dbzteam.org/pyinotify http://pypi.python.org/pypi/pyinotify"
+HOMEPAGE="http://trac.dbzteam.org/pyinotify https://pypi.python.org/pypi/pyinotify"
 SRC_URI="http://seb.dbzteam.org/pub/pyinotify/releases/${P}.tar.gz"
 
 LICENSE="MIT"

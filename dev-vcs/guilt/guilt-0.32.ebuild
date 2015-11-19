@@ -1,9 +1,9 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/guilt/guilt-0.32.ebuild,v 1.2 2010/03/17 16:31:41 sping Exp $
+# $Id$
 
 DESCRIPTION="A series of bash scripts which add a quilt-like interface to git"
-HOMEPAGE="http://www.kernel.org/pub/linux/kernel/people/jsipek/guilt/"
+HOMEPAGE="https://www.kernel.org/pub/linux/kernel/people/jsipek/guilt/"
 SRC_URI="mirror://kernel/linux/kernel/people/jsipek/${PN}/${P}.tar.bz2
 	mirror://gentoo/${PN}-manpages-${PV}.tar.bz2"
 

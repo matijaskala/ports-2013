@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/appinventor/appinventor-1.1.ebuild,v 1.2 2012/05/05 08:59:35 hwoarang Exp $
+# $Id$
 
 EAPI="4"
 
 MY_P="${PN}-setup_${PV}"
 DESCRIPTION="MIT App Inventor Setup package"
 HOMEPAGE="http://www.appinventor.mit.edu/"
-SRC_URI="http://dl.google.com/dl/${PN}/installers/linux/${MY_P}.tar.gz"
+SRC_URI="https://dl.google.com/dl/${PN}/installers/linux/${MY_P}.tar.gz"
 
 LICENSE="android"
 SLOT="0"

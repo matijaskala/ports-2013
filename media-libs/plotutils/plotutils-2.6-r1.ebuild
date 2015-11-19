@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/plotutils/plotutils-2.6-r1.ebuild,v 1.9 2014/08/05 11:47:31 armin76 Exp $
+# $Id$
 
 EAPI=5
 
 inherit libtool eutils autotools
 
 DESCRIPTION="Powerful C/C++ function library for exporting 2-D vector graphics"
-HOMEPAGE="http://www.gnu.org/software/plotutils/"
+HOMEPAGE="https://www.gnu.org/software/plotutils/"
 SRC_URI="mirror://gnu/plotutils/${P}.tar.gz"
 
 LICENSE="GPL-2"

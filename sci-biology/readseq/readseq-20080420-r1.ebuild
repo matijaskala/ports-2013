@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-biology/readseq/readseq-20080420-r1.ebuild,v 1.2 2014/08/10 20:31:52 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ HOMEPAGE="http://iubio.bio.indiana.edu/soft/molbio/readseq/"
 # Originally unversioned at
 # http://iubio.bio.indiana.edu/soft/molbio/readseq/java/readseq-source.zip.
 # Renamed to the date of the modification and mirrored
-SRC_URI="http://dev.gentoo.org/~dberkholz/distfiles/${MY_P}.zip"
+SRC_URI="https://dev.gentoo.org/~dberkholz/distfiles/${MY_P}.zip"
 
 LICENSE="public-domain"
 SLOT="0"

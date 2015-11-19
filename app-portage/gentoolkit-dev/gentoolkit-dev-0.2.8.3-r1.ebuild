@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/gentoolkit-dev/gentoolkit-dev-0.2.8.3-r1.ebuild,v 1.18 2015/04/08 07:30:35 mgorny Exp $
+# $Id$
 
 EAPI="5"
 
@@ -11,7 +11,7 @@ PYTHON_REQ_USE="xml"
 inherit python-r1 eutils
 
 DESCRIPTION="Collection of developer scripts for Gentoo"
-HOMEPAGE="http://www.gentoo.org/proj/en/portage/tools/index.xml"
+HOMEPAGE="https://www.gentoo.org/proj/en/portage/tools/index.xml"
 SRC_URI="mirror://gentoo/${P}.tar.gz"
 
 LICENSE="GPL-2"

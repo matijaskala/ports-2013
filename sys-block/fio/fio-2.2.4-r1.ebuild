@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/fio/fio-2.2.4-r1.ebuild,v 1.2 2015/03/11 06:02:43 prometheanfire Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~ppc64 ~x86"
 IUSE="aio glusterfs gnuplot gtk numa rbd rdma zlib"
 
 DEPEND="aio? ( dev-libs/libaio )
-	glusterfs? ( !arm? ( sys-cluster/glusterfs ) )
+	glusterfs? ( sys-cluster/glusterfs )
 	gtk? (
 		dev-libs/glib:2
 		x11-libs/gtk+:2

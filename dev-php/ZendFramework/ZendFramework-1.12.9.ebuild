@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-php/ZendFramework/ZendFramework-1.12.9.ebuild,v 1.5 2015/04/14 18:41:53 grknight Exp $
+# $Id$
 
 EAPI=5
 
@@ -24,9 +24,15 @@ IUSE="cli doc examples minimal"
 DEPEND="cli? ( dev-lang/php:*[simplexml,tokenizer] )"
 RDEPEND="${DEPEND}"
 
+src_unpack() {
+	default
+	if use minimal ; then
+		mv "${WORKDIR}/${P}-minimal" "${S}" || die
+	fi
+}
+
 src_prepare() {
 	if use minimal ; then
-		S="${WORKDIR}/${P}-minimal"
 		if use doc ; then
 			mv "${WORKDIR}/${P}/documentation" "${S}"
 		fi

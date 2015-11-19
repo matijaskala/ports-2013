@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/nikola/nikola-7.2.0.ebuild,v 1.4 2015/03/06 22:43:37 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -13,7 +13,6 @@ MY_PN="Nikola"
 if [[ ${PV} == *9999* ]]; then
 	inherit git-2
 	EGIT_REPO_URI="git://github.com/ralsina/${PN}.git"
-	KEYWORDS=""
 else
 	SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${P}.tar.gz"
 	KEYWORDS="amd64"
@@ -40,7 +39,7 @@ RDEPEND="${DEPEND}
 	>=dev-python/requests-2.2.0[${PYTHON_USEDEP}]
 	>=dev-python/unidecode-0.04.16[${PYTHON_USEDEP}]
 	>=dev-python/yapsy-1.10.423[${PYTHON_USEDEP}]
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	assets? ( >=dev-python/webassets-0.10.1[${PYTHON_USEDEP}] )
 	charts? ( >=dev-python/pygal-1.5.1[${PYTHON_USEDEP}] )
 	hyphenation? ( >=dev-python/pyphen-0.9.1[${PYTHON_USEDEP}] )

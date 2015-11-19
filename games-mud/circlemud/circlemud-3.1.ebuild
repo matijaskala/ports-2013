@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-mud/circlemud/circlemud-3.1.ebuild,v 1.15 2015/02/06 13:40:44 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils games
@@ -14,7 +14,8 @@ SLOT="0"
 KEYWORDS="amd64 ppc x86"
 IUSE=""
 
-DEPEND="dev-libs/openssl"
+DEPEND="dev-libs/openssl:0="
+RDEPEND=${DEPEND}
 
 S=${WORKDIR}/circle-${PV}
 

@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/flow-tools/flow-tools-0.68.5.1-r6.ebuild,v 1.1 2015/01/04 21:12:56 redlizard Exp $
+# $Id$
 
 EAPI=5
 inherit eutils user
 
 DESCRIPTION="library and programs to collect, send, process, and generate reports from NetFlow data"
-HOMEPAGE="http://code.google.com/p/flow-tools/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/flow-tools/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="BSD GPL-2"
 SLOT="0"

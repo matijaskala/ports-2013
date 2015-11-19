@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-tex/latex2html/latex2html-2008-r1.ebuild,v 1.3 2013/08/27 20:42:14 aballier Exp $
+# $Id$
 
 EAPI=4
 
@@ -8,7 +8,7 @@ inherit base eutils multilib
 
 DESCRIPTION="convertor written in Perl that converts LATEX documents to HTML"
 SRC_URI="http://saftsack.fs.uni-bayreuth.de/~latex2ht/current/${P}.tar.gz
-	http://dev.gentoo.org/~dilfridge/distfiles/${PN}-match-multiline.patch.bz2"
+	https://dev.gentoo.org/~dilfridge/distfiles/${PN}-match-multiline.patch.bz2"
 HOMEPAGE="http://www.latex2html.org/"
 
 LICENSE="GPL-2"

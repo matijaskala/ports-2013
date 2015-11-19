@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/trac/trac-1.0.5.ebuild,v 1.1 2015/04/04 08:36:07 djc Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ MY_PV=${PV/_beta/b}
 MY_P=Trac-${MY_PV}
 
 DESCRIPTION="Trac is a minimalistic web-based project management, wiki and bug/issue tracking system"
-HOMEPAGE="http://trac.edgewall.com/ http://pypi.python.org/pypi/Trac"
+HOMEPAGE="http://trac.edgewall.com/ https://pypi.python.org/pypi/Trac"
 SRC_URI="http://ftp.edgewall.com/pub/trac/${MY_P}.tar.gz"
 
 LICENSE="BSD"

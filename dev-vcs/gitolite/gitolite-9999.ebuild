@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/gitolite/gitolite-9999.ebuild,v 1.1 2014/11/29 22:27:00 robbat2 Exp $
+# $Id$
 
 EAPI=5
 [[ ${PV} == *9999 ]] && SCM="git-2"
@@ -10,7 +10,7 @@ EGIT_MASTER=master
 inherit perl-module user versionator ${SCM}
 
 DESCRIPTION="Highly flexible server for git directory version tracker"
-HOMEPAGE="http://github.com/sitaramc/gitolite"
+HOMEPAGE="https://github.com/sitaramc/gitolite"
 if [[ ${PV} != *9999 ]]; then
 	SRC_URI="https://github.com/sitaramc/gitolite/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~x86"

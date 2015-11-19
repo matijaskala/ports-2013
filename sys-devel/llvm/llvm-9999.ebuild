@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/llvm/llvm-9999.ebuild,v 1.118 2015/06/15 22:26:52 voyageur Exp $
+# $Id$
 
 EAPI=5
 
@@ -30,14 +30,14 @@ COMMON_DEPEND="
 			dev-lang/perl:*
 			${PYTHON_DEPS}
 		)
-		xml? ( dev-libs/libxml2:2= )
+		xml? ( dev-libs/libxml2:2=[${MULTILIB_USEDEP}] )
 	)
 	gold? ( >=sys-devel/binutils-2.22:*[cxx] )
 	libedit? ( dev-libs/libedit:0=[${MULTILIB_USEDEP}] )
 	libffi? ( >=virtual/libffi-3.0.13-r1:0=[${MULTILIB_USEDEP}] )
-	ncurses? ( >=sys-libs/ncurses-5.9-r3:5=[${MULTILIB_USEDEP}] )
+	ncurses? ( >=sys-libs/ncurses-5.9-r3:0=[${MULTILIB_USEDEP}] )
 	ocaml? (
-		dev-lang/ocaml:0=
+		>=dev-lang/ocaml-4.00.0:0=
 		dev-ml/findlib
 		dev-ml/ocaml-ctypes )"
 # configparser-3.2 breaks the build (3.3 or none at all are fine)
@@ -53,9 +53,11 @@ DEPEND="${COMMON_DEPEND}
 	kernel_Darwin? ( sys-libs/libcxx )
 	clang? ( xml? ( virtual/pkgconfig ) )
 	doc? ( dev-python/sphinx )
+	gold? ( sys-libs/binutils-libs )
 	libffi? ( virtual/pkgconfig )
 	lldb? ( dev-lang/swig )
 	!!<dev-python/configparser-3.3.0.2
+	ocaml? ( test? ( dev-ml/ounit ) )
 	${PYTHON_DEPS}"
 RDEPEND="${COMMON_DEPEND}
 	clang? ( !<=sys-devel/clang-${PV}-r99 )
@@ -66,7 +68,7 @@ PDEPEND="clang? ( =sys-devel/clang-${PV}-r100 )"
 # pypy gives me around 1700 unresolved tests due to open file limit
 # being exceeded. probably GC does not close them fast enough.
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
-	lldb? ( clang )
+	lldb? ( clang xml )
 	test? ( || ( $(python_gen_useflags 'python*') ) )"
 
 pkg_pretend() {
@@ -152,9 +154,10 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-3.5-gcc-4.9.patch
 	# Make ocaml warnings non-fatal, bug #537308
 	sed -e "/RUN/s/-warn-error A//" -i test/Bindings/OCaml/*ml  || die
+	# Fix libdir for ocaml bindings install, bug #559134
+	epatch "${FILESDIR}"/cmake/${PN}-3.7.0-ocaml-multilib.patch
 
 	# Make it possible to override Sphinx HTML install dirs
 	# https://llvm.org/bugs/show_bug.cgi?id=23780
@@ -168,6 +171,9 @@ src_prepare() {
 	# https://llvm.org/bugs/show_bug.cgi?id=18341
 	epatch "${FILESDIR}"/cmake/0004-cmake-Do-not-install-libgtest.patch
 
+	# Allow custom cmake build types (like 'Gentoo')
+	epatch "${FILESDIR}"/cmake/${PN}-3.8-allow_custom_cmake_build_types.patch
+
 	if use clang; then
 		# Automatically select active system GCC's libraries, bugs #406163 and #417913
 		epatch "${FILESDIR}"/clang-3.5-gentoo-runtime-gcc-detection-v3.patch
@@ -179,13 +185,18 @@ src_prepare() {
 
 		# Install clang runtime into /usr/lib/clang
 		# https://llvm.org/bugs/show_bug.cgi?id=23792
-		epatch "${FILESDIR}"/cmake/clang-0001-Install-clang-runtime-into-usr-lib-without-suffix.patch
+		epatch "${FILESDIR}"/cmake/clang-0001-Install-clang-runtime-into-usr-lib-without-suffix-3.8.patch
 		epatch "${FILESDIR}"/cmake/compiler-rt-0001-cmake-Install-compiler-rt-into-usr-lib-without-suffi.patch
 
 		# Make it possible to override CLANG_LIBDIR_SUFFIX
 		# (that is used only to find LLVMgold.so)
 		# https://llvm.org/bugs/show_bug.cgi?id=23793
 		epatch "${FILESDIR}"/cmake/clang-0002-cmake-Make-CLANG_LIBDIR_SUFFIX-overridable.patch
+
+		# Fix WX sections, bug #421527
+		find "${S}"/projects/compiler-rt/lib/builtins -type f -name \*.S -exec sed \
+			 -e '$a\\n#if defined(__linux__) && defined(__ELF__)\n.section .note.GNU-stack,"",%progbits\n#endif' \
+			 -i {} \; || die
 	fi
 
 	if use lldb; then
@@ -245,6 +256,12 @@ multilib_src_configure() {
 		-DHAVE_HISTEDIT_H=$(usex libedit)
 	)
 
+	if use clang; then
+		mycmakeargs+=(
+			-DCMAKE_DISABLE_FIND_PACKAGE_LibXml2=$(usex !xml)
+		)
+	fi
+
 	if use lldb; then
 		mycmakeargs+=(
 			-DLLDB_DISABLE_LIBEDIT=$(usex !libedit)
@@ -272,6 +289,8 @@ multilib_src_configure() {
 			-DLLVM_ENABLE_SPHINX=$(usex doc)
 			-DLLVM_ENABLE_DOXYGEN=OFF
 			-DLLVM_INSTALL_HTML="${EPREFIX}/usr/share/doc/${PF}/html"
+			-DSPHINX_WARNINGS_AS_ERRORS=OFF
+			-DLLVM_INSTALL_UTILS=ON
 		)
 
 		if use clang; then
@@ -331,6 +350,8 @@ multilib_src_configure() {
 
 multilib_src_compile() {
 	cmake-utils_src_compile
+	# TODO: not sure why this target is not correctly called
+	multilib_is_native_abi && use doc && use ocaml && cmake-utils_src_make docs/ocaml_doc
 
 	pax-mark m "${BUILD_DIR}"/bin/llvm-rtdyld
 	pax-mark m "${BUILD_DIR}"/bin/lli
@@ -364,7 +385,7 @@ src_install() {
 
 	if use clang; then
 		# note: magic applied in multilib_src_install()!
-		CLANG_VERSION=3.7
+		CLANG_VERSION=3.8
 
 		MULTILIB_CHOST_TOOLS+=(
 			/usr/bin/clang
@@ -483,5 +504,12 @@ multilib_src_install_all() {
 		}
 		python_foreach_impl python_inst
 		popd >/dev/null || die
+	fi
+}
+
+pkg_postinst() {
+	if use clang; then
+		elog "To enable OpenMP support in clang, install sys-libs/libomp"
+		elog "and use the '-fopenmp=libomp' command line option"
 	fi
 }

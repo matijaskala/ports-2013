@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/biosff/biosff-0.3.7.1.ebuild,v 1.1 2015/03/10 21:58:41 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -27,6 +27,10 @@ RDEPEND="dev-haskell/binary:=[profile?]
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.6
 "
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-ghc-7.10.patch
+}
 
 src_configure() {
 	haskell-cabal_src_configure \

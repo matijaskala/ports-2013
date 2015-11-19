@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apache/mod_auth_kerb/mod_auth_kerb-5.4-r2.ebuild,v 1.2 2015/05/17 10:55:22 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit apache-module eutils systemd
@@ -11,7 +11,7 @@ SRC_URI="mirror://sourceforge/modauthkerb/${P}.tar.gz"
 
 LICENSE="BSD openafs-krb5-a HPND"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="virtual/krb5"

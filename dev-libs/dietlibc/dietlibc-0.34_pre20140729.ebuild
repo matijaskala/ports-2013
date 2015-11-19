@@ -1,17 +1,17 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/dietlibc/dietlibc-0.34_pre20140729.ebuild,v 1.3 2015/02/28 22:44:59 zorry Exp $
+# $Id$
 
 EAPI=5
 inherit eutils flag-o-matic toolchain-funcs
 
 DESCRIPTION="A libc optimized for small size"
 HOMEPAGE="http://www.fefe.de/dietlibc/"
-SRC_URI="http://dev.gentoo.org/~patrick/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~patrick/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=" ~alpha ~amd64 ~arm ~ia64 ~mips ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="alpha amd64 ~arm ~ia64 ~mips ~sparc x86 ~amd64-linux ~x86-linux"
 IUSE=""
 
 DEPEND=""

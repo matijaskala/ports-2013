@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/ejabberd/ejabberd-2.1.13-r1.ebuild,v 1.5 2014/08/05 18:34:12 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit eutils multilib pam ssl-cert systemd
 DESCRIPTION="The Erlang Jabber Daemon"
 HOMEPAGE="http://www.ejabberd.im/ https://github.com/processone/ejabberd/"
 SRC_URI="http://www.process-one.net/downloads/${PN}/${PV}/${P}.tgz
-	mod_statsdx? ( http://dev.gentoo.org/~radhermit/dist/${PN}-mod_statsdx-1118.patch.gz )"
+	mod_statsdx? ( https://dev.gentoo.org/~radhermit/dist/${PN}-mod_statsdx-1118.patch.gz )"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-calculators/speedcrunch/speedcrunch-0.10.1.ebuild,v 1.5 2013/03/02 23:16:50 hwoarang Exp $
+# $Id$
 
 EAPI=4
 
@@ -8,7 +8,7 @@ inherit eutils cmake-utils
 
 DESCRIPTION="A fast and usable calculator for power users"
 HOMEPAGE="https://code.google.com/p/speedcrunch/"
-SRC_URI="http://speedcrunch.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://speedcrunch.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

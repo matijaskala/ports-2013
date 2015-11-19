@@ -1,11 +1,11 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/perl-info/perl-info-0.16.ebuild,v 1.7 2012/03/18 16:00:53 armin76 Exp $
+# $Id$
 
 DESCRIPTION="Tool to gather relevant perl data useful for bugreports; 'emerge --info' for perl"
-HOMEPAGE="http://www.gentoo.org/proj/en/perl/"
+HOMEPAGE="https://www.gentoo.org/proj/en/perl/"
 SRC_URI="mirror://gentoo/${P}.tar.gz
-	http://dev.gentoo.org/~tove/files/${P}.tar.gz"
+	https://dev.gentoo.org/~tove/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

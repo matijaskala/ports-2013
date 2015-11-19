@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/mosh/mosh-1.2.4.ebuild,v 1.8 2014/04/06 11:41:31 grobian Exp $
+# $Id$
 
 EAPI=4
 
@@ -18,7 +18,7 @@ REQUIRED_USE="|| ( client server )
 	examples? ( client )"
 
 RDEPEND="dev-libs/protobuf
-	sys-libs/ncurses:5
+	sys-libs/ncurses:0
 	virtual/ssh
 	client? ( dev-lang/perl
 		dev-perl/IO-Tty )

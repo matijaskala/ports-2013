@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-light/gnome-light-3.14.0.ebuild,v 1.5 2015/03/15 13:22:58 pacho Exp $
+# $Id$
 
 EAPI="5"
 
 DESCRIPTION="Meta package for GNOME-Light, merge this package to install"
-HOMEPAGE="http://www.gnome.org/"
+HOMEPAGE="https://www.gnome.org/"
 LICENSE="metapackage"
 SLOT="2.0"
 IUSE="cups +gnome-shell"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/vmd/vmd-1.9.2.ebuild,v 1.1 2015/03/06 10:07:11 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ inherit cuda eutils flag-o-matic multilib prefix python-single-r1 toolchain-func
 DESCRIPTION="Visual Molecular Dynamics"
 HOMEPAGE="http://www.ks.uiuc.edu/Research/vmd/"
 SRC_URI="
-	http://dev.gentoo.org/~jlec/distfiles/${P}-gentoo-patches.tar.xz
+	https://dev.gentoo.org/~jlec/distfiles/${P}-gentoo-patches.tar.xz
 	${P}.src.tar.gz"
 
 SLOT="0"
@@ -24,7 +24,7 @@ RESTRICT="fetch"
 # currently, tk-8.5* with USE=truetype breaks some
 # tk apps such as Sequence Viewer or Timeline.
 CDEPEND="
-	|| ( =dev-lang/tk-8.5*:0=[-truetype] >=dev-lang/tk-8.6.1 )
+	>=dev-lang/tk-8.6.1
 	dev-lang/perl
 	dev-libs/expat
 	dev-python/numpy[${PYTHON_USEDEP}]
@@ -33,7 +33,7 @@ CDEPEND="
 	>=x11-libs/fltk-1.1.10-r2:1
 	x11-libs/libXft
 	x11-libs/libXi
-	cuda? ( >=dev-util/nvidia-cuda-toolkit-4.2.9-r1 )
+	cuda? ( >=dev-util/nvidia-cuda-toolkit-4.2.9-r1:= )
 	gromacs? ( >=sci-chemistry/gromacs-5.0.4-r1[tng] )
 	sqlite? ( dev-db/sqlite:3= )
 	tachyon? ( >=media-gfx/tachyon-0.99_beta6 )
@@ -59,7 +59,7 @@ pkg_nofetch() {
 	elog "Please download ${P}.src.tar.gz from"
 	elog "${VMD_DOWNLOAD}"
 	elog "after agreeing to the license and get"
-	elog "http://dev.gentoo.org/~jlec/distfiles/${P}-gentoo-patches.tar.xz"
+	elog "https://dev.gentoo.org/~jlec/distfiles/${P}-gentoo-patches.tar.xz"
 	elog "Place both in ${DISTDIR}"
 }
 

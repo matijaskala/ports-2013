@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-debian/python-debian-0.1.27.ebuild,v 1.2 2015/04/19 16:37:26 floppym Exp $
+# $Id$
 
 EAPI="5"
 
-PYTHON_COMPAT=( python2_7 python3_{3,4} pypy )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} pypy )
 
 inherit distutils-r1
 
@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.1.26-fix-tests.patch
-	)
+)
 
 python_compile_all() {
 	"${PYTHON}" lib/debian/doc-debtags > README.debtags || die

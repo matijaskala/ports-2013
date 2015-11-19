@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-doc/devmanual/devmanual-0_pre20141116.ebuild,v 1.2 2015/04/25 16:08:42 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,11 +9,11 @@ inherit readme.gentoo
 [[ "${PV}" == "9999" ]] && inherit git-2
 
 DESCRIPTION="The Gentoo Development Guide"
-HOMEPAGE="http://devmanual.gentoo.org/"
+HOMEPAGE="https://devmanual.gentoo.org/"
 if [[ "${PV}" == "9999" ]]; then
 EGIT_REPO_URI="git://anongit.gentoo.org/proj/devmanual.git"
 else
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
 fi
 
 LICENSE="CC-BY-SA-2.0"

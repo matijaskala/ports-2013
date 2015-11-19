@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/iscan-plugin-gt-f500/iscan-plugin-gt-f500-1.0.0.1-r1.ebuild,v 1.2 2014/08/10 21:14:32 slyfox Exp $
+# $Id$
 
 EAPI="4"
 
@@ -10,7 +10,7 @@ MY_P="${PN}-$(replace_version_separator 3 -)"
 
 DESCRIPTION="Epson Perfection 2480/2580 PHOTO scanner plugin for SANE 'epkowa' backend"
 HOMEPAGE="http://download.ebz.epson.net/dsc/search/01/search/?OSC=LX"
-SRC_URI="http://dev.gentoo.org/~flameeyes/avasys/${MY_P}.c2.i386.rpm"
+SRC_URI="https://dev.gentoo.org/~flameeyes/avasys/${MY_P}.c2.i386.rpm"
 
 LICENSE="EPSON EAPL"
 SLOT="0"

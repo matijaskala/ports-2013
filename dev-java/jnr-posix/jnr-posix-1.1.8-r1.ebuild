@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jnr-posix/jnr-posix-1.1.8-r1.ebuild,v 1.1 2013/08/17 08:21:16 tomwij Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,8 +9,8 @@ JAVA_PKG_IUSE="doc source test"
 inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="Lightweight cross-platform POSIX emulation layer for Java"
-HOMEPAGE="http://github.com/jnr/"
-SRC_URI="http://github.com/jnr/${PN}/tarball/${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/jnr/"
+SRC_URI="https://github.com/jnr/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="|| ( CPL-1.0 GPL-2 LGPL-2.1 )"
 SLOT="1.1"

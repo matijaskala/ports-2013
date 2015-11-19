@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/sphinxtogithub/sphinxtogithub-1.1.0.ebuild,v 1.6 2015/06/07 09:57:06 maekke Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 pypy )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 pypy )
 inherit distutils-r1
 
 DESCRIPTION="A python script for preparing the html output of Sphinx documentation for github pages"
-HOMEPAGE="http://github.com/michaeljones/sphinx-to-github/"
+HOMEPAGE="https://github.com/michaeljones/sphinx-to-github/"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD-2"

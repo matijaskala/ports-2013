@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-puzzle/color-lines/color-lines-0.6.ebuild,v 1.3 2014/05/15 16:49:40 ulm Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils games
 
 DESCRIPTION="Color lines game written with SDL with bonus features"
-HOMEPAGE="http://color-lines.googlecode.com/"
-SRC_URI="http://color-lines.googlecode.com/files/lines_${PV}.tar.gz"
+HOMEPAGE="https://color-lines.googlecode.com/"
+SRC_URI="https://color-lines.googlecode.com/files/lines_${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

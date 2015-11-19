@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/gkrellweather/gkrellweather-2.0.8.ebuild,v 1.9 2015/05/11 19:38:51 zlogene Exp $
+# $Id$
 
 EAPI=5
 
 inherit flag-o-matic gkrellm-plugin toolchain-funcs
 
 DESCRIPTION="GKrellM2 Plugin that monitors a METAR station and displays weatherinfo"
-HOMEPAGE="http://sites.google.com/site/makovick/gkrellm-plugins"
-SRC_URI="http://sites.google.com/site/makovick/projects/${P}.tgz"
+HOMEPAGE="https://sites.google.com/site/makovick/gkrellm-plugins"
+SRC_URI="https://sites.google.com/site/makovick/projects/${P}.tgz"
 
 SLOT="2"
 LICENSE="GPL-2"

@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/udisks-glue/udisks-glue-1.3.5.ebuild,v 1.3 2015/04/18 15:56:58 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit autotools
 
 DESCRIPTION="A tool to associate udisks events to user-defined actions"
-HOMEPAGE="http://github.com/fernandotcl/udisks-glue"
-SRC_URI="http://github.com/fernandotcl/udisks-glue/tarball/release-${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/fernandotcl/udisks-glue"
+SRC_URI="https://github.com/fernandotcl/udisks-glue/tarball/release-${PV} -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

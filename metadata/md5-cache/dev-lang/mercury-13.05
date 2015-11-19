@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare setup test
-DEPEND=!dev-libs/mpatrol !dev-util/mono-debugger readline? ( sys-libs/readline ) erlang? ( dev-lang/erlang ) java? ( >=virtual/jdk-1.5 ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.14.1:1.14 >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 java? ( >=dev-java/java-config-2.2.0 )
+DEPEND=!dev-libs/mpatrol !dev-util/mono-debugger readline? ( sys-libs/readline ) erlang? ( dev-lang/erlang ) java? ( >=virtual/jdk-1.5 ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 java? ( >=dev-java/java-config-2.2.0 )
 DESCRIPTION=Mercury is a modern general-purpose logic/functional programming language
 EAPI=2
 HOMEPAGE=http://www.mercurylang.org/index.html
@@ -9,5 +9,5 @@ LICENSE=GPL-2 LGPL-2
 RDEPEND=!dev-libs/mpatrol !dev-util/mono-debugger readline? ( sys-libs/readline ) erlang? ( dev-lang/erlang ) java? ( >=virtual/jdk-1.5 ) emacs? ( virtual/emacs ) java? ( >=dev-java/java-config-2.2.0 )
 SLOT=0
 SRC_URI=http://dl.mercurylang.org/release/mercury-srcdist-13.05.tar.gz mirror://gentoo/mercury-13.05-gentoo-patchset-0.tar.gz
-_eclasses_=autotools	a9597abac7226d89ad9d010abeef6cfb	elisp-common	9a16929c1a6aec7e1c903289983e114c	eutils	9fb270e417e0e83d64ca52586c4a79de	flag-o-matic	c9602887773166fe300444712fc7ff98	java-pkg-opt-2	f9bbbe5092225a2059aa9e6a3a2b52f1	java-utils-2	6627198e505d021534cb20f89279c509	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	62927b3db3a589b0806255f3a002d5d3	toolchain-funcs	42408102d713fbad60ca21349865edb4	versionator	cd0bcdb170807e4a1984115e9d53a26f
-_md5_=605367786f56c8b15dd9f3a3a3b43d68
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	elisp-common	73c48c11ad6a6494eda0d0cca848c8fa	eutils	f813d23e417656bf3917483643165d5a	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	java-pkg-opt-2	40db73f27fc6458ec2105812a4f261c7	java-utils-2	a96633177f44ee992b3fce360d1c4f16	libtool	7f78cd7d403808a350c9ae23f5821fb4	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=1180795bb6484e27a008d2fe38277fe2

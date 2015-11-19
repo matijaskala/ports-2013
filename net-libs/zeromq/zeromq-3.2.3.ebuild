@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/zeromq/zeromq-3.2.3.ebuild,v 1.11 2015/06/04 10:58:58 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ DEPEND="
 	|| ( sys-devel/gcc sys-devel/gcc-apple )
 	pgm? (
 		virtual/pkgconfig
-		=net-libs/openpgm-5.1.118
+		~net-libs/openpgm-5.1.118
 	)
 	elibc_glibc? ( sys-apps/util-linux )"
 RDEPEND=""

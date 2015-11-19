@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/bluez/bluez-4.101-r9.ebuild,v 1.9 2015/04/08 18:20:55 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -10,7 +10,7 @@ inherit autotools eutils multilib python-single-r1 readme.gentoo \
 DESCRIPTION="Bluetooth Tools and System Daemons for Linux"
 HOMEPAGE="http://www.bluez.org/"
 SRC_URI="mirror://kernel/linux/bluetooth/${P}.tar.xz
-	http://dev.gentoo.org/~pacho/bluez/${P}-patches.tar.xz"
+	https://dev.gentoo.org/~pacho/bluez/${P}-patches.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

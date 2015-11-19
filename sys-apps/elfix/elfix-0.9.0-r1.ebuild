@@ -1,19 +1,19 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/elfix/elfix-0.9.0-r1.ebuild,v 1.4 2015/04/19 07:05:14 pacho Exp $
+# $Id$
 
 EAPI="5"
 
 inherit eutils
 
 DESCRIPTION="A suite of tools to work with ELF objects on Hardened Gentoo"
-HOMEPAGE="http://www.gentoo.org/proj/en/hardened/pax-quickstart.xml
-	http://dev.gentoo.org/~blueness/elfix/"
-SRC_URI="http://dev.gentoo.org/~blueness/elfix/${P}.tar.gz"
+HOMEPAGE="https://www.gentoo.org/proj/en/hardened/pax-quickstart.xml
+	https://dev.gentoo.org/~blueness/elfix/"
+SRC_URI="https://dev.gentoo.org/~blueness/elfix/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ~ia64 ~mips ppc ppc64 ~sparc x86"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
 IUSE="+ptpax +xtpax"
 
 REQUIRED_USE="|| ( ptpax xtpax )"

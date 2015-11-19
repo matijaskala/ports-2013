@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/bash/bash-2.05b_p13.ebuild,v 1.1 2014/10/19 20:31:56 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -73,6 +73,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.05b-parallel-build.patch #41002
 	epatch "${FILESDIR}"/${PN}-2.05b-jobs.patch
 	epatch "${FILESDIR}"/${PN}-2.05b-fix-job-warning.patch
+	epatch "${FILESDIR}"/${PN}-3.1-dev-fd-buffer-overflow.patch #431850
 
 	epatch_user
 }
@@ -115,6 +116,10 @@ src_configure() {
 	# ncurses in one or two small places :(.
 
 	tc-export AR #444070
+	# This old autoconf script does not re-exec itself properly and fails when
+	# /bin/sh is not bash.  Rather than try to regen everything, just force the
+	# use of bash directly.
+	CONFIG_SHELL="/bin/bash" \
 	econf \
 		--with-installed-readline=. \
 		--with-curses \

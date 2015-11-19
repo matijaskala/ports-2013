@@ -1,15 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/gentoo-vdr-scripts/gentoo-vdr-scripts-2.5.ebuild,v 1.3 2015/02/03 20:25:55 hd_brummy Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils user
 
 DESCRIPTION="Scripts necessary for use of vdr as a set-top-box"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI="mirror://gentoo/${P}.tar.bz2
-	http://dev.gentoo.org/~hd_brummy/distfiles/${P}.tar.bz2"
+	https://dev.gentoo.org/~hd_brummy/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

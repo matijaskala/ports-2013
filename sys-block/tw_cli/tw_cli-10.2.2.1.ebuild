@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/tw_cli/tw_cli-10.2.2.1.ebuild,v 1.3 2015/04/02 18:56:38 mr_bones_ Exp $
+# $Id$
 
 EAPI="5"
 
@@ -19,7 +19,7 @@ SRC_URI="kernel_linux? ( ${SRC_URI_BASE}/${SRC_URI_A_linux} )
 RELNOTES="${SRC_URI_BASE}/${PV}_Release_Notes.pdf"
 
 # Note: 3ware gave permission to redistribute the binaries before:
-# Ref: http://bugs.gentoo.org/show_bug.cgi?id=60690#c106
+# Ref: https://bugs.gentoo.org/show_bug.cgi?id=60690#c106
 #
 # Please note that the LSI-tw_cli license does allow redistribution, despite
 # being a EULA:

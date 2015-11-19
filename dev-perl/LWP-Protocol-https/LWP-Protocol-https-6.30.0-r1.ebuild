@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/LWP-Protocol-https/LWP-Protocol-https-6.30.0-r1.ebuild,v 1.2 2015/04/05 02:16:59 vapier Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ MODULE_VERSION=6.03
 inherit perl-module
 
 DESCRIPTION="Provide https support for LWP::UserAgent"
-SRC_URI+=" http://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${PN}_ca-cert-r1.patch.gz"
+SRC_URI+=" https://dev.gentoo.org/~tove/distfiles/${CATEGORY}/${PN}/${PN}_ca-cert-r1.patch.gz"
 
 SLOT="0"
 IUSE=""

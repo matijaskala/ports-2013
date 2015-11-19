@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dialup/gnuradius/gnuradius-1.6.1-r1.ebuild,v 1.4 2014/12/28 16:15:33 titanofold Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit eutils multilib pam
 MY_P="${P#gnu}"
 
 DESCRIPTION="GNU radius authentication server"
-HOMEPAGE="http://www.gnu.org/software/radius/radius.html"
+HOMEPAGE="https://www.gnu.org/software/radius/radius.html"
 SRC_URI="mirror://gnu/radius/${MY_P}.tar.gz"
 
 LICENSE="GPL-3"

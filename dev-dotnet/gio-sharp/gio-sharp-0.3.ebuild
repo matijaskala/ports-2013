@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-dotnet/gio-sharp/gio-sharp-0.3.ebuild,v 1.4 2012/05/04 03:56:57 jdhore Exp $
+# $Id$
 
 EAPI=4
 inherit autotools mono
 
 DESCRIPTION="GIO API C# binding"
-HOMEPAGE="http://github.com/mono/gio-sharp"
-SRC_URI="http://github.com/mono/${PN}/tarball/${PV} -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/mono/gio-sharp"
+SRC_URI="https://github.com/mono/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

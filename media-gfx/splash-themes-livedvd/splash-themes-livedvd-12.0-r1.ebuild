@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/splash-themes-livedvd/splash-themes-livedvd-12.0-r1.ebuild,v 1.1 2013/03/12 11:25:36 alonbl Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils
 
 DESCRIPTION="Gentoo theme for gensplash consoles"
-HOMEPAGE="http://www.gentoo.org/"
-SRC_URI="http://dev.gentoo.org/~tampakrap/tarballs/${P}.tar.bz2"
+HOMEPAGE="https://www.gentoo.org/"
+SRC_URI="https://dev.gentoo.org/~tampakrap/tarballs/${P}.tar.bz2"
 
 LICENSE="Artistic GPL-2 BitstreamVera"
 SLOT="0"

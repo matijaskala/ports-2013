@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/sgeps/sgeps-0_pre15.ebuild,v 1.1 2012/04/16 22:25:51 flameeyes Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="simple GnuPG-encrypted password store written in perl"
 HOMEPAGE="http://roland.entierement.nu/blog/2010/01/22/simple-gnupg-encrypted-password-store.html"
-SRC_URI="http://dev.gentoo.org/~flameeyes/${PN}/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~flameeyes/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

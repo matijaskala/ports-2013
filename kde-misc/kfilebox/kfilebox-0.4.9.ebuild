@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/kfilebox/kfilebox-0.4.9.ebuild,v 1.2 2014/04/23 22:41:43 creffett Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ MY_P="${PN}_${PV}"
 
 DESCRIPTION="KDE dropbox client"
 HOMEPAGE="http://kdropbox.deuteros.es/"
-SRC_URI="http://dev.gentoo.org/~tampakrap/tarballs/${MY_P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~tampakrap/tarballs/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 
 SLOT="4"

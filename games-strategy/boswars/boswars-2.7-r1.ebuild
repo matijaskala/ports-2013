@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-strategy/boswars/boswars-2.7-r1.ebuild,v 1.6 2014/11/30 18:03:10 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit eutils scons-utils games
@@ -8,7 +8,7 @@ inherit eutils scons-utils games
 DESCRIPTION="Futuristic real-time strategy game"
 HOMEPAGE="http://www.boswars.org/"
 SRC_URI="http://www.boswars.org/dist/releases/${P}-src.tar.gz
-	http://dev.gentoo.org/~hasufell/distfiles/${P}-fixed-images-for-libpng-1.6.tar.xz
+	https://dev.gentoo.org/~hasufell/distfiles/${P}-fixed-images-for-libpng-1.6.tar.xz
 	mirror://gentoo/bos.png"
 
 LICENSE="GPL-2"

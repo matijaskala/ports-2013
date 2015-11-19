@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/io/io-2011.09.12-r2.ebuild,v 1.6 2015/05/11 20:42:13 pacho Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,7 +9,7 @@ inherit cmake-utils
 DESCRIPTION="Io is a small, prototype-based programming language"
 HOMEPAGE="http://www.iolanguage.com"
 SRC_URI="mirror://gentoo/${P}.tar.gz
-		http://dev.gentoo.org/~araujo/snapshots/${P}.tar.gz"
+		https://dev.gentoo.org/~araujo/snapshots/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

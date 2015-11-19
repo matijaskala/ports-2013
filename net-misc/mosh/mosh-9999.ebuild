@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/mosh/mosh-9999.ebuild,v 1.16 2015/06/24 10:31:21 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ REQUIRED_USE="|| ( client server )
 	examples? ( client )"
 
 RDEPEND="dev-libs/protobuf
-	sys-libs/ncurses:5
+	sys-libs/ncurses:0=
 	virtual/ssh
 	client? ( dev-lang/perl
 		dev-perl/IO-Tty )
@@ -55,5 +55,5 @@ src_install() {
 	done
 
 	# bug 477384
-	dobashcomp conf/bash_completion.d/mosh
+	dobashcomp conf/bash-completion/completions/mosh
 }

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/popa3d/popa3d-1.0.2-r1.ebuild,v 1.7 2014/08/10 20:45:28 slyfox Exp $
+# $Id$
 
 EAPI=4
 inherit eutils toolchain-funcs user
@@ -36,7 +36,7 @@ inherit eutils toolchain-funcs user
 # POPA3D_VIRTUAL_HOME_PATH
 #
 # Set this field to the base virtual home path. For more information
-# read the virtual guide here: http://forums.gentoo.org/viewtopic.php?t=82386
+# read the virtual guide here: https://forums.gentoo.org/viewtopic.php?t=82386
 #
 ######
 # 12/07/2005 - port001

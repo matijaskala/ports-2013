@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/fddl/fddl-20111124.ebuild,v 1.4 2014/07/18 12:54:00 jer Exp $
+# $Id$
 
 EAPI=4
 
@@ -10,7 +10,7 @@ inherit cmake-utils multilib vcs-snapshot
 
 DESCRIPTION="Free Decision Diagram Library"
 HOMEPAGE="http://itval.sourceforge.net/ https://github.com/atomopawn/FDDL"
-SRC_URI="http://dev.gentoo.org/~pinkbyte/distfiles/snapshots/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~pinkbyte/distfiles/snapshots/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

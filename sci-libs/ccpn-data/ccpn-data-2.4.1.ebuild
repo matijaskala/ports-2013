@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/ccpn-data/ccpn-data-2.4.1.ebuild,v 1.1 2014/10/06 07:21:08 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,7 +16,7 @@ MY_MAJOR="$(get_version_component_range 1-3)"
 DESCRIPTION="The Collaborative Computing Project for NMR - Data"
 HOMEPAGE="http://www.ccpn.ac.uk/ccpn"
 SRC_URI="http://www2.ccpn.ac.uk/download/${MY_PN}/analysis${MY_PV}.tar.gz"
-[[ -n ${PATCHSET} ]] && SRC_URI+=" http://dev.gentoo.org/~jlec/distfiles/ccpn-update-${MY_MAJOR}-${PATCHSET}.patch.xz"
+[[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~jlec/distfiles/ccpn-update-${MY_MAJOR}-${PATCHSET}.patch.xz"
 
 SLOT="0"
 LICENSE="|| ( CCPN LGPL-2.1 )"

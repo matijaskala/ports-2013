@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/raw-thumbnailer/raw-thumbnailer-0.2.1.ebuild,v 1.10 2012/05/05 07:00:24 jdhore Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="A lightweight and fast raw image thumbnailer"
-HOMEPAGE="http://code.google.com/p/raw-thumbnailer"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/erlendd/raw-thumbnailer"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

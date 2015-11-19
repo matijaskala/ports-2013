@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/bdelta/bdelta-9999.ebuild,v 1.5 2013/03/05 13:35:01 slyfox Exp $
+# $Id$
 
 EAPI=4
 
@@ -16,7 +16,7 @@ inherit multilib toolchain-funcs ${UNPACKER_ECLASS}
 
 if [[ -z ${LIVE_EBUILD} ]]; then
 	KEYWORDS="~alpha ~amd64 ~ppc ~sparc ~x86 ~x86-linux"
-	SRC_URI="http://github.com/jjwhitney/BDelta/tarball/v${PV} -> ${P}.tar.gz"
+	SRC_URI="https://github.com/jjwhitney/BDelta/tarball/v${PV} -> ${P}.tar.gz"
 fi
 
 DESCRIPTION="Binary Delta - Efficient difference algorithm and format"

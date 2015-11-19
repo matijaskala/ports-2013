@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/sparse/sparse-0.4.4.ebuild,v 1.1 2013/05/09 17:42:05 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -11,7 +11,7 @@ if [[ ${PV} == "9999" ]] ; then
 fi
 
 DESCRIPTION="C semantic parser"
-HOMEPAGE="http://sparse.wiki.kernel.org/index.php/Main_Page"
+HOMEPAGE="https://sparse.wiki.kernel.org/index.php/Main_Page"
 
 if [[ ${PV} == "9999" ]] ; then
 	SRC_URI=""

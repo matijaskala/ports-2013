@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/dolphin/dolphin-9999.ebuild,v 1.30 2015/06/22 21:08:35 twitch153 Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ then
 	inherit git-r3
 	KEYWORDS=""
 else
-	SRC_URI="http://${PN}-emu.googlecode.com/files/${P}-src.zip"
+	SRC_URI="https://${PN}-emu.googlecode.com/files/${P}-src.zip"
 	KEYWORDS="~amd64"
 fi
 

@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/exfat-utils/exfat-utils-1.1.1.ebuild,v 1.1 2015/01/02 05:55:23 floppym Exp $
+# $Id$
 
 EAPI=5
 inherit scons-utils toolchain-funcs
 
 DESCRIPTION="exFAT filesystem utilities"
-HOMEPAGE="http://code.google.com/p/exfat/"
+HOMEPAGE="https://github.com/relan/exfat"
 SRC_URI="https://docs.google.com/uc?export=download&id=0B7CLI-REKbE3UzNtSkRvdHBpdjQ -> ${P}.tar.gz"
 
 LICENSE="GPL-2+" # COPYING is GPL-2 but ChangeLog says "Relicensed the project from GPLv3+ to GPLv2+"

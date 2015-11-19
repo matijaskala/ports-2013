@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/imule/imule-2.3.2.3.ebuild,v 1.1 2015/05/22 06:00:49 zlg Exp $
+# $Id$
 
 EAPI="5"
 WX_GTK_VER="2.8"
@@ -12,7 +12,7 @@ DESCRIPTION="P2P sharing software which connects through I2P and Kad network"
 # New homepage has a few resources and a working nodes.dat file users need
 # in order to get iMule to work
 HOMEPAGE="http://echelon.i2p/imule"
-SRC_URI="http://echelon.i2p/imule/${PV}/${MY_PN}-${PV}-src.tbz http://dev.gentoo.org/~zlg/extra/net-p2p/imule/2015-03-22_nodes.dat"
+SRC_URI="http://echelon.i2p/imule/${PV}/${MY_PN}-${PV}-src.tbz https://dev.gentoo.org/~zlg/extra/net-p2p/imule/2015-03-22_nodes.dat"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/goobook/goobook-1.9.ebuild,v 1.1 2015/06/03 23:11:04 mschiff Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -46,4 +46,4 @@ If you want to use goobook from mutt, add this in your .muttrc file:
 to query address book.
 
 You may find more information and advanced configuration tips at
-http://pypi.python.org/pypi/${PN}/${PV} in \"Configure/Mutt\" section"
+https://pypi.python.org/pypi/${PN}/${PV} in \"Configure/Mutt\" section"

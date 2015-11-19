@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jython/jython-2.7.0.ebuild,v 1.2 2015/06/13 18:04:56 monsieurp Exp $
+# $Id$
 
 EAPI=5
 JAVA_PKG_IUSE="doc examples source"
@@ -16,7 +16,7 @@ SRC_URI="http://search.maven.org/remotecontent?filepath=org/python/${PN}/${MY_PV
 
 LICENSE="PSF-2"
 SLOT="2.7"
-KEYWORDS="~amd64 ~x86 ~x86-freebsd ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS="amd64 x86 ~x86-freebsd ~amd64-linux ~x86-linux ~x86-macos"
 IUSE="+readline test"
 REQUIRED_USE="test? ( readline )"
 
@@ -28,7 +28,6 @@ CDEPEND="dev-java/ant-core:0
 	dev-java/guava:13
 	>=dev-java/java-config-2.1.11-r3
 	dev-java/jffi:1.2
-	dev-java/jline:0
 	dev-java/jline:2
 	dev-java/icu4j:52
 	dev-java/jnr-constants:0
@@ -54,9 +53,10 @@ S=${WORKDIR}
 RESTRICT="test"
 
 JAVA_ANT_REWRITE_CLASSPATH="yes"
-EANT_GENTOO_CLASSPATH="asm-4,commons-compress,guava-13,jffi-1.2,jline-2,jnr-constants"
-EANT_GENTOO_CLASSPATH+=",script-api,servlet-api-3.0,stringtemplate,xerces-2"
-EANT_GENTOO_CLASSPATH+=",icu4j-52,netty-transport,jnr-posix-3.0"
+EANT_GENTOO_CLASSPATH="asm-4,commons-compress,guava-13,jffi-1.2,jline-2,"
+EANT_GENTOO_CLASSPATH+="jnr-constants,script-api,servlet-api-3.0,"
+EANT_GENTOO_CLASSPATH+="stringtemplate,xerces-2,icu4j-52,netty-transport,jnr-posix-3.0"
+
 JAVA_ANT_CLASSPATH_TAGS+=" java"
 
 EANT_BUILD_TARGET="developer-build"
@@ -73,6 +73,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.7_beta1-ant.patch
 	"${FILESDIR}"/${PN}-2.7_beta1-dont-always-recompile-classes.patch
 	"${FILESDIR}"/${PN}-2.7_beta2-maxrepeat-import.patch
+	"${FILESDIR}"/${PN}-2.7.0-build.xml.patch
 )
 
 java_prepare() {
@@ -105,6 +106,8 @@ src_compile() {
 	java-pkg-2_src_compile
 }
 
+EANT_TEST_GENTOO_CLASSPATH="${EANT_GENTOO_CLASSPATH},junit-4"
+
 src_test() {
 	java-pkg-2_src_test
 }
@@ -122,7 +125,7 @@ src_install() {
 
 	dodoc ACKNOWLEDGMENTS NEWS README.txt
 
-	use doc && java-pkg_dojavadoc dist/Doc/javadoc
+	use doc && java-pkg_dohtml -r dist/Doc/javadoc
 	use source && java-pkg_dosrc src/*
 	use examples && java-pkg_doexamples Demo/*
 
@@ -153,8 +156,11 @@ src_install() {
 	EOF
 	chmod +x "${T}"/jython || die
 
-	python_export jython${SLOT} EPYTHON PYTHON_SITEDIR
-	local PYTHON="${T}"/jython
+	local -x PYTHON="${T}"/jython
+	# we can't get the path from the interpreter since it does some
+	# magic that fails on non-installed copy...
+	local PYTHON_SITEDIR=${EPREFIX}/usr/share/jython-${SLOT}/Lib/site-packages
+	python_export jython${SLOT} EPYTHON
 
 	# compile tests (everything else is compiled already)
 	# we're keeping it quiet since jython reports errors verbosely
@@ -162,7 +168,7 @@ src_install() {
 	python_optimize "${ED}${instdir}"/Lib/test &>/dev/null
 
 	# for python-exec
-	echo "EPYTHON='${EPYTHON}'" > epython.py
+	echo "EPYTHON='${EPYTHON}'" > epython.py || die
 	python_domodule epython.py
 
 	# some of the class files end up with newer timestamps than the files they

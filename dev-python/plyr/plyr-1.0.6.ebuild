@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/plyr/plyr-1.0.6.ebuild,v 1.4 2015/03/08 23:55:16 pacho Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -11,7 +11,7 @@ MY_PN="python-glyr"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A python wrapper for Glyr"
-HOMEPAGE="http://sahib.github.com/python-glyr/intro.html
+HOMEPAGE="https://sahib.github.com/python-glyr/intro.html
 	https://github.com/sahib/python-glyr"
 SRC_URI="https://github.com/sahib/${MY_PN}/archive/${PV}.tar.gz -> ${MY_P}.tar.gz"
 

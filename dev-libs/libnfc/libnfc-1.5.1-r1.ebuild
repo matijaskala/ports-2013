@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libnfc/libnfc-1.5.1-r1.ebuild,v 1.1 2013/05/24 17:10:36 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs
 
 DESCRIPTION="Near Field Communications (NFC) library"
 HOMEPAGE="http://www.libnfc.org/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"

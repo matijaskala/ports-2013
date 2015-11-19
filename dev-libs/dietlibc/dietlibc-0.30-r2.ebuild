@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/dietlibc/dietlibc-0.30-r2.ebuild,v 1.9 2014/01/16 13:51:52 jer Exp $
+# $Id$
 
 inherit eutils flag-o-matic
 
 DESCRIPTION="A minimal libc"
 HOMEPAGE="http://www.fefe.de/dietlibc/"
 SRC_URI="mirror://gentoo/${P}.tar.bz2
-	http://dev.gentoo.org/~phreak/distfiles/${PN}-patches-${PVR}.tar.bz2
-	http://dev.gentoo.org/~hollow/distfiles/${PN}-patches-${PVR}.tar.bz2"
+	https://dev.gentoo.org/~phreak/distfiles/${PN}-patches-${PVR}.tar.bz2
+	https://dev.gentoo.org/~hollow/distfiles/${PN}-patches-${PVR}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

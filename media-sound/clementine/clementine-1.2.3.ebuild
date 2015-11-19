@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/clementine/clementine-1.2.3.ebuild,v 1.5 2015/03/14 13:14:41 maksbotan Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,7 +19,7 @@ SRC_URI="https://github.com/clementine-player/Clementine/archive/${PV}.tar.gz ->
 LICENSE="GPL-3"
 SLOT="0"
 [[ ${PV} == *9999* ]] || \
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="ayatana box cdda +dbus debug dropbox googledrive ipod lastfm mms moodbar mtp projectm skydrive system-sqlite test ubuntu-one +udisks wiimote"
 IUSE+="${LANGS// / linguas_}"
 
@@ -36,7 +36,7 @@ COMMON_DEPEND="
 	dbus? ( >=dev-qt/qtdbus-4.5:4 )
 	>=dev-qt/qtopengl-4.5:4
 	>=dev-qt/qtsql-4.5:4[sqlite]
-	system-sqlite? ( dev-db/sqlite[fts3(+)] )
+	system-sqlite? ( dev-db/sqlite:3[fts3(+)] )
 	>=media-libs/taglib-1.8[mp4]
 	>=dev-libs/glib-2.24.1-r1
 	dev-libs/libxml2
@@ -57,13 +57,13 @@ COMMON_DEPEND="
 	lastfm? ( >=media-libs/liblastfm-1 )
 	mtp? ( >=media-libs/libmtp-1.0.0 )
 	moodbar? ( sci-libs/fftw:3.0 )
-	projectm? ( media-libs/glew )
+	projectm? ( media-libs/glew:= )
 "
 # now only presets are used, libprojectm is internal
 # https://github.com/clementine-player/Clementine/tree/master/3rdparty/libprojectm/patches
 # r1966 "Compile with a static sqlite by default, since Qt 4.7 doesn't seem to expose the symbols we need to use FTS"
 RDEPEND="${COMMON_DEPEND}
-	dbus? ( udisks? ( sys-fs/udisks:0 ) )
+	dbus? ( udisks? ( sys-fs/udisks:2 ) )
 	mms? ( media-plugins/gst-plugins-libmms:0.10 )
 	mtp? ( gnome-base/gvfs )
 	projectm? ( >=media-libs/libprojectm-1.2.0 )
@@ -90,11 +90,13 @@ DOCS="Changelog"
 # https://github.com/clementine-player/Clementine/issues/3935
 RESTRICT="test"
 
+# Switch to ^ when we switch to EAPI=6.
 [[ ${PV} == *9999* ]] || \
-S="${WORKDIR}/${P^}"
+S="${WORKDIR}/C${P:1}"
 
 PATCHES=(
-	"${FILESDIR}"/clementine-1.2.3-namespaces.patch
+	"${FILESDIR}/${PN}-1.2.3-namespaces.patch"
+	"${FILESDIR}/${P}-hide_boost_includes_from_q_moc.patch"
 )
 
 src_prepare() {

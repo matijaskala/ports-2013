@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-vim/youcompleteme/youcompleteme-99999999.ebuild,v 1.6 2015/04/16 12:12:39 maksbotan Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ if [[ ${PV} == 9999* ]] ; then
 	inherit git-r3
 else
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="http://dev.gentoo.org/~radhermit/vim/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~radhermit/vim/${P}.tar.xz"
 fi
 
 DESCRIPTION="vim plugin: a code-completion engine for Vim"
@@ -33,7 +33,7 @@ COMMON_DEPEND="
 RDEPEND="
 	${COMMON_DEPEND}
 	dev-python/bottle[${PYTHON_USEDEP}]
-	dev-python/futures[${PYTHON_USEDEP}]
+	virtual/python-futures[${PYTHON_USEDEP}]
 	dev-python/jedi[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-python/sh[${PYTHON_USEDEP}]

@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmcdplay/wmcdplay-1.0_beta1.ebuild,v 1.10 2012/09/05 08:14:17 jlec Exp $
+# $Id$
 
 inherit eutils
 
@@ -11,7 +11,7 @@ S=${WORKDIR}/${PN}
 
 DESCRIPTION="CD player applet for WindowMaker"
 SRC_URI="mirror://gentoo/${MY_P}.tgz"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 
 RDEPEND="x11-libs/libX11
 	x11-libs/libXext

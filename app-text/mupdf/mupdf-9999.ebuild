@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-text/mupdf/mupdf-9999.ebuild,v 1.51 2015/04/17 15:37:50 xmw Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,9 +15,11 @@ LICENSE="AGPL-3"
 MY_SOVER=1.7
 SLOT="0/${MY_SOVER}"
 KEYWORDS=""
-IUSE="X vanilla curl openssl static static-libs"
+IUSE="X vanilla curl libressl openssl static static-libs"
 
-LIB_DEPEND="dev-libs/openssl[static-libs?]
+LIB_DEPEND="
+	!libressl? ( dev-libs/openssl:0[static-libs?] )
+	libressl? ( dev-libs/libressl[static-libs?] )
 	media-libs/freetype:2[static-libs?]
 	media-libs/jbig2dec[static-libs?]
 	media-libs/openjpeg:2[static-libs?]

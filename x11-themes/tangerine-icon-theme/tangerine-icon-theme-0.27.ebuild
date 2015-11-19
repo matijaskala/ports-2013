@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/tangerine-icon-theme/tangerine-icon-theme-0.27.ebuild,v 1.11 2015/06/04 19:06:19 kensington Exp $
+# $Id$
 
 EAPI=4
 inherit gnome2-utils
@@ -8,7 +8,7 @@ inherit gnome2-utils
 DESCRIPTION="a derivative of the standard Tango theme, using a more orange approach"
 HOMEPAGE="http://packages.ubuntu.com/gutsy/x11/tangerine-icon-theme"
 SRC_URI="mirror://ubuntu/pool/universe/t/${PN}/${PN}_${PV}.tar.gz
-	http://www.gentoo.org/images/gentoo-logo.svg"
+	https://www.gentoo.org/images/gentoo-logo.svg"
 
 LICENSE="CC-BY-SA-2.5 LGPL-2.1"
 SLOT="0"
@@ -17,7 +17,7 @@ IUSE="minimal"
 
 RESTRICT="binchecks strip"
 
-RDEPEND="!minimal? ( || ( x11-themes/gnome-icon-theme kde-apps/oxygen-icons ) )"
+RDEPEND="!minimal? ( || ( x11-themes/gnome-icon-theme kde-frameworks/oxygen-icons ) )"
 DEPEND="dev-util/intltool
 	>=gnome-base/librsvg-2.34
 	sys-devel/gettext

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/nqp/nqp-2015.03.ebuild,v 1.1 2015/03/20 07:09:27 patrick Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ PARROT_VERSION="6.7.0"
 
 DESCRIPTION="Not Quite Perl, a Perl 6 bootstrapping compiler"
 HOMEPAGE="http://rakudo.org/"
-SRC_URI="http://github.com/perl6/${PN}/tarball/${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/perl6/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="Artistic-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-plugins/gnash/gnash-0.8.10_p20131019.ebuild,v 1.4 2015/04/08 18:30:35 mgorny Exp $
+# $Id$
 
 EAPI=5
 CMAKE_REQUIRED="never"
@@ -12,7 +12,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit autotools eutils kde4-base multilib nsplugins python-any-r1 flag-o-matic
 
 DESCRIPTION="GNU Flash movie player that supports many SWF v7,8,9 features"
-HOMEPAGE="http://www.gnu.org/software/gnash/"
+HOMEPAGE="https://www.gnu.org/software/gnash/"
 
 if [[ ${PV} = 9999* ]]; then
 	SRC_URI=""

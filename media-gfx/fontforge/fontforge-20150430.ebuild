@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/fontforge/fontforge-20150430.ebuild,v 1.2 2015/06/07 22:39:23 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,12 +14,12 @@ UTHASH="ac47d4928e61c5abc6e977d91310d31ed74690e4"
 DESCRIPTION="postscript font editor and converter"
 HOMEPAGE="http://fontforge.github.io/"
 SRC_URI="https://github.com/fontforge/fontforge/archive/${PV}.tar.gz -> ${P}.tar.gz
-	http://dev.gentoo.org/~floppym/dist/gnulib-${GNULIB}.tar.gz
+	https://dev.gentoo.org/~floppym/dist/gnulib-${GNULIB}.tar.gz
 	https://github.com/troydhanson/uthash/archive/${UTHASH}.tar.gz -> uthash-${UTHASH}.tar.gz"
 
 LICENSE="BSD GPL-3+"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
 IUSE="cairo truetype-debugger gif gtk jpeg png +python readline tiff svg unicode X"
 
 REQUIRED_USE="

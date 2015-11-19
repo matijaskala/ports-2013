@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-irc/eggdrop/eggdrop-1.6.21-r1.ebuild,v 1.4 2015/03/25 16:20:21 jlec Exp $
+# $Id$
 
 EAPI=4
 
@@ -13,7 +13,7 @@ DESCRIPTION="An IRC bot extensible with C or TCL"
 HOMEPAGE="http://www.eggheads.org/"
 SRC_URI="
 	ftp://ftp.eggheads.org/pub/eggdrop/source/1.6/${MY_P}.tar.bz2
-	http://dev.gentoo.org/~binki/distfiles/${CATEGORY}/${PN}/${P}-patches-${PATCHSET_V}.tar.bz2"
+	https://dev.gentoo.org/~binki/distfiles/${CATEGORY}/${PN}/${P}-patches-${PATCHSET_V}.tar.bz2"
 
 KEYWORDS="alpha amd64 ia64 ~mips ppc sparc x86"
 LICENSE="GPL-2"

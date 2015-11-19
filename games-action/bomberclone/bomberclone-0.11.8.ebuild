@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-action/bomberclone/bomberclone-0.11.8.ebuild,v 1.10 2014/12/31 09:52:09 tupone Exp $
+# $Id$
 
 EAPI=4
 inherit eutils autotools games
@@ -22,7 +22,8 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	ecvs_clean
-	epatch "${FILESDIR}"/${P}-underlink.patch
+	epatch "${FILESDIR}"/${P}-underlink.patch \
+		"${FILESDIR}"/${P}-gcc52.patch
 	eautoreconf
 }
 

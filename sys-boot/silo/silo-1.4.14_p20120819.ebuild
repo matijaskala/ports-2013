@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/silo/silo-1.4.14_p20120819.ebuild,v 1.2 2012/08/20 18:55:43 armin76 Exp $
+# $Id$
 
 inherit mount-boot flag-o-matic toolchain-funcs eutils
 
@@ -13,7 +13,7 @@ MY_P="${PN}_${MY_PV}+${MY_GIT}"
 DESCRIPTION="SPARC/UltraSPARC Improved Loader, a boot loader for sparc"
 SRC_URI="mirror://debian/pool/main/s/${PN}/${MY_P}.orig.tar.gz
 	mirror://debian/pool/main/s/${PN}/${MY_P}-${DEB_PL}.diff.gz"
-HOMEPAGE="http://git.kernel.org/?p=linux/kernel/git/davem/silo.git;a=summary"
+HOMEPAGE="https://git.kernel.org/?p=linux/kernel/git/davem/silo.git;a=summary"
 
 SLOT="0"
 LICENSE="GPL-2"

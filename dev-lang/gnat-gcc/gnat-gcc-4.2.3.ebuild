@@ -1,11 +1,12 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/gnat-gcc/gnat-gcc-4.2.3.ebuild,v 1.3 2009/02/05 18:23:40 george Exp $
+# $Id$
 
+EAPI=5
 inherit gnatbuild
 
 DESCRIPTION="GNAT Ada Compiler - gcc version"
-HOMEPAGE="http://gcc.gnu.org/"
+HOMEPAGE="https://gcc.gnu.org/"
 LICENSE="GMGPL"
 
 IUSE=""

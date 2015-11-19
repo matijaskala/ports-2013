@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pycairo/pycairo-1.10.0-r4.ebuild,v 1.22 2015/05/16 07:45:44 vapier Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -12,7 +12,7 @@ PYCAIRO_PYTHON2_VERSION="${PV}"
 PYCAIRO_PYTHON3_VERSION="${PV}"
 
 DESCRIPTION="Python bindings for the cairo library"
-HOMEPAGE="http://cairographics.org/pycairo/ http://pypi.python.org/pypi/pycairo"
+HOMEPAGE="http://cairographics.org/pycairo/ https://pypi.python.org/pypi/pycairo"
 SRC_URI="http://cairographics.org/releases/py2cairo-${PYCAIRO_PYTHON2_VERSION}.tar.bz2
 	http://cairographics.org/releases/pycairo-${PYCAIRO_PYTHON3_VERSION}.tar.bz2"
 

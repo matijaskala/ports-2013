@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kexec-tools/kexec-tools-2.0.4-r2.ebuild,v 1.6 2013/11/12 09:09:20 jlec Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools-utils flag-o-matic linux-info systemd
 
 DESCRIPTION="Load another kernel from the currently executing Linux kernel"
-HOMEPAGE="http://kernel.org/pub/linux/utils/kernel/kexec/"
+HOMEPAGE="https://kernel.org/pub/linux/utils/kernel/kexec/"
 SRC_URI="mirror://kernel/linux/utils/kernel/kexec/${P}.tar.xz"
 
 LICENSE="GPL-2"

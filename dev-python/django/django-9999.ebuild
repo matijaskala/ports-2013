@@ -1,17 +1,17 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/django/django-9999.ebuild,v 1.26 2015/04/20 20:36:15 jlec Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 python3_{3,4} pypy )
-PYTHON_REQ_USE='sqlite?'
+PYTHON_REQ_USE='sqlite?,threads(+)'
 WEBAPP_NO_AUTO_INSTALL="yes"
 
 inherit bash-completion-r1 distutils-r1 eutils git-r3 versionator webapp
 
 DESCRIPTION="High-level Python web framework"
-HOMEPAGE="http://www.djangoproject.com/ http://pypi.python.org/pypi/Django"
+HOMEPAGE="http://www.djangoproject.com/ https://pypi.python.org/pypi/Django"
 SRC_URI=""
 EGIT_REPO_URI="
 	https://github.com/django/django.git
@@ -76,8 +76,8 @@ src_install() {
 	echo
 	elog "Other features can be enhanced by"
 	optfeature "GEO Django" sci-libs/gdal[geos]
-	optfeature "Memcached support" dev-python/python-memcached
-	optfeature "ImageField Support" virtual/python-imaging
+	optfeature "Memcached support" dev-python/pylibmc dev-python/python-memcached
+	optfeature "ImageField Support" dev-python/pillow
 	optfeature "Password encryption" dev-python/bcrypt
 	optfeature "Extended templating support" dev-python/jinja
 	echo ""

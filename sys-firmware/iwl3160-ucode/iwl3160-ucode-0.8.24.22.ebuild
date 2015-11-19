@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-firmware/iwl3160-ucode/iwl3160-ucode-0.8.24.22.ebuild,v 1.1 2015/01/14 12:14:50 gienah Exp $
+# $Id$
 
 EAPI=5
 inherit linux-info versionator
@@ -15,8 +15,8 @@ DV_MINOR="13"
 DV_PATCH="0"
 
 DESCRIPTION="Firmware for Intel (R) Dual Band Wireless-AC ${DEV_N}"
-HOMEPAGE="http://wireless.kernel.org/en/users/Drivers/iwlwifi"
-SRC_URI="http://wireless.kernel.org/en/users/Drivers/iwlwifi?action=AttachFile&do=get&target=${MY_PN}-${MY_PV}.tgz -> ${P}.tgz"
+HOMEPAGE="https://wireless.kernel.org/en/users/Drivers/iwlwifi"
+SRC_URI="https://wireless.kernel.org/en/users/Drivers/iwlwifi?action=AttachFile&do=get&target=${MY_PN}-${MY_PV}.tgz -> ${P}.tgz"
 
 LICENSE="ipw3945"
 SLOT="${vc[2]}"

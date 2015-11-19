@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/pdf-reader/pdf-reader-1.1.1-r1.ebuild,v 1.3 2014/11/10 15:54:48 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,11 +17,11 @@ RUBY_FAKEGEM_EXTRADOC="CHANGELOG README.rdoc TODO"
 inherit ruby-fakegem
 
 DESCRIPTION="PDF parser conforming as much as possible to the PDF specification from Adobe"
-HOMEPAGE="http://github.com/yob/pdf-reader/"
+HOMEPAGE="https://github.com/yob/pdf-reader/"
 
 # We cannot use the gem distributions because they don't contain the
 # tests' data, we have to rely on the git tags.
-SRC_URI="http://github.com/${GITHUB_USER}/${PN}/tarball/v${PV} -> ${PN}-git-${PV}.tgz"
+SRC_URI="https://github.com/${GITHUB_USER}/${PN}/tarball/v${PV} -> ${PN}-git-${PV}.tgz"
 RUBY_S="${GITHUB_USER}-${PN}-*"
 
 LICENSE="MIT"

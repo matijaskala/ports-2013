@@ -1,8 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pygene/pygene-0.2.1-r1.ebuild,v 1.1 2015/01/02 11:40:04 idella4 Exp $
+# $Id$
 
 EAPI=5
+
 PYTHON_COMPAT=( python2_7 )
 
 inherit distutils-r1
@@ -16,8 +17,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc examples"
 
-DEPEND="doc? ( >=dev-python/epydoc-2.1-r2 )"
-RDEPEND="examples? ( >=dev-python/pyfltk-1.1.2 )"
+DEPEND="doc? ( >=dev-python/epydoc-2.1-r2[${PYTHON_USEDEP}] )"
+RDEPEND="examples? ( >=dev-python/pyfltk-1.1.2:0[${PYTHON_USEDEP}] )"
 
 python_prepare_all() {
 	if use examples; then

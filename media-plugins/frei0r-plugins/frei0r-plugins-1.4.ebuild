@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/frei0r-plugins/frei0r-plugins-1.4.ebuild,v 1.2 2013/08/27 20:38:19 aballier Exp $
+# $Id$
 
 EAPI=4
 inherit cmake-utils multilib
@@ -31,7 +31,10 @@ src_prepare() {
 		-e "/LIBDIR.*frei0r-1/s:lib:$(get_libdir):" \
 		${f} || die
 
-	# http://bugs.gentoo.org/418243
+	# https://bugs.gentoo.org/show_bug.cgi?id=555782
+	epatch "${FILESDIR}/${P}-opencv3.patch"
+
+	# https://bugs.gentoo.org/418243
 	sed -i \
 		-e '/set.*CMAKE_C_FLAGS/s:"): ${CMAKE_C_FLAGS}&:' \
 		src/filter/*/${f} || die
@@ -39,8 +42,8 @@ src_prepare() {
 
 src_configure() {
 	 local mycmakeargs=(
-		$(cmake-utils_use "!facedetect" "WITHOUT_GAVL"  )
-		$(cmake-utils_use "!scale0tilt" "WITHOUT_OPENCV")
+		$(cmake-utils_use "!facedetect" "WITHOUT_OPENCV" )
+		$(cmake-utils_use "!scale0tilt" "WITHOUT_GAVL"   )
 	 )
 	cmake-utils_src_configure
 }

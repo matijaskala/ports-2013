@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/cdm/cdm-0.5.3.ebuild,v 1.2 2012/05/05 11:45:41 gienah Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,7 +8,7 @@ inherit base pam eutils
 
 DESCRIPTION="The Console Display Manager"
 HOMEPAGE="https://wiki.archlinux.org/index.php/CDM"
-SRC_URI="http://dev.gentoo.org/~gienah/snapshots/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~gienah/snapshots/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/recaptcha/recaptcha-0.1.0.3.ebuild,v 1.1 2014/12/14 06:13:47 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Functions for using the reCAPTCHA service in web applications"
-HOMEPAGE="http://github.com/jgm/recaptcha/tree/master"
+HOMEPAGE="https://github.com/jgm/recaptcha/tree/master"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

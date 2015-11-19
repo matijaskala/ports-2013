@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/spring/spring-1.3.6.ebuild,v 1.1 2015/05/12 12:00:59 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21"
@@ -24,7 +24,7 @@ IUSE=""
 
 ruby_add_rdepend ">=dev-ruby/rubygems-2.1.0"
 
-ruby_add_bdepend "test? ( dev-ruby/bundler dev-ruby/activesupport virtual/ruby-minitest )"
+ruby_add_bdepend "test? ( dev-ruby/bundler dev-ruby/activesupport )"
 
 all_ruby_prepare() {
 	sed -i -e '/files/d' ${PN}.gemspec || die

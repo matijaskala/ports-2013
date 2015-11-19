@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/nautilus-sendto/nautilus-sendto-3.8.1.ebuild,v 1.5 2014/02/22 22:03:58 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -8,7 +8,7 @@ GCONF_DEBUG="yes"
 inherit gnome2
 
 DESCRIPTION="A nautilus extension for sending files to locations"
-HOMEPAGE="http://www.gnome.org"
+HOMEPAGE="https://www.gnome.org"
 
 LICENSE="GPL-2+"
 SLOT="0"

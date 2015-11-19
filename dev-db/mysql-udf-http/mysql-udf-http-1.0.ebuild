@@ -1,14 +1,14 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/mysql-udf-http/mysql-udf-http-1.0.ebuild,v 1.2 2011/10/19 12:09:10 sbriesen Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils toolchain-funcs autotools
 
 DESCRIPTION="MySQL User-defined function (UDF) for HTTP REST"
-HOMEPAGE="http://code.google.com/p/mysql-udf-http/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/mysql-udf-http/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"

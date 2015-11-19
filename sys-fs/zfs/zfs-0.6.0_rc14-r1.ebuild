@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/zfs/zfs-0.6.0_rc14-r1.ebuild,v 1.3 2015/05/15 18:29:56 blueness Exp $
+# $Id$
 
 EAPI="4"
 
@@ -110,13 +110,13 @@ pkg_postinst() {
 		update_moduledb
 	fi
 
-	[ -e "${EROOT}/etc/runlevels/boot/zfs" ] \
+	[ -e "${EROOT}etc/runlevels/boot/zfs" ] \
 		|| ewarn 'You should add zfs to the boot runlevel.'
 
-	if [ -e "${EROOT}/etc/runlevels/shutdown/zfs-shutdown" ]
+	if [ -e "${EROOT}etc/runlevels/shutdown/zfs-shutdown" ]
 	then
 		einfo "The zfs-shutdown script is obsolete. Removing it from runlevel."
-		rm "${EROOT}/etc/runlevels/shutdown/zfs-shutdown"
+		rm "${EROOT}etc/runlevels/shutdown/zfs-shutdown"
 	fi
 
 }

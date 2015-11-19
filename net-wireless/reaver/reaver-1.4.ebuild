@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/reaver/reaver-1.4.ebuild,v 1.1 2012/05/15 19:39:11 maksbotan Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,8 +9,8 @@ AUTOTOOLS_IN_SOURCE_BUILD="1"
 inherit autotools-utils
 
 DESCRIPTION="Brute force attack against Wifi Protected Setup"
-HOMEPAGE="http://code.google.com/p/reaver-wps/"
-SRC_URI="http://reaver-wps.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/reaver-wps/"
+SRC_URI="https://reaver-wps.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

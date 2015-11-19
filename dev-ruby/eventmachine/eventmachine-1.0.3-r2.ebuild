@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/eventmachine/eventmachine-1.0.3-r2.ebuild,v 1.1 2015/06/07 06:36:55 graaff Exp $
+# $Id$
 
 EAPI=5
 # ruby22 - code does not compile
@@ -21,9 +21,9 @@ KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos 
 IUSE=""
 
 DEPEND="${DEPEND}
-	dev-libs/openssl"
+	dev-libs/openssl:0"
 RDEPEND="${RDEPEND}
-	dev-libs/openssl"
+	dev-libs/openssl:0"
 
 ruby_add_bdepend "doc? ( dev-ruby/yard )"
 

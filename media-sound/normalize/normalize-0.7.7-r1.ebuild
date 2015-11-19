@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/normalize/normalize-0.7.7-r1.ebuild,v 1.6 2012/05/05 08:45:44 mgorny Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,7 +9,7 @@ inherit eutils autotools
 DESCRIPTION="Audio file volume normalizer"
 HOMEPAGE="http://normalize.nongnu.org/"
 SRC_URI="http://savannah.nongnu.org/download/${PN}/${P}.tar.bz2
-	http://dev.gentoo.org/~radhermit/distfiles/${P}-m4.patch.gz"
+	https://dev.gentoo.org/~radhermit/distfiles/${P}-m4.patch.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

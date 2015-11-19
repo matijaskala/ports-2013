@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/kdesudo/kdesudo-3.4.2.4-r1.ebuild,v 1.3 2014/08/05 16:31:42 mrueg Exp $
+# $Id$
 
 EAPI=5
 # FIXME. What is linguas_jv, different Japanese translation?
@@ -10,8 +10,8 @@ KDE_HANDBOOK="optional"
 inherit kde4-base
 
 DESCRIPTION="A frontend for sudo. Unlike kdesu, it uses directly sudo as backend"
-HOMEPAGE="http://launchpad.net/kdesudo/"
-SRC_URI="http://launchpad.net/${PN}/3.x/${PV}/+download/${P}.tar.gz"
+HOMEPAGE="https://launchpad.net/kdesudo/"
+SRC_URI="https://launchpad.net/${PN}/3.x/${PV}/+download/${P}.tar.gz"
 
 LICENSE="FDL-1.2 GPL-2 LGPL-2"
 SLOT="4"

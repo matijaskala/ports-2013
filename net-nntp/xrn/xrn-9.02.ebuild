@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-nntp/xrn/xrn-9.02.ebuild,v 1.6 2014/08/10 20:42:23 slyfox Exp $
+# $Id$
 
 DESCRIPTION="A small and fast news reader for X"
 HOMEPAGE="http://www.mit.edu/people/jik/software/xrn.html"
@@ -47,7 +47,7 @@ src_compile() {
 
 	# Bugs to Gentoo bugzilla:
 	sed -i \
-		-e "s,bug-xrn@kamens.brookline.ma.us,http://bugs.gentoo.org/," \
+		-e "s,bug-xrn@kamens.brookline.ma.us,https://bugs.gentoo.org/," \
 		-e "s,\(#ifndef CONFIG_H_IS_OK\),#define CONFIG_H_IS_OK\n\1," \
 		config.h
 

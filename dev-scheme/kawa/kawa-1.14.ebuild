@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-scheme/kawa/kawa-1.14.ebuild,v 1.1 2015/04/27 20:26:48 monsieurp Exp $
+# $Id$
 EAPI=5
 
 JAVA_PKG_IUSE="source"
@@ -8,7 +8,7 @@ JAVA_PKG_IUSE="source"
 inherit eutils java-pkg-2
 
 DESCRIPTION="Kawa, the Java-based Scheme system & Language Framework"
-HOMEPAGE="http://www.gnu.org/software/kawa/"
+HOMEPAGE="https://www.gnu.org/software/kawa/"
 XQTS_Ver="1_0_3"
 SRC_URI="mirror://gnu/kawa/${P}.tar.gz
 		 xqtests? ( http://www.w3.org/XML/Query/test-suite/XQTS_${XQTS_Ver}.zip )"

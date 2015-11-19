@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-perl/IPTables-libiptc/IPTables-libiptc-0.520.0.ebuild,v 1.1 2013/07/10 16:19:00 pinkbyte Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ inherit perl-module toolchain-funcs
 
 DESCRIPTION="Perl extension for iptables libiptc library"
 SRC_URI="${SRC_URI}
-http://dev.gentoo.org/~pinkbyte/distfiles/${PN}/${P}-support-for-iptables-1.4.12.patch.bz2
-http://dev.gentoo.org/~pinkbyte/distfiles/${PN}/${P}-support-for-iptables-1.4.16.2.patch.bz2"
+https://dev.gentoo.org/~pinkbyte/distfiles/${PN}/${P}-support-for-iptables-1.4.12.patch.bz2
+https://dev.gentoo.org/~pinkbyte/distfiles/${PN}/${P}-support-for-iptables-1.4.16.2.patch.bz2"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/openimageio/openimageio-1.3.5.ebuild,v 1.5 2015/05/27 11:28:54 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,8 +9,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit cmake-utils eutils multilib python-single-r1 vcs-snapshot
 
 DESCRIPTION="A library for reading and writing images"
-HOMEPAGE="http://sites.google.com/site/openimageio/ http://github.com/OpenImageIO"
-SRC_URI="http://github.com/OpenImageIO/oiio/archive/Release-${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://sites.google.com/site/openimageio/ https://github.com/OpenImageIO"
+SRC_URI="https://github.com/OpenImageIO/oiio/archive/Release-${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

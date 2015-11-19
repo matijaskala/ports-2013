@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/vserver-sources/vserver-sources-2.3.6.8.ebuild,v 1.2 2014/08/10 20:18:54 slyfox Exp $
+# $Id$
 
 EAPI="5"
 
@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~hppa ~x86"
 IUSE=""
 
 DESCRIPTION="Full sources including Linux-VServer patchsets for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
-HOMEPAGE="http://www.gentoo.org/proj/en/vps/"
+HOMEPAGE="https://wiki.gentoo.org/wiki/Project:VPS"
 SRC_URI="${KERNEL_URI} ${ARCH_URI}
 	http://vserver.13thfloor.at/Experimental/patch-${CKV}-vs${PV}.diff"
 

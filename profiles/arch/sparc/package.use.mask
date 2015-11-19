@@ -1,6 +1,49 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/profiles/arch/sparc/package.use.mask,v 1.200 2015/06/21 07:22:58 pacho Exp $
+# $Id$
+
+# Justin Lecher <jlec@gentoo.org> (18 Nov 2015)
+# requires dev-python/restkit which requires
+# dev-python/socketpool which requires dev-python/gevent which requires
+# dev-python/greenlet which has not been ported
+dev-python/wsgiproxy2 test
+dev-python/pyquery test
+
+# Pacho Ramos <pacho@gentoo.org> (15 Nov 2015)
+# Missing keywords
+>=media-plugins/grilo-plugins-0.2.14 upnp-av
+
+# Julian Ospald <hasufell@gentoo.org> (08 Nov 2015)
+# Requires net-libs/http-parser
+net-im/jabberd2 websocket
+
+# Davide Pesavento <pesa@gentoo.org> (26 Oct 2015)
+# Tests require non-keyworded qt5
+dev-qt/qtchooser test
+
+# Sergey Popov <pinkbyte@gentoo.org> (24 Oct 2015)
+# Not tested
+net-mail/dovecot lz4
+
+# Justin Lecher <jlec@gentoo.org> (14 Oct 2015)
+# Requires dev-python/ipython which triggers a long dep chain
+dev-python/restkit cli
+
+# Brian Evans <grknight@gentoo.org> (17 Sep 2015)
+# Mask new USE flags for percona-server which are not available on sparc
+dev-db/percona-server tokudb tokudb-backup-plugin
+
+# Brian Evans <grknight@gentoo.org> (14 Sep 2015)
+# Mask new USE flags for mariadb which all arches do not yet have dependencies
+>=dev-db/mariadb-10.1.0 innodb-snappy
+
+# Alexandre Rostovtsev <tetromino@gentoo.org> (10 Sep 2015)
+# Requires wifi USE flag, which is masked for this arch
+net-misc/networkmanager wext
+
+# Bernard Cafarelli <voyageur@gentoo.org> (06 Aug 2015)
+# Dependencies missing keywords, bug #543604
+sys-devel/llvm ocaml
 
 # Pacho Ramos <pacho@gentoo.org> (13 Jun 2015)
 # Missing keywords, bug #513108
@@ -21,6 +64,7 @@ media-video/mpv rubberband
 # Mike Frysinger <vapier@gentoo.org> (16 Mar 2015)
 # Needs sci-physics/bullet & media-libs/libsdl2 tested #499974
 dev-libs/efl physics sdl
+media-libs/elementary sdl
 
 # Michał Górny <mgorny@gentoo.org> (08 Mar 2015)
 # Dependency not keyworded on this arch, bug #542570.
@@ -64,6 +108,7 @@ sys-apps/systemd xkb
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (16 Sep 2014)
 # Needs libepoxy keywording, bug #510940
 x11-base/xorg-server glamor wayland
+x11-drivers/xf86-video-ati glamor
 
 # Maciej Mrozowski <reavertm@gentoo.org> (13 Aug 2014)
 # Missing keywords on dev-libs/protobuf-c (bug 519772)
@@ -181,14 +226,6 @@ gnome-extra/libgda reports
 # Requires libpcre with jit
 www-apache/mod_security jit
 
-# Ben de Groot <yngwin@gentoo.org> (14 Jun 2012)
-# Since dev-qt/qt* will no longer be available for sparc, we need
-# to mask the reverse dependencies
-dev-cpp/eigen examples
-dev-tex/latex-beamer lyx
-media-sound/pulseaudio equalizer
-media-video/vlc skins
-
 # Raúl Porcel <armin76@gentoo.org> (28 May 2012)
 # Needs x11-misc/lightdm(which also requires some other deps)
 x11-misc/xscreensaver new-login
@@ -234,6 +271,7 @@ dev-libs/libmemcached tcmalloc
 # Alexey Shvetsov <alexxy@gentoo.org> (31 Aug 2011)
 # Mask numa use flag per bug #381313
 sys-apps/hwloc numa
+sys-cluster/openmpi numa
 
 # Sergei Trofimovich <slyfox@gentoo.org> (03 Aug 2011)
 # sys-devel/llvm has no sparc keywords yet (bug #320221)
@@ -315,3 +353,7 @@ net-libs/ortp srtp
 # Ultrabug <ultrabug@gentoo.org) (05 Sept 2011)
 # missing keyword for net-libs/zeromq
 app-admin/rsyslog zeromq
+
+# Marius Brehler <marfbre@linux.sungazer.de> (13 Aug 2015)
+# missing keyword
+>=sci-misc/boinc-7.4.42-r1 X

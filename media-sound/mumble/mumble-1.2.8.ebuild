@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/mumble/mumble-1.2.8.ebuild,v 1.1 2014/10/30 21:50:38 tgurr Exp $
+# $Id$
 
 EAPI="5"
 
@@ -47,6 +47,7 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.4-speech-dispatcher.patch
+	"${FILESDIR}"/${PN}-1.2.8-gcc49.patch
 )
 
 S="${WORKDIR}/${MY_P}"

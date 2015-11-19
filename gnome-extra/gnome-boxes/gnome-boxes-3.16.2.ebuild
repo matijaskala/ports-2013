@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/gnome-boxes/gnome-boxes-3.16.2.ebuild,v 1.1 2015/06/09 23:34:39 eva Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -17,7 +17,7 @@ SLOT="0"
 
 # We force 'bindist' due to licenses from gnome-boxes-nonfree
 IUSE="smartcard usbredir" #bindist
-KEYWORDS="~amd64" # qemu-kvm[spice] is 64bit-only
+KEYWORDS="amd64" # qemu-kvm[spice] is 64bit-only
 
 # NOTE: sys-fs/* stuff is called via exec()
 # FIXME: ovirt is not available in tree

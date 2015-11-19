@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/gnome-builder/gnome-builder-3.16.3.ebuild,v 1.1 2015/06/09 16:10:31 eva Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -13,8 +13,9 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Builder"
 
 LICENSE="GPL-3+ GPL-2+ LGPL-3+ LGPL-2+ MIT CC-BY-SA-3.0 CC0-1.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 x86"
 IUSE="+introspection"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # FIXME: some unittests seem to hang forever
 RDEPEND="
@@ -48,7 +49,7 @@ src_configure() {
 	gnome2_src_configure \
 		--disable-static \
 		$(use_enable introspection) \
-		PYTHON3_CONFIG=${PYTHON}-config
+		PYTHON3_CONFIG="$(python_get_PYTHON_CONFIG)"
 }
 
 src_test() {

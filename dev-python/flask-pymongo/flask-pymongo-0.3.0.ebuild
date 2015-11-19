@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/flask-pymongo/flask-pymongo-0.3.0.ebuild,v 1.5 2015/04/08 08:05:05 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_PN="Flask-PyMongo"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="PyMongo support for Flask"
-HOMEPAGE="http://pypi.python.org/pypi/Flask-PyMongo"
+HOMEPAGE="https://pypi.python.org/pypi/Flask-PyMongo"
 SRC_URI="https://github.com/dcrosta/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 #SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 

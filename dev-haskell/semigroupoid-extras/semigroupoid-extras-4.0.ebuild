@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/semigroupoid-extras/semigroupoid-extras-4.0.ebuild,v 1.1 2013/10/19 11:59:39 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile"
 inherit haskell-cabal
 
 DESCRIPTION="This package has been absorbed into semigroupoids 4.0"
-HOMEPAGE="http://github.com/ekmett/semigroupoid-extras"
+HOMEPAGE="https://github.com/ekmett/semigroupoid-extras"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

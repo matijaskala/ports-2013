@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/distorm64/distorm64-3.3-r1.ebuild,v 1.1 2014/11/30 14:48:26 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ MY_PN=distorm
 MY_PV=$(replace_all_version_separators '-')
 MY_P=${MY_PN}${MY_PV}
 
-SRC_URI="http://distorm.googlecode.com/files/${MY_P}-sdist.zip"
+SRC_URI="https://distorm.googlecode.com/files/${MY_P}-sdist.zip"
 S="${WORKDIR}/${MY_P}"
 
 DEPEND="app-arch/unzip"

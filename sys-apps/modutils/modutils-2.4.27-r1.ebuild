@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/modutils/modutils-2.4.27-r1.ebuild,v 1.7 2012/04/14 00:27:45 vapier Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils
 
 DESCRIPTION="Standard kernel module utilities for linux-2.4 and older"
-HOMEPAGE="http://www.kernel.org/pub/linux/utils/kernel/modutils/"
+HOMEPAGE="https://www.kernel.org/pub/linux/utils/kernel/modutils/"
 SRC_URI="mirror://kernel/linux/utils/kernel/${PN}/v2.4/${P}.tar.bz2"
 
 LICENSE="GPL-2"

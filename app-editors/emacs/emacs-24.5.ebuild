@@ -1,23 +1,23 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-editors/emacs/emacs-24.5.ebuild,v 1.1 2015/04/11 08:25:18 ulm Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools elisp-common eutils flag-o-matic multilib readme.gentoo
 
 DESCRIPTION="The extensible, customizable, self-documenting real-time display editor"
-HOMEPAGE="http://www.gnu.org/software/emacs/"
+HOMEPAGE="https://www.gnu.org/software/emacs/"
 SRC_URI="mirror://gnu/emacs/${P}.tar.xz
-	http://dev.gentoo.org/~ulm/emacs/${P}-patches-1.tar.xz"
+	https://dev.gentoo.org/~ulm/emacs/${P}-patches-1.tar.xz"
 
 LICENSE="GPL-3+ FDL-1.3+ BSD HPND MIT W3C unicode PSF-2"
 SLOT="24"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 IUSE="acl alsa aqua athena dbus games gconf gfile gif gnutls gpm gsettings gtk +gtk3 gzip-el hesiod imagemagick +inotify jpeg kerberos libxml2 livecd m17n-lib motif pax_kernel png selinux sound source svg tiff toolkit-scroll-bars wide-int X Xaw3d xft +xpm zlib"
 REQUIRED_USE="?? ( aqua X )"
 
-RDEPEND="sys-libs/ncurses
+RDEPEND="sys-libs/ncurses:0
 	>=app-eselect/eselect-emacs-1.16
 	>=app-emacs/emacs-common-gentoo-1.5[games?,X?]
 	net-libs/liblockfile
@@ -146,6 +146,15 @@ src_configure() {
 		local f
 		if use gtk; then
 			einfo "Configuring to build with GIMP Toolkit (GTK+)"
+			while read line; do ewarn "${line}"; done <<-EOF
+				Your version of GTK+ will have problems with closing open
+				displays. This is no problem if you just use one display, but
+				if you use more than one and close one of them Emacs may crash.
+				See <https://bugzilla.gnome.org/show_bug.cgi?id=85715>.
+				If you intend to use more than one display, then it is strongly
+				recommended that you compile Emacs with the Athena/Lucid or the
+				Motif toolkit instead.
+			EOF
 			myconf+=" --with-x-toolkit=$(usex gtk3 gtk3 gtk2)"
 			for f in motif Xaw3d athena; do
 				use ${f} && ewarn \

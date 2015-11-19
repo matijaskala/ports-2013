@@ -1,14 +1,14 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/pidgin-musictracker/pidgin-musictracker-0.4.22.ebuild,v 1.5 2011/08/12 21:46:12 xarthisius Exp $
+# $Id$
 
 EAPI="2"
 
 inherit autotools
 
 DESCRIPTION="A Pidgin now playing plugin to publicise the songs you are listening to in your status message"
-HOMEPAGE="http://code.google.com/p/pidgin-musictracker/"
-SRC_URI="http://pidgin-musictracker.googlecode.com/files/${P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/pidgin-musictracker/"
+SRC_URI="https://pidgin-musictracker.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

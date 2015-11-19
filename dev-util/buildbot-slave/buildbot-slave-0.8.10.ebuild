@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/buildbot-slave/buildbot-slave-0.8.10.ebuild,v 1.6 2015/04/19 09:36:50 pacho Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 readme.gentoo systemd user
 
 DESCRIPTION="BuildBot Slave Daemon"
-HOMEPAGE="http://trac.buildbot.net/ http://code.google.com/p/buildbot/ http://pypi.python.org/pypi/buildbot-slave"
+HOMEPAGE="http://trac.buildbot.net/ https://code.google.com/p/buildbot/ https://pypi.python.org/pypi/buildbot-slave"
 
 MY_PV="${PV/_p/p}"
 MY_P="${PN}-${MY_PV}"

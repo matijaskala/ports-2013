@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/baselayout-prefix/baselayout-prefix-1.12.14.ebuild,v 1.9 2012/05/24 04:14:39 vapier Exp $
+# $Id$
 
 EAPI=3
 
@@ -10,8 +10,8 @@ inherit eutils toolchain-funcs multilib prefix flag-o-matic user
 PVER=1709
 
 DESCRIPTION="Baselayout for Gentoo Prefix installs"
-HOMEPAGE="http://prefix.gentoo.org/"
-SRC_URI="http://dev.gentoo.org/~grobian/distfiles/${P}.${PVER}.tar.bz2"
+HOMEPAGE="https://prefix.gentoo.org/"
+SRC_URI="https://dev.gentoo.org/~grobian/distfiles/${P}.${PVER}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

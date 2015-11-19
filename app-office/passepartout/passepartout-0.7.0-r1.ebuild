@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-office/passepartout/passepartout-0.7.0-r1.ebuild,v 1.3 2013/12/24 12:55:26 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools base eutils gnome2 libtool
@@ -38,16 +38,16 @@ DEPEND="${COMMON_DEPS}
 DOCS="AUTHORS BUGS NEWS README"
 
 # GCC-4.2 patch:
-# http://bugzilla.gnome.org/477017
+# https://bugzilla.gnome.org/477017
 # GCC-4.3 patch:
 # Snatched from Debian
-# http://bugzilla.gnome.org/565131
+# https://bugzilla.gnome.org/565131
 # include-flags:
-# http://bugzilla.gnome.org/464517
+# https://bugzilla.gnome.org/464517
 # libtoolization:
-# http://bugzilla.gnome.org/464567
+# https://bugzilla.gnome.org/464567
 # libxml-2.6:
-# http://bugzilla.gnome.org/449596
+# https://bugzilla.gnome.org/449596
 
 # The include and libtoolization patches are needed for
 # forced as-needed to work.

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/fcgi/fcgi-0.9.2.1.ebuild,v 1.12 2014/11/11 15:30:47 mrueg Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20"
@@ -13,7 +13,7 @@ RUBY_FAKEGEM_EXTRADOC="README.rdoc README.signals"
 inherit multilib ruby-fakegem
 
 DESCRIPTION="FastCGI library for Ruby"
-HOMEPAGE="http://github.com/alphallc/ruby-fcgi-ng"
+HOMEPAGE="https://github.com/alphallc/ruby-fcgi-ng"
 
 KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
 LICENSE="Ruby"

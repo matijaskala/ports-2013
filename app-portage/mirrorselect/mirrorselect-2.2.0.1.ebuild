@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/mirrorselect/mirrorselect-2.2.0.1.ebuild,v 1.15 2015/04/08 07:30:31 mgorny Exp $
+# $Id$
 
 EAPI="5"
 
@@ -10,8 +10,8 @@ PYTHON_REQ_USE="xml"
 inherit eutils distutils-r1 prefix
 
 DESCRIPTION="Tool to help select distfiles mirrors for Gentoo"
-HOMEPAGE="http://www.gentoo.org/proj/en/portage/tools/index.xml"
-SRC_URI="http://dev.gentoo.org/~dolsen/distfiles/${P}.tar.gz"
+HOMEPAGE="https://www.gentoo.org/proj/en/portage/tools/index.xml"
+SRC_URI="https://dev.gentoo.org/~dolsen/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

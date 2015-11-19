@@ -1,9 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-board/mt_ncurses_client/mt_ncurses_client-0.1.98.ebuild,v 1.9 2015/04/13 07:55:44 ago Exp $
+# $Id$
 
 EAPI=5
-inherit games
+inherit games eutils
 
 DESCRIPTION="client for the french tarot game maitretarot"
 HOMEPAGE="http://www.nongnu.org/maitretarot/"
@@ -18,8 +18,12 @@ DEPEND="dev-libs/glib:2
 	dev-libs/libxml2
 	dev-games/libmaitretarot
 	dev-games/libmt_client
-	sys-libs/ncurses"
+	sys-libs/ncurses:0"
 RDEPEND=${DEPEND}
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-format.patch
+}
 
 src_install() {
 	default

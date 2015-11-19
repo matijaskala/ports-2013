@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/beets/beets-1.3.3-r1.ebuild,v 1.1 2014/05/13 16:48:35 sochotnicky Exp $
+# $Id$
 
 EAPI="5"
 
@@ -14,7 +14,7 @@ MY_P=${PN}-${MY_PV}
 
 DESCRIPTION="A media library management system for obsessive-compulsive music geeks"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-HOMEPAGE="http://beets.radbox.org/ http://pypi.python.org/pypi/beets"
+HOMEPAGE="http://beets.radbox.org/ https://pypi.python.org/pypi/beets"
 
 KEYWORDS="~amd64 ~x86"
 SLOT="0"

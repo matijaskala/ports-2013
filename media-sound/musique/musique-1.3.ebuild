@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/musique/musique-1.3.ebuild,v 1.3 2014/12/31 13:19:49 kensington Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,7 +9,7 @@ inherit eutils qt4-r2
 DESCRIPTION="Qt4 music player"
 HOMEPAGE="http://flavio.tordini.org/musique"
 # Same tarball for every release. We repackage it
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

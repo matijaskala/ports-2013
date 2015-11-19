@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/neutron/neutron-2015.1.9999.ebuild,v 1.6 2015/05/17 23:25:00 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -15,7 +15,7 @@ EGIT_BRANCH="stable/kilo"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="compute-only dhcp doc l3 metadata openvswitch linuxbridge server test sqlite mysql postgres"
+IUSE="compute-only dhcp doc ipv6 l3 metadata openvswitch linuxbridge server test sqlite mysql postgres"
 REQUIRED_USE="!compute-only? ( || ( mysql postgres sqlite ) )
 						compute-only? ( !mysql !postgres !sqlite !dhcp !l3 !metadata !server
 						|| ( openvswitch linuxbridge ) )"
@@ -27,13 +27,13 @@ DEPEND="
 	app-admin/sudo
 	test? (
 		${RDEPEND}
-		>=dev-python/hacking-0.10.0[${PYTHON_USEDEP}]
-		<dev-python/hacking-0.11[${PYTHON_USEDEP}]
 		>=dev-python/cliff-1.10.0[${PYTHON_USEDEP}]
 		<dev-python/cliff-1.11.0[${PYTHON_USEDEP}]
 		>=dev-python/coverage-3.6[${PYTHON_USEDEP}]
 		>=dev-python/fixtures-0.3.14[${PYTHON_USEDEP}]
+		<dev-python/fixtures-1.3.0[${PYTHON_USEDEP}]
 		>=dev-python/mock-1.0[${PYTHON_USEDEP}]
+		<dev-python/mock-1.1.0[${PYTHON_USEDEP}]
 		>=dev-python/subunit-0.0.18[${PYTHON_USEDEP}]
 		>=dev-python/requests-mock-0.6.0[${PYTHON_USEDEP}]
 		>=dev-python/sphinx-1.1.2[${PYTHON_USEDEP}]
@@ -49,6 +49,7 @@ DEPEND="
 		>=dev-python/oslotest-1.5.1[${PYTHON_USEDEP}]
 		<dev-python/oslotest-1.6.0[${PYTHON_USEDEP}]
 		>=dev-python/tempest-lib-0.4.0[${PYTHON_USEDEP}]
+		<dev-python/tempest-lib-0.5.0[${PYTHON_USEDEP}]
 	)"
 
 RDEPEND="
@@ -67,8 +68,8 @@ RDEPEND="
 	>=dev-python/keystonemiddleware-1.5.0[${PYTHON_USEDEP}]
 	<dev-python/keystonemiddleware-1.6.0[${PYTHON_USEDEP}]
 	>=dev-python/netaddr-0.7.12[${PYTHON_USEDEP}]
-	>=dev-python/python-neutronclient-2.3.11[${PYTHON_USEDEP}]
-	<dev-python/python-neutronclient-3.5.0[${PYTHON_USEDEP}]
+	>=dev-python/python-neutronclient-2.4.0[${PYTHON_USEDEP}]
+	<dev-python/python-neutronclient-2.5.0[${PYTHON_USEDEP}]
 	>=dev-python/retrying-1.2.3[${PYTHON_USEDEP}]
 	!~dev-python/retrying-1.3.0[${PYTHON_USEDEP}]
 	compute-only? (
@@ -90,13 +91,14 @@ RDEPEND="
 		<=dev-python/sqlalchemy-0.9.99[${PYTHON_USEDEP}]
 	)
 	>=dev-python/webob-1.2.3[${PYTHON_USEDEP}]
-	>=dev-python/python-keystoneclient-1.1.0[${PYTHON_USEDEP}]
+	>=dev-python/python-keystoneclient-1.2.0[${PYTHON_USEDEP}]
 	<dev-python/python-keystoneclient-1.4.0[${PYTHON_USEDEP}]
 	>=dev-python/alembic-0.7.2[${PYTHON_USEDEP}]
+	<dev-python/alembic-0.8.1[${PYTHON_USEDEP}]
 	>=dev-python/six-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/stevedore-1.3.0[${PYTHON_USEDEP}]
 	<dev-python/stevedore-1.4.0[${PYTHON_USEDEP}]
-	>=dev-python/oslo-concurrency-1.8.0[${PYTHON_USEDEP}]
+	>=dev-python/oslo-concurrency-1.8.2[${PYTHON_USEDEP}]
 	<dev-python/oslo-concurrency-1.9.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-config-1.9.3[${PYTHON_USEDEP}]
 	<dev-python/oslo-config-1.10.0[${PYTHON_USEDEP}]
@@ -117,6 +119,7 @@ RDEPEND="
 	>=dev-python/oslo-serialization-1.4.0[${PYTHON_USEDEP}]
 	<dev-python/oslo-serialization-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/oslo-utils-1.4.0[${PYTHON_USEDEP}]
+	!~dev-python/oslo-utils-1.4.1[${PYTHON_USEDEP}]
 	<dev-python/oslo-utils-1.5.0[${PYTHON_USEDEP}]
 	>=dev-python/python-novaclient-2.22.0[${PYTHON_USEDEP}]
 	<dev-python/python-novaclient-2.24.0[${PYTHON_USEDEP}]
@@ -127,6 +130,7 @@ RDEPEND="
 	net-firewall/iptables
 	net-firewall/ebtables
 	openvswitch? ( net-misc/openvswitch )
+	ipv6? ( net-misc/radvd )
 	dhcp? ( net-dns/dnsmasq[dhcp-tools] )"
 
 PATCHES=(
@@ -152,9 +156,10 @@ pkg_config() {
 }
 
 src_prepare() {
-	#it's /bin/ip not /sbin/ip
-	sed -i 's/sbin\/ip\,/bin\/ip\,/g' etc/neutron/rootwrap.d/*
-	distutils-r1_src_prepare
+	sed -i '/^hacking/d' test-requirements.txt || die
+	# it's /bin/ip not /sbin/ip
+	sed -i 's/sbin\/ip\,/bin\/ip\,/g' etc/neutron/rootwrap.d/* || die
+	distutils-r1_python_prepare_all
 }
 
 python_compile_all() {
@@ -165,8 +170,6 @@ python_test() {
 	# https://bugs.launchpad.net/neutron/+bug/1234857
 	# https://bugs.launchpad.net/swift/+bug/1249727
 	# https://bugs.launchpad.net/neutron/+bug/1251657
-	# turn multiprocessing off, testr will use it --parallel
-	local DISTUTILS_NO_PARALLEL_BUILD=1
 	# Move tests out that attempt net connection, have failures
 	mv $(find . -name test_ovs_tunnel.py) . || die
 	sed -e 's:test_app_using_ipv6_and_ssl:_&:' \

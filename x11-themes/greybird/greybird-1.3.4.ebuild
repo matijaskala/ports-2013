@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-themes/greybird/greybird-1.3.4.ebuild,v 1.1 2014/06/03 09:56:18 ssuominen Exp $
+# $Id$
 
 EAPI=5
 
 MY_PN=${PN/g/G}
 
 DESCRIPTION="The default theme from Xubuntu"
-HOMEPAGE="http://shimmerproject.org/project/greybird/ http://github.com/shimmerproject/Greybird"
+HOMEPAGE="http://shimmerproject.org/project/greybird/ https://github.com/shimmerproject/Greybird"
 SRC_URI="https://github.com/shimmerproject/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 # README says "dual-licensed as GPLv2 or later and CC-BY-SA 3.0 or later"

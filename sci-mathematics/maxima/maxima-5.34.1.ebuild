@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-mathematics/maxima/maxima-5.34.1.ebuild,v 1.5 2015/04/22 06:55:34 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -144,12 +144,12 @@ src_configure() {
 		done
 	fi
 
-	econf ${CONFS} $(use_with tk wish) --with-lispdir="${SITELISP}"/${PN}
+	econf ${CONFS} $(use_with tk wish) --with-lispdir="${EPREFIX}/${SITELISP}"/${PN}
 }
 
 src_install() {
 	docompress -x /usr/share/info
-	emake DESTDIR="${D}" emacsdir="${SITELISP}/${PN}" install
+	emake DESTDIR="${D}" emacsdir="${EPREFIX}/${SITELISP}/${PN}" install
 
 	use tk && make_desktop_entry xmaxima xmaxima \
 		/usr/share/${PN}/${PV}/xmaxima/maxima-new.png \

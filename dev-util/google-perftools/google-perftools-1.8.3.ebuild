@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/google-perftools/google-perftools-1.8.3.ebuild,v 1.5 2013/01/20 23:30:53 robbat2 Exp $
+# $Id$
 
 EAPI=4
 
 inherit toolchain-funcs eutils flag-o-matic
 
 DESCRIPTION="Fast, multi-threaded malloc() and nifty performance analysis tools"
-HOMEPAGE="http://code.google.com/p/google-perftools/"
-SRC_URI="http://google-perftools.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/gperftools/gperftools"
+SRC_URI="https://google-perftools.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -64,7 +64,7 @@ src_test() {
 	case "${LD_PRELOAD}" in
 		*libsandbox*)
 			ewarn "Unable to run tests when sanbox is enabled."
-			ewarn "See http://bugs.gentoo.org/290249"
+			ewarn "See https://bugs.gentoo.org/290249"
 			return 0
 			;;
 	esac

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/insight/insight-6.8.1-r1.ebuild,v 1.7 2015/05/26 09:29:49 vapier Exp $
+# $Id$
 
 EAPI=4
 
@@ -11,7 +11,7 @@ MY_P="${PN}-$(replace_version_separator 2 -)"
 DESCRIPTION="A graphical interface to the GNU debugger"
 HOMEPAGE="http://sourceware.org/insight/"
 SRC_URI="ftp://sources.redhat.com/pub/${PN}/releases/${MY_P}a.tar.bz2
-	http://dev.gentoo.org/~xarthisius/distfiles/${P}-patchset-02.tar.xz"
+	https://dev.gentoo.org/~xarthisius/distfiles/${P}-patchset-02.tar.xz"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="0"

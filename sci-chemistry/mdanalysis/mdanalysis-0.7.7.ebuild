@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/mdanalysis/mdanalysis-0.7.7.ebuild,v 1.2 2015/04/08 18:22:14 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_PN="MDAnalysis"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A python library to analyze and manipulate molecular dynamics trajectories"
-HOMEPAGE="https://code.google.com/p/mdanalysis/"
+HOMEPAGE="http://www.mdanalysis.org/"
 SRC_URI="https://mdanalysis.googlecode.com/files/${MY_P}.tar.gz"
 
 SLOT="0"

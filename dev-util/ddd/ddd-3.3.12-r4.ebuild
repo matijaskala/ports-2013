@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/ddd/ddd-3.3.12-r4.ebuild,v 1.2 2015/02/17 17:38:44 haubi Exp $
+# $Id$
 
 EAPI="4"
 
 inherit autotools-utils eutils
 
 DESCRIPTION="Graphical front-end for command-line debuggers"
-HOMEPAGE="http://www.gnu.org/software/ddd"
+HOMEPAGE="https://www.gnu.org/software/ddd"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3 LGPL-3 FDL-1.1"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/ucommon/ucommon-6.1.10.ebuild,v 1.2 2014/10/27 20:03:03 maksbotan Exp $
+# $Id$
 
 EAPI="5"
 
@@ -9,7 +9,7 @@ AUTOTOOLS_AUTORECONF=1
 inherit autotools-utils eutils
 
 DESCRIPTION="Portable C++ runtime for threads and sockets"
-HOMEPAGE="http://www.gnu.org/software/commoncpp"
+HOMEPAGE="https://www.gnu.org/software/commoncpp"
 SRC_URI="mirror://gnu/commoncpp/${P}.tar.gz"
 
 LICENSE="LGPL-3"

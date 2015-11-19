@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libindicate/libindicate-12.10.1-r1.ebuild,v 1.1 2015/04/05 16:09:44 mgorny Exp $
+# $Id$
 
 EAPI=5
 VALA_MIN_API_VERSION="0.16"
@@ -9,8 +9,8 @@ VALA_USE_DEPEND="vapigen"
 inherit autotools eutils flag-o-matic vala
 
 DESCRIPTION="A library to raise flags on DBus for other components of the desktop to pick up and visualize"
-HOMEPAGE="http://launchpad.net/libindicate"
-SRC_URI="http://launchpad.net/${PN}/${PV%.*}/${PV}/+download/${P}.tar.gz"
+HOMEPAGE="https://launchpad.net/libindicate"
+SRC_URI="https://launchpad.net/${PN}/${PV%.*}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1 LGPL-3"
 SLOT="3"

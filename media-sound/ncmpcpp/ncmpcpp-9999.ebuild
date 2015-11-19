@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/ncmpcpp/ncmpcpp-9999.ebuild,v 1.9 2015/03/04 17:21:13 jer Exp $
+# $Id$
 
 EAPI=5
 
@@ -16,12 +16,14 @@ KEYWORDS=""
 IUSE="clock curl outputs taglib unicode visualizer"
 
 RDEPEND="
+	!dev-libs/boost:0/1.57.0
 	>=media-libs/libmpdclient-2.1
-	curl? ( net-misc/curl )
 	dev-libs/boost:=[nls,threads]
-	sys-libs/ncurses[unicode?]
+	sys-libs/ncurses:=[unicode?]
 	sys-libs/readline:*
+	curl? ( net-misc/curl )
 	taglib? ( media-libs/taglib )
+	unicode? ( dev-libs/boost:=[icu] )
 	visualizer? ( sci-libs/fftw:3.0 )
 "
 DEPEND="

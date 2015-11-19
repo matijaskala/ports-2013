@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/spl/spl-0.6.2-r5.ebuild,v 1.2 2015/05/15 18:25:55 blueness Exp $
+# $Id$
 
 EAPI="4"
 AUTOTOOLS_AUTORECONF="1"
@@ -14,7 +14,7 @@ else
 	inherit eutils versionator
 	MY_PV=$(replace_version_separator 3 '-')
 	SRC_URI="https://github.com/zfsonlinux/${PN}/archive/${PN}-${MY_PV}.tar.gz
-		http://dev.gentoo.org/~ryao/dist/${PN}-${MY_PV}-p4.tar.xz"
+		https://dev.gentoo.org/~ryao/dist/${PN}-${MY_PV}-p4.tar.xz"
 	S="${WORKDIR}/${PN}-${PN}-${MY_PV}"
 	KEYWORDS="~amd64 ~arm ~ppc ~ppc64"
 fi
@@ -71,7 +71,7 @@ src_prepare() {
 	fi
 
 	# splat is unnecessary unless we are debugging
-	use debug || sed -e 's/^subdir-m += splat$//' -i "${S}/module/Makefile.in"
+	use debug || { sed -e 's/^subdir-m += splat$//' -i "${S}/module/Makefile.in" || die ; }
 
 	autotools-utils_src_prepare
 }

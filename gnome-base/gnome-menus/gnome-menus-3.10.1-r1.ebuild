@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-menus/gnome-menus-3.10.1-r1.ebuild,v 1.10 2015/06/07 10:45:55 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -10,7 +10,7 @@ inherit eutils gnome2
 DESCRIPTION="Library for the Desktop Menu fd.o specification"
 HOMEPAGE="https://git.gnome.org/browse/gnome-menus"
 SRC_URI="${SRC_URI}
-	http://dev.gentoo.org/~tetromino/distfiles/${PN}/${PN}-3.10.1-patches.tar.xz"
+	https://dev.gentoo.org/~tetromino/distfiles/${PN}/${PN}-3.10.1-patches.tar.xz"
 
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="3"

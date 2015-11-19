@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/multi_json/multi_json-1.11.0.ebuild,v 1.1 2015/04/18 00:37:24 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,7 @@ inherit ruby-fakegem
 
 SRC_URI="https://github.com/intridea/multi_json/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 DESCRIPTION="A gem to provide swappable JSON backends"
-HOMEPAGE="http://github.com/intridea/multi_json"
+HOMEPAGE="https://github.com/intridea/multi_json"
 LICENSE="MIT"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"

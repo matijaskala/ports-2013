@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pysrt/pysrt-9999.ebuild,v 1.6 2015/04/08 08:04:57 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
@@ -23,10 +23,6 @@ DEPEND="${RDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? ( dev-python/nose[coverage(+),${PYTHON_USEDEP}] )
 "
-
-src_test() {
-	DISTUTILS_NO_PARALLEL_BUILD=1 distutils-r1_src_test
-}
 
 python_test() {
 	nosetests --with-coverage --cover-package=pysrt \

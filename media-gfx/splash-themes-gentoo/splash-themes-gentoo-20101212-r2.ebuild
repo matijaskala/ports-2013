@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/splash-themes-gentoo/splash-themes-gentoo-20101212-r2.ebuild,v 1.2 2013/12/22 11:18:08 pacho Exp $
+# $Id$
 
 EAPI="5"
 
 DESCRIPTION="A collection of Gentoo themes for splashutils"
-HOMEPAGE="http://dev.gentoo.org/~spock/"
+HOMEPAGE="https://dev.gentoo.org/~spock/"
 SRC_URI="mirror://gentoo/fbsplash-theme-emergence-r2.tar.bz2
 	 mirror://gentoo/fbsplash-theme-gentoo-r2.tar.bz2
 	 mirror://gentoo/fbsplash-theme-emerge-world-1.0.tar.bz2

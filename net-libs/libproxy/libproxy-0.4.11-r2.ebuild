@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/libproxy/libproxy-0.4.11-r2.ebuild,v 1.14 2015/04/08 18:04:58 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit cmake-multilib eutils flag-o-matic mono python-r1
 
 DESCRIPTION="Library for automatic proxy configuration management"
-HOMEPAGE="http://code.google.com/p/libproxy/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/libproxy/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"

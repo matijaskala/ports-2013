@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/xsane/xsane-0.999-r1.ebuild,v 1.7 2014/12/04 08:36:58 ago Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils toolchain-funcs
@@ -9,7 +9,7 @@ DESCRIPTION="graphical scanning frontend"
 HOMEPAGE="http://www.xsane.org/"
 SRC_URI="
 	http://www.xsane.org/download/${P}.tar.gz
-	http://dev.gentoo.org/~dilfridge/distfiles/${PN}-0.998-patches-2.tar.xz
+	https://dev.gentoo.org/~dilfridge/distfiles/${PN}-0.998-patches-2.tar.xz
 "
 
 LICENSE="GPL-2"

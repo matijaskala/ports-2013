@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-cluster/rgmanager/rgmanager-2.03.09-r1.ebuild,v 1.5 2011/05/17 07:52:33 phajdan.jr Exp $
+# $Id$
 
 EAPI=2
 
@@ -13,7 +13,7 @@ MAJ_PV="$(get_major_version)"
 MIN_PV="$(get_version_component_range 2).$(get_version_component_range 3)"
 
 DESCRIPTION="Clustered resource group manager"
-HOMEPAGE="http://sources.redhat.com/cluster/wiki/"
+HOMEPAGE="https://sources.redhat.com/cluster/wiki/"
 SRC_URI="ftp://sources.redhat.com/pub/cluster/releases/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"

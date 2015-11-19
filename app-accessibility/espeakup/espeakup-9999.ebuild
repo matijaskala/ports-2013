@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/espeakup/espeakup-9999.ebuild,v 1.10 2013/10/10 22:39:11 williamh Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ fi
 inherit $vcs linux-info
 
 DESCRIPTION="espeakup is a small lightweight connector for espeak and speakup"
-HOMEPAGE="http://www.github.com/williamh/espeakup"
+HOMEPAGE="https://www.github.com/williamh/espeakup"
 
 LICENSE="GPL-3"
 SLOT="0"

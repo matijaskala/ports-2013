@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/iksemel/iksemel-1.4.ebuild,v 1.5 2012/05/04 18:35:47 jdhore Exp $
+# $Id$
 
 EAPI="2"
 
 inherit autotools eutils
 
 DESCRIPTION="eXtensible Markup Language parser library designed for Jabber applications"
-HOMEPAGE="http://code.google.com/p/iksemel"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/meduketto/iksemel"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

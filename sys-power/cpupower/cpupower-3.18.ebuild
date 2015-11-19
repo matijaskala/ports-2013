@@ -1,17 +1,17 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-power/cpupower/cpupower-3.18.ebuild,v 1.1 2014/12/29 06:03:55 patrick Exp $
+# $Id$
 
 EAPI=5
 inherit multilib toolchain-funcs
 
 DESCRIPTION="Shows and sets processor power related values"
-HOMEPAGE="http://www.kernel.org/"
+HOMEPAGE="https://www.kernel.org/"
 SRC_URI="mirror://kernel/linux/kernel/v3.x/linux-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm x86"
 IUSE="cpufreq_bench debug nls"
 
 # File collision w/ headers of the deprecated cpufrequtils

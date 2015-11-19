@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/zlib-bindings/zlib-bindings-0.1.1.5.ebuild,v 1.3 2015/01/26 09:56:18 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Low-level bindings to the zlib package. (deprecated)"
-HOMEPAGE="http://github.com/snoyberg/zlib-bindings"
+HOMEPAGE="https://github.com/snoyberg/zlib-bindings"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

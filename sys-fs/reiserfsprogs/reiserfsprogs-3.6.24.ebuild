@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/reiserfsprogs/reiserfsprogs-3.6.24.ebuild,v 1.9 2014/03/14 10:07:17 ago Exp $
+# $Id$
 
 EAPI="5"
 
 inherit flag-o-matic
 
 DESCRIPTION="Reiserfs Utilities"
-HOMEPAGE="http://www.kernel.org/pub/linux/utils/fs/reiserfs/"
+HOMEPAGE="https://www.kernel.org/pub/linux/utils/fs/reiserfs/"
 SRC_URI="mirror://kernel/linux/utils/fs/reiserfs/${P}.tar.xz
 	mirror://kernel/linux/kernel/people/jeffm/${PN}/v${PV}/${P}.tar.xz"
 

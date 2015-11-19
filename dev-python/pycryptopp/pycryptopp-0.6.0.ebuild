@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pycryptopp/pycryptopp-0.6.0.ebuild,v 1.6 2015/04/08 08:05:09 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ NUM="1206569328141510525648634803928199668821045408958"
 MY_P="${P}.${NUM}"
 
 DESCRIPTION="Python wrappers for a few algorithms from the Crypto++ library"
-HOMEPAGE="http://tahoe-lafs.org/trac/pycryptopp http://pypi.python.org/pypi/pycryptopp"
+HOMEPAGE="http://tahoe-lafs.org/trac/pycryptopp https://pypi.python.org/pypi/pycryptopp"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"

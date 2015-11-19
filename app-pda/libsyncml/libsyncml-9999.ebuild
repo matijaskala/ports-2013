@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-pda/libsyncml/libsyncml-9999.ebuild,v 1.9 2014/06/22 11:44:58 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils subversion
@@ -36,7 +36,7 @@ REQUIRED_USE="|| ( http obex )"
 DOCS="AUTHORS CODING ChangeLog RELEASE"
 
 src_prepare() {
-	# http://bugs.gentoo.org/425738
+	# https://bugs.gentoo.org/425738
 	sed -i \
 		-e '/include/s:wbxml.h:wbxml/&:' \
 		libsyncml/parser/sml_wbxml_internals.h tests/mobiles/obex_mobile_ds_client.c || die

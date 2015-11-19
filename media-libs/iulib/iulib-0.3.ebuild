@@ -1,12 +1,12 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/iulib/iulib-0.3.ebuild,v 1.3 2010/11/08 15:13:00 ssuominen Exp $
+# $Id$
 
 inherit eutils
 
 DESCRIPTION="easy-to-use image and video I/O functions"
-HOMEPAGE="http://code.google.com/p/iulib/"
-SRC_URI="http://iulib.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/tmbdev/iulib"
+SRC_URI="https://iulib.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

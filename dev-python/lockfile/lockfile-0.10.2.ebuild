@@ -1,22 +1,25 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/lockfile/lockfile-0.10.2.ebuild,v 1.2 2015/04/04 09:12:10 djc Exp $
+# $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} pypy pypy3 )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
 DESCRIPTION="Platform-independent file locking module"
-HOMEPAGE="http://launchpad.net/pylockfile http://pypi.python.org/pypi/lockfile"
+HOMEPAGE="https://launchpad.net/pylockfile https://pypi.python.org/pypi/lockfile"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 IUSE="doc test"
 
-DEPEND="dev-python/pbr[${PYTHON_USEDEP}]
+DEPEND="
+	dev-python/pbr[${PYTHON_USEDEP}]
 	doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
 	test? ( dev-python/nose[${PYTHON_USEDEP}] )"
 RDEPEND=""

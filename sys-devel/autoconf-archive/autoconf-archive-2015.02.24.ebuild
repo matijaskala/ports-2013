@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/autoconf-archive/autoconf-archive-2015.02.24.ebuild,v 1.1 2015/05/13 09:03:23 vapier Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="GNU Autoconf Macro Archive"
-HOMEPAGE="http://www.gnu.org/software/autoconf-archive/"
+HOMEPAGE="https://www.gnu.org/software/autoconf-archive/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-3"

@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libwebp/libwebp-0.2.1.ebuild,v 1.10 2014/01/16 16:00:38 blueness Exp $
+# $Id$
 
 EAPI=4
 inherit eutils
 
 DESCRIPTION="A lossy image compression format"
-HOMEPAGE="http://code.google.com/p/webp/"
-SRC_URI="http://webp.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://developers.google.com/speed/webp/download"
+SRC_URI="https://webp.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

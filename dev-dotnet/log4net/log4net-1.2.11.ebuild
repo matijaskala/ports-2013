@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-dotnet/log4net/log4net-1.2.11.ebuild,v 1.5 2014/08/10 20:03:08 slyfox Exp $
+# $Id$
 
 EAPI="4"
 
@@ -11,7 +11,7 @@ PV_MAJOR=$(get_version_component_range 1-2)
 DESCRIPTION="tool to help the programmer output log statements to a variety of output targets"
 HOMEPAGE="http://logging.apache.org/log4net/"
 SRC_URI="mirror://apache/logging/log4net/source/${P}-src.zip
-	http://dev.gentoo.org/~pacho/dotnet/log4net.snk"
+	https://dev.gentoo.org/~pacho/dotnet/log4net.snk"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -22,7 +22,7 @@ RDEPEND=">=dev-lang/mono-2.0"
 DEPEND="${RDEPEND}"
 
 src_compile() {
-	/usr/bin/gmcs \
+	/usr/bin/mcs \
 		-t:library \
 		-out:log4net.dll \
 		-keyfile:"${DISTDIR}"/log4net.snk \

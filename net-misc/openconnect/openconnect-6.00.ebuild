@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/openconnect/openconnect-6.00.ebuild,v 1.4 2015/04/27 19:01:33 floppym Exp $
+# $Id$
 
 EAPI="5"
 
@@ -14,7 +14,7 @@ HOMEPAGE="http://www.infradead.org/openconnect.html"
 # New versions of openconnect-script can be found here:
 # http://git.infradead.org/users/dwmw2/vpnc-scripts.git/history/HEAD:/vpnc-script
 SRC_URI="ftp://ftp.infradead.org/pub/${PN}/${P}.tar.gz
-	http://dev.gentoo.org/~hasufell/distfiles/openconnect-script-20140311.tar.xz"
+	https://dev.gentoo.org/~hasufell/distfiles/openconnect-script-20140311.tar.xz"
 
 LICENSE="LGPL-2.1 GPL-2"
 SLOT="0/3"

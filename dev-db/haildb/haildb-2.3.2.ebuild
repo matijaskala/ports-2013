@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-db/haildb/haildb-2.3.2.ebuild,v 1.3 2011/02/03 12:28:15 flameeyes Exp $
+# $Id$
 
 EAPI=2
 
@@ -8,7 +8,7 @@ inherit versionator flag-o-matic
 
 DESCRIPTION="a relational database in shared library form"
 HOMEPAGE="http://www.haildb.com/"
-SRC_URI="http://launchpad.net/haildb/$(get_version_component_range 1-2)/cairo/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/haildb/$(get_version_component_range 1-2)/cairo/+download/${P}.tar.gz"
 LICENSE="GPL-2 MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"

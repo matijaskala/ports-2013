@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-input-mtrack/xf86-input-mtrack-0.3.0.ebuild,v 1.4 2013/01/21 19:59:56 steev Exp $
+# $Id$
 
 EAPI=4
 
@@ -10,7 +10,7 @@ inherit xorg-2 vcs-snapshot
 
 DESCRIPTION="Xorg Driver for Multitouch Trackpads"
 HOMEPAGE="https://github.com/BlueDragonX/xf86-input-mtrack"
-SRC_URI="http://github.com/BlueDragonX/xf86-input-mtrack/tarball/v${PV/_/-} -> ${P}.tar.gz"
+SRC_URI="https://github.com/BlueDragonX/xf86-input-mtrack/tarball/v${PV/_/-} -> ${P}.tar.gz"
 IUSE="debug"
 
 LICENSE="GPL-2"

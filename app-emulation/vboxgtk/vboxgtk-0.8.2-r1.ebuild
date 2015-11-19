@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/vboxgtk/vboxgtk-0.8.2-r1.ebuild,v 1.6 2015/04/08 07:30:35 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ PLOCALES="cs gl"
 inherit gnome2-utils l10n distutils-r1
 
 DESCRIPTION="GTK frontend for VirtualBox"
-HOMEPAGE="http://code.google.com/p/vboxgtk/"
-SRC_URI="http://vboxgtk.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/vboxgtk/"
+SRC_URI="https://vboxgtk.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

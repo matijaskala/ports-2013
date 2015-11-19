@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/python-twitter/python-twitter-1.1.ebuild,v 1.1 2014/05/17 13:52:40 idella4 Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="This library provides a pure python interface for the Twitter API"
-HOMEPAGE="http://code.google.com/p/python-twitter/"
-SRC_URI="http://python-twitter.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/bear/python-twitter"
+SRC_URI="https://python-twitter.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -30,7 +30,7 @@ src_prepare() {
 	rm -fr simplejson || die
 }
 
-# http://code.google.com/p/python-twitter/issues/detail?id=259&thanks=259&ts=1400334214
+# https://code.google.com/p/python-twitter/issues/detail?id=259&thanks=259&ts=1400334214
 python_test() {
 	esetup.py test
 }

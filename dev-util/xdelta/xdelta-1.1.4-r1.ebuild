@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/xdelta/xdelta-1.1.4-r1.ebuild,v 1.8 2012/05/05 02:18:52 jdhore Exp $
+# $Id$
 
 inherit autotools eutils toolchain-funcs
 
 DESCRIPTION="Computes changes between binary or text files and creates deltas"
-HOMEPAGE="http://xdelta.googlecode.com/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://xdelta.googlecode.com/"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

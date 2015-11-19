@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/temporary/temporary-1.1.2.4.ebuild,v 1.4 2014/12/20 09:33:55 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Portable temporary file and directory support for Windows and Unix, based on code from Cabal"
-HOMEPAGE="http://www.github.com/batterseapower/temporary"
+HOMEPAGE="https://www.github.com/batterseapower/temporary"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

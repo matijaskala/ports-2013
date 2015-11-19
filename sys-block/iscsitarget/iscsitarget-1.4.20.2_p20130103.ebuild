@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/iscsitarget/iscsitarget-1.4.20.2_p20130103.ebuild,v 1.5 2013/12/24 12:49:26 ago Exp $
+# $Id$
 
 EAPI="4"
 
@@ -10,7 +10,7 @@ if [ ${PV} == "9999" ] ; then
 	inherit subversion
 	ESVN_REPO_URI="http://svn.code.sf.net/p/iscsitarget/code/trunk"
 else
-	SRC_URI="http://dev.gentoo.org/~ryao/dist/${P}.tar.gz"
+	SRC_URI="https://dev.gentoo.org/~ryao/dist/${P}.tar.gz"
 	KEYWORDS="amd64 ~ppc x86"
 fi
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/crypto-pubkey-types/crypto-pubkey-types-0.4.1.ebuild,v 1.3 2014/03/23 10:00:30 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Generic cryptography Public keys algorithm types"
-HOMEPAGE="http://github.com/vincenthz/hs-crypto-pubkey-types"
+HOMEPAGE="https://github.com/vincenthz/hs-crypto-pubkey-types"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

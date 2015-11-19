@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-terms/qterminal/qterminal-0.6.0.ebuild,v 1.1 2015/02/03 09:05:04 yngwin Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -16,7 +16,7 @@ IUSE="debug qt4 qt5"
 
 REQUIRED_USE="^^ ( qt4 qt5 )"
 
-DEPEND="
+RDEPEND="
 	qt4? (
 		dev-qt/qtcore:4
 		dev-qt/qtgui:4
@@ -24,12 +24,13 @@ DEPEND="
 		~x11-libs/qtermwidget-${PV}[qt4(+)]
 	)
 	qt5? (
-		dev-qt/linguist-tools:5
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		~x11-libs/qtermwidget-${PV}[qt5(-)]
 	)"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	qt5? ( dev-qt/linguist-tools:5 )
+"
 
 src_configure() {
 	local mycmakeargs=(

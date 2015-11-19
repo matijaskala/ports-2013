@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/wbar/wbar-2.3.4-r2.ebuild,v 1.2 2014/10/22 07:18:13 jer Exp $
+# $Id$
 
 EAPI=5
 
 inherit autotools bash-completion-r1 eutils
 
 DESCRIPTION="A fast, lightweight quick launch bar"
-HOMEPAGE="http://code.google.com/p/wbar/"
-SRC_URI="http://${PN}.googlecode.com/files/${P}.tgz"
+HOMEPAGE="https://github.com/rodolf0/wbar"
+SRC_URI="https://${PN}.googlecode.com/files/${P}.tgz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,8 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/websocket-client/websocket-client-0.32.0.ebuild,v 1.1 2015/06/07 19:56:14 alunduil Exp $
+# $Id$
 
 EAPI=5
+
 PYTHON_COMPAT=( python2_7 python3_3 python3_4 )
 
 inherit distutils-r1 vcs-snapshot
@@ -25,7 +26,7 @@ RDEPEND="
 "
 
 python_test() {
-	esetup.py test || die "Tests failed under ${EPYTHON}"
+	esetup.py test
 }
 
 python_install_all() {

@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/edit-distance/edit-distance-0.2.1.1-r1.ebuild,v 1.1 2012/12/22 21:29:26 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Levenshtein and restricted Damerau-Levenshtein edit distances"
-HOMEPAGE="http://github.com/batterseapower/edit-distance"
+HOMEPAGE="https://github.com/batterseapower/edit-distance"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

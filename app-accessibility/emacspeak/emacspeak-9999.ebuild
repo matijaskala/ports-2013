@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/emacspeak/emacspeak-9999.ebuild,v 1.10 2015/03/10 15:29:50 williamh Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://github.com/tvraman/emacspeak.git"
 	inherit git-r3
 else
-	SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+	SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 	KEYWORDS="~amd64 ~ppc ~x86"
 fi
 

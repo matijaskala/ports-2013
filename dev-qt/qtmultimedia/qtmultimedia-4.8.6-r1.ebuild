@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qtmultimedia/qtmultimedia-4.8.6-r1.ebuild,v 1.6 2015/05/30 11:06:09 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ DESCRIPTION="The Multimedia module for the Qt toolkit"
 if [[ ${QT4_BUILD_TYPE} == live ]]; then
 	KEYWORDS="arm ppc ppc64"
 else
-	KEYWORDS="amd64 arm ~ia64 ppc ppc64 x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+	KEYWORDS="amd64 arm ~ia64 ppc ppc64 x86"
 fi
 
 IUSE="alsa"

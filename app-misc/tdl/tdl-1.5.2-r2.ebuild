@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/tdl/tdl-1.5.2-r2.ebuild,v 1.5 2012/09/30 18:24:33 armin76 Exp $
+# $Id$
 
 EAPI=4
 
@@ -10,7 +10,7 @@ DESCRIPTION="Command line To Do List manager"
 HOMEPAGE="http://www.rc0.org.uk/tdl/"
 SRC_URI="
 	http://www.rpcurnow.force9.co.uk/tdl/${P}.tar.gz
-	http://dev.gentoo.org/~jlec/distfiles/${PN}-screenshot.png.tar"
+	https://dev.gentoo.org/~jlec/distfiles/${PN}-screenshot.png.tar"
 
 LICENSE="GPL-2"
 SLOT="0"

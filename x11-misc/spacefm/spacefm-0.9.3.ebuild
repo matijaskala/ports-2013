@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/spacefm/spacefm-0.9.3.ebuild,v 1.4 2015/06/04 19:06:03 kensington Exp $
+# $Id$
 
 EAPI=5
 
 inherit fdo-mime gnome2-utils linux-info
 
 DESCRIPTION="A multi-panel tabbed file manager"
-HOMEPAGE="http://ignorantguru.github.com/spacefm/"
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz
+HOMEPAGE="https://ignorantguru.github.com/spacefm/"
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz
 	mirror://sourceforge/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"

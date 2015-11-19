@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libmemcached/libmemcached-1.0.18-r2.ebuild,v 1.1 2015/01/13 21:37:45 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,7 +11,7 @@ RESTRICT="test" # https://bugs.gentoo.org/show_bug.cgi?id=498250 https://bugs.la
 
 DESCRIPTION="a C client library to the memcached server"
 HOMEPAGE="http://libmemcached.org/libMemcached.html"
-SRC_URI="http://launchpad.net/${PN}/1.0/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/1.0/${PV}/+download/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

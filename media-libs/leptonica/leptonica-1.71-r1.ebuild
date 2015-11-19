@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/leptonica/leptonica-1.71-r1.ebuild,v 1.7 2015/02/24 08:48:36 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,12 +8,12 @@ AUTOTOOLS_AUTORECONF="1"
 inherit eutils autotools-utils
 
 DESCRIPTION="C library for image processing and analysis"
-HOMEPAGE="http://code.google.com/p/leptonica/"
+HOMEPAGE="http://www.leptonica.org/"
 SRC_URI="http://www.leptonica.com/source/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="alpha amd64 ~arm ~mips ~ppc ~ppc64 ~sparc x86"
+KEYWORDS="alpha amd64 ~arm ~mips ~ppc ~ppc64 sparc x86"
 IUSE="gif jpeg jpeg2k png tiff webp utils zlib static-libs test"
 
 # N.b. Tests need all tested features enabled:

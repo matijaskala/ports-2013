@@ -1,14 +1,15 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/autopep8/autopep8-1.0.4.ebuild,v 1.4 2015/03/08 23:39:55 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python{2_7,3_3,3_4} pypy )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1 vcs-snapshot
 
 DESCRIPTION="Automatically formats Python code to conform to the PEP 8 style guide"
-HOMEPAGE="https://github.com/hhatto/autopep8 http://pypi.python.org/pypi/autopep8"
+HOMEPAGE="https://github.com/hhatto/autopep8 https://pypi.python.org/pypi/autopep8"
 SRC_URI="https://github.com/hhatto/${PN}/tarball/ver${PV} -> ${P}.tar.gz"
 
 LICENSE="MIT"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gavl/gavl-1.4.0-r1.ebuild,v 1.5 2015/01/26 10:09:54 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -23,6 +23,8 @@ DEPEND="doc? ( app-doc/doxygen )
 DOCS=( AUTHORS README TODO )
 
 src_prepare() {
+	epatch "${FILESDIR}/${PV}-x32.diff"
+
 	# AC_CONFIG_HEADERS, bug #467736
 	sed -i \
 		-e 's:AM_CONFIG_HEADER:AC_CONFIG_HEADERS:' \

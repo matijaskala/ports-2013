@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/llvm/llvm-3.3-r3.ebuild,v 1.14 2015/04/16 11:55:18 voyageur Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,7 +14,7 @@ HOMEPAGE="http://llvm.org/"
 SRC_URI="http://llvm.org/releases/${PV}/${P}.src.tar.gz
 	clang? ( http://llvm.org/releases/${PV}/compiler-rt-${PV}.src.tar.gz
 		http://llvm.org/releases/${PV}/cfe-${PV}.src.tar.gz )
-	!doc? ( http://dev.gentoo.org/~voyageur/distfiles/${P}-manpages.tar.bz2 )"
+	!doc? ( https://dev.gentoo.org/~voyageur/distfiles/${P}-manpages.tar.bz2 )"
 
 LICENSE="UoI-NCSA"
 SLOT="0/${PV}"

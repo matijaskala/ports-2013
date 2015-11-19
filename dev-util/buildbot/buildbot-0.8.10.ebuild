@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/buildbot/buildbot-0.8.10.ebuild,v 1.6 2015/04/19 09:36:43 pacho Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -12,7 +12,7 @@ MY_PV="${PV/_p/p}"
 MY_P="${PN}-${MY_PV}"
 
 DESCRIPTION="BuildBot build automation system"
-HOMEPAGE="http://trac.buildbot.net/ http://code.google.com/p/buildbot/ http://pypi.python.org/pypi/buildbot"
+HOMEPAGE="http://buildbot.net/ https://pypi.python.org/pypi/buildbot"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -23,7 +23,8 @@ IUSE="doc examples irc mail manhole test"
 RDEPEND=">=dev-python/jinja-2.1[${PYTHON_USEDEP}]
 	dev-python/twisted-core[${PYTHON_USEDEP}]
 	dev-python/twisted-web[${PYTHON_USEDEP}]
-	dev-python/sqlalchemy-migrate[${PYTHON_USEDEP}]
+	<=dev-python/sqlalchemy-0.7.10-r999[${PYTHON_USEDEP}]
+	~dev-python/sqlalchemy-migrate-0.7.2[${PYTHON_USEDEP}]
 	irc? ( dev-python/twisted-words[${PYTHON_USEDEP}] )
 	mail? ( dev-python/twisted-mail[${PYTHON_USEDEP}] )
 	manhole? ( dev-python/twisted-conch[${PYTHON_USEDEP}] )"

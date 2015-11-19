@@ -1,18 +1,19 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/kdebase-runtime-meta/kdebase-runtime-meta-4.14.3.ebuild,v 1.1 2015/06/04 18:44:51 kensington Exp $
+# $Id$
 
 EAPI=5
 inherit kde4-meta-pkg
 
 DESCRIPTION="Merge this to pull in all kdebase-runtime-derived packages"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
-IUSE="+crash-reporter +handbook minimal nepomuk"
+IUSE="crash-reporter +handbook minimal"
 
 RDEPEND="
 	$(add_kdeapps_dep kcmshell)
 	$(add_kdeapps_dep kdebase-data)
 	$(add_kdeapps_dep kdebase-desktoptheme)
+	$(add_kdeapps_dep kdebase-kioslaves)
 	$(add_kdeapps_dep kdebase-menu)
 	$(add_kdeapps_dep kdebase-menu-icons)
 	$(add_kdeapps_dep kdebugdialog)
@@ -26,6 +27,7 @@ RDEPEND="
 	$(add_kdeapps_dep kioclient)
 	$(add_kdeapps_dep kmimetypefinder)
 	$(add_kdeapps_dep knewstuff)
+	$(add_kdeapps_dep knotify)
 	$(add_kdeapps_dep kpasswdserver)
 	$(add_kdeapps_dep kquitapp)
 	$(add_kdeapps_dep kstart)
@@ -43,11 +45,11 @@ RDEPEND="
 		$(add_kdebase_dep khelpcenter)
 		kde-plasma/khelpcenter:5[compat(+)]
 	) )
-	nepomuk? ( $(add_kdeapps_dep nepomuk) )
+	minimal? ( $(add_kdeapps_dep solid-runtime '-bluetooth') )
 	!minimal? (
 		$(add_kdeapps_dep attica)
 		$(add_kdeapps_dep kcontrol)
-		$(add_kdeapps_dep kdebase-kioslaves)
 		$(add_kdeapps_dep knetattach)
 	)
 "
+REQUIRED_USE="minimal? ( !crash-reporter )"

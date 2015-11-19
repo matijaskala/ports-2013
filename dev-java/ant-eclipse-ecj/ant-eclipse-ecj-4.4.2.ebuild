@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/ant-eclipse-ecj/ant-eclipse-ecj-4.4.2.ebuild,v 1.1 2015/03/15 21:09:37 chewi Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ HOMEPAGE="http://www.eclipse.org/"
 SRC_URI="http://download.eclipse.org/eclipse/downloads/drops4/${DMF}/ecjsrc-${PV}.jar"
 
 LICENSE="EPL-1.0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-solaris"
 SLOT="4.4"
 IUSE=""
 

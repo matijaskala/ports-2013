@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/mu/mu-0.9.9.ebuild,v 1.7 2012/12/06 04:37:52 phajdan.jr Exp $
+# $Id$
 
 EAPI=4
 
@@ -8,8 +8,8 @@ inherit base elisp-common
 
 DESCRIPTION="Set of tools to deal with Maildirs, in particular, searching and indexing"
 HOMEPAGE="http://www.djcbsoftware.nl/code/mu/"
-SRC_URI="http://mu0.googlecode.com/files/${P}.tar.gz
-		doc? ( http://mu0.googlecode.com/files/mu4e-manual-${PV}.pdf )"
+SRC_URI="https://mu0.googlecode.com/files/${P}.tar.gz
+		doc? ( https://mu0.googlecode.com/files/mu4e-manual-${PV}.pdf )"
 
 LICENSE="GPL-3"
 SLOT="0"

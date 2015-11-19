@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/smpeg2/smpeg2-2.0.0-r3.ebuild,v 1.3 2015/05/21 10:46:55 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils toolchain-funcs autotools multilib-minimal
@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs autotools multilib-minimal
 MY_P=smpeg-${PV}
 DESCRIPTION="SDL MPEG Player Library"
 HOMEPAGE="http://icculus.org/smpeg/"
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${MY_P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${MY_P}.tar.bz2"
 
 LICENSE="LGPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-filter/isbg/isbg-0.99-r1.ebuild,v 1.3 2013/07/13 07:48:50 ago Exp $
+# $Id$
 
 EAPI=3
 PYTHON_DEPEND="2"
@@ -10,7 +10,7 @@ inherit python
 MY_P="${P/-/_}_20100303"
 DESCRIPTION="IMAP Spam Begone: a script that makes it easy to scan an IMAP inbox for spam using SpamAssassin"
 HOMEPAGE="http://redmine.ookook.fr/projects/isbg"
-SRC_URI="http://github.com/downloads/ook/${PN}/${MY_P}.tgz"
+SRC_URI="https://github.com/downloads/ook/${PN}/${MY_P}.tgz"
 
 # upstream says:
 # You may use isbg under any OSI approved open source license

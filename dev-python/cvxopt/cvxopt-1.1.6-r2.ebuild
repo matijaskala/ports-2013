@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/cvxopt/cvxopt-1.1.6-r2.ebuild,v 1.3 2015/04/08 08:04:53 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -61,9 +61,13 @@ python_prepare_all(){
 	}
 
 	use_cvx() {
-		if use $1 ; then
+		local flag=$1
+		if use ${flag} ; then
+			# Switch to ^^ when we switch to EAPI=6.
+			#local uflag=${flag^^}
+			local uflag=$(tr '[:lower:]' '[:upper:]' <<<"${flag}")
 			sed -i \
-				-e "s/\(BUILD_${1^^} =\) 0/\1 1/" \
+				-e "s/\(BUILD_${uflag} =\) 0/\1 1/" \
 				setup.py || die
 		fi
 	}

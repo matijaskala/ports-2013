@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/coolkey/coolkey-1.1.0-r6.ebuild,v 1.1 2013/03/30 23:09:54 alonbl Exp $
+# $Id$
 
 EAPI=3
 
@@ -9,8 +9,8 @@ inherit eutils
 PATCHVER="002"
 
 DESCRIPTION="Linux Driver support for the CoolKey and CAC products"
-HOMEPAGE="http://directory.fedora.redhat.com/wiki/CoolKey"
-SRC_URI="http://directory.fedora.redhat.com/download/coolkey/${P}.tar.gz
+HOMEPAGE="https://directory.fedora.redhat.com/wiki/CoolKey"
+SRC_URI="https://directory.fedora.redhat.com/download/coolkey/${P}.tar.gz
 	mirror://gentoo/${P}-patches-${PATCHVER}.tar.gz"
 
 LICENSE="LGPL-2.1"

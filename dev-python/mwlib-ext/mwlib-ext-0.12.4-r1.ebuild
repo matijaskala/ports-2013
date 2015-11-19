@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/mwlib-ext/mwlib-ext-0.12.4-r1.ebuild,v 1.3 2015/04/08 08:04:55 mgorny Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ MY_PN="${PN/-/.}"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Extension module to mwlib to pull in reportlab"
-HOMEPAGE="http://code.pediapress.com/wiki/wiki http://pypi.python.org/pypi/mwlib.ext"
+HOMEPAGE="http://code.pediapress.com/wiki/wiki https://pypi.python.org/pypi/mwlib.ext"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.zip"
 
 LICENSE="BSD"

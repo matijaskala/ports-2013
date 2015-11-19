@@ -1,11 +1,11 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-base/xorg-drivers/xorg-drivers-1.14.ebuild,v 1.13 2013/10/08 05:05:00 ago Exp $
+# $Id$
 
 EAPI=5
 
 DESCRIPTION="Meta package containing deps on all xorg drivers"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 SRC_URI=""
 
 LICENSE="metapackage"

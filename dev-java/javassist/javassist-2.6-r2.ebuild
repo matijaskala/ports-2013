@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/javassist/javassist-2.6-r2.ebuild,v 1.1 2014/09/07 07:26:26 ercpe Exp $
+# $Id$
 
 EAPI=5
 
@@ -14,11 +14,11 @@ HOMEPAGE="http://www.csg.is.titech.ac.jp/~chiba/javassist/"
 
 LICENSE="MPL-1.1"
 SLOT="2"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE=""
 
-RDEPEND=">=virtual/jre-1.4"
-DEPEND=">=virtual/jdk-1.4
+RDEPEND=">=virtual/jre-1.6"
+DEPEND=">=virtual/jdk-1.6
 	app-arch/unzip"
 S="${WORKDIR}"
 

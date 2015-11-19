@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/qrencode-python/qrencode-python-1.01-r1.ebuild,v 1.2 2015/04/08 17:58:14 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="A simple wrapper for the C qrencode library"
-HOMEPAGE="http://pypi.python.org/pypi/qrencode/ https://github.com/Arachnid/pyqrencode/"
+HOMEPAGE="https://pypi.python.org/pypi/qrencode/ https://github.com/Arachnid/pyqrencode/"
 SRC_URI="mirror://pypi/q/qrencode/qrencode-${PV}.tar.gz -> ${P}.tar.gz"
 
 SLOT="0"
@@ -18,7 +18,7 @@ LICENSE="Apache-2.0"
 IUSE=""
 
 RDEPEND="
-	virtual/python-imaging[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
 	media-gfx/qrencode"
 DEPEND="${RDEPEND}"
 

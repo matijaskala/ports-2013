@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/chameleon/chameleon-2.16.ebuild,v 1.4 2014/12/28 10:06:31 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_PN="Chameleon"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Fast HTML/XML template compiler for Python"
-HOMEPAGE="http://chameleon.repoze.org http://pypi.python.org/pypi/Chameleon"
+HOMEPAGE="http://chameleon.repoze.org https://pypi.python.org/pypi/Chameleon"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="repoze"

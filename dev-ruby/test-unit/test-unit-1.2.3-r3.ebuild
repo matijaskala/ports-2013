@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/test-unit/test-unit-1.2.3-r3.ebuild,v 1.1 2015/06/12 15:26:36 mrueg Exp $
+# $Id$
 
 EAPI=5
 
@@ -27,6 +27,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE=""
+
+ruby_add_rdepend ">=dev-ruby/hoe-1.5.1"
 
 each_ruby_test() {
 	cd test || die

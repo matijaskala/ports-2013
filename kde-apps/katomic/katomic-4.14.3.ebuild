@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/katomic/katomic-4.14.3.ebuild,v 1.1 2015/06/04 18:44:50 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ inherit kde4-base
 
 DESCRIPTION="KDE Atomic Entertainment Game"
 HOMEPAGE="
-	http://www.kde.org/applications/games/katomic/
-	http://games.kde.org/game.php?game=katomic
+	https://www.kde.org/applications/games/katomic/
+	https://games.kde.org/game.php?game=katomic
 "
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug"

@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/quodlibet/quodlibet-3.1.2.ebuild,v 1.7 2015/06/11 14:26:25 ago Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 gnome2-utils fdo-mime
 
 DESCRIPTION="audio library tagger, manager, and player for GTK+"
-HOMEPAGE="http://code.google.com/p/quodlibet/"
-SRC_URI="http://bitbucket.org/lazka/${PN}-files/raw/default/releases/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/quodlibet/"
+SRC_URI="https://bitbucket.org/lazka/${PN}-files/raw/default/releases/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

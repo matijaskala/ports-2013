@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/iscan-plugin-gt-x770/iscan-plugin-gt-x770-2.1.2.1-r3.ebuild,v 1.2 2014/08/10 21:14:47 slyfox Exp $
+# $Id$
 
 EAPI="4"
 
@@ -12,8 +12,8 @@ MY_PVR="$(replace_version_separator 3 -)"
 DESCRIPTION="Epson Perfection V500 scanner plugin for SANE 'epkowa' backend"
 HOMEPAGE="http://download.ebz.epson.net/dsc/search/01/search/?OSC=LX"
 SRC_URI="
-	x86? ( http://dev.gentoo.org/~flameeyes/avasys/${PN}/${MY_PV}/${PN}-${MY_PVR}.i386.rpm )
-	amd64? ( http://dev.gentoo.org/~flameeyes/avasys/${PN}/${MY_PV}/${PN}-${MY_PVR}.x86_64.rpm )
+	x86? ( https://dev.gentoo.org/~flameeyes/avasys/${PN}/${MY_PV}/${PN}-${MY_PVR}.i386.rpm )
+	amd64? ( https://dev.gentoo.org/~flameeyes/avasys/${PN}/${MY_PV}/${PN}-${MY_PVR}.x86_64.rpm )
 "
 
 LICENSE="AVASYS"

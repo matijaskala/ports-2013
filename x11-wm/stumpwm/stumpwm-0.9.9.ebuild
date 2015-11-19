@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-wm/stumpwm/stumpwm-0.9.9.ebuild,v 1.4 2015/01/06 13:42:30 nimiux Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit common-lisp-3 eutils elisp-common autotools
 
 DESCRIPTION="Stumpwm is a tiling, keyboard driven X11 Window Manager written entirely in Common Lisp."
 HOMEPAGE="http://www.nongnu.org/stumpwm/"
-SRC_URI="http://github.com/${PN}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/${PN}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

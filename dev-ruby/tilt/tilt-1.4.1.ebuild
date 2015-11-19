@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/tilt/tilt-1.4.1.ebuild,v 1.12 2015/04/27 08:59:38 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ RUBY_FAKEGEM_EXTRADOC="README.md TEMPLATES.md"
 inherit ruby-fakegem
 
 DESCRIPTION="A thin interface over a Ruby template engines to make their usage as generic as possible"
-HOMEPAGE="http://github.com/rtomayko/tilt"
+HOMEPAGE="https://github.com/rtomayko/tilt"
 
 LICENSE="MIT"
 SLOT="0"

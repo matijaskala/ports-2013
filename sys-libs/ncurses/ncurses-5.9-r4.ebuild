@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/ncurses/ncurses-5.9-r4.ebuild,v 1.3 2015/04/06 20:11:01 vapier Exp $
+# $Id$
 
 EAPI="4"
 inherit eutils flag-o-matic toolchain-funcs multilib-minimal
@@ -9,17 +9,19 @@ MY_PV=${PV:0:3}
 PV_SNAP=${PV:4}
 MY_P=${PN}-${MY_PV}
 DESCRIPTION="console display library"
-HOMEPAGE="http://www.gnu.org/software/ncurses/ http://dickey.his.com/ncurses/"
+HOMEPAGE="https://www.gnu.org/software/ncurses/ http://dickey.his.com/ncurses/"
 SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
 
 LICENSE="MIT"
-SLOT="5"
+SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 IUSE="ada +cxx debug doc gpm minimal profile static-libs tinfo trace unicode"
 
 DEPEND="gpm? ( sys-libs/gpm )"
 #	berkdb? ( sys-libs/db )"
+# Block the older ncurses that installed all files w/SLOT=5. #557472
 RDEPEND="${DEPEND}
+	!<=sys-libs/ncurses-5.9-r4:0
 	!<x11-terms/rxvt-unicode-9.06-r3
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-baselibs-20130224-r12
@@ -100,8 +102,9 @@ do_configure() {
 		$(use_with cxx cxx-binding)
 		$(use_with debug)
 		$(use_with profile)
-		$(use_with gpm)
-		$(multilib_is_native_abi || use_with gpm gpm libgpm.so.1)
+		# The configure script uses ldd to parse the linked output which
+		# is flaky for cross-compiling/multilib/ldd versions/etc...
+		$(use_with gpm gpm libgpm.so.1)
 		--disable-termcap
 		--enable-symlinks
 		--with-rcs-ids

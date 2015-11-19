@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/isl/isl-0.15.ebuild,v 1.1 2015/06/13 11:29:15 blueness Exp $
+# $Id$
 
 EAPI="5"
 
@@ -26,7 +26,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.07-gdb-autoload-dir.patch
 
 	# m4/ax_create_pkgconfig_info.m4 is broken but avoid eautoreconf
-	# http://groups.google.com/group/isl-development/t/37ad876557e50f2c
+	# https://groups.google.com/group/isl-development/t/37ad876557e50f2c
 	sed -i -e '/Libs:/s:@LDFLAGS@ ::' configure || die #382737
 }
 

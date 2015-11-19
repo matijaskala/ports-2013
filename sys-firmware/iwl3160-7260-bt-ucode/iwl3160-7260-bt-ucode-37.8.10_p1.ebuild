@@ -1,12 +1,12 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-firmware/iwl3160-7260-bt-ucode/iwl3160-7260-bt-ucode-37.8.10_p1.ebuild,v 1.1 2014/11/17 13:44:23 gienah Exp $
+# $Id$
 
 EAPI=5
 inherit linux-info
 
 DESCRIPTION="Firmware for Intel (R) Wireless 3160, 7260, 7265 Bluetooth"
-HOMEPAGE="http://wireless.kernel.org/en/users/Drivers/iwlwifi"
+HOMEPAGE="https://wireless.kernel.org/en/users/Drivers/iwlwifi"
 SRC_URI="mirror://gentoo/${P}.tgz"
 
 LICENSE="ipw3945"

@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/tasque/tasque-0.1.12.ebuild,v 1.1 2012/12/24 13:08:26 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit eutils gnome.org mono
@@ -24,8 +24,8 @@ REQUIRED_USE="|| ( rememberthemilk sqlite hiveminder )"
 
 RDEPEND=">=dev-dotnet/gtk-sharp-2.12.7-r5
 	>=dev-dotnet/notify-sharp-0.4.0_pre20080912
-	dev-dotnet/dbus-sharp
-	dev-dotnet/dbus-sharp-glib
+	dev-dotnet/dbus-sharp:1.0
+	dev-dotnet/dbus-sharp-glib:1.0
 	sqlite? ( dev-db/sqlite:3 )"
 DEPEND="${RDEPEND}"
 

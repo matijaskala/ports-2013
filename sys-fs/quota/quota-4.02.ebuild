@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/quota/quota-4.02.ebuild,v 1.10 2015/05/11 19:20:49 zlogene Exp $
+# $Id$
 
 EAPI="4"
 
@@ -18,7 +18,7 @@ IUSE="ldap netlink nls rpc tcpd"
 RDEPEND="ldap? ( >=net-nds/openldap-2.3.35 )
 	netlink? (
 		sys-apps/dbus
-		dev-libs/libnl:1.1
+		dev-libs/libnl:3
 	)
 	rpc? ( net-nds/rpcbind )
 	tcpd? ( sys-apps/tcp-wrappers )"

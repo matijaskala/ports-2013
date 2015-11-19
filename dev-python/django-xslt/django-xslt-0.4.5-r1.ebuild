@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/django-xslt/django-xslt-0.4.5-r1.ebuild,v 1.5 2015/04/08 08:05:22 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,10 +8,10 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz
-	test? ( http://dev.gentoo.org/~tampakrap/tarballs/${PN}-demoapp-0.4.5_p20120427.tar.bz2 )"
+	test? ( https://dev.gentoo.org/~tampakrap/tarballs/${PN}-demoapp-0.4.5_p20120427.tar.bz2 )"
 
 DESCRIPTION="an XSLT template system for Django"
-HOMEPAGE="http://pypi.python.org/pypi/django-xslt/"
+HOMEPAGE="https://pypi.python.org/pypi/django-xslt/"
 KEYWORDS="amd64 x86"
 IUSE="test"
 

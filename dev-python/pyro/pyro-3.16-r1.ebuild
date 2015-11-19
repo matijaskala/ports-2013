@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pyro/pyro-3.16-r1.ebuild,v 1.6 2015/04/08 08:05:11 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ MY_PN="Pyro"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Advanced and powerful Distributed Object Technology system written entirely in Python"
-HOMEPAGE="http://www.xs4all.nl/~irmen/pyro3/ http://pypi.python.org/pypi/Pyro"
+HOMEPAGE="http://www.xs4all.nl/~irmen/pyro3/ https://pypi.python.org/pypi/Pyro"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="MIT"

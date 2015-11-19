@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/kiconedit/kiconedit-4.4.0.ebuild,v 1.6 2014/03/21 20:49:11 johu Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ KDE_HANDBOOK="optional"
 inherit kde4-base
 
 DESCRIPTION="KDE Icon Editor"
-HOMEPAGE="http://www.kde.org/"
+HOMEPAGE="https://www.kde.org/"
 SRC_URI="mirror://kde/stable/${PV}/src/extragear/${P}.tar.bz2"
 
 LICENSE="GPL-2 FDL-1.2"

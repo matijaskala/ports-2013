@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/wxmacmolplt/wxmacmolplt-7.5.ebuild,v 1.1 2014/01/06 17:50:26 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit autotools eutils wxwidgets
 
 DESCRIPTION="Chemical 3D graphics program with GAMESS input builder"
 HOMEPAGE="http://www.scl.ameslab.gov/MacMolPlt/"
-SRC_URI="http://wxmacmolplt.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://wxmacmolplt.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"

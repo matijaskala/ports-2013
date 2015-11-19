@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/openbabel-python/openbabel-python-2.3.2.ebuild,v 1.14 2015/05/05 09:41:37 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ DESCRIPTION="Python bindings for OpenBabel (including Pybel)"
 HOMEPAGE="http://openbabel.sourceforge.net/"
 SRC_URI="mirror://sourceforge/openbabel/openbabel-${PV}.tar.gz"
 
-KEYWORDS="amd64 ~arm ppc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ~arm ppc x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="GPL-2"
 IUSE=""
@@ -20,7 +20,6 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
-	!sci-chemistry/babel
 	~sci-chemistry/openbabel-${PV}
 	sys-libs/zlib"
 DEPEND="${RDEPEND}
@@ -46,22 +45,26 @@ src_prepare() {
 		-outdir scripts/python \
 		scripts/openbabel-python.i \
 		|| die "Regeneration of openbabel-python.cpp failed"
+	sed \
+		-e '/__GNUC__/s:== 4:>= 4:g' \
+		-i include/openbabel/shared_ptr.h || die
 }
 
 src_configure() {
 	my_impl_src_configure() {
-		local mycmakeargs="${mycmakeargs}
+		local mycmakeargs=(
 			-DCMAKE_INSTALL_RPATH=
 			-DBINDINGS_ONLY=ON
 			-DBABEL_SYSTEM_LIBRARY="${EPREFIX}/usr/$(get_libdir)/libopenbabel.so"
 			-DOB_MODULE_PATH="${EPREFIX}/usr/$(get_libdir)/openbabel/${PV}"
-			-DLIB_INSTALL_DIR="${ED}/usr/$(get_libdir)/${EPYTHON}/site-packages"
+			-DLIB_INSTALL_DIR="${D}$(python_get_sitedir)"
 			-DPYTHON_BINDINGS=ON
 			-DPYTHON_EXECUTABLE=${PYTHON}
-			-DPYTHON_INCLUDE_DIR="${EPREFIX}/usr/include/${EPYTHON}"
-			-DPYTHON_INCLUDE_PATH="${EPREFIX}/usr/include/${EPYTHON}"
-			-DPYTHON_LIBRARY="${EPREFIX}/usr/$(get_libdir)/lib${EPYTHON}.so"
-			-DENABLE_TESTS=ON"
+			-DPYTHON_INCLUDE_DIR="$(python_get_includedir)"
+			-DPYTHON_INCLUDE_PATH="$(python_get_includedir)"
+			-DPYTHON_LIBRARY="$(python_get_library_path)"
+			-DENABLE_TESTS=ON
+		)
 
 		cmake-utils_src_configure
 	}

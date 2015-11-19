@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/bashate/bashate-0.3.1.ebuild,v 1.2 2014/11/28 10:02:34 pacho Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 python3_3 python3_4 )
@@ -17,13 +17,13 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="test"
 
 DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	>=dev-python/pbr-0.8.0[${PYTHON_USEDEP}]
-	<dev-python/pbr-1.0[${PYTHON_USEDEP}]
+	<dev-python/pbr-2.0[${PYTHON_USEDEP}]
 "
 RDEPEND="
 	>=dev-python/Babel-0.9.6[${PYTHON_USEDEP}]

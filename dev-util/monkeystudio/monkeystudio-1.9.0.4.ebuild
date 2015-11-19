@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/monkeystudio/monkeystudio-1.9.0.4.ebuild,v 1.4 2014/11/20 00:27:01 pesa Exp $
+# $Id$
 
 EAPI=5
 LANGS="be es fr ru"
@@ -11,7 +11,7 @@ MY_P="mks_${PV}-src"
 
 DESCRIPTION="A cross platform Qt 4 IDE"
 HOMEPAGE="http://www.monkeystudio.org"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-2 LGPL-3"
 SLOT="0"

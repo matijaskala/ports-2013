@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/talloc/talloc-2.1.0-r1.ebuild,v 1.13 2015/05/05 05:39:43 patrick Exp $
+# $Id$
 
 EAPI=5
 
@@ -79,7 +79,7 @@ multilib_src_install() {
 			install_name_tool \
 				-change "${S}/bin/default/libtalloc.dylib" \
 					"${EPREFIX}"/usr/$(get_libdir)/libtalloc.2.dylib \
-				"${ED}"$(python_get_sitedir)/talloc.bundle || die
+				"${D}"$(python_get_sitedir)/talloc.bundle || die
 		fi
 	fi
 }

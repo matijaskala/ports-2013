@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-wm/xmonad-contrib/xmonad-contrib-0.11.4.ebuild,v 1.1 2015/04/03 04:45:25 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ EAPI=5
 #hackport: flags: -testing,use_xft:xft
 
 CABAL_FEATURES="lib profile haddock hoogle hscolour"
-inherit base haskell-cabal
+inherit eutils haskell-cabal
 
 DESCRIPTION="Third party extensions for xmonad"
 HOMEPAGE="http://xmonad.org/"
@@ -21,6 +21,8 @@ IUSE="+xft"
 
 RDEPEND="dev-haskell/extensible-exceptions:=[profile?]
 	>=dev-haskell/mtl-1:=[profile?] <dev-haskell/mtl-3:=[profile?]
+	dev-haskell/old-locale:=[profile?]
+	dev-haskell/old-time:=[profile?]
 	dev-haskell/random:=[profile?]
 	dev-haskell/utf8-string:=[profile?]
 	>=dev-haskell/x11-1.6.1:=[profile?] <dev-haskell/x11-1.7:=[profile?]
@@ -32,9 +34,15 @@ DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.6
 "
 
-# Upstream bug 597 xmonad-contrib-0.11.4 does not compile
-# https://code.google.com/p/xmonad/issues/detail?id=597
-PATCHES=("${FILESDIR}/${P}-import-Applicative.patch")
+src_prepare() {
+	# Upstream bug 597 xmonad-contrib-0.11.4 does not compile
+	# https://code.google.com/p/xmonad/issues/detail?id=597
+	epatch "${FILESDIR}"/${P}-import-Applicative.patch
+
+	# https://ghc.haskell.org/trac/ghc/ticket/10667
+	[[ $(ghc-version) == 7.10.1.20150630 ]] && replace-hcflags -g ''
+	[[ $(ghc-version) == 7.10.2 ]] && replace-hcflags -g ''
+}
 
 src_configure() {
 	haskell-cabal_src_configure \

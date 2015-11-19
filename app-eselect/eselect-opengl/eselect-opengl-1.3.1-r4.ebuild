@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-eselect/eselect-opengl/eselect-opengl-1.3.1-r4.ebuild,v 1.2 2015/06/17 12:28:01 chithanh Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils multilib
 
 DESCRIPTION="Utility to change the OpenGL interface being used"
-HOMEPAGE="http://www.gentoo.org/"
+HOMEPAGE="https://www.gentoo.org/"
 
 # Source:
 # http://www.opengl.org/registry/api/glext.h
@@ -15,8 +15,8 @@ HOMEPAGE="http://www.gentoo.org/"
 GLEXT="85"
 GLXEXT="34"
 
-MIRROR="http://dev.gentoo.org/~mattst88/distfiles"
-SRC_URI="http://dev.gentoo.org/~mgorny/dist/opengl.eselect-${PV}.xz"
+MIRROR="https://dev.gentoo.org/~mattst88/distfiles"
+SRC_URI="https://dev.gentoo.org/~mgorny/dist/opengl.eselect-${PV}.xz"
 #	${MIRROR}/${P}.tar.xz"
 
 LICENSE="GPL-2"
@@ -30,7 +30,11 @@ RDEPEND=">=app-admin/eselect-1.2.4
 		 !=media-libs/mesa-10.3.5
 		 !=media-libs/mesa-10.3.7-r1
 		 !<x11-proto/glproto-1.4.17-r1
-		 !<x11-base/xorg-server-1.16.4-r1
+		 !<=x11-base/xorg-server-1.12.4-r5
+		 !=x11-base/xorg-server-1.15.2-r1
+		 !=x11-base/xorg-server-1.15.2-r2
+		 !~x11-base/xorg-server-1.16.3
+		 !=x11-base/xorg-server-1.16.4
 		 !=x11-base/xorg-server-1.16.4-r3
 		 !~x11-base/xorg-server-1.17.0
 		 !=x11-base/xorg-server-1.17.1

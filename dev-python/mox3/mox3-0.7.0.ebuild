@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/mox3/mox3-0.7.0.ebuild,v 1.2 2014/08/01 05:59:05 prometheanfire Exp $
+# $Id$
 
 EAPI=5
 # py2.6 capable but unrequired
@@ -10,7 +10,7 @@ inherit distutils-r1
 
 # Use at your own risk ;), or because an openstack package cited it as a req'd dep :)
 DESCRIPTION="The Mock object framework for Python"
-HOMEPAGE="http://code.google.com/p/pymox/wiki/MoxDocumentation http://www.openstack.org/"
+HOMEPAGE="https://code.google.com/p/pymox/wiki/MoxDocumentation http://www.openstack.org/"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"

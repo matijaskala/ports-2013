@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/amqplib/amqplib-0.6.1-r1.ebuild,v 1.4 2015/04/08 08:05:11 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 eutils
 
 DESCRIPTION="Python client for the Advanced Message Queuing Procotol (AMQP)"
-HOMEPAGE="http://code.google.com/p/py-amqplib/"
-SRC_URI="http://py-amqplib.googlecode.com/files/${P}.tgz"
+HOMEPAGE="https://code.google.com/p/py-amqplib/"
+SRC_URI="https://py-amqplib.googlecode.com/files/${P}.tgz"
 
 LICENSE="LGPL-3"
 SLOT="0"

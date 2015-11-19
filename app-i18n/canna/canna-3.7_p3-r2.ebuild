@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/canna/canna-3.7_p3-r2.ebuild,v 1.5 2012/07/12 08:46:22 naota Exp $
+# $Id$
 
 inherit cannadic eutils multilib
 
@@ -68,7 +68,7 @@ src_compile() {
 		emake -j1 CC="$(tc-getCC)" CDEBUGFLAGS="${CFLAGS}" \
 			LOCAL_LDFLAGS="${LDFLAGS}" SHLIBGLOBALSFLAGS="${LDFLAGS}" \
 			JLATEXCMD=platex \
-			DVI2PSCMD="dvips -f" VARTEXFONTS=${T}/fonts \
+			DVI2PSCMD="dvips -f" VARTEXFONTS="${T}"/fonts \
 			canna.dvi canna.ps || die
 		if has_version 'app-text/dvipdfmx' && \
 			( has_version 'app-text/acroread' \
@@ -76,7 +76,7 @@ src_compile() {
 			emake -j1 CC="$(tc-getCC)" CDEBUGFLAGS="${CFLAGS}" \
 				LOCAL_LDFLAGS="${LDFLAGS}" SHLIBGLOBALSFLAGS="${LDFLAGS}" \
 				JLATEXCMD=platex \
-				DVI2PSCMD="dvips -f" VARTEXFONTS=${T}/fonts \
+				DVI2PSCMD="dvips -f" VARTEXFONTS="${T}"/fonts \
 				canna.pdf || die
 		fi
 	fi

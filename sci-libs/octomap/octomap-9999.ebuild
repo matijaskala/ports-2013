@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/octomap/octomap-9999.ebuild,v 1.2 2014/10/29 12:45:10 aballier Exp $
+# $Id$
 
 EAPI=5
 
 SCM=""
 if [ "${PV#9999}" != "${PV}" ] ; then
 	SCM="git-r3"
-	EGIT_REPO_URI="http://github.com/OctoMap/octomap"
+	EGIT_REPO_URI="https://github.com/OctoMap/octomap"
 fi
 
 inherit ${SCM} cmake-utils
@@ -17,7 +17,7 @@ if [ "${PV#9999}" != "${PV}" ] ; then
 	SRC_URI=""
 else
 	KEYWORDS="~amd64 ~arm"
-	SRC_URI="http://github.com/OctoMap/octomap/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/OctoMap/octomap/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 DESCRIPTION="An Efficient Probabilistic 3D Mapping Framework Based on Octrees"

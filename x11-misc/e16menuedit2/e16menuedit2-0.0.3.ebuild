@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-misc/e16menuedit2/e16menuedit2-0.0.3.ebuild,v 1.12 2014/11/21 10:00:39 pacho Exp $
+# $Id$
 
 EAPI=5
 GCONF_DEBUG="yes"
@@ -8,7 +8,7 @@ GCONF_DEBUG="yes"
 inherit gnome2 eutils
 
 DESCRIPTION="Menu editor for enlightenment DR16 written in GTK2"
-HOMEPAGE="http://www.enlightenment.org/"
+HOMEPAGE="https://www.enlightenment.org/"
 SRC_URI="mirror://sourceforge/enlightenment/${P}.tar.gz"
 
 LICENSE="MIT-with-advertising"

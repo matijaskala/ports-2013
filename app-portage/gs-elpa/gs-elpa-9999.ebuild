@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-portage/gs-elpa/gs-elpa-9999.ebuild,v 1.4 2015/04/24 22:04:52 jauhien Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ DESCRIPTION="g-sorcery backend for elisp packages"
 HOMEPAGE="https://github.com/jauhien/gs-elpa"
 SRC_URI=""
 EGIT_BRANCH="master"
-EGIT_REPO_URI="http://github.com/jauhien/gs-elpa"
+EGIT_REPO_URI="https://github.com/jauhien/gs-elpa"
 
 LICENSE="GPL-2"
 SLOT="0"

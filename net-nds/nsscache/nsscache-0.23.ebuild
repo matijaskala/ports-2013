@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-nds/nsscache/nsscache-0.23.ebuild,v 1.2 2015/05/16 08:01:55 floppym Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,8 +13,8 @@ PYTHON_USE_WITH_OPT="nssdb"
 inherit eutils python distutils
 
 DESCRIPTION="commandline tool to sync directory services to local cache"
-HOMEPAGE="http://code.google.com/p/nsscache/"
-SRC_URI="http://nsscache.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/google/nsscache"
+SRC_URI="https://nsscache.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/uid_wrapper/uid_wrapper-1.1.0.ebuild,v 1.2 2015/03/08 14:25:15 polynomial-c Exp $
+# $Id$
 
 EAPI=5
 
-inherit cmake-utils multilib-minimal
+inherit cmake-multilib
 
 DESCRIPTION="A wrapper to fake privilege separation"
 HOMEPAGE="https://cwrap.org/uid_wrapper.html"
@@ -17,14 +17,9 @@ IUSE="test"
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+# Work around a problem with >=dev-util/cmake-3.3.0 (bug #558340)
+# Because of this we cannot use cmake-multilib_src_configure() here.
 multilib_src_configure() {
+	local mycmakeargs=( -DCMAKE_LIBRARY_PATH=/usr/$(get_libdir) )
 	cmake-utils_src_configure
-}
-
-multilib_src_compile() {
-	cmake-utils_src_compile
-}
-
-multilib_src_install() {
-	cmake-utils_src_install
 }

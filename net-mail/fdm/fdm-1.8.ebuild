@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-mail/fdm/fdm-1.8.ebuild,v 1.1 2015/02/27 11:59:38 xmw Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils multilib toolchain-funcs user
 
 DESCRIPTION="fetch, filter and deliver mail"
-HOMEPAGE="http://fdm.sourceforge.net"
+HOMEPAGE="https://github.com/nicm/fdm"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"

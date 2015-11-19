@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/eet/eet-1.7.10.ebuild,v 1.1 2015/03/16 23:31:46 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,14 +9,14 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_URI_APPEND=${PN}
 	EGIT_BRANCH=${PN}-1.7
 else
-	SRC_URI="http://download.enlightenment.org/releases/${P}.tar.bz2"
+	SRC_URI="https://download.enlightenment.org/releases/${P}.tar.bz2"
 	EKEY_STATE="snap"
 fi
 
 inherit enlightenment
 
 DESCRIPTION="E file chunk reading/writing library"
-HOMEPAGE="http://trac.enlightenment.org/e/wiki/Eet"
+HOMEPAGE="https://trac.enlightenment.org/e/wiki/Eet"
 
 LICENSE="BSD-2"
 IUSE="debug examples gnutls ssl static-libs test"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/sha/sha-1.6.4.2.ebuild,v 1.1 2015/04/04 09:45:19 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -19,8 +19,10 @@ SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86 ~amd64-linux"
+KEYWORDS="amd64 x86 ~amd64-linux"
 IUSE="exe"
+
+RESTRICT=test # fails to build on ghc-7.6, https://ghc.haskell.org/trac/ghc/ticket/8657
 
 RDEPEND=">=dev-haskell/binary-0.7:=[profile?] <dev-haskell/binary-10000:=[profile?]
 	>=dev-lang/ghc-7.4.1:=
@@ -33,6 +35,11 @@ DEPEND="${RDEPEND}
 "
 
 S="${WORKDIR}/${MY_P}"
+
+src_prepare() {
+	cabal_chdeps \
+		' -O2' ' '
+}
 
 src_configure() {
 	haskell-cabal_src_configure \

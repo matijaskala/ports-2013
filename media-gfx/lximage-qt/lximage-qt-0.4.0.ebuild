@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/lximage-qt/lximage-qt-0.4.0.ebuild,v 1.2 2015/04/03 10:35:09 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -21,7 +21,6 @@ SLOT="0"
 
 RDEPEND="
 	dev-libs/glib:2
-	dev-qt/linguist-tools:5
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -37,6 +36,7 @@ RDEPEND="
 	x11-libs/libXfixes
 	x11-misc/pcmanfm-qt"
 DEPEND="${RDEPEND}
+	dev-qt/linguist-tools:5
 	virtual/pkgconfig"
 
 src_configure() {

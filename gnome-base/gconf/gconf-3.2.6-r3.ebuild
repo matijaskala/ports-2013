@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gconf/gconf-3.2.6-r3.ebuild,v 1.12 2015/04/08 18:13:25 mgorny Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -12,7 +12,7 @@ PYTHON_REQ_USE="xml"
 inherit eutils gnome2 multilib-minimal python-r1
 
 DESCRIPTION="GNOME configuration system and daemon"
-HOMEPAGE="http://projects.gnome.org/gconf/"
+HOMEPAGE="https://projects.gnome.org/gconf/"
 
 LICENSE="LGPL-2+"
 SLOT="2"

@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/mtree/mtree-1.0.ebuild,v 1.1 2012/07/01 16:44:39 ryao Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="Directory hierarchy mapping tool from FreeBSD"
-HOMEPAGE="http://code.google.com/p/mtree-port/"
-SRC_URI="http://mtree-port.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/archiecobbs/mtree-port"
+SRC_URI="https://mtree-port.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

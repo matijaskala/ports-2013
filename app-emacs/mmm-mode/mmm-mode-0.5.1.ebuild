@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/mmm-mode/mmm-mode-0.5.1.ebuild,v 1.4 2013/12/24 12:45:58 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ DESCRIPTION="Enables the user to edit different parts of a file in different maj
 HOMEPAGE="http://mmm-mode.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
-LICENSE="GPL-2+"
+LICENSE="GPL-2+ Texinfo-manual"
 SLOT="0"
 KEYWORDS="amd64 ppc x86 ~amd64-linux ~x86-linux ~ppc-macos"
 

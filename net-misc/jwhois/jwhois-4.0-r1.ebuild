@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/jwhois/jwhois-4.0-r1.ebuild,v 1.12 2012/12/29 17:23:04 armin76 Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils
 
 DESCRIPTION="Advanced Internet Whois client capable of recursive queries"
-HOMEPAGE="http://www.gnu.org/software/jwhois/"
+HOMEPAGE="https://www.gnu.org/software/jwhois/"
 SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-3"

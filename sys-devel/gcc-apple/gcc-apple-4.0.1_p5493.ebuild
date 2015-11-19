@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc-apple/gcc-apple-4.0.1_p5493.ebuild,v 1.5 2011/12/06 19:57:09 grobian Exp $
+# $Id$
 
 EAPI="3"
 
@@ -9,7 +9,7 @@ inherit eutils toolchain prefix
 GCC_VERS=${PV/_p*/}
 APPLE_VERS=${PV/*_p/}
 DESCRIPTION="Apple branch of the GNU Compiler Collection, Developer Tools 3.1.3"
-HOMEPAGE="http://gcc.gnu.org"
+HOMEPAGE="https://gcc.gnu.org"
 SRC_URI="http://www.opensource.apple.com/darwinsource/tarballs/other/gcc-${APPLE_VERS}.tar.gz"
 LICENSE="APSL-2 GPL-2"
 
@@ -140,7 +140,7 @@ src_configure() {
 	CFLAGS="-O2 -pipe"
 	CXXFLAGS=${CFLAGS}
 
-	# http://gcc.gnu.org/ml/gcc-patches/2006-11/msg00765.html
+	# https://gcc.gnu.org/ml/gcc-patches/2006-11/msg00765.html
 	# (won't hurt if already 64-bits, but is essential when coming from a
 	# multilib compiler -- the default)
 	[[ ${CTARGET} == powerpc64-* || ${CTARGET} == x86_64-* ]] && \

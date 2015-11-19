@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/nevow/nevow-0.11.1.ebuild,v 1.7 2015/04/08 08:04:57 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit twisted-r1
 
 DESCRIPTION="A web templating framework that provides LivePage, an automatic AJAX toolkit"
-HOMEPAGE="http://divmod.org/trac/wiki/DivmodNevow http://pypi.python.org/pypi/Nevow"
+HOMEPAGE="http://divmod.org/trac/wiki/DivmodNevow https://pypi.python.org/pypi/Nevow"
 SRC_URI="mirror://pypi/${TWISTED_PN:0:1}/${TWISTED_PN}/${TWISTED_P}.tar.gz"
 
 LICENSE="MIT"

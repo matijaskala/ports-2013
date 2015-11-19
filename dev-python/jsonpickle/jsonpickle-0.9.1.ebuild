@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/jsonpickle/jsonpickle-0.9.1.ebuild,v 1.2 2015/03/28 06:57:53 maekke Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 inherit distutils-r1
 
 DESCRIPTION="Python library for serializing any arbitrary object graph into JSON"
-HOMEPAGE="https://github.com/jsonpickle/jsonpickle/ http://pypi.python.org/pypi/jsonpickle"
+HOMEPAGE="https://github.com/jsonpickle/jsonpickle/ https://pypi.python.org/pypi/jsonpickle"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/lyskom-elisp-client/lyskom-elisp-client-0.48_p20131231.ebuild,v 1.5 2014/05/14 14:20:23 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit readme.gentoo elisp
 DESCRIPTION="Elisp client for the LysKOM conference system"
 HOMEPAGE="http://www.lysator.liu.se/lyskom/klienter/emacslisp/index.en.html"
 # snapshot of git://git.lysator.liu.se/${PN}/${PN}.git
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2+"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/net-ssh-multi/net-ssh-multi-1.2.1.ebuild,v 1.2 2015/04/30 05:37:49 graaff Exp $
+# $Id$
 
 EAPI=5
 USE_RUBY="ruby19 ruby20 ruby21 ruby22"
@@ -13,7 +13,7 @@ RUBY_FAKEGEM_TASK_TEST="none"
 inherit ruby-fakegem
 
 DESCRIPTION="A library for controlling multiple Net::SSH connections via a single interface"
-HOMEPAGE="http://net-ssh.github.com/net-ssh-multi"
+HOMEPAGE="https://net-ssh.github.com/net-ssh-multi"
 SRC_URI="https://github.com/net-ssh/${PN}/archive/v${PV}.tar.gz -> ${P}-git.tgz"
 
 LICENSE="GPL-2"

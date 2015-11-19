@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-misc/awstats/awstats-7.1_p20121017.ebuild,v 1.6 2014/08/10 20:10:20 slyfox Exp $
+# $Id$
 
 EAPI=4
 
@@ -12,7 +12,7 @@ DESCRIPTION="AWStats is short for Advanced Web Statistics"
 HOMEPAGE="http://www.awstats.org/"
 
 if [ ${MY_P} != ${P} ]; then
-	SRC_URI="http://dev.gentoo.org/~flameeyes/awstats/${P}.tar.gz"
+	SRC_URI="https://dev.gentoo.org/~flameeyes/awstats/${P}.tar.gz"
 	# The following SRC_URI is useful only when fetching for the first time
 	# after bump; upstream does not bump the version when they change it, so
 	# we rename it to include the date and upload to our mirrors instead.

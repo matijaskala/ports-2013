@@ -1,14 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/fuse-zip/fuse-zip-0.3.0.ebuild,v 1.1 2013/08/13 18:40:16 hwoarang Exp $
+# $Id$
 
 EAPI=5
 
 inherit toolchain-funcs eutils
 
 DESCRIPTION="FUSE file system to navigate, extract, create and modify ZIP archives"
-HOMEPAGE="http://code.google.com/p/fuse-zip/"
-SRC_URI="http://fuse-zip.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://bitbucket.org/agalanin/fuse-zip"
+SRC_URI="https://fuse-zip.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"

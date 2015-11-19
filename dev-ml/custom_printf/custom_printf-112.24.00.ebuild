@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ml/custom_printf/custom_printf-112.24.00.ebuild,v 1.1 2015/03/18 17:11:51 aballier Exp $
+# $Id$
 
 EAPI="5"
 
 inherit oasis
 
 DESCRIPTION="Syntax extension for printf format strings"
-HOMEPAGE="http://bitbucket.org/yminsky/ocaml-core/wiki/Home"
+HOMEPAGE="https://bitbucket.org/yminsky/ocaml-core/wiki/Home"
 SRC_URI="http://ocaml.janestreet.com/ocaml-core/${PV%.*}/files/${P%.*}.tar.gz"
 
 LICENSE="Apache-2.0"

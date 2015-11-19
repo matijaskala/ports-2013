@@ -1,13 +1,13 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pypy-bin/pypy-bin-2.4.0.ebuild,v 1.8 2015/01/28 19:46:12 mgorny Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 pypy )
 inherit eutils multilib pax-utils python-any-r1 versionator
 
-BINHOST="http://dev.gentoo.org/~mgorny/dist/pypy-bin/${PV}"
+BINHOST="https://dev.gentoo.org/~mgorny/dist/pypy-bin/${PV}"
 
 DESCRIPTION="A fast, compliant alternative implementation of the Python language (binary package)"
 HOMEPAGE="http://pypy.org/"
@@ -56,9 +56,9 @@ RDEPEND="
 	app-arch/bzip2:0
 	dev-libs/expat:0
 	dev-libs/libffi:0
-	dev-libs/openssl:0
+	dev-libs/openssl:0[-bindist]
 	sys-libs/glibc:2.2
-	sys-libs/ncurses:5
+	=sys-libs/ncurses-5*:0
 	sys-libs/zlib:0
 	gdbm? ( sys-libs/gdbm:0= )
 	sqlite? ( dev-db/sqlite:3= )
@@ -76,7 +76,9 @@ PDEPEND="app-admin/python-updater"
 S=${WORKDIR}/pypy-${PV}-src
 
 pkg_setup() {
-	use doc && python-any-r1_pkg_setup
+	if [[ ${MERGE_TYPE} != binary ]]; then
+		use doc && python-any-r1_pkg_setup
+	fi
 }
 
 src_prepare() {
@@ -144,11 +146,14 @@ src_install() {
 
 	einfo "Generating caches and byte-compiling ..."
 
-	python_export pypy EPYTHON PYTHON PYTHON_SITEDIR
-	local PYTHON=${ED%/}${INSDESTTREE}/pypy-c
+	local -x PYTHON=${ED%/}${INSDESTTREE}/pypy-c
 	local -x LD_LIBRARY_PATH="${ED%/}${INSDESTTREE}"
+	# we can't use eclass function since PyPy is dumb and always gives
+	# paths relative to the interpreter
+	local PYTHON_SITEDIR=${EPREFIX}/usr/$(get_libdir)/pypy/site-packages
+	python_export pypy EPYTHON
 
-	echo "EPYTHON='${EPYTHON}'" > epython.py
+	echo "EPYTHON='${EPYTHON}'" > epython.py || die
 	python_domodule epython.py
 
 	# Generate Grammar and PatternGrammar pickles.

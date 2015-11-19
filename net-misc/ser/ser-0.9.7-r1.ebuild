@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/ser/ser-0.9.7-r1.ebuild,v 1.4 2015/05/16 11:04:51 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -94,7 +94,7 @@ src_prepare() {
 		MY_A=$(eval echo ${x}-\${$(echo ${x} | tr "[:lower:]" "[:upper:]")_PV}-${PN}-${MODULES_PV})
 		MY_PATCH_A="${P}-extmod-${x}"
 		mkdir -p "${S}"/modules/${x} || die
-		cd "${S}"/modules/${x} || die
+		cd "${S}"/modules/${x} || die
 		unpack ${MY_A}.tar.gz
 		# fix makefiles
 		if [[ -f "${FILESDIR}"/${MY_A}.diff ]]; then
@@ -154,7 +154,7 @@ src_install () {
 
 	chown -R root:ser "${D}"/etc/ser || die
 	chmod 750 "${D}"/etc/ser || die
-	chmod 640 "${D}"/etc/ser/* || die
+	chmod 640 "${D}"/etc/ser/* || die
 
 	# fix manpages
 	sed -i	-e "s:^.B /ser-${PV}AUTHORS:.B /usr/share/doc/${PF}/AUTHORS:" \

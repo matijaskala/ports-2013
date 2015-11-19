@@ -1,8 +1,8 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/python-r1.eclass,v 1.90 2015/03/21 14:55:33 mgorny Exp $
+# $Id$
 
-# @ECLASS: python-r1
+# @ECLASS: python-r1.eclass
 # @MAINTAINER:
 # Python team <python@gentoo.org>
 # @AUTHOR:
@@ -26,8 +26,8 @@
 # in the packages using python-r1, and there is no need ever to inherit
 # both.
 #
-# For more information, please see the python-r1 Developer's Guide:
-# http://www.gentoo.org/proj/en/Python/python-r1/dev-guide.xml
+# For more information, please see the wiki:
+# https://wiki.gentoo.org/wiki/Project:Python/python-r1
 
 case "${EAPI:-0}" in
 	0|1|2|3)
@@ -74,15 +74,18 @@ inherit multibuild python-utils-r1
 #
 # Example:
 # @CODE
-# PYTHON_COMPAT=( python2_5 python2_6 python2_7 )
+# PYTHON_COMPAT=( python2_7 python3_3 python3_4} )
 # @CODE
 #
 # Please note that you can also use bash brace expansion if you like:
 # @CODE
-# PYTHON_COMPAT=( python{2_5,2_6,2_7} )
+# PYTHON_COMPAT=( python2_7 python3_{3,4} )
 # @CODE
 if ! declare -p PYTHON_COMPAT &>/dev/null; then
 	die 'PYTHON_COMPAT not declared.'
+fi
+if [[ $(declare -p PYTHON_COMPAT) != "declare -a"* ]]; then
+	die 'PYTHON_COMPAT must be an array.'
 fi
 
 # @ECLASS-VARIABLE: PYTHON_COMPAT_OVERRIDE
@@ -139,8 +142,8 @@ fi
 # Example value:
 # @CODE
 # dev-lang/python-exec:=
-# python_targets_python2_6? ( dev-lang/python:2.6[gdbm] )
 # python_targets_python2_7? ( dev-lang/python:2.7[gdbm] )
+# python_targets_pypy? ( virtual/pypy[gdbm] )
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_USEDEP
@@ -160,7 +163,7 @@ fi
 #
 # Example value:
 # @CODE
-# python_targets_python2_6(-)?,python_targets_python2_7(-)?
+# python_targets_python2_7(-)?,python_targets_python3_4(-)?
 # @CODE
 
 # @ECLASS-VARIABLE: PYTHON_REQUIRED_USE
@@ -178,7 +181,7 @@ fi
 #
 # Example value:
 # @CODE
-# || ( python_targets_python2_6 python_targets_python2_7 )
+# || ( python_targets_python2_7 python_targets_python3_4 )
 # @CODE
 
 _python_set_globals() {
@@ -355,17 +358,17 @@ python_gen_useflags() {
 #
 # Example:
 # @CODE
-# PYTHON_COMPAT=( python{2_5,2_6,2_7} )
+# PYTHON_COMPAT=( python{2_7,3_{3,4}} pypy )
 # RDEPEND="$(python_gen_cond_dep \
-#   'dev-python/unittest2[${PYTHON_USEDEP}]' python{2_5,2_6})"
+#   'dev-python/unittest2[${PYTHON_USEDEP}]' python2_7 pypy )"
 # @CODE
 #
 # It will cause the variable to look like:
 # @CODE
-# RDEPEND="python_targets_python2_5? (
-#     dev-python/unittest2[python_targets_python2_5?] )
-#	python_targets_python2_6? (
-#     dev-python/unittest2[python_targets_python2_6?] )"
+# RDEPEND="python_targets_python2_7? (
+#     dev-python/unittest2[python_targets_python2_7?] )
+#	python_targets_pypy? (
+#     dev-python/unittest2[python_targets_pypy?] )"
 # @CODE
 python_gen_cond_dep() {
 	debug-print-function ${FUNCNAME} "${@}"
@@ -410,7 +413,7 @@ python_gen_cond_dep() {
 #
 # Example value:
 # @CODE
-# ${WORKDIR}/foo-1.3-python2_6
+# ${WORKDIR}/foo-1.3-python2_7
 # @CODE
 
 # @FUNCTION: python_copy_sources
@@ -428,220 +431,6 @@ python_copy_sources() {
 	_python_obtain_impls
 
 	multibuild_copy_sources
-}
-
-# @FUNCTION: _python_check_USE_PYTHON
-# @INTERNAL
-# @DESCRIPTION:
-# Check whether USE_PYTHON and PYTHON_TARGETS are in sync. Output
-# warnings if they are not.
-_python_check_USE_PYTHON() {
-	debug-print-function ${FUNCNAME} "${@}"
-
-	if [[ ! ${_PYTHON_USE_PYTHON_CHECKED} ]]; then
-		_PYTHON_USE_PYTHON_CHECKED=1
-
-		# python-exec has profile-forced flags.
-		if [[ ${CATEGORY}/${PN} == dev-lang/python-exec ]]; then
-			return
-		fi
-
-		_try_eselect() {
-			# The eselect solution will work only with one py2 & py3.
-
-			local impl py2 py3 dis_py2 dis_py3
-			for impl in "${PYTHON_COMPAT[@]}"; do
-				_python_impl_supported "${impl}" || continue
-
-				if use "python_targets_${impl}"; then
-					case "${impl}" in
-						python2_*)
-							if [[ ${py2+1} ]]; then
-								debug-print "${FUNCNAME}: -> more than one py2: ${py2} ${impl}"
-								return 1
-							fi
-							py2=${impl/_/.}
-							;;
-						python3_4)
-							debug-print "${FUNCNAME}: python3.4 found, not using eselect"
-							return 1
-							;;
-						python3_*)
-							if [[ ${py3+1} ]]; then
-								debug-print "${FUNCNAME}: -> more than one py3: ${py3} ${impl}"
-								return 1
-							fi
-							py3=${impl/_/.}
-							;;
-						*)
-							return 1
-							;;
-					esac
-				else
-					case "${impl}" in
-						python2_*)
-							dis_py2=1
-							;;
-						python3_*)
-							dis_py3=1
-							;;
-					esac
-				fi
-			done
-
-			# The eselect solution won't work if the disabled Python version
-			# is installed.
-			if [[ ! ${py2+1} && ${dis_py2} ]]; then
-				debug-print "${FUNCNAME}: -> all py2 versions disabled"
-				if ! has python2_7 "${PYTHON_COMPAT[@]}"; then
-					debug-print "${FUNCNAME}: ---> package does not support 2.7"
-					return 0
-				fi
-				if has_version '=dev-lang/python-2*'; then
-					debug-print "${FUNCNAME}: ---> but =python-2* installed!"
-					return 1
-				fi
-			fi
-			if [[ ! ${py3+1} && ${dis_py3} ]]; then
-				debug-print "${FUNCNAME}: -> all py3 versions disabled"
-				if ! has python3_2 "${PYTHON_COMPAT[@]}"; then
-					debug-print "${FUNCNAME}: ---> package does not support 3.2"
-					return 0
-				fi
-				if has_version '=dev-lang/python-3*'; then
-					debug-print "${FUNCNAME}: ---> but =python-3* installed!"
-					return 1
-				fi
-			fi
-
-			local warned
-
-			# Now check whether the correct implementations are active.
-			if [[ ${py2+1} ]]; then
-				local sel_py2=$(eselect python show --python2)
-
-				debug-print "${FUNCNAME}: -> py2 built: ${py2}, active: ${sel_py2}"
-				if [[ ${py2} != ${sel_py2} ]]; then
-					ewarn "Building package for ${py2} only while ${sel_py2} is active."
-					ewarn "Please consider switching the active Python 2 interpreter:"
-					ewarn
-					ewarn "	eselect python set --python2 ${py2}"
-					warned=1
-				fi
-			fi
-
-
-			if [[ ${py3+1} ]]; then
-				local sel_py3=$(eselect python show --python3)
-
-				debug-print "${FUNCNAME}: -> py3 built: ${py3}, active: ${sel_py3}"
-				if [[ ${py3} != ${sel_py3} ]]; then
-					[[ ${warned} ]] && ewarn
-					ewarn "Building package for ${py3} only while ${sel_py3} is active."
-					ewarn "Please consider switching the active Python 3 interpreter:"
-					ewarn
-					ewarn "	eselect python set --python3 ${py3}"
-					warned=1
-				fi
-			fi
-
-			if [[ ${warned} ]]; then
-				ewarn
-				ewarn "Please note that after switching the active Python interpreter,"
-				ewarn "you may need to run 'python-updater' to rebuild affected packages."
-				ewarn
-				ewarn "For more information on PYTHON_TARGETS and python.eclass"
-				ewarn "compatibility, please see the relevant Wiki article [1]."
-				ewarn
-				ewarn "[1] https://wiki.gentoo.org/wiki/Project:Python/PYTHON_TARGETS"
-			fi
-		}
-
-		# If user has no USE_PYTHON, try to avoid it.
-		if [[ ! ${USE_PYTHON} ]]; then
-			debug-print "${FUNCNAME}: trying eselect solution ..."
-			_try_eselect && return
-		fi
-
-		debug-print "${FUNCNAME}: trying USE_PYTHON solution ..."
-		debug-print "${FUNCNAME}: -> USE_PYTHON=${USE_PYTHON}"
-
-		local impl old=${USE_PYTHON} new=() removed=()
-
-		for impl in "${PYTHON_COMPAT[@]}"; do
-			_python_impl_supported "${impl}" || continue
-
-			local abi
-			case "${impl}" in
-				pypy|pypy3|python3_4)
-					# unsupported in python.eclass
-					continue
-					;;
-				python*)
-					abi=${impl#python}
-					;;
-				jython*)
-					abi=${impl#jython}-jython
-					;;
-				*)
-					die "Unexpected Python implementation: ${impl}"
-					;;
-			esac
-			abi=${abi/_/.}
-
-			has "${abi}" ${USE_PYTHON}
-			local has_abi=${?}
-			use "python_targets_${impl}"
-			local has_impl=${?}
-
-			# 0 = has, 1 = does not have
-			if [[ ${has_abi} == 0 && ${has_impl} == 1 ]]; then
-				debug-print "${FUNCNAME}: ---> remove ${abi}"
-				# remove from USE_PYTHON
-				old=${old/${abi}/}
-				removed+=( ${abi} )
-			elif [[ ${has_abi} == 1 && ${has_impl} == 0 ]]; then
-				debug-print "${FUNCNAME}: ---> add ${abi}"
-				# add to USE_PYTHON
-				new+=( ${abi} )
-			fi
-		done
-
-		if [[ ${removed[@]} || ${new[@]} ]]; then
-			old=( ${old} )
-
-			debug-print "${FUNCNAME}: -> old: ${old[@]}"
-			debug-print "${FUNCNAME}: -> new: ${new[@]}"
-			debug-print "${FUNCNAME}: -> removed: ${removed[@]}"
-
-			if [[ ${USE_PYTHON} ]]; then
-				ewarn "It seems that your USE_PYTHON setting lists different Python"
-				ewarn "implementations than your PYTHON_TARGETS variable. Please consider"
-				ewarn "using the following value instead:"
-				ewarn
-				ewarn "	USE_PYTHON='\033[35m${old[@]}${new[@]+ \033[1m${new[@]}}\033[0m'"
-
-				if [[ ${removed[@]} ]]; then
-					ewarn
-					ewarn "(removed \033[31m${removed[@]}\033[0m)"
-				fi
-			else
-				ewarn "It seems that you need to set USE_PYTHON to make sure that legacy"
-				ewarn "packages will be built with respect to PYTHON_TARGETS correctly:"
-				ewarn
-				ewarn "	USE_PYTHON='\033[35;1m${new[@]}\033[0m'"
-			fi
-
-			ewarn
-			ewarn "Please note that after changing the USE_PYTHON variable, you may need"
-			ewarn "to run 'python-updater' to rebuild affected packages."
-			ewarn
-			ewarn "For more information on PYTHON_TARGETS and python.eclass"
-			ewarn "compatibility, please see the relevant Wiki article [1]."
-			ewarn
-			ewarn "[1] https://wiki.gentoo.org/wiki/Project:Python/PYTHON_TARGETS"
-		fi
-	fi
 }
 
 # @FUNCTION: _python_obtain_impls
@@ -665,7 +454,6 @@ _python_obtain_impls() {
 	fi
 
 	_python_validate_useflags
-	_python_check_USE_PYTHON
 
 	MULTIBUILD_VARIANTS=()
 

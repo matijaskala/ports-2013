@@ -1,13 +1,18 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/apinger/apinger-0.4.1.ebuild,v 1.1 2015/01/19 19:26:14 jer Exp $
+# $Id$
 
 EAPI=5
 inherit autotools
 
+# Switch to ^^ when we switch to EAPI=6.
+#MY_PN="${PN^^}"
+MY_PN="APINGER"
+MY_P="${MY_PN}_${PV//./_}"
+
 DESCRIPTION="Alarm Pinger"
 HOMEPAGE="https://github.com/Jajcus/apinger/"
-SRC_URI="${HOMEPAGE}archive/${PN^^}_${PV//./_}.tar.gz -> ${P}.tar.gz"
+SRC_URI="${HOMEPAGE}archive/${MY_P}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -18,7 +23,7 @@ DEPEND="
 	virtual/yacc
 "
 
-S=${WORKDIR}/${PN}-${PN^^}_${PV//./_}
+S="${WORKDIR}/${PN}-${MY_P}"
 
 DOCS=( AUTHORS ChangeLog NEWS README TODO )
 

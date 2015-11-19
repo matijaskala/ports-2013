@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/htmlparser/htmlparser-1.4-r1.ebuild,v 1.1 2014/07/30 18:35:05 sera Exp $
+# $Id$
 
 EAPI=5
 
@@ -17,29 +17,27 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-COMMON_DEP="
+CDEPEND="
 	dev-java/icu4j:52
 	dev-java/jchardet:0
 	dev-java/xom:0"
-RDEPEND="${COMMON_DEP}
-	>=virtual/jre-1.5"
-DEPEND="${COMMON_DEP}
-	>=virtual/jdk-1.5
+RDEPEND="${CDEPEND}
+	>=virtual/jre-1.6"
+DEPEND="${CDEPEND}
+	>=virtual/jdk-1.6
 	app-arch/unzip"
 
 java_prepare() {
-	find "${WORKDIR}" -name '*.jar' -delete || die
+	java-pkg_clean
 	mkdir -p build lib || die
 	cp "${FILESDIR}/build.xml" build.xml || die "cp failed"
 }
 
 JAVA_ANT_REWRITE_CLASSPATH="yes"
-
 EANT_GENTOO_CLASSPATH="icu4j-52,xom,jchardet"
 
 src_install() {
-	java-pkg_dojar htmlparser.jar
-
+	java-pkg_dojar "${PN}.jar"
 	use source && java-pkg_dosrc src/*
 	use doc && java-pkg_dojavadoc docs
 }

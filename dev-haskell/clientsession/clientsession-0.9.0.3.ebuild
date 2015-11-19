@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/clientsession/clientsession-0.9.0.3.ebuild,v 1.2 2014/07/25 09:16:39 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour test-suite"
 inherit haskell-cabal
 
 DESCRIPTION="Securely store session data in a client-side cookie"
-HOMEPAGE="http://github.com/yesodweb/clientsession/tree/master"
+HOMEPAGE="https://github.com/yesodweb/clientsession/tree/master"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

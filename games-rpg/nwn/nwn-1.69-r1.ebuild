@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-rpg/nwn/nwn-1.69-r1.ebuild,v 1.9 2015/06/14 17:08:19 ulm Exp $
+# $Id$
 
 EAPI=5
 inherit eutils games
@@ -10,7 +10,7 @@ PATCH_URL_BASE=http://files.bioware.com/neverwinternights/updates/linux/${MY_PV}
 
 DESCRIPTION="role-playing game set in a huge medieval fantasy world of Dungeons and Dragons"
 HOMEPAGE="http://nwn.bioware.com/downloads/linuxclient.html"
-SRC_URI="http://dev.gentoo.org/~calchan/distfiles/nwn-libs-1.tar.bz2
+SRC_URI="https://dev.gentoo.org/~calchan/distfiles/nwn-libs-1.tar.bz2
 	!sou? ( !hou? ( ${PATCH_URL_BASE}orig.tar.gz ) )
 	sou? ( !hou? ( ${PATCH_URL_BASE}xp1.tar.gz ) )
 	hou? ( ${PATCH_URL_BASE}xp2.tar.gz )"

@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-puzzle/shaaft/shaaft-0.5.0.ebuild,v 1.18 2015/02/18 22:57:46 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils games
 
 DESCRIPTION="A falling block game similar to Blockout"
-HOMEPAGE="http://packages.gentoo.org/package/games-puzzle/shaaft"
+HOMEPAGE="https://packages.gentoo.org/package/games-puzzle/shaaft"
 SRC_URI="mirror://sourceforge/criticalmass/${P/s/S}.tar.bz2"
 
 LICENSE="GPL-2"

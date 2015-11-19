@@ -1,25 +1,30 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-emulation/vbam/vbam-9999.ebuild,v 1.10 2015/06/13 19:29:36 mr_bones_ Exp $
+# $Id$
 
 EAPI=5
 WX_GTK_VER="3.0"
-inherit cmake-utils wxwidgets subversion gnome2-utils fdo-mime games
+inherit cmake-utils wxwidgets gnome2-utils fdo-mime games
 
-ESVN_REPO_URI="https://vbam.svn.sourceforge.net/svnroot/vbam/trunk"
+if [[ ${PV} == 9999 ]]; then
+	ESVN_REPO_URI="https://svn.code.sf.net/p/vbam/code/trunk"
+	inherit subversion
+else
+	SRC_URI="https://dev.gentoo.org/~radhermit/distfiles/${P}.tar.xz"
+	KEYWORDS="~amd64 ~x86"
+fi
 
 DESCRIPTION="Game Boy, GBC, and GBA emulator forked from VisualBoyAdvance"
-HOMEPAGE="http://vba-m.ngemu.com"
+HOMEPAGE="http://sourceforge.net/projects/vbam/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
 IUSE="cairo ffmpeg gtk link lirc nls openal +sdl wxwidgets"
 REQUIRED_USE="|| ( sdl gtk wxwidgets )"
 
 RDEPEND=">=media-libs/libpng-1.4:0=
 	media-libs/libsdl[joystick]
-	link? ( <media-libs/libsfml-2.0 )
+	link? ( >=media-libs/libsfml-2.0 )
 	sys-libs/zlib
 	virtual/glu
 	virtual/opengl
@@ -40,12 +45,9 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )
 	virtual/pkgconfig"
 
-src_unpack() {
-	subversion_src_unpack
-}
-
 src_prepare() {
-	subversion_src_prepare
+	[[ ${PV} == 9999 ]] && subversion_src_prepare
+
 	# fix issue with zlib-1.2.5.1 macros (bug #383179)
 	sed -i '1i#define OF(x) x' src/common/memgzio.c || die
 
@@ -93,7 +95,8 @@ src_install() {
 }
 
 pkg_preinst() {
-	subversion_pkg_preinst
+	[[ ${PV} == 9999 ]] && subversion_pkg_preinst
+
 	games_pkg_preinst
 	if use gtk || use wxwidgets ; then
 		gnome2_icon_savelist

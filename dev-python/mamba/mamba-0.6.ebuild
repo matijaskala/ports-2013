@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/mamba/mamba-0.6.ebuild,v 1.1 2014/10/16 03:49:10 alunduil Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 python3_3 )
@@ -44,8 +44,6 @@ python_prepare_all() {
 }
 
 python_test() {
-	local DISTUTILS_NO_PARALLEL_BUILD=TRUE
-
 	rm -f "${HOME}"/.pydistutils.cfg || die "Couldn't remove pydistutils.cfg"
 
 	distutils_install_for_testing

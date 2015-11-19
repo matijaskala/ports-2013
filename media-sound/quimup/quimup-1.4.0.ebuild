@@ -1,9 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/quimup/quimup-1.4.0.ebuild,v 1.1 2015/04/12 18:47:01 angelos Exp $
+# $Id$
 
 EAPI=5
-inherit qmake-utils
+inherit eutils qmake-utils
 
 MY_P=${PN}_${PV}
 
@@ -13,7 +13,7 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_P}_src.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE=""
 
 RDEPEND="dev-qt/qtcore:5
@@ -28,6 +28,10 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${PN} ${PV}"
 
 DOCS=( changelog FAQ.txt README )
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-qdatastream.patch
+}
 
 src_configure() {
 	eqmake5

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pycurl/pycurl-7.19.3.1-r2.ebuild,v 1.9 2015/03/07 08:19:18 pacho Exp $
+# $Id$
 EAPI=5
 
 # The selftests fail with pypy, and urlgrabber segfaults for me.
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 inherit distutils-r1
 
 DESCRIPTION="python binding for curl/libcurl"
-HOMEPAGE="https://github.com/pycurl/pycurl http://pypi.python.org/pypi/pycurl"
+HOMEPAGE="https://github.com/pycurl/pycurl https://pypi.python.org/pypi/pycurl"
 SRC_URI="http://pycurl.sourceforge.net/download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
@@ -51,12 +51,6 @@ src_configure() {
 python_compile() {
 	python_is_python3 || local -x CFLAGS="${CFLAGS} -fno-strict-aliasing"
 	distutils-r1_python_compile
-}
-
-src_test() {
-	# suite shatters without this
-	local DISTUTILS_NO_PARALLEL_BUILD=1
-	distutils-r1_src_test
 }
 
 python_test() {

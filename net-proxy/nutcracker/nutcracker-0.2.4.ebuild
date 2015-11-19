@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-proxy/nutcracker/nutcracker-0.2.4.ebuild,v 1.1 2013/10/31 20:04:54 neurogeek Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit autotools eutils
 DESCRIPTION="A fast, light-weight proxy for Memcached and Redis.
 (Twitter's Twemproxy)"
 HOMEPAGE="https://github.com/twitter/twemproxy"
-SRC_URI="http://twemproxy.googlecode.com/files/${P}.tar.gz"
+SRC_URI="https://twemproxy.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

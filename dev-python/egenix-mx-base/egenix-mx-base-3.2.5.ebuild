@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/egenix-mx-base/egenix-mx-base-3.2.5.ebuild,v 1.14 2015/06/07 09:18:50 maekke Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="eGenix utils for Python"
-HOMEPAGE="http://www.egenix.com/products/python/mxBase http://pypi.python.org/pypi/egenix-mx-base"
+HOMEPAGE="http://www.egenix.com/products/python/mxBase https://pypi.python.org/pypi/egenix-mx-base"
 SRC_URI="http://downloads.egenix.com/python/${P}.tar.gz"
 
 LICENSE="eGenixPublic-1.1"
@@ -19,7 +19,6 @@ IUSE=""
 # distutils.command.config writes to CWD, bug #450516
 # mxSetup.py is broken with --build-lib
 #DISTUTILS_IN_SOURCE_BUILD=1
-DISTUTILS_NO_PARALLEL_BUILD=1
 
 python_prepare_all() {
 	# Don't install documentation in site-packages directories.

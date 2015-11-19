@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/smooth-tasks/smooth-tasks-0_p20120130.ebuild,v 1.3 2014/03/21 19:07:46 johu Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit kde4-base
 
 DESCRIPTION="Alternate taskbar KDE plasmoid, similar to Windows 7"
 HOMEPAGE="https://bitbucket.org/flupp/smooth-tasks-fork"
-SRC_URI="http://dev.gentoo.org/~johu/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~johu/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="4"

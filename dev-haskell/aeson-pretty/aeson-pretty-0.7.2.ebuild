@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/aeson-pretty/aeson-pretty-0.7.2.ebuild,v 1.1 2014/12/14 04:42:37 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="bin lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="JSON pretty-printing library and command-line tool"
-HOMEPAGE="http://github.com/informatikr/aeson-pretty"
+HOMEPAGE="https://github.com/informatikr/aeson-pretty"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

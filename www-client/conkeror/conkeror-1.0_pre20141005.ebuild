@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/conkeror/conkeror-1.0_pre20141005.ebuild,v 1.1 2014/10/11 11:42:04 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,8 +10,8 @@ DESCRIPTION="A Mozilla-based web browser whose design is inspired by GNU Emacs"
 HOMEPAGE="http://conkeror.org/"
 # snapshot from http://repo.or.cz/w/conkeror.git
 # conkeror.png is derived from http://commons.wikimedia.org/wiki/File:Conker.jpg
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.tar.gz
-	http://dev.gentoo.org/~ulm/distfiles/${PN}.png"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.tar.gz
+	https://dev.gentoo.org/~ulm/distfiles/${PN}.png"
 
 # CC-BY-SA-3.0 for conkeror.png
 LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 ) CC-BY-SA-3.0"

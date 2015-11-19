@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/elinks/elinks-9999.ebuild,v 1.3 2015/04/08 18:30:30 mgorny Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://repo.or.cz/elinks.git"
 MY_P="${P/_/}"
 DESCRIPTION="Advanced and well-established text-mode web browser"
 HOMEPAGE="http://elinks.or.cz/"
-SRC_URI="http://dev.gentoo.org/~spock/portage/distfiles/elinks-0.10.4.conf.bz2"
+SRC_URI="https://dev.gentoo.org/~spock/portage/distfiles/elinks-0.10.4.conf.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,15 +24,15 @@ RESTRICT="test"
 DEPEND="dev-libs/boehm-gc
 	>=dev-libs/expat-1.95.4
 	bzip2? ( >=app-arch/bzip2-1.0.2 )
-	ssl? ( >=dev-libs/openssl-0.9.6g )
+	ssl? ( >=dev-libs/openssl-0.9.6g:0= )
 	X? ( x11-libs/libX11 x11-libs/libXt )
 	zlib? ( >=sys-libs/zlib-1.1.4 )
-	lua? ( >=dev-lang/lua-5 )
-	gpm? ( >=sys-libs/ncurses-5.2 >=sys-libs/gpm-1.20.0-r5 )
+	lua? ( >=dev-lang/lua-5:0= )
+	gpm? ( >=sys-libs/ncurses-5.2:0= >=sys-libs/gpm-1.20.0-r5 )
 	guile? ( >=dev-scheme/guile-1.6.4-r1[deprecated,discouraged] )
 	idn? ( net-dns/libidn )
 	perl? ( dev-lang/perl:= )
-	ruby? ( dev-lang/ruby dev-ruby/rubygems )
+	ruby? ( dev-lang/ruby:* dev-ruby/rubygems:* )
 	samba? ( net-fs/samba )
 	javascript? ( >=dev-lang/spidermonkey-1.8.5:0= )"
 RDEPEND="${DEPEND}"

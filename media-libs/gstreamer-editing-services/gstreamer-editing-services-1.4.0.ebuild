@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gstreamer-editing-services/gstreamer-editing-services-1.4.0.ebuild,v 1.4 2015/03/14 18:48:50 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -13,7 +13,7 @@ SRC_URI="http://gstreamer.freedesktop.org/src/${PN}/${P}.tar.xz"
 
 LICENSE="LGPL-2+"
 SLOT="1.0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 ~x86"
 IUSE="+introspection"
 
 # FIXME: There is something odd with pygobject check for >=4.22,
@@ -47,7 +47,7 @@ src_configure() {
 		--disable-examples \
 		--without-gtk \
 	        --with-package-name="GStreamer editing services ebuild for Gentoo" \
-        	--with-package-origin="http://packages.gentoo.org/package/media-libs/gstreamer-editing-services"
+        	--with-package-origin="https://packages.gentoo.org/package/media-libs/gstreamer-editing-services"
 }
 
 src_compile() {

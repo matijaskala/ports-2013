@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/lxqt-base/lxqt-session/lxqt-session-0.8.0.ebuild,v 1.3 2015/01/30 16:32:20 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -21,7 +21,6 @@ LICENSE="GPL-2 LGPL-2.1+"
 SLOT="0"
 
 CDEPEND="
-	dev-qt/linguist-tools:5
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -32,6 +31,7 @@ CDEPEND="
 	>=dev-libs/libqtxdg-1.0.0
 	x11-libs/libX11"
 DEPEND="${CDEPEND}
+	dev-qt/linguist-tools:5
 	dev-util/intltool
 	sys-devel/gettext
 	virtual/pkgconfig"

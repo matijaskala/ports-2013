@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/gucharmap/gucharmap-3.14.2.ebuild,v 1.6 2015/06/07 10:37:37 maekke Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -10,7 +10,7 @@ VALA_USE_DEPEND="vapigen"
 inherit gnome2 vala
 
 DESCRIPTION="Unicode character map viewer and library"
-HOMEPAGE="http://live.gnome.org/Gucharmap"
+HOMEPAGE="https://live.gnome.org/Gucharmap"
 
 LICENSE="GPL-3"
 SLOT="2.90"

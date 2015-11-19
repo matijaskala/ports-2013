@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/amd/amd-2.3.1.ebuild,v 1.10 2015/05/13 05:58:22 jmorgan Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit autotools-utils fortran-2
 
 DESCRIPTION="Library to order a sparse matrix prior to Cholesky factorization"
 HOMEPAGE="http://www.cise.ufl.edu/research/sparse/amd"
-SRC_URI="http://dev.gentoo.org/~bicatali/distfiles/${P}.tar.bz2"
+SRC_URI="https://dev.gentoo.org/~bicatali/distfiles/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

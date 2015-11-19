@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libmp4v2/libmp4v2-1.9.1-r1.ebuild,v 1.4 2012/07/02 07:58:18 jdhore Exp $
+# $Id$
 
 # this ebuild is only for the libmp4v2.so.1 SONAME for ABI compat
 
@@ -8,8 +8,8 @@ EAPI=4
 inherit libtool multilib
 
 DESCRIPTION="Functions for accessing ISO-IEC:14496-1:2001 MPEG-4 standard"
-HOMEPAGE="http://code.google.com/p/mp4v2/"
-SRC_URI="http://mp4v2.googlecode.com/files/${P/lib}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/mp4v2/"
+SRC_URI="https://mp4v2.googlecode.com/files/${P/lib}.tar.bz2"
 
 LICENSE="MPL-1.1"
 SLOT="1"

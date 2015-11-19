@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-tv/wis-go7007/wis-go7007-0.9.8-r3.ebuild,v 1.5 2013/01/21 22:34:15 ssuominen Exp $
+# $Id$
 
 inherit eutils linux-mod udev
 
@@ -89,7 +89,7 @@ pkg_postinst() {
 	elog ""
 	elog "For more information on how to use the Plextor devices with Gentoo"
 	elog "you can follow this thread for tips and tricks:"
-	elog "http://forums.gentoo.org/viewtopic-t-306559-highlight-.html"
+	elog "https://forums.gentoo.org/viewtopic-t-306559-highlight-.html"
 	elog ""
 	elog "Also, the unofficial Gentoo wiki has a HOWTO page:"
 	elog "http://gentoo-wiki.com/HARDWARE_go7007"

@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-eselect/eselect-lapack/eselect-lapack-0.1.ebuild,v 1.1 2015/03/31 16:49:51 ulm Exp $
+# $Id$
 
 inherit eutils
 
 DESCRIPTION="LAPACK module for eselect"
-HOMEPAGE="http://www.gentoo.org/proj/en/eselect/"
+HOMEPAGE="https://www.gentoo.org/proj/en/eselect/"
 SRC_URI=""
 
 LICENSE="GPL-2"

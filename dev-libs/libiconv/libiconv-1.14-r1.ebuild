@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libiconv/libiconv-1.14-r1.ebuild,v 1.7 2014/05/24 09:47:39 hwoarang Exp $
+# $Id$
 
 EAPI="4"
 
 inherit libtool toolchain-funcs multilib-minimal
 
 DESCRIPTION="GNU charset conversion library for libc which doesn't implement it"
-HOMEPAGE="http://www.gnu.org/software/libiconv/"
+HOMEPAGE="https://www.gnu.org/software/libiconv/"
 SRC_URI="mirror://gnu/libiconv/${P}.tar.gz"
 
 LICENSE="GPL-3"

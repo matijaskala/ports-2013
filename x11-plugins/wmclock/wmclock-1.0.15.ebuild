@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmclock/wmclock-1.0.15.ebuild,v 1.1 2015/01/12 10:57:51 voyageur Exp $
+# $Id$
 
 EAPI=5
 inherit autotools
@@ -8,7 +8,7 @@ inherit autotools
 DESCRIPTION="a dockapp that displays time and date (same style as NEXTSTEP(tm) operating systems)"
 HOMEPAGE="http://windowmaker.org/dockapps/?name=wmclock"
 # Grab from http://windowmaker.org/dockapps/?download=${P}.tar.gz
-SRC_URI="http://dev.gentoo.org/~voyageur/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~voyageur/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

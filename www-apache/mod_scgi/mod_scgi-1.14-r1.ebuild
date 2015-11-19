@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apache/mod_scgi/mod_scgi-1.14-r1.ebuild,v 1.1 2015/05/09 12:00:20 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit apache-module eutils
 
 DESCRIPTION="Apache module for a replacement of the CGI protocol, similar to FastCGI"
-HOMEPAGE="http://python.ca/scgi/ http://pypi.python.org/pypi/scgi"
+HOMEPAGE="http://python.ca/scgi/ https://pypi.python.org/pypi/scgi"
 SRC_URI="http://python.ca/scgi/releases/scgi-${PV}.tar.gz"
 
 LICENSE="CNRI"

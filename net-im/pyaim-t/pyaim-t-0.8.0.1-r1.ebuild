@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/pyaim-t/pyaim-t-0.8.0.1-r1.ebuild,v 1.5 2015/04/08 18:03:12 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ inherit eutils python-single-r1
 
 MY_P="${P/pyaim-t/pyaimt}"
 DESCRIPTION="Python based jabber transport for AIM"
-HOMEPAGE="http://code.google.com/p/pyaimt/"
-SRC_URI="http://pyaimt.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/pyaimt/"
+SRC_URI="https://pyaimt.googlecode.com/files/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="GPL-2"
@@ -23,7 +23,7 @@ RDEPEND="${DEPEND}
 	dev-python/twisted-words[${PYTHON_USEDEP}]
 	dev-python/twisted-web[${PYTHON_USEDEP}]
 	webinterface? ( >=dev-python/nevow-0.4.1[${PYTHON_USEDEP}] )
-	virtual/python-imaging[${PYTHON_USEDEP}]"
+	dev-python/pillow[${PYTHON_USEDEP}]"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-python26-warnings.patch"

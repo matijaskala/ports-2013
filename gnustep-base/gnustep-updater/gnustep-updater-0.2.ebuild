@@ -1,12 +1,12 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnustep-base/gnustep-updater/gnustep-updater-0.2.ebuild,v 1.7 2012/12/20 13:07:08 ago Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="Helper tool to upgrade Gentoo GNUstep installations"
-HOMEPAGE="http://www.gentoo.org"
-SRC_URI="http://dev.gentoo.org/~voyageur/distfiles/${P}.tar.bz2"
+HOMEPAGE="https://www.gentoo.org"
+SRC_URI="https://dev.gentoo.org/~voyageur/distfiles/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

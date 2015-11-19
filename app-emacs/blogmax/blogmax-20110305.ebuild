@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/blogmax/blogmax-20110305.ebuild,v 1.2 2014/03/25 20:37:48 ulm Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit eutils readme.gentoo elisp
 DESCRIPTION="Blogging in Emacs"
 HOMEPAGE="http://billstclair.com/blogmax/index.html"
 # taken from http://billstclair.com/blogmax.zip
-SRC_URI="http://dev.gentoo.org/~ulm/distfiles/${P}.zip"
+SRC_URI="https://dev.gentoo.org/~ulm/distfiles/${P}.zip"
 
 LICENSE="GPL-1+"
 SLOT="0"

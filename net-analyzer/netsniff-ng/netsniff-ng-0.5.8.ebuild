@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/netsniff-ng/netsniff-ng-0.5.8.ebuild,v 1.1 2014/09/01 16:11:01 xmw Exp $
+# $Id$
 
 EAPI=5
 
@@ -23,7 +23,7 @@ RDEPEND="dev-libs/geoip
 	net-libs/libnet:1.1
 	net-libs/libnetfilter_conntrack
 	net-libs/libpcap
-	sys-libs/ncurses:5
+	sys-libs/ncurses:0
 	sys-libs/zlib"
 DEPEND="${RDEPEND}
 	sys-devel/flex

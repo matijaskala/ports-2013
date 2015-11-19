@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/networkmanager/networkmanager-1.0.2-r1.ebuild,v 1.2 2015/06/04 09:34:21 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -23,7 +23,7 @@ IUSE="bluetooth connection-sharing consolekit +dhclient dhcpcd gnutls +introspec
 kernel_linux +nss +modemmanager ncurses +ppp resolvconf selinux systemd teamd test \
 vala +wext +wifi zeroconf" # wimax
 
-KEYWORDS="~alpha amd64 arm ~arm64 ~ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha amd64 arm ~arm64 ppc ppc64 ~sparc x86"
 
 REQUIRED_USE="
 	modemmanager? ( ppp )
@@ -43,7 +43,7 @@ COMMON_DEPEND="
 	net-libs/libndp
 	>=net-libs/libsoup-2.26:2.4=
 	net-misc/iputils
-	sys-libs/readline
+	sys-libs/readline:0
 	>=virtual/libgudev-165:=
 	bluetooth? ( >=net-wireless/bluez-5 )
 	connection-sharing? (
@@ -90,7 +90,7 @@ sysfs_deprecated_check() {
 	if { linux_chkconfig_present SYSFS_DEPRECATED_V2; }; then
 		eerror "Please disable SYSFS_DEPRECATED_V2 support in your kernel config and recompile your kernel"
 		eerror "or NetworkManager will not work correctly."
-		eerror "See http://bugs.gentoo.org/333639 for more info."
+		eerror "See https://bugs.gentoo.org/333639 for more info."
 		die "CONFIG_SYSFS_DEPRECATED_V2 support detected!"
 	fi
 	eend $?
@@ -104,7 +104,7 @@ pkg_pretend() {
 		else
 			ewarn "Was unable to determine your kernel .config"
 			ewarn "Please note that if CONFIG_SYSFS_DEPRECATED_V2 is set in your kernel .config, NetworkManager will not work correctly."
-			ewarn "See http://bugs.gentoo.org/333639 for more info."
+			ewarn "See https://bugs.gentoo.org/333639 for more info."
 		fi
 
 	fi

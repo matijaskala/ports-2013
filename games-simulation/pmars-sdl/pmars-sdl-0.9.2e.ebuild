@@ -1,9 +1,9 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-simulation/pmars-sdl/pmars-sdl-0.9.2e.ebuild,v 1.16 2015/03/24 17:22:41 ago Exp $
+# $Id$
 
 EAPI=5
-inherit toolchain-funcs games
+inherit toolchain-funcs games eutils
 
 MY_PN="${PN/-sdl/}"
 MY_PV="${PV/e/-5}"
@@ -23,6 +23,10 @@ DEPEND="sdl? ( x11-libs/libX11 media-libs/libsdl[video] )
 	!sdl? ( !X? ( sys-libs/ncurses ) )"
 
 S=${WORKDIR}/${MY_P}
+
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-format.patch
+}
 
 src_compile() {
 	CFLAGS="${CFLAGS} -DEXT94 -DPERMUTATE"

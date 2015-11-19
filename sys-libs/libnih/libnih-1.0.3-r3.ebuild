@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libnih/libnih-1.0.3-r3.ebuild,v 1.1 2015/05/21 08:28:24 vapier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -8,18 +8,21 @@ inherit versionator eutils autotools toolchain-funcs multilib flag-o-matic
 
 DESCRIPTION="Light-weight 'standard library' of C functions"
 HOMEPAGE="https://launchpad.net/libnih"
-SRC_URI="http://launchpad.net/${PN}/$(get_version_component_range 1-2)/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/$(get_version_component_range 1-2)/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~mips ~x86"
-IUSE="+dbus nls static-libs test +threads"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~mips ~ppc64 ~x86"
+IUSE="+dbus nls static-libs +threads"
 
+# The configure phase will check for valgrind headers, and the tests will use
+# that header, but only to do dynamic valgrind detection.  The tests aren't
+# run directly through valgrind, only by developers directly.  So don't bother
+# depending on valgrind here. #559830
 RDEPEND="dbus? ( dev-libs/expat >=sys-apps/dbus-1.2.16 )"
 DEPEND="${RDEPEND}
 	sys-devel/gettext
-	virtual/pkgconfig
-	test? ( dev-util/valgrind )"
+	virtual/pkgconfig"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-1.0.3-optional-dbus.patch

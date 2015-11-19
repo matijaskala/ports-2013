@@ -1,13 +1,13 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-pda/gnupod/gnupod-0.99.8-r1.ebuild,v 1.3 2014/11/09 21:50:54 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
 inherit perl-module
 
 DESCRIPTION="A collection of Perl-scripts for iPod"
-HOMEPAGE="http://www.gnu.org/software/gnupod/"
+HOMEPAGE="https://www.gnu.org/software/gnupod/"
 SRC_URI="http://blinkenlights.ch/gnupod-dist/stable/${P}.tgz"
 
 LICENSE="GPL-3"
@@ -38,15 +38,16 @@ src_configure() {
 	econf
 }
 
+src_compile() {
+	:;
+}
+
 src_install() {
 	perl_set_version
-	sed -i -e "s:\$INC\[0\]/\$modi:${D}${VENDOR_ARCH}/\$modi:g" \
+	sed -i -e "s:\$INC\[0\]/\$modi:${VENDOR_ARCH}/\$modi:g" \
 		tools/gnupod_install.pl || die
 
-	dodir /usr/bin
-	dodir ${VENDOR_ARCH}/GNUpod
-	dodir /usr/share/info
-	einstall
+	emake DESTDIR="${D}" install
 
 	dodoc CHANGES README* doc/gnupodrc.example doc/gnutunesdb.example
 	dohtml doc/gnupod.html

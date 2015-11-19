@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/coreutils/coreutils-8.20.ebuild,v 1.12 2013/01/01 18:55:02 armin76 Exp $
+# $Id$
 
 EAPI="3"
 
@@ -8,12 +8,12 @@ inherit eutils flag-o-matic toolchain-funcs
 
 PATCH_VER="1.1"
 DESCRIPTION="Standard GNU file utilities (chmod, cp, dd, dir, ls...), text utilities (sort, tr, head, wc..), and shell utilities (whoami, who,...)"
-HOMEPAGE="http://www.gnu.org/software/coreutils/"
+HOMEPAGE="https://www.gnu.org/software/coreutils/"
 SRC_URI="mirror://gnu-alpha/coreutils/${P}.tar.xz
 	mirror://gnu/${PN}/${P}.tar.xz
 	mirror://gentoo/${P}.tar.xz
 	mirror://gentoo/${P}-patches-${PATCH_VER}.tar.xz
-	http://dev.gentoo.org/~ryao/dist/${P}-patches-${PATCH_VER}.tar.xz"
+	https://dev.gentoo.org/~ryao/dist/${P}-patches-${PATCH_VER}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -34,7 +34,7 @@ RDEPEND="!static? ( ${LIB_DEPEND//\[static-libs]} )
 	!sys-apps/mktemp
 	!<app-forensics/tct-1.18-r1
 	!<net-fs/netatalk-2.0.3-r4
-	!<sci-chemistry/ccp4-6.1.1"
+"
 DEPEND="${RDEPEND}
 	static? ( ${LIB_DEPEND} )
 	app-arch/xz-utils"
@@ -80,7 +80,7 @@ src_configure() {
 	econf \
 		--with-packager="Gentoo" \
 		--with-packager-version="${PVR} (p${PATCH_VER:-0})" \
-		--with-packager-bug-reports="http://bugs.gentoo.org/" \
+		--with-packager-bug-reports="https://bugs.gentoo.org/" \
 		--enable-install-program="arch" \
 		--enable-no-install-program="groups,hostname,kill,su,uptime" \
 		--enable-largefile \

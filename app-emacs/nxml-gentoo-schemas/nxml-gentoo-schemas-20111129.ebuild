@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/nxml-gentoo-schemas/nxml-gentoo-schemas-20111129.ebuild,v 1.4 2014/06/07 11:25:01 ulm Exp $
+# $Id$
 
 EAPI=4
 
 inherit elisp
 
 DESCRIPTION="Extension for nxml-mode with Gentoo-specific schemas"
-HOMEPAGE="http://dev.gentoo.org/~flameeyes/nxml-gentoo-schemas/"
-SRC_URI="http://dev.gentoo.org/~flameeyes/${PN}/${P}.tar.bz2"
+HOMEPAGE="https://dev.gentoo.org/~flameeyes/nxml-gentoo-schemas/"
+SRC_URI="https://dev.gentoo.org/~flameeyes/${PN}/${P}.tar.bz2"
 
 LICENSE="HPND"
 SLOT="0"

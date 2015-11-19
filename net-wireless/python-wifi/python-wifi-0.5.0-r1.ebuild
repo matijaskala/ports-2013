@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/python-wifi/python-wifi-0.5.0-r1.ebuild,v 1.13 2012/12/16 15:25:55 armin76 Exp $
+# $Id$
 
 EAPI="3"
 
@@ -11,7 +11,7 @@ RESTRICT_PYTHON_ABIS="3.* *-jython"
 inherit distutils
 
 DESCRIPTION="Provides r/w access to a wireless network card's capabilities using the Linux Wireless Extensions"
-HOMEPAGE="http://pypi.python.org/pypi/python-wifi https://developer.berlios.de/projects/pythonwifi"
+HOMEPAGE="https://pypi.python.org/pypi/python-wifi https://developer.berlios.de/projects/pythonwifi"
 SRC_URI="mirror://berlios/${PN/-}/${P}.tar.bz2"
 
 SLOT="0"

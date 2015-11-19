@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/golang-vcs.eclass,v 1.3 2015/06/23 18:59:43 williamh Exp $
+# $Id$
 
 # @ECLASS: golang-vcs.eclass
 # @MAINTAINER:
@@ -10,7 +10,7 @@
 # This eclass is written to ease the maintenance of live ebuilds
 # of software written in the Go programming language.
 
-inherit eutils
+inherit eutils golang-base
 
 case "${EAPI:-0}" in
 	5)
@@ -26,8 +26,6 @@ if [[ -z ${_GOLANG_VCS} ]]; then
 
 _GOLANG_VCS=1
 
-DEPEND=">=dev-lang/go-1.4.2"
-
 # @ECLASS-VARIABLE: EGO_PN
 # @REQUIRED
 # @DESCRIPTION:
@@ -38,20 +36,6 @@ DEPEND=">=dev-lang/go-1.4.2"
 # @CODE
 # EGO_PN="github.com/user/package"
 # EGO_PN="github.com/user1/package1 github.com/user2/package2"
-# @CODE
-
-# @ECLASS-VARIABLE: EGO_SRC
-# @DESCRIPTION:
-# This is the Go upstream repository which will be copied to
-# ${WORKDIR}/${P}.
-# If it isn't set, it defaults to the first word of ${EGO_PN}.
-# This should be set if you are retrieving a repository that includes
-# multiple packages, e.g. golang.org/x/tools.
-#
-# Example:
-# @CODE
-# EGO_PN="github.com/user/repository/..."
-# EGO_SRC="github.com/user/repository"
 # @CODE
 
 # @ECLASS-VARIABLE: EGO_STORE_DIR
@@ -100,10 +84,6 @@ _golang-vcs_env_setup() {
 	[[ -n ${EVCS_UMASK} ]] && eumask_pop
 	mkdir -p "${WORKDIR}/${P}/src" ||
 		die "${ECLASS}: unable to create ${WORKDIR}/${P}"
-	if [ -z "${EGO_SRC}" ]; then
-		set -- ${EGO_PN}
-		EGO_SRC="$1"
-	fi
 	return 0
 }
 
@@ -114,8 +94,7 @@ _golang-vcs_env_setup() {
 _golang-vcs_fetch() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	[[ -z ${EGO_PN} ]] &&
-		die "${ECLASS}: EGO_PN is not set"
+	ego_pn_check
 
 	if [[ -z ${EVCS_OFFLINE} ]]; then
 		[[ -n ${EVCS_UMASK} ]] && eumask_push ${EVCS_UMASK}
@@ -130,13 +109,14 @@ _golang-vcs_fetch() {
 
 		[[ -n ${EVCS_UMASK} ]] && eumask_pop
 	fi
-	set -- mkdir -p "${WORKDIR}/${P}/src/${EGO_SRC%/*}"
+	local go_srcpath="${WORKDIR}/${P}/src/${EGO_PN%/...}"
+	set -- mkdir -p "${go_srcpath}"
 	echo "$@"
-	"$@" || die "Unable to create ${WORKDIR}/${P}/src"
-	set -- cp -r	"${EGO_STORE_DIR}/src/${EGO_SRC}" \
-		"${WORKDIR}/${P}/src/${EGO_SRC%/*}"
+	"$@" || die "Unable to create ${go_srcpath}"
+	set -- cp -r	"${EGO_STORE_DIR}/src/${EGO_PN%/...}" \
+		"${go_srcpath}/.."
 	echo "$@"
-	"$@" || die "Unable to copy sources to ${WORKDIR}/${P}"
+	"$@" || die "Unable to copy sources to ${go_srcpath}"
 	return 0
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libselinux/libselinux-2.2.2-r5.ebuild,v 1.5 2015/04/08 18:28:33 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 python3_3 )
@@ -12,7 +12,7 @@ SEPOL_VER="2.2"
 DESCRIPTION="SELinux userland library"
 HOMEPAGE="http://userspace.selinuxproject.org"
 SRC_URI="http://userspace.selinuxproject.org/releases/20131030/${P}.tar.gz
-	http://dev.gentoo.org/~swift/patches/${PN}/patchbundle-${P}-r5.tar.gz"
+	https://dev.gentoo.org/~swift/patches/${PN}/patchbundle-${P}-r5.tar.gz"
 
 LICENSE="public-domain"
 SLOT="0"

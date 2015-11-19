@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/eutils.eclass,v 1.444 2015/03/20 18:28:11 vapier Exp $
+# $Id$
 
 # @ECLASS: eutils.eclass
 # @MAINTAINER:
@@ -55,11 +55,11 @@ ebeep() {
 else
 
 ebeep() {
-	ewarn "QA Notice: ebeep is not defined in EAPI=${EAPI}, please file a bug at http://bugs.gentoo.org"
+	ewarn "QA Notice: ebeep is not defined in EAPI=${EAPI}, please file a bug at https://bugs.gentoo.org"
 }
 
 epause() {
-	ewarn "QA Notice: epause is not defined in EAPI=${EAPI}, please file a bug at http://bugs.gentoo.org"
+	ewarn "QA Notice: epause is not defined in EAPI=${EAPI}, please file a bug at https://bugs.gentoo.org"
 }
 
 fi
@@ -350,6 +350,12 @@ EPATCH_FORCE="no"
 # List of patches not to apply.	 Note this is only file names,
 # and not the full path.  Globs accepted.
 
+# @VARIABLE: EPATCH_USER_SOURCE
+# @DESCRIPTION:
+# Location for user patches, see the epatch_user function.
+# Should be set by the user. Don't set this in ebuilds.
+: ${EPATCH_USER_SOURCE:=${PORTAGE_CONFIGROOT%/}/etc/portage/patches}
+
 # @FUNCTION: epatch
 # @USAGE: [options] [patches] [dirs of patches]
 # @DESCRIPTION:
@@ -591,7 +597,7 @@ epatch() {
 			(
 			_epatch_draw_line "***** ${patchname} *****"
 			echo
-			echo "PATCH COMMAND:  ${patch_cmd} < '${PATCH_TARGET}'"
+			echo "PATCH COMMAND:  ${patch_cmd} --dry-run -f < '${PATCH_TARGET}'"
 			echo
 			_epatch_draw_line "***** ${patchname} *****"
 			${patch_cmd} --dry-run -f < "${PATCH_TARGET}" 2>&1
@@ -606,6 +612,7 @@ epatch() {
 				_epatch_draw_line "***** ${patchname} *****"
 				echo
 				echo "ACTUALLY APPLYING ${patchname} ..."
+				echo "PATCH COMMAND:  ${patch_cmd} < '${PATCH_TARGET}'"
 				echo
 				_epatch_draw_line "***** ${patchname} *****"
 				${patch_cmd} < "${PATCH_TARGET}" 2>&1
@@ -697,11 +704,11 @@ epatch_user() {
 	[[ -e ${applied} ]] && return 2
 
 	# don't clobber any EPATCH vars that the parent might want
-	local EPATCH_SOURCE check base=${PORTAGE_CONFIGROOT%/}/etc/portage/patches
+	local EPATCH_SOURCE check
 	for check in ${CATEGORY}/{${P}-${PR},${P},${PN}}{,:${SLOT}}; do
-		EPATCH_SOURCE=${base}/${CTARGET}/${check}
-		[[ -r ${EPATCH_SOURCE} ]] || EPATCH_SOURCE=${base}/${CHOST}/${check}
-		[[ -r ${EPATCH_SOURCE} ]] || EPATCH_SOURCE=${base}/${check}
+		EPATCH_SOURCE=${EPATCH_USER_SOURCE}/${CTARGET}/${check}
+		[[ -r ${EPATCH_SOURCE} ]] || EPATCH_SOURCE=${EPATCH_USER_SOURCE}/${CHOST}/${check}
+		[[ -r ${EPATCH_SOURCE} ]] || EPATCH_SOURCE=${EPATCH_USER_SOURCE}/${check}
 		if [[ -d ${EPATCH_SOURCE} ]] ; then
 			EPATCH_SOURCE=${EPATCH_SOURCE} \
 			EPATCH_SUFFIX="patch" \
@@ -1402,7 +1409,7 @@ built_with_use() {
 # Many configure scripts wrongly bail when a C++ compiler could not be
 # detected.  If dir is not specified, then it defaults to ${S}.
 #
-# http://bugs.gentoo.org/73450
+# https://bugs.gentoo.org/73450
 epunt_cxx() {
 	local dir=$1
 	[[ -z ${dir} ]] && dir=${S}
@@ -1505,15 +1512,17 @@ path_exists() {
 # as necessary.
 #
 # Note that this function should not be used in the global scope.
-in_iuse() {
-	debug-print-function ${FUNCNAME} "${@}"
-	[[ ${#} -eq 1 ]] || die "Invalid args to ${FUNCNAME}()"
+if has "${EAPI:-0}" 0 1 2 3 4 5; then
+	in_iuse() {
+		debug-print-function ${FUNCNAME} "${@}"
+		[[ ${#} -eq 1 ]] || die "Invalid args to ${FUNCNAME}()"
 
-	local flag=${1}
-	local liuse=( ${IUSE} )
+		local flag=${1}
+		local liuse=( ${IUSE} )
 
-	has "${flag}" "${liuse[@]#[+-]}"
-}
+		has "${flag}" "${liuse[@]#[+-]}"
+	}
+fi
 
 # @FUNCTION: use_if_iuse
 # @USAGE: <flag>
@@ -1707,42 +1716,44 @@ prune_libtool_files() {
 #
 # Passing additional options to dodoc and dohtml is not supported.
 # If you needed such a thing, you need to call those helpers explicitly.
-einstalldocs() {
-	debug-print-function ${FUNCNAME} "${@}"
+if has "${EAPI:-0}" 0 1 2 3 4 5; then
+	einstalldocs() {
+		debug-print-function ${FUNCNAME} "${@}"
 
-	local dodoc_opts=-r
-	has ${EAPI} 0 1 2 3 && dodoc_opts=
+		local dodoc_opts=-r
+		has ${EAPI} 0 1 2 3 && dodoc_opts=
 
-	if ! declare -p DOCS &>/dev/null ; then
-		local d
-		for d in README* ChangeLog AUTHORS NEWS TODO CHANGES \
-				THANKS BUGS FAQ CREDITS CHANGELOG ; do
-			if [[ -s ${d} ]] ; then
-				dodoc "${d}" || die
+		if ! declare -p DOCS &>/dev/null ; then
+			local d
+			for d in README* ChangeLog AUTHORS NEWS TODO CHANGES \
+					THANKS BUGS FAQ CREDITS CHANGELOG ; do
+				if [[ -s ${d} ]] ; then
+					dodoc "${d}" || die
+				fi
+			done
+		elif [[ $(declare -p DOCS) == "declare -a"* ]] ; then
+			if [[ ${DOCS[@]} ]] ; then
+				dodoc ${dodoc_opts} "${DOCS[@]}" || die
 			fi
-		done
-	elif [[ $(declare -p DOCS) == "declare -a"* ]] ; then
-		if [[ ${DOCS[@]} ]] ; then
-			dodoc ${dodoc_opts} "${DOCS[@]}" || die
+		else
+			if [[ ${DOCS} ]] ; then
+				dodoc ${dodoc_opts} ${DOCS} || die
+			fi
 		fi
-	else
-		if [[ ${DOCS} ]] ; then
-			dodoc ${dodoc_opts} ${DOCS} || die
-		fi
-	fi
 
-	if [[ $(declare -p HTML_DOCS 2>/dev/null) == "declare -a"* ]] ; then
-		if [[ ${HTML_DOCS[@]} ]] ; then
-			dohtml -r "${HTML_DOCS[@]}" || die
+		if [[ $(declare -p HTML_DOCS 2>/dev/null) == "declare -a"* ]] ; then
+			if [[ ${HTML_DOCS[@]} ]] ; then
+				dohtml -r "${HTML_DOCS[@]}" || die
+			fi
+		else
+			if [[ ${HTML_DOCS} ]] ; then
+				dohtml -r ${HTML_DOCS} || die
+			fi
 		fi
-	else
-		if [[ ${HTML_DOCS} ]] ; then
-			dohtml -r ${HTML_DOCS} || die
-		fi
-	fi
 
-	return 0
-}
+		return 0
+	}
+fi
 
 check_license() { die "you no longer need this as portage supports ACCEPT_LICENSE itself"; }
 

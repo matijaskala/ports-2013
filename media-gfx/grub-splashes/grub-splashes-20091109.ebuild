@@ -1,9 +1,9 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/grub-splashes/grub-splashes-20091109.ebuild,v 1.3 2009/12/31 15:55:57 maekke Exp $
+# $Id$
 
 DESCRIPTION="Collection of grub splashes"
-HOMEPAGE="http://dev.gentoo.org/~welp/grub-splashes.xml"
+HOMEPAGE="https://dev.gentoo.org/~welp/grub-splashes.xml"
 SRC_URI="mirror://gentoo/${PN}-0.1.tar.gz
 	http://www.kde-look.org/CONTENT/content-files/49074-natural_gentoo-8.0.tar.gz
 	http://www.kde-look.org/CONTENT/content-files/98478-gentoo-splash.xpm.gz"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/conmux/conmux-0.15.1-r3.ebuild,v 1.3 2014/11/09 21:37:29 dilfridge Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit perl-module
 
 DESCRIPTION="A console multiplexor"
 HOMEPAGE="https://github.com/autotest/autotest"
-SRC_URI="http://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
+SRC_URI="https://dev.gentoo.org/~hwoarang/distfiles/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -1,9 +1,9 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/codeblocks/codeblocks-9999.ebuild,v 1.7 2014/08/10 21:26:29 slyfox Exp $
+# $Id$
 
 EAPI="5"
-WX_GTK_VER="2.8"
+WX_GTK_VER="3.0"
 
 inherit autotools eutils subversion wxwidgets
 
@@ -18,7 +18,7 @@ ESVN_REPO_URI="svn://svn.code.sf.net/p/${PN}/code/trunk"
 IUSE="contrib debug pch static-libs"
 
 RDEPEND="app-arch/zip
-	x11-libs/wxGTK:2.8[X]
+	x11-libs/wxGTK:${WX_GTK_VER}[X]
 	contrib? (
 		app-text/hunspell
 		dev-libs/boost:=
@@ -41,6 +41,7 @@ src_prepare() {
 }
 
 src_configure() {
+	need-wxwidgets unicode
 	econf \
 		--with-wx-config="${WX_CONFIG}" \
 		$(use_enable debug) \

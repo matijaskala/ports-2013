@@ -1,13 +1,13 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/tasque/tasque-0.1.11.ebuild,v 1.3 2012/12/07 04:51:40 phajdan.jr Exp $
+# $Id$
 
 EAPI="4"
 
 inherit eutils gnome.org mono
 
 DESCRIPTION="Tasky is a simple task management app (TODO list) for the Linux Desktop"
-HOMEPAGE="http://live.gnome.org/Tasque"
+HOMEPAGE="https://live.gnome.org/Tasque"
 
 LICENSE="MIT"
 SLOT="0"
@@ -41,7 +41,7 @@ pkg_setup() {
 }
 
 src_configure() {
-	#http://bugzilla.gnome.org/show_bug.cgi?id=568910
+	#https://bugzilla.gnome.org/show_bug.cgi?id=568910
 	export	GTK_DOTNET_20_LIBS=" " \
 		GTK_DOTNET_20_CFLAGS=" "
 	econf	--disable-backend-icecore \

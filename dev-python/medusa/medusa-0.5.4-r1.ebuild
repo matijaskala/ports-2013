@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/medusa/medusa-0.5.4-r1.ebuild,v 1.15 2015/04/08 08:05:07 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 pypy )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 pypy )
 inherit distutils-r1
 
 DESCRIPTION="A framework for writing asynchronous long-running, high-performance network servers in Python"
-HOMEPAGE="http://www.amk.ca/python/code/medusa.html http://pypi.python.org/pypi/medusa"
+HOMEPAGE="http://www.amk.ca/python/code/medusa.html https://pypi.python.org/pypi/medusa"
 SRC_URI="http://www.amk.ca/files/python/${P}.tar.gz"
 
 LICENSE="PSF-2"

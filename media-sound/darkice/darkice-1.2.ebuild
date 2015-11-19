@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/darkice/darkice-1.2.ebuild,v 1.8 2013/09/06 14:58:54 ago Exp $
+# $Id$
 
 EAPI=5
 inherit eutils
 
 DESCRIPTION="A live audio streamer"
-HOMEPAGE="http://code.google.com/p/darkice/"
-SRC_URI="http://darkice.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="http://www.darkice.org/"
+SRC_URI="https://darkice.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

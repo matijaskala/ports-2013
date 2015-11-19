@@ -1,13 +1,13 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emacs/company-mode/company-mode-0.7.ebuild,v 1.2 2014/06/07 11:05:17 ulm Exp $
+# $Id$
 
 EAPI=5
 
 inherit elisp
 
 DESCRIPTION="In-buffer completion front-end"
-HOMEPAGE="http://company-mode.github.com/"
+HOMEPAGE="https://company-mode.github.com/"
 SRC_URI="https://github.com/${PN}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3+"

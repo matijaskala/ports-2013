@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/dleyna-server/dleyna-server-0.5.0.ebuild,v 1.1 2015/06/09 23:10:02 eva Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ SRC_URI="https://01.org/sites/default/files/downloads/dleyna/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE=""
 
 RDEPEND="
@@ -25,7 +25,7 @@ RDEPEND="
 	>=net-libs/gupnp-av-0.11.5
 	>=net-libs/libsoup-2.28.2:2.4
 "
-DEPEND="${DEPEND}
+DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-client/thunderbird/thunderbird-24.8.0.ebuild,v 1.7 2015/02/26 15:14:39 axs Exp $
+# $Id$
 
 EAPI=5
 WANT_AUTOCONF="2.1"
@@ -51,9 +51,9 @@ SRC_URI="${SRC_URI}
 		${MOZ_HTTP_URI/${PN}/calendar/lightning}${MOZ_LIGHTNING_VER}/linux/lightning.xpi -> lightning-${MOZ_LIGHTNING_VER}.xpi
 		${MOZ_HTTP_URI/${PN}/calendar/lightning}${MOZ_LIGHTNING_GDATA_VER}/linux/gdata-provider.xpi -> gdata-provider-${MOZ_LIGHTNING_GDATA_VER}.xpi
 	)
-	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
-	http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCHFF}.tar.xz
-	http://dev.gentoo.org/~polynomial-c/mozilla/patchsets/${PATCH}.tar.xz"
+	https://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
+	https://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCHFF}.tar.xz
+	https://dev.gentoo.org/~polynomial-c/mozilla/patchsets/${PATCH}.tar.xz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -71,6 +71,7 @@ CDEPEND="
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-sqlite? ( >=dev-db/sqlite-3.8.0.2:3[secure-delete,debug=] )
 	>=media-libs/libvpx-1.0.0
+	<media-libs/libvpx-1.4
 	kernel_linux? ( media-libs/alsa-lib )
 	!x11-plugins/enigmail
 	crypt?  ( || (

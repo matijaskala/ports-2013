@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-fonts/droid/droid-113-r4.ebuild,v 1.2 2015/03/07 03:47:57 yngwin Exp $
+# $Id$
 
 EAPI=4
 
@@ -9,9 +9,9 @@ inherit font
 MY_PN="${PN/d/D}"
 
 # $PV is a build number, use fontforge to find it out. 113 was taken from:
-# http://android.git.kernel.org/?p=platform/frameworks/base.git;a=tree;f=data/fonts;hb=HEAD
+# https://android.git.kernel.org/?p=platform/frameworks/base.git;a=tree;f=data/fonts;hb=HEAD
 DESCRIPTION="Font family from Google's Android project"
-HOMEPAGE="http://code.google.com/android/RELEASENOTES.html http://www.cosmix.org/software/"
+HOMEPAGE="https://code.google.com/android/RELEASENOTES.html http://www.cosmix.org/software/"
 SRC_URI="mirror://gentoo/${P}-r1.tar.bz2
 	mirror://gentoo/${MY_PN}SansMonoSlashed-112_p1.ttf.bz2
 	mirror://gentoo/${MY_PN}SansMonoDotted-112_p1.ttf.bz2"

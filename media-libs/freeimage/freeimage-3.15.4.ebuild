@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/freeimage/freeimage-3.15.4.ebuild,v 1.10 2015/04/02 16:51:03 aballier Exp $
+# $Id$
 
 EAPI="4"
 
@@ -14,7 +14,7 @@ DESCRIPTION="Image library supporting many formats"
 HOMEPAGE="http://freeimage.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}.zip
 	mirror://sourceforge/${PN}/${MY_P}.pdf
-	http://dev.gentoo.org/~gienah/2big4tree/media-libs/freeimage/${PN}-3.15.4-libjpeg-turbo.patch.gz"
+	https://dev.gentoo.org/~gienah/2big4tree/media-libs/freeimage/${PN}-3.15.4-libjpeg-turbo.patch.gz"
 
 LICENSE="|| ( GPL-2 FIPL-1.0 )"
 SLOT="0"

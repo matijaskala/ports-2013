@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-games/ogre/ogre-1.9.0-r1.ebuild,v 1.5 2015/05/13 09:28:29 ago Exp $
+# $Id$
 
 EAPI=5
 CMAKE_REMOVE_MODULES="yes"
@@ -68,8 +68,10 @@ src_prepare() {
 	rm -f Tools/XMLConverter/{include,src}/tiny*.*
 
 	# Fix some path issues
-	epatch "${FILESDIR}/${P}-remove_resource_path_to_bindir.patch" \
-		"${FILESDIR}/${P}-remove_media_path_to_bindir.patch"
+	epatch \
+		"${FILESDIR}/${P}-remove_resource_path_to_bindir.patch" \
+		"${FILESDIR}/${P}-remove_media_path_to_bindir.patch" \
+		"${FILESDIR}/${P}-gcc52.patch"
 }
 
 src_configure() {

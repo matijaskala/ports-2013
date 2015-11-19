@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-libs/libapparmor/libapparmor-2.8.3.ebuild,v 1.4 2015/04/08 18:28:33 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ inherit autotools-utils distutils-r1 perl-module versionator
 
 DESCRIPTION="Library to support AppArmor userspace utilities"
 HOMEPAGE="http://apparmor.net/"
-SRC_URI="http://launchpad.net/apparmor/$(get_version_component_range 1-2)/${PV}/+download/apparmor-${PV}.tar.gz"
+SRC_URI="https://launchpad.net/apparmor/$(get_version_component_range 1-2)/${PV}/+download/apparmor-${PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/cryptohash-cryptoapi/cryptohash-cryptoapi-0.1.0.ebuild,v 1.1 2013/08/26 12:24:30 qnikst Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Crypto-api interfaces for cryptohash"
-HOMEPAGE="http://github.com/vincenthz/hs-cryptohash-cryptoapi"
+HOMEPAGE="https://github.com/vincenthz/hs-cryptohash-cryptoapi"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

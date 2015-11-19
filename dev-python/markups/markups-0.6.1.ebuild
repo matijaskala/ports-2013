@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/markups/markups-0.6.1.ebuild,v 1.1 2015/05/27 07:58:08 jlec Exp $
+# $Id$
 
 EAPI="5"
 
@@ -12,7 +12,7 @@ MY_PN="Markups"
 MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="A wrapper around various text markups"
-HOMEPAGE="http://pypi.python.org/pypi/Markups"
+HOMEPAGE="https://pypi.python.org/pypi/Markups"
 SRC_URI="mirror://pypi/M/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

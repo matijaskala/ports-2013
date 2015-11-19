@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-scheme/ypsilon/ypsilon-0.9.6_p3.ebuild,v 1.3 2014/06/19 13:01:36 creffett Exp $
+# $Id$
 EAPI=5
 
 inherit eutils flag-o-matic toolchain-funcs
 
 MY_P="${P/_p/.update}"
 DESCRIPTION="R6RS-compliant Scheme implementation for real-time applications"
-HOMEPAGE="http://code.google.com/p/ypsilon/"
-SRC_URI="http://ypsilon.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/ypsilon/"
+SRC_URI="https://ypsilon.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

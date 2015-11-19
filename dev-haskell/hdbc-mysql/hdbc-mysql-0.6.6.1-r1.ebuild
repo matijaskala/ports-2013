@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/hdbc-mysql/hdbc-mysql-0.6.6.1-r1.ebuild,v 1.1 2012/12/24 15:32:26 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ MY_PN="HDBC-mysql"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="MySQL driver for HDBC"
-HOMEPAGE="http://github.com/bos/hdbc-mysql"
+HOMEPAGE="https://github.com/bos/hdbc-mysql"
 SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="LGPL-2.1"

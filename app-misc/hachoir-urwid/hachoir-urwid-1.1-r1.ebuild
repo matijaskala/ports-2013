@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/hachoir-urwid/hachoir-urwid-1.1-r1.ebuild,v 1.1 2014/12/27 14:40:56 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ PYTHON_REQ_USE="ncurses"
 inherit distutils-r1
 
 DESCRIPTION="Binary file explorer using Hachoir and urwid libraries"
-HOMEPAGE="http://bitbucket.org/haypo/hachoir/wiki/hachoir-urwid http://pypi.python.org/pypi/hachoir-urwid"
+HOMEPAGE="https://bitbucket.org/haypo/hachoir/wiki/hachoir-urwid https://pypi.python.org/pypi/hachoir-urwid"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"

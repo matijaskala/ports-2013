@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lua/lgi/lgi-0.6.2.ebuild,v 1.2 2012/11/29 16:29:47 mr_bones_ Exp $
+# $Id$
 
 EAPI=4
 
 inherit eutils toolchain-funcs flag-o-matic
 
 DESCRIPTION="Lua bindings using gobject-introspection"
-HOMEPAGE="http://github.com/pavouk/lgi"
-SRC_URI="http://github.com/downloads/pavouk/lgi/${P}.tar.gz"
+HOMEPAGE="https://github.com/pavouk/lgi"
+SRC_URI="https://github.com/downloads/pavouk/lgi/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

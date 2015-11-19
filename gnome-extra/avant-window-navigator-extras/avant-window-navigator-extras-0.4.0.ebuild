@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/avant-window-navigator-extras/avant-window-navigator-extras-0.4.0.ebuild,v 1.8 2013/02/07 22:21:06 ulm Exp $
+# $Id$
 
 EAPI=4
 
@@ -12,8 +12,8 @@ PYTHON_DEPEND="2:2.6"
 inherit eutils gnome2 python
 
 DESCRIPTION="Applets for the Avant Window Navigator"
-HOMEPAGE="http://launchpad.net/awn-extras"
-SRC_URI="http://launchpad.net/awn-extras/0.4/${PV}/+download/awn-extras-${PV}.tar.gz"
+HOMEPAGE="https://launchpad.net/awn-extras"
+SRC_URI="https://launchpad.net/awn-extras/0.4/${PV}/+download/awn-extras-${PV}.tar.gz"
 
 LICENSE="BSD CC-BY-SA-3.0 GPL-3 LGPL-2.1"
 SLOT="0"

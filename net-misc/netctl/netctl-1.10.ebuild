@@ -1,10 +1,10 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/netctl/netctl-1.10.ebuild,v 1.1 2015/01/18 19:30:25 hwoarang Exp $
+# $Id$
 
 EAPI=5
 
-inherit bash-completion-r1
+inherit bash-completion-r1 eutils
 
 if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="git://projects.archlinux.org/netctl.git"
@@ -52,19 +52,6 @@ src_install() {
 	bashcomp_alias netctl netctl-auto wifi-menu
 	insinto /usr/share/zsh/site-functions
 	newins contrib/zsh-completion _netctl
-}
-
-optfeature() {
-	local desc=$1
-	shift
-	while (( $# )); do
-		if has_version "$1"; then
-			elog "  [I] $1 for ${desc}"
-		else
-			elog "  [ ] $1 for ${desc}"
-		fi
-		shift
-	done
 }
 
 pkg_postinst() {

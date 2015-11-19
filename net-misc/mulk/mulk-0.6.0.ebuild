@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/mulk/mulk-0.6.0.ebuild,v 1.1 2011/08/07 17:38:25 hwoarang Exp $
+# $Id$
 
 EAPI="4"
 
@@ -26,7 +26,7 @@ DEPEND="net-misc/curl
 		checksum? ( dev-libs/openssl )
 	)"
 
-REQUIRE_USE="checksum? ( metalink )"
+REQUIRED_USE="checksum? ( metalink )"
 
 RDEPEND="${DEPEND}"
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-qt/qtdeclarative/qtdeclarative-4.8.7.ebuild,v 1.1 2015/05/26 18:14:16 pesa Exp $
+# $Id$
 
 EAPI=5
 inherit qt4-build-multilib
@@ -8,7 +8,7 @@ inherit qt4-build-multilib
 DESCRIPTION="The Declarative module for the Qt toolkit"
 
 if [[ ${QT4_BUILD_TYPE} == release ]]; then
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 fi
 
 IUSE="+accessibility qt3support webkit"

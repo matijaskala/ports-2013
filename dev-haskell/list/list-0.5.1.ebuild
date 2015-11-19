@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/list/list-0.5.1.ebuild,v 1.1 2012/11/25 06:01:06 gienah Exp $
+# $Id$
 
 EAPI=5
 
@@ -13,7 +13,7 @@ MY_PN="List"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="List monad transformer and class"
-HOMEPAGE="http://github.com/yairchu/generator/tree"
+HOMEPAGE="https://github.com/yairchu/generator/tree"
 SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

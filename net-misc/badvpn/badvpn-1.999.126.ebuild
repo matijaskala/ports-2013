@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/badvpn/badvpn-1.999.126.ebuild,v 1.1 2012/12/26 02:22:00 hasufell Exp $
+# $Id$
 
 EAPI=5
 inherit eutils cmake-utils user toolchain-funcs
 
 MY_P=${PN}-${PV/_rc/rc}
 DESCRIPTION="Peer-to-peer VPN, NCD scripting language, tun2socks proxifier"
-HOMEPAGE="http://code.google.com/p/badvpn/"
-SRC_URI="http://badvpn.googlecode.com/files/${MY_P}.tar.bz2"
+HOMEPAGE="https://code.google.com/p/badvpn/"
+SRC_URI="https://badvpn.googlecode.com/files/${MY_P}.tar.bz2"
 
 LICENSE="BSD"
 KEYWORDS="~amd64 ~arm ~x86"

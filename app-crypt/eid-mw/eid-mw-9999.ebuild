@@ -1,32 +1,35 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-crypt/eid-mw/eid-mw-9999.ebuild,v 1.3 2015/01/24 18:17:08 swift Exp $
+# $Id$
 
 EAPI=5
 
-inherit eutils versionator mozextension multilib
+inherit eutils autotools mozextension multilib
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://github.com/Fedict/${PN}.git
 		https://github.com/Fedict/${PN}.git"
-	inherit git-2 autotools
+	inherit git-2
 	SRC_URI=""
 else
-	MY_P="${PN}-${PV/_p/-}"
-	SRC_URI="http://eid.belgium.be/en/binaries/${MY_P}.tar_tcm406-258906.gz -> ${MY_P}.tar.gz"
-	KEYWORDS="~x86 ~amd64"
-	S="${WORKDIR}/eid-mw-$(get_version_component_range 1-3)"
+	MY_P="${P}-v${PV}"
+	SRC_URI="https://downloads.services.belgium.be/eid/${MY_P}.tar.gz"
+	KEYWORDS="~x86 ~amd64 ~arm"
+	S="${WORKDIR}/${MY_P}"
 fi
 
 SLOT="0"
 LICENSE="LGPL-3"
-DESCRIPTION="Belgian Electronic Identity Card middleware supplied by the Belgian Federal Government"
+DESCRIPTION="Electronic Identity Card middleware supplied by the Belgian Federal Government"
 
 HOMEPAGE="http://eid.belgium.be"
 
-IUSE="+gtk +xpi"
+IUSE="+gtk +xpi +dialogs"
 
-RDEPEND="gtk? ( x11-libs/gtk+:2 )
+REQUIRED_USE="
+	dialogs? ( gtk )"
+
+RDEPEND="gtk? ( x11-libs/gtk+:* )
 	>=sys-apps/pcsc-lite-1.2.9
 	xpi? ( || ( >=www-client/firefox-bin-3.6.24
 		>=www-client/firefox-3.6.20 ) )
@@ -35,18 +38,32 @@ RDEPEND="gtk? ( x11-libs/gtk+:2 )
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-if [[ ${PV} == "9999" ]]; then
-	src_prepare() {
+src_prepare() {
+	use gtk || epatch "${FILESDIR}"/gtk_not_required_9999.patch
+
+	if [[ ${PV} == "9999" ]] ; then
+		# Only in current git. Hopefully, in next release.
+		sed -i -e 's:/beid/rsaref220:/rsaref220:' configure.ac
+		sed -i -e 's:/beid::' cardcomm/pkcs11/src/libbeidpkcs11.pc.in
+	fi
+
+	if [[ ${PV} == "9999" ]] || ! use gtk ; then
 		eautoreconf
-	}
-fi
+	fi
+}
 
 src_configure() {
-	econf $(use_enable gtk dialogs) --disable-static
+	econf $(use_enable dialogs) --disable-static
 }
 
 src_install() {
 	emake DESTDIR="${D}" install
+
+	if [[ ${PV} != "9999" ]] ; then
+		# Automatically done in current git. Hopefully, in next release.
+		rm doc/sdk/include/rsaref220/win32.h
+		doheader -r doc/sdk/include/*
+	fi
 	if use xpi; then
 		declare MOZILLA_FIVE_HOME
 		if has_version '>=www-client/firefox-3.6.20'; then

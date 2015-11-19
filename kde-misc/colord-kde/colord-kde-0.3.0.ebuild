@@ -1,13 +1,13 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/colord-kde/colord-kde-0.3.0.ebuild,v 1.1 2013/05/01 18:39:36 johu Exp $
+# $Id$
 
 EAPI=5
 
 inherit kde4-base
 
 DESCRIPTION="Provides interfaces and session daemon to colord"
-HOMEPAGE="http://projects.kde.org/projects/playground/graphics/colord-kde"
+HOMEPAGE="https://projects.kde.org/projects/playground/graphics/colord-kde"
 SRC_URI="mirror://kde/stable/${PN}/${PV}/src/${P}.tar.bz2"
 
 LICENSE="GPL-2+"

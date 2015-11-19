@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libltdl/libltdl-2.4.5.ebuild,v 1.1 2015/01/19 23:30:31 polynomial-c Exp $
+# $Id$
 
 EAPI="4"
 
@@ -9,7 +9,7 @@ inherit multilib-minimal
 MY_P="libtool-${PV}"
 
 DESCRIPTION="A shared library tool for developers"
-HOMEPAGE="http://www.gnu.org/software/libtool/"
+HOMEPAGE="https://www.gnu.org/software/libtool/"
 SRC_URI="mirror://gnu/libtool/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-vcs/bzr/bzr-2.5.1-r1.ebuild,v 1.12 2015/04/08 17:53:03 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -14,7 +14,7 @@ SERIES=$(get_version_component_range 1-2)
 DESCRIPTION="Bazaar is a next generation distributed version control system"
 HOMEPAGE="http://bazaar-vcs.org/"
 #SRC_URI="http://bazaar-vcs.org/releases/src/${MY_P}.tar.gz"
-SRC_URI="http://launchpad.net/bzr/${SERIES}/${PV}/+download/${MY_P}.tar.gz"
+SRC_URI="https://launchpad.net/bzr/${SERIES}/${PV}/+download/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -49,12 +49,6 @@ python_compile() {
 		append-cflags -fno-strict-aliasing
 	fi
 	distutils-r1_python_compile
-}
-
-src_test() {
-	# Race due to conflicting ports in
-	# blackbox.test_serve.TestBzrServe.test_bzr_serve*.
-	DISTUTILS_NO_PARALLEL_BUILD=1 distutils-r1_src_test
 }
 
 python_test() {

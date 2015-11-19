@@ -1,10 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/sssd/sssd-1.12.1.ebuild,v 1.5 2015/04/10 00:23:33 blueness Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
+
+WANT_AUTOMAKE="1.13"
 
 AUTOTOOLS_IN_SOURCE_BUILD=1
 AUTOTOOLS_AUTORECONF=1
@@ -86,7 +88,7 @@ src_configure(){
 		--without-nscd
 		--with-unicode-lib="glib2"
 		--disable-rpath
-		--enable-silent-rules
+		--disable-silent-rules
 		--sbindir=/usr/sbin
 		--without-samba
 		$(use_enable acl cifs-idmap-plugin)

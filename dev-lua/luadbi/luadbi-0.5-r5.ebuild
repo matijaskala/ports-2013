@@ -1,14 +1,14 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lua/luadbi/luadbi-0.5-r5.ebuild,v 1.5 2014/12/28 15:37:07 titanofold Exp $
+# $Id$
 
 EAPI=5
 
 inherit toolchain-funcs flag-o-matic eutils
 
 DESCRIPTION="DBI module for Lua"
-HOMEPAGE="http://code.google.com/p/luadbi/"
-SRC_URI="http://luadbi.googlecode.com/files/${PN}.${PV}.tar.gz"
+HOMEPAGE="https://code.google.com/p/luadbi/"
+SRC_URI="https://luadbi.googlecode.com/files/${PN}.${PV}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

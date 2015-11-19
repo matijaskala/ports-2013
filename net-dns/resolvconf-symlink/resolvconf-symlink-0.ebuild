@@ -1,11 +1,11 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-dns/resolvconf-symlink/resolvconf-symlink-0.ebuild,v 1.2 2012/12/06 22:20:11 mgorny Exp $
+# $Id$
 
 EAPI=4
 
 DESCRIPTION="Make /etc/resolv.conf a symlink to a runtime-writable location"
-HOMEPAGE="http://www.gentoo.org"
+HOMEPAGE="https://www.gentoo.org"
 SRC_URI=""
 
 LICENSE="public-domain"

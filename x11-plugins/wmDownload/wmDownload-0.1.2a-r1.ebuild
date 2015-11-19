@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-plugins/wmDownload/wmDownload-0.1.2a-r1.ebuild,v 1.6 2014/08/10 20:03:18 slyfox Exp $
+# $Id$
 
 inherit eutils multilib toolchain-funcs
 
@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="amd64 ppc sparc x86"
 IUSE=""
 
-DEPEND="x11-libs/libdockapp
+DEPEND="<x11-libs/libdockapp-0.7
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXpm"

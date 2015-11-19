@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/openh264/openh264-1.2_p20141104.ebuild,v 1.1 2014/12/04 04:01:03 axs Exp $
+# $Id$
 
 EAPI=5
 
@@ -8,7 +8,7 @@ inherit nsplugins
 
 DESCRIPTION="Cisco OpenH264 library and Gecko Media Plugin for mozilla packages"
 HOMEPAGE="http://www.openh264.org/"
-SRC_URI="http://dev.gentoo.org/~axs/distfiles/gmp-${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~axs/distfiles/gmp-${P}.tar.xz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"

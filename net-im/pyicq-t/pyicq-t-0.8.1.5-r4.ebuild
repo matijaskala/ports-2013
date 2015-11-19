@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/pyicq-t/pyicq-t-0.8.1.5-r4.ebuild,v 1.5 2015/04/08 18:03:12 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,8 +8,8 @@ inherit eutils python-single-r1 systemd
 
 MY_P="${P/pyicq-t/pyicqt}"
 DESCRIPTION="Python based jabber transport for ICQ"
-HOMEPAGE="http://code.google.com/p/pyicqt/"
-SRC_URI="http://pyicqt.googlecode.com/files/${MY_P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/pyicqt/"
+SRC_URI="https://pyicqt.googlecode.com/files/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="GPL-2"
@@ -23,7 +23,7 @@ RDEPEND="${DEPEND}
 	dev-python/twisted-words[${PYTHON_USEDEP}]
 	dev-python/twisted-web[${PYTHON_USEDEP}]
 	webinterface? ( >=dev-python/nevow-0.4.1[${PYTHON_USEDEP}] )
-	virtual/python-imaging[${PYTHON_USEDEP}]"
+	dev-python/pillow[${PYTHON_USEDEP}]"
 
 src_prepare() {
 	epatch "${FILESDIR}/${P}-python26-warnings.diff"

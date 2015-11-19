@@ -1,17 +1,14 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-benchmarks/ltp/ltp-20130503.ebuild,v 1.3 2013/07/20 15:35:55 jer Exp $
+# $Id$
 
 EAPI="4"
 
 inherit autotools eutils readme.gentoo
 
-MY_PN="${PN}-full"
-MY_P="${MY_PN}-${PV}"
-
 DESCRIPTION="A testsuite for the linux kernel"
-HOMEPAGE="http://ltp.sourceforge.net/"
-SRC_URI="mirror://sourceforge/ltp/LTP%20Source/${P}/${MY_P}.bz2 -> ${P}.tar.bz2"
+HOMEPAGE="http://linux-test-project.github.io/"
+SRC_URI="https://github.com/linux-test-project/ltp/archive/20130503.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
@@ -23,8 +20,6 @@ DEPEND="expect? ( dev-tcltk/expect )
 	python? ( dev-lang/python )"
 
 RESTRICT="test"
-
-S="${WORKDIR}"/${MY_P}
 
 pkg_setup() {
 	# Don't create groups

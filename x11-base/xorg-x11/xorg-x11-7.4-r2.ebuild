@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-base/xorg-x11/xorg-x11-7.4-r2.ebuild,v 1.3 2012/10/06 20:41:11 ulm Exp $
+# $Id$
 
 EAPI="2"
 
@@ -147,7 +147,7 @@ pkg_postinst() {
 	elog
 
 	# (#76985)
-	elog "Visit http://www.gentoo.org/doc/en/index.xml?catid=desktop"
+	elog "Visit https://www.gentoo.org/doc/en/index.xml?catid=desktop"
 	elog "for more information on configuring X."
 	elog
 }

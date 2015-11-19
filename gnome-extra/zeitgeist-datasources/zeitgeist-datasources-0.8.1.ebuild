@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-extra/zeitgeist-datasources/zeitgeist-datasources-0.8.1.ebuild,v 1.9 2015/04/08 17:56:31 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ DIR_PV2=$(get_version_component_range 1-3)
 
 DESCRIPTION="Plugins whose work is to push activities as events into Zeitgeist daemon"
 HOMEPAGE="https://launchpad.net/zeitgeist-datasources/ http://zeitgeist-project.com/"
-SRC_URI="http://launchpad.net/zeitgeist-datasources/${DIR_PV}/${DIR_PV2}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/zeitgeist-datasources/${DIR_PV}/${DIR_PV2}/+download/${P}.tar.gz"
 
 SLOT="0"
 KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86 ~amd64-linux ~x86-linux"

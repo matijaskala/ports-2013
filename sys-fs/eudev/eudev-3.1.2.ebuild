@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/eudev/eudev-3.1.2.ebuild,v 1.2 2015/06/21 11:30:32 blueness Exp $
+# $Id$
 
 EAPI="5"
 
@@ -13,8 +13,8 @@ if [[ ${PV} = 9999* ]]; then
 	EGIT_REPO_URI="git://github.com/gentoo/eudev.git"
 	inherit git-2
 else
-	SRC_URI="http://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~sparc ~x86"
+	SRC_URI="https://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
+	KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
@@ -251,12 +251,12 @@ pkg_postinst() {
 	elog
 	elog "For more information on eudev on Gentoo, writing udev rules, and"
 	elog "fixing known issues visit:"
-	elog "         http://www.gentoo.org/doc/en/udev-guide.xml"
+	elog "         https://www.gentoo.org/doc/en/udev-guide.xml"
 	elog
 
 	# http://cgit.freedesktop.org/systemd/systemd/commit/rules/50-udev-default.rules?id=3dff3e00e044e2d53c76fa842b9a4759d4a50e69
-	# http://bugs.gentoo.org/246847
-	# http://bugs.gentoo.org/514174
+	# https://bugs.gentoo.org/246847
+	# https://bugs.gentoo.org/514174
 	enewgroup input
 
 	# Update hwdb database in case the format is changed by udev version.

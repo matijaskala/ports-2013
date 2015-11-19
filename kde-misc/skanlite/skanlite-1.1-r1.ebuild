@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-misc/skanlite/skanlite-1.1-r1.ebuild,v 1.5 2015/06/04 18:57:32 kensington Exp $
+# $Id$
 
 EAPI=5
 
@@ -12,7 +12,7 @@ KDE_HANDBOOK="optional"
 inherit kde4-base
 
 DESCRIPTION="KDE image scanning application"
-HOMEPAGE="http://www.kde.org/applications/graphics/skanlite/"
+HOMEPAGE="https://www.kde.org/applications/graphics/skanlite/"
 SRC_URI="mirror://kde/stable/${PN}/${PV}/src/${P}.tar.xz"
 
 LICENSE="GPL-2"

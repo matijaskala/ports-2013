@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/objconv/objconv-2.32_pre20131127.ebuild,v 1.1 2014/07/28 14:29:15 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ DESCRIPTION="object code file converted (COFF, ELF, OMF, MACHO)"
 HOMEPAGE="http://agner.org/optimize/#objconv"
 # original URL is "http://agner.org/optimize/objconv.zip", but it's unversioned.
 # I copy those to distfiles time to time
-SRC_URI="http://dev.gentoo.org/~slyfox/distfiles/${P}.zip"
+SRC_URI="https://dev.gentoo.org/~slyfox/distfiles/${P}.zip"
 LICENSE="GPL-2"
 
 SLOT="0"

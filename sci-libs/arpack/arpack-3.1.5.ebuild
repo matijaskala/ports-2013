@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/arpack/arpack-3.1.5.ebuild,v 1.1 2015/04/03 13:00:45 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -43,7 +43,7 @@ src_configure() {
 }
 
 src_test() {
-	cp "${S}"/TESTS/testA.mtx "${BUILD_DIR}"/TESTS || die
+	cp "${S}"/TESTS/testA.mtx "${BUILD_DIR}"/TESTS || die
 	autotools-utils_src_test
 }
 

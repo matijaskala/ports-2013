@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gstreamer/gstreamer-0.10.36-r2.ebuild,v 1.15 2015/04/14 18:27:32 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -81,7 +81,7 @@ multilib_src_configure() {
 		$(multilib_native_use_enable introspection) \
 		$(use_enable test tests) \
 		--with-package-name="GStreamer ebuild for Gentoo" \
-		--with-package-origin="http://packages.gentoo.org/package/media-libs/gstreamer"
+		--with-package-origin="https://packages.gentoo.org/package/media-libs/gstreamer"
 
 	if multilib_is_native_abi; then
 		local x

@@ -1,14 +1,14 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-cpp/ctemplate/ctemplate-2.2.ebuild,v 1.5 2012/08/04 14:12:19 blueness Exp $
+# $Id$
 
 EAPI="4"
 
 inherit elisp-common python
 
 DESCRIPTION="A simple but powerful template language for C++"
-HOMEPAGE="http://code.google.com/p/ctemplate/"
-SRC_URI="http://ctemplate.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://github.com/olafvdspek/ctemplate"
+SRC_URI="https://ctemplate.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

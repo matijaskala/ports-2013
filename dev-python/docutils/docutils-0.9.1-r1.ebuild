@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/docutils/docutils-0.9.1-r1.ebuild,v 1.18 2015/04/08 08:05:08 mgorny Exp $
+# $Id$
 
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="Python Documentation Utilities"
-HOMEPAGE="http://docutils.sourceforge.net/ http://pypi.python.org/pypi/docutils"
+HOMEPAGE="http://docutils.sourceforge.net/ https://pypi.python.org/pypi/docutils"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 SRC_URI+=" glep? ( mirror://gentoo/glep-0.4-r1.tbz2 )"
 

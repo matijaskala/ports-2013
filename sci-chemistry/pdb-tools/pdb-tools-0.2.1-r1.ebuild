@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/pdb-tools/pdb-tools-0.2.1-r1.ebuild,v 1.7 2015/04/08 18:22:13 mgorny Exp $
+# $Id$
 
 EAPI=5
 
@@ -11,8 +11,8 @@ inherit fortran-2 python-single-r1 toolchain-funcs
 MY_PN="pdbTools"
 
 DESCRIPTION="Tools for manipulating and doing calculations on wwPDB macromolecule structure files"
-HOMEPAGE="http://code.google.com/p/pdb-tools/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_PN}_${PV}.tar.gz"
+HOMEPAGE="https://github.com/harmslab/pdbtools"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_PN}_${PV}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-3"

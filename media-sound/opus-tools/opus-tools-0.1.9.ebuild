@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-sound/opus-tools/opus-tools-0.1.9.ebuild,v 1.3 2015/05/13 05:29:23 jer Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils
@@ -12,7 +12,7 @@ if [[ ${PV} == *9999 ]] ; then
 	inherit git-2
 	EGIT_REPO_URI="git://git.opus-codec.org/${PN}.git"
 elif [[ ${PV%_p*} != ${PV} ]] ; then # Gentoo snapshot
-	SRC_URI="http://dev.gentoo.org/~lu_zero/${PN}/${P}.tar.xz"
+	SRC_URI="https://dev.gentoo.org/~lu_zero/${PN}/${P}.tar.xz"
 else # Official release
 	SRC_URI="http://downloads.xiph.org/releases/opus/${P}.tar.gz"
 fi

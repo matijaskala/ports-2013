@@ -1,10 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/git-python/git-python-1.0.1.ebuild,v 1.1 2015/06/01 07:23:41 patrick Exp $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1
 
@@ -13,7 +14,7 @@ MY_PV="${PV/_rc/.RC}"
 MY_P="${MY_PN}-${MY_PV}"
 
 DESCRIPTION="Library used to interact with Git repositories"
-HOMEPAGE="http://gitorious.org/git-python http://pypi.python.org/pypi/GitPython"
+HOMEPAGE="http://gitorious.org/git-python https://pypi.python.org/pypi/GitPython"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"

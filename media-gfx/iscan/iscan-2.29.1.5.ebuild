@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/iscan/iscan-2.29.1.5.ebuild,v 1.3 2014/01/27 19:20:25 axs Exp $
+# $Id$
 
 EAPI="4"
 
@@ -29,9 +29,9 @@ MY_DOC="userg_revQ"
 
 DESCRIPTION="EPSON Image Scan! for Linux (including sane-epkowa backend)"
 HOMEPAGE="http://download.ebz.epson.net/dsc/search/01/search/?OSC=LX"
-SRC_URI="http://dev.gentoo.org/~flameeyes/avasys/${PN}_${MY_PVR}.tar.gz
-	doc? ( http://dev.gentoo.org/~flameeyes/avasys/${MY_DOC}_e.pdf
-		linguas_ja? ( http://dev.gentoo.org/~flameeyes/avasys/${MY_DOC}_j.pdf )
+SRC_URI="https://dev.gentoo.org/~flameeyes/avasys/${PN}_${MY_PVR}.tar.gz
+	doc? ( https://dev.gentoo.org/~flameeyes/avasys/${MY_DOC}_e.pdf
+		linguas_ja? ( https://dev.gentoo.org/~flameeyes/avasys/${MY_DOC}_j.pdf )
 	)"
 LICENSE="GPL-2 AVASYS"
 SLOT="0"

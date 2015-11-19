@@ -1,15 +1,15 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-block/thin-provisioning-tools/thin-provisioning-tools-0.4.0.ebuild,v 1.1 2014/09/04 04:27:00 ssuominen Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils
 
 DESCRIPTION="A suite of tools for thin provisioning on Linux"
-HOMEPAGE="http://github.com/jthornber/thin-provisioning-tools"
+HOMEPAGE="https://github.com/jthornber/thin-provisioning-tools"
 EXT=.tar.gz
 BASE_A=${P}${EXT}
-SRC_URI="http://github.com/jthornber/${PN}/archive/v${PV}${EXT} -> ${BASE_A}"
+SRC_URI="https://github.com/jthornber/${PN}/archive/v${PV}${EXT} -> ${BASE_A}"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-misc/bfgminer/bfgminer-3.10.10.ebuild,v 1.1 2015/06/09 19:45:35 blueness Exp $
+# $Id$
 
 EAPI=5
 
@@ -42,7 +42,7 @@ REQUIRED_USE='
 DEPEND='
 	net-misc/curl
 	ncurses? (
-		sys-libs/ncurses[unicode?]
+		sys-libs/ncurses:=[unicode?]
 	)
 	>=dev-libs/jansson-2
 	net-libs/libblkmaker:=
@@ -80,14 +80,7 @@ RDEPEND="${DEPEND}
 	opencl? (
 		|| (
 			virtual/opencl
-			virtual/opencl-sdk
-			dev-util/ati-stream-sdk
-			dev-util/ati-stream-sdk-bin
-			dev-util/amdstream
-			dev-util/amd-app-sdk
-			dev-util/amd-app-sdk-bin
 			dev-util/nvidia-cuda-sdk[opencl]
-			dev-util/intel-opencl-sdk
 		)
 	)
 "

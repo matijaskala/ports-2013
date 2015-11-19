@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/isl/isl-0.13.ebuild,v 1.6 2014/11/04 03:22:08 vapier Exp $
+# $Id$
 
 EAPI="5"
 
@@ -25,7 +25,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.07-gdb-autoload-dir.patch
 
 	# m4/ax_create_pkgconfig_info.m4 is broken but avoid eautoreconf
-	# http://groups.google.com/group/isl-development/t/37ad876557e50f2c
+	# https://groups.google.com/group/isl-development/t/37ad876557e50f2c
 	sed -i -e '/Libs:/s:@LDFLAGS@ ::' configure || die #382737
 }
 

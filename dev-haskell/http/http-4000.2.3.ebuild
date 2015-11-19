@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/http/http-4000.2.3.ebuild,v 1.8 2012/12/10 21:53:15 slyfox Exp $
+# $Id$
 
 EAPI="4"
 
@@ -13,7 +13,7 @@ MY_P="${MY_PN}-${PV}"
 DESCRIPTION="A library for client-side HTTP"
 HOMEPAGE="https://github.com/haskell/HTTP"
 SRC_URI="mirror://hackage/packages/archive/${MY_PN}/${PV}/${MY_P}.tar.gz
-		http://dev.gentoo.org/~gienah/2big4tree/dev-haskell/http/${MY_P}-test-suite.tar.gz"
+		https://dev.gentoo.org/~gienah/2big4tree/dev-haskell/http/${MY_P}-test-suite.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

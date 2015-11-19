@@ -1,12 +1,12 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/netboot-base/netboot-base-20050110.ebuild,v 1.3 2010/10/08 02:13:21 leio Exp $
+# $Id$
 
 inherit toolchain-funcs
 
 DESCRIPTION="Baselayout for netboot systems"
-HOMEPAGE="http://www.gentoo.org/"
-SRC_URI="http://dev.gentoo.org/~vapier/${P}.tar.bz2
+HOMEPAGE="https://www.gentoo.org/"
+SRC_URI="https://dev.gentoo.org/~vapier/${P}.tar.bz2
 	mirror://gentoo/${P}.tar.bz2"
 
 LICENSE="GPL-2"

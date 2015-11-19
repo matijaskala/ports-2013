@@ -1,12 +1,11 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-wm/ratpoison/ratpoison-9999.ebuild,v 1.7 2014/10/20 15:11:09 jer Exp $
+# $Id$
 
 EAPI=5
-
 inherit autotools elisp-common eutils git-r3 toolchain-funcs
 
-DESCRIPTION="an extremely light-weight and barebones wm modelled after screen"
+DESCRIPTION="window manager without mouse dependency"
 HOMEPAGE="http://www.nongnu.org/ratpoison/"
 EGIT_REPO_URI="git://git.savannah.nongnu.org/ratpoison.git"
 
@@ -17,11 +16,11 @@ IUSE="debug emacs +history sloppy +xft"
 
 RDEPEND="
 	emacs? ( virtual/emacs )
-	history? ( sys-libs/readline )
+	history? ( sys-libs/readline:= )
+	xft? ( x11-libs/libXft )
 	virtual/perl-Pod-Parser
 	x11-libs/libXinerama
 	x11-libs/libXtst
-	xft? ( x11-libs/libXft )
 "
 DEPEND="
 	${RDEPEND}
@@ -33,7 +32,7 @@ SITEFILE=50ratpoison-gentoo.el
 DOCS=( AUTHORS ChangeLog NEWS README TODO )
 
 src_prepare() {
-	epatch "${FILESDIR}/ratpoison.el-gentoo.patch"
+	epatch "${FILESDIR}"/ratpoison.el-gentoo.patch
 	eautoreconf
 }
 

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/kcoloredit/kcoloredit-2.0.0-r1.ebuild,v 1.2 2014/04/26 12:34:34 johu Exp $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,7 @@ KDE_VERSION=4.4.0
 MY_P=${P}-kde${KDE_VERSION}
 
 DESCRIPTION="Tool for editing color palettes"
-HOMEPAGE="http://www.kde.org/"
+HOMEPAGE="https://www.kde.org/"
 SRC_URI="mirror://kde/stable/${KDE_VERSION}/src/extragear/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"

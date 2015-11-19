@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-accessibility/emacspeak/emacspeak-39.0-r2.ebuild,v 1.4 2014/12/31 16:21:52 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,10 +10,10 @@ DISABLE_AUTOFORMATTING=1
 inherit eutils readme.gentoo elisp
 
 if [[ ${PV} == "9999" ]] ; then
-	ESVN_REPO_URI="http://${PN}.googlecode.com/svn/trunk"
+	ESVN_REPO_URI="https://${PN}.googlecode.com/svn/trunk"
 	inherit subversion
 else
-	SRC_URI="http://${PN}.googlecode.com/files/${P}.tar.bz2"
+	SRC_URI="https://${PN}.googlecode.com/files/${P}.tar.bz2"
 	KEYWORDS="amd64 ppc x86"
 fi
 

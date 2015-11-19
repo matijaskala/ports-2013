@@ -1,14 +1,14 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-fs/cachefilesd/cachefilesd-0.10.5-r4.ebuild,v 1.4 2015/01/26 10:00:11 ago Exp $
+# $Id$
 
 EAPI=5
 
 inherit eutils flag-o-matic systemd toolchain-funcs
 
 DESCRIPTION="Provides a caching directory on an already mounted filesystem"
-HOMEPAGE="http://people.redhat.com/~dhowells/fscache/"
-SRC_URI="http://people.redhat.com/~dhowells/fscache/${P}.tar.bz2 -> ${P}.tar"
+HOMEPAGE="https://people.redhat.com/~dhowells/fscache/"
+SRC_URI="https://people.redhat.com/~dhowells/fscache/${P}.tar.bz2 -> ${P}.tar"
 
 SLOT="0"
 LICENSE="GPL-2"

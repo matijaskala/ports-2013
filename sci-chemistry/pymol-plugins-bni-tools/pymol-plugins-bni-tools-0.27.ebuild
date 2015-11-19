@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-chemistry/pymol-plugins-bni-tools/pymol-plugins-bni-tools-0.27.ebuild,v 1.1 2013/07/15 11:57:15 jlec Exp $
+# $Id$
 
 EAPI=5
 
@@ -28,8 +28,8 @@ S="${WORKDIR}"
 
 src_install(){
 	python_moduleinto pmg_tk/startup
-	python_parallel_foreach_impl python_domodule bni-tools.py
-	python_parallel_foreach_impl python_optimize
+	python_foreach_impl python_domodule bni-tools.py
+	python_foreach_impl python_optimize
 	dodoc readme.txt
 	dohtml ShortCommandDescription.html
 }

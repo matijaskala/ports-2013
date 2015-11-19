@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/xdelta/xdelta-3.0.6.ebuild,v 1.10 2014/08/10 21:30:09 slyfox Exp $
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ MY_P=${PN}${PV%.*.*}-${PV}
 
 DESCRIPTION="a binary diff and differential compression tools. VCDIFF (RFC 3284) delta compression"
 HOMEPAGE="http://xdelta.org/"
-SRC_URI="http://${PN}.googlecode.com/files/${MY_P}.tar.gz"
+SRC_URI="https://${PN}.googlecode.com/files/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="3"

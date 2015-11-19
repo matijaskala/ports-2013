@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/kde-apps/kate/kate-4.14.3.ebuild,v 1.1 2015/06/04 18:44:49 kensington Exp $
+# $Id$
 
 EAPI=5
 KDE_HANDBOOK="optional"
@@ -10,7 +10,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 inherit python-single-r1 kde4-meta
 
 DESCRIPTION="Kate is an MDI texteditor"
-HOMEPAGE="http://www.kde.org/applications/utilities/kate http://kate-editor.org"
+HOMEPAGE="https://www.kde.org/applications/utilities/kate http://kate-editor.org"
 KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="debug python"
 

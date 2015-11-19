@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-haskell/tagged/tagged-0.7.2.ebuild,v 1.2 2014/09/10 21:04:36 slyfox Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ CABAL_FEATURES="lib profile haddock hoogle hscolour"
 inherit haskell-cabal
 
 DESCRIPTION="Haskell 98 phantom types to avoid unsafely passing dummy arguments"
-HOMEPAGE="http://github.com/ekmett/tagged"
+HOMEPAGE="https://github.com/ekmett/tagged"
 SRC_URI="mirror://hackage/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"

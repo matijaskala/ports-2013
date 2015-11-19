@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/libkate/libkate-0.3.7.ebuild,v 1.18 2012/10/10 04:01:30 zerochaos Exp $
+# $Id$
 
 EAPI="4"
 PYTHON_DEPEND="wxwidgets? 2"
@@ -8,8 +8,8 @@ PYTHON_DEPEND="wxwidgets? 2"
 inherit eutils python
 
 DESCRIPTION="Codec for karaoke and text encapsulation for Ogg"
-HOMEPAGE="http://code.google.com/p/libkate/"
-SRC_URI="http://libkate.googlecode.com/files/${P}.tar.gz"
+HOMEPAGE="https://code.google.com/p/libkate/"
+SRC_URI="https://libkate.googlecode.com/files/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

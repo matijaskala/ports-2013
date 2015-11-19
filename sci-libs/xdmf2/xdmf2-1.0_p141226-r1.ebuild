@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-libs/xdmf2/xdmf2-1.0_p141226-r1.ebuild,v 1.5 2015/03/09 00:06:04 pacho Exp $
+# $Id$
 
 EAPI=5
 
@@ -10,7 +10,7 @@ inherit cmake-utils multilib python-single-r1
 
 DESCRIPTION="eXtensible Data Model and Format"
 HOMEPAGE="http://xdmf.org/index.php/Main_Page"
-SRC_URI="http://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~jlec/distfiles/${P}.tar.xz"
 
 SLOT="0"
 LICENSE="VTK"

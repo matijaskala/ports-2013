@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-terms/roxterm/roxterm-2.6.3.ebuild,v 1.5 2012/07/03 16:31:28 ranger Exp $
+# $Id$
 
 EAPI=4
 inherit gnome2-utils python toolchain-funcs
@@ -37,14 +37,14 @@ src_prepare() {
 	python_convert_shebangs 2 mscript.py
 
 	# the "maitch" build system is complete junk. let's stab it...
-	sed -i -e 's:TerminalEmulator:System;&:' roxterm.desktop || die
+	sed -i -e 's:TerminalEmulator:System;&:' roxterm.desktop || die
 	sed -i -e '/ctx.install_doc/s:COPYING COPYING-LGPL ::' mscript.py || die
 	sed -i -e "/CFLAGS/s:-O2 -g:${CFLAGS}:" {maitch,mscript}.py || die
 	sed -i \
 		-e 's:gcc:${CC}:' \
 		-e "/LDFLAGS/s:'':'${LDFLAGS}':" \
 		-e 's:--mode=link:--mode=link --tag=CC:' \
-		maitch.py || die
+		maitch.py || die
 }
 
 src_configure() {

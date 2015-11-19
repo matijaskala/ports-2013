@@ -1,12 +1,12 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/systemd-readahead/systemd-readahead-216.ebuild,v 1.2 2015/04/26 09:50:35 pacho Exp $
+# $Id$
 
 EAPI=5
 inherit systemd toolchain-funcs udev
 
 DESCRIPTION="Split of readahead systemd implementation"
-HOMEPAGE="http://dev.gentoo.org/~pacho/systemd-readahead.html"
+HOMEPAGE="https://dev.gentoo.org/~pacho/systemd-readahead.html"
 SRC_URI="http://www.freedesktop.org/software/systemd/systemd-${PV}.tar.xz"
 
 LICENSE="LGPL-2.1 MIT"

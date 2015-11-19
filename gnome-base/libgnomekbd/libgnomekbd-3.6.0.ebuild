@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/libgnomekbd/libgnomekbd-3.6.0.ebuild,v 1.5 2014/02/22 21:47:56 pacho Exp $
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -9,7 +9,7 @@ GNOME2_LA_PUNT="yes"
 inherit gnome2
 
 DESCRIPTION="Gnome keyboard configuration library"
-HOMEPAGE="http://www.gnome.org"
+HOMEPAGE="https://www.gnome.org"
 
 LICENSE="LGPL-2+"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/games-arcade/notpacman/notpacman-1.0.4.ebuild,v 1.3 2013/07/05 11:04:41 ago Exp $
+# $Id$
 
 EAPI=5
 
@@ -9,7 +9,7 @@ inherit eutils gnome2-utils games
 DESCRIPTION="A mashup of \"Not\" and \"Pacman\""
 HOMEPAGE="http://stabyourself.net/notpacman/"
 SRC_URI="http://stabyourself.net/dl.php?file=notpacman-1004/notpacman-linux.zip -> ${P}.zip
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
 
 LICENSE="WTFPL-2"
 SLOT="0"

@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-fonts/wqy-microhei/wqy-microhei-0.2.0_beta-r1.ebuild,v 1.1 2014/11/14 03:23:05 dlan Exp $
+# $Id$
 
 EAPI=5
 inherit font
@@ -9,7 +9,7 @@ MY_P="${P/_/-}"
 DESCRIPTION="A droid derived Sans-Serif style CJK font"
 HOMEPAGE="http://wqy.sourceforge.net/en/"
 SRC_URI="mirror://sourceforge/wqy/${MY_P}.tar.gz
-	http://dev.gentoo.org/~dlan/distfiles/${PN}.ttc.xd3"
+	https://dev.gentoo.org/~dlan/distfiles/${PN}.ttc.xd3"
 
 LICENSE="Apache-2.0 GPL-3"
 SLOT="0"

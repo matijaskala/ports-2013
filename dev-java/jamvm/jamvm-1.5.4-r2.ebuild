@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/jamvm/jamvm-1.5.4-r2.ebuild,v 1.5 2014/08/10 20:16:11 slyfox Exp $
+# $Id$
 
 EAPI=4
 
@@ -21,9 +21,13 @@ DEPEND="dev-java/gnu-classpath:${CLASSPATH_SLOT}
 	amd64? ( virtual/libffi )"
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	"${FILESDIR}"/"${P}-classes-location.patch"
+)
+
 src_prepare() {
 	# without this patch, classes.zip is not found at runtime
-	epatch "${FILESDIR}/classes-location.patch"
+	epatch "${PATCHES[@]}"
 	eautoreconf
 
 	# These come precompiled.
@@ -38,7 +42,7 @@ CLASSPATH_DIR="/usr/gnu-classpath-${CLASSPATH_SLOT}"
 
 src_configure() {
 	# Keep libjvm.so out of /usr
-	# http://bugs.gentoo.org/show_bug.cgi?id=181896
+	# https://bugs.gentoo.org/show_bug.cgi?id=181896
 	INSTALL_DIR="/usr/$(get_libdir)/${PN}"
 
 	filter-flags "-fomit-frame-pointer"
@@ -76,7 +80,7 @@ src_install() {
 
 	dodoc ACKNOWLEDGEMENTS AUTHORS ChangeLog NEWS README
 
-	set_java_env "${FILESDIR}/${PN}-1.5.4-r2.env"
+	set_java_env "${FILESDIR}/${P}-env.file"
 
 	dosym /usr/bin/jamvm ${INSTALL_DIR}/bin/java
 	dosym ${CLASSPATH_DIR}/share/classpath/glibj.zip ${INSTALL_DIR}/jre/lib/rt.jar

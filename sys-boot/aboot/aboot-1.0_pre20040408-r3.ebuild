@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-boot/aboot/aboot-1.0_pre20040408-r3.ebuild,v 1.5 2011/12/11 17:29:53 armin76 Exp $
+# $Id$
 
 inherit eutils
 
@@ -11,7 +11,7 @@ HOMEPAGE="http://aboot.sourceforge.net/"
 SRC_URI="http://aboot.sourceforge.net/tarballs/${P}.tar.bz2
 	mirror://gentoo/gentoo-headers-base-${KERN_VER}.tar.bz2
 	mirror://gentoo/${PN}_gentoo.diff.bz2
-	http://dev.gentoo.org/~armin76/dist/${PN}_gentoo.diff.bz2"
+	https://dev.gentoo.org/~armin76/dist/${PN}_gentoo.diff.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
