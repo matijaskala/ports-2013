@@ -7,14 +7,14 @@ EAPI=5
 MY_P="${PN}-3-${PV}"
 
 inherit scons-utils multilib toolchain-funcs eutils user flag-o-matic
-DESCRIPTION="Synchronous multi-master replication engine that provides its service through wsrep API"
+DESCRIPTION="Synchronous multi-master replication engine that provides the wsrep API"
 HOMEPAGE="http://www.galeracluster.com"
 SRC_URI="http://releases.galeracluster.com/source/galera-3-${PV}.tar.gz"
 LICENSE="GPL-2 BSD"
 
 SLOT="0"
 
-KEYWORDS="~amd64 ~ppc64 ~x86"
+KEYWORDS="~amd64 ~arm ~ppc64 ~x86"
 IUSE="cpu_flags_x86_sse4_2 garbd ssl test"
 
 CDEPEND="
