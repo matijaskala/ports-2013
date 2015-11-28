@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="4"
+EAPI=5
 
 PATCH_VER="1.4"
 UCLIBC_VER="1.0"
@@ -19,6 +19,10 @@ SSP_STABLE="amd64 x86 mips ppc ppc64 arm"
 # uclibc need to be >= 0.9.33
 SSP_UCLIBC_STABLE="x86 amd64 mips ppc ppc64 arm"
 #end Hardened stuff
+
+GMP_VER="5.1.3"
+MPFR_VER="3.1.2"
+MPC_VER="1.0.1"
 
 inherit eutils toolchain
 

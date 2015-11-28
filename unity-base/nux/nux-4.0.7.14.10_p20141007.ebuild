@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit autotools base ubuntu
+inherit autotools eutils ubuntu-versionator
 
 DESCRIPTION="Visual rendering toolkit for the Unity desktop"
 HOMEPAGE="http://launchpad.net/nux"
@@ -15,14 +15,13 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="media-libs/glew:=
-	app-i18n/ibus
+RDEPEND="app-i18n/ibus
 	dev-libs/boost
 	>=dev-libs/glib-2.32.3
 	dev-libs/libpcre
 	dev-libs/libsigc++:2
 	gnome-base/gnome-common
-	media-libs/glew
+	media-libs/glew:=
 	media-libs/libpng:0
 	sys-apps/pciutils
 	unity-base/geis
@@ -33,20 +32,18 @@ RDEPEND="media-libs/glew:=
 	x11-libs/libXxf86vm
 	x11-libs/pango
 	x11-proto/dri2proto
-	x11-proto/glproto"
+	x11-proto/glproto
+	media-libs/glew:="
 DEPEND="${RDEPEND}
 	>=sys-devel/gcc-4.7
 	dev-cpp/gmock
 	dev-cpp/gtest"
 
 src_prepare() {
-	base_src_prepare
 	eautoreconf
 }
 
 src_install() {
 	emake DESTDIR="${D}" install || die
-	dosym /usr/libexec/nux/unity_support_test /usr/lib/nux/unity_support_test
-
 	prune_libtool_files --modules
 }

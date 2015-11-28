@@ -1,9 +1,10 @@
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 # Maintainer: Toolchain Ninjas <toolchain@gentoo.org>
 
 DESCRIPTION="The GNU Compiler Collection"
-HOMEPAGE="http://gcc.gnu.org/"
+HOMEPAGE="https://gcc.gnu.org/"
 RESTRICT="strip" # cross-compilers need controlled stripping
 
 inherit eutils fixheadtails flag-o-matic gnuconfig libtool multilib pax-utils toolchain-funcs versionator
@@ -24,7 +25,7 @@ FEATURES=${FEATURES/multilib-strict/}
 
 EXPORTED_FUNCTIONS="pkg_setup src_unpack src_compile src_test src_install pkg_postinst pkg_postrm"
 case ${EAPI:-0} in
-	0|1)	;;
+	0|1)    die "Need to upgrade to at least EAPI=2";;
 	2|3)    EXPORTED_FUNCTIONS+=" src_prepare src_configure" ;;
 	4*|5*)  EXPORTED_FUNCTIONS+=" pkg_pretend src_prepare src_configure" ;;
 	*)      die "I don't speak EAPI ${EAPI}."
@@ -35,8 +36,8 @@ EXPORT_FUNCTIONS ${EXPORTED_FUNCTIONS}
 
 export CTARGET=${CTARGET:-${CHOST}}
 if [[ ${CTARGET} = ${CHOST} ]] ; then
-	if [[ ${CATEGORY/cross-} != ${CATEGORY} ]] ; then
-		export CTARGET=${CATEGORY/cross-}
+	if [[ ${CATEGORY} == cross-* ]] ; then
+		export CTARGET=${CATEGORY#cross-}
 	fi
 fi
 : ${TARGET_ABI:=${ABI}}
@@ -84,9 +85,9 @@ elif [[ ${GCC_PV} == *_rc* ]] ; then
 	SNAPSHOT=${GCC_PV%_rc*}-RC-${GCC_PV##*_rc}
 fi
 
-if [[ ${SNAPSHOT} == 5.0-* ]] ; then
-	# The gcc-5 release has dropped the .0 for some reason.
-	SNAPSHOT=${SNAPSHOT/5.0/5}
+if [[ ${SNAPSHOT} == [56789].0-* ]] ; then
+	# The gcc-5+ releases have dropped the .0 for some reason.
+	SNAPSHOT=${SNAPSHOT/.0}
 fi
 
 export GCC_FILESDIR=${GCC_FILESDIR:-${FILESDIR}}
@@ -132,7 +133,7 @@ IUSE="multislot regression-test vanilla"
 IUSE_DEF=( nls nptl )
 
 if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
-	IUSE+=" altivec"
+	IUSE+=" altivec debug"
 	IUSE_DEF+=( cxx fortran )
 	[[ -n ${PIE_VER} ]] && IUSE+=" nopie"
 	[[ -n ${HTB_VER} ]] && IUSE+=" boundschecking"
@@ -147,16 +148,19 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	tc_version_is_at_least 4.7 && IUSE+=" go"
 	tc_version_is_at_least 4.8 && IUSE+=" graphite" IUSE_DEF+=( sanitize )
 	tc_version_is_at_least 4.9 && IUSE+=" cilk"
+	tc_version_is_at_least 6.0 && IUSE+=" pie +ssp"
 fi
 
-[[ ${EAPI:-0} != 0 ]] && IUSE_DEF=( "${IUSE_DEF[@]/#/+}" )
-IUSE+=" ${IUSE_DEF[*]}"
+IUSE+=" ${IUSE_DEF[*]/#/+}"
 
 # Support upgrade paths here or people get pissed
-if use multislot ; then
+if ! tc_version_is_at_least 4.7 || is_crosscompile || use multislot || [[ ${GCC_PV} == *_alpha* ]] ; then
 	SLOT="${GCC_CONFIG_VER}"
-else
+elif ! tc_version_is_at_least 5.0 ; then
 	SLOT="${GCC_BRANCH_VER}"
+else
+	# Upstream changed versioning w/gcc-5+, so SLOT matches major only. #555164
+	SLOT="${GCCMAJOR}"
 fi
 
 #---->> DEPEND <<----
@@ -169,9 +173,9 @@ tc_version_is_at_least 3 && RDEPEND+=" virtual/libiconv"
 if tc_version_is_at_least 4 ; then
 	GMP_MPFR_DEPS=""
 	[[ -z ${GMP_VER} ]] && \
-		GMP_MPFR_DEPS="${GMP_MPFR_DEPS} >=dev-libs/gmp-4.3.2"
+		GMP_MPFR_DEPS="${GMP_MPFR_DEPS} >=dev-libs/gmp-4.3.2:0"
 	[[ -z ${MPFR_VER} ]] && \
-		GMP_MPFR_DEPS="${GMP_MPFR_DEPS} >=dev-libs/mpfr-2.4.2"
+		GMP_MPFR_DEPS="${GMP_MPFR_DEPS} >=dev-libs/mpfr-2.4.2:0"
 	if tc_version_is_at_least 4.3 ; then
 		RDEPEND+=" ${GMP_MPFR_DEPS}"
 	elif in_iuse fortran ; then
@@ -180,11 +184,11 @@ if tc_version_is_at_least 4 ; then
 fi
 
 [[ -z ${MPC_VER} ]] && \
-tc_version_is_at_least 4.5 && RDEPEND+=" >=dev-libs/mpc-0.8.1"
+tc_version_is_at_least 4.5 && RDEPEND+=" >=dev-libs/mpc-0.8.1:0"
 
 if in_iuse graphite ; then
 	if tc_version_is_at_least 5.0 ; then
-		RDEPEND+=" graphite? ( >=dev-libs/isl-0.12 )"
+		RDEPEND+=" graphite? ( >=dev-libs/isl-0.14 )"
 	elif tc_version_is_at_least 4.8 ; then
 		RDEPEND+="
 			graphite? (
@@ -213,10 +217,6 @@ if in_iuse gcj ; then
 		x11-proto/xextproto
 		=x11-libs/gtk+-2*
 		virtual/pkgconfig
-		amd64? ( multilib? (
-			app-emulation/emul-linux-x86-gtklibs
-			app-emulation/emul-linux-x86-xlibs
-		) )
 	"
 	tc_version_is_at_least 3.4 && GCJ_GTK_DEPS+=" x11-libs/pango"
 	tc_version_is_at_least 4.2 && GCJ_DEPS+=" app-arch/zip app-arch/unzip"
@@ -242,7 +242,7 @@ S=$(
 gentoo_urls() {
 	local devspace="HTTP~vapier/dist/URI HTTP~rhill/dist/URI
 	HTTP~zorry/patches/gcc/URI HTTP~blueness/dist/URI"
-	devspace=${devspace//HTTP/http:\/\/dev.gentoo.org\/}
+	devspace=${devspace//HTTP/https:\/\/dev.gentoo.org\/}
 	echo mirror://gentoo/$1 ${devspace//URI/$1}
 }
 
@@ -397,8 +397,8 @@ toolchain_pkg_pretend() {
 #---->> pkg_setup <<----
 
 toolchain_pkg_setup() {
-	case "${EAPI:-0}" in
-		0|1|2|3)    toolchain_pkg_pretend ;;
+	case ${EAPI} in
+	2|3) toolchain_pkg_pretend ;;
 	esac
 
 	# we dont want to use the installed compiler's specs to build gcc
@@ -414,10 +414,6 @@ toolchain_src_unpack() {
 	else
 		gcc_quick_unpack
 	fi
-
-	case ${EAPI:-0} in
-		0|1)   toolchain_src_prepare ;;
-	esac
 }
 
 gcc_quick_unpack() {
@@ -612,7 +608,7 @@ toolchain_src_prepare() {
 	fi
 
 	case ${CTARGET} in
-		*-musl*)
+		*-_musl*)
 			cd "${S}"
 			sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
 			mv 'libstdc++-v3/config/os/gnu-linux' 'libstdc++-v3/config/os/gnu-linux.org'
@@ -920,10 +916,10 @@ toolchain_src_configure() {
 
 	# Use the default ("release") checking because upstream usually neglects
 	# to test "disabled" so it has a history of breaking. #317217
-	if tc_version_is_at_least 4 || [[ -n ${GCC_CHECKS_LIST} ]] ; then
-		confgcc+=( --enable-checking=${GCC_CHECKS_LIST:-release} )
-	else
-		confgcc+=( --disable-checking )
+	if tc_version_is_at_least 3.4 ; then
+		# The "release" keyword is new to 4.0. #551636
+		local off=$(tc_version_is_at_least 4.0 && echo release || echo no)
+		confgcc+=( --enable-checking="${GCC_CHECKS_LIST:-$(usex debug yes ${off})}" )
 	fi
 
 	# Branding
@@ -1229,6 +1225,14 @@ toolchain_src_configure() {
 		confgcc+=( $(use_enable sanitize libsanitizer) )
 	fi
 
+	if tc_version_is_at_least 6.0 ; then
+		confgcc+=(
+			$(use_enable pie default-pie)
+			# This defaults to -fstack-protector-strong.
+			$(use_enable ssp default-ssp)
+		)
+	fi
+
 	# Disable gcc info regeneration -- it ships with generated info pages
 	# already.  Our custom version/urls/etc... trigger it.  #464008
 	export gcc_cv_prog_makeinfo_modern=no
@@ -1261,7 +1265,8 @@ toolchain_src_configure() {
 	# and now to do the actual configuration
 	addwrite /dev/zero
 	echo "${S}"/configure "${confgcc[@]}"
-	"${S}"/configure "${confgcc[@]}" || die "failed to run configure"
+	CONFIG_SHELL="/bin/bash" \
+	bash "${S}"/configure "${confgcc[@]}" || die "failed to run configure"
 
 	# return to whatever directory we were in before
 	popd > /dev/null
@@ -1510,8 +1515,8 @@ gcc-abi-map() {
 	# Convert the ABI name we use in Gentoo to what gcc uses
 	local map=()
 	case ${CTARGET} in
-		mips*)   map=("o32 32" "n32 n32" "n64 64") ;;
-		x86_64*) map=("amd64 m64" "x86 m32" "x32 mx32") ;;
+	mips*)   map=("o32 32" "n32 n32" "n64 64") ;;
+	x86_64*) map=("amd64 m64" "x86 m32" "x32 mx32") ;;
 	esac
 
 	local m
@@ -1524,10 +1529,6 @@ gcc-abi-map() {
 #----> src_compile <----
 
 toolchain_src_compile() {
-	case ${EAPI:-0} in
-		0|1)   toolchain_src_configure ;;
-	esac
-
 	touch "${S}"/gcc/c-gperf.h
 
 	# Do not make manpages if we do not have perl ...
@@ -1640,7 +1641,7 @@ toolchain_src_install() {
 	# We remove the generated fixincludes, as they can cause things to break
 	# (ncurses, openssl, etc).  We do not prevent them from being built, as
 	# in the following commit which we revert:
-	# http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/eclass/toolchain.eclass?r1=1.647&r2=1.648
+	# https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/eclass/toolchain.eclass?r1=1.647&r2=1.648
 	# This is because bsd userland needs fixedincludes to build gcc, while
 	# linux does not.  Both can dispose of them afterwards.
 	while read x ; do
@@ -1717,8 +1718,6 @@ toolchain_src_install() {
 		if tc_version_is_at_least 3.0 ; then
 			local cxx_mandir=$(find "${WORKDIR}/build/${CTARGET}/libstdc++-v3" -name man)
 			if [[ -d ${cxx_mandir} ]] ; then
-				# clean bogus manpages #113902
-				find "${cxx_mandir}" -name '*_build_*' -exec rm {} \;
 				cp -r "${cxx_mandir}"/man? "${D}/${DATAPATH}"/man/
 			fi
 		fi
@@ -1744,13 +1743,9 @@ toolchain_src_install() {
 	# between binary and source package borks things ....
 	if ! is_crosscompile ; then
 		insinto "${DATAPATH}"
-		if tc_version_is_at_least 4.0 ; then
-			newins "${GCC_FILESDIR}"/awk/fixlafiles.awk-no_gcc_la fixlafiles.awk || die
-			find "${D}/${LIBPATH}" -name libstdc++.la -type f -exec rm "{}" \;
-			find "${D}/${LIBPATH}" -name "lib?san.la" -type f -exec rm "{}" \; # 487550
-		else
-			doins "${GCC_FILESDIR}"/awk/fixlafiles.awk || die
-		fi
+		newins "${GCC_FILESDIR}"/awk/fixlafiles.awk-no_gcc_la fixlafiles.awk || die
+		find "${D}/${LIBPATH}" -name libstdc++.la -type f -delete
+		find "${D}/${LIBPATH}" -name 'lib*san.la' -type f -delete #487550 #546700
 		exeinto "${DATAPATH}"
 		doexe "${GCC_FILESDIR}"/fix_libtool_files.sh || die
 		doexe "${GCC_FILESDIR}"/c{89,99} || die
@@ -1814,7 +1809,7 @@ gcc_movelibs() {
 			if [[ ${FROMDIR} != "${TODIR}" && -d ${FROMDIR} ]] ; then
 				local files=$(find "${FROMDIR}" -maxdepth 1 ! -type d 2>/dev/null)
 				if [[ -n ${files} ]] ; then
-					mv ${files} "${TODIR}"
+					mv ${files} "${TODIR}" || die
 				fi
 			fi
 		done
@@ -1824,7 +1819,7 @@ gcc_movelibs() {
 		FROMDIR="${PREFIX}/lib/${OS_MULTIDIR}"
 		for x in "${D}${FROMDIR}"/pkgconfig/libgcj*.pc ; do
 			[[ -f ${x} ]] || continue
-			sed -i "/^libdir=/s:=.*:=${LIBPATH}/${MULTIDIR}:" "${x}"
+			sed -i "/^libdir=/s:=.*:=${LIBPATH}/${MULTIDIR}:" "${x}" || die
 			mv "${x}" "${D}${FROMDIR}"/pkgconfig/libgcj-${GCC_PV}.pc || die
 		done
 	done
@@ -1843,21 +1838,25 @@ gcc_movelibs() {
 # -are-, and not where they -used- to be.  also, any dependencies we have
 # on our own .la files need to be updated.
 fix_libtool_libdir_paths() {
+	local libpath="$1"
+
 	pushd "${D}" >/dev/null
 
-	pushd "./${1}" >/dev/null
+	pushd "./${libpath}" >/dev/null
 	local dir="${PWD#${D%/}}"
 	local allarchives=$(echo *.la)
 	allarchives="\(${allarchives// /\\|}\)"
 	popd >/dev/null
 
-	sed -i \
-		-e "/^libdir=/s:=.*:='${dir}':" \
-		./${dir}/*.la
-	sed -i \
-		-e "/^dependency_libs=/s:/[^ ]*/${allarchives}:${LIBPATH}/\1:g" \
-		$(find ./${PREFIX}/lib* -maxdepth 3 -name '*.la') \
-		./${dir}/*.la
+	# The libdir might not have any .la files. #548782
+	find "./${dir}" -maxdepth 1 -name '*.la' \
+		-exec sed -i -e "/^libdir=/s:=.*:='${dir}':" {} + || die
+	# Would be nice to combine these, but -maxdepth can not be specified
+	# on sub-expressions.
+	find "./${PREFIX}"/lib* -maxdepth 3 -name '*.la' \
+		-exec sed -i -e "/^dependency_libs=/s:/[^ ]*/${allarchives}:${libpath}/\1:g" {} + || die
+	find "./${dir}/" -maxdepth 1 -name '*.la' \
+		-exec sed -i -e "/^dependency_libs=/s:/[^ ]*/${allarchives}:${libpath}/\1:g" {} + || die
 
 	popd >/dev/null
 }
@@ -1982,7 +1981,7 @@ toolchain_pkg_postinst() {
 		echo
 		ewarn "You might want to review the GCC upgrade guide when moving between"
 		ewarn "major versions (like 4.2 to 4.3):"
-		ewarn "http://www.gentoo.org/doc/en/gcc-upgrading.xml"
+		ewarn "https://wiki.gentoo.org/wiki/Upgrading_GCC"
 		echo
 
 		# Clean up old paths
