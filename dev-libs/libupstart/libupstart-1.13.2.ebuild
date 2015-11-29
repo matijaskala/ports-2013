@@ -16,6 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+threads"
 RESTRICT="mirror"
 
+RDEPEND="!sys-apps/upstart"
 DEPEND="sys-devel/gettext
 	sys-libs/libnih[dbus]
 	virtual/pkgconfig"

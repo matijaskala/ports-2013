@@ -15,13 +15,13 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
 
-RDEPEND="app-i18n/ibus
+RDEPEND="media-libs/glew:=
+	app-i18n/ibus
 	dev-libs/boost
 	>=dev-libs/glib-2.32.3
 	dev-libs/libpcre
 	dev-libs/libsigc++:2
 	gnome-base/gnome-common
-	media-libs/glew:=
 	media-libs/libpng:0
 	sys-apps/pciutils
 	unity-base/geis
@@ -32,8 +32,7 @@ RDEPEND="app-i18n/ibus
 	x11-libs/libXxf86vm
 	x11-libs/pango
 	x11-proto/dri2proto
-	x11-proto/glproto
-	media-libs/glew:="
+	x11-proto/glproto"
 DEPEND="${RDEPEND}
 	>=sys-devel/gcc-4.7
 	dev-cpp/gmock
