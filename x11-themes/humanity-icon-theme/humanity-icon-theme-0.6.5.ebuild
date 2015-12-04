@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=4
-inherit gnome2-utils ubuntu
+inherit gnome2-utils ubuntu-versionator
 
 DESCRIPTION="A nice and well polished icon theme"
 HOMEPAGE="https://launchpad.net/human-icon-theme"

@@ -90,7 +90,6 @@ src_prepare() {
 	export CMAKE_BUILD_TYPE=none
 
 	epatch "${FILESDIR}/${PN}-sandbox.patch"
-	epatch "${FILESDIR}/use_python.patch"
 	epatch "${FILESDIR}/rotate_edge.patch"
 	epatch "${FILESDIR}/untest.diff"
 	epatch "${FILESDIR}/gsettings_schemas.diff"

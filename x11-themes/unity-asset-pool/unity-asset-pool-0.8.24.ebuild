@@ -6,7 +6,7 @@ EAPI=4
 
 UVER_PREFIX="daily13.06.10"
 
-inherit gnome2-utils ubuntu
+inherit gnome2-utils ubuntu-versionator
 
 DESCRIPTION="Unity desktop icon theme"
 HOMEPAGE="https://launchpad.net/unity-asset-pool"
