@@ -10,7 +10,7 @@ inherit autotools flag-o-matic gnome2 base vala
 
 DESCRIPTION="The greeter (login screen) application for Unity. It is implemented as a LightDM greeter."
 HOMEPAGE="https://launchpad.net/unity-greeter"
-SRC_URI="http://launchpad.net/${PN}/15.04/${PV}/+download/${P}.tar.gz"
+SRC_URI="http://launchpad.net/${PN}/16.04/${PV}/+download/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"

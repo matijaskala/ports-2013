@@ -8,7 +8,8 @@ SRC_URI="http://launchpad.net/lightdm-webkit-greeter/trunk/${PV}/+download/${P}.
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="amd64 x86"
+RESTRICT="mirror"
 
 DEPEND="net-libs/webkit-gtk:2
 	>=x11-misc/lightdm-1.0.0"
