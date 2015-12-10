@@ -4,16 +4,17 @@
 
 EAPI=4
 
-UVER_PREFIX="daily13.06.05"
-inherit autotools eutils ubuntu-versionator
+inherit autotools eutils
 
 DESCRIPTION="uTouch Frame Library"
 HOMEPAGE="https://launchpad.net/frame"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}daily13.06.05.orig.tar.gz"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
+S=${WORKDIR}/${P}daily13.06.05
 RESTRICT="mirror"
 
 DEPEND=">=sys-devel/gcc-4.6

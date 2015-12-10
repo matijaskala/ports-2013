@@ -5,11 +5,11 @@
 EAPI=5
 PYTHON_COMPAT=( python{3_3,3_4} )
 
-SRC_SUFFIX="tar.xz"
-inherit autotools distutils-r1 ubuntu-versionator vala
+inherit autotools distutils-r1 vala
 
 DESCRIPTION="Ubuntu mobile platform package management framework"
 HOMEPAGE="https://launchpad.net/click"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"

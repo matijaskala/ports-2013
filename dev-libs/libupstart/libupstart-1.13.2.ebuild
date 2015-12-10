@@ -4,16 +4,17 @@
 
 EAPI=5
 
-UPN="upstart"
-inherit eutils ubuntu-versionator
+inherit eutils
 
 DESCRIPTION="Event-based replacement for the /sbin/init daemon."
 HOMEPAGE="http://upstart.ubuntu.com/"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/upstart_${PV}.orig.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+threads"
+S=${WORKDIR}/upstart-${PV}
 RESTRICT="mirror"
 
 RDEPEND="!sys-apps/upstart"

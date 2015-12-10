@@ -8,10 +8,11 @@ GCONF_DEBUG="yes"
 
 SRC_SUFFIX="orig.tar.bz2"
 
-inherit base gnome2 cmake-utils ubuntu-versionator
+inherit base gnome2 cmake-utils
 
 DESCRIPTION="Dconf Qt bindings for the Unity desktop"
 HOMEPAGE="https://launchpad.net/dconf-qt"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.orig.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"

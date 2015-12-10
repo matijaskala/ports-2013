@@ -4,17 +4,17 @@
 
 EAPI=4
 
-UVER_PREFIX="daily13.06.10"
-
-inherit gnome2-utils ubuntu-versionator
+inherit gnome2-utils
 
 DESCRIPTION="Unity desktop icon theme"
 HOMEPAGE="https://launchpad.net/unity-asset-pool"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}daily13.06.10.orig.tar.gz"
 
 LICENSE="CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
+S=${WORKDIR}/${P}daily13.06.10
 RESTRICT="mirror"
 
 RDEPEND=">=x11-themes/gnome-icon-theme-3.8

@@ -13,20 +13,23 @@
 
 # Type		Name							Status		NoMix
 
-arch		arch/alpha						stable
-arch		arch/amd64						stable
-arch		arch/amd64/x32						stable
-arch		arch/amd64/no-multilib					exp	
-arch		arch/amd64-fbsd						exp
-arch		arch/arm/armv7a						exp
-arch		arch/arm/armv6j						exp
-arch		arch/arm/armv5te					exp
-arch		arch/x86						stable
-arch		arch/x86-fbsd						exp
+arch		default/linux/alpha					stable
+arch		default/linux/amd64					stable
+arch		default/linux/arm					stable
+arch		default/linux/arm64					stable
+arch		default/linux/hppa					stable
+arch		default/linux/ia64					stable
+arch		default/linux/mips					stable
+arch		default/linux/nios2					stable
+arch		default/linux/powerpc					stable
+arch		default/linux/riscv					stable
+arch		default/linux/s390					stable
+arch		default/linux/sh					stable
+arch		default/linux/sparc					stable
+arch		default/linux/x86					stable
 
-build		funtoo/1.0/linux-gnu/build/stable			stable
+build		releases/13.0						stable
 
-flavor		funtoo/1.0/linux-gnu/flavor/minimal			stable
 flavor		funtoo/1.0/linux-gnu/flavor/core			stable
 flavor		funtoo/1.0/linux-gnu/flavor/desktop			stable
 flavor		hardened/linux						exp

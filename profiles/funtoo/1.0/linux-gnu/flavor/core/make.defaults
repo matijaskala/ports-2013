@@ -1,10 +1,5 @@
-USE="gdbm nptl unicode"
-USE="$USE acl pam ssl crypt cracklib" 									#core security
-USE="$USE nls iconv xml pcre" 									#core subsystems
-USE="$USE zlib bzip2"										#core compression
-USE="$USE readline ncurses"									#core gui/interactivity frameworks
-USE="$USE openmp python"									#core languages
-USE="$USE ipv6 tcpd resolvconf icu"								#core networking 
+USE="cracklib" 									#core security
+USE="$USE xml" 									#core subsystems
+USE="$USE resolvconf icu"								#core networking 
 USE="$USE -alsa -consolekit -cups -X -gtk -kde -introspection"					#do not enable GUI flags
-USE="$USE systemd"										#systemd
 INPUT_DEVICES="evdev synaptics"  								#FL-159

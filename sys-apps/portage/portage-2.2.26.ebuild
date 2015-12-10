@@ -18,7 +18,7 @@ DESCRIPTION="Portage is the package management and distribution system for Gento
 HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Portage"
 
 LICENSE="GPL-2"
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 SLOT="0"
 IUSE="build doc epydoc +ipc linguas_ru selinux xattr"
 
@@ -56,7 +56,7 @@ RDEPEND="
 	!<app-admin/logrotate-3.8.0"
 PDEPEND="
 	!build? (
-		dev-vcs/git
+		>=net-misc/rsync-2.6.4
 		userland_GNU? ( >=sys-apps/coreutils-6.4 )
 	)"
 # coreutils-6.4 rdep is for date format in emerge-webrsync #164532
@@ -79,14 +79,12 @@ TARBALL_PV=${PV}
 SRC_URI="mirror://gentoo/${PN}-${TARBALL_PV}.tar.bz2
 	$(prefix_src_archives ${PN}-${TARBALL_PV}.tar.bz2)"
 
+pkg_setup() {
+	use epydoc && DISTUTILS_ALL_SUBPHASE_IMPLS=( python2.7 )
+}
+
 python_prepare_all() {
 	distutils-r1_python_prepare_all
-
-	einfo "Adjusting repos.conf ..."
-	sed -e "s|^\(sync-type = \).*|\\1git|" \
-		-e "s|^\(sync-uri = \).*|\\1git://github.com/matijaskala/ports-2013.git|" \
-		-i cnf/repos.conf || die "sed failed"
-	epatch "${FILESDIR}/partylinux-usr-merge.patch"
 
 	if ! use ipc ; then
 		einfo "Disabling ipc..."
@@ -130,6 +128,7 @@ python_prepare_all() {
 		sed -e "s|^\(main-repo = \).*|\\1gentoo_prefix|" \
 			-e "s|^\\[gentoo\\]|[gentoo_prefix]|" \
 			-e "s|^\(location = \)\(/usr/portage\)|\\1${EPREFIX}\\2|" \
+			-e "s|^\(sync-uri = \).*|\\1rsync://prefix.gentooexperimental.org/gentoo-portage-prefix|" \
 			-i cnf/repos.conf || die "sed failed"
 
 		einfo "Adding FEATURES=force-prefix to make.globals ..."
@@ -237,38 +236,36 @@ pkg_preinst() {
 		USERSYNC_UPGRADE=false
 		REPOS_CONF_UPGRADE=false
 	fi
+}
 
-	local PKG_SYM="${EROOT}/var/db/pkg"
-	if [ ! -h "${PKG_SYM}" ]; then
-		rmdir "${PKG_SYM}" 2> /dev/null
-		if [ -d "${PKG_SYM}" ]; then
-			pushd ${PKG_SYM}
-			local DATADIR="${EROOT}/usr/share/portage/pkg"
-			[ -h ${DATADIR} ] && rm -f ${DATADIR}
-			einfo "Merging ${PKG_SYM} to ${DATADIR}"
-			for group in *; do
-				rmdir "${group}" 2> /dev/null && continue
-				local dst="${DATADIR}/${group}"
-				mkdir -p "${dst}"
-				mv ${group}/* "${dst}" || (
-					local duplicates=""
-					cd "${group}"
-					for pkg in *; do
-						duplicates+=" $(ls -1 ${dst} | grep ${pkg}) "
-					done
-					eerror "Merge failed due to duplicated packages."
-					eerror "Please delete following directories from ${GROUP_DIR}:"
-					die "${duplicates}"
-				)
-				rmdir "${group}"
-			done
-			popd
-			rmdir "${PKG_SYM}" || die "${PKG_SYM} not empty"
-		fi
-		einfo "Creating ${PKG_SYM} symlink"
-		mkdir -p "${EROOT}/var/db"
-		ln -s ../../usr/share/portage/pkg "${EROOT}/var/db" || die
-	fi
+get_ownership() {
+	case ${USERLAND} in
+		BSD)
+			stat -f '%Su:%Sg' "${1}"
+			;;
+		*)
+			stat -c '%U:%G' "${1}"
+			;;
+	esac
+}
+
+new_config_protect() {
+	# Generate a ._cfg file even if the target file
+	# does not exist, ensuring that the user will
+	# notice the config change.
+	local basename=${1##*/}
+	local dirname=${1%/*}
+	local i=0
+	while true ; do
+		local filename=$(
+			echo -n "${dirname}/._cfg"
+			printf "%04d" ${i}
+			echo -n "_${basename}"
+		)
+		[[ -e ${filename} ]] || break
+		(( i++ ))
+	done
+	echo "${filename}"
 }
 
 pkg_postinst() {
@@ -358,4 +355,13 @@ pkg_postinst() {
 				-exec chown -R portage:portage {} +
 		fi
 	fi
+
+	einfo ""
+	einfo "This release of portage contains the new repoman code base"
+	einfo "This code base is still being developed.  So its API's are"
+	einfo "not to be considered stable and are subject to change."
+	einfo "The code released has been tested and considered ready for use."
+	einfo "This however does not guarantee it to be completely bug free."
+	einfo "Please report any bugs you may encounter."
+	einfo ""
 }

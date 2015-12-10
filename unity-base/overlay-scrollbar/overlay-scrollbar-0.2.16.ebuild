@@ -6,10 +6,11 @@ EAPI=5
 
 UVER_PREFIX="+r359+15.04.20150319"
 
-inherit autotools eutils ubuntu-versionator
+inherit autotools eutils
 
 DESCRIPTION="Ayatana Scrollbars use an overlay to ensure scrollbars take up no active screen real-estate"
 HOMEPAGE="http://launchpad.net/ayatana-scrollbar"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.orig.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
