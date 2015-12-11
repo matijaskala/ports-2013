@@ -1,7 +1,5 @@
-USE="cracklib" 									#core security
+USE="xml" 									#core subsystems
 USE="$USE cairo cups gbm gpm opengl policykit sdl"
-USE="$USE xml" 									#core subsystems
-USE="$USE resolvconf icu"								#core networking 
 USE="$USE -gtk -kde -introspection"								#do not enable GUI flags
 USE="$USE udev systemd -consolekit"								#systemd
 USE="$USE X dbus"									# desktop gui frameworks
