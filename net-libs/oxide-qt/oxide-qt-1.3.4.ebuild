@@ -4,12 +4,12 @@
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
-SRC_SUFFIX="orig.tar.xz"
 
-inherit base check-reqs cmake-utils python-single-r1 ubuntu
+inherit base check-reqs cmake-utils python-single-r1
 
 DESCRIPTION="Web browser engine library for Qt"
 HOMEPAGE="https://launchpad.net/oxide"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.orig.tar.xz"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
