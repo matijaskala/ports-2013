@@ -72,7 +72,7 @@ src_install() {
 
 	rm -rf "${D}usr/etc" &> /dev/null
 	exeinto /etc/X11/xinit/xinitrc.d/
-	doexe data/81overlay-scrollbar
+	doexe build-gtk3/data/81overlay-scrollbar
 
 	prune_libtool_files --modules
 }
