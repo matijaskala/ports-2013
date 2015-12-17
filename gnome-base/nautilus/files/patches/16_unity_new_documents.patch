@@ -1,0 +1,95 @@
+# Description: display the "new document" menu under unity, 
+# even if there is no template installed (lp: #1113648)
+# Ubuntu: http://launchpad.net/bugs/1113648
+=== modified file 'nautilus/src/nautilus-files-view.c'
+--- nautilus/src/nautilus-files-view.c	2015-11-24 10:44:52 +0000
++++ nautilus/src/nautilus-files-view.c	2015-11-27 16:41:57 +0000
+@@ -2278,6 +2278,16 @@
+ }
+ 
+ static void
++action_new_empty (GSimpleAction *action,
++                   GVariant      *state,
++                   gpointer       user_data)
++{
++        g_assert (NAUTILUS_IS_FILES_VIEW (user_data));
++
++        nautilus_files_view_new_file (NAUTILUS_FILES_VIEW (user_data), NULL, NULL);
++}
++
++static void
+ action_properties (GSimpleAction *action,
+                    GVariant      *state,
+                    gpointer       user_data)
+@@ -4882,6 +4892,25 @@
+         return TRUE;
+ }
+ 
++static void
++unity_create_empty (GMenu *menu)
++{
++        GMenu *section;
++        GMenuItem *empty_item;
++        GIcon *icon;
++        
++        section = g_menu_new ();
++        empty_item = g_menu_item_new (_("_Empty Document"), "view.new-empty");
++        icon = g_themed_icon_new ("text-x-generic");
++
++        g_menu_item_set_icon (empty_item, icon);
++        g_menu_append_item (section, empty_item);
++        g_menu_append_section (menu, NULL, G_MENU_MODEL (section));
++
++        g_object_unref (icon);
++        g_object_unref (section);
++}
++
+ static GMenu *
+ update_directory_in_templates_menu (NautilusFilesView *view,
+                                     NautilusDirectory *directory)
+@@ -4937,6 +4966,11 @@
+                 }
+         }
+ 
++        if (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "Unity") == 0) {
++                unity_create_empty (menu);
++                any_templates = TRUE;
++        }
++
+         nautilus_file_list_free (file_list);
+         g_free (templates_directory_uri);
+ 
+@@ -5814,6 +5848,7 @@
+         { "select-all", action_select_all },
+         { "paste", action_paste_files },
+         { "new-document" },
++        { "new-empty", action_new_empty },
+         /* Selection menu */
+         { "scripts" },
+         { "new-folder-with-selection", action_new_folder_with_selection },
+@@ -6361,7 +6396,8 @@
+         g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                      can_create_files &&
+                                      !selection_contains_recent &&
+-                                     view->details->templates_present);
++                                     (view->details->templates_present || 
++                                     g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "Unity") == 0));
+ 
+         /* Ask the clipboard */
+         g_object_ref (view); /* Need to keep the object alive until we get the reply */
+
+=== modified file 'nautilus/src/nautilus-toolbar-action-menu.xml'
+--- nautilus/src/nautilus-toolbar-action-menu.xml	2015-11-24 10:44:52 +0000
++++ nautilus/src/nautilus-toolbar-action-menu.xml	2015-11-26 18:29:20 +0000
+@@ -11,6 +11,10 @@
+         <attribute name="label" translatable="yes">New _Tab</attribute>
+         <attribute name="action">win.new-tab</attribute>
+       </item>
++      <item>
++        <attribute name="label" translatable="yes">Empty _Document</attribute>
++        <attribute name="action">view.new-empty</attribute>
++      </item>
+     </section>
+     <section>
+       <attribute name="id">undo-redo-section</attribute>
+

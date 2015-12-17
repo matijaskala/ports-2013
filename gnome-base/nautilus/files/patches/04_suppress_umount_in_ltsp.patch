@@ -1,0 +1,29 @@
+Description: Don't list volumes option on LTSP configs
+Bug: https://launchpad.net/bugs/220564
+
+Index: nautilus-3.18.1/libnautilus-private/nautilus-file.c
+===================================================================
+--- nautilus-3.18.1.orig/libnautilus-private/nautilus-file.c
++++ nautilus-3.18.1/libnautilus-private/nautilus-file.c
+@@ -1044,6 +1044,10 @@ nautilus_file_can_unmount (NautilusFile
+ {
+ 	g_return_val_if_fail (NAUTILUS_IS_FILE (file), FALSE);
+ 
++	if (getenv("LTSP_CLIENT")) {
++		return FALSE;
++	}
++
+ 	return file->details->can_unmount ||
+ 		(file->details->mount != NULL &&
+ 		 g_mount_can_unmount (file->details->mount));
+@@ -1054,6 +1058,10 @@ nautilus_file_can_eject (NautilusFile *f
+ {
+ 	g_return_val_if_fail (NAUTILUS_IS_FILE (file), FALSE);
+ 
++	if (getenv("LTSP_CLIENT")) {
++		return FALSE;
++	}
++
+ 	return file->details->can_eject ||
+ 		(file->details->mount != NULL &&
+ 		 g_mount_can_eject (file->details->mount));

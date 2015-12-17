@@ -1,0 +1,42 @@
+From b97f085565bac06d90a8577c3e3b9c2969ab3456 Mon Sep 17 00:00:00 2001
+From: Sebastien Noël <sebastien@twolife.be>
+Date: Tue, 28 Jan 2014 19:08:31 +0000
+Subject: Restore backspace for going to parent folder
+
+This restores the behaviour from nautilus <= 3.4.
+---
+Index: nautilus-3.18.1/src/nautilus-window.c
+===================================================================
+--- nautilus-3.18.1.orig/src/nautilus-window.c
++++ nautilus-3.18.1/src/nautilus-window.c
+@@ -1914,6 +1914,7 @@ const GActionEntry win_entries[] = {
+ 	{ "back",  action_back },
+ 	{ "forward",  action_forward },
+ 	{ "up",  action_up },
++	{ "backspaceup",  action_up },
+ 	{ "action-menu", action_toggle_state_action_button, NULL, "false", NULL },
+ 	{ "reload", action_reload },
+ 	{ "stop", action_stop },
+@@ -1997,6 +1998,9 @@ nautilus_window_initialize_actions (Naut
+ 	g_signal_connect_object (nautilus_file_undo_manager_get (), "undo-changed",
+ 				 G_CALLBACK (undo_manager_changed), window, G_CONNECT_SWAPPED);
+ 	undo_manager_changed (window);
++	
++	/* Let backspace go up one dir as well */
++	nautilus_application_add_accelerator (app, "win.backspaceup", "BackSpace");
+ }
+ 
+ 
+Index: nautilus-3.18.1/src/nautilus-query-editor.c
+===================================================================
+--- nautilus-3.18.1.orig/src/nautilus-query-editor.c
++++ nautilus-3.18.1/src/nautilus-query-editor.c
+@@ -121,7 +121,7 @@ nautilus_query_editor_handle_event (Naut
+ 	}
+ 
+ 	/* never handle these events */
+-	if (event->keyval == GDK_KEY_slash || event->keyval == GDK_KEY_Delete) {
++	if (event->keyval == GDK_KEY_slash || event->keyval == GDK_KEY_Delete || event->keyval == GDK_KEY_BackSpace) {
+ 		return FALSE;
+ 	}
+ 

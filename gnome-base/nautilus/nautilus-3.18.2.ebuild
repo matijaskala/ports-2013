@@ -6,9 +6,9 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes" # Needed with USE 'sendto'
 
-inherit eutils gnome2 readme.gentoo virtualx
+inherit autotools base eutils gnome2 readme.gentoo virtualx
 
-DESCRIPTION="A file manager for the GNOME desktop"
+DESCRIPTION="A file manager for the GNOME desktop patched for the Unity desktop"
 HOMEPAGE="https://wiki.gnome.org/Apps/Nautilus"
 
 LICENSE="GPL-2+ LGPL-2+ FDL-1.1"
@@ -32,8 +32,11 @@ COMMON_DEPEND="
 	>=dev-libs/libxml2-2.7.8:2
 	>=gnome-base/gnome-desktop-3:3=
 
+	dev-libs/libunity
+
 	gnome-base/dconf
 	>=gnome-base/gsettings-desktop-schemas-3.8.0
+	>=x11-libs/libnotify-0.7:=
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXrender
@@ -51,6 +54,7 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig
 	x11-proto/xproto
+	dev-libs/libzeitgeist
 "
 RDEPEND="${COMMON_DEPEND}
 	packagekit? ( app-admin/packagekit-base )
@@ -73,6 +77,13 @@ PDEPEND="
 # Need gvfs[gtk] for recent:/// support
 
 src_prepare() {
+	# Ubuntu patchset #
+	for patch in $(cat "${FILESDIR}/patches/series" | grep -v '#'); do
+		PATCHES+=( "${FILESDIR}/patches/${patch}" )
+	done
+	base_src_prepare
+	eautoreconf
+
 	if use previewer; then
 		DOC_CONTENTS="nautilus uses gnome-extra/sushi to preview media files.
 			To activate the previewer, select a file and press space; to
@@ -110,6 +121,9 @@ src_test() {
 src_install() {
 	use previewer && readme.gentoo_create_doc
 	gnome2_src_install
+
+	insinto /usr/share/applications/
+	doins "${FILESDIR}"/*.desktop
 }
 
 pkg_postinst() {

@@ -1,0 +1,34 @@
+# Description: don't tweak wrapping after dots, it's not required and 
+# creates some issues (i.e with Ubuntu version number)
+# Upstream: https://bugzilla.gnome.org/show_bug.cgi?id=674924
+#
+Index: nautilus-3.18.1/libnautilus-private/nautilus-canvas-item.c
+===================================================================
+--- nautilus-3.18.1.orig/libnautilus-private/nautilus-canvas-item.c
++++ nautilus-3.18.1/libnautilus-private/nautilus-canvas-item.c
+@@ -1290,11 +1290,6 @@ nautilus_canvas_item_draw (EelCanvasItem
+ 
+ #define ZERO_WIDTH_SPACE "\xE2\x80\x8B"
+ 
+-#define ZERO_OR_THREE_DIGITS(p)			\
+-	(!g_ascii_isdigit (*(p)) ||		\
+-	 (g_ascii_isdigit (*(p+1)) &&		\
+-	  g_ascii_isdigit (*(p+2))))
+-
+ 
+ static PangoLayout *
+ create_label_layout (NautilusCanvasItem *item,
+@@ -1323,11 +1318,9 @@ create_label_layout (NautilusCanvasItem
+ 		for (p = text; *p != '\0'; p++) {
+ 			str = g_string_append_c (str, *p);
+ 
+-			if (*p == '_' || *p == '-' || (*p == '.' && ZERO_OR_THREE_DIGITS (p+1))) {
++			if (*p == '_' || *p == '-' || (*p == '.' && !g_ascii_isdigit(*(p+1)))) {
+ 				/* Ensure that we allow to break after '_' or '.' characters,
+-				 * if they are not likely to be part of a version information, to
+-				 * not break wrapping of foobar-0.0.1.
+-				 * Wrap before IPs and long numbers, though. */
++				 * if they are not followed by a number */
+ 				str = g_string_append (str, ZERO_WIDTH_SPACE);
+ 			}
+ 		}
