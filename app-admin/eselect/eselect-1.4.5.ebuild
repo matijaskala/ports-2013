@@ -47,8 +47,8 @@ src_install() {
 		fperms g+w /var/lib/gentoo/news
 	fi
 
-	insinto /usr/share/eselect/modules
-	doins $FILESDIR/profile.eselect || die
+#	insinto /usr/share/eselect/modules
+#	doins $FILESDIR/profile.eselect || die
 }
 
 pkg_postinst() {
