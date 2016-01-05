@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -19,8 +19,9 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 RDEPEND="
-	dev-libs/dbus-glib
+	>=dev-libs/glib-2.32:2
 	media-libs/fontconfig
+	>=x11-libs/gtk+-2:2
 	>=x11-libs/gtk+-3:3
 	x11-libs/pango
 	~app-admin/packagekit-base-${PV}[introspection]
@@ -52,12 +53,10 @@ src_configure() {
 }
 
 src_compile() {
-	cd "${S}"/contrib/gtk-module || die
-	emake
+	emake -C contrib/gtk-module
 }
 
 src_install() {
-	cd "${S}"/contrib/gtk-module || die
-	emake DESTDIR="${D}" install
+	emake -C contrib/gtk-module DESTDIR="${D}" install
 	prune_libtool_files --all
 }

@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -14,6 +14,6 @@ KEYWORDS="~amd64 ~arm ~x86"
 IUSE="gtk qt4"
 
 RDEPEND="gtk? ( ~app-admin/packagekit-gtk-${PV} )
-	qt4? ( =app-admin/packagekit-qt4-0.8* )"
+	qt4? ( >=app-admin/packagekit-qt4-0.9 )"
 
 DEPEND="${RDEPEND}"
