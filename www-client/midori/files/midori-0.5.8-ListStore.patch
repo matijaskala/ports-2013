@@ -1,0 +1,12 @@
+--- extensions/history-list.vala
++++ extensions/history-list.vala
+@@ -321,3 +321,3 @@
+         private void create_widgets () {
+-            ListStore model;
++            Gtk.ListStore model;
+             TreeIter iter;
+@@ -333,3 +333,3 @@
+ 
+-            model = new ListStore (2, typeof (string), typeof (int));
++            model = new Gtk.ListStore (2, typeof (string), typeof (int));
+ 

@@ -75,6 +75,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}"/${P}-ListStore.patch
 	epatch "${WORKDIR}"/${P}-save_as.patch #498898
 	vala_src_prepare
 	sed -i -e '/install/s:COPYING:HACKING TODO TRANSLATE:' CMakeLists.txt || die
