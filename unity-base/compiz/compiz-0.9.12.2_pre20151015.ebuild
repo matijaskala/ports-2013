@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit base gnome2 cmake-utils eutils python-r1
 
-DESCRIPTION="Compiz Fusion OpenGL window and compositing manager patched for the Unity desktop"
+DESCRIPTION="OpenGL window and compositing manager patched for the Unity desktop"
 HOMEPAGE="https://launchpad.net/compiz"
 MY_PV="${PV/_pre/+15.10.}"
 UURL="https://launchpad.net/ubuntu/+archive/primary/+files"
@@ -17,22 +17,30 @@ SRC_URI="${UURL}/${PN}_${MY_PV}.orig.tar.gz
 
 LICENSE="GPL-2 LGPL-2.1 MIT"
 SLOT="0/${PV}"
-KEYWORDS="~amd64 ~x86"
-IUSE="+debug kde test"
+KEYWORDS="amd64 x86"
+IUSE="kde test"
 RESTRICT="mirror"
 
 S=${WORKDIR}/${PN}-${MY_PV}
 
 COMMONDEPEND="!!x11-wm/compiz
+	!!x11-wm/compiz-fusion
 	!!x11-libs/compiz-bcop
 	!!x11-libs/libcompizconfig
+	!!x11-libs/compizconfig-backend-gconf
+	!!x11-libs/compizconfig-backend-kconfig4
 	!!x11-plugins/compiz-plugins-main
+	!!x11-plugins/compiz-plugins-extra
+	!!x11-plugins/compiz-plugins-unsupported
+	!!x11-apps/ccsm
+	!!dev-python/compizconfig-python
+	!!x11-apps/fusion-icon
 	dev-libs/boost:=[${PYTHON_USEDEP}]
 	dev-libs/glib:2[${PYTHON_USEDEP}]
 	dev-cpp/glibmm
 	dev-libs/libxml2[${PYTHON_USEDEP}]
 	dev-libs/libxslt[${PYTHON_USEDEP}]
-	dev-libs/protobuf[${PYTHON_USEDEP}]
+	dev-libs/protobuf:=[${PYTHON_USEDEP}]
 	dev-python/python-distutils-extra[${PYTHON_USEDEP}]
 	dev-python/pyrex[${PYTHON_USEDEP}]
 	gnome-base/gconf[${PYTHON_USEDEP}]
@@ -59,7 +67,7 @@ COMMONDEPEND="!!x11-wm/compiz
 	x11-libs/libSM
 	>=x11-libs/startup-notification-0.7
 	>=x11-wm/metacity-3.12
-	kde? ( >=kde-base/kwin-4.11.1 )
+	kde? ( >=kde-base/kwin-4.2.0 )
 	${PYTHON_DEPS}"
 
 DEPEND="${COMMONDEPEND}
@@ -72,8 +80,6 @@ DEPEND="${COMMONDEPEND}
 		sys-apps/xorg-gtest )"
 
 RDEPEND="${COMMONDEPEND}
-	dev-libs/protobuf:=
-	unity-base/unity-language-pack
 	x11-apps/mesa-progs
 	x11-apps/xvinfo"
 
@@ -83,7 +89,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Ubuntu patchset #
-	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}${UVER_SUFFIX}.diff"        # This needs to be applied for the debian/ directory to be present #
+	epatch -p1 "${WORKDIR}/${PN}_${MY_PV}-0ubuntu1.diff"        # This needs to be applied for the debian/ directory to be present #
 	for patch in $(cat "${S}/debian/patches/series" | grep -v '#'); do
 		PATCHES+=( "${S}/debian/patches/${patch}" )
 	done
@@ -140,14 +146,6 @@ src_configure() {
 }
 
 src_compile() {
-	# Disable unitymtgrabhandles plugin #
-	sed -e "s:unitymtgrabhandles;::g" \
-		-i "${CMAKE_USE_DIR}/debian/unity.ini"
-	sed -e "s:unitymtgrabhandles,::g" \
-		-i "${CMAKE_USE_DIR}/debian/compiz-gnome.gconf-defaults"
-	sed -e "s:'unitymtgrabhandles',::g" \
-		-i "${CMAKE_USE_DIR}/debian/compiz-gnome.gsettings-override"
-
 	compilation() {
 		cmake-utils_src_compile VERBOSE=1
 	}
@@ -212,16 +210,6 @@ src_install() {
 	# Remove all installed language files as they can be incomplete #
 	#  due to being provided by Ubuntu's language-pack packages #
 	rm -rf "${ED}usr/share/locale"
-
-	# Setup gconf defaults #
-	dodir /etc/gconf/2
-	if [ -z "`grep gconf.xml.unity /etc/gconf/2/local-defaults.path 2> /dev/null`" ]; then
-		echo "/etc/gconf/gconf.xml.unity" >> ${D}etc/gconf/2/local-defaults.path
-	fi
-	dodir /etc/gconf/gconf.xml.unity 2> /dev/null
-	/usr/bin/update-gconf-defaults \
-		--source="${ED}usr/share/gconf/defaults" \
-			--destination="${ED}etc/gconf/gconf.xml.unity" || die
 }
 
 pkg_preinst() {

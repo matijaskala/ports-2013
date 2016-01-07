@@ -83,6 +83,10 @@ PDEPEND="
 # coreutils-6.4 rdep is for date format in emerge-webrsync #164532
 # NOTE: FEATURES=installsources requires debugedit and rsync
 
+PATCHES=(
+        "${FILESDIR}"/partylinux-usr-merge.patch
+)
+
 SRC_ARCHIVES="https://dev.gentoo.org/~dolsen/releases/portage"
 
 prefix_src_archives() {

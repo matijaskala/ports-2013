@@ -1,4 +1,6 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -49,12 +51,7 @@ COMMONDEPEND="
 		>=x11-libs/libwnck-2.18.3:1
 		x11-libs/pango
 	)
-	kde? (
-		|| (
-			>=kde-base/kwin-4.2.0
-			kde-base/kwin:live
-		)
-	)
+	kde? ( >=kde-base/kwin-4.2.0 )
 	svg? (
 		>=gnome-base/librsvg-2.14.0:2
 		>=x11-libs/cairo-1.0

@@ -1,0 +1,12 @@
+diff -U 3 -H -d -r -N -- a/vartree.py b/vartree.py
+--- a/pym/portage/dbapi/vartree.py	2013-09-21 08:52:38.000000000 +0200
++++ b/pym/portage/dbapi/vartree.py	2013-09-26 16:52:23.534211198 +0200
+@@ -2280,7 +2280,7 @@
+ 
+ 				if not ignore:
+ 					if islink and f_match in \
+-						("/lib", "/usr/lib", "/usr/local/lib"):
++						("/lib", "/usr/lib", "/usr/local/lib", "/lib32", "/lib64", "/bin", "/sbin"):
+ 						# Ignore libdir symlinks for bug #423127.
+ 						ignore = True
+ 
