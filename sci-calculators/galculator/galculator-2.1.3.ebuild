@@ -18,7 +18,8 @@ IUSE="gtk3"
 
 RDEPEND="
 	dev-libs/glib:2
-	x11-libs/gtk+:3
+	!gtk3? ( x11-libs/gtk+:2 )
+	gtk3? ( x11-libs/gtk+:3 )
 	x11-libs/pango
 "
 DEPEND="${RDEPEND}

@@ -85,7 +85,7 @@ DEPEND="${COMMON_DEPEND}
 
 src_prepare() {
 	# Ubuntu patchset #
-	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff"  # This needs to be applied for the debian/ directory to be present #
+	epatch -p1 "${WORKDIR}/${PN}_${MY_PV}-0ubuntu1.diff"  # This needs to be applied for the debian/ directory to be present #
 
 	# https://bugzilla.gnome.org/show_bug.cgi?id=621836
 	# Apparently this change severely affects touchpad usability for some
