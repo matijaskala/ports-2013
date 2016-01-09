@@ -109,7 +109,6 @@ src_configure() {
 		--enable-fast-install \
 		--disable-static \
 		--disable-gnome-keybindings \
-		--with-default-plugins \
 		$(use_enable svg librsvg) \
 		$(use_enable cairo annotate) \
 		$(use_enable dbus) \
