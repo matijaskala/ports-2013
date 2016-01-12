@@ -1,7 +1,7 @@
 # Set up the prompt
 typeset -g PS1="%B%(?,%F{green},%F{yellow})%n%k %B%F{magenta}%32<...<%~ %# %b%f%k"
-typeset -g PS2="%B%(?,%F{green},%F{yellow})%n%k %B%F{magenta}%32<...<%~ %_> %b%f%k"
-typeset -g PS3="%B%(?,%F{green},%F{yellow})%n%k %B%F{magenta}%32<...<%~ ?# %b%f%k"
+typeset -g PS2="%B%F{magenta}%16<...<%~ %_> %b%f%k"
+typeset -g PS3="%B%F{magenta}%16<...<%~ ?# %b%f%k"
 typeset -g RPS1="%B%F{red}%m%F{white}:%b%F{cyan}%T%f"
 
 setopt histignorealldups sharehistory

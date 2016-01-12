@@ -35,4 +35,17 @@ src_install() {
 	emake DESTDIR="${D}" install
 	dodoc TODO
 	prune_libtool_files --all
+	echo > "${D}/etc/compizconfig/config" << EOF
+[gnome_session]
+backend = gconf
+integration = true
+plugin_list_autosort = true
+profile = Minimal
+
+[general]
+backend = ini
+plugin_list_autosort = true
+profile = Minimal
+
+EOF
 }

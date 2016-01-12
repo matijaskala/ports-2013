@@ -30,6 +30,35 @@
 
 #--- END OF EXAMPLES ---
 
+# Michał Górny <mgorny@gentoo.org> (11 Jan 2016)
+# (on behalf of Python team)
+# Masked for testing. python-exec now checks argv[0] to determine
+# whether it's called via the Python wrapper shebang, or symlinked
+# directly. eselect-python uses the C wrapper rather than Python wrapper
+# to fix Prefix support, #568974.
+>=app-eselect/eselect-python-20151117-r3
+>=dev-lang/python-exec-2.2
+
+# Aaron W. Swenson <titanofold@gentoo.org> (11 Jan 2016)
+# Masked for removal after 2016-03-11. Package hasn't been updated in
+# some time and doesn't work with Apache 2.4 without patching by
+# Gentoo. (Bug 548974) Use Apache Module mod_authn_dbd instead.
+www-apache/mod_auth_pgsql
+
+# Lars Wendler <polynomial-c@gentoo.org> (11 Jan 2016)
+# Masked until reavertm added all missing pieces (lua, gles)
+# to the ebuild.
+=dev-games/openscenegraph-3.4.0
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (9 Jan 2016)
+# Errorneously added. Is already in perl-core. Please uninstall.
+dev-perl/ExtUtils-Constant
+
+# Michael Palimaka <kensington@gentoo.org)> (09 Jan 2016)
+# Fails to build with newer versions of llvm. Dead upstream. No revdeps.
+# Masked for removal in 30 days. Bug #571212.
+media-libs/opengtl
+
 # Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
 # Cannot be downloaded either mirrored, bug #561114. Removal in a month
 games-fps/doom3-mitm
@@ -81,10 +110,6 @@ games-fps/ut2004-cor
 games-fps/ut2004-crossfire
 
 # Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Cannot be downloaded either mirrored, bug #561174. Removal in a month
-net-mail/courierpassd
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
 # Cannot be downloaded either mirrored, bug #561176. Removal in a month
 net-misc/ixp4xx
 
@@ -92,10 +117,6 @@ net-misc/ixp4xx
 # Cannot be downloaded because sources changed, bug #561200. Removal in a
 # month.
 sys-block/megarc
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Cannot be downloaded either mirrored, bug #561202. Removal in a month
-sci-geosciences/gmt
 
 # Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
 # Obsolete and dead, bug #561622. Removal in a month.
@@ -293,10 +314,6 @@ x11-misc/magneto-gtk
 x11-misc/magneto-gtk3
 sys-apps/rigo-daemon
 sys-apps/magneto-core
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Cannot be installed, bug #541626. Removal in a month.
-net-fs/tahoe-lafs
 
 # Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
 # Fails to build, bug #542928. Removal in a month.
@@ -1495,10 +1512,6 @@ games-fps/quake4-demo
 # Tavis Ormandy <taviso@gentoo.org> (21 Mar 2006)
 # masked pending unresolved security issues #127167
 games-roguelike/slashem
-
-# Tavis Ormandy <taviso@gentoo.org> (21 Mar 2006)
-# masked pending unresolved security issues #125902
-games-util/hearse
 
 # Robin H. Johnson <robbat2@gentoo.org> (11 Feb 2006)
 # zlib interaction is badly broken. See bug #124733.

@@ -109,6 +109,7 @@ src_configure() {
 		--enable-fast-install \
 		--disable-static \
 		--disable-gnome-keybindings \
+		--with-default-plugins='core workarounds dbus resize crashhandler mousepoll decoration svg wall place png text imgjpeg move regex animation ezoom' \
 		$(use_enable svg librsvg) \
 		$(use_enable cairo annotate) \
 		$(use_enable dbus) \
