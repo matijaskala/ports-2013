@@ -30,6 +30,14 @@
 
 #--- END OF EXAMPLES ---
 
+# James Le Cuirot <chewi@gentoo.org> (14 Jan 2016)
+# Superseded by gnu-classpath. Removal in 30 days.
+dev-java/gjdoc
+
+# Sergei Trofimovich <slyfox@gentoo.org> (14 Jan 2016)
+# Masked for testing.
+>=net-im/openfire-4.0.0
+
 # Michał Górny <mgorny@gentoo.org> (11 Jan 2016)
 # (on behalf of Python team)
 # Masked for testing. python-exec now checks argv[0] to determine
@@ -44,11 +52,6 @@
 # some time and doesn't work with Apache 2.4 without patching by
 # Gentoo. (Bug 548974) Use Apache Module mod_authn_dbd instead.
 www-apache/mod_auth_pgsql
-
-# Lars Wendler <polynomial-c@gentoo.org> (11 Jan 2016)
-# Masked until reavertm added all missing pieces (lua, gles)
-# to the ebuild.
-=dev-games/openscenegraph-3.4.0
 
 # Andreas K. Hüttel <dilfridge@gentoo.org> (9 Jan 2016)
 # Errorneously added. Is already in perl-core. Please uninstall.
@@ -815,11 +818,6 @@ games-misc/bsd-games-non-free
 dev-db/drizzle
 dev-php/pecl-drizzle
 
-# José María Alonso Josa <nimiux@gentoo.org> (15 Dec 2015)
-# Refers to same package as dev-lisp/clx
-# Masked for removal in 30 days, bug 568188
-dev-lisp/cl-clx
-
 # Andreas K. Huettel <dilfridge@gentoo.org> (11 Dec 2015)
 # Ancient, smells funny, disowned by upstream, needs syck
 # Masked for removal in 30 days, bug 565012
@@ -829,11 +827,6 @@ dev-perl/YAML-Parser-Syck
 # Release candidates for Exim 4.87
 =mail-mta/exim-4.87_rc1
 =mail-mta/exim-4.87_rc2
-
-# Michael Palimaka <kensington@gentoo.org> (10 Dec 2015)
-# Relies on dead ISP API. Dead upstream. Masked for removal in 30 days.
-# Bug 567532
-x11-plugins/wmium
 
 # Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (07 Dec 2015)
 # Dev channel releases are only for people who are developers or want more

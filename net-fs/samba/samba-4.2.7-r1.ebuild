@@ -14,7 +14,8 @@ MY_P="${PN}-${MY_PV}"
 SRC_PATH="stable"
 [[ ${PV} = *_rc* ]] && SRC_PATH="rc"
 
-SRC_URI="mirror://samba/${SRC_PATH}/${MY_P}.tar.gz"
+SRC_URI="mirror://samba/${SRC_PATH}/${MY_P}.tar.gz
+	https://dev.gentoo.org/~axs/distfiles/samba-disable-python-patches-${PV}.tar.xz"
 KEYWORDS="~amd64 ~hppa ~x86"
 [[ ${PV} = *_rc* ]] && KEYWORDS="~hppa"
 
@@ -39,12 +40,12 @@ CDEPEND="${PYTHON_DEPS}
 	dev-libs/popt[${MULTILIB_USEDEP}]
 	sys-libs/readline:=
 	virtual/libiconv
-	dev-python/subunit[${PYTHON_USEDEP}]
+	dev-python/subunit[${PYTHON_USEDEP},${MULTILIB_USEDEP}]
 	>=net-libs/socket_wrapper-1.1.2[${MULTILIB_USEDEP}]
 	sys-apps/attr[${MULTILIB_USEDEP}]
 	sys-libs/libcap
 	>=sys-libs/ldb-1.1.24[${MULTILIB_USEDEP}]
-	sys-libs/ncurses:0=
+	sys-libs/ncurses:0=[${MULTILIB_USEDEP}]
 	>=sys-libs/nss_wrapper-1.0.2[${MULTILIB_USEDEP}]
 	>=sys-libs/ntdb-1.0[python,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
 	>=sys-libs/talloc-2.1.2[python,${PYTHON_USEDEP},${MULTILIB_USEDEP}]
@@ -62,7 +63,7 @@ CDEPEND="${PYTHON_DEPS}
 	fam? ( virtual/fam )
 	gnutls? ( dev-libs/libgcrypt:0
 		>=net-libs/gnutls-1.4.0 )
-	ldap? ( net-nds/openldap )
+	ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
 	system-mitkrb5? ( app-crypt/mit-krb5[${MULTILIB_USEDEP}] )
 	!system-mitkrb5? ( >=app-crypt/heimdal-1.5[-ssl,${MULTILIB_USEDEP}] )
 	systemd? ( sys-apps/systemd:0= )"
@@ -82,7 +83,6 @@ S="${WORKDIR}/${MY_P}"
 PATCHES=(
 	"${FILESDIR}/${PN}-4.2.3-heimdal_compilefix.patch"
 	"${FILESDIR}/${PN}-4.2.7-pam.patch"
-	"${FILESDIR}/${PN}-4.2.7-disable-python-for-altabi.patch"
 )
 
 CONFDIR="${FILESDIR}/$(get_version_component_range 1-2)"
@@ -93,20 +93,26 @@ pkg_setup() {
 	python-single-r1_pkg_setup
 	if use aio ; then
 		if ! linux_config_exists || ! linux_chkconfig_present AIO; then
-				ewarn "You must enable AIO support in your kernel config, "
-				ewarn "to be able to support asynchronous I/O. "
-				ewarn "You can find it at"
-				ewarn
-				ewarn "General Support"
-				ewarn " Enable AIO support "
-				ewarn
-				ewarn "and recompile your kernel..."
+			ewarn "You must enable AIO support in your kernel config, "
+			ewarn "to be able to support asynchronous I/O. "
+			ewarn "You can find it at"
+			ewarn
+			ewarn "General Support"
+			ewarn " Enable AIO support "
+			ewarn
+			ewarn "and recompile your kernel..."
 		fi
 	fi
 }
 
 src_prepare() {
 	epatch ${PATCHES[@]}
+
+	# install the patches from tarball(s)
+	EPATCH_SUFFIX="patch" \
+	EPATCH_FORCE="yes" \
+	epatch "${WORKDIR}/patches"
+
 	# Allow user patches
 	epatch_user
 	multilib_copy_sources
@@ -127,54 +133,58 @@ multilib_src_configure() {
 		--nopyc
 		--nopyo
 	)
-	if multilib_is_native_abi ; then myconf+=(
-		$(use_with acl acl-support)
-		$(usex addc '' '--without-ad-dc')
-		$(use_with addns dnsupdate)
-		$(use_with ads)
-		$(usex ads '--with-shared-modules=idmap_ad' '')
-		$(use_with aio aio-support)
-		$(usex cluster '--with-ctdb-dir=/usr' '')
-		$(use_enable avahi)
-		$(use_with cluster cluster-support)
-		$(use_enable cups)
-		$(use_with dmapi)
-		$(use_with fam)
-		$(use_enable gnutls)
-		$(use_enable iprint)
-		$(use_with ldap)
-		$(use_with pam)
-		$(use_with pam pam_smbpass)
-		$(usex pam "--with-pammodulesdir=/$(get_libdir)/security" '')
-		$(use_with quota quotas)
-		$(use_with syslog)
-		$(use_with systemd)
-		$(usex system-mitkrb5 '--with-system-mitkrb5' '')
-		$(use_with winbind)
-		$(usex test '--enable-selftest' '')
-	); else myconf+=(
-		--without-acl-support
-		--without-ad-dc
-		--without-dnsupdate
-		--without-ads
-		--without-aio-support
-		--disable-avahi
-		--without-cluster-support
-		--disable-cups
-		--without-dmapi
-		--without-fam
-		--disable-gnutls
-		--disable-iprint
-		--without-ldap
-		--without-pam
-		--without-pam_smbpass
-		--without-quotas
-		--without-syslog
-		--without-systemd
-		$(usex system-mitkrb5 '--with-system-mitkrb5' '')
-		--without-winbind
-		--disable-python
-	); fi
+	if multilib_is_native_abi ; then
+		myconf+=(
+			$(use_with acl acl-support)
+			$(usex addc '' '--without-ad-dc')
+			$(use_with addns dnsupdate)
+			$(use_with ads)
+			$(usex ads '--with-shared-modules=idmap_ad' '')
+			$(use_with aio aio-support)
+			$(usex cluster '--with-ctdb-dir=/usr' '')
+			$(use_enable avahi)
+			$(use_with cluster cluster-support)
+			$(use_enable cups)
+			$(use_with dmapi)
+			$(use_with fam)
+			$(use_enable gnutls)
+			$(use_enable iprint)
+			$(use_with ldap)
+			$(use_with pam)
+			$(use_with pam pam_smbpass)
+			$(usex pam "--with-pammodulesdir=/$(get_libdir)/security" '')
+			$(use_with quota quotas)
+			$(use_with syslog)
+			$(use_with systemd)
+			$(usex system-mitkrb5 '--with-system-mitkrb5' '')
+			$(use_with winbind)
+			$(usex test '--enable-selftest' '')
+		)
+	else
+		myconf+=(
+			--without-acl-support
+			--without-ad-dc
+			--without-dnsupdate
+			--without-ads
+			--without-aio-support
+			--disable-avahi
+			--without-cluster-support
+			--disable-cups
+			--without-dmapi
+			--without-fam
+			--disable-gnutls
+			--disable-iprint
+			$(use_with ldap)
+			--without-pam
+			--without-pam_smbpass
+			--without-quotas
+			--without-syslog
+			--without-systemd
+			$(usex system-mitkrb5 '--with-system-mitkrb5' '')
+			--without-winbind
+			--disable-python
+		)
+	fi
 
 	CPPFLAGS="-I${SYSROOT}/usr/include/et ${CPPFLAGS}" \
 		waf-utils_src_configure ${myconf[@]}
