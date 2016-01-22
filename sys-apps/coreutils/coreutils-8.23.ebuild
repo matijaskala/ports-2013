@@ -139,18 +139,7 @@ src_install() {
 		cd "${ED}"/usr/bin
 		dodir /bin
 		# move critical binaries into /bin (required by FHS)
-		local fhs="cat chgrp chmod chown cp date dd df echo false ln ls
-		           mkdir mknod mv pwd rm rmdir stty sync true uname"
-		mv ${fhs} ../../bin/ || die "could not move fhs bins"
-		# move critical binaries into /bin (common scripts)
-		local com="basename chroot cut dir dirname du env expr head mkfifo
-		           mktemp readlink seq sleep sort tail touch tr tty vdir wc yes"
-		mv ${com} ../../bin/ || die "could not move common bins"
-		# create a symlink for uname in /usr/bin/ since autotools require it
-		local x
-		for x in ${com} uname ; do
-			dosym /bin/${x} /usr/bin/${x}
-		done
+		# but DON'T
 	else
 		# For now, drop the man pages, collides with the ones of the system.
 		rm -rf "${ED}"/usr/share/man
