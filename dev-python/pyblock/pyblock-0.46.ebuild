@@ -5,7 +5,7 @@
 EAPI="3"
 EGIT_COMMIT="${PN}-${PV}-1"
 EGIT_REPO_URI="git://git.fedorahosted.org/pyblock.git"
-inherit base git-2
+inherit base git-2 python
 
 DESCRIPTION="Python interface for working with block devices"
 HOMEPAGE="http://git.fedoraproject.org/git/pyblock.git?p=pyblock.git;a=summary"
@@ -23,7 +23,13 @@ DEPEND="${DEPEND}
 	sys-fs/dmraid
 	dev-python/pyparted"
 
+pkg_setup() {
+	python_set_active_version 2
+}
+
 src_compile() {
+	sed -i 's/-Werror//' Makefile
+
 	local use_selinux=0
 	use selinux && use_selinux=1
 	base_src_compile USESELINUX="${use_selinux}"

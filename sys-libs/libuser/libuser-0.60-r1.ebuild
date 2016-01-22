@@ -3,7 +3,7 @@
 # $
 
 EAPI=5
-inherit autotools eutils
+inherit autotools eutils python
 
 DESCRIPTION="Implements a standardized interface for manipulating and administering user and group accounts"
 HOMEPAGE="https://fedorahosted.org/libuser"
@@ -23,6 +23,10 @@ DEPEND="app-text/linuxdoc-tools
 	sys-devel/gettext
 	${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+}
 
 src_prepare() {
 	mv apps/{,libuser-}lid.1 || die

@@ -17,7 +17,7 @@ LSELINUX_SRC_URI="https://raw.githubusercontent.com/wiki/SELinuxProject/selinux/
 DESCRIPTION="Sabayon Redhat Anaconda Installer Port"
 HOMEPAGE="https://github.com/Sabayon/anaconda"
 
-SRC_URI="mirror://sabayon/${CATEGORY}/${PN}-${PV}.tar.bz2 ${AUDIT_SRC_URI} ${LSELINUX_SRC_URI}"
+SRC_URI="mirror://sabayon/${CATEGORY}/${P}.tar.bz2 ${AUDIT_SRC_URI} ${LSELINUX_SRC_URI}"
 KEYWORDS="~amd64 ~x86"
 
 AUDIT_S="${WORKDIR}/audit-${AUDIT_VER}"
@@ -37,7 +37,7 @@ COMMON_DEPEND="
 	>=app-arch/libarchive-3.0.4
 	dev-python/dbus-python
 	dev-python/nose
-	dev-python/pygobject-base
+	dev-python/pygobject
 	dev-util/intltool
 	gnome-base/libgnomekbd
 	>=net-misc/networkmanager-0.9.8.0
@@ -155,7 +155,7 @@ src_configure() {
 	# compiling audit here, anaconda configure needs libaudit
 	einfo "compiling audit"
 	cd "${AUDIT_S}" || die "cannot cd into ${AUDIT_S}"
-	base_src_compile
+	base_src_compile PYTHON_VERSION=2.7
 
 	# installing audit
 	einfo "installing audit libs into ${AUDIT_S}/fakeroot temporarily"
@@ -242,7 +242,7 @@ src_install() {
 
 	cd "${S}" || die
 	_copy_audit_data_over # ${D} is cleared
-	base_src_install
+	python_foreach_impl base_src_install
 
 	# Drop any static library
 	rm "${D}"/usr/lib*/anaconda-runtime/*.a
@@ -254,4 +254,9 @@ src_install() {
 
 	# Fix analog collision
 	mv "${D}"/usr/bin/{analog,anaconda-analog} || die
+
+	mv "${D}"/usr/$(get_libdir)/python{3*,2.7}/site-packages/pyanaconda
+	rmdir "${D}"/usr/$(get_libdir)/python3*/*
+	rmdir "${D}"/usr/$(get_libdir)/python3*
+	sed -i 's/#!\/usr\/bin\/python/#!\/usr\/bin\/python2/' "${D}"/sbin/anaconda
 }

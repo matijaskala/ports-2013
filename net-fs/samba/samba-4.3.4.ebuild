@@ -4,7 +4,7 @@
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
-PYTHON_REQ_USE='threads(+)'
+PYTHON_REQ_USE='threads(+),xml(+)'
 
 inherit python-single-r1 waf-utils multilib-minimal linux-info systemd eutils
 
@@ -30,6 +30,7 @@ ldap pam quota selinux syslog +system-mitkrb5 systemd test winbind"
 
 MULTILIB_WRAPPED_HEADERS=(
 	/usr/include/samba-4.0/policy.h
+	/usr/include/samba-4.0/dcerpc_server.h
 )
 
 # sys-apps/attr is an automagic dependency (see bug #489748)

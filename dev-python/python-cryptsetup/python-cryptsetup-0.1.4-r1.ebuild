@@ -19,3 +19,7 @@ IUSE=""
 
 DEPEND="sys-fs/cryptsetup"
 RDEPEND="${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+}
