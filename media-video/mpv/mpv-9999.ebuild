@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV='1.8.12'
@@ -205,7 +205,6 @@ src_configure() {
 		--disable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
-		--enable-libavfilter
 		--enable-libavdevice
 
 		# Audio outputs

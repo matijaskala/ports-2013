@@ -27,9 +27,9 @@ src_install() {
 	: ${ROOTPREFIX=/usr}
 	for app in halt poweroff reboot runlevel shutdown telinit; do
 		doman ${app}.8
-		dosym "..${ROOTPREFIX}/bin/systemctl" /sbin/${app}
+		dosym "../bin/systemctl" ${ROOTPREFIX}/sbin/${app}
 	done
 
 	newman init.1 init.8
-	dosym "..${ROOTPREFIX}/lib/systemd/systemd" /sbin/init
+	dosym "../lib/systemd/systemd" ${ROOTPREFIX}/sbin/init
 }

@@ -59,10 +59,13 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "$FILESDIR"/ppsspp-cmake.patch
+	# Bug 574000
+	sed -i -e "s#-O3#-O2#g;" "${S}"/CMakeLists.txt || die
+
 	epatch "$FILESDIR"/ppsspp-ffmpeg-x86_64.patch
 	epatch "$FILESDIR"/ppsspp-ffmpeg-x86.patch
 	epatch "$FILESDIR"/ppsspp-qt.patch
+
 	if use qt4 ; then
 		cd "${WORKDIR}"/"${P}"/Qt || die
 		qt4-r2_src_prepare
@@ -119,4 +122,10 @@ src_install() {
 	insinto /usr/share/icons/
 	newins "${WORKDIR}"/"${P}"/source_assets/image/icon_regular_72.png ppsspp-icon.png
 	domenu "${FILESDIR}"/ppsspp.desktop
+}
+
+pkg_postinst() {
+	elog "Remember, in order to play games, you have to "
+	elog "be in the 'games' group. "
+	elog "Just run 'gpasswd -a <USER> games', then have <USER> re-login. "
 }

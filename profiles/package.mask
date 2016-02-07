@@ -30,15 +30,39 @@
 
 #--- END OF EXAMPLES ---
 
-# Michael Orlitzky <mjo@gentoo.org> (22 Jan 2016)
-# Masked for testing of new build system.
->=app-eselect/eselect-php-0.9.0
+# Wolfram Schlich <wschlich@gentoo.org> (06 Feb 2016)
+# Mask live ebuild
+=net-im/mcabber-9999
 
-# Alexis Ballier <aballier@gentoo.org> (22 Jan 2016)
-# Breaks some of its revdeps
-# https://bugs.gentoo.org/show_bug.cgi?id=572552
-# https://github.com/ros/console_bridge/pull/31
-=dev-libs/console_bridge-0.3.0
+# Davide Pesavento <pesa@gentoo.org> (06 Feb 2016)
+# Masked for removal in 30 days. Doesn't build against recent PyQt4
+# versions, bug 527572, not trivial to fix. Upstream doesn't seem to
+# care anymore, last release was in 2012. Zero reverse deps.
+dev-python/PyQtMobility
+
+# James Le Cuirot <chewi@gentoo.org> (03 Feb 2016)
+# Built into Java since 1.5. Ancient and doesn't build with
+# Java 8. Removal in 30 days. See bug #544038.
+dev-java/concurrent-util
+
+# James Le Cuirot <chewi@gentoo.org> (03 Feb 2016)
+# Old, unused, broken on Java 7 and up. These are still alive upstream
+# but bumping is likely non-trivial. Removal in 30 days.
+dev-java/dsiutils
+dev-java/sux4j
+
+# Bernard Cafarelli <voyageur@gentoo.org> (27 Jan 2016)
+# New llvm version, masked for testing
+=sys-devel/llvm-3.8.0*
+=sys-devel/clang-3.8.0*
+
+# James Le Cuirot <chewi@gentoo.org> (26 Jan 2016)
+# No new release since 2008. Removal in 30 days.
+app-cdr/webcdwriter
+
+# James Le Cuirot <chewi@gentoo.org> (26 Jan 2016)
+# Now part of eselect-java. Removal in 30 days.
+app-eselect/eselect-maven
 
 # Michael Sterrett <mr_bones_@gentoo.org> (20 Jan 2016)
 # Buggy and no updates in 9 years.
@@ -81,12 +105,6 @@ media-libs/evas
 # that can't be transparently used in ghc-7.8 and
 # ghc-7.10, bug #561122
 dev-haskell/extra:0
-
-# Pacho Ramos <pacho@gentoo.org> (16 Jan 2016)
-# Dead for years, not compatible with latest libsigc++ (#569514), it
-# requires either a lot of patching or move to a forked project that tries
-# to continue it. Removal in a month.
-media-sound/seq24
 
 # James Le Cuirot <chewi@gentoo.org> (14 Jan 2016)
 # Superseded by gnu-classpath. Removal in 30 days.
@@ -246,10 +264,6 @@ media-sound/mimd
 sys-cluster/gfs-kernel
 
 # Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #514832. Removal in a month.
-x11-misc/matchbox-panel-manager
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
 # Unmaintained, security issues, bug #515272. Removal in a month.
 net-misc/italc
 
@@ -294,9 +308,12 @@ net-proxy/ntlmaps
 # microdc2 should be used instead, bug #533782. Removal in a month.
 net-p2p/microdc
 
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Unmaintained, security issues, bug #536334. Removal in a month.
-net-nds/389-ds-base
+# NP-Hardass <NP-Hardass@gentoo.org> (05 Feb 2016)
+# Security issues bug #536334. Remove this entry in a month.
+<net-nds/389-ds-base-1.3.2.22
+
+# NP-Hardass <NP-Hardass@gentoo.org> (05 Feb 2016)
+# Security issues bug #536334. Under investigation by maintainer.
 app-admin/389-ds-console
 net-nds/389-admin
 app-admin/389-admin-console
@@ -512,11 +529,6 @@ media-plugins/gst-plugins-mimic
 media-sound/giada
 
 # Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Old version, upstream moved to kannel long time ago, bug #493712
-# Removal in a month.
-app-mobilephone/kannel-sqlbox
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
 # Doesn't work properly (#519732), doesn't build (#503246). Removal in a
 # month.
 net-proxy/dansguardian
@@ -592,11 +604,6 @@ www-client/uzbl
 # Needs a bump and substantial ebuild rewrite
 =sci-mathematics/reduce-20110414-r1
 
-# Michael Sterrett <mr_bones_@gentoo.org> (04 Jan 2016)
-# Upstream stopped development in 2004 and doesn't work on modern systems.
-# Masked for removal on 20160203
-games-puzzle/krystaldrop
-
 # Pacho Ramos <pacho@gentoo.org> (03 Jan 2016)
 # Fails to build, bug #368873. Removal in a month
 x11-misc/xoo
@@ -643,13 +650,6 @@ dev-util/cocom
 # Fails to build, bug #298686
 # Removal in a month
 dev-ada/booch_components
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Fails to build, bug #298700
-# Removal in a month.
-dev-java/istack-commons-tools
-dev-java/jax-ws-tools
-dev-java/jaxb-tools
 
 # Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
 # Unresolved security issues, bug #324017
@@ -717,35 +717,9 @@ app-office/passepartout
 # Removal in a month.
 media-video/bombono-dvd
 
-# Pacho Ramos <pacho@gentoo.org> (31 Dec 2015)
-# Upstream dead, doesn't compile with libsigc++-2.6, bug #569540
-# Removal in a month.
-sci-electronics/gspeakers
-
-# Michael Sterrett <mr_bones_@gentoo.org> (30 Dec 2015)
-# Upstream has gone away and games-strategy/xbattleai is
-# basically a superset anyhow.
-# Masked for removal on 20160129
-games-strategy/xbattle
-
 # Victor Ostorga <vostorga@gentoo.org> (30 Dec 2015)
 # Mask this liferea version because upstream released it broken
 =net-news/liferea-1.10.17
-
-# Michael Sterrett <mr_bones_@gentoo.org> (30 Dec 2015)
-# Unnecessary with newer version of games-simulation/flightgear
-# Masked for removal on 20160129
-games-simulation/fgrun
-
-# Michael Sterrett <mr_bones_@gentoo.org> (29 Dec 2015)
-# Fetch fails since it looks like it's distributed via stream now (bug #553728)
-# Masked for removal on 20160128
-games-strategy/revenge-of-the-titans
-
-# Michael Sterrett <mr_bones_@gentoo.org> (29 Dec 2015)
-# Lacking in fun; no upstream; crashy (bug #550890)
-# Masked for removal on 20160128
-games-simulation/qct
 
 # Justin Lecher <jlec@gentoo.org> (29 Dec 2015)
 # Fails to build and test runs
@@ -753,22 +727,11 @@ games-simulation/qct
 # #370021, #478614, #513964
 sci-libs/libbufr
 
-# Michael Palimaka <kensington@gentoo.org> (27 Dec 2015)
-# Fails to build. Dead upstream. Masked for removal in 30 days.
-# Bug 541522
-dev-util/pmk
-
 # Mikle Kolyada <zlogene@gentoo.org> (26 Dec 2015)
 # Dead upstream (last activity in 2003)
 # Nothing in the tree depends on it
 # Masked for removal
 dev-perl/SpeedyCGI
-
-# Sergey Popov <pinkbyte@gentoo.org> (25 Dec 2015)
-# Old versions lacks multilib support and proper subslots
-# Masked for removal
-<dev-libs/boost-1.55.0
-<dev-util/boost-build-1.55.0
 
 # Manuel Rüger <mrueg@rueg.eu> (24 Dec 2015)
 # Effectively unmaintained, multiple bugs
@@ -793,11 +756,6 @@ media-tv/xawtv
 dev-db/drizzle
 dev-php/pecl-drizzle
 
-# Andreas K. Huettel <dilfridge@gentoo.org> (11 Dec 2015)
-# Ancient, smells funny, disowned by upstream, needs syck
-# Masked for removal in 30 days, bug 565012
-dev-perl/YAML-Parser-Syck
-
 # Fabian Groffen <grobian@gentoo.org> (11 Dec 2015)
 # Release candidates for Exim 4.87
 =mail-mta/exim-4.87_rc2
@@ -819,11 +777,6 @@ dev-perl/YAML-Parser-Syck
 # Brian Evans <grknight@gentoo.org> (02 Dec 2015)
 # All current targets are masked.
 <dev-php/pecl-taint-1.99.99
-
-# Brian Evans <grknight@gentoo.org> (02 Dec 2015)
-# Zend Opcache was integrated into PHP versions 5.5 and later
-# Masked for removal in 30 days
-dev-php/pecl-zendopcache
 
 # Brian Evans <grknight@gentoo.org> (02 Dec 2015)
 # PHP 5.4 is End Of Life and will not receive any further updates
@@ -932,12 +885,6 @@ dev-libs/iniparser:4
 # Has race condition / failure modes that make systems unusable
 # See #551724 and duplicates
 =sys-fs/udev-init-scripts-29
-
-# Ryan Hill <rhill@gentoo.org> (28 Apr 2015)
-# Moving to /lib/gentoo/functions.sh broke the eclass
-# by changing output it relies on. See bug #504118,
-# 547586, and 547962.
->=sys-devel/gcc-config-1.8-r1
 
 # Patrick Lauer <patrick@gentoo.org> (10 Apr 2015)
 # Breaks pretty much all consumers, like samba

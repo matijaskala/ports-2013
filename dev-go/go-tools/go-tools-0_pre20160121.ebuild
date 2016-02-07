@@ -23,8 +23,8 @@ LICENSE="BSD"
 SLOT="0"
 IUSE=""
 DEPEND="dev-go/go-net:=
-	!<dev-lang/go-1.5"
-RDEPEND=""
+	>=dev-lang/go-1.5"
+RDEPEND="!<dev-lang/go-1.5"
 
 src_prepare() {
 	local go_src="${EGO_PN%/...}"
@@ -99,15 +99,6 @@ src_install() {
 	# bug 558818: install binaries in $GOROOT/bin to avoid file collisions
 	exeinto "$(go env GOROOT)/bin"
 	doexe bin/* "${T}/goroot/bin/godoc"
-	# Since tipgodoc has been known to be installed in either
-	# GOROOT or GOPATH, handle either case (bug 572650). It likely
-	# depends on what is currently installed, as is often the case
-	# for weird issues like this with go.
-	if [[ -e ${T}/gopath/bin/tipgodoc ]]; then
-		doexe "${T}/gopath/bin/tipgodoc"
-	else
-		doexe "${T}/goroot/bin/tipgodoc"
-	fi
 	dodir /usr/bin
 	ln "${ED}$(go env GOROOT)/bin/godoc" "${ED}usr/bin/godoc" || die
 

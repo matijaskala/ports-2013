@@ -23,10 +23,10 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
-IUSE="+pcap +wireshark-plugins"
+IUSE="+pcap static-libs +wireshark-plugins"
 
 RDEPEND="
-	pcap? ( net-libs/libpcap )
+	pcap? ( net-libs/libpcap[static-libs?] )
 	wireshark-plugins? (
 		>=net-analyzer/wireshark-1.8.3-r1:=
 	)
@@ -70,10 +70,11 @@ src_configure() {
 	CMAKE_USE_DIR="${S}"
 	BUILD_DIR="${S}"_build
 	local mycmakeargs=(
-		-DDISABLE_PYTHON=true
+		-DENABLE_PYTHON=false
 		-DPACKAGE_MANAGER=true
 		$(cmake-utils_use pcap PCAPDUMP)
 		$(cmake-utils_use pcap USE_PCAP)
+		$(cmake-utils_use static-libs BUILD_STATIC_LIB)
 	)
 	cmake-utils_src_configure
 
