@@ -109,7 +109,7 @@ src_configure() {
 		--enable-fast-install \
 		--disable-static \
 		--disable-gnome-keybindings \
-		--with-default-plugins='core workarounds dbus resize crashhandler mousepoll decoration svg wall place png text imgjpeg move regex animation ezoom' \
+		--with-default-plugins=ccp \
 		$(use_enable svg librsvg) \
 		$(use_enable cairo annotate) \
 		$(use_enable dbus) \
@@ -147,6 +147,19 @@ src_install() {
 	KWIN="$(type -p kwin)"
 	METACITY="$(type -p metacity)"
 	SKIP_CHECKS="yes"
+	EOF
+
+	dodir /etc/skel/.config/compiz/compizconfig
+
+	cat <<- EOF > "${D}/etc/skel/.config/compiz/compizconfig/Default.ini"
+	[decoration]
+	as_command = gtk-window-decorator
+
+	[core]
+	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;
+	s0_hsize = 2
+	s0_vsize = 2
+
 	EOF
 
 	domenu "${FILESDIR}"/compiz.desktop
