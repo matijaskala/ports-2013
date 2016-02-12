@@ -33,7 +33,7 @@ SRC_URI="https://${EGO_PN%/*}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz
 DESCRIPTION="High-performance web framework for Go"
 HOMEPAGE="https://${EGO_PN%/*}"
 LICENSE="Apache-2.0"
-SLOT="0"
+SLOT="0/${PVR}"
 IUSE=""
 RESTRICT="test"
 
@@ -58,10 +58,10 @@ unpack_go_packages() {
 		if [[ ${x} == *.tar.gz ]]; then
 			go_package=$(get_archive_go_package ${x})
 			mkdir -p "${S}/src/${go_package%/*}"
-            for x in ${go_package##*/}-*; do
-                [[ ${x} -ef ${S} ]] && continue
-                mv "${x}" "${S}/src/${go_package}" || die
-            done
+			for x in ${go_package##*/}-*; do
+				[[ ${x} -ef ${S} ]] && continue
+				mv "${x}" "${S}/src/${go_package}" || die
+			done
 		fi
 	done
 }

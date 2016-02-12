@@ -1,24 +1,24 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-shells/gentoo-zsh-completions/gentoo-zsh-completions-99999999.ebuild,v 1.4 2014/11/21 14:08:11 radhermit Exp $
+# $Id$
 
 EAPI=5
 
-inherit git-r3
-
-EGIT_REPO_URI="https://github.com/radhermit/gentoo-zsh-completions.git"
+if [[ ${PV} == 9999* ]] ; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/gentoo/gentoo-zsh-completions.git"
+else
+	SRC_URI="https://github.com/gentoo/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc64-solaris"
+fi
 
 DESCRIPTION="Gentoo specific zsh completion support (includes emerge and ebuild commands)"
-HOMEPAGE="https://github.com/radhermit/gentoo-zsh-completions"
+HOMEPAGE="https://github.com/gentoo/gentoo-zsh-completions"
 
 LICENSE="ZSH"
 SLOT="0"
 
 RDEPEND=">=app-shells/zsh-4.3.5"
-
-src_prepare() {
-	epatch "${FILESDIR}"/${PN}-eselect.patch
-}
 
 src_install() {
 	insinto /usr/share/zsh/site-functions

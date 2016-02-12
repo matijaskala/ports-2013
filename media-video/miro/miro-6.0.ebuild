@@ -42,7 +42,8 @@ RDEPEND="${CDEPEND}
 	xvid? ( media-plugins/gst-plugins-xvid:0.10 )
 	net-dns/avahi[mdnsresponder-compat]"
 
-DEPEND="${CDEPEND}"
+DEPEND="${CDEPEND}
+	media-libs/taglib"
 
 # 2 unexpected failures, requires a running gconf which MAY not exist
 # but failing tests not a regression from 4.0.6

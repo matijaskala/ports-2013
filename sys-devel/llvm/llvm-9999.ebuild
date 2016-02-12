@@ -20,7 +20,8 @@ LICENSE="UoI-NCSA"
 SLOT="0/${PV}"
 KEYWORDS=""
 IUSE="clang debug +doc gold libedit +libffi lldb multitarget ncurses ocaml
-	python +static-analyzer test xml video_cards_radeon kernel_Darwin"
+	python +static-analyzer test xml video_cards_radeon
+	kernel_Darwin kernel_FreeBSD"
 
 COMMON_DEPEND="
 	sys-libs/zlib:0=
@@ -47,7 +48,7 @@ DEPEND="${COMMON_DEPEND}
 		( >=sys-freebsd/freebsd-lib-9.1-r10 sys-libs/libcxx )
 	)
 	|| ( >=sys-devel/binutils-2.18 >=sys-devel/binutils-apple-5.1 )
-	kernel_Darwin? ( sys-libs/libcxx )
+	kernel_Darwin? ( <sys-libs/libcxx-${PV%_rc*}.9999 )
 	clang? ( xml? ( virtual/pkgconfig ) )
 	doc? ( dev-python/sphinx )
 	gold? ( sys-libs/binutils-libs )
@@ -393,6 +394,9 @@ src_install() {
 	fi
 
 	multilib-minimal_src_install
+
+	# Remove unnecessary headers on FreeBSD, bug #417171
+	use kernel_FreeBSD && use clang && rm "${ED}"usr/lib/clang/${PV}/include/{std,float,iso,limits,tgmath,varargs}*.h
 }
 
 multilib_src_install() {

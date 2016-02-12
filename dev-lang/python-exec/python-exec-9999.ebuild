@@ -68,14 +68,10 @@ src_install() {
 	insinto /etc/python-exec
 	doins "${T}"/python-exec.conf
 
+	# Create Python interpreter executable wrappers
 	local f
-	for f in python{,2,3}; do
-		# can't use symlinks here since random stuff
-		# loves to do readlink on sys.executable...
-		newbin python-exec2-c "${f}"
-	done
-	for f in python{,2,3}-config 2to3 idle pydoc pyvenv; do
-		dosym ../lib/python-exec/python-exec2 /usr/bin/"${f}"
+	for f in python{,2,3}{,-config} 2to3 idle pydoc pyvenv; do
+		dosym python-exec2-c /usr/bin/"${f}"
 	done
 }
 
