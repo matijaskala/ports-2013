@@ -30,6 +30,34 @@
 
 #--- END OF EXAMPLES ---
 
+# Lars Wendler <polynomial-c@gentoo.org> (01 Mar 2016)
+# Arrow keys don't work (bug #576086).
+=sys-apps/less-482
+
+# James Le Cuirot <chewi@gentoo.org> (29 Feb 2016)
+# Dead upstream and doesn't build with Java 8. Removal in 30 days.
+sci-biology/readseq
+
+# Patrice Clement <monsieurp@gentoo.org> (29 Feb 2016)
+# Duplicate of dev-libs/libedit.
+# Masked for removal in 30 days.
+sys-libs/libedit
+
+# Patrick Lauer <patrick@gentoo.org> (22 Feb 2016)
+# Inactive upstream, build failures, obsoleted by rakudo/perl6
+dev-lang/niecza
+dev-lang/niecza-bin
+
+# Eray Aslan <eras@gentoo.org> (22 Feb 2016)
+# Mask experimental software
+=mail-mta/postfix-3.2*
+
+# James Le Cuirot <chewi@gentoo.org> (21 Feb 2016)
+# No revdeps, no release since 2007, and upstream have even moved the
+# download to a hidden OldFiles directory in the parent SourceForge
+# project. Removal in 30 days.
+dev-java/xsd2jibx
+
 # James Le Cuirot <chewi@gentoo.org> (19 Feb 2016)
 # Upstream EOL is December 2016. We would rather focus on other things
 # than support it until then. Removal in 30 days.
@@ -170,14 +198,6 @@ dev-java/sux4j
 =sys-devel/llvm-3.8.0*
 =sys-devel/clang-3.8.0*
 
-# James Le Cuirot <chewi@gentoo.org> (26 Jan 2016)
-# No new release since 2008. Removal in 30 days.
-app-cdr/webcdwriter
-
-# James Le Cuirot <chewi@gentoo.org> (26 Jan 2016)
-# Now part of eselect-java. Removal in 30 days.
-app-eselect/eselect-maven
-
 # Sergey Popov <pinkbyte@gentoo.org> (20 Jan 2016)
 # Mask new versions of Boost - they are known to cause breakages
 ~dev-util/boost-build-1.60.0
@@ -210,19 +230,6 @@ media-libs/evas
 # ghc-7.10, bug #561122
 dev-haskell/extra:0
 
-# Michał Górny <mgorny@gentoo.org> (11 Jan 2016)
-# (on behalf of Python team)
-# Masked for testing. python-exec now checks argv[0] to determine
-# whether it's called via the Python wrapper shebang, or symlinked
-# directly. eselect-python uses the C wrapper rather than Python wrapper
-# to fix Prefix support, #568974.
-# The 2.3 version uses completely new configuration format which
-# requires much more testing.
->=app-eselect/eselect-python-20151117-r3
->=dev-lang/python-exec-2.2
->=app-eselect/eselect-python-20160207
->=dev-lang/python-exec-2.3
-
 # Aaron W. Swenson <titanofold@gentoo.org> (11 Jan 2016)
 # Masked for removal after 2016-03-11. Package hasn't been updated in
 # some time and doesn't work with Apache 2.4 without patching by
@@ -233,174 +240,9 @@ www-apache/mod_auth_pgsql
 # Errorneously added. Is already in perl-core. Please uninstall.
 dev-perl/ExtUtils-Constant
 
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Cannot be downloaded either mirrored, bug #561142. Removal in a month
-games-fps/ut2004-alienswarm
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Cannot be downloaded either mirrored, bug #561150. Removal in a month
-games-rpg/sacred-gold
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Cannot be downloaded either mirrored, bug #561154. Removal in a month
-games-strategy/coldwar
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Cannot be downloaded either mirrored, bug #561176. Removal in a month
-net-misc/ixp4xx
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Obsolete and dead, bug #561622. Removal in a month.
-app-misc/ompload
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Security issues, too hard to maintain, bug #561952. Removal in a month.
-app-crypt/truecrypt
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Not useful anymore, bug #562998. Removal in a month.
-app-editors/xmlcopyeditor
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Opensource version dead for ages, it was replaced by a closed source one,
-# bug #563334. Removal in a month.
-dev-db/flamerobin
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Dead and obsolete for years, bug #563900. Removal in a month.
-gnome-extra/zeitgeist-extensions
-dev-python/python-geoclue
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, it includes multiple hacks currently and has pending bugs
-# to resolve, bug #564048. Removal in a month.
-net-dns/host
-net-misc/proxyper
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, buggy, doesn't work with wxGTK:3.0, bug #564052. Removal in
-# a month.
-sci-visualization/extrema
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, doesn't work with wxGTK:3.0, bug #564092. Removal in a
-# month.
-media-gfx/comical
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, doesn't work with wxGTK:3.0, bug #564094. Removal in a
-# month.
-media-sound/miniaudicle
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, buggy, doesn't work with wxGTK:3.0, bug #564102. Removal in
-# a month.
-net-p2p/imule
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Doesn't work at all, bug #564106. Removal in a month.
-media-gfx/fr0st
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Nothing need this old and broken packages, bug #565014. Removal in a
-# month.
-dev-php/pecl-syck
-dev-libs/syck
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Obsolete version, nobody willing to package newer version and nothing
-# needs it in the tree, bug #565206. Removal in a month.
-net-libs/libmapi
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Nothing needs this old dummy package, bug #566774. Removal in a month.
-gnome-extra/at-spi
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, doesn't work with libsigc++-2.6, bug #568788. Removal in a
-# month.
-app-misc/granule
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead, nothing needs it, will break with next snakeoil version,
-# bug #569202. Removal in a month,
-app-portage/maintainer-helper
-
-# Pacho Ramos <pacho@gentoo.org> (08 Jan 2016)
-# Upstream dead for ages, they rely on old libs also, bug #565654. Removal
-# in a month.
-gnome-extra/gdesklets-core
-x11-plugins/desklet-Genesis
-x11-plugins/desklet-ImageSlideShow
-x11-plugins/desklet-Mouse
-x11-plugins/desklet-SlideShow
-x11-plugins/desklet-WeeklyCalendar
-x11-plugins/desklet-ftb
-x11-plugins/desklet-iCalendarEvent
-x11-plugins/desklet-justanicon
-
-# Patrice Clement <monsieurp@gentoo.org> (06 Jan 2016)
-# Struts 2 and friends suffer from a lack of interest. These ebuilds are
-# outdated, riddled with CVEs (about 5 currently opened in Bugzilla) and some
-# of them do not compile at all. Time to see them off.
-# Masked for removal in 30 days. See bug #540888.
-dev-java/struts-plugins
-dev-java/struts-xwork
-dev-java/struts-core
-dev-java/struts
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #514778. Removal in a month.
-media-sound/mimd
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #514826. Removal in a month.
-sys-cluster/gfs-kernel
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Unmaintained, security issues, bug #515272. Removal in a month.
-net-misc/italc
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #515904. Removal in a month.
-media-sound/sweep
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Unmaintained, fails to build, relies on deprecated libs, bug #515912.
-# Removal in a month.
-x11-misc/dragbox
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Unfetchable, mirror-restricted, bug #521442. Removal in a month.
-sci-chemistry/gopenmol
-
 # Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
 # Unbuildable for a long time, bug #522916. Removal in a month.
 net-im/silc-server
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Buggy and completely obsolete, bug #527488. Removal in a month.
-x11-misc/alltray
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, dead since 2005, bug #528050. Removal in a month.
-net-irc/asuka
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #528854. Removal in a month.
-dev-ada/aunit
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #529434. Removal in a month.
-app-emulation/aranym
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Multiple bugs and buggy ebuild, bug #533170. Removal in a month.
-net-proxy/ntlmaps
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# microdc2 should be used instead, bug #533782. Removal in a month.
-net-p2p/microdc
 
 # NP-Hardass <NP-Hardass@gentoo.org> (05 Feb 2016)
 # Security issues bug #536334. Remove this entry in a month.
@@ -413,368 +255,13 @@ net-nds/389-admin
 app-admin/389-admin-console
 www-apps/389-dsgw
 
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #536418. Removal in a month.
-dev-ada/xmlada
-dev-ada/adadoc
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #536632. Removal in a month.
-dev-util/piklab
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #537520. Removal in a month.
-dev-ada/florist
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Unmaintained, security issues, bug #537528. Removal in a month
-app-admin/usermin
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Obsolete versions, updated ones living in Sabayon overlay, bug #538142.
-# Removal in a month.
-app-admin/rigo
-app-misc/magneto-loader
-kde-misc/magneto-kde
-x11-misc/magneto-gtk
-x11-misc/magneto-gtk3
-sys-apps/rigo-daemon
-sys-apps/magneto-core
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #542928. Removal in a month.
-net-misc/kumofs
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #543210. Removal in a month.
-media-sound/phasex
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #545090. Removal in a month.
-x11-misc/bmpanel
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Unmaintained, obsolete, bug #545450. Removal in a month.
-sys-cluster/xgridagent
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, upstream dead many years ago, bug #545692. Removal in a
-# month.
-media-sound/muine
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #547290. Removal in a month.
-sys-cluster/pacemaker-gui
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #547652. Removal in a month.
-media-video/hwdecode-demos
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, nothing in the tree needs this, bug #549686. Removal in a
-# month.
-app-i18n/xsim
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Buggy, upstream dead for years, bug #550800. Removal in a month.
-games-action/poopmup
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Dead upstream since 2009, nothing in the tree needs it anymore, bug
-# #551354. Removal in a month.
-net-proxy/sshproxy
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #551894. Removal in a month.
-dev-python/Djblets
-dev-util/reviewboard
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Security issues, bug #553604. Removal in a month.
-net-mail/checkpw
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #555556. Removal in a month.
-app-i18n/scim-canna
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Fails to build, bug #555840. Removal in a month.
-app-misc/lcd-stuff
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Upstream dead for ages, doesn't build, bug #558274. Removal in a month.
-net-wireless/ap-utils
-
-# Pacho Ramos <pacho@gentoo.org> (06 Jan 2016)
-# Those packages were meant to use on a PDA, no upsteam commits to git since
-# 3 years to most project parts. No releases, bug #560482. Removal in a
-# month.
-x11-libs/libmatchbox
-x11-misc/matchbox-panel-manager
-x11-plugins/matchbox-applet-input-manager
-x11-plugins/matchbox-applet-startup-monitor
-x11-plugins/matchbox-applet-volume
-x11-plugins/matchbox-desktop-image-browser
-x11-plugins/matchbox-desktop-xine
-x11-wm/matchbox-common
-x11-wm/matchbox-desktop
-x11-wm/matchbox-panel
-x11-wm/matchbox-window-manager
-x11-themes/matchbox-themes-extra
-x11-wm/matchbox
-x11-misc/matchbox-keyboard
-
-# Matthias Maier <tamiko@gentoo.org> (06 Jan 2016)
-# Obsolete package, nowadays bundled with media-sound/quodlibet
-# Masked for removal in 30 days
-media-plugins/quodlibet-plugins
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Upstream dead, ignores cflags, nothing need it in the tree
-# bug #438940. Removal in a month
-net-libs/libbt
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Broken in many ways, nobody willing to fix and maintain it.
-# bug #443728. Removal in a month
-app-laptop/prey
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Upstream dead for a long time, doesn't work on amd64, bug #445776
-# Removal in a month.
-net-p2p/wire
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Incompatible with current services API, bug #446940
-# Removal in a month.
-media-sound/shell-fm
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Dead, doesn't build, use multimon-ng instead, bug #448742
-# Removal in a month.
-app-misc/multimon
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Doesn't support current gnutls, nothing in the tree needs
-# this old lib, bug #456306. Removal in a month.
-net-libs/libdexter
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Doesn't build with current kernels, the support is included
-# in that kernels without this extra package, bug #463566
-# Removal in a month.
-app-accessibility/speakup
-app-accessibility/speechd-up
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #465208. Removal in a month.
-app-misc/usbirboy
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails with tcl/tk-8.6, nothing in the tree needs this
-# bug #467444. Removal in a month
-dev-tcltk/tcl-sql
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-#
-# Tom Wijsman <TomWij@gentoo.org> (18 Sep 2013)
-# Temporarily masked due to QA issue during attempts to unbundle dependencies;
-# we need to check the jar contents to check for differences, especially the
-# stax dependency seems to be problematic in this regard but we'll check all of
-# them to ensure that unbundling doesn't hurt some missed functionality.
-# Bug #471942 tracks the progress of these unbundling efforts.
-#
-# Removal in a month
-app-admin/ec2-api-tools
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Broken and completely old versions because this needs a maintainer
-# to take care of bumping it soon enough, bug #472170
-sys-kernel/vserver-sources
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Upstream dead for a long time, no compatible then with current ffmpeg
-# versions and neither with libav, bug #474352. Removal in a month
-media-video/winki
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Not compatible with libav, upstream dead for ages, please use other
-# downloaders like youtube-dl, bug #474370. Removal in a month.
-net-misc/yaydl
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Not compatible with libav, upstream stopped caring about fix and taking
-# care of its security issues long time ago. bug #474388. Removal in a
-# month.
-www-apps/gallery
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Doesn't work with current twisted, bug #486810. Removal in a month.
-media-video/coherence
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# MSN died long time ago, this are not needed then. bug #489552. Removal in
-# a month.
-media-libs/libmimic
-media-plugins/gst-plugins-mimic
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #491292. Removal in a month.
-media-sound/giada
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Doesn't work properly (#519732), doesn't build (#503246). Removal in a
-# month.
-net-proxy/dansguardian
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Cannot be download, license is incorrect, bug #505752. Removal in a month.
-games-strategy/coldwar-demo
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Cannot be downloaded, mirror restricted, bug #506860. Removal in a month.
-games-fps/quake1-movies
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Dead for ages, its functionality was merged in bluez-5 long time ago.
-# Nobody needs it in the tree, bug #507486. Removal in a month.
-app-mobilephone/obexd
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Not compatible with python3, nothing in the tree needs this old lib, bug
-# #513424. Removal in a month
-sys-libs/libtrash
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# No updates since 2005, doesn't build, bug #513996. Removal in a month.
-net-proxy/oops
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Doesn't build, bug #514018. Removal in a month.
-net-wireless/rfswitch
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Not compatible with current GC lib, bug #514046. Removal in a month.
-dev-scheme/bigloo
-dev-scheme/hop
-app-text/skribe
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #514058. Removal in a month.
-net-libs/libopkele
-www-apache/mod_auth_openid
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #514078. Removal in a month.
-dev-util/exmap
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, unmaintained, bug #514122. Removal in a month.
-x11-misc/growl-for-linux
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Missing deps, doesn't run, bug #514436. Removal in a month.
-x11-misc/bbsload
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #514596. Removal in a month.
-dev-scheme/schemik
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #514602. Removal in a month.
-app-crypt/shishi
-
-# Pacho Ramos <pacho@gentoo.org> (05 Jan 2016)
-# Fails to build, bug #514634. Removal in a month.
-app-arch/torrentzip
-
-# Patrice Clement <monsieurp@gentoo.org> (05 Jan 2016)
-# According to its maintainer. this project is slowly dying 
-# and there's no activity occuring on mailing lists / git repo.
-# Masked for removal. See bug 570836.
-www-client/uzbl
-
 # Andrey Grozin <grozin@gentoo.org> (04 Jan 2016)
 # Needs a bump and substantial ebuild rewrite
 =sci-mathematics/reduce-20110414-r1
 
-# Pacho Ramos <pacho@gentoo.org> (03 Jan 2016)
-# Fails to build, bug #368873. Removal in a month
-x11-misc/xoo
-
-# Pacho Ramos <pacho@gentoo.org> (03 Jan 2016)
-# Fails to build, bug #368913. Removal in a month
-media-video/cxfe
-
-# Pacho Ramos <pacho@gentoo.org> (03 Jan 2016)
-# Fails to build, bug #369053. Removal in a month
-media-sound/freewheeling
-
-# Pacho Ramos <pacho@gentoo.org> (03 Jan 2016)
-# Fails to build, bug #369769. Removal in a month
-media-sound/gqmpeg
-
-# Pacho Ramos <pacho@gentoo.org> (03 Jan 2016)
-# Obsolete lib, nothing needs it, bug #380193
-# Removal in a month
-x11-libs/libsexy
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Nothing requires this obsolete versions, bug #249418
-# Removal in a month.
-=dev-db/sqlite-2*
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Fails to build in multiple ways, bug #250055
-# Removal in a month.
-dev-ada/adasockets
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Security issues, without maintainer, upstream dead, bug #261194
-# Removal in a month.
-net-dns/noip-updater
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Tests fail, the version was superseeded by Dino package
-# long time ago but it lack maintainer to do the work.
-# Removal in a month. bug #297952
-dev-util/cocom
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Fails to build, bug #298686
-# Removal in a month
-dev-ada/booch_components
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Unresolved security issues, bug #324017
-# Removal in a month.
-sys-libs/nss-db
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Doesn't work, bug #330329
-# Removal in a month.
-net-dialup/capisuite
-
-# Pacho Ramos <pacho@gentoo.org> (01 Jan 2016)
-# Does not respect LDFLAGS, nothing requires it, bug #334627
-# Removal in a month.
-app-admin/showconsole
-
 # Victor Ostorga <vostorga@gentoo.org> (30 Dec 2015)
 # Mask this liferea version because upstream released it broken
 =net-news/liferea-1.10.17
-
-# Justin Lecher <jlec@gentoo.org> (29 Dec 2015)
-# Fails to build and test runs
-# No reverse deps
-# #370021, #478614, #513964
-sci-libs/libbufr
-
-# Manuel Rüger <mrueg@rueg.eu> (24 Dec 2015)
-# Effectively unmaintained, multiple bugs
-# Bug 288611,358013,413987,468186,480854,528750,548480,566226
-# Masked for removal in 30 days.
-media-tv/xawtv
 
 # Fabian Groffen <grobian@gentoo.org> (11 Dec 2015)
 # Release candidates for Exim 4.87
@@ -800,28 +287,12 @@ media-tv/xawtv
 dev-lang/php:5.4
 ~virtual/httpd-php-5.4
 
-# Justin Lecher <jlec@gentoo.org> (12 Nov 2015)
-# deprecated version of the plugin. 
-# sci-chemistry/pymol includes the newer version
-sci-chemistry/pymol-apbs-plugin
-
 # Brian Evans <grknight@gentoo.org> (11 Nov 2015)
 # Mask latest xdebug{,-client} beta versions
 # Upstream keeps changing the tarballs causing Manifest errors.
 # wrt bug 565234
 >=dev-php/xdebug-2.4.0_beta1
 >=dev-php/xdebug-client-2.4.0_beta1
-
-# Justin Lecher <jlec@gentoo.org> (10 Nov 2015)
-# Vulnerable package CVE-2014-{1932,1933}
-# Bug: 507982
-dev-python/imaging
-
-# Justin Lecher <jlec@gentoo.org> (10 Nov 2015)
-# Compatibility virtual for transition from
-# dev-python/imaging to dev-python/pillow
-# obsolete now #508266
-virtual/python-imaging
 
 # Michał Górny <mgorny@gentoo.org> (30 Oct 2015)
 # Uses unsafe ioctls that could result in data corruption. Upstream
@@ -942,10 +413,6 @@ dev-python/south
 # Michał Górny <mgorny@gentoo.org> (11 Feb 2015)
 # Potentially destructive to @world, bug #539746.
 =sys-apps/portage-2.2.16
-
-# Eray Aslan <eras@gentoo.org> (03 Feb 2015)
-# Mask experimental software
-=mail-mta/postfix-3.1*
 
 # Sergei Trofimovich <slyfox@gentoo.org> (29 Jan 2015)
 # Mask live ebuild
@@ -1286,10 +753,6 @@ app-text/cuneiform
 # bundled ffmpeg, see bugs #446468 and #444262.
 <media-video/avidemux-2.6.2
 
-# Sven Wegener <swegener@gentoo.org> (21 Dec 2012)
-# temporary mask for socket location change
-=app-misc/screen-4.0.3-r8
-
 # Rick Farina <zerochaos@gentoo.org> (21 Dec 2012)
 # madwifi has been replaced by ath5k and ath9k in kernel
 # drivers and is subject to numerous long standing bugs
@@ -1423,10 +886,6 @@ games-fps/quake4-demo
 # MATSUU Takuto <matsuu@gentoo.org> (05 Apr 2007)
 # to be tested, seems unstable
 >=app-i18n/scim-anthy-1.3.0
-
-# Tavis Ormandy <taviso@gentoo.org> (21 Mar 2006)
-# masked pending unresolved security issues #127167
-games-roguelike/slashem
 
 # Robin H. Johnson <robbat2@gentoo.org> (11 Feb 2006)
 # zlib interaction is badly broken. See bug #124733.

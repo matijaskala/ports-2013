@@ -35,7 +35,7 @@ EXTRACTONLY="
 "
 
 if [ "${CATEGORY#*cross-}" = "${CATEGORY}" ]; then
-	RDEPEND="ssl? ( dev-libs/openssl )
+	RDEPEND="ssl? ( dev-libs/openssl:0= )
 		hesiod? ( net-dns/hesiod )
 		kerberos? ( app-crypt/heimdal )
 		usb? ( !dev-libs/libusb )
@@ -186,6 +186,19 @@ src_prepare() {
 	sed -e 's/LDFLAGS/RAW_LDFLAGS/g' \
 		-i "${S}/csu/i386-elf/Makefile" \
 		-i "${S}/csu/ia64/Makefile" || die
+
+	if install --version 2> /dev/null | grep -q GNU; then
+		sed -i.bak -e 's:${INSTALL} -C:${INSTALL}:' "${WORKDIR}/include/Makefile"
+	fi
+
+	# Try to fix sed calls for GNU sed. Do it only with GNU userland and force
+	# BSD's sed on BSD.
+	cd "${S}"
+	if [[ ${CBUILD:-${CHOST}} != *bsd* ]]; then
+		find . -name Makefile -exec sed -ibak 's/sed -i /sed -i/' {} \;
+		sed -i -e 's/-i ""/-i""/' "${S}/csu/Makefile.inc" || die
+	fi
+
 	if use build; then
 		cd "${WORKDIR}"
 		# This patch has to be applied on ${WORKDIR}/sys, so we do it here since it
@@ -197,23 +210,12 @@ src_prepare() {
 
 	if ! is_crosscompile ; then
 		if [[ ! -e "${WORKDIR}/sys" ]]; then
-			ln -s "/usr/src/sys" "${WORKDIR}/sys" || die "Couldn't make sys symlink!"
+			ln -s "${SYSROOT}/usr/src/sys" "${WORKDIR}/sys" || die "Couldn't make sys symlink!"
 		fi
 	else
 		sed -i.bak -e "s:/usr/include:/usr/${CTARGET}/usr/include:g" \
 			"${S}/libc/rpc/Makefile.inc" \
 			"${S}/libc/yp/Makefile.inc"
-	fi
-
-	if install --version 2> /dev/null | grep -q GNU; then
-		sed -i.bak -e 's:${INSTALL} -C:${INSTALL}:' "${WORKDIR}/include/Makefile"
-	fi
-
-	# Try to fix sed calls for GNU sed. Do it only with GNU userland and force
-	# BSD's sed on BSD.
-	cd "${S}"
-	if use userland_GNU; then
-		find . -name Makefile -exec sed -ibak 's/sed -i /sed -i/' {} \;
 	fi
 }
 
@@ -326,6 +328,7 @@ do_bootstrap() {
 		CTARGET="${CHOST}" install_includes "/include_proper_${ABI}"
 		CFLAGS="${CFLAGS} -isystem ${WORKDIR}/include_proper_${ABI}"
 		CXXFLAGS="${CXXFLAGS} -isystem ${WORKDIR}/include_proper_${ABI}"
+		mymakeopts="${mymakeopts} RPCDIR=${WORKDIR}/include_proper_${ABI}/rpcsvc"
 	fi
 	bootstrap_csu
 	bootstrap_libssp_nonshared
@@ -358,7 +361,7 @@ do_compile() {
 src_compile() {
 	# Does not work with GNU sed
 	# Force BSD's sed on BSD.
-	if use userland_BSD ; then
+	if [[ ${CBUILD:-${CHOST}} == *bsd* ]]; then
 		export ESED=/usr/bin/sed
 		unalias sed
 	fi
@@ -404,11 +407,11 @@ gen_libc_ldscript() {
 	#   $3 = source libssp_nonshared dir
 
 	# Clear the symlink.
-	rm -f "${D}/$2/libc.so" || die
+	rm -f "${DESTDIR}/$2/libc.so" || die
 
 	# Move the library if needed
 	if [ "$1" != "$2" ] ; then
-		mv "${D}/$2/libc.so.7" "${D}/$1/" || die
+		mv "${DESTDIR}/$2/libc.so.7" "${DESTDIR}/$1/" || die
 	fi
 
 	# Generate libc.so ldscript for inclusion of libssp_nonshared.a when linking
@@ -422,7 +425,7 @@ gen_libc_ldscript() {
 
 	# iconv symbol provided by libc_nonshared.a.
 	# http://svnweb.freebsd.org/base?view=revision&amp;revision=258283
-	cat > "${D}/$2/libc.so" <<-END_LDSCRIPT
+	cat > "${DESTDIR}/$2/libc.so" <<-END_LDSCRIPT
 /* GNU ld script
    SSP (-fstack-protector) requires __stack_chk_fail_local to be local.
    GCC invokes this symbol in a non-PIC way, which results in TEXTRELs if
@@ -527,13 +530,13 @@ do_install() {
 
 	if ! is_crosscompile ; then
 		if ! multilib_is_native_abi ; then
-			gen_libc_ldscript "usr/$(get_libdir)" "usr/$(get_libdir)" "usr/$(get_libdir)"
+			DESTDIR="${D}" gen_libc_ldscript "usr/$(get_libdir)" "usr/$(get_libdir)" "usr/$(get_libdir)"
 		else
 			dodir "$(get_libdir)"
-			gen_libc_ldscript "$(get_libdir)" "usr/$(get_libdir)" "usr/$(get_libdir)"
+			DESTDIR="${D}" gen_libc_ldscript "$(get_libdir)" "usr/$(get_libdir)" "usr/$(get_libdir)"
 		fi
 	else
-		CHOST=${CTARGET} gen_libc_ldscript "usr/${CTARGET}/usr/lib" "usr/${CTARGET}/usr/lib" "usr/${CTARGET}/usr/lib"
+		CHOST=${CTARGET} DESTDIR="${D}/usr/${CTARGET}/" gen_libc_ldscript "usr/lib" "usr/lib" "usr/lib"
 		# We're done for the cross libc here.
 		return 0
 	fi

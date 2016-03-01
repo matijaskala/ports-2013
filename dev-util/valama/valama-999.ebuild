@@ -15,13 +15,14 @@ IUSE=""
 
 COMMONDEPEND="
 	>=dev-util/cmake-2.8.4
-	>=dev-lang/vala-0.22
+	>=dev-lang/vala-0.24
 	>=dev-libs/glib-2.36.4
-	>=dev-libs/gdl-3.4
+	>=dev-libs/gdl-3.10
 	dev-util/glade
 	>=dev-libs/libgee-0.10.5
-	>=x11-libs/gtk+-2.32
-	>=x11-libs/gtk+-3.4"
+	net-libs/webkit-gtk:3
+	>=x11-libs/gtk+-3.10
+	>=x11-libs/gtksourceview-3.12[vala]"
 
 DEPEND="$COMMONDEPEND
 	virtual/pkgconfig"
