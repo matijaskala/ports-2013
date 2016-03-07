@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -31,6 +31,7 @@ DEPEND="${CDEPEND}
 	dev-libs/libxslt
 	dev-util/gtk-doc-am
 	dev-util/intltool
+	sys-devel/gettext
 	virtual/pkgconfig
 "
 RDEPEND="${CDEPEND}
@@ -63,7 +64,11 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -i -e 's|unix-group:wheel|unix-user:0|' src/polkitbackend/*-default.rules || die #401513
+	# Workaround upstream hack around standard gtk-doc behavior, bug #552170
+	sed -i -e 's/@ENABLE_GTK_DOC_TRUE@\(TARGET_DIR\)/\1/' \
+		-e '/install-data-local:/,/uninstall-local:/ s/@ENABLE_GTK_DOC_TRUE@//' \
+		-e 's/@ENABLE_GTK_DOC_FALSE@install-data-local://' \
+		docs/polkit/Makefile.in || die
 }
 
 src_configure() {

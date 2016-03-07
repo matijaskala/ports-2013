@@ -30,6 +30,43 @@
 
 #--- END OF EXAMPLES ---
 
+# Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
+# Per security bug #491372 this package is vulnerable
+# and unmaintained.  Removal in 30 days.
+net-mail/perdition
+
+# Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
+# Per security bug #448826 this package is vulnerable
+# and unmaintained.  Removal in 30 days.
+www-apps/dragonflycms
+
+# Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
+# Per security bug #392325 this package is vulnerable
+# and unmaintained.  Removal in 30 days.
+dev-libs/clearsilver
+
+# Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
+# Per security bug #466782 this package is vulnerable
+# and unmaintained.  Removal in 30 days.
+media-sound/xmp
+
+# Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
+# Per security bug #399563 these packages are vulnerable
+# and unmaintained.  Removal in 30 days.
+www-apps/horde-imp
+www-apps/horde-dimp
+
+# Mike Gilbert <floppym@gentoo.org> (03 Mar 2016)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+>=www-client/chromium-50
+
+# Alexis Ballier <aballier@gentoo.org> (01 Mar 2016)
+# Breaks some of its rev deps, still in beta stage
+>=dev-lang/ocaml-4.03_beta
+>=dev-ml/camlp4-4.03
+>=dev-ml/ppx_tools-0.99.3_p20160217
+
 # Lars Wendler <polynomial-c@gentoo.org> (01 Mar 2016)
 # Arrow keys don't work (bug #576086).
 =sys-apps/less-482
@@ -156,17 +193,6 @@ dev-java/jsr93
 net-libs/iojs
 
 # James Le Cuirot <chewi@gentoo.org> (07 Feb 2016)
-# BioJava depends on commons-dbcp:0, which requires Java 6. Even the
-# latest "legacy" version 1.9.1 does so and no one wants to do the
-# difficult bump to 4.1.0. Mauve depends on BioJava but being a very
-# outdated live SVN ebuild, it probably doesn't work anyway. This goes
-# for Mauve Aligner too. Removal in 30 days. See bug #556470.
-sci-biology/biojava
-sci-biology/mauve
-sci-biology/mauvealigner
-dev-java/bytecode
-
-# James Le Cuirot <chewi@gentoo.org> (07 Feb 2016)
 # Masked until 2.0 final arrives, which hopefully won't depend on
 # commons-dbcp:0 as that requires Java 6. Note that the 2.0 in the
 # tree should have actually been 2.0_beta1. There are no revdeps.
@@ -181,17 +207,6 @@ dev-java/jcs
 # versions, bug 527572, not trivial to fix. Upstream doesn't seem to
 # care anymore, last release was in 2012. Zero reverse deps.
 dev-python/PyQtMobility
-
-# James Le Cuirot <chewi@gentoo.org> (03 Feb 2016)
-# Built into Java since 1.5. Ancient and doesn't build with
-# Java 8. Removal in 30 days. See bug #544038.
-dev-java/concurrent-util
-
-# James Le Cuirot <chewi@gentoo.org> (03 Feb 2016)
-# Old, unused, broken on Java 7 and up. These are still alive upstream
-# but bumping is likely non-trivial. Removal in 30 days.
-dev-java/dsiutils
-dev-java/sux4j
 
 # Bernard Cafarelli <voyageur@gentoo.org> (27 Jan 2016)
 # New llvm version, masked for testing
@@ -265,13 +280,7 @@ www-apps/389-dsgw
 
 # Fabian Groffen <grobian@gentoo.org> (11 Dec 2015)
 # Release candidates for Exim 4.87
-=mail-mta/exim-4.87_rc2
-=mail-mta/exim-4.87_rc3
-
-# Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (07 Dec 2015)
-# Dev channel releases are only for people who are developers or want more
-# experimental features and accept a more unstable release.
->=www-client/chromium-49
+=mail-mta/exim-4.87_rc5
 
 # Anthony G. Basile <blueness@gentoo.org> (06 Dec 2015)
 # Masked until we deal with SSLv3, bug #567554
@@ -335,9 +344,9 @@ www-apache/mod_h2
 >=net-fs/samba-4.3.0
 
 # Lars Wendler <polynomial-c@gentoo.org> (20 Aug 2015)
-# Masked for testing
-=net-misc/iputils-20150815
-=net-misc/iputils-20150815-r1
+# Release is not from original upstream but from a fork. Masked as requested by
+# vapier
+~net-misc/iputils-20150815
 
 # Sebastian Pipping <sping@gentoo.org> (8 Aug 2015)
 # Upcoming, too young to go into testing unmasked

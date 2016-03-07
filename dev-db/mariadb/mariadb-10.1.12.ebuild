@@ -34,7 +34,7 @@ PATCHES=(
 
 COMMON_DEPEND="
 	mroonga? ( app-text/groonga-normalizer-mysql )
-	kerberos? ( virtual/krb5 )
+	kerberos? ( virtual/krb5[${MULTILIB_USEDEP}] )
 	systemd? ( sys-apps/systemd:= )
 	!bindist? ( >=sys-libs/readline-4.1:0=	)
 	server? (
@@ -79,6 +79,8 @@ src_configure(){
 	local MYSQL_CMAKE_NATIVE_DEFINES=(
 			-DWITH_JEMALLOC=$(usex jemalloc system)
 			-DWITH_PCRE=system
+	)
+	local MYSQL_CMAKE_EXTRA_DEFINES=(
 			-DPLUGIN_AUTH_GSSAPI_CLIENT=$(usex kerberos YES NO)
 	)
 	if use server ; then

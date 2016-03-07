@@ -156,7 +156,7 @@ src_install() {
 	as_command = gtk-window-decorator
 
 	[core]
-	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;
+	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;switcher;
 	s0_hsize = 2
 	s0_vsize = 2
 
