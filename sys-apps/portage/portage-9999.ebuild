@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -101,6 +101,10 @@ python_prepare_all() {
 			|| die "failed to append to make.globals"
 	fi
 
+	sed	-e "s|^\(sync-type = \).*|\\1git|" \
+		-e "s|^\(sync-uri = \).*|\\1git://github.com/matijaskala/ports-2013.git|" \
+		-i cnf/repos.conf || die "sed failed"
+
 	if [[ -n ${EPREFIX} ]] ; then
 		einfo "Setting portage.const.EPREFIX ..."
 		sed -e "s|^\(SANDBOX_BINARY[[:space:]]*=[[:space:]]*\"\)\(/usr/bin/sandbox\"\)|\\1${EPREFIX}\\2|" \
@@ -130,6 +134,7 @@ python_prepare_all() {
 		sed -e "s|^\(main-repo = \).*|\\1gentoo_prefix|" \
 			-e "s|^\\[gentoo\\]|[gentoo_prefix]|" \
 			-e "s|^\(location = \)\(/usr/portage\)|\\1${EPREFIX}\\2|" \
+			-e "s|^\(sync-type = \).*|\\1rsync|" \
 			-e "s|^\(sync-uri = \).*|\\1rsync://prefix.gentooexperimental.org/gentoo-portage-prefix|" \
 			-i cnf/repos.conf || die "sed failed"
 
@@ -191,7 +196,7 @@ python_install_all() {
 	fi
 
 	# Due to distutils/python-exec limitations
-	# they must be installed to /usr/bin.
+	# these must be installed to /usr/bin.
 	local sbin_relocations='archive-conf dispatch-conf emaint env-update etc-update fixpackages regenworld'
 	einfo "Moving admin scripts to the correct directory"
 	dodir /usr/sbin

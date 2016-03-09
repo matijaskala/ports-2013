@@ -30,6 +30,29 @@
 
 #--- END OF EXAMPLES ---
 
+# Michael Palimaka <kensington@gentoo.org> (09 Mar 2016)
+# Deprecated by upstream. No further releases. Unused.
+lxqt-base/liblxqt-mount
+lxqt-base/lxqt-config-randr
+
+# Michael Palimaka <kensington@gentoo.org> (09 Mar 2016)
+# Dead upstream. Doesn't work with new Twitter API.
+# Masked for removal in 30 days. Bug 575156
+net-im/qwit
+
+# Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
+# Pending completion of 9 security bugs against
+# this package.  Multiple vulnerabilities and no
+# updates from maintainers. Removal in 30 days.
+www-apps/mantisbt
+
+# Ian Stakenvicius <axs@gentoo.org> (06 Mar 2016)
+# Mask old versions of thunderbird as they are no longer supported,
+# but we keep them in the repo for now in case there is a need
+# for them for upgrading old user profiles, etc.
+~mail-client/thunderbird-24.8.0
+~mail-client/thunderbird-31.8.0
+
 # Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
 # Per security bug #491372 this package is vulnerable
 # and unmaintained.  Removal in 30 days.
@@ -66,10 +89,6 @@ www-apps/horde-dimp
 >=dev-lang/ocaml-4.03_beta
 >=dev-ml/camlp4-4.03
 >=dev-ml/ppx_tools-0.99.3_p20160217
-
-# Lars Wendler <polynomial-c@gentoo.org> (01 Mar 2016)
-# Arrow keys don't work (bug #576086).
-=sys-apps/less-482
 
 # James Le Cuirot <chewi@gentoo.org> (29 Feb 2016)
 # Dead upstream and doesn't build with Java 8. Removal in 30 days.
@@ -168,30 +187,6 @@ media-libs/gluon
 # Masked for removal in 30 days.  See bug 573326
 dev-python/simplegui
 
-# Ian Stakenviciuus <axs@gentoo.org> (09 Feb 2016)
-# Mask until members of the project can test and unmask
-=net-fs/samba-4.4*
-=sys-libs/ldb-1.1.25
-
-# Patrice Clement <monsieurp@gentoo.org> (09 Feb 2016)
-# Old, ancient, deprecated, obsolete.. so many adjectives could describe these
-# ebuilds. Let's just say it's about time to kiss them goodbye.
-# Masked for removal in 30 days. See bug 566232.
-java-virtuals/jaxp-virtual
-dev-java/jaxp
-dev-java/jaxb
-dev-java/jax-ws
-dev-java/jax-ws-api
-dev-java/jaxr
-dev-java/jsr93
-
-# Patrice Clement <monsieurp@gentoo.org> (08 Feb 2016)
-# iojs and nodejs merged and formed the new major version nodejs 4.0. iojs will
-# not be maintained after 3.3.x and all users are suggested to move to nodejs 4
-# (or newer) as quick as possible to avoid any security-related issues.
-# Masked for removal in 30 days. See bug 573870.
-net-libs/iojs
-
 # James Le Cuirot <chewi@gentoo.org> (07 Feb 2016)
 # Masked until 2.0 final arrives, which hopefully won't depend on
 # commons-dbcp:0 as that requires Java 6. Note that the 2.0 in the
@@ -201,12 +196,6 @@ dev-java/jcs
 # Wolfram Schlich <wschlich@gentoo.org> (06 Feb 2016)
 # Mask live ebuild
 =net-im/mcabber-9999
-
-# Davide Pesavento <pesa@gentoo.org> (06 Feb 2016)
-# Masked for removal in 30 days. Doesn't build against recent PyQt4
-# versions, bug 527572, not trivial to fix. Upstream doesn't seem to
-# care anymore, last release was in 2012. Zero reverse deps.
-dev-python/PyQtMobility
 
 # Bernard Cafarelli <voyageur@gentoo.org> (27 Jan 2016)
 # New llvm version, masked for testing
@@ -280,7 +269,7 @@ www-apps/389-dsgw
 
 # Fabian Groffen <grobian@gentoo.org> (11 Dec 2015)
 # Release candidates for Exim 4.87
-=mail-mta/exim-4.87_rc5
+=mail-mta/exim-4.87_rc6
 
 # Anthony G. Basile <blueness@gentoo.org> (06 Dec 2015)
 # Masked until we deal with SSLv3, bug #567554
@@ -344,9 +333,10 @@ www-apache/mod_h2
 >=net-fs/samba-4.3.0
 
 # Lars Wendler <polynomial-c@gentoo.org> (20 Aug 2015)
-# Release is not from original upstream but from a fork. Masked as requested by
-# vapier
+# Releases are not from original upstream but from a fork.
+# Masked as requested by vapier.
 ~net-misc/iputils-20150815
+~net-misc/iputils-20160308
 
 # Sebastian Pipping <sping@gentoo.org> (8 Aug 2015)
 # Upcoming, too young to go into testing unmasked
@@ -366,12 +356,6 @@ dev-libs/iniparser:4
 # Version bump is a WIP, see bug #524242
 # It works (except USE=vamp) but is not up to Gentoo standards yet
 =media-sound/audacity-2.1.1
-
-# Ian Stakenvicius <axs@gentoo.org> (16 Jul 2015)
-# Mask thunerbird-24.x as it is no longer supported, but
-# it remains in the tree for now in case there is a need
-# for it for upgrading old user profiles, etc.
-~mail-client/thunderbird-24.8.0
 
 # Patrick Lauer <patrick@gentoo.org> (1 Jul 2015)
 # Wrong version #553670

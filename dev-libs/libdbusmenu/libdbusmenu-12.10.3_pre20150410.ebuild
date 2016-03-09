@@ -17,7 +17,7 @@ SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${MY_PV}.ori
 
 LICENSE="LGPL-2.1 LGPL-3"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 ~arm hppa ~mips ppc ~ppc64 sparc x86"
 IUSE="debug gtk gtk3 +introspection json"
 S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
