@@ -18,7 +18,7 @@ IUSE=""
 RESTRICT="mirror"
 
 RDEPEND="
-	dev-python/pygtk+"
+	dev-python/pygtk"
 DEPEND="${RDEPEND}"
 
 src_install() {

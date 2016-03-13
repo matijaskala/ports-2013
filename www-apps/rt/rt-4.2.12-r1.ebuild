@@ -63,7 +63,7 @@ DEPEND="
 	dev-perl/DBD-SQLite
 	dev-perl/Data-GUID
 	dev-perl/Data-ICal
-	dev-perl/DateManip
+	dev-perl/Date-Manip
 	dev-perl/Devel-GlobalDestruction
 	dev-perl/Email-Address
 	dev-perl/Email-Address-List
@@ -102,7 +102,7 @@ DEPEND="
 	dev-perl/UNIVERSAL-require
 	dev-perl/libwww-perl
 	dev-perl/Locale-Maketext-Fuzzy
-	dev-perl/net-server
+	dev-perl/Net-Server
 	dev-perl/regexp-common
 	dev-perl/text-template
 	dev-perl/text-wrapper
