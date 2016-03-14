@@ -4,10 +4,11 @@
 
 EAPI=5
 
-inherit base eutils
+WANT_AUTOMAKE='1.14'
+inherit autotools eutils
 
 DESCRIPTION="Library parsing abiword documents"
-HOMEPAGE="https://wiki.documentfoundation.org/DLP/Libraries/${PN}"
+HOMEPAGE="https://wiki.documentfoundation.org/DLP/Libraries/libabw"
 SRC_URI="http://dev-www.libreoffice.org/src/${PN}/${P}.tar.xz"
 
 LICENSE="MPL-2.0"
@@ -27,12 +28,11 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 "
 
-PATCHES=(
-	# from git master
-	"${FILESDIR}/${PN}-0.1.1-dereference-before-null-check.patch"
-	"${FILESDIR}/${PN}-0.1.1-do-not-let-AbiDocument_parse-throw.patch"
-	"${FILESDIR}/${PN}-0.1.1-boost-1.59.patch"
-)
+src_prepare() {
+	epatch "${FILESDIR}/${P}-dereference-before-null-check.patch"
+	epatch "${FILESDIR}/${P}-do-not-let-AbiDocument_parse-throw.patch"
+	epatch "${FILESDIR}/${P}-boost-1.59.patch"
+}
 
 src_configure() {
 	econf \

@@ -17,9 +17,11 @@ IUSE=""
 #S=${WORKDIR}/${PN}
 RESTRICT="mirror"
 
-RDEPEND="
-	dev-python/pygtk"
-DEPEND="${RDEPEND}"
+DEPEND=""
+RDEPEND="${DEPEND}
+	dev-python/pillow
+	dev-python/pyparted
+	dev-python/pywebkitgtk"
 
 src_install() {
 	mv ${S}/etc ${ED}
