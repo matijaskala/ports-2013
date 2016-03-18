@@ -30,6 +30,44 @@
 
 #--- END OF EXAMPLES ---
 
+# Michael Palimaka <kensington@gentoo.org> (17 Mar 2016)
+# Dead upstream. Doesn't work with new Twitter API.
+# Masked for removal in 30 days.
+net-im/qtwitter
+
+# James Le Cuirot <chewi@gentoo.org> (14 Mar 2016)
+# Bye bye Java 6! If you really still need it then gnu_andrew will
+# continue to maintain icedtea:6 in java-overlay but it is not
+# supported by Java team at all. IBM's JVM is still alive but
+# downloads are behind a registration wall and Java team does not wish
+# to support it. haubi may provide IBM updates though probably only
+# for ppc-aix. Removal in 30 days.
+dev-java/apple-jdk-bin
+dev-java/hp-jdk-bin
+dev-java/ibm-jdk-bin:1.6
+dev-java/ibm-jre-bin:1.6
+dev-java/icedtea-bin:6
+<dev-java/icedtea-6.1.13.10:6
+dev-java/soylatte-jdk-bin
+virtual/jdk:1.6
+virtual/jre:1.6
+
+# James Le Cuirot <chewi@gentoo.org> (14 Mar 2016)
+# Our old ebuilds require Java 6/7 and are most likely
+# vulnerable. Upstream has a new version targeting Java 8 but no
+# response from dotnet team. I am leaving ikvm-bin alone but only
+# because it doesn't require Java. Removal in 30 days.
+dev-dotnet/ikvm
+
+# James Le Cuirot <chewi@gentoo.org> (14 Mar 2016)
+# Requires Java 6. No stable releases since 2003 and no longer
+# required by bt747. Removal in 30 days.
+dev-java/jcharts
+
+# Hans de Graaff <graaff@gentoo.org> (14 Mar 2016)
+# Not compatible with ruby21+, no reverse dependencies.
+dev-ruby/extlib
+
 # Patrice Clement <monsieurp@gentoo.org> (14 Mar 2016)
 # No activity nor release since 2010. Does not compile with Java 8.
 # Masked for removal. See bug 577368.
@@ -104,10 +142,24 @@ dev-libs/clearsilver
 media-sound/xmp
 
 # Aaron Bauman <bman@gentoo.org> (05 Mar 2016)
-# Per security bug #399563 these packages are vulnerable
+# Per security bug #399563, #489946, #489948, and
+# #490422 these packages are vulnerable
 # and unmaintained.  Removal in 30 days.
-www-apps/horde-imp
+www-apps/horde
+www-apps/horde-chora
 www-apps/horde-dimp
+www-apps/horde-gollem
+www-apps/horde-hermes
+www-apps/horde-imp
+www-apps/horde-ingo
+www-apps/horde-jeta
+www-apps/horde-kronolith
+www-apps/horde-mimp
+www-apps/horde-mnemo
+www-apps/horde-nag
+www-apps/horde-passwd
+www-apps/horde-pear
+www-apps/horde-turba
 
 # Mike Gilbert <floppym@gentoo.org> (03 Mar 2016)
 # Dev channel releases are only for people who are developers or want more
@@ -118,7 +170,7 @@ www-apps/horde-dimp
 # Breaks some of its rev deps, still in beta stage
 >=dev-lang/ocaml-4.03_beta
 >=dev-ml/camlp4-4.03
->=dev-ml/ppx_tools-0.99.3_p20160217
+>=dev-ml/ppx_tools-4.03
 
 # James Le Cuirot <chewi@gentoo.org> (29 Feb 2016)
 # Dead upstream and doesn't build with Java 8. Removal in 30 days.

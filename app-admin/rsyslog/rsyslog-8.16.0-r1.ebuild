@@ -35,7 +35,7 @@ else
 		http://www.rsyslog.com/files/download/${PN}/${P}.tar.gz
 		doc? ( http://www.rsyslog.com/files/download/${PN}/${PN}-doc-${PV}.tar.gz )
 	"
-	KEYWORDS="~amd64 ~arm ~hppa ~x86"
+	KEYWORDS="amd64 ~arm ~hppa x86"
 fi
 
 LICENSE="GPL-3 LGPL-3 Apache-2.0"
@@ -134,7 +134,6 @@ src_prepare() {
 	default
 
 	eautoreconf
-	elibtoolize --patch-only
 }
 
 src_configure() {
