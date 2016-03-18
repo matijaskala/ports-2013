@@ -21,7 +21,8 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	dev-python/pillow
 	dev-python/pyparted
-	dev-python/pywebkitgtk"
+	dev-python/pywebkitgtk
+	x11-apps/setxkbmap"
 
 src_install() {
 	mv ${S}/etc ${ED}
