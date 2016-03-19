@@ -11,7 +11,7 @@ SRC_URI=""
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux"
-IUSE="minimal +svg"
+IUSE="+svg"
 
 RDEPEND=">=x11-themes/gtk-engines-xfce-3:0
 	x11-themes/hicolor-icon-theme
@@ -21,8 +21,5 @@ RDEPEND=">=x11-themes/gtk-engines-xfce-3:0
 	>=xfce-base/xfce4-settings-4.12
 	>=xfce-base/xfdesktop-4.12
 	>=xfce-base/xfwm4-4.12
-	!minimal? (
-		media-fonts/dejavu
-		virtual/freedesktop-icon-theme
-		)
+	media-fonts/dejavu
 	svg? ( gnome-base/librsvg )"
