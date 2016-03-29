@@ -30,6 +30,77 @@
 
 #--- END OF EXAMPLES ---
 
+# Mike Frysinger <vapier@gentoo.org (28 Mar 2016)
+# Tons-o-bugs and no actual testing by new author. #578490
+dev-libs/libtomcrypt
+
+# Anthony G. Basile <blueness@gentoo.org> (27 Mar 2016)
+# Fails to build, bug #578348
+x11-wm/lumina
+
+# Pawel Hajdan jr <phajdan.jr@gentoo.org> (25 Mar 2016)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+>=www-client/chromium-51
+
+# Michael Palimaka <kensington@gentoo.org> (24 Mar 2016)
+# Requires old llvm. Dead upstream.
+# Masked for removal in 30 days. Bug #571216.
+dev-python/llvmpy
+dev-python/llvmmath
+dev-python/pykit
+
+# José María Alonso <nimiux@gentoo.org> (24 Mar 2016)
+# Fails to build dev-lisp/sbcl-1.3.3 #563812
+=dev-lisp/asdf-3.1.7
+=dev-lisp/uiop-3.1.7
+
+# Michael Palimaka <kensington@gentoo.org> (24 Mar 2016)
+# Doesn't run. Unmaintained. Bug #304865.
+# Masked for removal in 30 days.
+app-cdr/qmultirecord
+
+# Michael Palimaka <kensington@gentoo.org> (24 Mar 2016)
+# Fails to build. Bug #368953.
+# Masked for removal in 30 days.
+net-p2p/hx
+
+# Aaron Bauman <bman@gentoo.org> (19 Mar 2016)
+# Unpatched security vulnerability per bug #521892.
+# Masked for removal in 30 days.
+net-irc/srvx
+
+# Aaron Bauman <bman@gentoo.org> (19 Mar 2016)
+# Unpatched security vulnerability per bug #261182.
+# Masked for removal in 30 days.
+media-sound/shoutcast-server-bin
+media-sound/shoutcast-trans-bin
+
+# Lars Wendler <polynomial-c@gentoo.org> (20 Mar 2016)
+# Don't work with latest claws-mail package. Most plugins are now part of
+# claws-mail sources and can be en-/disabled via USE flags.
+# Masked for removal in 30 days.
+mail-client/claws-mail-acpi-notifier
+mail-client/claws-mail-address_keeper
+mail-client/claws-mail-archive
+mail-client/claws-mail-att-remover
+mail-client/claws-mail-attachwarner
+mail-client/claws-mail-clamd
+mail-client/claws-mail-fancy
+mail-client/claws-mail-fetchinfo
+mail-client/claws-mail-gdata
+mail-client/claws-mail-gtkhtml
+mail-client/claws-mail-mailmbox
+mail-client/claws-mail-newmail
+mail-client/claws-mail-notification
+mail-client/claws-mail-pdf-viewer
+mail-client/claws-mail-perl
+mail-client/claws-mail-python
+mail-client/claws-mail-rssyl
+mail-client/claws-mail-spam-report
+mail-client/claws-mail-tnef-parse
+mail-client/claws-mail-vcalendar
+
 # Andreas K. Huettel <dilfridge@gentoo.org> (19 Mar 2016)
 # Dead upstream since 2010, new VMware uses new incompatible
 # proprietary libview. No other consumers. Removal in 30 days.
@@ -39,7 +110,7 @@ x11-libs/libview
 # Aaron Bauman <bman@gentoo.org> (19 Mar 2016)
 # Unpatched security vulnerability per bug #512356.
 # Masked for removal in 30 days.
-app-forensics/chkrootkit
+=app-forensics/chkrootkit-0.49
 
 # Aaron Bauman <bman@gentoo.org> (19 Mar 2016)
 # Unpatched security vulnerability per bug #529712.
@@ -48,7 +119,7 @@ www-apps/coppermine
 
 # Aaron Bauman <bman@gentoo.org> (19 Mar 2016)
 # Multiple unpatched security vulnerabilities
-# per bug #523040. Masked for removal in 30 days.
+# per bug #532040. Masked for removal in 30 days.
 dev-libs/matrixssl
 
 # Michael Palimaka <kensington@gentoo.org> (17 Mar 2016)
@@ -96,14 +167,9 @@ dev-vcs/statsvn
 dev-vcs/statcvs
 
 # Mike Gilbert <floppym@gentoo.org> (12 Mar 2016)
-# Masked for testing.
+# Drops libsystemd-{daemon,id128,journal,login}.pc.
+# Bug: https://bugs.gentoo.org/577158
 =sys-apps/systemd-229-r100
-
-# Michał Górny <mgorny@gentoo.org> (12 Mar 2016)
-# Masked for testing.
-=dev-python/pypy-5.0.0
-=dev-python/pypy-bin-5.0.0
-=virtual/pypy-5.0.0
 
 # Michael Palimaka <kensington@gentoo.org> (11 Mar 2016)
 # Fails to build. Use version included in dev-texlive/texlive-science instead.
@@ -182,11 +248,6 @@ www-apps/horde-passwd
 www-apps/horde-pear
 www-apps/horde-turba
 
-# Mike Gilbert <floppym@gentoo.org> (03 Mar 2016)
-# Dev channel releases are only for people who are developers or want more
-# experimental features and accept a more unstable release.
->=www-client/chromium-50
-
 # Alexis Ballier <aballier@gentoo.org> (01 Mar 2016)
 # Breaks some of its rev deps, still in beta stage
 >=dev-lang/ocaml-4.03_beta
@@ -210,55 +271,6 @@ dev-lang/niecza-bin
 # Eray Aslan <eras@gentoo.org> (22 Feb 2016)
 # Mask experimental software
 =mail-mta/postfix-3.2*
-
-# James Le Cuirot <chewi@gentoo.org> (21 Feb 2016)
-# No revdeps, no release since 2007, and upstream have even moved the
-# download to a hidden OldFiles directory in the parent SourceForge
-# project. Removal in 30 days.
-dev-java/xsd2jibx
-
-# James Le Cuirot <chewi@gentoo.org> (19 Feb 2016)
-# Upstream EOL is December 2016. We would rather focus on other things
-# than support it until then. Removal in 30 days.
-www-servers/tomcat:6
-
-# Michael Palimaka <kensington@gentoo.org> (19 Feb 2016)
-# Superceded by other filesharing systems. Dead upstream. Unmaintained.
-# Masked for removal in 30 days. Bug 314359.
-net-p2p/gift
-net-p2p/gift-ares
-net-p2p/gift-fasttrack
-net-p2p/gift-gnutella
-net-p2p/gift-openft
-net-p2p/giftcurs
-sec-policy/selinux-gift
-
-# Michael Sterrett <mr_bones_@gentoo.org> (18 Feb 2016)
-# Now part of games-emulation/sdlmame
-# Masked for removal on 20160319
-games-emulation/sdlmess
-games-emulation/sdlmametools
-
-# Michael Palimaka <kensington@gentoo.org> (18 Feb 2016)
-# Fails to build. Dead upstream.
-# Masked for removal in 30 days. Bug 574248.
-dev-util/vdkbuilder
-
-# Michael Palimaka <kensington@gentoo.org> (18 Feb 2016)
-# Fails to build. Dead upstream. Use net-misc/connman-gtk instead.
-# Masked for removal in 30 days. Bug 502552.
-gnome-extra/connman-gnome
-
-# Michael Palimaka <kensington@gentoo.org> (18 Feb 2016)
-# Fails to build with recent kernels. Dead upstream.
-# Use kernel driver VIDEO_GO7007 instead.
-# Masked for removal in 30 days. Bug 482120.
-media-tv/wis-go7007
-
-# Michael Palimaka <kensington@gentoo.org> (18 Feb 2016)
-# Fails to build with recent kernels. Dead upstream.
-# Masked for removal in 30 days. Bug 488128.
-media-video/stk11xx
 
 # Yixun Lan <dlan@gentoo.org> (16 Feb 2016)
 # Mask early development version, leave only upstream stable version
@@ -332,12 +344,6 @@ media-libs/evas
 # ghc-7.10, bug #561122
 dev-haskell/extra:0
 
-# Aaron W. Swenson <titanofold@gentoo.org> (11 Jan 2016)
-# Masked for removal after 2016-03-11. Package hasn't been updated in
-# some time and doesn't work with Apache 2.4 without patching by
-# Gentoo. (Bug 548974) Use Apache Module mod_authn_dbd instead.
-www-apache/mod_auth_pgsql
-
 # Andreas K. Hüttel <dilfridge@gentoo.org> (9 Jan 2016)
 # Errorneously added. Is already in perl-core. Please uninstall.
 dev-perl/ExtUtils-Constant
@@ -382,13 +388,6 @@ www-apps/389-dsgw
 # Please migrate to 5.5 or, preferably 5.6.
 dev-lang/php:5.4
 ~virtual/httpd-php-5.4
-
-# Brian Evans <grknight@gentoo.org> (11 Nov 2015)
-# Mask latest xdebug{,-client} beta versions
-# Upstream keeps changing the tarballs causing Manifest errors.
-# wrt bug 565234
->=dev-php/xdebug-2.4.0_beta1
->=dev-php/xdebug-client-2.4.0_beta1
 
 # Michał Górny <mgorny@gentoo.org> (30 Oct 2015)
 # Uses unsafe ioctls that could result in data corruption. Upstream

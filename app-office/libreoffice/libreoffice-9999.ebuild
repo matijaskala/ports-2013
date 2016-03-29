@@ -59,7 +59,7 @@ unset DEV_URI
 # These are bundles that can't be removed for now due to huge patchsets.
 # If you want them gone, patches are welcome.
 ADDONS_SRC=(
-	"${ADDONS_URI}/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz" # modifies source code
+	"${ADDONS_URI}/d37daeccb841e5a457b9476d613a6012-xmlsec1-1.2.17.tar.gz" # modifies source code
 	"collada? ( ${ADDONS_URI}/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2 )"
 	"java? ( ${ADDONS_URI}/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip )"
 	# no release for 8 years, should we package it?
@@ -122,7 +122,7 @@ COMMON_DEPEND="
 	dev-libs/expat
 	>=dev-libs/hyphen-2.7.1
 	>=dev-libs/icu-4.8.1.1:=
-	>=dev-libs/liborcus-0.9.0
+	>=dev-libs/liborcus-0.11.1
 	>=dev-libs/librevenge-0.0.1
 	>=dev-libs/nspr-4.8.8
 	>=dev-libs/nss-3.12.9
@@ -258,7 +258,12 @@ PATCHES=(
 )
 
 CHECKREQS_MEMORY="512M"
-if [[ ${MERGE_TYPE} != binary ]] ; then CHECKREQS_DISK_BUILD="6G" ; fi
+
+if [[ ${MERGE_TYPE} != binary ]] && is-flagq "-g*" && ! is-flagq "-g*0" ; then
+	CHECKREQS_DISK_BUILD="22G"
+elif [[ ${MERGE_TYPE} != binary ]] ; then
+	CHECKREQS_DISK_BUILD="6G"
+fi
 
 pkg_pretend() {
 	local pgslot
@@ -529,11 +534,10 @@ src_install() {
 	make DESTDIR="${D}" distro-pack-install -o build -o check || die
 
 	# Fix bash completion placement
-	newbashcomp "${ED}"etc/bash_completion.d/libreoffice.sh ${PN}
+	newbashcomp "${ED}"usr/share/bash-completion/completions/libreoffice.sh ${PN}
 	bashcomp_alias \
 		libreoffice \
 		unopkg loimpress lobase localc lodraw lomath lowriter lofromtemplate loweb loffice
-	rm -rf "${ED}"etc/ || die
 
 	if use branding; then
 		insinto /usr/$(get_libdir)/${PN}/program
