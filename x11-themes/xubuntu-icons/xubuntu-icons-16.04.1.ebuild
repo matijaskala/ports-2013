@@ -3,6 +3,7 @@
 # $Id$
 
 EAPI=5
+inherit gnome2-utils
 
 DESCRIPTION="Xubuntu icon theme"
 HOMEPAGE="https://launchpad.net/xubuntu-artwork"
