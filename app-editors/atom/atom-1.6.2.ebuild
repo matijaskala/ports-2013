@@ -54,6 +54,7 @@ src_prepare(){
 	sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
 		./script/build \
 		|| die "Fail fixing verbosity of script/build"
+	default
 }
 
 src_compile(){
@@ -64,7 +65,7 @@ src_compile(){
 
 src_install(){
 	insinto "/usr/share/${PN}"
-	doins -r "${T}/Atom/*"
+	doins -r "${T}"/Atom/*
 	insinto "/usr/share/applications"
 	newins resources/linux/Atom.desktop atom.desktop
 	insinto "/usr/share/pixmaps"
