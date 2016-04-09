@@ -13,7 +13,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="git://git.xfce.org/apps/${PN}"
 	_live_inherits=git-2
 else
-	KEYWORDS="~amd64 ~arm ~mips x86 ~x86-fbsd"
+	KEYWORDS="amd64 ~arm ~mips x86 ~x86-fbsd"
 	SRC_URI="http://www.${PN}-browser.org/downloads/${PN}_${PV}_all_.tar.bz2"
 fi
 
