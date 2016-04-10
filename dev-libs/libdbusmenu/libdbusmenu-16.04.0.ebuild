@@ -12,8 +12,8 @@ inherit eutils flag-o-matic multilib-minimal python-single-r1 vala
 
 DESCRIPTION="Library to pass menu structure across DBus"
 HOMEPAGE="https://launchpad.net/dbusmenu"
-MY_PV="${PV/_pre/+16.04.}.1"
-SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${MY_PV}.orig.tar.gz"
+#MY_PV="${PV/_pre/+16.04.}.1"
+SRC_URI="https://launchpad.net/${PN}/${PV:0:5}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1 LGPL-3"
 SLOT="0"
