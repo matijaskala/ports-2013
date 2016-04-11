@@ -19,7 +19,7 @@ LICENSE="LGPL-2.1 LGPL-3"
 SLOT="0"
 KEYWORDS="alpha amd64 ~arm hppa ~mips ppc ~ppc64 sparc x86"
 IUSE="debug gtk +gtk3 +introspection json"
-S=${WORKDIR}/${PN}-${MY_PV}
+#S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
 RDEPEND="
