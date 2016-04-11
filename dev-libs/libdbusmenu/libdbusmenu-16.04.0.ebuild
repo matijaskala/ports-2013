@@ -13,12 +13,12 @@ inherit eutils flag-o-matic multilib-minimal python-single-r1 vala
 DESCRIPTION="Library to pass menu structure across DBus"
 HOMEPAGE="https://launchpad.net/dbusmenu"
 #MY_PV="${PV/_pre/+16.04.}.1"
-SRC_URI="https://launchpad.net/${PN}/${PV:0:5}/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://launchpad.net/${PN/lib}/${PV%.*}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1 LGPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 ~arm hppa ~mips ppc ~ppc64 sparc x86"
-IUSE="debug gtk +gtk3 +introspection json"
+KEYWORDS="alpha amd64 ~arm hppa ~mips ppc ppc64 sparc x86"
+IUSE="debug gtk +gtk3 +introspection"
 #S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
@@ -55,7 +55,6 @@ multilib_src_configure() {
 		--disable-gtk
 		--disable-static
 		--disable-silent-rules
-		$(use_enable json tests)
 		--disable-dumper
 		$(multilib_native_use_enable introspection)
 		$(multilib_native_use_enable introspection vala)
@@ -111,4 +110,14 @@ multilib_src_install() {
 multilib_src_install_all() {
 	einstalldocs
 	prune_libtool_files
+}
+
+pkg_preinst() {
+	# kill old symlinks that Portage will preserve and break install
+	if [[ -L ${EROOT}/usr/share/gtk-doc/html/libdbusmenu-glib ]]; then
+		rm -v "${EROOT}/usr/share/gtk-doc/html/libdbusmenu-glib" || die
+	fi
+	if [[ -L ${EROOT}/usr/share/gtk-doc/html/libdbusmenu-gtk ]]; then
+		rm -v "${EROOT}/usr/share/gtk-doc/html/libdbusmenu-gtk" || die
+	fi
 }
