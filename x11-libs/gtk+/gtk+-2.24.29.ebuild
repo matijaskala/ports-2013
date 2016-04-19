@@ -110,6 +110,14 @@ src_prepare() {
 	# Fix tests running when building out of sources, bug #510596, upstream bug #730319
 	epatch "${FILESDIR}"/${PN}-2.24.24-out-of-source.patch
 
+	# Ubuntu patches
+	if use ubuntu; then
+		einfo "Applying patches from Ubuntu:"
+		for patch in `cat "${FILESDIR}/${P}-ubuntu-patch-series"`; do
+			epatch "${WORKDIR}/debian/patches/${patch}"
+		done
+	fi
+
 	# Rely on split gtk-update-icon-cache package, bug #528810
 	epatch "${FILESDIR}"/${PN}-2.24.27-update-icon-cache.patch
 
