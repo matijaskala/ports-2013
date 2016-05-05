@@ -4,7 +4,7 @@ Date: Fri, 22 Apr 2016 13:42:26 +0500
 Subject: [PATCH] Fixing underlinking for gcc 4.9
 
 Allegro4 backend uses XGrabPointer() from libX11.
-Added ${X11_LIBRARIES} for she to resolve underlinking.
+Added ${X11_LIBRARIES} to resolve underlinking.
 ---
  src/she/CMakeLists.txt | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)

@@ -30,11 +30,19 @@
 
 #--- END OF EXAMPLES ---
 
+# Maciej Mrozowski <reavertm@gentoo.org> (3 May 2016)
+# Mask until >=net-libs/qxmpp-0.8.3 is provided with qt5 support.
+=net-im/kadu-3.0
+
+# Lars Wendler <polynomial-c@gentoo.org> (2 May 2016)
+# Broken reverse deps. At least one header file has been moved around.
+>=media-gfx/imagemagick-7.0.1.0
+
 # Rafael G. Martins <rafaelmartins@gentoo.org> (30 Apr 2016)
 # Packages merged upstream with app-text/blogc. Please install
 # app-text/blogc with USE=git and USE=httpd instead. Removal in 30 days.
 dev-vcs/blogc-git-receiver
-www-server/blogc-runserver
+www-servers/blogc-runserver
 
 # James Le Cuirot <chewi@gentoo.org> (27 Apr 2016)
 # Very very dead upstream and probably doesn't work any more like
@@ -130,7 +138,6 @@ dev-java/freehep-xml
 # Work in progress. Do not unmask! Unmasking these ebuilds
 # is like fiddling with the infinite improbability drive;
 # expect unexpected, weird, and potentially fatal results.
-=dev-lang/perl-5.22.2*
 =dev-lang/perl-5.24*
 
 # Michael Sterrett <mr_bones_@gentoo.org> (06 Apr 2016)
@@ -165,11 +172,6 @@ dev-libs/ptypes
 =app-admin/logstash-bin-2.3.0*
 
 # James Le Cuirot <chewi@gentoo.org> (03 Apr 2016)
-# Legacy migration package that is no longer needed. See
-# bug #549508. Removal in 30 days.
-dev-java/java-config-wrapper
-
-# James Le Cuirot <chewi@gentoo.org> (03 Apr 2016)
 # Masking Spring Framework for the time being as 3.2.4 is old, has
 # multiple vulnerabilities, and we're not likely to update it
 # soon. Hopefully we can revisit it when the Maven stuff works out.
@@ -186,11 +188,6 @@ dev-java/spring-instrument
 # the proxied maintainer Matthew Brewer <tomboy64@sina.cn>
 # for questions.
 <=media-gfx/slic3r-1.1.9999
-
-# Michael Sterrett <mr_bones_@gentoo.org> (02 Apr 2016)
-# Doesn't work with latest dev-lang/ocaml; dead upstream
-# Masked for removal on 20160502
-games-simulation/planets
 
 # Patrick Lauer (30 Mar 2015)
 # Segfaults when creating directories #578582
@@ -215,23 +212,6 @@ x11-libs/libview
 # Unpatched security vulnerability per bug #512356.
 # Masked for removal in 30 days.
 =app-forensics/chkrootkit-0.49
-
-# James Le Cuirot <chewi@gentoo.org> (14 Mar 2016)
-# Bye bye Java 6! If you really still need it then gnu_andrew will
-# continue to maintain icedtea:6 in java-overlay but it is not
-# supported by Java team at all. IBM's JVM is still alive but
-# downloads are behind a registration wall and Java team does not wish
-# to support it. haubi may provide IBM updates though probably only
-# for ppc-aix. Removal in 30 days.
-dev-java/apple-jdk-bin
-dev-java/hp-jdk-bin
-dev-java/ibm-jdk-bin:1.6
-dev-java/ibm-jre-bin:1.6
-dev-java/icedtea-bin:6
-<dev-java/icedtea-6.1.13.10:6
-dev-java/soylatte-jdk-bin
-virtual/jdk:1.6
-virtual/jre:1.6
 
 # Hans de Graaff <graaff@gentoo.org> (14 Mar 2016)
 # Not compatible with ruby21+, no reverse dependencies.
@@ -260,6 +240,7 @@ dev-vcs/statcvs
 >=dev-lang/ocaml-4.03_beta
 >=dev-ml/camlp4-4.03
 >=dev-ml/ppx_tools-4.03
+>=dev-ml/labltk-8.06.1
 
 # Patrice Clement <monsieurp@gentoo.org> (29 Feb 2016)
 # Duplicate of dev-libs/libedit.
@@ -377,16 +358,6 @@ www-apps/389-dsgw
 # Anthony G. Basile <blueness@gentoo.org> (06 Dec 2015)
 # Masked until we deal with SSLv3, bug #567554
 =dev-libs/libressl-2.3*
-
-# Brian Evans <grknight@gentoo.org> (02 Dec 2015)
-# All current targets are masked.
-<dev-php/pecl-taint-1.99.99
-
-# Brian Evans <grknight@gentoo.org> (02 Dec 2015)
-# PHP 5.4 is End Of Life and will not receive any further updates
-# Please migrate to 5.5 or, preferably 5.6.
-dev-lang/php:5.4
-~virtual/httpd-php-5.4
 
 # Michał Górny <mgorny@gentoo.org> (30 Oct 2015)
 # Uses unsafe ioctls that could result in data corruption. Upstream
@@ -563,10 +534,6 @@ app-admin/hwreport
 # FAIL:07:02:35 (00:00:00) db_verify_preop: expected 0, got 1
 =sys-libs/db-6.1*
 =sys-libs/db-6.2*
-
-# Yixun Lan <dlan@gentoo.org> (17 Jul 2014)
-# Masked for proper testing. (Major updates in the code).
-=net-misc/tinc-1.1_pre*
 
 # Ulrich Müller <ulm@gentoo.org> (15 Jul 2014)
 # Permanently mask sys-libs/lib-compat and its reverse dependencies,
