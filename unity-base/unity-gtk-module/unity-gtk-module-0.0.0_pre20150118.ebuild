@@ -1,8 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=5
+EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
 inherit autotools eutils python-r1
@@ -26,10 +26,6 @@ RDEPEND=">=dev-libs/glib-2.38
 	x11-libs/gtk+:3
 	!x11-misc/appmenu-gtk"
 DEPEND="${RDEPEND}"
-
-pkg_setup() {
-	python_export_best
-}
 
 src_prepare() {
 	eautoreconf
@@ -76,13 +72,6 @@ src_install() {
 	pushd build-gtk3
 		emake DESTDIR="${D}" install || die
 	popd
-
-	rm -rf "${D}etc" &> /dev/null
-	exeinto /etc/X11/xinit/xinitrc.d/
-	doexe "${FILESDIR}/81unity-gtk-module"
-
-	# Remove upstart jobs as we use xsession based scripts in /etc/X11/xinit/xinitrc.d/ #
-	rm -rf "${ED}usr/share/upstart"
 
 	prune_libtool_files --modules
 }
