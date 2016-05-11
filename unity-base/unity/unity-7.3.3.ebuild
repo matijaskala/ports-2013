@@ -41,7 +41,7 @@ COMMONDEPEND="
 	gnome-base/gnome-menus:3
 	gnome-base/gnome-session
 	gnome-base/gsettings-desktop-schemas
-	gnome-extra/polkit-gnome:0
+	gnome-extra/zeitgeist
 	media-libs/clutter-gtk:1.0
 	media-libs/glew:=
 	sys-apps/dbus

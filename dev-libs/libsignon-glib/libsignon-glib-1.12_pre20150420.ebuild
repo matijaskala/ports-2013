@@ -34,7 +34,6 @@ DEPEND="${RDEPEND}
 MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
-	epatch -p1 "${WORKDIR}/${MY_P}${UVER_PREFIX}-${UVER}.diff" || die
 	vala_src_prepare
 	append-cflags -Wno-error
 	eautoreconf

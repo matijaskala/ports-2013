@@ -6,13 +6,11 @@ EAPI=4
 GNOME2_LA_PUNT="yes"
 GCONF_DEBUG="yes"
 
-SRC_SUFFIX="orig.tar.bz2"
-
 inherit base gnome2 cmake-utils
 
 DESCRIPTION="Dconf Qt bindings for the Unity desktop"
 HOMEPAGE="https://launchpad.net/dconf-qt"
-SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.orig.tar.gz"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV}.orig.tar.bz2"
 
 LICENSE="LGPL-3"
 SLOT="0"
