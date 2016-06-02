@@ -5,7 +5,7 @@
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 
-CHROMIUM_LANGS="am ar bg bn ca cs da de el en_GB es es_LA et fa fi fil fr gu he
+CHROMIUM_LANGS="am ar bg bn ca cs da de el en_GB es es_419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt_BR pt_PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh_CN zh_TW"
 
@@ -447,6 +447,7 @@ src_configure() {
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gyp+=" -Dproprietary_codecs=1 -Dffmpeg_branding=${ffmpeg_branding}"
+	myconf_gn+=" proprietary_codecs=true ffmpeg_branding=\"${ffmpeg_branding}\""
 
 	# Set up Google API keys, see http://www.chromium.org/developers/how-tos/api-keys .
 	# Note: these are for Gentoo use ONLY. For your own distribution,
@@ -538,8 +539,7 @@ src_configure() {
 	export TMPDIR="${WORKDIR}/temp"
 	mkdir -p -m 755 "${TMPDIR}" || die
 
-	# TODO: also do this for GN bundled ffmpeg build.
-	if ! use system-ffmpeg && ! use gn; then
+	if ! use system-ffmpeg; then
 		local build_ffmpeg_args=""
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"

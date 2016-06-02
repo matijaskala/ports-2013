@@ -12,11 +12,12 @@ DESCRIPTION="Desktop/GUI font family for integrated use with the KDE Plasma desk
 HOMEPAGE="https://projects.kde.org/projects/kde/workspace/oxygen-fonts"
 
 LICENSE="OFL-1.1"
-KEYWORDS="amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm x86"
 IUSE=""
 
 DEPEND="
 	$(add_frameworks_dep extra-cmake-modules)
+	$(add_qt_dep qtcore)
 	media-gfx/fontforge
 "
 RDEPEND="!media-fonts/oxygen-fonts"

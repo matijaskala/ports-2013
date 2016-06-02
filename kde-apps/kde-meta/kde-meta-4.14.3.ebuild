@@ -6,7 +6,7 @@ EAPI=5
 inherit kde4-meta-pkg
 
 DESCRIPTION="KDE - merge this to pull in all split kde-base/* packages"
-KEYWORDS="amd64 ~arm ppc ppc64 x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86 ~amd64-linux ~x86-linux"
 IUSE="accessibility kdepim minimal nls sdk"
 
 RDEPEND="
@@ -19,13 +19,12 @@ RDEPEND="
 	$(add_kdeapps_dep kdegraphics-meta)
 	$(add_kdeapps_dep kdemultimedia-meta)
 	$(add_kdeapps_dep kdenetwork-meta)
-	$(add_kdeapps_dep kdetoys-meta)
 	$(add_kdeapps_dep kdeutils-meta)
 	accessibility? ( $(add_kdeapps_dep kdeaccessibility-meta) )
 	kdepim? ( $(add_kdeapps_dep kdepim-meta '' 4.4.11.1) )
 	nls? ( $(add_kdeapps_dep kde4-l10n) )
 	sdk? (
-		$(add_kdebase_dep kdebindings-meta)
+		$(add_kdeapps_dep kdebindings-meta)
 		$(add_kdeapps_dep kdesdk-meta)
 		$(add_kdeapps_dep kdewebdev-meta)
 	)

@@ -6,12 +6,12 @@ EAPI=6
 
 inherit cmake-utils
 
-DESCRIPTION="A helper library for Wayland compositors."
+DESCRIPTION="A helper library for Wayland compositors"
 HOMEPAGE="https://github.com/Cloudef/wlc"
 
 SRC_URI="https://github.com/Cloudef/wlc/releases/download/v${PV}/${P}.tar.bz2"
 
-LICENSE="MIT"
+LICENSE="MIT ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="X static-libs systemd"
@@ -31,6 +31,7 @@ RDEPEND="virtual/opengl
 		systemd? ( sys-apps/systemd sys-apps/dbus )"
 
 DEPEND="${RDEPEND}
+	virtual/pkgconfig
 		dev-libs/wayland-protocols"
 
 src_configure() {
@@ -47,4 +48,12 @@ src_configure() {
 	)
 
 	cmake-utils_src_configure
+}
+
+pkg_postinst() {
+	if use X && !has_version 'x11-base/xorg-server[wayland]'
+	then
+		elog "You have enabled wlc's X11 support. To use Xwayland, you must emerge"
+		elog "'x11-base/xorg-server[wayland]'."
+	fi
 }

@@ -2,6 +2,10 @@
 # Distributed under the terms of the GNU General Public License, v2
 # $Id$
 
+# Tobias Klausmann <klausman@gentoo.org> (23 May 2016)
+# There is no luajit support on alpha.  Bug #554376.
+luajittex
+
 # Tobias Klausmann <klausman@gentoo.org> (05 Feb 2016)
 # Newer versions of libgadu depend on protobuf-c, which doesn't
 # compile on alpha as of slot:0.
@@ -196,10 +200,6 @@ llvm
 # Matt Turner <mattst88@gentoo.org) (10 Feb 2012)
 # mask d3d since we don't have wine
 d3d
-
-# Matt Turner <mattst88@gentoo.org) (10 Feb 2012)
-# mask wayland since dev-libs/wayland isn't keyworded
-wayland
 
 # Matt Turner <mattst88@gentoo.org (27 May 2012)
 # net-misc/connman is not keyworded

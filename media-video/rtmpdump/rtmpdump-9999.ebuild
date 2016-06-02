@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -53,7 +53,7 @@ multilib_src_compile() {
 		fi
 	fi
 	#fix multilib-script support. Bug #327449
-	sed -i "/^libdir/s:lib$:$(get_libdir)$:" librtmp/Makefile || die
+	sed -i "/^libdir/s:lib$:$(get_libdir):" librtmp/Makefile || die
 	if ! multilib_is_native_abi; then
 		cd librtmp || die
 	fi
@@ -62,12 +62,12 @@ multilib_src_compile() {
 }
 
 multilib_src_install() {
-	mkdir -p "${ED}"/${DESTTREE}/$(get_libdir) || die
+	mkdir -p "${ED}"/usr/$(get_libdir) || die
 	if multilib_is_native_abi; then
 		dodoc README ChangeLog rtmpdump.1.html rtmpgw.8.html
 	else
 		cd librtmp || die
 	fi
-	emake DESTDIR="${ED}" prefix="${DESTTREE}" mandir="${DESTTREE}/share/man" \
+	emake DESTDIR="${ED}" prefix="/usr" mandir="/usr/share/man" \
 		CRYPTO="${crypto}" install
 }

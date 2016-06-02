@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python{2_7,3_2,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 
 inherit toolchain-funcs cmake-utils python-single-r1 java-pkg-opt-2 java-ant-2
 
@@ -13,7 +13,7 @@ HOMEPAGE="http://opencv.org"
 SRC_URI="
 	mirror://sourceforge/opencvlibrary/opencv-unix/${PV}/${P}.zip
 	https://github.com/Itseez/${PN}/archive/${PV}.zip -> ${P}.zip
-	contrib? ( https://github.com/Itseez/${PN}_contrib/archive/${PV}.zip -> ${PN}_contrib.zip )"
+	contrib? ( https://github.com/Itseez/opencv_contrib/archive/2d1fc7a6cdccd04435795f68126151a51071a539.zip -> ${PN}_contrib.zip )" # commit from 26.10.2015
 
 LICENSE="BSD"
 SLOT="0/3.1" # subslot = libopencv* soname version

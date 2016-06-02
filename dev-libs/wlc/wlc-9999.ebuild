@@ -6,12 +6,12 @@ EAPI=6
 
 inherit git-r3 cmake-utils
 
-DESCRIPTION="A helper library for Wayland compositors."
+DESCRIPTION="A helper library for Wayland compositors"
 HOMEPAGE="https://github.com/Cloudef/wlc"
 
 EGIT_REPO_URI="https://github.com/Cloudef/wlc.git"
 
-LICENSE="MIT"
+LICENSE="MIT ZLIB"
 SLOT="0"
 KEYWORDS=""
 IUSE="X static-libs systemd"
@@ -31,6 +31,7 @@ RDEPEND="virtual/opengl
 		systemd? ( sys-apps/systemd sys-apps/dbus )"
 
 DEPEND="${RDEPEND}
+	virtual/pkgconfig
 		dev-libs/wayland-protocols"
 
 src_configure() {
@@ -40,11 +41,19 @@ src_configure() {
 
 		-DWLC_BUILD_STATIC=$(usex static-libs)
 
+		-DWLC_X11_SUPPORT=$(usex X)
+
 		$(cmake-utils_use_find_package systemd Systemd)
 		$(cmake-utils_use_find_package systemd Dbus)
-		$(cmake-utils_use_find_package X X11)
-		$(cmake-utils_use_find_package X XCB)
 	)
 
 	cmake-utils_src_configure
+}
+
+pkg_postinst() {
+	if use X && !has_version 'x11-base/xorg-server[wayland]'
+	then
+		elog "You have enabled wlc's X11 support. To use Xwayland, you must emerge"
+		elog "'x11-base/xorg-server[wayland]'."
+	fi
 }

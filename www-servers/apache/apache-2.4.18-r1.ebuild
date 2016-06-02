@@ -10,7 +10,7 @@ GENTOO_DEVELOPER="polynomial-c"
 GENTOO_PATCHNAME="gentoo-apache-2.4.18-r1"
 
 # IUSE/USE_EXPAND magic
-IUSE_MPMS_FORK="peruser prefork"
+IUSE_MPMS_FORK="prefork"
 IUSE_MPMS_THREAD="event worker"
 
 # << obsolete modules:
@@ -120,7 +120,7 @@ MODULE_CRITICAL="
 inherit eutils apache-2 systemd toolchain-funcs
 
 DESCRIPTION="The Apache Web Server"
-HOMEPAGE="http://httpd.apache.org/"
+HOMEPAGE="https://httpd.apache.org/"
 
 # some helper scripts are Apache-1.1, thus both are here
 LICENSE="Apache-2.0 Apache-1.1"
