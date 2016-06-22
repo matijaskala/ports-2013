@@ -18,7 +18,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	MAJOR_V=$(get_version_component_range 1-2)
 	SRC_URI="https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2"
-	KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
+	KEYWORDS="-* amd64 ~x86 ~x86-fbsd"
 fi
 
 GV="2.40"
@@ -190,10 +190,17 @@ wine_build_environment_check() {
 		fi
 	fi
 
-	if use abi_x86_64 && [[ $(( $(gcc-major-version) * 100 + $(gcc-minor-version) )) -lt 404 ]]; then
-		eerror "You need gcc-4.4+ to build 64-bit wine"
-		eerror
-		return 1
+	if use abi_x86_64; then
+		einfo "Checking for builtin_ms_va_list ..."
+		if ( $(tc-getCC) -O2 "${FILESDIR}"/builtin_ms_va_list.c -o "${T}"/builtin_ms_va_list >/dev/null 2>&1) ; then
+			einfo "$(tc-getCC) supports builtin_ms_va_list, enabling 64-bit wine"
+		else
+			eerror "This version of $(tc-getCC) does not support builtin_ms_va_list, can't enable 64-bit wine"
+			eerror
+			eerror "You need gcc-4.4+ or clang 3.8+ to build 64-bit wine"
+			eerror
+			return 1
+		fi
 	fi
 
 	if use abi_x86_32 && use opencl && [[ x$(eselect opencl show 2> /dev/null) = "xintel" ]]; then

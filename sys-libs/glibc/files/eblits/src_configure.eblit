@@ -106,6 +106,8 @@ glibc_do_configure() {
 		$(use_with gd)
 		--with-headers=$(alt_build_headers)
 		--prefix="${EPREFIX}/usr"
+		--sysconfdir="${EPREFIX}/etc"
+		--localstatedir="${EPREFIX}/var"
 		--libdir='$(prefix)'/$(get_libdir)
 		--mandir='$(prefix)'/share/man
 		--infodir='$(prefix)'/share/info
@@ -130,6 +132,7 @@ glibc_do_configure() {
 
 	# There is no configure option for this and we need to export it
 	# since the glibc build will re-run configure on itself
+	export libc_cv_rootsbindir="${EPREFIX}/sbin"
 	export libc_cv_slibdir="${EPREFIX}/$(get_libdir)"
 
 	# We take care of patching our binutils to use both hash styles,
