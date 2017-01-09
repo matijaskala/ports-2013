@@ -9,7 +9,7 @@ PYTHON_COMPAT=(
 	python3_3 python3_4 python3_5
 	python2_7
 )
-PYTHON_REQ_USE='bzip2(+)'
+PYTHON_REQ_USE='bzip2(+),threads(+)'
 
 inherit distutils-r1 git-r3 multilib
 
@@ -44,6 +44,7 @@ RDEPEND="
 	)
 	elibc_FreeBSD? ( sys-freebsd/freebsd-bin )
 	elibc_glibc? ( >=sys-apps/sandbox-2.2 )
+	elibc_musl? ( >=sys-apps/sandbox-2.2 )
 	elibc_uclibc? ( >=sys-apps/sandbox-2.2 )
 	>=app-misc/pax-utils-0.1.17
 	selinux? ( >=sys-libs/libselinux-2.0.94[python,${PYTHON_USEDEP}] )
@@ -135,7 +136,7 @@ python_prepare_all() {
 			-e "s|^\\[gentoo\\]|[gentoo_prefix]|" \
 			-e "s|^\(location = \)\(/usr/portage\)|\\1${EPREFIX}\\2|" \
 			-e "s|^\(sync-type = \).*|\\1rsync|" \
-			-e "s|^\(sync-uri = \).*|\\1rsync://prefix.gentooexperimental.org/gentoo-portage-prefix|" \
+			-e "s|^\(sync-uri = \).*|\\1rsync://rsync.prefix.bitzolder.nl/gentoo-portage-prefix|" \
 			-i cnf/repos.conf || die "sed failed"
 
 		einfo "Adding FEATURES=force-prefix to make.globals ..."
@@ -196,7 +197,7 @@ python_install_all() {
 	fi
 
 	# Due to distutils/python-exec limitations
-	# these must be installed to /usr/bin.
+	# they must be installed to /usr/bin.
 	local sbin_relocations='archive-conf dispatch-conf emaint env-update etc-update fixpackages regenworld'
 	einfo "Moving admin scripts to the correct directory"
 	dodir /usr/sbin

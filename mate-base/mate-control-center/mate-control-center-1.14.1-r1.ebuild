@@ -16,7 +16,7 @@ DESCRIPTION="The MATE Desktop configuration tool"
 LICENSE="GPL-2"
 SLOT="0"
 
-IUSE="appindicator debug gtk3"
+IUSE="+about-me appindicator debug gtk3"
 
 COMMON_DEPEND="
 	dev-libs/atk:0
@@ -87,4 +87,9 @@ src_configure() {
 		--with-gtk=$(usex gtk3 3.0 2.0) \
 		$(use_enable appindicator) \
 		$(use_enable debug)
+}
+
+src_install() {
+	gnome2_src_install
+	use about-me || rm ${ED}/usr/bin/mate-about-me || die
 }

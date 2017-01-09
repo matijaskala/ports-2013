@@ -73,7 +73,9 @@ arm             default/linux/arm/13.0/armv7a/developer         dev
 # ARM64 Profiles
 arm64           default/linux/arm64/13.0                        exp
 arm64           default/linux/arm64/13.0/desktop                exp
+arm64           default/linux/arm64/13.0/desktop/systemd        exp
 arm64           default/linux/arm64/13.0/developer              exp
+arm64           default/linux/arm64/13.0/systemd                exp
 
 # HPPA Profiles
 hppa            default/linux/hppa/13.0                         stable
@@ -138,6 +140,7 @@ ppc64           default/linux/powerpc/ppc64/13.0/64bit-userland/desktop/kde     
 ppc64           default/linux/powerpc/ppc64/13.0/64bit-userland/desktop/kde/systemd     stable
 ppc64           default/linux/powerpc/ppc64/13.0/64bit-userland/developer               stable
 ppc64		default/linux/powerpc/ppc64/13.0/64bit-userland/little-endian		exp
+ppc64		default/linux/powerpc/ppc64/13.0/64bit-userland/little-endian/systemd	exp
 
 # RISC-V Profiles
 riscv           default/linux/riscv/13.0                        exp
@@ -179,21 +182,19 @@ x86             default/linux/x86/13.0/desktop/plasma           stable
 x86             default/linux/x86/13.0/desktop/plasma/systemd   stable
 x86             default/linux/x86/13.0/desktop/xfce             stable
 x86             default/linux/x86/13.0/developer                stable
+x86		default/linux/x86/13.0/systemd			stable
 
 # Gentoo/FreeBSD Profiles
 amd64-fbsd	default/bsd/fbsd/amd64/9.1			dev
-amd64-fbsd	default/bsd/fbsd/amd64/9.2			dev
-amd64-fbsd	default/bsd/fbsd/amd64/10.1			dev
-amd64-fbsd	default/bsd/fbsd/amd64/10.2			dev
+amd64-fbsd	default/bsd/fbsd/amd64/10.3			dev
+amd64-fbsd	default/bsd/fbsd/amd64/11.0			dev
 amd64-fbsd	default/bsd/fbsd/amd64/9.1/clang		exp
-amd64-fbsd	default/bsd/fbsd/amd64/9.2/clang		exp
-amd64-fbsd	default/bsd/fbsd/amd64/10.1/clang		exp
-amd64-fbsd	default/bsd/fbsd/amd64/10.2/clang		exp
+amd64-fbsd	default/bsd/fbsd/amd64/10.3/clang		exp
+amd64-fbsd	default/bsd/fbsd/amd64/11.0/clang		exp
 sparc-fbsd      default/bsd/fbsd/sparc/8.2                      exp
 x86-fbsd	default/bsd/fbsd/x86/9.1			dev
-x86-fbsd	default/bsd/fbsd/x86/9.2			dev
-x86-fbsd	default/bsd/fbsd/x86/10.1			dev
-x86-fbsd	default/bsd/fbsd/x86/10.2			dev
+x86-fbsd	default/bsd/fbsd/x86/10.3			dev
+x86-fbsd	default/bsd/fbsd/x86/11.0			dev
 
 # Hardened Profiles
 amd64		hardened/linux/amd64					stable
@@ -206,6 +207,7 @@ amd64		hardened/linux/musl/amd64/x32				exp
 arm		hardened/linux/arm/armv7a				dev
 arm		hardened/linux/arm/armv6j				dev
 arm		hardened/linux/musl/arm/armv7a				exp
+arm64		hardened/linux/musl/arm64 				exp
 ia64		hardened/linux/ia64					dev
 mips		hardened/linux/musl/mips				exp
 mips		hardened/linux/musl/mips/mipsel				exp
@@ -262,7 +264,10 @@ x86-linux		prefix/linux/x86				exp
 
 # Linux Standalone Profiles
 amd64-linux		prefix/linux-standalone/amd64			exp
+amd64-linux		prefix/linux-standalone/amd64/legacy		exp
 x86-linux		prefix/linux-standalone/x86			exp
+x86-linux		prefix/linux-standalone/x86/legacy		exp
+arm-linux		prefix/linux-standalone/arm/armv7a		exp
 
 # Mac OS X Profiles
 ppc-macos		prefix/darwin/macos/10.4/ppc			exp
@@ -276,15 +281,23 @@ x86-macos		prefix/darwin/macos/10.7/x86			exp
 x64-macos		prefix/darwin/macos/10.7/x64			exp
 x86-macos		prefix/darwin/macos/10.8/x86			exp
 x64-macos		prefix/darwin/macos/10.8/x64			exp
+x86-macos		prefix/darwin/macos/10.9/x86			exp
+x64-macos		prefix/darwin/macos/10.9/x64			exp
+x86-macos		prefix/darwin/macos/10.10/x86			exp
+x64-macos		prefix/darwin/macos/10.10/x64			exp
+x86-macos		prefix/darwin/macos/10.11/x86			exp
+x64-macos		prefix/darwin/macos/10.11/x64			exp
+x86-macos		prefix/darwin/macos/10.12/x86			exp
+x64-macos		prefix/darwin/macos/10.12/x64			exp
 
 # Solaris Profiles
 sparc-solaris		prefix/sunos/solaris/5.9/sparc			exp
 sparc-solaris		prefix/sunos/solaris/5.10/sparc			exp
-sparc64-solaris		prefix/sunos/solaris/5.10/sparc64 		exp
+sparc64-solaris		prefix/sunos/solaris/5.10/sparc64		exp
 x86-solaris		prefix/sunos/solaris/5.10/x86			exp
 x64-solaris		prefix/sunos/solaris/5.10/x64			exp
 sparc-solaris		prefix/sunos/solaris/5.11/sparc			exp
-sparc64-solaris		prefix/sunos/solaris/5.11/sparc64 		exp
+sparc64-solaris		prefix/sunos/solaris/5.11/sparc64		exp
 x86-solaris		prefix/sunos/solaris/5.11/x86			exp
 x64-solaris		prefix/sunos/solaris/5.11/x64			exp
 
@@ -300,15 +313,14 @@ x86-interix		prefix/windows/interix/6.0/x86			exp
 x86-interix		prefix/windows/interix/6.1/x86			exp
 
 # Windows Profiles
-x86-winnt		prefix/windows/winnt/3.5/x86 			exp
+x86-winnt		prefix/windows/winnt/3.5/x86			exp
 x86-winnt		prefix/windows/winnt/5.2/x86			exp
 x86-winnt		prefix/windows/winnt/6.0/x86			exp
 x86-winnt		prefix/windows/winnt/6.1/x86			exp
 
 # Cygwin Profiles
-x86-cygwin		prefix/windows/cygwin/1.7/x86			exp
-x86-cygwin		prefix/windows/cygwin/2.0/x86			exp
-x64-cygwin		prefix/windows/cygwin/2.0/x64			exp
+x86-cygwin		prefix/windows/cygwin/x86			exp
+x64-cygwin		prefix/windows/cygwin/x64			exp
 
 # HP-UX Profiles
 ia64-hpux		prefix/hpux/B.11.23/ia64			exp

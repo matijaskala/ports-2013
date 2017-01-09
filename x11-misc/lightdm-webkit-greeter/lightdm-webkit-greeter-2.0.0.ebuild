@@ -14,8 +14,8 @@ KEYWORDS="amd64 x86"
 IUSE="+gtk3"
 RESTRICT="mirror"
 
-DEPEND="gtk3? (net-libs/webkit-gtk:3)
-	!gtk3? (net-libs/webkit-gtk:2)
+DEPEND="gtk3? ( net-libs/webkit-gtk:3 )
+	!gtk3? ( net-libs/webkit-gtk:2 )
 	x11-misc/lightdm"
 RDEPEND="${DEPEND}"
 
