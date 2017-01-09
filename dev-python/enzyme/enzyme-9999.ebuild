@@ -4,14 +4,14 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 PYTHON_REQ_USE='xml(+)'
 
 inherit distutils-r1 git-r3
 
 DESCRIPTION="Python video metadata parser"
 HOMEPAGE="https://github.com/Diaoul/enzyme https://pypi.python.org/pypi/enzyme"
-EGIT_REPO_URI="git://github.com/Diaoul/${PN}.git"
+EGIT_REPO_URI=( {https,git}://github.com/Diaoul/${PN}.git )
 SRC_URI="test? ( mirror://sourceforge/matroska/test_files/matroska_test_w1_1.zip )"
 
 LICENSE="Apache-2.0"

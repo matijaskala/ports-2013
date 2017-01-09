@@ -1,18 +1,18 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=6
 inherit autotools systemd user
 
-DESCRIPTION="An opensource alternative to shoutcast that supports mp3, ogg (vorbis/theora) and aac streaming"
+DESCRIPTION="Opensource alternative to shoutcast that supports mp3, ogg and aac streaming"
 HOMEPAGE="http://www.icecast.org/"
 SRC_URI="http://downloads.xiph.org/releases/icecast/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~x86-fbsd"
-IUSE="kate logrotate +speex +ssl +theora +yp"
+KEYWORDS="amd64 ~ppc ppc64 x86 ~x86-fbsd"
+IUSE="kate libressl logrotate +speex +ssl +theora +yp"
 
 #Although there is a --with-ogg and --with-orbis configure option, they're
 #only useful for specifying paths, not for disabling.
@@ -25,7 +25,10 @@ DEPEND="dev-libs/libxslt
 	speex? ( media-libs/speex )
 	theora? ( media-libs/libtheora )
 	yp? ( net-misc/curl )
-	ssl? ( dev-libs/openssl:0= )"
+	ssl? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:0= )
+	)"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=6
 
 inherit eutils flag-o-matic
 if [[ ${PV} == "9999" ]] ; then
@@ -10,12 +10,12 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3 autotools
 else
 	MY_P=${PN}-${PV/_}
-	SRC_URI="http://www.nano-editor.org/dist/v${PV:0:3}/${MY_P}.tar.gz"
+	SRC_URI="https://www.nano-editor.org/dist/v${PV:0:3}/${MY_P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
 
 DESCRIPTION="GNU GPL'd Pico clone with more functionality"
-HOMEPAGE="http://www.nano-editor.org/ https://wiki.gentoo.org/wiki/Nano/Basics_Guide"
+HOMEPAGE="https://www.nano-editor.org/ https://wiki.gentoo.org/wiki/Nano/Basics_Guide"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -36,7 +36,7 @@ src_prepare() {
 	if [[ ${PV} == "9999" ]] ; then
 		eautoreconf
 	fi
-	epatch_user
+	default
 }
 
 src_configure() {
@@ -68,7 +68,8 @@ src_install() {
 	rm -rf "${D}"/trash
 
 	dodoc doc/nanorc.sample
-	dohtml doc/faq.html
+	docinto html
+	dodoc doc/faq.html
 	insinto /etc
 	newins doc/nanorc.sample nanorc
 	if ! use minimal ; then

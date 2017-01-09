@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="3"
+EAPI="5"
 
 inherit eutils flag-o-matic toolchain-funcs
 
@@ -22,7 +22,7 @@ SRC_URI="http://www.opensource.apple.com/tarballs/ld64/${LD64}.tar.gz
 	http://dev.gentoo.org/~grobian/distfiles/${PN}-patches-5.1-r2.tar.bz2"
 
 LICENSE="APSL-2"
-KEYWORDS="~x64-macos ~x86-macos"
+KEYWORDS="~ppc-macos ~x64-macos ~x86-macos"
 IUSE="lto test libcxx multitarget"
 
 RDEPEND="sys-devel/binutils-config
@@ -33,30 +33,11 @@ DEPEND="${RDEPEND}
 	|| ( >=sys-devel/gcc-apple-4.2.1 sys-devel/llvm )
 	libcxx? ( sys-devel/llvm )"
 
-export CTARGET=${CTARGET:-${CHOST}}
-if [[ ${CTARGET} == ${CHOST} ]] ; then
-	if [[ ${CATEGORY} == cross-* ]] ; then
-		export CTARGET=${CATEGORY#cross-}
-	fi
-fi
-is_cross() { [[ ${CHOST} != ${CTARGET} ]] ; }
-
-if is_cross ; then
-	SLOT="${CTARGET}-5"
-else
-	SLOT="5"
-fi
-
-LIBPATH=/usr/$(get_libdir)/binutils/${CTARGET}/${PV}
-INCPATH=${LIBPATH}/include
-DATAPATH=/usr/share/binutils-data/${CTARGET}/${PV}
-if is_cross ; then
-	BINPATH=/usr/${CHOST}/${CTARGET}/binutils-bin/${PV}
-else
-	BINPATH=/usr/${CTARGET}/binutils-bin/${PV}
-fi
+SLOT="5"
 
 S=${WORKDIR}
+
+is_cross() { [[ ${CHOST} != ${CTARGET} ]] ; }
 
 src_prepare() {
 	if use multitarget ; then
@@ -200,6 +181,22 @@ src_prepare() {
 src_configure() {
 	ENABLE_LTO=0
 	use lto && ENABLE_LTO=1
+
+	export CTARGET=${CTARGET:-${CHOST}}
+	if [[ ${CTARGET} == ${CHOST} ]] ; then
+		if [[ ${CATEGORY} == cross-* ]] ; then
+			export CTARGET=${CATEGORY#cross-}
+		fi
+	fi
+
+	LIBPATH=/usr/$(get_libdir)/binutils/${CTARGET}/${PV}
+	INCPATH=${LIBPATH}/include
+	DATAPATH=/usr/share/binutils-data/${CTARGET}/${PV}
+	if is_cross ; then
+		BINPATH=/usr/${CHOST}/${CTARGET}/binutils-bin/${PV}
+	else
+		BINPATH=/usr/${CTARGET}/binutils-bin/${PV}
+	fi
 
 	if [ "${CXX/*clang*/yes}" = "yes" ] ; then
 		if use libcxx ; then

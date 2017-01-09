@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils autotools python-single-r1
 
 DESCRIPTION="Library interface to IPMI"
-HOMEPAGE="http://sourceforge.net/projects/openipmi/"
+HOMEPAGE="https://sourceforge.net/projects/openipmi/"
 MY_PN="OpenIPMI"
 MY_P="${MY_PN}-${PV}"
 SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
@@ -24,6 +24,7 @@ RESTRICT='test'
 RDEPEND="
 	dev-libs/glib:2
 	sys-libs/gdbm
+	sys-libs/ncurses:0=
 	crypt? ( dev-libs/openssl:0= )
 	snmp? ( net-analyzer/net-snmp )
 	perl? ( dev-lang/perl )

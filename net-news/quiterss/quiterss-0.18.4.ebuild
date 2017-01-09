@@ -15,7 +15,7 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/QuiteRSS/quiterss/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="amd64 ~arm x86 ~amd64-linux ~x86-linux"
 fi
 
 LICENSE="GPL-3"
@@ -23,7 +23,7 @@ SLOT="0"
 IUSE="phonon qt5"
 
 RDEPEND=">=dev-db/sqlite-3.11.1:3
-	!qt5? ( dev-qt/qtcore:4
+	!qt5? ( dev-qt/qtcore:4[ssl]
 		dev-qt/qtgui:4
 		dev-qt/qtsingleapplication[X,qt4(+)]
 		dev-qt/qtsql:4[sqlite]
@@ -32,7 +32,7 @@ RDEPEND=">=dev-db/sqlite-3.11.1:3
 	qt5? ( dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtmultimedia:5
-		dev-qt/qtnetwork:5
+		dev-qt/qtnetwork:5[ssl]
 		dev-qt/qtprintsupport:5
 		dev-qt/qtsingleapplication[X,qt5(-)]
 		dev-qt/qtsql:5[sqlite]

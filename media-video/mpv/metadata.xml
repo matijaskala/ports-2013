@@ -2,16 +2,8 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>yngwin@gentoo.org</email>
-		<description>Primary maintainer</description>
-	</maintainer>
-	<maintainer type="person">
-		<email>maksbotan@gentoo.org</email>
-	</maintainer>
-	<maintainer type="person">
 		<email>itumaykin+gentoo@gmail.com</email>
 		<name>Coacher</name>
-		<description>Proxied maintainer; set to assignee in all bugs</description>
 	</maintainer>
 	<maintainer type="project">
 		<email>media-video@gentoo.org</email>
@@ -43,6 +35,7 @@
 		<flag name="rubberband">Enable high quality pitch correction via <pkg>media-libs/rubberband</pkg></flag>
 		<flag name="sdl">Enable <pkg>media-libs/libsdl2</pkg> based video and audio outputs
 			(Note: these outputs exist for compatibility reasons only, avoid if possible)</flag>
+		<flag name="tools">Install extra tools: mpv_identify.sh, mpv_idet.sh, and umpv</flag>
 		<flag name="uchardet">Enable subtitles charset discovery via <pkg>dev-libs/uchardet</pkg></flag>
 		<flag name="vf-dlopen">Install additional video filters to be used with -vf dlopen</flag>
 	</use>

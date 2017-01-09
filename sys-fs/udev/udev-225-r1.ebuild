@@ -17,7 +17,7 @@ else
 			https://dev.gentoo.org/~ssuominen/${P}-patches-${patchset}.tar.xz
 			https://dev.gentoo.org/~williamh/dist/${P}-patches-${patchset}.tar.xz"
 	fi
-	KEYWORDS="alpha amd64 arm arm64 ~hppa ia64 m68k ~mips ppc ~ppc64 s390 sh sparc x86"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
@@ -61,11 +61,6 @@ PDEPEND=">=sys-apps/hwids-20140304[udev]
 	>=sys-fs/udev-init-scripts-26"
 
 S=${WORKDIR}/systemd-${PV}
-
-# The multilib-build.eclass doesn't handle situation where the installed headers
-# are different in ABIs. In this case, we install libgudev headers in native
-# ABI but not for non-native ABI.
-multilib_check_headers() { :; }
 
 check_default_rules() {
 	# Make sure there are no sudden changes to upstream rules file

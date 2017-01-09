@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,6 +12,7 @@ KDE_HANDBOOK="optional"
 KDE_MINIMAL="4.13.1"
 VIRTUALX_REQUIRED="test"
 VIRTUALDBUS_TEST="true"
+WEBKIT_REQUIRED="always"
 inherit flag-o-matic kde4-base pax-utils
 
 DESCRIPTION="Advanced audio player based on KDE framework"
@@ -22,7 +23,7 @@ if [[ ${PV} != *9999* ]]; then
 	else
 		SRC_URI="mirror://kde/stable/${PN}/${PV}/src/${P}.tar.bz2"
 	fi
-	KEYWORDS="amd64 ~ppc x86"
+	KEYWORDS="amd64 x86"
 else
 	KEYWORDS=""
 fi
@@ -38,9 +39,9 @@ fi
 # ipod requires gdk enabled and also gtk compiled in libgpod
 COMMONDEPEND="
 	app-crypt/qca:2[qt4(+)]
-	$(add_kdebase_dep kdelibs 'opengl?' 4.8.4)
+	kde-frameworks/kdelibs:4[opengl?]
 	$(add_kdeapps_dep kdebase-kioslaves)
-	>=media-libs/taglib-1.7[asf,mp4]
+	>=media-libs/taglib-1.7[asf(+),mp4(+)]
 	>=media-libs/taglib-extras-1.0.1
 	sys-libs/zlib
 	>=virtual/mysql-5.1[embedded?]

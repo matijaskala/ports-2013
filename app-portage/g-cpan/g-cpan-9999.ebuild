@@ -10,7 +10,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	SRC_URI=""
 else
-	SRC_URI="https://github.com/gentoo-perl/g-cpan/releases/download/v${PV}/${P}.tar.gz"
+	SRC_URI="https://github.com/gentoo-perl/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 fi
 
@@ -22,11 +22,13 @@ SLOT="0"
 IUSE="test"
 
 COMMONDEPEND="
+	dev-perl/Config-Tiny
 	virtual/perl-File-Path
 	virtual/perl-File-Spec
 	dev-perl/Log-Agent
 	virtual/perl-Memoize
 	virtual/perl-IO
+	dev-perl/Path-Tiny
 	dev-perl/Shell-EnvImporter
 	virtual/perl-Term-ANSIColor
 	>=dev-perl/YAML-0.60
@@ -40,11 +42,11 @@ DEPEND="${COMMONDEPEND}
 "
 
 src_install() {
-		perl-module_src_install
-		diropts -m0775 -o portage -g portage
-		dodir "/var/tmp/g-cpan"
-		dodir "/var/log/g-cpan"
-		keepdir "/var/log/g-cpan"
+	perl-module_src_install
+	diropts -m0775 -o portage -g portage
+	dodir "/var/tmp/g-cpan"
+	dodir "/var/log/g-cpan"
+	keepdir "/var/log/g-cpan"
 }
 
 pkg_postinst() {

@@ -15,7 +15,7 @@ SRC_URI="http://www.process-one.net/downloads/${PN}/${PV}/${P}.tgz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
+KEYWORDS="amd64 ~arm ~ia64 ppc ~sparc x86"
 REQUIRED_USE="mssql? ( odbc )"
 # TODO: Add 'tools' flag.
 IUSE="captcha debug full-xml hipe ldap mssql mysql nls odbc pam postgres redis
@@ -43,6 +43,7 @@ CDEPEND="
 	>=dev-erlang/stringprep-1.0.3
 	>=dev-erlang/stun-1.0.3
 	>=dev-lang/erlang-17.1[hipe?,odbc?,ssl]
+	<dev-lang/erlang-19
 	>=net-im/jabber-base-0.01
 	ldap? ( =net-nds/openldap-2* )
 	mysql? ( >=dev-erlang/p1_mysql-1.0.1 )
@@ -62,6 +63,7 @@ DEPEND="${CDEPEND}
 RDEPEND="${CDEPEND}
 	captcha? ( media-gfx/imagemagick[truetype,png] )"
 
+DOCS=( README )
 PATCHES=( "${FILESDIR}/${P}-ejabberdctl.patch" )
 
 EJABBERD_CERT="${EPREFIX}/etc/ssl/ejabberd/server.pem"
@@ -113,7 +115,7 @@ ejabberd_cert_exists() {
 
 	for cert in $(gawk -- \
 			'match($0, /^[[:space:]]*certfile: "([^"]+)"/, m) {print m[1];}' \
-			"${EROOT}${JABBER_ETC}/ejabberd.yml"); do
+			"${EROOT%/}${JABBER_ETC}/ejabberd.yml"); do
 		[[ -f ${cert} ]] && return 0
 	done
 
@@ -125,13 +127,22 @@ ejabberd_cert_exists() {
 ejabberd_cert_install() {
 	SSL_ORGANIZATION="${SSL_ORGANIZATION:-ejabberd XMPP Server}"
 	install_cert "${EJABBERD_CERT%.*}"
-	chown root:jabber "${EROOT}${EJABBERD_CERT}" || die
-	chmod 0440 "${EROOT}${EJABBERD_CERT}" || die
+	chown root:jabber "${EROOT%/}${EJABBERD_CERT}" || die
+	chmod 0440 "${EROOT%/}${EJABBERD_CERT}" || die
 }
 
 # Get path to ejabberd lib directory.
 get_ejabberd_path() {
 	echo "$(get_erl_libs)/${P}"
+}
+
+# Make ejabberd.service for systemd from upstream provided template.
+make_ejabberd_service() {
+	sed -r \
+		-e 's!@ctlscriptpath@!/usr/sbin!' \
+		-e 's!(User|Group)=(.*)!\1=jabber!' \
+		"${PN}.service.template" >"${PN}.service" \
+		|| die 'failed to make ejabberd.service'
 }
 
 # Set paths to defined by net-im/jabber-base.
@@ -168,6 +179,7 @@ src_prepare() {
 	rebar_remove_deps
 	correct_ejabberd_paths
 	set_jabberbase_paths
+	make_ejabberd_service
 	skip_docs
 	adjust_config
 	customize_epam_wrapper "${FILESDIR}/epam-wrapper"
@@ -209,13 +221,13 @@ src_install() {
 		newbin epam-wrapper epam
 		# PAM helper module permissions
 		# https://www.process-one.net/docs/ejabberd/guide_en.html#pam
-		fperms 4750 "${epam_path}"
 		fowners root:jabber "${epam_path}"
+		fperms 4750 "${epam_path}"
 	fi
 
-	newconfd "${FILESDIR}/${PN}-3.confd" "${PN}"
-	newinitd "${FILESDIR}/${PN}-3.initd" "${PN}"
-	systemd_dounit "${FILESDIR}/${PN}.service"
+	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
+	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
+	systemd_dounit "${PN}.service"
 	systemd_dotmpfilesd "${FILESDIR}/${PN}.tmpfiles.conf"
 
 	insinto /etc/logrotate.d
@@ -224,10 +236,26 @@ src_install() {
 
 pkg_postinst() {
 	if [[ ! ${REPLACING_VERSIONS} ]]; then
+		echo
 		elog "For configuration instructions, please see"
-		elog "  /usr/share/doc/${PF}/html/guide.html"
-		elog "or the online version at"
 		elog "  http://www.process-one.net/en/ejabberd/docs/"
+		echo
+		if [[ " ${REPLACING_VERSIONS} " =~ \ 2\. ]]; then
+			ewarn "If you have used pubsub in ejabberd-2.* you may encounter issues after"
+			ewarn "migration to ${PV}. pubsub data may not be migrated automatically and"
+			ewarn "you may need to run migration script manually, see:"
+			ewarn
+			ewarn "  https://github.com/processone/ejabberd/issues/479#issuecomment-124497456"
+			ewarn
+			ewarn "In case you don't care about all stored moods, activities, geoinfo and you"
+			ewarn "know you don't store in pubsub anything important, you can just remove"
+			ewarn "pubsub tables:"
+			ewarn
+			ewarn "  rm ${EROOT%/}${JABBER_SPOOL}/pubsub_*"
+			ewarn
+			ewarn "See also: https://bugs.gentoo.org/show_bug.cgi?id=588244"
+			echo
+		fi
 	elif [[ -f ${EROOT}etc/jabber/ejabberd.cfg ]]; then
 		elog "Ejabberd now defaults to using a YAML format for its config file."
 		elog "The old ejabberd.cfg file can be converted using the following instructions:"

@@ -1,10 +1,10 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 # emacs support disabled due to #99533 #335900
 
-EAPI="4"
+EAPI=5
 
 inherit eutils systemd toolchain-funcs autotools multilib-minimal
 
@@ -18,13 +18,13 @@ SLOT="0"
 KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86"
 IUSE="selinux static-libs"
 
-RDEPEND=">=sys-libs/ncurses-5.9-r3[${MULTILIB_USEDEP}]
+RDEPEND=">=sys-libs/ncurses-5.9-r3:0=[${MULTILIB_USEDEP}]
 	selinux? ( sec-policy/selinux-gpm )
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-baselibs-20130224-r12
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
 	)"
-DEPEND=">=sys-libs/ncurses-5.9-r3[${MULTILIB_USEDEP}]
+DEPEND=">=sys-libs/ncurses-5.9-r3:0=[${MULTILIB_USEDEP}]
 	app-arch/xz-utils
 	sys-apps/texinfo
 	virtual/yacc"
@@ -61,16 +61,23 @@ multilib_src_configure() {
 		emacs=/bin/false
 }
 
+_emake() {
+	emake \
+		EMACS=: ELISP="" \
+		$(multilib_is_native_abi || echo "PROG= ") \
+		"$@"
+}
+
 multilib_src_compile() {
-	emake EMACS=: $(multilib_is_native_abi || echo "PROG= ")
+	_emake
+}
+
+multilib_src_test() {
+	_emake check
 }
 
 multilib_src_install() {
-	emake \
-		DESTDIR="${D}" \
-		EMACS=: ELISP="" \
-		$(multilib_is_native_abi || echo "PROG= ") \
-		install
+	_emake DESTDIR="${D}" install
 
 	dosym libgpm.so.1 /usr/$(get_libdir)/libgpm.so
 	gen_usr_ldscript -a gpm

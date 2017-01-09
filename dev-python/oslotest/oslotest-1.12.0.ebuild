@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_{3,4,5}} )
+PYTHON_COMPAT=( python{2_7,3_{4,5}} )
 
 inherit distutils-r1
 
@@ -42,7 +42,7 @@ RDEPEND="
 
 python_compile_all() {
 	if use doc; then
-	 	esetup.py build_sphinx
+		esetup.py build_sphinx
 	else
 		esetup.py build_sphinx -b man
 	fi

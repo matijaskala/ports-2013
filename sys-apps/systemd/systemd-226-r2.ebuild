@@ -9,7 +9,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/systemd/systemd/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="alpha amd64 arm ia64 ppc ~ppc64 sparc x86"
+	KEYWORDS="alpha amd64 arm ia64 ppc ppc64 sparc x86"
 fi
 
 inherit autotools bash-completion-r1 linux-info multilib \
@@ -20,7 +20,7 @@ HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-IUSE="acl apparmor audit cryptsetup curl elfutils gcrypt gnuefi http
+IUSE="acl apparmor audit build cryptsetup curl elfutils gcrypt gnuefi http
 	idn importd +kdbus +kmod +lz4 lzma nat pam policykit
 	qrcode +seccomp selinux ssl sysv-utils test vanilla xkb"
 
@@ -65,6 +65,11 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.26:0=[${MULTILIB_USEDEP}]
 # baselayout-2.2 has /run
 RDEPEND="${COMMON_DEPEND}
 	>=sys-apps/baselayout-2.2
+	!build? ( || (
+		sys-apps/util-linux[kill(-)]
+		sys-process/procps[kill(+)]
+		sys-apps/coreutils[kill(-)]
+	) )
 	!sys-auth/nss-myhostname
 	!sys-fs/eudev
 	!sys-fs/udev"
@@ -96,14 +101,16 @@ DEPEND="${COMMON_DEPEND}
 
 pkg_pretend() {
 	local CONFIG_CHECK="~AUTOFS4_FS ~BLK_DEV_BSG ~CGROUPS
-		~DEVPTS_MULTIPLE_INSTANCES ~DEVTMPFS ~DMIID ~EPOLL ~FANOTIFY ~FHANDLE
-		~INOTIFY_USER ~IPV6 ~NET ~NET_NS ~PROC_FS ~SECCOMP ~SIGNALFD ~SYSFS
+		~DEVTMPFS ~DMIID ~EPOLL ~FANOTIFY ~FHANDLE
+		~INOTIFY_USER ~IPV6 ~NET ~NET_NS ~PROC_FS ~SIGNALFD ~SYSFS
 		~TIMERFD ~TMPFS_XATTR ~UNIX
 		~!FW_LOADER_USER_HELPER ~!GRKERNSEC_PROC ~!IDE ~!SYSFS_DEPRECATED
 		~!SYSFS_DEPRECATED_V2"
 
 	use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"
+	use seccomp && CONFIG_CHECK+=" ~SECCOMP ~SECCOMP_FILTER"
 	kernel_is -lt 3 7 && CONFIG_CHECK+=" ~HOTPLUG"
+	kernel_is -lt 4 7 && CONFIG_CHECK+=" ~DEVPTS_MULTIPLE_INSTANCES"
 
 	if linux_config_exists; then
 		local uevent_helper_path=$(linux_chkconfig_string UEVENT_HELPER_PATH)

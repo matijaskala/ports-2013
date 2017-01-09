@@ -15,7 +15,7 @@
 # Some use flags which may be optional in particular mozilla packages can be
 # supported through setting eclass variables.
 #
-# This eclass inherits mozconfig helper functions as defined in mozcoreconf-v3,
+# This eclass inherits mozconfig helper functions as defined in mozcoreconf-v4,
 # and so ebuilds inheriting this eclass do not need to inherit that.
 
 case ${EAPI} in
@@ -76,8 +76,9 @@ IUSE="${IUSE} dbus debug ffmpeg +gstreamer gstreamer-0 +jemalloc3 neon pulseaudi
 # some notes on deps:
 # gtk:2 minimum is technically 2.10 but gio support (enabled by default) needs 2.14
 # media-libs/mesa needs to be 10.2 or above due to a bug with flash+vdpau
+# media-libs/libcanberra is dlopen'ed rather than linked
 
-RDEPEND=">=app-text/hunspell-1.2
+RDEPEND=">=app-text/hunspell-1.2:=
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
@@ -88,6 +89,7 @@ RDEPEND=">=app-text/hunspell-1.2
 	>=media-libs/mesa-10.2:*
 	media-libs/fontconfig
 	>=media-libs/freetype-2.4.10
+	media-libs/libcanberra:*[pulseaudio?]
 	kernel_linux? ( media-libs/alsa-lib )
 	pulseaudio? ( media-sound/pulseaudio )
 	virtual/freedesktop-icon-theme
@@ -216,6 +218,19 @@ REQUIRED_USE="
 # }
 
 mozconfig_config() {
+	# Migrated from mozcoreconf-v3
+	mozconfig_annotate 'more disable_update_strip' \
+		--disable-pedantic \
+		--disable-installer \
+		--disable-strip-libs
+
+	if [[ ${PN} != seamonkey ]]; then
+		mozconfig_annotate 'basic_profile' \
+			--disable-profilelocking \
+			--enable-single-profile \
+			--disable-profilesharing
+	fi
+
 	# Migrated from mozcoreconf-2
 	mozconfig_annotate 'system_libs' \
 		--with-system-zlib \

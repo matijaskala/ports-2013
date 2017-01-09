@@ -1,13 +1,12 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
-CMAKE_MIN_VERSION="3.0"
 
 # This ebuild could use some python checks, as sigil contains python plugin architecture.
 
-inherit eutils cmake-utils
+inherit cmake-utils
 
 MY_PN="Sigil"
 
@@ -15,7 +14,7 @@ DESCRIPTION="Sigil is a multi-platform WYSIWYG ebook editor for ePub format"
 HOMEPAGE="http://sigil-ebook.com/"
 SRC_URI="https://github.com/Sigil-Ebook/${MY_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="GPL-3"
+LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

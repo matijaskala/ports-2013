@@ -13,7 +13,7 @@ SRC_URI="https://github.com/processone/${PN}/archive/${PV}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
+KEYWORDS="amd64 ~arm ~ia64 ppc ~sparc x86"
 IUSE="test"
 
 CDEPEND=">=dev-lang/erlang-17.1"
@@ -29,6 +29,7 @@ DOCS=( CHANGELOG.md  README.md )
 src_prepare() {
 	rebar_src_prepare
 	rebar_remove_deps rebar.test.config
+	sed -e '/, warnings_as_errors/d' -i rebar.test.config || die
 }
 
 src_test() {

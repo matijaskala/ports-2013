@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -24,11 +24,10 @@ if [[ ${PV} != 9999* ]]; then
 	SRC_URI="http://ktorrent.org/downloads/${MY_PV}/${MY_P}.tar.bz2"
 	S="${WORKDIR}"/"${MY_P}"
 
-	KEYWORDS="amd64 ~ppc x86"
+	KEYWORDS="amd64 x86"
 else
 	LIBKT_VERSION_MIN="${PV}"
 	LIBKT_VERSION_MAX="99999999"
-	KEYWORDS=""
 fi
 
 inherit kde4-base
@@ -38,18 +37,20 @@ HOMEPAGE="http://ktorrent.pwsp.net/"
 
 LICENSE="GPL-2"
 SLOT="4"
-IUSE="+bwscheduler debug +downloadorder +infowidget +ipfilter +kross +logviewer
-+magnetgenerator +mediaplayer plasma rss +scanfolder +search +shutdown +stats
-+upnp webinterface +zeroconf"
+IUSE="+bwscheduler debug +downloadorder +infowidget +ipfilter +logviewer
++magnetgenerator +mediaplayer rss +scanfolder +search +stats +upnp webinterface
++zeroconf"
 
 COMMONDEPEND="
 	<net-libs/libktorrent-${LIBKT_VERSION_MAX}:4
 	>=net-libs/libktorrent-${LIBKT_VERSION_MIN}:4
 	infowidget? ( dev-libs/geoip )
 	mediaplayer? ( >=media-libs/taglib-1.5 )
-	plasma? ( $(add_kdebase_dep libtaskmanager) )
 	rss? ( $(add_kdeapps_dep kdepimlibs) )
-	shutdown? ( $(add_kdebase_dep libkworkspace) )
+	search? (
+		dev-qt/qtwebkit:4
+		kde-frameworks/kdelibs:4[webkit]
+	)
 "
 DEPEND="${COMMONDEPEND}
 	dev-libs/boost
@@ -61,7 +62,6 @@ RDEPEND="${COMMONDEPEND}
 		app-arch/unzip
 		$(add_kdeapps_dep kdebase-kioslaves)
 	)
-	kross? ( $(add_kdebase_dep krosspython) )
 "
 
 PATCHES=(
@@ -70,30 +70,28 @@ PATCHES=(
 )
 
 src_prepare() {
-	if ! use plasma; then
-		sed -i \
-			-e "s:add_subdirectory(plasma):#nada:g" \
-			CMakeLists.txt || die "Failed to make plasmoid optional"
-	fi
+	sed -i \
+		-e "s:add_subdirectory(plasma):#nada:g" \
+		CMakeLists.txt || die "Failed to make plasmoid optional"
 
 	kde4-base_src_prepare
 }
 
 src_configure() {
 	mycmakeargs=(
+		-DENABLE_SHUTDOWN_PLUGIN=OFF
+		-DENABLE_SCRIPTING_PLUGIN=OFF
 		$(cmake-utils_use_enable bwscheduler BWSCHEDULER_PLUGIN)
 		$(cmake-utils_use_enable downloadorder DOWNLOADORDER_PLUGIN)
 		$(cmake-utils_use_enable infowidget INFOWIDGET_PLUGIN)
 		$(cmake-utils_use_with infowidget SYSTEM_GEOIP)
 		$(cmake-utils_use_enable ipfilter IPFILTER_PLUGIN)
-		$(cmake-utils_use_enable kross SCRIPTING_PLUGIN)
 		$(cmake-utils_use_enable logviewer LOGVIEWER_PLUGIN)
 		$(cmake-utils_use_enable magnetgenerator MAGNETGENERATOR_PLUGIN)
 		$(cmake-utils_use_enable mediaplayer MEDIAPLAYER_PLUGIN)
 		$(cmake-utils_use_enable rss SYNDICATION_PLUGIN)
 		$(cmake-utils_use_enable scanfolder SCANFOLDER_PLUGIN)
 		$(cmake-utils_use_enable search SEARCH_PLUGIN)
-		$(cmake-utils_use_enable shutdown SHUTDOWN_PLUGIN)
 		$(cmake-utils_use_enable stats STATS_PLUGIN)
 		$(cmake-utils_use_enable upnp UPNP_PLUGIN)
 		$(cmake-utils_use_enable webinterface WEBINTERFACE_PLUGIN)

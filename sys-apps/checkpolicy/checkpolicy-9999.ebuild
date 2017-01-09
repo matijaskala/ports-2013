@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 
-inherit toolchain-funcs eutils
+inherit toolchain-funcs
 
 MY_P="${P//_/-}"
-MY_RELEASEDATE="20160223"
+MY_RELEASEDATE="20161014"
 
 SEPOL_VER="${PV}"
 SEMNG_VER="${PV}"
@@ -35,10 +35,6 @@ DEPEND=">=sys-libs/libsepol-${SEPOL_VER}
 	sys-devel/bison"
 
 RDEPEND=">=sys-libs/libsemanage-${SEMNG_VER}"
-
-src_prepare() {
-	epatch_user
-}
 
 src_compile() {
 	emake CC="$(tc-getCC)" YACC="bison -y" LIBDIR="\$(PREFIX)/$(get_libdir)"

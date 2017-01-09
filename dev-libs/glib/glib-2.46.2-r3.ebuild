@@ -32,7 +32,7 @@ REQUIRED_USE="
 	test? ( ${PYTHON_REQUIRED_USE} )
 "
 
-KEYWORDS="alpha amd64 arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
 
 RDEPEND="
 	!<dev-util/gdbus-codegen-${PV}
@@ -73,7 +73,7 @@ PDEPEND="!<gnome-base/gvfs-1.6.4-r990
 # Earlier versions of gvfs do not work with glib
 
 MULTILIB_CHOST_TOOLS=(
-	/usr/bin/gio-querymodules
+	/usr/bin/gio-querymodules$(get_exeext)
 )
 
 pkg_setup() {

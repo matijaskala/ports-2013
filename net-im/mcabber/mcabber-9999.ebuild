@@ -15,7 +15,7 @@ S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS=""
 
 IUSE="aspell crypt idn modules otr spell ssl vim-syntax"
 
@@ -41,9 +41,6 @@ DEPEND="${RDEPEND}
 AUTOTOOLS_AUTORECONF="1"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
 DOCS=( AUTHORS ChangeLog NEWS README TODO mcabberrc.example doc/README_PGP.txt )
-PATCHES=(
-	"${FILESDIR}/${PN}-0.10.3-vim-ftdetect.patch"
-)
 
 pkg_setup() {
 	if use aspell && use spell; then

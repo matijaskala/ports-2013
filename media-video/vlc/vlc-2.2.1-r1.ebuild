@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -15,7 +15,7 @@ if [ "${PV%9999}" != "${PV}" ] ; then
 	fi
 fi
 
-inherit eutils multilib autotools toolchain-funcs flag-o-matic virtualx ${SCM}
+inherit eutils multilib autotools toolchain-funcs flag-o-matic versionator virtualx ${SCM}
 
 MY_PV="${PV/_/-}"
 MY_PV="${MY_PV/-beta/-test}"
@@ -45,7 +45,7 @@ IUSE="a52 aalib alsa altivec atmo +audioqueue +avcodec
 	growl httpd ieee1394 jack jpeg kate kde libass libav libcaca libnotify
 	+libsamplerate libtiger linsys libtar lirc live lua
 	macosx-dialog-provider macosx-eyetv macosx-quartztext macosx-qtkit
-	matroska media-library cpu_flags_x86_mmx modplug mp3 mpeg
+	matroska cpu_flags_x86_mmx modplug mp3 mpeg
 	mtp musepack ncurses neon ogg omxil opencv opengl optimisememory opus
 	png postproc projectm pulseaudio +qt4 qt5 rdp rtsp run-as-root samba
 	schroedinger sdl sdl-image sftp shout sid skins speex cpu_flags_x86_sse svg +swscale
@@ -90,10 +90,10 @@ RDEPEND="
 		gnome? ( gnome-base/gnome-vfs:2 dev-libs/glib:2 )
 		gnutls? ( >=net-libs/gnutls-3.0.20:0 )
 		ieee1394? ( >=sys-libs/libraw1394-2.0.1:0 >=sys-libs/libavc1394-0.5.3:0 )
-		jack? ( >=media-sound/jack-audio-connection-kit-0.99.0-r1:0 )
+		jack? ( virtual/jack )
 		jpeg? ( virtual/jpeg:0 )
 		kate? ( >=media-libs/libkate-0.3:0 )
-		libass? ( >=media-libs/libass-0.9.8:0 media-libs/fontconfig:1.0 )
+		libass? ( >=media-libs/libass-0.9.8:0= media-libs/fontconfig:1.0 )
 		libcaca? ( >=media-libs/libcaca-0.99_beta14:0 )
 		libnotify? ( x11-libs/libnotify:0 x11-libs/gtk+:2 x11-libs/gdk-pixbuf:2 dev-libs/glib:2 )
 		libsamplerate? ( media-libs/libsamplerate:0 )
@@ -121,12 +121,10 @@ RDEPEND="
 		)
 		projectm? ( media-libs/libprojectm:0 media-fonts/dejavu:0 )
 		pulseaudio? ( >=media-sound/pulseaudio-1:0 )
-		qt4? ( >=dev-qt/qtgui-4.6:4 >=dev-qt/qtcore-4.6:4 )
-		qt5? ( >=dev-qt/qtgui-5.1:5 >=dev-qt/qtcore-5.1:5 >=dev-qt/qtwidgets-5.1:5
-			>=dev-qt/qtx11extras-5.1:5 )
-		rdp? ( >=net-misc/freerdp-1.0.1:0=[client] )
-		samba? ( || ( ( >=net-fs/samba-3.4.6:0[smbclient] <net-fs/samba-4.0.0_alpha1:0[smbclient] )
-			>=net-fs/samba-4.0.0_alpha1:0[client] ) )
+		!qt5? ( qt4? ( dev-qt/qtcore:4 dev-qt/qtgui:4 ) )
+		qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 dev-qt/qtx11extras:5 )
+		rdp? ( >=net-misc/freerdp-1.0.1:0=[client] <net-misc/freerdp-2 )
+		samba? ( >=net-fs/samba-4.0.0_alpha1:0[client] )
 		schroedinger? ( >=media-libs/schroedinger-1.0.10:0 )
 		sdl? ( >=media-libs/libsdl-1.2.10:0
 			sdl-image? ( >=media-libs/sdl-image-1.2.10:0 sys-libs/zlib:0 ) )
@@ -168,7 +166,7 @@ RDEPEND="${RDEPEND}
 		)
 		vnc? ( >=net-libs/libvncserver-0.9.9:0 )
 		vorbis? ( >=media-libs/libvorbis-1.1:0 )
-		vpx? ( media-libs/libvpx:0 )
+		vpx? ( media-libs/libvpx:0= )
 		X? ( x11-libs/libX11:0 )
 		x264? ( >=media-libs/x264-0.0.20090923:0= )
 		x265? ( media-libs/x265:0= )
@@ -178,7 +176,7 @@ RDEPEND="${RDEPEND}
 "
 
 DEPEND="${RDEPEND}
-	kde? ( >=kde-base/kdelibs-4:4 )
+	!qt5? ( kde? ( kde-frameworks/kdelibs:4 ) )
 	xcb? ( x11-proto/xproto:0 )
 	app-arch/xz-utils:0
 	x86?   ( dev-lang/yasm:* )
@@ -200,10 +198,10 @@ REQUIRED_USE="
 	libcaca? ( X )
 	libtar? ( skins )
 	libtiger? ( kate )
-	qt4? ( X !qt5 )
-	qt5? ( X !qt4 )
+	qt4? ( X )
+	qt5? ( X )
 	sdl? ( X )
-	skins? ( truetype X xml ^^ ( qt4 qt5 ) )
+	skins? ( truetype X xml || ( qt4 qt5 ) )
 	vaapi? ( avcodec X )
 	vdpau? ( xcb )
 	vlm? ( encode )
@@ -213,8 +211,8 @@ REQUIRED_USE="
 S="${WORKDIR}/${MY_P}"
 
 pkg_setup() {
-	if [[ "${MERGE_TYPE}" != "binary" && "$(tc-getCC)" == *"gcc"* ]] ; then
-		if [[ $(gcc-major-version) < 4 || ( $(gcc-major-version) == 4 && $(gcc-minor-version) < 5 ) ]] ; then
+	if [[ "${MERGE_TYPE}" != "binary" ]] && tc-is-gcc ; then
+		if ! version_is_at_least 4.5 $(gcc-version) ; then
 			die "You need to have at least >=sys-devel/gcc-4.5 to build and/or have a working vlc, see bug #426754."
 		fi
 	fi
@@ -236,7 +234,7 @@ src_prepare() {
 	# config.h:793: warning: ignoring #pragma STDC FP_CONTRACT [-Wunknown-pragmas]
 	#
 	# https://gcc.gnu.org/c99status.html
-	if [[ "$(tc-getCC)" == *"gcc"* ]] ; then
+	if tc-is-gcc ; then
 		sed -i 's/ifndef __FAST_MATH__/if 0/g' configure.ac || die
 	fi
 
@@ -289,14 +287,16 @@ src_prepare() {
 
 	# If qtchooser is installed, it may break the build, because moc,rcc and uic binaries for wrong qt version may be used.
 	# Setting QT_SELECT environment variable will enforce correct binaries.
-	if use qt4; then
-		export QT_SELECT=qt4
-	elif use qt5; then
+	if use qt5; then
 		export QT_SELECT=qt5
+	elif use qt4; then
+		export QT_SELECT=qt4
 	fi
 }
 
 src_configure() {
+	local myconf
+
 	# Compatibility fix for Samba 4.
 	use samba && append-cppflags "-I/usr/include/samba-4.0"
 
@@ -316,13 +316,15 @@ src_configure() {
 				--with-default-monospace-font-family=Monospace"
 	fi
 
-	local qt_flag=""
-	if use qt4 ; then
-		qt_flag="--enable-qt=4"
-	elif use qt5 ; then
-		qt_flag="--enable-qt=5"
+	if use qt5 ; then
+		myconf+=" --enable-qt=5"
 	else
-		qt_flag="--disable-qt"
+		if use qt4 ; then
+			myconf+=" --enable-qt=4"
+		else
+			myconf+=" --disable-qt"
+		fi
+		use kde && myconf+=" --with-kde-solid"
 	fi
 
 	econf \
@@ -372,7 +374,6 @@ src_configure() {
 		$(use_enable jack) \
 		$(use_enable jpeg) \
 		$(use_enable kate) \
-		$(use_with kde kde-solid) \
 		$(use_enable libass) \
 		$(use_enable libcaca caca) \
 		$(use_enable libnotify notify) \
@@ -407,7 +408,6 @@ src_configure() {
 		$(use_enable postproc) \
 		$(use_enable projectm) \
 		$(use_enable pulseaudio pulse) \
-		${qt_flag} \
 		$(use_enable rdp freerdp) \
 		$(use_enable rtsp realrtsp) \
 		$(use_enable run-as-root) \
@@ -482,7 +482,7 @@ src_configure() {
 }
 
 src_test() {
-	Xemake check-TESTS
+	virtx emake check-TESTS
 }
 
 DOCS="AUTHORS THANKS NEWS README doc/fortunes.txt doc/intf-vcd.txt"
@@ -491,7 +491,7 @@ src_install() {
 	default
 
 	# Punt useless libtool's .la files
-	find "${D}" -name '*.la' -delete
+	find "${D}" -name '*.la' -delete || die
 }
 
 pkg_postinst() {

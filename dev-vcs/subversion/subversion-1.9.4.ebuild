@@ -19,7 +19,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="Subversion GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="apache2 berkdb ctypes-python debug doc +dso extras gnome-keyring +http java kde nls perl python ruby sasl test vim-syntax"
 
 COMMON_DEPEND=">=dev-db/sqlite-3.7.12
@@ -32,7 +32,7 @@ COMMON_DEPEND=">=dev-db/sqlite-3.7.12
 	berkdb? ( >=sys-libs/db-4.0.14:= )
 	ctypes-python? ( ${PYTHON_DEPS} )
 	gnome-keyring? ( dev-libs/glib:2 sys-apps/dbus gnome-base/libgnome-keyring )
-	kde? ( sys-apps/dbus dev-qt/qtcore:4 dev-qt/qtdbus:4 dev-qt/qtgui:4 >=kde-base/kdelibs-4:4 )
+	kde? ( sys-apps/dbus dev-qt/qtcore:4 dev-qt/qtdbus:4 dev-qt/qtgui:4 kde-frameworks/kdelibs:4 )
 	perl? ( dev-lang/perl:= )
 	python? ( ${PYTHON_DEPS} )
 	ruby? ( ${RUBY_DEPS} )
@@ -70,6 +70,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.8.0-hpux-dso.patch
 	"${FILESDIR}"/${PN}-fix-parallel-build-support-for-perl-bindings.patch
 	"${FILESDIR}"/${PN}-1.8.1-revert_bdb6check.patch
+	"${FILESDIR}"/${PN}-1.8.16-javadoc-nolint.patch
 )
 
 want_apache

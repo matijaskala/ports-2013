@@ -145,17 +145,10 @@ x11-base/xorg-drivers video_cards_sis
 # x11-drivers/xf86-video-tdfx
 x11-base/xorg-drivers video_cards_tdfx
 
-# x11-drivers/xf86-video-vmware
-# x11-libs/libdrm[libkms,video_cards_vmware]
-x11-base/xorg-drivers video_cards_vmware
-
-# >=dev-cpp/clucene-0.9.21[-debug]
-app-misc/strigi clucene
-
 # >=sys-auth/polkit-qt-0.103.0
 # >=kde-misc/polkit-kde-kcmodules-0.98_pre20101127
 # >=sys-auth/polkit-kde-agent-0.99
-kde-base/kdelibs policykit
+kde-frameworks/kdelibs policykit
 
 # <=sci-geosciences/gpsd-2.95-r1
 app-misc/geoclue gps
@@ -172,16 +165,16 @@ media-video/vlc fluidsynth
 # sys-cluster/knem
 sys-cluster/openmpi openmpi_fabrics_knem
 
-# sys-infiniband/dapl
+# sys-fabric/dapl
 sys-cluster/openmpi openmpi_fabrics_dapl
 
-# sys-infiniband/ofed
+# sys-fabric/ofed
 sys-cluster/openmpi openmpi_fabrics_ofed
 
-# sys-infiniband/infinipath-psm
+# sys-fabric/infinipath-psm
 sys-cluster/openmpi openmpi_fabrics_psm
 
-# sys-infiniband/librdmacm
+# sys-fabric/librdmacm
 sys-cluster/openmpi openmpi_ofed_features_rdmacm
 
 # sys-cluster/open-mx

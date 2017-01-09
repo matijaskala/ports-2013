@@ -19,17 +19,18 @@ HOMEPAGE="https://libreswan.org/"
 
 LICENSE="GPL-2 BSD-4 RSA DES"
 SLOT="0"
-IUSE="caps curl dnssec ldap pam"
+IUSE="caps curl dnssec ldap pam systemd"
 
 COMMON_DEPEND="
 	dev-libs/gmp:0=
-	dev-libs/libevent
+	dev-libs/libevent:0=
 	dev-libs/nspr
 	caps? ( sys-libs/libcap-ng )
 	curl? ( net-misc/curl )
 	dnssec? ( net-dns/unbound net-libs/ldns )
 	ldap? ( net-nds/openldap )
 	pam? ( sys-libs/pam )
+	systemd? ( sys-apps/systemd:0= )
 "
 DEPEND="${COMMON_DEPEND}
 	app-text/docbook-xml-dtd:4.1.2
@@ -50,6 +51,11 @@ usetf() {
 	usex "$1" true false
 }
 
+src_prepare() {
+	sed -i -e 's:/sbin/runscript:/sbin/openrc-run:' initsystems/openrc/ipsec.init.in || die
+	default
+}
+
 src_configure() {
 	tc-export AR CC
 	export INC_USRLOCAL=/usr
@@ -65,6 +71,8 @@ src_configure() {
 	export USE_LIBCAP_NG=$(usetf caps)
 	export USE_LIBCURL=$(usetf curl)
 	export USE_LDAP=$(usetf ldap)
+	export USE_SYSTEMD_WATCHDOG=$(usetf systemd)
+	export SD_WATCHDOGSEC=$(usex systemd 200 0)
 	export USE_XAUTHPAM=$(usetf pam)
 	export DEBUG_CFLAGS=
 	export OPTIMIZE_CFLAGS=
@@ -73,17 +81,16 @@ src_configure() {
 
 src_compile() {
 	emake all
+	emake -C initsystems INITSYSTEM=systemd UNITDIR="$(systemd_get_systemunitdir)" all
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	default
+	emake -C initsystems INITSYSTEM=systemd UNITDIR="$(systemd_get_systemunitdir)" DESTDIR="${D}" install
 
 	echo "include /etc/ipsec.d/*.secrets" > "${D}"/etc/ipsec.secrets
 	fperms 0600 /etc/ipsec.secrets
 
-	systemd_dounit "${FILESDIR}/ipsec.service"
-
-	dodoc CHANGES README
 	dodoc -r docs
 
 	find "${D}" -type d -empty -delete || die

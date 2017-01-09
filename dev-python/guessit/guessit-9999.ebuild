@@ -4,13 +4,13 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
 inherit distutils-r1 git-r3
 
 DESCRIPTION="Python library for guessing information from video filenames"
 HOMEPAGE="https://github.com/guessit-io/guessit https://pypi.python.org/pypi/guessit"
-EGIT_REPO_URI="git://github.com/${PN}-io/${PN}.git"
+EGIT_REPO_URI=( {https,git}://github.com/${PN}-io/${PN}.git )
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -19,9 +19,8 @@ IUSE="test"
 
 RDEPEND="
 	>=dev-python/babelfish-0.5.5[${PYTHON_USEDEP}]
-	>=dev-python/python-dateutil-2.1[${PYTHON_USEDEP}]
-	<dev-python/python-dateutil-2.5.2[${PYTHON_USEDEP}]
-	>=dev-python/rebulk-0.7.1[${PYTHON_USEDEP}]
+	>=dev-python/rebulk-0.8.2[${PYTHON_USEDEP}]
+	dev-python/python-dateutil[${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-python/six[${PYTHON_USEDEP}]
 "
@@ -33,8 +32,6 @@ DEPEND="${RDEPEND}
 		dev-python/pyyaml[${PYTHON_USEDEP}]
 	)
 "
-
-PATCHES=( "${FILESDIR}/${PN}-2.0.5-support-noninteractive-shells.patch" )
 
 python_prepare_all() {
 	# Disable benchmarks as they require unavailable pytest-benchmark.

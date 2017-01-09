@@ -32,5 +32,5 @@ DEPEND="${RDEPEND}
 DOCS="AUTHORS ChangeLog NEWS README THANKS doc/shortcuts"
 
 src_configure() {
-	econf $(use_enable gtk3)
+	gnome2_src_configure $(use_enable gtk3)
 }

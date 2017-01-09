@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit git-r3 eutils cmake-utils
+inherit git-r3 eutils cmake-utils fcaps
 
 DESCRIPTION="i3-compatible Wayland window manager"
 HOMEPAGE="http://swaywm.org/"
@@ -22,6 +22,7 @@ RDEPEND="=dev-libs/wlc-9999[systemd=]
 		dev-libs/libinput
 		x11-libs/libxkbcommon
 		dev-libs/wayland
+		sys-libs/libcap
 		x11-libs/pango
 		x11-libs/cairo
 		swaylock? ( virtual/pam )
@@ -32,10 +33,10 @@ DEPEND="${RDEPEND}
 		app-text/asciidoc"
 
 src_prepare() {
-	default
+	cmake-utils_src_prepare
 
 	# remove bad CFLAGS that upstream is trying to add
-	sed -i -e '/FLAGS.*-Werror/d' -e '/FLAGS.*-g/d' CMakeLists.txt || die
+	sed -i -e '/FLAGS.*-Werror/d' CMakeLists.txt || die
 }
 
 src_configure() {
@@ -52,21 +53,20 @@ src_configure() {
 		-Dzsh-completions=$(usex zsh-completion)
 
 		-DCMAKE_INSTALL_SYSCONFDIR="/etc"
+		-DLD_LIBRARY_PATH="${EPREFIX}/usr/lib"
 	)
 
 	cmake-utils_src_configure
 }
 
-src_install() {
-	cmake-utils_src_install
-
-	use !systemd && fperms u+s /usr/bin/sway
-}
+FILECAPS=( -M 4711 cap_sys_ptrace,cap_sys_tty_config usr/bin/sway )
 
 pkg_postinst() {
+	fcaps_pkg_postinst
 	if use swaygrab
 	then
 		optfeature "swaygrab screenshot support" media-gfx/imagemagick[png]
 		optfeature "swaygrab video capture support" virtual/ffmpeg
 	fi
+	optfeature "X11 applications support" dev-libs/wlc[xwayland] x11-base/xorg-server[wayland]
 }

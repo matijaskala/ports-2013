@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -12,22 +12,24 @@ SRC_URI="mirror://gnu/aspell/${P}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm hppa ~ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x86-solaris"
 IUSE="nls"
 
 PDEPEND="app-dicts/aspell-en"
-LANGS="af be bg br ca cs cy da de de_1901 el en eo es et fi fo fr ga gl he hr
-hu hy is it la lt nl no pl pt pt_BR ro ru sk sl sr sv uk vi"
+LANGS="af be bg br ca cs cy da de de@1901 el en eo es et fi fo fr ga gl he hr
+hu hy is it la lt nl no pl pt pt-BR ro ru sk sl sr sv uk vi"
 for lang in ${LANGS}; do
+	IUSE+=" l10n_${lang/@/-}"
+	# Need to keep linguas_* for now, since aspell uses gettext
+	IUSE+=" linguas_${lang/-/_}"
 	case ${lang} in
-		de_1901) dep="app-dicts/aspell-de-alt"  ;;
-		pt_BR)   dep="app-dicts/aspell-pt-br"   ;;
-		*)       dep="app-dicts/aspell-${lang}" ;;
+		de@1901) dict="de-alt"  ;;
+		pt-BR)   dict="pt-br"   ;;
+		*)       dict="${lang}" ;;
 	esac
-	PDEPEND+=" linguas_${lang}? ( ${dep} )"
-	IUSE+=" linguas_${lang}"
+	PDEPEND+=" l10n_${lang/@/-}? ( app-dicts/aspell-${dict} )"
 done
-unset dep
+unset dict lang LANGS
 
 COMMON_DEPEND="
 	>=sys-libs/ncurses-5.2:0=

@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 USE_RUBY="ruby20 ruby21 ruby22"
 
 inherit eutils multiprocessing python-any-r1 ruby-single toolchain-funcs
@@ -52,7 +52,7 @@ RDEPEND="server? (
 		musepack? ( media-sound/musepack-tools )
 		ofa? ( media-libs/libofa )
 		pulseaudio? ( media-sound/pulseaudio )
-		samba? ( net-fs/samba[smbclient(+)] )
+		samba? ( >=net-fs/samba-4.2[client] )
 		sid? ( media-sound/sidplay
 			media-libs/resid )
 		sndfile? ( media-libs/libsndfile )

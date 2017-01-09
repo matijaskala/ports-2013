@@ -1,11 +1,11 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
 # waf fails on python3_5: AttributeError: Can't pickle local object 'Context.__init__.<locals>.node_class'
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4} )
 USE_RUBY="ruby20 ruby21 ruby22"
 
 inherit eutils multiprocessing python-single-r1 ruby-single toolchain-funcs
@@ -18,12 +18,12 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.bz2"
 LICENSE="GPL-2 LGPL-2.1"
 
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~ppc ~x86"
+KEYWORDS="alpha amd64 ppc x86"
 
-IUSE="aac airplay +alsa ao asf avahi cdda curl cxx ffmpeg flac gvfs ices
+IUSE="aac airplay +alsa ao asf cdda curl cxx ffmpeg flac gvfs ices
 jack mac mlib-update mms +mad modplug mp3 mp4 musepack ofa oss
-perl phonehome pulseaudio python ruby
-samba +server sid sndfile speex test valgrind +vorbis vocoder wavpack xml"
+perl phonehome pulseaudio python ruby samba +server sid sndfile speex
+test valgrind +vorbis vocoder wavpack xml zeroconf"
 
 RDEPEND="server? (
 		>=dev-db/sqlite-3.3.4
@@ -32,7 +32,6 @@ RDEPEND="server? (
 		airplay? ( dev-libs/openssl:0= )
 		alsa? ( media-libs/alsa-lib )
 		ao? ( media-libs/libao )
-		avahi? ( net-dns/avahi[mdnsresponder-compat] )
 		cdda? ( dev-libs/libcdio-paranoia
 			>=media-libs/libdiscid-0.1.1
 			>=media-sound/cdparanoia-3.9.8 )
@@ -53,7 +52,7 @@ RDEPEND="server? (
 		musepack? ( media-sound/musepack-tools )
 		ofa? ( media-libs/libofa )
 		pulseaudio? ( media-sound/pulseaudio )
-		samba? ( net-fs/samba[smbclient(+)] )
+		samba? ( >=net-fs/samba-4.2[client] )
 		sid? ( media-sound/sidplay
 			media-libs/resid )
 		sndfile? ( media-libs/libsndfile )
@@ -63,6 +62,7 @@ RDEPEND="server? (
 		vocoder? ( sci-libs/fftw:3.0= media-libs/libsamplerate )
 		wavpack? ( media-sound/wavpack )
 		xml? ( dev-libs/libxml2 )
+		zeroconf? ( net-dns/avahi[mdnsresponder-compat] )
 	)
 
 	>=dev-libs/glib-2.12.9
@@ -192,7 +192,7 @@ src_configure() {
 					"DISABLED	coreaudio" # MacOS only?
 					"		curl"
 					"ENABLED	cue"
-					"avahi		daap"
+					"zeroconf	daap"
 					"ENABLED	diskwrite"
 					"ENABLED	equalizer"
 					"aac		faad"

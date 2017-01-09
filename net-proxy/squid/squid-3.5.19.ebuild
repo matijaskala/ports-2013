@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-inherit autotools linux-info pam toolchain-funcs user versionator
+inherit autotools linux-info pam toolchain-funcs user
 
 DESCRIPTION="A full-featured web proxy cache"
 HOMEPAGE="http://www.squid-cache.org/"
@@ -11,7 +11,7 @@ SRC_URI="http://www.squid-cache.org/Versions/v3/3.5/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ~ia64 ~mips ~ppc ppc64 ~sparc x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd"
 IUSE="caps ipv6 pam ldap samba sasl kerberos nis radius ssl snmp selinux logrotate test \
 	ecap esi ssl-crtd \
 	mysql postgres sqlite \
@@ -235,13 +235,4 @@ src_install() {
 
 	diropts -m0750 -o squid -g squid
 	keepdir /var/log/squid /etc/ssl/squid /var/lib/squid
-}
-
-pkg_postinst() {
-	if [[ $(get_version_component_range 1 ${REPLACING_VERSIONS}) -lt 3 ]] || \
-		[[ $(get_version_component_range 2 ${REPLACING_VERSIONS}) -lt 5 ]]; then
-		elog "Please read the release notes at:"
-		elog "  http://www.squid-cache.org/Versions/v3/3.5/RELEASENOTES.html"
-		echo
-	fi
 }

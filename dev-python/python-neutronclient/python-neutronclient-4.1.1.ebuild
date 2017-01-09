@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-PYTHON_COMPAT=( python2_7 python3_3 python3_4 python3_5 )
+PYTHON_COMPAT=( python2_7 python3_4 python3_5 )
 
 inherit distutils-r1
 
@@ -62,7 +62,7 @@ RDEPEND="
 	>=dev-python/Babel-1.3[${PYTHON_USEDEP}]"
 
 python_prepare_all() {
-	# built in... 
+	# built in...
 	sed -i '/^argparse/d' requirements.txt || die
 	sed -i '/^hacking/d' test-requirements.txt || die
 	distutils-r1_python_prepare_all

@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -7,12 +7,12 @@ EAPI=6
 inherit eutils scons-utils toolchain-funcs
 
 DESCRIPTION="Automatic BPM detection utility"
-HOMEPAGE="http://sourceforge.net/projects/bpmdetect"
+HOMEPAGE="https://sourceforge.net/projects/bpmdetect"
 SRC_URI="mirror://sourceforge/${PN}/${P}-src.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="media-libs/taglib

@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit flag-o-matic toolchain-funcs git-r3
+inherit flag-o-matic toolchain-funcs git-r3 versionator
 
 DESCRIPTION="Selection-oriented code editor inspired by vim"
 HOMEPAGE="https://github.com/mawww/kakoune"
@@ -13,11 +13,11 @@ EGIT_REPO_URI="https://github.com/mawww/kakoune.git"
 LICENSE="Unlicense"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug"
+IUSE="debug static"
 
 RDEPEND="
-	sys-libs/ncurses:=[unicode]
-	dev-libs/boost
+	sys-libs/ncurses:0=[unicode]
+	dev-libs/boost:=
 "
 DEPEND="
 	app-text/asciidoc
@@ -25,16 +25,24 @@ DEPEND="
 	${RDEPEND}
 "
 
-PATCHES=( "${FILESDIR}/${PN}-makefile.patch" )
+PATCHES=( "${FILESDIR}/${PN}-0_pre20161111-makefile.patch" )
+
+pkg_setup() {
+	if [[ ${MERGE_TYPE} != binary ]]; then
+		if tc-is-gcc && ! version_is_at_least 5.0 $(gcc-version); then
+			die "Clang or GCC >=5.0 is required to build this version"
+		fi
+	fi
+}
 
 src_configure() {
-	append-cppflags $(pkg-config --cflags ncursesw)
-	append-libs $(pkg-config --libs ncursesw)
-	export CXX=$(tc-getCXX)
+	append-cppflags $($(tc-getPKG_CONFIG) --cflags ncursesw)
+	append-libs $($(tc-getPKG_CONFIG) --libs ncursesw)
+	tc-export CXX
 	export debug=$(usex debug)
-	S="${WORKDIR}/${P}/src"
+	export static=$(usex static)
 }
 
 src_install() {
-	emake DESTDIR="${D}" PREFIX="/usr" docdir="${D}/usr/share/doc/${PF}" install
+	emake -C src DESTDIR="${D}" PREFIX="${EPREFIX}/usr" docdir="${ED%/}/usr/share/doc/${PF}" install
 }

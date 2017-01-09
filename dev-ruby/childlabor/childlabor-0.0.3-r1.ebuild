@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-USE_RUBY="ruby20 ruby21 ruby22"
+USE_RUBY="ruby20 ruby21 ruby22 ruby23"
 
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_TASK_TEST=""
@@ -19,7 +19,7 @@ SRC_URI="https://github.com/carllerche/childlabor/archive/${COMMIT_ID}.tar.gz ->
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86"
 IUSE="test"
 
 RUBY_S="${PN}-${COMMIT_ID}"

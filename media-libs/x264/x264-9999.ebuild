@@ -35,23 +35,13 @@ RDEPEND="opencl? ( >=virtual/opencl-0-r3[${MULTILIB_USEDEP}] )
 
 DOCS="AUTHORS doc/*.txt"
 
-src_prepare() {
-	# Initial support for x32 ABI, bug #420241
-	# Avoid messing too much with CFLAGS.
-	epatch "${FILESDIR}"/x264-0.0.20160523-cflags.patch
-}
-
 multilib_src_configure() {
 	tc-export CC
 	local asm_conf=""
 
-	if [[ ${ABI} == x86* ]] && use pic || [[ ${ABI} == "x32" ]]; then
+	if [[ ${ABI} == x86* ]] && { use pic || use !cpu_flags_x86_sse ; } || [[ ${ABI} == "x32" ]]; then
 		asm_conf=" --disable-asm"
 	fi
-
-	# Upstream uses this, see the cflags patch
-	use cpu_flags_x86_sse && append-flags "-msse" "-mfpmath=sse"
-	append-flags "-ffast-math"
 
 	"${S}/configure" \
 		--prefix="${EPREFIX}"/usr \

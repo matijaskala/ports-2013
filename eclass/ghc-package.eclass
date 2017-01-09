@@ -11,7 +11,7 @@
 # @DESCRIPTION:
 # Helper eclass to handle ghc installation/upgrade/deinstallation process.
 
-inherit versionator
+inherit multiprocessing versionator
 
 # @FUNCTION: ghc-getghc
 # @DESCRIPTION:
@@ -62,16 +62,6 @@ ghc-getghcpkgbin() {
 	fi
 }
 
-# @FUNCTION: ghc-host-prefix
-# @DESCRIPTION:
-# Returns root of installed ghc.
-# Some helpers (like best_version) require reference
-# host system as they are tied to compiler bing executed.
-ghc-host-root() {
-	has "${EAPI:-0}" 0 1 2 && ! use prefix && EPREFIX=
-	echo "${EPREFIX}/"
-}
-
 # @FUNCTION: ghc-version
 # @DESCRIPTION:
 # returns upstream version of ghc
@@ -95,7 +85,7 @@ ghc-pm-version() {
 	local pm_ghc_p
 
 	if [[ -z "${_GHC_PM_VERSION_CACHE}" ]]; then
-		pm_ghc_p=$(ROOT=$(ghc-host-root) best_version dev-lang/ghc)
+		pm_ghc_p=$(best_version dev-lang/ghc)
 		_GHC_PM_VERSION_CACHE="PM:${pm_ghc_p#dev-lang/ghc-}"
 	fi
 	echo "${_GHC_PM_VERSION_CACHE}"
@@ -116,20 +106,6 @@ ghc-cabal-version() {
 	fi
 }
 
-# @FUNCTION: ghc-sanecabal
-# @DESCRIPTION:
-# check if a standalone Cabal version is available for the
-# currently used ghc; takes minimal version of Cabal as
-# an optional argument
-ghc-sanecabal() {
-	local f
-	local version
-	if [[ -z "$1" ]]; then version="1.0.1"; else version="$1"; fi
-	for f in $(ghc-confdir)/cabal-*; do
-		[[ -f "${f}" ]] && version_is_at_least "${version}" "${f#*cabal-}" && return
-	done
-	return 1
-}
 # @FUNCTION: ghc-is-dynamic
 # @DESCRIPTION:
 # checks if ghc is built against dynamic libraries
@@ -201,6 +177,25 @@ ghc-libdir() {
 		_GHC_LIBDIR_CACHE="$($(ghc-getghc) --print-libdir)"
 	fi
 	echo "${_GHC_LIBDIR_CACHE}"
+}
+
+# @FUNCTION: ghc-make-args
+# @DESCRIPTION:
+# Returns default arguments passed along 'ghc --make'
+# build mode. Used mainly to enable parallel build mode.
+ghc-make-args() {
+	local ghc_make_args=()
+	# parallel on all available cores
+	if ghc-supports-smp && ghc-supports-parallel-make; then
+		# It should have been just -j$(makeopts_jobs)
+		# but GHC does not yet have nice defaults:
+		#    https://ghc.haskell.org/trac/ghc/ticket/9221#comment:57
+		# SMP is a requirement for parallel GC's gen0
+		# 'qb' balancing.
+		echo "-j$(makeopts_jobs) +RTS -A256M -qb0 -RTS"
+		ghc_make_args=()
+	fi
+	echo "${ghc_make_args[@]}"
 }
 
 # @FUNCTION: ghc-confdir

@@ -6,10 +6,10 @@ EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="ncurses,readline"
 
-PLOCALES="de_DE fr_FR hu it tr zh_CN"
+PLOCALES="bg de_DE fr_FR hu it tr zh_CN"
 
 inherit eutils flag-o-matic linux-info toolchain-funcs multilib python-r1 \
-	user udev fcaps readme.gentoo pax-utils l10n
+	user udev fcaps readme.gentoo-r1 pax-utils l10n
 
 if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="git://git.qemu.org/qemu.git"
@@ -25,7 +25,7 @@ HOMEPAGE="http://www.qemu.org http://www.linux-kvm.org"
 
 LICENSE="GPL-2 LGPL-2 BSD-2"
 SLOT="0"
-IUSE="accessibility +aio alsa bluetooth +caps +curl debug +fdt glusterfs \
+IUSE="accessibility +aio alsa bluetooth bzip2 +caps +curl debug +fdt glusterfs \
 gnutls gtk gtk2 infiniband iscsi +jpeg \
 kernel_linux kernel_FreeBSD lzo ncurses nfs nls numa opengl +pin-upstream-blobs
 +png pulseaudio python \
@@ -34,9 +34,9 @@ static-user systemtap tci test +threads usb usbredir +uuid vde +vhost-net \
 virgl virtfs +vnc vte xattr xen xfs"
 
 COMMON_TARGETS="aarch64 alpha arm cris i386 m68k microblaze microblazeel mips
-mips64 mips64el mipsel or32 ppc ppc64 s390x sh4 sh4eb sparc sparc64 unicore32
+mips64 mips64el mipsel or32 ppc ppc64 s390x sh4 sh4eb sparc sparc64
 x86_64"
-IUSE_SOFTMMU_TARGETS="${COMMON_TARGETS} lm32 moxie ppcemb tricore xtensa xtensaeb"
+IUSE_SOFTMMU_TARGETS="${COMMON_TARGETS} lm32 moxie ppcemb tricore unicore32 xtensa xtensaeb"
 IUSE_USER_TARGETS="${COMMON_TARGETS} armeb mipsn32 mipsn32el ppc64abi32 ppc64le sparc32plus tilegx"
 
 use_softmmu_targets=$(printf ' qemu_softmmu_targets_%s' ${IUSE_SOFTMMU_TARGETS})
@@ -65,8 +65,12 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 #
 # Older versions of gnutls are supported, but it's simpler to just require
 # the latest versions.  This is also why we require nettle.
+#
+# TODO: Split out tools deps into another var.  e.g. bzip2 is only used by
+# system binaries and tools, not user binaries.
 COMMON_LIB_DEPEND=">=dev-libs/glib-2.0[static-libs(+)]
 	sys-libs/zlib[static-libs(+)]
+	bzip2? ( app-arch/bzip2[static-libs(+)] )
 	xattr? ( sys-apps/attr[static-libs(+)] )"
 SOFTMMU_LIB_DEPEND="${COMMON_LIB_DEPEND}
 	>=x11-libs/pixman-0.28.0[static-libs(+)]
@@ -89,10 +93,10 @@ SOFTMMU_LIB_DEPEND="${COMMON_LIB_DEPEND}
 		)
 		!gtk2? (
 			x11-libs/gtk+:3
-			vte? ( x11-libs/vte:2.90 )
+			vte? ( x11-libs/vte:2.91 )
 		)
 	)
-	infiniband? ( sys-infiniband/librdmacm:=[static-libs(+)] )
+	infiniband? ( sys-fabric/librdmacm:=[static-libs(+)] )
 	iscsi? ( net-libs/libiscsi )
 	jpeg? ( virtual/jpeg:0=[static-libs(+)] )
 	lzo? ( dev-libs/lzo:2[static-libs(+)] )
@@ -103,7 +107,7 @@ SOFTMMU_LIB_DEPEND="${COMMON_LIB_DEPEND}
 		virtual/opengl
 		media-libs/libepoxy[static-libs(+)]
 		media-libs/mesa[static-libs(+)]
-		media-libs/mesa[egl,gles2]
+		media-libs/mesa[egl,gles2,gbm]
 	)
 	png? ( media-libs/libpng:0=[static-libs(+)] )
 	pulseaudio? ( media-sound/pulseaudio )
@@ -138,7 +142,7 @@ USER_LIB_DEPEND="${COMMON_LIB_DEPEND}"
 X86_FIRMWARE_DEPEND="
 	>=sys-firmware/ipxe-1.0.0_p20130624
 	pin-upstream-blobs? (
-		~sys-firmware/seabios-1.8.2
+		~sys-firmware/seabios-1.10.1
 		~sys-firmware/sgabios-0.1_pre8
 		~sys-firmware/vgabios-0.7a
 	)
@@ -329,7 +333,6 @@ src_prepare() {
 
 	epatch "${FILESDIR}"/${PN}-2.5.0-cflags.patch
 	epatch "${FILESDIR}"/${PN}-2.5.0-sysmacros.patch
-	epatch "${FILESDIR}"/${PN}-2.6.0-crypto-static.patch
 
 	# Fix ld and objcopy being called directly
 	tc-export AR LD OBJCOPY
@@ -393,6 +396,7 @@ qemu_src_configure() {
 	conf_opts+=(
 		$(conf_softmmu accessibility brlapi)
 		$(conf_softmmu aio linux-aio)
+		$(conf_softmmu bzip2)
 		$(conf_softmmu bluetooth bluez)
 		$(conf_softmmu caps cap-ng)
 		$(conf_softmmu curl)
@@ -463,6 +467,7 @@ qemu_src_configure() {
 			--disable-linux-user
 			--disable-system
 			--disable-blobs
+			$(use_enable bzip2)
 		)
 		static_flag="static"
 		;;

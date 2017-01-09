@@ -2,19 +2,19 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils multilib-minimal
+inherit multilib-minimal
 
 DESCRIPTION="A helper library for REVerse ENGineered formats filters"
 HOMEPAGE="http://sf.net/p/libwpd/librevenge"
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://git.code.sf.net/p/libwpd/librevenge"
 	inherit git-r3 autotools
-	KEYWORDS=""
+	KEYWORDS="hppa ppc64"
 else
 	SRC_URI="http://sf.net/projects/libwpd/files/${PN}/${P}/${P}.tar.xz"
-	KEYWORDS="~alpha amd64 ~arm ~hppa ~mips ~ppc64 ~x86 ~x86-fbsd"
+	KEYWORDS="~alpha amd64 ~arm hppa ~mips ppc64 x86 ~x86-fbsd"
 fi
 
 LICENSE="|| ( MPL-2.0 LGPL-2.1 )"
@@ -31,6 +31,7 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
+	default
 	[[ ${PV} = 9999 ]] && eautoreconf
 }
 
@@ -40,10 +41,9 @@ multilib_src_configure() {
 		--disable-static \
 		--disable-werror \
 		$(use_with doc docs) \
-		$(use_enable test tests) \
-		--docdir="${EPREFIX}/usr/share/doc/${PF}"
+		$(use_enable test tests)
 }
 
 multilib_src_install_all() {
-	prune_libtool_files --all
+	find "${D}" -name '*.la' -delete || die
 }

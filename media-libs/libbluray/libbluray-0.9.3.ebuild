@@ -1,21 +1,20 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-if [ "${PV#9999}" != "${PV}" ] ; then
-	VCSECLASS="git-r3"
+if [[ "${PV#9999}" != "${PV}" ]] ; then
+	inherit git-r3
 	KEYWORDS=""
 	EGIT_REPO_URI="git://git.videolan.org/libbluray.git"
 	SRC_URI=""
 else
-	VCSECLASS=""
-	KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+	KEYWORDS="amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
 	SRC_URI="http://ftp.videolan.org/pub/videolan/libbluray/${PV}/${P}.tar.bz2"
 fi
 
-inherit autotools ${VCSECLASS} java-pkg-opt-2 flag-o-matic eutils multilib-minimal
+inherit autotools java-pkg-opt-2 flag-o-matic eutils multilib-minimal
 
 DESCRIPTION="Blu-ray playback libraries"
 HOMEPAGE="http://www.videolan.org/developers/libbluray.html"
@@ -47,6 +46,8 @@ DEPEND="
 DOCS=( ChangeLog README.txt )
 
 src_prepare() {
+	default
+
 	if use java ; then
 		export JDK_HOME="$(java-config -g JAVA_HOME)"
 

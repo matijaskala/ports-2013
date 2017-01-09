@@ -107,6 +107,11 @@ toolchain-glibc_src_install() {
 		fi
 	done
 
+	# Fix symlinked libraries:
+	# '/usr/lib*/lib*.so -> ../../lib*/lib*.so*' -> '/lib/lib*.so -> lib*.so*'
+	eval "$(readlink "${ED}"$(alt_usrlibdir)/* | grep '^\.\./\.\..*\.so\..*$' | \
+		sed 's@^\.\./\.\.\(/.*/\)\([^/]*\.so\)\(\..*\)$@rm "${ED}"$(alt_usrlibdir)/\2 \; dosym \2\3 $(alt_prefix)\1\2 \;@')"
+
 	# With devpts under Linux mounted properly, we do not need the pt_chown
 	# binary to be setuid.  This is because the default owners/perms will be
 	# exactly what we want.

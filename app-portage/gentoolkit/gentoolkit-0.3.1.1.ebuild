@@ -4,13 +4,13 @@
 
 EAPI="5"
 
-PYTHON_COMPAT=(python{2_7,3_3,3_4,3_5} pypy)
+PYTHON_COMPAT=(python{2_7,3_4,3_5} pypy)
 PYTHON_REQ_USE="xml(+),threads(+)"
 
 inherit distutils-r1 eutils
 
 DESCRIPTION="Collection of administration scripts for Gentoo"
-HOMEPAGE="https://www.gentoo.org/proj/en/portage/tools/index.xml"
+HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Portage-Tools"
 SRC_URI="http://dev.gentoo.org/~dolsen/releases/gentoolkit/${P}.tar.gz"
 
 LICENSE="GPL-2"
@@ -22,10 +22,8 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~s
 DEPEND="sys-apps/portage[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	!<=app-portage/gentoolkit-dev-0.2.7
-	|| ( >=sys-apps/coreutils-8.15 app-misc/realpath sys-freebsd/freebsd-bin )
 	sys-apps/gawk
-	sys-apps/gentoo-functions
-	sys-apps/grep"
+	sys-apps/gentoo-functions"
 
 python_prepare_all() {
 	python_setup
@@ -57,7 +55,7 @@ pkg_postinst() {
 	if [[ ! ${REPLACING_VERSIONS} ]]; then
 		elog
 		elog "For further information on gentoolkit, please read the gentoolkit"
-		elog "guide: https://www.gentoo.org/doc/en/gentoolkit.xml"
+		elog "guide: https://wiki.gentoo.org/wiki/Gentoolkit"
 		elog
 		elog "Another alternative to equery is app-portage/portage-utils"
 		elog

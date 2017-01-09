@@ -48,7 +48,7 @@ fi
 
 SLOT="0"
 LICENSE="|| ( GPL-2 BL )"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="+boost +bullet collada colorio cycles +dds debug doc +elbeem ffmpeg fftw +game-engine jack jpeg2k libav ndof nls openal openimageio +opennl openmp +openexr player redcode sdl sndfile cpu_flags_x86_sse cpu_flags_x86_sse2 tiff"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	player? ( game-engine )
@@ -68,7 +68,6 @@ RDEPEND="
 	media-libs/glew
 	media-libs/libpng:0
 	media-libs/libsamplerate
-	sci-libs/ldl
 	sys-libs/zlib
 	virtual/glu
 	virtual/jpeg:0
@@ -112,6 +111,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.70-sse2.patch
 	"${FILESDIR}"/${PN}-2.72-T42797.diff
 	"${FILESDIR}"/${P}-fix-util_simd.patch
+	"${FILESDIR}"/${P}-gcc6-fixes.patch
 )
 
 pkg_pretend() {

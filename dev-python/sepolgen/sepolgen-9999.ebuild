@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+EAPI="6"
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
-inherit python-r1 eutils
+inherit python-r1
 
 MY_P="${P//_/-}"
-MY_RELEASEDATE="20160223"
+MY_RELEASEDATE="20161014"
 
 DESCRIPTION="SELinux policy generation library"
 HOMEPAGE="https://github.com/SELinuxProject/selinux/wiki"
@@ -19,7 +19,7 @@ if [[ ${PV} == 9999 ]] ; then
 	S="${WORKDIR}/${MY_P}/${PN}"
 else
 	SRC_URI="https://raw.githubusercontent.com/wiki/SELinuxProject/selinux/files/releases/${MY_RELEASEDATE}/${MY_P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~x86"
+	KEYWORDS="~amd64 ~arm64 ~mips ~x86"
 	S="${WORKDIR}/${MY_P}"
 fi
 
@@ -28,17 +28,17 @@ SLOT="0"
 IUSE=""
 
 DEPEND=">=sys-libs/libselinux-2.4[python]
-		app-admin/setools[python(+)]
+		>=app-admin/setools-4.0[${PYTHON_USEDEP}]
 		${PYTHON_DEPS}"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
 	if [[ ${PV} != 9999 ]] ; then
 		# If needed for live ebuilds please use /etc/portage/patches
-		epatch "${FILESDIR}/0030-default-path-for-tests-also-needed-bug-467264.patch"
+		eapply "${FILESDIR}/0030-default-path-for-tests-also-needed-bug-467264.patch"
 	fi
 
-	epatch_user
+	eapply_user
 
 	python_copy_sources
 }

@@ -63,11 +63,25 @@ src_prepare() {
 }
 
 src_configure() {
+	# Prevent sandbox violations, bug #586560
+	# https://bugzilla.gnome.org/show_bug.cgi?id=744134
+	# https://bugzilla.gnome.org/show_bug.cgi?id=744135
+	addpredict /dev
+
 	econf \
 		$(use_enable static-libs static) \
 		$(use_with sasl) \
 		$(use_enable smartcard) \
 		--disable-gui
+}
+
+src_compile() {
+	# Prevent sandbox violations, bug #586560
+	# https://bugzilla.gnome.org/show_bug.cgi?id=744134
+	# https://bugzilla.gnome.org/show_bug.cgi?id=744135
+	addpredict /dev
+
+	default
 }
 
 src_install() {

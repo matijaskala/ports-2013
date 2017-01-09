@@ -1,0 +1,515 @@
+#!/usr/bin/python3
+
+import os, sys
+import portage
+import json
+
+portdir = portage.settings["PORTDIR"]
+repodir = portdir + "/profiles"
+egodescfile = repodir + "/profiles.ego.desc"
+
+
+profiledir = "/etc/portage/make.profile"
+
+
+
+reponamefile = os.path.join(repodir,"repo_name")
+
+# Somewhat self-explanatory, these list profiles that can be specified (up to once), ones that can
+# be specified up to multiple times, all types of profiles, and all types of actions that this
+# module can perform.
+
+key_order = [ "arch", "release", "subarch", "flavor", "mix-ins" ]
+required_profiles = [ "arch", "release", "flavor" ]
+valid_single_profiles = [ "flavor", "release", "arch", "subarch" ]
+valid_multi_profiles = [ "mix-ins" ]
+valid_profiles = valid_single_profiles + valid_multi_profiles
+valid_actions = valid_profiles + [ "show", "show-json", "get", "list" ]
+
+if os.path.exists(reponamefile):
+	with open(reponamefile,"r") as rnf:
+		reponame = rnf.read().strip()
+else:
+	print("Unable to find the repository name in %s - exiting." % reponamefile)
+	sys.exit(1)
+
+# ProfileLister will allow us to see what profile settings -- flavors, subarches, mix-ins, builds --
+# are available. It returns relative paths (relative to repodir) to each type of profile. For
+# example, mypl["flavor"] = "funtoo/1.0/linux-gnu/flavors" and mypl.list("flavor") = [ "desktop" ...].
+
+# ProfileLister uses the profiles.ego.desc file in /usr/portage/profiles to locate the base directories
+# for all these goodies.
+
+class ProfileLister(object):
+
+	def __init__(self,repodir,p,arch=None):
+		self.repodir = repodir
+		# info is a dict: key is a profile type, like "flavor", and value is a sub-path to its location,
+		# relative to repodir.
+		self.info = {}
+		self.arch = arch
+		if os.path.exists(p):
+			with open(p,"r") as ed:
+				self.info = json.loads(ed.read())
+		for k in self.info:
+			if not isinstance(self.info[k], list):
+				# move everything inside a list. We can have multiple mix-in directories now (subarch mix-ins, etc.)
+				self.info[k] = [self.info[k]]
+		if "mix-ins" not in self.info:
+			self.info["mix-ins"] = []
+		# The subarch entry is dynamically generated based on the system's arch. We assume we only have one arch set:
+		if arch != None and "arch" in self.info:
+			self.info["subarch"] = [ self.info["arch"][0] + "/" + self.arch + "/subarch" ]
+			# We now have subarch mix-ins! Specific to subarches. :)
+			self.info["mix-ins"].append(self.info["arch"][0] + "/" + self.arch + "/mix-ins")
+
+	def keys(self):
+		r = []
+		for k in valid_profiles:
+			if k in self.info:
+				r.append(k)
+		return r
+
+	def __getitem__(self,key):
+		if key in self.info:
+			return self.info[key]
+		return None
+
+	def list(self,key):
+		things = []
+		for item in self[key]:
+			p = self.repodir + "/" + item
+			if os.path.exists(p):
+				for thing in os.listdir(p):
+					if os.path.isdir(p + "/" + thing):
+						things.append(thing)
+		return things
+
+	def find(self,key,val):
+		if not key in self.info:
+			return None
+		for path in self.info[key]:
+			if os.path.exists(os.path.join(self.repodir,path,val)):
+				return path
+		return None
+
+# all_enabled is used to record all enabled sub-profile settings, even those enabled through inheritance.
+# Short names, not live objects are stored here.
+
+all_enabled = dict((p, set()) for p in valid_profiles)
+
+# ProfileSetting will recurse into the system's profile settings and determine heirarchical relationships
+# of the profile, and create a tree of ProfileSetting objects (linked via self.child, self.descendents).
+
+# We use this for seeing everything that gets enabled from a particular flavor or mix-in. When a user updates
+# a profile setting, we tweak the top object's decendents info. Then the write() method will write out the
+# updated information.
+
+class ProfileSetting(object):
+
+	def __init__(self,repomap={},name=None,cl=None,path=None,child=None,parent_line=None,top={ "mix-ins" : None, "flavor" : None}):
+		# For user-specified settings (changing flavors, etc.) -- we use self.name, and self.cl (for type)
+
+		self.name = name
+		self.cl = cl
+
+		# Child maps to the direct child of this profile entry -- this means the one that referenced
+		# this one in the parent file.
+
+		self.child = child
+
+		# Parent_line contains line from the parent file that refers to this profile entry.
+
+		self.parent_line = parent_line
+
+
+		# for top-level (user-selected) flavors and mix-ins, self.inherited will hold a list of
+		# child flavors and mix-ins inherited via parent.
+
+		self.inherited = { "mix-ins" : [], "flavor" : [] }
+
+		# Reposmap is a dict that maps a repository name, such as "gentoo" to the associated
+		# profile directory path (i.e. "/usr/portage/profiles")
+
+		self.repomap = repomap
+
+		# Descendents contains a dict, which is populated with keys such as "flavor", "mix-ins", etc.
+		# The values are a list of all direct descendents of that type.
+
+		self.descendents = {}
+
+		# Top is used for updating self.inherited properly. It tracks the top-most flavor or mix-in,
+		# which is the user-selected one. Top-most flavor is self.top["flavor"], etc.
+
+		# If we are a mix-in or flavor, we get added to self.top["flavor"] and self.top["mix-ins"]
+		# inherited[self.cl] list.
+
+		self.top = top
+		self.path = path
+
+		if cl == None:
+			self.cl = self.classify()
+		else:
+			self.cl = cl
+
+		if self.cl in all_enabled:
+			all_enabled[self.cl].add(self.shortname)
+
+		self.parentfile = None
+
+		if path != None:
+
+			# If we are creating a fake ProfileSetting to change a flavor, etc, then path will be None.
+			# If we are reading in an existing ProfileSetting, we do a lot of processing, including
+			# figuring out what kind of profile setting we are, recursing on any parents, etc.
+
+			parentfile = path + "/parent"
+			self.lines = []
+			if os.path.exists(parentfile):
+				self.parentfile = parentfile
+				a = open(parentfile, "r")
+				for l in a.readlines():
+					self.lines.append(l.strip())
+				a.close()
+			self.parents = []
+			self.path = path
+
+			if self.cl in [ "flavor", "mix-ins" ]:
+				for ty in [ "flavor", "mix-ins" ]:
+					if self.top[ty] != None:
+						self.top[ty].inherited[self.cl].append(self)
+			self.process()
+
+	def nextTop(self):
+		# This function returns a dict of top values to be used by process()
+		out = {}
+		for k in [ "mix-ins", "flavor" ]:
+			if self.top[k]:
+				out[k] = self.top[k]
+			elif self.cl == k:
+				out[k] = self
+			else:
+				out[k] = None
+		return out
+
+	@property
+	def shortname(self):
+		if self.name:
+			return self.name
+		return self.path.split("/")[-1]
+
+	def process(self):
+		for l in self.lines:
+			l = l.split("#")[0]
+			if len(l) == 0:
+				continue
+			colsplit = l.split(":")
+			if l[0] == ":":
+				# ":base" format
+				ps = ProfileSetting(self.repomap,path=os.path.join(self.repomap[reponame],l[1:]),child=self,parent_line=l,top=self.nextTop())
+			elif len(colsplit) == 2 and colsplit[0] in self.repomap:
+				# "gentoo:foo" format
+				ps = ProfileSetting(self.repomap,path=os.path.join(self.repomap[colsplit[0]],colsplit[1]),child=self,parent_line=l,top=self.nextTop())
+			else:
+				# "../../foo/bar" format
+				ps = ProfileSetting(self.repomap,path=os.path.normpath(os.path.join(self.path,l)),child=self,parent_line=l,top=self.nextTop())
+			self.parents.append(ps)
+			if not ps.cl in self.descendents:
+				self.descendents[ps.cl] = []
+			self.descendents[ps.cl].append(ps)
+
+	def classify(self):
+		ps = self.path.split("/")
+		pstag = ps[-2:-1][0]
+		if pstag == "releases":
+			return "release"
+		if pstag in valid_profiles:
+			return pstag
+		else:
+			return "misc"
+
+	def genProfileString(self):
+		out = ""
+		for key in key_order:
+			if key in self.descendents and len(self.descendents[key]):
+				if key in valid_multi_profiles:
+					for item in self.descendents[key]:
+						out += item.parent_line + "\n"
+				else:
+					out += self.descendents[key][0].parent_line + "\n"
+		return out
+
+	def write(self):
+		if not self.parentfile:
+			return
+		if os.path.islink(self.path):
+			os.unlink(self.path)
+		if not os.path.exists(self.path):
+			os.mkdir(self.path)
+		out = self.genProfileString()
+		with open(self.parentfile,"w") as f:
+			f.write(out)
+
+
+def warning(info):
+	print("WARNING: %s" % info)
+
+def header(info):
+	print("\n=== "+color.BOLD+color.GREEN+info+color.END+": ===\n")
+
+ps = ProfileSetting(repomap={reponame:repodir},path=profiledir)
+
+inherit_order = "original"
+
+writeout = False
+
+if len(sys.argv) > 1:
+	action = sys.argv[1]
+else:
+	action = "show"
+args = sys.argv[2:]
+
+if action not in valid_actions + [ "mix-in" ]:
+	print("Please specify a valid action.")
+	sys.exit(1)
+
+class color:
+	PURPLE = '\033[95m'
+	CYAN = '\033[96m'
+	DARKCYAN = '\033[36m'
+	BLUE = '\033[94m'
+	GREEN = '\033[92m'
+	YELLOW = '\033[93m'
+	RED = '\033[91m'
+	BOLD = '\033[1m'
+	UNDERLINE = '\033[4m'
+	END = '\033[0m'
+
+# We use a ProfileLister for everything but show:
+
+if action not in [ "show", "show-json", "get" ]:
+	if "arch" in ps.descendents and len(ps.descendents) != 0:
+		# We list subarches based on the arch path, ie. "arch/x86-64bit/subarch" -- so we need to provide arch name:
+		pl = ProfileLister(repodir,egodescfile, arch=ps.descendents["arch"][0].shortname)
+	else:
+		pl = ProfileLister(repodir,egodescfile)
+
+def shortList():
+	header("Enabled Profiles")
+	for key in key_order:
+		if key not in ps.descendents or len(ps.descendents[key]) == 0:
+			print("%s%12s%s: (not set)" % (color.BOLD, key, color.END))
+		else:
+			for item in ps.descendents[key]:
+				print("%s%12s%s: %s%s%s" % ( color.BOLD, key, color.END, color.CYAN, item.shortname, color.END ))
+	print()
+
+def shortJSON():
+	outdict = {}
+	for key in key_order:
+		outdict[key] = []
+		if not key in ps.descendents:
+			continue
+		for item in ps.descendents[key]:
+			out = {}
+			out["shortname"] = item.shortname
+			if item.path != None:
+				out["path"] = item.path
+			outdict[key].append(out)
+	return outdict
+
+if action == "show":
+	shortList()
+	inherited_things = []
+	if "flavor" in ps.descendents and len(ps.descendents["flavor"]):
+		# follow first flavor:
+		inherited_things.append(ps.descendents["flavor"][0])
+	# follow all mix-ins:
+	if "mix-ins" in ps.descendents:
+		inherited_things.extend(ps.descendents["mix-ins"])
+
+	for item in inherited_things:
+		for x in [ "flavor", "mix-ins" ]:
+			ilist = item.inherited[x]
+			# pluralize output if needed:
+			if x[-1] != "s":
+				x += "s"
+			if ilist:
+				icl = item.cl
+				# de-pluralize
+				if icl == "mix-ins":
+					icl = "mix-in"
+				header("All inherited %s from %s %s" % (x, item.shortname, icl))
+				for i in ilist:
+					if i == i.child:
+						continue
+					iccl = i.child.cl
+					# de-pluralize
+					if iccl == "mix-ins":
+						iccl = "mix-in"
+					print("      %s%26s%s (from %s %s)" % ( color.CYAN, i.shortname, color.END, i.child.shortname, iccl ))
+	print()
+elif action == "show-json":
+	print(json.dumps(shortJSON(),indent=4))
+elif action == "get":
+	if len(sys.argv) >= 3 and sys.argv[2] in valid_profiles:
+		short_json = shortJSON()
+		print(' '.join(p['shortname'] for p in short_json[sys.argv[2]]))
+	else:
+		print("Please specify a valid target.")
+		sys.exit(1)
+elif action == "list":
+
+	# Time to list all available profile settings.
+
+	args = sys.argv[2:]
+	for key in pl.keys():
+		if args != [] and key not in args:
+			# user-specified sub-list, only list those things
+			continue
+
+		# active_keys: Names of active (currently enabled explicitly by user) profile keys
+		# of this type (ie. flavor, etc.). These active ones will get highlighted differently.
+
+		active_keys = []
+		inherited_keys = []
+		if key in ps.descendents:
+			for my_ps in ps.descendents[key]:
+				active_keys.append(my_ps.shortname)
+
+		header(key)
+		items = pl.list(key)
+		items.sort()
+
+		# We handle our own output formatting/spacing/newlines. These vars are used for this.
+		# lpos - column position; maxpos - when to wrap; count - item count.
+
+		lpos = 4
+		maxpos = 60
+		count = 0
+
+		# write each item out -- when we cross maxpos characters, add a newline and indent:
+		sys.stdout.write(" " * lpos)
+		if not items:
+			sys.stdout.write("None available")
+			continue
+		for x in items:
+			if lpos > maxpos:
+				sys.stdout.write("\n")
+				lpos = 4
+				sys.stdout.write(" " * lpos)
+			if x in active_keys:
+				# make it stand out if it explicitly enabled:
+				outx = color.BOLD + color.CYAN + x + "*" + color.END
+				if key in [ "arch", "release" ]:
+					# parens to mark as read-only -- USE style. Not really read-only but should
+					# not generally be changed by user.
+					outx = "(" + outx + ")"
+			elif key in all_enabled and x in all_enabled[key]:
+				# highlight if enabled through inheritance:
+				outx = color.DARKCYAN + x + color.END
+			else:
+				outx = x
+			count += 1
+			if count == 1 or lpos == 4:
+				sys.stdout.write(outx)
+				lpos += len(x)
+			else:
+				sys.stdout.write(", "+outx)
+				lpos += len(x) + 2
+		print()
+	print()
+elif action in valid_profiles + [ "mix-in" ]:
+	if action in valid_single_profiles:
+		if len(sys.argv) < 3:
+			print("Please specify a valid target.")
+			sys.exit(1)
+		newset = sys.argv[2]
+		if newset not in pl.list(action):
+			warning("%s %s not available. Can't set." % ( action, newset ))
+			sys.exit(1)
+		writeout = True
+		if action in [ "release", "arch" ]:
+			if action in ps.descendents and len(action) > 0:
+				warning("%s already set to %s -- typically, user should not change this." % ( action, ps.descendents[action][0].shortname ))
+		# ps is the head of our heirarchy of ProfileSettings. Hack it -- inject our new profile info as a
+		# direct descendent of ps. Then the write() function will write the correct stuff out to the
+		# profile.
+		action_path = pl.find(action,newset)
+		ps.descendents[action] = [ProfileSetting(ps.repomap,name=newset,cl=action,parent_line=reponame + ":" + action_path + "/" + newset,child=ps)]
+		shortList()
+		print(">>> Set %s to %s." % ( action, newset ))
+	else:
+		if action == "mix-in":
+			action = "mix-ins"
+		adds = set()
+		subs = set()
+		for i in sys.argv[2:]:
+			if i[0] == "-":
+				subs.add(i[1:])
+			elif i[0] == "+":
+				adds.add(i[1:])
+			else:
+				adds.add(i)
+		valids = pl.list("mix-ins")
+		for i in adds.union(subs):
+			if i not in valids:
+				warning("Error: %s is not a valid mix-in." % i)
+				sys.exit(1)
+		p = 0
+		# remove "-" arguments.
+		removed = set()
+		if "mix-ins" in ps.descendents:
+			while p < len(ps.descendents["mix-ins"]):
+				sn = ps.descendents["mix-ins"][p].shortname
+				if sn in subs:
+					del ps.descendents["mix-ins"][p]
+					removed.add(sn)
+					writeout = True
+					continue
+				p += 1
+		# get currently active mix-ins:
+		active = []
+		if "mix-ins" in ps.descendents:
+			active = [ x.shortname for x in ps.descendents["mix-ins"] ]
+		notadded = set()
+		added = set()
+		for new_shortname in adds:
+			if new_shortname in active:
+				notadded.add(new_shortname)
+				continue
+			mixin_path = pl.find("mix-ins",new_shortname)
+			new_ps = ProfileSetting(ps.repomap,name=new_shortname,cl="mix-ins",parent_line=reponame + ":" + mixin_path + "/" + new_shortname,child=ps)
+			if "mix-ins" not in ps.descendents:
+				ps.descendents["mix-ins"] = []
+			ps.descendents["mix-ins"].append(new_ps)
+			added.add(new_shortname)
+			writeout = True
+
+		# Do all output here -- our shortList() will reflect the mix-in changes made above. Then put informational messages
+		# underneath for readability:
+
+		shortList()
+		for x in subs.difference(removed):
+			warning("Mix-in %s not found, not removing." % x)
+		for x in notadded:
+			warning("Mix-in %s already active, not adding." % x)
+		for x in removed:
+			print(">>> Removed %s mix-in." % x)
+		for x in added:
+			print(">>> Added %s mix-in." % x)
+
+for x in ps.parents:
+	c = x.cl
+	if c in valid_single_profiles and len(ps.descendents[c]) > 1:
+		warning("Extra profile of type '%s' defined: '%s'. Will be removed." % ( c, x.shortname))
+		writeout = True
+for key in required_profiles:
+	if key not in ps.descendents:
+		warning("No %s defined. Please set a %s." % (key,key))
+
+
+if writeout:
+	ps.write()
+
+# vim: ts=4 noexpandtab sw=4

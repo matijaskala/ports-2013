@@ -3,14 +3,13 @@
 # $Id$
 
 EAPI=6
-inherit autotools eutils git-r3 linux-info pam
+inherit autotools libtool git-r3 linux-info pam
 
 MY_PN=ConsoleKit2
 MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="Framework for defining and tracking users, login sessions and seats"
 HOMEPAGE="https://github.com/ConsoleKit2/ConsoleKit2 https://www.freedesktop.org/wiki/Software/ConsoleKit"
-SRC_URI="https://launchpad.net/debian/+archive/primary/+files/${PN}_0.4.6-4.debian.tar.gz" # for logrotate file
 EGIT_REPO_URI="https://github.com/${MY_PN}/${MY_PN}.git"
 
 LICENSE="GPL-2"
@@ -59,15 +58,11 @@ pkg_setup() {
 	fi
 }
 
-src_unpack() {
-	git-r3_src_unpack
-	unpack "${PN}_0.4.6-4.debian.tar.gz"
-}
-
 src_prepare() {
 	sed -i -e '/SystemdService/d' data/org.freedesktop.ConsoleKit.service.in || die
 
 	default
+	elibtoolize # bug 593314
 	eautoreconf
 }
 
@@ -86,7 +81,7 @@ src_configure() {
 		$(use_enable test tests) \
 		--with-dbus-services="${EPREFIX}"/usr/share/dbus-1/services \
 		--with-pam-module-dir="$(getpam_mod_dir)" \
-		--with-xinitrc-dir=/etc/X11/xinit/xinitrc.d \
+		--with-xinitrc-dir="${EPREFIX}"/etc/X11/xinit/xinitrc.d \
 		--without-systemdsystemunitdir
 }
 
@@ -119,7 +114,4 @@ src_install() {
 	prune_libtool_files --all # --all for pam_ck_connector.la
 
 	rm -rf "${ED}"/var/run || die # let the init script create the directory
-
-	insinto /etc/logrotate.d
-	newins "${WORKDIR}"/debian/${PN}.logrotate ${PN} #374513
 }

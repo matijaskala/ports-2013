@@ -20,7 +20,6 @@ S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
 RDEPEND=">=dev-libs/glib-2.38
-	dev-libs/libdbusmenu:=
 	x11-libs/libX11
 	x11-libs/gtk+:2
 	x11-libs/gtk+:3

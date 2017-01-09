@@ -13,7 +13,7 @@ HOMEPAGE="http://www.kadu.net"
 SRC_URI="http://download.kadu.im/stable/${P}.tar.bz2"
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 SLOT="0"
 IUSE="+gadu mpd otr phonon sdk speech spell xmpp"
 REQUIRED_USE="
@@ -23,7 +23,7 @@ REQUIRED_USE="
 	)
 "
 COMMON_DEPEND="
-	app-crypt/qca:2[openssl,qt5]
+	app-crypt/qca:2[qt5,ssl]
 	>=dev-libs/injeqt-1.0.0
 	>=dev-qt/qtcore-5.2.0:5
 	>=dev-qt/qtdbus-5.2.0:5

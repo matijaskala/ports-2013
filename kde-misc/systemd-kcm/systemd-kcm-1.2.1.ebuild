@@ -4,7 +4,6 @@
 
 EAPI=6
 
-CMAKE_MIN_VERSION="3.0.0"
 inherit kde5
 
 DESCRIPTION="Plasma control module for systemd"
@@ -13,7 +12,7 @@ SRC_URI="mirror://kde/stable/${PN}/${P}.tar.xz"
 
 IUSE=""
 LICENSE="GPL-2+"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 CDEPEND="
 	$(add_frameworks_dep kauth)

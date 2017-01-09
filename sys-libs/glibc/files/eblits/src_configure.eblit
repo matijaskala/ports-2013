@@ -247,6 +247,7 @@ toolchain-glibc_headers_configure() {
 	[[ -d ${S}/ports ]] && addons+=",ports"
 	# Newer versions require nptl, so there is no addon for it.
 	version_is_at_least 2.20 || addons+=",nptl"
+	[[ ${CTARGET} == *-hurd-gnu || ${CTARGET} == *-pc-gnu || ${CTARGET} == i686-gnu ]] && addons+=",libpthread"
 	myconf+=( --enable-add-ons="${addons#,}" )
 
 	# Nothing is compiled here which would affect the headers for the target.

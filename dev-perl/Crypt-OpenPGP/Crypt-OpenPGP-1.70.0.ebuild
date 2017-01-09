@@ -10,8 +10,6 @@ inherit perl-module
 
 DESCRIPTION="Pure-Perl OpenPGP-compatible PGP implementation"
 
-LICENSE="Artistic"
-#LICENSE="|| ( Artistic GPL-2 )"
 SLOT="0"
 KEYWORDS="amd64 x86 ~x86-solaris"
 IUSE="test"
@@ -25,7 +23,7 @@ IUSE="test"
 # URI-Escape
 
 RDEPEND="
-	>=dev-perl/data-buffer-0.04
+	>=dev-perl/Data-Buffer-0.04
 	virtual/perl-MIME-Base64
 	virtual/perl-Math-BigInt
 	virtual/perl-IO-Compress

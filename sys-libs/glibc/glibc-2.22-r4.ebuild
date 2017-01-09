@@ -163,6 +163,7 @@ eblit-src_unpack-pre() {
 eblit-src_prepare-post() {
 	cd "${S}"
 
+	[[ ${CTARGET} == *-hurd-gnu || ${CTARGET} == *-pc-gnu || ${CTARGET} == i686-gnu ]] && epatch "${FILESDIR}"/hurd/*
 	epatch "${FILESDIR}"/2.19/${PN}-2.19-ia64-gcc-4.8-reloc-hack.patch #503838
 
 	if use hardened ; then

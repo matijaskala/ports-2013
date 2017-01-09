@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI="5"
-PYTHON_COMPAT=( python2_7 python{3_3,3_4,3_5} )
+PYTHON_COMPAT=( python2_7 python{3_4,3_5} )
 
 inherit python-r1
 
@@ -13,7 +13,7 @@ SRC_URI="https://gstreamer.freedesktop.org/src/${PN}/${P}.tar.xz"
 
 LICENSE="LGPL-2"
 SLOT="1.0"
-KEYWORDS="alpha amd64 arm hppa ~ia64 ~ppc ppc64 ~sparc x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="alpha amd64 arm hppa ~ia64 ppc ppc64 ~sparc x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~x86-solaris"
 IUSE="test"
 
 RDEPEND="

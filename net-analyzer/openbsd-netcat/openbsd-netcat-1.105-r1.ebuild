@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit toolchain-funcs
+inherit toolchain-funcs eutils
 
 DESCRIPTION="The OpenBSD network swiss army knife"
 HOMEPAGE="http://www.openbsd.org/cgi-bin/cvsweb/src/usr.bin/nc/"
@@ -12,11 +12,12 @@ SRC_URI="http://http.debian.net/debian/pool/main/n/netcat-openbsd/netcat-openbsd
 	http://http.debian.net/debian/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}-7.debian.tar.gz"
 LICENSE="BSD"
 SLOT="0"
+IUSE="elibc_Darwin"
 
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x64-macos"
 
 DEPEND="virtual/pkgconfig"
-RDEPEND="dev-libs/libbsd
+RDEPEND="!elibc_Darwin? ( dev-libs/libbsd )
 	!net-analyzer/netcat
 	!net-analyzer/netcat6
 "
@@ -24,6 +25,14 @@ RDEPEND="dev-libs/libbsd
 S=${WORKDIR}/netcat-openbsd-${PV}
 
 PATCHES=( "${WORKDIR}/debian/patches" )
+
+src_prepare() {
+	default
+	if [[ ${CHOST} == *-darwin* ]] ; then
+		# this undoes some of the Debian/Linux changes
+		epatch "${FILESDIR}"/${P}-darwin.patch
+	fi
+}
 
 src_compile() {
 	emake CC=$(tc-getCC) CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" || die

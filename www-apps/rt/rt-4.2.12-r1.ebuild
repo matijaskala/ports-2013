@@ -45,7 +45,7 @@ DEPEND="
 	>=dev-perl/Text-WikiFormat-0.76
 	>=dev-perl/Tree-Simple-1.04
 	>=dev-perl/XML-RSS-1.05
-	>=dev-perl/dbix-searchbuilder-1.660.0
+	>=dev-perl/DBIx-SearchBuilder-1.660.0
 	>=virtual/perl-Digest-MD5-2.27
 	>=virtual/perl-Encode-2.730.0
 	>=virtual/perl-File-Spec-0.8
@@ -103,7 +103,7 @@ DEPEND="
 	dev-perl/libwww-perl
 	dev-perl/Locale-Maketext-Fuzzy
 	dev-perl/Net-Server
-	dev-perl/regexp-common
+	dev-perl/Regexp-Common
 	dev-perl/Text-Template
 	dev-perl/Text-Wrapper
 	virtual/perl-Digest

@@ -46,7 +46,7 @@ else
 		unset _tmp_last_index
 		unset _tmp_suffix
 	else
-		KEYWORDS="~amd64 ~arm ~hppa ~x86"
+		KEYWORDS="amd64 ~arm ~arm64 hppa x86"
 	fi
 
 	SRC_URI="
@@ -58,7 +58,7 @@ fi
 LICENSE="GPL-3 LGPL-3 Apache-2.0"
 SLOT="0"
 IUSE="dbi debug doc elasticsearch +gcrypt grok jemalloc kafka kerberos libressl mongodb mysql normalize omhttpfs"
-IUSE+=" omudpspoof postgres rabbitmq redis relp rfc3195 rfc5424hmac snmp ssl systemd test usertools zeromq"
+IUSE+=" omudpspoof postgres rabbitmq redis relp rfc3195 rfc5424hmac snmp ssl systemd test usertools +uuid zeromq"
 
 RDEPEND="
 	>=dev-libs/libfastjson-0.99.2:=
@@ -76,7 +76,7 @@ RDEPEND="
 	mysql? ( virtual/mysql )
 	normalize? (
 		>=dev-libs/libee-0.4.0
-		>=dev-libs/liblognorm-1.1.2:=
+		>=dev-libs/liblognorm-2.0.1:=
 	)
 	omhttpfs? ( >=net-misc/curl-7.35.0 )
 	omudpspoof? ( >=net-libs/libnet-1.1.6 )
@@ -92,6 +92,7 @@ RDEPEND="
 	snmp? ( >=net-analyzer/net-snmp-5.7.2 )
 	ssl? ( >=net-libs/gnutls-2.12.23:0= )
 	systemd? ( >=sys-apps/systemd-208 )
+	uuid? ( sys-apps/util-linux:0= )
 	zeromq? (
 		>=net-libs/zeromq-4.1.1:=
 		>=net-libs/czmq-3.0.0
@@ -228,6 +229,7 @@ src_configure() {
 		$(use_enable systemd imjournal)
 		$(use_enable systemd omjournal)
 		$(use_enable usertools)
+		$(use_enable uuid)
 		$(use_enable zeromq imczmq)
 		$(use_enable zeromq imzmq3)
 		$(use_enable zeromq omczmq)
@@ -339,15 +341,6 @@ pkg_postinst() {
 			elog "once for each logging client. The client certificates will be signed"
 			elog "using the CA certificate generated during the first run."
 		fi
-	fi
-
-	if [[ -z "${REPLACING_VERSIONS}" ]] || [[ ${REPLACING_VERSIONS} < 8.0 ]]; then
-		# Show this message until rsyslog-8.x
-		echo
-		elog "Since ${PN}-7.6.3 we no longer use the catch-all log target"
-		elog "\"/var/log/syslog\" due to its redundancy to the other log targets."
-
-		advertise_readme=1
 	fi
 
 	if [[ ${advertise_readme} -gt 0 ]]; then

@@ -14,7 +14,7 @@ HOMEPAGE="http://quassel-irc.org/"
 [[ "${PV}" == "9999" ]] || SRC_URI="http://quassel-irc.org/pub/${P}.tar.bz2"
 
 LICENSE="GPL-3"
-KEYWORDS="~amd64 ~arm ~ppc ~x86 ~amd64-linux ~sparc-solaris"
+KEYWORDS="amd64 ~arm ~ppc x86 ~amd64-linux ~sparc-solaris"
 SLOT="0"
 IUSE="ayatana crypt dbus debug kde monolithic phonon postgres qt5 +server
 snorenotify +ssl syslog webkit X"
@@ -22,13 +22,13 @@ snorenotify +ssl syslog webkit X"
 SERVER_RDEPEND="
 	qt5? (
 		dev-qt/qtscript:5
-		crypt? ( app-crypt/qca:2[openssl,qt5] )
+		crypt? ( app-crypt/qca:2[qt5,ssl] )
 		postgres? ( dev-qt/qtsql:5[postgres] )
 		!postgres? ( dev-qt/qtsql:5[sqlite] dev-db/sqlite:3[threadsafe(+),-secure-delete] )
 	)
 	!qt5? (
 		dev-qt/qtscript:4
-		crypt? ( app-crypt/qca:2[openssl,qt4(+)] )
+		crypt? ( app-crypt/qca:2[qt4(+),ssl] )
 		postgres? ( dev-qt/qtsql:4[postgres] )
 		!postgres? ( dev-qt/qtsql:4[sqlite] dev-db/sqlite:3[threadsafe(+),-secure-delete] )
 	)
@@ -64,7 +64,7 @@ GUI_RDEPEND="
 			>=dev-libs/libdbusmenu-qt-0.9.3_pre20140619[qt4(+)]
 			dev-qt/qtdbus:4
 			kde? (
-				kde-base/kdelibs:4
+				kde-frameworks/kdelibs:4
 				kde-frameworks/oxygen-icons:*
 				ayatana? ( kde-misc/plasma-widget-message-indicator )
 			)
@@ -188,18 +188,6 @@ pkg_postinst() {
 	if use server || use monolithic ; then
 		einfo "Quassel can use net-misc/oidentd package if installed on your system."
 		einfo "Consider installing it if you want to run quassel within identd daemon."
-	fi
-
-	# temporary info mesage
-	if use server && [[ $(get_version_component_range 2 ${REPLACING_VERSIONS}) -lt 7 ]]; then
-		echo
-		ewarn "Please note that all configuration moved from"
-		ewarn "/home/\${QUASSEL_USER}/.config/quassel-irc.org/"
-		ewarn "to: ${QUASSEL_DIR}."
-		echo
-		ewarn "For migration, stop the core, move quasselcore files (pretty much"
-		ewarn "everything apart from quasselclient.conf and settings.qss) into"
-		ewarn "new location and then start server again."
 	fi
 }
 

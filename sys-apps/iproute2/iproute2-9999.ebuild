@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -15,7 +15,7 @@ else
 fi
 
 DESCRIPTION="kernel routing and traffic control utilities"
-HOMEPAGE="http://www.linuxfoundation.org/collaborate/workgroups/networking/iproute2"
+HOMEPAGE="https://wiki.linuxfoundation.org/networking/iproute2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -37,11 +37,10 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-3.1.0-mtu.patch #291907
-	epatch "${FILESDIR}"/${P}-tc-show-buffer-overflow.patch #546928
-	use ipv6 || epatch "${FILESDIR}"/${PN}-3.10.0-no-ipv6.patch #326849
+	use ipv6 || epatch "${FILESDIR}"/${PN}-4.2.0-no-ipv6.patch #326849
 
 	sed -i \
-		-e '/^CC =/d' \
+		-e '/^CC :=/d' \
 		-e "/^LIBDIR/s:=.*:=/$(get_libdir):" \
 		-e "s:-O2:${CFLAGS} ${CPPFLAGS}:" \
 		-e "/^HOSTCC/s:=.*:= $(tc-getBUILD_CC):" \
@@ -71,10 +70,10 @@ src_configure() {
 	# This sure is ugly.  Should probably move into toolchain-funcs at some point.
 	local setns
 	pushd "${T}" >/dev/null
-	echo 'main(){return setns();};' > test.c
-	${CC} ${CFLAGS} ${LDFLAGS} test.c >&/dev/null && setns=y || setns=n
-	echo 'main(){};' > test.c
-	${CC} ${CFLAGS} ${LDFLAGS} test.c -lresolv >&/dev/null || sed -i '/^LDLIBS/s:-lresolv::' "${S}"/Makefile
+	printf '#include <sched.h>\nint main(){return setns(0, 0);}\n' > test.c
+	${CC} ${CFLAGS} ${CPPFLAGS} -D_GNU_SOURCE ${LDFLAGS} test.c >&/dev/null && setns=y || setns=n
+	echo 'int main(){return 0;}' > test.c
+	${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} test.c -lresolv >&/dev/null || sed -i '/^LDLIBS/s:-lresolv::' "${S}"/Makefile
 	popd >/dev/null
 
 	cat <<-EOF > Config

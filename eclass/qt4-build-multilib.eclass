@@ -113,10 +113,13 @@ multilib_src_install_all()	{ qt4_multilib_src_install_all; }
 # @DESCRIPTION:
 # Unpacks the sources.
 qt4-build-multilib_src_unpack() {
-	if [[ $(gcc-major-version) -lt 4 ]] || [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -lt 4 ]]; then
-		ewarn
-		ewarn "Using a GCC version lower than 4.4 is not supported."
-		ewarn
+	if tc-is-gcc; then
+		if [[ $(gcc-major-version) -lt 4 ]] || \
+		   [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -lt 4 ]]; then
+			ewarn
+			ewarn "Using a GCC version lower than 4.4 is not supported"
+			ewarn
+		fi
 	fi
 
 	if [[ ${PN} == qtwebkit ]]; then
@@ -155,6 +158,12 @@ qt4-build-multilib_src_prepare() {
 			|| die "sed failed (skip X11 tests)"
 	fi
 
+	# Qt4 is not safe to build with C++14 (the new gcc-6 default).
+	# Upstream has addressed this for Qt5, but while we continue to
+	# support Qt4, we need to ensure everything is built in C++98 mode.
+	# See bugs 582522, 582618, 583662, 583744.
+	append-cxxflags -std=gnu++98
+
 	if [[ ${PN} == qtcore ]]; then
 		# Bug 373061
 		# qmake bus errors with -O2 or -O3 but -O1 works
@@ -172,7 +181,7 @@ qt4-build-multilib_src_prepare() {
 	if [[ ${PN} == qtdeclarative ]]; then
 		# Bug 551560
 		# gcc-4.8 ICE with -Os, fixed in 4.9
-		if use x86 && [[ $(gcc-version) == 4.8 ]]; then
+		if use x86 && tc-is-gcc && [[ $(gcc-version) == 4.8 ]]; then
 			replace-flags -Os -O2
 		fi
 	fi

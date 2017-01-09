@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_4} )
 
 inherit cmake-utils eutils fdo-mime flag-o-matic python-any-r1
 if [[ ${PV} = *9999* ]]; then
@@ -13,7 +13,7 @@ if [[ ${PV} = *9999* ]]; then
 	KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sparc x86"
 else
 	SRC_URI="http://ftp.stack.nl/pub/users/dimitri/${P}.src.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x86-solaris"
+	KEYWORDS="alpha amd64 ~arm ~arm64 hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x86-solaris"
 fi
 SRC_URI+=" https://dev.gentoo.org/~xarthisius/distfiles/doxywizard.png"
 

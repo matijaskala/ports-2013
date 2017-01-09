@@ -9,7 +9,7 @@ if [[ ${PV} != *9999* ]]; then
 	gl hi hne hr hu is it ja ka lt mai ml nb nds nl nn pl pt pt_BR ro ru rw sk
 	sv ta tg tr ug uk zh_CN zh_TW"
 	SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
-	KEYWORDS="amd64 ~ppc x86 ~amd64-linux"
+	KEYWORDS="amd64 x86 ~amd64-linux"
 	KDE_HANDBOOK="optional"
 else
 	KEYWORDS=""
@@ -36,7 +36,7 @@ CDEPEND="
 		dev-qt/qtgui:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtwidgets:5 )
-	kde? ( $(add_kdebase_dep kdelibs) )
+	kde? ( kde-frameworks/kdelibs:4 )
 "
 DEPEND="${CDEPEND}
 	sys-devel/gettext

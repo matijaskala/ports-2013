@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -8,12 +8,12 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils gnome2-utils multilib python-single-r1 toolchain-funcs
 
 DESCRIPTION="a Rhythmbox-like PyGTK+ client for Music Player Daemon"
-HOMEPAGE="http://sourceforge.net/projects/pympd"
+HOMEPAGE="https://sourceforge.net/projects/pympd"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~sparc ~x86"
+KEYWORDS="amd64 ~ppc ~sparc x86"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 

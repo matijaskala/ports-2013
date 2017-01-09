@@ -1,9 +1,9 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+EAPI=6
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 PYTHON_REQ_USE="ncurses"
 
 inherit distutils-r1
@@ -22,6 +22,13 @@ LICENSE="GPL-3"
 SLOT="0"
 
 RDEPEND="virtual/pager"
+
+src_prepare() {
+	# use versioned doc path
+	sed -i "s|share/doc/ranger|share/doc/${PF}|" setup.py doc/ranger.1 || die
+
+	distutils-r1_src_prepare
+}
 
 pkg_postinst() {
 	if [[ -z ${REPLACING_VERSIONS} ]]; then

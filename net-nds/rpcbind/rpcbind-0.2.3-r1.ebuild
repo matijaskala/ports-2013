@@ -11,11 +11,11 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit autotools git-r3
 else
 	SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
-	KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86"
 fi
 
 DESCRIPTION="portmap replacement which supports RPC over various protocols"
-HOMEPAGE="http://sourceforge.net/projects/rpcbind/"
+HOMEPAGE="https://sourceforge.net/projects/rpcbind/"
 
 LICENSE="BSD"
 SLOT="0"

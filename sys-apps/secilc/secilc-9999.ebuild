@@ -2,12 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
-
-inherit toolchain-funcs eutils
+EAPI="6"
 
 MY_P="${P//_/-}"
-MY_RELEASEDATE="20160223"
+MY_RELEASEDATE="20161014"
 
 SEPOL_VER="${PV}"
 
@@ -39,7 +37,3 @@ RDEPEND="
 # tests are not meant to be run outside of the
 # full SELinux userland repo
 RESTRICT="test"
-
-src_prepare() {
-	epatch_user
-}

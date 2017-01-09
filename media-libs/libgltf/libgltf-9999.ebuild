@@ -1,12 +1,11 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 EGIT_REPO_URI="git://gerrit.libreoffice.org/libgltf.git"
-inherit base eutils
-[[ ${PV} == 9999 ]] && inherit autotools git-2
+[[ ${PV} == 9999 ]] && inherit autotools git-r3
 
 DESCRIPTION="C++ Library for rendering OpenGL models stored in glTF format"
 HOMEPAGE="http://www.libreoffice.org"
@@ -18,11 +17,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="debug test"
 
-RDEPEND="virtual/opengl"
-
+RDEPEND="
+	>=media-libs/libepoxy-1.3.1
+	virtual/opengl
+"
 DEPEND="${RDEPEND}
 	dev-libs/boost
-	media-libs/glew:=
 	media-libs/glm
 	sys-devel/libtool
 	virtual/pkgconfig
@@ -33,19 +33,18 @@ DEPEND="${RDEPEND}
 RESTRICT="test"
 
 src_prepare() {
+	default
 	[[ -d m4 ]] || mkdir "m4"
-	base_src_prepare
 	[[ ${PV} == 9999 ]] && eautoreconf
 }
 
 src_configure() {
 	econf \
-		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
 		--disable-werror \
 		$(use_enable test tests)
 }
 
 src_install() {
 	default
-	prune_libtool_files --all
+	find "${D}" -name '*.la' -delete || die
 }

@@ -10,7 +10,7 @@ MY_P="gperftools-${PV}"
 inherit toolchain-funcs eutils flag-o-matic vcs-snapshot autotools-multilib
 
 DESCRIPTION="Fast, multi-threaded malloc() and nifty performance analysis tools"
-HOMEPAGE="http://code.google.com/p/gperftools/"
+HOMEPAGE="https://github.com/gperftools/gperftools"
 SRC_URI="https://github.com/gperftools/gperftools/tarball/${MY_P} -> ${MY_P}.tar.gz"
 
 LICENSE="MIT"
@@ -72,8 +72,15 @@ src_test() {
 	autotools-multilib_src_test
 }
 
-# abi_x86_x32 forces minimal, which installs fewer headers
-# so override the header check with a no-op
-multilib_check_headers() {
-	:
+src_install() {
+	if ! use minimal && has x32 ${MULTILIB_ABIS}; then
+		MULTILIB_WRAPPED_HEADERS=(
+			/usr/include/gperftools/heap-checker.h
+			/usr/include/gperftools/heap-profiler.h
+			/usr/include/gperftools/stacktrace.h
+			/usr/include/gperftools/profiler.h
+		)
+	fi
+
+	autotools-multilib_src_install
 }

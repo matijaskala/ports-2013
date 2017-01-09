@@ -45,7 +45,7 @@ DEPEND="${COMMON_DEPEND}
 	ncurses? ( virtual/pkgconfig )"
 RDEPEND="${COMMON_DEPEND}
 	!prefix? (
-		kernel_linux? ( || ( >=sys-apps/sysvinit-2.86-r6 sys-process/runit ) )
+		kernel_linux? ( >=sys-apps/sysvinit-2.86-r6 sys-process/runit )
 		kernel_FreeBSD? ( sys-freebsd/freebsd-sbin )
 	)
 	selinux? (
@@ -89,7 +89,7 @@ src_compile() {
 		MAKE_ARGS="${MAKE_ARGS} OS=FreeBSD"
 		brand="FreeBSD"
 	fi
-	export BRANDING="Slontoo ${brand}"
+	export BRANDING="${BRANDING:-Slontoo ${brand}}"
 	use prefix && MAKE_ARGS="${MAKE_ARGS} MKPREFIX=yes PREFIX=${EPREFIX}"
 	export DEBUG=$(usev debug)
 	export MKTERMCAP=$(usev ncurses)

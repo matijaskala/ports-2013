@@ -104,12 +104,12 @@ foomaticdb - Add support for the foomatic printing driver database
 fortran - Add support for fortran
 freetds - Add support for the TDS protocol to connect to MSSQL/Sybase databases
 freewnn - Add support for FreeWnn kana to kanji conversion engine
-frontbase - Add support for the frontbase sql server
 ftp - Add FTP (File Transfer Protocol) support
 gcj - Enable building with gcj (The GNU Compiler for the Javatm Programming Language)
 gd - Add support for media-libs/gd (to generate graphics on the fly)
 gdbm - Add support for sys-libs/gdbm (GNU database libraries)
 geoip - Add geoip support for country and city lookup based on IPs
+geolocation - Enable physical position determination
 ggi - Add support for media-libs/libggi (non-X video api/drivers)
 gif - Add GIF image support
 gimp - Build a plugin for the GIMP
@@ -130,7 +130,7 @@ gstreamer - Add support for media-libs/gstreamer (Streaming media)
 gtk - Add support for x11-libs/gtk+ (The GIMP Toolkit)
 guile - Add support for the guile Scheme interpreter
 gzip - Compress files with Lempel-Ziv coding (LZ77)
-handbook - Enable handbooks generation for KDE4.
+handbook - Enable handbooks generation for packages by KDE
 hardened - Activate default security enhancements for toolchain (gcc, glibc, binutils)
 hddtemp - Enable monitoring of hdd temperature (app-admin/hddtemp)
 hdf5 - Add support for the Hierarchical Data Format v5
@@ -192,7 +192,6 @@ m17n-lib - Enable m17n-lib support
 mad - Add support for mad (high-quality mp3 decoder library and cli frontend)
 maildir - Add support for maildir (~/.maildir) style mail spools
 matroska - Add support for the matroska container format (extensions .mkv, .mka and .mks)
-matrox - Add Matrox MGA support to mplayer
 mbox - Add support for mbox (/var/spool/mail) style mail spools
 memcached - Add support for memcached
 memlimit - Add memory usage limiting in supporting programs
@@ -285,7 +284,7 @@ qt5 - Add support for the Qt 5 application and UI framework
 quicktime - Add support for OpenQuickTime
 radius - Add support for RADIUS authentication
 raw - Add support for raw image formats
-rdesktop - Add support for the remote desktop protocol, usually used to connect to Windows servers
+rdp - Enables RDP/Remote Desktop support
 readline - Enable support for libreadline, a GNU line-editing library that almost everyone wants
 recode - Enable support for the GNU recode library
 rss - Enable support for RSS feeds
@@ -294,6 +293,7 @@ samba - Add support for SAMBA (Windows File and Printer sharing)
 sasl - Add support for the Simple Authentication and Security Layer
 savedconfig - Use this to restore your config from /etc/portage/savedconfig ${CATEGORY}/${PN}. Make sure your USE flags allow for appropriate dependencies
 scanner - Add support for scanner hardware (e.g. build the sane frontend in kdegraphics)
+sctp - Support for Stream Control Transmission Protocol
 sdl - Add support for Simple Direct Layer (media library)
 seamonkey - Add support for the Seamonkey web-browser
 seccomp - Enable seccomp (secure computing mode) to perform system call filtering at runtime to increase security of programs
@@ -370,6 +370,7 @@ wayland - Enable dev-libs/wayland backend
 wavpack - Add support for wavpack audio compression tools
 wddx - Add support for Web Distributed Data eXchange
 webkit - Add support for the WebKit HTML rendering/layout engine
+webp - Add support for the WebP image format
 wifi - Enable wireless network functions
 wmf - Add support for the Windows Metafile vector image format
 wxwidgets - Add support for wxWidgets/wxGTK GUI toolkit

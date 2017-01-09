@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -23,10 +23,11 @@ REQUIRED_USE="
 	)
 "
 COMMON_DEPEND="
-	app-crypt/qca:2[openssl,qt5]
+	app-crypt/qca:2[qt5,ssl]
 	>=dev-libs/injeqt-1.0.0
 	>=dev-qt/qtcore-5.2.0:5
 	>=dev-qt/qtdbus-5.2.0:5
+	>=dev-qt/qtdeclarative-5.2.0:5
 	>=dev-qt/qtgui-5.2.0:5
 	>=dev-qt/qtmultimedia-5.2.0:5
 	>=dev-qt/qtnetwork-5.2.0:5
@@ -70,10 +71,6 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	speech? ( app-accessibility/powiedz )
 "
-
-PATCHES=(
-	"${FILESDIR}/${P}-qt5-compilation.patch"
-)
 
 PLUGINS='
 antistring

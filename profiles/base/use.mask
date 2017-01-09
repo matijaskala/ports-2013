@@ -1,17 +1,16 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-# Brian Evans <grknight@gentoo.org> (2 Dec 2015)
-# php 5.4 is end of life, masked for removal
-php_targets_php5-4
+# Michael Orlitzky <mjo@gentoo.org> (7 Jan 2017)
+# The dev-db/firebird and dev-db/oracle-instantclient* packages
+# only support amd64 and x86.
+firebird
+oci8
 
-# Daniel Kuehn <lejonet@gentoo.org> (13 Nov 2015)
-# Masking sssd USE-flag globally and unmasking it on the tested arches
-# to stop minor arches from blocking major arches AND prevent the dropping
-# of keywords on sudo for said minor arches, in regards to ssd and sudo bugs
-# 540540 and 525674
-sssd
+# Michael Palimaka <kensington@gentoo.org> (29 Dec 2016)
+# elogind support is not yet fully implemented in all required packages
+elogind
 
 # cilk has been ported only to x86 systems
 cilk
@@ -27,6 +26,7 @@ ruby_targets_ruby18
 ruby_targets_jruby
 ruby_targets_ree18
 ruby_targets_ruby19
+ruby_targets_ruby20
 
 # masking here and unmasking in default/linux/
 kmod
@@ -101,7 +101,6 @@ cpu_flags_x86_fma3
 cpu_flags_x86_fma4
 cpu_flags_x86_mmx
 cpu_flags_x86_mmxext
-cpu_flags_x86_mpx
 cpu_flags_x86_padlock
 cpu_flags_x86_popcnt
 cpu_flags_x86_sse
@@ -191,6 +190,7 @@ video_cards_omap
 video_cards_omapfb
 video_cards_tegra
 video_cards_vc4
+video_cards_vivante
 
 # linux-only drivers
 video_cards_qxl
@@ -198,9 +198,6 @@ video_cards_qxl
 # not needed on non-x86, non-amd64, non-ppc systems
 input_devices_synaptics
 input_devices_wacom
-
-# awaiting keywording, bug #538828
-input_devices_libinput
 
 # psyco only works on x86
 psyco
@@ -272,13 +269,6 @@ fdftk
 # These are specific of Mac OS X
 aqua
 coreaudio
-
-# Diego Pettenò <flameeyes@gentoo.org> (4 Jan 2007)
-# Mask the flags for PHP that are available only on x86
-frontbase
-# Shared with amd64
-oci8
-firebird
 
 # Robert Buchholz <rbu@gentoo.org> (03 Jun 2007)
 # Only works on x86 or amd64
@@ -394,3 +384,17 @@ openrc-force
 # sys-libs/libapparmor
 apparmor
 
+# Daniel Kuehn <lejonet@gentoo.org> (13 Nov 2015)
+# Masking sssd USE-flag globally and unmasking it on the tested arches
+# to stop minor arches from blocking major arches AND prevent the dropping
+# of keywords on sudo for said minor arches, in regards to ssd and sudo bugs
+# 540540 and 525674
+sssd
+
+# Brian Evans <grknight@gentoo.org> (2 Dec 2015)
+# php 5.4 is end of life, masked for removal
+php_targets_php5-4
+
+# Brian Evans <grknight@gentoo.org> (22 Aug 2016)
+# php 5.5 is end of life, masked for removal
+php_targets_php5-5

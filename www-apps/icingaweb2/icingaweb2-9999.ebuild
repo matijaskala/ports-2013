@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -14,13 +14,27 @@ EGIT_BRANCH="master"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="apache2 ldap mysql nginx postgres"
+REQUIRED_USE="^^ ( apache2 nginx )"
 KEYWORDS=""
 
 DEPEND=">=net-analyzer/icinga2-2.1.1
-		dev-lang/php:*[apache2?,cli,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
 		dev-php/pecl-imagick
-		apache2? ( >=www-servers/apache-2.4.0 )
-		nginx? ( >=www-servers/nginx-1.7.0:* )"
+		apache2? (
+			>=www-servers/apache-2.4.0
+			|| (
+				dev-lang/php:5.6[apache2?,cli,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
+				dev-lang/php:7.0[apache2?,cli,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
+				dev-lang/php:7.1[apache2?,cli,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
+			)
+		)
+		nginx? (
+			>=www-servers/nginx-1.7.0:*
+			|| (
+				dev-lang/php:5.6[apache2?,cli,fpm,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
+				dev-lang/php:7.0[apache2?,cli,fpm,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
+				dev-lang/php:7.1[apache2?,cli,fpm,gd,json,intl,ldap?,mysql?,pdo,postgres?,sockets,ssl,xslt,xml]
+			)
+		)"
 RDEPEND="${DEPEND}"
 
 want_apache2
@@ -31,7 +45,7 @@ pkg_setup() {
 	enewgroup icingaweb2
 	enewgroup icingacmd
 	use nginx && usermod -a -G icingacmd,icingaweb2 nginx
-	use apache2 && usermod -a -G icingacmd,icingaweb2 apache2
+	use apache2 && usermod -a -G icingacmd,icingaweb2 apache
 }
 
 pkg_config() {
@@ -59,6 +73,7 @@ src_install() {
 	insinto "/usr/share/${PN}"
 	doins -r "${S}"/*
 	fperms -R a+rX "/usr/share/${PN}/public/"
+	fperms u+x,g+x "/usr/share/${PN}/bin/icingacli"
 }
 
 pkg_postinst() {

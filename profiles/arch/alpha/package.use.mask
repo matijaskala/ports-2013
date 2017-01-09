@@ -2,6 +2,37 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
+# Tobias Klausmann <klausman@gentoo.org> (15 Nov 2016)
+# JITing for libpcre{,2} is not supported on Alpha
+dev-libs/libpcre jit
+dev-libs/libpcre2 jit
+
+# Tobias Klausmann <klausman@gentoo.org> (22 Oct 2016)
+# Pulls in dev-db/redis which is not keyworded on alpha.
+>=dev-python/pyzor-1.0.0 test
+
+# Tobias Klausmann <klausman@gentoo.org> (03 Oct 2016)
+# Pulls in dev-db/redis which is not keyworded on alpha.
+>=dev-libs/hiredis-0.13.1 test
+
+# Tobias Klausmann <klausman@gentoo.org> (02 Oct 2016)
+# For the one single version noted hereunder, the ebuild does not pull in
+# sys-apps/fakeroot as a test dependency (bug #593768).
+=dev-util/debhelper-9.20160814 test
+
+# Gilles Dartiguelongue <eva@gentoo.org> (11 Sep 2016)
+# networkmanager USE masked due to missing keywords
+gnome-extra/nm-applet teamd
+
+# Gilles Dartiguelongue <eva@gentoo.org> (11 Sep 2016)
+# Opt-out of ofono support until there is a user request,
+# see also pulseaudio/connman
+net-misc/networkmanager ofono
+
+# Tobias Klausmann <klausman@gentoo.org> (04 Jul 2016)
+# Mask USE=test since it implies USE=valgrind
+net-mail/notmuch test
+
 # Tobias Klausmann <klausman@gentoo.org> (14 Jun 2016)
 # asciidoctor pulls in a lot of Ruby deps
 >=net-misc/chrony-2.4_pre1 html
@@ -28,7 +59,7 @@ media-libs/elementary javascript
 # sys-cluster/ceph is not broken per se, but a maintenance burden.
 net-analyzer/rrdtool rados
 
-# James Le Cuirot <chewi@gentoo.org) (30 Jan 2016)
+# James Le Cuirot <chewi@gentoo.org> (30 Jan 2016)
 # scrollview requires Java, which is unsupported on Alpha.
 app-text/tesseract scrollview
 
@@ -72,10 +103,6 @@ dev-python/restkit cli
 # app-portage/g-sorcery pulls in pymongo and a whole host of deps that don't
 # work on alpha. Mask USE flag for layman accordingly
 app-portage/layman -g-sorcery
-
-# Brian Evans <grknight@gentoo.org> (17 Sep 2015)
-# Mask new USE flags for percona-server which are not available on alpha
-dev-db/percona-server tokudb tokudb-backup-plugin
 
 # Tobias Klausmann <klausman@gentoo.org> (16 Sep 2015)
 # Mask USE=sssd for sudo because sys-auth/sssd is relatively big and doesn't
@@ -191,9 +218,6 @@ media-video/mpv doc-pdf
 # Missing keywords, bug #495250
 >=gnome-base/gnome-extra-apps-3.10 tracker
 
-# Pacho Ramos <pacho@gentoo.org> (11 Jan 2014)
-sys-kernel/dracut -dracut_modules_systemd
-
 # Pacho Ramos <pacho@gentoo.org> (02 Dec 2013)
 # Missing keywords, bug #493156
 media-libs/libgphoto2 serial
@@ -286,10 +310,6 @@ net-libs/webkit-gtk webkit2
 # Alexey Shvetsov <alexxy@gentoo.org> (17 Dec 2011)
 # mask use numa for openmpi
 sys-cluster/openmpi openmpi_fabrics_psm openmpi_fabrics_knem openmpi_fabrics_open-mx openmpi_fabrics_ofed openmpi_fabrics_dapl openmpi_rm_slurm openmpi_ofed_features_rdmacm
-
-# Patrick McLean <chutzpah@gentoo.org> (08 Nov 2011)
-# mask conntrack USE flag for dnsmasq as dep is not keyworded
-net-dns/dnsmasq conntrack
 
 # Tobias Klausmann <klausman@gentoo.org> (02 Nov 2011)
 # libpcre jit is not supported on alpha

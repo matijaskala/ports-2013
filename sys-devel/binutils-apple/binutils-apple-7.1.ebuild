@@ -24,9 +24,8 @@ SRC_URI="http://www.opensource.apple.com/tarballs/ld64/${LD64}.tar.gz
 	http://dev.gentoo.org/~grobian/distfiles/${PN}-patches-6.3-r1.tar.bz2
 	http://dev.gentoo.org/~grobian/distfiles/${PN}-patches-7.0-r1.tar.bz2"
 
-
 LICENSE="APSL-2"
-KEYWORDS="~x64-macos ~x86-macos"
+KEYWORDS="~ppc-macos ~x64-macos ~x86-macos"
 IUSE="test multitarget"
 
 # ld64 can now only be compiled using llvm and libc++ since it massivley uses
@@ -45,30 +44,11 @@ RDEPEND="sys-devel/binutils-config
 DEPEND="${RDEPEND}
 	test? ( >=dev-lang/perl-5.8.8 )"
 
-export CTARGET=${CTARGET:-${CHOST}}
-if [[ ${CTARGET} == ${CHOST} ]] ; then
-	if [[ ${CATEGORY} == cross-* ]] ; then
-		export CTARGET=${CATEGORY#cross-}
-	fi
-fi
-is_cross() { [[ ${CHOST} != ${CTARGET} ]] ; }
-
-if is_cross ; then
-	SLOT="${CTARGET}-7"
-else
-	SLOT="7"
-fi
-
-LIBPATH=/usr/$(get_libdir)/binutils/${CTARGET}/${PV}
-INCPATH=${LIBPATH}/include
-DATAPATH=/usr/share/binutils-data/${CTARGET}/${PV}
-if is_cross ; then
-	BINPATH=/usr/${CHOST}/${CTARGET}/binutils-bin/${PV}
-else
-	BINPATH=/usr/${CTARGET}/binutils-bin/${PV}
-fi
+SLOT="7"
 
 S=${WORKDIR}
+
+is_cross() { [[ ${CHOST} != ${CTARGET} ]] ; }
 
 src_prepare() {
 	if use multitarget ; then
@@ -205,6 +185,22 @@ src_configure() {
 	# CPPFLAGS only affects ld64, cctools don't use 'em (which currently is
 	# what we want)
 	append-cppflags -DNDEBUG
+
+	export CTARGET=${CTARGET:-${CHOST}}
+	if [[ ${CTARGET} == ${CHOST} ]] ; then
+		if [[ ${CATEGORY} == cross-* ]] ; then
+			export CTARGET=${CATEGORY#cross-}
+		fi
+	fi
+
+	LIBPATH=/usr/$(get_libdir)/binutils/${CTARGET}/${PV}
+	INCPATH=${LIBPATH}/include
+	DATAPATH=/usr/share/binutils-data/${CTARGET}/${PV}
+	if is_cross ; then
+		BINPATH=/usr/${CHOST}/${CTARGET}/binutils-bin/${PV}
+	else
+		BINPATH=/usr/${CTARGET}/binutils-bin/${PV}
+	fi
 
 	# Block API and thus snapshots supported on >= 10.6
 	[[ ${CHOST} == *darwin* && ${CHOST#*-darwin} -ge 10 ]] && \

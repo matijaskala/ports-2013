@@ -7,21 +7,22 @@ EAPI=6
 KMNAME="kdepim"
 EGIT_BRANCH="KDE/4.14"
 KMNOMODULE="true"
+WEBKIT_REQUIRED="always"
 inherit kde4-meta
 
 DESCRIPTION="Common libraries for KDE PIM apps"
 COMMIT_ID="2aec255c6465676404e4694405c153e485e477d9"
 SRC_URI="https://quickgit.kde.org/?p=kdepim.git&a=snapshot&h=${COMMIT_ID}&fmt=tgz -> ${KMNAME}-${PV}.tar.gz"
 
-KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ~arm x86 ~amd64-linux ~x86-linux"
 IUSE="debug google"
 
 DEPEND="
-	$(add_kdebase_dep baloo '' 4.14.3)
 	$(add_kdeapps_dep kdepimlibs 'akonadi(+)')
 	app-crypt/gpgme
-	>=app-office/akonadi-server-1.12.90
 	dev-libs/grantlee:0
+	kde-apps/akonadi:4
+	kde-frameworks/baloo:4
 	google? ( net-libs/libkgapi:4 )
 "
 RDEPEND="${DEPEND}

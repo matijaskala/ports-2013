@@ -14,7 +14,7 @@ SRC_URI="https://github.com/Itseez/opencv/archive/${PV}.zip -> ${P}.zip"
 
 LICENSE="BSD"
 SLOT="0/2.4"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86 ~amd64-linux"
+KEYWORDS="amd64 ~arm ~ppc ~ppc64 x86 ~amd64-linux"
 IUSE="cuda +eigen examples ffmpeg gstreamer gtk ieee1394 ipp jpeg jpeg2k libav opencl openexr opengl openmp pch png +python qt4 qt5 testprograms threads tiff v4l vtk xine"
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )
@@ -46,7 +46,7 @@ RDEPEND="
 	)
 	java? ( >=virtual/jre-1.6:* )
 	jpeg? ( virtual/jpeg:0 )
-	jpeg2k? ( media-libs/jasper )
+	jpeg2k? ( media-libs/jasper:= )
 	ieee1394? (
 		media-libs/libdc1394
 		sys-libs/libraw1394
@@ -87,6 +87,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.4.8-javamagic.patch"
 	"${FILESDIR}/${PN}-2.4.9-cuda-pkg-config.patch"
 	"${FILESDIR}/${P}-git-autodetect.patch"
+	 "${FILESDIR}/${PN}-3.0.0-gles.patch"
 	)
 
 pkg_setup() {
@@ -197,7 +198,7 @@ src_configure() {
 
 	if use cuda; then
 		if [[ "$(gcc-version)" > "4.8" ]]; then
-			# bug 577410 
+			# bug 577410
 			# #error -- unsupported GNU version! gcc 4.9 and up are not supported!
 			ewarn "CUDA and >=sys-devel/gcc-4.9 do not play well together. Disabling CUDA support."
 			mycmakeargs+=( -DWITH_CUDA=OFF )

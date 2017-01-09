@@ -15,7 +15,7 @@ SRC_URI="http://web.mit.edu/kerberos/dist/krb5/${P_DIR}/${MY_P}.tar.gz"
 
 LICENSE="openafs-krb5-a BSD MIT OPENLDAP BSD-2 HPND BSD-4 ISC RSA CC-BY-SA-3.0 || ( BSD-2 GPL-2+ )"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ~ia64 ~mips ~ppc ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86"
 IUSE="doc +keyutils libressl openldap +pkinit selinux +threads test xinetd"
 
 CDEPEND="
@@ -58,12 +58,12 @@ MULTILIB_CHOST_TOOLS=(
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-1.12_warn_cflags.patch"
 	epatch "${FILESDIR}/${PN}-config_LDFLAGS.patch"
+	epatch "${FILESDIR}/${PN}-1.14.2-redeclared-ttyname.patch"
 
 	eautoreconf
 }
 
 src_configure() {
-	append-cppflags "-I${EPREFIX}/usr/include/et"
 	# QA
 	append-flags -fno-strict-aliasing
 	append-flags -fno-strict-overflow

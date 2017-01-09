@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -8,7 +8,7 @@ inherit cmake-utils gnome2-utils
 
 DESCRIPTION="Provides functionality for gaming input devices"
 
-HOMEPAGE="http://sourceforge.net/projects/libgaminggear/"
+HOMEPAGE="https://sourceforge.net/projects/libgaminggear/"
 SRC_URI="mirror://sourceforge/libgaminggear/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"

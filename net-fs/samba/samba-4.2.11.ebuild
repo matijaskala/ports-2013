@@ -16,8 +16,8 @@ SRC_PATH="stable"
 
 SRC_URI="mirror://samba/${SRC_PATH}/${MY_P}.tar.gz
 	https://dev.gentoo.org/~polynomial-c/samba-disable-python-patches-4.2.9.tar.xz"
-KEYWORDS="amd64 arm hppa ~ia64 ~ppc ppc64 ~sparc x86"
-[[ ${PV} = *_rc* ]] && KEYWORDS="arm hppa ppc64"
+KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sparc x86"
+[[ ${PV} = *_rc* ]] && KEYWORDS="alpha arm hppa ppc64"
 
 DESCRIPTION="Samba Suite Version 4"
 HOMEPAGE="http://www.samba.org/"
@@ -52,7 +52,7 @@ CDEPEND="${PYTHON_DEPS}
 	>=net-libs/socket_wrapper-1.1.2[${MULTILIB_USEDEP}]
 	sys-apps/attr[${MULTILIB_USEDEP}]
 	sys-libs/libcap
-	>=sys-libs/ldb-1.1.24[${MULTILIB_USEDEP}]
+	>=sys-libs/ldb-1.1.24[ldap(+)?,${MULTILIB_USEDEP}]
 	sys-libs/ncurses:0=[${MULTILIB_USEDEP}]
 	>=sys-libs/nss_wrapper-1.0.2[${MULTILIB_USEDEP}]
 	>=sys-libs/ntdb-1.0[python,${PYTHON_USEDEP},${MULTILIB_USEDEP}]

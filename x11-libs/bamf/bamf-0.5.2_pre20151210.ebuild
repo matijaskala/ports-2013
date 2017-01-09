@@ -1,8 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=5
+EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
 inherit autotools eutils vala python-single-r1
@@ -19,17 +19,15 @@ IUSE=""
 RESTRICT="mirror"
 
 RDEPEND="dev-libs/gobject-introspection
+	dev-libs/libxml2[python,${PYTHON_USEDEP}]
 	dev-libs/libxslt[python,${PYTHON_USEDEP}]
-	dev-libs/libxml2[${PYTHON_USEDEP}]
-	dev-util/gdbus-codegen
-	x11-libs/gtk+:2
-	x11-libs/gtk+:3
-	x11-libs/libwnck:1
-	x11-libs/libwnck:3
-	x11-libs/libXfixes
+	gnome-base/libgtop:2
+	>=x11-libs/libwnck-3.4.7:3
 	$(vala_depend)"
 
 DEPEND="${RDEPEND}
+	dev-util/gdbus-codegen
+	dev-util/gtk-doc-am
 	virtual/pkgconfig"
 
 S=${WORKDIR}/${PN}-${MY_PV}

@@ -6,7 +6,7 @@ EAPI=5
 
 inherit flag-o-matic systemd
 if [[ ${PV} == "9999" ]] ; then
-	ESVN_REPO_URI="https://smartmontools.svn.sourceforge.net/svnroot/smartmontools/trunk/smartmontools"
+	ESVN_REPO_URI="https://svn.code.sf.net/p/smartmontools/code/trunk/smartmontools"
 	ESVN_PROJECT="smartmontools"
 	inherit subversion autotools
 else
@@ -47,7 +47,7 @@ src_configure() {
 	# in our src_install, so no need to manually delete it.
 	myeconfargs=(
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
-		--with-drivedbdir=/var/db/${PN} #575292
+		--with-drivedbdir="${EPREFIX}/var/db/${PN}" #575292
 		--with-initscriptdir="${EPREFIX}/etc/init.d"
 		$(use_with caps libcap-ng)
 		$(use_with selinux)

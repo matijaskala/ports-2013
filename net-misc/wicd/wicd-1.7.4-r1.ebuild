@@ -17,7 +17,7 @@ SRC_URI="https://launchpad.net/wicd/1.7/${PV}/+download/${P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~mips ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~mips ppc ~ppc64 x86"
 IUSE="doc X ambiance +gtk ioctl libnotify mac4lin ncurses nls +pm-utils gnome-shell"
 
 DEPEND="nls? ( dev-python/Babel[${PYTHON_USEDEP}] )"
@@ -52,6 +52,7 @@ RDEPEND="${PYTHON_DEPS}
 	)
 	pm-utils? ( sys-power/pm-utils )
 	gnome-shell? ( gnome-base/gnome-shell )
+	net-wireless/rfkill
 	"
 PATCHES=(
 	"${FILESDIR}"/${PN}-init-sve-start.patch

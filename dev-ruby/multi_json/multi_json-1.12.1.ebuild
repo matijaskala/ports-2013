@@ -21,11 +21,11 @@ DESCRIPTION="A gem to provide swappable JSON backends"
 HOMEPAGE="https://github.com/intridea/multi_json"
 LICENSE="MIT"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc64 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 SLOT="0"
 IUSE=""
 
-ruby_add_rdepend "|| ( >=dev-ruby/json-1.4 >=dev-ruby/yajl-ruby-1.0 =dev-ruby/activesupport-3* )"
+ruby_add_rdepend "|| ( >=dev-ruby/json-1.4 >=dev-ruby/yajl-ruby-1.0 )"
 
 ruby_add_bdepend "doc? ( dev-ruby/rspec:3 dev-ruby/yard )"
 

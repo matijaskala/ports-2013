@@ -131,6 +131,12 @@ OPENGL_REQUIRED="${OPENGL_REQUIRED:-never}"
 # This variable must be set before inheriting any eclasses. Defaults to 'never'.
 MULTIMEDIA_REQUIRED="${MULTIMEDIA_REQUIRED:-never}"
 
+# @ECLASS-VARIABLE: WEBKIT_REQUIRED
+# @DESCRIPTION:
+# Is qtwebkit required? Possible values are 'always', 'optional' and 'never'.
+# This variable must be set before inheriting any eclasses. Defaults to 'never'.
+WEBKIT_REQUIRED="${WEBKIT_REQUIRED:-never}"
+
 # @ECLASS-VARIABLE: CPPUNIT_REQUIRED
 # @DESCRIPTION:
 # Is cppunit required for tests? Possible values are 'always', 'optional' and 'never'.
@@ -258,6 +264,22 @@ case ${MULTIMEDIA_REQUIRED} in
 esac
 unset qtmultimediadepend
 
+# WebKit dependencies
+qtwebkitdepend="
+	>=dev-qt/qtwebkit-${QT_MINIMAL}:4
+"
+case ${WEBKIT_REQUIRED} in
+	always)
+		COMMONDEPEND+=" ${qtwebkitdepend}"
+		;;
+	optional)
+		IUSE+=" +webkit"
+		COMMONDEPEND+=" webkit? ( ${qtwebkitdepend} )"
+		;;
+	*) ;;
+esac
+unset qtwebkitdepend
+
 # CppUnit dependencies
 cppuintdepend="
 	dev-util/cppunit
@@ -287,11 +309,17 @@ kdecommondepend="
 	>=dev-qt/qtsql-${QT_MINIMAL}:4[qt3support]
 	>=dev-qt/qtsvg-${QT_MINIMAL}:4
 	>=dev-qt/qttest-${QT_MINIMAL}:4
-	>=dev-qt/qtwebkit-${QT_MINIMAL}:4
 "
 
 if [[ ${PN} != kdelibs ]]; then
-	kdecommondepend+=" $(add_kdebase_dep kdelibs)"
+	local _kdelibsuse
+	case ${WEBKIT_REQUIRED} in
+		always) _kdelibsuse="[webkit]" ;;
+		optional) _kdelibsuse="[webkit?]" ;;
+		*) ;;
+	esac
+	kdecommondepend+=" >=kde-frameworks/kdelibs-4.14.22:4${_kdelibsuse}"
+	unset _kdelibsuse
 	if [[ ${KDEBASE} = kdevelop ]]; then
 		if [[ ${PN} != kdevplatform ]]; then
 			# @ECLASS-VARIABLE: KDEVPLATFORM_REQUIRED
@@ -333,13 +361,13 @@ fi
 
 # add a dependency over kde4-l10n
 if [[ ${KDEBASE} != "kde-base" && -n ${KDE_LINGUAS} ]]; then
-	for _lingua in ${KDE_LINGUAS}; do
+	for _lingua in $(kde4_lingua_to_l10n ${KDE_LINGUAS}); do
 		# if our package has linguas, pull in kde4-l10n with selected lingua enabled,
 		# but only for selected ones.
 		# this can't be done on one line because if user doesn't use any localisation
 		# then he is probably not interested in kde4-l10n at all.
 		kderdepend+="
-		linguas_${_lingua}? ( $(add_kdeapps_dep kde4-l10n "linguas_${_lingua}(+)") )
+		l10n_${_lingua}? ( $(add_kdeapps_dep kde4-l10n "l10n_${_lingua}(+)") )
 		"
 	done
 	unset _lingua
@@ -350,7 +378,7 @@ kdehandbookdepend="
 	app-text/docbook-xsl-stylesheets
 "
 kdehandbookrdepend="
-	$(add_kdebase_dep kdelibs 'handbook')
+	kde-frameworks/kdelibs:4[handbook]
 "
 case ${KDE_HANDBOOK} in
 	always)
@@ -433,10 +461,6 @@ _calculate_src_uri() {
 	case ${KDEBASE} in
 		kde-base)
 			case ${PV} in
-				4.4.11.1)
-					# KDEPIM 4.4, special case
-					# TODO: Remove this part when KDEPIM 4.4 gets out of the tree
-					SRC_URI="mirror://kde/stable/kdepim-${PV}/src/${_kmname_pv}.tar.bz2" ;;
 				4.4.20*)
 					# KDEPIM 4.4 no-akonadi branch, special case
 					# TODO: Remove this part when KDEPIM 4.4 gets out of the tree
@@ -444,18 +468,12 @@ _calculate_src_uri() {
 				4.?.[6-9]? | 4.??.[6-9]?)
 					# Unstable KDE SC releases
 					SRC_URI="mirror://kde/unstable/${PV}/src/${_kmname_pv}.tar.xz" ;;
-				4.11.19)
-					# Part of 15.04.1 actually, sigh. Not stable for next release!
-					SRC_URI="mirror://kde/Attic/applications/15.04.1/src/${_kmname_pv}.tar.xz" ;;
 				4.11.22)
 					# Part of 15.08.0 actually, sigh. Not stable for next release!
-					SRC_URI="mirror://kde/stable/applications/15.08.0/src/${_kmname_pv}.tar.xz" ;;
+					SRC_URI="mirror://kde/Attic/applications/15.08.0/src/${_kmname_pv}.tar.xz" ;;
 				4.14.3)
 					# Last SC release
 					SRC_URI="mirror://kde/stable/${PV}/src/${_kmname_pv}.tar.xz" ;;
-				4.14.8)
-					# Part of 15.04.1 actually, sigh. Used by kdelibs and KDE PIM 4.
-					SRC_URI="mirror://kde/Attic/applications/15.04.1/src/${_kmname_pv}.tar.xz" ;;
 				4.14.10)
 					# Part of 15.04.3 actually, sigh. Used by last version of KDE PIM 4.
 					SRC_URI="mirror://kde/Attic/applications/15.04.3/src/${_kmname_pv}.tar.xz" ;;
@@ -472,6 +490,7 @@ _calculate_src_uri() {
 			case ${KDEVELOP_VERSION} in
 				4.[123].[6-9]*) SRC_URI="mirror://kde/unstable/kdevelop/${KDEVELOP_VERSION}/src/${P}.tar.xz" ;;
 				4.7.3) SRC_URI="mirror://kde/stable/kdevelop/${KDEVELOP_VERSION}/src/${P}.tar.bz2" ;;
+				4.7.4) SRC_URI="mirror://kde/stable/kdevelop/${KDEVELOP_VERSION}/${P}.tar.xz" ;;
 				*) SRC_URI="mirror://kde/stable/kdevelop/${KDEVELOP_VERSION}/src/${P}.tar.xz" ;;
 			esac
 			;;
@@ -626,7 +645,7 @@ kde4-base_pkg_setup() {
 	# In theory should be in pkg_pretend but we check it only for kdelibs there
 	# and for others we do just quick scan in pkg_setup because pkg_pretend
 	# executions consume quite some time (ie. when merging 300 packages at once will cause 300 checks)
-	if [[ ${MERGE_TYPE} != binary ]]; then
+	if [[ ${MERGE_TYPE} != binary ]] && tc-is-gcc; then
 		[[ $(gcc-major-version) -lt 4 ]] || \
 				( [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -le 6 ]] ) \
 			&& die "Sorry, but gcc-4.6 and earlier wont work for some KDE packages."
@@ -901,16 +920,6 @@ kde4-base_pkg_postinst() {
 			einfo "Use it at your own risk."
 			einfo "Do _NOT_ file bugs at bugs.gentoo.org because of this ebuild!"
 			echo
-		fi
-		# for all 3rd party soft tell user that he SHOULD install kdebase-startkde or kdebase-runtime-meta
-		if [[ ${KDEBASE} != kde-base ]] && \
-				! has_version 'kde-apps/kdebase-runtime-meta'; then
-			if [[ ${KDE_REQUIRED} == always ]] || ( [[ ${KDE_REQUIRED} == optional ]] && use kde ); then
-				echo
-				ewarn "WARNING! Your system configuration does not contain \"kde-apps/kdebase-runtime-meta\"."
-				ewarn "With this setting you are unsupported by KDE team."
-				ewarn "All missing features you report for misc packages will be probably ignored or closed as INVALID."
-			fi
 		fi
 	fi
 }

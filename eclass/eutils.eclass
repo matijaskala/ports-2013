@@ -595,6 +595,8 @@ epatch() {
 			: $(( count++ ))
 		done
 
+		(( EPATCH_N_APPLIED_PATCHES++ ))
+
 		# if we had to decompress the patch, delete the temp one
 		if [[ -n ${PIPE_CMD} ]] ; then
 			rm -f "${PATCH_TARGET}"
@@ -1060,7 +1062,7 @@ _iconins() {
 #    !!! must specify to install into /usr/share/icons/... !!!
 #    size of the icon, like 48 or 48x48
 #    supported icon sizes are:
-#    16 22 24 32 36 48 64 72 96 128 192 256 scalable
+#    16 22 24 32 36 48 64 72 96 128 192 256 512 scalable
 #  -c, --context
 #    defaults to "apps"
 #  -t, --theme
@@ -1736,13 +1738,17 @@ epatch_user() {
 		[[ -r ${EPATCH_SOURCE} ]] || EPATCH_SOURCE=${EPATCH_USER_SOURCE}/${CHOST}/${check}
 		[[ -r ${EPATCH_SOURCE} ]] || EPATCH_SOURCE=${EPATCH_USER_SOURCE}/${check}
 		if [[ -d ${EPATCH_SOURCE} ]] ; then
+			local old_n_applied_patches=${EPATCH_N_APPLIED_PATCHES:-0}
 			EPATCH_SOURCE=${EPATCH_SOURCE} \
 			EPATCH_SUFFIX="patch" \
 			EPATCH_FORCE="yes" \
 			EPATCH_MULTI_MSG="Applying user patches from ${EPATCH_SOURCE} ..." \
 			epatch
 			echo "${EPATCH_SOURCE}" > "${applied}"
-			has epatch_user_death_notice ${EBUILD_DEATH_HOOKS} || EBUILD_DEATH_HOOKS+=" epatch_user_death_notice"
+			if [[ ${old_n_applied_patches} -lt ${EPATCH_N_APPLIED_PATCHES} ]]; then
+				has epatch_user_death_notice ${EBUILD_DEATH_HOOKS} || \
+					EBUILD_DEATH_HOOKS+=" epatch_user_death_notice"
+			fi
 			return 0
 		fi
 	done

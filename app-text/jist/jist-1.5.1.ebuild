@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-USE_RUBY="ruby20"
+USE_RUBY="ruby20 ruby21"
 
 RUBY_FAKEGEM_TASK_TEST=""
 RUBY_FAKEGEM_TASK_DOC=""
@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/ConradIrwin/jist"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ~x86"
 IUSE=""
 
 ruby_add_rdepend "dev-ruby/json"

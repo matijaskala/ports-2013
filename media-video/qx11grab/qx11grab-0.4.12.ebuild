@@ -12,7 +12,7 @@ SRC_URI="http://qx11grab.hjcms.de/downloads/${PV}/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="libav kde opengl pulseaudio"
 
 RDEPEND="
@@ -28,7 +28,7 @@ RDEPEND="
 	>=x11-libs/libXrandr-1.3
 	libav? ( >=media-video/libav-9:0=[X,encode,truetype] )
 	!libav? ( >=media-video/ffmpeg-1.1:0=[X,encode,truetype] )
-	kde? ( kde-base/kdelibs:4 )
+	kde? ( kde-frameworks/kdelibs:4 )
 	opengl? ( >=dev-qt/qtopengl-4.7.4:4 )
 	pulseaudio? ( media-sound/pulseaudio )
 "

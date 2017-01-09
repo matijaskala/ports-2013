@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -65,7 +65,7 @@ fi
 FFMPEG_FLAG_MAP=(
 		+bzip2:bzlib cpudetection:runtime-cpudetect debug gcrypt gnutls gmp
 		+gpl +hardcoded-tables +iconv lzma +network openssl +postproc
-		samba:libsmbclient sdl:ffplay sdl vaapi vdpau X:xlib xcb:libxcb
+		samba:libsmbclient sdl:ffplay sdl:sdl2 vaapi vdpau X:xlib xcb:libxcb
 		xcb:libxcb-shm xcb:libxcb-xfixes +zlib
 		# libavdevice options
 		cdio:libcdio iec61883:libiec61883 ieee1394:libdc1394 libcaca openal
@@ -79,7 +79,7 @@ FFMPEG_FLAG_MAP=(
 		schroedinger:libschroedinger speex:libspeex vorbis:libvorbis vpx:libvpx
 		zvbi:libzvbi
 		# libavfilter options
-		bs2b:libbs2b chromaprint ebur128:libebur128 flite:libflite frei0r
+		bs2b:libbs2b chromaprint flite:libflite frei0r
 		fribidi:libfribidi fontconfig ladspa libass truetype:libfreetype
 		rubberband:librubberband zimg:libzimg
 		# libswresample options
@@ -91,7 +91,7 @@ FFMPEG_FLAG_MAP=(
 # Same as above but for encoders, i.e. they do something only with USE=encode.
 FFMPEG_ENCODER_FLAG_MAP=(
 	amrenc:libvo-amrwbenc mp3:libmp3lame
-	faac:libfaac kvazaar:libkvazaar nvenc:nvenc
+	kvazaar:libkvazaar nvenc:nvenc
 	openh264:libopenh264 snappy:libsnappy theora:libtheora twolame:libtwolame
 	wavpack:libwavpack webp:libwebp x264:libx264 x265:libx265 xvid:libxvid
 )
@@ -162,10 +162,8 @@ RDEPEND="
 	cdio? ( >=dev-libs/libcdio-paranoia-0.90_p1-r1[${MULTILIB_USEDEP}] )
 	celt? ( >=media-libs/celt-0.11.1-r1[${MULTILIB_USEDEP}] )
 	chromaprint? ( >=media-libs/chromaprint-1.2-r1[${MULTILIB_USEDEP}] )
-	ebur128? ( >=media-libs/libebur128-1.1.0[${MULTILIB_USEDEP}] )
 	encode? (
 		amrenc? ( >=media-libs/vo-amrwbenc-0.1.2-r1[${MULTILIB_USEDEP}] )
-		faac? ( >=media-libs/faac-1.28-r3[${MULTILIB_USEDEP}] )
 		kvazaar? ( media-libs/kvazaar[${MULTILIB_USEDEP}] )
 		mp3? ( >=media-sound/lame-3.99.5-r1[${MULTILIB_USEDEP}] )
 		nvenc? ( media-video/nvidia_video_sdk )
@@ -190,7 +188,7 @@ RDEPEND="
 	gcrypt? ( >=dev-libs/libgcrypt-1.6:0=[${MULTILIB_USEDEP}] )
 	gme? ( >=media-libs/game-music-emu-0.6.0[${MULTILIB_USEDEP}] )
 	gmp? ( >=dev-libs/gmp-6:0=[${MULTILIB_USEDEP}] )
-	gnutls? ( >=net-libs/gnutls-2.12.23-r6[${MULTILIB_USEDEP}] )
+	gnutls? ( >=net-libs/gnutls-2.12.23-r6:=[${MULTILIB_USEDEP}] )
 	gsm? ( >=media-sound/gsm-1.0.13-r1[${MULTILIB_USEDEP}] )
 	iconv? ( >=virtual/libiconv-0-r1[${MULTILIB_USEDEP}] )
 	iec61883? (
@@ -204,7 +202,7 @@ RDEPEND="
 	)
 	jack? ( virtual/jack[${MULTILIB_USEDEP}] )
 	jpeg2k? ( >=media-libs/openjpeg-2:2[${MULTILIB_USEDEP}] )
-	libass? ( >=media-libs/libass-0.10.2[${MULTILIB_USEDEP}] )
+	libass? ( >=media-libs/libass-0.10.2:=[${MULTILIB_USEDEP}] )
 	libcaca? ( >=media-libs/libcaca-0.99_beta18-r1[${MULTILIB_USEDEP}] )
 	libilbc? ( >=media-libs/libilbc-2[${MULTILIB_USEDEP}] )
 	libsoxr? ( >=media-libs/soxr-0.1.0[${MULTILIB_USEDEP}] )
@@ -221,7 +219,7 @@ RDEPEND="
 	rubberband? ( >=media-libs/rubberband-1.8.1-r1[${MULTILIB_USEDEP}] )
 	samba? ( >=net-fs/samba-3.6.23-r1[${MULTILIB_USEDEP}] )
 	schroedinger? ( >=media-libs/schroedinger-1.0.11-r1[${MULTILIB_USEDEP}] )
-	sdl? ( >=media-libs/libsdl-1.2.15-r4[sound,video,${MULTILIB_USEDEP}] )
+	sdl? ( media-libs/libsdl2[sound,video,${MULTILIB_USEDEP}] )
 	speex? ( >=media-libs/speex-1.2_rc1-r1[${MULTILIB_USEDEP}] )
 	ssh? ( >=net-libs/libssh-0.5.5[${MULTILIB_USEDEP}] )
 	truetype? ( >=media-libs/freetype-2.5.0.1:2[${MULTILIB_USEDEP}] )
@@ -280,7 +278,6 @@ REQUIRED_USE="
 	${GPL_REQUIRED_USE}
 	${CPU_REQUIRED_USE}"
 RESTRICT="
-	encode? ( faac? ( bindist ) )
 	gpl? ( openssl? ( bindist ) fdk? ( bindist ) )
 "
 
@@ -311,9 +308,6 @@ multilib_src_configure() {
 		# Licensing.
 		if use amrenc ; then
 			myconf+=( --enable-version3 )
-		fi
-		if use faac ; then
-			myconf+=( --enable-nonfree )
 		fi
 	else
 		myconf+=( --disable-encoders )
