@@ -60,6 +60,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-4.3-append-process-segfault.patch
 	epatch "${FILESDIR}"/${PN}-4.3-mapfile-improper-array-name-validation.patch
 	epatch "${FILESDIR}"/${PN}-4.3-arrayfunc.patch
+	epatch "${FILESDIR}"/crosscompile.patch
 }
 
 src_configure() {

@@ -37,22 +37,21 @@ MOZ_PN="firefox"
 MOZ_P="firefox-${MOZ_PV}"
 MOZEXTENSION_TARGET=browser/extensions
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.45 pax-utils fdo-mime autotools virtualx mozlinguas
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.45 pax-utils fdo-mime autotools virtualx mozlinguas geek
 
 DESCRIPTION="IceCat Web Browser"
 HOMEPAGE="https://www.gnu.org/software/gnuzilla"
 
-#KEYWORDS="alpha amd64 arm arm64 hppa ia64 ppc ppc64 x86 amd64-linux x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ppc ppc64 x86 amd64-linux x86-linux"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1 GPL-3 LGPL-3"
 IUSE="hardened +hwaccel pgo selinux +gmp-autoupdate test"
 
-#EGIT_REPO_URI="git://git.sv.gnu.org/gnuzilla.git"
+GNUZILLA_REPO_URI="git://git.sv.gnu.org/gnuzilla.git"
 
 # More URIs appended below...
 SRC_URI="${SRC_URI}
-	https://www.icecat.gnu/gnuzilla.tar.xz
 	https://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
 	https://dev.gentoo.org/~axs/mozilla/patchsets/${PATCH}.tar.xz
 	https://dev.gentoo.org/~polynomial-c/mozilla/patchsets/${PATCH}.tar.xz"
@@ -123,12 +122,15 @@ src_unpack() {
 
 	# Unpack language packs
 	mozlinguas_src_unpack
+
+	geek_prepare_storedir
+	geek_fetch gnuzilla
 }
 
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox" \
-		"${WORKDIR}/gnuzilla/data/patches"/* \
+		"${GEEK_STORE_DIR}/gnuzilla/data/patches"/* \
 		"${FILESDIR}"/reorder-addon-sdk-moz.build.patch \
 		"${FILESDIR}"/unity-menubar.patch \
 		"${FILESDIR}"/jit-none-branch64.patch
@@ -172,7 +174,7 @@ src_prepare() {
 	sed "s|^\(pref(\"datareporting\.healthreport\.infoURL.*\", \"\)https://.*\(\");\)$|\1${HOMEPAGE}\2|" -i "${S}"/{services/healthreport,mobile/android/chrome/content}/healthreport-prefs.js
 	sed "s|https://www.mozilla.org/legal/privacy/|${HOMEPAGE}|" -i "${S}"/browser/app/profile/firefox.js "${S}"/toolkit/content/aboutRights.xhtml
 	rm "${S}"/browser/locales/en-US/searchplugins/ddg.xml
-	for i in "${WORKDIR}"/gnuzilla/data/searchplugins/* ; do
+	for i in "${GEEK_STORE_DIR}"/gnuzilla/data/searchplugins/* ; do
 		cp "${i}" "${S}"/browser/locales/en-US/searchplugins
 		echo "$(basename "${i%.xml}")" >> "${S}"/browser/locales/en-US/searchplugins/list.txt
 		cp "${i}" "${S}"/mobile/locales/en-US/searchplugins
@@ -184,19 +186,19 @@ src_prepare() {
 	sed '/Promo2.iOSBefore/,/mobilePromo2.iOSLink/d' -i "${S}"/browser/components/preferences/in-content/sync.xul
 	sed 's|www.mozilla.org/firefox/android.*sync-preferences|f-droid.org/repository/browse/?fdid=org.gnu.icecat|' -i "${S}"/browser/components/preferences/in-content/sync.xul
 	rm -rf "${S}"/{browser,mobile/android}/branding/*
-	cp "${FILESDIR}"/identity-icons-brand.svg "${WORKDIR}"/gnuzilla/data/branding/icecat/content
-	echo "  content/branding/identity-icons-brand.svg" >> "${WORKDIR}"/gnuzilla/data/branding/icecat/content/jar.mn
-	cp -a "${WORKDIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/official
-	cp -a "${WORKDIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/unofficial
-	cp -a "${WORKDIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/nightly
-	cp -a "${WORKDIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/official
-	cp -a "${WORKDIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/unofficial
-	cp -a "${WORKDIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/nightly
+	cp "${FILESDIR}"/identity-icons-brand.svg "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/content
+	echo "  content/branding/identity-icons-brand.svg" >> "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/content/jar.mn
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/official
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/unofficial
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/nightly
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/official
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/unofficial
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/nightly
 	rm -rf "${S}"/browser/base/content/abouthome
-	cp -a "${WORKDIR}"/gnuzilla/data/abouthome "${S}"/browser/base/content
+	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/abouthome "${S}"/browser/base/content
 	sed '/mozilla.*png/d' -i "${S}"/browser/base/jar.mn
 	sed '/abouthome/s/*/ /' -i "${S}"/browser/base/jar.mn
-	cp "${WORKDIR}"/gnuzilla/data/bookmarks.html.in "${S}"/browser/locales/generic/profile
+	cp "${GEEK_STORE_DIR}"/gnuzilla/data/bookmarks.html.in "${S}"/browser/locales/generic/profile
 	for i in community.end3 community.exp.end community.start2 community.mozillaLink community.middle2 community.creditsLink \
 	community.end2 contribute.start contribute.getInvolvedLink contribute.end channel.description.start channel.description.end ; do
 		find "${WORKDIR}/${MOZ_P}"*/* -name aboutDialog.dtd -exec sed -i "s|\(ENTITY ${i}\).*|\1 \"\">|" {} +
@@ -205,9 +207,9 @@ src_prepare() {
 		find "${WORKDIR}/${MOZ_P}"*/* -name aboutRights.dtd -exec sed -i "s|\(ENTITY ${i}\).*|\1 \"\">|" {} +
 	done
 	sed -i '/helpus\.start/d' "${S}"/browser/base/content/aboutDialog.xul
-	cp "${WORKDIR}"/gnuzilla/data/aboutRights.xhtml "${S}"/toolkit/content/aboutRights.xhtml
-	cp "${WORKDIR}"/gnuzilla/data/aboutRights.xhtml "${S}"/toolkit/content/aboutRights-unbranded.xhtml
-	cp "${WORKDIR}"/gnuzilla/data/branding/sync.png "${S}"/browser/themes/shared/fxa/logo.png
+	cp "${GEEK_STORE_DIR}"/gnuzilla/data/aboutRights.xhtml "${S}"/toolkit/content/aboutRights.xhtml
+	cp "${GEEK_STORE_DIR}"/gnuzilla/data/aboutRights.xhtml "${S}"/toolkit/content/aboutRights-unbranded.xhtml
+	cp "${GEEK_STORE_DIR}"/gnuzilla/data/branding/sync.png "${S}"/browser/themes/shared/fxa/logo.png
 	find "${WORKDIR}/${MOZ_P}"*/* -type d -name firefox -exec rename firefox icecat {} +
 	find "${WORKDIR}/${MOZ_P}"*/* -type d -name firefox-ui -exec rename firefox icecat {} +
 	find "${WORKDIR}/${MOZ_P}"*/* -type d -name \*firefox\* -exec rename firefox icecat {} +
@@ -259,30 +261,30 @@ src_prepare() {
 		s|IceCatAccountsCommand|FirefoxAccountsCommand|;
 		s|https://www.mozilla.org/icecat/?utm_source=synceol|https://www.mozilla.org/firefox/?utm_source=synceol|;
 	" "{}" ";"
-	cat "${WORKDIR}"/gnuzilla/data/settings.js >> "${S}"/browser/app/profile/icecat.js
-	cat "${WORKDIR}"/gnuzilla/data/settings.js >> "${S}"/mobile/android/app/mobile.js
+	cat "${GEEK_STORE_DIR}"/gnuzilla/data/settings.js >> "${S}"/browser/app/profile/icecat.js
+	cat "${GEEK_STORE_DIR}"/gnuzilla/data/settings.js >> "${S}"/mobile/android/app/mobile.js
 
-        favicon="${WORKDIR}"/gnuzilla/data/branding/icecat/icecat.ico
-        jpglogo="${WORKDIR}"/gnuzilla/data/../artwork/icecat.jpg
-        ff256="${WORKDIR}"/gnuzilla/data/branding/icecat/default256.png
-        ff128="${WORKDIR}"/gnuzilla/data/branding/icecat/mozicon128.png
-        ff64="${WORKDIR}"/gnuzilla/data/branding/icecat/content/icon64.png
-        ff48="${WORKDIR}"/gnuzilla/data/branding/icecat/default48.png
-        ff32="${WORKDIR}"/gnuzilla/data/branding/icecat/default32.png
-        ff24="${WORKDIR}"/gnuzilla/data/branding/icecat/default24.png
-        ff22="${WORKDIR}"/gnuzilla/data/branding/icecat/default22.png
-        ff16="${WORKDIR}"/gnuzilla/data/branding/icecat/default16.png
-        gf300="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-xhdpi/icon_home_empty_icecat.png
-        gf225="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-hdpi/icon_home_empty_icecat.png
-        gf150="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-mdpi/icon_home_empty_icecat.png
-        gf32="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-xhdpi/ic_status_logo.png
-        gf24="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-hdpi/ic_status_logo.png
-        gf16="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-mdpi/ic_status_logo.png
-        wf24="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-mdpi-v11/ic_status_logo.png
-        wf48="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-xhdpi-v11/ic_status_logo.png
-        wf36="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-hdpi-v11/ic_status_logo.png
-        ma50="${WORKDIR}"/gnuzilla/data/android-images/core/marketplace-logo.png
-        ma128="${WORKDIR}"/gnuzilla/data/android-images/resources/drawable-mdpi/marketplace.png
+        favicon="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/icecat.ico
+        jpglogo="${GEEK_STORE_DIR}"/gnuzilla/data/../artwork/icecat.jpg
+        ff256="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/default256.png
+        ff128="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/mozicon128.png
+        ff64="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/content/icon64.png
+        ff48="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/default48.png
+        ff32="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/default32.png
+        ff24="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/default24.png
+        ff22="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/default22.png
+        ff16="${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/default16.png
+        gf300="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-xhdpi/icon_home_empty_icecat.png
+        gf225="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-hdpi/icon_home_empty_icecat.png
+        gf150="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-mdpi/icon_home_empty_icecat.png
+        gf32="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-xhdpi/ic_status_logo.png
+        gf24="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-hdpi/ic_status_logo.png
+        gf16="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-mdpi/ic_status_logo.png
+        wf24="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-mdpi-v11/ic_status_logo.png
+        wf48="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-xhdpi-v11/ic_status_logo.png
+        wf36="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-hdpi-v11/ic_status_logo.png
+        ma50="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/core/marketplace-logo.png
+        ma128="${GEEK_STORE_DIR}"/gnuzilla/data/android-images/resources/drawable-mdpi/marketplace.png
 
         cp "${ff64}"  "${S}"/devtools/client/framework/dev-edition-promo/dev-edition-logo.png
         cp "${ff128}" "${S}"/mobile/android/base/resources/raw/bookmarkdefaults_favicon_support.png
@@ -475,7 +477,7 @@ src_install() {
 	mozlinguas_src_install
 
 	# Install extensions
-	for x in "${WORKDIR}"/gnuzilla/data/extensions/* ; do
+	for x in "${GEEK_STORE_DIR}"/gnuzilla/data/extensions/* ; do
 		xpi_install "${x}"
 	done
 

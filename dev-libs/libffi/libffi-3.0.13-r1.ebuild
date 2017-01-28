@@ -38,6 +38,7 @@ pkg_setup() {
 
 src_prepare() {
 	sed -i 's:@toolexeclibdir@:$(libdir):g' Makefile.in || die #462814
+	epatch "${FILESDIR}"/muslx32.patch
 	epatch "${FILESDIR}"/${P}-emutramp_pax_proc.patch #457194
 	epatch_user
 	elibtoolize

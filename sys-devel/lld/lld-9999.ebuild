@@ -5,6 +5,8 @@
 EAPI=6
 
 : ${CMAKE_MAKEFILE_GENERATOR:=ninja}
+# (needed due to CMAKE_BUILD_TYPE != Gentoo)
+CMAKE_MIN_VERSION=3.7.0-r1
 PYTHON_COMPAT=( python2_7 )
 
 inherit cmake-utils git-r3
@@ -22,10 +24,13 @@ IUSE="test"
 
 RDEPEND="~sys-devel/llvm-${PV}"
 DEPEND="${RDEPEND}
-	test? ( dev-python/lit )"
+	test? ( ~dev-python/lit-${PV} )"
 
 # TODO: fix test suite to build stand-alone
 RESTRICT="test"
+
+# least intrusive of all
+CMAKE_BUILD_TYPE=RelWithDebInfo
 
 src_unpack() {
 	if use test; then
@@ -45,7 +50,6 @@ src_unpack() {
 src_configure() {
 	local libdir=$(get_libdir)
 	local mycmakeargs=(
-		-DLLVM_LIBDIR_SUFFIX="${libdir#lib}"
 		# TODO: fix rpaths
 		#-DBUILD_SHARED_LIBS=ON
 

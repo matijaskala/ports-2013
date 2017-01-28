@@ -5,6 +5,8 @@
 EAPI=6
 
 : ${CMAKE_MAKEFILE_GENERATOR:=ninja}
+# (needed due to CMAKE_BUILD_TYPE != Gentoo)
+CMAKE_MIN_VERSION=3.7.0-r1
 PYTHON_COMPAT=( python2_7 )
 
 inherit cmake-utils git-r3 python-single-r1 toolchain-funcs
@@ -32,10 +34,13 @@ RDEPEND="
 # upstream: https://github.com/swig/swig/issues/769
 DEPEND="${RDEPEND}
 	python? ( <dev-lang/swig-3.0.9 )
-	test? ( dev-python/lit[${PYTHON_USEDEP}] )
+	test? ( ~dev-python/lit-${PV}[${PYTHON_USEDEP}] )
 	${PYTHON_DEPS}"
 
 REQUIRED_USE=${PYTHON_REQUIRED_USE}
+
+# least intrusive of all
+CMAKE_BUILD_TYPE=RelWithDebInfo
 
 src_unpack() {
 	if use test; then
@@ -55,14 +60,12 @@ src_unpack() {
 src_configure() {
 	local libdir=$(get_libdir)
 	local mycmakeargs=(
-		# used to find cmake modules
-		-DLLVM_LIBDIR_SUFFIX="${libdir#lib}"
-
 		-DLLDB_DISABLE_CURSES=$(usex !ncurses)
 		-DLLDB_DISABLE_LIBEDIT=$(usex !libedit)
 		-DLLDB_DISABLE_PYTHON=$(usex !python)
 		-DLLVM_ENABLE_TERMINFO=$(usex ncurses)
 
+		-DLLVM_BUILD_TESTS=$(usex test)
 		# compilers for lit tests
 		-DLLDB_TEST_C_COMPILER="${EPREFIX}/usr/bin/clang"
 		-DLLDB_TEST_CXX_COMPILER="${EPREFIX}/usr/bin/clang++"

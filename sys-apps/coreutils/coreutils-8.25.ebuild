@@ -23,7 +23,7 @@ SRC_URI="mirror://gnu/${PN}/${P}.tar.xz
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
 IUSE="acl caps gmp hostname kill multicall nls selinux static userland_BSD vanilla xattr"
 
 LIB_DEPEND="acl? ( sys-apps/acl[static-libs] )
@@ -144,7 +144,12 @@ src_install() {
 		cd "${ED}"/usr/bin
 		dodir /bin
 		# move critical binaries into /bin (required by FHS)
-		# but DON'T
+		local fhs="cat chgrp chmod chown cp date dd df echo false ln ls
+		           mkdir mknod mv pwd rm rmdir stty sync true uname"
+		mv ${fhs} ../../bin/ || die "could not move fhs bins"
+		if use kill; then
+			mv kill ../../bin/ || die
+		fi
 	else
 		# For now, drop the man pages, collides with the ones of the system.
 		rm -rf "${ED}"/usr/share/man

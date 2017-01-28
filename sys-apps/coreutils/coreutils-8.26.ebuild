@@ -150,15 +150,6 @@ src_install() {
 		if use kill; then
 			mv kill ../../bin/ || die
 		fi
-		# move critical binaries into /bin (common scripts)
-		local com="basename chroot cut dir dirname du env expr head mkfifo
-		           mktemp readlink seq sleep sort tail touch tr tty vdir wc yes"
-		mv ${com} ../../bin/ || die "could not move common bins"
-		# create a symlink for uname in /usr/bin/ since autotools require it
-		local x
-		for x in ${com} uname ; do
-			dosym /bin/${x} /usr/bin/${x}
-		done
 	else
 		# For now, drop the man pages, collides with the ones of the system.
 		rm -rf "${ED}"/usr/share/man

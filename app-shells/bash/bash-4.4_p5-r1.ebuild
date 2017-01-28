@@ -96,6 +96,7 @@ src_prepare() {
 	touch -r . doc/*
 
 	epatch_user
+	epatch "${FILESDIR}"/crosscompile.patch
 }
 
 src_configure() {

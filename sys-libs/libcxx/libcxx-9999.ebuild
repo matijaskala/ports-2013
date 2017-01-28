@@ -7,6 +7,8 @@ EAPI=6
 # Ninja provides better scalability and cleaner verbose output, and is used
 # throughout all LLVM projects.
 : ${CMAKE_MAKEFILE_GENERATOR:=ninja}
+# (needed due to CMAKE_BUILD_TYPE != Gentoo)
+CMAKE_MIN_VERSION=3.7.0-r1
 EGIT_REPO_URI="http://llvm.org/git/libcxx.git
 	https://github.com/llvm-mirror/libcxx.git"
 PYTHON_COMPAT=( python2_7 )
@@ -39,15 +41,14 @@ RDEPEND="
 	libcxxabi? ( ~sys-libs/libcxxabi-${PV}[libunwind=,static-libs?,${MULTILIB_USEDEP}] )
 	libcxxrt? ( sys-libs/libcxxrt[libunwind=,static-libs?,${MULTILIB_USEDEP}] )
 	!libcxxabi? ( !libcxxrt? ( >=sys-devel/gcc-4.7:=[cxx] ) )"
-# llvm-3.9.0 needed because its cmake files installation path changed, which is
-# needed by libcxx
+# LLVM 4 required for llvm-config --cmakedir
 # clang-3.9.0 installs necessary target symlinks unconditionally
 # which removes the need for MULTILIB_USEDEP
 DEPEND="${RDEPEND}
 	test? ( >=sys-devel/clang-3.9.0
 		$(python_gen_any_dep 'dev-python/lit[${PYTHON_USEDEP}]') )
 	app-arch/xz-utils
-	>=sys-devel/llvm-3.9.0"
+	>=sys-devel/llvm-4"
 
 DOCS=( CREDITS.TXT )
 
@@ -56,6 +57,9 @@ PATCHES=(
 	# out-of-tree build.
 	"${FILESDIR}/${PN}-3.9-cmake-link-flags.patch"
 )
+
+# least intrusive of all
+CMAKE_BUILD_TYPE=RelWithDebInfo
 
 python_check_deps() {
 	has_version "dev-python/lit[${PYTHON_USEDEP}]"
@@ -76,11 +80,6 @@ pkg_setup() {
 		eerror "gcc-4.7 or later version."
 		die
 	fi
-}
-
-src_configure() {
-	NATIVE_LIBDIR=$(get_libdir)
-	cmake-multilib_src_configure
 }
 
 multilib_src_configure() {
@@ -121,9 +120,6 @@ multilib_src_configure() {
 
 	local libdir=$(get_libdir)
 	local mycmakeargs=(
-		# LLVM_LIBDIR_SUFFIX is used to find CMake files
-		# and we are happy to use the native set
-		-DLLVM_LIBDIR_SUFFIX=${NATIVE_LIBDIR#lib}
 		-DLIBCXX_LIBDIR_SUFFIX=${libdir#lib}
 		-DLIBCXX_ENABLE_SHARED=ON
 		-DLIBCXX_ENABLE_STATIC=$(usex static-libs)

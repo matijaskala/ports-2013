@@ -10,14 +10,13 @@ inherit autotools base eutils gnome2 vala
 
 DESCRIPTION="Unity Desktop Configuration Tool"
 HOMEPAGE="http://www.gnome.org/"
-MY_PV="${PV/_p/+16.10.}.1"
-SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${MY_PV}.orig.tar.gz"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${PV/_p/+16.10.}.1.orig.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE="+cups +gnome-online-accounts +i18n kerberos v4l"
 KEYWORDS="~amd64 ~x86"
-S=${WORKDIR}/${PN}-${MY_PV}
+S=${WORKDIR}
 RESTRICT="mirror"
 
 # False positives caused by nested configure scripts

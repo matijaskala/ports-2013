@@ -36,6 +36,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/${P}-exec-hash.patch #578524
 	epatch "${FILESDIR}"/${P}-exec-prelink.patch #599894
 	epatch "${FILESDIR}"/${PN}-2.10-fix-opendir.patch #553092
+	epatch "${FILESDIR}"/${P}-musl.patch
+	epatch "${FILESDIR}"/${PN}-2.10-fix-visibility-musl.patch
 	epatch_user
 }
 
@@ -63,7 +65,6 @@ multilib_src_install_all() {
 
 	cd "${S}"
 	dodoc AUTHORS ChangeLog* NEWS README
-	rm -f "${D}"/usr/share/applications/sandbox.desktop
 }
 
 pkg_preinst() {

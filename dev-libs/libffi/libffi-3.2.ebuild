@@ -40,6 +40,7 @@ pkg_setup() {
 src_prepare() {
 	sed -i -e 's:@toolexeclibdir@:$(libdir):g' Makefile.in || die #462814
 
+	epatch "${FILESDIR}"/muslx32.patch
 	epatch "${FILESDIR}"/${PN}-3.1-darwin-x32.patch
 
 	epatch_user

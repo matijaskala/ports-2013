@@ -38,6 +38,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch \
+		"${FILESDIR}"/muslx32.patch \
 		"${FILESDIR}"/${P}-execstack.patch \
 		"${FILESDIR}"/${P}-typing_error.patch
 

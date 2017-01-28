@@ -5,8 +5,10 @@
 EAPI=6
 
 : ${CMAKE_MAKEFILE_GENERATOR:=ninja}
-
+# (needed due to CMAKE_BUILD_TYPE != Gentoo)
+CMAKE_MIN_VERSION=3.7.0-r1
 PYTHON_COMPAT=( python2_7 )
+
 inherit cmake-utils git-r3 python-any-r1
 
 DESCRIPTION="OCaml bindings for LLVM"
@@ -36,12 +38,15 @@ DEPEND="${RDEPEND}
 	dev-lang/perl
 	dev-ml/findlib
 	test? ( dev-ml/ounit
-		$(python_gen_any_dep 'dev-python/lit[${PYTHON_USEDEP}]') )
+		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]") )
 	!!<dev-python/configparser-3.3.0.2
 	${PYTHON_DEPS}"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	|| ( ${ALL_LLVM_TARGETS[*]} )"
+
+# least intrusive of all
+CMAKE_BUILD_TYPE=RelWithDebInfo
 
 python_check_deps() {
 	! use test \

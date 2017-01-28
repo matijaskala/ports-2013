@@ -15,7 +15,7 @@ SRC_URI="mirror://nongnu/${PN}/${P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~hppa ~ppc ~s390 ~sparc x86"
+KEYWORDS="alpha amd64 arm hppa ppc ~s390 sparc x86"
 
 IUSE="bgpclassless caps doc elibc_glibc ipv6 multipath ospfapi pam protobuf +readline snmp tcp-zebra"
 
@@ -57,7 +57,7 @@ src_prepare() {
 	# http://hasso.linux.ee/doku.php/english:network:quagga
 	use bgpclassless && eapply -p0 "${DISTDIR}/${CLASSLESS_BGP_PATCH}"
 
-	eapply ${PATCHES[@]}
+	eapply "${PATCHES[@]}"
 	eapply_user
 	eautoreconf
 }

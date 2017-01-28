@@ -657,7 +657,7 @@ do_gcc_PIE_patches() {
 make_gcc_hard() {
 
 	local gcc_hard_flags=""
-	# Gcc >= 6.X we can use configurations options to turn pie/ssp on as default
+	# Gcc >= 6.X we can use configuration options to turn pie/ssp on as default
 	if tc_version_is_at_least 6.0 ; then
 		if use pie ; then
 			einfo "Updating gcc to use automatic PIE building ..."
@@ -666,7 +666,7 @@ make_gcc_hard() {
 			einfo "Updating gcc to use automatic SSP building ..."
 		fi
 		if use hardened ; then
-			# Will add some optimatizion as default.
+			# Will add some optimizations by default.
 			gcc_hard_flags+=" -DEXTRA_OPTIONS"
 			# rebrand to make bug reports easier
 			BRANDING_GCC_PKGVERSION=${BRANDING_GCC_PKGVERSION/Gentoo/Gentoo Hardened}
@@ -1050,6 +1050,9 @@ toolchain_src_configure() {
 		;;
 	*-elf|*-eabi)
 		confgcc+=( --with-newlib )
+		;;
+	*-musl*)
+		confgcc+=( --enable-__cxa_atexit )
 		;;
 	*-gnu*)
 		confgcc+=(
@@ -2338,13 +2341,17 @@ hardened_gcc_is_stable() {
 	if [[ $1 == "pie" ]] ; then
 		if [[ ${CTARGET} == *-uclibc* ]] ; then
 			tocheck=${PIE_UCLIBC_STABLE}
-		else
+		elif [[ ${CTARGET} == *-musl* ]] ; then
+			tocheck=${PIE_MUSL_STABLE}
+		elif [[ ${CTARGET} == *-gnu* ]] ; then
 			tocheck=${PIE_GLIBC_STABLE}
 		fi
 	elif [[ $1 == "ssp" ]] ; then
 		if [[ ${CTARGET} == *-uclibc* ]] ; then
 			tocheck=${SSP_UCLIBC_STABLE}
-		elif  [[ ${CTARGET} == *-gnu* ]] ; then
+		elif [[ ${CTARGET} == *-musl* ]] ; then
+			tocheck=${SSP_MUSL_STABLE}
+		elif [[ ${CTARGET} == *-gnu* ]] ; then
 			tocheck=${SSP_STABLE}
 		fi
 	else

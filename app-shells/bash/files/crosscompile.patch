@@ -1,0 +1,39 @@
+portage needs bash with job control
+
+TODO: create a patch that replaces AC_TRY_RUN with AC_TRY_COMPILE and upstream it
+--- a/aclocal.m4
++++ b/aclocal.m4
+@@ -1400,14 +1400,14 @@
+ exit(1);
+ #endif
+ 
+ exit(0);
+ }], bash_cv_job_control_missing=present, bash_cv_job_control_missing=missing,
+-    [AC_MSG_WARN(cannot check job control if cross-compiling -- defaulting to missing)
+-     bash_cv_job_control_missing=missing]
++    [AC_MSG_WARN(cannot check job control if cross-compiling -- defaulting to present)
++     bash_cv_job_control_missing=present]
+ )])
+ AC_MSG_RESULT($bash_cv_job_control_missing)
+ if test $bash_cv_job_control_missing = missing; then
+ AC_DEFINE(JOB_CONTROL_MISSING)
+ fi
+ ])
+ 
+--- a/configure
++++ b/configure
+@@ -15060,11 +15060,11 @@
+ if ${bash_cv_job_control_missing+:} false; then :
+   $as_echo_n "(cached) " >&6
+ else
+   if test "$cross_compiling" = yes; then :
+-  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot check job control if cross-compiling -- defaulting to missing" >&5
+-$as_echo "$as_me: WARNING: cannot check job control if cross-compiling -- defaulting to missing" >&2;}
+-     bash_cv_job_control_missing=missing
++  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot check job control if cross-compiling -- defaulting to present" >&5
++$as_echo "$as_me: WARNING: cannot check job control if cross-compiling -- defaulting to present" >&2;}
++     bash_cv_job_control_missing=present
+ 
+ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */

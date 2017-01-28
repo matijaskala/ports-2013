@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/buildbot/buildbot.git"
 inherit readme.gentoo user distutils-r1
 
 DESCRIPTION="BuildBot Slave Daemon"
-HOMEPAGE="http://trac.buildbot.net/ http://code.google.com/p/buildbot/ http://pypi.python.org/pypi/buildbot-slave"
+HOMEPAGE="http://buildbot.net/ http://code.google.com/p/buildbot/ http://pypi.python.org/pypi/buildbot-worker"
 
 MY_V="${PV/_p/p}"
 MY_P="${PN}-${MY_V}"
@@ -66,8 +66,8 @@ python_install_all() {
 
 	doman docs/buildbot-worker.1
 
-	newconfd "${FILESDIR}/buildbot_worker.confd" buildslave
-	newinitd "${FILESDIR}/buildbot_worker.initd" buildslave
+	newconfd "${FILESDIR}/buildbot_worker.confd" buildbot_worker
+	newinitd "${FILESDIR}/buildbot_worker.initd" buildbot_worker
 
 	readme.gentoo_create_doc
 }

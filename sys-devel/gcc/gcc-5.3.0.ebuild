@@ -45,5 +45,8 @@ src_prepare() {
 	fi
 	is_crosscompile && EPATCH_EXCLUDE+=" 05_all_gcc-spec-env.patch"
 
+	epatch "${FILESDIR}"/linker_path.patch
+	epatch "${FILESDIR}"/musl.patch
+
 	toolchain_src_prepare
 }

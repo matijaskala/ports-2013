@@ -30,7 +30,7 @@ if os.path.exists(reponamefile):
 	with open(reponamefile,"r") as rnf:
 		reponame = rnf.read().strip()
 else:
-	print("Unable to find the repository name in %s - exiting." % reponamefile)
+	sys.stderr.write("Unable to find the repository name in %s - exiting.\n" % reponamefile)
 	sys.exit(1)
 
 # ProfileLister will allow us to see what profile settings -- flavors, subarches, mix-ins, builds --
@@ -252,10 +252,10 @@ class ProfileSetting(object):
 
 
 def warning(info):
-	print("WARNING: %s" % info)
+	sys.stderr.write("WARNING: %s\n" % info)
 
 def header(info):
-	print("\n=== "+color.BOLD+color.GREEN+info+color.END+": ===\n")
+	sys.stdout.write("\n=== "+color.BOLD+color.GREEN+info+color.END+": ===\n\n")
 
 ps = ProfileSetting(repomap={reponame:repodir},path=profiledir)
 
@@ -270,7 +270,7 @@ else:
 args = sys.argv[2:]
 
 if action not in valid_actions + [ "mix-in" ]:
-	print("Please specify a valid action.")
+	sys.stderr.write("Please specify a valid action.\n")
 	sys.exit(1)
 
 class color:
@@ -298,10 +298,10 @@ def shortList():
 	header("Enabled Profiles")
 	for key in key_order:
 		if key not in ps.descendents or len(ps.descendents[key]) == 0:
-			print("%s%12s%s: (not set)" % (color.BOLD, key, color.END))
+			sys.stdout.write("%s%12s%s: (not set)\n" % (color.BOLD, key, color.END))
 		else:
 			for item in ps.descendents[key]:
-				print("%s%12s%s: %s%s%s" % ( color.BOLD, key, color.END, color.CYAN, item.shortname, color.END ))
+				sys.stdout.write("%s%12s%s: %s%s%s\n" % ( color.BOLD, key, color.END, color.CYAN, item.shortname, color.END ))
 	print()
 
 def shortJSON():
@@ -347,16 +347,16 @@ if action == "show":
 					# de-pluralize
 					if iccl == "mix-ins":
 						iccl = "mix-in"
-					print("      %s%26s%s (from %s %s)" % ( color.CYAN, i.shortname, color.END, i.child.shortname, iccl ))
+					sys.stdout.write("      %s%26s%s (from %s %s)\n" % ( color.CYAN, i.shortname, color.END, i.child.shortname, iccl ))
 	print()
 elif action == "show-json":
-	print(json.dumps(shortJSON(),indent=4))
+	sys.stdout.write("%s\n" % json.dumps(shortJSON(),indent=4))
 elif action == "get":
 	if len(sys.argv) >= 3 and sys.argv[2] in valid_profiles:
 		short_json = shortJSON()
-		print(' '.join(p['shortname'] for p in short_json[sys.argv[2]]))
+		sys.stdout.write("%s\n" % ' '.join(p['shortname'] for p in short_json[sys.argv[2]]))
 	else:
-		print("Please specify a valid target.")
+		sys.stderr.write("Please specify a valid target.\n")
 		sys.exit(1)
 elif action == "list":
 
@@ -422,7 +422,7 @@ elif action == "list":
 elif action in valid_profiles + [ "mix-in" ]:
 	if action in valid_single_profiles:
 		if len(sys.argv) < 3:
-			print("Please specify a valid target.")
+			sys.stderr.write("Please specify a valid target.\n")
 			sys.exit(1)
 		newset = sys.argv[2]
 		if newset not in pl.list(action):
@@ -438,7 +438,7 @@ elif action in valid_profiles + [ "mix-in" ]:
 		action_path = pl.find(action,newset)
 		ps.descendents[action] = [ProfileSetting(ps.repomap,name=newset,cl=action,parent_line=reponame + ":" + action_path + "/" + newset,child=ps)]
 		shortList()
-		print(">>> Set %s to %s." % ( action, newset ))
+		sys.stdout.write(">>> Set %s to %s.\n" % ( action, newset ))
 	else:
 		if action == "mix-in":
 			action = "mix-ins"
@@ -495,9 +495,9 @@ elif action in valid_profiles + [ "mix-in" ]:
 		for x in notadded:
 			warning("Mix-in %s already active, not adding." % x)
 		for x in removed:
-			print(">>> Removed %s mix-in." % x)
+			sys.stdout.write(">>> Removed %s mix-in.\n" % x)
 		for x in added:
-			print(">>> Added %s mix-in." % x)
+			sys.stdout.write(">>> Added %s mix-in.\n" % x)
 
 for x in ps.parents:
 	c = x.cl

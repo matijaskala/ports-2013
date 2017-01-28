@@ -48,6 +48,8 @@ src_unpack() {
 	cd "${S}"
 	epatch "${FILESDIR}"/${P}-memory-corruption.patch #568714
 	epatch "${FILESDIR}"/${P}-disable-same.patch
+	epatch "${FILESDIR}"/${PN}-2.6-musl.patch
+	epatch "${FILESDIR}"/${P}-fix-visibility-musl.patch
 	epatch_user
 }
 
@@ -109,7 +111,6 @@ src_install() {
 
 	cd "${S}"
 	dodoc AUTHORS ChangeLog* NEWS README
-	rm -f "${D}"/usr/share/applications/sandbox.desktop
 }
 
 pkg_preinst() {
