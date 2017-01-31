@@ -67,6 +67,7 @@ src_prepare() {
 	xdg_environment_reset
 
 	use systemd || { sed -i -e 's:libsystemd-login:&disable:' configure || die; }
+	sed -i 's@^# *if.*__GNUC_PREREQ.*__clang__.*$@#ifdef __GNUC__@' udisks/udisksclient.c || die
 
 	default
 }

@@ -1,6 +1,8 @@
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: $
 
-EAPI="3"
+EAPI="5"
 
 inherit cmake-utils versionator
 
@@ -32,11 +34,11 @@ RDEPEND="
 	gmenu? ( gnome-base/gnome-menus )
 	mail? ( net-libs/libetpan )
 	mono? ( dev-dotnet/glib-sharp )
-	kde? ( kde-base/kdelibs )
+	kde? ( kde-frameworks/kdelibs )
 	sensors? ( sys-apps/lm_sensors )
 	terminal? ( x11-libs/vte )
 	upower? ( sys-power/upower )
-	vala? ( dev-lang/vala:0.12 )
+	vala? ( dev-lang/vala )
 	webkit? ( net-libs/webkit-gtk )
 	xgamma? ( x11-libs/libXxf86vm )
 	xklavier? ( x11-libs/libxklavier )

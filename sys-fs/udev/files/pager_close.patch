@@ -1,0 +1,13 @@
+--- a/src/shared/pager.c
++++ b/src/shared/pager.c
+@@ -160,8 +160,8 @@
+                 return;
+ 
+         /* Inform pager that we are done */
+-        stdout = safe_fclose(stdout);
+-        stderr = safe_fclose(stderr);
++        safe_fclose(stdout);
++        safe_fclose(stderr);
+ 
+         (void) kill(pager_pid, SIGCONT);
+         (void) wait_for_terminate(pager_pid, NULL);

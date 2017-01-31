@@ -124,6 +124,10 @@ src_prepare() {
 
 	eapply "${FILESDIR}/systemd-${PV}-pkgconfig.patch"
 	eapply "${FILESDIR}"/232-0002-build-sys-add-check-for-gperf-lookup-function-signat.patch
+	eapply "${FILESDIR}"/0024-add-fallback-parse_printf_format-implementation.patch
+	eapply "${FILESDIR}"/event_child_handler_t.patch
+	eapply "${FILESDIR}"/pager_close.patch
+	eapply "${FILESDIR}"/SIOCGSTAMPNS.patch
 
 	# apply user patches
 	eapply_user
@@ -134,9 +138,9 @@ src_prepare() {
 		check_default_rules
 	fi
 
-	if ! use elibc_glibc; then #443030
+	if use elibc_uclibc; then #443030
 		echo '#define secure_getenv(x) NULL' >> config.h.in
-		sed -i -e '/error.*secure_getenv/s:.*:#define secure_getenv(x) NULL:' src/shared/missing.h || die
+		sed -i -e '/error.*secure_getenv/s:.*:#define secure_getenv(x) NULL:' src/basic/missing.h || die
 	fi
 }
 
