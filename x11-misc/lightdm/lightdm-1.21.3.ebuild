@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-inherit autotools eutils flag-o-matic pam qmake-utils readme.gentoo-r1 systemd versionator xdg-utils
+inherit autotools eutils flag-o-matic pam qmake-utils readme.gentoo-r1 systemd vala versionator xdg-utils
 
 TRUNK_VERSION="$(get_version_component_range 1-2)"
 DESCRIPTION="A lightweight display manager"
@@ -62,6 +62,7 @@ src_prepare() {
 	sed -i -e "/AC_CHECK_TOOLS(MOC5/a AC_SUBST(MOC5,$(qt5_get_bindir)/moc)" configure.ac || die
 
 	default
+	vala_src_prepare
 
 	# Remove bogus Makefile statement. This needs to go upstream
 	sed -i /"@YELP_HELP_RULES@"/d help/Makefile.am || die

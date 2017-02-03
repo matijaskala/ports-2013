@@ -30,6 +30,40 @@
 
 #--- END OF EXAMPLES ---
 
+# Michael Palimaka <kensington@gentoo.org> (02 Feb 2017)
+# Upstream missing. Ancient. Unmaintained. No revdeps.
+# Masked for removal in 30 days.
+dev-libs/safestr
+dev-libs/xxl
+
+# Michał Górny <mgorny@gentoo.org> (01 Feb 2017)
+# Fails to compile with USE=static. It is a system package, so a lot
+# of people are hitting this. Furthermore, people keep working it around
+# by forcing USE=-static which may defeat its purpose as a rescue tool.
+# Bug #607548.
+=sys-apps/busybox-1.26.2
+
+# Matthias Maier <tamiko@gentoo.org> (31 Jan 2017)
+# Dead upstream (no development since 2010) [1,2], outstanding security
+# issue with newer encfs versions [3], oustanding Gentoo bugs [4,5].
+# Mask for removal in 30 days.
+# [1] https://github.com/tomm/cryptkeeper/commits/master
+# [2] https://github.com/tomm/cryptkeeper/issues/
+# [3] https://bugs.gentoo.org/show_bug.cgi?id=607772
+# [4] https://bugs.gentoo.org/show_bug.cgi?id=448360
+# [5] https://bugs.gentoo.org/show_bug.cgi?id=596832
+app-crypt/cryptkeeper
+
+# Mike Gilbert <floppym@gentoo.org> (31 Jan 2017)
+# Depends on old version of dev-python/pyparsing.
+# Removal in 30 days.
+dev-python/mwlib
+dev-python/mwlib-rl
+
+# Fabian Groffen <grobian@gentoo.org> (31 Jan 2017)
+# Mask upcoming Exim release candidates
+=mail-mta/exim-4.89_rc1
+
 # David Seifert <soap@gentoo.org> (30 Jan 2017)
 # No maintainer activity since git migration, dated eclass
 # Multiple open bugs, with no activity:
@@ -357,8 +391,9 @@ dev-lang/python:3.6
 app-office/openproj-bin
 
 # Michael Orlitzky <mjo@gentoo.org> (07 Jan 2017)
-# Places unauthenticated HTTP data into root's SSH authorized_keys
-# file. Nope. Masked for removal in 30 days. Bug 603346.
+# This package has some dangerous quality and security issues, but
+# people may still find it useful. It is masked to prevent accidental
+# use. See bugs 603346 and 604998 for more information.
 app-admin/amazon-ec2-init
 
 # Mart Raudsepp <leio@gentoo.org> (07 Jan 2017)
@@ -492,10 +527,6 @@ sci-geosciences/googleearth
 # Lars Wendler <polynomial-c@gentoo.org> (26 Aug 2016)
 # Masked while being tested and reverse deps aren't fully compatible
 =dev-libs/openssl-1.1*
-
-# Pacho Ramos <pacho@gentoo.org> (21 Aug 2016)
-# Security issues (#562898)
-=app-admin/lsyncd-2.1.5
 
 # Brian Evans <grknight@gentoo.org> (18 Aug 2016)
 # Mask new MariaDB alphas for testing

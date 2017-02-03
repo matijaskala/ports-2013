@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -14,14 +14,12 @@ SRC_URI=""
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="amd64 x86"
 IUSE=""
 
-DEPEND="
-	dev-ruby/yard
-	dev-util/yast-devtools
-	yast-base/yast-rake
-"
+DEPEND="dev-ruby/yard
+	dev-ruby/yast-rake
+	dev-util/yast-devtools"
 
 RDEPEND="${DEPEND}"
 
