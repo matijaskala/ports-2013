@@ -23,7 +23,8 @@ geek-sources_src_unpack() {
 
 	geek_prepare_storedir
 
-	for i in ${GEEK_SOURCES_IUSE} ; do
+	local _iuse=( ${GEEK_SOURCES_IUSE} )
+	for i in "${_iuse[@]#[+-]}" ; do
 		use ${i} || continue
 		if type "${i}_fetch" &> /dev/null ; then
 			"${i}_fetch"

@@ -4,7 +4,7 @@
 
 EAPI="5"
 ETYPE="sources"
-GEEK_SOURCES_IUSE="gentoo debian fedora mageia suse"
+GEEK_SOURCES_IUSE="+gentoo debian fedora mageia suse"
 
 inherit geek-sources
 detect_version
@@ -12,6 +12,7 @@ detect_version
 DESCRIPTION="Full sources for the Linux kernel including Gentoo, Debian, Fedora, Mageia and openSUSE patches"
 HOMEPAGE="https://www.kernel.org"
 UNIPATCH_LIST="${FILESDIR}/enable_additional_cpu_optimizations_for_gcc.patch ${FILESDIR}/linux-4.3-colored-printk.patch"
+UNIPATCH_STRICTORDER=1
 
 KEYWORDS="~amd64 ~x86"
 DEBIAN_BRANCH="debian/${PV}-1"
@@ -23,6 +24,19 @@ GENTOO_BRANCH="${KV_MAJOR}.${KV_MINOR}-${KV_PATCH}"
 MAGEIA_REPO_URI="svn://svn.mageia.org/svn/packages/cauldron/kernel/releases/${PV}/1.mga6/PATCHES/patches -> mageia/${PV}"
 SUSE_REPO_URI="git://kernel.opensuse.org/kernel-source.git"
 SUSE_BRANCH="stable"
+IUSE="bfq muqss wbt zen-interactive"
+REQUIRED_USE="zen-interactive? ( muqss )"
+
+debian_fetch() {
+	local CSD="$(geek_get_source_repo_path debian)"
+	if [[ -d ${CSD} ]]; then
+		pushd "${CSD}" > /dev/null || die
+		git pull --all --quiet
+		popd > /dev/null || die
+	else
+		git clone -b "${DEBIAN_BRANCH}" "${DEBIAN_REPO_URI% -> *}" "${CSD}"
+	fi
+}
 
 debian_apply() {
 	cd debian/patches
@@ -47,4 +61,13 @@ suse_apply() {
 	# masked arch.acpi.thermal because it is not compatible with linux 4.8.11
 	# TODO remove the mask in later ebuilds
 	geek_apply $(awk '!/(#|^$)/ && !/^(\+(needs|tren|trenn|hare|xen|jbeulich|jeffm|jjolly|agruen|still|philips|disabled|olh))|patches\.(kernel|rpmify|xen|arch.acpi.thermal).*/{gsub(/[ \t]/,"") ; print $1}' series.conf)
+}
+
+src_unpack() {
+	use muqss && UNIPATCH_LIST+=" ${FILESDIR}/0001-MuQSS-The-Multiple-Queue-Skiplist-Scheduler-v0.144-b.patch"
+	use wbt && UNIPATCH_LIST+=" ${FILESDIR}/0002-Writeback-buf-throttling-patch-v7-by-Jens-Axboe.patch"
+	use bfq && UNIPATCH_LIST+=" ${FILESDIR}/0003-BFQ-version-4.8.0-v8r5-by-Paolo-Valente.patch"
+	use zen-interactive && UNIPATCH_LIST+=" ${FILESDIR}/zen_interactive.patch"
+
+	geek-sources_src_unpack
 }

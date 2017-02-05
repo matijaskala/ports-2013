@@ -1,0 +1,200 @@
+diff -ru a/include/linux/blkdev.h b/include/linux/blkdev.h
+--- a/include/linux/blkdev.h	2016-10-03 01:24:33.000000000 +0200
++++ b/include/linux/blkdev.h	2017-02-05 09:22:24.339859459 +0100
+@@ -39,7 +39,11 @@
+ struct pr_ops;
+ 
+ #define BLKDEV_MIN_RQ	4
++#ifdef CONFIG_ZEN_INTERACTIVE
++#define BLKDEV_MAX_RQ	512
++#else
+ #define BLKDEV_MAX_RQ	128	/* Default maximum */
++#endif
+ 
+ /*
+  * Maximum number of blkcg policies allowed to be registered concurrently.
+diff -ru a/drivers/cpufreq/cpufreq_ondemand.c b/drivers/cpufreq/cpufreq_ondemand.c
+--- a/drivers/cpufreq/cpufreq_ondemand.c	2017-02-05 08:09:52.000000000 +0100
++++ b/drivers/cpufreq/cpufreq_ondemand.c	2017-02-04 19:56:11.003373951 +0100
+@@ -21,7 +21,11 @@
+ 
+ /* On-demand governor macros */
+ #define DEF_FREQUENCY_UP_THRESHOLD		(80)
++#ifdef CONFIG_ZEN_INTERACTIVE
++#define DEF_SAMPLING_DOWN_FACTOR		(10)
++#else
+ #define DEF_SAMPLING_DOWN_FACTOR		(1)
++#endif
+ #define MAX_SAMPLING_DOWN_FACTOR		(100000)
+ #define MICRO_FREQUENCY_UP_THRESHOLD		(95)
+ #define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(10000)
+diff -ru a/init/Kconfig b/init/Kconfig
+--- a/init/Kconfig	2017-02-05 08:41:24.435909655 +0100
++++ b/init/Kconfig	2017-02-04 19:56:11.167373947 +0100
+@@ -30,9 +30,41 @@
+ 	default n
+ 	---help---
+ 	  The Multiple Queue Skiplist Scheduler for excellent interactivity and
+ 	  responsiveness on the desktop and highly scalable deterministic
+ 	  low latency on any hardware.
+ 
++config ZEN_INTERACTIVE
++	bool "Tune kernel for interactivity"
++	default y
++	help
++	  Tunes the kernel for responsiveness at the cost of throughput and power usage.
++
++	  --- Virtual Memory Subsystem ---------------------------
++
++	    Mem dirty before bg writeback..:  10 %  ->  20 %
++	    Mem dirty before sync writeback:  20 %  ->  50 %
++
++	  --- Block Layer ----------------------------------------
++
++	    Block Layer Queue Depth........: 128    ->  512
++
++	  --- CPU Scheduler (CFS) --------------------------------
++
++	    Scheduling latency.............:   6    ->   3    ms
++	    Minimal granularity............:   0.75 ->   0.3  ms
++	    Wakeup granularity.............:   1    ->   0.5  ms
++	    CPU migration cost.............:   0.5  ->   0.25 ms
++	    Bandwidth slice size...........:   5    ->   3    ms
++
++	  --- CPU Scheduler (MuQSS) ------------------------------
++
++	    Scheduling interval............:   6    ->   3    ms
++	    ISO task max realtime use......:  70 %  ->  25 %
++
++	  --- CPU Frequency Scaling ------------------------------
++
++	    Ondemand down scaling factor...:   1    ->  10
++
+ config BROKEN
+ 	bool
+ 
+diff -ru a/kernel/sched/fair.c b/kernel/sched/fair.c
+--- a/kernel/sched/fair.c	2017-02-05 08:15:11.000000000 +0100
++++ b/kernel/sched/fair.c	2017-02-04 19:56:11.177373947 +0100
+@@ -47,8 +47,13 @@
+  * (to see the precise effective timeslice length of your workload,
+  *  run vmstat and monitor the context-switches (cs) field)
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++unsigned int sysctl_sched_latency = 3000000ULL;
++unsigned int normalized_sysctl_sched_latency = 3000000ULL;
++#else
+ unsigned int sysctl_sched_latency = 6000000ULL;
+ unsigned int normalized_sysctl_sched_latency = 6000000ULL;
++#endif
+ 
+ /*
+  * The initial- and re-scaling of tunables is configurable
+@@ -66,13 +71,22 @@
+  * Minimal preemption granularity for CPU-bound tasks:
+  * (default: 0.75 msec * (1 + ilog(ncpus)), units: nanoseconds)
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++unsigned int sysctl_sched_min_granularity = 300000ULL;
++unsigned int normalized_sysctl_sched_min_granularity = 300000ULL;
++#else
+ unsigned int sysctl_sched_min_granularity = 750000ULL;
+ unsigned int normalized_sysctl_sched_min_granularity = 750000ULL;
++#endif
+ 
+ /*
+  * is kept at sysctl_sched_latency / sysctl_sched_min_granularity
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++static unsigned int sched_nr_latency = 10;
++#else
+ static unsigned int sched_nr_latency = 8;
++#endif
+ 
+ /*
+  * After fork, child runs first. If set to 0 (default) then
+@@ -88,10 +102,17 @@
+  * and reduces their over-scheduling. Synchronous workloads will still
+  * have immediate wakeup/sleep latencies.
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++unsigned int sysctl_sched_wakeup_granularity = 500000UL;
++unsigned int normalized_sysctl_sched_wakeup_granularity = 500000UL;
++
++const_debug unsigned int sysctl_sched_migration_cost = 250000UL;
++#else
+ unsigned int sysctl_sched_wakeup_granularity = 1000000UL;
+ unsigned int normalized_sysctl_sched_wakeup_granularity = 1000000UL;
+ 
+ const_debug unsigned int sysctl_sched_migration_cost = 500000UL;
++#endif
+ 
+ /*
+  * The exponential sliding  window over which load is averaged for shares
+@@ -111,8 +132,12 @@
+  *
+  * default: 5 msec, units: microseconds
+   */
++#ifdef CONFIG_ZEN_INTERACTIVE
++unsigned int sysctl_sched_cfs_bandwidth_slice = 3000UL;
++#else
+ unsigned int sysctl_sched_cfs_bandwidth_slice = 5000UL;
+ #endif
++#endif
+ 
+ static inline void update_load_add(struct load_weight *lw, unsigned long inc)
+ {
+diff -ru a/kernel/sched/MuQSS.c b/kernel/sched/MuQSS.c
+--- a/kernel/sched/MuQSS.c	2017-02-05 08:41:24.435909655 +0100
++++ b/kernel/sched/MuQSS.c	2017-02-04 19:56:11.175373947 +0100
+@@ -145,7 +145,11 @@
+  * Value is in ms and set to a minimum of 6ms. Scales with number of cpus.
+  * Tunable via /proc interface.
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++int rr_interval __read_mostly = 3;
++#else
+ int rr_interval __read_mostly = 6;
++#endif
+ 
+ /* Tunable to choose whether to prioritise latency or throughput, simple
+  * binary yes or no */
+@@ -157,7 +161,11 @@
+  * are allowed to run five seconds as real time tasks. This is the total over
+  * all online cpus.
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++int sched_iso_cpu __read_mostly = 25;
++#else
+ int sched_iso_cpu __read_mostly = 70;
++#endif
+ 
+ /*
+  * The relative length of deadline for each priority(nice) level.
+diff -ru a/mm/page-writeback.c b/mm/page-writeback.c
+--- a/mm/page-writeback.c	2017-02-05 08:09:18.000000000 +0100
++++ b/mm/page-writeback.c	2017-02-04 19:56:11.187373947 +0100
+@@ -70,7 +70,11 @@
+ /*
+  * Start background writeback (via writeback threads) at this percentage
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++int dirty_background_ratio = 20;
++#else
+ int dirty_background_ratio = 10;
++#endif
+ 
+ /*
+  * dirty_background_bytes starts at 0 (disabled) so that it is a function of
+@@ -87,7 +91,11 @@
+ /*
+  * The generator of dirty data starts writeback at this percentage
+  */
++#ifdef CONFIG_ZEN_INTERACTIVE
++int vm_dirty_ratio = 50;
++#else
+ int vm_dirty_ratio = 20;
++#endif
+ 
+ /*
+  * vm_dirty_bytes starts at 0 (disabled) so that it is a function of
