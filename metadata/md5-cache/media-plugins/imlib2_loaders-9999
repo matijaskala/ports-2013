@@ -1,0 +1,11 @@
+DEFINED_PHASES=compile configure install prepare unpack
+DEPEND=dev-vcs/git !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 doc? ( app-doc/doxygen )
+DESCRIPTION=image loader plugins for Imlib 2
+EAPI=5
+HOMEPAGE=https://www.enlightenment.org/pages/imlib2.html
+IUSE=eet xcf nls doc
+LICENSE=BSD
+RDEPEND=>=media-libs/imlib2-9999 eet? ( dev-libs/efl ) nls? ( sys-devel/gettext )
+SLOT=0
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	enlightenment	614557d78f201966d7600f6b5733098c	eutils	ea170b525f6a38a006be05c9d9429f13	git-2	7af5d170bfc02983b4bcd3167dc5edd4	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=b83bc597efce6c6a93460148698fcd3d

@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=>=dev-perl/Module-Build-0.40 test? ( virtual/perl-Carp dev-perl/Moo dev-perl/Type-Tiny dev-perl/Test-NoWarnings ) dev-lang/perl:=
+DESCRIPTION=Perl extension for comparing arrays
+EAPI=6
+HOMEPAGE=http://search.cpan.org/dist/Array-Compare/
+IUSE=test
+KEYWORDS=~amd64 ~ppc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos
+LICENSE=|| ( Artistic GPL-1+ )
+RDEPEND=virtual/perl-Carp dev-perl/Moo dev-perl/Type-Tiny dev-lang/perl:=
+SLOT=0
+SRC_URI=mirror://cpan/authors/id/D/DA/DAVECROSS/Array-Compare-2.11.tar.gz
+_eclasses_=multiprocessing	7bb10a841be2368af0c00f27dd67560b	perl-functions	aac50de73be0a80ebe780e0b20850130	perl-module	f6549146ea31a902e20b5f2e6f244358
+_md5_=7cdcad52b8e6fccf586f024d859e8c7a

@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare prerm pretend setup test unpack
+DEPEND=binary? ( >=sys-kernel/genkernel-3.4.12.6-r4 ) !build? ( sys-apps/sed >=sys-devel/binutils-2.11.90.0.31 )
+DESCRIPTION=Ubuntu patched kernel sources
+EAPI=5
+HOMEPAGE=https://launchpad.net/ubuntu/+source/linux
+IUSE=binary symlink build
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=binary? ( virtual/udev ) !build? ( >=sys-libs/ncurses-5.2 sys-devel/make dev-lang/perl sys-devel/bc )
+RESTRICT=binchecks mirror strip
+SLOT=4.8.34.36
+SRC_URI=mirror://kernel/linux/kernel/v4.x/linux-4.8.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux_4.8.0-34.36.diff.gz amd64? ( http://kernel.ubuntu.com/~kernel-ppa/configs/utopic/amd64-config.flavour.generic ) x86? ( http://kernel.ubuntu.com/~kernel-ppa/configs/utopic/i386-config.flavour.generic )
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	kernel-2	e8e266e84046228629e450852397a75d	mount-boot	41ed556fa5641393d5323e421c8e5bcf	multilib	165fc17c38d1b11dac2008280dab6e80	python-any-r1	1c20f9b800324335a8e3b137363362e8	python-utils-r1	d275302cd06aedef2ba08f81f3104206	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=da0ad5f2db52a9cea99b6200e2f77382

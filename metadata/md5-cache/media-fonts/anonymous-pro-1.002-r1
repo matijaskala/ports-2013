@@ -1,0 +1,13 @@
+DEFINED_PHASES=install postinst postrm setup
+DEPEND=app-arch/unzip X? ( x11-apps/mkfontdir media-fonts/encodings )
+DESCRIPTION=Monospaced truetype font designed with coding in mind
+EAPI=5
+HOMEPAGE=http://www.marksimonson.com/fonts/view/anonymous-pro
+IUSE=X
+KEYWORDS=amd64 arm ~arm64 x86 ~x64-macos
+LICENSE=OFL-1.1
+RESTRICT=binchecks strip
+SLOT=0
+SRC_URI=http://www.marksimonson.com/assets/content/fonts/AnonymousPro-1.002.zip
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	font	cd7790315ca5b8c505e1e0513df6acce	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=9b1526e093fa8382ef73817418fc3d7c

@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=mysql? ( virtual/mysql ) postgres? ( dev-db/postgresql ) sqlite? ( >=dev-db/sqlite-3.7:3[unlock-notify(+)] ) ssl? ( dev-libs/openssl ) virtual/pkgconfig doc? ( app-doc/doxygen )
+DESCRIPTION=A thread safe high level multi-database connection pool library
+EAPI=5
+HOMEPAGE=http://www.tildeslash.com/libzdb/
+IUSE=debug doc mysql postgres +sqlite ssl static-libs
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=mysql? ( virtual/mysql ) postgres? ( dev-db/postgresql ) sqlite? ( >=dev-db/sqlite-3.7:3[unlock-notify(+)] ) ssl? ( dev-libs/openssl )
+REQUIRED_USE=|| ( postgres mysql sqlite )
+RESTRICT=test
+SLOT=0
+SRC_URI=http://www.tildeslash.com/libzdb/dist/libzdb-3.1.tar.gz
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=80a2df67b6e15db8f496152c87217f77

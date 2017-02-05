@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install nofetch postinst preinst prepare setup unpack
+DESCRIPTION=Guide a hero safely through various traps, clear obstructions from his path, and shift his surroundings to create a safe passage to the cozy bed.
+EAPI=5
+HOMEPAGE=http://www.11bitstudios.com/games/12/sleepwalker-s-journey
+IUSE=multilib
+KEYWORDS=-* ~amd64 ~x86
+LICENSE=as-is
+RDEPEND=x86? ( media-libs/openal x11-libs/libdrm x11-libs/libX11 x11-libs/libXau x11-libs/libxcb x11-libs/libXdamage x11-libs/libXdmcp x11-libs/libXext x11-libs/libXfixes x11-libs/libXxf86vm ) amd64? ( app-emulation/emul-linux-x86-xlibs app-emulation/emul-linux-x86-opengl app-emulation/emul-linux-x86-sdl ) virtual/opengl app-arch/unzip games-misc/games-envd
+REQUIRED_USE=amd64? ( multilib )
+RESTRICT=fetch strip
+SLOT=0
+SRC_URI=Sleepwalker-lin_1371139237-Installer
+_eclasses_=base	3fe4f8980633fd7bc69e9887209ba2fe	eutils	ea170b525f6a38a006be05c9d9429f13	games	2cf0d67d765e6358b435ccda30c13ad8	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	unpacker	45d07319df5f40ee6af58418b0f930be	user	80aaa71614ced86f02ee1a513821dc87
+_md5_=3e967598c94541a909f312783a48afab

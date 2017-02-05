@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install postinst preinst prepare setup unpack
+DEPEND=dev-util/cmake monkeyd_plugins_tls? ( net-libs/mbedtls:= ) dev-vcs/git
+DESCRIPTION=A small, fast, and scalable web server
+EAPI=5
+HOMEPAGE=http://www.monkey-project.com/
+IUSE=cgi -debug fastcgi php static-plugins monkeyd_plugins_auth monkeyd_plugins_cheetah monkeyd_plugins_dirlisting +monkeyd_plugins_liana monkeyd_plugins_logger monkeyd_plugins_mandril monkeyd_plugins_tls
+LICENSE=GPL-2
+RDEPEND=php? ( dev-lang/php ) cgi? ( dev-lang/php[cgi] )
+REQUIRED_USE=monkeyd_plugins_tls? ( !static-plugins ) elibc_uclibc? ( !debug ) cgi? ( php )
+SLOT=0
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	git-2	7af5d170bfc02983b4bcd3167dc5edd4	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	user	80aaa71614ced86f02ee1a513821dc87
+_md5_=a31e337cec59f23e3ba44b9aa81c4f3f

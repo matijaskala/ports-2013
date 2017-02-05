@@ -1,0 +1,14 @@
+DEFINED_PHASES=configure prepare setup
+DEPEND=dev-libs/gobject-introspection dev-libs/libxml2[python,python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] dev-libs/libxslt[python,python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] gnome-base/libgtop:2 >=x11-libs/libwnck-3.4.7:3 || ( dev-lang/vala:0.34 dev-lang/vala:0.32 dev-lang/vala:0.30 dev-lang/vala:0.28 dev-lang/vala:0.26 ) dev-util/gdbus-codegen dev-util/gtk-doc-am virtual/pkgconfig !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=BAMF Application Matching Framework
+EAPI=6
+HOMEPAGE=https://launchpad.net/bamf
+IUSE=python_targets_python2_7
+KEYWORDS=amd64 x86
+LICENSE=LGPL-3
+RDEPEND=dev-libs/gobject-introspection dev-libs/libxml2[python,python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] dev-libs/libxslt[python,python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] gnome-base/libgtop:2 >=x11-libs/libwnck-3.4.7:3 || ( dev-lang/vala:0.34 dev-lang/vala:0.32 dev-lang/vala:0.30 dev-lang/vala:0.28 dev-lang/vala:0.26 )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/bamf_0.5.3+16.10.20160929.orig.tar.gz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	python-single-r1	19a74c6b5c191723a997dc7e0cc6bb09	python-utils-r1	d275302cd06aedef2ba08f81f3104206	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	vala	ca3f1c504058f5de407febddfae73167
+_md5_=e3f7eef7660216ce595c51d7e2717514

@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=>=media-libs/coin-3.1.3 x11-libs/motif:0 virtual/opengl virtual/pkgconfig doc? ( app-doc/doxygen )
+DESCRIPTION=GUI binding for using Coin/Open Inventor with Xt/Motif
+EAPI=5
+HOMEPAGE=http://www.coin3d.org/
+IUSE=debug doc static-libs
+KEYWORDS=~amd64 ~arm ~x86 ~amd64-linux ~x86-linux
+LICENSE=GPL-2
+RDEPEND=>=media-libs/coin-3.1.3 x11-libs/motif:0 virtual/opengl
+SLOT=0
+SRC_URI=https://bitbucket.org/Coin3D/coin/downloads/SoXt-1.3.0.tar.gz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	autotools-utils	419811142edf3516b0d0cf1a254d93cb	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=df6ad9120a7a4133bd1fc6632a21fad1

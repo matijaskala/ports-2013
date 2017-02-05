@@ -1,0 +1,11 @@
+DEFINED_PHASES=compile configure prepare test unpack
+DEPEND=dev-libs/boost:= doc? ( app-doc/doxygen dev-python/sphinx ) >=dev-vcs/git-1.8.2.1 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=A collection of multi-dimensional data structure and indexing algorithm
+EAPI=6
+HOMEPAGE=https://gitlab.com/mdds/mdds
+IUSE=doc valgrind
+LICENSE=MIT
+RDEPEND=dev-libs/boost:=
+SLOT=1/9999
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	git-r3	6efc2d7de07a77bf72c7207b48d0e123	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=f17329f8dabb5a0e45541ce6b5734e05

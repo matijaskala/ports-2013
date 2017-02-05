@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst postrm prepare test unpack
+DEPEND=dev-qt/qtcore:5 dev-qt/qtdeclarative:5 >=dev-libs/glib-2.38.1 !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost dev-lang/perl virtual/pkgconfig test? ( ~dev-qt/qttest-0.1_pre20140807 )
+DESCRIPTION=Qml bindings for GSettings.
+EAPI=5
+HOMEPAGE=https://launchpad.net/gsettings-qt
+IUSE=test debug test
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=dev-qt/qtchooser
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/gsettings-qt_0.1+14.10.20140807.orig.tar.gz
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	multilib	165fc17c38d1b11dac2008280dab6e80	qt5-build	dccad07fe79faa8333980c8e327e2727	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	versionator	99ae9d758cbe7cfed19170e7d48f5a9c	virtualx	86c9305a59b3e0459e7fbef3a5f30b96
+_md5_=454876cc36039984ff09dacd327d5f7c

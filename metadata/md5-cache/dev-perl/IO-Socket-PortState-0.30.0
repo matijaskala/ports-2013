@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=virtual/perl-IO virtual/perl-ExtUtils-MakeMaker test? ( virtual/perl-Test-Simple ) dev-lang/perl:=
+DESCRIPTION=Perl extension for checking the open or closed status of a port
+EAPI=6
+HOMEPAGE=http://search.cpan.org/dist/IO-Socket-PortState/
+IUSE=test
+KEYWORDS=~amd64 ~x86
+LICENSE=|| ( Artistic GPL-1+ )
+RDEPEND=virtual/perl-IO dev-lang/perl:=
+SLOT=0
+SRC_URI=mirror://cpan/authors/id/D/DM/DMUEY/IO-Socket-PortState-0.03.tar.gz
+_eclasses_=multiprocessing	7bb10a841be2368af0c00f27dd67560b	perl-functions	aac50de73be0a80ebe780e0b20850130	perl-module	f6549146ea31a902e20b5f2e6f244358
+_md5_=ea137b5a625eeac4fd05ca19ea0c2afe

@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst preinst prepare setup unpack
+DEPEND=games-util/loki_patch
+DESCRIPTION=Postal 2: Share the Pain
+EAPI=5
+HOMEPAGE=http://www.linuxgamepublishing.com/info.php?id=postal2
+KEYWORDS=amd64 x86
+LICENSE=postal2
+PROPERTIES=interactive
+RDEPEND=sys-libs/glibc sys-libs/libstdc++-v3:5 amd64? ( sys-libs/glibc[multilib] sys-libs/libstdc++-v3:5[multilib] ) >=virtual/opengl-7.0-r1[abi_x86_32(-)] >=media-libs/libsdl-1.2.15-r4[X,opengl,abi_x86_32(-)] >=media-libs/openal-1.15.1[abi_x86_32(-)] games-misc/games-envd
+RESTRICT=strip
+SLOT=0
+SRC_URI=http://updatefiles.linuxgamepublishing.com/postal2/postal2-1409.1.run http://updatefiles.linuxgamepublishing.com/postal2/postal2-1409.2.run
+_eclasses_=base	3fe4f8980633fd7bc69e9887209ba2fe	cdrom	d59e7a8a50d875e095c60654bbe22273	eutils	ea170b525f6a38a006be05c9d9429f13	games	2cf0d67d765e6358b435ccda30c13ad8	multilib	165fc17c38d1b11dac2008280dab6e80	portability	bb1a0ed8ea152b957d17339f01d4d7f5	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	unpacker	45d07319df5f40ee6af58418b0f930be	user	80aaa71614ced86f02ee1a513821dc87
+_md5_=803b6a8b46f6c94d23ccdd768e072f6f

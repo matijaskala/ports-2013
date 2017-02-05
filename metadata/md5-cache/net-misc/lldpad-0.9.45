@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=dev-libs/libconfig dev-libs/libnl:1.1 sys-devel/flex virtual/pkgconfig kernel_linux? ( >=sys-kernel/linux-headers-2.6.29 ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Link Layer Discovery Protocol Implementation
+EAPI=4
+HOMEPAGE=http://www.open-lldp.org/
+IUSE=kernel_linux
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=dev-libs/libconfig dev-libs/libnl:1.1 sys-apps/iproute2
+SLOT=0
+SRC_URI=http://www.open-lldp.org/open-lldp/downloads/lldpad-0.9.45.tar.gz/at_download/file -> lldpad-0.9.45.tar.gz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	autotools-utils	419811142edf3516b0d0cf1a254d93cb	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=9127e873e3ca60773e3a860051574684

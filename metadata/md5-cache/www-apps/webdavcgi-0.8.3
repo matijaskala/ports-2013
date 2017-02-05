@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst prepare prerm setup
+DEPEND=|| ( virtual/httpd-cgi virtual/httpd-fastcgi ) >=app-admin/webapp-config-1.50.15
+DESCRIPTION=A Perl CGI for accessing and sharing files, or calendar/addressbooks via WebDAV
+EAPI=4
+HOMEPAGE=http://webdavcgi.sourceforge.net/
+IUSE=mysql postgres rcs samba +sqlite +suid vhosts
+KEYWORDS=~amd64
+LICENSE=GPL-3
+RDEPEND=dev-perl/Archive-Zip dev-perl/File-Copy-Link dev-perl/PerlIO-gzip dev-perl/Quota dev-perl/TimeDate dev-perl/URI dev-perl/UUID-Tiny dev-perl/XML-Simple media-gfx/graphicsmagick[perl] mysql? ( dev-perl/DBD-mysql ) virtual/perl-Module-Load postgres? ( dev-perl/DBD-Pg ) rcs? ( dev-perl/Rcs ) samba? ( dev-perl/Filesys-SmbClient ) sqlite? ( dev-perl/DBD-SQLite ) dev-perl/CGI virtual/perl-File-Spec >=app-admin/webapp-config-1.50.15
+REQUIRED_USE=|| ( mysql postgres sqlite )
+SLOT=0
+SRC_URI=mirror://sourceforge/webdavcgi/webdavcgi-0.8.3.tar.bz2
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	webapp	42c6ef7af496b228f9854b3c81e4b226
+_md5_=63d48a5467a85d614ef09d174681bfff

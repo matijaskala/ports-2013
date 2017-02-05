@@ -1,0 +1,12 @@
+DEFINED_PHASES=install prepare test
+DEPEND=virtual/libusb:0 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Library and client for communicating with PTP enabled devices (e.g. digital photo cameras)
+EAPI=2
+HOMEPAGE=https://sourceforge.net/projects/libptp/
+KEYWORDS=amd64 ppc ppc64 x86
+LICENSE=GPL-2
+RDEPEND=virtual/libusb:0
+SLOT=0
+SRC_URI=mirror://sourceforge/libptp/libptp2-1.1.10.tar.gz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=91d0c22409137f6b7dff5a1bde2aa903

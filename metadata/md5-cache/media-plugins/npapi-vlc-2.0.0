@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install prepare
+DEPEND=>=media-video/vlc-1.1 x11-libs/libX11 !gtk? ( x11-libs/libXpm x11-libs/libSM x11-libs/libICE ) gtk? ( x11-libs/gtk+:2 ) !<media-video/vlc-1.2[nsplugin] app-arch/xz-utils virtual/pkgconfig >=net-misc/npapi-sdk-0.27 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Mozilla plugin based on VLC
+EAPI=3
+HOMEPAGE=http://www.videolan.org/
+IUSE=gtk
+KEYWORDS=amd64 ~ppc64 x86
+LICENSE=LGPL-2.1
+RDEPEND=>=media-video/vlc-1.1 x11-libs/libX11 !gtk? ( x11-libs/libXpm x11-libs/libSM x11-libs/libICE ) gtk? ( x11-libs/gtk+:2 ) !<media-video/vlc-1.2[nsplugin]
+SLOT=0
+SRC_URI=http://download.videolan.org/pub/videolan/vlc/2.0.0/npapi-vlc-2.0.0.tar.xz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=d4c263280d10b6e3b2f71af28e78a5e3

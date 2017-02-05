@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test
+DEPEND=dev-libs/libaccounts-glib dev-libs/libdbusmenu:= dev-libs/libtimezonemap:= gnome-extra/evolution-data-server:= media-libs/gstreamer:1.0 net-misc/url-dispatcher sys-apps/util-linux unity-indicators/ido:= >=x11-libs/libnotify-0.7.6 dev-libs/properties-cpp sys-devel/make >=dev-util/cmake-3.5.2 >=sys-apps/sed-4
+DESCRIPTION=Date and Time Indicator used by the Unity desktop
+EAPI=6
+HOMEPAGE=https://launchpad.net/indicator-datetime
+IUSE=+eds
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=dev-libs/libaccounts-glib dev-libs/libdbusmenu:= dev-libs/libtimezonemap:= gnome-extra/evolution-data-server:= media-libs/gstreamer:1.0 net-misc/url-dispatcher sys-apps/util-linux unity-indicators/ido:= >=x11-libs/libnotify-0.7.6 unity-base/unity-control-center unity-base/unity-language-pack
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/indicator-datetime_15.10+16.10.20160820.1.orig.tar.gz
+_eclasses_=cmake-utils	f0c2647fb321257c91c6a967f362d053	eutils	ea170b525f6a38a006be05c9d9429f13	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	gnome2-utils	c6dcdf3a2c22b578b16adb945dc85c35	multilib	165fc17c38d1b11dac2008280dab6e80	multiprocessing	7bb10a841be2368af0c00f27dd67560b	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	vala	ca3f1c504058f5de407febddfae73167	versionator	99ae9d758cbe7cfed19170e7d48f5a9c	xdg-utils	e2b2bd56125ce8cf59ce30c642b59d48
+_md5_=2e32d6db5daca31ffab25e882e73242b

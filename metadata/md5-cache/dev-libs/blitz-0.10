@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=boost? ( >=dev-libs/boost-1.40 ) doc? ( app-doc/doxygen[dot] ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=High-performance C++ numeric library
+EAPI=4
+HOMEPAGE=http://blitz.sourceforge.net
+IUSE=boost debug doc examples static-libs
+KEYWORDS=~amd64 ~ppc ~x86 ~amd64-linux ~ppc-macos ~x86-linux ~x86-macos
+LICENSE=|| ( LGPL-3 Artistic-2 BSD )
+RDEPEND=boost? ( >=dev-libs/boost-1.40 )
+SLOT=0
+SRC_URI=mirror://sourceforge/blitz/blitz-0.10.tar.gz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	autotools-utils	419811142edf3516b0d0cf1a254d93cb	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=dedb24bdb1407a5aa4327d20fac43d9f

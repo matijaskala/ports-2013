@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install prepare
+DEPEND=dev-libs/openssl:0 sys-libs/zlib !bundled-libs? ( dev-lang/luajit:2[lua52compat] >=dev-libs/yajl-2.0.2 net-libs/http-parser ) virtual/pkgconfig
+DESCRIPTION=Takes node.js' architecture and dependencies and fits it in the Lua language
+EAPI=5
+HOMEPAGE=http://luvit.io/
+IUSE=bundled-libs examples
+KEYWORDS=amd64 x86
+LICENSE=Apache-2.0 bundled-libs? ( BSD MIT )
+RDEPEND=dev-libs/openssl:0 sys-libs/zlib !bundled-libs? ( dev-lang/luajit:2[lua52compat] >=dev-libs/yajl-2.0.2 net-libs/http-parser )
+RESTRICT=test
+SLOT=0
+SRC_URI=http://luvit.io/dist/latest/luvit-0.7.0.tar.gz
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=47169c801c781bbecddbdc885c0b4713

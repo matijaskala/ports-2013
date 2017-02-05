@@ -1,0 +1,12 @@
+DEFINED_PHASES=configure install prepare unpack
+DEPEND=dev-cpp/glog dev-cpp/sparsehash dev-libs/cityhash dev-libs/libpo6 dev-libs/libe dev-libs/busybee dev-libs/popt dev-libs/replicant dev-libs/json-c !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1
+DESCRIPTION=A searchable distributed Key-Value Store
+EAPI=5
+HOMEPAGE=http://hyperdex.org
+IUSE=+python python_targets_python2_7
+LICENSE=BSD
+RDEPEND=dev-cpp/glog dev-cpp/sparsehash dev-libs/cityhash dev-libs/libpo6 dev-libs/libe dev-libs/busybee dev-libs/popt dev-libs/replicant dev-libs/json-c
+SLOT=0
+SRC_URI=http://dev.gentooexperimental.org/~patrick/autotools-java.tar
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	git-r3	6efc2d7de07a77bf72c7207b48d0e123	libtool	4890219c51da247200223277f993e054	multibuild	742139c87a9fa3766f0c2b155e5522bf	multilib	165fc17c38d1b11dac2008280dab6e80	python-r1	dcd61d7a5c283f18cfe763552b09eb88	python-utils-r1	d275302cd06aedef2ba08f81f3104206	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=74f6c9bdfd4d0184ab3222dae0dc2a99

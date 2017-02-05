@@ -1,0 +1,13 @@
+DEFINED_PHASES=install unpack
+DEPEND=app-arch/unzip
+DESCRIPTION=Neverwinter Nights Dedicated server
+EAPI=6
+HOMEPAGE=http://nwn.bioware.com/downloads/standaloneserver.html
+IUSE=linguas_en
+KEYWORDS=-* ~amd64 ~x86
+LICENSE=NWN-EULA
+RESTRICT=mirror strip
+SLOT=0
+SRC_URI=http://files.bioware.com/neverwinternights/updates/windows/server/NWNDedicatedServer1.69.zip linguas_en? ( http://files.bioware.com/neverwinternights/dialog//english/NWNEnglish1.69dialog.zip )
+_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=ef716cdbe3f16b0ccd69dadc95b13648

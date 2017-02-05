@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure postinst prepare setup
+DEPEND=app-text/linuxdoc-tools sys-devel/bison sys-devel/gettext dev-libs/glib:2 ldap? ( net-nds/openldap ) popt? ( dev-libs/popt ) sasl? ( dev-libs/cyrus-sasl ) selinux? ( sys-libs/libselinux ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Implements a standardized interface for manipulating and administering user and group accounts
+EAPI=5
+HOMEPAGE=https://fedorahosted.org/libuser
+IUSE=ldap +popt sasl selinux
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=dev-libs/glib:2 ldap? ( net-nds/openldap ) popt? ( dev-libs/popt ) sasl? ( dev-libs/cyrus-sasl ) selinux? ( sys-libs/libselinux )
+SLOT=0
+SRC_URI=https://fedorahosted.org/releases/l/i/libuser/libuser-0.60.tar.xz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	python	efc1c55fc44c5b7272fc2ffba73c3e6f	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=2ed07c142a08dc560b4d1adeadc91ba5

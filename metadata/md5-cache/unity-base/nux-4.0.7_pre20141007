@@ -1,0 +1,13 @@
+DEFINED_PHASES=install prepare
+DEPEND=media-libs/glew:= app-i18n/ibus dev-libs/boost >=dev-libs/glib-2.32.3 dev-libs/libpcre dev-libs/libsigc++:2 gnome-base/gnome-common media-libs/libpng:0 sys-apps/pciutils unity-base/geis x11-libs/cairo x11-libs/gdk-pixbuf x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXxf86vm x11-libs/pango x11-proto/dri2proto x11-proto/glproto >=sys-devel/gcc-4.7 dev-cpp/gmock dev-cpp/gtest !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Visual rendering toolkit for the Unity desktop
+EAPI=5
+HOMEPAGE=http://launchpad.net/nux
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3 LGPL-3
+RDEPEND=media-libs/glew:= app-i18n/ibus dev-libs/boost >=dev-libs/glib-2.32.3 dev-libs/libpcre dev-libs/libsigc++:2 gnome-base/gnome-common media-libs/libpng:0 sys-apps/pciutils unity-base/geis x11-libs/cairo x11-libs/gdk-pixbuf x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXxf86vm x11-libs/pango x11-proto/dri2proto x11-proto/glproto
+RESTRICT=mirror
+SLOT=0/4
+SRC_URI=https://launchpad.net/ubuntu/+archive/primary/+files/nux_4.0.7+14.10.20141007.orig.tar.gz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=c4a12d90632a5246ea83c06dbc4cedee
