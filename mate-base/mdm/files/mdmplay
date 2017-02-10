@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Copied from ubuntu
+# https://bugs.gentoo.org/show_bug.cgi?id=248253
+/usr/bin/aplay -q -N $@ 2> /dev/null

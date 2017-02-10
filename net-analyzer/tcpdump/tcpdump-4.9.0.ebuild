@@ -12,12 +12,12 @@ HOMEPAGE="
 "
 SRC_URI="
 	https://dev.gentoo.org/~jer/${P}.tar.gz
-	https://github.com/the-${PN}-group/${PN}/archive/${P}.tar.gz
 "
+#	https://github.com/the-${PN}-group/${PN}/archive/${P}.tar.gz
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha amd64 ~arm ~arm64 hppa ~ia64 ~mips ~ppc ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 ~arm ~arm64 hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux"
 IUSE="+drop-root libressl smi ssl samba suid test"
 
 RDEPEND="

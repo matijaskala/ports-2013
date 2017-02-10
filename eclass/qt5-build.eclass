@@ -505,7 +505,7 @@ qt5_symlink_tools_to_build_dir() {
 # @DESCRIPTION:
 # Runs ./configure for modules belonging to qtbase.
 qt5_base_configure() {
-	if [[ ${CHOST} == ${CBUILD} ]] || [[ ${PN} != qtcore ]] ; then
+	if [[ ${CHOST} == ${CBUILD} ]] ; then
 	# setup toolchain variables used by configure
 	tc-export AR CC CXX OBJDUMP RANLIB STRIP
 	export LD="$(tc-getCXX)"
@@ -549,7 +549,7 @@ qt5_base_configure() {
 		-shared
 
 		# always enable large file support
-		-largefile
+		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -largefile)
 
 		# disabling accessibility is not recommended by upstream, as
 		# it will break QStyle and may break other internal parts of Qt
@@ -649,8 +649,7 @@ qt5_base_configure() {
 		-no-xkb -no-xrender
 
 		# disable obsolete/unused X11-related flags
-		# (not shown in ./configure -help output)
-		-no-mitshm -no-xcursor -no-xfixes -no-xrandr -no-xshape -no-xsync
+		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -no-mitshm -no-xcursor -no-xfixes -no-xrandr -no-xshape -no-xsync)
 
 		# always enable session management support: it doesn't need extra deps
 		# at configure time and turning it off is dangerous, see bug 518262
@@ -682,6 +681,12 @@ qt5_base_configure() {
 		"${myconf[@]}"
 	)
 
+	if [[ ${CHOST} == *mingw* ]] ; then
+		export PKG_CONFIG_LIBDIR="${SYSROOT}${EPREFIX}"/usr/$(get_libdir)/pkgconfig
+		export PKG_CONFIG_PATH="${SYSROOT}${EPREFIX}"/usr/share/pkgconfig
+		export PKG_CONFIG_SYSROOT_DIR="${SYSROOT}${EPREFIX}"
+	fi
+
 	pushd "${QT5_BUILD_DIR}" >/dev/null || die
 
 	einfo "Configuring with: ${conf[@]}"
@@ -701,14 +706,14 @@ qt5_qmake() {
 	if [[ ${QT5_MODULE} == qtbase ]]; then
 		qmakepath=${QT5_BUILD_DIR}/bin
 	else
-		qmakepath=${QT5_BINDIR}
+		qmakepath=${SYSROOT}${QT5_BINDIR}
 	fi
 
 	local qmakeargs=(
 		CONFIG+=$(usex debug debug release)
 		CONFIG-=$(usex debug release debug)
 	)
-	[[ ${CHOST} == ${CBUILD} ]] || [[ ${PN} != qtcore ]] && \
+	[[ ${CHOST} == ${CBUILD} ]] || [[ $(pwd) != */tools/* ]] && \
 	qmakeargs+=(
 		QMAKE_AR="$(tc-getAR) cqs"
 		QMAKE_CC="$(tc-getCC)"
@@ -737,6 +742,34 @@ qt5_qmake() {
 		"${qmakeargs[@]}" \
 		"${myqmakeargs[@]}" \
 		|| die "qmake failed (${projectdir#${S}/})"
+
+	# FIXME: is there any other way to pass the correct paths?
+	make clean
+	if [[ -n ${SYSROOT} ]] ; then
+		find -name "Makefile*" -exec sed \
+			-e "s@-L\(/usr/lib \)@-L${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-e "s@-I\(/usr/include/[^ ]* \)@-I${SYSROOT}\1@" \
+			-i {} +
+	fi
 }
 
 # @FUNCTION: qt5_install_module_qconfigs

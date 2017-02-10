@@ -1,10 +1,8 @@
 USE="xml" 									#core subsystems
 USE="$USE cairo cups gbm gpm opengl policykit sdl"
-USE="$USE -gtk -kde -introspection"								#do not enable GUI flags
 USE="$USE udev systemd -consolekit"								#systemd
 USE="$USE X dbus"									# desktop gui frameworks
 USE="$USE dri"		                             					# desktop hardware support
 USE="$USE -video_cards_vmware"								# disable vmware by default
 USE="$USE alsa cdr dvd dvdr flac lame mad mp3 mpeg ogg vorbis wavpack win32codecs"	#core media features
 USE="$USE gif jpeg png tiff truetype"							#core graphics
-USE="$USE apng"										#FL-413 Firefox requres package.use change
