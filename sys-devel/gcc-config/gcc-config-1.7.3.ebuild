@@ -40,7 +40,7 @@ pkg_postinst() {
 	# Do we have a valid multi ver setup ?
 	local x
 	for x in $(gcc-config -C -l 2>/dev/null | awk '$NF == "*" { print $2 }') ; do
-		gcc-config ${x}
+		"${ROOT}"/usr/bin/gcc-config ${x}
 	done
 
 	wait

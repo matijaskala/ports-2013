@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -27,6 +26,6 @@ RDEPEND="dev-python/pycairo[${PYTHON_USEDEP}]
 	media-video/dvdauthor
 	media-video/vcdimager
 	virtual/cdrtools
-	|| ( app-cdr/brasero app-cdr/k3b )"
+	|| ( app-cdr/brasero kde-apps/k3b )"
 
 DEPEND="${PYTHON_DEPS}"

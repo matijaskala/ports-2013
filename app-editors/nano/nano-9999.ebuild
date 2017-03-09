@@ -79,5 +79,4 @@ src_install() {
 	fi
 
 	dodir /usr/bin
-	dosym /bin/nano /usr/bin/nano
 }

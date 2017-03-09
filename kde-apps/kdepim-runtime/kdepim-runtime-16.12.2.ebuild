@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -59,7 +58,7 @@ CDEPEND="
 	$(add_qt_dep qtxml)
 	$(add_qt_dep qtxmlpatterns)
 	dev-libs/libical:=
-	google? ( >=net-libs/libkgapi-5.1.0:5 )
+	google? ( $(add_kdeapps_dep libkgapi '' 5.1.0) )
 	ssl? ( dev-libs/cyrus-sasl )
 "
 DEPEND="${CDEPEND}

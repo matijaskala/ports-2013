@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -29,10 +28,10 @@ KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
 RDEPEND="
-	>=sys-devel/clang-3.6
-	>=sys-devel/llvm-3.6
-	<sys-devel/clang-3.7
-	<sys-devel/llvm-3.7"
+	>=sys-devel/clang-3.6:0
+	>=sys-devel/llvm-3.6:0
+	<sys-devel/clang-3.7:0
+	<sys-devel/llvm-3.7:0"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}"
 
@@ -47,7 +46,7 @@ src_unpack() {
 
 src_configure() {
 	./configure.py \
-		--with-llvm-config="${EPREFIX}/usr/bin/llvm-config" \
+		--with-llvm-config="$(type -P llvm-config)" \
 		--prefix="${EPREFIX}/usr" || die
 }
 

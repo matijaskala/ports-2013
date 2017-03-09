@@ -1,0 +1,24 @@
+--- a/include/stdlib.h
++++ b/include/stdlib.h
+@@ -120,6 +120,9 @@
+ #if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) \
+  || defined(_BSD_SOURCE)
+ char *realpath (const char *__restrict, char *__restrict);
++#ifdef _GNU_SOURCE
++char *canonicalize_file_name (const char *__restrict);
++#endif
+ long int random (void);
+ void srandom (unsigned int);
+ char *initstate (unsigned int, char *, size_t);
+--- a/src/misc/realpath.c
++++ b/src/misc/realpath.c
+@@ -42,4 +42,9 @@
+ err:
+ 	__syscall(SYS_close, fd);
+ 	return 0;
+ }
++
++char *canonicalize_file_name(const char *restrict filename)
++{
++	return realpath(filename, NULL);
++}

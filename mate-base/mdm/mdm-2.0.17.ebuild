@@ -3,6 +3,7 @@
 # $Id$
 
 EAPI=6
+GNOME2_EAUTORECONF="yes"
 
 inherit gnome2 pam user
 
@@ -31,7 +32,6 @@ RDEPEND=">=dev-libs/glib-2.37.3:2
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-apps/sessreg
-	x11-libs/libXdmcp
 	xinerama? ( x11-libs/libXinerama )
 	consolekit? (
 		sys-auth/consolekit
@@ -57,36 +57,9 @@ DEPEND="${RDEPEND}
 	>=app-text/scrollkeeper-0.1.4
 	>=app-text/gnome-doc-utils-0.3.2"
 
+DOCS="AUTHORS ChangeLog NEWS README TODO"
+
 pkg_setup() {
-	DOCS="AUTHORS ChangeLog NEWS README TODO"
-	G2CONF="${G2CONF}
-		--with-prefetch
-		--sysconfdir=/etc/X11
-		--localstatedir=/var
-		--with-xdmcp=yes
-		--with-pam-prefix=/etc
-		--disable-static
-		SOUND_PROGRAM=/usr/bin/mdmplay
-		$(use_enable ipv6)
-		$(use_enable remote secureremote)
-		$(use_with accessibility xevie)
-		$(use_with consolekit console-kit)
-		$(use_with dmx)
-		$(use_with selinux)
-		$(use_with tcpd tcp-wrappers)
-		$(use_with xinerama)"
-
-	if use pam; then
-		G2CONF="${G2CONF} --enable-authentication-scheme=pam"
-	else
-		G2CONF="${G2CONF} --enable-console-helper=no"
-		if use elibc_glibc ; then
-			G2CONF="${G2CONF} --enable-authentication-scheme=shadow"
-		else
-			G2CONF="${G2CONF} --enable-authentication-scheme=crypt"
-		fi
-	fi
-
 	enewgroup mdm
 	enewuser mdm -1 -1 /var/lib/mdm mdm
 }
@@ -98,9 +71,28 @@ src_prepare() {
 	# Make custom session work, bug #216984
 	epatch "${FILESDIR}/gdm-2.20.10-custom-session.patch"
 
-	eautoreconf
-
 	gnome2_src_prepare
+}
+
+src_configure() {
+	gnome2_src_configure \
+		--with-prefetch \
+		--sysconfdir=/etc/X11 \
+		--localstatedir=/var \
+		--with-pam-prefix=/etc \
+		--disable-static \
+		--disable-console-helper \
+		--enable-authentication-scheme=$(usex pam pam "$(usex elibc_glibc shadow crypt)") \
+		SOUND_PROGRAM=/usr/bin/mdmplay \
+		$(use_enable ipv6) \
+		$(use_enable remote secureremote) \
+		$(use_with accessibility xevie) \
+		$(use_with consolekit console-kit) \
+		$(use_with dmx) \
+		$(use_with selinux) \
+		$(use_with tcpd tcp-wrappers) \
+		$(use_with xinerama)
+
 }
 
 src_install() {
@@ -113,16 +105,17 @@ src_install() {
 	# add a custom sound playing script (#248253)
 	dobin "${FILESDIR}"/mdmplay
 
-	# avoid file collision, bug #213118
-	rm -f "${D}/usr/share/xsessions/gnome.desktop"
+	# avoid file collision
+	rm -f "${ED}/usr/share/pixmaps/nobody.png"
+	rm -f "${ED}/usr/share/pixmaps/nohost.png"
 
 	# We replace the pam stuff by our own
-	rm -rf "${D}/etc/pam.d"
+	rm -rf "${ED}/etc/pam.d"
 
 	if use pam ; then
-		use gnome-keyring && sed -i "s:#Keyring=::g" "${FILESDIR}"/pam.d/*
-
 		dopamd "${FILESDIR}"/pam.d/*
 		dopamsecurity console.apps "${FILESDIR}/security/console.apps/mdmsetup"
+
+		use gnome-keyring && sed -i "s:#Keyring=::g" "${ED}"/etc/pam.d/*
 	fi
 }

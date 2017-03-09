@@ -1,11 +1,11 @@
-DEFINED_PHASES=configure postinst postrm preinst prepare unpack
-DEPEND=dev-libs/glib:2 media-libs/alsa-lib >=x11-libs/gtk+-3.6:3 x11-libs/libX11 libnotify? ( x11-libs/libnotify ) dev-util/intltool virtual/pkgconfig !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-apps/sed-4 >=dev-vcs/git-1.8.2.1
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
+DEPEND=dev-libs/glib:2 media-libs/alsa-lib >=x11-libs/gtk+-3.12:3 x11-libs/libX11 libnotify? ( x11-libs/libnotify ) sys-devel/gettext virtual/pkgconfig sys-devel/make >=dev-util/cmake-3.6.3 >=sys-apps/sed-4 >=dev-vcs/git-1.8.2.1
 DESCRIPTION=Volume mixer for the system tray
-EAPI=5
+EAPI=6
 HOMEPAGE=https://github.com/nicklan/pnmixer
-IUSE=debug libnotify
+IUSE=libnotify
 LICENSE=GPL-3
-RDEPEND=dev-libs/glib:2 media-libs/alsa-lib >=x11-libs/gtk+-3.6:3 x11-libs/libX11 libnotify? ( x11-libs/libnotify )
+RDEPEND=dev-libs/glib:2 media-libs/alsa-lib >=x11-libs/gtk+-3.12:3 x11-libs/libX11 libnotify? ( x11-libs/libnotify )
 SLOT=0
-_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	ea170b525f6a38a006be05c9d9429f13	git-r3	6efc2d7de07a77bf72c7207b48d0e123	gnome2-utils	c6dcdf3a2c22b578b16adb945dc85c35	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	xdg-utils	e2b2bd56125ce8cf59ce30c642b59d48
-_md5_=f8fd2b54230731ac004d3a26a05d6a02
+_eclasses_=cmake-utils	dd1d263f83f0791bd433b134f40db39b	eutils	3c847a0129fed780bd709b98e426f89c	flag-o-matic	61cad4fb5d800b29d484b27cb033f59b	git-r3	08c5be5f8bdc203ed54d5ff5fef3c34d	gnome2-utils	fe8e9099c6fc74a40946623c593c7236	multilib	4bad85ef4e04ba5a5af265c3e576ac19	multiprocessing	284a473719153462f3e974d86c8cb81c	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	c80ccf29e90adea7c5cae94b42eb76d0	xdg-utils	178a84136f416b8ea1a857717eacd21c
+_md5_=3f2e10a3798609d46f3ed930d8fa665c

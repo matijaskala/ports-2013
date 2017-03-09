@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -37,7 +36,7 @@ DEPEND="
 	$(add_qt_dep qtsql)
 	$(add_qt_dep qtwebengine 'widgets')
 	$(add_qt_dep qtwidgets)
-	google? ( net-libs/libkgapi:5 )
+	google? ( $(add_kdeapps_dep libkgapi '' 5.3.1) )
 "
 RDEPEND="${DEPEND}
 	!<kde-apps/kdepim-apps-libs-16.04.50

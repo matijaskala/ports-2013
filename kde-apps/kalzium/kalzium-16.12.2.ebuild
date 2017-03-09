@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -43,6 +42,8 @@ DEPEND="
 RDEPEND="${DEPEND}
 	sci-chemistry/chemical-mime-data
 "
+
+PATCHES=( "${FILESDIR}/${P}-kf-5.31.patch" )
 
 src_configure(){
 	# Fix missing finite()

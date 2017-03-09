@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -113,30 +112,48 @@ multilib_layout() {
 }
 
 usrmerge_layout() {
+	[[ -e ${EROOT}usr ]] || return
+	[[ ${EROOT}. -ef ${EROOT}usr/. ]] && return
+	[[ -d ${EROOT}usr ]] || die "${EROOT}usr is not a directory"
 	local d
 	for d in bin sbin $(get_all_libdirs) ; do
-		if [ -h "${ROOT}${d}" ] ; then
+		if [[ ${EROOT}${d}/. -ef ${EROOT}usr/${d}/. ]] ; then
 			continue
-		elif [ -d "${ROOT}${d}" ] ; then
-			if [ -h "${ROOT}usr/${d}" ] ; then
-				if [ "${SYMLINK_LIB}" = "yes" ] && [ "${d}" == "lib" ] ; then
-					mv ${ROOT}${d}/* ${ROOT}usr/${d}/
-					rmdir ${ROOT}${d}
+		elif [[ -d ${EROOT}${d} ]] ; then
+			if [[ -h ${EROOT}${d} ]] ; then
+				eerror "${EROOT}${d} is a symlink but it doesn't point to usr/${d}"
+				continue
+			elif [[ -h ${EROOT}usr/${d} ]] ; then
+				if [[ ! -d ${EROOT}usr/${d} ]] ; then
+					die "${EROOT}usr/${d} is not a directory"
+				elif [[ ${SYMLINK_LIB} = "yes" && ${d} == "lib" ]] ; then
+					[[ ${MERGE_USR} == "no" ]] && continue
+					mv "${EROOT}${d}"/* "${EROOT}usr/${d}"
+					rmdir "${EROOT}${d}"
 				else
-					die "${ROOT}usr/${d} is not a directory"
+					eerror "${EROOT}usr/${d} is a symlink when it shouldn't be"
+					continue
 				fi
-			elif [ -d "${ROOT}usr/${d}" ] ; then
+			elif [[ -d ${EROOT}usr/${d} ]] ; then
+				[[ ${MERGE_USR} == "no" ]] && continue
 				# it is pointless to check for duplicate files
 				# if they don't exist everything is fine
 				# if they do they will reappear on first update
-				mv ${ROOT}${d}/* ${ROOT}usr/${d}/
-				rmdir ${ROOT}${d}
+				mv "${EROOT}${d}"/* "${EROOT}usr/${d}"
+				rmdir "${EROOT}${d}"
+			elif [[ -e ${EROOT}usr/${d} ]] ; then
+				die "${EROOT}usr/${d} is not a directory"
 			else
-				mv ${ROOT}${d} ${ROOT}usr/
+				mv "${EROOT}${d}" "${EROOT}usr"
 			fi
+		elif [[ -e ${EROOT}${d} ]] ; then
+			die "${EROOT}${d} is not a directory"
 		fi
-		ln -s usr/${d} ${ROOT}${d}
-		mkdir -p ${ROOT}usr/${d}
+		if [[ -e ${EROOT}${d} ]] && ! rmdir "${EROOT}${d}" ; then
+			die "failed to recreate ${EROOT}${d} as a symlink"
+		fi
+		ln -s usr/${d} "${EROOT}${d}"
+		mkdir -p "${EROOT}usr/${d}"
 	done
 }
 

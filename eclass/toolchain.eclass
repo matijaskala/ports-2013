@@ -751,7 +751,13 @@ setup_multilib_osdirnames() {
 	if tc_version_is_at_least 4.6 ; then
 		sed_args+=( -e 's:$[(]call if_multiarch[^)]*[)]::g' )
 	fi
-	if [[ ${SYMLINK_LIB} == "yes" ]] ; then
+	local abi libdir
+	local use_lib32="no"
+	for abi in ${TARGET_MULTILIB_ABIS} ; do
+		libdir="LIBDIR_${abi}"
+		[[ ${!libdir} == "lib32" ]] && use_lib32="yes"
+	done
+	if [[ ${use_lib32} == "yes" ]] ; then
 		einfo "updating multilib directories to be: ${libdirs}"
 		if tc_version_is_at_least 4.6.4 || tc_version_is_at_least 4.7 ; then
 			sed_args+=( -e '/^MULTILIB_OSDIRNAMES.*lib32/s:[$][(]if.*):../lib32:' )

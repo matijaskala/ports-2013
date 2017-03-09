@@ -1,11 +1,12 @@
-DEFINED_PHASES=compile install postinst postrm prepare setup unpack
-DEPEND=dev-vcs/mercurial doc? ( app-text/docbook-xsl-stylesheets dev-libs/libxslt ) =dev-lang/python-2* dev-vcs/mercurial
+DEFINED_PHASES=compile configure install prepare setup test unpack
+DEPEND=dev-vcs/mercurial doc? ( app-text/docbook-xsl-stylesheets dev-libs/libxslt ) python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] dev-vcs/mercurial
 DESCRIPTION=Mercurial authentication and authorization tools
-EAPI=3
+EAPI=6
 HOMEPAGE=http://www.lshift.net/mercurial-server.html
-IUSE=doc
+IUSE=doc python_targets_python2_7
 LICENSE=GPL-2
-RDEPEND=dev-vcs/mercurial =dev-lang/python-2*
+RDEPEND=dev-vcs/mercurial python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)]
+REQUIRED_USE=python_targets_python2_7
 SLOT=0
-_eclasses_=distutils	ad9e4720eb3e69090dd968b152fc611b	eutils	ea170b525f6a38a006be05c9d9429f13	mercurial	66da6d1ccacd123e28d2c64821052a9a	multilib	165fc17c38d1b11dac2008280dab6e80	python	efc1c55fc44c5b7272fc2ffba73c3e6f	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	user	80aaa71614ced86f02ee1a513821dc87
-_md5_=579aa046a700eb985093be497f5bf22f
+_eclasses_=distutils-r1	039ba10839816478cfb070fdeb053906	eutils	3c847a0129fed780bd709b98e426f89c	mercurial	4d80fb11f07e24cf9827196e4f45fd18	multilib	4bad85ef4e04ba5a5af265c3e576ac19	python-single-r1	c3e54dd0dc1e70c6252f2551a55bf053	python-utils-r1	4f8aa7196c2c9a5630e66c2113ae46c3	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	user	e4b567c44272a719fabf53f0f885d3f7	xdg-utils	178a84136f416b8ea1a857717eacd21c
+_md5_=5f396b55db02dfcac53999ad3c076362

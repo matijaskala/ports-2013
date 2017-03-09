@@ -1,0 +1,11 @@
+--- a/src/machine/operation.c
++++ b/src/machine/operation.c
+@@ -17,6 +17,8 @@
+   along with systemd; If not, see <http://www.gnu.org/licenses/>.
+ ***/
+ 
++#include <sys/wait.h>
++
+ #include "alloc-util.h"
+ #include "fd-util.h"
+ #include "operation.h"

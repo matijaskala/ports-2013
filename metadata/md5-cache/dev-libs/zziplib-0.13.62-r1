@@ -1,5 +1,5 @@
 DEFINED_PHASES=configure install prepare setup test
-DEPEND=sys-libs/zlib sdl? ( >=media-libs/libsdl-1.2.6 ) >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] virtual/pkgconfig test? ( app-arch/zip )
+DEPEND=sys-libs/zlib sdl? ( >=media-libs/libsdl-1.2.6 ) python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] virtual/pkgconfig test? ( app-arch/zip )
 DESCRIPTION=Lightweight library for extracting data from files archived in a single zip file
 EAPI=5
 HOMEPAGE=http://zziplib.sourceforge.net/
@@ -10,5 +10,5 @@ RDEPEND=sys-libs/zlib sdl? ( >=media-libs/libsdl-1.2.6 )
 REQUIRED_USE=python_targets_python2_7
 SLOT=0
 SRC_URI=mirror://sourceforge/zziplib/zziplib-0.13.62.tar.bz2
-_eclasses_=eutils	ea170b525f6a38a006be05c9d9429f13	flag-o-matic	e0ef2bf8bb6a54693e146ab4085a5ec8	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	python-single-r1	19a74c6b5c191723a997dc7e0cc6bb09	python-utils-r1	d275302cd06aedef2ba08f81f3104206	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
-_md5_=7468f13226b35b694578f45a03ea9353
+_eclasses_=eutils	3c847a0129fed780bd709b98e426f89c	flag-o-matic	61cad4fb5d800b29d484b27cb033f59b	libtool	48b1b9f6194d2842456514d1184ca72e	multilib	4bad85ef4e04ba5a5af265c3e576ac19	python-single-r1	c3e54dd0dc1e70c6252f2551a55bf053	python-utils-r1	4f8aa7196c2c9a5630e66c2113ae46c3	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=638593e3281a2ba21448ead97725bf62

@@ -24,7 +24,7 @@ LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
 IUSE="acl apparmor audit build cryptsetup curl doc elfutils +gcrypt gnuefi http
 	idn importd +kmod +lz4 lzma nat pam policykit
-	qrcode +seccomp selinux ssl sysv-utils test vanilla xkb"
+	qrcode +seccomp selinux ssl sysv-utils test vanilla xkb elibc_musl"
 
 REQUIRED_USE="importd? ( curl gcrypt lzma )"
 
@@ -72,6 +72,7 @@ RDEPEND="${COMMON_DEPEND}
 		sys-apps/util-linux[kill(-)]
 		sys-process/procps[kill(+)]
 		sys-apps/coreutils[kill(-)]
+		sys-apps/busybox-wrappers[kill(-)]
 	) )
 	!sys-auth/nss-myhostname
 	!<sys-kernel/dracut-044
@@ -152,6 +153,15 @@ src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}"/232-0001-build-sys-check-for-lz4-in-the-old-and-new-numbering.patch
 		"${FILESDIR}"/232-0002-build-sys-add-check-for-gperf-lookup-function-signat.patch
+		"${FILESDIR}"/0024-add-fallback-parse_printf_format-implementation.patch
+		"${FILESDIR}"/event_child_handler_t.patch
+		"${FILESDIR}"/pager_close.patch
+		"${FILESDIR}"/SIOCGSTAMPNS.patch
+		"${FILESDIR}"/issetugid.patch
+		"${FILESDIR}"/WEXITED.patch
+		"${FILESDIR}"/libnss_systemd.patch
+		"${FILESDIR}"/LOCK_EX.patch
+		"${FILESDIR}"/unistd.patch
 	)
 
 	if ! use vanilla; then
@@ -247,6 +257,12 @@ multilib_src_configure() {
 		$(multilib_native_use_enable xkb xkbcommon)
 		$(multilib_native_use_with doc python)
 
+		$(use_enable !elibc_musl machined)
+		$(use_enable !elibc_musl myhostname)
+		$(use_enable !elibc_musl resolved)
+		$(use_enable !elibc_musl sysusers)
+		$(use_enable !elibc_musl tmpfiles)
+
 		# hardcode a few paths to spare some deps
 		KILL=/bin/kill
 		QUOTAON=/usr/sbin/quotaon
@@ -334,9 +350,9 @@ multilib_src_install_all() {
 
 	if use sysv-utils; then
 		for app in halt poweroff reboot runlevel shutdown telinit; do
-			dosym "..${ROOTPREFIX-/usr}/bin/systemctl" /sbin/${app}
+			dosym ../bin/systemctl "${ROOTPREFIX-/usr}/sbin/${app}"
 		done
-		dosym "..${ROOTPREFIX-/usr}/lib/systemd/systemd" /sbin/init
+		dosym ../lib/systemd/systemd "${ROOTPREFIX-/usr}/sbin/init"
 	else
 		# we just keep sysvinit tools, so no need for the mans
 		rm "${D}"/usr/share/man/man8/{halt,poweroff,reboot,runlevel,shutdown,telinit}.8 \

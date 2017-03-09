@@ -1,0 +1,14 @@
+--- a/include/stdlib.h
++++ b/include/stdlib.h
+@@ -98,7 +99,11 @@
+ #define WIFSTOPPED(s) ((short)((((s)&0xffff)*0x10001)>>8) > 0x7f00)
+ #define WIFSIGNALED(s) (((s)&0xffff)-1U < 0xffu)
+ 
++#ifdef __GNUG__
++int posix_memalign (void **, size_t, size_t) throw();
++#else
+ int posix_memalign (void **, size_t, size_t);
++#endif
+ int setenv (const char *, const char *, int);
+ int unsetenv (const char *);
+ int mkstemp (char *);

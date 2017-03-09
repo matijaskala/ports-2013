@@ -128,6 +128,7 @@ src_prepare() {
 	eapply "${FILESDIR}"/event_child_handler_t.patch
 	eapply "${FILESDIR}"/pager_close.patch
 	eapply "${FILESDIR}"/SIOCGSTAMPNS.patch
+	eapply "${FILESDIR}"/issetugid.patch
 
 	# apply user patches
 	eapply_user

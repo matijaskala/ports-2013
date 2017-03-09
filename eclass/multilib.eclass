@@ -320,10 +320,19 @@ multilib_env() {
 			: ${MULTILIB_ABIS=arm64}
 			: ${DEFAULT_ABI=arm64}
 		;;
-		x86_64*)
+		x86_64*|x32*)
+			export CFLAGS_amd64=${CFLAGS_amd64--m64}
+			case ${CTARGET} in
+			*-gnux32|*-muslx32) export CHOST_amd64=${CTARGET%x32};;
+			x32*)               export CHOST_amd64=${CTARGET/x32/x86_64};;
+			x86_64-x32*)        export CHOST_amd64=${CTARGET/-x32};;
+			*)                  export CHOST_amd64=${CTARGET};;
+			esac
+			export CTARGET_amd64=${CHOST_amd64}
+			export LIBDIR_amd64="lib64"
+
 			export CFLAGS_x86=${CFLAGS_x86--m32}
-			export CHOST_x86=${CTARGET/x86_64/i686}
-			CHOST_x86=${CHOST_x86/%-gnux32/-gnu}
+			export CHOST_x86=${CTARGET_amd64/x86_64/i686}
 			export CTARGET_x86=${CHOST_x86}
 			if [[ ${SYMLINK_LIB} == "yes" ]] ; then
 				export LIBDIR_x86="lib32"
@@ -331,26 +340,19 @@ multilib_env() {
 				export LIBDIR_x86="lib"
 			fi
 
-			export CFLAGS_amd64=${CFLAGS_amd64--m64}
-			export CHOST_amd64=${CTARGET/%-gnux32/-gnu}
-			export CTARGET_amd64=${CHOST_amd64}
-			export LIBDIR_amd64="lib64"
-
 			export CFLAGS_x32=${CFLAGS_x32--mx32}
-			export CHOST_x32=${CTARGET/%-gnu/-gnux32}
+			export CHOST_x32=${CTARGET}
+			[[ ${CTARGET_amd64} == ${CTARGET} ]] && CHOST_x32+="x32"
 			export CTARGET_x32=${CHOST_x32}
 			export LIBDIR_x32="libx32"
 
-			case ${CTARGET} in
-			*-gnux32)
+			if [[ ${CTARGET_amd64} != ${CTARGET} ]] ; then
 				: ${MULTILIB_ABIS=x32 amd64 x86}
 				: ${DEFAULT_ABI=x32}
-				;;
-			*)
+			else
 				: ${MULTILIB_ABIS=amd64 x86}
 				: ${DEFAULT_ABI=amd64}
-				;;
-			esac
+			fi
 		;;
 		mips64*)
 			export CFLAGS_o32=${CFLAGS_o32--mabi=32}
