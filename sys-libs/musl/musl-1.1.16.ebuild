@@ -169,6 +169,9 @@ multilib_src_install() {
 		multilib_is_native_abi && dosym ../$(get_libdir)/${MUSL_SONAME} ${sysroot}/bin/ldd
 		gen_usr_ldscript -a c
 		dosym ${MUSL_SONAME} ${sysroot}/$(get_libdir)/ld-musl-${arch}.so.1
+		if [[ $(get_libdir) != "lib" ]] ; then
+			dosym ../$(get_libdir)/${MUSL_SONAME} ${sysroot}/lib/ld-musl-${arch}.so.1
+		fi
 	fi
 }
 
