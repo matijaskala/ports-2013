@@ -112,8 +112,6 @@ src_prepare() {
 		einfo "Emacs version number: ${FULL_VERSION}"
 		[[ ${FULL_VERSION} =~ ^${PV%.*}(\..*)?$ ]] \
 			|| die "Upstream version number changed to ${FULL_VERSION}"
-
-		bash -c "autoreconf() { :; }; . autogen.sh --no-check" || die #605400
 	fi
 
 	eapply_user
@@ -122,6 +120,8 @@ src_prepare() {
 	sed -i -e "/^\\.so/s/etags/&-${EMACS_SUFFIX}/" doc/man/ctags.1 \
 		|| die "unable to sed ctags.1"
 
+	bash -c 'autoreconf() { echo nope; }; . $0 "$@"' \
+		./autogen.sh --no-check || die	#605400
 	AT_M4DIR=m4 eautoreconf
 	touch src/stamp-h.in || die
 }
@@ -231,12 +231,12 @@ src_configure() {
 		--infodir="${EPREFIX}"/usr/share/info/${EMACS_SUFFIX} \
 		--localstatedir="${EPREFIX}"/var \
 		--enable-locallisppath="${EPREFIX}/etc/emacs:${EPREFIX}${SITELISP}" \
-		--with-gameuser=":gamestat" \
 		--without-compress-install \
 		--with-file-notification=$(usev inotify || usev gfile || echo no) \
 		$(use_enable acl) \
 		$(use_with dbus) \
 		$(use_with dynamic-loading modules) \
+		$(use_with games gameuser ":gamestat") \
 		$(use_with gpm) \
 		$(use_with hesiod) \
 		$(use_with kerberos) $(use_with kerberos kerberos5) \

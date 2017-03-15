@@ -1,6 +1,18 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+# Michael Weber <xmw@gentoo.org> (15 Mar 2017)
+# Cannot test non-free dependency dev-libs/device-atlas-api-c
+net-proxy/haproxy device-atlas
+
+# Johannes Huber <johu@gentoo.org> (11 Mar 2017)
+# Unkeyworded depdendency on app-text/editorconfig-core-c
+kde-frameworks/ktexteditor editorconfig
+
+# Alon Bar-Lev <alonbl@gentoo.org> (10 Mar 2017)
+# net-firewall/ipset is not available on arm
+net-firewall/firehol ipset
+
 # Christoph Junghans <junghans@gentoo.org> (05 Feb 2017)
 # Mask some fabrics
 sys-cluster/openmpi java openmpi_fabrics_psm openmpi_fabrics_knem openmpi_fabrics_open-mx openmpi_fabrics_ofed openmpi_fabrics_dapl openmpi_rm_pbs openmpi_rm_slurm openmpi_ofed_features_rdmacm
@@ -44,7 +56,7 @@ sci-mathematics/octave graphicsmagick
 # Davide Pesavento <pesa@gentoo.org> (28 Jul 2016)
 # The corresponding Qt5 modules are not keyworded on arm, and we don't want to
 # keyword them solely because of PyQt5 while there are no other in-tree users.
-dev-python/PyQt5 location webengine
+dev-python/PyQt5 webengine
 
 # Göktürk Yüksek <gokturk@gentoo.org> (14 June 2016) on behalf of
 # Nicholas Vinson <nvinso234@gmail.com> (proxy-maint)

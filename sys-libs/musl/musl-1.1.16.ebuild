@@ -29,6 +29,41 @@ if [[ ${CTARGET} == ${CHOST} ]] ; then
 	fi
 fi
 
+if [[ ${CTARGET} == ${CHOST} ]] ; then
+	MULTILIB_WRAPPED_HEADERS=(
+		/usr/include/bits/alltypes.h
+		/usr/include/bits/endian.h
+		/usr/include/bits/errno.h
+		/usr/include/bits/fcntl.h
+		/usr/include/bits/fenv.h
+		/usr/include/bits/float.h
+		/usr/include/bits/hwcap.h
+		/usr/include/bits/ioctl_fix.h
+		/usr/include/bits/ioctl.h
+		/usr/include/bits/io.h
+		/usr/include/bits/ipc.h
+		/usr/include/bits/limits.h
+		/usr/include/bits/link.h
+		/usr/include/bits/mman.h
+		/usr/include/bits/msg.h
+		/usr/include/bits/poll.h
+		/usr/include/bits/posix.h
+		/usr/include/bits/reg.h
+		/usr/include/bits/resource.h
+		/usr/include/bits/sem.h
+		/usr/include/bits/setjmp.h
+		/usr/include/bits/shm.h
+		/usr/include/bits/signal.h
+		/usr/include/bits/socket.h
+		/usr/include/bits/statfs.h
+		/usr/include/bits/stat.h
+		/usr/include/bits/stdint.h
+		/usr/include/bits/syscall.h
+		/usr/include/bits/termios.h
+		/usr/include/bits/user.h
+	)
+fi
+
 DESCRIPTION="Light, fast and simple C library focused on standards-conformance and safety"
 HOMEPAGE="http://www.musl-libc.org/"
 LICENSE="MIT LGPL-2 GPL-2"
@@ -46,7 +81,7 @@ PATCHES=(
 )
 
 is_crosscompile() {
-	[[ ${CHOST} != ${CTARGET} ]]
+	[[ ${CHOST_default} != ${CTARGET} ]]
 }
 
 just_headers() {
@@ -73,9 +108,12 @@ src_prepare() {
 }
 
 multilib_src_configure() {
+	local chost=CHOST_${ABI}
+	local ctarget=CTARGET_${ABI}
+	export CTARGET_${ABI}=${!ctarget:-${!chost}}
 	tc-getCC $(get_abi_CTARGET)
 	just_headers && export CC=true
-	is_crosscompile && export CROSS_COMPILE=${CTARGET}-
+	export CROSS_COMPILE=${CTARGET}-
 
 	local sysroot
 	is_crosscompile && sysroot=/usr/${CTARGET}
@@ -118,6 +156,10 @@ EOF
 }
 
 musl_export_abi() {
+	if ! is_crosscompile ; then
+		export MY_ABI=
+		return
+	fi
 	case ${ABI} in
 		x32|o32|n32|n64) MY_ABI=${ABI} ;;
 		amd64|ppc64) MY_ABI=64 ;;
@@ -165,9 +207,30 @@ multilib_src_install() {
 			-e "s|/lib|/$(get_libdir)|" \
 			-e "s|\(/$(get_libdir)\)\(.*\)/lib|\1\2\1|" \
 			>> "${T}"/ldconfig || die
-		cp "${D}"${sysroot}/usr/$(get_libdir)/libc.so "${D}"${sysroot}/usr/$(get_libdir)/${MUSL_SONAME} || die
+		mv "${D}"${sysroot}/usr/$(get_libdir)/libc.so "${D}"${sysroot}/$(get_libdir)/${MUSL_SONAME} || die
 		multilib_is_native_abi && dosym ../$(get_libdir)/${MUSL_SONAME} ${sysroot}/bin/ldd
-		gen_usr_ldscript -a c
+		local flags=( ${CFLAGS} ${LDFLAGS} -Wl,--verbose )
+		if $(tc-getLD) --version | grep -q 'GNU gold' ; then
+			local d="${T}/bfd-linker"
+			mkdir -p "${d}"
+			ln -sf $(which ${CHOST}-ld.bfd) "${d}"/ld
+			flags+=( -B"${d}" )
+		fi
+		local output_format=$($(tc-getCC) "${flags[@]}" 2>&1 | sed -n 's/^OUTPUT_FORMAT("\([^"]*\)",.*/\1/p')
+		[[ -n ${output_format} ]] && output_format="OUTPUT_FORMAT ( ${output_format} )"
+		cat > "${D}"${sysroot}/usr/$(get_libdir)/libc.so <<-END_LDSCRIPT
+/* GNU ld script
+   Since Gentoo has critical dynamic libraries in /lib, and the static versions
+   in /usr/lib, we need to have a "fake" dynamic lib in /usr/lib, otherwise we
+   run into linking problems.  This "fake" dynamic lib is a linker script that
+   redirects the linker to the real lib.  And yes, this works in the cross-
+   compiling scenario as the sysroot-ed linker will prepend the real path.
+
+   See bug https://bugs.gentoo.org/4411 for more info.
+ */
+${output_format}
+GROUP ( ${EPREFIX}/$(get_libdir)/${MUSL_SONAME} )
+END_LDSCRIPT
 		dosym ${MUSL_SONAME} ${sysroot}/$(get_libdir)/ld-musl-${arch}.so.1
 		if [[ $(get_libdir) != "lib" ]] ; then
 			dosym ../$(get_libdir)/${MUSL_SONAME} ${sysroot}/lib/ld-musl-${arch}.so.1
