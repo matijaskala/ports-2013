@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -10,7 +9,7 @@ if [[ ${PV} == 9999 ]]; then
 else
 	SRC_URI="https://github.com/systemd/systemd/archive/v${PV}.tar.gz -> ${P}.tar.gz
 		!doc? ( https://dev.gentoo.org/~floppym/dist/${P}-man.tar.gz )"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+	KEYWORDS="alpha amd64 arm ~arm64 ia64 ppc ppc64 sparc x86"
 fi
 
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
