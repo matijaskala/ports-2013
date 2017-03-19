@@ -10,5 +10,5 @@ RDEPEND=binary? ( virtual/udev ) !build? ( >=sys-libs/ncurses-5.2 sys-devel/make
 RESTRICT=binchecks mirror strip
 SLOT=4.8.34.36
 SRC_URI=mirror://kernel/linux/kernel/v4.x/linux-4.8.tar.xz http://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux_4.8.0-34.36.diff.gz amd64? ( http://kernel.ubuntu.com/~kernel-ppa/configs/utopic/amd64-config.flavour.generic ) x86? ( http://kernel.ubuntu.com/~kernel-ppa/configs/utopic/i386-config.flavour.generic )
-_eclasses_=eutils	3c847a0129fed780bd709b98e426f89c	kernel-2	238dd55384300d94154aad9048ac2028	mount-boot	1e82d96b7a7dcb483b412497a90bb646	multilib	4bad85ef4e04ba5a5af265c3e576ac19	python-any-r1	be89e882151ba4b847089b860d79729c	python-utils-r1	4f8aa7196c2c9a5630e66c2113ae46c3	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	c80ccf29e90adea7c5cae94b42eb76d0
+_eclasses_=epatch	122e1264e67c4f59a1482f2095e0b35d	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1ef31aee2bd63ffbfcae8a1843c9208d	kernel-2	7cc211cb9f869927ca267873f54d8fd5	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	1e82d96b7a7dcb483b412497a90bb646	multilib	4bad85ef4e04ba5a5af265c3e576ac19	python-any-r1	be89e882151ba4b847089b860d79729c	python-utils-r1	a166d0f5815d7f1e67bb60a196f1bf7e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	c80ccf29e90adea7c5cae94b42eb76d0
 _md5_=da0ad5f2db52a9cea99b6200e2f77382

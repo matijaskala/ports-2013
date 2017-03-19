@@ -1,6 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # @ECLASS: qt5-build.eclass
 # @MAINTAINER:
@@ -151,6 +150,7 @@ qt5-build_src_unpack() {
 		fi
 	fi
 
+	# bug 307861
 	if [[ ${PN} == qtwebengine || ${PN} == qtwebkit ]]; then
 		eshopts_push -s extglob
 		if is-flagq '-g?(gdb)?([1-9])'; then
@@ -158,7 +158,6 @@ qt5-build_src_unpack() {
 			ewarn "You have enabled debug info (probably have -g or -ggdb in your CFLAGS/CXXFLAGS)."
 			ewarn "You may experience really long compilation times and/or increased memory usage."
 			ewarn "If compilation fails, please try removing -g/-ggdb before reporting a bug."
-			ewarn "For more info check out https://bugs.gentoo.org/307861"
 			ewarn
 		fi
 		eshopts_pop
@@ -202,10 +201,8 @@ qt5-build_src_prepare() {
 
 		# Don't inject -msse/-mavx/... into CXXFLAGS when detecting
 		# compiler support for extended instruction sets (bug 552942)
-		if [[ ${QT5_MINOR_VERSION} -ge 5 ]]; then
 		find config.tests/common -name '*.pro' -type f -execdir \
-			sed -i -e '/else:QMAKE_CXXFLAGS\s*+=/ d' '{}' + || die
-		fi
+			sed -i -e '/QMAKE_CXXFLAGS\s*+=/ d' '{}' + || die
 
 		# Don't add -O3 to CXXFLAGS (bug 549140)
 		sed -i -e '/CONFIG\s*+=/ s/optimize_full//' \
@@ -507,7 +504,7 @@ qt5_base_configure() {
 	export AR="$(tc-getBUILD_AR)"
 	export CC="$(tc-getBUILD_CC)"
 	export CXX="$(tc-getBUILD_CXX)"
-	export OBJDUMP="$(tc-getBUILD_OBJDUMP)"
+	export OBJDUMP="$(tc-getBUILD_PROG OBJDUMP objdump)"
 	export RANLIB="$(tc-getBUILD_RANLIB)"
 	export STRIP="$(tc-getBUILD_STRIP)"
 	export LD="$(tc-getBUILD_CXX)"
@@ -563,14 +560,7 @@ qt5_base_configure() {
 		# ensure the QML debugging support (qmltooling) is built in qtdeclarative
 		-qml-debug
 
-		# extended instruction sets support
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-sse2   && echo -no-sse2)
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-sse3   && echo -no-sse3)
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-ssse3  && echo -no-ssse3)
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-sse4.1 && echo -no-sse4.1)
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-sse4.2 && echo -no-sse4.2)
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-avx    && echo -no-avx)
-		$([[ ${QT5_MINOR_VERSION} -le 4 ]] && is-flagq -mno-avx2   && echo -no-avx2)
+		# MIPS DSP instruction set extensions
 		$(is-flagq -mno-dsp   && echo -no-mips_dsp)
 		$(is-flagq -mno-dspr2 && echo -no-mips_dspr2)
 
@@ -580,6 +570,7 @@ qt5_base_configure() {
 		# prefer system libraries (only common hard deps here)
 		-system-zlib
 		-system-pcre
+		$([[ ${QT5_MINOR_VERSION} -ge 7 ]] && echo -system-doubleconversion)
 
 		# disable everything to prevent automagic deps (part 1)
 		-no-mtdev
@@ -587,9 +578,8 @@ qt5_base_configure() {
 		$([[ ${QT5_MINOR_VERSION} -ge 6 ]] && echo -no-syslog)
 		-no-libpng -no-libjpeg
 		-no-freetype -no-harfbuzz
-		-no-openssl
-		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-libproxy)
-		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-xkbcommon-{x11,evdev})
+		-no-openssl -no-libproxy
+		-no-xkbcommon-x11 -no-xkbcommon-evdev
 		-no-xinput2 -no-xcb-xlib
 
 		# cannot use -no-gif because there is no way to override it later
@@ -617,10 +607,7 @@ qt5_base_configure() {
 		-iconv
 
 		# disable everything to prevent automagic deps (part 3)
-		-no-cups -no-evdev
-		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-tslib)
-		-no-icu -no-fontconfig
-		-no-dbus
+		-no-cups -no-evdev -no-tslib -no-icu -no-fontconfig -no-dbus
 
 		# let portage handle stripping
 		-no-strip
@@ -664,10 +651,10 @@ qt5_base_configure() {
 		-no-opengl -no-egl
 
 		# disable libinput-based generic plugin by default, override in qtgui
-		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-libinput)
+		-no-libinput
 
 		# disable gstreamer by default, override in qtmultimedia
-		$([[ ${QT5_MINOR_VERSION} -ge 5 ]] && echo -no-gstreamer)
+		-no-gstreamer
 
 		# respect system proxies by default: it's the most natural
 		# setting, and it'll become the new upstream default in 5.8
@@ -729,6 +716,18 @@ qt5_qmake() {
 		QMAKE_OBJCOPY="$(tc-getOBJCOPY)"
 		QMAKE_RANLIB=
 		QMAKE_STRIP="$(tc-getSTRIP)"
+	) || \
+	qmakeargs+=(
+		QMAKE_AR="$(tc-getBUILD_AR) cqs"
+		QMAKE_CC="$(tc-getBUILD_CC)"
+		QMAKE_LINK_C="$(tc-getBUILD_CC)"
+		QMAKE_LINK_C_SHLIB="$(tc-getBUILD_CC)"
+		QMAKE_CXX="$(tc-getBUILD_CXX)"
+		QMAKE_LINK="$(tc-getBUILD_CXX)"
+		QMAKE_LINK_SHLIB="$(tc-getBUILD_CXX)"
+		QMAKE_OBJCOPY="$(tc-getBUILD_OBJCOPY)"
+		QMAKE_RANLIB=
+		QMAKE_STRIP="$(tc-getBUILD_STRIP)"
 	)
 	qmakeargs+=(
 		QMAKE_CFLAGS="${CFLAGS}"
