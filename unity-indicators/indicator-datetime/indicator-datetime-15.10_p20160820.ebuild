@@ -19,11 +19,11 @@ S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
 COMMON_DEPEND="
-	dev-libs/libaccounts-glib
 	dev-libs/libdbusmenu:=
 	dev-libs/libtimezonemap:=
 	gnome-extra/evolution-data-server:=
 	media-libs/gstreamer:1.0
+	net-libs/libaccounts-glib
 	net-misc/url-dispatcher
 	sys-apps/util-linux
 	unity-indicators/ido:=

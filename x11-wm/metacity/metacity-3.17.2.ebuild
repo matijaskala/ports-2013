@@ -1,12 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI=5
-GNOME2_LA_PUNT="yes"
-GCONF_DEBUG="yes"
+EAPI=6
 
-inherit base eutils gnome2
+inherit eutils gnome2-utils
 MY_P="${PN}_${PV}"
 UVER="4ubuntu1"
 
@@ -56,25 +53,21 @@ DEPEND="${RDEPEND}
 	x11-proto/xextproto
 	x11-proto/xproto"
 
-pkg_setup() {
-	DOCS="AUTHORS ChangeLog HACKING NEWS README *.txt doc/*.txt"
-	G2CONF="${G2CONF}
-		--disable-static
-		--enable-canberra
-		--enable-compositor
-		--enable-render
-		--enable-shape
-		--enable-sm
-		--enable-startup-notification
-		--enable-xsync
-		$(use_enable xinerama)"
-}
-
 src_prepare() {
 	# Ubuntu patchset #
 	for patch in $(cat "${WORKDIR}/debian/patches/series" | grep -v \# ); do
 		PATCHES+=( "${WORKDIR}/debian/patches/${patch}" )
 	done
-	base_src_prepare
-	gnome2_src_prepare
+	default
+}
+
+src_configure() {
+	econf ${myconf} \
+		--disable-static \
+		--enable-canberra \
+		--enable-compositor \
+		--enable-render \
+		--enable-sm \
+		--enable-startup-notification \
+		$(use_enable xinerama)
 }

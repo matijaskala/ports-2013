@@ -6,7 +6,8 @@ EAPI=5
 
 EGIT_REPO_URI="git://git.fedorahosted.org/python-meh.git"
 EGIT_COMMIT="r${PV}-1"
-inherit distutils git-2 eutils
+PYTHON_COMPAT=( python2_7 )
+inherit distutils-r1 git-2 eutils
 
 DESCRIPTION="Python exception handling library"
 HOMEPAGE="http://git.fedoraproject.org/git/python-meh.git?p=python-meh.git;a=summary"
@@ -36,5 +37,5 @@ RDEPEND="${COMMON_DEPEND}
 src_prepare() {
 	cd "${S}"
 	epatch "${FILESDIR}/${PN}-keep_exc_win_above.patch"
-	distutils_src_prepare
+	distutils-r1_src_prepare
 }

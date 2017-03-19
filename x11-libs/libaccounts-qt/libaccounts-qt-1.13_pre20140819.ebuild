@@ -19,7 +19,7 @@ IUSE="doc qt5"
 S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
-DEPEND="dev-libs/libaccounts-glib:=
+DEPEND="net-libs/libaccounts-glib:=
 	dev-qt/qtcore:4
 	dev-qt/qtxmlpatterns:4
 	doc? ( app-doc/doxygen )
