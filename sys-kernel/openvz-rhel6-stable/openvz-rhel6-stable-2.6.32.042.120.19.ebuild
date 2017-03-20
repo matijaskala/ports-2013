@@ -133,8 +133,6 @@ src_compile() {
 		--kernname="${PN}" \
 		--build-src="$S" \
 		--build-dst=${WORKDIR}/build \
-		--kernel-cc=gcc-4.8.5 \
-		--utils-cc=gcc-4.8.5 \
 		--makeopts="${MAKEOPTS}" \
 		--firmware-dst=${WORKDIR}/out/lib/firmware \
 		--cachedir="${T}/cache" \
