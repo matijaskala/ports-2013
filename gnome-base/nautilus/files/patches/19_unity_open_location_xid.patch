@@ -26,22 +26,23 @@ Index: nautilus-3.18.2/src/nautilus-application.c
  }
  
 -static void
--update_dbus_opened_locations (NautilusApplication *app)
+-update_dbus_opened_locations (NautilusApplication *self)
 +void
-+nautilus_application_update_dbus_opened_locations (NautilusApplication *app)
++nautilus_application_update_dbus_opened_locations (NautilusApplication *self)
  {
+         NautilusApplicationPrivate *priv;
  	gint i;
- 	GList *l, *sl;
-@@ -1133,15 +1133,40 @@ update_dbus_opened_locations (NautilusAp
+@@ -1133,16 +1133,41 @@ update_dbus_opened_locations (NautilusAp
  
- 	g_return_if_fail (NAUTILUS_IS_APPLICATION (app));
+ 	g_return_if_fail (NAUTILUS_IS_APPLICATION (self));
  
 +	GVariantBuilder b;
 +	GVariantBuilder wb;
 +
 +	g_variant_builder_init (&b, G_VARIANT_TYPE ("a{uas}"));
 +
- 	for (l = app->priv->windows; l != NULL; l = l->next) {
+         priv = nautilus_application_get_instance_private (self);
+ 	for (l = priv->windows; l != NULL; l = l->next) {
  		window = l->data;
  
 +		g_variant_builder_init (&wb, G_VARIANT_TYPE ("as"));
@@ -97,9 +98,9 @@ Index: nautilus-3.18.2/src/nautilus-application.c
  	locations_array = g_new (gchar*, locations_size + 1);
 @@ -1165,6 +1205,8 @@ update_dbus_opened_locations (NautilusAp
  
- 	nautilus_freedesktop_dbus_set_open_locations (app->priv->fdb_manager,
+ 	nautilus_freedesktop_dbus_set_open_locations (priv->fdb_manager,
  		                                      (const gchar**) locations_array);
-+	nautilus_freedesktop_dbus_set_open_locations_xids (app->priv->fdb_manager,
++	nautilus_freedesktop_dbus_set_open_locations_xids (priv->fdb_manager,
 +							   g_variant_builder_end (&b));
  
  	g_free (locations_array);
@@ -109,58 +110,58 @@ Index: nautilus-3.18.2/src/nautilus-application.c
  static void
  on_slot_location_changed (NautilusWindowSlot  *slot,
 -                          GParamSpec          *pspec,
--                          NautilusApplication *application)
+-                          NautilusApplication *self)
 +			  GParamSpec          *pspec,
-+			  NautilusApplication *application)
++			  NautilusApplication *self)
 +{
-+	nautilus_application_update_dbus_opened_locations (application);
++	nautilus_application_update_dbus_opened_locations (self);
 +}
 +
 +static void
 +on_slot_active_changed (NautilusWindowSlot *slot,
-+			NautilusApplication *application)
++			NautilusApplication *self)
  {
--	update_dbus_opened_locations (application);
-+	nautilus_application_update_dbus_opened_locations (application);
+-	update_dbus_opened_locations (self);
++	nautilus_application_update_dbus_opened_locations (self);
  }
  
  static void
 @@ -1184,10 +1233,11 @@ on_slot_added (NautilusWindow      *wind
- 	       NautilusApplication *application)
+ 	       NautilusApplication *self)
  {
  	if (nautilus_window_slot_get_location (slot)) {
--		update_dbus_opened_locations (application);
-+		nautilus_application_update_dbus_opened_locations (application);
+-		update_dbus_opened_locations (self);
++		nautilus_application_update_dbus_opened_locations (self);
  	}
  
- 	g_signal_connect (slot, "notify::location", G_CALLBACK (on_slot_location_changed), application);
-+	g_signal_connect (slot, "active", G_CALLBACK (on_slot_active_changed), application);
+ 	g_signal_connect (slot, "notify::location", G_CALLBACK (on_slot_location_changed), self);
++	g_signal_connect (slot, "active", G_CALLBACK (on_slot_active_changed), self);
  }
  
  static void
 @@ -1195,9 +1245,17 @@ on_slot_removed (NautilusWindow      *wi
  		 NautilusWindowSlot  *slot,
- 		 NautilusApplication *application)
+ 		 NautilusApplication *self)
  {
--	update_dbus_opened_locations (application);
-+	nautilus_application_update_dbus_opened_locations (application);
+-	update_dbus_opened_locations (self);
++	nautilus_application_update_dbus_opened_locations (self);
  
- 	g_signal_handlers_disconnect_by_func (slot, on_slot_location_changed, application);
-+	g_signal_handlers_disconnect_by_func (slot, on_slot_active_changed, application);
+ 	g_signal_handlers_disconnect_by_func (slot, on_slot_location_changed, self);
++	g_signal_handlers_disconnect_by_func (slot, on_slot_active_changed, self);
 +}
 +
 +static void
 +on_realize (GtkWidget           *widget,
-+	    NautilusApplication *application)
++	    NautilusApplication *self)
 +{
-+	nautilus_application_update_dbus_opened_locations (application);
++	nautilus_application_update_dbus_opened_locations (self);
  }
  
  static void
 @@ -1210,6 +1268,7 @@ nautilus_application_window_added (GtkAp
  
  	if (NAUTILUS_IS_WINDOW (window)) {
- 		self->priv->windows = g_list_prepend (self->priv->windows, window);
+ 		priv->windows = g_list_prepend (priv->windows, window);
 +		g_signal_connect (window, "realize", G_CALLBACK (on_realize), app);
  		g_signal_connect (window, "slot-added", G_CALLBACK (on_slot_added), app);
  		g_signal_connect (window, "slot-removed", G_CALLBACK (on_slot_removed), app);
@@ -168,7 +169,7 @@ Index: nautilus-3.18.2/src/nautilus-application.c
 @@ -1225,6 +1284,7 @@ nautilus_application_window_removed (Gtk
  
  	if (NAUTILUS_IS_WINDOW (window)) {
- 		self->priv->windows = g_list_remove_all (self->priv->windows, window);
+ 		priv->windows = g_list_remove_all (priv->windows, window);
 +		g_signal_handlers_disconnect_by_func (window, on_realize, app);
  		g_signal_handlers_disconnect_by_func (window, on_slot_added, app);
  		g_signal_handlers_disconnect_by_func (window, on_slot_removed, app);
@@ -222,10 +223,12 @@ Index: nautilus-3.18.2/src/nautilus-application.h
 ===================================================================
 --- nautilus-3.18.2.orig/src/nautilus-application.h
 +++ nautilus-3.18.2/src/nautilus-application.h
-@@ -85,4 +85,6 @@ void nautilus_application_edit_bookmarks
- 
- GtkWidget * nautilus_application_connect_server (NautilusApplication *application,
- 						 NautilusWindow      *window);
+@@ -85,6 +85,8 @@ void nautilus_application_edit_bookmarks
+ void nautilus_application_search (NautilusApplication *application,
+                                   const gchar         *uri,
+                                   const gchar         *text);
 +
 +void nautilus_application_update_dbus_opened_locations (NautilusApplication *app);
+ G_END_DECLS
+ 
  #endif /* __NAUTILUS_APPLICATION_H__ */

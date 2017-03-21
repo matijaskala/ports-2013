@@ -1,3 +1,6 @@
+Description: set the infobars type to "other" rather than "question"
+ to avoid blue cluebars
+Bug-Ubuntu: https://launchpad.net/bugs/1259059
 Index: nautilus-3.18.1/src/nautilus-trash-bar.c
 ===================================================================
 --- nautilus-3.18.1.orig/src/nautilus-trash-bar.c
@@ -15,7 +18,7 @@ Index: nautilus-3.18.1/src/nautilus-x-content-bar.c
 --- nautilus-3.18.1.orig/src/nautilus-x-content-bar.c
 +++ nautilus-3.18.1/src/nautilus-x-content-bar.c
 @@ -388,7 +388,7 @@ nautilus_x_content_bar_new (GMount *moun
- 			    const char **x_content_types)
+ 			    const char * const *x_content_types)
  {
  	return g_object_new (NAUTILUS_TYPE_X_CONTENT_BAR,
 -			     "message-type", GTK_MESSAGE_QUESTION,

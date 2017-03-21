@@ -4,11 +4,11 @@ Bug: https://bugzilla.gnome.org/show_bug.cgi?id=681871
 Bug-Ubuntu: https://bugs.launchpad.net/bugs/1164016
 
 === modified file 'libnautilus-private/nautilus-global-preferences.h'
-Index: nautilus-3.18.1/libnautilus-private/nautilus-global-preferences.h
+Index: nautilus/libnautilus-private/nautilus-global-preferences.h
 ===================================================================
---- nautilus-3.18.1.orig/libnautilus-private/nautilus-global-preferences.h
-+++ nautilus-3.18.1/libnautilus-private/nautilus-global-preferences.h
-@@ -156,6 +156,8 @@ typedef enum
+--- nautilus.orig/libnautilus-private/nautilus-global-preferences.h
++++ nautilus/libnautilus-private/nautilus-global-preferences.h
+@@ -149,6 +149,8 @@ typedef enum
  /* Recent files */
  #define NAUTILUS_PREFERENCES_RECENT_FILES_ENABLED          "remember-recent-files"
  
@@ -17,27 +17,11 @@ Index: nautilus-3.18.1/libnautilus-private/nautilus-global-preferences.h
  /* Move to trash shorcut changed dialog */
  #define NAUTILUS_PREFERENCES_SHOW_MOVE_TO_TRASH_SHORTCUT_CHANGED_DIALOG "show-move-to-trash-shortcut-changed-dialog"
  
-Index: nautilus-3.18.1/libnautilus-private/org.gnome.nautilus.gschema.xml.in
+Index: nautilus/src/nautilus-list-view.c
 ===================================================================
---- nautilus-3.18.1.orig/libnautilus-private/org.gnome.nautilus.gschema.xml.in
-+++ nautilus-3.18.1/libnautilus-private/org.gnome.nautilus.gschema.xml.in
-@@ -181,6 +181,11 @@
-       <_summary>Whether to open the hovered folder after a timeout when drag and drop operation</_summary>
-       <_description>If this is set to true, when performing a drag and drop operation the hovered folder will open automatically after a timeout</_description>
-     </key>
-+    <key name="enable-interactive-search" type="b">
-+      <default>false</default>
-+      <_summary>Enable interactive (type-ahead) search</_summary>
-+      <_description>If set to true, enables interactive search, similar to Nautilus 3.4.</_description>
-+    </key>
-   </schema>
- 
-   <schema id="org.gnome.nautilus.icon-view" path="/org/gnome/nautilus/icon-view/" gettext-domain="nautilus">
-Index: nautilus-3.18.1/src/nautilus-list-view.c
-===================================================================
---- nautilus-3.18.1.orig/src/nautilus-list-view.c
-+++ nautilus-3.18.1/src/nautilus-list-view.c
-@@ -2389,6 +2389,7 @@ nautilus_list_view_set_selection (Nautil
+--- nautilus.orig/src/nautilus-list-view.c
++++ nautilus/src/nautilus-list-view.c
+@@ -2392,6 +2392,7 @@ nautilus_list_view_set_selection (Nautil
  	GList *node;
  	GList *iters, *l;
  	NautilusFile *file;
@@ -45,7 +29,7 @@ Index: nautilus-3.18.1/src/nautilus-list-view.c
  	
  	list_view = NAUTILUS_LIST_VIEW (view);
  	tree_selection = gtk_tree_view_get_selection (list_view->details->tree_view);
-@@ -2403,10 +2404,19 @@ nautilus_list_view_set_selection (Nautil
+@@ -2406,10 +2407,19 @@ nautilus_list_view_set_selection (Nautil
  		for (l = iters; l != NULL; l = l->next) {
  			gtk_tree_selection_select_iter (tree_selection,
  							(GtkTreeIter *)l->data);
@@ -66,14 +50,14 @@ Index: nautilus-3.18.1/src/nautilus-list-view.c
  	g_signal_handlers_unblock_by_func (tree_selection, list_selection_changed_callback, view);
  	nautilus_files_view_notify_selection_changed (view);
  }
-Index: nautilus-3.18.1/src/nautilus-window-slot.c
+Index: nautilus/src/nautilus-window-slot.c
 ===================================================================
---- nautilus-3.18.1.orig/src/nautilus-window-slot.c
-+++ nautilus-3.18.1/src/nautilus-window-slot.c
-@@ -125,6 +125,17 @@ struct NautilusWindowSlotDetails {
+--- nautilus.orig/src/nautilus-window-slot.c
++++ nautilus/src/nautilus-window-slot.c
+@@ -124,6 +124,17 @@ struct NautilusWindowSlotDetails {
  	gboolean tried_mount;
-         gchar *view_mode_before_search;
-         gchar *view_mode_before_places;
+         gint view_mode_before_search;
+         gint view_mode_before_places;
 +
 +	/* Interactive search */
 +	gboolean isearch_enable;
@@ -88,7 +72,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  };
  
  static guint signals[LAST_SIGNAL] = { 0 };
-@@ -248,6 +259,16 @@ nautilus_window_slot_content_view_matche
+@@ -236,6 +247,16 @@ nautilus_window_slot_content_view_matche
          }
  }
  
@@ -103,18 +87,15 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
 +#define ISEARCH_TIMEOUT 	5000
 +
  static void
- check_search_visible (NautilusWindowSlot *slot)
+ update_search_visible (NautilusWindowSlot *slot)
  {
-@@ -484,17 +505,86 @@ nautilus_window_slot_handle_event (Nauti
+@@ -466,18 +487,86 @@ nautilus_window_slot_handle_event (Nauti
  
  	retval = FALSE;
  	window = nautilus_window_slot_get_window (slot);
 -	if (!NAUTILUS_IS_DESKTOP_WINDOW (window)) {
--		retval = nautilus_query_editor_handle_event (slot->details->query_editor, event);
--	}
- 
--	if (retval) {
--		nautilus_window_slot_set_search_visible (slot, TRUE);
+-                retval = gtk_search_bar_handle_event (GTK_SEARCH_BAR (slot->details->query_editor),
+-                                                      (GdkEvent*) event);
 -	}
 +	if (slot->details->isearch_enable) {
 +		GdkEvent *new_event;
@@ -126,7 +107,6 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
 +		gulong popup_menu_id;
 +
 +		isearch_ensure (slot);
-+
 +		/* Make a copy of the current text */
 +		old_text = g_strdup (gtk_entry_get_text (GTK_ENTRY (slot->details->isearch_entry)));
 +		new_event = gdk_event_copy ((GdkEvent *) event);
@@ -174,15 +154,20 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
 +				return FALSE;
 +			}
 +		}
-+	} else {
-+		if (!NAUTILUS_IS_DESKTOP_WINDOW (window)) {
-+			retval = nautilus_query_editor_handle_event (slot->details->query_editor, event);
-+		}
++        } else {
++	        if (!NAUTILUS_IS_DESKTOP_WINDOW (window)) {
++                        retval = gtk_search_bar_handle_event (GTK_SEARCH_BAR (slot->details->query_editor),
++                                                              (GdkEvent*) event);
++        	}
  
-+		if (retval) {
-+			nautilus_window_slot_set_search_visible (slot, TRUE);
-+		}
-+	}
+-	if (retval) {
+-		nautilus_window_slot_set_search_visible (slot, TRUE);
+-	}
++        	if (retval) {
++	        	nautilus_window_slot_set_search_visible (slot, TRUE);
++	        }
++        }
+ 
  	return retval;
  }
  
@@ -198,7 +183,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  static void
  real_active (NautilusWindowSlot *slot)
  {
-@@ -526,6 +616,13 @@ real_inactive (NautilusWindowSlot *slot)
+@@ -509,6 +598,13 @@ real_inactive (NautilusWindowSlot *slot)
  	g_assert (slot == nautilus_window_get_active_slot (window));
  
          gtk_widget_insert_action_group (GTK_WIDGET (window), "slot", NULL);
@@ -212,7 +197,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  }
  
  static void
-@@ -582,6 +679,13 @@ nautilus_window_slot_set_property (GObje
+@@ -565,6 +661,13 @@ nautilus_window_slot_set_property (GObje
  		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
  		break;
  	}
@@ -226,7 +211,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  }
  
  static void
-@@ -724,6 +828,13 @@ nautilus_window_slot_init (NautilusWindo
+@@ -692,6 +795,13 @@ nautilus_window_slot_init (NautilusWindo
  	slot->details = G_TYPE_INSTANCE_GET_PRIVATE
  		(slot, NAUTILUS_TYPE_WINDOW_SLOT, NautilusWindowSlotDetails);
  
@@ -240,8 +225,8 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
          slot->details->slot_action_group = G_ACTION_GROUP (g_simple_action_group_new ());
          g_action_map_add_action_entries (G_ACTION_MAP (slot->details->slot_action_group),
                                           slot_entries,
-@@ -737,6 +848,19 @@ nautilus_window_slot_init (NautilusWindo
-         nautilus_application_add_accelerator (app, "slot.search-visible", "<control>f");
+@@ -707,6 +817,19 @@ nautilus_window_slot_init (NautilusWindo
+         slot->details->view_mode_before_search = NAUTILUS_VIEW_INVALID_ID;
  }
  
 +static void
@@ -260,7 +245,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  #define DEBUG_FLAG NAUTILUS_DEBUG_WINDOW
  #include <libnautilus-private/nautilus-debug.h>
  
-@@ -2266,6 +2390,8 @@ nautilus_window_slot_dispose (GObject *o
+@@ -2199,6 +2322,8 @@ nautilus_window_slot_dispose (GObject *o
  
  	slot = NAUTILUS_WINDOW_SLOT (object);
  
@@ -269,7 +254,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  	nautilus_window_slot_clear_forward_list (slot);
  	nautilus_window_slot_clear_back_list (slot);
  
-@@ -2353,6 +2479,7 @@ nautilus_window_slot_class_init (Nautilu
+@@ -2274,6 +2399,7 @@ nautilus_window_slot_class_init (Nautilu
  	oclass->constructed = nautilus_window_slot_constructed;
  	oclass->set_property = nautilus_window_slot_set_property;
  	oclass->get_property = nautilus_window_slot_get_property;
@@ -277,7 +262,7 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
  
          widget_class->grab_focus = nautilus_window_slot_grab_focus;
  
-@@ -2635,3 +2762,761 @@ nautilus_window_slot_get_loading (Nautil
+@@ -2593,3 +2719,761 @@ nautilus_window_slot_get_loading (Nautil
  
          return slot->details->loading;
  }
@@ -1039,3 +1024,19 @@ Index: nautilus-3.18.1/src/nautilus-window-slot.c
 +		slot->details->isearch_entry = NULL;
 +	}
 +}
+Index: nautilus/data/org.gnome.nautilus.gschema.xml
+===================================================================
+--- nautilus.orig/data/org.gnome.nautilus.gschema.xml
++++ nautilus/data/org.gnome.nautilus.gschema.xml
+@@ -204,6 +204,11 @@
+       <summary>Whether to open the hovered folder after a timeout when drag and drop operation</summary>
+       <description>If this is set to true, when performing a drag and drop operation the hovered folder will open automatically after a timeout.</description>
+     </key>
++    <key name="enable-interactive-search" type="b">
++      <default>false</default>
++      <summary>Enable interactive (type-ahead) search</summary>
++      <description>If set to true, enables interactive search, similar to Nautilus 3.4.</description>
++    </key>
+   </schema>
+ 
+   <schema path="/org/gnome/nautilus/icon-view/" id="org.gnome.nautilus.icon-view" gettext-domain="nautilus">

@@ -11,72 +11,66 @@ https://bugzilla.gnome.org/show_bug.cgi?id=740617
  src/nautilus-window.c           | 13 ++++++++++++-
  2 files changed, 22 insertions(+), 6 deletions(-)
 
-diff --git a/src/nautilus-bookmarks-window.c b/src/nautilus-bookmarks-window.c
-index ad4393b..889ff9c 100644
---- a/src/nautilus-bookmarks-window.c
-+++ b/src/nautilus-bookmarks-window.c
-@@ -689,6 +689,7 @@ nautilus_bookmarks_window_constructed (GObject *object)
- 	GtkWidget *headerbar;
- 	GtkTreeViewColumn *col;
- 	GtkCellRenderer *rend;
-+	const gchar *desktop;
- 
- 	G_OBJECT_CLASS (nautilus_bookmarks_window_parent_class)->constructed (object);
- 
-@@ -703,13 +704,17 @@ nautilus_bookmarks_window_constructed (GObject *object)
- 		return;
- 	}
- 
--	headerbar = gtk_header_bar_new ();
--	gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (headerbar), TRUE);
--	gtk_widget_show (headerbar);
--
- 	window = GTK_WINDOW (object);
-+
-+	desktop = g_getenv ("XDG_CURRENT_DESKTOP");
-+	if (desktop && strstr (desktop, "GNOME")) {
-+		headerbar = gtk_header_bar_new ();
-+		gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (headerbar), TRUE);
-+		gtk_widget_show (headerbar);
-+		gtk_window_set_titlebar (window,  headerbar);
-+	}
-+
- 	gtk_window_set_title (window, _("Bookmarks"));
--	gtk_window_set_titlebar (window,  headerbar);
- 	gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DIALOG);
- 	gtk_window_set_default_size (window, 
- 				     BOOKMARKS_WINDOW_INITIAL_WIDTH, 
-diff --git a/src/nautilus-window.c b/src/nautilus-window.c
-index 124fc57..2da42d9 100644
 --- a/src/nautilus-window.c
 +++ b/src/nautilus-window.c
-@@ -1439,6 +1439,7 @@ nautilus_window_constructed (GObject *self)
- 	GtkWidget *grid;
- 	NautilusWindowSlot *slot;
- 	NautilusApplication *application;
-+	const gchar * desktop;
+@@ -102,6 +102,7 @@
+         GList *slots;
+         NautilusWindowSlot *active_slot;
  
- 	window = NAUTILUS_WINDOW (self);
++        GtkWidget *content_grid;
+         GtkWidget *content_paned;
  
-@@ -1467,7 +1468,17 @@ nautilus_window_constructed (GObject *self)
- 			 G_CALLBACK (nautilus_window_load_extension_menus), window, G_CONNECT_SWAPPED);
- 
- 	window->details->toolbar = create_toolbar (window);
--	gtk_window_set_titlebar (GTK_WINDOW (window), window->details->toolbar);
-+	desktop = g_getenv ("XDG_CURRENT_DESKTOP");
-+	if (desktop && strstr (desktop, "GNOME"))
-+		gtk_window_set_titlebar (GTK_WINDOW (window), window->details->toolbar);
-+	else {
-+		gtk_container_add (GTK_CONTAINER (grid), window->details->toolbar);
-+		gtk_widget_set_hexpand (window->details->toolbar, TRUE);
-+		gtk_widget_set_vexpand (window->details->toolbar, FALSE);
-+		gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (window->details->toolbar),
-+				 FALSE);
-+		gtk_widget_show (window->details->toolbar);
+         /* Side Pane */
+@@ -1874,6 +1875,33 @@
+ {
+ 	GtkWidget *path_bar;
+ 	GtkWidget *location_entry;
++	GtkStyleContext *context;
++	const gchar *xdg_current_desktop;
++	g_auto(GStrv) strv = NULL;
++
++	xdg_current_desktop = g_getenv ("XDG_CURRENT_DESKTOP");
++
++	if (xdg_current_desktop && !NAUTILUS_IS_DESKTOP_WINDOW (window)) {
++		strv = g_strsplit (xdg_current_desktop, ":", 0);
++
++		if (g_strv_contains ((const gchar * const *) strv, "Unity")) {
++			context = gtk_widget_get_style_context (window->priv->toolbar);
++			gtk_style_context_remove_class (context, GTK_STYLE_CLASS_TITLEBAR);
++			gtk_window_set_titlebar (GTK_WINDOW (window), NULL);
++			gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (window->priv->toolbar),
++							      FALSE);
++			gtk_grid_insert_row (GTK_GRID (window->priv->content_grid), 0);
++			gtk_grid_attach_next_to (GTK_GRID (window->priv->content_grid),
++							   window->priv->toolbar,
++							   window->priv->content_paned,
++							   GTK_POS_TOP,
++							   1, 1);
++			gtk_widget_set_hexpand (window->priv->toolbar, TRUE);
++			gtk_widget_set_vexpand (window->priv->toolbar, FALSE);
++			gtk_widget_show (window->priv->toolbar);
++		}
++
 +	}
  
- 	window->details->content_paned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
- 	gtk_widget_set_hexpand (window->details->content_paned, TRUE);
--- 
-2.1.3
-
+ 	g_object_set (window->priv->toolbar, "window", window, NULL);
+ 	g_object_bind_property (window, "disable-chrome",
+@@ -2585,6 +2613,7 @@
+ 	gtk_widget_class_set_template_from_resource (wclass,
+ 	                                             "/org/gnome/nautilus/ui/nautilus-window.ui");
+ 	gtk_widget_class_bind_template_child_private (wclass, NautilusWindow, toolbar);
++	gtk_widget_class_bind_template_child_private (wclass, NautilusWindow, content_grid);
+ 	gtk_widget_class_bind_template_child_private (wclass, NautilusWindow, content_paned);
+ 	gtk_widget_class_bind_template_child_private (wclass, NautilusWindow, sidebar);
+ 	gtk_widget_class_bind_template_child_private (wclass, NautilusWindow, places_sidebar);
+--- a/src/resources/ui/nautilus-window.ui
++++ b/src/resources/ui/nautilus-window.ui
+@@ -17,7 +17,7 @@
+       </object>
+     </child>
+     <child>
+-      <object class="GtkGrid">
++      <object class="GtkGrid" id="content_grid">
+         <property name="visible">True</property>
+         <child>
+           <object class="GtkPaned" id="content_paned">

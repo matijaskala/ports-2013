@@ -1,95 +1,128 @@
-# Description: display the "new document" menu under unity, 
-# even if there is no template installed (lp: #1113648)
-# Ubuntu: http://launchpad.net/bugs/1113648
-=== modified file 'nautilus/src/nautilus-files-view.c'
---- nautilus/src/nautilus-files-view.c	2015-11-24 10:44:52 +0000
-+++ nautilus/src/nautilus-files-view.c	2015-11-27 16:41:57 +0000
-@@ -2278,6 +2278,16 @@
+Description: display the "new document" menu under unity, even if there is no
+ template installed
+Bug-Ubuntu: https://launchpad.net/bugs/1113648
+diff --git a/src/nautilus-actions.h b/src/nautilus-actions.h
+index 8c8e575..2b9e642 100644
+--- a/src/nautilus-actions.h
++++ b/src/nautilus-actions.h
+@@ -119,6 +119,7 @@
+ #define NAUTILUS_ACTION_SCRIPTS "Scripts"
+ #define NAUTILUS_ACTION_OPEN_SCRIPTS_FOLDER "Open Scripts Folder"
+ #define NAUTILUS_ACTION_NEW_DOCUMENTS "New Documents"
++#define NAUTILUS_ACTION_NEW_EMPTY_DOCUMENT "New Empty Document"
+ #define NAUTILUS_ACTION_EMPTY_TRASH_CONDITIONAL "Empty Trash Conditional"
+ #define NAUTILUS_ACTION_MANUAL_LAYOUT "Manual Layout"
+ #define NAUTILUS_ACTION_REVERSED_ORDER "Reversed Order"
+diff --git a/src/nautilus-directory-view-ui.xml b/src/nautilus-directory-view-ui.xml
+index 64a9fc6..ad98f81 100644
+--- a/src/nautilus-directory-view-ui.xml
++++ b/src/nautilus-directory-view-ui.xml
+@@ -12,6 +12,7 @@
+       <menu action="New Documents">
+         <placeholder name="New Documents Placeholder"/>
+         <separator name="After New Documents"/>
++        <menuitem name="New Empty Document" action="New Empty Document"/>
+       </menu>
+     </placeholder>
+     <placeholder name="Open Placeholder">
+@@ -95,6 +96,8 @@
+     <menuitem name="New Folder with Selection" action="New Folder with Selection"/>
+     <menu action="New Documents">
+       <placeholder name="New Documents Placeholder"/>
++      <separator name="After New Documents"/>
++      <menuitem name="New Empty Document" action="New Empty Document"/>
+     </menu>
+   </placeholder>
+   <placeholder name="Global File Items Placeholder">
+@@ -121,6 +124,8 @@
+       <menuitem name="New Folder" action="New Folder"/>
+       <menu action="New Documents">
+         <placeholder name="New Documents Placeholder"/>
++        <separator name="After New Documents"/>
++        <menuitem name="New Empty Document" action="New Empty Document"/>
+       </menu>
+     </placeholder>
+     <separator name="Clipboard separator"/>
+diff --git a/src/nautilus-view.c b/src/nautilus-view.c
+index 481d039..049260e 100644
+--- a/src/nautilus-view.c
++++ b/src/nautilus-view.c
+@@ -2133,6 +2133,15 @@ action_new_folder_with_selection_callback (GtkAction *action,
  }
  
  static void
-+action_new_empty (GSimpleAction *action,
-+                   GVariant      *state,
-+                   gpointer       user_data)
-+{
-+        g_assert (NAUTILUS_IS_FILES_VIEW (user_data));
++action_new_empty_file_callback (GtkAction *action,
++				gpointer callback_data)
++{                
++        g_assert (NAUTILUS_IS_VIEW (callback_data));
 +
-+        nautilus_files_view_new_file (NAUTILUS_FILES_VIEW (user_data), NULL, NULL);
++	nautilus_view_new_file (NAUTILUS_VIEW (callback_data), NULL, NULL);
 +}
 +
 +static void
- action_properties (GSimpleAction *action,
-                    GVariant      *state,
-                    gpointer       user_data)
-@@ -4882,6 +4892,25 @@
-         return TRUE;
- }
+ action_properties_callback (GtkAction *action,
+ 			    gpointer callback_data)
+ {
+@@ -7166,6 +7175,11 @@ static const GtkActionEntry directory_view_entries[] = {
+   /* label, accelerator */       N_("New Folder with Selection"), NULL,
+   /* tooltip */                  N_("Create a new folder containing the selected items"),
+ 				 G_CALLBACK (action_new_folder_with_selection_callback) },
++  /* name, stock id */         { NAUTILUS_ACTION_NEW_EMPTY_DOCUMENT, NULL,
++    /* translators: this is used to indicate that a document doesn't contain anything */
++  /* label, accelerator */       N_("_Empty Document"), NULL,
++  /* tooltip */                  N_("Create a new empty document inside this folder"),
++				 G_CALLBACK (action_new_empty_file_callback) },
+   /* name, stock id */         { NAUTILUS_ACTION_OPEN, NULL,
+   /* label, accelerator */       N_("_Open"), "<control>o",
+   /* tooltip */                  N_("Open the selected item in this window"),
+@@ -7420,6 +7434,27 @@ static const GtkToggleActionEntry directory_view_toggle_entries[] = {
+ };
  
-+static void
-+unity_create_empty (GMenu *menu)
+ static void
++connect_proxy (NautilusView *view,
++	       GtkAction *action,
++	       GtkWidget *proxy,
++	       GtkActionGroup *action_group)
 +{
-+        GMenu *section;
-+        GMenuItem *empty_item;
-+        GIcon *icon;
-+        
-+        section = g_menu_new ();
-+        empty_item = g_menu_item_new (_("_Empty Document"), "view.new-empty");
-+        icon = g_themed_icon_new ("text-x-generic");
++	GdkPixbuf *pixbuf;
++	GtkWidget *image;
 +
-+        g_menu_item_set_icon (empty_item, icon);
-+        g_menu_append_item (section, empty_item);
-+        g_menu_append_section (menu, NULL, G_MENU_MODEL (section));
++	if (strcmp (gtk_action_get_name (action), NAUTILUS_ACTION_NEW_EMPTY_DOCUMENT) == 0 &&
++	    GTK_IS_IMAGE_MENU_ITEM (proxy)) {
++		pixbuf = nautilus_ui_get_menu_icon ("text-x-generic", GTK_WIDGET (view));
++		if (pixbuf != NULL) {
++			image = gtk_image_new_from_pixbuf (pixbuf);
++			gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (proxy), image);
 +
-+        g_object_unref (icon);
-+        g_object_unref (section);
++			g_object_unref (pixbuf);
++		}
++	}
 +}
 +
- static GMenu *
- update_directory_in_templates_menu (NautilusFilesView *view,
-                                     NautilusDirectory *directory)
-@@ -4937,6 +4966,11 @@
-                 }
-         }
++static void
+ pre_activate (NautilusView *view,
+ 	      GtkAction *action,
+ 	      GtkActionGroup *action_group)
+@@ -7482,6 +7517,9 @@ real_merge_menus (NautilusView *view)
+ 	g_object_unref (action);
+ 	g_free (tooltip);
  
-+        if (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "Unity") == 0) {
-+                unity_create_empty (menu);
-+                any_templates = TRUE;
-+        }
-+
-         nautilus_file_list_free (file_list);
-         g_free (templates_directory_uri);
++	g_signal_connect_object (action_group, "connect-proxy",
++				 G_CALLBACK (connect_proxy), G_OBJECT (view),
++				 G_CONNECT_SWAPPED);
+ 	g_signal_connect_object (action_group, "pre-activate",
+ 				 G_CALLBACK (pre_activate), G_OBJECT (view),
+ 				 G_CONNECT_SWAPPED);
+@@ -8813,7 +8851,11 @@ real_update_menus (NautilusView *view)
+ 	action = gtk_action_group_get_action (view->details->dir_action_group,
+ 					      NAUTILUS_ACTION_NEW_DOCUMENTS);
+ 	gtk_action_set_sensitive (action, can_create_files);
+-	gtk_action_set_visible (action, !selection_contains_recent && view->details->templates_present);
++	
++	if (g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "Unity") == 0)
++		gtk_action_set_visible (action, TRUE);
++	else
++		gtk_action_set_visible (action, !selection_contains_recent && view->details->templates_present);
  
-@@ -5814,6 +5848,7 @@
-         { "select-all", action_select_all },
-         { "paste", action_paste_files },
-         { "new-document" },
-+        { "new-empty", action_new_empty },
-         /* Selection menu */
-         { "scripts" },
-         { "new-folder-with-selection", action_new_folder_with_selection },
-@@ -6361,7 +6396,8 @@
-         g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
-                                      can_create_files &&
-                                      !selection_contains_recent &&
--                                     view->details->templates_present);
-+                                     (view->details->templates_present || 
-+                                     g_strcmp0 (g_getenv ("XDG_CURRENT_DESKTOP"), "Unity") == 0));
- 
-         /* Ask the clipboard */
-         g_object_ref (view); /* Need to keep the object alive until we get the reply */
-
-=== modified file 'nautilus/src/nautilus-toolbar-action-menu.xml'
---- nautilus/src/nautilus-toolbar-action-menu.xml	2015-11-24 10:44:52 +0000
-+++ nautilus/src/nautilus-toolbar-action-menu.xml	2015-11-26 18:29:20 +0000
-@@ -11,6 +11,10 @@
-         <attribute name="label" translatable="yes">New _Tab</attribute>
-         <attribute name="action">win.new-tab</attribute>
-       </item>
-+      <item>
-+        <attribute name="label" translatable="yes">Empty _Document</attribute>
-+        <attribute name="action">view.new-empty</attribute>
-+      </item>
-     </section>
-     <section>
-       <attribute name="id">undo-redo-section</attribute>
-
+ 	action = gtk_action_group_get_action (view->details->dir_action_group,
+ 					      NAUTILUS_ACTION_COPY_TO);

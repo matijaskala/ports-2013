@@ -5,11 +5,17 @@ Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/nautilus/+bug/1445595
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=758833
 Forwarded: yes
 Author: Marco Trevisan <marco@ubuntu.com>
+From 13b0e898fbc80230333bb53dfffaa26a32889279 Mon Sep 17 00:00:00 2001
+From: Tim Lunn <tim@feathertop.org>
+Date: Sat, 20 Feb 2016 08:26:51 +1100
+Subject: [PATCH] 20_timestamp
 
-Index: nautilus-3.18.2/data/dbus-interfaces.xml
+---
+
+Index: nautilus/data/dbus-interfaces.xml
 ===================================================================
---- nautilus-3.18.2.orig/data/dbus-interfaces.xml
-+++ nautilus-3.18.2/data/dbus-interfaces.xml
+--- nautilus.orig/data/dbus-interfaces.xml
++++ nautilus/data/dbus-interfaces.xml
 @@ -27,13 +27,28 @@
        <arg type='as' name='SourceFilesURIList' direction='in'/>
        <arg type='s' name='DestinationDirectoryURI' direction='in'/>
@@ -39,10 +45,10 @@ Index: nautilus-3.18.2/data/dbus-interfaces.xml
 +    </method>
    </interface>
  </node>
-Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
+Index: nautilus/libnautilus-private/nautilus-file-operations.c
 ===================================================================
---- nautilus-3.18.2.orig/libnautilus-private/nautilus-file-operations.c
-+++ nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
+--- nautilus.orig/libnautilus-private/nautilus-file-operations.c
++++ nautilus/libnautilus-private/nautilus-file-operations.c
 @@ -72,6 +72,7 @@ typedef struct {
  	GtkWindow *parent_window;
  	int screen_num;
@@ -51,16 +57,14 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
  	NautilusProgressInfo *progress;
  	GCancellable *cancellable;
  	GHashTable *skip_files;
-@@ -1061,7 +1062,8 @@ typedef struct {
+@@ -1061,6 +1062,7 @@ typedef struct {
  	const char *details_text;
  	const char **button_titles;
  	gboolean show_all;
--	
 +	guint32 timestamp;
-+
  	int result;
- } RunSimpleDialogData;
- 
+ 	/* Dialogs are ran from operation threads, which need to be blocked until
+ 	 * the user gives a valid response
 @@ -1104,7 +1106,8 @@ do_run_simple_dialog (gpointer _data)
  	}
  	
@@ -76,10 +80,10 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
  	data->details_text = details_text;
  	data->show_all = show_all;
 +	data->timestamp = job->action_timestamp;
- 
- 	ptr_array = g_ptr_array_new ();
- 	while ((button_title = va_arg (varargs, const char *)) != NULL) {
-@@ -5065,6 +5069,26 @@ nautilus_file_operations_copy_file (GFil
+ 	data->completed = FALSE;
+ 	g_mutex_init (&data->mutex);
+ 	g_cond_init (&data->cond);
+@@ -5065,6 +5069,27 @@ nautilus_file_operations_copy_file (GFil
  				    NautilusCopyCallback done_callback,
  				    gpointer done_callback_data)
  {
@@ -101,12 +105,13 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
 +					      GtkWindow *parent_window,
 +					      guint32 timestamp,
 +					      NautilusCopyCallback done_callback,
-+					      gpointer done_callback_data)
++				      gpointer done_callback_data)
 +{
++
+ 	GTask *task;
  	CopyMoveJob *job;
  
- 	job = op_job_new (CopyMoveJob, parent_window);
-@@ -5077,6 +5101,7 @@ nautilus_file_operations_copy_file (GFil
+@@ -5077,6 +5102,7 @@ nautilus_file_operations_copy_file (GFil
          nautilus_progress_info_set_destination (((CommonJob *)job)->progress, target_dir);
  	job->target_name = g_strdup (new_name);
  	job->debuting_files = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal, g_object_unref, NULL);
@@ -114,7 +119,7 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
  
  	if (source_display_name != NULL) {
  		gchar *path;
-@@ -5104,6 +5129,24 @@ nautilus_file_operations_copy (GList *fi
+@@ -5104,6 +5130,24 @@ nautilus_file_operations_copy (GList *fi
  			       NautilusCopyCallback  done_callback,
  			       gpointer done_callback_data)
  {
@@ -136,10 +141,10 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
 +					 NautilusCopyCallback  done_callback,
 +					 gpointer              done_callback_data)
 +{
+ 	GTask *task;
  	CopyMoveJob *job;
  
- 	job = op_job_new (CopyMoveJob, parent_window);
-@@ -5112,6 +5155,7 @@ nautilus_file_operations_copy (GList *fi
+@@ -5112,6 +5156,7 @@ nautilus_file_operations_copy (GList *fi
  	job->done_callback_data = done_callback_data;
  	job->files = g_list_copy_deep (files, (GCopyFunc) g_object_ref, NULL);
  	job->destination = g_object_ref (target_dir);
@@ -147,7 +152,7 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
          /* Need to indicate the destination for the operation notification open
           * button. */
          nautilus_progress_info_set_destination (((CommonJob *)job)->progress, target_dir);
-@@ -6933,6 +6977,13 @@ empty_trash_job (GIOSchedulerJob *io_job
+@@ -6933,6 +6978,13 @@ empty_trash_job (GIOSchedulerJob *io_job
  void 
  nautilus_file_operations_empty_trash (GtkWidget *parent_view)
  {
@@ -158,21 +163,21 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.c
 +nautilus_file_operations_empty_trash_with_time (GtkWidget *parent_view,
 +						guint32    timestamp)
 +{
+ 	GTask *task;
  	EmptyTrashJob *job;
  	GtkWindow *parent_window;
- 
-@@ -6945,6 +6996,7 @@ nautilus_file_operations_empty_trash (Gt
+@@ -6945,6 +6997,7 @@ nautilus_file_operations_empty_trash (Gt
  	job->trash_dirs = g_list_prepend (job->trash_dirs,
  					  g_file_new_for_uri ("trash:"));
  	job->should_confirm = TRUE;
 +	((CommonJob *)job)->action_timestamp = timestamp;
  
  	inhibit_power_manager ((CommonJob *)job, _("Emptying Trash"));
- 	
-Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.h
+ 
+Index: nautilus/libnautilus-private/nautilus-file-operations.h
 ===================================================================
---- nautilus-3.18.2.orig/libnautilus-private/nautilus-file-operations.h
-+++ nautilus-3.18.2/libnautilus-private/nautilus-file-operations.h
+--- nautilus.orig/libnautilus-private/nautilus-file-operations.h
++++ nautilus/libnautilus-private/nautilus-file-operations.h
 @@ -62,7 +62,17 @@ void nautilus_file_operations_copy_file
  					 GtkWindow *parent_window,
  					 NautilusCopyCallback done_callback,
@@ -205,10 +210,10 @@ Index: nautilus-3.18.2/libnautilus-private/nautilus-file-operations.h
  void nautilus_file_operations_move      (GList                *files,
  					 GArray               *relative_item_points,
  					 GFile                *target_dir,
-Index: nautilus-3.18.2/src/nautilus-dbus-manager.c
+Index: nautilus/src/nautilus-dbus-manager.c
 ===================================================================
---- nautilus-3.18.2.orig/src/nautilus-dbus-manager.c
-+++ nautilus-3.18.2/src/nautilus-dbus-manager.c
+--- nautilus.orig/src/nautilus-dbus-manager.c
++++ nautilus/src/nautilus-dbus-manager.c
 @@ -57,13 +57,12 @@ nautilus_dbus_manager_dispose (GObject *
    G_OBJECT_CLASS (nautilus_dbus_manager_parent_class)->dispose (object);
  }

@@ -138,7 +138,7 @@ ETC_LDSO_PATH=/etc/${LDSO_NAME}.path
 
 X=$(mktemp -p /tmp ${LDSO_NAME}.XXXXXX)
 for d in $drs; do
-	echo $d >> $X
+	@@HACK@@
 done
 chmod 644 $X
 mv $X $ETC_LDSO_PATH

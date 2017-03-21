@@ -1,7 +1,9 @@
 === modified file 'nautilus/configure.ac'
---- nautilus/configure.ac	2015-11-24 10:44:52 +0000
-+++ nautilus/configure.ac	2015-11-25 14:41:39 +0000
-@@ -11,6 +11,8 @@
+Index: nautilus/configure.ac
+===================================================================
+--- nautilus.orig/configure.ac
++++ nautilus/configure.ac
+@@ -11,6 +11,8 @@ m4_define(exif_minver,                 0
  m4_define(exempi_minver,               2.1.0)
  m4_define(notify_minver,               0.7.0)
  m4_define(schemas_minver,              3.8.0)
@@ -10,7 +12,7 @@
  
  dnl 1. If the library code has changed at all since last release, then increment revision.
  dnl 2. If any interfaces have been added, then increment current and set revision to 0.
-@@ -175,6 +177,29 @@
+@@ -176,6 +178,29 @@ fi
  
  dnl ==========================================================================
  
@@ -40,7 +42,7 @@
  dnl Turn on the additional warnings last, so -Werror doesn't affect other tests.
  
  WARNING_CFLAGS=""
-@@ -332,6 +357,7 @@
+@@ -334,6 +359,7 @@ nautilus-$VERSION:
  	libexif support:	${enable_exif}
  	libexempi support:	${enable_xmp}
  	PackageKit support:     $msg_packagekit
@@ -48,11 +50,11 @@
  	nautilus-sendto ext:	$enable_nst_extension
  	Tracker support:	$enable_tracker
  
-
-=== modified file 'nautilus/src/Makefile.am'
---- nautilus/src/Makefile.am	2015-11-24 10:44:52 +0000
-+++ nautilus/src/Makefile.am	2015-11-26 09:26:26 +0000
-@@ -27,6 +27,7 @@
+Index: nautilus/src/Makefile.am
+===================================================================
+--- nautilus.orig/src/Makefile.am
++++ nautilus/src/Makefile.am
+@@ -22,6 +22,7 @@ AM_CPPFLAGS =							\
  	-DPREFIX=\""$(prefix)"\" 				\
  	-DVERSION="\"$(VERSION)\"" 				\
  	$(DISABLE_DEPRECATED) 		                        \
@@ -60,7 +62,7 @@
  	$(NULL)
  
  LDADD =\
-@@ -39,6 +40,7 @@
+@@ -34,6 +35,7 @@ LDADD =\
  	$(EXIF_LIBS) \
  	$(EXEMPI_LIBS) \
  	$(POPT_LIBS) \
@@ -68,7 +70,7 @@
  	$(NULL)
  
  dbus_built_sources = 					\
-@@ -225,6 +227,10 @@
+@@ -219,6 +221,10 @@ nautilus_SOURCES = \
  	nautilus-window.h			\
  	nautilus-x-content-bar.c		\
  	nautilus-x-content-bar.h		\
@@ -79,11 +81,11 @@
  	$(NULL)
  
  nodist_nautilus_SOURCES = \
-
-=== modified file 'nautilus/src/nautilus-toolbar.c'
---- nautilus/src/nautilus-toolbar.c	2015-11-24 10:44:52 +0000
-+++ nautilus/src/nautilus-toolbar.c	2015-11-26 09:30:59 +0000
-@@ -36,6 +36,10 @@
+Index: nautilus/src/nautilus-toolbar.c
+===================================================================
+--- nautilus.orig/src/nautilus-toolbar.c
++++ nautilus/src/nautilus-toolbar.c
+@@ -38,6 +38,10 @@
  #include <libnautilus-private/nautilus-progress-info-manager.h>
  #include <libnautilus-private/nautilus-file-operations.h>
  
@@ -94,7 +96,7 @@
  #include <glib/gi18n.h>
  #include <math.h>
  
-@@ -84,6 +88,7 @@
+@@ -86,6 +90,7 @@ struct _NautilusToolbarPrivate {
          NautilusWindowSlot *active_slot;
          GBinding *icon_binding;
          GBinding *view_widget_binding;
@@ -102,7 +104,7 @@
  };
  
  enum {
-@@ -399,6 +404,9 @@
+@@ -401,6 +406,9 @@ on_remove_finished_operations_timeout (N
          if (should_hide_operations_button (self)) {
                  gtk_revealer_set_reveal_child (GTK_REVEALER (self->priv->operations_revealer),
                                                 FALSE);
@@ -112,17 +114,17 @@
          } else {
                  update_operations (self);
          }
-@@ -582,6 +590,9 @@
+@@ -575,6 +583,9 @@ update_operations (NautilusToolbar *self
                  gtk_revealer_set_reveal_child (GTK_REVEALER (self->priv->operations_revealer),
                                                 TRUE);
                  gtk_widget_queue_draw (self->priv->operations_icon);
 +#ifdef HAVE_UNITY
 +                unity_launcher_entry_set_progress_visible (self->priv->ulauncher, TRUE);
 +#endif
-         }
- }
  
-@@ -691,6 +702,9 @@
+                 /* Show the popover at start to increase visibility */
+                 if (!NAUTILUS_IS_DESKTOP_WINDOW (self->priv->window)) {
+@@ -701,6 +712,9 @@ on_operations_icon_draw (GtkWidget
          }
  
  
@@ -132,7 +134,7 @@
          width = gtk_widget_get_allocated_width (widget);
          height = gtk_widget_get_allocated_height (widget);
  
-@@ -744,6 +758,9 @@
+@@ -773,6 +787,9 @@ nautilus_toolbar_init (NautilusToolbar *
  	g_object_unref (builder);
  
          self->priv->progress_manager = nautilus_progress_info_manager_dup_singleton ();
@@ -141,11 +143,12 @@
 +#endif
  	g_signal_connect (self->priv->progress_manager, "new-progress-info",
  			  G_CALLBACK (on_new_progress_info), self);
-         update_operations (self);
-=== modified file 'nautilus/src/nautilus-application.c'
---- nautilus/src/nautilus-application.c	2015-11-24 10:44:52 +0000
-+++ nautilus/src/nautilus-application.c	2015-11-26 09:28:10 +0000
-@@ -67,6 +67,10 @@
+         g_signal_connect (self->priv->progress_manager, "has-viewers-changed",
+Index: nautilus/src/nautilus-application.c
+===================================================================
+--- nautilus.orig/src/nautilus-application.c
++++ nautilus/src/nautilus-application.c
+@@ -66,6 +66,10 @@
  #include <gdk/gdkx.h>
  #include <gtk/gtk.h>
  
@@ -153,24 +156,24 @@
 +#include "src/unity-bookmarks-handler.h"
 +#endif
 +
- G_DEFINE_TYPE (NautilusApplication, nautilus_application, GTK_TYPE_APPLICATION);
- 
- struct _NautilusApplicationPriv {
-@@ -1051,6 +1055,10 @@
- 	init_desktop (self);
+ typedef struct {
+ 	NautilusProgressPersistenceHandler *progress_handler;
+ 	NautilusDBusManager *dbus_manager;
+@@ -1249,6 +1253,10 @@ nautilus_application_startup (GApplicati
  
  	nautilus_profile_end (NULL);
-+
+ 
 +#ifdef HAVE_UNITY
 +	unity_bookmarks_handler_initialize ();
 +#endif
++
+         g_signal_connect (self, "shutdown", G_CALLBACK (on_application_shutdown), NULL);
  }
  
- static gboolean
-
-=== added file 'nautilus/src/unity-bookmarks-handler.c'
---- nautilus/src/unity-bookmarks-handler.c	1970-01-01 00:00:00 +0000
-+++ nautilus/src/unity-bookmarks-handler.c	2015-11-26 09:32:56 +0000
+Index: nautilus/src/unity-bookmarks-handler.c
+===================================================================
+--- /dev/null
++++ nautilus/src/unity-bookmarks-handler.c
 @@ -0,0 +1,140 @@
 +/*unity-bookmarks-handler.c: handle Unity bookmark for quicklist
 + *
@@ -266,15 +269,15 @@
 +unity_bookmarks_handler_update_bookmarks () {
 +
 +	NautilusBookmark *bookmark;
-+	guint bookmark_count;
-+	guint index;
++	GList *all_bookmarks;
++	GList *lb;
 +	GList *l;
 +
 +	/* append new set of bookmarks */
-+	bookmark_count = nautilus_bookmark_list_length (bookmarks);
-+	for (index = 0; index < bookmark_count; ++index) {
++	all_bookmarks = nautilus_bookmark_list_get_all (bookmarks);
++	for (lb = all_bookmarks; lb != NULL; lb = lb->next) {
 +
-+		bookmark = nautilus_bookmark_list_item_at (bookmarks, index);
++		bookmark = NAUTILUS_BOOKMARK (lb->data);
 +
 +		for (l = unity_quicklist_get_launcher_entries (unity_quicklist_handler); l; l = l->next) {
 +			UnityLauncherEntry *entry = l->data;
@@ -312,10 +315,10 @@
 +						G_CALLBACK (unity_bookmarks_handler_refresh_bookmarks), 0);
 +}
 +
-
-=== added file 'nautilus/src/unity-bookmarks-handler.h'
---- nautilus/src/unity-bookmarks-handler.h	1970-01-01 00:00:00 +0000
-+++ nautilus/src/unity-bookmarks-handler.h	2015-11-26 09:23:04 +0000
+Index: nautilus/src/unity-bookmarks-handler.h
+===================================================================
+--- /dev/null
++++ nautilus/src/unity-bookmarks-handler.h
 @@ -0,0 +1,31 @@
 +/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 +/*
@@ -348,10 +351,10 @@
 +void unity_bookmarks_handler_initialize (void);
 +
 +#endif /* __UNITY_BOOKMARKS_HANDLER_H__*/
-
-=== added file 'nautilus/src/unity-quicklist-handler.c'
---- nautilus/src/unity-quicklist-handler.c	1970-01-01 00:00:00 +0000
-+++ nautilus/src/unity-quicklist-handler.c	2015-11-26 09:23:04 +0000
+Index: nautilus/src/unity-quicklist-handler.c
+===================================================================
+--- /dev/null
++++ nautilus/src/unity-quicklist-handler.c
 @@ -0,0 +1,154 @@
 +/*unity-quicklist-handler.c: handle Unity quicklists
 + *
@@ -507,10 +510,10 @@
 +	return g_object_new (UNITY_TYPE_QUICKLIST_HANDLER, NULL);
 +}
 +
-
-=== added file 'nautilus/src/unity-quicklist-handler.h'
---- nautilus/src/unity-quicklist-handler.h	1970-01-01 00:00:00 +0000
-+++ nautilus/src/unity-quicklist-handler.h	2015-11-26 09:41:08 +0000
+Index: nautilus/src/unity-quicklist-handler.h
+===================================================================
+--- /dev/null
++++ nautilus/src/unity-quicklist-handler.h
 @@ -0,0 +1,72 @@
 +/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 +/*
@@ -584,4 +587,3 @@
 +void unity_quicklist_handler_append_menuitem (UnityLauncherEntry *entry, DbusmenuMenuitem *elem);
 +
 +#endif /* __UNITY_QUICKLIST_HANDLER_H__ */
-

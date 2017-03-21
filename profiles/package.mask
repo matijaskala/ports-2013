@@ -29,6 +29,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (20 Mar 2017)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+>=www-client/chromium-59
+
 # David Seifert <soap@gentoo.org> (19 Mar 2017)
 # EOL'd upstream, fetch restricted, digests missing
 # Masked for removal in 30 days. Bug #612746.
@@ -261,14 +266,6 @@ dev-ada/charles
 # Masked for removal on 30 days. Bug #609754.
 x11-misc/bbappconf
 
-# Michał Górny <mgorny@gentoo.org> (20 Feb 2017)
-# The Gentoo packages are roughly 300 releases behind upstream, and are
-# unmaintained. They do not build anymore, #545148, #558570, #597312.
-# Also, the first ebuild blocks python.eclass removal, #599866,
-# and is one huge QA mystery. Removal in 30 days.
-net-misc/elliptics
-net-misc/elliptics-eblob
-
 # Andreas K. Hüttel <dilfridge@gentoo.org> (19 Feb 2017)
 # Dead upstream for >3 years. Closed source. Bundles outdated
 # libraries that certainly have known security issues (e.g.,
@@ -314,11 +311,6 @@ media-plugins/gst-plugins-ffmpeg
 # Affects libreoffice-base.
 # Bug #586634.
 =app-office/libreoffice-5.3.0.3
-
-# Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (03 Feb 2017)
-# Dev channel releases are only for people who are developers or want more
-# experimental features and accept a more unstable release.
->=www-client/chromium-58
 
 # Bernard Cafarelli <voyageur@gentoo.org> (30 Jan 2017)
 # Alpha release with new features, masked for testing
@@ -449,6 +441,7 @@ dev-perl/Params-ValidationCompiler
 >=dev-perl/DateTime-TimeZone-2.20.0
 >=dev-perl/DateTime-1.370.0
 >=dev-perl/DateTime-Format-Strptime-1.710.0
+>=dev-perl/Log-Dispatch-2.590.0
 
 # Aaron Bauman <bman@gentoo.org> (30 Jun 2016)
 # Unpatched security vulnerability per bug #509920
