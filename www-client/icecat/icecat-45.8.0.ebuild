@@ -205,20 +205,22 @@ src_prepare() {
 	for i in rights.intro-point3-unbranded rights.intro-point4a-unbranded rights.intro-point4b-unbranded rights.intro-point4c-unbranded ; do
 		find "${WORKDIR}/${MOZ_P}"*/* -name aboutRights.dtd -exec sed -i "s|\(ENTITY ${i}\).*|\1 \"\">|" {} +
 	done
+	find -name brand.dtd -exec sed -i 's/\(trademarkInfo.part1\s*"\).*\(">\)/\1\2/' {} +
 	sed -i '/helpus\.start/d' "${S}"/browser/base/content/aboutDialog.xul
 	cp "${GEEK_STORE_DIR}"/gnuzilla/data/aboutRights.xhtml "${S}"/toolkit/content/aboutRights.xhtml
 	cp "${GEEK_STORE_DIR}"/gnuzilla/data/aboutRights.xhtml "${S}"/toolkit/content/aboutRights-unbranded.xhtml
+	sed -i 's|<a href="http://www.mozilla.org/">Mozilla Project</a>|<a href="http://www.gnu.org/">GNU Project</a>|' browser/base/content/overrides/app-license.html
 	cp "${GEEK_STORE_DIR}"/gnuzilla/data/branding/sync.png "${S}"/browser/themes/shared/fxa/logo.png
-	find "${WORKDIR}/${MOZ_P}"*/* -type d -name firefox -exec rename firefox icecat {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type d -name firefox-ui -exec rename firefox icecat {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type d -name \*firefox\* -exec rename firefox icecat {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type f -name \*firefox\* -exec rename firefox icecat {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type f -name \*Firefox\* -exec rename Firefox IceCat {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type d -name \*fennec\* -exec rename fennec icecatmobile {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type f -name \*fennec\* -exec rename fennec icecatmobile {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type f -name \*Fennec\* -exec rename Fennec IceCatMobile {} +
-	find "${WORKDIR}/${MOZ_P}"*/* -type f -name run-mozilla.sh -execdir mv {} run-icecat.sh \;
-	find "${WORKDIR}/${MOZ_P}"*/* -type f -not -iregex '.*changelog.*' -not -iregex '.*copyright.*' -execdir sed --follow-symlinks -i "
+	find "${WORKDIR}/${MOZ_P}"*/ -type d -name firefox -exec rename firefox icecat {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type d -name firefox-ui -exec rename firefox icecat {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type d -name \*firefox\* -exec rename firefox icecat {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type f -name \*firefox\* -exec rename firefox icecat {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type f -name \*Firefox\* -exec rename Firefox IceCat {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type d -name \*fennec\* -exec rename fennec icecatmobile {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type f -name \*fennec\* -exec rename fennec icecatmobile {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type f -name \*Fennec\* -exec rename Fennec IceCatMobile {} +
+	find "${WORKDIR}/${MOZ_P}"*/ -type f -name run-mozilla.sh -execdir mv {} run-icecat.sh \;
+	find "${WORKDIR}/${MOZ_P}"*/ -type f -not -iregex '.*changelog.*' -not -iregex '.*copyright.*' -execdir sed --follow-symlinks -i "
 		s|marketplace\.firefox\.com|f-droid.org/repository/browse|;
 		s|org\.mozilla\.firefox|org.gnu.icecat|;
 		s|Adobe Flash|Flash|;
@@ -238,8 +240,14 @@ src_prepare() {
 		s|Mozilla Firefox|GNU IceCat|;
 		s|firefox|icecat|;
 		s|firefox|icecat|;
+		s|firefox|icecat|;
+		s|firefox|icecat|;
+		s|firefox|icecat|;
 		s|fennec|icecatmobile|;
 		s|fennec|icecatmobile|;
+		s|Firefox|IceCat|;
+		s|Firefox|IceCat|;
+		s|Firefox|IceCat|;
 		s|Firefox|IceCat|;
 		s|Firefox|IceCat|;
 		s|Fennec|IceCatMobile|;
@@ -260,6 +268,8 @@ src_prepare() {
 		s|IceCatAccountsCommand|FirefoxAccountsCommand|;
 		s|https://www.mozilla.org/icecat/?utm_source=synceol|https://www.mozilla.org/firefox/?utm_source=synceol|;
 	" "{}" ";"
+	find -name region.properties -exec sed -i 's|https://www\.mibbit\..*$||' -i {} +
+	sed -i s/mozilla-esr/gnu-esr/ browser/confvars.sh
 	cat "${GEEK_STORE_DIR}"/gnuzilla/data/settings.js >> "${S}"/browser/app/profile/icecat.js
 	cat "${GEEK_STORE_DIR}"/gnuzilla/data/settings.js >> "${S}"/mobile/android/app/mobile.js
 

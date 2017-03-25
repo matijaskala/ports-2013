@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -77,14 +76,14 @@ provided_by app-arch/gzip: ${GZIP_BIN}
 provided_by app-arch/lzop: lzop
 provided_by app-arch/xz-utils: ${XZ_USR_BIN}
 provided_by app-arch/tar: tar
-provided_by mail-mta/nullmailer: sendmail
+provided_by mail-mta/{{e,m,s}smtp,courier,exim,netqmail,nullmailer,opensmtpd,postfix,sendmail} : sendmail
 provided_by net-analyzer/traceroute: traceroute
 provided_by net-dialup/ppp: chat
 provided_by net-dns/bind-tools: nslookup
 provided_by net-misc/iputils: ping tftpd
 provided_by net-misc/wget: wget
 provided_by net-misc/whois: mkpasswd whois
-provided_by net-print/cups: lpq lpr
+provided_by net-print/{cups[-lprng-compat(-)],lprnq} : lpq lpr
 provided_by sys-apps/coreutils: ${COREUTILS_USR_BIN} ${COREUTILS_USR_SBIN} dir vdir
 provided_by sys-apps/diffutils: cmp diff
 provided_by sys-apps/ed: ed

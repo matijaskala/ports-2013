@@ -122,9 +122,9 @@ src_unpack() {
 }
 
 src_prepare() {
-#	epatch "${FILESDIR}/unity-menubar.patch"
 	# Apply our patches
-	eapply "${WORKDIR}/firefox"
+	eapply "${WORKDIR}/firefox" \
+		"${FILESDIR}"/52-unity-menubar.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then

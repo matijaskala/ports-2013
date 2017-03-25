@@ -16,7 +16,6 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 IUSE="doc libproxy"
-RESTRICT="mirror"
 
 RDEPEND="
 	app-arch/rpm
@@ -37,7 +36,7 @@ DEPEND="${RDEPEND}
 "
 
 # tests require actual instance of zypp to be on system
-RESTRICT="test"
+RESTRICT="test mirror"
 
 src_configure() {
 	local mycmakeargs=(
