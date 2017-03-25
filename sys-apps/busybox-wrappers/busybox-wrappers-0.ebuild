@@ -83,7 +83,7 @@ provided_by net-dns/bind-tools: nslookup
 provided_by net-misc/iputils: ping tftpd
 provided_by net-misc/wget: wget
 provided_by net-misc/whois: mkpasswd whois
-provided_by net-print/{cups[-lprng-compat(-)],lprnq} : lpq lpr
+provided_by net-print/{'cups[-lprng-compat(-)]',lprnq} : lpq lpr
 provided_by sys-apps/coreutils: ${COREUTILS_USR_BIN} ${COREUTILS_USR_SBIN} dir vdir
 provided_by sys-apps/diffutils: cmp diff
 provided_by sys-apps/ed: ed

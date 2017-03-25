@@ -26,8 +26,8 @@ RDEPEND=">=dev-util/pykickstart-1.99.22
 	sys-fs/dosfstools
 	>=sys-fs/e2fsprogs-1.41.0
 	sys-fs/btrfs-progs
-	>=dev-python/pyblock-0.45
 	sys-fs/multipath-tools
+	sys-libs/libblockdev
 	sys-process/lsof
 	"
 DEPEND="${RDEPEND}"

@@ -1,13 +1,14 @@
-# Copyright 2004-2014 Sabayon
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $
 
 EAPI=5
-inherit autotools eutils python
+PYTHON_COMPAT=( python2_7 )
+
+inherit autotools eutils python-single-r1
 
 DESCRIPTION="Implements a standardized interface for manipulating and administering user and group accounts"
-HOMEPAGE="https://fedorahosted.org/libuser"
-SRC_URI="https://fedorahosted.org/releases/l/i/${PN}/${P}.tar.xz"
+HOMEPAGE="https://pagure.io/libuser"
+SRC_URI="https://releases.pagure.io/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
@@ -24,10 +25,6 @@ DEPEND="app-text/linuxdoc-tools
 	${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}"
 
-pkg_setup() {
-	python_set_active_version 2
-}
-
 src_prepare() {
 	mv apps/{,libuser-}lid.1 || die
 	sed -i 's: apps/lid\.1 : apps/libuser-lid.1 :' \
@@ -38,13 +35,4 @@ src_prepare() {
 src_configure() {
 	econf $(use_with ldap) $(use_with popt) $(use_with sasl) \
 		$(use_with selinux) --with-python
-}
-
-pkg_postinst() {
-	if [[ -z ${REPLACING_VERSIONS} ]] \
-		|| [[ ${REPLACING_VERSIONS} < 0.60-r1 ]];
-	then
-		einfo "lid.1 was renamed to libuser-lid.1 to avoid conflict"
-		einfo "with dev-util/idutils (seen in 4.6)."
-	fi
 }
