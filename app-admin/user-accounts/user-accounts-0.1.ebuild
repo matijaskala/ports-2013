@@ -22,6 +22,7 @@ DEPEND="
 	>=sys-apps/accountsservice-0.6.39
 	>=sys-auth/polkit-0.103
 	>=x11-libs/gdk-pixbuf-2.23.0
+	virtual/krb5
 	x11-libs/gtk+:2"
 RDEPEND="${DEPEND}
 	faces? ( !gnome-base/gnome-control-center )"
