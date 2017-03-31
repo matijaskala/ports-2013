@@ -11,11 +11,11 @@ SRC_URI="https://github.com/matijaskala/user-accounts/archive/${PV}.tar.gz -> ${
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+faces"
 RESTRICT="mirror"
 
-DEPEND="
+COMMON_DEPEND="
 	>=dev-libs/glib-2.39.91
 	>=dev-libs/libpwquality-1.2.2
 	>=gnome-base/gsettings-desktop-schemas-3.15.4
@@ -24,8 +24,12 @@ DEPEND="
 	>=x11-libs/gdk-pixbuf-2.23.0
 	virtual/krb5
 	x11-libs/gtk+:2"
-RDEPEND="${DEPEND}
+RDEPEND="${COMMON_DEPEND}
 	faces? ( !gnome-base/gnome-control-center )"
+DEPEND="${COMMON_DEPEND}
+	dev-util/gdbus-codegen
+	dev-util/intltool
+	virtual/pkgconfig"
 
 src_prepare() {
 	eapply_user

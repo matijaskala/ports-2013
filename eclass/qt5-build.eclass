@@ -747,8 +747,8 @@ qt5_qmake() {
 		|| die "qmake failed (${projectdir#${S}/})"
 
 	# FIXME: is there any other way to pass the correct paths?
-	make clean
 	if [[ -n ${SYSROOT} ]] ; then
+		make clean
 		find -name "Makefile*" -exec sed \
 			-e "s@-L\(/usr/lib \)@-L${SYSROOT}\1@" \
 			-e "s@-L\(${QT5_LIBDIR} \)@-L${SYSROOT}\1@" \

@@ -997,6 +997,7 @@ toolchain-glibc_headers_configure() {
 	[[ -d ${S}/ports ]] && addons+=",ports"
 	# Newer versions require nptl, so there is no addon for it.
 	version_is_at_least 2.20 || addons+=",nptl"
+	[[ ${CTARGET} == i?86-hurd-gnu || ${CTARGET} == i?86-pc-gnu || ${CTARGET} == i?86-gnu ]] && addons+=",libpthread"
 	myconf+=( --enable-add-ons="${addons#,}" )
 
 	# Nothing is compiled here which would affect the headers for the target.
@@ -1121,7 +1122,9 @@ toolchain-glibc_do_src_install() {
 	# Newer versions get fancy with libm linkage to include vectorized support.
 	# While we don't really need a ldscript here, portage QA checks get upset.
 	if [[ -e ${ED}$(alt_usrlibdir)/libm-${PV}.a ]] ; then
-		dosym ../../$(get_libdir)/libm-${PV}.so $(alt_usrlibdir)/libm-${PV}.so
+		sed -i "s@\(libm-${PV}.a\)@${P}/\1@" "${ED}"$(alt_usrlibdir)/libm.a || die
+		dodir $(alt_usrlibdir)/${P}
+		mv "${ED}"$(alt_usrlibdir)/libm-${PV}.a "${ED}"$(alt_usrlibdir)/${P}/libm-${PV}.a || die
 	fi
 
 	# We'll take care of the cache ourselves
@@ -1178,6 +1181,14 @@ toolchain-glibc_do_src_install() {
 		if [[ ! -L ${ED}/${ldso_name} && ! -e ${ED}/${ldso_name} ]] ; then
 			dosym ../$(get_abi_LIBDIR ${ldso_abi})/${ldso_name##*/} ${ldso_name}
 		fi
+	done
+
+	# Fix symlinked libraries:
+	# '/usr/lib*/lib*.so -> ../../lib*/lib*.so*' -> '/lib/lib*.so -> lib*.so*'
+	for i in "${ED}"$(alt_usrlibdir)/lib*.so ; do
+		[[ $(readlink ${i}) == ../../lib*.so* ]] || continue
+		i=${i#${ED}$(alt_usrlibdir)/lib}
+		gen_usr_ldscript -a ${i%.so}
 	done
 
 	# With devpts under Linux mounted properly, we do not need the pt_chown
