@@ -24,7 +24,6 @@ RDEPEND=">=app-text/poppler-0.16:0=[cairo]
 	dev-libs/atk:0
 	>=dev-libs/glib-2.36:2
 	>=dev-libs/libxml2-2.5:2
-	>=mate-base/mate-desktop-1.9[gtk3(-)=]
 	sys-libs/zlib:0
 	x11-libs/gdk-pixbuf:2
 	x11-libs/libICE:0
@@ -77,7 +76,7 @@ src_configure() {
 		--enable-pixbuf \
 		--enable-previewer \
 		--enable-thumbnailer \
-		--with-matedesktop \
+		--without-matedesktop \
 		--with-gtk=$(usex gtk3 3.0 2.0) \
 		$(use_with gnome-keyring keyring) \
 		$(use_enable caja) \
