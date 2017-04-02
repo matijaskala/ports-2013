@@ -5,7 +5,7 @@ EAPI=6
 
 DESCRIPTION="Return a copy of an object excluding the given key, or array of keys. Also accepts an optional filter function as the last argument."
 HOMEPAGE="https://github.com/jonschlinkert/object.omit"
-SRC_URI="https://registry.npmjs.org/object.omit/-/object.omit-${PV}.tgz"
+SRC_URI="https://registry.npmjs.org/${PN/-/.}/-/${P/-/.}.tgz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -21,7 +21,7 @@ RDEPEND="net-libs/nodejs
 "
 
 src_install() {
-	mv package ${PN}
+	mv package ${PN/-/.}
 	insinto /usr/$(get_libdir)/node_modules
-	doins -r ${PN}
+	doins -r ${PN/-/.}
 }

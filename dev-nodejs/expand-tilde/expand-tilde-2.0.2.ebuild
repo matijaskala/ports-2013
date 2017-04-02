@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Bash-like tilde expansion for node.js. Expands a leading tilde in a file path to the user home directory, or `~+` to the cwd."
+DESCRIPTION="Bash-like tilde expansion for node.js. Expands a leading tilde in a file path to the user home directory, or '~+' to the cwd."
 HOMEPAGE="https://github.com/jonschlinkert/expand-tilde"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

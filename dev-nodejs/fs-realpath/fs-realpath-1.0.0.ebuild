@@ -5,7 +5,7 @@ EAPI=6
 
 DESCRIPTION="Use node's fs.realpath, but fall back to the JS implementation if the native one fails"
 HOMEPAGE="https://github.com/isaacs/fs.realpath"
-SRC_URI="https://registry.npmjs.org/fs.realpath/-/fs.realpath-${PV}.tgz"
+SRC_URI="https://registry.npmjs.org/${PN/-/.}/-/${P/-/.}.tgz"
 
 LICENSE="ISC"
 SLOT="0"
@@ -19,7 +19,7 @@ RDEPEND="net-libs/nodejs
 "
 
 src_install() {
-	mv package ${PN}
+	mv package ${PN/-/.}
 	insinto /usr/$(get_libdir)/node_modules
-	doins -r ${PN}
+	doins -r ${PN/-/.}
 }

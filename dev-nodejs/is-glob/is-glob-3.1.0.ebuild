@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Returns `true` if the given string looks like a glob pattern or an extglob pattern. This makes it easy to create code that only uses external modules like node-glob when necessary, resulting in much faster code execution and initialization time, and a bet"
+DESCRIPTION="Returns 'true' if the given string looks like a glob pattern or an extglob pattern. This makes it easy to create code that only uses external modules like node-glob when necessary, resulting in much faster code execution and initialization time, and a bet"
 HOMEPAGE="https://github.com/jonschlinkert/is-glob"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

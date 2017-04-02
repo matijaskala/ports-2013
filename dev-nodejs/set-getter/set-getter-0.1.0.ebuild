@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Create nested getter properties and any intermediary dot notation (`'a.b.c'`) paths"
+DESCRIPTION="Create nested getter properties and any intermediary dot notation ('a.b.c') paths"
 HOMEPAGE="https://github.com/doowb/set-getter"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

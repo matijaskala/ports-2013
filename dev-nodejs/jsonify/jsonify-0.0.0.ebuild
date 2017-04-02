@@ -7,7 +7,7 @@ DESCRIPTION="JSON without touching any globals"
 HOMEPAGE="git://github.com/substack/jsonify.git"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 
-LICENSE="Public Domain"
+LICENSE="public-domain"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

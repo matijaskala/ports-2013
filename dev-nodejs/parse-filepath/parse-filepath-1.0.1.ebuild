@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Pollyfill for node.js `path.parse`, parses a filepath into an object."
+DESCRIPTION="Pollyfill for node.js 'path.parse', parses a filepath into an object."
 HOMEPAGE="https://github.com/jonschlinkert/parse-filepath"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

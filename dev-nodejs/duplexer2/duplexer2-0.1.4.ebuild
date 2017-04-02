@@ -7,7 +7,7 @@ DESCRIPTION="Like duplexer but using streams3"
 HOMEPAGE="https://github.com/deoxxa/duplexer2"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 
-LICENSE="BSD-3-Clause"
+LICENSE="BSD-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Polyfill for node.js `path.isAbolute`. Returns true if a file path is absolute."
+DESCRIPTION="Polyfill for node.js 'path.isAbolute'. Returns true if a file path is absolute."
 HOMEPAGE="https://github.com/jonschlinkert/is-absolute"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

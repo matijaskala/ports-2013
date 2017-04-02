@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Convert an absolute path to a tilde path: `/Users/sindresorhus/dev` => `~/dev`"
+DESCRIPTION="Convert an absolute path to a tilde path: '/Users/sindresorhus/dev' => '~/dev'"
 HOMEPAGE="https://github.com/sindresorhus/tildify"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

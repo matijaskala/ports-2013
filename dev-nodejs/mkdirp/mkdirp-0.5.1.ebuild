@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Recursively mkdir, like `mkdir -p`"
+DESCRIPTION="Recursively mkdir, like 'mkdir -p'"
 HOMEPAGE="https://github.com/substack/node-mkdirp"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Returns `true` if the path appears to be relative."
+DESCRIPTION="Returns 'true' if the path appears to be relative."
 HOMEPAGE="https://github.com/jonschlinkert/is-relative"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Fill in a range of numbers or letters, optionally passing an increment or `step` to use, or create a regex-compatible range with `options.toRegex`"
+DESCRIPTION="Fill in a range of numbers or letters, optionally passing an increment or 'step' to use, or create a regex-compatible range with 'options.toRegex'"
 HOMEPAGE="https://github.com/jonschlinkert/fill-range"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 
