@@ -16,6 +16,7 @@ S=${WORKDIR}
 
 DEPEND=""
 RDEPEND="net-libs/nodejs
+	>=dev-nodejs/event-stream-3.1.7
 	>=dev-nodejs/object-assign-3.0.0
 	>=dev-nodejs/through2-2.0.0
 	>=dev-nodejs/array-uniq-1.0.2

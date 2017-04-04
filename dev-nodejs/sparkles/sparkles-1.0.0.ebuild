@@ -16,6 +16,7 @@ S=${WORKDIR}
 
 DEPEND=""
 RDEPEND="net-libs/nodejs
+	>=dev-nodejs/eslint-config-iceddev-0.2.1
 "
 
 src_install() {

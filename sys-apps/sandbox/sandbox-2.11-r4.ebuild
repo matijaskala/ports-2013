@@ -65,6 +65,7 @@ multilib_src_install_all() {
 
 	cd "${S}"
 	dodoc AUTHORS ChangeLog* NEWS README
+	rm -f "${ED}"usr/share/applications/sandbox.desktop
 }
 
 pkg_preinst() {

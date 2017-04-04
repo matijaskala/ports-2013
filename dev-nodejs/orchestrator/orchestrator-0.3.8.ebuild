@@ -17,6 +17,7 @@ S=${WORKDIR}
 DEPEND=""
 RDEPEND="net-libs/nodejs
 	>=dev-nodejs/end-of-stream-0.1.5
+	>=dev-nodejs/event-stream-3.3.4
 	>=dev-nodejs/stream-consume-0.1.0
 	>=dev-nodejs/sequencify-0.0.7
 "

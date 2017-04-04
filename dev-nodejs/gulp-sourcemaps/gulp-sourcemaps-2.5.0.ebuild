@@ -17,6 +17,7 @@ S=${WORKDIR}
 DEPEND=""
 RDEPEND="net-libs/nodejs
 	>=dev-nodejs/source-map-0
+	>=dev-nodejs/map-sources-1
 	>=dev-nodejs/through2-2
 	>=dev-nodejs/acorn-4
 	>=dev-nodejs/strip-bom-3

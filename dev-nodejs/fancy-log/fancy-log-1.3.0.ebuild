@@ -17,6 +17,7 @@ S=${WORKDIR}
 DEPEND=""
 RDEPEND="net-libs/nodejs
 	>=dev-nodejs/chalk-1.1.1
+	>=dev-nodejs/eslint-config-iceddev-0.2.1
 	>=dev-nodejs/time-stamp-1.0.0
 "
 

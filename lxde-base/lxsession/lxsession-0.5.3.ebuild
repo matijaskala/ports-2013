@@ -25,7 +25,7 @@ COMMON_DEPEND="
 	gtk3? ( x11-libs/gtk+:3 )
 	x11-libs/libX11
 	libnotify? (
-		dev-libs/libappindicator:0
+		dev-libs/libappindicator:2
 		dev-libs/libindicator:0
 		x11-libs/libnotify
 	)
