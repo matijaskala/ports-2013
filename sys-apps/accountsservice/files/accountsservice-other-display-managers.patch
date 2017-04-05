@@ -62,7 +62,7 @@ Support setting/reading autologin setings for LightDM, LXDM, SDDM
 +        }
 +        if (!system ("pidof lightdm > /dev/null"))
 +                return DISPLAY_MANAGER_LIGHTDM;
-+        if (!system ("pidof lxdm > /dev/null"))
++        if (!system ("pidof lxdm-binary > /dev/null"))
 +                return DISPLAY_MANAGER_LXDM;
 +        if (!system ("pidof sddm > /dev/null"))
 +                return DISPLAY_MANAGER_SDDM;
