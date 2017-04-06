@@ -18,7 +18,6 @@ RDEPEND="x11-libs/gtk+:2"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	sys-devel/gettext"
-PDEPEND="lxde-base/lxde-icon-theme"
 
 src_prepare() {
 	#bug 380043

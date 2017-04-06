@@ -172,13 +172,13 @@ src_prepare() {
 	sed '/mozilla\.org\/legal/d' -i "${S}"/services/healthreport/healthreport-prefs.js
 	sed "s|^\(pref(\"datareporting\.healthreport\.infoURL.*\", \"\)https://.*\(\");\)$|\1${HOMEPAGE}\2|" -i "${S}"/{services/healthreport,mobile/android/chrome/content}/healthreport-prefs.js
 	sed "s|https://www.mozilla.org/legal/privacy/|${HOMEPAGE}|" -i "${S}"/browser/app/profile/firefox.js "${S}"/toolkit/content/aboutRights.xhtml
-	rm "${S}"/browser/locales/en-US/searchplugins/ddg.xml
 	for i in "${GEEK_STORE_DIR}"/gnuzilla/data/searchplugins/* ; do
 		cp "${i}" "${S}"/browser/locales/en-US/searchplugins
 		echo "$(basename "${i%.xml}")" >> "${S}"/browser/locales/en-US/searchplugins/list.txt
 		cp "${i}" "${S}"/mobile/locales/en-US/searchplugins
 		echo "$(basename "${i%.xml}")" >> "${S}"/mobile/locales/en-US/searchplugins/list.txt
 	done
+	mv "${S}"/browser/locales/en-US/searchplugins/{duckduckgo,ddg}.xml || die
 	for i in base/content/newtab/newTab.css themes/linux/newtab/newTab.css themes/windows/newtab/newTab.css themes/osx/newtab/newTab.css ; do
 		echo '#newtab-customize-button, #newtab-intro-what{display:none}' >> "${S}/browser/${i}"
 	done

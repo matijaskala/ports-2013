@@ -22,7 +22,7 @@ RDEPEND="net-libs/nodejs
 	>=dev-nodejs/through-2.3.1
 	>=dev-nodejs/split-0.3
 	>=dev-nodejs/duplexer-0.1.1
-	>=dev-nodejs/map-stream-0.1.0
+	dev-nodejs/map-stream
 "
 
 src_install() {
