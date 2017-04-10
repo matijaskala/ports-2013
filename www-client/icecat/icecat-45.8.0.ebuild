@@ -171,7 +171,7 @@ src_prepare() {
 	einfo "Converting into IceCat ..."
 	sed '/mozilla\.org\/legal/d' -i "${S}"/services/healthreport/healthreport-prefs.js
 	sed "s|^\(pref(\"datareporting\.healthreport\.infoURL.*\", \"\)https://.*\(\");\)$|\1${HOMEPAGE}\2|" -i "${S}"/{services/healthreport,mobile/android/chrome/content}/healthreport-prefs.js
-	sed "s|https://www.mozilla.org/legal/privacy/|${HOMEPAGE}|" -i "${S}"/browser/app/profile/firefox.js "${S}"/toolkit/content/aboutRights.xhtml
+	sed "s|https://www\.mozilla\.org/legal/privacy/|${HOMEPAGE}/|" -i "${S}"/browser/app/profile/firefox.js "${S}"/toolkit/content/aboutRights.xhtml
 	for i in "${GEEK_STORE_DIR}"/gnuzilla/data/searchplugins/* ; do
 		cp "${i}" "${S}"/browser/locales/en-US/searchplugins
 		echo "$(basename "${i%.xml}")" >> "${S}"/browser/locales/en-US/searchplugins/list.txt
@@ -235,8 +235,8 @@ src_prepare() {
 		s|https*://www\.mozilla\.com/plugincheck|${HOMEPAGE}/addons.html|;
 		s|ww*3*\.mozilla\.com/plugincheck|${HOMEPAGE}/addons.html|;
 		s|mozilla\.com/plugincheck|${HOMEPAGE}/addons.html|;
-		s|\"https://www\.mozilla\.com/legay/privacy.*\"|\"${HOMEPAGE}\"|;
-		s|https://www\.mozilla\.com/legay/privacy|${HOMEPAGE}|;
+		s|\"https://www\.mozilla\..../legay/privacy.*\"|\"${HOMEPAGE}\"|;
+		s|https://www\.mozilla\..../legay/privacy|${HOMEPAGE}|;
 
 		s|Mozilla Firefox|GNU IceCat|;
 		s|Mozilla Firefox|GNU IceCat|;
