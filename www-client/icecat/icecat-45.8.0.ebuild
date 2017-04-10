@@ -186,10 +186,12 @@ src_prepare() {
 	sed 's|www.mozilla.org/firefox/android.*sync-preferences|f-droid.org/repository/browse/?fdid=org.gnu.icecat|' -i "${S}"/browser/components/preferences/in-content/sync.xul
 	rm -rf "${S}"/{browser,mobile/android}/branding/*
 	cp "${FILESDIR}"/identity-icons-brand.svg "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/content
-	echo "  content/branding/identity-icons-brand.svg" >> "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/content/jar.mn
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/official
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/unofficial
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/nightly
+	echo "  content/branding/identity-icons-brand.svg" >> "${S}"/browser/branding/official/content/jar.mn
+	echo "  content/branding/identity-icons-brand.svg" >> "${S}"/browser/branding/unofficial/content/jar.mn
+	echo "  content/branding/identity-icons-brand.svg" >> "${S}"/browser/branding/nightly/content/jar.mn
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/official
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/unofficial
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecatmobile "${S}"/mobile/android/branding/nightly
