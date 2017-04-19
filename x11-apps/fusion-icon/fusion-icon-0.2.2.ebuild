@@ -13,10 +13,10 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="+gtk qt4 qt5"
+IUSE="+gtk gtk3 qt4 qt5"
 RESTRICT="mirror"
 
-REQUIRED_USE="?? ( qt4 qt5 ) || ( gtk qt4 qt5 )"
+REQUIRED_USE="gtk3? ( gtk ) ?? ( qt4 qt5 ) || ( gtk qt4 qt5 )"
 
 RDEPEND="
 	>=dev-python/compizconfig-python-0.8.12[${PYTHON_USEDEP}]
@@ -25,7 +25,10 @@ RDEPEND="
 	x11-apps/xvinfo
 	>=x11-wm/compiz-0.8
 	<x11-wm/compiz-0.9
-	gtk? ( >=dev-python/pygtk-2.10:2[${PYTHON_USEDEP}] )
+	gtk? (
+		!gtk3? ( dev-libs/libappindicator:2 )
+		gtk3? ( dev-libs/libappindicator:3 )
+	)
 	qt4? ( dev-python/PyQt4[${PYTHON_USEDEP}] )
 	qt5? ( dev-python/PyQt5[${PYTHON_USEDEP}] )
 "
@@ -34,8 +37,15 @@ DEPEND="${RDEPEND}"
 
 PATCHES=( "${FILESDIR}"/${P}-qt4-interface-subprocess-call.patch )
 
-python_install() {
-	distutils-r1_python_install
+python_configure_all() {
+	mydistutilsargs=(
+	build \
+		--with-gtk=$(usex gtk3 3.0 2.0)
+	)
+}
+
+python_install_all() {
+	distutils-r1_python_install_all
 	use gtk || rm -r "${D}$(python_get_sitedir)/FusionIcon/interface_gtk" || die
 	use qt4 || use qt5 || rm -r "${D}$(python_get_sitedir)/FusionIcon/interface_qt4" || die
 }

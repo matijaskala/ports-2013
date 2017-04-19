@@ -1,11 +1,11 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_IN_SOURCE_BUILD=1
-inherit distutils-r1
+inherit distutils-r1 gnome2-utils
 
 DESCRIPTION="Compizconfig Settings Manager"
 HOMEPAGE="http://www.compiz.org/"
@@ -24,19 +24,9 @@ RDEPEND="
 	gnome-base/librsvg
 "
 
-# missing icons and text fix, bug #487106
-PATCHES=( "${FILESDIR}/${P}-pygobject-glib-fix.patch" )
-
-DOCS=( AUTHORS )
-
 python_prepare_all() {
 	# return error if wrong arguments passed to setup.py
 	sed -i -e 's/raise SystemExit/\0(1)/' setup.py || die 'sed on setup.py failed'
-	# fix desktop file
-	sed -i \
-		-e '/Categories/s/Compiz/X-\0/' \
-		-e '/Encoding/d' \
-		ccsm.desktop.in || die 'sed on ccsm.desktop.in failed'
 
 	# correct gettext behavior
 	if [[ -n "${LINGUAS+x}" ]] ; then
@@ -51,6 +41,17 @@ python_prepare_all() {
 }
 
 python_configure_all() {
-	#set prefix
-	mydistutilsargs=( build --prefix=/usr )
+	mydistutilsargs=(
+		build \
+		--prefix=/usr \
+		--with-gtk=$(usex gtk3 3.0 2.0)
+	)
+}
+
+pkg_postinst() {
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
 }

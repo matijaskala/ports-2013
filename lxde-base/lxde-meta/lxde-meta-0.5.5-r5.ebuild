@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -8,11 +8,12 @@ HOMEPAGE="http://lxde.org/"
 
 LICENSE="metapackage"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ppc ~x86"
+KEYWORDS="~alpha amd64 arm ~arm64 ppc x86"
 IUSE=""
 
 RDEPEND=">=lxde-base/menu-cache-0.3.3
 	>=lxde-base/lxappearance-0.5.5
+	>=lxde-base/lxde-icon-theme-0.5.0
 	>=lxde-base/lxde-common-0.5.5
 	>=lxde-base/lxmenu-data-0.1.4
 	>=lxde-base/lxinput-0.3.2

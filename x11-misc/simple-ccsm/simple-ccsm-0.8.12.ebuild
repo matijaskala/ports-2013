@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_IN_SOURCE_BUILD=1
@@ -11,7 +11,7 @@ DESCRIPTION="Simplified Compizconfig Settings Manager"
 HOMEPAGE="http://www.compiz.org/"
 SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 IUSE="gtk3"

@@ -4,13 +4,13 @@
 EAPI=5
 inherit xfconf
 
-DESCRIPTION="Unified widget and session management libs for Xfce"
+DESCRIPTION="Unified widget and session management libraries for Xfce"
 HOMEPAGE="http://www.xfce.org/projects/libxfce4"
 SRC_URI="mirror://xfce/src/xfce/${PN}/${PV%.*}/${P}.tar.bz2"
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-solaris"
 IUSE="debug glade startup-notification"
 
 RDEPEND=">=dev-libs/glib-2.30:2=
@@ -31,6 +31,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 pkg_setup() {
+	PATCHES=( "${FILESDIR}"/print_screen.patch )
+
 	XFCONF=(
 		$(use_enable startup-notification)
 		$(xfconf_use_debug)

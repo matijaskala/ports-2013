@@ -51,7 +51,7 @@ inherit flag-o-matic toolchain-funcs mozcoreconf-v4
 # @ECLASS-VARIABLE: MOZCONFIG_OPTIONAL_GTK3
 # @DESCRIPTION:
 # Set this variable before the inherit line, when an ebuild can provide
-# optional gtk3 support via IUSE="force-gtk3".  Currently this would include
+# optional gtk3 support via IUSE="gtk3".  Currently this would include
 # thunderbird and seamonkey in the future, once support is ready for testing.
 #
 # Leave the variable UNSET if gtk3 support should not be optionally available.
@@ -132,11 +132,11 @@ RDEPEND=">=app-text/hunspell-1.2:=
 if [[ -n ${MOZCONFIG_OPTIONAL_GTK3} ]]; then
 	MOZCONFIG_OPTIONAL_GTK2ONLY=
 	if [[ ${MOZCONFIG_OPTIONAL_GTK3} = "enabled" ]]; then
-		IUSE+=" +force-gtk3"
+		IUSE+=" +gtk3"
 	else
-		IUSE+=" force-gtk3"
+		IUSE+=" gtk3"
 	fi
-	RDEPEND+=" force-gtk3? ( >=x11-libs/gtk+-3.4.0:3 )"
+	RDEPEND+=" gtk3? ( >=x11-libs/gtk+-3.4.0:3 )"
 elif [[ -n ${MOZCONFIG_OPTIONAL_GTK2ONLY} ]]; then
 	if [[ ${MOZCONFIG_OPTIONAL_GTK2ONLY} = "enabled" ]]; then
 		IUSE+=" +gtk2"
@@ -201,7 +201,7 @@ mozconfig_config() {
 		fi
 	fi
 
-	# Enable position independent executables 
+	# Enable position independent executables
 	mozconfig_annotate 'enabled by Gentoo' --enable-pie
 	mozconfig_use_enable debug
 	mozconfig_use_enable debug tests
@@ -328,10 +328,6 @@ mozconfig_config() {
 	fi
 	if [[ ${CHOST} == armv* ]] ; then
 		mozconfig_annotate '' --with-float-abi=hard
-		if ! use skia ; then
-			mozconfig_annotate 'Gentoo forces skia for arm' --enable-skia
-		fi
-
 		if ! use system-libvpx ; then
 			sed -i -e "s|softfp|hard|" \
 				"${S}"/media/libvpx/moz.build
