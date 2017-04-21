@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit gnome2 virtualx
@@ -13,7 +12,7 @@ SRC_URI="${SRC_URI}
 LICENSE="GPL-2+ FDL-1.1+ LGPL-2+"
 SLOT="3/12" # subslot = libgnome-desktop-3 soname version
 IUSE="debug +introspection +ubuntu udev"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~x86-solaris"
+KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~x86-solaris"
 
 # cairo[X] needed for gnome-bg
 COMMON_DEPEND="
@@ -51,7 +50,7 @@ src_prepare() {
 	if use ubuntu; then
 		einfo "Applying patches from Ubuntu:"
 		for patch in `cat "${FILESDIR}/${P}-ubuntu-patch-series"`; do
-			epatch "${WORKDIR}/debian/patches/${patch}"
+			eapply "${WORKDIR}/debian/patches/${patch}"
 		done
 	fi
 

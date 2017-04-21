@@ -13,7 +13,6 @@ IUSE=""
 
 RDEPEND=">=lxde-base/menu-cache-0.3.3
 	>=lxde-base/lxappearance-0.5.5
-	>=lxde-base/lxde-icon-theme-0.5.0
 	>=lxde-base/lxde-common-0.5.5
 	>=lxde-base/lxmenu-data-0.1.4
 	>=lxde-base/lxinput-0.3.2
