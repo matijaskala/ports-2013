@@ -16,7 +16,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	dev-ada/gnatcoll[iconv,postgresql,readline,sqlite]
+	dev-ada/gnatcoll[iconv,postgresql,projects,readline,sqlite]
 	dev-ada/gprbuild[shared]
 	dev-db/sqlite
 	dev-lang/gnat-gpl
@@ -27,6 +27,7 @@ RDEPEND="${DEPEND}
 	media-libs/fontconfig
 	media-libs/freetype
 	sys-devel/llvm
+	sys-devel/clang
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf
 	x11-libs/gtk+

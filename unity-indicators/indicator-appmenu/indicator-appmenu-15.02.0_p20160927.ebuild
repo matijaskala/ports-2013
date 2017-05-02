@@ -19,7 +19,6 @@ RESTRICT="mirror"
 
 RDEPEND="dev-libs/libdbusmenu:=
 	dev-libs/libappindicator:3=
-	dev-libs/libindicate-qt
 	x11-libs/bamf:=
 	x11-libs/gtk+:3
 	x11-libs/libwnck:3"
@@ -27,6 +26,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
+	eapply_user
 	eautoreconf
 	append-cflags -Wno-error
 }
