@@ -23,6 +23,9 @@ RDEPEND="dev-libs/libdbusmenu:=
 	x11-libs/gtk+:3
 	x11-libs/libwnck:3"
 DEPEND="${RDEPEND}
+	dev-util/gtk-doc
+	dev-util/gtk-doc-am
+	dev-util/intltool
 	virtual/pkgconfig"
 
 src_prepare() {

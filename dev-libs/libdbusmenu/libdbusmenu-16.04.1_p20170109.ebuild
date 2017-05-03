@@ -33,6 +33,7 @@ RDEPEND="
 	!<${CATEGORY}/${PN}-0.5.1-r200"
 DEPEND="${RDEPEND}
 	app-text/gnome-doc-utils
+	dev-util/gtk-doc
 	dev-util/intltool
 	sys-devel/gettext
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
