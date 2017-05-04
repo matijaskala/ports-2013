@@ -12,12 +12,11 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="libnotify"
 RESTRICT="mirror"
 
 RDEPEND="
 	gnome-base/librsvg
-	libnotify? ( x11-libs/libnotify )
+	x11-libs/libnotify
 	>=x11-libs/compiz-bcop-0.7.3
 	<x11-libs/compiz-bcop-0.9
 	>=x11-plugins/compiz-plugins-main-0.8
@@ -35,7 +34,6 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-libnotify.patch"
 	default
 	eautoreconf
 }
@@ -43,8 +41,7 @@ src_prepare() {
 src_configure() {
 	econf \
 		--enable-fast-install \
-		--disable-static \
-		$(use_with libnotify notifications)
+		--disable-static
 }
 
 src_install() {

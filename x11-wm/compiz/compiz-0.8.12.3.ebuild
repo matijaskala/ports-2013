@@ -69,8 +69,6 @@ RDEPEND="${COMMONDEPEND}
 	x11-apps/xvinfo
 "
 
-DOCS=( AUTHORS ChangeLog NEWS README TODO )
-
 src_prepare() {
 	default
 	eautoreconf
