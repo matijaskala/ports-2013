@@ -20,9 +20,9 @@ COMMONDEPEND="
 	dev-libs/libxml2
 	dev-libs/libxslt
 	media-libs/libpng:0=
-	>=media-libs/mesa-6.5.1-r1
-	>=x11-base/xorg-server-1.1.1-r1
-	>=x11-libs/libX11-1.4
+	media-libs/mesa
+	x11-base/xorg-server
+	x11-libs/libX11
 	x11-libs/libxcb
 	x11-libs/libXcomposite
 	x11-libs/libXdamage
@@ -41,15 +41,18 @@ COMMONDEPEND="
 		dev-libs/dbus-glib
 	)
 	fuse? ( sys-fs/fuse )
-	mate? (
-		mate-base/mate-control-center
-		mate-base/mate-desktop
-	)
 	gtk? (
-		>=x11-libs/gtk+-2.8.0:2
-		>=x11-libs/libwnck-2.18.3:1
+		gtk3? (
+			x11-libs/gtk+:3
+			x11-libs/libwnck:3
+		)
+		!gtk3? (
+			>=x11-libs/gtk+-2.22.0:2
+			>=x11-libs/libwnck-2.22.0:1
+		)
 		x11-libs/pango
 	)
+	mate? ( x11-wm/marco )
 	svg? (
 		>=gnome-base/librsvg-2.14.0:2
 		>=x11-libs/cairo-1.0
@@ -57,6 +60,7 @@ COMMONDEPEND="
 "
 
 DEPEND="${COMMONDEPEND}
+	dev-util/intltool
 	virtual/pkgconfig
 	x11-proto/damageproto
 	x11-proto/xineramaproto
@@ -75,13 +79,16 @@ src_prepare() {
 }
 
 src_configure() {
+	use gtk && myconf="--with-gtk=$(usex gtk3 3.0 2.0)"
+
 	econf \
 		--disable-static \
-		$(use_enable svg librsvg) \
 		$(use_enable cairo annotate) \
 		$(use_enable dbus) \
 		$(use_enable dbus dbus-glib) \
 		$(use_enable fuse) \
+		$(use_enable gtk gsettings) \
+		$(use_enable svg librsvg) \
 		$(use_enable mate) \
 		$(use_enable mate marco) \
 		$(use_enable gtk) \
@@ -121,7 +128,7 @@ src_install() {
 	as_command = gtk-window-decorator
 
 	[core]
-	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;switcher;
+	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;switcher;$(use mate && echo 'matecompat;')
 	s0_hsize = 2
 	s0_vsize = 2
 
