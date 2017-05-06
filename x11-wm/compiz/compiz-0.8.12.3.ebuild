@@ -12,7 +12,7 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2+ LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="+cairo dbus fuse mate gtk +svg"
+IUSE="+cairo dbus fuse +gtk gtk3 mate +svg"
 RESTRICT="mirror"
 
 COMMONDEPEND="
@@ -50,6 +50,9 @@ COMMONDEPEND="
 			>=x11-libs/gtk+-2.22.0:2
 			>=x11-libs/libwnck-2.22.0:1
 		)
+		>=dev-libs/glib-2.32
+		>=x11-libs/libcompizconfig-0.8
+		<x11-libs/libcompizconfig-0.9
 		x11-libs/pango
 	)
 	mate? ( x11-wm/marco )
@@ -84,6 +87,7 @@ src_configure() {
 	econf \
 		--disable-static \
 		$(use_enable cairo annotate) \
+		$(use_enable gtk compizconfig) \
 		$(use_enable dbus) \
 		$(use_enable dbus dbus-glib) \
 		$(use_enable fuse) \
