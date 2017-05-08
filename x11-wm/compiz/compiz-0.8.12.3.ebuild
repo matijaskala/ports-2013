@@ -12,8 +12,7 @@ SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.
 LICENSE="GPL-2+ LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="+cairo compizconfig dbus fuse +gtk gtk3 mate +svg"
-REQUIRED_USE="compizconfig? ( gtk )"
+IUSE="+cairo dbus fuse +gtk mate +svg"
 RESTRICT="mirror"
 
 COMMONDEPEND="
@@ -37,28 +36,11 @@ COMMONDEPEND="
 	cairo? (
 		x11-libs/cairo[X]
 	)
-	compizconfig? (
-		>=x11-libs/libcompizconfig-0.8
-		<x11-libs/libcompizconfig-0.9
-	)
 	dbus? (
 		>=sys-apps/dbus-1.0
 		dev-libs/dbus-glib
 	)
 	fuse? ( sys-fs/fuse )
-	gtk? (
-		gtk3? (
-			x11-libs/gtk+:3
-			x11-libs/libwnck:3
-		)
-		!gtk3? (
-			>=x11-libs/gtk+-2.22.0:2
-			>=x11-libs/libwnck-2.22.0:1
-		)
-		>=dev-libs/glib-2.32
-		x11-libs/pango
-	)
-	mate? ( x11-wm/marco )
 	svg? (
 		>=gnome-base/librsvg-2.14.0:2
 		>=x11-libs/cairo-1.0
@@ -79,27 +61,26 @@ RDEPEND="${COMMONDEPEND}
 	x11-apps/xvinfo
 "
 
+PDEPEND="gtk? ( x11-wm/gtk-window-decorator )"
+
 src_prepare() {
 	default
 	eautoreconf
 }
 
 src_configure() {
-	use gtk && myconf="--with-gtk=$(usex gtk3 3.0 2.0)"
-
 	econf \
 		--disable-static \
 		$(use_enable cairo annotate) \
-		$(use_enable compizconfig) \
+		--disable-compizconfig \
 		$(use_enable dbus) \
 		$(use_enable dbus dbus-glib) \
 		$(use_enable fuse) \
-		$(use_enable gtk gsettings) \
+		--disable-gsettings \
 		$(use_enable svg librsvg) \
+		--disable-marco \
 		$(use_enable mate) \
-		$(use_enable mate marco) \
-		$(use_enable gtk) \
-		${myconf}
+		--disable-gtk
 }
 
 src_install() {
@@ -131,9 +112,6 @@ src_install() {
 	dodir /etc/skel/.config/compiz/compizconfig
 
 	cat <<- EOF > "${D}/etc/skel/.config/compiz/compizconfig/Default.ini"
-	[decoration]
-	as_command = gtk-window-decorator
-
 	[core]
 	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;switcher;$(use mate && echo 'matecompat;')
 	s0_hsize = 2
