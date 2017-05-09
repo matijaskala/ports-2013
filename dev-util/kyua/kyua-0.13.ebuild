@@ -4,12 +4,12 @@
 EAPI=6
 
 DESCRIPTION="Testing framework for infrastructure software"
-HOMEPAGE="https://github.com/jmmv/lutok"
+HOMEPAGE="https://github.com/jmmv/kyua"
 SRC_URI="https://github.com/jmmv/kyua/releases/download/${P}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~alpha ~amd64 ~hppa ~x86"
 IUSE="test"
 
 # Tests fail

@@ -14,6 +14,7 @@ SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
 IUSE="gtk3 mate"
 RESTRICT="mirror"
+S=${WORKDIR}/compiz-${PV}
 
 COMMONDEPEND="
 	>=dev-libs/glib-2.32
