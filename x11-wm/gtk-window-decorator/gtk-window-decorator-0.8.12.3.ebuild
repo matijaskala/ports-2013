@@ -43,7 +43,7 @@ COMMONDEPEND="
 	)
 	>=x11-libs/libcompizconfig-0.8
 	<x11-libs/libcompizconfig-0.9
-	mate? ( x11-wm/marco )
+	mate? ( x11-wm/marco[gtk3(+)=] )
 "
 
 DEPEND="${COMMONDEPEND}
@@ -79,7 +79,7 @@ src_configure() {
 }
 
 src_install() {
-	dobin gtk/window-decorator/gtk-window-decorator
+	dobin gtk/window-decorator/.libs/gtk-window-decorator
 	insinto /usr/share/glib-2.0/schemas
 	doins gtk/window-decorator/org.compiz-0.gwd.gschema.xml
 }

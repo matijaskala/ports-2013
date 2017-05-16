@@ -1,14 +1,14 @@
 DEFINED_PHASES=configure install prepare
-DEPEND=>=dev-libs/glib-2.32 dev-libs/libxml2 dev-libs/libxslt media-libs/mesa x11-base/xorg-server x11-libs/libX11 x11-libs/libxcb x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXinerama x11-libs/libXrandr x11-libs/libICE x11-libs/libSM >=x11-libs/libXrender-0.8.4 >=x11-libs/startup-notification-0.7 virtual/glu gtk3? ( x11-libs/gtk+:3 x11-libs/libwnck:3 ) !gtk3? ( >=x11-libs/gtk+-2.22.0:2 >=x11-libs/libwnck-2.22.0:1 ) >=x11-libs/libcompizconfig-0.8 <x11-libs/libcompizconfig-0.9 mate? ( x11-wm/marco ) dev-util/intltool virtual/pkgconfig x11-proto/damageproto x11-proto/xineramaproto >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=sys-apps/sed-4
+DEPEND=>=dev-libs/glib-2.32 dev-libs/libxml2 dev-libs/libxslt media-libs/mesa x11-base/xorg-server x11-libs/libX11 x11-libs/libxcb x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXinerama x11-libs/libXrandr x11-libs/libICE x11-libs/libSM >=x11-libs/libXrender-0.8.4 >=x11-libs/startup-notification-0.7 virtual/glu gtk3? ( x11-libs/gtk+:3 x11-libs/libwnck:3 ) !gtk3? ( >=x11-libs/gtk+-2.22.0:2 >=x11-libs/libwnck-2.22.0:1 ) >=x11-libs/libcompizconfig-0.8 <x11-libs/libcompizconfig-0.9 mate? ( x11-wm/marco[gtk3(+)=] ) dev-util/intltool virtual/pkgconfig x11-proto/damageproto x11-proto/xineramaproto >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=sys-apps/sed-4
 DESCRIPTION=GTK window decorator
 EAPI=6
 HOMEPAGE=https://github.com/compiz-reloaded
 IUSE=gtk3 mate
 KEYWORDS=amd64 ppc ppc64 x86
 LICENSE=GPL-2+ LGPL-2.1 MIT
-RDEPEND=>=dev-libs/glib-2.32 dev-libs/libxml2 dev-libs/libxslt media-libs/mesa x11-base/xorg-server x11-libs/libX11 x11-libs/libxcb x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXinerama x11-libs/libXrandr x11-libs/libICE x11-libs/libSM >=x11-libs/libXrender-0.8.4 >=x11-libs/startup-notification-0.7 virtual/glu gtk3? ( x11-libs/gtk+:3 x11-libs/libwnck:3 ) !gtk3? ( >=x11-libs/gtk+-2.22.0:2 >=x11-libs/libwnck-2.22.0:1 ) >=x11-libs/libcompizconfig-0.8 <x11-libs/libcompizconfig-0.9 mate? ( x11-wm/marco ) x11-wm/compiz[svg]
+RDEPEND=>=dev-libs/glib-2.32 dev-libs/libxml2 dev-libs/libxslt media-libs/mesa x11-base/xorg-server x11-libs/libX11 x11-libs/libxcb x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXinerama x11-libs/libXrandr x11-libs/libICE x11-libs/libSM >=x11-libs/libXrender-0.8.4 >=x11-libs/startup-notification-0.7 virtual/glu gtk3? ( x11-libs/gtk+:3 x11-libs/libwnck:3 ) !gtk3? ( >=x11-libs/gtk+-2.22.0:2 >=x11-libs/libwnck-2.22.0:1 ) >=x11-libs/libcompizconfig-0.8 <x11-libs/libcompizconfig-0.9 mate? ( x11-wm/marco[gtk3(+)=] ) x11-wm/compiz[svg]
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/compiz-reloaded/compiz/releases/download/v0.8.12.3/compiz-0.8.12.3.tar.xz
 _eclasses_=autotools	7027963e8e8cc12c91117bdb9225dc26	epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	9c113d6a64826c40154cad7be15d95ea	gnome2-utils	8a5e0bf2b8031478ecfeaec753ef4560	libtool	e32ea84bf82cf8987965b574672dba93	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	4bad85ef4e04ba5a5af265c3e576ac19	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	xdg-utils	b9389dfad0ee8f8e0b2a41b79fcf7120
-_md5_=467db193d2d9cae79a799bd669df23a2
+_md5_=179383ce1e24862ca7087f341224b42e

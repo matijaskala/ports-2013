@@ -27,6 +27,7 @@ RDEPEND="dev-libs/gobject-introspection
 DEPEND="${RDEPEND}
 	dev-util/gdbus-codegen
 	dev-util/gtk-doc-am
+	gnome-base/gnome-common
 	virtual/pkgconfig"
 
 S=${WORKDIR}
