@@ -1,0 +1,15 @@
+--- a/include/utmpx.h
++++ b/include/utmpx.h
+@@ -55,6 +55,12 @@
+ #define USER_PROCESS    7
+ #define DEAD_PROCESS    8
+ 
++
++#ifdef _GNU_SOURCE
++#define _PATH_UTMPX "/dev/null/utmp"
++#define _PATH_WTMPX "/dev/null/wtmp"
++#endif
++
+ #ifdef __cplusplus
+ }
+ #endif
