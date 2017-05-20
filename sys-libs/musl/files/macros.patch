@@ -1,0 +1,40 @@
+--- a/include/glob.h
++++ b/include/glob.h
+@@ -22,6 +22,7 @@
+ int  glob(const char *__restrict, int, int (*)(const char *, int), glob_t *__restrict);
+ void globfree(glob_t *);
+ 
++#define GLOB_BRACE 0
+ #define GLOB_ERR      0x01
+ #define GLOB_MARK     0x02
+ #define GLOB_NOSORT   0x04
+--- a/include/regex.h
++++ b/include/regex.h
+@@ -31,6 +31,7 @@
+ 
+ #define REG_NOTBOL      1
+ #define REG_NOTEOL      2
++#define REG_STARTEND    0
+ 
+ #define REG_OK          0
+ #define REG_NOMATCH     1
+--- a/include/netdb.h
++++ b/include/netdb.h
+@@ -124,6 +124,8 @@
+ #define NO_RECOVERY    3
+ #define NO_DATA        4
+ #define NO_ADDRESS     NO_DATA
++#define NETDB_INTERNAL -1
++#define NETDB_SUCCESS  0
+ #endif
+ 
+ #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
+@@ -140,6 +140,8 @@
+ #define EAI_IDN_ENCODE -105
+ #define NI_MAXHOST 255
+ #define NI_MAXSERV 32
++#define NI_IDN 0
++#define NI_IDN_USE_STD3_ASCII_RULES 0
+ #endif
+ 
+ 
