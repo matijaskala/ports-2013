@@ -381,15 +381,13 @@ foreach_abi() {
 	else
 		abilist=${DEFAULT_ABI}
 	fi
-	evar_push ABI
-	export ABI
+	local -x ABI
 	for ABI in ${abilist:-default} ; do
 		setup_env
 		einfo "Running $1 for ABI ${ABI}"
 		$1
 		: $(( ret |= $? ))
 	done
-	evar_pop
 	return ${ret}
 }
 
@@ -1127,6 +1125,36 @@ toolchain-glibc_do_src_install() {
 		mv "${ED}"$(alt_usrlibdir)/libm-${PV}.a "${ED}"$(alt_usrlibdir)/${P}/libm-${PV}.a || die
 	fi
 
+	# Fix symlinked libraries:
+	# '/usr/lib*/lib*.so -> ../../lib*/lib*.so*' -> '/lib/lib*.so -> lib*.so*'
+	local flags=( ${CFLAGS} ${LDFLAGS} -Wl,--verbose )
+	if $(tc-getLD) --version | grep -q 'GNU gold' ; then
+		local d="${T}/bfd-linker"
+		mkdir -p "${d}"
+		ln -sf $(which ${CHOST}-ld.bfd) "${d}"/ld
+		flags+=( -B"${d}" )
+	fi
+	local output_format=$($(tc-getCC) "${flags[@]}" 2>&1 | sed -n 's/^OUTPUT_FORMAT("\([^"]*\)",.*/\1/p')
+	[[ -n ${output_format} ]] && output_format="OUTPUT_FORMAT ( ${output_format} )"
+	for i in "${ED}"$(alt_usrlibdir)/lib*.so ; do
+		j="$(readlink "${i}")"
+		[[ ${j} == ../../lib*/lib*.so* ]] || continue
+		rm "${i}" || die
+		cat > "${i}" <<-END_LDSCRIPT
+/* GNU ld script
+   Since Gentoo has critical dynamic libraries in /lib, and the static versions
+   in /usr/lib, we need to have a "fake" dynamic lib in /usr/lib, otherwise we
+   run into linking problems.  This "fake" dynamic lib is a linker script that
+   redirects the linker to the real lib.  And yes, this works in the cross-
+   compiling scenario as the sysroot-ed linker will prepend the real path.
+
+   See bug https://bugs.gentoo.org/4411 for more info.
+ */
+${output_format}
+GROUP ( ${EPREFIX}${j#../..} )
+END_LDSCRIPT
+	done
+
 	# We'll take care of the cache ourselves
 	rm -f "${ED}"/etc/ld.so.cache
 
@@ -1181,14 +1209,6 @@ toolchain-glibc_do_src_install() {
 		if [[ ! -L ${ED}/${ldso_name} && ! -e ${ED}/${ldso_name} ]] ; then
 			dosym ../$(get_abi_LIBDIR ${ldso_abi})/${ldso_name##*/} ${ldso_name}
 		fi
-	done
-
-	# Fix symlinked libraries:
-	# '/usr/lib*/lib*.so -> ../../lib*/lib*.so*' -> '/lib/lib*.so -> lib*.so*'
-	for i in "${ED}"$(alt_usrlibdir)/lib*.so ; do
-		[[ $(readlink ${i}) == ../../lib*.so* ]] || continue
-		i=${i#${ED}$(alt_usrlibdir)/lib}
-		gen_usr_ldscript -a ${i%.so}
 	done
 
 	# With devpts under Linux mounted properly, we do not need the pt_chown
