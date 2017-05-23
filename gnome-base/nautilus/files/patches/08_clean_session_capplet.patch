@@ -1,9 +1,23 @@
-Index: nautilus-3.18.1/data/nautilus-autostart.desktop.in
-===================================================================
---- nautilus-3.18.1.orig/data/nautilus-autostart.desktop.in
-+++ nautilus-3.18.1/data/nautilus-autostart.desktop.in
+From 7947fb3cef7aa7ddc4bfda9961178808c024c82e Mon Sep 17 00:00:00 2001
+From: Jeremy Bicha <jbicha@ubuntu.com>
+Date: Thu, 27 Apr 2017 20:35:54 -0400
+Subject: [PATCH] autostart: Set NoDisplay=true
+
+This hides the autostart from Ubuntu's Startup Applications
+app since we don't want users to easily disable this without
+understanding why it's there.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=781874
+---
+ data/nautilus-autostart.desktop.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/data/nautilus-autostart.desktop.in b/data/nautilus-autostart.desktop.in
+index d161ffe9d..10926da74 100644
+--- a/data/nautilus-autostart.desktop.in
++++ b/data/nautilus-autostart.desktop.in
 @@ -4,3 +4,4 @@ Name=Files
- Exec=nautilus -n
+ Exec=nautilus-desktop
  OnlyShowIn=GNOME;Unity;
  AutostartCondition=GSettings org.gnome.desktop.background show-desktop-icons
 +NoDisplay=true

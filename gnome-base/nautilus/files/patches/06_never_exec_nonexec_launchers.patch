@@ -1,24 +1,24 @@
-Description: never allow launching of untrusted launchers.  Implements the
- Ubuntu "Execute-Permission Bit Required" from
- https://wiki.ubuntu.com/SecurityTeam/Policies#Execute-Permission%20Bit%20Required
-Author: Kees Cook <kees@ubuntu.com>
+From 75a0e1c62203ef362437ce4fdf1fc93ec5cf147c Mon Sep 17 00:00:00 2001
+From: Jeremy Bicha <jbicha@ubuntu.com>
+Date: Sun, 30 Apr 2017 21:28:31 -0400
+Subject: [PATCH] Require executable permission for launchers in home dir
 
-Index: nautilus-3.18.1/src/nautilus-mime-actions.c
-===================================================================
---- nautilus-3.18.1.orig/src/nautilus-mime-actions.c
-+++ nautilus-3.18.1/src/nautilus-mime-actions.c
-@@ -1354,12 +1354,14 @@ activate_desktop_file (ActivateParameter
- 			      "text", primary,
- 			      "secondary-text", secondary,
- 			      NULL);
-+		/*
- 		gtk_dialog_add_button (GTK_DIALOG (dialog),
- 				       _("_Launch Anyway"), RESPONSE_RUN);
- 		if (nautilus_file_can_set_permissions (file)) {
- 			gtk_dialog_add_button (GTK_DIALOG (dialog),
- 					       _("Mark as _Trusted"), RESPONSE_MARK_TRUSTED);
- 		}
-+		*/
- 		gtk_dialog_add_button (GTK_DIALOG (dialog),
- 				       _("_Cancel"), GTK_RESPONSE_CANCEL);
- 		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+Implements Ubuntu's "Execute-Permission Bit Required" policy
+https://wiki.ubuntu.com/SecurityTeam/Policies#Execute-Permission_Bit_Required
+---
+ src/nautilus-mime-actions.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/nautilus-mime-actions.c b/src/nautilus-mime-actions.c
+index 14fe44bc3..0c6364986 100644
+--- a/src/nautilus-mime-actions.c
++++ b/src/nautilus-mime-actions.c
+@@ -1606,7 +1606,7 @@ activate_desktop_file (ActivateParameters *parameters,
+                                _("_Cancel"), GTK_RESPONSE_CANCEL);
+ 
+         gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+-        if (nautilus_file_can_set_permissions (file))
++        if (nautilus_file_can_set_permissions (file) && nautilus_file_can_execute (file))
+         {
+             gtk_dialog_add_button (GTK_DIALOG (dialog),
+                                    _("Trust and _Launch"), GTK_RESPONSE_OK);

@@ -29,6 +29,16 @@
 
 #--- END OF EXAMPLES ---
 
+# Mike Gilbert <floppym@gentoo.org> (23 May 2017)
+# Needs more testing.
+~net-misc/networkmanager-1.8.0
+
+# Michał Górny <mgorny@gentoo.org> (22 May 2017)
+# for Maciej S. Szmigiero <mail@maciej.szmigiero.name>
+# Any version above 5.100.138 breaks b43 driver in various ways.
+# Also, b43 wiki page says to use 5.100.138. Bug #541080.
+>=sys-firmware/b43-firmware-6.30.163.46
+
 # Michał Górny <mgorny@gentoo.org>, Andreas K. Hüttel <dilfridge@gentoo.org>,
 # Matthias Maier <tamiko@gentoo.org> (21 May 2017)
 # Those old versions of GCC are no longer really supported and are not
@@ -463,12 +473,6 @@ media-plugins/gst-plugins-ffmpeg
 # Needs openssl-1.1
 >=dev-libs/opencryptoki-3.6
 
-# Andreas Sturmlechner <asturm@gentoo.org> (03 Feb 2017)
-# Drops USE=firebird because it requires not yet packaged Firebird-3.0.
-# Affects libreoffice-base.
-# Bug #586634.
-=app-office/libreoffice-5.3.3.2
-
 # Bernard Cafarelli <voyageur@gentoo.org> (30 Jan 2017)
 # Alpha release with new features, masked for testing
 =app-text/tesseract-4.00.00_alpha*
@@ -620,10 +624,6 @@ www-apps/egroupware
 # The webkit-gtk:4 backend for Xiphos has known text display issues.
 # Use at your own risk.
 =app-text/xiphos-4.0.4-r1
-
-# Lars Wendler <polynomial-c@gentoo.org> (2 May 2016)
-# Broken reverse deps. At least one header file has been moved around.
->=media-gfx/imagemagick-7.0.1.0
 
 # Richard Freeman <rich0@gentoo.org> (16 Apr 2016)
 # Masked for extended testing, and porting of openrc scripts

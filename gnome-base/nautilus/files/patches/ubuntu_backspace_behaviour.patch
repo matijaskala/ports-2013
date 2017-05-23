@@ -5,25 +5,25 @@ Subject: Restore backspace for going to parent folder
 
 This restores the behaviour from nautilus <= 3.4.
 ---
-Index: b/src/nautilus-window.c
-===================================================================
+---
+ src/nautilus-window.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
 --- a/src/nautilus-window.c
 +++ b/src/nautilus-window.c
-@@ -2012,6 +2012,7 @@
- 	{ "back",  action_back },
- 	{ "forward",  action_forward },
- 	{ "up",  action_up },
-+	{ "backspaceup",  action_up },
- 	{ "action-menu", action_toggle_state_action_button, NULL, "false", NULL },
- 	{ "reload", action_reload },
- 	{ "stop", action_stop },
-@@ -2095,6 +2096,9 @@
- 	g_signal_connect_object (nautilus_file_undo_manager_get (), "undo-changed",
- 				 G_CALLBACK (undo_manager_changed), window, G_CONNECT_SWAPPED);
- 	undo_manager_changed (window);
-+
-+	/* Let backspace go up one dir as well */
-+	nautilus_application_add_accelerator (app, "win.backspaceup", "BackSpace");
- }
+@@ -2138,6 +2138,7 @@ const GActionEntry win_entries[] =
+ {
+     { "back", action_back },
+     { "forward", action_forward },
++    { "backspaceup",  action_up },
+     { "up", action_up },
+     { "view-menu", action_toggle_state_view_button, NULL, "false", NULL },
+     { "reload", action_reload },
+@@ -2205,6 +2206,7 @@ nautilus_window_initialize_actions (Naut
+     nautilus_application_set_accelerator (app, "win.prompt-root-location", "slash");
+     nautilus_application_set_accelerator (app, "win.prompt-home-location", "asciitilde");
+     nautilus_application_set_accelerator (app, "win.view-menu", "F10");
++    nautilus_application_set_accelerator (app, "win.backspaceup", "BackSpace");
  
- 
+     /* Alt+N for the first 9 tabs */
+     for (i = 0; i < 9; ++i)

@@ -1,14 +1,16 @@
 Description: specify a background color for the unity launcher icon
 Bug: https://launchpad.net/bugs/1081691
-Index: nautilus/data/org.gnome.Nautilus.desktop.in.in
-===================================================================
---- nautilus.orig/data/org.gnome.Nautilus.desktop.in.in
-+++ nautilus/data/org.gnome.Nautilus.desktop.in.in
-@@ -16,6 +16,7 @@ X-GNOME-Bugzilla-Component=general
- X-GNOME-Bugzilla-Version=@VERSION@
+---
+ data/org.gnome.Nautilus.desktop.in |    1 +
+ 1 file changed, 1 insertion(+)
+
+--- a/data/org.gnome.Nautilus.desktop.in
++++ b/data/org.gnome.Nautilus.desktop.in
+@@ -14,6 +14,7 @@ Categories=GNOME;GTK;Utility;Core;FileMa
+ MimeType=inode/directory;application/x-gnome-saved-search;
  X-GNOME-UsesNotifications=true
  Actions=new-window;
 +X-Unity-IconBackgroundColor=#af4853
  
  [Desktop Action new-window]
- _Name=New Window
+ Name=New Window

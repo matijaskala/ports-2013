@@ -4,298 +4,221 @@ Date: Mon, 24 Nov 2014 10:43:18 +0000
 Subject: [PATCH 1/2] Respect gtk-dialogs-use-header for all dialogs
 
 https://bugzilla.gnome.org/show_bug.cgi?id=740617
- .../nautilus-file-conflict-dialog.c                |   10 +-
- src/nautilus-file-management-properties.c          |   25 +-
- src/nautilus-file-management-properties.ui         | 1737 ++++++++++----------
- src/nautilus-list-view.c                           |   17 +-
- src/nautilus-properties-window.c                   |   26 +-
- src/nautilus-query-editor.c                        |   15 +-
- src/nautilus-view.c                                |   32 +-
- 8 files changed, 981 insertions(+), 890 deletions(-)
-Index: b/libnautilus-private/nautilus-file-conflict-dialog.c
-===================================================================
---- a/libnautilus-private/nautilus-file-conflict-dialog.c
-+++ b/libnautilus-private/nautilus-file-conflict-dialog.c
-@@ -637,6 +637,14 @@
- 	GtkWidget *dialog;
- 	NautilusFile *src, *dest;
- 	gboolean source_is_dir, dest_is_dir;
-+	GtkSettings *settings;
-+	gboolean use_header;
-+
-+	settings = gtk_settings_get_default ();
-+
-+	g_object_get (G_OBJECT (settings),
-+				  "gtk-dialogs-use-header", &use_header,
-+				  NULL);
- 
- 	src = nautilus_file_get (source);
- 	dest = nautilus_file_get (destination);
-@@ -646,13 +654,13 @@
- 
- 	if (source_is_dir) {
- 		dialog = GTK_WIDGET (g_object_new (NAUTILUS_TYPE_FILE_CONFLICT_DIALOG,
--						   "use-header-bar", TRUE,
-+						   "Use-header-bar", use_header,
- 						   "modal", TRUE,
- 						   "title", dest_is_dir ? _("Merge Folder") : _("File and Folder conflict"),
- 						   NULL));
- 	} else {
- 		dialog = GTK_WIDGET (g_object_new (NAUTILUS_TYPE_FILE_CONFLICT_DIALOG,
--						   "use-header-bar", TRUE,
-+						   "use-header-bar", use_header,
- 						   "modal", TRUE,
- 						   "title", dest_is_dir ? _("File and Folder conflict") : _("File conflict"),
- 						   NULL));
-Index: b/src/nautilus-list-view.c
-===================================================================
---- a/src/nautilus-list-view.c
-+++ b/src/nautilus-list-view.c
-@@ -2646,15 +2646,29 @@
- 	char *str;
- 	char *name;
- 	const char *label_text;
-+	GtkSettings *settings;
-+	gboolean use_header;
-+	GtkDialogFlags flags;
- 	
- 	file = nautilus_files_view_get_directory_as_file (NAUTILUS_FILES_VIEW (view));
- 	name = nautilus_file_get_display_name (file);
- 	str = g_strdup_printf (_("%s Visible Columns"), name);
- 	g_free (name);
- 
-+	settings = gtk_settings_get_default ();
-+
-+	g_object_get (G_OBJECT (settings),
-+				  "gtk-dialogs-use-header", &use_header,
-+				  NULL);
-+
-+	flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-+
-+	if (use_header)
-+		flags |= GTK_DIALOG_USE_HEADER_BAR;
-+
- 	window = gtk_dialog_new_with_buttons (str,
- 					      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
--					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
-+					      flags,
- 					      NULL, NULL);
- 	g_free (str);
- 	g_signal_connect (window, "response", 
-Index: b/src/nautilus-properties-window.c
-===================================================================
---- a/src/nautilus-properties-window.c
-+++ b/src/nautilus-properties-window.c
-@@ -4186,10 +4186,24 @@
- 	GtkWidget *label;
- 	GtkWidget *combo;
- 	GtkGrid *grid;
-+	gboolean use_header;
-+	GtkSettings *settings;
-+	GtkDialogFlags flags;
-+
-+	settings = gtk_settings_get_default ();
-+
-+	g_object_get (G_OBJECT (settings),
-+				  "gtk-dialogs-use-header", &use_header,
-+				  NULL);
-+
-+	flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-+
-+	if (use_header)
-+		flags |= GTK_DIALOG_USE_HEADER_BAR;
- 
- 	dialog = gtk_dialog_new_with_buttons (_("Change Permissions for Enclosed Files"),
- 					       GTK_WINDOW (window),
--					       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
-+					       flags,
- 					      _("_Cancel"), GTK_RESPONSE_CANCEL,
- 					      _("Change"), GTK_RESPONSE_OK,
- 					      NULL);
-@@ -4589,9 +4603,17 @@
+ src/nautilus-file-conflict-dialog.c |   10 ++++++++-
+ src/nautilus-files-view.c           |   38 ++++++++++++++++++++++++++++++++----
+ src/nautilus-list-view.c            |   20 ++++++++++++++++++
+ src/nautilus-properties-window.c    |   28 ++++++++++++++++++++++++--
+ src/nautilus-search-popover.c       |   18 ++++++++++++++++-
+ 5 files changed, 105 insertions(+), 9 deletions(-)
+--- a/src/nautilus-file-conflict-dialog.c
++++ b/src/nautilus-file-conflict-dialog.c
+@@ -371,9 +371,17 @@ NautilusFileConflictDialog *
+ nautilus_file_conflict_dialog_new (GtkWindow *parent)
  {
- 	NautilusPropertiesWindow *window;
- 	GList *l;
-+	GtkSettings *settings;
-+	gboolean use_header;
+     NautilusFileConflictDialog *dialog;
++    GtkSettings *settings;
++    gboolean use_header;
 +
-+	settings = gtk_settings_get_default ();
++    settings = gtk_settings_get_default ();
 +
-+	g_object_get (G_OBJECT (settings),
-+				  "gtk-dialogs-use-header", &use_header,
-+				  NULL);
++    g_object_get (G_OBJECT (settings),
++                  "gtk-dialogs-use-header", &use_header,
++                  NULL);
  
- 	window = NAUTILUS_PROPERTIES_WINDOW (gtk_widget_new (NAUTILUS_TYPE_PROPERTIES_WINDOW,
--							     "use-header-bar", TRUE,
-+							     "use-header-bar", use_header,
- 							     "type-hint", GDK_WINDOW_TYPE_HINT_DIALOG,
- 							     "modal", TRUE,
- 							     NULL));
-Index: b/src/nautilus-files-view.c
-===================================================================
+     dialog = NAUTILUS_FILE_CONFLICT_DIALOG (g_object_new (NAUTILUS_TYPE_FILE_CONFLICT_DIALOG,
+-                                                          "use-header-bar", TRUE,
++                                                          "use-header-bar", use_header,
+                                                           "modal", TRUE,
+                                                           NULL));
+ 
 --- a/src/nautilus-files-view.c
 +++ b/src/nautilus-files-view.c
-@@ -1322,16 +1322,29 @@
-         GtkWidget *dialog;
-         gchar *mime_type;
-         GtkWindow *parent_window;
-+        gboolean use_header;
-+        GtkSettings *settings;
-+        GtkDialogFlags flags;
+@@ -1451,16 +1451,30 @@ choose_program (NautilusFilesView *view,
+     GtkWidget *dialog;
+     gchar *mime_type;
+     GtkWindow *parent_window;
++    gboolean use_header;
++    GtkSettings *settings;
++    GtkDialogFlags flags;
  
-         g_assert (NAUTILUS_IS_FILES_VIEW (view));
+     g_assert (NAUTILUS_IS_FILES_VIEW (view));
  
-+        settings = gtk_settings_get_default ();
++    settings = gtk_settings_get_default ();
 +
-+        g_object_get (G_OBJECT (settings),
-+                        "gtk-dialogs-use-header", &use_header,
-+                        NULL);
-+
-+        flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-+
-+        if (use_header)
-+                flags |= GTK_DIALOG_USE_HEADER_BAR;
-+
-+
-         mime_type = nautilus_file_get_mime_type (files->data);
-         parent_window = nautilus_files_view_get_containing_window (view);
- 
-         dialog = gtk_app_chooser_dialog_new_for_content_type (parent_window,
--                                                              GTK_DIALOG_MODAL |
--                                                              GTK_DIALOG_DESTROY_WITH_PARENT |
--                                                              GTK_DIALOG_USE_HEADER_BAR,
-+                                                              flags,
-                                                               mime_type);
-         g_object_set_data_full (G_OBJECT (dialog),
-                                 "directory-view:files",
-@@ -1523,10 +1536,24 @@
-         GtkWidget *grid;
-         GtkWidget *entry;
-         char *example_pattern;
-+        gboolean use_header;
-+        GtkSettings *settings;
-+        GtkDialogFlags flags;
-+
-+        settings = gtk_settings_get_default ();
-+
-+        g_object_get (G_OBJECT (settings),
-+                        "gtk-dialogs-use-header", &use_header,
-+                        NULL);
-+
-+        flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
-+
-+        if (use_header)
-+                flags |= GTK_DIALOG_USE_HEADER_BAR;
- 
-         dialog = gtk_dialog_new_with_buttons (_("Select Items Matching"),
-                                               nautilus_files_view_get_containing_window (view),
--                                              GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
-+                                              flags,
-                                               _("_Cancel"),
-                                               GTK_RESPONSE_CANCEL,
-                                               _("_Select"),
-@@ -2058,15 +2085,49 @@
-         FileNameWidgetData *widget_data;
-         GtkWidget *label_file_name;
-         GtkBuilder *builder;
-+        GtkWidget *dialog, *vbox;
-+        GtkDialog *orig_dialog;
-+        GtkContainer *content_area;
-+        GtkSettings *settings;
-+        gboolean use_header;
-+
-+        settings = gtk_settings_get_default ();
-+
-+        g_object_get (G_OBJECT (settings),
-+                      "gtk-dialogs-use-header", &use_header,
-+                      NULL);
- 
-         builder = gtk_builder_new_from_resource ("/org/gnome/nautilus/ui/nautilus-create-folder-dialog.ui");
-         label_file_name = GTK_WIDGET (gtk_builder_get_object (builder, "name_label"));
- 
-+        dialog = gtk_widget_new (GTK_TYPE_DIALOG,
-+                                 "destroy-with-parent", TRUE,
-+                                 "modal", TRUE,
-+                                 "use-header-bar", use_header,
-+                                 "width-request", 450,
-+                                 "window-position", GTK_WIN_POS_CENTER_ON_PARENT,
-+                                 "type-hint", GDK_WINDOW_TYPE_HINT_DIALOG,
-+                                 NULL);
-+
-+        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-+                                _("Create"), GTK_RESPONSE_OK,
-+                                _("Cancel"), GTK_RESPONSE_CANCEL,
-+                                NULL);
-+        gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-+
-+        vbox = GTK_WIDGET (gtk_builder_get_object (builder, "vbox"));
-+
-+        orig_dialog = GTK_DIALOG (gtk_builder_get_object (builder, "create_folder_dialog"));
-+        gtk_container_remove (GTK_CONTAINER (orig_dialog), vbox);
-+        content_area = GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
-+        gtk_container_add (content_area, vbox);
-+
-         widget_data = g_new (FileNameWidgetData, 1);
-         widget_data->view = view;
-         widget_data->on_name_accepted = create_folder_on_name_accepted;
--        widget_data->widget = GTK_WIDGET (gtk_builder_get_object (builder, "create_folder_dialog"));
--        widget_data->activate_button = GTK_WIDGET (gtk_builder_get_object (builder, "ok_button"));
-+        widget_data->widget = GTK_WIDGET (dialog);
-+        widget_data->activate_button = GTK_WIDGET (gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog),
-+                                                                                       GTK_RESPONSE_OK));
-         widget_data->error_label = GTK_WIDGET (gtk_builder_get_object (builder, "error_label"));
-         widget_data->name_entry = GTK_WIDGET (gtk_builder_get_object (builder, "name_entry"));
-         widget_data->target_is_folder = TRUE;
-@@ -2082,13 +2143,14 @@
-                                           G_CALLBACK (file_name_widget_entry_on_changed),
-                                           "file_name_widget_on_activate",
-                                           G_CALLBACK (file_name_widget_on_activate),
--                                          "create_folder_dialog_on_response",
--                                          G_CALLBACK (create_folder_dialog_on_response),
-                                           NULL);
- 
-+        g_signal_connect (dialog,
-+                          "response",
-+                          G_CALLBACK (create_folder_dialog_on_response),
-+                          widget_data);
-+
-         gtk_builder_connect_signals (builder, widget_data);
--        gtk_button_set_label (GTK_BUTTON (widget_data->activate_button),
--                              _("Create"));
-         gtk_label_set_text (GTK_LABEL (label_file_name), _("Folder name"));
-         gtk_window_set_title (GTK_WINDOW (widget_data->widget), _("New Folder"));
- 
-Index: b/src/nautilus-search-popover.c
-===================================================================
---- a/src/nautilus-search-popover.c
-+++ b/src/nautilus-search-popover.c
-@@ -505,6 +505,20 @@
-   GtkCellRenderer *renderer;
-   GtkWidget *toplevel;
-   GtkTreeSelection *selection;
-+  gboolean use_header;
-+  GtkSettings *settings;
-+  GtkDialogFlags flags;
-+
-+  settings = gtk_settings_get_default ();
-+
-+  g_object_get (G_OBJECT (settings),
++    g_object_get (G_OBJECT (settings),
 +                  "gtk-dialogs-use-header", &use_header,
 +                  NULL);
 +
-+  flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
++    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
 +
-+  if (use_header)
-+          flags |= GTK_DIALOG_USE_HEADER_BAR;
++    if (use_header)
++    {
++        flags |= GTK_DIALOG_USE_HEADER_BAR;
++    }
++
+     mime_type = nautilus_file_get_mime_type (files->data);
+     parent_window = nautilus_files_view_get_containing_window (view);
  
-   mime_infos = g_content_types_get_registered ();
+     dialog = gtk_app_chooser_dialog_new_for_content_type (parent_window,
+-                                                          GTK_DIALOG_MODAL |
+-                                                          GTK_DIALOG_DESTROY_WITH_PARENT |
+-                                                          GTK_DIALOG_USE_HEADER_BAR,
++                                                          flags,
+                                                           mime_type);
+     g_object_set_data_full (G_OBJECT (dialog),
+                             "directory-view:files",
+@@ -1665,10 +1679,26 @@ select_pattern (NautilusFilesView *view)
+     GtkWidget *grid;
+     GtkWidget *entry;
+     char *example_pattern;
++    gboolean use_header;
++    GtkSettings *settings;
++    GtkDialogFlags flags;
++
++    settings = gtk_settings_get_default ();
++
++    g_object_get (G_OBJECT (settings),
++                  "gtk-dialogs-use-header", &use_header,
++                   NULL);
++
++    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
++
++    if (use_header)
++    {
++        flags |= GTK_DIALOG_USE_HEADER_BAR;
++    }
  
-@@ -535,7 +549,7 @@
-   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (popover));
-   dialog = gtk_dialog_new_with_buttons (_("Select type"),
-                                         GTK_WINDOW (toplevel),
--                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
-+                                        flags,
-                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                         _("Select"), GTK_RESPONSE_OK,
-                                         NULL);
+     dialog = gtk_dialog_new_with_buttons (_("Select Items Matching"),
+                                           nautilus_files_view_get_containing_window (view),
+-                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
++                                          flags,
+                                           _("_Cancel"),
+                                           GTK_RESPONSE_CANCEL,
+                                           _("_Select"),
+--- a/src/nautilus-list-view.c
++++ b/src/nautilus-list-view.c
+@@ -1119,6 +1119,8 @@ sort_column_changed_callback (GtkTreeSor
+     char *reversed_attr, *default_reversed_attr;
+     gboolean default_sort_reversed;
+ 
++
++
+     file = nautilus_files_view_get_directory_as_file (NAUTILUS_FILES_VIEW (view));
+ 
+     gtk_tree_sortable_get_sort_column_id (sortable, &sort_column_id, &reversed);
+@@ -2970,15 +2972,31 @@ create_column_editor (NautilusListView *
+     char *str;
+     char *name;
+     const char *label_text;
++    GtkSettings *settings;
++    gboolean use_header;
++    GtkDialogFlags flags;
+ 
+     file = nautilus_files_view_get_directory_as_file (NAUTILUS_FILES_VIEW (view));
+     name = nautilus_file_get_display_name (file);
+     str = g_strdup_printf (_("%s Visible Columns"), name);
+     g_free (name);
+ 
++    settings = gtk_settings_get_default ();
++
++    g_object_get (G_OBJECT (settings),
++                  "gtk-dialogs-use-header", &use_header,
++                  NULL);
++
++    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
++
++    if (use_header)
++    {
++        flags |= GTK_DIALOG_USE_HEADER_BAR;
++    }
++
+     window = gtk_dialog_new_with_buttons (str,
+                                           GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+-                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
++                                          flags,
+                                           NULL, NULL);
+     g_free (str);
+     g_signal_connect (window, "response",
+--- a/src/nautilus-properties-window.c
++++ b/src/nautilus-properties-window.c
+@@ -4580,10 +4580,26 @@ on_change_permissions_clicked (GtkWidget
+     GtkWidget *label;
+     GtkWidget *combo;
+     GtkGrid *grid;
++    gboolean use_header;
++    GtkSettings *settings;
++    GtkDialogFlags flags;
++
++    settings = gtk_settings_get_default ();
++
++    g_object_get (G_OBJECT (settings),
++                  "gtk-dialogs-use-header", &use_header,
++                  NULL);
++
++    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
++
++    if (use_header)
++    {
++        flags |= GTK_DIALOG_USE_HEADER_BAR;
++    }
+ 
+     dialog = gtk_dialog_new_with_buttons (_("Change Permissions for Enclosed Files"),
+                                           GTK_WINDOW (window),
+-                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
++                                          flags,
+                                           _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                           _("Change"), GTK_RESPONSE_OK,
+                                           NULL);
+@@ -5023,9 +5039,17 @@ create_properties_window (StartupData *s
+ {
+     NautilusPropertiesWindow *window;
+     GList *l;
++    GtkSettings *settings;
++    gboolean use_header;
++
++    settings = gtk_settings_get_default ();
++
++    g_object_get (G_OBJECT (settings),
++                  "gtk-dialogs-use-header", &use_header,
++                  NULL);
+ 
+     window = NAUTILUS_PROPERTIES_WINDOW (gtk_widget_new (NAUTILUS_TYPE_PROPERTIES_WINDOW,
+-                                                         "use-header-bar", TRUE,
++                                                         "use-header-bar", use_header,
+                                                          "type-hint", GDK_WINDOW_TYPE_HINT_DIALOG,
+                                                          "modal", TRUE,
+                                                          NULL));
+--- a/src/nautilus-search-popover.c
++++ b/src/nautilus-search-popover.c
+@@ -516,6 +516,22 @@ show_other_types_dialog (NautilusSearchP
+     GtkCellRenderer *renderer;
+     GtkWidget *toplevel;
+     GtkTreeSelection *selection;
++    gboolean use_header;
++    GtkSettings *settings;
++    GtkDialogFlags flags;
++
++    settings = gtk_settings_get_default ();
++
++    g_object_get (G_OBJECT (settings),
++                  "gtk-dialogs-use-header", &use_header,
++                   NULL);
++
++    flags = GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT;
++
++    if (use_header)
++    {
++        flags |= GTK_DIALOG_USE_HEADER_BAR;
++    }
+ 
+     mime_infos = g_content_types_get_registered ();
+ 
+@@ -546,7 +562,7 @@ show_other_types_dialog (NautilusSearchP
+     toplevel = gtk_widget_get_toplevel (GTK_WIDGET (popover));
+     dialog = gtk_dialog_new_with_buttons (_("Select type"),
+                                           GTK_WINDOW (toplevel),
+-                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
++                                          flags,
+                                           _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                           _("Select"), GTK_RESPONSE_OK,
+                                           NULL);

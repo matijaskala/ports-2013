@@ -4,33 +4,29 @@ Date: Fri, 30 Oct 2015 10:42:23 +0100
 Subject: [PATCH] Restore background drawing
 
 ---
- libnautilus-private/Makefile.am                   |   2 +
- libnautilus-private/nautilus-desktop-background.c | 601 ++++++++++++++++++++++
- libnautilus-private/nautilus-desktop-background.h |  68 +++
- src/nautilus-desktop-canvas-view.c                |  39 +-
- src/nautilus-desktop-window.c                     |  16 +-
- 5 files changed, 706 insertions(+), 20 deletions(-)
- create mode 100644 libnautilus-private/nautilus-desktop-background.c
- create mode 100644 libnautilus-private/nautilus-desktop-background.h
+ nautilus-desktop/Makefile.am                    |    2 
+ nautilus-desktop/nautilus-desktop-background.c  |  627 ++++++++++++++++++++++++
+ nautilus-desktop/nautilus-desktop-background.h  |   68 ++
+ nautilus-desktop/nautilus-desktop-canvas-view.c |   40 -
+ nautilus-desktop/nautilus-desktop-window.c      |   12 
+ 5 files changed, 735 insertions(+), 14 deletions(-)
+ create mode 100644 nautilus-desktop/nautilus-desktop-background.c
+ create mode 100644 nautilus-desktop/nautilus-desktop-background.h
 
-Index: b/libnautilus-private/Makefile.am
-===================================================================
---- a/libnautilus-private/Makefile.am
-+++ b/libnautilus-private/Makefile.am
-@@ -80,6 +80,8 @@
- 	nautilus-debug.h \
- 	nautilus-default-file-icon.c \
- 	nautilus-default-file-icon.h \
-+	nautilus-desktop-background.c \
-+	nautilus-desktop-background.h \
- 	nautilus-desktop-directory-file.c \
- 	nautilus-desktop-directory-file.h \
- 	nautilus-desktop-directory.c \
-Index: b/libnautilus-private/nautilus-desktop-background.c
-===================================================================
+--- a/nautilus-desktop/Makefile.am
++++ b/nautilus-desktop/Makefile.am
+@@ -32,6 +32,8 @@ nautilus_desktop_SOURCES= 				\
+ 	main-desktop.c					\
+ 	nautilus-desktop-application.c			\
+ 	nautilus-desktop-application.h			\
++	nautilus-desktop-background.c			\
++	nautilus-desktop-background.h			\
+ 	nautilus-desktop-canvas-view.c		\
+ 	nautilus-desktop-canvas-view.h		\
+ 	nautilus-desktop-canvas-view-container.c	\
 --- /dev/null
-+++ b/libnautilus-private/nautilus-desktop-background.c
-@@ -0,0 +1,606 @@
++++ b/nautilus-desktop/nautilus-desktop-background.c
+@@ -0,0 +1,627 @@
 +/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 +
 +/*
@@ -90,21 +86,21 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +
 +struct NautilusDesktopBackgroundDetails {
 +
-+	GtkWidget *widget;
-+        GnomeBG *bg;
++    GtkWidget *widget;
++    GnomeBG *bg;
 +
-+	/* Realized data: */
-+	cairo_surface_t *background_surface;
-+	GnomeBGCrossfade *fade;
-+	int background_entire_width;
-+	int background_entire_height;
-+	GdkColor default_color;
++    /* Realized data: */
++    cairo_surface_t *background_surface;
++    GnomeBGCrossfade *fade;
++    int background_entire_width;
++    int background_entire_height;
++    GdkColor default_color;
 +
-+	/* Desktop screen size watcher */
-+	gulong screen_size_handler;
-+	/* Desktop monitors configuration watcher */
-+	gulong screen_monitors_handler;
-+	guint change_idle_id;
++    /* Desktop screen size watcher */
++    gulong screen_size_handler;
++    /* Desktop monitors configuration watcher */
++    gulong screen_monitors_handler;
++    guint change_idle_id;
 +};
 +
 +
@@ -118,320 +114,337 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +static void
 +free_fade (NautilusDesktopBackground *self)
 +{
-+	if (self->details->fade != NULL) {
-+		g_object_unref (self->details->fade);
-+		self->details->fade = NULL;
-+	}
++    if (self->details->fade != NULL)
++    {
++        g_object_unref (self->details->fade);
++        self->details->fade = NULL;
++    }
 +}
 +
 +static void
 +free_background_surface (NautilusDesktopBackground *self)
 +{
-+	cairo_surface_t *surface;
++    cairo_surface_t *surface;
 +
-+	surface = self->details->background_surface;
-+	if (surface != NULL) {
-+		cairo_surface_destroy (surface);
-+		self->details->background_surface = NULL;
-+	}
++    surface = self->details->background_surface;
++    if (surface != NULL)
++    {
++        cairo_surface_destroy (surface);
++        self->details->background_surface = NULL;
++    }
 +}
 +
 +static void
 +nautilus_desktop_background_finalize (GObject *object)
 +{
-+	NautilusDesktopBackground *self;
++    NautilusDesktopBackground *self;
 +
-+	self = NAUTILUS_DESKTOP_BACKGROUND (object);
++    self = NAUTILUS_DESKTOP_BACKGROUND (object);
 +
-+	g_signal_handlers_disconnect_by_func (gnome_background_preferences,
-+					      background_settings_change_event_cb,
-+					      self);
++    g_signal_handlers_disconnect_by_func (gnome_background_preferences,
++                          background_settings_change_event_cb,
++                          self);
 +
-+	free_background_surface (self);
-+	free_fade (self);
++    free_background_surface (self);
++    free_fade (self);
 +
-+	g_clear_object (&self->details->bg);
++    g_clear_object (&self->details->bg);
 +
-+	G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->finalize (object);
++    G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->finalize (object);
 +}
 +
 +static void
 +nautilus_desktop_background_unrealize (NautilusDesktopBackground *self)
 +{
-+	free_background_surface (self);
++    free_background_surface (self);
 +
-+	self->details->background_entire_width = 0;
-+	self->details->background_entire_height = 0;
-+	self->details->default_color.red = 0xffff;
-+	self->details->default_color.green = 0xffff;
-+	self->details->default_color.blue = 0xffff;
++    self->details->background_entire_width = 0;
++    self->details->background_entire_height = 0;
++    self->details->default_color.red = 0xffff;
++    self->details->default_color.green = 0xffff;
++    self->details->default_color.blue = 0xffff;
 +}
 +
 +static void
 +nautilus_desktop_background_set_image_uri (NautilusDesktopBackground *self,
 +                                           const char *image_uri)
 +{
-+	char *filename;
++    char *filename;
 +
-+	if (image_uri != NULL) {
-+		filename = g_filename_from_uri (image_uri, NULL, NULL);
-+	}
-+	else {
-+		filename = NULL;
-+	}
++    if (image_uri != NULL)
++    {
++        filename = g_filename_from_uri (image_uri, NULL, NULL);
++    }
++    else
++    {
++        filename = NULL;
++    }
 +
-+	gnome_bg_set_filename (self->details->bg, filename);
++    gnome_bg_set_filename (self->details->bg, filename);
 +
-+	g_free (filename);
++    g_free (filename);
 +}
 +
 +static void
 +init_fade (NautilusDesktopBackground *self)
 +{
-+	GtkWidget *widget;
-+	gboolean do_fade;
++    GtkWidget *widget;
++    gboolean do_fade;
 +
-+	widget = self->details->widget;
++    widget = self->details->widget;
 +
-+	if (widget == NULL || !gtk_widget_get_realized (widget))
-+		return;
++    if (widget == NULL || !gtk_widget_get_realized (widget))
++    {
++        return;
++    }
 +
-+	do_fade = g_settings_get_boolean (nautilus_desktop_preferences,
-+					  NAUTILUS_PREFERENCES_DESKTOP_BACKGROUND_FADE);
++    do_fade = g_settings_get_boolean (nautilus_desktop_preferences,
++                      NAUTILUS_PREFERENCES_DESKTOP_BACKGROUND_FADE);
 +
-+	if (!do_fade) {
-+		return;
-+	}
++    if (!do_fade)
++    {
++        return;
++    }
 +
-+	if (self->details->fade == NULL) {
-+		GdkWindow *window;
-+		GdkScreen *screen;
-+		int old_width, old_height, width, height;
++    if (self->details->fade == NULL)
++    {
++        GdkWindow *window;
++        GdkScreen *screen;
++        int old_width, old_height, width, height;
 +
-+		/* If this was the result of a screen size change,
-+		 * we don't want to crossfade
-+		 */
-+		window = gtk_widget_get_window (widget);
-+		old_width = gdk_window_get_width (window);
-+		old_height = gdk_window_get_height (window);
++        /* If this was the result of a screen size change,
++         * we don't want to crossfade
++         */
++        window = gtk_widget_get_window (widget);
++        old_width = gdk_window_get_width (window);
++        old_height = gdk_window_get_height (window);
 +
-+		screen = gtk_widget_get_screen (widget);
-+		width = gdk_screen_get_width (screen);
-+		height = gdk_screen_get_height (screen);
++        screen = gtk_widget_get_screen (widget);
++        width = gdk_screen_get_width (screen);
++        height = gdk_screen_get_height (screen);
 +
-+		if (old_width == width && old_height == height) {
-+			self->details->fade = gnome_bg_crossfade_new (width, height);
-+			g_signal_connect_swapped (self->details->fade,
++        if (old_width == width && old_height == height)
++        {
++            self->details->fade = gnome_bg_crossfade_new (width, height);
++            g_signal_connect_swapped (self->details->fade,
 +                                                  "finished",
 +                                                  G_CALLBACK (free_fade),
 +                                                  self);
-+		}
-+	}
++        }
++    }
 +
-+	if (self->details->fade != NULL && !gnome_bg_crossfade_is_started (self->details->fade)) {
-+		cairo_surface_t *start_surface;
++    if (self->details->fade != NULL && !gnome_bg_crossfade_is_started (self->details->fade))
++    {
++        cairo_surface_t *start_surface;
 +
-+		if (self->details->background_surface == NULL) {
-+			start_surface = gnome_bg_get_surface_from_root (gtk_widget_get_screen (widget));
-+		} else {
-+			start_surface = cairo_surface_reference (self->details->background_surface);
-+		}
-+		gnome_bg_crossfade_set_start_surface (self->details->fade,
-+						      start_surface);
-+                cairo_surface_destroy (start_surface);
-+	}
++        if (self->details->background_surface == NULL)
++        {
++            start_surface = gnome_bg_get_surface_from_root (gtk_widget_get_screen (widget));
++        } else {
++            start_surface = cairo_surface_reference (self->details->background_surface);
++        }
++        gnome_bg_crossfade_set_start_surface (self->details->fade,
++                                              start_surface);
++        cairo_surface_destroy (start_surface);
++    }
 +}
 +
 +static void
 +screen_size_changed (GdkScreen *screen,
 +                     NautilusDesktopBackground *self)
 +{
-+	queue_background_change (self);
++    queue_background_change (self);
 +}
 +
 +static gboolean
 +nautilus_desktop_background_ensure_realized (NautilusDesktopBackground *self)
 +{
-+	int entire_width;
-+	int entire_height;
-+	GdkScreen *screen;
-+	GdkWindow *window;
++    int entire_width;
++    int entire_height;
++    GdkScreen *screen;
++    GdkWindow *window;
 +
-+	screen = gtk_widget_get_screen (self->details->widget);
-+	entire_height = gdk_screen_get_height (screen);
-+	entire_width = gdk_screen_get_width (screen);
++    screen = gtk_widget_get_screen (self->details->widget);
++    entire_height = gdk_screen_get_height (screen);
++    entire_width = gdk_screen_get_width (screen);
 +
-+	/* If the window size is the same as last time, don't update */
-+	if (entire_width == self->details->background_entire_width &&
-+	    entire_height == self->details->background_entire_height) {
-+		return FALSE;
-+	}
++    /* If the window size is the same as last time, don't update */
++    if (entire_width == self->details->background_entire_width &&
++        entire_height == self->details->background_entire_height)
++    {
++        return FALSE;
++    }
 +
-+	free_background_surface (self);
++    free_background_surface (self);
 +
-+	window = gtk_widget_get_window (self->details->widget);
-+	self->details->background_surface = gnome_bg_create_surface (self->details->bg,
-+                                                                     window,
-+                                                                     entire_width, entire_height,
-+                                                                     TRUE);
++    window = gtk_widget_get_window (self->details->widget);
++    self->details->background_surface = gnome_bg_create_surface (self->details->bg,
++                                                                 window,
++                                                                 entire_width, entire_height,
++                                                                 TRUE);
 +
-+	/* We got the surface and everything, so we don't care about a change
-+	   that is pending (unless things actually change after this time) */
-+	g_object_set_data (G_OBJECT (self),
-+			   "ignore-pending-change", GINT_TO_POINTER (TRUE));
++    /* We got the surface and everything, so we don't care about a change
++       that is pending (unless things actually change after this time) */
++    g_object_set_data (G_OBJECT (self),
++                       "ignore-pending-change", GINT_TO_POINTER (TRUE));
 +
-+	self->details->background_entire_width = entire_width;
-+	self->details->background_entire_height = entire_height;
++    self->details->background_entire_width = entire_width;
++    self->details->background_entire_height = entire_height;
 +
-+	return TRUE;
++    return TRUE;
 +}
 +
 +static void
 +on_fade_finished (GnomeBGCrossfade *fade,
-+		  GdkWindow *window,
-+		  gpointer user_data)
++          GdkWindow *window,
++          gpointer user_data)
 +{
 +        NautilusDesktopBackground *self = user_data;
 +
-+	nautilus_desktop_background_ensure_realized (self);
-+	if (self->details->background_surface != NULL)
-+		gnome_bg_set_surface_as_root (gdk_window_get_screen (window),
-+					      self->details->background_surface);
++    nautilus_desktop_background_ensure_realized (self);
++    if (self->details->background_surface != NULL)
++    {
++        gnome_bg_set_surface_as_root (gdk_window_get_screen (window),
++                                      self->details->background_surface);
++    }
 +}
 +
 +static gboolean
 +fade_to_surface (NautilusDesktopBackground *self,
-+		 GdkWindow     *window,
-+		 cairo_surface_t *surface)
++         GdkWindow     *window,
++         cairo_surface_t *surface)
 +{
-+	if (self->details->fade == NULL) {
-+		return FALSE;
-+	}
++    if (self->details->fade == NULL)
++    {
++        return FALSE;
++    }
 +
-+	if (!gnome_bg_crossfade_set_end_surface (self->details->fade,
-+				                 surface)) {
-+		return FALSE;
-+	}
++    if (!gnome_bg_crossfade_set_end_surface (self->details->fade, surface))
++    {
++        return FALSE;
++    }
 +
-+	if (!gnome_bg_crossfade_is_started (self->details->fade)) {
-+		gnome_bg_crossfade_start (self->details->fade, window);
-+		g_signal_connect (self->details->fade,
-+				  "finished",
-+				  G_CALLBACK (on_fade_finished), self);
-+	}
++    if (!gnome_bg_crossfade_is_started (self->details->fade))
++    {
++        gnome_bg_crossfade_start (self->details->fade, window);
++        g_signal_connect (self->details->fade,
++                          "finished",
++                          G_CALLBACK (on_fade_finished), self);
++    }
 +
-+	return gnome_bg_crossfade_is_started (self->details->fade);
++    return gnome_bg_crossfade_is_started (self->details->fade);
 +}
 +
 +static void
 +nautilus_desktop_background_set_up_widget (NautilusDesktopBackground *self)
 +{
-+	GdkWindow *window;
-+	gboolean in_fade = FALSE;
-+        GtkWidget *widget;
++    GdkWindow *window;
++    gboolean in_fade = FALSE;
++    GtkWidget *widget;
 +
-+        widget = self->details->widget;
++    widget = self->details->widget;
 +
-+	if (!gtk_widget_get_realized (widget)) {
-+		return;
-+	}
++    if (!gtk_widget_get_realized (widget))
++    {
++        return;
++    }
 +
-+	nautilus_desktop_background_ensure_realized (self);
-+	if (self->details->background_surface == NULL)
-+		return;
++    nautilus_desktop_background_ensure_realized (self);
++    if (self->details->background_surface == NULL)
++    {
++        return;
++    }
 +
-+        window = gtk_layout_get_bin_window (GTK_LAYOUT (widget));
++    window = gtk_layout_get_bin_window (GTK_LAYOUT (widget));
 +
-+	in_fade = fade_to_surface (self, window,
-+				   self->details->background_surface);
++    in_fade = fade_to_surface (self, window, self->details->background_surface);
 +
-+	if (!in_fade) {
-+		cairo_pattern_t *pattern;
++    if (!in_fade)
++    {
++        cairo_pattern_t *pattern;
 +
-+		pattern = cairo_pattern_create_for_surface (self->details->background_surface);
-+		gdk_window_set_background_pattern (window, pattern);
-+		cairo_pattern_destroy (pattern);
++        pattern = cairo_pattern_create_for_surface (self->details->background_surface);
++        gdk_window_set_background_pattern (window, pattern);
++        cairo_pattern_destroy (pattern);
 +
-+                gnome_bg_set_surface_as_root (gtk_widget_get_screen (widget),
-+                                              self->details->background_surface);
-+	}
++        gnome_bg_set_surface_as_root (gtk_widget_get_screen (widget),
++                                      self->details->background_surface);
++    }
 +}
 +
 +static gboolean
 +background_changed_cb (NautilusDesktopBackground *self)
 +{
-+	self->details->change_idle_id = 0;
++    self->details->change_idle_id = 0;
 +
-+	nautilus_desktop_background_unrealize (self);
-+	nautilus_desktop_background_set_up_widget (self);
++    nautilus_desktop_background_unrealize (self);
++    nautilus_desktop_background_set_up_widget (self);
 +
-+	gtk_widget_queue_draw (self->details->widget);
++    gtk_widget_queue_draw (self->details->widget);
 +
-+	nautilus_canvas_container_request_update_all (NAUTILUS_CANVAS_CONTAINER (self->details->widget));
++    nautilus_canvas_container_request_update_all (NAUTILUS_CANVAS_CONTAINER (self->details->widget));
 +
-+	return FALSE;
++    return FALSE;
 +}
 +
 +static void
 +queue_background_change (NautilusDesktopBackground *self)
 +{
-+	if (self->details->change_idle_id != 0) {
-+                g_source_remove (self->details->change_idle_id);
-+	}
++    if (self->details->change_idle_id != 0)
++    {
++        g_source_remove (self->details->change_idle_id);
++    }
 +
-+	self->details->change_idle_id =
-+                g_idle_add ((GSourceFunc) background_changed_cb, self);
++    self->details->change_idle_id = g_idle_add ((GSourceFunc) background_changed_cb, self);
 +}
 +
 +static void
 +nautilus_desktop_background_changed (GnomeBG *bg,
 +                                     gpointer user_data)
 +{
-+        NautilusDesktopBackground *self;
++    NautilusDesktopBackground *self;
 +
-+        self = user_data;
-+	init_fade (self);
-+	queue_background_change (self);
++    self = user_data;
++    init_fade (self);
++    queue_background_change (self);
 +}
 +
 +static void
 +nautilus_desktop_background_transitioned (GnomeBG *bg,
 +                                          gpointer user_data)
 +{
-+        NautilusDesktopBackground *self;
++    NautilusDesktopBackground *self;
 +
-+        self = user_data;
-+	free_fade (self);
-+	queue_background_change (self);
++    self = user_data;
++    free_fade (self);
++    queue_background_change (self);
 +}
 +
 +static void
 +widget_realize_cb (GtkWidget *widget,
 +                   gpointer user_data)
 +{
-+	GdkScreen *screen;
-+        NautilusDesktopBackground *self = user_data;
++    GdkScreen *screen;
++    NautilusDesktopBackground *self = user_data;
 +
-+	screen = gtk_widget_get_screen (widget);
++    screen = gtk_widget_get_screen (widget);
 +
-+	if (self->details->screen_size_handler > 0) {
-+		g_signal_handler_disconnect (screen,
-+					     self->details->screen_size_handler);
-+	}
-+	self->details->screen_size_handler =
-+		g_signal_connect (screen, "size-changed",
-+				  G_CALLBACK (screen_size_changed), self);
++    if (self->details->screen_size_handler > 0)
++    {
++        g_signal_handler_disconnect (screen, self->details->screen_size_handler);
++    }
++    self->details->screen_size_handler = g_signal_connect (screen, "size-changed",
++                                                           G_CALLBACK (screen_size_changed), self);
 +
-+	if (self->details->screen_monitors_handler > 0) {
-+		g_signal_handler_disconnect (screen,
-+					     self->details->screen_monitors_handler);
-+	}
-+	self->details->screen_monitors_handler =
-+		g_signal_connect (screen, "monitors-changed",
-+				  G_CALLBACK (screen_size_changed), self);
++    if (self->details->screen_monitors_handler > 0) {
++        g_signal_handler_disconnect (screen,
++                                     self->details->screen_monitors_handler);
++    }
++    self->details->screen_monitors_handler = g_signal_connect (screen, "monitors-changed",
++                                                               G_CALLBACK (screen_size_changed), self);
 +
-+	init_fade (self);
-+	nautilus_desktop_background_set_up_widget (self);
++    init_fade (self);
++    nautilus_desktop_background_set_up_widget (self);
 +}
 +
 +static void
@@ -440,16 +453,18 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +{
 +        NautilusDesktopBackground *self = user_data;
 +
-+	if (self->details->screen_size_handler > 0) {
-+		        g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (widget)),
-+				                     self->details->screen_size_handler);
-+			self->details->screen_size_handler = 0;
-+	}
-+	if (self->details->screen_monitors_handler > 0) {
-+		        g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (widget)),
-+				                     self->details->screen_monitors_handler);
-+			self->details->screen_monitors_handler = 0;
-+	}
++    if (self->details->screen_size_handler > 0)
++    {
++        g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (widget)),
++                                     self->details->screen_size_handler);
++        self->details->screen_size_handler = 0;
++    }
++    if (self->details->screen_monitors_handler > 0)
++    {
++        g_signal_handler_disconnect (gtk_widget_get_screen (GTK_WIDGET (widget)),
++                                     self->details->screen_monitors_handler);
++        self->details->screen_monitors_handler = 0;
++    }
 +}
 +
 +static void
@@ -458,24 +473,25 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +{
 +        NautilusDesktopBackground *self = user_data;
 +
-+	if (self->details->change_idle_id != 0) {
-+		g_source_remove (self->details->change_idle_id);
-+		self->details->change_idle_id = 0;
-+	}
++    if (self->details->change_idle_id != 0)
++    {
++        g_source_remove (self->details->change_idle_id);
++        self->details->change_idle_id = 0;
++    }
 +
-+	free_fade (self);
-+	self->details->widget = NULL;
++    free_fade (self);
++    self->details->widget = NULL;
 +}
 +
 +static gboolean
 +background_change_event_idle_cb (NautilusDesktopBackground *self)
 +{
-+	gnome_bg_load_from_preferences (self->details->bg,
-+					gnome_background_preferences);
++    gnome_bg_load_from_preferences (self->details->bg,
++                                    gnome_background_preferences);
 +
-+	g_object_unref (self);
++    g_object_unref (self);
 +
-+	return FALSE;
++    return FALSE;
 +}
 +
 +static gboolean
@@ -484,55 +500,55 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +                                     gint       n_keys,
 +                                     gpointer   user_data)
 +{
-+	NautilusDesktopBackground *self = user_data;
++    NautilusDesktopBackground *self = user_data;
 +
-+	/* Need to defer signal processing otherwise
-+	 * we would make the dconf backend deadlock.
-+	 */
-+	g_idle_add ((GSourceFunc) background_change_event_idle_cb,
-+		    g_object_ref (self));
++    /* Need to defer signal processing otherwise
++     * we would make the dconf backend deadlock.
++     */
++    g_idle_add ((GSourceFunc) background_change_event_idle_cb, g_object_ref (self));
 +
-+	return FALSE;
++    return FALSE;
 +}
 +
 +static void
 +nautilus_desktop_background_constructed (GObject *obj)
 +{
-+        NautilusDesktopBackground *self;
-+        GtkWidget *widget;
++    NautilusDesktopBackground *self;
++    GtkWidget *widget;
 +
-+        self = NAUTILUS_DESKTOP_BACKGROUND (obj);
++    self = NAUTILUS_DESKTOP_BACKGROUND (obj);
 +
-+        if (G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->constructed != NULL) {
-+                G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->constructed (obj);
-+        }
++    if (G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->constructed != NULL)
++    {
++        G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->constructed (obj);
++    }
 +
-+        widget = self->details->widget;
++    widget = self->details->widget;
 +
-+        g_assert (widget != NULL);
++    g_assert (widget != NULL);
 +
-+ 	g_signal_connect_object (widget, "destroy",
-+                                 G_CALLBACK (on_widget_destroyed), self, 0);
-+	g_signal_connect_object (widget, "realize",
-+				 G_CALLBACK (widget_realize_cb), self, 0);
-+	g_signal_connect_object (widget, "unrealize",
-+				 G_CALLBACK (widget_unrealize_cb), self, 0);
++    g_signal_connect_object (widget, "destroy",
++                             G_CALLBACK (on_widget_destroyed), self, 0);
++    g_signal_connect_object (widget, "realize",
++                             G_CALLBACK (widget_realize_cb), self, 0);
++    g_signal_connect_object (widget, "unrealize",
++                             G_CALLBACK (widget_unrealize_cb), self, 0);
 +
-+        gnome_bg_load_from_preferences (self->details->bg,
-+                                        gnome_background_preferences);
++    gnome_bg_load_from_preferences (self->details->bg,
++                                    gnome_background_preferences);
 +
-+        /* widget is already realized; we won't get widget_realize_cb called by
-+         * the signal handler */
++    /* widget is already realized; we won't get widget_realize_cb called by
++     * the signal handler */
 +        if (gtk_widget_get_realized (widget))
-+                widget_realize_cb (widget, self);
++            widget_realize_cb (widget, self);
 +
-+        /* Let's receive batch change events instead of every single one */
-+        g_signal_connect (gnome_background_preferences,
-+                          "change-event",
-+                          G_CALLBACK (background_settings_change_event_cb),
-+                          self);
++    /* Let's receive batch change events instead of every single one */
++    g_signal_connect (gnome_background_preferences,
++                      "change-event",
++                      G_CALLBACK (background_settings_change_event_cb),
++                      self);
 +
-+	queue_background_change (self);
++    queue_background_change (self);
 +}
 +
 +static void
@@ -545,13 +561,14 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +
 +        self = NAUTILUS_DESKTOP_BACKGROUND (object);
 +
-+        switch (property_id) {
++        switch (property_id)
++        {
 +        case PROP_WIDGET:
-+                self->details->widget = g_value_get_object (value);
-+                break;
++            self->details->widget = g_value_get_object (value);
++            break;
 +        default:
-+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-+                break;
++            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
++            break;
 +        }
 +}
 +
@@ -560,74 +577,74 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +                                         guint n_construct_params,
 +                                         GObjectConstructParam *construct_params)
 +{
-+        GObject *retval;
++    GObject *retval;
 +
-+        if (singleton != NULL) {
-+                return g_object_ref (singleton);
-+        }
++    if (singleton != NULL)
++    {
++        return g_object_ref (singleton);
++    }
 +
-+        retval = G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->constructor
-+                (type, n_construct_params, construct_params);
++    retval = G_OBJECT_CLASS (nautilus_desktop_background_parent_class)->constructor
++                             (type, n_construct_params, construct_params);
 +
-+        singleton = NAUTILUS_DESKTOP_BACKGROUND (retval);
-+        g_object_add_weak_pointer (retval, (gpointer) &singleton);
++    singleton = NAUTILUS_DESKTOP_BACKGROUND (retval);
++    g_object_add_weak_pointer (retval, (gpointer) &singleton);
 +
-+        return retval;
++    return retval;
 +}
 +
 +static void
 +nautilus_desktop_background_class_init (NautilusDesktopBackgroundClass *klass)
 +{
-+	GObjectClass *object_class;
-+        GParamSpec *pspec;
++    GObjectClass *object_class;
++    GParamSpec *pspec;
 +
-+	object_class = G_OBJECT_CLASS (klass);
-+	object_class->finalize = nautilus_desktop_background_finalize;
-+        object_class->set_property = nautilus_desktop_background_set_property;
-+        object_class->constructor = nautilus_desktop_background_constructor;
-+        object_class->constructed = nautilus_desktop_background_constructed;
++    object_class = G_OBJECT_CLASS (klass);
++    object_class->finalize = nautilus_desktop_background_finalize;
++    object_class->set_property = nautilus_desktop_background_set_property;
++    object_class->constructor = nautilus_desktop_background_constructor;
++    object_class->constructed = nautilus_desktop_background_constructed;
 +
-+        pspec = g_param_spec_object ("widget", "The widget for this background",
-+                                     "The widget that gets its background set",
-+                                     NAUTILUS_TYPE_CANVAS_CONTAINER,
-+                                     G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
-+        g_object_class_install_property (object_class, PROP_WIDGET, pspec);
++    pspec = g_param_spec_object ("widget", "The widget for this background",
++                                 "The widget that gets its background set",
++                                 NAUTILUS_TYPE_CANVAS_CONTAINER,
++                                 G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
++    g_object_class_install_property (object_class, PROP_WIDGET, pspec);
 +
-+	g_type_class_add_private (klass, sizeof (NautilusDesktopBackgroundDetails));
++    g_type_class_add_private (klass, sizeof (NautilusDesktopBackgroundDetails));
 +}
 +
 +static void
 +nautilus_desktop_background_init (NautilusDesktopBackground *self)
 +{
-+	self->details =
-+		G_TYPE_INSTANCE_GET_PRIVATE (self,
-+					     NAUTILUS_TYPE_DESKTOP_BACKGROUND,
-+					     NautilusDesktopBackgroundDetails);
++    self->details = G_TYPE_INSTANCE_GET_PRIVATE (self,
++                                                 NAUTILUS_TYPE_DESKTOP_BACKGROUND,
++                                                 NautilusDesktopBackgroundDetails);
 +
-+        self->details->bg = gnome_bg_new ();
-+	self->details->default_color.red = 0xffff;
-+	self->details->default_color.green = 0xffff;
-+	self->details->default_color.blue = 0xffff;
++    self->details->bg = gnome_bg_new ();
++    self->details->default_color.red = 0xffff;
++    self->details->default_color.green = 0xffff;
++    self->details->default_color.blue = 0xffff;
 +
-+	g_signal_connect (self->details->bg, "changed",
-+			  G_CALLBACK (nautilus_desktop_background_changed), self);
-+	g_signal_connect (self->details->bg, "transitioned",
-+			  G_CALLBACK (nautilus_desktop_background_transitioned), self);
++    g_signal_connect (self->details->bg, "changed",
++                      G_CALLBACK (nautilus_desktop_background_changed), self);
++    g_signal_connect (self->details->bg, "transitioned",
++                      G_CALLBACK (nautilus_desktop_background_transitioned), self);
 +}
 +
 +void
 +nautilus_desktop_background_receive_dropped_background_image (NautilusDesktopBackground *self,
 +                                                              const char *image_uri)
 +{
-+	/* Currently, we only support tiled images. So we set the placement.
-+	 */
-+	gnome_bg_set_placement (self->details->bg,
-+				G_DESKTOP_BACKGROUND_STYLE_WALLPAPER);
-+	gnome_bg_set_draw_background (self->details->bg, TRUE);
-+	nautilus_desktop_background_set_image_uri (self, image_uri);
++    /* Currently, we only support tiled images. So we set the placement.
++     */
++    gnome_bg_set_placement (self->details->bg,
++                            G_DESKTOP_BACKGROUND_STYLE_WALLPAPER);
++    gnome_bg_set_draw_background (self->details->bg, TRUE);
++    nautilus_desktop_background_set_image_uri (self, image_uri);
 +
-+	gnome_bg_save_to_preferences (self->details->bg,
-+				      gnome_background_preferences);
++    gnome_bg_save_to_preferences (self->details->bg,
++                                  gnome_background_preferences);
 +}
 +
 +NautilusDesktopBackground *
@@ -637,10 +654,8 @@ Index: b/libnautilus-private/nautilus-desktop-background.c
 +                             "widget", container,
 +                             NULL);
 +}
-Index: b/libnautilus-private/nautilus-desktop-background.h
-===================================================================
 --- /dev/null
-+++ b/libnautilus-private/nautilus-desktop-background.h
++++ b/nautilus-desktop/nautilus-desktop-background.h
 @@ -0,0 +1,68 @@
 +/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 +
@@ -696,144 +711,143 @@ Index: b/libnautilus-private/nautilus-desktop-background.h
 +NautilusDesktopBackground * nautilus_desktop_background_new (NautilusCanvasContainer *container);
 +
 +void nautilus_desktop_background_receive_dropped_background_image (NautilusDesktopBackground *self,
-+								   const gchar *image_uri);
++                                   const gchar *image_uri);
 +
 +typedef struct NautilusDesktopBackgroundDetails NautilusDesktopBackgroundDetails;
 +
 +struct NautilusDesktopBackground {
-+	GObject parent;
-+	NautilusDesktopBackgroundDetails *details;
++    GObject parent;
++    NautilusDesktopBackgroundDetails *details;
 +};
 +
 +struct NautilusDesktopBackgroundClass {
-+	GObjectClass parent_class;
++    GObjectClass parent_class;
 +};
 +
 +#endif /* __NAUTILIUS_DESKTOP_BACKGROUND_H__ */
-Index: b/src/nautilus-desktop-canvas-view.c
-===================================================================
---- a/src/nautilus-desktop-canvas-view.c
-+++ b/src/nautilus-desktop-canvas-view.c
-@@ -39,6 +39,7 @@
- #include <fcntl.h>
- #include <gdk/gdkx.h>
- #include <glib/gi18n.h>
-+#include <libnautilus-private/nautilus-desktop-background.h>
- #include <libnautilus-private/nautilus-desktop-icon-file.h>
- #include <libnautilus-private/nautilus-directory-notify.h>
- #include <libnautilus-private/nautilus-file-changes-queue.h>
-@@ -62,6 +63,8 @@
+--- a/nautilus-desktop/nautilus-desktop-canvas-view.c
++++ b/nautilus-desktop/nautilus-desktop-canvas-view.c
+@@ -26,6 +26,7 @@
+ 
+ #include "nautilus-desktop-canvas-view.h"
+ 
++#include "nautilus-desktop-background.h"
+ #include "nautilus-desktop-canvas-view-container.h"
+ #include "nautilus-desktop-icon-file.h"
+ #include "nautilus-desktop-directory.h"
+@@ -61,6 +62,7 @@
  struct NautilusDesktopCanvasViewDetails
  {
- 	GdkWindow *root_window;
-+
-+	NautilusDesktopBackground *background;
+     GdkWindow *root_window;
++    NautilusDesktopBackground *background;
  };
  
- static void     default_zoom_level_changed                        (gpointer                user_data);
-@@ -220,6 +223,22 @@
- 	return GDK_FILTER_CONTINUE;
+ static void     default_zoom_level_changed (gpointer user_data);
+@@ -243,6 +245,23 @@ desktop_canvas_view_property_filter (Gdk
+     return GDK_FILTER_CONTINUE;
  }
  
 +static void
 +real_begin_loading (NautilusFilesView *object)
 +{
-+	NautilusCanvasContainer *canvas_container;
-+	NautilusDesktopCanvasView *view;
++    NautilusCanvasContainer *canvas_container;
++    NautilusDesktopCanvasView *view;
 +
-+	view = NAUTILUS_DESKTOP_CANVAS_VIEW (object);
++    view = NAUTILUS_DESKTOP_CANVAS_VIEW (object);
 +
-+	canvas_container = get_canvas_container (view);
-+	if (view->details->background == NULL) {
-+		view->details->background = nautilus_desktop_background_new (canvas_container);
-+	}
++    canvas_container = get_canvas_container (view);
++    if (view->details->background == NULL)
++    {
++        view->details->background = nautilus_desktop_background_new (canvas_container);
++    }
 +
-+	NAUTILUS_FILES_VIEW_CLASS (nautilus_desktop_canvas_view_parent_class)->begin_loading (object);
++    NAUTILUS_FILES_VIEW_CLASS (nautilus_desktop_canvas_view_parent_class)->begin_loading (object);
 +}
 +
  static guint
  real_get_id (NautilusFilesView *view)
  {
-@@ -243,6 +262,11 @@
- 					      nautilus_files_view_update_context_menus,
- 					      canvas_view);
+@@ -266,6 +285,12 @@ nautilus_desktop_canvas_view_dispose (GO
+                                           nautilus_files_view_update_context_menus,
+                                           canvas_view);
  
-+	if (canvas_view->details->background != NULL) {
-+		g_object_unref (canvas_view->details->background);
-+		canvas_view->details->background = NULL;
-+	}
++    if (canvas_view->details->background != NULL)
++    {
++        g_object_unref (canvas_view->details->background);
++        canvas_view->details->background = NULL;
++    }
 +
- 	G_OBJECT_CLASS (nautilus_desktop_canvas_view_parent_class)->dispose (object);
+     G_OBJECT_CLASS (nautilus_desktop_canvas_view_parent_class)->dispose (object);
  }
  
-@@ -291,6 +315,7 @@
+@@ -328,6 +353,7 @@ nautilus_desktop_canvas_view_class_init
  
- 	G_OBJECT_CLASS (class)->dispose = nautilus_desktop_canvas_view_dispose;
+     canvas_class->create_canvas_container = real_create_canvas_container;
  
-+	vclass->begin_loading = real_begin_loading;
- 	vclass->update_context_menus = real_update_context_menus;
- 	vclass->get_view_id = real_get_id;
- 	vclass->end_loading = nautilus_desktop_canvas_view_end_loading;
-@@ -333,17 +358,6 @@
- 			       desktop_canvas_view);
++    vclass->begin_loading = real_begin_loading;
+     vclass->update_context_menus = real_update_context_menus;
+     vclass->get_view_id = real_get_id;
+     vclass->end_loading = nautilus_desktop_canvas_view_end_loading;
+@@ -374,17 +400,6 @@ realized_callback (GtkWidget
+                            desktop_canvas_view);
  }
  
 -static void
--desktop_canvas_container_realize (GtkWidget *widget,
--				  NautilusDesktopCanvasView *desktop_canvas_view)
+-desktop_canvas_container_realize (GtkWidget                 *widget,
+-                                  NautilusDesktopCanvasView *desktop_canvas_view)
 -{
--	GdkWindow *bin_window;
--	GdkRGBA transparent = { 0, 0, 0, 0 };
+-    GdkWindow *bin_window;
+-    GdkRGBA transparent = { 0, 0, 0, 0 };
 -
--	bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (widget));
--	gdk_window_set_background_rgba (bin_window, &transparent);
+-    bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (widget));
+-    gdk_window_set_background_rgba (bin_window, &transparent);
 -}
 -
  static NautilusCanvasZoomLevel
  get_default_zoom_level (void)
  {
-@@ -650,9 +664,6 @@
- 	nautilus_files_view_set_show_foreign (NAUTILUS_FILES_VIEW (desktop_canvas_view),
- 					FALSE);
+@@ -737,9 +752,6 @@ nautilus_desktop_canvas_view_init (Nauti
+     nautilus_files_view_set_show_foreign (NAUTILUS_FILES_VIEW (desktop_canvas_view),
+                                           FALSE);
  
--	g_signal_connect_object (canvas_container, "realize",
--				 G_CALLBACK (desktop_canvas_container_realize), desktop_canvas_view, 0);
+-    g_signal_connect_object (canvas_container, "realize",
+-                             G_CALLBACK (desktop_canvas_container_realize), desktop_canvas_view, 0);
 -
- 	g_signal_connect_object (desktop_canvas_view, "realize",
- 				 G_CALLBACK (realized_callback), desktop_canvas_view, 0);
- 	g_signal_connect_object (desktop_canvas_view, "unrealize",
-Index: b/src/nautilus-desktop-window.c
-===================================================================
---- a/src/nautilus-desktop-window.c
-+++ b/src/nautilus-desktop-window.c
-@@ -40,6 +40,7 @@
+     g_signal_connect_object (desktop_canvas_view, "realize",
+                              G_CALLBACK (realized_callback), desktop_canvas_view, 0);
+     g_signal_connect_object (desktop_canvas_view, "unrealize",
+--- a/nautilus-desktop/nautilus-desktop-window.c
++++ b/nautilus-desktop/nautilus-desktop-window.c
+@@ -44,6 +44,7 @@
+ struct NautilusDesktopWindowDetails
+ {
+     gulong size_changed_id;
++    gulong monitors_changed_id;
  
- struct NautilusDesktopWindowDetails {
- 	gulong size_changed_id;
-+	gulong monitors_changed_id;
+     gboolean loaded;
  
- 	gboolean loaded;
+@@ -431,6 +432,13 @@ unrealize (GtkWidget *widget)
+         details->size_changed_id = 0;
+     }
  
-@@ -313,6 +314,12 @@
- 		details->size_changed_id = 0;
- 	}
- 
-+	if (details->monitors_changed_id != 0) {
-+		g_signal_handler_disconnect (gtk_window_get_screen (GTK_WINDOW (window)),
-+					     details->monitors_changed_id);
-+		details->monitors_changed_id = 0;
-+	}
++    if (details->monitors_changed_id != 0)
++    {
++        g_signal_handler_disconnect (gtk_window_get_screen (GTK_WINDOW (window)),
++                                     details->monitors_changed_id);
++        details->monitors_changed_id = 0;
++    }
 +
- 	gtk_widget_destroy (details->desktop_selection);
+     gtk_widget_destroy (details->desktop_selection);
  
- 	GTK_WIDGET_CLASS (nautilus_desktop_window_parent_class)->unrealize (widget);
-@@ -359,6 +366,9 @@
- 	details->size_changed_id =
- 		g_signal_connect (gtk_window_get_screen (GTK_WINDOW (window)), "size-changed",
- 				  G_CALLBACK (nautilus_desktop_window_screen_size_changed), window);
-+	details->monitors_changed_id =
-+		g_signal_connect (gtk_window_get_screen (GTK_WINDOW (window)), "monitors-changed",
-+				  G_CALLBACK (nautilus_desktop_window_screen_size_changed), window);
+     GTK_WIDGET_CLASS (nautilus_desktop_window_parent_class)->unrealize (widget);
+@@ -478,6 +486,10 @@ realize (GtkWidget *widget)
+     details->size_changed_id =
+         g_signal_connect (gtk_window_get_screen (GTK_WINDOW (window)), "size-changed",
+                           G_CALLBACK (nautilus_desktop_window_screen_size_changed), window);
++
++    details->monitors_changed_id =
++        g_signal_connect (gtk_window_get_screen (GTK_WINDOW (window)), "monitors-changed",
++                          G_CALLBACK (nautilus_desktop_window_screen_size_changed), window);
  }
  
  static void

@@ -1,7 +1,13 @@
-Index: nautilus-3.18.1/libnautilus-private/nautilus-desktop-background.c
-===================================================================
---- nautilus-3.18.1.orig/libnautilus-private/nautilus-desktop-background.c
-+++ nautilus-3.18.1/libnautilus-private/nautilus-desktop-background.c
+Description: Sync chosen background filename to accountsservice
+ used in lightdm by unity-greeter
+Bug: https://launchpad.net/bugs/1128492
+Bug: https://launchpad.net/bugs/928553
+---
+ nautilus-desktop/nautilus-desktop-background.c |   81 +++++++++++++++++++++++++
+ 1 file changed, 81 insertions(+)
+
+--- a/nautilus-desktop/nautilus-desktop-background.c
++++ b/nautilus-desktop/nautilus-desktop-background.c
 @@ -75,6 +75,85 @@ struct NautilusDesktopBackgroundDetails
  };
  
@@ -88,12 +94,12 @@ Index: nautilus-3.18.1/libnautilus-private/nautilus-desktop-background.c
  static gboolean
  background_settings_change_event_cb (GSettings *settings,
                                       gpointer   keys,
-@@ -440,6 +519,8 @@ background_change_event_idle_cb (Nautilu
- 	gnome_bg_load_from_preferences (self->details->bg,
- 					gnome_background_preferences);
+@@ -460,6 +539,8 @@ background_change_event_idle_cb (Nautilu
+     gnome_bg_load_from_preferences (self->details->bg,
+                                     gnome_background_preferences);
  
-+	set_accountsservice_background (gnome_bg_get_filename (self->details->bg));
++    set_accountsservice_background (gnome_bg_get_filename (self->details->bg));
 +
- 	g_object_unref (self);
+     g_object_unref (self);
  
- 	return FALSE;
+     return FALSE;

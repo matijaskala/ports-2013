@@ -1,34 +1,45 @@
-# Description: don't tweak wrapping after dots, it's not required and 
-# creates some issues (i.e with Ubuntu version number)
-# Upstream: https://bugzilla.gnome.org/show_bug.cgi?id=674924
-# Bug-Ubuntu: https://launchpad.net/bugs/942539
-Index: nautilus-3.18.1/libnautilus-private/nautilus-canvas-item.c
-===================================================================
---- nautilus-3.18.1.orig/libnautilus-private/nautilus-canvas-item.c
-+++ nautilus-3.18.1/libnautilus-private/nautilus-canvas-item.c
-@@ -1290,11 +1290,6 @@ nautilus_canvas_item_draw (EelCanvasItem
+From e8e94c92f846f5ef0e7376734bbbfd6dbf98caac Mon Sep 17 00:00:00 2001
+From: Jeremy Bicha <jbicha@ubuntu.com>
+Date: Thu, 27 Apr 2017 20:52:26 -0400
+Subject: [PATCH] canvas-item: Don't wrap after . immediately followed by
+ numbers
+
+https://launchpad.net/bugs/942539
+
+https://bugzilla.gnome.org/show_bug.cgi?id=781875
+---
+ src/nautilus-canvas-item.c | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
+
+diff --git a/src/nautilus-canvas-item.c b/src/nautilus-canvas-item.c
+index a103d34a4..97672001f 100644
+--- a/src/nautilus-canvas-item.c
++++ b/src/nautilus-canvas-item.c
+@@ -1457,12 +1457,6 @@ nautilus_canvas_item_draw (EelCanvasItem
  
  #define ZERO_WIDTH_SPACE "\xE2\x80\x8B"
  
--#define ZERO_OR_THREE_DIGITS(p)			\
--	(!g_ascii_isdigit (*(p)) ||		\
--	 (g_ascii_isdigit (*(p+1)) &&		\
--	  g_ascii_isdigit (*(p+2))))
+-#define ZERO_OR_THREE_DIGITS(p)                 \
+-    (!g_ascii_isdigit (*(p)) ||             \
+-     (g_ascii_isdigit (*(p + 1)) &&           \
+-      g_ascii_isdigit (*(p + 2))))
 -
- 
+-
  static PangoLayout *
  create_label_layout (NautilusCanvasItem *item,
-@@ -1323,11 +1318,9 @@ create_label_layout (NautilusCanvasItem
- 		for (p = text; *p != '\0'; p++) {
- 			str = g_string_append_c (str, *p);
+                      const char         *text)
+@@ -1492,12 +1486,10 @@ create_label_layout (NautilusCanvasItem
+         {
+             str = g_string_append_c (str, *p);
  
--			if (*p == '_' || *p == '-' || (*p == '.' && ZERO_OR_THREE_DIGITS (p+1))) {
-+			if (*p == '_' || *p == '-' || (*p == '.' && !g_ascii_isdigit(*(p+1)))) {
- 				/* Ensure that we allow to break after '_' or '.' characters,
--				 * if they are not likely to be part of a version information, to
--				 * not break wrapping of foobar-0.0.1.
--				 * Wrap before IPs and long numbers, though. */
-+				 * if they are not followed by a number */
- 				str = g_string_append (str, ZERO_WIDTH_SPACE);
- 			}
- 		}
+-            if (*p == '_' || *p == '-' || (*p == '.' && ZERO_OR_THREE_DIGITS (p + 1)))
++            if (*p == '_' || *p == '-' || (*p == '.' && !g_ascii_isdigit(*(p+1))))
+             {
+                 /* Ensure that we allow to break after '_' or '.' characters,
+-                 * if they are not likely to be part of a version information, to
+-                 * not break wrapping of foobar-0.0.1.
+-                 * Wrap before IPs and long numbers, though. */
++                 * if they are not followed by a number */
+                 str = g_string_append (str, ZERO_WIDTH_SPACE);
+             }
+         }

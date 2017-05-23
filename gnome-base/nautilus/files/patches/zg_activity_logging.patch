@@ -19,49 +19,51 @@ diff --git a/configure.ac b/configure.ac
 index 777ff84..3eb759c 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -246,6 +246,8 @@ fi
+@@ -287,7 +287,9 @@ fi
  AM_CONDITIONAL(ENABLE_TRACKER, test "x$enable_tracker" = "xyes")
  
  dnl ==========================================================================
+-	
 +
 +PKG_CHECK_MODULES(ZEITGEIST, zeitgeist-2.0)
- 	
++
  dnl base libs
  PKG_CHECK_MODULES(BASE, [
-diff --git a/libnautilus-private/Makefile.am b/libnautilus-private/Makefile.am
+ 	gtk+-3.0 >= gtk_minver
+diff --git a/src/Makefile.am b/src/Makefile.am
 index 92c6014..7f4803b 100644
---- a/libnautilus-private/Makefile.am
-+++ b/libnautilus-private/Makefile.am
-@@ -12,6 +12,7 @@ AM_CPPFLAGS = 						\
- 	$(WARNING_CFLAGS)				\
- 	$(DISABLE_DEPRECATED)				\
- 	$(TRACKER_CFLAGS)				\
-+	$(ZEITGEIST_CFLAGS)				\
- 	-DDATADIR=\""$(datadir)"\" 			\
- 	-DNAUTILUS_DATADIR=\""$(datadir)/nautilus"\" 	\
- 	-DNAUTILUS_EXTENSIONDIR=\""$(libdir)/nautilus/extensions-3.0"\" \
-@@ -46,6 +47,7 @@ libnautilus_private_la_LDFLAGS =	\
- libnautilus_private_la_LIBADD =		\
- 	$(SELINUX_LIBS)			\
- 	$(TRACKER_LIBS)			\
-+	$(ZEITGEIST_LIBS)		\
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -19,6 +19,7 @@ AM_CPPFLAGS =							\
+ 	$(EXIF_CFLAGS)						\
+ 	$(EXEMPI_CFLAGS)                                        \
+ 	$(TRACKER_CFLAGS)					\
++	$(ZEITGEIST_CFLAGS)					\
+ 	-DDATADIR=\""$(datadir)"\" 				\
+ 	-DLIBDIR=\""$(libdir)"\" 				\
+ 	-DLOCALEDIR=\""$(localedir)"\"				\
+@@ -43,6 +44,7 @@ libnautilus_la_LIBADD =\
+ 	$(EXEMPI_LIBS) \
+ 	$(POPT_LIBS) \
+ 	$(TRACKER_LIBS) \
++	$(ZEITGEIST_LIBS) \
+ 	$(SELINUX_LIBS) \
  	$(top_builddir)/eel/libeel-2.la \
  	$(top_builddir)/libnautilus-extension/libnautilus-extension.la \
- 	$(top_builddir)/libgd/libgd.la  \
-diff --git a/libnautilus-private/nautilus-file-operations.c b/libnautilus-private/nautilus-file-operations.c
+diff --git a/src/nautilus-file-operations.c b/src/nautilus-file-operations.c
 index 376ef7e..9fbd2db 100644
---- a/libnautilus-private/nautilus-file-operations.c
-+++ b/libnautilus-private/nautilus-file-operations.c
-@@ -64,6 +64,8 @@
- #include "nautilus-file-undo-operations.h"
+--- a/src/nautilus-file-operations.c
++++ b/src/nautilus-file-operations.c
+@@ -61,6 +61,8 @@
  #include "nautilus-file-undo-manager.h"
+ #include "nautilus-ui-utilities.h"
  
 +#include <zeitgeist.h>
 +
  /* TODO: TESTING!!! */
  
- typedef struct {
-@@ -192,6 +194,107 @@ typedef struct {
+ typedef struct
+@@ -235,6 +237,112 @@ typedef struct
  #define MERGE_ALL _("Merge _All")
  #define COPY_FORCE _("Copy _Anyway")
  
@@ -76,14 +78,14 @@ index 376ef7e..9fbd2db 100644
 +
 +typedef struct {
 +    const char *event_interpretation;
-+    //char *event_origin;
++    /* char *event_origin; */
 +    GFile *file;
-+    gchar *original_uri; // for MOVE_EVENT
++    gchar *original_uri; /* for MOVE_EVENT */
 +} _ZeitgeistFileEventData;
 +
 +static void
 +_log_zeitgeist_event_for_file_cb (GObject *source_object,
-+        GAsyncResult *res, gpointer user_data)
++                                  GAsyncResult *res, gpointer user_data)
 +{
 +    _ZeitgeistFileEventData *data;
 +    GError *error;
@@ -98,40 +100,45 @@ index 376ef7e..9fbd2db 100644
 +    error = NULL;
 +    info = g_file_query_info_finish (G_FILE (source_object), res, &error);
 +
-+    if (info) {
++    if (info)
++    {
 +        uri = g_file_get_uri (data->file);
 +        origin = g_path_get_dirname (uri);
 +        display_name = g_file_info_get_display_name (info);
 +        mimetype = g_file_info_get_content_type (info);
-+    } else {
++    }
++    else
++    {
 +        g_warning ("Error getting info: %s\n", error->message);
 +        g_error_free (error);
 +        g_object_unref (data->file);
 +        g_free (data->original_uri);
 +        g_free (data);
-+        return; // skip this event
++        return;
 +    }
 +
 +    ZeitgeistSubject *subject = zeitgeist_subject_new_full (
 +        (data->original_uri) ? (data->original_uri) : uri,
-+        NULL, // subject interpretation - auto-guess
-+        NULL, // suject manifestation - auto-guess
++        NULL, /* subject interpretation - auto-guess */
++        NULL, /* suject manifestation - auto-guess */
 +        mimetype,
 +        origin,
 +        display_name,
-+        NULL // storage - auto-guess
++        NULL /* storage - auto-guess */
 +    );
 +
 +    if (data->original_uri)
++    {
 +        zeitgeist_subject_set_current_uri (subject, uri);
++    }
 +
-+    if (subject) {
-+        ZeitgeistEvent *event = zeitgeist_event_new_full (
-+            data->event_interpretation,
-+            ZEITGEIST_ZG_USER_ACTIVITY,
-+            ZEITGEIST_NAUTILUS_ACTOR,
-+            origin,
-+            subject, NULL);
++    if (subject)
++    {
++        ZeitgeistEvent *event = zeitgeist_event_new_full (data->event_interpretation,
++                                                          ZEITGEIST_ZG_USER_ACTIVITY,
++                                                          ZEITGEIST_NAUTILUS_ACTOR,
++                                                          origin,
++                                                          subject, NULL);
 +        send_event_to_zeitgeist (event);
 +        g_object_unref (event);
 +        g_object_unref (subject);
@@ -148,7 +155,7 @@ index 376ef7e..9fbd2db 100644
 +
 +static void
 +log_zeitgeist_event_for_file_no_reply (const char *event_interpretation,
-+    GFile *file, gchar *original_uri)
++                                       GFile *file, gchar *original_uri)
 +{
 +    _ZeitgeistFileEventData *data;
 +    data = g_new0 (_ZeitgeistFileEventData, 1);
@@ -158,147 +165,147 @@ index 376ef7e..9fbd2db 100644
 +    data->file = file;
 +
 +    g_file_query_info_async (file,
-+        G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME ","
-+            G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
-+        G_FILE_QUERY_INFO_NONE,
-+        G_PRIORITY_DEFAULT,
-+        NULL,
-+        _log_zeitgeist_event_for_file_cb, data);
++                             G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME ","
++                             G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
++                             G_FILE_QUERY_INFO_NONE,
++                             G_PRIORITY_DEFAULT,
++                             NULL,
++                             _log_zeitgeist_event_for_file_cb, data);
 +}
 +
  static void
- mark_desktop_file_trusted (CommonJob *common,
- 			   GCancellable *cancellable,
-@@ -2108,6 +2211,41 @@ delete_job_done (gpointer user_data)
+ mark_desktop_file_executable (CommonJob    *common,
+                               GCancellable *cancellable,
+@@ -2421,6 +2529,37 @@ delete_task_done (GObject      *source_o
  
- 	job = user_data;
+     job = user_data;
  
-+	// Send event to Zeitgeist for deletions/trash
-+	GList *file_iter = job->files;
-+	while (file_iter != NULL) {
-+		gchar *uri = g_file_get_uri (file_iter->data);
-+		gchar *origin = g_path_get_dirname (uri);
-+		gchar *parse_name = g_file_get_parse_name (file_iter->data);
-+		gchar *display_name = g_path_get_basename (parse_name);
-+		ZeitgeistSubject *subject = zeitgeist_subject_new_full (
-+			uri,
-+			NULL, // subject interpretation - auto-guess
-+			NULL, // suject manifestation - auto-guess
-+			NULL, // mime-type
-+			origin,
-+			display_name,
-+			NULL // storage - auto-guess
-+		);
-+		ZeitgeistEvent *event = zeitgeist_event_new_full (
-+			ZEITGEIST_ZG_DELETE_EVENT,
-+			ZEITGEIST_ZG_USER_ACTIVITY,
-+			ZEITGEIST_NAUTILUS_ACTOR,
-+			origin,
-+			subject,
-+			NULL
-+		);
-+		send_event_to_zeitgeist (event);
-+		g_object_unref (event);
-+		g_object_unref (subject);
-+		g_free (uri);
-+		g_free (origin);
-+		g_free (parse_name);
-+		g_free (display_name);
-+		file_iter = g_list_next (file_iter);
-+	}
-+	// ---
-+
- 	g_list_free_full (job->files, g_object_unref);
- 
- 	if (job->done_callback) {
-@@ -4972,6 +5110,23 @@ copy_job_done (gpointer user_data)
- 				    job->done_callback_data);
- 	}
- 
-+	// Send event to Zeitgeist
-+	GHashTableIter iter;
-+	GFile *file;
-+	gpointer done;
-+	g_hash_table_iter_init (&iter, job->debuting_files);
-+	while (g_hash_table_iter_next (&iter, (gpointer *) &file, &done)) {
-+		if (GPOINTER_TO_INT (done)) {
-+			// operation was completed successfully for this file
-+			g_object_ref (file);
-+			// FIXME: Set event origin to the original file URI, if we
-+			//        can somehow figure out which one it is.
-+			log_zeitgeist_event_for_file_no_reply (
-+				ZEITGEIST_ZG_CREATE_EVENT, file, NULL);
-+		}
-+	}
-+	// ---
-+
- 	g_list_free_full (job->files, g_object_unref);
- 	if (job->destination) {
- 		g_object_unref (job->destination);
-@@ -5544,6 +5699,19 @@ move_job_done (gpointer user_data)
- 				    job->done_callback_data);
- 	}
- 
-+	// Send event to Zeitgeist for moved files (not renaming)
++    /* Send event to Zeitgeist for deletions/trash */
 +    GList *file_iter = job->files;
-+	while (file_iter != NULL) {
++    while (file_iter != NULL)
++    {
++        gchar *uri = g_file_get_uri (file_iter->data);
++        gchar *origin = g_path_get_dirname (uri);
++        gchar *parse_name = g_file_get_parse_name (file_iter->data);
++        gchar *display_name = g_path_get_basename (parse_name);
++        ZeitgeistSubject *subject = zeitgeist_subject_new_full (uri,
++                                                                NULL, /* subject interpretation - auto-guess */
++                                                                NULL, /* suject manifestation - auto-guess */
++                                                                NULL, /* mime-type */
++                                                                origin,
++                                                                display_name,
++                                                                NULL /* storage - auto-guess */ );
++        ZeitgeistEvent *event = zeitgeist_event_new_full (ZEITGEIST_ZG_DELETE_EVENT,
++                                                          ZEITGEIST_ZG_USER_ACTIVITY,
++                                                          ZEITGEIST_NAUTILUS_ACTOR,
++                                                          origin,
++                                                          subject,
++                                                          NULL);
++        send_event_to_zeitgeist (event);
++        g_object_unref (event);
++        g_object_unref (subject);
++        g_free (uri);
++        g_free (origin);
++        g_free (parse_name);
++        g_free (display_name);
++        file_iter = g_list_next (file_iter);
++    }
++
+     g_list_free_full (job->files, g_object_unref);
+ 
+     if (job->done_callback)
+@@ -5666,6 +5805,25 @@ copy_task_done (GObject      *source_obj
+                             job->done_callback_data);
+     }
+ 
++    /* Send event to Zeitgeist */
++    GHashTableIter iter;
++    GFile *file;
++    gpointer done;
++    g_hash_table_iter_init (&iter, job->debuting_files);
++    while (g_hash_table_iter_next (&iter, (gpointer *) &file, &done))
++    {
++        if (GPOINTER_TO_INT (done))
++        {
++            /* operation was completed successfully for this file
++             *  FIXME: Set event origin to the original file URI, if we
++             *  can somehow figure out which one it is.
++             */
++            g_object_ref (file);
++            log_zeitgeist_event_for_file_no_reply (ZEITGEIST_ZG_CREATE_EVENT,
++                                                   file, NULL);
++        }
++    }
++
+     g_list_free_full (job->files, g_object_unref);
+     if (job->destination)
+     {
+@@ -6346,6 +6504,20 @@ move_task_done (GObject      *source_obj
+                             job->done_callback_data);
+     }
+ 
++    /* Send event to Zeitgeist for moved files (not renaming) */
++    GList *file_iter = job->files;
++    while (file_iter != NULL)
++    {
 +        char *basename = g_file_get_basename (file_iter->data);
 +        GFile *new_file = g_file_get_child (job->destination, basename);
 +        g_free (basename);
 +
 +        log_zeitgeist_event_for_file_no_reply (ZEITGEIST_ZG_MOVE_EVENT,
-+            new_file, g_file_get_uri (file_iter->data));
++                                               new_file,
++                                               g_file_get_uri (file_iter->data));
 +        file_iter = g_list_next (file_iter);
-+	}
-+	// ---
++    }
 +
- 	g_list_free_full (job->files, g_object_unref);
- 	g_object_unref (job->destination);
- 	g_hash_table_unref (job->debuting_files);
-@@ -5890,6 +6058,23 @@ link_job_done (gpointer user_data)
- 				    job->done_callback_data);
- 	}
+     g_list_free_full (job->files, g_object_unref);
+     g_object_unref (job->destination);
+     g_hash_table_unref (job->debuting_files);
+@@ -6728,6 +6900,25 @@ link_task_done (GObject      *source_obj
+                             job->done_callback_data);
+     }
  
-+	// Send event to Zeitgeist
-+	GHashTableIter iter;
-+	GFile *file;
-+	gpointer done;
-+	g_hash_table_iter_init (&iter, job->debuting_files);
-+	while (g_hash_table_iter_next (&iter, (gpointer *) &file, &done)) {
-+		if (GPOINTER_TO_INT (done)) {
-+            // operation was completed successfully for this file
++    /* Send event to Zeitgeist */
++    GHashTableIter iter;
++    GFile *file;
++    gpointer done;
++    g_hash_table_iter_init (&iter, job->debuting_files);
++    while (g_hash_table_iter_next (&iter, (gpointer *) &file, &done))
++    {
++        if (GPOINTER_TO_INT (done))
++        {
++            /* operation was completed successfully for this file
++             *  FIXME: Set event origin to the original file URI, if we
++             *  can somehow figure out which one it is.
++             */
 +            g_object_ref (file);
-+            // FIXME: Set event origin to the original file URI, if we
-+            //        can somehow figure out which one it is.
-+            log_zeitgeist_event_for_file_no_reply (
-+                ZEITGEIST_ZG_CREATE_EVENT, file, NULL);
-+		}
-+	}
-+	// ---
++            log_zeitgeist_event_for_file_no_reply (ZEITGEIST_ZG_CREATE_EVENT,
++                                                   file, NULL);
++        }
++    }
 +
- 	g_list_free_full (job->files, g_object_unref);
- 	g_object_unref (job->destination);
- 	g_hash_table_unref (job->debuting_files);
-@@ -6374,6 +6559,14 @@ create_job_done (gpointer user_data)
- 				    job->done_callback_data);
- 	}
+     g_list_free_full (job->files, g_object_unref);
+     g_object_unref (job->destination);
+     g_hash_table_unref (job->debuting_files);
+@@ -7241,6 +7432,13 @@ create_task_done (GObject      *source_o
+                             job->done_callback_data);
+     }
  
-+	// Send event to Zeitgeist
-+	if (job->created_file) {
-+		g_object_ref (job->created_file);
-+		log_zeitgeist_event_for_file_no_reply (
-+			ZEITGEIST_ZG_CREATE_EVENT, job->created_file, NULL);
-+	}
-+	// ---
++    if (job->created_file)
++    {
++        g_object_ref (job->created_file);
++        log_zeitgeist_event_for_file_no_reply (ZEITGEIST_ZG_CREATE_EVENT,
++                                               job->created_file, NULL);
++    }
 +
- 	g_object_unref (job->dest_dir);
- 	if (job->src) {
- 		g_object_unref (job->src);
-diff --git a/libnautilus-private/nautilus-file.c b/libnautilus-private/nautilus-file.c
+     g_object_unref (job->dest_dir);
+     if (job->src)
+     {
+diff --git a/src/nautilus-file.c b/src/nautilus-file.c
 index 8fde7c5..3e52643 100644
---- a/libnautilus-private/nautilus-file.c
-+++ b/libnautilus-private/nautilus-file.c
-@@ -90,6 +90,9 @@
+--- a/src/nautilus-file.c
++++ b/src/nautilus-file.c
+@@ -85,6 +85,9 @@
  #define DEBUG_REF_PRINTF printf
  #endif
  
@@ -308,40 +315,36 @@ index 8fde7c5..3e52643 100644
  /* Files that start with these characters sort after files that don't. */
  #define SORT_LAST_CHAR1 '.'
  #define SORT_LAST_CHAR2 '#'
-@@ -1754,6 +1757,33 @@ rename_get_info_callback (GObject *source_object,
- 		update_info_and_name (op->file, new_info);
- 		
- 		new_uri = nautilus_file_get_uri (op->file);
+@@ -1959,6 +1962,29 @@ rename_get_info_callback (GObject      *
+         update_info_and_name (op->file, new_info);
+ 
+         new_uri = nautilus_file_get_uri (op->file);
 +
-+		// Send event to Zeitgeist
-+		ZeitgeistLog *log = zeitgeist_log_get_default ();
-+		gchar *origin = g_path_get_dirname (new_uri);
-+		ZeitgeistSubject *subject = zeitgeist_subject_new_full (
-+			old_uri,
-+			NULL, // subject interpretation - auto-guess
-+			NULL, // subject manifestation - auto-guess
-+			g_file_info_get_content_type (new_info), // const char*
-+			origin,
-+			new_name,
-+			NULL // storage - auto-guess
-+		);
-+		zeitgeist_subject_set_current_uri (subject, new_uri);
-+		// FIXME: zeitgeist_subject_set_current_uri ();
-+		ZeitgeistEvent *event = zeitgeist_event_new_full (
-+			ZEITGEIST_ZG_MOVE_EVENT,
-+			ZEITGEIST_ZG_USER_ACTIVITY,
-+			ZEITGEIST_NAUTILUS_ACTOR,
-+			origin,
-+			subject, NULL);
-+		zeitgeist_log_insert_event_no_reply (log, event, NULL);
-+		g_object_unref (event);
-+		g_object_unref (subject);
-+		g_free (origin);
-+		// ---
++       /* Send event to Zeitgeist */
++       ZeitgeistLog *log = zeitgeist_log_get_default ();
++       gchar *origin = g_path_get_dirname (new_uri);
++       ZeitgeistSubject *subject = zeitgeist_subject_new_full (old_uri,
++                                                               NULL, /* subject interpretation - auto-guess */
++                                                               NULL, /* subject manifestation - auto-guess */
++                                                               g_file_info_get_content_type (new_info), /* const char* */
++                                                               origin,
++                                                               new_name,
++                                                               NULL /* storage - auto-guess */ );
++        zeitgeist_subject_set_current_uri (subject, new_uri);
++        /* FIXME: zeitgeist_subject_set_current_uri (); */
++        ZeitgeistEvent *event = zeitgeist_event_new_full (ZEITGEIST_ZG_MOVE_EVENT,
++                                                          ZEITGEIST_ZG_USER_ACTIVITY,
++                                                          ZEITGEIST_NAUTILUS_ACTOR,
++                                                          origin,
++                                                          subject, NULL);
++        zeitgeist_log_insert_event_no_reply (log, event, NULL);
++        g_object_unref (event);
++        g_object_unref (subject);
++        g_free (origin);
 +
- 		nautilus_directory_moved (old_uri, new_uri);
- 		g_free (new_uri);
- 		g_free (old_uri);
+         nautilus_directory_moved (old_uri, new_uri);
+         g_free (new_uri);
+         g_free (old_uri);
 diff --git a/test/Makefile.am b/test/Makefile.am
 index c78212d..4a96756 100644
 --- a/test/Makefile.am
@@ -354,30 +357,14 @@ index c78212d..4a96756 100644
  	-DVERSION="\"$(VERSION)\"" \
  	-DNAUTILUS_DATADIR=\""$(datadir)/nautilus"\" \
  	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
-@@ -16,12 +17,14 @@ LDADD =\
- 	$(BASE_LIBS) \
- 	$(COMMON_LIBS) \
- 	$(NAUTILUS_LIBS) \
-+	$(ZEITGEIST_LIBS) \
- 	$(NULL)
- 
- noinst_PROGRAMS =\
+@@ -19,6 +20,7 @@ noinst_PROGRAMS =\
  	test-nautilus-search-engine \
  	test-nautilus-directory-async \
  	test-nautilus-copy \
 +	test-nautilus-zeitgeist \
- 	$(NULL)
- 
- test_nautilus_copy_SOURCES = test-copy.c test.c
-@@ -30,6 +33,8 @@ test_nautilus_search_engine_SOURCES = test-nautilus-search-engine.c
- 
- test_nautilus_directory_async_SOURCES = test-nautilus-directory-async.c
- 
-+test_nautilus_zeitgeist_SOURCES = test-nautilus-zeitgeist.c
-+
- EXTRA_DIST = \
- 	test.h \
- 	$(NULL)
+ 	test-file-utilities-get-common-filename-prefix \
+ 	test-eel-string-rtrim-punctuation \
+ 	test-eel-string-get-common-prefix \
 diff --git a/test/run-zeitgeist-test.sh b/test/run-zeitgeist-test.sh
 new file mode 100755
 index 0000000..7dbe1d8
@@ -388,7 +375,7 @@ index 0000000..7dbe1d8
 +
 +#echo "Building..."
 +#gcc test-nautilus-zeitgeist.c -o test-nautilus-zeitgeist \
-+#    ../libnautilus-private/nautilus-file-operations.c \
++#    ../src/nautilus-file-operations.c \
 +#    `pkg-config --cflags --libs glib-2.0 gtk+-3.0 zeitgeist-2.0` -I.. \
 +[ "`basename $(pwd)`" = "test" ] || echo "Please cd into test/"
 +[ "`basename $(pwd)`" = "test" ] || exit
@@ -457,11 +444,11 @@ index 0000000..3f4fa35
 +#include <zeitgeist.h>
 +#include <string.h>
 +
-+#include <libnautilus-private/nautilus-file-operations.h>
++#include <src/nautilus-file-operations.h>
 +
-+// After doing a file operation and before checking Zeitgeist for
-+// events, we needed to give Nautilus some time to insert the events
-+// (because of g_file_query_info, etc).
++/* After doing a file operation and before checking Zeitgeist for
++ * events, we needed to give Nautilus some time to insert the events
++ * (because of g_file_query_info, etc). */
 +#define SLEEP_TIME  400
 +
 +// Test location
@@ -506,17 +493,17 @@ index 0000000..3f4fa35
 +    const char *event_interpretation, const char *uri, const char *current_uri,
 +    const char *origin, const char *text, const char *mimetype)
 +{
-+    // Create subject template
++    /* Create subject template */
 +    ZeitgeistSubject *subject_template = zeitgeist_subject_new_full (
 +        uri, NULL, NULL, mimetype, origin, text, NULL);
 +    zeitgeist_subject_set_current_uri (subject_template, current_uri);
 +
-+    // Create event template
++    /* Create event template */
 +    ZeitgeistEvent *event_template = zeitgeist_event_new_full (
 +        event_interpretation, ZEITGEIST_ZG_USER_ACTIVITY, NULL,
 +        origin, subject_template, NULL);
 +
-+    // Add event template to the fixture for later verification
++    /* Add event template to the fixture for later verification */
 +    g_ptr_array_add (fix->expected_events, (gpointer) event_template);
 +    fix->num_expected_events++;
 +}
@@ -539,15 +526,15 @@ index 0000000..3f4fa35
 +        ZeitgeistSubject *subj_templ = zeitgeist_event_get_subject (tmpl, i);
 +
 +        g_assert_cmpstr (zeitgeist_subject_get_uri (subject), ==,
-+            zeitgeist_subject_get_uri (subj_templ));
++                         zeitgeist_subject_get_uri (subj_templ));
 +        g_assert_cmpstr (zeitgeist_subject_get_current_uri (subject), ==,
-+            zeitgeist_subject_get_current_uri (subj_templ));
++                         zeitgeist_subject_get_current_uri (subj_templ));
 +        g_assert_cmpstr (zeitgeist_subject_get_origin (subject), ==,
-+            zeitgeist_subject_get_origin (subj_templ));
++                         zeitgeist_subject_get_origin (subj_templ));
 +        g_assert_cmpstr (zeitgeist_subject_get_text (subject), ==,
-+            zeitgeist_subject_get_text (subj_templ));
++                         zeitgeist_subject_get_text (subj_templ));
 +        g_assert_cmpstr (zeitgeist_subject_get_mimetype (subject), ==,
-+            zeitgeist_subject_get_mimetype (subj_templ));
++                         zeitgeist_subject_get_mimetype (subj_templ));
 +    }
 +}
 +
@@ -557,7 +544,7 @@ index 0000000..3f4fa35
 +    int i;
 +
 +    g_assert_cmpint (zeitgeist_result_set_size (results), ==,
-+        fix->num_expected_events);
++                     fix->num_expected_events);
 +
 +    for (i = 0; i < fix->num_expected_events; ++i)
 +    {
@@ -571,8 +558,8 @@ index 0000000..3f4fa35
 +_zeitgeist_test_cb2 (ZeitgeistLog *log, GAsyncResult *res, Fixture *fix)
 +{
 +    GError *error = NULL;
-+    ZeitgeistResultSet *results = zeitgeist_log_find_events_finish (
-+            log, res, &error);
++    ZeitgeistResultSet *results = zeitgeist_log_find_events_finish (log,
++                                                                    res, &error);
 +    if (error)
 +    {
 +        g_warning ("Error with FindEventIds: %s", error->message);
@@ -619,11 +606,11 @@ index 0000000..3f4fa35
 +test_copy_move (Fixture *fix, gconstpointer data)
 +{
 +    test_add_event_assertion (fix, ZEITGEIST_ZG_MOVE_EVENT,
-+                                    TEST_URI "/moveme.txt",
-+                                    TEST_URI "/move_dest/moveme.txt",
-+                                    TEST_URI "/move_dest",
-+                                    "moveme.txt",
-+                                    "text/plain");
++                              TEST_URI "/moveme.txt",
++                              TEST_URI "/move_dest/moveme.txt",
++                              TEST_URI "/move_dest",
++                              "moveme.txt",
++                              "text/plain");
 +
 +    GList *item_uris = NULL;
 +    item_uris = g_list_prepend (item_uris,
@@ -746,9 +733,9 @@ index 0000000..3f4fa35
 +    file_list = g_list_prepend (file_list,
 +                                g_file_new_for_path (TEST_PATH "/del2.txt"));
 +
-+    // Nautilus_file_operations_trash_or_delete is exactly the same
-+    // NOTE: This operation will ask for manual confirmation of the delete.
-+    //       There isn't really any nice way around this :(.
++    /* Nautilus_file_operations_trash_or_delete is exactly the same
++     * NOTE: This operation will ask for manual confirmation of the delete.
++     *       There isn't really any nice way around this :(. */
 +    nautilus_file_operations_delete (
 +            file_list,
 +            NULL,
@@ -783,6 +770,3 @@ index 0000000..3f4fa35
 +
 +    return g_test_run ();
 +}
--- 
-2.6.2
-
