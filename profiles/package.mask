@@ -29,6 +29,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Thomas Deutschmann <whissi@gentoo.org> (24 May 2017)
+# Broken runscript/changed behavior causing lvm2 to fail
+# on boot. Bug #617578
+=sys-fs/lvm2-2.02.17
+
 # Mike Gilbert <floppym@gentoo.org> (23 May 2017)
 # Needs more testing.
 ~net-misc/networkmanager-1.8.0
@@ -326,10 +331,6 @@ app-emulation/wine-vanilla
 app-emulation/wine-staging
 app-emulation/wine-d3d9
 app-emulation/wine-any
-
-# Michael Weber <xmw@gentoo.org> (08 Apr 2017)
-# Experimental version.
->=net-wireless/gnuradio-3.7.11
 
 # Yixun Lan <dlan@gentoo.org> (30 Mar 2017)
 # Masked, broken due to emoji support which requre npm package installed (bug #612218)

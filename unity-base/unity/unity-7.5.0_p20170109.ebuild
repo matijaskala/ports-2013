@@ -21,6 +21,7 @@ RESTRICT="mirror"
 S=${WORKDIR}
 
 COMMON_DEPEND=">=sys-apps/systemd-232
+	!unity-base/dconf-qt
 	dev-libs/dee:=
 	dev-libs/libdbusmenu:=
 	dev-libs/libindicator:3=
@@ -34,7 +35,6 @@ COMMON_DEPEND=">=sys-apps/systemd-232
 	sys-apps/upstart
 	sys-auth/pambase
 	unity-base/compiz:=
-	unity-base/dconf-qt
 	unity-base/nux:=
 	unity-base/overlay-scrollbar
 	unity-base/unity-gtk-module
