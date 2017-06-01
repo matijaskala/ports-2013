@@ -9,7 +9,7 @@
          if ( gst->priv->use_custom_subtitles == TRUE )
          {
 -            ret = g_list_prepend (ret, g_strdup_printf("%s",gst->priv->custom_subtitles));
-+            ret = g_list_apppend (ret, g_strdup_printf("%s",gst->priv->custom_subtitles));
++            ret = g_list_append (ret, g_strdup_printf("%s",gst->priv->custom_subtitles));
          }
      }
      else
