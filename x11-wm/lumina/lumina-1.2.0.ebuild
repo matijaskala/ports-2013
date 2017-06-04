@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -41,14 +41,6 @@ RDEPEND="$COMMON_DEPEND
 	media-sound/alsa-utils
 	sys-power/acpi
 	app-admin/sysstat"
-
-src_prepare(){
-	default
-
-	rm -rf src-qt5/desktop-utils || die
-
-	sed -e "/desktop-utils/d" -i src-qt5/src-qt5.pro || die
-}
 
 src_configure(){
 	eqmake5 PREFIX="${EPREFIX}/usr" L_BINDIR="${EPREFIX}/usr/bin" \
