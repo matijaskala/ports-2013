@@ -7,7 +7,7 @@ inherit kde5
 
 DESCRIPTION="Framework providing desktop-wide storage for passwords"
 LICENSE="LGPL-2+"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 IUSE="gpg +man"
 
 RDEPEND="
@@ -53,5 +53,6 @@ pkg_postinst() {
 		elog "Starting with 5.34.0-r1, ${PN} is able to serve applications"
 		elog "that still require old kwalletd4. After migration has finished,"
 		elog "kde-apps/kwalletd can be removed."
+		elog "For more information, read https://wiki.gentoo.org/wiki/KDE#KWallet"
 	fi
 }
