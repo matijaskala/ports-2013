@@ -43,6 +43,7 @@ src_prepare() {
 		die "Could not setup release"
 
 	sed -i "s:# CONFIG_RELAY is not set:CONFIG_RELAY=y:" "${S}"/arch/*/kernel-config || die
+	sed -i "s:# CONFIG_BTRFS_FS is not set:CONFIG_BTRFS_FS=y:" "${S}"/arch/*/kernel-config || die
 	sed -i "s:# CONFIG_ATH_COMMON is not set:CONFIG_ATH_COMMON=y:" "${S}"/arch/*/kernel-config || die
 	sed -i "s:CONFIG_COMPAT_VDSO=y:# CONFIG_COMPAT_VDSO is not set:" "${S}"/arch/*/kernel-config || die
 	for i in "${S}"/arch/*/kernel-config ; do
