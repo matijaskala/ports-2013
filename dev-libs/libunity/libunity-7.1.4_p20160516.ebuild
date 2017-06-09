@@ -15,7 +15,6 @@ LICENSE="GPL-3"
 SLOT="0/9.0.2"
 KEYWORDS="amd64 x86"
 IUSE=""
-S=${WORKDIR}
 RESTRICT="mirror"
 
 DEPEND=">=dev-libs/dee-1.2.5:=
@@ -26,6 +25,12 @@ DEPEND=">=dev-libs/dee-1.2.5:=
 	$(vala_depend)"
 
 RDEPEND="${DEPEND}"
+
+src_unpack() {
+	unpack ${A}
+	mkdir ${P}
+	mv * ${P} &> /dev/null
+}
 
 src_prepare() {
 	default
