@@ -23,7 +23,7 @@ src_install() {
 	doins -r Humanity-Dark
 
 	## Remove broken symlinks ##
-	find -L "${ED}" -type l -exec rm {} +
+	find -L "${ED}" -type l -exec rm {} \;
 }
 
 pkg_preinst() { gnome2_icon_savelist; }
