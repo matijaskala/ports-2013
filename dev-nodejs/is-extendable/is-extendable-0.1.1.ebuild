@@ -3,7 +3,7 @@
 
 EAPI=6
 
-DESCRIPTION="Returns true if a value is any of the object types: array, regexp, plain object, function or date. This is useful for determining if a value can be extended, e.g. "can the value have keys?""
+DESCRIPTION="Returns true if a value is any of the object types: array, regexp, plain object, function or date. This is useful for determining if a value can be extended, e.g. 'can the value have keys?'"
 HOMEPAGE="https://github.com/jonschlinkert/is-extendable"
 SRC_URI="https://registry.npmjs.org/${PN}/-/${P}.tgz"
 
@@ -15,8 +15,7 @@ RESTRICT="mirror"
 S=${WORKDIR}
 
 DEPEND=""
-RDEPEND="net-libs/nodejs
-"
+RDEPEND="net-libs/nodejs"
 
 src_install() {
 	mv package ${PN}
