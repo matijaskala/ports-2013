@@ -25,7 +25,7 @@ RDEPEND="net-im/pidgin[-eds,dbus,gadu,groupwise,idn,meanwhile,networkmanager,sas
 	net-voip/telepathy-haze
 	net-voip/telepathy-rakia
 	net-voip/telepathy-salut
-	unity-base/signon-ui"
+	net-libs/signon-ui"
 DEPEND="net-libs/libaccounts-glib:=
 	net-libs/libsignon-glib:=
 	dev-libs/libxml2:2
