@@ -100,12 +100,6 @@ src_install() {
 	dodir /etc/xdg/compiz
 
 	cat <<- EOF > "${D}/etc/xdg/compiz/compiz-manager"
-	COMPIZ_BIN_PATH="/usr/bin/"
-	PLUGIN_PATH="/usr/$(get_libdir)/compiz/"
-	LIBGL_NVIDIA="/usr/$(get_libdir)/opengl/xorg-x11/lib/libGL.so.1.2"
-	LIBGL_FGLRX="/usr/$(get_libdir)/opengl/xorg-x11/lib/libGL.so.1.2"
-	KWIN="$(type -p kwin)"
-	METACITY="$(type -p metacity)"
 	SKIP_CHECKS="yes"
 	EOF
 
@@ -113,7 +107,7 @@ src_install() {
 
 	cat <<- EOF > "${D}/etc/skel/.config/compiz/compizconfig/Default.ini"
 	[core]
-	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;switcher;$(use mate && echo 'matecompat;')
+	as_active_plugins = core;workarounds;dbus;resize;crashhandler;mousepoll;decoration;svg;wall;place;png;text;imgjpeg;move;regex;animation;ezoom;switcher;
 	s0_hsize = 2
 	s0_vsize = 2
 

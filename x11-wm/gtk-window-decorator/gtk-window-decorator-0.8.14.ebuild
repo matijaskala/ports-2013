@@ -41,8 +41,6 @@ COMMONDEPEND="
 		>=x11-libs/gtk+-2.22.0:2
 		>=x11-libs/libwnck-2.22.0:1
 	)
-	>=x11-libs/libcompizconfig-0.8
-	<x11-libs/libcompizconfig-0.9
 	mate? ( x11-wm/marco[gtk3(+)=] )
 "
 
@@ -66,7 +64,7 @@ src_configure() {
 	econf \
 		--disable-static \
 		--disable-annotate \
-		--enable-compizconfig \
+		--disable-compizconfig \
 		--disable-dbus \
 		--disable-dbus-glib \
 		--disable-fuse \
@@ -79,7 +77,7 @@ src_configure() {
 }
 
 src_install() {
-	dobin gtk/window-decorator/.libs/gtk-window-decorator
+	dobin gtk-window-decorator/.libs/gtk-window-decorator
 	insinto /usr/share/glib-2.0/schemas
-	doins gtk/window-decorator/org.compiz-0.gwd.gschema.xml
+	doins gtk-window-decorator/org.compiz-0.gwd.gschema.xml
 }
