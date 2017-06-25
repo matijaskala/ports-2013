@@ -12,7 +12,7 @@ SRC_URI="https://github.com/compiz-reloaded/compiz/releases/download/v${PV}/comp
 LICENSE="GPL-2+ LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="gtk3 mate"
+IUSE="dbus gtk3 mate"
 RESTRICT="mirror"
 S=${WORKDIR}/compiz-${PV}
 
@@ -33,6 +33,7 @@ COMMONDEPEND="
 	>=x11-libs/libXrender-0.8.4
 	>=x11-libs/startup-notification-0.7
 	virtual/glu
+	dbus? ( dev-libs/dbus-glib )
 	gtk3? (
 		x11-libs/gtk+:3
 		x11-libs/libwnck:3
@@ -52,7 +53,7 @@ DEPEND="${COMMONDEPEND}
 "
 
 RDEPEND="${COMMONDEPEND}
-	x11-wm/compiz[svg]
+	~x11-wm/compiz-${PV}
 "
 
 src_prepare() {
@@ -66,7 +67,7 @@ src_configure() {
 		--disable-annotate \
 		--disable-compizconfig \
 		--disable-dbus \
-		--disable-dbus-glib \
+		$(use_enable dbus dbus-glib) \
 		--disable-fuse \
 		--enable-gsettings \
 		--disable-librsvg \

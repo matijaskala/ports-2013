@@ -15,14 +15,14 @@ KEYWORDS="amd64 ppc ppc64 x86"
 RESTRICT="mirror"
 
 RDEPEND="
-	gnome-base/librsvg
 	virtual/jpeg:0
 	virtual/glu
 	>=x11-libs/compiz-bcop-0.7.3
 	<x11-libs/compiz-bcop-0.9
 	>=x11-wm/compiz-0.8
 	<x11-wm/compiz-0.9
-	x11-libs/cairo
+	x11-libs/cairo[X]
+	x11-libs/pango
 "
 
 DEPEND="${RDEPEND}

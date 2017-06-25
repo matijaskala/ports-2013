@@ -33,18 +33,10 @@ COMMONDEPEND="
 	>=x11-libs/libXrender-0.8.4
 	>=x11-libs/startup-notification-0.7
 	virtual/glu
-	cairo? (
-		x11-libs/cairo[X]
-	)
-	dbus? (
-		>=sys-apps/dbus-1.0
-		dev-libs/dbus-glib
-	)
+	cairo? ( x11-libs/cairo[X] )
+	dbus? ( sys-apps/dbus )
 	fuse? ( sys-fs/fuse )
-	svg? (
-		>=gnome-base/librsvg-2.14.0:2
-		>=x11-libs/cairo-1.0
-	)
+	svg? ( gnome-base/librsvg:2 )
 "
 
 DEPEND="${COMMONDEPEND}
@@ -74,7 +66,7 @@ src_configure() {
 		$(use_enable cairo annotate) \
 		--disable-compizconfig \
 		$(use_enable dbus) \
-		$(use_enable dbus dbus-glib) \
+		--disable-dbus-glib \
 		$(use_enable fuse) \
 		--disable-gsettings \
 		$(use_enable svg librsvg) \

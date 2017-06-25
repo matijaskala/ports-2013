@@ -610,17 +610,6 @@ toolchain_src_prepare() {
 				einfo "  ${f%%...}"
 			done
 	fi
-
-	case ${CTARGET} in
-		*-_musl*)
-			cd "${S}"
-			sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in
-			mv 'libstdc++-v3/config/os/gnu-linux' 'libstdc++-v3/config/os/gnu-linux.org'
-			cp -r 'libstdc++-v3/config/os/generic' 'libstdc++-v3/config/os/gnu-linux'
-			mv 'libitm/config/linux/x86' 'libitm/config/linux/x86_glibc'
-			cp -r 'libtim/config/generic' 'libtim/config/linux/x86'
-		;;
-	esac
 }
 
 guess_patch_type_in_dir() {
