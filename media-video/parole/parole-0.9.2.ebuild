@@ -33,7 +33,6 @@ COMMON_DEPEND=">=dev-libs/dbus-glib-0.100:=
 	taglib? ( >=media-libs/taglib-1.6:0= )"
 RDEPEND="${COMMON_DEPEND}
 	media-plugins/gst-plugins-meta:1.0"
-PATCHES=( "${FILESDIR}"/parole-audio-order.patch )
 DEPEND="${COMMON_DEPEND}
 	dev-util/intltool
 	sys-devel/gettext
