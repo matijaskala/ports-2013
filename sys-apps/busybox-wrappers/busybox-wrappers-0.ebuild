@@ -22,7 +22,7 @@ XZ_USR_BIN="lzcat lzma unlzma unxz xz xzcat"
 APPLETS_BIN="${COREUTILS_BIN} ${GZIP_BIN} catv chattr cpio dmesg dnsdomainname ed egrep fgrep fuser grep hostname kill linux32 linux64 login lsattr lzop more mount mountpoint netstat pidof ping ps sed setarch su tar umount watch"
 APPLETS_SBIN="${KMOD_SBIN} acpid arp blkid blockdev findfs fsck hwclock ifconfig ip iptunnel losetup mkdosfs mke2fs mkfs.ext2 mkfs.vfat mkswap nameif pivot_root route swapoff swapon switch_root sysctl tune2fs"
 APPLETS_USR_BIN="${COREUTILS_USR_BIN} ${PROCPS_USR_BIN} ${KBD_USR_BIN} ${XZ_USR_BIN} bunzip2 bzcat bzip2 cal cmp diff find flock groups hexdump killall last lpq lpr lsof lspci lsusb lzopcat mkpasswd nslookup passwd patch pstree resize script setarch traceroute unlzop wget which whois xargs"
-APPLETS_USR_SBIN="${COREUTILS_USR_SBIN} addgroup adduser chat chpasswd crond delgroup deluser sendmail setfont tftpd"
+APPLETS_USR_SBIN="${COREUTILS_USR_SBIN} addgroup adduser arping chat chpasswd crond delgroup deluser sendmail setfont tftpd"
 APPLETS_ALL="${APPLETS_BIN} ${APPLETS_SBIN} ${APPLETS_USR_BIN} ${APPLETS_USR_SBIN}"
 
 DESCRIPTION="Wrappers around busybox applets"
@@ -110,6 +110,7 @@ provided_by sys-process/procps: ${PROCPS_USR_BIN} ps sysctl
 provided_by sys-process/psmisc: fuser killall pstree
 provided_by x11-terms/xterm: resize
 
+provided_by 'net-analyzer/arping' 'net-misc/iputils[arping(+)]': arping
 provided_by 'sys-apps/net-tools[arp(+)]': arp
 provided_by 'sys-apps/coreutils[hostname(-)]' 'sys-apps/net-tools[hostname(+)]': hostname
 provided_by 'sys-apps/coreutils[kill(-)]' 'sys-apps/util-linux[kill(-)]' 'sys-process/procps[kill(+)]': kill

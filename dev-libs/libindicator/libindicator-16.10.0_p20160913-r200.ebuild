@@ -52,5 +52,6 @@ multilib_src_install_all() {
 
 	rm -vf \
 		"${ED}"/usr/lib*/libdummy-indicator-* \
+		"${ED}"/usr/lib/systemd/user/indicators-pre.target \
 		"${ED}"/usr/share/${PN}/*indicator-debugging
 }
