@@ -190,7 +190,7 @@ src_prepare() {
 	done
 	sed '/Promo2.iOSBefore/,/mobilePromo2.iOSLink/d' -i "${S}"/browser/components/preferences/in-content/sync.xul
 	sed 's|www.mozilla.org/firefox/android.*sync-preferences|f-droid.org/repository/browse/?fdid=org.gnu.icecat|' -i "${S}"/browser/components/preferences/in-content/sync.xul
-	rm -rf "${S}"/{browser,mobile/android}/branding/*
+	rm -rf "${S}"/{browser,mobile/android}/branding/*/
 	cp "${FILESDIR}"/identity-icons-brand.svg "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat/content
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/official
 	cp -a "${GEEK_STORE_DIR}"/gnuzilla/data/branding/icecat "${S}"/browser/branding/unofficial
@@ -313,8 +313,6 @@ src_prepare() {
         cp "${gf32}" "${S}"/browser/themes/shared/theme-switcher-icon.png
         cp "${gf32}" "${S}"/browser/themes/shared/heme-switcher-icon@2x.png
         cp "${gf32}" "${S}"/browser/base/content/aboutaccounts/images/fox.png
-        cp "${ff256}" "${S}"/browser/extensions/loop/chrome/content/shared/img/icecat-logo.png
-        cp "${ff256}" "${S}"/browser/extensions/loop/chrome/content/shared/img/icecat-hello_logo.png
 
         cp "${ff16}" "${S}"/dom/canvas/test/crossorigin/image.png
         cp "${ff16}" "${S}"/image/test/unit/image1.png
