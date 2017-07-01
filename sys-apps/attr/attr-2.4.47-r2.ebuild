@@ -22,6 +22,9 @@ RDEPEND="abi_x86_32? (
 	)"
 
 src_prepare() {
+	epatch "${FILESDIR}"/${P}-cdecls.patch
+
+	sed -i s@__THROW@xattr_nothrow@ include/xattr.h || die
 	sed -i \
 		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
 		-e '/HAVE_ZIPPED_MANPAGES/s:=.*:=false:' \

@@ -1,0 +1,10 @@
+--- a/include/utmp.h
++++ b/include/utmp.h
+@@ -33,6 +33,7 @@
+ void         setutent(void);
+ 
+ void updwtmp(const char *, const struct utmp *);
++#define logwtmp(...)
+ int utmpname(const char *);
+ 
+ int login_tty(int);
