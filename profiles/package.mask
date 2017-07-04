@@ -29,6 +29,13 @@
 
 #--- END OF EXAMPLES ---
 
+# Matthias Schwarzott <zzam@gentoo.org> (03 Jul 2017)
+# The snapshots got a wrong version number assigned.
+# They are from before version 2.0.0. Masking them to force
+# an update to version 2.0.0 as soon as it is added to the tree.
+=media-plugins/vdr-xineliboutput-2.0.0_p20130821
+=media-plugins/vdr-xineliboutput-2.0.0_p20150220
+
 # Michał Górny <mgorny@gentoo.org> (02 Jul 2017)
 # The eselect module has been integrated into app-shells/bash-completion
 # and all the old versions (not having it) are gone. Removal in 14 days.
@@ -101,11 +108,6 @@ dev-java/jdbc-jaybird
 # No more kdelibs-4 based kparts in tree to feed it with.
 # Masked for removal in 30 days.
 www-plugins/kpartsplugin
-
-# Michael Palimamka <kensington@gentoo.org> (18 Jun 2017)
-# Fails to build with upcoming stable Qt 5.7. Dead upstream.
-# Masked for removal in 30 days. Bug #603564.
-media-sound/ams
 
 # Thomas Deutschmann <whissi@gentoo.org> (17 Jun 2017)
 # Unmaintained in Gentoo repository; Multiple vulnerabilities
@@ -563,16 +565,6 @@ dev-perl/Params-ValidationCompiler
 >=dev-perl/DateTime-1.370.0
 >=dev-perl/DateTime-Format-Strptime-1.710.0
 >=dev-perl/Log-Dispatch-2.590.0
-
-# Michael Palimaka <kensington@gentoo.org> (04 Jun 2017)
-# Relies on obsolete and vulnerable qtwebkit version. Dead upstream.
-# Masked for removal in 30 days. Bug #620758.
-www-client/qtweb
-
-# Michael Palimaka <kensington@gentoo.org> (04 Jun 2017)
-# Relies on obsolete and vulnerable qtwebkit version. Dead upstream.
-# Masked for removal in 30 days. Bug #620752.
-sci-mathematics/freemat
 
 # Michał Górny <mgorny@gentoo.org> (25 May 2017)
 # First GTK+3 version with known regressions:
