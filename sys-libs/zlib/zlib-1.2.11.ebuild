@@ -46,6 +46,7 @@ multilib_src_configure() {
 		;;
 	*)      # not an autoconf script, so can't use econf
 		local uname=$("${EPREFIX}"/usr/share/gnuconfig/config.sub "${CHOST}" | cut -d- -f3) #347167
+		[[ ${uname} == gnu ]] && uname=GNU # configure script doesn't recognize lowercase gnu
 		echoit "${S}"/configure \
 			--shared \
 			--prefix="${EPREFIX}/usr" \
