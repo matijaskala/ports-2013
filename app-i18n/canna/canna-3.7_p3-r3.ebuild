@@ -35,7 +35,10 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-gentoo.patch
 	"${FILESDIR}"/${PN}-canuum.patch
 	"${FILESDIR}"/${PN}-kpdef.patch
+	"${FILESDIR}"/${PN}-overflow.patch
 	"${FILESDIR}"/${PN}-posix-sort.patch
+	"${FILESDIR}"/${PN}-Wformat.patch
+	"${FILESDIR}"/${PN}-Wformat-security.patch
 )
 DOCS="*CHANGES* ChangeLog INSTALL* README* RKCCONF* WHATIS*"
 
