@@ -4,7 +4,7 @@
 EAPI=5
 inherit xfconf
 
-DESCRIPTION="Unified widgets and session management libraries for the Xfce desktop environment"
+DESCRIPTION="Unified widget and session management libraries for Xfce"
 HOMEPAGE="http://www.xfce.org/projects/libxfce4"
 SRC_URI="mirror://xfce/src/xfce/${PN}/${PV%.*}/${P}.tar.bz2"
 
