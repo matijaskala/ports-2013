@@ -512,7 +512,7 @@ toolchain-glibc_pkg_pretend() {
 			die "keeping your system alive, say thank you"
 		fi
 
-		if ! glibc_run_test '#include <unistd.h>\n#include <sys/syscall.h>\nint main(){return syscall(1000)!=-1;}\n'
+		if ! [[ ${CTARGET} == i?86-gnu || ${CTARGET} == i?86-pc-gnu || ${CTARGET} == i?86-hurd-gnu ]] && ! glibc_run_test '#include <unistd.h>\n#include <sys/syscall.h>\nint main(){return syscall(1000)!=-1;}\n'
 		then
 			eerror "Your old kernel is broken.  You need to update it to"
 			eerror "a newer version as syscall(<bignum>) will break."
@@ -609,6 +609,7 @@ check_nptl_support() {
 		die "No __thread support in gcc!"
 	fi
 
+	if ! [[ ${CTARGET} == i?86-gnu || ${CTARGET} == i?86-pc-gnu || ${CTARGET} == i?86-hurd-gnu ]] ; then
 	if ! is_crosscompile && ! tc-is-cross-compiler ; then
 		# Building fails on an non-supporting kernel
 		ebegin "Checking kernel version (${run_kv} >= ${want_kv})"
@@ -624,6 +625,7 @@ check_nptl_support() {
 		echo
 		eerror "You need linux-headers of at least ${want_kv} for NPTL support!"
 		die "linux-headers version too low!"
+	fi
 	fi
 }
 
@@ -1049,6 +1051,7 @@ toolchain-glibc_do_src_compile() {
 	for t in linuxthreads nptl ; do
 		if want_${t} ; then
 			[[ ${EAPI:-0} == [01] ]] && glibc_do_configure ${t}
+			[[ ${CTARGET} == i?86-gnu || ${CTARGET} == i?86-pc-gnu || ${CTARGET} == i?86-hurd-gnu ]] && make -C "$(builddir ${t})"
 			emake -C "$(builddir ${t})" || die "make ${t} for ${ABI} failed"
 		fi
 	done
