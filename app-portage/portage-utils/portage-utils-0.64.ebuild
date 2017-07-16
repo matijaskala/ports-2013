@@ -3,7 +3,7 @@
 
 EAPI="5"
 
-inherit toolchain-funcs
+inherit eutils toolchain-funcs
 
 DESCRIPTION="small and fast portage helper tools written in C"
 HOMEPAGE="https://wiki.gentoo.org/wiki/Portage-utils"
@@ -19,6 +19,10 @@ RDEPEND="dev-libs/iniparser:0"
 DEPEND="${RDEPEND}
 	app-arch/xz-utils
 	static? ( dev-libs/iniparser:0[static-libs] )"
+
+src_prepare() {
+	epatch "${FILESDIR}"/hurd.patch
+}
 
 src_configure() {
 	# Avoid slow configure+gnulib+make if on an up-to-date Linux system
