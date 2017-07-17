@@ -1,13 +1,11 @@
 --- a/qlop.c
 +++ b/qlop.c
-@@ -377,8 +377,10 @@
- }
- 
+@@ -379,6 +379,8 @@
  _q_static void show_current_emerge(void);
-+#if defined __linux__ || defined __GNU__
  #ifdef __linux__
  # include <asm/param.h>
 +#endif
++#if defined __linux__ || defined __GNU__
  # include <elf.h>
  static unsigned log hz = 0;
  static void init_hz(void)
