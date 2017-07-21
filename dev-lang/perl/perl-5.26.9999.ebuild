@@ -141,6 +141,8 @@ pkg_setup() {
 		*-interix*)   osname="interix" ;;
 		*-aix*)       osname="aix" ;;
 		*-cygwin*)    osname="cygwin" ;;
+		*-linux*)     osname="linux" ;;
+		*-gnu*)       osname="gnu" ;;
 		*)            osname="linux" ;;
 	esac
 

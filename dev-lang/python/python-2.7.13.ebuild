@@ -201,7 +201,7 @@ src_configure() {
 		--with-system-ffi \
 		--without-ensurepip
 
-	if use threads && grep -q "#define POSIX_SEMAPHORES_NOT_ENABLED 1" pyconfig.h; then
+	if ! [[ ${CHOST} == i?86-gnu || ${CHOST} == i?86-pc-gnu || ${CHOST} == i?86-hurd-gnu ]] && use threads && grep -q "#define POSIX_SEMAPHORES_NOT_ENABLED 1" pyconfig.h; then
 		eerror "configure has detected that the sem_open function is broken."
 		eerror "Please ensure that /dev/shm is mounted as a tmpfs with mode 1777."
 		die "Broken sem_open function (bug 496328)"
