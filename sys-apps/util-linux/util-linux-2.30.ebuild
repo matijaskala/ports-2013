@@ -119,10 +119,10 @@ multilib_src_configure() {
 		--enable-bash-completion
 		--enable-fs-paths-extra="${EPREFIX}/usr/sbin:${EPREFIX}/bin:${EPREFIX}/usr/bin"
 		--enable-line
-		--enable-partx
-		--enable-raw
+		$(use_enable kernel_linux partx)
+		$(use_enable kernel_linux raw)
 		--enable-rename
-		--enable-schedutils
+		--enable-schedutils$([[ ${KERNEL} == hurd ]] && echo =check)
 		--with-bashcompletiondir="$(get_bashcompdir)"
 		--with-systemdsystemunitdir=$(multilib_native_usex systemd "$(systemd_get_unitdir)" "no")
 		$(multilib_native_use_enable caps setpriv)
