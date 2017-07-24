@@ -3,10 +3,13 @@
 
 EAPI=6
 
+MACH=gnumach-1.8
+HURD=hurd-0.9
+
 DESCRIPTION="GNU system headers"
 HOMEPAGE="https://www.gnu.org/software/hurd/"
-SRC_URI="mirror://gnu/gnumach/gnumach-1.8.tar.gz
-	mirror://gnu/hurd/hurd-0.9.tar.gz"
+SRC_URI="mirror://gnu/gnumach/${MACH}.tar.gz
+	mirror://gnu/hurd/${HURD}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,12 +19,19 @@ RESTRICT="mirror"
 
 S=${WORKDIR}
 
-: ${CTARGET:=${CHOST/x86_64/i686}}
+export CTARGET=${CTARGET:-${CHOST}}
+if [[ ${CTARGET} == ${CHOST} ]] && [[ ${CATEGORY} == cross-* ]] ; then
+	export CTARGET=${CATEGORY#cross-}
+else
+	export CTARGET=${CTARGET/x86_64/i686}
+fi
 
 src_configure() {
-	cd gnumach-1.8
-	[[ ${CATEGORY} == cross-* ]] && CTARGET=${CATEGORY#cross-}
-	./configure \
+	config() {
+		echo ./configure "$@"
+		./configure "$@"
+	}
+	cd "${MACH}" && config \
 		--prefix= \
 		--host=${CTARGET} || die
 }
@@ -36,14 +46,10 @@ src_install() {
 		ddir=
 	fi
 
-	pushd gnumach-1.8
-		emake install-data DESTDIR="${ED}"${ddir}
-		rm "${ED}"${ddir}/share/info/dir || die
-	popd
+	emake -C "${MACH}" install-data DESTDIR="${ED}"${ddir}
+	rm "${ED}"${ddir}/share/info/dir || die
 
-	pushd hurd-0.9
-		emake install-headers \
-			INSTALL_DATA="/bin/sh \"${WORKDIR}/hurd-0.9/install-sh\" -c -C -m 644" \
-			includedir="${ED}"${ddir}/include infodir=/some/path
-	popd
+	emake -C "${HURD}" install-headers \
+		INSTALL_DATA="/bin/sh \"${WORKDIR}/${HURD}/install-sh\" -c -C -m 644" \
+		includedir="${ED}"${ddir}/include infodir=/some/path
 }

@@ -60,7 +60,7 @@ src_prepare() {
 src_configure() {
 	case ${CHOST} in
 	i?86*-*linux*)       TARGET="linux_asm" ;;
-	*linux*)             TARGET="linux_noasm" ;;
+	*linux*|*-gnu)       TARGET="linux_noasm" ;;
 	i?86*-*bsd* | \
 	i?86*-dragonfly*)    TARGET="freebsd" ;; # mislabelled bsd with x86 asm
 	*bsd* | *dragonfly*) TARGET="bsd" ;;
@@ -69,7 +69,7 @@ src_configure() {
 	*) die "Unknown target; please update the ebuild to handle ${CHOST}	" ;;
 	esac
 
-	[[ ${CHOST} == *linux* ]] && append-cppflags -DNO_LCHMOD
+	[[ ${CHOST} == *linux* || ${CHOST} == *-gnu ]] && append-cppflags -DNO_LCHMOD
 	use bzip2 && append-cppflags -DUSE_BZIP2
 	use unicode && append-cppflags -DUNICODE_SUPPORT -DUNICODE_WCHAR -DUTF8_MAYBE_NATIVE
 	append-cppflags -DLARGE_FILE_SUPPORT #281473
