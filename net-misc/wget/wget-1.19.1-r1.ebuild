@@ -56,6 +56,10 @@ pkg_setup() {
 src_prepare() {
 	epatch "${PATCHES[@]}"
 
+	if [[ ${CHOST} == i?86-gnu || ${CHOST} == i?86-pc-gnu || ${CHOST} == i?86-hurd-gnu ]] ; then
+		sed -i 's@PTHREAD_RWLOCK_INITIALIZER@SOMETHING__UNDEFINED@' lib/glthread/lock.? || die
+	fi
+
 	# revert some hack that breaks linking, bug #585924
 	if [[ ${CHOST} == *-darwin* ]] || [[ ${CHOST} == *-solaris* ]] || [[ ${CHOST} == *-uclibc* ]]; then
 		sed -i \
