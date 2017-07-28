@@ -1,7 +1,8 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
+
 inherit autotools eutils flag-o-matic virtualx multilib-minimal
 
 DESCRIPTION="A set of symbols and convenience functions that all indicators would like to use"
@@ -23,7 +24,10 @@ DEPEND="${RDEPEND}
 	>=unity-indicators/ido-13.10.0
 	test? ( dev-util/dbus-test-runner )"
 
+MAKEOPTS="${MAKEOPTS} -j1"
+
 src_prepare() {
+	default
 	eautoreconf
 }
 
@@ -41,10 +45,6 @@ multilib_src_configure() {
 
 multilib_src_test() {
 	Xemake check #391179
-}
-
-multilib_src_install() {
-	emake -j1 DESTDIR="${D}" install
 }
 
 multilib_src_install_all() {

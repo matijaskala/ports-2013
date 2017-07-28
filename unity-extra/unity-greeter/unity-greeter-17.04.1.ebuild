@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -8,7 +7,7 @@ inherit autotools flag-o-matic gnome2-utils vala
 
 DESCRIPTION="The greeter (login screen) application for Unity. It is implemented as a LightDM greeter."
 HOMEPAGE="https://launchpad.net/unity-greeter"
-SRC_URI="http://launchpad.net/${PN}/17.04/${PV}/+download/${P}.tar.xz"
+SRC_URI="http://launchpad.net/${PN}/${PV:0:5}/${PV}/+download/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -43,6 +42,7 @@ RDEPEND="accessibility? ( app-accessibility/onboard
 	x11-themes/ubuntu-wallpapers"
 
 src_prepare() {
+	default
 	# patch 'at-spi-bus-launcher' path
 	sed -i -e "s:/usr/lib/at-spi2-core/at-spi-bus-launcher:/usr/libexec/at-spi-bus-launcher:" \
                   "${S}"/src/unity-greeter.vala || die
@@ -51,7 +51,6 @@ src_prepare() {
 	sed -i -e "s:case \"ubuntu:case \"unity:" "${S}"/src/session-list.vala || die
 
 	vala_src_prepare
-	eapply_user
 	append-cflags -Wno-error
 	eautoreconf
 }

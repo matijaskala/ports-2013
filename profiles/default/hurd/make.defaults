@@ -1,2 +1,6 @@
 USE="acl bzip2 crypt gdbm ipv6 ncurses nls readline unicode zlib"
 KERNEL="hurd"
+
+# It seems that sys-devel/patch[xattr] doesn't work on hurd.
+# Disabled globally to avoid issues with any other package.
+USE="${USE} -xattr"
