@@ -1142,6 +1142,8 @@ toolchain-glibc_do_src_install() {
 		cp -a elf/ld.so "${ED}"$(alt_libdir)/$(scanelf -qSF'%S#F' elf/ld.so) || die "copying nptl interp"
 	fi
 
+	[[ ${CTARGET} == i?86-gnu || ${CTARGET} == i?86-pc-gnu || ${CTARGET} == i?86-hurd-gnu ]] && dosym ld.so.1 $(alt_libdir)/ld.so
+
 	# Newer versions get fancy with libm linkage to include vectorized support.
 	# While we don't really need a ldscript here, portage QA checks get upset.
 	if [[ -e ${ED}$(alt_usrlibdir)/libm-${PV}.a ]] ; then
