@@ -1,0 +1,14 @@
+DEFINED_PHASES=configure install prepare
+DEPEND=bzip2? ( app-arch/bzip2[static-libs(+)] ) ncurses? ( sys-libs/ncurses[static-libs] ) parted? ( sys-apps/util-linux[static-libs(+)] sys-block/parted[static-libs(+)] ) zlib? ( sys-libs/zlib[static-libs(+)] ) >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=GNU Hurd
+EAPI=6
+HOMEPAGE=https://www.gnu.org/software/hurd/
+IUSE=bzip2 ncurses parted zlib
+KEYWORDS=~x86
+LICENSE=GPL-2
+RDEPEND=bzip2? ( app-arch/bzip2[static-libs(+)] ) ncurses? ( sys-libs/ncurses[static-libs] ) parted? ( sys-apps/util-linux[static-libs(+)] sys-block/parted[static-libs(+)] ) zlib? ( sys-libs/zlib[static-libs(+)] ) app-shells/bash
+RESTRICT=mirror
+SLOT=0
+SRC_URI=mirror://debian/pool/main/h/hurd/hurd_0.9.git20170507.orig.tar.bz2
+_eclasses_=autotools	7027963e8e8cc12c91117bdb9225dc26	libtool	e32ea84bf82cf8987965b574672dba93	multilib	5639e758185406e12b096906dd41fb1e	toolchain-funcs	8fec6b1eb195836560e70b66d98fb163
+_md5_=79964245367ff47037cc62c4d5677cb2

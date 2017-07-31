@@ -9,4 +9,5 @@ KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86
 IUSE="static-libs"
 
 RDEPEND="kernel_linux? ( sys-apps/acl[static-libs?] )
+	kernel_hurd? ( sys-apps/acl[static-libs?] )
 	kernel_FreeBSD? ( sys-freebsd/freebsd-lib )"

@@ -26,7 +26,6 @@ case ${PV} in
 	;;
 esac
 GCC_BOOTSTRAP_VER="4.7.3-r1"
-# patches live at https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo/src/patchsets/glibc/
 PATCH_VER="8"                                  # Gentoo patchset
 : ${NPTL_KERN_VER:="2.6.32"}                   # min kernel version nptl requires
 
@@ -121,6 +120,9 @@ src_prepare() {
 
 	cd "${S}"
 
+	[[ ${CTARGET} == *-hurd-gnu || ${CTARGET} == *-pc-gnu || ${CTARGET} == i686-gnu ]] && for i in $(grep -v '#' "${FILESDIR}"/${PV}-hurd/series) ; do
+		epatch "${FILESDIR}"/${PV}-hurd/${i}
+	done
 	epatch "${FILESDIR}"/2.19/${PN}-2.19-ia64-gcc-4.8-reloc-hack.patch #503838
 
 	if use hardened ; then
