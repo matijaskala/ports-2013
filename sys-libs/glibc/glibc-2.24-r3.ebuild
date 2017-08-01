@@ -26,6 +26,7 @@ case ${PV} in
 	;;
 esac
 GCC_BOOTSTRAP_VER="4.7.3-r1"
+# patches live at https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo/src/patchsets/glibc/
 PATCH_VER="8"                                  # Gentoo patchset
 : ${NPTL_KERN_VER:="2.6.32"}                   # min kernel version nptl requires
 
@@ -64,6 +65,7 @@ SLOT="2.2"
 # General: We need a new-enough binutils/gcc to match upstream baseline.
 # arch: we need to make sure our binutils/gcc supports TLS.
 COMMON_DEPEND="
+	kernel_hurd? ( sys-microkernel/hurd )
 	nscd? ( selinux? (
 		audit? ( sys-process/audit )
 		caps? ( sys-libs/libcap )
@@ -86,8 +88,17 @@ if [[ ${CATEGORY} == cross-* ]] ; then
 		>=${CATEGORY}/gcc-4.7
 	)"
 	[[ ${CATEGORY} == *-linux* ]] && DEPEND+=" ${CATEGORY}/linux-headers"
+	[[ ${CATEGORY} == cross-i?86-gnu || ${CATEGORY} == cross-i?86-pc-gnu || ${CATEGORY} == cross-i?86-hurd-gnu ]] && DEPEND+="
+		crosscompile_opts_headers-only? ( || (
+			sys-microkernel/mig
+			${CATEGORY}/mig
+		) )
+		!crosscompile_opts_headers-only? (
+			${CATEGORY}/mig
+		)"
 else
 	DEPEND+="
+		kernel_hurd? ( sys-microkernel/mig )
 		>=sys-devel/binutils-2.24
 		>=sys-devel/gcc-4.7
 		virtual/os-headers"

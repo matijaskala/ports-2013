@@ -29,6 +29,7 @@ RDEPEND="${COMMON_DEPEND}
 
 src_prepare() {
 	eapply "${FILESDIR}"/lhurduser.diff
+	eapply "${FILESDIR}"/git-26e774bab06eab72847a7ca052a90d5319ad658a
 	default
 	eautoreconf
 }
