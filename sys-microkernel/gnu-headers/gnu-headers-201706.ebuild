@@ -26,6 +26,8 @@ else
 	export CTARGET=${CTARGET/x86_64/i686}
 fi
 
+PATCHES=( "${FILESDIR}"/git-26e774bab06eab72847a7ca052a90d5319ad658a )
+
 src_configure() {
 	config() {
 		echo ./configure "$@"
