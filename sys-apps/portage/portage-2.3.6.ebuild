@@ -61,7 +61,7 @@ PDEPEND="
 # NOTE: FEATURES=installsources requires debugedit and rsync
 
 PATCHES=(
-        "${FILESDIR}"/partylinux-usr-merge.patch
+        "${FILESDIR}"/filesystem-layout-symlinks.patch
 )
 
 REQUIRED_USE="epydoc? ( $(python_gen_useflags 'python2*') )"

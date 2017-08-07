@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install setup test
-DEPEND=>=sys-kernel/linux-headers-3.17
+DEPEND=kernel_linux? ( >=sys-kernel/linux-headers-3.17 )
 DESCRIPTION=An library to provide useful functions commonly found on BSD systems
 EAPI=6
 HOMEPAGE=https://libbsd.freedesktop.org/wiki/
@@ -9,4 +9,4 @@ LICENSE=BSD BSD-2 BSD-4 ISC
 SLOT=0
 SRC_URI=https://libbsd.freedesktop.org/releases/libbsd-0.8.6.tar.xz
 _eclasses_=multibuild	72647e255187a1fadc81097b3657e5c3	multilib	5639e758185406e12b096906dd41fb1e	multilib-build	eed53a6313267c9fbcd35fc384bd0087	multilib-minimal	9139c3a57e077cb8e0d0f73ceb080b89	toolchain-funcs	8fec6b1eb195836560e70b66d98fb163
-_md5_=3b2ab083a904db89f02f1a467ee4f4cf
+_md5_=0ed04ce0e2053af9222f1f8859786ad4

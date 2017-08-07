@@ -1,0 +1,11 @@
+--- a/pym/portage/dbapi/vartree.py
++++ b/pym/portage/dbapi/vartree.py
+@@ -2280,7 +2280,7 @@
+ 
+ 				if not ignore:
+ 					if islink and f_match in \
+-						("/lib", "/usr/lib", "/usr/local/lib"):
++						("/lib", "/usr/lib", "/usr/local/lib", "/lib32", "/lib64", "/bin", "/sbin", "/usr"):
+ 						# Ignore libdir symlinks for bug #423127.
+ 						ignore = True
+ 
