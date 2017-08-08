@@ -82,4 +82,11 @@ END_LDSCRIPT
 		rm ${i} || die
 		fperms a+x /usr/lib/${lib} || die "could not change perms on ${lib}"
 	done
+
+	for i in login ps uptime vmstat w ; do
+		rm "${ED}"/bin/${i} || die
+	done
+	for i in fsck halt reboot ; do
+		rm "${ED}"/sbin/${i} || die
+	done
 }
