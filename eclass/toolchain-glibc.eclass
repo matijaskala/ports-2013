@@ -1144,12 +1144,16 @@ toolchain-glibc_do_src_install() {
 
 	[[ ${CTARGET} == i?86-gnu || ${CTARGET} == i?86-pc-gnu || ${CTARGET} == i?86-hurd-gnu ]] && dosym ld.so.1 $(alt_libdir)/ld.so
 
+	# Normally real_pv is ${PV}. Live ebuilds are exception, there we need
+	# to infer upstream version:
+	# '#define VERSION "2.26.90"' -> '2.26.90'
+	local upstream_pv=$(sed -n -r 's/#define VERSION "(.*)"/\1/p' "${S}"/version.h)
 	# Newer versions get fancy with libm linkage to include vectorized support.
 	# While we don't really need a ldscript here, portage QA checks get upset.
-	if [[ -e ${ED}$(alt_usrlibdir)/libm-${PV}.a ]] ; then
-		sed -i "s@\(libm-${PV}.a\)@${P}/\1@" "${ED}"$(alt_usrlibdir)/libm.a || die
+	if [[ -e ${ED}$(alt_usrlibdir)/libm-${upstream_pv}.a ]] ; then
+		sed -i "s@\(libm-${upstream_pv}.a\)@${P}/\1@" "${ED}"$(alt_usrlibdir)/libm.a || die
 		dodir $(alt_usrlibdir)/${P}
-		mv "${ED}"$(alt_usrlibdir)/libm-${PV}.a "${ED}"$(alt_usrlibdir)/${P}/libm-${PV}.a || die
+		mv "${ED}"$(alt_usrlibdir)/libm-${upstream_pv}.a "${ED}"$(alt_usrlibdir)/${P}/libm-${upstream_pv}.a || die
 	fi
 
 	# Fix symlinked libraries:

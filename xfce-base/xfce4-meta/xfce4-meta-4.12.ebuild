@@ -10,7 +10,6 @@ SRC_URI=""
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux"
-IUSE="+svg"
 
 RDEPEND=">=x11-themes/gtk-engines-xfce-3:0
 	x11-themes/hicolor-icon-theme
@@ -20,5 +19,4 @@ RDEPEND=">=x11-themes/gtk-engines-xfce-3:0
 	>=xfce-base/xfce4-settings-4.12
 	>=xfce-base/xfdesktop-4.12
 	>=xfce-base/xfwm4-4.12
-	media-fonts/dejavu
-	svg? ( gnome-base/librsvg )"
+	media-fonts/dejavu"
