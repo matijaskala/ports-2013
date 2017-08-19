@@ -6,7 +6,7 @@ EAPI=6
 VALA_MIN_API_VERSION=0.26
 VALA_USE_DEPEND=vapigen
 
-inherit vala
+inherit gnome2 vala
 
 DESCRIPTION="The simplest dock on the planet"
 HOMEPAGE="https://launchpad.net/plank"
@@ -33,6 +33,6 @@ DEPEND="${RDEPEND}
 DOCS=( AUTHORS COPYING COPYRIGHT NEWS README )
 
 src_prepare() {
-	default
+	gnome2_src_prepare
 	vala_src_prepare
 }
