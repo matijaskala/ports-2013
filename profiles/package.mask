@@ -29,6 +29,53 @@
 
 #--- END OF EXAMPLES ---
 
+# Patrice Clement (23 Aug 2017)
+# Packages depending on this library need to be tested first before
+# it is unmasked. Possibly some slotting is still needed.
+# Package testing tracked in bug #611022.
+>=dev-libs/msgpack-1.4.2
+
+# Michał Górny <mgorny@gentoo.org> (21 Aug 2017)
+# xfce4-mixer is discontinued upstream and no longer considered part
+# of the DE since 4.12. It requires vulnerable gstreamer:0.10, and no
+# longer builds with the development versions of core Xfce4 components.
+# The suggested replacement is xfce-extra/xfce4-pulseaudio-plugin.
+# Removal in 30 days. Bug #628424.
+xfce-extra/xfce4-mixer
+
+# Hanno Boeck <hanno@gentoo.org> (21 Aug 2017)
+# Open security bugs, no upstream, bug 628432
+# Alternatives: app-arch/libarchive, app-arch/unar
+app-arch/unrar-gpl
+
+# Andreas Sturmlechner <asturm@gentoo.org> (20 Aug 2017)
+# Masked for removal in 30 days. Use kde-apps/kio-extras[mtp,slp] instead.
+kde-misc/kio-mtp
+kde-misc/kio-slp
+
+# Michał Górny <mgorny@gentoo.org> (20 Aug 2017)
+# Pre-release of a new incompatible version that breaks the only reverse
+# dependency in Gentoo. Masked until 2.0.0 proper is released, or
+# dev-cpp/libjson-rpc-cpp is fixed, whichever happens first.
+>=dev-cpp/catch-2
+
+# Hans de Graaff <graaff@gentoo.org> (20 Aug 2017)
+# Mask Ruby 2.1 for removal, bug 615822
+# This version is no longer supported by upstream
+# since March 2017.
+# This mask also includes all remaining ruby21-only packages.
+dev-lang/ruby:2.1
+dev-ruby/activeresource:4.1
+dev-ruby/builder:3
+dev-ruby/rails-observers
+dev-ruby/samuel
+games-rpg/a-bird-story
+
+# Sébastien Fabbro <bicatali@gentoo.org> (19 Aug 2017)
+# ipython-6 is python-3 only and causes circular dependencies
+# Unset python_targets_python2_7 for ipykernel and ipyparallel if needed.
+>=dev-python/ipython-6
+
 # Andreas Sturmlechner <asturm@gentoo.org> (19 Aug 2017)
 # Plasma-4 fragment, no more rdeps, masked for removal in 30 days.
 kde-plasma/libkworkspace
@@ -57,15 +104,16 @@ app-xemacs/ecb
 app-xemacs/xemacs-packages-all
 
 # Andreas Sturmlechner <asturm@gentoo.org> (17 Aug 2017)
-# Masked for removal in 30 days. KDE Applications 17.04.3 was
-# stabilised, including KDE PIM based on KDE Frameworks.
-kde-apps/kde-l10n
+# KDE Applications 17.04.3 was stabilised, including KDE PIM
+# based on KDE Frameworks. kde-apps/ktnef merged into kmail.
+# Masked for removal in 30 days.
 kde-apps/kdepim-common-libs
-kde-apps/kommander
-kde-apps/ksaneplugin
 kde-apps/ktnef
-kde-apps/kwalletd
+
+# Andreas Sturmlechner <asturm@gentoo.org> (17 Aug 2017)
+# Masked for removal in 30 days. No reverse dependencies left.
 kde-apps/kcmshell
+kde-apps/kde-l10n
 kde-apps/kdebase-runtime-meta
 kde-apps/kdontchangethehostname
 kde-apps/keditfiletype
@@ -73,7 +121,16 @@ kde-apps/kfile
 kde-apps/kmimetypefinder
 kde-apps/knewstuff
 kde-apps/kreadconfig
+kde-apps/ksaneplugin
 kde-apps/ktraderclient
+
+# Andreas Sturmlechner <asturm@gentoo.org> (17 Aug 2017)
+# Masked for removal in 30 days. Replaced by kde-frameworks/kwallet.
+kde-apps/kwalletd
+
+# Andreas Sturmlechner <asturm@gentoo.org> (17 Aug 2017)
+# Masked for removal in 30 days. Dead upstream, no replacement.
+kde-apps/kommander
 
 # Patrice Clement <monsieurp@gentoo.org> (10 Aug 2017)
 # Not ready for production yet.
@@ -194,40 +251,6 @@ media-video/dfbsee
 # month.
 net-misc/directvnc
 
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Dropped from upstream tarball for years, removal in a month (#626106)
-gnustep-apps/clipbook
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Dead upstream, last release 13 years ago, removal in a month (#626106)
-gnustep-apps/displaycalibrator
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Segfaults on diffs, last release 8 years ago, removal in a month (#626106)
-gnustep-apps/easydiff
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Dead upstream, last release 11 years ago, removal in a month (#626106)
-gnustep-apps/remotedesk
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Crashes on startup with current gnustep packages, removal in a month (#626106)
-gnustep-apps/sudoku
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Dead upstream, nothing in tree depends on it, removal in a month (#626106)
-gnustep-libs/camerakit
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Dead upstream, nothing in tree depends on it, removal in a month (#626106)
-gnustep-libs/iconkit
-
-# Bernard Cafarelli <voyageur@gentoo.org> (25 Jul 2017)
-# Dead upstream, last code update 11 years ago, removal in a month (#626106)
-# Use gnustep-apps/systempreferences instead
-gnustep-apps/preferences
-gnustep-libs/prefsmodule
-
 # Kent Fredric <kentnl@gentoo.org> (21 Jul 2017)
 # Masked due to serious regression that introduces widespread data
 # corruption when storing data in blobs. Masked, because any code
@@ -335,16 +358,6 @@ media-sound/skype-call-recorder
 net-im/skype
 net-im/skypetab-ng
 
-# Michał Górny <mgorny@gentoo.org> (07 Jun 2017)
-# The new release changes API and *breaks* core Xfce components.
-# Upstream lists xfce-base/xfce4-settings and xfce-base/xfce4-panel
-# as being incompatible. The breakage is not exhibited at build time
-# but results in broken executables. Masked until upstream releases
-# fixed versions and for further testing.
->=xfce-base/xfconf-4.13
->=xfce-base/xfce4-settings-4.13.1
->=xfce-base/xfce4-panel-4.13.1
-
 # Hans de Graaff <graaff@gentoo.org> (05 Jun 2017)
 # Bundles obsolete and vulnerable webkit version.
 # Upstream has stopped development and recommends using
@@ -433,12 +446,6 @@ dev-perl/Params-ValidationCompiler
 >=dev-perl/DateTime-1.370.0
 >=dev-perl/DateTime-Format-Strptime-1.710.0
 >=dev-perl/Log-Dispatch-2.590.0
-
-# Michał Górny <mgorny@gentoo.org> (25 May 2017)
-# First GTK+3 version with known regressions:
-# https://mail.xfce.org/pipermail/xfce-announce/2017-May/000517.html
-# Masked (+ reverse dependencies) for opt-in testing.
->=xfce-base/xfce4-panel-4.13
 
 # Thomas Deutschmann <whissi@gentoo.org> (24 May 2017)
 # Broken runscript/changed behavior causing lvm2 to fail

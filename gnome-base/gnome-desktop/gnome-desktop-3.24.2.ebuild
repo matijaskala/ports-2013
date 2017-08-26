@@ -6,10 +6,12 @@ inherit gnome2 virtualx
 
 DESCRIPTION="Libraries for the gnome desktop that are not part of the UI"
 HOMEPAGE="https://git.gnome.org/browse/gnome-desktop"
+SRC_URI="${SRC_URI}
+	ubuntu? ( https://launchpad.net/ubuntu/+archive/primary/+files/gnome-desktop3_3.24.2-0ubuntu1.debian.tar.xz )"
 
 LICENSE="GPL-2+ FDL-1.1+ LGPL-2+"
 SLOT="3/12" # subslot = libgnome-desktop-3 soname version
-IUSE="debug +introspection udev"
+IUSE="debug +introspection +ubuntu udev"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~x86-solaris"
 
 # cairo[X] needed for gnome-bg
@@ -42,6 +44,18 @@ DEPEND="${COMMON_DEPEND}
 "
 
 # Includes X11/Xatom.h in libgnome-desktop/gnome-bg.c which comes from xproto
+
+src_prepare() {
+	# Ubuntu patches
+	if use ubuntu; then
+		einfo "Applying patches from Ubuntu:"
+		for patch in `cat "${FILESDIR}/${P}-ubuntu-patch-series"`; do
+			eapply "${WORKDIR}/debian/patches/${patch}"
+		done
+	fi
+
+	gnome2_src_prepare
+}
 
 src_configure() {
 	gnome2_src_configure \
