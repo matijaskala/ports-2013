@@ -11,6 +11,7 @@ inherit mount-boot kernel-2
 detect_version
 
 KCONFIG_URELEASE="utopic"
+KCONFIG_URELEASE="artful/linux/${OKV}.0-$(get_version_component_range 3-4)"
 UBUNTU_PATCH="linux_${OKV}.0-$(get_version_component_range 3-4).diff.gz"
 UBUNTU_URI="http://archive.ubuntu.com/ubuntu/pool/main/l/linux/${UBUNTU_PATCH}"
 UNIPATCH_LIST="${DISTDIR}/${UBUNTU_PATCH}"
@@ -18,8 +19,8 @@ UNIPATCH_LIST="${DISTDIR}/${UBUNTU_PATCH}"
 DESCRIPTION="Ubuntu patched kernel sources"
 HOMEPAGE="https://launchpad.net/ubuntu/+source/linux"
 SRC_URI="${KERNEL_URI} ${UBUNTU_URI}
-	amd64? ( http://kernel.ubuntu.com/~kernel-ppa/configs/${KCONFIG_URELEASE}/amd64-config.flavour.generic )
-	x86? ( http://kernel.ubuntu.com/~kernel-ppa/configs/${KCONFIG_URELEASE}/i386-config.flavour.generic )"
+	amd64? ( http://kernel.ubuntu.com/~kernel-ppa/config/${KCONFIG_URELEASE}/amd64-config.flavour.generic -> amd64-config-ubuntu-${PV} )
+	x86? ( http://kernel.ubuntu.com/~kernel-ppa/config/${KCONFIG_URELEASE}/i386-config.flavour.generic -> i386-config-ubuntu-${PV} )"
 LICENSE="GPL-2"
 KEYWORDS="amd64 x86"
 IUSE="binary"
@@ -39,7 +40,7 @@ pkg_setup() {
 			die "unsupported ARCH: $ARCH"
 			;;
 	esac
-	defconfig_src="${DISTDIR}/${defconfig_src}-config.flavour.generic"
+	defconfig_src="${DISTDIR}/${defconfig_src}-config-ubuntu-${PV}"
 	unset ARCH; unset LDFLAGS # will interfere with Makefile if set
 }
 
