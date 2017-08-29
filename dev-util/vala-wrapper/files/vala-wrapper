@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if qlist -Ieq dev-lang/vala > /dev/null ; then
+	PATH=@ "${0##*/}" "$@"
+fi
+
+for i in $(qlist -CSe dev-lang/vala | sed 's/.*://' | tac) ; do
+	prog="$(type -P "${0##*/}-$i")"
+	[ -n "$prog" ] && exec "$prog" "$@"
+done
+
+for i in $(qlist -CSe dev-lang/vala | sed 's/.*://' | tac) ; do
+	PATH=@ "${0##*/}-$i" "$@"
+done
