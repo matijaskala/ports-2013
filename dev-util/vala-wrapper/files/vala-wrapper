@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if qlist -Ieq dev-lang/vala > /dev/null ; then
+if ! qlist -Ieq dev-lang/vala > /dev/null ; then
 	PATH=@ "${0##*/}" "$@"
 fi
 
