@@ -1,19 +1,17 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
-WANT_AUTOMAKE='1.14'
-inherit autotools eutils
+inherit autotools
 
 DESCRIPTION="Library parsing abiword documents"
-HOMEPAGE="https://wiki.documentfoundation.org/DLP/Libraries/libabw"
+HOMEPAGE="https://wiki.documentfoundation.org/DLP/Libraries/${PN}"
 SRC_URI="http://dev-www.libreoffice.org/src/${PN}/${P}.tar.xz"
 
 LICENSE="MPL-2.0"
 SLOT="0"
-KEYWORDS="amd64 ~arm x86"
+KEYWORDS="amd64 ~arm ~arm64 x86"
 IUSE="doc static-libs"
 
 RDEPEND="
@@ -28,21 +26,26 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 "
 
+PATCHES=(
+	# from git master
+	"${FILESDIR}/${PN}-0.1.1-dereference-before-null-check.patch"
+	"${FILESDIR}/${PN}-0.1.1-do-not-let-AbiDocument_parse-throw.patch"
+	"${FILESDIR}/${PN}-0.1.1-boost-1.59.patch"
+)
+
 src_prepare() {
-	epatch "${FILESDIR}/${P}-dereference-before-null-check.patch"
-	epatch "${FILESDIR}/${P}-do-not-let-AbiDocument_parse-throw.patch"
-	epatch "${FILESDIR}/${P}-boost-1.59.patch"
+	default
+	eautoreconf
 }
 
 src_configure() {
 	econf \
-		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
 		--disable-werror \
-		$(use_enable static-libs static) \
-		$(use_with doc docs)
+		$(use_with doc docs) \
+		$(use_enable static-libs static)
 }
 
 src_install() {
 	default
-	prune_libtool_files --all
+	find "${D}" -name '*.la' -delete || die
 }
