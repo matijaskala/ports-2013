@@ -1,0 +1,48 @@
+diff --git a/po/sl.po b/po/sl.po
+index 914a6f9..db9760c 100644
+--- a/po/sl.po
++++ b/po/sl.po
+@@ -344,7 +344,7 @@ msgstr "Jedro"
+ #. menu item for kernel variant (cf. txt_kernel)
+ #. txt_kernel_default
+ msgid "Default"
+-msgstr "Privzeti"
++msgstr "Privzeto"
+ 
+ #. menu item for kernel variant (cf. txt_kernel)
+ #. -> like in txt_safe_linux
+diff --git a/src/common.inc b/src/common.inc
+index f1c12fe..81bc4f7 100644
+--- a/src/common.inc
++++ b/src/common.inc
+@@ -611,7 +611,7 @@
+ 
+   config.beep { 3000 50000 beep } if
+   
+-  % lang.displayed not { panel.lang } if
++  lang.displayed not { panel.lang } if
+ 
+   syslinux {
+     32+64bit_source not {
+@@ -1088,7 +1088,7 @@
+       1 add
+     } forall
+     tmp dup setlang pop getkeymapfromlocale setkeymap
+-    % /lang.displayed true def
++    /lang.displayed true def
+   } {
+     pop
+     "en_US" dup setlang pop getkeymapfromlocale setkeymap
+diff --git a/src/dia_lang.inc b/src/dia_lang.inc
+index d50c69f..bb30840 100644
+--- a/src/dia_lang.inc
++++ b/src/dia_lang.inc
+@@ -12,7 +12,7 @@
+ % fallback if there is no "languages"
+ /lang.items [ "en_US" ] def
+ /lang.names [ "English (US)" ] def
+-% /lang.displayed false def
++/lang.displayed false def
+ 
+ /.la.locale 0 def
+ /.la.keymap 1 def
