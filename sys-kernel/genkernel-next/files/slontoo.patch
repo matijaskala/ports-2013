@@ -1,3 +1,20 @@
+--- a/gen_initramfs.sh
++++ b/gen_initramfs.sh
+@@ -5,12 +5,12 @@
+ 
+ _get_udevdir() {
+     local udev_dir=$(pkg-config --variable udevdir udev)
+-    [[ -n "${udev_dir}" ]] && echo $(realpath "${udev_dir}")
++    echo $(realpath "${udev_dir:-/lib/udev}")
+ }
+ 
+ _get_systemdutildir() {
+     local systemdutil_dir=$(pkg-config systemd --variable=systemdutildir)
+-    [[ -n "${systemdutil_dir}" ]] && echo $(realpath "${systemdutil_dir}")
++    echo $(realpath "${systemdutil_dir:-/lib/systemd}")
+ }
+ 
+ # The copy_binaries function is explicitly released under the CC0 license to
 --- a/defaults/linuxrc
 +++ b/defaults/linuxrc
 @@ -257,6 +257,18 @@
