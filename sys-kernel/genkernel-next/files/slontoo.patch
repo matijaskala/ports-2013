@@ -76,11 +76,11 @@
          good_msg "Mounting squashfs & aufs filesystems"
          _setup_squashfs_aufs
          test_success "Mount filesystem"
-+        [ -n "${SLONTOO_LANG}" ] && echo "LANG=${SLONTOO_LANG}.UTF-8" > /etc/env.d/02locale
-+        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" /etc/env.d/keymaps
++        [ -n "${SLONTOO_LANG}" ] && echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
++        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/env.d/keymaps
 +        if [ -n "${SLONTOO_XKB}" ] ; then
-+            install -d /etc/X11/xorg.conf.d
-+            cat > /etc/X11/xorg.conf.d/00-keybord.conf << EOF
++            install -d "${NEW_ROOT}"/etc/X11/xorg.conf.d
++            cat > "${NEW_ROOT}"/etc/X11/xorg.conf.d/00-keybord.conf << EOF
 +Section "InputClass"
 +       Identifier "keyboard"
 +       MatchIsKeyboard "yes"
@@ -93,11 +93,11 @@
          good_msg "Mounting squashfs & overlay fs filesystems"
          _setup_squashfs_overlayfs
          test_success "Mount filesystem"
-+        [ -n "${SLONTOO_LANG}" ] && echo "LANG=${SLONTOO_LANG}.UTF-8" > /etc/env.d/02locale
-+        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" /etc/env.d/keymaps
++        [ -n "${SLONTOO_LANG}" ] && echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
++        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/env.d/keymaps
 +        if [ -n "${SLONTOO_XKB}" ] ; then
-+            install -d /etc/X11/xorg.conf.d
-+            cat > /etc/X11/xorg.conf.d/00-keybord.conf << EOF
++            install -d "${NEW_ROOT}"/etc/X11/xorg.conf.d
++            cat > "${NEW_ROOT}"/etc/X11/xorg.conf.d/00-keybord.conf << EOF
 +Section "InputClass"
 +       Identifier "keyboard"
 +       MatchIsKeyboard "yes"
