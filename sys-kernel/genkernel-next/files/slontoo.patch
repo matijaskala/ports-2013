@@ -72,15 +72,20 @@
      mount -t squashfs -o loop,ro "${LOOP_PATH}" "${static}"
      mount -t tmpfs none "${overlay}"
      mkdir "${upperdir}" "${workdir}"
-@@ -235,17 +235,46 @@
+@@ -235,17 +235,56 @@
          good_msg "Mounting squashfs & aufs filesystems"
          _setup_squashfs_aufs
          test_success "Mount filesystem"
-+        [ -n "${SLONTOO_LANG}" ] && echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
-+        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/env.d/keymaps
++        if [ -n "${SLONTOO_LANG}" ] ; then
++            echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
++            sed -i /\\\<LANG\\\>.\'/d "${NEW_ROOT}"/etc/*.env
++            echo "export LANG='${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/profile.env
++            echo "setenv LANG '${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/csh.env
++        fi
++        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/conf.d/keymaps
 +        if [ -n "${SLONTOO_XKB}" ] ; then
-+            install -d "${NEW_ROOT}"/etc/X11/xorg.conf.d
-+            cat > "${NEW_ROOT}"/etc/X11/xorg.conf.d/00-keybord.conf << EOF
++            mkdir -p "${NEW_ROOT}"/etc/X11/xorg.conf.d
++            cat > "${NEW_ROOT}"/etc/X11/xorg.conf.d/00-keyboard.conf << EOF
 +Section "InputClass"
 +       Identifier "keyboard"
 +       MatchIsKeyboard "yes"
@@ -93,11 +98,16 @@
          good_msg "Mounting squashfs & overlay fs filesystems"
          _setup_squashfs_overlayfs
          test_success "Mount filesystem"
-+        [ -n "${SLONTOO_LANG}" ] && echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
-+        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/env.d/keymaps
++        if [ -n "${SLONTOO_LANG}" ] ; then
++            echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
++            sed -i /\\\<LANG\\\>.\'/d "${NEW_ROOT}"/etc/*.env
++            echo "export LANG='${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/profile.env
++            echo "setenv LANG '${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/csh.env
++        fi
++        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/conf.d/keymaps
 +        if [ -n "${SLONTOO_XKB}" ] ; then
-+            install -d "${NEW_ROOT}"/etc/X11/xorg.conf.d
-+            cat > "${NEW_ROOT}"/etc/X11/xorg.conf.d/00-keybord.conf << EOF
++            mkdir -p "${NEW_ROOT}"/etc/X11/xorg.conf.d
++            cat > "${NEW_ROOT}"/etc/X11/xorg.conf.d/00-keyboard.conf << EOF
 +Section "InputClass"
 +       Identifier "keyboard"
 +       MatchIsKeyboard "yes"
