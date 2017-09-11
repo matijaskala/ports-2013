@@ -81,7 +81,6 @@ RESTRICT="test"
 PATCHES=(
 	# TODO upstream
 	"${FILESDIR}/${PN}-2.18.6-featuresummary.patch"
-	"${FILESDIR}/${PN}-2.18.6-python.patch"
 	# Taken from redhat
 	"${FILESDIR}/${P}-sip.patch"
 	# git master
@@ -148,6 +147,9 @@ src_configure() {
 			-DWITH_INTERNAL_YAML=OFF
 		)
 	fi
+
+	# bug 612956
+	addpredict /dev/dri/renderD128
 
 	cmake-utils_src_configure
 }
