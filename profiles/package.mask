@@ -133,9 +133,7 @@ games-rpg/nwn-shadowlordsdreamcatcherdemon
 dev-perl/XML-AutoWriter
 
 # Gilles Dartiguelongue <eva@gentoo.org> (04 Sep 2017)
-# Release barely known to projects using enchant
-# soversion is completely broken, bug #629750
-# Breaks gtkspell (build) & gspell (runtime) at least, bug #629772
+# Incompatible changes in API in Enchant 2. Bug #629838.
 >=app-text/enchant-2
 
 # Lars Wendler <polynomial-c@gentoo.org> (03 Sep 2017)
@@ -157,11 +155,6 @@ dev-qt/qtphonon
 # vulnerable per bug #513818 and dead upstream
 # net-analyzer/ntopng is available
 net-analyzer/ntop
-
-# Michael Orlitzky <mjo@gentoo.org> (30 Aug 2017)
-# Ownership of most installed files has changed; needs testing.
-=net-analyzer/nagios-core-4.3.4
-=net-analyzer/nagios-4.3.4
 
 # James Le Cuirot <chewi@gentoo.org> (29 Aug 2017)
 # The FOSS-friendly oracle-javamail has rendered other implementations
@@ -207,12 +200,6 @@ kde-misc/akonadi-git-resource
 # Anthony G. Basile <blueness@gentoo.org> (27 Aug 2017)
 # Upstream is no longer providing public patches
 sys-kernel/hardened-sources
-
-# Andreas Sturmlechner <asturm@gentoo.org> (27 Aug 2017)
-# Requires deprecated libkcddb:4, upstream is not going to port.
-# See also: https://github.com/dfaust/soundkonverter/issues/23
-# Masked for removal in 30 days.
-media-sound/soundkonverter
 
 # Michael Palimaka <kensington@gentoo.org> (27 Aug 2017)
 # Requires deprecated Qt/KDE4. Dead upstream. Use kde-apps/spectacle instead.
@@ -348,27 +335,6 @@ kde-apps/kommander
 # experimental features and accept a more unstable release.
 >=www-client/chromium-62
 
-# Brian Evans <grknight@gentoo.org) (08 Aug 2017)
-# Old PEAR packages which are not maintained upstream or superseded
-# They contain errors which are not easy to maintain with no upstream
-# Many also do not have tests to easily find
-# incompatibilies with latest versions.
-# dev-php-Auth_HTTP has an upstream but relies on PEAR-Auth which does not
-# Masked for removal in 30 days
-dev-php/PEAR-Auth
-dev-php/PEAR-Auth_HTTP
-dev-php/PEAR-HTML_Template_IT
-dev-php/PEAR-HTML_TreeMenu
-dev-php/PEAR-HTTP_Client
-dev-php/PEAR-HTTP_Request
-dev-php/PEAR-Numbers_Roman
-dev-php/PEAR-PEAR_Info
-dev-php/PEAR-SOAP
-dev-php/PEAR-Services_Amazon
-dev-php/PEAR-Services_Weather
-dev-php/PEAR-Testing_Selenium
-dev-php/PEAR-Translation2
-
 # Lars Wendler <polynomial-c@gentoo.org> (06 Aug 2017)
 # Masked for security reasons:
 # https://bugs.gentoo.org/600214
@@ -386,65 +352,9 @@ dev-php/PEAR-Translation2
 # with it, bug #626292
 =dev-libs/libfilezilla-0.10.0
 
-# Michał Górny <mgorny@gentoo.org> (04 Aug 2017)
-# Obsolete. Replaced by media-gfx/graphite2. No longer used
-# by anything. Removal in 30 days. Bug #594314.
-media-libs/silgraphite
-
-# Michał Górny <mgorny@gentoo.org> (04 Aug 2017)
-# Dependency of dev-texlive/texlive-basic-2012 no longer needed for
-# the current versions. Removal in 14 days.
-dev-texlive/texlive-documentation
-
-# Michał Górny <mgorny@gentoo.org> (04 Aug 2017)
-# Unmaintained since mid-2016, requires an active maintainer. Has
-# multiple build failure bugs. Removal in 30 days. Bug #580516.
-sys-kernel/openvz-sources
-
 # Alexey Shvetsov <alexxy@gentoo.org> (26 Jul 2017)
 # Its pre release so better to mask it
 =media-gfx/freecad-0.17_pre*
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Upstream dead, cannot be bumped, buggy (#468128). Removal in a month.
-x11-apps/spotlighter
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Fails to build (#542108), relies on dead DirectFB. Removal in a month.
-dev-libs/DFB++
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# One of the last consumers of old udisks:0, upstream dead for ages
-# (#601358). Removal in a month.
-x11-misc/tinymount
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# EOL, severely broken, impossible to bump (#624966). Removal in a month.
-sci-geosciences/googleearth
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Dead for ages, not usable at present time (#625596). Removal in a month.
-app-mobilephone/linuxsms
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Upstream dead, last consumer of obsolete cegui version (#625604). Removal
-# in a month.
-games-arcade/smc
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Dead for a long time, relies on also dead DirectFB lib (#625608). Removal
-# in a month.
-media-gfx/DFBPoint
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Upstream dead, relies on also dead DirectFB lib (#625610). Removal in a
-# month.
-media-video/dfbsee
-
-# Pacho Ramos <pacho@gentoo.org> (26 Jul 2017)
-# Upstream dead, relies on also dead DirectFB lib (#625612). Removal in a
-# month.
-net-misc/directvnc
 
 # Kent Fredric <kentnl@gentoo.org> (21 Jul 2017)
 # Masked due to serious regression that introduces widespread data
@@ -710,11 +620,6 @@ app-emulation/wine-any
 # Symantec trust issues properly (bug #613714)
 =app-misc/ca-certificates-20161130.3.30-r1
 
-# Gnome Team <gnome@gentoo.org> (08 Mar 2017)
-# GNOME 3.24 mask (#611270)
->=net-libs/gtk-vnc-0.7
->=dev-libs/libgee-0.19
-
 # Eray Aslan <eras@gentoo.org> (01 Mar 2017)
 # Mask experimental software
 =mail-mta/postfix-3.3*
@@ -724,10 +629,6 @@ app-emulation/wine-any
 # Needs full revdep testing.
 >=dev-python/qscintilla-python-2.10
 >=x11-libs/qscintilla-2.10
-
-# Michael Palimaka <kensington@gentoo.org> (19 Feb 2017)
-# Revdeps need patching.
->=media-gfx/libopenraw-0.1.0
 
 # Mart Raudsepp <leio@gentoo.org> (16 Feb 2017)
 # Old gstreamer 0.10 version, which is security vulnerable.
@@ -831,11 +732,6 @@ x11-libs/gtk+:1
 # Lars Wendler <polynomial-c@gentoo.org> (26 Aug 2016)
 # Masked while being tested and reverse deps aren't fully compatible
 =dev-libs/openssl-1.1*
-
-# Mike Gilbert <floppym@gentoo.org> (07 Aug 2016)
-# Fails to switch cpufreq governor.
-# https://bugs.gentoo.org/590780
-~sys-power/cpupower-4.7.0
 
 # Michał Górny <mgorny@gentoo.org> (18 Jul 2016)
 # Pre-release of a complete rewrite, provided for early testing. Not all
