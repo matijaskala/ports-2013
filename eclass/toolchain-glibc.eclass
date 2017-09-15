@@ -120,9 +120,6 @@ setup_target_flags() {
 			# The mips abi cannot support the GNU style hashes. #233233
 			filter-ldflags -Wl,--hash-style=gnu -Wl,--hash-style=both
 		;;
-		ppc)
-			append-flags "-freorder-blocks"
-		;;
 		sparc)
 			# Both sparc and sparc64 can use -fcall-used-g6.  -g7 is bad, though.
 			filter-flags "-fcall-used-g7"
@@ -793,7 +790,19 @@ glibc_do_configure() {
 	fi
 
 	if version_is_at_least 2.25 ; then
-		myconf+=( --enable-stack-protector=all )
+		case ${CTARGET} in
+			powerpc-*)
+				# Currently gcc on powerpc32 generates invalid code for
+				# __builtin_return_address(0) calls. Normally programs
+				# don't do that but malloc hooks in glibc do:
+				# https://gcc.gnu.org/PR81996
+				# https://bugs.gentoo.org/629054
+				myconf+=( --enable-stack-protector=no )
+				;;
+			*)
+				myconf+=( --enable-stack-protector=all )
+				;;
+		esac
 	fi
 
 	if version_is_at_least 2.25 ; then
@@ -1300,7 +1309,7 @@ END_LDSCRIPT
 	doins "${WORKDIR}"/extra/etc/*.conf || die
 
 	if ! in_iuse nscd || use nscd ; then
-		doinitd "${WORKDIR}"/extra/etc/nscd || die
+		doinitd "$(prefixify_ro "${WORKDIR}"/extra/etc/nscd)" || die
 
 		local nscd_args=(
 			-e "s:@PIDFILE@:$(strings "${ED}"/usr/sbin/nscd | grep nscd.pid):"
