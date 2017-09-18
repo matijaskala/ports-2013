@@ -1,0 +1,13 @@
+use /usr/bin/bro to unpack brotli-compressed manpages
+
+--- man-db/include/comp_src.h.in
++++ man-db/include/comp_src.h.in
+@@ -83,6 +83,7 @@
+ /* Add your decompressor(s) and extension(s) below here */
+ /*------------------------------------------------------*/
+ 
++	{"/usr/bin/bro -d -i", "br", NULL},
+ 
+ 
+ /*----------------*/
+ 

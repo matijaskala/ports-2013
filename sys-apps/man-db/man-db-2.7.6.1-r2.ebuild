@@ -43,6 +43,10 @@ pkg_setup() {
 	fi
 }
 
+src_prepare() {
+	epatch "${FILESDIR}"/bro.patch
+}
+
 src_configure() {
 	export ac_cv_lib_z_gzopen=$(usex zlib)
 	econf \

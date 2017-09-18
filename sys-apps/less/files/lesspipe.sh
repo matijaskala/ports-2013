@@ -16,6 +16,7 @@ guesscompress() {
 		*.lz)       echo "lzip -dc" ;;
 		*.lzma)     echo "unlzma -c" ;;
 		*.lzo)      echo "lzop -dc" ;;
+		*.zst)      echo "zstdcat" ;;
 		*.xz)       echo "xzdec" ;;
 		*)          echo "cat" ;;
 	esac
@@ -116,7 +117,7 @@ lesspipe() {
 	### Tar files ###
 	*.tar|\
 	*.tar.bz2|*.tar.bz|*.tar.gz|*.tar.z|\
-	*.tar.lz|*.tar.tlz|\
+	*.tar.lz|*.tar.tlz|*.tar.zst|\
 	*.tar.lzma|*.tar.xz)
 		${DECOMPRESSOR} -- "$1" | tar tvvf -;;
 	*.tbz2|*.tbz|*.tgz|*.tlz|*.txz)
@@ -126,7 +127,9 @@ lesspipe() {
 	*.bz2|\
 	*.gz|*.z|\
 	*.lz|\
+	*.zst|\
 	*.lzma|*.xz)  ${DECOMPRESSOR} -- "$1" ;;
+	*.br)         bro -d -i "$1" ;;
 	*.rpm)        rpm -qpivl --changelog -- "$1" || rpm2tar -O "$1" | tar tvvf -;;
 	*.cpi|*.cpio) cpio -itv < "$1" ;;
 	*.ace)        unace l "$1" ;;
