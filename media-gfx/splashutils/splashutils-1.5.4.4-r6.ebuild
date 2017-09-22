@@ -1,11 +1,11 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit autotools eutils multilib toolchain-funcs
 
 MISCSPLASH="miscsplashutils-0.1.8"
+GENTOOSPLASH="splashutils-gentoo-1.0.17"
 V_JPEG="8a"
 V_PNG="1.4.3"
 V_ZLIB="1.2.3"
@@ -17,12 +17,13 @@ JPEGSRC="libs/jpeg-${V_JPEG}"
 FT2SRC="libs/freetype-${V_FT}"
 
 RESTRICT="test"
-IUSE="hardened +png +truetype gpm fbcondecor"
+IUSE="hardened +png +truetype gpm fbcondecor +openrc"
 
 DESCRIPTION="Framebuffer splash utilities"
-HOMEPAGE="http://sourceforge.net/projects/fbsplash.berlios/"
+HOMEPAGE="https://sourceforge.net/projects/fbsplash.berlios/"
 SRC_URI="
 	mirror://sourceforge/fbsplash.berlios/${PN}-lite-${PV}.tar.bz2
+	openrc? ( mirror://sourceforge/fbsplash.berlios/${GENTOOSPLASH}.tar.bz2 )
 	mirror://gentoo/${MISCSPLASH}.tar.bz2
 	mirror://sourceforge/libpng/libpng-${V_PNG}.tar.bz2
 	ftp://ftp.uu.net/graphics/jpeg/jpegsrc.v${V_JPEG}.tar.gz
@@ -48,7 +49,8 @@ RDEPEND="
 	virtual/jpeg:0[static-libs]
 	app-arch/cpio
 	media-gfx/fbgrab
-	!sys-apps/lcdsplash"
+	!sys-apps/lcdsplash
+	openrc? ( sys-apps/openrc )"
 
 DEPEND="${RDEPEND}
 	>=dev-libs/klibc-1.5
@@ -56,6 +58,7 @@ DEPEND="${RDEPEND}
 "
 
 S="${WORKDIR}/${P/_/-}"
+SG="${WORKDIR}/${GENTOOSPLASH}"
 SM="${WORKDIR}/${MISCSPLASH}"
 
 pkg_setup() {
@@ -74,6 +77,12 @@ src_prepare() {
 	# is being configured. Either that, or we end up with a segfaulting kernel
 	# helper.
 	rm "${S}/libs/zlib-${V_ZLIB}/Makefile"
+
+	if use openrc ; then
+		cd "${SG}"
+		epatch "${FILESDIR}/splashutils-1.5.4.4-gentoo-typo-fix.patch"
+		epatch "${FILESDIR}/splashutils-1.5.4.4-sys-queue.patch"
+	fi
 
 	if use truetype ; then
 		cd "${SM}"
@@ -139,6 +148,11 @@ src_compile() {
 
 	cd "${SM}"
 	emake CC="${CC}" LIB=$(get_libdir) STRIP=true
+
+	if use openrc ; then
+		cd "${SG}"
+		emake LIB=$(get_libdir)
+	fi
 }
 
 src_install() {
@@ -159,6 +173,21 @@ src_install() {
 	insinto /etc/splash
 	doins "${SM}"/fbtruetype/luxisri.ttf
 
+	if use openrc ; then
+		cd "${SG}"
+		make DESTDIR="${D}" LIB=${LIB} install
+		prune_libtool_files
+
+		if use fbcondecor ; then
+			newinitd init-fbcondecor fbcondecor
+			newconfd fbcondecor.conf fbcondecor
+		fi
+		newconfd splash.conf splash
+
+		insinto /usr/share/${PN}
+		doins initrd.splash
+	fi
+
 	sed -i -e "s#/lib/splash#/${LIB}/splash#" "${D}"/sbin/splash-functions.sh
 	keepdir /${LIB}/splash/{tmp,cache,bin,sys}
 	dosym /${LIB}/splash/bin/fbres /sbin/fbres
@@ -178,7 +207,7 @@ pkg_postinst() {
 		elog "devfs or a static /dev tree might work, but are generally discouraged and"
 		elog "not supported. If you decide to switch to udev, you might want to have a"
 		elog "look at 'The Gentoo udev Guide', which can be found at"
-		elog "  http://wiki.gentoo.org/wiki/Udev"
+		elog "  https://wiki.gentoo.org/wiki/Udev"
 		elog ""
 	fi
 
