@@ -77,7 +77,7 @@
          _setup_squashfs_aufs
          test_success "Mount filesystem"
 +        if [ -n "${SLONTOO_LANG}" ] ; then
-+            echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
++            echo "LANG=${SLONTOO_LANG}.utf8" > "${NEW_ROOT}"/etc/env.d/02locale
 +            sed -i /\\\<LANG\\\>.\'/d "${NEW_ROOT}"/etc/*.env
 +            echo "export LANG='${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/profile.env
 +            echo "setenv LANG '${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/csh.env
@@ -99,7 +99,7 @@
          _setup_squashfs_overlayfs
          test_success "Mount filesystem"
 +        if [ -n "${SLONTOO_LANG}" ] ; then
-+            echo "LANG=${SLONTOO_LANG}.UTF-8" > "${NEW_ROOT}"/etc/env.d/02locale
++            echo "LANG=${SLONTOO_LANG}.utf8" > "${NEW_ROOT}"/etc/env.d/02locale
 +            sed -i /\\\<LANG\\\>.\'/d "${NEW_ROOT}"/etc/*.env
 +            echo "export LANG='${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/profile.env
 +            echo "setenv LANG '${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/csh.env

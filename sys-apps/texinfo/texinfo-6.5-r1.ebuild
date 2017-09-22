@@ -32,6 +32,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-brotli.patch"
+	touch man/install-info.1 || die
+	default
 }
 
 src_configure() {
