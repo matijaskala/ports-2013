@@ -39,12 +39,14 @@
       free (*opened_filename);
       *opened_filename = concat (filename, ".lzma", "");
       f = fopen (*opened_filename, FOPEN_RBIN);
-@@ -838,6 +849,14 @@
+@@ -838,6 +849,16 @@
      *compression_program = "lzip";
  #endif
  
 +  else if (data[0] == 'B' && data[1] == 'r' && data[2] == 'o'
-+           && data[3] == 'T' && data[4] == 'L' && data[5] == 0)
++           && data[3] == 'T' && data[4] == 'L' && data[5] == 0
++           || data[0] == '\xce' && data[1] == '\xb2'
++           && data[2] == '\xcf' && data[3] == '\x81')
 +#ifndef STRIP_DOT_EXE
 +    *compression_program = "brp.exe";
 +#else
