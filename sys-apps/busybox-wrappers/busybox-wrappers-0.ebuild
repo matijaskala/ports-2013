@@ -46,7 +46,7 @@ provided_by() {
 		_pkgs+=("${1%:}")
 		shift
 	fi
-	for _useflag in $( ( for i ; do echo $i ; done ) | /bin/grep -v -e '\[' -e '\.' | sort -u ) ; do
+	for _useflag in $( ( for i ; do echo $i ; done ) | /bin/grep -v -e '\[' -e '\.' ) ; do
 		if has "${_useflag}" "${_liuse[@]#[+-]}" ; then
 			RDEPEND+=" ${_useflag}? ("
 			for _pkg in "${_pkgs[@]}" ; do

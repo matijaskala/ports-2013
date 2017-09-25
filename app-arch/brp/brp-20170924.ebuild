@@ -36,8 +36,8 @@ src_compile() {
 		echo "$@"
 		"$@"
 	}
-	showcmd ${VALAC} brp.gs libbrotlienc.vapi libbrotlidec.vapi --pkg=posix --ccode || die
-	showcmd $(tc-getCC) ${CFLAGS} $(pkg-config --cflags --libs glib-2.0 libbrotlienc libbrotlidec) -o ${PN}$(get_exeext) ${PN}.c || die
+	showcmd ${VALAC} brp.gs libbrotlienc.vapi libbrotlidec.vapi xxhash.vapi --pkg=posix --ccode || die
+	showcmd $(tc-getCC) ${CFLAGS} $(pkg-config --cflags --libs glib-2.0 libbrotlienc libbrotlidec) -lxxhash -lpthread -o ${PN}$(get_exeext) ${PN}.c crc32c.c || die
 }
 
 src_install() {
