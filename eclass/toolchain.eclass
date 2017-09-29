@@ -7,7 +7,7 @@ DESCRIPTION="The GNU Compiler Collection"
 HOMEPAGE="https://gcc.gnu.org/"
 RESTRICT="strip" # cross-compilers need controlled stripping
 
-inherit eutils fixheadtails flag-o-matic gnuconfig libtool multilib pax-utils toolchain-funcs versionator
+inherit eutils fixheadtails flag-o-matic gnuconfig libtool multilib pax-utils toolchain-funcs versionator prefix
 
 if [[ ${PV} == *_pre9999* ]] ; then
 	EGIT_REPO_URI="git://gcc.gnu.org/git/gcc.git"
@@ -90,8 +90,6 @@ if [[ ${SNAPSHOT} == [56789].0-* ]] ; then
 	SNAPSHOT=${SNAPSHOT/.0}
 fi
 
-export GCC_FILESDIR=${GCC_FILESDIR:-${FILESDIR}}
-
 PREFIX=${TOOLCHAIN_PREFIX:-${EPREFIX}/usr}
 
 if tc_version_is_at_least 3.4.0 ; then
@@ -141,6 +139,7 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	[[ -n ${D_VER}   ]] && IUSE+=" d"
 	[[ -n ${SPECS_VER} ]] && IUSE+=" nossp"
 	tc_version_is_at_least 3 && IUSE+=" doc gcj awt hardened multilib objc"
+	tc_version_is_at_least 3.3 && IUSE+=" pgo"
 	tc_version_is_at_least 4.0 && IUSE+=" objc-gc"
 	tc_version_is_between 4.0 4.9 && IUSE+=" mudflap"
 	tc_version_is_at_least 4.1 && IUSE+=" libssp objc++"
@@ -602,14 +601,14 @@ toolchain_src_prepare() {
 	einfo "Fixing misc issues in configure files"
 	for f in $(grep -l 'autoconf version 2.13' $(find "${S}" -name configure)) ; do
 		ebegin "  Updating ${f/${S}\/} [LANG]"
-		patch "${f}" "${GCC_FILESDIR}"/gcc-configure-LANG.patch >& "${T}"/configure-patch.log \
+		patch "${f}" "${FILESDIR}"/gcc-configure-LANG.patch >& "${T}"/configure-patch.log \
 			|| eerror "Please file a bug about this"
 		eend $?
 	done
 	sed -i 's|A-Za-z0-9|[:alnum:]|g' "${S}"/gcc/*.awk #215828
 
 	# Prevent new texinfo from breaking old versions (see #198182, #464008)
-	tc_version_is_at_least 4.1 && epatch "${GCC_FILESDIR}"/gcc-configure-texinfo.patch
+	tc_version_is_at_least 4.1 && epatch "${FILESDIR}"/gcc-configure-texinfo.patch
 
 	if [[ -x contrib/gcc_update ]] ; then
 		einfo "Touching generated files"
@@ -1610,7 +1609,11 @@ gcc_do_make() {
 		# resulting binaries natively ^^;
 		GCC_MAKE_TARGET=${GCC_MAKE_TARGET-all}
 	else
-		GCC_MAKE_TARGET=${GCC_MAKE_TARGET-bootstrap-lean}
+		if tc_version_is_at_least 3.3 && use pgo; then
+			GCC_MAKE_TARGET=${GCC_MAKE_TARGET-profiledbootstrap}
+		else
+			GCC_MAKE_TARGET=${GCC_MAKE_TARGET-bootstrap-lean}
+		fi
 	fi
 
 	# Older versions of GCC could not do profiledbootstrap in parallel due to
@@ -1819,10 +1822,10 @@ toolchain_src_install() {
 	# between binary and source package borks things ....
 	if ! is_crosscompile ; then
 		insinto "${DATAPATH#${EPREFIX}}"
-		newins "${GCC_FILESDIR}"/awk/fixlafiles.awk-no_gcc_la fixlafiles.awk || die
+		newins "$(prefixify_ro "${FILESDIR}"/awk/fixlafiles.awk-no_gcc_la)" fixlafiles.awk || die
 		exeinto "${DATAPATH#${EPREFIX}}"
-		doexe "${GCC_FILESDIR}"/fix_libtool_files.sh || die
-		doexe "${GCC_FILESDIR}"/c{89,99} || die
+		doexe "$(prefixify_ro "${FILESDIR}"/fix_libtool_files.sh)" || die
+		doexe "${FILESDIR}"/c{89,99} || die
 	fi
 
 	# libstdc++.la: Delete as it doesn't add anything useful: g++ itself
