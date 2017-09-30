@@ -4,11 +4,11 @@
  #if STRIP_DOT_EXE
    { ".gz", "gunzip" },
    { ".lz", "lunzip" },
-+  { ".br", "brpdec" },
++  { ".br", "brunzip" },
  #else
    { ".gz", "gzip -d" },
    { ".lz", "lzip -d" },
-+  { ".br", "brp -d" },
++  { ".br", "brzip -d" },
  #endif
    { ".xz", "unxz" },
    { ".bz2", "bunzip2" },
@@ -39,18 +39,16 @@
       free (*opened_filename);
       *opened_filename = concat (filename, ".lzma", "");
       f = fopen (*opened_filename, FOPEN_RBIN);
-@@ -838,6 +849,16 @@
+@@ -838,6 +849,14 @@
      *compression_program = "lzip";
  #endif
  
-+  else if (data[0] == 'B' && data[1] == 'r' && data[2] == 'o'
-+           && data[3] == 'T' && data[4] == 'L' && data[5] == 0
-+           || data[0] == '\xce' && data[1] == '\xb2'
++  else if (data[0] == '\xce' && data[1] == '\xb2'
 +           && data[2] == '\xcf' && data[3] == '\x81')
 +#ifndef STRIP_DOT_EXE
-+    *compression_program = "brp.exe";
++    *compression_program = "brzip.exe";
 +#else
-+    *compression_program = "brp";
++    *compression_program = "brzip";
 +#endif
 +
      /* We (try to) match against old lzma format (which lacks proper

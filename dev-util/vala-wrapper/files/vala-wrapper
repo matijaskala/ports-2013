@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if ! qlist -Ieq dev-lang/vala > /dev/null ; then
-	PATH=@ "${0##*/}" "$@"
+	PATH=/dev/null "${0##*/}" "$@"
 fi
 
 for i in $(qlist -CSe dev-lang/vala | sed 's/.*://' | tac) ; do
@@ -10,5 +10,5 @@ for i in $(qlist -CSe dev-lang/vala | sed 's/.*://' | tac) ; do
 done
 
 for i in $(qlist -CSe dev-lang/vala | sed 's/.*://' | tac) ; do
-	PATH=@ "${0##*/}-$i" "$@"
+	PATH=/dev/null "${0##*/}-$i" "$@"
 done

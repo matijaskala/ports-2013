@@ -40,7 +40,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/man-1.6g-xz.patch #302380
 	epatch "${FILESDIR}"/man-1.6f-makewhatis-compression-cleanup.patch #331979
 	epatch "${FILESDIR}"/man-1.6g-hurd.patch
-	echo ".br		brp -c -d" >> src/man.conf.in || die
+	echo ".br		brcat" >> src/man.conf.in || die
 	# make sure `less` handles escape sequences #287183
 	sed -i -e '/^DEFAULTLESSOPT=/s:"$:R":' configure
 }

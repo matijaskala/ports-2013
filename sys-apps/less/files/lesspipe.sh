@@ -17,7 +17,7 @@ guesscompress() {
 		*.lzma)     echo "unlzma -c" ;;
 		*.lzo)      echo "lzop -dc" ;;
 		*.zst)      echo "zstdcat" ;;
-		*.br)       echo "brp -dc" ;;
+		*.br)       echo "brcat" ;;
 		*.xz)       echo "xzdec" ;;
 		*)          echo "cat" ;;
 	esac
