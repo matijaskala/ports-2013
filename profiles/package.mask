@@ -29,6 +29,10 @@
 
 #--- END OF EXAMPLES ---
 
+# Patrice Clement <elvis@magic.io> (01 Oct 2017)
+# Mask Atom betas for testing.
+app-editors/atom:beta
+
 # Michael Palimaka <kensington@gentoo.org> (01 Oct 2017)
 # Fails to build (bug #622632). Requires dead and vulnerable qtwebkit4
 # (bug #620710). Masked for removal in 30 days.
@@ -223,11 +227,6 @@ dev-perl/XML-AutoWriter
 # https://cgit.freedesktop.org/poppler/poppler/commit/poppler/Object.h?id=9773c1534668d84b8267c3e5c9d612076fa231a5
 # See also our tracker bug: https://bugs.gentoo.org/629836
 >=app-text/poppler-0.58.0
-
-# Michael Palimaka <kensington@gentoo.org> (03 Sep 2017)
-# Dead upstream. Use media-libs/phonon instead.
-# Masked for removal in 30 days. Bug #629144.
-dev-qt/qtphonon
 
 # Gilles Dartiguelongue <eva@gentoo.org> (2 Sep 1017)
 # Gnome 3.26 package mask
