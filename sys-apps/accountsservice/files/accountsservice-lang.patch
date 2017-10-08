@@ -1,0 +1,24 @@
+--- accountsservice-0.6.40/src/user.c
++++ accountsservice-0.6.40/src/user.c
+@@ -25,6 +25,7 @@
+ #include "config.h"
+ 
+ #include <stdlib.h>
++#include <locale.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <sys/wait.h>
+@@ -2240,7 +2240,12 @@
+                 g_value_set_string (value, user->email);
+                 break;
+         case PROP_LANGUAGE:
+-                g_value_set_string (value, user->language);
++                if (user->language)
++                        g_value_set_string (value, user->language);
++                else {
++                        char* locale = setlocale (LC_ALL, NULL);
++                        g_value_set_string (value, locale ? locale : "en_US.utf8");
++                }
+                 break;
+         case PROP_X_SESSION:
+                 g_value_set_string (value, user->x_session);

@@ -24,5 +24,5 @@ mycmakeargs=( -DBUILD_SHARED_LIBS=ON )
 
 src_prepare() {
 	sed -i "s/lib$/$(get_libdir)/;/CMAKE_INSTALL_RPATH /d" CMakeLists.txt || die
-	default
+	cmake-utils_src_prepare
 }
