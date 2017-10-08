@@ -44,7 +44,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-0.6.35-gentoo-system-users.patch
 	"${FILESDIR}"/${PN}-0.6.43-elogind.patch
 	"${FILESDIR}"/${PN}-other-display-managers.patch
-	"${FILESDIR}"/${PN}-lang.patch
 )
 
 src_configure() {

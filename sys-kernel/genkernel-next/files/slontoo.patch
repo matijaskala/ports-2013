@@ -72,7 +72,7 @@
      mount -t squashfs -o loop,ro "${LOOP_PATH}" "${static}"
      mount -t tmpfs none "${overlay}"
      mkdir "${upperdir}" "${workdir}"
-@@ -235,17 +235,56 @@
+@@ -235,17 +235,58 @@
          good_msg "Mounting squashfs & aufs filesystems"
          _setup_squashfs_aufs
          test_success "Mount filesystem"
@@ -81,6 +81,7 @@
 +            sed -i /\\\<LANG\\\>.\'/d "${NEW_ROOT}"/etc/*.env
 +            echo "export LANG='${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/profile.env
 +            echo "setenv LANG '${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/csh.env
++            printf "[User]\nLanguage=${SLONTOO_LANG}.utf8\n" > "${NEW_ROOT}"/var/lib/AccountsService/users/$(grep :1000: "${NEW_ROOT}"/etc/passwd | cut -d: -f1)
 +        fi
 +        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/conf.d/keymaps
 +        if [ -n "${SLONTOO_XKB}" ] ; then
@@ -103,6 +104,7 @@
 +            sed -i /\\\<LANG\\\>.\'/d "${NEW_ROOT}"/etc/*.env
 +            echo "export LANG='${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/profile.env
 +            echo "setenv LANG '${SLONTOO_LANG}'" >> "${NEW_ROOT}"/etc/csh.env
++            printf "[User]\nLanguage=${SLONTOO_LANG}.utf8\n" > "${NEW_ROOT}"/var/lib/AccountsService/users/$(grep :1000: "${NEW_ROOT}"/etc/passwd | cut -d: -f1)
 +        fi
 +        [ -n "${SLONTOO_KEYMAP}" ] && sed -i "s/keymap=.*/keymap=\"${SLONTOO_KEYMAP}\"/" "${NEW_ROOT}"/etc/conf.d/keymaps
 +        if [ -n "${SLONTOO_XKB}" ] ; then

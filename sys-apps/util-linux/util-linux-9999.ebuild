@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 
 inherit ltprune toolchain-funcs libtool flag-o-matic bash-completion-r1 \
-	python-single-r1 multilib-minimal systemd
+	pam python-single-r1 multilib-minimal systemd
 
 MY_PV="${PV/_/-}"
 MY_P="${PN}-${MY_PV}"
@@ -179,6 +179,11 @@ multilib_src_install_all() {
 
 	# e2fsprogs-libs didnt install .la files, and .pc work fine
 	prune_libtool_files
+
+	if use pam; then
+		newpamd "${FILESDIR}/runuser.pamd" runuser
+		newpamd "${FILESDIR}/runuser-l.pamd" runuser-l
+	fi
 }
 
 pkg_postinst() {
