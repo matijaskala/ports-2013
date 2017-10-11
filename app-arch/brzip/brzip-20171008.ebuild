@@ -20,7 +20,7 @@ RDEPEND="
 	dev-libs/glib:2=
 	app-arch/brotli:=
 	dev-libs/xxhash:=
-	sys-fs/btrfs-progs:="
+	kernel_linux? ( sys-fs/btrfs-progs:= )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	$(vala_depend)"
@@ -38,7 +38,11 @@ src_compile() {
 		"$@"
 	}
 	showcmd ${VALAC} brzip.gs libbrotlienc.vapi libbrotlidec.vapi xxhash.vapi --pkg=posix --ccode || die
-	showcmd $(tc-getCC) ${CFLAGS} $(pkg-config --cflags --libs glib-2.0 libbrotlienc libbrotlidec) -lxxhash -lbtrfs -o brzip$(get_exeext) brzip.c || die
+	if [[ ${KERNEL} == linux ]] ; then
+		showcmd $(tc-getCC) ${CFLAGS} $(pkg-config --cflags --libs glib-2.0 libbrotlienc libbrotlidec) -lxxhash -lbtrfs -o brzip$(get_exeext) brzip.c || die
+	else
+		showcmd $(tc-getCC) ${CFLAGS} $(pkg-config --cflags --libs glib-2.0 libbrotlienc libbrotlidec) -lxxhash -o brzip$(get_exeext) brzip.c crc32c.c || die
+	fi
 }
 
 src_install() {
