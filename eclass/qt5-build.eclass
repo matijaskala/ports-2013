@@ -65,7 +65,7 @@ case ${PV} in
 		QT5_BUILD_TYPE="live"
 		EGIT_BRANCH="dev"
 		;;
-	5.?.9999)
+	5.?.9999|5.??.9999|5.???.9999)
 		# git stable branch
 		QT5_BUILD_TYPE="live"
 		EGIT_BRANCH=${PV%.9999}
@@ -88,9 +88,8 @@ esac
 readonly QT5_BUILD_TYPE
 
 EGIT_REPO_URI=(
-	"git://code.qt.io/qt/${QT5_MODULE}.git"
-	"https://code.qt.io/git/qt/${QT5_MODULE}.git"
-	"https://github.com/qtproject/${QT5_MODULE}.git"
+	"https://code.qt.io/qt/${QT5_MODULE}.git"
+	"https://github.com/qt/${QT5_MODULE}.git"
 )
 [[ ${QT5_BUILD_TYPE} == live ]] && inherit git-r3
 
@@ -111,7 +110,7 @@ DEPEND="
 	dev-lang/perl
 	virtual/pkgconfig
 "
-if [[ ${PN} != qttest ]]; then
+if [[ (${PN} != qttest && ${PN} != qtwebkit) || (${PN} == qtwebkit && ${QT5_MINOR_VERSION} -lt 9) ]]; then
 	DEPEND+=" test? ( ~dev-qt/qttest-${PV} )"
 fi
 RDEPEND="
@@ -168,8 +167,14 @@ qt5-build_src_prepare() {
 		qt5_symlink_tools_to_build_dir
 
 		# Avoid unnecessary qmake recompilations
-		sed -i -re "s|^if true;.*(\[ '\!').*(\"\\\$outpath/bin/qmake\".*)|if \1 -e \2 then|" \
-			configure || die "sed failed (skip qmake bootstrap)"
+		if [[ ${QT5_MINOR_VERSION} -ge 8 ]]; then
+			sed -i -e "/Creating qmake/i if [ '!' -e \"\$outpath/bin/qmake\" ]; then" \
+				-e '/echo "Done."/a fi' \
+				configure || die "sed failed (skip qmake bootstrap)"
+		else
+			sed -i -re "s|^if true;.*(\[ '\!').*(\"\\\$outpath/bin/qmake\".*)|if \1 -e \2 then|" \
+				configure || die "sed failed (skip qmake bootstrap)"
+		fi
 
 		# Respect CC, CXX, *FLAGS, MAKEOPTS and EXTRA_EMAKE when bootstrapping qmake
 		sed -i -e "/outpath\/qmake\".*\"\$MAKE\")/ s:): \
@@ -184,9 +189,11 @@ qt5-build_src_prepare() {
 		sed -i -e "/^QMAKE_CONF_COMPILER=/ s:=.*:=\"$(tc-getCXX)\":" \
 			configure || die "sed failed (QMAKE_CONF_COMPILER)"
 
-		# Respect toolchain and flags in config.tests
-		find config.tests/unix -name '*.test' -type f -execdir \
-			sed -i -e 's/-nocache //' '{}' + || die
+		if [[ ${QT5_MINOR_VERSION} -le 7 ]]; then
+			# Respect toolchain and flags in config.tests
+			find config.tests/unix -name '*.test' -type f -execdir \
+				sed -i -e 's/-nocache //' '{}' + || die
+		fi
 
 		# Don't inject -msse/-mavx/... into CXXFLAGS when detecting
 		# compiler support for extended instruction sets (bug 552942)
@@ -490,6 +497,11 @@ qt5_base_configure() {
 	export STRIP="$(tc-getBUILD_STRIP)"
 	export LD="$(tc-getBUILD_CXX)"
 
+	# bug 633838
+	if [[ ${QT5_MINOR_VERSION} -ge 9 ]]; then
+		unset QMAKESPEC XQMAKESPEC QMAKEPATH QMAKEFEATURES
+	fi
+
 	# configure arguments
 	local conf=(
 		# installation paths
@@ -569,8 +581,8 @@ qt5_base_configure() {
 		-glib
 
 		# disable everything to prevent automagic deps (part 2)
-		-no-pulseaudio -no-alsa
 		$([[ ${QT5_MINOR_VERSION} -ge 7 ]] && echo -no-gtk || echo -no-gtkstyle)
+		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -no-pulseaudio -no-alsa)
 
 		# exclude examples and tests from default build
 		-nomake examples
@@ -584,7 +596,8 @@ qt5_base_configure() {
 		-verbose
 
 		# always enable iconv support
-		-iconv
+		# since 5.8 this is handled in qtcore
+		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -iconv)
 
 		# disable everything to prevent automagic deps (part 3)
 		-no-cups -no-evdev -no-tslib -no-icu -no-fontconfig -no-dbus
@@ -611,7 +624,8 @@ qt5_base_configure() {
 
 		# disable undocumented X11-related flags, override in qtgui
 		# (not shown in ./configure -help output)
-		-no-xkb -no-xrender
+		-no-xkb
+		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -no-xrender)
 
 		# disable obsolete/unused X11-related flags
 		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -no-mitshm -no-xcursor -no-xfixes -no-xrandr -no-xshape -no-xsync)
@@ -631,7 +645,7 @@ qt5_base_configure() {
 		-no-libinput
 
 		# disable gstreamer by default, override in qtmultimedia
-		-no-gstreamer
+		$([[ ${QT5_MINOR_VERSION} -lt 8 ]] && echo -no-gstreamer)
 
 		# respect system proxies by default: it's the most natural
 		# setting, and it'll become the new upstream default in 5.8
@@ -657,7 +671,14 @@ qt5_base_configure() {
 	einfo "Configuring with: ${conf[@]}"
 	"${S}"/configure "${conf[@]}" || die "configure failed"
 
+	if [[ ${QT5_MINOR_VERSION} -ge 8 ]]; then
+		# a forwarding header is no longer created since 5.8, causing the system
+		# config to always be used. bug 599636
+		cp src/corelib/global/qconfig.h include/QtCore/ || die
+	fi
+
 	popd >/dev/null || die
+
 }
 
 # @FUNCTION: qt5_qmake

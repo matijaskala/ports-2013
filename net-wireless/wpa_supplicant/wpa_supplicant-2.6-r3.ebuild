@@ -320,9 +320,9 @@ src_install() {
 	# baselayout-1 compat
 	if has_version "<sys-apps/baselayout-2.0.0"; then
 		dodir /sbin
-		dosym ../usr/sbin/wpa_supplicant /sbin/wpa_supplicant
+		dosym /usr/sbin/wpa_supplicant /sbin/wpa_supplicant
 		dodir /bin
-		dosym ../usr/bin/wpa_cli /bin/wpa_cli
+		dosym /usr/bin/wpa_cli /bin/wpa_cli
 	fi
 
 	if has_version ">=sys-apps/openrc-0.5.0"; then
