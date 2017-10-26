@@ -35,7 +35,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-1.3.15-r1-fix-preferences-ui.patch"
 )
 
-CDEPEND="<net-libs/libtorrent-rasterbar-1.1[python,${PYTHON_USEDEP}]"
+CDEPEND=">=net-libs/libtorrent-rasterbar-1.0:=[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
