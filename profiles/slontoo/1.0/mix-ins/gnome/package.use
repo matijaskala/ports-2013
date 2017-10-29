@@ -2,56 +2,38 @@
 app-misc/tracker -ffmpeg
 
 # Required by GNOME for a more complete experience.
-app-editors/gedit spell
 gnome-base/gnome accessibility
 gnome-base/nautilus sendto
-mail-client/evolution spell
-net-im/empathy spell
 
 # eds is a problematic flag, causing many package to fail. It does allow
 # to build gnome clean but leading to pidgin failures. FL-347
 net-im/pidgin -eds
 
-# Required by gnome, for FL-343
-media-libs/gst-plugins-base theora
-dev-libs/folks vala
-gnome-extra/evolution-data-server vala
+# Do not enable gstreamer in wine by default; it's mostly broken in <1.7.20,
+# and the patch that fixes it causes problems in some games in >=1.7.20
+# See http://bugs.winehq.org/show_bug.cgi?id=30557 and
+# http://bugs.winehq.org/show_bug.cgi?id=36772
+app-emulation/wine -gstreamer
 
-# Required by gnome-base/gvfs and sys-fs/udisks
-sys-fs/udev extras
-virtual/udev extras hwdb
-gnome-base/gvfs gdu
-sys-block/parted device-mapper 
+# Required by folks, needed by empathy
+>=gnome-extra/evolution-data-server-3.8 vala
 
-# The following are required by ekiga-3
-net-libs/opal sip
-net-libs/ptlib wav
+# Required for cheese in gnome3
+>=media-libs/gst-plugins-base-1.0 theora
 
-# Required by app-admin/sabayon
-x11-base/xorg-server kdrive
-
-# Required by gnome-extra/hamster-applet
+# Required for gnome-base/gnome-2.32 to be merged directly, for
+# gnome-extra/hamster-applet-2.32 and x11-misc/alacarte-0.13
 dev-lang/python sqlite
-
-# Required by media-libs/libcanberra[udev]
-media-libs/libcanberra alsa
-
-# Required by media-sound/sound-juicer
-gnome-base/gvfs cdda
-
-# Required by media-video/cheese
-x11-libs/gdk-pixbuf jpeg
 
 # Required by app-accessibility/orca-3
 app-accessibility/speech-dispatcher python
 
+# Pulled in by grilo-plugins which is needed for gnome-music
+media-libs/grilo playlist
+
 # Pulled in by net-im/telepathy-connection-managers[msn] (via dev-python/papyon
 # and net-voip/telepathy-butterfly)
-net-libs/farsight2 python
 net-libs/libproxy python
-
-# Required by dev-libs/folks[libsocialweb]
-net-libs/libsocialweb vala
 
 # The following are required by ekiga-3
 net-libs/opal sip
@@ -63,11 +45,5 @@ net-libs/ptlib wav
 # FL-545, new curl ebuild reuqire curl_ssl_openssl as default, changing
 net-misc/curl -curl_ssl_gnutls -curl_ssl_nss curl_ssl_openssl -gnutls nss
 
-# Required by net-print/cups
-app-text/ghostscript-gpl cups
-
-#Required by gnom-base/gnome-core-apps[networkmanager]
-gnome-extra/nm-applet bluetooth
-
-# Required by app-misc/tracker
-media-gfx/imagemagick png jpeg
+# Required by app-admin/sabayon
+x11-base/xorg-server kdrive
