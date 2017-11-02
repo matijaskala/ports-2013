@@ -513,6 +513,7 @@ src_configure() {
 		-Dsh="${EPREFIX}"/bin/sh \
 		-Dtargetsh="${EPREFIX}"/bin/sh \
 		-Uusenm \
+		-Ui_xlocale \
 		"${myconf[@]}" \
 		"${EXTRA_ECONF[@]}"
 
