@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils multilib versionator prefix
+inherit multilib versionator prefix
 
 DESCRIPTION="Filesystem baselayout and init scripts"
 HOMEPAGE="https://www.gentoo.org/"
@@ -18,7 +18,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="build kernel_linux"
+IUSE="build usrmerge kernel_linux"
 
 pkg_setup() {
 	multilib_layout
@@ -26,15 +26,22 @@ pkg_setup() {
 
 # Create our multilib dirs - the Makefile has no knowledge of this
 multilib_layout() {
-	local libdir libdirs=$(get_all_libdirs) def_libdir=$(get_abi_LIBDIR $DEFAULT_ABI)
+	local def_libdir libdir libdirs
+	def_libdir=$(get_abi_LIBDIR $DEFAULT_ABI)
+	libdirs=$(get_all_libdirs)
 	: ${libdirs:=lib}	# it isn't that we don't trust multilib.eclass...
 
-	[ -z "${def_libdir}" ] && die "your DEFAULT_ABI=$DEFAULT_ABI appears to be invalid"
+	[ -z "${def_libdir}" ] &&
+		die "your DEFAULT_ABI=$DEFAULT_ABI appears to be invalid"
 
 	# figure out which paths should be symlinks and which should be directories
 	local dirs syms exp d
 	for libdir in ${libdirs} ; do
-		exp=( {usr/,usr/local/}${libdir} )
+		if ! use usrmerge; then
+			exp=( {,usr/,usr/local/}${libdir} )
+		else
+			exp=( {usr/,usr/local/}${libdir} )
+		fi
 		for d in "${exp[@]}" ; do
 			# most things should be dirs
 			if [ "${SYMLINK_LIB}" = "yes" ] && [ "${libdir}" = "lib" ] ; then
@@ -56,8 +63,13 @@ multilib_layout() {
 
 	# setup symlinks and dirs where we expect them to be; do not migrate
 	# data ... just fall over in that case.
-	local prefix
-	for prefix in "${EROOT}"{usr/,usr/local/} ; do
+	local prefix prefix_lst
+	if ! use usrmerge; then
+		prefix_lst="${EROOT}"{,usr/,usr/local/}
+	else
+		prefix_lst="${EROOT}"{usr/,usr/local/}
+	fi
+	for prefix in "${prefix_lst}"; do
 		if [ "${SYMLINK_LIB}" = yes ] ; then
 			# we need to make sure "lib" points to the native libdir
 			if [ -h "${prefix}lib" ] ; then
@@ -115,52 +127,13 @@ multilib_layout() {
 			fi
 		fi
 	done
-}
-
-usrmerge_layout() {
-	[[ -e ${EROOT}usr ]] || return
-	[[ ${EROOT}. -ef ${EROOT}usr/. ]] && return
-	[[ -d ${EROOT}usr ]] || die "${EROOT}usr is not a directory"
-	local d
-	for d in bin sbin $(get_all_libdirs) ; do
-		if [[ ${EROOT}${d}/. -ef ${EROOT}usr/${d}/. ]] ; then
-			continue
-		elif [[ -d ${EROOT}${d} ]] ; then
-			if [[ -h ${EROOT}${d} ]] ; then
-				eerror "${EROOT}${d} is a symlink but it doesn't point to usr/${d}"
-				continue
-			elif [[ -h ${EROOT}usr/${d} ]] ; then
-				if [[ ! -d ${EROOT}usr/${d} ]] ; then
-					die "${EROOT}usr/${d} is not a directory"
-				elif [[ ${SYMLINK_LIB} = "yes" && ${d} == "lib" ]] ; then
-					[[ ${MERGE_USR} == "no" ]] && continue
-					mv "${EROOT}${d}"/* "${EROOT}usr/${d}"
-					rmdir "${EROOT}${d}"
-				else
-					eerror "${EROOT}usr/${d} is a symlink when it shouldn't be"
-					continue
-				fi
-			elif [[ -d ${EROOT}usr/${d} ]] ; then
-				[[ ${MERGE_USR} == "no" ]] && continue
-				# it is pointless to check for duplicate files
-				# if they don't exist everything is fine
-				# if they do they will reappear on first update
-				mv "${EROOT}${d}"/* "${EROOT}usr/${d}"
-				rmdir "${EROOT}${d}"
-			elif [[ -e ${EROOT}usr/${d} ]] ; then
-				die "${EROOT}usr/${d} is not a directory"
-			else
-				mv "${EROOT}${d}" "${EROOT}usr"
+	if use usrmerge; then
+		for libdir in ${libdirs}; do
+			if [[ ! -e "${EROOT}${libdir}" ]]; then
+				ln -s usr/"${libdir}" "${EROOT}${libdir}"
 			fi
-		elif [[ -e ${EROOT}${d} ]] ; then
-			die "${EROOT}${d} is not a directory"
-		fi
-		if [[ -e ${EROOT}${d} ]] && ! rmdir "${EROOT}${d}" ; then
-			die "failed to recreate ${EROOT}${d} as a symlink"
-		fi
-		ln -s usr/${d} "${EROOT}${d}"
-		mkdir -p "${EROOT}usr/${d}"
-	done
+		done
+	fi
 }
 
 pkg_preinst() {
@@ -180,9 +153,12 @@ pkg_preinst() {
 	# stages, but they cannot be in CONTENTS.
 	# Also, we cannot reference $S as binpkg will break so we do this.
 	multilib_layout
-	usrmerge_layout
 	if use build ; then
-		emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout || die
+		if ! use usrmerge; then
+			emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout
+		else
+			emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout-usrmerge
+		fi
 	fi
 	rm -f "${ED}"/usr/share/${PN}/Makefile
 }
