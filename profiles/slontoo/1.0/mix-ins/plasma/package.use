@@ -11,9 +11,6 @@ app-arch/unzip natspec
 dev-libs/libpcre pcre16
 dev-libs/libpcre2 pcre16
 
-# Required by kde-frameworks/kcoreaddons
-dev-qt/qtcore:5 icu
-
 # Required by kde-frameworks/kwayland
 dev-qt/qtgui:5 egl
 
@@ -22,9 +19,6 @@ dev-qt/qtscript:5 scripttools
 
 # Required by kde-apps/akonadi
 dev-qt/qtsql:5 mysql
-
-# Required by kde-apps/kate[addons]
-dev-libs/libgit2 threads
 
 # Required by kde-apps/ktp-text-ui
 kde-apps/ktp-common-internals otr
@@ -56,12 +50,6 @@ media-sound/pulseaudio gnome
 # Required by kde-frameworks/kactivities
 sys-libs/zlib minizip
 
-# FIXME: unnecessary REQUIRED_USE ^^ ( qt4 qt5 )
-<dev-python/qscintilla-python-2.10 -qt4
-<x11-libs/qscintilla-2.10 -qt4
-
 # FIXME: REQUIRED_USE conflicts: qt5? ( !qt4 )
 >=app-crypt/pinentry-0.9.6-r5 -qt4
->=media-libs/opencv-2.4.12-r1 -qt4
-<media-video/smplayer-16.4.0-r2 -qt4
 <net-wireless/wpa_supplicant-2.6-r1 -qt4

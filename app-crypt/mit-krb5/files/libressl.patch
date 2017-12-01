@@ -1,0 +1,58 @@
+From 8b0ce47eb04f086b4d1d5f03c0a3e681d92a9dae Mon Sep 17 00:00:00 2001
+From: Matija Skala <mskala@gmx.com>
+Date: Fri, 1 Dec 2017 17:36:41 +0100
+Subject: [PATCH] Fix for libressl
+
+---
+ src/plugins/preauth/pkinit/pkinit_crypto_openssl.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c b/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c
+index ac107c2c1b..0c1fde6748 100644
+--- a/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c
++++ b/src/plugins/preauth/pkinit/pkinit_crypto_openssl.c
+@@ -187,7 +187,7 @@ pkinit_pkcs11_code_to_text(int err);
+     (*_x509_pp) = PKCS7_cert_from_signer_info(_p7,_si)
+ #endif
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined LIBRESSL_VERSION_NUMBER
+ 
+ /* 1.1 standardizes constructor and destructor names, renaming
+  * EVP_MD_CTX_{create,destroy} and deprecating ASN1_STRING_data. */
+@@ -240,7 +240,7 @@ static void compat_dh_get0_key(const DH *dh, const BIGNUM **pub,
+ #define ku_reject(c, u)                                                 \
+     (((c)->ex_flags & EXFLAG_KUSAGE) && !((c)->ex_kusage & (u)))
+ 
+-#else /* OPENSSL_VERSION_NUMBER >= 0x10100000L */
++#else /* OPENSSL_VERSION_NUMBER >= 0x10100000L && ! defined LIBRESSL_VERSION_NUMBER */
+ 
+ /* Return true if the cert x includes a key usage which doesn't include u. */
+ #define ku_reject(c, u) (!(X509_get_key_usage(c) & (u)))
+@@ -3047,7 +3047,7 @@ pkinit_encode_dh_params(const BIGNUM *p, const BIGNUM *g, const BIGNUM *q,
+     return retval;
+ }
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if OPENSSL_VERSION_NUMBER >= 0x10100000L && ! defined LIBRESSL_VERSION_NUMBER
+ 
+ /*
+  * We need to decode DomainParameters from RFC 3279 section 2.3.3.  We would
+@@ -3108,7 +3108,7 @@ decode_dh_params(const uint8_t *p, unsigned int len)
+     return dh;
+ }
+ 
+-#else /* OPENSSL_VERSION_NUMBER < 0x10100000L */
++#else /* OPENSSL_VERSION_NUMBER < 0x10100000L || defined LIBRESSL_VERSION_NUMBER */
+ 
+ /*
+  * Do the same decoding (except without decoding j and vparams or checking the
+@@ -3184,7 +3184,7 @@ decode_dh_params(const uint8_t *p, unsigned int len)
+     return decode_dh_params_int(NULL, &ptr, len);
+ }
+ 
+-#endif /* OPENSSL_VERSION_NUMBER < 0x10100000L */
++#endif /* OPENSSL_VERSION_NUMBER < 0x10100000L || defined LIBRESSL_VERSION_NUMBER */
+ 
+ static krb5_error_code
+ pkinit_create_sequence_of_principal_identifiers(
