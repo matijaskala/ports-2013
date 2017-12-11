@@ -2,3 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 
 -abi_x86_x32
+
+# ssp is broken on x32 musl.  This is critical for gcc-6.
+ssp
