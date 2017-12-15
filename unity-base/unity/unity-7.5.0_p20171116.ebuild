@@ -75,7 +75,7 @@ src_prepare() {
 	fi
 
 	# Taken from http://ppa.launchpad.net/timekiller/unity-systrayfix/ubuntu/pool/main/u/unity/ #
-		epatch -p1 "${FILESDIR}/systray-fix_saucy.diff"
+		#epatch -p1 "${FILESDIR}/systray-fix_saucy.diff"
 
 	# Setup Unity side launcher default applications #
 	sed \
@@ -134,6 +134,8 @@ src_prepare() {
 		-e 's:After=unity-settings-daemon.service:After=graphical-session-pre.target gnome-session.service bamfdaemon.service unity-settings-daemon.service:g' \
 			-i data/unity7.service.in || \
 				die "Sed failed for data/unity7.service.in"
+
+	eapply -p1 "${FILESDIR}/unity-7.5.0_fix-missing-vector-includes.diff"
 
 	cmake-utils_src_prepare
 }
