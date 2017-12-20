@@ -151,7 +151,7 @@ src_unpack() {
 src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}/236-0001-cryptsetup-generator-Don-t-mistake-NULL-input-as-OOM.patch"
-		"${FILESDIR}"/issetugid.patch
+		"${FILESDIR}/236-musl.patch"
 	)
 
 	if ! use vanilla; then
@@ -171,6 +171,7 @@ src_prepare() {
 	sed -i "/secure_getenv/s/.$/, 'issetugid'&/" meson.build || die
 	sed -i "/ILP32/s/$/ \&\& defined __GLIBC__/" src/basic/format-util.h || die
 	sed -i "/info.__/d" src/test/test-sizeof.c || die
+	sed -i s/ULONG_LONG_MAX/ULLONG_MAX/ src/core/shutdown.c src/journal-remote/journal-remote.c || die
 }
 
 src_configure() {

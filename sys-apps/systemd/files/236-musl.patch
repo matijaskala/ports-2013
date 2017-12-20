@@ -1,0 +1,36 @@
+--- a/src/basic/missing.h
++++ b/src/basic/missing.h
+@@ -528,7 +528,9 @@
+ #if ! HAVE_SECURE_GETENV
+ #  if HAVE___SECURE_GETENV
+ #    define secure_getenv __secure_getenv
++#  elif HAVE_ISSETUGID
++#    define secure_getenv(...) (issetugid() ? NULL : getenv(__VA_ARGS__))
+ #  else
+ #    error "neither secure_getenv nor __secure_getenv are available"
+ #  endif
+ #endif
+--- a/src/basic/process-util.c
++++ b/src/basic/process-util.c
+@@ -20,6 +20,9 @@
+ #include <errno.h>
+ #include <limits.h>
+ #include <linux/oom.h>
++#ifndef __GLIBC__
++#include <pthread.h>
++#endif
+ #include <sched.h>
+ #include <signal.h>
+ #include <stdbool.h>
+@@ -1100,7 +1100,11 @@
+ 
+                 new_pid = getpid();
+ 
++#ifdef __GLIBC__
+                 if (__register_atfork(NULL, NULL, reset_cached_pid, __dso_handle) != 0) {
++#else
++                if (pthread_atfork(NULL, NULL, reset_cached_pid) != 0) {
++#endif
+                         /* OOM? Let's try again later */
+                         cached_pid = CACHED_PID_UNSET;
+                         return new_pid;
