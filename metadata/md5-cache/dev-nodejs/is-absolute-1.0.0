@@ -1,0 +1,11 @@
+DEFINED_PHASES=install
+DESCRIPTION=Returns true if a file path is absolute. Does not rely on the path module and can be used as a polyfill for node.js native 'path.isAbolute'.
+EAPI=6
+HOMEPAGE=https://github.com/jonschlinkert/is-absolute
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND=net-libs/nodejs >=dev-nodejs/is-windows-1.0.1 >=dev-nodejs/is-relative-1.0.0
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://registry.npmjs.org/is-absolute/-/is-absolute-1.0.0.tgz
+_md5_=c943a7708cf4878a9762c83aa981d108

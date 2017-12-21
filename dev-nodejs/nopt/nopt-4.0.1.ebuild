@@ -16,7 +16,7 @@ S=${WORKDIR}
 
 DEPEND=""
 RDEPEND="net-libs/nodejs
-	dev-nodejs/abbrev
+	>=dev-nodejs/abbrev-1
 	>=dev-nodejs/osenv-0.1.4
 "
 
