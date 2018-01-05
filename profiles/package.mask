@@ -29,6 +29,29 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas Sturmlechner <asturm@gentoo.org> (05 Jan 2018)
+# Masked for removal in 30 days, merged into dev-util/kdevelop
+dev-util/kdevplatform
+
+# Andreas Sturmlechner <asturm@gentoo.org> (05 Jan 2018)
+# Masked for removal in 30 days, no more rdeps, bug #642462
+kde-apps/katepart
+kde-apps/kdebase-data
+kde-apps/konsolepart
+
+# Alice Ferrazzi <alicef@gentoo.org> (05 Jan 2018)
+# kernel: Meltdown and Spectre - Processor flaw. (#643228)
+# Please upgrade for Intel processor flaw workaround, 
+# also excluding AMD from the fix as not affected.
+# Please unmask your kernel version if you want to
+# continue to use your kernel with AMD.
+# Removal in a month.
+=sys-kernel/gentoo-sources-4.14.8-r1
+=sys-kernel/gentoo-sources-4.14.9
+=sys-kernel/gentoo-sources-4.14.10
+=sys-kernel/gentoo-sources-4.14.10-r1
+=sys-kernel/gentoo-sources-4.14.11
+
 # Pacho Ramos <pacho@gentoo.org> (04 Jan 2018)
 # Nobody bothered to bump it for ages, NPAPI is phased out (#468772).
 # Removal in a month.
@@ -361,7 +384,6 @@ dev-dotnet/referenceassemblies-pcl
 # Pacho Ramos <pacho@gentoo.org> (27 Dec 2017)
 # Dead for ages, rely on deprecated/dead libs (#447466). Removal in a month.
 dev-vcs/bzr-gtk
-dev-vcs/bzr-explorer
 
 # Pacho Ramos <pacho@gentoo.org> (27 Dec 2017)
 # Completely broken for years (#514400, #596078, #598609, #640096, #641428).
@@ -624,12 +646,6 @@ net-ftp/oneclickftp
 # Masked for removal in 30 days. Bug #640138.
 dev-vcs/qct
 
-# Andreas Sturmlechner <asturm@gentoo.org> (06 Dec 2017)
-# No maintainer, depends on dead PyQt4/Qt4.
-# Masked for removal in 30 days. Bugs #480250, #640114
-dev-vcs/qbzr
-dev-vcs/bzr-explorer
-
 # Bernard Cafarelli <voyageur@gentoo.org> (05 Dec 2017)
 # Dead Window Maker dockapps, dead upstreams and download links
 # (no release for more than 10 years)
@@ -653,11 +669,6 @@ x11-plugins/wmsvencd
 x11-plugins/wmupmon
 x11-plugins/wmwave
 <=x11-plugins/wmsysmon-0.7.7
-
-# Ian Whyman <thev00d00@gentoo.org> (04 Dec 2017)
-# Declared dead upstream. Masked for removal in 30 days
-# Please see net-misc/gerbera for a replacement.
-net-misc/mediatomb
 
 # Andreas Sturmlechner <asturm@gentoo.org> (03 Dec 2017)
 # Dead upstream, depending on dead qt3support/qt4. Bug #631788
@@ -932,11 +943,6 @@ app-xemacs/cogre
 app-xemacs/ecb
 app-xemacs/xemacs-packages-all
 
-# Bernard Cafarelli <voyageur@gentoo.org> (04 Aug 2017)
-# Temporary mask as current net-ftp/filezilla does not compile
-# with it, bug #626292
->=dev-libs/libfilezilla-0.10.0
-
 # Kent Fredric <kentnl@gentoo.org> (21 Jul 2017)
 # Masked due to serious regression that introduces widespread data
 # corruption when storing data in blobs. Masked, because any code
@@ -1044,8 +1050,7 @@ net-wireless/cpyrit-cuda
 # Bernard Cafarelli <voyageur@gentoo.org> (8 May 2017)
 # Coordinated conversion to wxGTK:3.0-gtk3
 # Drop mask after migration of existing wxGTK:3.0 users
-# and wxGTK-3.0.3 bump in tree
->=net-ftp/filezilla-3.25.2-r1
+=net-ftp/filezilla-3.29.0-r300
 
 # Rick Farina <zerochaos@gentoo.org> (17 Apr 2017)
 # Masking old versions because upstream changed versioning
