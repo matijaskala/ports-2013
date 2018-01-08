@@ -22,23 +22,26 @@ COMMON_DEPEND="
 	net-libs/libaccounts-glib
 	dev-libs/libdbusmenu:=
 	dev-libs/libtimezonemap:=
-	gnome-extra/evolution-data-server:=
 	media-libs/gstreamer:1.0
-	net-misc/url-dispatcher
 	sys-apps/util-linux
 	unity-indicators/ido:=
-	>=x11-libs/libnotify-0.7.6"
+	>=x11-libs/libnotify-0.7.6
+	eds? ( gnome-extra/evolution-data-server:= )"
 RDEPEND="${COMMON_DEPEND}
-	unity-base/unity-control-center
 	unity-base/unity-language-pack"
 DEPEND="${COMMON_DEPEND}
 	dev-libs/properties-cpp"
+PDEPEND="unity-base/unity-control-center"
 
 MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
 	# Fix schema errors and sandbox violations #
-	epatch -p1 "${FILESDIR}/sandbox_violations_fix.diff"
+	eapply "${FILESDIR}/sandbox_violations_fix.diff"
+
+	eapply "${FILESDIR}/01-${PN}-add-custom-deps.patch"
+	eapply "${FILESDIR}/02-${PN}-remove-url-dispatcher.patch"
+	eapply "${FILESDIR}/02-${PN}-optional-eds.patch"
 
 	vala_src_prepare
 	export VALA_API_GEN="$VAPIGEN"
@@ -46,9 +49,12 @@ src_prepare() {
 }
 
 src_configure() {
-	mycmakeargs+=(-DVALA_COMPILER=$VALAC
+	local mycmakeargs=(
+		-DVALA_COMPILER=$VALAC
 		-DVAPI_GEN=$VAPIGEN
-		-DCMAKE_INSTALL_FULL_LOCALEDIR=/usr/share/locale)
+		-DCMAKE_INSTALL_FULL_LOCALEDIR=/usr/share/locale
+		-DWITH_EDS="$(usex eds)"
+	)
 	cmake-utils_src_configure
 }
 

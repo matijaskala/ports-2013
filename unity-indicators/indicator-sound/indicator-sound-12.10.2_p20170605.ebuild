@@ -28,12 +28,12 @@ DEPEND="${RDEPEND}
 	dev-libs/libgee:0
 	dev-libs/libindicate-qt
 	media-sound/pulseaudio
-	net-misc/url-dispatcher
 	$(vala_depend)"
 
 MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
+	eapply "${FILESDIR}/disable-url-dispatcher.diff"
 	vala_src_prepare
 	export VALA_API_GEN="$VAPIGEN"
 	cmake-utils_src_prepare

@@ -22,7 +22,6 @@ DEPEND="${RDEPEND}
 	dev-libs/libappindicator
 	dev-libs/libdbusmenu
 	dev-libs/libindicate-qt
-	net-misc/url-dispatcher
 	sys-power/upower
 	unity-base/unity-settings-daemon"
 
@@ -30,7 +29,8 @@ S=${WORKDIR}
 MAKEOPTS="-j1"
 
 src_prepare() {
-	epatch "${FILESDIR}/sandbox_violations_fix.diff"
+	eapply "${FILESDIR}/sandbox_violations_fix.diff"
+	eapply "${FILESDIR}/disable-url-dispatcher.diff"
 	cmake-utils_src_prepare
 }
 
