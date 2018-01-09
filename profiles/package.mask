@@ -29,6 +29,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas Sturmlechner <asturm@gentoo.org> (09 Jan 2018)
+# Dead upstream, depends on dead Qt4.
+# Bug #643976. Masked for removal in 30 days.
+media-video/2mandvd
+
 # Andreas Sturmlechner <asturm@gentoo.org> (07 Jan 2018)
 # Masked for removal in 30 days, no more rdeps, bug #602816
 dev-python/python-poppler-qt4
@@ -50,7 +55,8 @@ kde-apps/konsolepart
 
 # Alice Ferrazzi <alicef@gentoo.org> (05 Jan 2018)
 # kernel: Meltdown and Spectre - Processor flaw. (#643228)
-# Please upgrade for Intel processor flaw workaround, 
+# Please upgrade for Intel processor flaw workaround
+# (currently KPTI patch are 64bit only), 
 # also excluding AMD from the fix as not affected.
 # Please unmask your kernel version if you want to
 # continue to use your kernel with AMD.
