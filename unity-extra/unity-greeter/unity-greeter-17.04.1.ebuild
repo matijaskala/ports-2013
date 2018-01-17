@@ -31,7 +31,6 @@ RDEPEND="accessibility? ( app-accessibility/onboard
 			app-accessibility/orca )
 	battery? ( unity-indicators/indicator-power )
 	networkmanager? ( >=gnome-extra/nm-applet-0.9.8.0 )
-	>=app-eselect/eselect-lightdm-0.1
 	>=gnome-base/gsettings-desktop-schemas-3.8
 	media-fonts/ubuntu-font-family
 	unity-base/unity-language-pack
