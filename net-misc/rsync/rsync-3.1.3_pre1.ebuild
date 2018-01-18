@@ -26,6 +26,13 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${P/_/}"
 
+src_prepare() {
+	sed -i 's/\*linux\*|\*netbsd\*/&|*gnu*/' configure.ac || die
+	sed -i 's/\*linux\*|\*netbsd\*/&|*gnu*/' configure.sh || die
+	touch config.h.in || die
+	default
+}
+
 src_configure() {
 	use static && append-ldflags -static
 	local myeconfargs=(
