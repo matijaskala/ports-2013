@@ -12,10 +12,11 @@ SRC_URI="https://github.com/ib/xarchiver/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha amd64 ~arm hppa ia64 ppc ppc64 ~sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux"
-IUSE="doc"
+IUSE="doc +gtk3"
 
 RDEPEND=">=dev-libs/glib-2:=
-	x11-libs/gtk+:3="
+	gtk3? ( x11-libs/gtk+:3= )
+	!gtk3? ( x11-libs/gtk+:2 )"
 DEPEND="${RDEPEND}
 	dev-util/intltool
 	sys-devel/gettext
@@ -36,6 +37,7 @@ src_prepare() {
 src_configure() {
 	local myconf=(
 		$(use_enable doc)
+		$(use_enable !gtk3 gtk2)
 	)
 	econf "${myconf[@]}"
 }
