@@ -1,0 +1,123 @@
+diff --git a/modules/profile.ego b/modules/profile.ego
+--- a/modules/profile.ego
++++ b/modules/profile.ego
+@@ -54,6 +54,7 @@ class Module(EgoModule):
+ 			subparsers.add_parser('arch', help="Change your arch profile"),
+ 			subparsers.add_parser('build', help="Change your build profile"),
+ 			subparsers.add_parser('subarch', help="Change your subarch profile"),
++			subparsers.add_parser('release', help="Change your release profile"),
+ 			subparsers.add_parser('flavor', help="Change your flavor profile"),
+ 		]
+ 		for subparser in single_profile_parsers:
+@@ -71,7 +72,7 @@ class Module(EgoModule):
+ 
+ 	def short_list(self):
+ 		Output.header("Enabled Profiles")
+-		for key in [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.FLAVOR, ProfileType.MIX_IN ]:
++		for key in [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.RELEASE, ProfileType.FLAVOR, ProfileType.MIX_IN ]:
+ 			all_enabled = list(self.tree.get_children(key))
+ 			if len(all_enabled) == 0:
+ 				Output.log("%s%12s%s: (not set)" % (Color.BOLD, key, Color.END))
+@@ -82,7 +83,7 @@ class Module(EgoModule):
+ 
+ 	def short_JSON(self):
+ 		outdict = {}
+-		for p_type in [ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.FLAVOR, ProfileType.MIX_IN]:
++		for p_type in [ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.RELEASE, ProfileType.FLAVOR, ProfileType.MIX_IN]:
+ 			key = str(p_type)
+ 			outdict[key] = []
+ 			for item in self.tree.get_children(p_type):
+@@ -96,7 +97,7 @@ class Module(EgoModule):
+ 
+ 	def handle_show_action(self, **options):
+ 		self.short_list()
+-		self.python_info()
++		#self.python_info()
+ 
+ 		for specifier in self.tree.get_children([ProfileType.FLAVOR, ProfileType.MIX_IN]):
+ 
+@@ -117,6 +118,10 @@ class Module(EgoModule):
+ 
+ 	def handle_write(self, **options):
+ 		try:
++			if os.path.islink(self.tree.root_parent_dir):
++				os.unlink(self.tree.root_parent_dir)
++			if not os.path.exists(self.tree.root_parent_dir):
++				os.mkdir(self.tree.root_parent_dir)
+ 			with open(self.tree.master_parent_file, "w") as outfile:
+ 				self.tree.write(self.config, outfile)
+ 		except PermissionError:
+@@ -133,7 +138,7 @@ class Module(EgoModule):
+ 		# Time to list all available profile settings.
+ 		profiles = options['profiles']
+ 
+-		for key in [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.FLAVOR, ProfileType.MIX_IN ]:
++		for key in [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.RELEASE, ProfileType.FLAVOR, ProfileType.MIX_IN ]:
+ 			if profiles and str(key) not in profiles:
+ 				continue
+ 
+@@ -204,7 +209,7 @@ class Module(EgoModule):
+ 			Output.fatal("%s %s not available. Can't set." % (action, newset))
+ 		self.writeout = True
+ 
+-		self.tree.replace_entry(profile_type, "core-kit:" + self.catalog.find_path(profile_type, newset))
++		self.tree.replace_entry(profile_type, "gentoo:" + self.catalog.find_path(profile_type, newset))
+ 
+ 		self.short_list()
+ 		Output.log(">>> Set %s to %s." % (action, newset))
+@@ -263,6 +268,7 @@ class Module(EgoModule):
+ 
+ 	def handle(self, **options):
+ 		portdir = os.path.join(self.config.kit_root, "core-kit")
++		portdir = "/usr/portage"
+ 
+ 		self.catalog, self.tree = getProfileCatalogAndTree(portdir)
+ 
+diff --git a/python/ego/profile.py b/python/ego/profile.py
+--- a/python/ego/profile.py
++++ b/python/ego/profile.py
+@@ -78,8 +78,9 @@ class ProfileType(ProfileName):
+ 	ARCH = (1, "arch")
+ 	BUILD = (2, "build")
+ 	SUBARCH = (3, "subarch")
+-	FLAVOR = (4, "flavor")
+-	MIX_IN = (5, "mix-ins")
++	RELEASE = (4, "release")
++	FLAVOR = (5, "flavor")
++	MIX_IN = (6, "mix-ins")
+ 	OTHER = (99, "other")
+ 
+ 	@classmethod
+@@ -95,12 +96,12 @@ class ProfileType(ProfileName):
+ 	@classmethod
+ 	def valid(cls):
+ 		# valid for use in setting profiles.
+-		return [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.FLAVOR, ProfileType.MIX_IN ]
++		return [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.SUBARCH, ProfileType.RELEASE, ProfileType.FLAVOR, ProfileType.MIX_IN ]
+ 
+ 	@classmethod
+ 	def single(cls):
+ 		# profile types that should only be set once.
+-		return [ ProfileType.ARCH, ProfileType.BUILD, ProfileType.FLAVOR ]
++		return [ ProfileType.ARCH, ProfileType.RELEASE, ProfileType.FLAVOR ]
+ 
+ class ProfileCatalog:
+ 	"""
+@@ -516,7 +517,7 @@ class ProfileTree(object):
+ 
+ def getProfileCatalogAndTree(portdir):
+ 	catalog = ProfileCatalog(portdir + "/profiles")
+-	tree = ProfileTree(catalog, "core-kit", {"core-kit": portdir})
++	tree = ProfileTree(catalog, "gentoo", {"gentoo": portdir})
+ 	current_arch = tree.get_arch()
+ 	catalog.set_arch(current_arch.name if current_arch is not None else None)
+ 	return catalog, tree
+@@ -525,7 +526,7 @@ if __name__ == "__main__":
+ 	# A quick example to parse profiles in core-kit. Note how the profiles tree specified in the ProfileCatalog()
+ 	# constructor is completely decoupled from the core-kit repo. In theory, it could live anywhere.
+ 
+-	pt = ProfileTree(ProfileCatalog("/var/git/meta-repo/kits/core-kit/profiles"), "core-kit", {"core-kit": "/var/git/meta-repo/kits/core-kit"})
++	pt = ProfileTree(ProfileCatalog("/usr/portage/profiles"), "gentoo", {"gentoo": "/usr/portage"})
+ 	# pt.spiff()
+ 	print(list(pt.get_children(child_types=[ProfileType.FLAVOR])))
+ 

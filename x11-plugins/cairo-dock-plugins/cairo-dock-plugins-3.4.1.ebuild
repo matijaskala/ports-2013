@@ -54,8 +54,9 @@ DEPEND="${RDEPEND}
 "
 
 src_configure() {
+	CFLAGS+=" -D_POSIX_C_SOURCE=200809L"
 	local mycmakeargs=(
-		"-Denable-alsa=$(usex alsa)"
+		"-Denable-alsa-mixer=$(usex alsa)"
 		"-Denable-dbusmenu-support=$(usex dbusmenu)"
 		"-Denable-disks=$(usex disks)"
 		"-Denable-doncky=$(usex doncky)"

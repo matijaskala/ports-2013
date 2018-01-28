@@ -41,7 +41,7 @@ DEPEND="${RDEPEND}
 src_configure() {
 	local mycmakeargs=(
 		"-Denable-desktop-manager=$(usex desktop-manager ON OFF)"
-		"$(cmake-utils_use_with xcomposite XEXTEND)"
+		"-DWITH_XEXTEND=$(usex xcomposite)"
 	)
 	cmake-utils_src_configure
 }
