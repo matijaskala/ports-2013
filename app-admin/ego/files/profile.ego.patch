@@ -58,7 +58,7 @@ diff --git a/modules/profile.ego b/modules/profile.ego
  			if profiles and str(key) not in profiles:
  				continue
  
-@@ -204,7 +209,7 @@ class Module(EgoModule):
+@@ -204,7 +207,7 @@ class Module(EgoModule):
  			Output.fatal("%s %s not available. Can't set." % (action, newset))
  		self.writeout = True
  
@@ -67,7 +67,22 @@ diff --git a/modules/profile.ego b/modules/profile.ego
  
  		self.short_list()
  		Output.log(">>> Set %s to %s." % (action, newset))
-@@ -263,6 +266,7 @@ class Module(EgoModule):
+@@ -241,11 +244,12 @@ class Module(EgoModule):
+ 				self.tree.remove_name(ProfileType.MIX_IN, mix_in.name)
+ 				self.writeout = True
+ 
+-		available_mix_in_shortnames = set(self.catalog.list(ProfileType.MIX_IN))
++		available_mix_in_shortnames = set(self.catalog.list(ProfileType.MIX_IN)) - set([x.name for x in enabled_mix_ins])
+ 		not_added = adds - available_mix_in_shortnames
+ 
+ 		for shortname in adds & available_mix_in_shortnames:
+-			self.tree.append_mixin("core-kit:" + self.catalog.find_path(ProfileType.MIX_IN, shortname))
++			added.add(shortname)
++			self.tree.append_mixin("gentoo:" + self.catalog.find_path(ProfileType.MIX_IN, shortname))
+ 			self.writeout = True
+ 
+ 		# Do all output here -- our shortList() will reflect the mix-in changes made above. Then put informational messages
+@@ -263,6 +267,7 @@ class Module(EgoModule):
  
  	def handle(self, **options):
  		portdir = os.path.join(self.config.kit_root, "core-kit")
@@ -107,7 +122,18 @@ diff --git a/python/ego/profile.py b/python/ego/profile.py
  
  class ProfileCatalog:
  	"""
-@@ -338,7 +337,7 @@ class ProfileTree(object):
+@@ -163,9 +162,7 @@ class ProfileCatalog:
+ 
+ 		if arch is not None:
+ 
+-			if key == ProfileType.SUBARCH:
+-				dirlist = [self.json_info[str(ProfileType.ARCH)] + "/" + arch + "/subarch"]
+-			elif key == ProfileType.MIX_IN:
++			if key == ProfileType.MIX_IN:
+ 				dirlist = [self.json_info[str(ProfileType.MIX_IN)] + "/" + arch + "/mix-ins"]
+ 
+ 		if str(key) in self.json_info:
+@@ -338,7 +335,7 @@ class ProfileTree(object):
  
  	def write(self, config, outfile):
  
@@ -116,7 +142,7 @@ diff --git a/python/ego/profile.py b/python/ego/profile.py
  
  		# TODO: it's possible to get blank lines in the profile file, and the specifier doesn't like this...
  
-@@ -350,10 +349,10 @@ class ProfileTree(object):
+@@ -350,10 +347,10 @@ class ProfileTree(object):
  			outfile.write(strout + '\n')
  
  		# add new python-kit settings
@@ -131,7 +157,7 @@ diff --git a/python/ego/profile.py b/python/ego/profile.py
  
  	def remove_line(self, spec_str):
  		"""
-@@ -516,7 +515,7 @@ class ProfileTree(object):
+@@ -516,7 +513,7 @@ class ProfileTree(object):
  
  def getProfileCatalogAndTree(portdir):
  	catalog = ProfileCatalog(portdir + "/profiles")
@@ -140,7 +166,7 @@ diff --git a/python/ego/profile.py b/python/ego/profile.py
  	current_arch = tree.get_arch()
  	catalog.set_arch(current_arch.name if current_arch is not None else None)
  	return catalog, tree
-@@ -525,7 +524,7 @@ if __name__ == "__main__":
+@@ -525,7 +522,7 @@ if __name__ == "__main__":
  	# A quick example to parse profiles in core-kit. Note how the profiles tree specified in the ProfileCatalog()
  	# constructor is completely decoupled from the core-kit repo. In theory, it could live anywhere.
  
