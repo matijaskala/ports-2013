@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: toolchain-glibc.eclass
@@ -19,9 +19,10 @@ case ${EAPI:-0} in
 		src_install pkg_preinst pkg_postinst;;
 	2|3) EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_configure \
 		src_compile src_test src_install pkg_preinst pkg_postinst;;
-	4|5|6) EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare \
+	4|5) EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare \
 		src_configure src_compile src_test src_install \
 		pkg_preinst pkg_postinst;;
+	6) EXPORT_FUNCTIONS pkg_pretend;;
 	*) die "Unsupported EAPI=${EAPI}";;
 esac
 
@@ -226,6 +227,7 @@ setup_flags() {
 	strip-flags
 	strip-unsupported-flags
 	filter-flags -m32 -m64 -mabi=*
+	filter-ldflags -Wl,-rpath=*
 
 	# Bug 492892.
 	filter-flags -frecord-gcc-switches
@@ -397,7 +399,7 @@ foreach_abi() {
 }
 
 just_headers() {
-	is_crosscompile && use crosscompile_opts_headers-only
+	is_crosscompile && use headers-only
 }
 
 glibc_banner() {
@@ -481,6 +483,12 @@ check_devpts() {
 }
 
 toolchain-glibc_pkg_pretend() {
+	if [[ ${EAPI:-0} == 6 ]]; then
+		eerror "We're moving code back to the ebuilds to get away from the ancient EAPI cruft."
+		eerror "From EAPI=6 on you'll have to define the phases in the glibc ebuilds."
+		die "Silly overlay authors..."
+	fi
+
 	# For older EAPIs, this is run in pkg_preinst.
 	if [[ ${EAPI:-0} != [0123] ]] ; then
 		check_devpts
