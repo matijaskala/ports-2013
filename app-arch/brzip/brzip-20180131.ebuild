@@ -6,7 +6,7 @@ EAPI=6
 inherit meson vala
 
 COMMIT_ID="3e8ae177890dc4970691d3b8b841b8a62ce0cb4e"
-DESCRIPTION=".br compression utility"
+DESCRIPTION="A compression utility based on Brotli algorithm"
 HOMEPAGE="https://github.com/matijaskala/brzip"
 SRC_URI="${HOMEPAGE}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
 
