@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -21,7 +21,6 @@ DEPEND="${RDEPEND}
 	>=dev-libs/glib-2.40
 	dev-libs/libappindicator
 	dev-libs/libdbusmenu
-	dev-libs/libindicate-qt
 	sys-power/upower
 	unity-base/unity-settings-daemon"
 
@@ -31,6 +30,7 @@ MAKEOPTS="-j1"
 src_prepare() {
 	eapply "${FILESDIR}/sandbox_violations_fix.diff"
 	eapply "${FILESDIR}/disable-url-dispatcher.diff"
+
 	cmake-utils_src_prepare
 }
 

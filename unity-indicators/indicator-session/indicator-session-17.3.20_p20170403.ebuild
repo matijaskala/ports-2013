@@ -23,7 +23,6 @@ RDEPEND="
 	>=dev-libs/glib-2.36
 	dev-libs/libappindicator:=
 	dev-libs/libdbusmenu:=
-	dev-libs/libindicate-qt
 	help? ( gnome-extra/yelp
 		gnome-extra/gnome-user-docs )"
 DEPEND="$RDEPEND"

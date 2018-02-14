@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=5
 
@@ -18,9 +17,9 @@ IUSE=""
 S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
-RDEPEND="dev-libs/libdbusmenu:=
-	dev-libs/libappindicator
-	dev-libs/libindicate-qt"
+RDEPEND="dev-libs/libappindicator:=
+	dev-libs/libdbusmenu:=
+"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
@@ -36,7 +35,7 @@ src_prepare() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	emake DESTDIR="${ED}" install
 	prune_libtool_files --modules
 
 	# Remove upstart jobs as we use XDG autostart desktop files to spawn indicators #

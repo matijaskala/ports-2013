@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -26,7 +26,6 @@ RDEPEND="dev-libs/libdbusmenu:=
 DEPEND="${RDEPEND}
 	dev-libs/libappindicator
 	dev-libs/libgee:0
-	dev-libs/libindicate-qt
 	media-sound/pulseaudio
 	$(vala_depend)"
 
@@ -34,6 +33,7 @@ MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
 	eapply "${FILESDIR}/disable-url-dispatcher.diff"
+
 	vala_src_prepare
 	export VALA_API_GEN="$VAPIGEN"
 	cmake-utils_src_prepare

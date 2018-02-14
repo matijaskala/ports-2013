@@ -1,8 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python3_5 )
+PYTHON_COMPAT=( python3_{5,6} )
 DISTUTILS_SINGLE_IMPL=1
 
 inherit cmake-utils distutils-r1 eutils gnome2-utils pam systemd toolchain-funcs
@@ -58,7 +58,6 @@ DEPEND="${COMMON_DEPEND}
 	dev-libs/boost:=
 	dev-libs/libappindicator
 	dev-libs/libindicate[gtk,introspection]
-	dev-libs/libindicate-qt
 	app-text/yelp-tools
 	doc? ( app-doc/doxygen )
 	test? ( dev-cpp/gmock
@@ -125,11 +124,11 @@ src_prepare() {
 		-i tools/{systemd,upstart}-prestart-check || \
 			die "Sed failed for tools/{systemd,upstart}-prestart-check"
 
-	#  'After=graphical-session-pre.target' must be explicitly set in the unit files that require it #
-	#  Relying on the upstart job /usr/share/upstart/systemd-session/upstart/systemd-graphical-session.conf #
-	#       to create "$XDG_RUNTIME_DIR/systemd/user/${unit}.d/graphical-session-pre.conf" drop-in units #
-	#       results in weird race problems on desktop logout where the reliant desktop services #
-	#       stop in a different jumbled order each time #
+	# 'After=graphical-session-pre.target' must be explicitly set in the unit files that require it #
+	# Relying on the upstart job /usr/share/upstart/systemd-session/upstart/systemd-graphical-session.conf #
+	#	to create "$XDG_RUNTIME_DIR/systemd/user/${unit}.d/graphical-session-pre.conf" drop-in units #
+	#	results in weird race problems on desktop logout where the reliant desktop services #
+	#	stop in a different jumbled order each time #
 	sed -e 's:Requires=unity-settings-daemon.service:Requires=gnome-session.service unity-settings-daemon.service:g' \
 		-e 's:After=unity-settings-daemon.service:After=graphical-session-pre.target gnome-session.service bamfdaemon.service unity-settings-daemon.service:g' \
 			-i data/unity7.service.in || \
