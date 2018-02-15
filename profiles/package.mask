@@ -216,8 +216,8 @@ net-p2p/primecoind
 sci-physics/geant-python
 
 # Patrice Clement <monsieurp@gentoo.org> (18 Jan 2018)
-# mpv-0.28.0 requires changes currently only available in ffmpeg-9999.
-=media-video/mpv-0.28.0
+# mpv >= 0.28.0 requires changes currently only available in ffmpeg-9999.
+>=media-video/mpv-0.28.0
 
 # Andreas Sturmlechner <asturm@gentoo.org> (18 Jan 2018)
 # Broken by >=kde-apps/kcalcore-17.12.0, but also merged into
@@ -233,11 +233,6 @@ dev-tex/pstplus
 # Depends on dead PyQt4/Qt4, upstream needs help w/ PyQt5.
 # Masked for removal in 30 days. Bug #634986
 dev-tex/texamator
-
-# Kent Fredric <kentnl@gentoo.org> (10 Jan 2018)
-# Dead upstream, Broken since 2009.
-# Bug #644146. Removal in 30 days
-dev-perl/SVN-Simple
 
 # Michał Górny <mgorny@gentoo.org> (10 Jan 2018)
 # The Fuzzer library is now installed as part of core LLVM. That's
@@ -501,6 +496,7 @@ games-kids/crayon-physics
 >=dev-python/thunarx-python-0.4.0
 >=xfce-base/thunar-1.7
 >=xfce-extra/thunar-archive-plugin-0.4.0
+>=xfce-extra/thunar-media-tags-plugin-0.3.0
 
 # Andreas Sturmlechner <asturm@gentoo.org> (16 Nov 2017)
 # Qt4WebKit is ancient and full of security holes.
