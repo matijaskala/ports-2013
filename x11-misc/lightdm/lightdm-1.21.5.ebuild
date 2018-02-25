@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
 inherit autotools eutils flag-o-matic pam qmake-utils readme.gentoo-r1 systemd vala versionator xdg-utils
 
 TRUNK_VERSION="$(get_version_component_range 1-2)"
@@ -13,34 +14,30 @@ SRC_URI="https://launchpad.net/${PN}/${TRUNK_VERSION}/${PV}/+download/${P}.tar.x
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 ~ppc ~ppc64 x86"
-IUSE="audit +gnome +introspection qt4 qt5 +vala"
+IUSE="audit +gnome +introspection qt5 +vala"
 
-COMMON_DEPEND="audit? ( sys-process/audit )
+COMMON_DEPEND="
 	>=dev-libs/glib-2.32.3:2
 	dev-libs/libxml2
-	gnome? ( sys-apps/accountsservice )
 	virtual/pam
 	x11-libs/libX11
 	>=x11-libs/libxklavier-5
+	audit? ( sys-process/audit )
+	gnome? ( sys-apps/accountsservice )
 	introspection? ( >=dev-libs/gobject-introspection-1 )
-	qt4? (
-		dev-qt/qtcore:4
-		dev-qt/qtdbus:4
-		dev-qt/qtgui:4
-		)
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtdbus:5
 		dev-qt/qtgui:5
-		)"
+	)"
 RDEPEND="${COMMON_DEPEND}
 	>=sys-auth/pambase-20101024-r2"
 DEPEND="${COMMON_DEPEND}
 	dev-util/gtk-doc-am
 	dev-util/intltool
-	gnome? ( gnome-base/gnome-common )
 	sys-devel/gettext
-	virtual/pkgconfig"
+	virtual/pkgconfig
+	gnome? ( gnome-base/gnome-common )"
 
 DOCS=( NEWS )
 RESTRICT="test"
@@ -94,7 +91,7 @@ src_configure() {
 		--disable-tests \
 		$(use_enable audit libaudit) \
 		$(use_enable introspection) \
-		$(use_enable qt4 liblightdm-qt) \
+		--disable-liblightdm-qt \
 		$(use_enable qt5 liblightdm-qt5) \
 		$(use_enable vala) \
 		--with-user-session=${_session} \
