@@ -388,8 +388,9 @@ src_configure() {
 
 	if ! tc-is-clang; then
 		# Force clang since gcc is pretty broken at the moment.
-		CC=clang
-		CXX=clang++
+		CC=${CHOST}-clang
+		CXX=${CHOST}-clang++
+		strip-unsupported-flags
 	fi
 
 	if tc-is-clang; then
