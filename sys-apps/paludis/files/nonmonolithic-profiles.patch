@@ -1,0 +1,14 @@
+--- a/paludis/repositories/e/traditional_profile.cc
++++ b/paludis/repositories/e/traditional_profile.cc
+@@ -274,7 +274,10 @@
+                 {
+                     try
+                     {
+-                        parent_dir = (parent_dir / *i).realpath();
++                        if (i->compare(0, 7, "gentoo:") == 0)
++                            parent_dir = (FSPath("/usr/portage/profiles") / i->substr(7)).realpath();
++                        else
++                            parent_dir = (parent_dir / *i).realpath();
+                     }
+                     catch (const FSError & e)
+                     {

@@ -56,6 +56,8 @@ RESTRICT="!test? ( test )"
 
 S=${WORKDIR}/${MY_P}
 
+PATCHES=( "${FILESDIR}"/nonmonolithic-profiles.patch )
+
 pkg_pretend() {
 	if [[ ${MERGE_TYPE} != buildonly ]]; then
 		if id paludisbuild >/dev/null 2>/dev/null ; then

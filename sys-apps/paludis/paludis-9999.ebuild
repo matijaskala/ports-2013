@@ -53,6 +53,8 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )
 	ruby? ( ruby_targets_ruby${RUBY_VER/./} )"
 RESTRICT="!test? ( test )"
 
+PATCHES=( "${FILESDIR}"/nonmonolithic-profiles.patch )
+
 pkg_pretend() {
 	if [[ ${MERGE_TYPE} != buildonly ]]; then
 		if id paludisbuild >/dev/null 2>/dev/null ; then
