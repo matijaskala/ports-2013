@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: qt5-build.eclass
@@ -53,15 +53,14 @@ esac
 # for tests you should proceed with setting VIRTUALX_REQUIRED=test.
 : ${VIRTUALX_REQUIRED:=manual}
 
-inherit estack flag-o-matic ltprune toolchain-funcs versionator virtualx
+inherit eapi7-ver estack flag-o-matic toolchain-funcs virtualx
 
 HOMEPAGE="https://www.qt.io/"
 LICENSE="|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3"
-SLOT=5/$(get_version_component_range 1-2)
+SLOT=5/$(ver_cut 1-2)
 
-QT5_MINOR_VERSION=$(get_version_component_range 2)
-QT5_PATCH_VERSION=$(get_version_component_range 3)
-readonly QT5_MINOR_VERSION QT5_PATCH_VERSION
+QT5_MINOR_VERSION=$(ver_cut 2)
+readonly QT5_MINOR_VERSION
 
 case ${PV} in
 	5.9999)
@@ -166,7 +165,7 @@ qt5-build_src_unpack() {
 	fi
 
 	case ${QT5_BUILD_TYPE} in
-		live)    git-r3_src_unpack ;;
+		live)    git-r3_src_unpack ;&
 		release) default ;;
 	esac
 }
@@ -321,10 +320,14 @@ qt5-build_src_install() {
 		# convenience symlinks
 		dosym qt5-"${CHOST}".conf /etc/xdg/qtchooser/5.conf
 		dosym qt5-"${CHOST}".conf /etc/xdg/qtchooser/qt5.conf
+		# TODO bug 522646: write an eselect module to manage default.conf
+		dosym qt5.conf /etc/xdg/qtchooser/default.conf
 	fi
 
 	qt5_install_module_config
-	prune_libtool_files
+
+	# prune libtool files
+	find "${D}" -name '*.la' -delete || die
 }
 
 # @FUNCTION: qt5-build_pkg_postinst
@@ -921,11 +924,11 @@ qt5_install_module_config() {
 		)
 	fi
 
-	# install also the original qconfig.pri
+	# install the original {qconfig,qmodule}.pri from qtcore
 	[[ ${PN} == qtcore && ${QT5_MINOR_VERSION} -ge 9 ]] && (
 		insinto "${QT5_ARCHDATADIR#${EPREFIX}}"/mkspecs/gentoo
-		newins "${D}${QT5_ARCHDATADIR#${EPREFIX}}"/mkspecs/qconfig.pri qconfig-qtcore.pri
-		newins "${D}${QT5_ARCHDATADIR#${EPREFIX}}"/mkspecs/qmodule.pri qmodule-qtcore.pri
+		newins "${D}${QT5_ARCHDATADIR}"/mkspecs/qconfig.pri qconfig-qtcore.pri
+		newins "${D}${QT5_ARCHDATADIR}"/mkspecs/qmodule.pri qmodule-qtcore.pri
 	)
 }
 

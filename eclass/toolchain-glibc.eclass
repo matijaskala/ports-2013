@@ -593,7 +593,7 @@ eend_KV() {
 
 get_kheader_version() {
 	printf '#include <linux/version.h>\nLINUX_VERSION_CODE\n' | \
-	$(tc-getCPP ${CTARGET}) -I "${EPREFIX}/$(alt_build_headers)" - | \
+	$(tc-getCPP ${CTARGET}) -I "$(alt_build_headers)" - | \
 	tail -n 1
 }
 
@@ -799,6 +799,11 @@ glibc_do_configure() {
 
 	if version_is_at_least 2.25 ; then
 		case ${CTARGET} in
+			mips*)
+				# dlopen() detects stack smash on mips n32 ABI.
+				# Cause is unknown: https://bugs.gentoo.org/640130
+				myconf+=( --enable-stack-protector=no )
+				;;
 			powerpc-*)
 				# Currently gcc on powerpc32 generates invalid code for
 				# __builtin_return_address(0) calls. Normally programs
@@ -812,6 +817,17 @@ glibc_do_configure() {
 				;;
 		esac
 	fi
+
+	# Keep a whitelist of targets supporing IFUNC. glibc's ./configure
+	# is not robust enough to detect proper support:
+	#    https://bugs.gentoo.org/641216
+	#    https://sourceware.org/PR22634#c0
+	case $(tc-arch ${CTARGET}) in
+		# Keep whitelist of targets where autodetection mostly works.
+		amd64|x86|sparc|ppc|ppc64|arm|arm64|s390) ;;
+		# Blacklist everywhere else
+		*) myconf+=( libc_cv_ld_gnu_indirect_function=no ) ;;
+	esac
 
 	if version_is_at_least 2.25 ; then
 		myconf+=( --enable-stackguard-randomization )
