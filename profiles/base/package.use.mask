@@ -22,8 +22,6 @@ net-analyzer/scapy visual
 
 # Pacho Ramos <pacho@gentoo.org> (18 Mar 2018)
 # net-dns/hesiod will be removed (#606652)
-app-editors/emacs hesiod
-app-editors/emacs-vcs hesiod
 net-mail/fetchmail hesiod
 sys-freebsd/freebsd-lib hesiod
 
@@ -182,11 +180,6 @@ app-emulation/libvirt openvz
 # The Z3 backend is unstable and causes assertion failures. Mask it
 # until upstream fixes it properly.
 sys-devel/clang z3
-
-# Ulrich Müller <ulm@gentoo.org> (26 Jul 2017)
-# Disable hesiod support due to security vulnerability, bug #626242.
-app-editors/emacs hesiod
-app-editors/emacs-vcs hesiod
 
 # Brian Evans <grknight@gentoo.org> (21 Jul 2017)
 # Mask USE flag which has limited keywords for app-crypt/argon2
