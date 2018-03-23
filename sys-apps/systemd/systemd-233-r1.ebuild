@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -56,9 +56,6 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.27.1:0=[${MULTILIB_USEDEP}]
 	qrcode? ( media-gfx/qrencode:0= )
 	seccomp? ( >=sys-libs/libseccomp-2.3.1:0= )
 	selinux? ( sys-libs/libselinux:0= )
-	sysv-utils? (
-		!sys-apps/systemd-sysv-utils
-		!sys-apps/sysvinit )
 	xkb? ( >=x11-libs/libxkbcommon-0.4.1:0= )
 	abi_x86_32? ( !<=app-emulation/emul-linux-x86-baselibs-20130224-r9
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)] )"
@@ -67,6 +64,8 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.27.1:0=[${MULTILIB_USEDEP}]
 RDEPEND="${COMMON_DEPEND}
 	>=sys-apps/baselayout-2.2
 	selinux? ( sec-policy/selinux-base-policy[systemd] )
+	sysv-utils? ( !sys-apps/sysvinit )
+	!sysv-utils? ( sys-apps/sysvinit )
 	!build? ( || (
 		sys-apps/util-linux[kill(-)]
 		sys-process/procps[kill(+)]
@@ -113,7 +112,7 @@ pkg_pretend() {
 			~INOTIFY_USER ~IPV6 ~NET ~NET_NS ~PROC_FS ~SIGNALFD ~SYSFS
 			~TIMERFD ~TMPFS_XATTR ~UNIX
 			~CRYPTO_HMAC ~CRYPTO_SHA256 ~CRYPTO_USER_API_HASH
-			~!FW_LOADER_USER_HELPER ~!GRKERNSEC_PROC ~!IDE ~!SYSFS_DEPRECATED
+			~!FW_LOADER_USER_HELPER_FALLBACK ~!GRKERNSEC_PROC ~!IDE ~!SYSFS_DEPRECATED
 			~!SYSFS_DEPRECATED_V2"
 
 		use acl && CONFIG_CHECK+=" ~TMPFS_POSIX_ACL"
@@ -168,9 +167,9 @@ src_prepare() {
 
 	if ! use vanilla; then
 		PATCHES+=(
-			"${FILESDIR}/218-Dont-enable-audit-by-default.patch"
+			"${FILESDIR}/gentoo-Dont-enable-audit-by-default.patch"
 			"${FILESDIR}/228-noclean-tmp.patch"
-			"${FILESDIR}/233-systemd-user-pam.patch"
+			"${FILESDIR}/gentoo-systemd-user-pam.patch"
 		)
 	fi
 
@@ -372,11 +371,11 @@ multilib_src_install_all() {
 
 	# If we install these symlinks, there is no way for the sysadmin to remove them
 	# permanently.
-	rm "${D}"/etc/systemd/system/multi-user.target.wants/systemd-networkd.service || die
-	rm -f "${D}"/etc/systemd/system/multi-user.target.wants/systemd-resolved.service || die
-	rm -r "${D}"/etc/systemd/system/network-online.target.wants || die
-	rm -r "${D}"/etc/systemd/system/sockets.target.wants || die
-	rm -r "${D}"/etc/systemd/system/sysinit.target.wants || die
+	rm -f "${ED%/}"/etc/systemd/system/multi-user.target.wants/systemd-networkd.service || die
+	rm -f "${ED%/}"/etc/systemd/system/multi-user.target.wants/systemd-resolved.service || die
+	rm -fr "${ED%/}"/etc/systemd/system/network-online.target.wants || die
+	rm -fr "${ED%/}"/etc/systemd/system/sockets.target.wants || die
+	rm -fr "${ED%/}"/etc/systemd/system/sysinit.target.wants || die
 }
 
 migrate_locale() {
