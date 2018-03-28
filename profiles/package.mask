@@ -632,11 +632,6 @@ media-video/abby
 # See https://wiki.gentoo.org/wiki/Project:Hardened_uClibc
 sys-libs/uclibc
 
-# Thomas Deutschmann <whissi@gentoo.org> (23 Feb 2018)
-# Unmaintained in Gentoo, known critical vulnerabilities like
-# auth bypass. Removal in 30 days. Bugs #559658, #592080.
-sys-cluster/ganglia-web
-
 # Mart Raudsepp <leio@gentoo.org> (23 Feb 2018)
 # Old net-libs/webkit-gtk SLOTs have hundreds of known security issues.
 # Use the security safe net-libs webkit-gtk SLOT=4 instead via
@@ -1167,10 +1162,6 @@ sys-fs/bedup
 # Masked as requested by vapier.
 ~net-misc/iputils-20160308
 ~net-misc/iputils-20161105
-
-# Sebastian Pipping <sping@gentoo.org> (8 Aug 2015)
-# Upcoming, too young to go into testing unmasked
-dev-libs/iniparser:4
 
 # Justin Lecher <jlec@gentoo.org> (28 Feb 2015)
 # Unfixed security problems
