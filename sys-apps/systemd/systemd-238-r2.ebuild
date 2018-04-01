@@ -150,7 +150,7 @@ src_unpack() {
 
 src_prepare() {
 	local PATCHES=(
-		"${FILESDIR}/236-musl.patch"
+		"${FILESDIR}/238-musl.patch"
 		"${FILESDIR}/238-0001-sd-bus-do-not-try-to-close-already-closed-fd-8392.patch"
 		"${FILESDIR}/238-0002-core-do-not-free-heap-allocated-strings-8391.patch"
 		"${FILESDIR}/238-libmount-include.patch"
