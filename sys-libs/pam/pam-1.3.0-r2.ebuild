@@ -94,6 +94,9 @@ src_prepare() {
 		-e '/ test /s:==:=:' \
 		configure || die
 	elibtoolize
+	epatch "${FILESDIR}"/hurd_no_setfsuid
+	epatch "${FILESDIR}"/paths.patch
+	use elibc_musl && sed -e 's/pam_rhosts//g' -i modules/Makefile.am modules/Makefile.in
 }
 
 multilib_src_configure() {
