@@ -29,6 +29,12 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas Sturmlechner <asturm@gentoo.org> (09 Apr 2018)
+# Obsolete dev-texlive/* cleanup. Content moved into other packages.
+dev-texlive/texlive-documentation-base
+dev-texlive/texlive-mathextra
+dev-texlive/texlive-science
+
 # Richard Yao <ryao@gentoo.org> (08 Apr 2018)
 # Potential data loss regression reported upstream. Masking until solved.
 # Bug #652828
@@ -617,11 +623,6 @@ net-libs/librpcsecgss
 # Marked obsolete on CTAN. EAPI=3 ebuild. No consumers.
 # Masked for removal in 30 days. Bug 644258
 app-text/noweb
-
-# Jason Zaman <perfinion@gentoo.org> (02 Mar 2018)
-# Became sys-apps/selinux-python in release 2.7
-# Masked for removal in 30 days.
-dev-python/sepolgen
 
 # Tim Harder <radhermit@gentoo.org> (01 Mar 2018)
 # Masked for testing.
