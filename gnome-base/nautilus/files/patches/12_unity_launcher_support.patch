@@ -106,7 +106,7 @@ Index: nautilus/src/nautilus-toolbar.c
          gtk_revealer_set_reveal_child (GTK_REVEALER (self->operations_revealer),
                                         FALSE);
 +#ifdef HAVE_UNITY
-+        unity_launcher_entry_set_progress_visible (self->priv->ulauncher, FALSE);
++        unity_launcher_entry_set_progress_visible (self->ulauncher, FALSE);
 +#endif
      }
      else
@@ -116,7 +116,7 @@ Index: nautilus/src/nautilus-toolbar.c
          gtk_widget_queue_draw (self->operations_icon);
  
 +#ifdef HAVE_UNITY
-+        unity_launcher_entry_set_progress_visible (self->priv->ulauncher, TRUE);
++        unity_launcher_entry_set_progress_visible (self->ulauncher, TRUE);
 +#endif
 +
          /* Show the popover at start to increase visibility.
@@ -127,7 +127,7 @@ Index: nautilus/src/nautilus-toolbar.c
  
  
 +#ifdef HAVE_UNITY
-+    unity_launcher_entry_set_progress (self->priv->ulauncher, ratio);
++    unity_launcher_entry_set_progress (self->ulauncher, ratio);
 +#endif
 +
      width = gtk_widget_get_allocated_width (widget);
@@ -138,7 +138,7 @@ Index: nautilus/src/nautilus-toolbar.c
  
      self->progress_manager = nautilus_progress_info_manager_dup_singleton ();
 +#ifdef HAVE_UNITY
-+    self->priv->ulauncher = unity_launcher_entry_get_for_desktop_id ("org.gnome.Nautilus.desktop");
++    self->ulauncher = unity_launcher_entry_get_for_desktop_id ("org.gnome.Nautilus.desktop");
 +#endif
      g_signal_connect (self->progress_manager, "new-progress-info",
                        G_CALLBACK (on_new_progress_info), self);
@@ -362,7 +362,7 @@ Index: nautilus/src/unity-quicklist-handler.c
 ===================================================================
 --- /dev/null
 +++ nautilus/src/unity-quicklist-handler.c
-@@ -0,0 +1,154 @@
+@@ -0,0 +1,162 @@
 +/*unity-quicklist-handler.c: handle Unity quicklists
 + *
 + * Copyright (C) 2012 Canonical
@@ -515,8 +515,16 @@ Index: nautilus/src/unity-quicklist-handler.c
 +unity_quicklist_handler_get_singleton (void)
 +{
 +    if (!unity_quicklist_handler_singleton)
-+    {
 +        unity_quicklist_handler_singleton = unity_quicklist_handler_new ();
++    return unity_quicklist_handler_singleton;
++}
++
++UnityQuicklistHandler *
++unity_quicklist_handler_new (void)
++{
++    return g_object_new (UNITY_TYPE_QUICKLIST_HANDLER, NULL);
++}
++
 Index: nautilus/src/unity-quicklist-handler.h
 ===================================================================
 --- /dev/null
