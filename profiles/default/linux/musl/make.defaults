@@ -6,8 +6,8 @@ ELIBC="musl"
 
 FEATURES="sandbox sfperms strict"
 
-USE="nptl unicode"
-BOOTSTRAP_USE="${BOOTSTRAP_USE} nptl -nls"
+USE="nptl unicode -berkdb"
+BOOTSTRAP_USE="${BOOTSTRAP_USE} nptl -berkdb"
 
 # TODO: fix so musl doesn't generate this for all packages
 # that use a charset, it causes package collisons.
