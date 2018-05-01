@@ -17,8 +17,7 @@ IUSE="test"
 S=${WORKDIR}
 RESTRICT="mirror"
 
-DEPEND="dev-cpp/gmock-src
-	dev-cpp/gtest-src
+DEPEND="
 	dev-libs/libqtdbustest
 	net-misc/networkmanager"
 RDEPEND="${DEPEND}"

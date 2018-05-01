@@ -111,7 +111,6 @@ src_install() {
 
 	# move passwd to / to help recover broke systems #64441
 	mv "${ED%/}"/usr/bin/passwd "${ED%/}"/bin/ || die
-	dosym ../../bin/passwd /usr/bin/passwd
 
 	cd "${S}" || die
 	insinto /etc
