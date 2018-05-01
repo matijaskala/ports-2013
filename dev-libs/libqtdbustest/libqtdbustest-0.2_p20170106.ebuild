@@ -23,3 +23,8 @@ DEPEND="dev-cpp/gmock-src
 	dev-qt/qtdbus:5
 	dev-qt/qttest:5"
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	local mycmakeargs=( -DGMOCK_INCLUDE_DIRS=/usr/src/gmock/include )
+	cmake-utils_src_configure
+}

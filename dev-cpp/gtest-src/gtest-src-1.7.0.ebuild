@@ -16,7 +16,10 @@ S=${WORKDIR}/googletest-release-${PV}
 
 src_install() {
 	insinto /usr/src/gtest/include/gtest
-	doins -r include/gtest/*.h
+	doins include/gtest/*.h
+
+	insinto /usr/src/gtest/include/gtest/internal
+	doins include/gtest/internal/*.h
 
 	insinto /usr/src/gtest
 	doins -r cmake src CMakeLists.txt

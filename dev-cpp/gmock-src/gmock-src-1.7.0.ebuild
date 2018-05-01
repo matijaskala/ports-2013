@@ -16,11 +16,14 @@ S=${WORKDIR}/googlemock-release-${PV}
 
 src_install() {
 	insinto /usr/src/gmock/include/gmock
-	doins -r include/gmock/*.h
+	doins include/gmock/*.h
+
+	insinto /usr/src/gmock/include/gmock/internal
+	doins include/gmock/internal/*.h
 
 	insinto /usr/src/gmock/src
-	doins -r src/*.cc
+	doins src/*.cc
 
 	insinto /usr/src/gmock
-	doins -r gtest CMakeLists.txt
+	doins CMakeLists.txt
 }
