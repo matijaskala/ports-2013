@@ -8,7 +8,9 @@ inherit cmake-utils gnome2-utils
 DESCRIPTION="Indicator showing session management, status and user switching used by the Unity desktop"
 HOMEPAGE="https://launchpad.net/indicator-session"
 MY_PV="${PV/_p/+17.04.}"
-SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${MY_PV}.orig.tar.gz"
+GTEST_PV="1.8.0"
+SRC_URI="https://launchpad.net/ubuntu/+archive/primary/+files/${PN}_${MY_PV}.orig.tar.gz
+	https://github.com/google/googletest/archive/release-${GTEST_PV}.tar.gz -> gtest-${GTEST_PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -19,7 +21,6 @@ RESTRICT="mirror"
 
 RDEPEND="
 	app-admin/system-config-printer
-	dev-cpp/gtest
 	>=dev-libs/glib-2.36
 	dev-libs/libappindicator:=
 	dev-libs/libdbusmenu:=
@@ -52,6 +53,16 @@ src_prepare() {
 	fi
 
 	cmake-utils_src_prepare
+}
+
+src_configure() {
+	local mycmakeargs=(
+		-DGMOCK_SOURCE_DIR="${WORKDIR}"/googletest-release-${GTEST_PV}/googlemock
+		-DGMOCK_INCLUDE_DIRS="${WORKDIR}"/googletest-release-${GTEST_PV}/googlemock/include
+		-DGTEST_INCLUDE_DIRS="${WORKDIR}"/googletest-release-${GTEST_PV}/googletest/include
+	)
+
+	cmake-utils_src_configure
 }
 
 src_install() {
