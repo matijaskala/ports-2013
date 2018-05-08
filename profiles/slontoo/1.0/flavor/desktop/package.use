@@ -1,10 +1,33 @@
+# Andreas Sturmlechner <asturm@gentoo.org> (04 Aug 2017)
+# Required by flac and mp3
+kde-apps/k3b taglib
+kde-frameworks/kfilemetadata taglib
+
+# Mike Gilbert <floppym@gentoo.org> (04 Jan 2017)
+# Needed by x11-misc/xdg-utils.
 app-text/xmlto text
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (08 May 2014)
+# Enable x11-libs/libxcb[xkb] as it is needed by x11-libs/libxkbcommon[X]
+# and the X flag is enabled by default in the desktop profile
 x11-libs/libxcb xkb
+
+# Jeremy Olexa <darkside@gentoo.org> (07 Oct 2011)
+# Required by mesa, ultimately by xorg-server (every desktop) bug 385843
+dev-libs/libxml2 python
+
+# Samuli Suominen <ssuominen@gentoo.org> (27 Sep 2011)
+# Required by mozilla browsers wrt #372419
 media-libs/libpng apng
+
+# Samuli Suominen <ssuominen@gentoo.org> (19 Dec 2010)
+# gudev, required by freedesktop.org udev helpers like udisks and upower
 sys-apps/systemd gudev
 sys-fs/eudev gudev
 sys-fs/udev gudev
+
+# Chris Gianelloni <wolf31o2@gentoo.org> (26 Mar 2008)
+# While we may need LDAP client support, who needs the server on a desktop?
+# Did I mention that this also fixes the horrible perl dependency hell, too?
 net-nds/openldap minimal
-x11-drivers/xf86-video-intel -glamor
-dev-libs/libxml2 python
 dev-libs/xmlsec nss
