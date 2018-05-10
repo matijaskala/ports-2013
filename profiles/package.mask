@@ -195,11 +195,6 @@ x11-libs/libXp
 # See tracker bug #653464
 >=app-text/poppler-0.64.0
 
-# Andreas Sturmlechner <asturm@gentoo.org> (10 Apr 2018)
-# Depends on dead Qt4. Switch to media-gfx/scantailor-advanced instead.
-# Masked for removal in 30 days. Bug #633386
-media-gfx/scantailor
-
 # Jason Zaman <perfinion@gentoo.org> (08 Apr 2018)
 # Dead upstream, for an old version of Xfce
 # Masked for removal in 30 days.
@@ -478,6 +473,10 @@ app-xemacs/xemacs-packages-all
 # versions of gjs.  Will unmask when gnome-3.26 is ready for testing
 # or when upstream releases an official tarball.
 dev-lang/spidermonkey:52
+# Lars Wendler <polynomial-c@gentoo.org> (09 May 2018)
+# Depends on masked spidermonkey:52.
+# Please remove both masks together.
+>=sys-auth/polkit-0.114
 
 # Nicolas Bock <nicolasbock@gentoo.org> (17 Jul 2017)
 # Keep shotwell development series masked.

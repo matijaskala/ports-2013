@@ -34,5 +34,8 @@ sys-libs/zlib minizip
 # Mitigate media-libs/phonon:4[designer] dep by USE=phonon in make.defaults
 dev-qt/designer:4 -phonon
 
+# Required by app-office/calligra
+media-gfx/pstoedit plotutils
+
 # FIXME: REQUIRED_USE conflicts: qt5? ( !qt4 )
 <net-wireless/wpa_supplicant-2.6-r1 -qt4
