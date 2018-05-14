@@ -36,7 +36,6 @@ RDEPEND="
 	indicator? ( dev-libs/libindicator:3= )
 	mail? ( net-libs/libetpan )
 	mono? ( dev-dotnet/glib-sharp )
-	kde? ( kde-frameworks/kdelibs )
 	sensors? ( sys-apps/lm_sensors )
 	terminal? ( x11-libs/vte:= )
 	upower? ( sys-power/upower )
