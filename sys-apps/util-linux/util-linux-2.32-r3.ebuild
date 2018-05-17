@@ -153,8 +153,8 @@ multilib_src_configure() {
 			$(use_enable kernel_linux partx)
 			$(use_enable kernel_linux raw)
 			--enable-rename
-			--enable-rfkill
-			--enable-schedutils$(usex kernel_linux '' '=check')
+			$(use_enable kernel_linux rfkill)
+			$(use_enable kernel_linux schedutils)
 			--with-systemdsystemunitdir="$(systemd_get_systemunitdir)"
 			$(use_enable caps setpriv)
 			$(use_enable cramfs)
