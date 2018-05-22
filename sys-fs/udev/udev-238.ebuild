@@ -10,7 +10,7 @@ if [[ ${PV} = 9999* ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/systemd/systemd/archive/v${PV}.tar.gz -> systemd-${PV}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+	KEYWORDS="alpha amd64 ~arm arm64 ~hppa ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh sparc x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
@@ -82,7 +82,7 @@ src_prepare() {
 
 	local PATCHES=(
 		"${FILESDIR}/236-uucp-group.patch"
-		"${FILESDIR}/issetugid.patch"
+		"${FILESDIR}/238-musl.patch"
 	)
 
 	sed -i "/secure_getenv/s/.$/, 'issetugid'&/" meson.build || die
