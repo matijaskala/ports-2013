@@ -16,10 +16,15 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="doc test"
-S=${WORKDIR}
+S=${WORKDIR}/${PN}-${MY_PV}
 RESTRICT="mirror"
 
-DEPEND="dev-cpp/gmock
+RDEPEND="
+	dev-libs/libdbusmenu-qt
+	x11-libs/dee-qt[qt5(+)]
+	x11-libs/gtk+:3
+"
+DEPEND="
 	dev-db/sqlite:3
 	dev-libs/dee[${PYTHON_USEDEP}]
 	dev-libs/glib:2[${PYTHON_USEDEP}]
@@ -55,17 +60,17 @@ src_prepare() {
 	# disable build of tests
 	sed -i '/add_subdirectory(tests)/d' "${S}/CMakeLists.txt" || die
 
-	default
+	cmake-utils_src_prepare
 }
 
 src_configure() {
 	mycmakeargs+=( -DENABLE_TESTS="$(usex test)"
 			-DENABLE_DOCUMENTATION="$(usex doc)"
-			-DENABLE_MEMCHECK_OPTION=ON
 			-DENABLE_BAMF=ON
 			-DVALA_COMPILER=${VALAC}
 			-DVAPI_GEN=${VAPIGEN}
-			-DCMAKE_INSTALL_DATADIR=/usr/share )
+	)
+
 	cmake-utils_src_configure
 }
 
