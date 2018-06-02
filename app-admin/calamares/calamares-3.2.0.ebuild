@@ -12,7 +12,7 @@ if [[ ${KDE_BUILD_TYPE} == live ]] ; then
 	EGIT_REPO_URI="https://github.com/${PN}/${PN}"
 else
 	SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.gz"
-	KEYWORDS="~amd64"
+	KEYWORDS="amd64"
 fi
 
 LICENSE="GPL-3"
@@ -59,6 +59,7 @@ RDEPEND="${DEPEND}
 "
 
 src_prepare() {
+	sed -i 's:fatal:no-fatal:' CMakeLists.txt || die
 	cmake-utils_src_prepare
 	python_setup
 	export PYTHON_INCLUDE_DIRS="$(python_get_includedir)" \
