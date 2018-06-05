@@ -10,13 +10,13 @@ PYTHON_COMPAT=(
 )
 PYTHON_REQ_USE='bzip2(+),threads(+)'
 
-inherit distutils-r1 systemd
+inherit distutils-r1 eutils systemd
 
 DESCRIPTION="Portage is the package management and distribution system for Gentoo"
 HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Portage"
 
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd"
+KEYWORDS="~alpha amd64 ~arm arm64 hppa ia64 ~mips ~ppc ~ppc64 s390 ~sparc ~x86 ~amd64-fbsd"
 SLOT="0"
 IUSE="build doc epydoc gentoo-dev +ipc +native-extensions selinux xattr"
 
@@ -82,7 +82,8 @@ prefix_src_archives() {
 
 TARBALL_PV=${PV}
 SRC_URI="mirror://gentoo/${PN}-${TARBALL_PV}.tar.bz2
-	$(prefix_src_archives ${PN}-${TARBALL_PV}.tar.bz2)"
+	$(prefix_src_archives ${PN}-${TARBALL_PV}.tar.bz2)
+	https://github.com/gentoo/portage/commit/345256c2d439c5ab580e4226f227db2819883d40.patch -> ${P}-bug-657360-345256c2d439.patch"
 
 pkg_setup() {
 	use epydoc && DISTUTILS_ALL_SUBPHASE_IMPLS=( python2.7 )
@@ -90,6 +91,12 @@ pkg_setup() {
 
 python_prepare_all() {
 	distutils-r1_python_prepare_all
+
+	epatch "${DISTDIR}/${P}-bug-657360-345256c2d439.patch"
+
+	# apply d07a47ff3c06
+	sed -i 's:("--dynamic-deps", "y") != "n"$:\0 and "--nodeps" not in myopts:' \
+		pym/_emerge/create_depgraph_params.py || die
 
 	# apply 4fb5ef2ce2cb
 	sed -i "s:\\((self._poll_obj, 'close'\\)):\\1, None):" \
