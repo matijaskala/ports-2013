@@ -10,8 +10,9 @@ DESCRIPTION="OpenGL window and compositing manager patched for the Unity desktop
 HOMEPAGE="https://launchpad.net/compiz"
 MY_PV="${PV/_p/+18.04.}"
 UURL="https://launchpad.net/ubuntu/+archive/primary/+files"
+UVER="1"
 SRC_URI="${UURL}/${PN}_${MY_PV}.orig.tar.gz
-	${UURL}/${PN}_${MY_PV}-1.diff.gz"
+	${UURL}/${PN}_${MY_PV}-${UVER}.diff.gz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT"
 SLOT="0/${PV}"
@@ -85,7 +86,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch -p1 "${WORKDIR}/${PN}_${MY_PV}-0ubuntu1.diff"        # This needs to be applied for the debian/ directory to be present #
+	eapply -p1 "${WORKDIR}/${PN}_${MY_PV}-${UVER}.diff"        # This needs to be applied for the debian/ directory to be present #
 
 	# 'python-copy-sources' will not work if S="${WORKDIR}" because it bails if 'cp' prints anything to stderr #
 	#	(the 'cp' command works but prints "cp: cannot copy a directory into itself" to stderr) #
