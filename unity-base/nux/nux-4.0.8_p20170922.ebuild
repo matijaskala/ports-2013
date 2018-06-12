@@ -34,8 +34,7 @@ RDEPEND="app-i18n/ibus
 	x11-libs/libXdamage
 	x11-libs/libXxf86vm
 	x11-libs/pango
-	x11-proto/dri2proto
-	x11-proto/glproto"
+	x11-base/xorg-proto"
 DEPEND="${RDEPEND}
 	test? ( dev-cpp/gmock
 		dev-cpp/gtest )"
