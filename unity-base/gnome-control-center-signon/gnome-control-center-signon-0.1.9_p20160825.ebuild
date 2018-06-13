@@ -1,8 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
+
+VALA_MAX_API_VERSION="0.34"
 
 inherit autotools eutils gnome2-utils vala
 
@@ -52,7 +53,9 @@ src_prepare() {
 }
 
 src_configure() {
-	econf --disable-coverage
+	econf \
+		--disable-compile-warnings \
+		--disable-coverage
 }
 
 pkg_postinst() {

@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+GNOME2_EAUTORECONF="yes"
 GNOME2_LA_PUNT="yes" # Needed with USE 'sendto'
 
 inherit gnome2 readme.gentoo-r1 virtualx
