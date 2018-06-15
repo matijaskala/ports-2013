@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-# Required by kde-apps/okteta
+# Required by app-editors/okteta
 dev-qt/qtscript:5 scripttools
 
 # Required by kde-apps/akonadi
@@ -31,11 +31,5 @@ media-sound/pulseaudio gnome
 # Required by kde-frameworks/kactivities
 sys-libs/zlib minizip
 
-# Mitigate media-libs/phonon:4[designer] dep by USE=phonon in make.defaults
-dev-qt/designer:4 -phonon
-
 # Required by app-office/calligra
 media-gfx/pstoedit plotutils
-
-# FIXME: REQUIRED_USE conflicts: qt5? ( !qt4 )
-<net-wireless/wpa_supplicant-2.6-r1 -qt4
