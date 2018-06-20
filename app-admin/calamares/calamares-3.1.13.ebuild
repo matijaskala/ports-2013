@@ -32,7 +32,7 @@ DEPEND="${PYTHON_DEPS}
 	$(add_qt_dep qtwebengine 'widgets')
 	$(add_qt_dep qtwidgets)
 	dev-cpp/yaml-cpp:=
-	>=dev-libs/boost-1.55:=[${PYTHON_USEDEP}]
+	>=dev-libs/boost-1.55:=[python,${PYTHON_USEDEP}]
 	sys-apps/dbus
 	sys-apps/dmidecode
 	sys-auth/polkit-qt[qt5(+)]
