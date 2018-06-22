@@ -58,6 +58,8 @@ RDEPEND="${DEPEND}
 	upower? ( sys-power/upower )
 "
 
+PATCHES=( "${FILESDIR}"/machineid-openrc.patch )
+
 src_prepare() {
 	sed -i 's:fatal:no-fatal:' CMakeLists.txt || die
 	cmake-utils_src_prepare

@@ -1,0 +1,25 @@
+--- a/calamares/src/modules/machineid/main.py
++++ b/calamares/src/modules/machineid/main.py
+@@ -51,9 +51,10 @@
+ 	if os.path.exists(target_dbus_machineid_file):
+ 		os.remove(target_dbus_machineid_file)
+ 
++	if os.path.exists(target_systemd_machineid_file):
++		os.remove(target_systemd_machineid_file)
++
+ 	if enable_systemd:
+-		if os.path.exists(target_systemd_machineid_file):
+-			os.remove(target_systemd_machineid_file)
+ 		check_target_env_call("systemd-machine-id-setup")
+ 
+ 	if enable_dbus:
+--- a/calamares/src/modules/machineid/machineid.conf
++++ b/calamares/src/modules/machineid/machineid.conf
+@@ -1,7 +1,7 @@
+ ---
+ # Whether to create /etc/machine-id for systemd.
+-systemd: true
++systemd: false
+ # Whether to create /var/lib/dbus/machine-id for D-Bus.
+ dbus: true
+ # Whether /var/lib/dbus/machine-id should be a symlink to /etc/machine-id
