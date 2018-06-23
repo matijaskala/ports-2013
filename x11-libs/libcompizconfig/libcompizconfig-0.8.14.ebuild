@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -19,7 +19,7 @@ RDEPEND="dev-libs/libxml2
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.41
 	virtual/pkgconfig
-	x11-proto/xproto"
+	x11-base/xorg-proto"
 
 RESTRICT="test"
 
