@@ -23,4 +23,5 @@ RDEPEND="
 		sys-kernel/zen-sources
 		sys-kernel/aufs-sources
 		sys-kernel/raspberrypi-sources
+		sys-kernel/geek-sources
 	)"
