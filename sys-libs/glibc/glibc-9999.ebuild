@@ -1144,6 +1144,57 @@ glibc_do_src_install() {
 		mv "${ED}"$(alt_usrlibdir)/libm-${upstream_pv}.a "${ED}"$(alt_usrlibdir)/${P}/libm-${upstream_pv}.a || die
 	fi
 
+	# Fix symbolic links that cross /usr boundary
+	# If we have /usr/i686-gnu/usr pointing to /usr/i686-gnu,
+	# then a symlink inside /usr/i686-gnu/usr/lib that points to
+	# ../../lib/libsomething-2.so will be installed to /usr/i686-gnu/lib
+	# and will end up pointing to /usr/lib/libsomething-2.so
+	# instead of /usr/i686-gnu/lib/libsomething-2.so.
+	# Affected symlinks:
+	# 	libanl.so
+	# 	libBrokenLocale.so
+	# 	libcidn.so
+	# 	libcrypt.so
+	# 	libdl.so
+	# 	libmvec.so
+	# 	libnss_db.so
+	# 	libnss_dns.so
+	# 	libnss_files.so
+	# 	libnss_hesiod.so
+	# 	libresolv.so
+	# 	librt.so
+	# 	libthread_db.so
+	# 	libutil.so
+	# Moving them to /lib would break normal systems
+	# so convert them to ldscripts instead.
+	local flags=( ${CFLAGS} ${LDFLAGS} -Wl,--verbose )
+	if $(tc-getLD) --version | grep -q 'GNU gold' ; then
+		local d="${T}/bfd-linker"
+		mkdir -p "${d}"
+		ln -sf $(which ${CHOST}-ld.bfd) "${d}"/ld
+		flags+=( -B"${d}" )
+	fi
+	local output_format=$($(tc-getCC) "${flags[@]}" 2>&1 | sed -n 's/^OUTPUT_FORMAT("\([^"]*\)",.*/\1/p')
+	[[ -n ${output_format} ]] && output_format="OUTPUT_FORMAT ( ${output_format} )"
+	for i in "${ED}"$(alt_usrlibdir)/lib*.so ; do
+		j="$(readlink "${i}")"
+		[[ ${j} == ../../lib*/lib*.so* ]] || continue
+		rm "${i}" || die
+		cat > "${i}" <<-END_LDSCRIPT
+		/* GNU ld script
+		   Since Gentoo has critical dynamic libraries in /lib, and the static versions
+		   in /usr/lib, we need to have a "fake" dynamic lib in /usr/lib, otherwise we
+		   run into linking problems.  This "fake" dynamic lib is a linker script that
+		   redirects the linker to the real lib.  And yes, this works in the cross-
+		   compiling scenario as the sysroot-ed linker will prepend the real path.
+
+		   See bug https://bugs.gentoo.org/4411 for more info.
+		 */
+		${output_format}
+		GROUP ( ${EPREFIX}${j#../..} )
+		END_LDSCRIPT
+	done
+
 	# We'll take care of the cache ourselves
 	rm -f "${ED}"/etc/ld.so.cache
 
