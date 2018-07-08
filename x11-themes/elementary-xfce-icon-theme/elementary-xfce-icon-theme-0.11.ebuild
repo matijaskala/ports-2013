@@ -12,13 +12,19 @@ SRC_URI="https://github.com/shimmerproject/${MY_PN}/archive/${MY_PN}-${PV}.tar.g
 
 LICENSE="public-domain GPL-1 GPL-2 GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE=""
 
 RDEPEND=""
 DEPEND=""
 
 S="${WORKDIR}/${MY_PN}-${MY_PN}-${PV}"
+
+src_prepare() {
+	sed -i 's/adwaita/Adwaita/' elementary-xfce/index.theme || die
+
+	default
+}
 
 src_install() {
 	insinto /usr/share/icons/
