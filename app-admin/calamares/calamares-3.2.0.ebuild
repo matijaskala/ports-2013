@@ -62,9 +62,9 @@ PATCHES=( "${FILESDIR}"/machineid-openrc.patch )
 
 src_prepare() {
 	sed -i 's:fatal:no-fatal:' CMakeLists.txt || die
-	sed -i 's:etc/default:etc/env.d:g' src/modules/localecfg/locale.conf || die
-	sed -i 's:etc_default:etc_envd:' src/modules/localecfg/locale.conf || die
-	sed -i 's:"locale":"02locale":' src/modules/localecfg/locale.conf || die
+	sed -i 's:etc/default:etc/env.d:g' src/modules/localecfg/main.py || die
+	sed -i 's:etc_default:etc_envd:' src/modules/localecfg/main.py || die
+	sed -i 's:"locale":"02locale":' src/modules/localecfg/main.py || die
 	cmake-utils_src_prepare
 	python_setup
 	export PYTHON_INCLUDE_DIRS="$(python_get_includedir)" \
