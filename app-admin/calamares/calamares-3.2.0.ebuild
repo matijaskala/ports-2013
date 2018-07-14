@@ -58,6 +58,10 @@ RDEPEND="${DEPEND}
 	upower? ( sys-power/upower )
 "
 
+DEPEND="${DEPEND}
+	$(add_qt_dep linguist_tools)
+"
+
 PATCHES=( "${FILESDIR}"/machineid-openrc.patch )
 
 src_prepare() {
