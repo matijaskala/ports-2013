@@ -59,7 +59,7 @@ RDEPEND="${DEPEND}
 "
 
 DEPEND="${DEPEND}
-	$(add_qt_dep linguist_tools)
+	$(add_qt_dep linguist-tools)
 "
 
 PATCHES=( "${FILESDIR}"/machineid-openrc.patch )
