@@ -10,7 +10,7 @@ detect_version
 
 DESCRIPTION="Full sources for the Linux kernel including Gentoo, Debian, Fedora, Mageia and openSUSE patches"
 HOMEPAGE="https://www.kernel.org"
-UNIPATCH_LIST="${FILESDIR}/5000_enable-additional-cpu-optimizations-for-gcc.patch ${FILESDIR}/5010_enable-additional-cpu-optimizations-for-gcc-4.9.patch ${FILESDIR}/linux-4.3-colored-printk.patch"
+UNIPATCH_LIST="${FILESDIR}/5020_enable-additional-cpu-optimizations-for-gcc-4.14.patch ${FILESDIR}/linux-4.14-colored-printk.patch"
 UNIPATCH_STRICTORDER=1
 
 KEYWORDS="~amd64 ~x86"

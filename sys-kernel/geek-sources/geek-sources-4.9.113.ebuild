@@ -53,7 +53,7 @@ gentoo_apply() {
 }
 
 mageia_apply() {
-	geek_apply `grep -ve '#' -ve '3rd' -ve 'fs-aufs' -ve 'mageia-logo' series`
+	geek_apply `grep -ve '#' -ve '3rd' -ve 'fs-aufs' -ve 'mageia-logo' -ve 'ALC215' series`
 }
 
 suse_apply() {
