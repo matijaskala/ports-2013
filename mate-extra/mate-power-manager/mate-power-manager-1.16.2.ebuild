@@ -61,6 +61,8 @@ DEPEND="${COMMON_DEPEND}
 src_prepare() {
 	mate_src_prepare
 
+	sed -i 's/MATE;$/&LXDE;/' data/mate-power-*.desktop.in || die
+
 	# This needs to be after eautoreconf to prevent problems like bug #356277
 	# Remove the docbook2man rules here since it's not handled by a proper
 	# parameter in configure.in.

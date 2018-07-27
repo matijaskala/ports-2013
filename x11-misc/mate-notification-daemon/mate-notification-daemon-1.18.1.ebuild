@@ -42,7 +42,19 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/libtool-2.2.6:2
 	virtual/pkgconfig:*"
 
+src_prepare() {
+	mate_src_prepare
+
+	sed -i 's/MATE;$/&LXDE;/' src/capplet/mate-*.desktop.in || die
+}
+
 src_configure() {
+src_prepare() {
+	mate_src_prepare
+
+	sed -i 's/MATE;$/&LXDE;/' src/capplet/mate-*.desktop.in || die
+}
+
 	mate_src_configure
 }
 

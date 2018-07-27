@@ -1,0 +1,16 @@
+--- a/src/Makefile.in	2017-05-06 12:09:24.000000000 +0200
++++ b/src/Makefile.in	2017-12-27 14:30:32.596688999 +0100
+@@ -14,11 +14,11 @@
+ 
+ # Create sysconfdir
+ install-data-local:
+-	$(MKDIR_P) $(sysconfdir)
++	$(MKDIR_P) $(DESTDIR)$(sysconfdir)
+ 
+ # set suid bit on xcdrwrap
+ install-data-hook:
+-	chmod 4711 $(XCDRLIB_PREFIX)/bin/xcdrwrap
++	chmod 4711 $(DESTDIR)$(XCDRLIB_PREFIX)/bin/xcdrwrap
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
