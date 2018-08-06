@@ -31,6 +31,21 @@ DEPEND="${CDEOEND}
 src_prepare() {
 	default
 	sed -i -e '/^Categories/ s/$/;/' connman-gtk.desktop.in || die
+	sed -i -e '/^Exec/ s/$/ --no-icon/' connman-gtk.desktop.in || die
+	patch -p1 << EOF
+--- a/net.connman.gtk.gschema.xml
++++ b/net.connman.gtk.gschema.xml
+@@ -0,7 +0,7 @@
+ <schemalist>
+ 	<schema path="/net/connman/gtk/" id="net.connman.gtk">
+ 		<key name="status-icon-enabled" type="b">
+-			<default>false</default>
++			<default>true</default>
+ 		</key>
+ 		<key name="launch-to-tray" type="b">
+ 			<default>false</default>
+EOF
+	sed -i -e '/launch_to_tray =/d' src/config.c || die
 	eautoreconf
 }
 
@@ -39,6 +54,18 @@ src_configure() {
 	econf \
 		--disable-schemas-compile \
 		$(use_with openconnect)
+}
+
+src_install() {
+	default
+	newins - /etc/xdg/autostart/connman-gtk.desktop << EOF
+[Desktop Entry]
+Type=Application
+Exec=${PN} --tray
+Name=Connman
+NotShowIn=KDE,GNOME;
+Icon=preferences-system-network
+EOF
 }
 
 pkg_preinst() {
