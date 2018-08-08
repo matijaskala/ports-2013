@@ -58,7 +58,8 @@ src_configure() {
 
 src_install() {
 	default
-	newins - /etc/xdg/autostart/connman-gtk.desktop << EOF
+	insinto /etc/xdg/autostart
+	newins - connman-gtk.desktop << EOF
 [Desktop Entry]
 Type=Application
 Exec=${PN} --tray
