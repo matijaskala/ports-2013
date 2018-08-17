@@ -19,8 +19,9 @@ RESTRICT="mirror"
 S=${WORKDIR}/${HURD}
 
 COMMON_DEPEND="
+	dev-libs/libgcrypt:=[static-libs(-)]
 	bzip2? ( app-arch/bzip2[static-libs(+)] )
-	ncurses? ( sys-libs/ncurses[static-libs] )
+	ncurses? ( sys-libs/ncurses:=[static-libs] )
 	parted? ( sys-apps/util-linux[static-libs(+)] sys-block/parted[static-libs(+)] )
 	zlib? ( sys-libs/zlib[static-libs(+)] )"
 DEPEND="${COMMON_DEPEND}"
