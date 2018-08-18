@@ -142,15 +142,6 @@ EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install sr
 # @DESCRIPTION:
 # Unpacks the sources.
 qt5-build_src_unpack() {
-	if tc-is-gcc; then
-		local min_gcc4_minor_version=7
-		if [[ $(gcc-major-version) -lt 4 ]] || \
-		   [[ $(gcc-major-version) -eq 4 && $(gcc-minor-version) -lt ${min_gcc4_minor_version} ]]; then
-			eerror "GCC version 4.${min_gcc4_minor_version} or later is required to build this package"
-			die "GCC 4.${min_gcc4_minor_version} or later required"
-		fi
-	fi
-
 	# bug 307861
 	if [[ ${PN} == qtwebengine || ${PN} == qtwebkit ]]; then
 		eshopts_push -s extglob
@@ -554,6 +545,26 @@ qt5_base_configure() {
 		-examplesdir "${QT5_EXAMPLESDIR}"
 		-testsdir "${QT5_TESTSDIR}"
 
+		# force appropriate compiler
+		$(if use kernel_FreeBSD; then
+			if tc-is-gcc; then
+				echo -platform freebsd-g++
+			elif tc-is-clang; then
+				echo -platform freebsd-clang
+			fi
+		elif use kernel_Winnt; then
+			echo -xplatform win32-g++
+		fi)
+		$(if [[ ${QT5_MINOR_VERSION} -ge 10 ]]; then
+			if use kernel_linux; then
+				if tc-is-gcc; then
+					echo -platform linux-g++
+				elif tc-is-clang; then
+					echo -platform linux-clang
+				fi
+			fi
+		fi)
+
 		# configure in release mode by default,
 		# override via the CONFIG qmake variable
 		-release
@@ -690,7 +701,7 @@ qt5_base_configure() {
 		# enable in respective modules to avoid poisoning QT.global_private.enabled_features
 		$([[ ${QT5_MINOR_VERSION} -ge 9 ]] && echo -no-gui -no-widgets)
 
-		$([[ ${CHOST} == *mingw* ]] && echo -xplatform win32-g++ -device-option CROSS_COMPILE=${CHOST}-)
+		$([[ ${CHOST} == *mingw* ]] && echo -device-option CROSS_COMPILE=${CHOST}-)
 
 		# module-specific options
 		"${myconf[@]}"

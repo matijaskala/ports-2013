@@ -54,7 +54,11 @@ src_prepare() {
 
 src_configure() {
 	just_headers || ./configure \
-		--prefix="${D}$(alt_prefix)${EPREFIX}/usr" \
+		--prefix="${ED}$(alt_prefix)" \
+		--datadir="${ED}$(alt_prefix)/usr/share" \
+		--datarootdir="${ED}$(alt_prefix)/usr/share" \
+		--includedir="${ED}$(alt_prefix)/usr/include" \
+		--libexecdir="${ED}$(alt_prefix)/usr/libexec" \
 		--host=${CHOST} \
 		--enable-static-progs=iso9660fs,ext2fs,ufs \
 		--disable-profile \
@@ -73,18 +77,16 @@ src_install() {
 	if just_headers ; then
 		mkdir -p "${D}$(alt_prefix)${EPREFIX}/usr/include" || die
 		emake \
-			INSTALL_DATA="/bin/sh \"${S}\"/install-sh -c -C -m 644" DESTDIR="${D}$(alt_prefix)" \
-			includedir=${EPREFIX}/usr/include infodir=${EPREFIX}/usr/share/info \
+			INSTALL_DATA="/bin/sh \"${S}\"/install-sh -c -C -m 644" DESTDIR="${ED}$(alt_prefix)" \
+			includedir=/usr/include infodir=/usr/share/info \
 			install-headers
 		return
 	fi
 
 	emake install
 
-	rm -r "${ED}"/include || die
-
-	dodir /usr/lib
-	mv "${ED}"/lib/*.a "${ED}"/usr/lib || die
+	dodir $(alt_prefix)/usr/lib
+	mv "${ED}$(alt_prefix)"/lib/lib*.a "${ED}$(alt_prefix)"/usr/lib || die
 
 	local flags=( ${CFLAGS} ${LDFLAGS} -Wl,--verbose )
 	if $(tc-getLD) --version | grep -q 'GNU gold' ; then
@@ -95,9 +97,9 @@ src_install() {
 	fi
 	local output_format=$($(tc-getCC) "${flags[@]}" 2>&1 | sed -n 's/^OUTPUT_FORMAT("\([^"]*\)",.*/\1/p')
 	[[ -n ${output_format} ]] && output_format="OUTPUT_FORMAT ( ${output_format} )"
-	for i in "${ED}"/lib/*.so ; do
-		local lib=${i#${ED}/lib}
-		cat > "${ED}"/usr/lib/${lib} <<-END_LDSCRIPT
+	for i in "${ED}$(alt_prefix)"/lib/*.so ; do
+		local lib=${i#${ED}$(alt_prefix)/lib}
+		cat > "${ED}$(alt_prefix)"/usr/lib/${lib} <<-END_LDSCRIPT
 /* GNU ld script
    Since Gentoo has critical dynamic libraries in /lib, and the static versions
    in /usr/lib, we need to have a "fake" dynamic lib in /usr/lib, otherwise we
@@ -111,13 +113,13 @@ ${output_format}
 GROUP ( /lib/$(readlink "${i}") )
 END_LDSCRIPT
 		rm ${i} || die
-		fperms a+x /usr/lib/${lib} || die "could not change perms on ${lib}"
+		fperms a+x $(alt_prefix)/usr/lib/${lib} || die "could not change perms on ${lib}"
 	done
 
 	for i in login ps uptime vmstat w ; do
-		rm "${ED}"/bin/${i} || die
+		rm "${ED}$(alt_prefix)"/bin/${i} || die
 	done
 	for i in fsck halt reboot ; do
-		rm "${ED}"/sbin/${i} || die
+		rm "${ED}$(alt_prefix)"/sbin/${i} || die
 	done
 }
