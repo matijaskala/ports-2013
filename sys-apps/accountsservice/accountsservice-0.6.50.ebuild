@@ -42,6 +42,7 @@ RDEPEND="${CDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.6.35-gentoo-system-users.patch
+	"${FILESDIR}"/${PN}-other-display-managers.patch
 )
 
 src_configure() {
