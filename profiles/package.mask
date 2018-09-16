@@ -29,6 +29,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Brian Evans <grknight@gentoo.org> (16 Sep 2018)
+# Broken build on modern clients. Please update to latest slot.
+# Slot to be removed in 30 days
+dev-db/myodbc:5.2
+
 # Michał Górny <mgorny@gentoo.org> (13 Sep 2018)
 # Depends on old version of dev-libs/jsoncpp, blocking its pruning.
 # Downstream maintainer is inactive to bump it.  Removal in 30 days.
@@ -206,11 +211,6 @@ app-crypt/simp_le
 # Obsolete! Use net-analyzer/nagios-icinga-openvpn instead.
 # Will be removed in 30 days (bug 663774).
 net-analyzer/nagios-check_openvpn-simple
-
-# Sergey Popov <pinkbyte@gentoo.org> (16 Aug 2018)
-# Upstream is dead, no consumers in tree
-# Masked for removal in 30 days
-dev-python/pyfire
 
 # Bernard Cafarelli <voyageur@gentoo.org> (13 Aug 2018)
 # Beta release with new features, masked for testing
