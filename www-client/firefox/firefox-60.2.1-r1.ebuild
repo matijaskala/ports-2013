@@ -38,14 +38,13 @@ inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils llvm \
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="https://www.mozilla.com/firefox"
 
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist eme-free +gmp-autoupdate hardened hwaccel jack +screenshot selinux test ubuntu"
+IUSE="bindist eme-free geckodriver +gmp-autoupdate hardened hwaccel jack +screenshot selinux test ubuntu"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=239e434d6d2b8e1e2b697c3416d1e96d48fe98e5
 SDIR="release"
 [[ ${PV} == *_beta* ]] && SDIR="beta"
 
@@ -131,6 +130,8 @@ src_prepare() {
 	eapply "${FILESDIR}"/bug_1461221.patch
 	eapply "${FILESDIR}"/${PN}-60.0-blessings-TERM.patch # 654316
 	use ubuntu && eapply "${FILESDIR}"/60-unity-menubar.patch
+	eapply "${FILESDIR}"/${PN}-60.0-rust-1.29-comp.patch
+	eapply "${FILESDIR}"/${PN}-60.0-missing-errno_h-in-SandboxOpenedFiles_cpp.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -193,6 +194,14 @@ src_configure() {
 	# get your own set of keys.
 	_google_api_key=AIzaSyDEAOvatFo0eTgsV_ZlEzx0ObmepsMzfAc
 
+	# Add information about TERM to output (build.log) to aid debugging
+	# blessings problems
+	if [[ -n "${TERM}" ]] ; then
+		einfo "TERM is set to: \"${TERM}\""
+	else
+		einfo "TERM is unset."
+	fi
+
 	####################################
 	#
 	# mozconfig, CFLAGS and CXXFLAGS setup
@@ -201,6 +210,8 @@ src_configure() {
 
 	mozconfig_init
 	mozconfig_config
+
+	mozconfig_use_enable geckodriver
 
 	# enable JACK, bug 600002
 	mozconfig_use_enable jack
@@ -216,9 +227,6 @@ src_configure() {
 		append-ldflags "-Wl,-z,relro,-z,now"
 		mozconfig_use_enable hardened hardening
 	fi
-
-	# Only available on mozilla-overlay for experimentation -- Removed in Gentoo repo per bug 571180
-	#use egl && mozconfig_annotate 'Enable EGL as GL provider' --with-gl-provider=EGL
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
 	# Use FEATURES=ccache instead!
@@ -292,7 +300,14 @@ src_install() {
 
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
-	DESTDIR="${D}" ./mach install
+	DESTDIR="${D}" ./mach install || die
+
+	if use geckodriver ; then
+		cp "${BUILD_OBJ_DIR}"/dist/bin/geckodriver "${ED%/}"${MOZILLA_FIVE_HOME} || die
+		pax-mark m "${ED%/}"${MOZILLA_FIVE_HOME}/geckodriver
+
+		dosym ${MOZILLA_FIVE_HOME}/geckodriver /usr/bin/geckodriver
+	fi
 
 	# Install language packs
 	mozlinguas_src_install
@@ -341,8 +356,16 @@ PROFILE_EOF
 			|| die
 	fi
 
+	# Don't install llvm-symbolizer from sys-devel/llvm package
+	[[ -f "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer" ]] && \
+		rm "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer"
+
+	# firefox and firefox-bin are identical
+	rm "${ED%/}"${MOZILLA_FIVE_HOME}/firefox-bin || die
+	dosym firefox ${MOZILLA_FIVE_HOME}/firefox-bin
+
 	# Required in order to use plugins and even run firefox on hardened.
-	pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/{firefox,firefox-bin,plugin-container}
+	pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/{firefox,plugin-container}
 }
 
 pkg_preinst() {
@@ -366,9 +389,8 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	# Update mimedb for the new .desktop file
-	xdg_desktop_database_update
 	gnome2_icon_cache_update
+	xdg_desktop_database_update
 
 	if ! use gmp-autoupdate && ! use eme-free ; then
 		elog "USE='-gmp-autoupdate' has disabled the following plugins from updating or"
@@ -388,4 +410,5 @@ pkg_postinst() {
 
 pkg_postrm() {
 	gnome2_icon_cache_update
+	xdg_desktop_database_update
 }
