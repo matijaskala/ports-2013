@@ -51,19 +51,7 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig:*
 	x11-base/xorg-proto"
 
-src_prepare() {
-	mate_src_prepare
-
-	sed -i 's/MATE;$/&LXDE;/' data/mate-power-*.desktop.in || die
-}
-
 src_configure() {
-src_prepare() {
-	mate_src_prepare
-
-	sed -i 's/MATE;$/&LXDE;/' data/mate-power-*.desktop.in || die
-}
-
 	mate_src_configure \
 		--enable-compile-warnings=minimum \
 		$(use_with gnome-keyring keyring) \

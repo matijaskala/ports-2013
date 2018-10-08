@@ -1390,6 +1390,8 @@ toolchain_src_configure() {
 	# and now to do the actual configuration
 	addwrite /dev/zero
 	echo "${S}"/configure "${confgcc[@]}"
+	# Older gcc versions did not detect bash and re-exec itself, so force the
+	# use of bash.  Newer ones will auto-detect, but this is not harmful.
 	CONFIG_SHELL="${EPREFIX}/bin/bash" \
 	bash "${S}"/configure "${confgcc[@]}" || die "failed to run configure"
 
@@ -1546,6 +1548,11 @@ gcc_do_filter_flags() {
 		filter-flags -f{no-,}unit-at-a-time -f{no-,}web -mno-tls-direct-seg-refs
 		filter-flags -f{no-,}stack-protector{,-all}
 		filter-flags -fvisibility-inlines-hidden -fvisibility=hidden
+		# and warning options
+		filter-flags -Wextra -Wstack-protector
+	fi
+	if ! tc_version_is_at_least 4.1 ; then
+		filter-flags -fdiagnostics-show-option
 	fi
 
 	if tc_version_is_at_least 3.4 ; then
@@ -1661,6 +1668,11 @@ toolchain_src_compile() {
 	[[ ! -x /usr/bin/perl ]] \
 		&& find "${WORKDIR}"/build -name '*.[17]' -exec touch {} +
 
+	# Older gcc versions did not detect bash and re-exec itself, so force the
+	# use of bash.  Newer ones will auto-detect, but this is not harmful.
+	# This needs to be set for compile as well, as it's used in libtool
+	# generation, which will break install otherwise (at least in 3.3.6): #664486
+	CONFIG_SHELL="${EPREFIX}/bin/bash" \
 	gcc_do_make ${GCC_MAKE_TARGET}
 }
 

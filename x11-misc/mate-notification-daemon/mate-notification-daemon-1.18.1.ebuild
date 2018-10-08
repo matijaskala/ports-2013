@@ -49,12 +49,6 @@ src_prepare() {
 }
 
 src_configure() {
-src_prepare() {
-	mate_src_prepare
-
-	sed -i 's/MATE;$/&LXDE;/' src/capplet/mate-*.desktop.in || die
-}
-
 	mate_src_configure
 }
 
