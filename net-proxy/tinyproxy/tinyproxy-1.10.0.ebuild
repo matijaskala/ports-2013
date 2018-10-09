@@ -3,28 +3,20 @@
 
 EAPI=6
 
-inherit autotools systemd user
+inherit autotools systemd tmpfiles user
 
 DESCRIPTION="A lightweight HTTP/SSL proxy"
-HOMEPAGE="http://www.banu.com/tinyproxy/"
-SRC_URI="http://www.banu.com/pub/${PN}/1.8/${P}.tar.bz2"
+HOMEPAGE="https://github.com/tinyproxy/tinyproxy/"
+SRC_URI="https://github.com/tinyproxy/tinyproxy/releases/download/${PV}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 ~arm ia64 ppc sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~sparc ~x86"
 
-IUSE="test debug +filter-proxy minimal reverse-proxy
-	transparent-proxy +upstream-proxy +xtinyproxy-header"
+IUSE="test debug +filter-proxy reverse-proxy transparent-proxy 
++upstream-proxy +xtinyproxy-header"
 
 REQUIRED_USE="test? ( xtinyproxy-header )"
-
-DEPEND="!minimal? ( app-text/asciidoc )"
-
-PATCHES=(
-	"${FILESDIR}"/${PN}-1.8.1-ldflags.patch
-	"${FILESDIR}"/${P}-r2-DoS-Prevention.patch
-
-)
 
 pkg_setup() {
 	enewgroup ${PN}
@@ -32,28 +24,16 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use minimal && PATCHES+=( "${FILESDIR}/${PN}-1.8.1-minimal.patch" )
-
 	default
 
 	sed -i \
 		-e "s|nobody|${PN}|g" \
-		-e 's|/var/run/|/run/|g' \
 		etc/${PN}.conf.in || die "sed failed"
-
-	sed -i \
-		-e 's|AM_CONFIG_HEADER|AC_CONFIG_HEADERS|g' \
-		configure.ac || die
 
 	eautoreconf
 }
 
 src_configure() {
-	if use minimal; then
-		ln -s /bin/true "${T}"/a2x
-		export PATH="${T}:${PATH}"
-	fi
-
 	econf \
 		$(use_enable debug) \
 		$(use_enable filter-proxy filter) \
@@ -84,6 +64,8 @@ src_install() {
 }
 
 pkg_postinst() {
+	tmpfiles_process ${PN}.tmpfiles.conf
+
 	elog "For filtering domains and URLs, enable filter option in the configuration"
 	elog "file and add them to the filter file (one domain or URL per line)."
 }

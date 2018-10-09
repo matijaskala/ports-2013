@@ -65,7 +65,7 @@ PDEPEND="
 # NOTE: FEATURES=installsources requires debugedit and rsync
 
 PATCHES=(
-	"${FILESDIR}"/filesystem-layout-symlinks.patch
+	"${FILESDIR}"/filesystem-layout-symlinks-r1.patch
 )
 
 REQUIRED_USE="epydoc? ( $(python_gen_useflags 'python2*') )"
