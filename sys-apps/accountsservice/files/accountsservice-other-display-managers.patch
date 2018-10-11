@@ -1,10 +1,11 @@
 Support setting/reading autologin setings for LightDM, LXDM, SDDM
 --- accountsservice-0.6.40/src/daemon.c
 +++ accountsservice-0.6.40/src/daemon.c
-@@ -49,6 +49,17 @@
+@@ -49,6 +49,18 @@
+ #define PATH_PASSWD "/etc/passwd"
  #define PATH_SHADOW "/etc/shadow"
  #define PATH_GROUP "/etc/group"
- #define PATH_GDM_CUSTOM "/etc/gdm/custom.conf"
++#define PATH_GDM_CUSTOM "/etc/gdm/custom.conf"
 +#define PATH_LIGHTDM_CONFIG "/etc/lightdm/lightdm.conf"
 +#define PATH_LXDM_CONFIG "/etc/lxdm/lxdm.conf"
 +#define PATH_SDDM_CONFIG "/etc/sddm.conf"
@@ -120,7 +121,7 @@ Support setting/reading autologin setings for LightDM, LXDM, SDDM
  {
          GKeyFile *keyfile;
          GError *local_error;
-@@ -1312,23 +1325,130 @@ load_autologin (Daemon      *daemon,
+@@ -1312,22 +1325,129 @@ load_autologin (Daemon      *daemon,
          return TRUE;
  }
  
@@ -232,8 +233,8 @@ Support setting/reading autologin setings for LightDM, LXDM, SDDM
 +                    gboolean     enabled,
 +                    GError     **error)
 +{
-         GKeyFile *keyfile;
-         gchar *data;
+         g_autoptr(GKeyFile) keyfile = NULL;
+         g_autofree gchar *data = NULL;
          gboolean result;
 +        GError *local_error = NULL;
 +
@@ -245,13 +246,11 @@ Support setting/reading autologin setings for LightDM, LXDM, SDDM
                                          PATH_GDM_CUSTOM,
                                          G_KEY_FILE_KEEP_COMMENTS,
 -                                        error)) {
--                g_key_file_free (keyfile);
 -                return FALSE;
 +                                        &local_error)) {
 +                /* It's OK for custom.conf to not exist, we will make it */
 +                if (!g_error_matches (local_error, G_FILE_ERROR, G_FILE_ERROR_NOENT)) {
 +                        g_propagate_error (error, local_error);
-+                        g_key_file_free (keyfile);
 +                        return FALSE;
 +                }
 +                g_error_free (local_error);
