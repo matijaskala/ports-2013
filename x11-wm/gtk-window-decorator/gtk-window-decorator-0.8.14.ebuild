@@ -12,7 +12,7 @@ SRC_URI="https://github.com/compiz-reloaded/compiz/releases/download/v${PV}/comp
 LICENSE="GPL-2+ LGPL-2.1 MIT"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 x86"
-IUSE="dbus gtk3 mate"
+IUSE="dbus +gtk3 mate"
 RESTRICT="mirror"
 S=${WORKDIR}/compiz-${PV}
 
