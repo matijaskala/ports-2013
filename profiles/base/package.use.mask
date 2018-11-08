@@ -7,6 +7,10 @@
 # This file is only for generic masks. For arch-specific masks (i.e.
 # mask everywhere, unmask on arch/*) use arch/base.
 
+# Alon Bar-Lev <alonbl@gentoo.org> (08 Nov 2018)
+# Waiting for >=dev-libs/libressl-2.7 to be unmasked.
+>=app-crypt/xca-2.1.0 libressl
+
 # Pacho Ramos <pacho@gento.org> (04 Nov 2018)
 # upower-pm-utils will be removed (#596988)
 mate-extra/mate-power-manager pm-utils
@@ -51,9 +55,10 @@ sys-power/suspend fbsplash
 media-libs/mesa openmax
 
 # Thomas Deutschmann <whissi@gentoo.org> (12 Oct 2018)
-# Requires www-client/firefox which isn't available on all architectures
+# Requires www-client/firefox and mail-client/thunderbird
+# which are not available on all architectures
 # yet, unmask per arch
-app-misc/tracker firefox-bookmarks
+app-misc/tracker firefox-bookmarks thunderbird
 
 # Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (06 Oct 2018)
 # address user visible breakage due to circular dependency #665008

@@ -86,6 +86,9 @@ src_install() {
 	newins "${DISTDIR}"/gentoo-logo.png bizcom.png
 
 	# Install compatibility symlinks as some rdeps hardcode the paths
+	dosym ../usr/bin/plymouth /bin/plymouth
+	dosym ..../usr/sbin/plymouth-set-default-theme /sbin/plymouth-set-default-theme
+	dosym ../usr/sbin/plymouthd /sbin/plymouthd
 
 	readme.gentoo_create_doc
 

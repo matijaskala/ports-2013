@@ -58,6 +58,7 @@ src_configure() {
 		-DUSE_VENDORDIRS=1
 		-DLIB="$(get_libdir)"
 		-DENABLE_PYTHON=0
+		-DENABLE_HELIXREPO=ON
 		$(cmake-utils_use_enable bzip2 BZIP2_COMPRESSION)
 		$(cmake-utils_use_enable lzma LZMA_COMPRESSION)
 		$(cmake-utils_use_enable perl PERL)
