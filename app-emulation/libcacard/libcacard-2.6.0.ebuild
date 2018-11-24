@@ -18,6 +18,19 @@ RDEPEND=">=dev-libs/nss-3.13
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
+PATCHES=(
+	"${FILESDIR}/${P}-simpletlv-test-fix.patch"
+	)
+
+src_prepare() {
+	default
+
+	# remove test requiring SoftHSMv2 which is not in the tree atm
+	sed -i \
+		-e 's|tests/hwtests$(EXEEXT) \($(am__EXEEXT_1)\)|\1|' \
+		Makefile.in || die
+}
+
 src_configure() {
 	econf \
 		$(use_enable passthrough pcsc) \
