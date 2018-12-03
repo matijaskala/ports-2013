@@ -18,7 +18,7 @@ SLOT="0"
 IUSE="+introspection +python spell vala"
 REQUIRED_USE="python? ( introspection ${PYTHON_REQUIRED_USE} )"
 
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 
 # X libs are not needed for OSX (aqua)
 COMMON_DEPEND="
@@ -68,6 +68,9 @@ src_prepare() {
 src_configure() {
 	DOCS="AUTHORS ChangeLog MAINTAINERS NEWS README"
 
+	# manually set pyexecdir due to bug #524018 and AM_PATH_PYTHON limitations
+	use python && export am_cv_python_pyexecdir="$(python_get_sitedir)"
+
 	gnome2_src_configure \
 		--disable-deprecations \
 		--disable-updater \
@@ -81,12 +84,4 @@ src_configure() {
 src_test() {
 	"${EROOT}${GLIB_COMPILE_SCHEMAS}" --allow-any-name "${S}/data" || die
 	GSETTINGS_SCHEMA_DIR="${S}/data" virtx emake check
-}
-
-src_install() {
-	local args=()
-	# manually set pyoverridesdir due to bug #524018 and AM_PATH_PYTHON limitations
-	use python && args+=( pyoverridesdir="$(python_get_sitedir)/gi/overrides" )
-
-	gnome2_src_install "${args[@]}"
 }
