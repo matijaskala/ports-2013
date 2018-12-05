@@ -27,7 +27,7 @@ RDEPEND="
 DEPEND="
 	dev-db/sqlite:3
 	dev-libs/dee[${PYTHON_USEDEP}]
-	dev-libs/glib:2[${PYTHON_USEDEP}]
+	dev-libs/glib:2
 	dev-libs/libdbusmenu:=
 	dev-libs/libdbusmenu-qt
 	dev-libs/libqtdbusmock
