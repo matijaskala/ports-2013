@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -44,7 +44,10 @@ RDEPEND="${COMMON_DEPEND}
 	appindicator? ( dev-libs/libappindicator:3[introspection] )
 	network? (
 		net-firewall/iptables
-		sys-apps/net-tools
+		|| (
+			sys-apps/net-tools
+			sys-apps/iproute2
+		)
 		|| (
 			net-dns/dnsmasq
 			net-misc/dhcp
@@ -90,6 +93,8 @@ src_configure() {
 		# thunar integration is a single data file with no extra deps
 		# so install it unconditionally
 		--enable-thunar-sendto
+		# ignore pointless check
+		NETWORKTOOLS=/bin/true
 	)
 	econf "${myconf[@]}"
 }
