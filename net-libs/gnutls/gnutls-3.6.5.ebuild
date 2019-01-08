@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools libtool multilib-minimal
+inherit libtool multilib-minimal
 
 DESCRIPTION="A TLS 1.2 and SSL 3.0 implementation for the GNU project"
 HOMEPAGE="http://www.gnutls.org/"
@@ -23,11 +23,11 @@ RDEPEND=">=dev-libs/libtasn1-4.9:=[${MULTILIB_USEDEP}]
 	dev-libs/libunistring:=[${MULTILIB_USEDEP}]
 	>=dev-libs/nettle-3.4.1:=[gmp,${MULTILIB_USEDEP}]
 	>=dev-libs/gmp-5.1.3-r1:=[${MULTILIB_USEDEP}]
-	tools? ( sys-devel/autogen )
+	tools? ( sys-devel/autogen:= )
 	dane? ( >=net-dns/unbound-1.4.20:=[${MULTILIB_USEDEP}] )
 	guile? ( >=dev-scheme/guile-2:=[networking] )
-	nls? ( >=virtual/libintl-0-r1[${MULTILIB_USEDEP}] )
-	pkcs11? ( >=app-crypt/p11-kit-0.23.1[${MULTILIB_USEDEP}] )
+	nls? ( >=virtual/libintl-0-r1:=[${MULTILIB_USEDEP}] )
+	pkcs11? ( >=app-crypt/p11-kit-0.23.1:=[${MULTILIB_USEDEP}] )
 	idn? ( >=net-dns/libidn2-0.16-r1:=[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}
 	test? (
@@ -74,10 +74,10 @@ src_prepare() {
 	# Use sane .so versioning on FreeBSD.
 	elibtoolize
 
-	# bug#673574 - until upstream builds with guile.m4 of guile-2.2
-	# eautoreconf will run gtk-doc gen so let's avoid that
-	eaclocal
-	eautoconf
+	# detect also guile-2.2, bug#673574
+	# aclocal/autoreconf will require more dependencies
+	# that we want to have
+	sed -i 's/\(_guile_versions_to_search="\)\(.*\)\("\)/\1\2 2.2\3/' configure || die
 }
 
 multilib_src_configure() {
