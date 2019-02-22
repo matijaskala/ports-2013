@@ -13,7 +13,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS="~amd64 x86"
+KEYWORDS="amd64 x86"
 IUSE="acoustid flac kde mp3 mp4 +taglib vorbis"
 
 REQUIRED_USE="flac? ( vorbis )"
@@ -71,9 +71,6 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DWITH_PHONON=OFF
-		-DWITH_QT4=OFF
-		-DWITH_QT5=ON
 		-DWITH_CHROMAPRINT=$(usex acoustid)
 		-DWITH_FLAC=$(usex flac)
 		-DWITH_ID3LIB=$(usex mp3)
