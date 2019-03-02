@@ -44,7 +44,7 @@ DEPEND="
 if [[ ${PV} == 9999 ]]; then
 	DEPEND+="~gui-libs/wlroots-9999[elogind=,systemd=,X=]"
 else
-	DEPEND+=">=gui-libs/wlroots-0.3[elogind=,systemd=,X=]"
+	DEPEND+=">=gui-libs/wlroots-0.4[elogind=,systemd=,X=]"
 fi
 RDEPEND="
 	x11-misc/xkeyboard-config
@@ -55,6 +55,11 @@ BDEPEND="
 	virtual/pkgconfig
 	man? ( >=app-text/scdoc-1.8.1 )
 "
+if [[ ${PV} == 9999 ]]; then
+	BDEPEND+="~app-text/scdoc-9999"
+else
+	BDEPEND+="~app-text/scdoc=-1.9.0"
+fi
 
 src_prepare() {
 	default
