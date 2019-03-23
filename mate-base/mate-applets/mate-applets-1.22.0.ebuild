@@ -3,9 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
-
-inherit mate python-single-r1
+inherit mate
 
 if [[ ${PV} != 9999 ]]; then
 	KEYWORDS="~amd64 ~arm ~arm64 ~x86"
@@ -16,10 +14,8 @@ LICENSE="GPL-2 FDL-1.1 LGPL-2"
 SLOT="0"
 
 IUSE="X ipv6 policykit +upower"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-COMMON_DEPEND="${PYTHON_DEPS}
-	dev-libs/atk
+COMMON_DEPEND="dev-libs/atk
 	>=dev-libs/dbus-glib-0.74
 	>=dev-libs/glib-2.50:2
 	>=dev-libs/libmateweather-1.17.0
@@ -56,7 +52,7 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/gettext:*
 	virtual/pkgconfig:*"
 
-PATCHES=( "${FILESDIR}/${PN}-1.16.0-cpupower-4.7.patch" )
+PATCHES=( "${FILESDIR}"/${P}-cpupower.patch )
 
 src_configure() {
 	mate_src_configure \
