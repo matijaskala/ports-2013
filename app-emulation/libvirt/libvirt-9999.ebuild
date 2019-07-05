@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit autotools bash-completion-r1 eutils linux-info python-any-r1 readme.gentoo-r1 systemd user
 
@@ -14,12 +14,7 @@ if [[ ${PV} = *9999* ]]; then
 	KEYWORDS=""
 	SLOT="0"
 else
-	# Versions with 4 numbers are stable updates:
-	if [[ ${PV} =~ ^[0-9]+(\.[0-9]+){3} ]]; then
-		SRC_URI="https://libvirt.org/sources/stable_updates/${P}.tar.xz"
-	else
-		SRC_URI="https://libvirt.org/sources/${P}.tar.xz"
-	fi
+	SRC_URI="https://libvirt.org/sources/${P}.tar.xz"
 	KEYWORDS="~amd64 ~arm64 ~x86"
 	SLOT="0/${PV}"
 fi
@@ -56,11 +51,7 @@ RDEPEND="
 	dev-libs/libgcrypt:0
 	dev-libs/libnl:3
 	>=dev-libs/libxml2-2.7.6
-	|| (
-		>=net-analyzer/gnu-netcat-0.7.1-r3
-		>=net-analyzer/netcat-110-r9
-		>=net-analyzer/openbsd-netcat-1.105-r1
-	)
+	>=net-analyzer/openbsd-netcat-1.105-r1
 	>=net-libs/gnutls-1.0.25:0=
 	net-libs/libssh2
 	net-libs/libtirpc
@@ -75,7 +66,7 @@ RDEPEND="
 	audit? ( sys-process/audit )
 	caps? ( sys-libs/libcap-ng )
 	dbus? ( sys-apps/dbus )
-	firewalld? ( net-firewall/firewalld )
+	firewalld? ( >=net-firewall/firewalld-0.6.3 )
 	fuse? ( >=sys-fs/fuse-2.8.6:= )
 	glusterfs? ( >=sys-cluster/glusterfs-3.4.1 )
 	iscsi? ( sys-block/open-iscsi )
@@ -191,7 +182,14 @@ pkg_setup() {
 		~NETFILTER_ADVANCED
 		~NETFILTER_XT_CONNMARK
 		~NETFILTER_XT_MARK
-		~NETFILTER_XT_TARGET_CHECKSUM"
+		~NETFILTER_XT_TARGET_CHECKSUM
+		~IP_NF_FILTER
+		~IP_NF_MANGLE
+		~IP_NF_NAT
+		~IP_NF_TARGET_MASQUERADE
+		~IP6_NF_FILTER
+		~IP6_NF_MANGLE
+		~IP6_NF_NAT"
 	# Bandwidth Limiting Support
 	use virt-network && CONFIG_CHECK+="
 		~BRIDGE_EBT_T_NAT
@@ -362,8 +360,8 @@ src_install() {
 	newconfd "${FILESDIR}/libvirtd.confd-r5" libvirtd || die
 	newconfd "${FILESDIR}/libvirt-guests.confd" libvirt-guests || die
 
-	newbashcomp "${S}/tools/bash-completion/vsh" vsh
-	bashcomp_alias vsh virsh virt-admin
+	newbashcomp "${S}/tools/bash-completion/vsh" virsh
+	bashcomp_alias virsh virt-admin
 
 	DOC_CONTENTS=$(<"${FILESDIR}/README.gentoo-r2")
 	DISABLE_AUTOFORMATTING=true

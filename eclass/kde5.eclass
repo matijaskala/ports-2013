@@ -159,14 +159,7 @@ fi
 # a proper error message via pkg_nofetch.
 KDE_UNRELEASED=( )
 
-if [[ ${KDEBASE} = kdevelop ]]; then
-	HOMEPAGE="https://www.kdevelop.org/"
-elif [[ ${KMNAME} = kdepim ]]; then
-	HOMEPAGE="https://kde.org/applications/office/kontact/"
-else
-	HOMEPAGE="https://kde.org/"
-fi
-
+HOMEPAGE="https://kde.org/"
 LICENSE="GPL-2"
 
 SLOT=5
@@ -269,20 +262,12 @@ case ${EAPI} in
 	6) DEPEND+=" ${BDEPEND}" ;;
 esac
 
-DEPEND+=" ${COMMONDEPEND} dev-util/desktop-file-utils"
+DEPEND+=" ${COMMONDEPEND}"
 RDEPEND+=" ${COMMONDEPEND}"
 unset COMMONDEPEND
 
 if [[ -n ${KMNAME} && ${KMNAME} != ${PN} && ${KDE_BUILD_TYPE} = release ]]; then
 	S=${WORKDIR}/${KMNAME}-${PV}
-fi
-
-if [[ -n ${KDEBASE} && ${KDEBASE} = kdevelop && ${KDE_BUILD_TYPE} = release ]]; then
-	if [[ -n ${KMNAME} ]]; then
-		S=${WORKDIR}/${KMNAME}-${PV}
-	else
-		S=${WORKDIR}/${P}
-	fi
 fi
 
 _kde_is_unreleased() {
@@ -319,8 +304,6 @@ _calculate_src_uri() {
 			;;
 	esac
 
-	DEPEND+=" app-arch/xz-utils"
-
 	case ${CATEGORY} in
 		kde-apps)
 			case ${PV} in
@@ -350,23 +333,15 @@ _calculate_src_uri() {
 			;;
 	esac
 
-	if [[ -z ${SRC_URI} && -n ${KDEBASE} ]] ; then
-		local _kdebase
-		case ${PN} in
-			kdevelop-pg-qt)
-				_kdebase=${PN} ;;
-			*)
-				_kdebase=${KDEBASE} ;;
-		esac
+	if [[ ${PN} = kdevelop* ]]; then
 		case ${PV} in
 			*.*.[6-9]? )
-				SRC_URI="mirror://kde/unstable/${_kdebase}/${PV}/src/${_kmname}-${PV}.tar.xz"
+				SRC_URI="mirror://kde/unstable/kdevelop/${PV}/src/${_kmname}-${PV}.tar.xz"
 				RESTRICT+=" mirror"
 				;;
 			*)
-				SRC_URI="mirror://kde/stable/${_kdebase}/${PV}/src/${_kmname}-${PV}.tar.xz" ;;
+				SRC_URI="mirror://kde/stable/kdevelop/${PV}/src/${_kmname}-${PV}.tar.xz" ;;
 		esac
-		unset _kdebase
 	fi
 
 	if _kde_is_unreleased ; then
@@ -520,7 +495,10 @@ kde5_src_prepare() {
 	fi
 
 	# enable only the requested translations when required
-	if [[ -v LINGUAS ]] ; then
+	# always install unconditionally for kconfigwidgets - if you use language
+	# X as system language, and there is a combobox with language names, the
+	# translated language name for language Y is taken from /usr/share/locale/Y/kf5_entry.desktop
+	if [[ -v LINGUAS && ${PN} != kconfigwidgets ]] ; then
 		local po
 		for po in ${KDE_PO_DIRS}; do
 		if [[ -d ${po} ]] ; then

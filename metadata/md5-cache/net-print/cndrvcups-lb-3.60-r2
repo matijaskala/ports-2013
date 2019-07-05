@@ -3,10 +3,10 @@ DEFINED_PHASES=configure install prepare setup unpack
 DESCRIPTION=Canon UFR II / LIPSLX Printer Driver for Linux
 EAPI=7
 HOMEPAGE=https://www.canon-europe.com/support/products/imagerunner/imagerunner-1730i.aspx
-KEYWORDS=-* ~amd64 ~x86
+KEYWORDS=-* amd64 x86
 LICENSE=Canon-UFR-II
-RDEPEND=>=dev-libs/libxml2-2.9.1-r4[abi_x86_32(-)] >=gnome-base/libglade-2.4:2.0 >=net-print/cups-1.1.17 ~net-print/cndrvcups-common-lb-3.60 >=x11-libs/gtk+-2.4:2 virtual/jpeg:62[abi_x86_32(-)]
+RDEPEND=>=dev-libs/libxml2-2.9.1-r4[abi_x86_32(-)] >=gnome-base/libglade-2.4:2.0 >=net-print/cups-1.1.17 ~net-print/cndrvcups-common-lb-3.60 >=x11-libs/gtk+-2.4:2
 SLOT=0
 SRC_URI=http://gdlp01.c-wss.com/gds/0/0100009240/02/linux-UFRII-drv-v360-uken.tar.gz
-_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	dac0d024ab09dd209cfe9c0e7152a02b	toolchain-funcs	b45201c4e6c096b98e250336954e64b9
-_md5_=0dde4163ce60f509f598300834dce289
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	dac0d024ab09dd209cfe9c0e7152a02b	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_md5_=0cd211793ed2822c5361a0f197cb5652

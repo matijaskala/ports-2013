@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-PYTHON_COMPAT=(python{2_7,3_4,3_5,3_6,3_7})
+PYTHON_COMPAT=(python{2_7,3_5,3_6,3_7})
 inherit bash-completion-r1 distutils-r1 git-r3 readme.gentoo-r1
 
 DESCRIPTION="Download videos from YouTube.com (and more sites...)"
@@ -60,6 +60,7 @@ pkg_postinst() {
 	elog
 	elog "Videos or video formats streamed via RTMP protocol can only be"
 	elog "downloaded when rtmpdump (media-video/rtmpdump) is installed."
+	elog
 	elog "Downloading MMS and RTSP videos requires either mplayer"
 	elog "(media-video/mplayer) or mpv (media-video/mpv) to be installed."
 	elog

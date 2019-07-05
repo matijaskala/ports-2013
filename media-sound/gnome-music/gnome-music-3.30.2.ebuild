@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{5,6} )
 
 inherit gnome.org gnome2-utils meson python-single-r1 xdg
 
@@ -14,7 +14,7 @@ SLOT="0"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 # At 3.30.2 libdazzle only used from .ui file, thus introspection not needed
 COMMON_DEPEND="${PYTHON_DEPS}

@@ -38,14 +38,10 @@ case ${CATEGORY} in
 		[[ ${KDE_BUILD_TYPE} = live ]] && : ${FRAMEWORKS_MINIMAL:=9999}
 		;;
 	kde-plasma)
-		[[ ${PV} = 5.14.5 ]] && : ${FRAMEWORKS_MINIMAL:=5.52.0}
-		if [[ ${KDE_BUILD_TYPE} = live && ${PV} != 5.??.49* ]]; then
-			: ${FRAMEWORKS_MINIMAL:=9999}
-			: ${QT_MINIMAL:=5.12.1}
-		fi
-		;;
-	kde-apps)
-		[[ ${PV} = 19.04* ]] && : ${FRAMEWORKS_MINIMAL:=5.56.0}
+		[[ ${PV} = 5.15.5 ]] && : ${QT_MINIMAL:=5.11.1}
+		[[ ${PV} = 5.16* ]] && : ${FRAMEWORKS_MINIMAL:=5.58.0}
+		[[ ${KDE_BUILD_TYPE} = live ]] && : ${FRAMEWORKS_MINIMAL:=9999}
+		: ${QT_MINIMAL:=5.12.3}
 		;;
 esac
 
@@ -57,7 +53,7 @@ esac
 # @ECLASS-VARIABLE: FRAMEWORKS_MINIMAL
 # @DESCRIPTION:
 # Minimum version of Frameworks to require. This affects add_frameworks_dep.
-: ${FRAMEWORKS_MINIMAL:=5.54.0}
+: ${FRAMEWORKS_MINIMAL:=5.57.0}
 
 # @ECLASS-VARIABLE: PLASMA_MINIMAL
 # @DESCRIPTION:
@@ -74,17 +70,6 @@ esac
 # @DESCRIPTION:
 # Minimum version of active GCC to require. This is checked in kde5.eclass in
 # kde5_pkg_pretend and kde5_pkg_setup.
-
-# @ECLASS-VARIABLE: KDEBASE
-# @DEFAULT_UNSET
-# @DESCRIPTION:
-# This gets set to a non-zero value when a package is considered a
-# kdevelop ebuild.
-if [[ ${KMNAME-${PN}} = kdevelop ]]; then
-	KDEBASE=kdevelop
-fi
-
-debug-print "${ECLASS}: ${KDEBASE} ebuild recognized"
 
 # @FUNCTION: _check_gcc_version
 # @INTERNAL

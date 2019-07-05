@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6,3_7} )
+PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=2.0.9
@@ -99,6 +99,7 @@ COMMON_DEPEND="
 	vulkan? (
 		media-libs/shaderc
 		media-libs/vulkan-loader[X?,wayland?]
+		>=media-libs/libplacebo-1.18.0[vulkan]
 	)
 	wayland? (
 		>=dev-libs/wayland-1.6.0

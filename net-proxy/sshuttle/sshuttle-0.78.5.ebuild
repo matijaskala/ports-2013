@@ -12,7 +12,7 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="test"
 
 RDEPEND="
@@ -34,6 +34,9 @@ CONFIG_CHECK="~NETFILTER_XT_TARGET_HL ~IP_NF_TARGET_REDIRECT ~IP_NF_MATCH_TTL ~N
 python_prepare_all() {
 	# don't run tests via setup.py pytest
 	sed -i "/setup_requires=/s/'pytest-runner'//" setup.py || die
+
+	# don't require pytest-cov when running tests
+	sed -i "s/^addopts =/#\0/" setup.cfg || die
 
 	distutils-r1_python_prepare_all
 }

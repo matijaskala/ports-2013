@@ -10,7 +10,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/Amtk"
 
 LICENSE="LGPL-2.1+"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86"
 IUSE="+introspection"
 
 RDEPEND="
@@ -20,6 +20,7 @@ RDEPEND="
 "
 DEPEND="${DEPEND}
 	>=sys-devel/gettext-0.19.4
+	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1.25
 	virtual/pkgconfig
 "

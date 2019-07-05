@@ -11,7 +11,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/libchamplain"
 
 SLOT="0.12"
 LICENSE="LGPL-2.1+"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86"
 
 IUSE="+gtk gtk-doc +introspection vala"
 REQUIRED_USE="
@@ -40,6 +40,11 @@ BDEPEND="
 	gtk-doc? ( >=dev-util/gtk-doc-1.15 )
 	vala? ( $(vala_depend) )
 "
+
+PATCHES=(
+	# Fix compilation against clutter[-gtk]
+	"${FILESDIR}"/${PV}-gdk-meson-fixes.patch # https://gitlab.gnome.org/GNOME/libchamplain/merge_requests/8
+)
 
 src_prepare() {
 	xdg_src_prepare

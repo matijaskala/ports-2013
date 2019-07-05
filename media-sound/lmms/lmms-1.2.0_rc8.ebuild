@@ -54,7 +54,9 @@ COMMON_DEPEND="
 	stk? ( media-libs/stk )
 	vst? ( virtual/wine )
 "
-DEPEND="${COMMON_DEPEND}"
+DEPEND="${COMMON_DEPEND}
+	dev-qt/qtx11extras:5
+"
 BDEPEND="
 	dev-qt/linguist-tools:5
 "
@@ -71,7 +73,6 @@ DOCS=( README.md doc/AUTHORS )
 src_configure() {
 	local mycmakeargs+=(
 		-DUSE_WERROR=FALSE
-		-DWANT_SYSTEM_SR=TRUE
 		-DWANT_CAPS=FALSE
 		-DWANT_TAP=FALSE
 		-DWANT_SWH=FALSE
