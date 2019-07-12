@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: qt5-build.eclass
@@ -6,14 +6,15 @@
 # qt@gentoo.org
 # @AUTHOR:
 # Davide Pesavento <pesa@gentoo.org>
-# @SUPPORTED_EAPIS: 6
+# @SUPPORTED_EAPIS: 6 7
 # @BLURB: Eclass for Qt5 split ebuilds.
 # @DESCRIPTION:
 # This eclass contains various functions that are used when building Qt5.
 # Requires EAPI 6.
 
 case ${EAPI} in
-	6)	: ;;
+	6)	inherit eapi7-ver ;;
+	7)	: ;;
 	*)	die "qt5-build.eclass: unsupported EAPI=${EAPI:-0}" ;;
 esac
 
@@ -53,7 +54,7 @@ esac
 # for tests you should proceed with setting VIRTUALX_REQUIRED=test.
 : ${VIRTUALX_REQUIRED:=manual}
 
-inherit eapi7-ver estack flag-o-matic toolchain-funcs virtualx
+inherit estack flag-o-matic toolchain-funcs virtualx
 
 HOMEPAGE="https://www.qt.io/"
 LICENSE="|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3"
@@ -109,10 +110,13 @@ IUSE="debug test"
 
 [[ ${QT5_BUILD_TYPE} == release ]] && RESTRICT+=" test" # bug 457182
 
-DEPEND="
+BDEPEND="
 	dev-lang/perl
 	virtual/pkgconfig
 "
+case ${EAPI} in
+	6) DEPEND+=" ${BDEPEND}" ;;
+esac
 if [[ ${PN} != qttest ]]; then
 	DEPEND+=" test? ( ~dev-qt/qttest-${PV} )"
 fi
@@ -251,10 +255,6 @@ qt5-build_src_install() {
 		"$@"
 
 		popd >/dev/null || die
-
-		if [[ ${QT5_MINOR_VERSION} -lt 12 ]]; then
-			docompress -x "${QT5_DOCDIR#${EPREFIX}}"/global
-		fi
 
 		# install an empty Gentoo/gentoo-qconfig.h in ${D}
 		# so that it's placed under package manager control
@@ -412,11 +412,7 @@ qt5_prepare_env() {
 	QT5_IMPORTDIR=${QT5_ARCHDATADIR}/imports
 	QT5_QMLDIR=${QT5_ARCHDATADIR}/qml
 	QT5_DATADIR=${QT5_PREFIX}/share/qt5
-	if [[ ${QT5_MINOR_VERSION} -lt 12 ]]; then
-		QT5_DOCDIR=${QT5_PREFIX}/share/doc/qt-${PV}
-	else
-		QT5_DOCDIR=${QT5_PREFIX}/share/qt5-doc
-	fi
+	QT5_DOCDIR=${QT5_PREFIX}/share/qt5-doc
 	QT5_TRANSLATIONDIR=${QT5_DATADIR}/translations
 	QT5_EXAMPLESDIR=${QT5_DATADIR}/examples
 	QT5_TESTSDIR=${QT5_DATADIR}/tests
@@ -583,8 +579,7 @@ qt5_base_configure() {
 		-no-freetype -no-harfbuzz
 		-no-openssl -no-libproxy
 		-no-xcb-xlib
-		$([[ ${QT5_MINOR_VERSION} -lt 12 ]] && echo -no-xinput2 -no-xkbcommon-x11 -no-xkbcommon-evdev)
-		$([[ ${QT5_MINOR_VERSION} -ge 12 ]] && echo -no-xcb-xinput -no-xkbcommon) # bug 672340
+		-no-xcb-xinput -no-xkbcommon # bug 672340
 
 		# cannot use -no-gif because there is no way to override it later
 		#-no-gif
@@ -627,7 +622,8 @@ qt5_base_configure() {
 		$(tc-ld-is-gold && echo -use-gold-linker || echo -no-use-gold-linker)
 
 		# disable all platform plugins by default, override in qtgui
-		-no-xcb -no-eglfs -no-kms -no-gbm -no-directfb -no-linuxfb -no-mirclient
+		-no-xcb -no-eglfs -no-kms -no-gbm -no-directfb -no-linuxfb
+		$([[ ${QT5_MINOR_VERSION} -lt 14 ]] && echo -no-mirclient)
 
 		# disable undocumented X11-related flags, override in qtgui
 		# (not shown in ./configure -help output)
