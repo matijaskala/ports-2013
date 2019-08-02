@@ -6,8 +6,9 @@ EAPI=7
 HOMEPAGE=https://www.gnu.org/software/hurd/
 IUSE=bzip2 headers-only ncurses parted zlib
 LICENSE=GPL-2
+PROPERTIES=live
 RDEPEND=!headers-only? ( dev-libs/libgcrypt:=[static-libs(-)] bzip2? ( app-arch/bzip2[static-libs(+)] ) ncurses? ( sys-libs/ncurses:=[static-libs] ) parted? ( sys-apps/util-linux[static-libs(+)] sys-block/parted[static-libs(+)] ) zlib? ( sys-libs/zlib[static-libs(+)] ) app-shells/bash )
 RESTRICT=mirror
 SLOT=0
-_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	git-r3	0d4635eeb5a96cd5315597a47eba25c9	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	dac0d024ab09dd209cfe9c0e7152a02b	toolchain-funcs	a3a237ef6c0c58546bf23b2c382f9e56
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	git-r3	562b380fc59ae6a8622171d0acb777d1	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	dac0d024ab09dd209cfe9c0e7152a02b	toolchain-funcs	a3a237ef6c0c58546bf23b2c382f9e56
 _md5_=800a9a825a4218cfdd78adf013969d3a
