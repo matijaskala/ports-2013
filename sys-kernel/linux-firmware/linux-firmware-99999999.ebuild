@@ -27,6 +27,7 @@ RESTRICT="binchecks strip
 
 BDEPEND="initramfs? ( app-arch/cpio )"
 
+#add anything else that collides to this
 RDEPEND="!savedconfig? (
 		redistributable? (
 			!sys-firmware/alsa-firmware[alsa_cards_ca0132]
@@ -71,7 +72,9 @@ RDEPEND="!savedconfig? (
 		)
 	)"
 
-#add anything else that collides to this
+pkg_pretend() {
+	use initramfs && mount-boot_pkg_pretend
+}
 
 src_unpack() {
 	if [[ ${PV} == 99999999* ]]; then
@@ -274,13 +277,13 @@ src_prepare() {
 	fi
 
 	echo "# Remove files that shall not be installed from this list." > ${PN}.conf
-	find * ! -type d \( ! -name ${PN}.conf -o -name amd-uc.img \) >> ${PN}.conf
+	find * ! -type d ! \( -name ${PN}.conf -o -name amd-uc.img \) >> ${PN}.conf
 
 	if use savedconfig; then
 		restore_config ${PN}.conf
 
 		ebegin "Removing all files not listed in config"
-		find ! -type d ! -name ${PN}.conf -printf "%P\n" \
+		find ! -type d ! \( -name ${PN}.conf -o -name amd-uc.img \) -printf "%P\n" \
 			| grep -Fvx -f <(grep -v '^#' ${PN}.conf \
 				|| die "grep failed, empty config file?") \
 			| xargs -d '\n' --no-run-if-empty rm
@@ -316,6 +319,9 @@ pkg_preinst() {
 	if use savedconfig; then
 		ewarn "USE=savedconfig is active. You must handle file collisions manually."
 	fi
+
+	# Make sure /boot is available if needed.
+	use initramfs && mount-boot_pkg_preinst
 }
 
 pkg_postinst() {
@@ -332,4 +338,17 @@ pkg_postinst() {
 			break
 		fi
 	done
+
+	# Don't forget to umount /boot if it was previously mounted by us.
+	use initramfs && mount-boot_pkg_postinst
+}
+
+pkg_prerm() {
+	# Make sure /boot is mounted so that we can remove /boot/amd-uc.img!
+	use initramfs && mount-boot_pkg_prerm
+}
+
+pkg_postrm() {
+	# Don't forget to umount /boot if it was previously mounted by us.
+	use initramfs && mount-boot_pkg_postrm
 }

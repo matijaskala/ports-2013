@@ -29,6 +29,25 @@
 
 #--- END OF EXAMPLES ---
 
+# Mike Gilbert <floppym@gentoo.org> (2019-08-08)
+# Dev channel releases are only for people who
+# are developers or want more experimental features
+# and accept a more unstable release.
+>=www-client/chromium-77
+
+# Mikle Kolyada <zlogene@gentoo.org> (2019-08-05)
+# dead upstream, does not work and compile
+#(bug #688006, bug #686630)
+# masked for removal in 14 days
+app-text/winefish
+dev-tex/oesch
+
+# Aaron Bauman <bman@gentoo.org> (2019-08-04)
+# multiple open sec bugs. no response from upstream
+# Masked for removal in 30 days
+media-libs/ming
+dev-php/ming-php
+
 # Hans de Graaff <graaff@gentoo.org> (2019-08-03)
 # ruby24-only, no longer compiles with gcc 9, last release in 2009,
 # upstream gone, no reverse dependencies.
@@ -127,13 +146,6 @@ kde-misc/plasma-active-window-control
 # Lars Wendler <polynomial-c@gentoo.org> (2019-07-21)
 # Requires >=mail-client/thunderbird-68_beta1 which is not in the tree yet
 >=x11-plugins/enigmail-2.1
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2019-07-20)
-# Ancient theme for KDE SC 4.4, useless for Plasma 5
-# Removal in 15 days
-x11-themes/korilla
-x11-themes/noia
-x11-themes/oxygen-molecule
 
 # Sergei Trofimovich <slyfox@gentoo.org> (2019-07-20)
 # Mask linux-headers-5.2 as it breaks at least firefox
@@ -366,7 +378,7 @@ dev-ros/sound_play
 # Jeroen Roovers <jer@gentoo.org> (2019-04-24)
 # Depends on =dev-libs/openssl-1.1.1* due to newly introduced
 # support for EVP_PKEY_ED25519 and EVP_PKEY_ED448 (bug #670574).
-=net-libs/nodejs-10.16.0
+=net-libs/nodejs-10.16*
 =net-libs/nodejs-11.15.0
 =net-libs/nodejs-12*
 
