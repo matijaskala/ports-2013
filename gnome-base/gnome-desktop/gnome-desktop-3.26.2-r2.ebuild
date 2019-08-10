@@ -7,17 +7,18 @@ inherit gnome2 virtualx
 
 DESCRIPTION="Libraries for the gnome desktop that are not part of the UI"
 HOMEPAGE="https://git.gnome.org/browse/gnome-desktop"
-SRC_URI+=" https://dev.gentoo.org/~leio/distfiles/${P}-patchset-r1.tar.xz"
+SRC_URI+=" https://dev.gentoo.org/~leio/distfiles/${P}-patchset-r1.tar.xz
+	ubuntu? ( https://launchpad.net/ubuntu/+archive/primary/+files/gnome-desktop3_3.26.2-0ubuntu0.1.debian.tar.xz )"
 
 LICENSE="GPL-2+ FDL-1.1+ LGPL-2+"
 SLOT="3/12" # subslot = libgnome-desktop-3 soname version
-IUSE="debug +introspection seccomp udev"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-solaris"
+IUSE="debug +introspection seccomp +ubuntu udev"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~x86-solaris"
 
 # cairo[X] needed for gnome-bg
 COMMON_DEPEND="
 	app-text/iso-codes
-	>=dev-libs/glib-2.53.0:2
+	>=dev-libs/glib-2.53.0:2[dbus]
 	>=x11-libs/gdk-pixbuf-2.36.5:2[introspection?]
 	>=x11-libs/gtk+-3.3.6:3[X,introspection?]
 	x11-libs/cairo:=[X]
@@ -51,6 +52,18 @@ DEPEND="${COMMON_DEPEND}
 PATCHES=(
 	"${WORKDIR}"/patches/ # Requires eautoreconf. Various backports for sandboxed thumbnailer, leak fixes and more - https://gitlab.gnome.org/Community/gentoo/gnome-desktop/commits/gentoo-3.26.2
 )
+
+src_prepare() {
+	# Ubuntu patches
+	if use ubuntu; then
+		einfo "Applying patches from Ubuntu:"
+		for patch in `cat "${FILESDIR}/${P}-ubuntu-patch-series"`; do
+			eapply "${WORKDIR}/debian/patches/${patch}"
+		done
+	fi
+
+	gnome2_src_prepare
+}
 
 src_configure() {
 	gnome2_src_configure \

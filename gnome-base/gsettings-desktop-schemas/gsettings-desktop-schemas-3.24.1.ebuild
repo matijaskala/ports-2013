@@ -20,6 +20,7 @@ RDEPEND="
 	!<gnome-base/gdm-3.8
 "
 DEPEND="${RDEPEND}
+	dev-util/glib-utils
 	>=dev-util/intltool-0.50.1
 	sys-devel/gettext
 	virtual/pkgconfig
