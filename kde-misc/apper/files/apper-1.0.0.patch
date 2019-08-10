@@ -1,0 +1,65 @@
+--- apper-1.0.0/libapper/CMakeLists.txt	2018-02-20 21:12:16.000000000 +0100
++++ apper/libapper/CMakeLists.txt	2019-08-09 21:59:33.049954974 +0200
+@@ -59,7 +59,10 @@
+     KF5::I18n
+     Qt5::Core
+     PK::packagekitqt5
+-    AppStreamQt
+ )
+ 
++if(APPSTREAM)
++    target_link_libraries(apper_private AppStreamQt)
++endif()
++
+ install(TARGETS apper_private DESTINATION ${CMAKE_INSTALL_LIBDIR}/apper)
+--- apper-1.0.0/libapper/PackageModel.cpp	2018-02-20 21:12:16.000000000 +0100
++++ apper/libapper/PackageModel.cpp	2019-08-09 21:59:33.053288308 +0200
+@@ -491,7 +491,7 @@
+ 
+         if (notFound) {
+             // Uncheck the package If it's not in the model
+-            m_checkedPackages.erase(it);
++            it = m_checkedPackages.erase(it);
+             uncheckPackageLogic(package.packageID);
+         } else {
+             ++it;
+--- apper-1.0.0/libapper/Requirements.h	2018-02-20 21:12:16.000000000 +0100
++++ apper/libapper/Requirements.h	2019-08-09 21:59:33.053288308 +0200
+@@ -23,6 +23,7 @@
+ 
+ #include <QDialog>
+ 
++#include <QButtonGroup>
+ #include <QToolButton>
+ 
+ namespace Ui {
+--- apper-1.0.0/Apper/CMakeLists.txt	2018-02-20 21:12:16.000000000 +0100
++++ apper/Apper/CMakeLists.txt	2019-08-09 21:59:33.029954975 +0200
+@@ -49,7 +49,7 @@
+ 
+ set_target_properties(apper PROPERTIES INSTALL_RPATH ${CMAKE_INSTALL_FULL_LIBDIR}/apper)
+ 
+-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/apper DESTINATION ${CMAKE_INSTALL_BINDIR})
++install(TARGETS apper DESTINATION ${CMAKE_INSTALL_BINDIR})
+ install(FILES org.kde.apper.desktop DESTINATION ${CMAKE_INSTALL_APPDIR})
+ install(FILES org.kde.apper_installer.desktop DESTINATION ${CMAKE_INSTALL_APPDIR})
+ install(FILES org.kde.apper_settings.desktop DESTINATION ${CMAKE_INSTALL_APPDIR})
+--- apper-1.0.0/Apper/Settings/Settings.cpp	2018-02-20 21:12:16.000000000 +0100
++++ apper/Apper/Settings/Settings.cpp	2019-08-09 21:59:33.036621641 +0200
+@@ -27,6 +27,7 @@
+ #include <Enum.h>
+ #include <PkStrings.h>
+ 
++#include <QAction>
+ #include <QTimer>
+ #include <QSortFilterProxyModel>
+ 
+@@ -154,7 +155,7 @@
+ void Settings::on_editOriginsPB_clicked()
+ {
+ #ifdef EDIT_ORIGNS_DESKTOP_NAME
+-    KToolInvocation::startServiceByDesktopName(EDIT_ORIGNS_DESKTOP_NAME);
++    KToolInvocation::startServiceByDesktopName(QLatin1String(EDIT_ORIGNS_DESKTOP_NAME));
+ #endif //EDIT_ORIGNS_DESKTOP_NAME
+ }
+ 
