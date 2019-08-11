@@ -1,8 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit xfconf
+EAPI=7
+
+inherit xdg-utils
 
 DESCRIPTION="Unified widget and session management libraries for Xfce"
 HOMEPAGE="http://www.xfce.org/projects/libxfce4"
@@ -29,17 +30,28 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
-pkg_setup() {
-	XFCONF=(
+src_configure() {
+	local myconf=(
 		$(use_enable startup-notification)
 		$(use_enable gtk3)
-		$(xfconf_use_debug)
 		# requires deprecated glade:3 (gladeui-1.0), bug #551296
 		--disable-gladeui
 		--with-vendor-info=Gentoo
-		)
+	)
 
-	[[ ${CHOST} == *-darwin* ]] && XFCONF+=( --disable-visibility ) #366857
+	econf "${myconf[@]}"
+}
 
-	DOCS=( AUTHORS ChangeLog NEWS README THANKS TODO )
+src_install() {
+	default
+
+	find "${D}" -name '*.la' -delete || die
+}
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
 }
