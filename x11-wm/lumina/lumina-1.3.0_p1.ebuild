@@ -11,6 +11,7 @@ SRC_URI="https://github.com/trueos/${PN}/archive/v${PV/_/-}.tar.gz -> ${P}.tar.g
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 x86"
+IUSE="desktop-utils"
 
 COMMON_DEPEND="dev-qt/qtcore:5
 	dev-qt/qtconcurrent:5
@@ -46,6 +47,15 @@ PATCHES=(
 	"${FILESDIR}/1.3.0-OS-detect.patch"
 )
 
+src_prepare(){
+	default
+
+	if use !desktop-utils ; then
+		rm -rf src-qt5/desktop-utils || die
+		sed -e "/desktop-utils/d" -i src-qt5/src-qt5.pro || die
+	fi
+}
+
 src_configure(){
 	eqmake5 PREFIX="${EPREFIX}/usr" LIBPREFIX="${EPREFIX}/usr/$(get_libdir)" \
 		DESTDIR="${D}" CONFIG+=WITH_I18N QMAKE_CFLAGS_ISYSTEM=
@@ -54,5 +64,5 @@ src_configure(){
 src_install(){
 	default
 	mv "${ED%/}"/etc/luminaDesktop.conf{.dist,} || die
-	mv "${ED%/}"/{${PN}-*,start-${PN}-desktop} "${ED%/}"/usr/bin || die
+	rm "${ED%/}"/${PN}-* "${ED%/}"/start-${PN}-desktop || die
 }

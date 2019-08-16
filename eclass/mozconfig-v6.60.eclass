@@ -52,7 +52,7 @@ inherit flag-o-matic toolchain-funcs mozcoreconf-v6
 # @ECLASS-VARIABLE: MOZCONFIG_OPTIONAL_GTK3
 # @DESCRIPTION:
 # Set this variable before the inherit line, when an ebuild can provide
-# optional gtk3 support via IUSE="gtk3".  Currently this would include
+# optional gtk3 support via IUSE="force-gtk3".  Currently this would include
 # thunderbird and seamonkey in the future, once support is ready for testing.
 #
 # Leave the variable UNSET if gtk3 support should not be optionally available.
@@ -124,11 +124,11 @@ RDEPEND=">=app-text/hunspell-1.5.4:=
 if [[ -n ${MOZCONFIG_OPTIONAL_GTK3} ]]; then
 	MOZCONFIG_OPTIONAL_GTK2ONLY=
 	if [[ ${MOZCONFIG_OPTIONAL_GTK3} = "enabled" ]]; then
-		IUSE+=" +gtk3"
+		IUSE+=" +force-gtk3"
 	else
-		IUSE+=" gtk3"
+		IUSE+=" force-gtk3"
 	fi
-	RDEPEND+=" gtk3? ( >=x11-libs/gtk+-3.4.0:3 )"
+	RDEPEND+=" force-gtk3? ( >=x11-libs/gtk+-3.4.0:3 )"
 elif [[ -n ${MOZCONFIG_OPTIONAL_GTK2ONLY} ]]; then
 	if [[ ${MOZCONFIG_OPTIONAL_GTK2ONLY} = "enabled" ]]; then
 		IUSE+=" +gtk2"
@@ -324,9 +324,9 @@ mozconfig_config() {
 	local toolkit="cairo-gtk3"
 	local toolkit_comment=""
 	if [[ -n ${MOZCONFIG_OPTIONAL_GTK3} ]]; then
-		if ! use gtk3; then
+		if ! use force-gtk3; then
 			toolkit="cairo-gtk2"
-			toolkit_comment="gtk3 use flag"
+			toolkit_comment="force-gtk3 use flag"
 		fi
 	fi
 	if [[ -n ${MOZCONFIG_OPTIONAL_GTK2ONLY} ]]; then
