@@ -199,7 +199,7 @@ app-admin/hardinfo 0.5.2_pre20130823: System information and benchmark tool for 
 app-admin/haskell-updater 1.2.9 1.2.10 1.2.12-r1 1.3.1: Rebuild Haskell dependencies in Gentoo
 app-admin/hcloud 1.12.0 1.13.0: A command-line interface for Hetzner Cloud
 app-admin/hddtemp 0.3_beta15-r28: A simple utility to read the temperature of SMART capable hard drives
-app-admin/helm 2.14.1 2.14.2 2.14.3: Kubernetes Package Manager
+app-admin/helm 2.14.3: Kubernetes Package Manager
 app-admin/ide-smart 1.4-r2: A tool to read SMART information from harddiscs
 app-admin/installer 0.1.1_beta: A software for Gentoo installation
 app-admin/integrit 4.1-r1: file integrity verification program
@@ -488,7 +488,7 @@ app-backup/tsm 7.1.8.0 8.1.6.0: IBM Spectrum Protect (former Tivoli Storage Mana
 app-backup/untangle-https-backup 0.0.10: Back up Untangle configurations via the web admin UI
 app-backup/vzdump 1.2: A utility to make consistent snapshots of running OpenVZ containers
 app-backup/zbackup 1.4.4-r1 9999: A versatile deduplicating backup tool
-app-benchmarks/acovea 5.1.1 5.1.1-r2: Analysis of Compiler Options via Evolutionary Algorithm
+app-benchmarks/acovea 5.1.1-r2: Analysis of Compiler Options via Evolutionary Algorithm
 app-benchmarks/acovea-gtk 1.0.1: Analysis of Compiler Options via Evolutionary Algorithm GUI
 app-benchmarks/bashmark 0.6.2: Geno's cross platform benchmarking suite
 app-benchmarks/bonnie 2.0.6-r2: Performance Test of Filesystem I/O using standard C library calls
@@ -514,7 +514,7 @@ app-benchmarks/siege 4.0.4: A HTTP regression testing and benchmarking utility
 app-benchmarks/spew 1.0.8-r1: Measures I/O performance and/or generates I/O load
 app-benchmarks/stress 1.0.4-r2: A deliberately simple workload generator for POSIX systems
 app-benchmarks/stress-ng 0.10.00: Stress test for a computer system with various selectable ways
-app-benchmarks/sysbench 1.0.10 1.0.15 1.0.16 9999: System performance benchmark
+app-benchmarks/sysbench 1.0.15 1.0.16 1.0.17 9999: System performance benchmark
 app-benchmarks/tiobench 0.4.2: Portable, robust, fully-threaded I/O benchmark program
 app-benchmarks/volanomark 2.5.0.9: Java server benchmark utility
 app-benchmarks/wrk 4.1.0-r1: A HTTP benchmarking tool
@@ -1290,7 +1290,7 @@ app-emacs/navi2ch 1.8.4-r1: A navigator for the Japanese textboard 2ch
 app-emacs/nxml-docbook5-schemas 20080922: Add support for DocBook 5 schemas to NXML
 app-emacs/nxml-gentoo-schemas 20170302 20180611: Extension for nxml-mode with Gentoo-specific schemas
 app-emacs/nxml-libvirt-schemas 0.9.7 1.2.1: Extension for nxml-mode with libvirt schemas
-app-emacs/nxml-svg-schemas 1.1.20081123: Extension for nxml-mode with SVG 1.1 schemas
+app-emacs/nxml-svg-schemas 1.1.20081123 1.1.20081123-r1: Extension for nxml-mode with SVG 1.1 schemas
 app-emacs/ocaml-mode 3.12.1 3.12.1-r1 4.00.1: Emacs mode for OCaml
 app-emacs/org-mode 8.3.2-r1 9.0.4 9.1.13: An Emacs mode for notes and project planning
 app-emacs/outline-magic 0.9: Outline mode extensions for Emacs
@@ -1319,7 +1319,7 @@ app-emacs/rfcview 0.13: An Emacs mode that reformats IETF RFCs for display
 app-emacs/riece 8.0.0 9.0.0: A redesign of Liece IRC client
 app-emacs/rnc-mode 1.0.6: An Emacs mode for editing Relax NG compact schema files
 app-emacs/rpm-spec-mode 0.15: Emacs mode to ease editing of RPM spec files
-app-emacs/ruby-mode 2.3.0 2.4.1 2.5.3 2.5.5 2.6.0 2.6.3: Emacs major mode for editing Ruby code
+app-emacs/ruby-mode 2.4.1 2.5.3 2.5.5 2.6.0 2.6.3: Emacs major mode for editing Ruby code
 app-emacs/rudel 0.3_pre20110721-r1 0.3.1: Collaborative editing environment for GNU Emacs
 app-emacs/rust-mode 0.3.0_p20180221 0.3.0_p20190125: A major emacs mode for editing Rust source code
 app-emacs/s 1.11.0 1.12.0: The long lost Emacs string manipulation library
@@ -1439,7 +1439,7 @@ app-emulation/phpvirtualbox 5.2.1: Web-based administration for VirtualBox in PH
 app-emulation/playonlinux 4.2.12 4.3.4: Set of scripts to easily install and use Windows games and software
 app-emulation/punes 0.103 0.104: Nintendo Entertainment System (NES) emulator
 app-emulation/q4wine 1.3.11: Qt GUI configuration tool for Wine
-app-emulation/qemu 4.0.0-r3 4.0.0-r4 9999: QEMU + Kernel-based Virtual Machine userland tools
+app-emulation/qemu 4.0.0-r3 4.0.0-r50 9999: QEMU + Kernel-based Virtual Machine userland tools
 app-emulation/qemu-guest-agent 3.1.0 4.0.0: QEMU Guest Agent (qemu-ga) for use when running inside a VM
 app-emulation/qemu-init-scripts 0.3.0: Kvm and qemu init scripts
 app-emulation/qemu-riscv64-bin 3.1.0-r4: Statically linked x86-64 binary of app-emulation/qemu, riscv64 emulator
@@ -1485,9 +1485,9 @@ app-emulation/wine-any 3.20 3.21 4.0 4.1 9999: Free implementation of Windows(tm
 app-emulation/wine-d3d9 3.20 3.21 4.0 4.1 9999: Free implementation of Windows(tm) on Unix, with Gallium Nine patchset
 app-emulation/wine-desktop-common 20150204-r1: Various desktop menu items and icons for wine
 app-emulation/wine-gecko 2.47-r1: A Mozilla Gecko based version of Internet Explorer for Wine
-app-emulation/wine-mono 4.6.4 4.7.0 4.7.1 4.7.3 4.7.5 4.8.0 4.8.1 4.8.3 4.9.0: Wine Mono is a replacement for the .NET runtime and class libraries in Wine
-app-emulation/wine-staging 4.10 4.11 4.12.1 4.13 9999: Free implementation of Windows(tm) on Unix, with Wine-Staging patchset
-app-emulation/wine-vanilla 4.0 4.0.1 4.10 4.11 4.12.1 4.13 9999: Free implementation of Windows(tm) on Unix, without external patchsets
+app-emulation/wine-mono 4.6.4 4.7.0 4.7.1 4.7.3 4.7.5 4.8.0 4.8.1 4.8.3 4.9.0 4.9.2: Wine Mono is a replacement for the .NET runtime and class libraries in Wine
+app-emulation/wine-staging 4.11 4.12.1 4.13 4.14 9999: Free implementation of Windows(tm) on Unix, with Wine-Staging patchset
+app-emulation/wine-vanilla 4.0 4.0.1 4.11 4.12.1 4.13 4.14 9999: Free implementation of Windows(tm) on Unix, without external patchsets
 app-emulation/winetricks 20190310 20190615 99999999: Easy way to install DLLs needed to work around problems in Wine
 app-emulation/x48 0.6.4-r1: HP48 Calculator Emulator
 app-emulation/xcpc 20070122: XCPC is a portable Amstrad CPC 464/664/6128 emulator written in C.
@@ -1990,7 +1990,7 @@ app-misc/mencal 3.0: Calendar to track menstruation cycles
 app-misc/mepl 0.45-r1: Self-employed-mode software for 3COM/USR message modems
 app-misc/metromap 0.1.4-r1: Metromap is simple pygtk+2 programm for finding paths in metro(subway) maps
 app-misc/mime-types 9: Provides /etc/mime.types file
-app-misc/mkcert 1.1.2: A zero-config tool to make locally trusted development certificates
+app-misc/mkcert 1.1.2 1.4.0: A zero-config tool to make locally trusted development certificates
 app-misc/mmv 1.01b_p18 1.01b_p18-r1: Move/copy/append/link multiple files according to a set of wildcard patterns
 app-misc/mosquitto 1.5.6 1.5.8 1.6.2: An Open Source MQTT v3 Broker
 app-misc/mouseremote 0.90-r2: X10 MouseRemote
@@ -3059,7 +3059,7 @@ dev-db/cpp-driver 2.9.0 2.11.0: DataStax C/C++ Driver for Cassandra
 dev-db/cppdb 0.3.1-r3: SQL connectivity library for platform and database independent connectivity
 dev-db/datadraw 3.1.1: feature rich database generator for high performance C applications
 dev-db/db-je 3.3.75: A high performance, transactional storage engine written entirely in Java
-dev-db/etcd 3.3.12 3.3.13: Highly-available key value store for shared configuration and service discovery
+dev-db/etcd 3.3.13 3.3.14: Highly-available key value store for shared configuration and service discovery
 dev-db/firebird 3.0.4.33054.0: Relational database offering many ANSI SQL:2003 and some SQL:2008 features
 dev-db/freetds 1.00.558: Tabular Datastream Library
 dev-db/gigabase 3.83-r2: OO-DBMS with interfaces for C/C++/Java/PHP/Perl
@@ -3087,8 +3087,8 @@ dev-db/mongodb 3.6.8 3.6.13 4.0.10 4.0.12: A high-performance, open source, sche
 dev-db/mtop 0.6.6-r3: Mysql top monitors a MySQL server
 dev-db/mycli 1.15.0-r2 1.17.0-r1 1.19.0 9999: CLI for MySQL Database with auto-completion and syntax highlighting
 dev-db/mydumper 0.9.3-r1 0.9.5 0.9.5-r1: A high-performance multi-threaded backup (and restore) toolset for MySQL
-dev-db/myodbc 5.3.9 5.3.10-r2 8.0.16: ODBC driver for MySQL
-dev-db/mysql 5.5.61 5.5.62 5.6.40-r2 5.6.42 5.6.43 5.6.44-r1 5.6.45-r1 5.7.23-r2 5.7.24 5.7.25 5.7.26 5.7.27 8.0.17_pre4: A fast, multi-threaded, multi-user SQL database server
+dev-db/myodbc 5.3.9 5.3.10-r2 8.0.16 8.0.17: ODBC driver for MySQL
+dev-db/mysql 5.5.61 5.5.62 5.6.40-r2 5.6.42 5.6.43 5.6.44-r1 5.6.45-r1 5.7.23-r2 5.7.24 5.7.25 5.7.26 5.7.27 8.0.17: A fast, multi-threaded, multi-user SQL database server
 dev-db/mysql++ 2.3.2-r1 3.2.3 3.2.4 3.2.5: C++ API interface to the MySQL database
 dev-db/mysql-cluster 7.2.34 7.3.22 7.4.21: An enhanced, drop-in replacement for MySQL
 dev-db/mysql-connector-c 6.1.11-r2 8.0.17-r1: C client library for MariaDB/MySQL
@@ -3120,7 +3120,7 @@ dev-db/pgcli 2.0.2: CLI for Postgres with auto-completion and syntax highlightin
 dev-db/pgmemcache 2.1.2 2.2.0 2.3.0: A PostgreSQL API based on libmemcached to interface with memcached
 dev-db/pgmodeler 0.9.1: PostgreSQL Database Modeler
 dev-db/pgpool2 3.7.10 4.0.5 9999: Connection pool server for PostgreSQL
-dev-db/pgrouting 2.5.2 2.6.2: pgRouting extends PostGIS and PostgreSQL with geospatial routing functionality.
+dev-db/pgrouting 2.5.2 2.6.2 2.6.2-r1: pgRouting extends PostGIS and PostgreSQL with geospatial routing functionality.
 dev-db/pgtap 0.99.0: Unit testing for PostgreSQL
 dev-db/pgxnclient 1.2-r1 1.2.1: PostgreSQL Extension Network Client
 dev-db/phpmyadmin 4.8.5 4.9.0.1: Web-based administration for MySQL database in PHP
@@ -4712,7 +4712,7 @@ dev-libs/actor-framework 0.13.2 0.14.5: The C++ Actor Framework (CAF)
 dev-libs/amdgpu-pro-opencl 18.20.684755 19.10.785425 19.10.785425-r1 19.30.838629: Proprietary OpenCL implementation for AMD GPUs
 dev-libs/angelscript 2.33.0: A flexible, cross-platform scripting library
 dev-libs/antlr-c 3.5.2: The ANTLR3 C Runtime
-dev-libs/appstream 0.12.6 0.12.7: Cross-distro effort for providing metadata for software in the Linux ecosystem
+dev-libs/appstream 0.12.6 0.12.7 0.12.8: Cross-distro effort for providing metadata for software in the Linux ecosystem
 dev-libs/appstream-glib 0.7.9 0.7.15: Provides GObjects and helper methods to read and write AppStream metadata
 dev-libs/apr 1.6.3-r4 1.6.5-r1 1.7.0-r1: Apache Portable Runtime Library
 dev-libs/apr-util 1.5.4 1.5.4-r3 1.6.1-r3: Apache Portable Runtime Utility Library
@@ -4983,7 +4983,7 @@ dev-libs/libnl 1.1.4 1.1.4-r1 3.4.0 99999999: Libraries providing APIs to netlin
 dev-libs/libnsfb 0.2.0-r1: framebuffer abstraction library, written in C
 dev-libs/libnsutils 0.0.5-r1: base64 and time library, written in C
 dev-libs/libntru 0.4.1-r1: C Implementation of NTRUEncrypt
-dev-libs/libofx 0.9.10: A library to support the Open Financial eXchange XML format
+dev-libs/libofx 0.9.10 0.9.14: A library to support the Open Financial eXchange XML format
 dev-libs/liboil 0.3.17-r2: Library of simple functions that are optimized for various CPUs
 dev-libs/liboobs 3.0.0: Liboobs is a wrapping library to the System Tools Backends
 dev-libs/liborcus 0.13.4 0.14.1 9999: Standalone file import filter library for spreadsheet documents
@@ -5128,7 +5128,7 @@ dev-libs/pcc-libs 1.1.0 9999: pcc compiler support libs
 dev-libs/pcl 1.12-r1: Portable Coroutine Library
 dev-libs/pcre++ 0.9.5-r1: A C++ support library for libpcre
 dev-libs/pegtl 1.3.1-r1 2.0_pre1 2.0.0 2.1.4: header-only library for creating parsers according to Parsing Expression Grammar
-dev-libs/pigpio 67 68 70: A library for the Raspberry which allows control of the GPIOs
+dev-libs/pigpio 67 68 70 71: A library for the Raspberry which allows control of the GPIOs
 dev-libs/pkcs11-helper 1.25.1: PKCS#11 helper library
 dev-libs/poco 1.9.0-r2: C++ libraries for building network-based applications
 dev-libs/polylib 9999: ppl port of cloog
@@ -7257,7 +7257,7 @@ dev-php/agavi 1.0.8: PHP MVC application framework
 dev-php/awl 0.59: Andrew McMillan's Web Libraries
 dev-php/ca-bundle 1.1.3: Find the system CA bundle or fall back to the Mozilla one
 dev-php/cli-prompt 1.0.0 1.0.3: Allows you to prompt for user input on the command line
-dev-php/composer 1.8.6: Dependency Manager for PHP
+dev-php/composer 1.8.6 1.9.0: Dependency Manager for PHP
 dev-php/cphplib 0.51-r1: Cute PHP Library (cphplib)
 dev-php/doctrine 1.2.5 2.4.6 2.6.1: An object relational mapper for PHP
 dev-php/doctrine-instantiator 1.0.5 1.1.0: Utility to instantiate objects in PHP without invoking their constructors
@@ -9719,7 +9719,7 @@ dev-ruby/acts_as_list 0.9.17 0.9.18 0.9.19: Capabilities for sorting and reorder
 dev-ruby/addressable 2.5.2 2.6.0: A replacement for the URI implementation that is part of Ruby's standard library
 dev-ruby/ae 1.8.2: Assertive Expressive is an assertions library designed for reuse
 dev-ruby/afm 0.2.2: A very simple library to read Adobe Font Metrics files
-dev-ruby/airbrussh 1.3.0 1.3.1 1.3.2: A replacement log formatter for SSHKit
+dev-ruby/airbrussh 1.3.2 1.3.3: A replacement log formatter for SSHKit
 dev-ruby/allison 2.0.3-r3: A modern, pretty RDoc template
 dev-ruby/amatch 0.4.0: Approximate Matching Extension for Ruby
 dev-ruby/ammeter 1.1.4-r1: Write specs for your Rails 3+ generators
@@ -9890,7 +9890,7 @@ dev-ruby/fuubar 2.3.2 2.4.0 2.4.1: Instafailing RSpec progress bar formatter
 dev-ruby/gettext-setup 0.30 0.31: A gem to ease i18n
 dev-ruby/gettext_i18n_rails 1.8.0: FastGettext / Rails integration
 dev-ruby/gh 0.15.1-r2: multi-layer client for the github api v3
-dev-ruby/gherkin 4.1.3 5.1.0: Fast Gherkin lexer and parser
+dev-ruby/gherkin 5.1.0: Fast Gherkin lexer and parser
 dev-ruby/gist 5.0.0: Potentially the best command line gister.
 dev-ruby/git 1.4.0 1.5.0: Library for using Git in Ruby
 dev-ruby/github_api 0.18.2: A Ruby wrapper for the GitHub REST API v3
@@ -10031,12 +10031,12 @@ dev-ruby/necromancer 0.5.0: Conversion from one object type to another with a bi
 dev-ruby/nenv 0.3.0: Convenient wrapper for Ruby's ENV
 dev-ruby/neovim-ruby-client 0.7.1 0.8.1: Ruby bindings for Neovim
 dev-ruby/net-http-digest_auth 1.4.1: An implementation of RFC 2617 - Digest Access Authentication
-dev-ruby/net-http-persistent 2.9.4-r2 3.0.0 3.0.1 3.1.0: Manages persistent connections using Net::HTTP plus a speed fix for Ruby 1.8
+dev-ruby/net-http-persistent 3.0.0 3.0.1 3.1.0: Manages persistent connections using Net::HTTP plus a speed fix for Ruby 1.8
 dev-ruby/net-http-pipeline 1.0.1: An HTTP/1.1 pipelining implementation atop Net::HTTP
 dev-ruby/net-scp 1.2.1-r1 2.0.0: A pure Ruby implementation of the SCP client protocol
 dev-ruby/net-sftp 2.1.2-r2 2.1.2-r4: SFTP in pure Ruby
 dev-ruby/net-ssh 4.2.0 5.0.2 5.1.0 5.2.0: Non-interactive SSH processing in pure Ruby
-dev-ruby/net-ssh-gateway 1.3.0 2.0.0: A simple library to assist in enabling tunneled Net::SSH connections
+dev-ruby/net-ssh-gateway 2.0.0: A simple library to assist in enabling tunneled Net::SSH connections
 dev-ruby/net-telnet 0.1.1-r1 0.2.0: Provides telnet client functionality
 dev-ruby/netrc 0.11.0: This library reads and writes .netrc files
 dev-ruby/network_interface 0.0.2: network_interface layer from metasploit pcaprub
@@ -10171,7 +10171,7 @@ dev-ruby/rmagick 2.16.0 3.0.0 3.1.0 3.2.0 4.0.0: An interface between Ruby and t
 dev-ruby/roadie 3.4.0 3.5.0: Making HTML emails comfortable for the Rails rockstars
 dev-ruby/roadie-rails 1.2.1 1.3.0: Hooks Roadie into your Rails application to help with email generation
 dev-ruby/robots 0.10.1-r2: A simple Ruby library to parse robots.txt
-dev-ruby/rouge 1.11.1-r2 3.6.0 3.7.0 3.8.0: Yet-another-markdown-parser using a strict syntax definition in pure Ruby
+dev-ruby/rouge 3.6.0 3.7.0 3.8.0: Yet-another-markdown-parser using a strict syntax definition in pure Ruby
 dev-ruby/rqrcode 0.10.1: Library for encoding QR Codes
 dev-ruby/rr 1.2.1: A double framework featuring a selection of double techniques and a terse syntax
 dev-ruby/rrdtool-bindings 1.6.0 1.7.0 1.7.1 1.7.1-r1 1.7.2: Ruby bindings for rrdtool
@@ -10360,7 +10360,7 @@ dev-ruby/unindent 1.0: Ruby method to unindent strings
 dev-ruby/uuidtools 2.1.5-r1: Simple library to generate UUIDs
 dev-ruby/vagrant_cloud 2.0.2: Vagrant Cloud API Library
 dev-ruby/vcard 0.2.15: Ruby vcard support extracted from Vpim
-dev-ruby/vcr 1.11.3 2.9.3 4.0.0 5.0.0: Records your test suite's HTTP interactions and replay them during test runs
+dev-ruby/vcr 1.11.3 4.0.0 5.0.0: Records your test suite's HTTP interactions and replay them during test runs
 dev-ruby/virtus 1.0.5: Attributes on Steroids for Plain Old Ruby Objects
 dev-ruby/vlad 2.7.0: Pragmatic application deployment automation, without mercy
 dev-ruby/warden 1.2.8: General Rack Authentication Framework
@@ -10638,7 +10638,7 @@ dev-util/catalyst 3.0.5 9999: Release metatool used for creating releases based 
 dev-util/catfish 1.4.7 1.4.8 1.4.8-r1 1.4.9: A frontend for find, (s)locate, doodle, tracker, beagle, strigi and pinot
 dev-util/catkin 0.7.14 0.7.17 9999: Cmake macros and associated python code used to build some parts of ROS
 dev-util/cbindgen 0.6.6 0.6.7 0.7.1 0.8.2 0.8.7 0.9.0: A tool for generating C bindings to Rust code
-dev-util/ccache 3.3.4-r1 3.6 3.7.1 3.7.2: fast compiler cache
+dev-util/ccache 3.7.1 3.7.2 3.7.3: fast compiler cache
 dev-util/cccc 3.1.5-r1: Source metrics (line counts, complexity, etc) for Java and C++
 dev-util/ccglue 0.3.1 0.6.0: Produce cross-reference files from cscope and ctags for use with app-vim/cctree
 dev-util/cdiff 1.0 9999: Colored, side-by-side diff terminal viewer
@@ -10684,7 +10684,7 @@ dev-util/cscope 15.8a-r1 15.8a-r2 15.9: Interactively examine a C program
 dev-util/csup 20060318-r1: A rewrite of CVSup
 dev-util/ctags 20190331: Exuberant Ctags creates tags files for code browsing in editors
 dev-util/cucumber 3.1.2: Executable feature scenarios
-dev-util/cucumber-core 1.5.0 3.2.1: Executable feature scenarios
+dev-util/cucumber-core 3.2.1: Executable feature scenarios
 dev-util/cucumber-expressions 6.0.1: a simpler alternative to Regular Expressions
 dev-util/cucumber-messages 2.1.1 2.1.2: Protocol Buffer messages for Cucumber's inter-process communication
 dev-util/cucumber-rails 1.6.0 1.7.0 1.8.0: Executable feature scenarios for Rails
@@ -10904,7 +10904,6 @@ dev-util/rosinstall 0.7.8 9999: Command-line tools for maintaining a workspace o
 dev-util/rosinstall_generator 0.1.13 0.1.14 9999: Generates rosinstall metadata about repositories with ROS packages/stacks
 dev-util/rpmdevtools 8.10: Collection of rpm packaging related utilities
 dev-util/rr 4.5.0 5.0.0 5.1.0 5.2.0 5.2.0-r1: Record and Replay Framework
-dev-util/rustfmt 0.8.6 0.9.0: Tool to find and fix Rust formatting issues
 dev-util/sasm 2.2-r1 3.10.1: Simple crossplatform IDE for NASM assembly language
 dev-util/scala-ide 4.7.0: The Scala IDE
 dev-util/scanmem 0.16.1 0.17: Locate and modify variables in executing processes
@@ -12114,6 +12113,7 @@ gui-apps/swaylock 1.3 1.4 9999: Screen locker for Wayland
 gui-apps/waybar 0.7.2 9999: Highly customizable Wayland bar for Sway and Wlroots based compositors.
 gui-apps/wl-clipboard 1.0.0 9999: Wayland clipboard utilities
 gui-libs/amtk 5.0.0: Actions, Menus and Toolbars Kit for GTK+ applications
+gui-libs/libhandy 0.0.9: Library with GTK widgets for mobile phones
 gui-libs/tepl 4.2.0: GtkSourceView-based text editors and IDE helper library
 gui-libs/wlroots 0.4.1 0.5.0 0.6.0 9999: Pluggable, composable, unopinionated modules for building a Wayland compositor
 gui-wm/sway 1.0 1.1.1 9999: i3-compatible Wayland window manager
@@ -12340,7 +12340,7 @@ kde-apps/lokalize 19.04.3 19.08.0: KDE Applications 5 translation tool
 kde-apps/lskat 19.04.3 19.08.0: Skat game by KDE
 kde-apps/mailcommon 19.04.3 19.08.0: Common mail library
 kde-apps/mailimporter 19.04.3 19.08.0: Library to import mail from various sources
-kde-apps/marble 19.04.3 19.08.0: Virtual Globe and World Atlas to learn more about Earth
+kde-apps/marble 19.04.3 19.08.0-r1: Virtual Globe and World Atlas to learn more about Earth
 kde-apps/mbox-importer 19.04.3 19.08.0: Import mbox email archives from various sources into Akonadi
 kde-apps/messagelib 19.04.3 19.08.0: Libraries for messaging functions
 kde-apps/minuet 19.04.3 19.08.0: Music Education software by KDE
@@ -12392,7 +12392,7 @@ kde-frameworks/kdesignerplugin 5.60.0 5.61.0: Framework providing plugins to use
 kde-frameworks/kdesu 5.60.0 5.61.0: Framework to handle super user actions
 kde-frameworks/kdewebkit 5.60.0 5.61.0: Framework providing KDE integration of QtWebKit
 kde-frameworks/kdnssd 5.60.0 5.61.0: Framework for network service discovery using Zeroconf
-kde-frameworks/kdoctools 5.60.0 5.61.0: Tools to generate documentation in various formats from DocBook files
+kde-frameworks/kdoctools 5.60.0 5.61.0-r1: Tools to generate documentation in various formats from DocBook files
 kde-frameworks/kemoticons 5.60.0 5.61.0: Framework for converting text emoticons to graphical representations
 kde-frameworks/kf-env 5: Environment setting required for all KDE Frameworks apps to run
 kde-frameworks/kfilemetadata 5.60.0 5.61.0: Library for extracting file metadata
@@ -13951,7 +13951,7 @@ media-sound/dcaenc 2 2-r1 9999: DTS Coherent Acoustics audio encoder
 media-sound/dcd 0.95: A simple command-line based CD Player
 media-sound/declick 0.6.5-r1: Dynamic digital declicker for audio sample files
 media-sound/deinvert 9999: A voice inversion descrambler
-media-sound/denemo 2.2.0: A music notation editor
+media-sound/denemo 2.2.0 2.3.0: A music notation editor
 media-sound/din 5.2.1: a software musical instrument and audio synthesizer
 media-sound/dir2ogg 0.12: Converts mp3, m4a, wma, and wav files to Ogg Vorbis format
 media-sound/drumstick 1.1.2: Qt/C++ wrapper for ALSA sequencer
@@ -14927,7 +14927,7 @@ net-im/mattermost-desktop-bin 4.2.3: Mattermost Desktop application
 net-im/mcabber 1.1.0-r1 9999: A small Jabber console client with various features, like MUC, SSL, PGP
 net-im/minbif 1.0.5-r2: IRC gateway to IM networks
 net-im/openfire 4.2.3-r1 4.2.3-r2: Openfire (formerly wildfire) real time collaboration (RTC) server
-net-im/openmittsu 0.9.11.0 0.9.13.32: An open source chat client for Threema-style end-to-end encrypted chat networks
+net-im/openmittsu 0.9.13.32: An open source chat client for Threema-style end-to-end encrypted chat networks
 net-im/pidgin 2.13.0 2.13.0-r1: GTK Instant Messenger client
 net-im/poezio 0.12 9999: Console XMPP client that looks like most famous IRC clients
 net-im/profanity 0.6.0: A console based XMPP client inspired by Irssi
@@ -17306,7 +17306,7 @@ sys-apps/help2man 1.47.6 1.47.10 1.47.11: GNU utility to convert program --help 
 sys-apps/hexdump-esr 1.8: Eric Raymond's hex dumper
 sys-apps/highway 1.1.0: High performance source code search tool
 sys-apps/hotplug2stdout 1.2.1: A tool for reading kernel uevent(s) to stdout
-sys-apps/hponcfg 4.6.0.0 5.2.0.0: HP Lights-Out Online Configuration Utility (HPONCFG)
+sys-apps/hponcfg 4.6.0.0 5.4.0.0: HP Lights-Out Online Configuration Utility (HPONCFG)
 sys-apps/hprofile 3.0.6 3.1.1 3.2.2 6.1.3: Utility to manage hardware, network, power or other profiles (fork)
 sys-apps/hwdata-gentoo 0.4: Data for the hwsetup program
 sys-apps/hwdata-redhat 0.217: Hardware identification and configuration data
@@ -17462,9 +17462,9 @@ sys-apps/syscriptor 1.5.15: display misc information about your hardware
 sys-apps/syslog-notify 0.2: Notifications for syslog entries via libnotify
 sys-apps/systemd 242-r6 243_rc1-r2 9999: System and service manager for Linux
 sys-apps/systemd-readahead 216: Split of readahead systemd implementation
-sys-apps/sysvinit 2.93 2.94 2.95: /sbin/init - parent of all processes
+sys-apps/sysvinit 2.93 2.94 2.95 2.95-r1: /sbin/init - parent of all processes
 sys-apps/tas 1.5.2.180622: Supermicro Thin-Agent Service for monitoring through the BMC/IPMI
-sys-apps/tcp-wrappers 7.6.22-r1: TCP Wrappers
+sys-apps/tcp-wrappers 7.6.22-r1 7.6.28: TCP Wrappers
 sys-apps/texinfo 6.3 6.6-r1 6.6-r3: The GNU info program and utilities
 sys-apps/the_silver_searcher 2.0.0 2.1.0: A code-searching tool similar to ack, but faster
 sys-apps/thunderbolt-software-user-space 0.9.2 0.9.3: Thunderbolt(TM) user-space components
@@ -17707,7 +17707,7 @@ sys-cluster/kube-proxy 1.13.7 1.13.8 1.13.9 1.14.3 1.14.4 1.14.5 1.15.0 1.15.2: 
 sys-cluster/kube-router 0.3.1: A turnkey solution for Kubernetes networking
 sys-cluster/kube-scheduler 1.13.7 1.13.8 1.13.9 1.14.3 1.14.4 1.14.5 1.15.0 1.15.2: Kubernetes Scheduler
 sys-cluster/kubeadm 1.13.7 1.13.8 1.13.9 1.14.3 1.14.4 1.14.5 1.15.0 1.15.1 1.15.2: CLI to Easily bootstrap a secure Kubernetes cluster
-sys-cluster/kubectl 1.13.7 1.13.8 1.13.9 1.14.3 1.14.4 1.14.5 1.15.0 1.15.1 1.15.2: CLI to run commands against Kubernetes clusters
+sys-cluster/kubectl 1.13.9 1.14.5 1.15.2: CLI to run commands against Kubernetes clusters
 sys-cluster/kubelet 1.13.7 1.13.8 1.13.9 1.14.3 1.14.4 1.14.5 1.15.0 1.15.1 1.15.2: Kubernetes Node Agent
 sys-cluster/legion 16.08.0-r1 16.10.0 17.02.0 17.05.0 17.08.0 17.10.0 18.02.0 18.05.0 18.12.0 19.06.0 9999: A data-centric parallel programming system
 sys-cluster/libcircle 0.2.0_rc1 0.2.1_rc1: API for distributing embarrassingly parallel workloads using self-stabilization
@@ -18517,8 +18517,8 @@ www-apps/mod_survey 3.2.5: XML-defined web questionnaires as a plug-in module us
 www-apps/moodle 3.5.7 3.6.5 3.7.1: The Moodle Course Management System
 www-apps/mythweb 0.28.1: PHP scripts intended to manage MythTV from a web browser
 www-apps/nanoblogger 3.2.3 3.5_rc1-r1: Small and simple weblog engine written in Bash for the command-line
-www-apps/nanoc 4.10.4 4.11.0 4.11.2 4.11.5 4.11.6 4.11.7 4.11.8: nanoc is a simple but very flexible static site generator written in Ruby
-www-apps/nanoc-core 4.11.2 4.11.5 4.11.6 4.11.7 4.11.8: nanoc is a simple but very flexible static site generator written in Ruby
+www-apps/nanoc 4.10.4 4.11.7 4.11.8 4.11.9: nanoc is a simple but very flexible static site generator written in Ruby
+www-apps/nanoc-core 4.11.7 4.11.8 4.11.9: nanoc is a simple but very flexible static site generator written in Ruby
 www-apps/netbox 2.5.11 2.5.12 2.6.1: IP address and data center infrastructure management tool
 www-apps/nextcloud 14.0.13 15.0.10 16.0.3: Personal cloud that runs on your own server
 www-apps/nikola 7.8.8 7.8.11 7.8.12 7.8.13 7.8.14 7.8.14-r1 7.8.15 7.8.15-r1: A static website and blog generator
@@ -18560,7 +18560,7 @@ www-client/chromium 76.0.3809.100 77.0.3865.35 78.0.3880.4: Open-source version 
 www-client/ck4up 1.2: Check for Updates on HTTP pages
 www-client/dillo 3.0.5 3.0.5-r1 9999: Lean FLTK based web browser
 www-client/elinks 0.12_pre6-r1 0.12_pre6-r4 0.13_pre_pre20180225 9999: Advanced and well-established text-mode web browser
-www-client/epiphany 3.30.4: GNOME webbrowser based on Webkit
+www-client/epiphany 3.30.4 3.32.4: GNOME webbrowser based on Webkit
 www-client/falkon 3.1.0-r1: Cross-platform web browser using QtWebEngine
 www-client/fetch 1.0-r3: HTTP download tool built atop the HTTP fetcher library
 www-client/firefox 52.9.0 60.8.0 68.0.1 68.0.2: Firefox Web Browser
@@ -19149,7 +19149,7 @@ x11-misc/xdotool 3.20150503.1-r1 3.20160805.1: Simulate keyboard input and mouse
 x11-misc/xearth 1.1-r1: Xearth sets the X root window to an image of the Earth
 x11-misc/xfe 1.42 1.43.1 1.43.2: MS-Explorer-like minimalist file manager for X
 x11-misc/xfishtank 2.1-r2: Turns your root window into an aquarium
-x11-misc/xflux 20130927 20130927-r1: Makes the color of your computer's display adapt to the time of the day
+x11-misc/xflux 20130927 20130927-r1 20170103: Makes the color of your computer's display adapt to the time of the day
 x11-misc/xflux-gui 1.1.10_p20180910 1.2.0: A GUI for f.lux
 x11-misc/xfractint 20.04_p14: A fractal generator
 x11-misc/xgestures 0.4: A mouse gesture recognition program for X11 desktops
