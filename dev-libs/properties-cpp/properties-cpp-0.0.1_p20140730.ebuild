@@ -21,4 +21,5 @@ S="${WORKDIR}/properties-cpp-0.0.1+14.10.20140730"
 
 src_prepare() {
 	sed -i '/add_subdirectory(tests)/d' CMakeLists.txt
+	cmake-utils_src_prepare
 }

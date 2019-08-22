@@ -19,4 +19,5 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	sed -i '/add_subdirectory(tests)/d' CMakeLists.txt
+	cmake-utils_src_prepare
 }

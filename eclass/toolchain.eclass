@@ -708,9 +708,9 @@ do_gcc_CYGWINPORTS_patches() {
 	[[ -n ${CYGWINPORTS_GITREV} ]] || return 0
 	use elibc_Cygwin || return 0
 
-	local -a patches
 	local p d="${WORKDIR}/gcc-${CYGWINPORTS_GITREV}"
-	readarray -t patches < <(sed -e '1,/PATCH_URI="/d;/"/,$d' < "${d}"/gcc.cygport)
+	# readarray -t is available since bash-4.4 only, #690686
+	local patches=( $(sed -e '1,/PATCH_URI="/d;/"/,$d' < "${d}"/gcc.cygport) )
 	for p in ${patches[*]}; do
 		epatch "${d}/${p}"
 	done
@@ -2279,6 +2279,7 @@ toolchain_pkg_postinst() {
 }
 
 toolchain_pkg_postrm() {
+	do_gcc_config
 	if [[ ! ${ROOT%/} && -f ${EPREFIX}/usr/share/eselect/modules/compiler-shadow.eselect ]] ; then
 		eselect compiler-shadow clean all
 	fi
@@ -2291,6 +2292,7 @@ toolchain_pkg_postrm() {
 	# clean up the cruft left behind by cross-compilers
 	if is_crosscompile ; then
 		if [[ -z $(ls "${EROOT%/}"/etc/env.d/gcc/${CTARGET}* 2>/dev/null) ]] ; then
+			einfo "Removing last cross-compiler instance. Deleting dangling symlinks."
 			rm -f "${EROOT%/}"/etc/env.d/gcc/config-${CTARGET}
 			rm -f "${EROOT%/}"/etc/env.d/??gcc-${CTARGET}
 			rm -f "${EROOT%/}"/usr/bin/${CTARGET}-{gcc,{g,c}++}{,32,64}
@@ -2302,9 +2304,6 @@ toolchain_pkg_postrm() {
 	[[ ${ROOT%/} ]] && return 0
 
 	if [[ ! -e ${LIBPATH}/libstdc++.so ]] ; then
-		# make sure the profile is sane during same-slot upgrade #289403
-		do_gcc_config
-
 		einfo "Running 'fix_libtool_files.sh ${GCC_RELEASE_VER}'"
 		fix_libtool_files.sh ${GCC_RELEASE_VER}
 		if [[ -n ${BRANCH_UPDATE} ]] ; then
