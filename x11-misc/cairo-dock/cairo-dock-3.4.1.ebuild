@@ -12,8 +12,8 @@ SRC_URI="http://launchpad.net/${PN}-core/${MY_PV}/${PV}/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="desktop-manager xcomposite"
+KEYWORDS="amd64 x86"
+IUSE="xcomposite"
 
 RDEPEND="
 	dev-libs/dbus-glib
@@ -40,7 +40,6 @@ DEPEND="${RDEPEND}
 
 src_configure() {
 	local mycmakeargs=(
-		"-Denable-desktop-manager=$(usex desktop-manager ON OFF)"
 		"-DWITH_XEXTEND=$(usex xcomposite)"
 	)
 	cmake-utils_src_configure
