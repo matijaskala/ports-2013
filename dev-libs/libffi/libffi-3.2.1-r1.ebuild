@@ -10,17 +10,15 @@ SRC_URI="ftp://sourceware.org/pub/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="debug pax_kernel static-libs test"
 
-RDEPEND="abi_x86_32? ( !<=app-emulation/emul-linux-x86-baselibs-20130224-r1
-		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)] )"
+RDEPEND=""
 DEPEND="test? ( dev-util/dejagnu )"
 
 DOCS="ChangeLog* README"
 
 PATCHES=(
-	"${FILESDIR}"/muslx32.patch
 	"${FILESDIR}"/${PN}-3.2.1-o-tmpfile-eacces.patch #529044
 	"${FILESDIR}"/${PN}-3.2.1-complex_alpha.patch
 	"${FILESDIR}"/${PN}-3.1-darwin-x32.patch
@@ -54,7 +52,7 @@ src_prepare() {
 
 multilib_src_configure() {
 	use userland_BSD && export HOST="${CHOST}"
-	# python does not like multilib-wrapped headers: bug #643582
+	# python does not like miltilib-wrapped headers: bug #643582
 	# thus we install includes into ABI-specific paths
 	local includes="${EPREFIX}"/usr/$(get_libdir)/${P}/include/
 	econf \

@@ -11,14 +11,14 @@ HOMEPAGE="http://flatpak.org/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="doc gnome gtk introspection kde policykit seccomp"
 
 # FIXME: systemd is automagic dep.
 RDEPEND="
 	acct-group/flatpak
 	acct-user/flatpak
-	>=sys-fs/libostree-2018.9
+	>=sys-fs/libostree-2018.9[gpg(+)]
 	>=net-libs/libsoup-2.4
 	>=gnome-base/dconf-0.26
 	>=dev-libs/appstream-glib-0.5.10
