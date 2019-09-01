@@ -29,6 +29,40 @@
 
 #--- END OF EXAMPLES ---
 
+# Michał Górny <mgorny@gentoo.org> (2019-09-01)
+# Remnant of Half-Life server stuff that was removed back in 2005.
+# Removal in 30 days.  Bug #693260.
+dev-games/hlsdk
+
+# Michał Górny <mgorny@gentoo.org> (2019-09-01)
+# Ancient, i386-only binary package.  Current version is a nightly
+# from 2006.  The package has had a release since, has found a new
+# upstream and has been forked multiple times as well.  Apparently
+# NetRadiant-custom is the most recently maintained fork (not packaged).
+# Removal in 30 days.  Bug #181372.
+dev-games/gtkradiant
+
+# Michał Górny <mgorny@gentoo.org> (2019-09-01)
+# Never keyworded on amd64 (and probably does not work on 64-bit
+# systems).  Last release from 2001.  Requires rare hardware.
+# Removal in 30 days.  Bug #693258.
+dev-games/flinker
+
+# Michał Górny <mgorny@gentoo.org> (2019-09-01)
+# Last bumped in 2007.  The current version is known to be broken
+# on amd64.  The game has been discontinued, and then revived/forked
+# multiple times.  It is pending a version bump since at least 2011.
+# See [1] for the 'revived' project and links to other forks.
+# [1] http://www.netpanzer.info/Download/
+# Removal in 30 days.  Bug #375237.
+games-strategy/netpanzer
+
+# Michał Górny <mgorny@gentoo.org> (2019-09-01)
+# Discontinued upstream.  Last release in 2003.  Replaced
+# by dev-embedded/urjtag.
+# Removal in 30 days.  Bug #693256.
+dev-embedded/jtag
+
 # Joonas Niilola <juippis@gentoo.org> (2019-08-31)
 # No maintainer and no one stepped in to take it after a mailing 
 # list announcement. Has QA issues and continuous CI issues. Removal 
@@ -238,12 +272,6 @@ sci-mathematics/spass
 # Removal in 30 days.  Bug #691840.
 sys-apps/lomoco
 
-# Michał Górny <mgorny@gentoo.org> (2019-08-14)
-# Replaced by sys-freebsd/freebsd-ubin, therefore not installable
-# anymore.  All revdeps support the replacement.
-# Removal in 14 days.  Bug #688502.
-sys-process/fuser-bsd
-
 # Aaron Bauman <bman@gentoo.org> (2019-08-14)
 # open sec bug #622428, unmaintained
 # list includes rdeps. Removal in 30 days.
@@ -311,13 +339,6 @@ dev-java/jlayer
 # are developers or want more experimental features
 # and accept a more unstable release.
 >=www-client/chromium-78
-
-# Mikle Kolyada <zlogene@gentoo.org> (2019-08-05)
-# dead upstream, does not work and compile
-#(bug #688006, bug #686630)
-# masked for removal in 14 days
-app-text/winefish
-dev-tex/oesch
 
 # Aaron Bauman <bman@gentoo.org> (2019-08-04)
 # multiple open sec bugs. no response from upstream
