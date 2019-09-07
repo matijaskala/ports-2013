@@ -169,7 +169,7 @@ multilib_src_configure() {
 			--disable-nologin
 			--disable-pylibmount
 			--disable-su
-			--enable-agetty
+			$(use_enable kernel_linux agetty)
 			--enable-bash-completion
 			--enable-line
 			$(use_enable kernel_linux partx)
