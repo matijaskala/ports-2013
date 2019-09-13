@@ -30,102 +30,48 @@
  #define GLOB_NOMATCH 3
 --- a/src/regex/glob.c
 +++ b/src/regex/glob.c
-@@ -48,10 +48,10 @@ static int append(struct match **tail, const char *name, size_t len, int mark)
+@@ -30,7 +30,7 @@
  	return 0;
  }
  
--static int match_in_dir(const char *d, const char *p, int flags, int (*errfunc)(const char *path, int err), struct match **tail)
-+static int match_in_dir(const char *d, const char *p, int flags, int (*errfunc)(const char *path, int err), struct match **tail, glob_t *restrict g)
+-static int do_glob(char *buf, size_t pos, int type, char *pat, int flags, int (*errfunc)(const char *path, int err), struct match **tail)
++static int do_glob(char *buf, size_t pos, int type, char *pat, int flags, int (*errfunc)(const char *path, int err), struct match **tail, glob_t *restrict g)
  {
- 	DIR *dir;
--	struct dirent de_buf, *de;
-+	struct dirent *de;
- 	char pat[strlen(p)+1];
- 	char *p2;
- 	size_t l = strlen(d);
-@@ -70,14 +70,14 @@ static int match_in_dir(const char *d, const char *p, int flags, int (*errfunc)(
- 	if (*d == '/' && !*(d+1)) l = 0;
- 
- 	/* rely on opendir failing for nondirectory objects */
--	dir = opendir(*d ? d : ".");
-+	dir = (flags & GLOB_ALTDIRFUNC) ? g->gl_opendir(*d ? d : ".") : opendir(*d ? d : ".");
- 	error = errno;
+ 	/* If GLOB_MARK is unused, we don't care about type. */
+ 	if (!type && !(flags & GLOB_MARK)) type = DT_REG;
+@@ -94,7 +94,7 @@
+ 		 * determine its type. */
+ 		struct stat st;
+ 		if ((flags & GLOB_MARK) && type==DT_LNK) type = 0;
+-		if (!type && stat(buf, &st)) {
++		if (!type && (!((flags & GLOB_ALTDIRFUNC) ? g->gl_stat(buf, &st) : stat(buf, &st)) && S_ISDIR(st.st_mode))) {
+ 			if (errno!=ENOENT && (errfunc(buf, errno) || (flags & GLOB_ERR)))
+ 				return GLOB_ABORTED;
+ 			return 0;
+@@ -115,7 +115,7 @@
+ 			saved_sep = '\\';
+ 		}
+ 	}
+-	DIR *dir = opendir(pos ? buf : ".");
++	DIR *dir = (flags & GLOB_ALTDIRFUNC) ? g->gl_opendir(pos ? buf : ".") : opendir(pos ? buf : ".");
  	if (!dir) {
- 		/* this is not an error -- we let opendir call stat for us */
- 		if (error == ENOTDIR) return 0;
- 		if (error == EACCES && !*p) {
- 			struct stat st;
--			if (!stat(d, &st) && S_ISDIR(st.st_mode)) {
-+			if (!((flags & GLOB_ALTDIRFUNC) ? g->gl_stat(d, &st) : stat(d, &st)) && S_ISDIR(st.st_mode)) {
- 				if (append(tail, d, l, l))
- 					return GLOB_NOSPACE;
- 				return 0;
-@@ -89,10 +89,13 @@ static int match_in_dir(const char *d, const char *p, int flags, int (*errfunc)(
- 	}
- 	if (!*p) {
- 		error = append(tail, d, l, l) ? GLOB_NOSPACE : 0;
--		closedir(dir);
-+		if (flags & GLOB_ALTDIRFUNC)
-+			g->gl_closedir(dir);
-+		else
-+			closedir(dir);
- 		return error;
- 	}
--	while (!(error = readdir_r(dir, &de_buf, &de)) && de) {
-+	while (de = (flags & GLOB_ALTDIRFUNC) ? g->gl_readdir(dir) : readdir(dir)) {
- 		char namebuf[l+de->d_reclen+2], *name = namebuf;
- 		if (!literal && fnmatch(p, de->d_name, fnm_flags))
- 			continue;
-@@ -108,8 +111,11 @@ static int match_in_dir(const char *d, const char *p, int flags, int (*errfunc)(
- 			name = de->d_name;
- 		}
- 		if (p2) {
--			if ((error = match_in_dir(name, p2, flags, errfunc, tail))) {
--				closedir(dir);
-+			if ((error = match_in_dir(name, p2, flags, errfunc, tail, g))) {
-+				if (flags & GLOB_ALTDIRFUNC)
-+					g->gl_closedir(dir);
-+				else
-+					closedir(dir);
- 				return error;
- 			}
- 		} else {
-@@ -119,17 +125,26 @@ static int match_in_dir(const char *d, const char *p, int flags, int (*errfunc)(
- 					mark = S_ISDIR(de->d_type<<12);
- 				else {
- 					struct stat st;
--					stat(name, &st);
-+					if (flags & GLOB_ALTDIRFUNC)
-+						g->gl_stat(name, &st);
-+					else
-+						stat(name, &st);
- 					mark = S_ISDIR(st.st_mode);
- 				}
- 			}
- 			if (append(tail, name, l+de->d_reclen+1, mark)) {
--				closedir(dir);
-+				if (flags & GLOB_ALTDIRFUNC)
-+					g->gl_closedir(dir);
-+				else
-+					closedir(dir);
- 				return GLOB_NOSPACE;
- 			}
- 		}
- 	}
--	closedir(dir);
-+	if (flags & GLOB_ALTDIRFUNC)
-+		g->gl_closedir(dir);
-+	else
-+		closedir(dir);
- 	if (error && (errfunc(d, error) || (flags & GLOB_ERR)))
- 		return GLOB_ABORTED;
- 	return 0;
-@@ -179,7 +194,7 @@ int glob(const char *restrict pat, int flags, int (*errfunc)(const char *path, i
+ 		if (errfunc(buf, errno) || (flags & GLOB_ERR))
+ 			return GLOB_ABORTED;
+@@ -148,7 +148,7 @@
  
- 	if (strnlen(p, PATH_MAX+1) > PATH_MAX) return GLOB_NOSPACE;
+ 		memcpy(buf+pos, de->d_name, l+1);
+ 		if (p2) *p2 = saved_sep;
+-		int r = do_glob(buf, pos+l, de->d_type, p2 ? p2 : "", flags, errfunc, tail);
++		int r = do_glob(buf, pos+l, de->d_type, p2 ? p2 : "", flags, errfunc, tail, g);
+ 		if (r) {
+ 			closedir(dir);
+ 			return r;
+@@ -202,7 +202,7 @@
+ 		char *p = strdup(pat);
+ 		if (!p) return GLOB_NOSPACE;
+ 		buf[0] = 0;
+-		error = do_glob(buf, 0, 0, p, flags, errfunc, &tail);
++		error = do_glob(buf, 0, 0, p, flags, errfunc, &tail, g);
+ 		free(p);
+ 	}
  
--	if (*pat) error = match_in_dir(d, p, flags, errfunc, &tail);
-+	if (*pat) error = match_in_dir(d, p, flags, errfunc, &tail, g);
- 	if (error == GLOB_NOSPACE) {
- 		freelist(&head);
- 		return error;
