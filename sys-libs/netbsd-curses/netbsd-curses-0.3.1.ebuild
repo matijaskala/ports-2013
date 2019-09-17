@@ -17,6 +17,13 @@ RESTRICT="mirror"
 
 RDEPEND="!sys-libs/ncurses"
 
+src_prepare() {
+	default
+
+	multilib_copy_sources
+	tc-export CC
+}
+
 multilib_src_install() {
 	emake PREFIX="${EPREFIX}/usr" DESTDIR="${D}" \
 		$(usex static-libs install install-dynlibs) \

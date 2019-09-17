@@ -14,11 +14,11 @@ LICENSE="LGPL-2+"
 SLOT="3"
 IUSE="aqua broadway cloudprint colord cups examples gtk-doc +introspection test +ubuntu vim-syntax wayland +X xinerama"
 REQUIRED_USE="
-	|| ( aqua wayland X )
+	|| ( aqua kernel_Winnt wayland X )
 	xinerama? ( X )
 "
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 SRC_URI="${SRC_URI}
 	ubuntu? ( https://launchpad.net/ubuntu/+archive/primary/+files/gtk+3.0_3.24.8-1ubuntu1.debian.tar.xz )"
 
@@ -54,6 +54,7 @@ COMMON_DEPEND="
 	)
 	X? (
 		>=app-accessibility/at-spi2-atk-2.5.3[${MULTILIB_USEDEP}]
+		media-libs/mesa[X(+),${MULTILIB_USEDEP}]
 		x11-libs/libX11[${MULTILIB_USEDEP}]
 		>=x11-libs/libXi-1.3[${MULTILIB_USEDEP}]
 		x11-libs/libXext[${MULTILIB_USEDEP}]
@@ -150,6 +151,7 @@ multilib_src_configure() {
 		$(use_enable cups cups auto)
 		$(multilib_native_use_enable gtk-doc)
 		$(multilib_native_use_enable introspection)
+		$(use_enable kernel_Winnt win32-backend)
 		$(use_enable wayland wayland-backend)
 		$(use_enable X x11-backend)
 		$(use_enable X xcomposite)
