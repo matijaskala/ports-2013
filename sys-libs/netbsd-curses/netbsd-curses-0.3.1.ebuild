@@ -36,4 +36,7 @@ multilib_src_install() {
 		rm "${ED%/}/usr/share/man/man3/attr_get.3" || die
 		rm "${ED%/}/usr/share/man/man3/attr_set.3" || die
 	fi
+
+	insinto "${EPREFIX}"/usr/$(get_libdir)/pkgconfig
+	doins "${FILESDIR}"/ncurses.pc
 }
