@@ -29,6 +29,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Joonas Niilola <juippis@gentoo.org> (2019-09-24)
+# Upstream decided to deprecate this service, and app. Removal in 
+# ~30 days. Bug #695562
+x11-misc/enlightenment-extra
+
 # Hanno Boeck <hanno@gentoo.org> (2019-09-23)
 # Depends on an API by German tax authorities that
 # has been disabled, bug #695434
@@ -353,12 +358,6 @@ dev-libs/ltxml
 # Unmaintained.  EOL-ed upstream.  No reverse dependencies.
 # Removal in 30 days.  Bug #694212.
 dev-libs/log4shib
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-12)
-# Unmaintained.  Last bumped in 2014.  Homepage gone.  No reverse
-# dependencies.
-# Removal in 30 days.  Bug #694210.
-dev-libs/libwbxml
 
 # Michał Górny <mgorny@gentoo.org> (2019-09-12)
 # Unmaintained.  Old GNOME library, last release in 2000.  No reverse
@@ -1060,12 +1059,6 @@ mail-filter/opensmtpd-extras
 # in 2006.  Removal in 30 days.  Bug #680412.
 mail-filter/ask
 
-# Ulrich Müller <ulm@gentoo.org> (2019-08-30)
-# Last visible upstream activity in 2013. Doesn't work with Emacs 24.3
-# or newer. Byte-compilation of newest upstream version 1.3.1 fails.
-# Masked for removal in 30 days, bug #693118.
-app-emacs/identica-mode
-
 # David Seifert <soap@gentoo.org> (2019-08-29)
 # Dead upstream, last commit over 10 years ago, no revdeps, EAPI=0,
 # Removal in 30 days.
@@ -1137,24 +1130,6 @@ dev-tcltk/tkTheme
 # having to be addressed by other developers.
 # Removal in 30 days.  Bug #681044.
 net-misc/tokyotyrant
-
-# Ulrich Müller <ulm@gentoo.org> (2019-08-26)
-# A more recent version of thumbs.el is distributed
-# as part of GNU Emacs proper.
-# Masked for removal in 30 days, bug #692882.
-app-emacs/thumbs
-
-# Brian Evans <grknight@gentoo.org> (2019-08-26)
-# Deprecated virtual as it cannot solve the issue of ABI incompatibility
-# and rebuild consumers when provider changes
-# No revdeps. Removal in 30 days.
-virtual/libmysqlclient
-
-# Michał Górny <mgorny@gentoo.org> (2019-08-25)
-# Discontinued upstream in 2015, and not touched in Gentoo since.
-# Has series of build failures reported due to growing incompatibility
-# with new kernels.  Removal in 30 days.  Bug #677618.
-sys-cluster/open-mx
 
 # Miroslav Šulc <fordfrog@gentoo.org> (2019-08-19)
 # Depends on >=virtual/{jdk,jre}-11 which is masked
