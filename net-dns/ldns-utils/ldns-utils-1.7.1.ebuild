@@ -12,7 +12,7 @@ SRC_URI="http://www.nlnetlabs.nl/downloads/ldns/${MY_P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
-IUSE="+dane ecdsa ed25519 ed448 examples gost libressl ssl"
+IUSE="+dane ecdsa ed25519 ed448 examples gost ssl"
 
 REQUIRED_USE="
 	ecdsa? ( ssl )
@@ -30,7 +30,7 @@ S=${WORKDIR}/${MY_P}
 
 src_configure() {
 	# >=openssl-1.1.0 required for dane-ta
-	if has_version "<dev-libs/openssl-1.1.0" || use libressl; then
+	if has_version "<dev-libs/openssl-1.1.0" || has_version dev-libs/libressl; then
 		local dane_ta_usage="--disable-dane-ta-usage"
 	else
 		local dane_ta_usage=""
