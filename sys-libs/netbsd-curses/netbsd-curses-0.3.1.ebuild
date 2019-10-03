@@ -26,8 +26,9 @@ src_prepare() {
 
 multilib_src_install() {
 	emake PREFIX="${EPREFIX}/usr" DESTDIR="${D}" \
-		$(usex static-libs install install-dynlibs) \
-		$(usex doc install-manpages "")
+		$(usex static-libs install-libs install-dynlibs) \
+		$(usex doc install-manpages "") \
+		install-headers install-progs install-pcs
 
 	dodoc README.md
 
@@ -36,7 +37,4 @@ multilib_src_install() {
 		rm "${ED%/}/usr/share/man/man3/attr_get.3" || die
 		rm "${ED%/}/usr/share/man/man3/attr_set.3" || die
 	fi
-
-	insinto "${EPREFIX}"/usr/$(get_libdir)/pkgconfig
-	doins "${FILESDIR}"/ncurses.pc
 }
