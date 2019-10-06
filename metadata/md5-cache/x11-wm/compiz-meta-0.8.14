@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=Compiz Reloaded (meta)
+EAPI=6
+HOMEPAGE=https://github.com/compiz-reloaded
+IUSE=+ccsm emerald experimental +extra fusionicon simpleccsm
+KEYWORDS=amd64 ppc ppc64 x86
+LICENSE=GPL-2+
+RDEPEND=>=x11-wm/compiz-0.8.14 >=x11-plugins/compiz-plugins-main-0.8.14 experimental? ( >=x11-plugins/compiz-plugins-experimental-0.8.14 ) extra? ( >=x11-plugins/compiz-plugins-extra-0.8.14 ) ccsm? ( >=x11-misc/ccsm-0.8.14 ) emerald? ( >=x11-wm/emerald-0.8.14 ) fusionicon? ( >=x11-apps/fusion-icon-0.2.4 ) simpleccsm? ( >=x11-misc/simple-ccsm-0.8.14 )
+SLOT=0
+_md5_=f8d598ba632da4f30089ebd238d8686b

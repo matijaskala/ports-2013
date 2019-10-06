@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure
+DEPEND=>=dev-libs/glib-2.44:2[dbus] >=x11-libs/gtk+-3.14:3 wayland? ( >=x11-libs/gtk+-3.21.5:3[wayland] ) X? ( >=x11-libs/gtk+-3.14:3[X] ) >=sys-apps/xdg-desktop-portal-1.0 virtual/pkgconfig >=sys-devel/gettext-0.18.3 virtual/pkgconfig
+DESCRIPTION=GTK/GNOME backend for xdg-desktop-portal
+EAPI=6
+HOMEPAGE=https://github.com/flatpak/xdg-desktop-portal-gtk
+IUSE=wayland X
+KEYWORDS=amd64
+LICENSE=LGPL-2.1
+RDEPEND=>=dev-libs/glib-2.44:2[dbus] >=x11-libs/gtk+-3.14:3 wayland? ( >=x11-libs/gtk+-3.21.5:3[wayland] ) X? ( >=x11-libs/gtk+-3.14:3[X] ) >=sys-apps/xdg-desktop-portal-1.0
+SLOT=0
+SRC_URI=https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.2.0/xdg-desktop-portal-gtk-1.2.0.tar.xz
+_eclasses_=multilib	dac0d024ab09dd209cfe9c0e7152a02b	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a
+_md5_=1b1b237abc9fc9dba307e6ca9723d814
