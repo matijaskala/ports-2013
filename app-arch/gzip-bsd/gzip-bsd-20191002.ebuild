@@ -16,6 +16,7 @@ RESTRICT="mirror"
 DEPEND="
 	app-arch/bzip2:=
 	app-arch/xz-utils:=
+	dev-libs/libbsd
 	sys-libs/zlib:="
 RDEPEND="${DEPEND}
 	!app-arch/gzip"
