@@ -1,0 +1,15 @@
+DEFINED_PHASES=configure install prepare
+DEPEND=>=x11-wm/compiz-0.8.12 <=x11-wm/compiz-0.9 gtk3? ( x11-libs/gtk+:3 x11-libs/libwnck:3 ) !gtk3? ( >=x11-libs/gtk+-2.22.0:2 >=x11-libs/libwnck-2.22:1 ) >=dev-util/intltool-0.35 >=sys-devel/gettext-0.17 virtual/pkgconfig
+DESCRIPTION=Emerald Window Decorator
+EAPI=6
+HOMEPAGE=https://github.com/compiz-reloaded
+IUSE=gtk3
+KEYWORDS=amd64 ppc ppc64 x86
+LICENSE=GPL-2+
+PDEPEND=>=x11-themes/emerald-themes-0.8.12 <x11-themes/emerald-themes-0.9
+RDEPEND=>=x11-wm/compiz-0.8.12 <=x11-wm/compiz-0.9 gtk3? ( x11-libs/gtk+:3 x11-libs/libwnck:3 ) !gtk3? ( >=x11-libs/gtk+-2.22.0:2 >=x11-libs/libwnck-2.22:1 )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/compiz-reloaded/emerald/releases/download/v0.8.14/emerald-0.8.14.tar.xz
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	ltprune	2729691420b6deeda2a90b1f1183fb55	multilib	dac0d024ab09dd209cfe9c0e7152a02b	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
+_md5_=bf2864a4c3268cc597fa07d751e7e185

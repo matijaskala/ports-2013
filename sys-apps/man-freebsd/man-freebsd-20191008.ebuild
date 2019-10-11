@@ -17,6 +17,7 @@ RDEPEND="userland_GNU? ( sys-apps/which )
 	sys-apps/groff
 	!sys-apps/man
 	!sys-apps/man-db
+	!sys-apps/man-netbsd
 	!sys-freebsd/freebsd-ubin"
 
 S=${WORKDIR}/${PN}-f857ffbe8fcc2c678017a6ae6174de7fdbea0e58
