@@ -11,12 +11,12 @@ SRC_URI="https://github.com/bbidulock/blackboxwm/archive/${PV}.tar.gz -> ${P}.ta
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="nls truetype debug"
 
 RDEPEND="x11-libs/libXft
 	x11-libs/libXt
-	nls? ( sys-devel/gettext )
+	nls? ( >=sys-devel/gettext-0.20 )
 	truetype? ( media-libs/freetype )"
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
