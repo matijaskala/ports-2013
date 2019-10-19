@@ -29,6 +29,64 @@
 
 #--- END OF EXAMPLES ---
 
+# Agostino Sarubbo <ago@gentoo.org> (2019-10-18)
+# Superseded by app-admin/checksec
+# Removal in 30 days.
+app-admin/hardening-check
+
+# Thomas Deutschmann <whissi@gentoo.org> (2019-10-17)
+# clamav-milter completely broken, #697688
+~app-antivirus/clamav-0.102.0
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-17)
+# Homepage gone.  EAPI 0.  Used to be used with old versions
+# of www-apps/gallery that were removed back in 2016.
+# Removal in 30 days.  Bug #697280.
+media-gfx/galleryadd
+
+# David Seifert <soap@gentoo.org> (2019-10-17)
+# Dead upstream, EAPI 0, low quality ebuild,
+# hasn't been touched in ages
+# Removal in 30 days.  Bug #697274.
+media-sound/mserv
+
+# Mikle Kolyada <zlogene@gentoo.org> (2019-10-16)
+# not needed due to openpam removal. Please
+# update your packages running emerge with the
+# --changed-deps option if you have problems
+# with your system.
+virtual/pam
+
+# Lars Wendler <polynomial-c@gentoo.org> (2019-10-16)
+# Depends on apache-2.2
+dev-libs/OpenSRF
+
+# Lars Wendler <polynomial-c@gentoo.org> (2019-10-16)
+# Masked for removal (bug #692088)
+=app-admin/apache-tools-2.2*
+=www-servers/apache-2.2*
+
+# Miroslav Šulc <fordfrog@gentoo.org> (2019-10-16)
+# Depends on >=virtual/{jdk,jre}-11 which is masked
+=www-servers/tomcat-9.0.27
+
+# Miroslav Šulc <fordfrog@gentoo.org> (2019-10-16)
+# Depends on >=virtual/{jdk,jre}-11 which is masked
+dev-java/ant-eclipse-ecj:4.13
+dev-java/eclipse-ecj:4.13
+
+# Sergei Trofimovich <slyfox@gentoo.org> (2019-10-16)
+# Binary-only slot that provides libmpfr.so.1. If you need that
+# library please add a note to describe use case to the bug #697822.
+# Masked for removal in a year.
+dev-libs/mpfr:1
+
+# Sergei Trofimovich <slyfox@gentoo.org> (2019-10-16)
+# Binary-only slot that provides libgmp.so.3. If you need that
+# library please add a note to describe use case to the bug #697826.
+# Masked for removal in a year.
+dev-libs/gmp:3
+
 # Andreas Sturmlechner <asturm@gentoo.org> (2019-10-15)
 # Unmaintained and broken with current Frameworks.
 # Removal in 30 days. Bug #697780
@@ -112,10 +170,6 @@ net-misc/ipsc
 # Removal in 30 days.  Bug #696294.
 mail-mta/qmail-ldap
 
-# Matt Turner <mattst88@gentoo.org> (2019-10-09)
-# Needs unreleased xorgproto. Bug #697098.
-=x11-libs/libX11-1.6.9
-
 # Michał Górny <mgorny@gentoo.org> (2019-10-07)
 # Unmaintained.  A few versions behind upstream.  Forces an old version
 # of dev-java/ant-contrib.
@@ -179,7 +233,6 @@ net-irc/miau
 net-mail/hotwayd
 net-mail/popick
 net-mail/poppassd_ceti
-net-mail/qmail-notify
 net-mail/spamcup
 net-mail/vacation
 net-mail/yosucker
@@ -363,10 +416,6 @@ games-server/ut2004-ded
 # Removal in 30 days.
 virtual/python-pmw
 
-# Ulrich Müller <ulm@gentoo.org> (2019-09-26)
-# Blocks its own dependency. Bug #695606.
-=x11-libs/libXvMC-1.0.12
-
 # Joonas Niilola <juippis@gentoo.org> (2019-09-24)
 # Upstream decided to deprecate this service, and app. Removal in 
 # ~30 days. Bug #695562
@@ -392,70 +441,10 @@ games-action/minetest_game
 # Removal in 30 days.  Bug #680726.
 sci-chemistry/azara
 
-# Michał Górny <mgorny@gentoo.org> (2019-09-18)
-# Distributing an entire prebuilt distribution as a package turned out
-# to be a bad idea.  All current upstream versions contain vulnerable
-# packages and lack correct license information.  Upstream does not
-# provide a publicly accessible bug tracker, and does not reply to mail.
-# Removal in 30 days.  Bug #683724.
-app-admin/systemrescuecd-x86
-sys-boot/systemrescuecd-x86-grub
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-17)
-# Unmaintained EAPI 0 Apache modules + mod_access_dnsbl as a revdep.
-# Removal in 30 days.  Bug #694608.
-www-apache/mod_access_dnsbl
-www-apache/mod_authn_sasl
-www-apache/mod_depends
-www-apache/mod_dnsbl_lookup
-www-apache/mod_flvx
-www-apache/mod_geoip2
-www-apache/mod_macro
-www-apache/mod_umask
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-17)
-# Unmaintained libraries with no reverse dependencies.
-# Removal in 30 days.  Bug #694602.
-dev-db/cppdb
-dev-db/odbtp
-dev-db/soci
-dev-db/xbase
-dev-db/xbsql
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-17)
-# Last touched in 2005.  EAPI 0.  No clearly defined license.
-# Removal in 30 days.  Bug #694598.
-sys-fs/wpflash
-
 # Michał Górny <mgorny@gentoo.org> (2019-09-16)
 # Unmaintained.  Fails to build.  Last release in 2004.  EAPI 0.
 # Removal in 30 days.  Bug #592360.
 net-mail/mailsync
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-16)
-# Unmaintained.  Does not work anymore.  Last release in 2007.
-# Our recommended alternative is app-text/wgetpaste.
-# Removal in 30 days.  Bug #678554.
-app-text/gnopaster
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-16)
-# Unmaintained.  Last touched in 2005.  Keyworded ppc only.  Upstream
-# is still alive, so this thing needs a major version bump.
-# Removal in 30 days.  Bug #694562.
-app-emulation/vmips
-app-emulation/vmips-cross-bin
-
-# Zac Medico <zmedico@gentoo.org> (2019-09-14)
-# No reverse dependencies.
-# Removal in 30 days.  Bug #694390.
-dev-go/go-oauth2
-
-# Thomas Sachau <tommy@gentoo.org> (2019-09-14)
-# Freemail has been completly rewritten so the current
-# ebuild does no longer work for it. In addition the source
-# has moved. So masking for removal.
-# Removal in 30 days. Bug #628914
-net-mail/Freemail
 
 # Lars Wendler <polynomial-c@gentoo.org> (2019-09-04)
 # Unofficial build. Superseded by official 2.49.5 release.
@@ -637,8 +626,8 @@ x11-drivers/xf86-video-voodoo
 
 # Miroslav Šulc <fordfrog@gentoo.org> (2019-01-23)
 # Depends on >=virtual/{jdk,jre}-11 which is masked
-=dev-java/ant-eclipse-ecj-4.10
-=dev-java/eclipse-ecj-4.10
+dev-java/ant-eclipse-ecj:4.10
+dev-java/eclipse-ecj:4.10
 
 # Thomas Deutschmann <whissi@gentoo.org> (2018-12-10)
 # Requires >=dev-lang/lua-5.2 which is masked
