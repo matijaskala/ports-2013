@@ -29,6 +29,95 @@
 
 #--- END OF EXAMPLES ---
 
+# Matt Turner <mattst88@gentoo.org> (2019-10-21)
+# Replaced by introspection bindings. Bug #628938
+# Removal in 30 days
+dev-python/gnome-keyring-python
+
+# Matthew Thode <prometheanfire@gentoo.org> (2019-10-20)
+# defunct upstream, removal in 30 days. Bug #611580
+app-emulation/openstack-guest-agents-unix
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-20)
+# Fails to build.  Last release in 2009.  The stable version is EAPI 0.
+# Removal in 30 days.  Bug #698162.
+net-analyzer/nagios-sap-ccms-plugin
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-20)
+# Testing version that breaks multiple plugins.  Let's keep it masked
+# until upstream releases fixed versions.
+~xfce-base/xfce4-panel-4.15.0
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-20)
+# The XFCE GTK+ engines have been abandoned upstream.  They do not work
+# well with modern GTK+ versions, and have no seen any updates
+# since 2015.
+# Removal in 30 days.  Bug #577252.
+x11-themes/gtk-engines-xfce
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2019-10-20)
+# Full of ancient StarOffice era templates, last updated in 2006.
+# Removal in 30 days. Bug #697400
+app-office/ooextras
+
+# Hans de Graaff <graaff@gentoo.org> (2019-10-19)
+# ruby24-only packages with no reverse dependencies and no recent
+# releases. Masked for removal in 30 days.
+dev-ruby/cocaine
+dev-ruby/debugger-linecache
+dev-ruby/escape_utils
+dev-ruby/ruby-beautify
+dev-ruby/termcolor
+dev-ruby/terrapin
+www-servers/thin
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-20)
+# A dummy package with no revdeps.  Replaced by app-text/rarian.
+# Removal in 30 days.  Bug #697376.
+app-text/scrollkeeper
+
+# David Seifert <soap@gentoo.org> (2019-10-19)
+# EAPI 0, tarball completely broken, only contains
+# symlinks to /usr/portage/distdir.
+# Removal in 15 days. Bug #697306.
+media-fonts/jsmath-extra-light
+
+# David Seifert <soap@gentoo.org> (2019-10-19)
+# EAPI 0, broken build system, unmaintained,
+# Removal in 30 days.  Bug #679304, #688906, #697356.
+app-i18n/scim-wnn
+dev-libs/wnn7sdk
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-19)
+# sci-chemistry/ccpn is unfetchable and mirror-restricted.
+# sci-chemistry/aria is its reverse dependency which can't be installed
+# as a result.
+# sci-chemistry/cns is fetch-restricted and the package request form
+# is dead.  Also, its only dependency is aria.
+# Removal in 30 days.  Bug #695784.
+sci-chemistry/aria
+sci-chemistry/ccpn
+sci-chemistry/ccpn-data
+sci-chemistry/cns
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-19)
+# The Linux installer/update is unfetchable, and can't be redistributed.
+# Removal in 30 days.  Bug #695778.
+games-fps/postal2
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-19)
+# Upstream homepage and sources are gone.  The license raises doubt
+# as to whether we can redistribute it.  No new releases since being
+# added in 2005.
+# Removal in 30 days.  Bug #694926.
+sci-biology/ariadne
+
+# Michał Górny <mgorny@gentoo.org> (2019-10-19)
+# Unmaintained package with incorrect LICENSE and a failing build
+# (#679204).
+# Removal in 30 days.  Bug #694450.
+sys-auth/sakcl
+
 # Agostino Sarubbo <ago@gentoo.org> (2019-10-18)
 # Superseded by app-admin/checksec
 # Removal in 30 days.
@@ -105,6 +194,7 @@ dev-perl/NetxAP
 # Nick Sarnie <sarnex@gentoo.org> (2019-10-14)
 # No longer updated or supported by the Wine project
 # wine-any has no value without wine-d3d9
+# Please use app-emulation/gallium-nine-standalone instead
 # Removal in 30 days
 app-emulation/wine-any
 
@@ -341,7 +431,7 @@ dev-php/pecl-svn
 dev-php/pecl-xrange
 dev-php/suhosin
 dev-php/xcache
-dev-php/xhprof
+<dev-php/xhprof-0.9.10
 
 # Matt Turner <mattst88@gentoo.org> (2019-09-28)
 # Merged into Mesa. No reverse dependencies. Bug #654464
@@ -421,25 +511,9 @@ virtual/python-pmw
 # ~30 days. Bug #695562
 x11-misc/enlightenment-extra
 
-# Hanno Boeck <hanno@gentoo.org> (2019-09-23)
-# Depends on an API by German tax authorities that
-# has been disabled, bug #695434
-app-office/geierlein
-
 # Miroslav Šulc <fordfrog@gentoo.org> (2019-09-21)
 # Depends on >=virtual/{jdk,jre}-11 which is masked
 =www-servers/tomcat-9.0.26
-
-# James Le Cuirot <chewi@gentoo.org> (2019-09-19)
-# Minetest Game is now installed and managed through the Minetest
-# engine in games-action/minetest. Removal in 30 days.
-games-action/minetest_game
-
-# Michał Górny <mgorny@gentoo.org> (2019-09-19)
-# Last bumped in 2010.  Homepage & SRC_URI gone, redistribution
-# is forbidden by license.
-# Removal in 30 days.  Bug #680726.
-sci-chemistry/azara
 
 # Michał Górny <mgorny@gentoo.org> (2019-09-16)
 # Unmaintained.  Fails to build.  Last release in 2004.  EAPI 0.
@@ -891,9 +965,7 @@ www-plugins/chrome-binary-plugins:unstable
 # These packages are not supposed to be merged directly, instead
 # please use sys-devel/crossdev to install them.
 dev-libs/cygwin
-dev-util/mingw-runtime
 dev-util/mingw64-runtime
-dev-util/w32api
 sys-libs/newlib
 dev-embedded/avr-libc
 
