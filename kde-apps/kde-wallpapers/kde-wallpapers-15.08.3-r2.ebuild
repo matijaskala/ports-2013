@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 KMNAME="kde-wallpapers"
 KDE_AUTODEPS="false"
@@ -11,7 +11,7 @@ DESCRIPTION="KDE wallpapers"
 KEYWORDS="~amd64 ~x86"
 IUSE="+minimal"
 
-DEPEND="$(add_frameworks_dep extra-cmake-modules)"
+BDEPEND="$(add_frameworks_dep extra-cmake-modules)"
 RDEPEND="!kde-apps/kde-wallpapers:4"
 
 PATCHES=( "${FILESDIR}/${PN}-15.08.0-kf5-port.patch" ) # bug 559156
