@@ -3,7 +3,7 @@
 
 EAPI="4"
 
-inherit eutils libtool toolchain-funcs multilib-minimal
+inherit eutils libtool toolchain-funcs multilib-minimal usr-ldscript
 
 DESCRIPTION="Extended attributes tools"
 HOMEPAGE="https://savannah.nongnu.org/projects/attr"
@@ -11,20 +11,14 @@ SRC_URI="mirror://nongnu/${PN}/${P}.src.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~x86-linux"
 IUSE="nls static-libs"
 
 DEPEND="nls? ( sys-devel/gettext )
 	sys-devel/autoconf"
-RDEPEND="abi_x86_32? (
-		!<=app-emulation/emul-linux-x86-baselibs-20130224-r9
-		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
-	)"
+RDEPEND=""
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}-cdecls.patch
-
-	sed -i s@__THROW@xattr_nothrow@ include/xattr.h || die
 	sed -i \
 		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
 		-e '/HAVE_ZIPPED_MANPAGES/s:=.*:=false:' \

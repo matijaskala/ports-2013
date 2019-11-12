@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
-inherit libtool multilib multilib-minimal eutils pam toolchain-funcs flag-o-matic db-use fcaps
+inherit libtool multilib multilib-minimal eutils pam toolchain-funcs flag-o-matic db-use fcaps usr-ldscript
 
 MY_PN="Linux-PAM"
 MY_P="${MY_PN}-${PV}"
@@ -15,7 +15,7 @@ SRC_URI="http://www.linux-pam.org/library/${MY_P}.tar.bz2
 
 LICENSE="|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 ~riscv s390 sh sparc x86 ~amd64-linux ~x86-linux"
 IUSE="audit berkdb +cracklib debug nis nls +pie selinux test vim-syntax"
 
 RDEPEND="
@@ -40,7 +40,6 @@ PDEPEND="
 RDEPEND="
 	${RDEPEND}
 	!<sys-apps/openrc-0.11.8
-	!sys-auth/openpam
 	!sys-auth/pam_userdb"
 
 S="${WORKDIR}/${MY_P}"
@@ -94,9 +93,6 @@ src_prepare() {
 		-e '/ test /s:==:=:' \
 		configure || die
 	elibtoolize
-	epatch "${FILESDIR}"/hurd_no_setfsuid
-	epatch "${FILESDIR}"/paths.patch
-	use elibc_musl && sed -e 's/pam_rhosts//g' -i modules/Makefile.am modules/Makefile.in
 }
 
 multilib_src_configure() {

@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,7 +9,7 @@ if [[ ${PV} == 9999* ]] ; then
 	inherit git-r3 autotools
 	EGIT_REPO_URI="https://git.code.sf.net/p/zsh/code"
 else
-	KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 	SRC_URI="https://www.zsh.org/pub/${P}.tar.xz
 		https://www.zsh.org/pub/old/${P}.tar.xz
 		doc? ( https://www.zsh.org/pub/${P}-doc.tar.xz )"
@@ -57,8 +57,6 @@ src_prepare() {
 		# add openrc specific options for init.d completion
 		eapply "${FILESDIR}"/${PN}-5.3-init.d-gentoo.diff
 	fi
-
-	cp "${FILESDIR}"/zshrc-1 "${T}"/zshrc || die
 
 	eapply_user
 
@@ -141,12 +139,8 @@ src_install() {
 	emake DESTDIR="${D}" install $(usex doc "install.info" "")
 
 	insinto /etc/zsh
-	doins "${T}"/zshrc
 	export PREFIX_QUOTE_CHAR='"' PREFIX_EXTRA_REGEX="/EUID/s,0,${EUID},"
 	newins "$(prefixify_ro "${FILESDIR}"/zprofile-4)" zprofile
-
-	insinto /etc/skel
-	newins "${FILESDIR}"/zshrc-2 .zshrc
 
 	keepdir /usr/share/zsh/site-functions
 	insinto /usr/share/zsh/${PV%_*}/functions/Prompts
@@ -177,10 +171,9 @@ src_install() {
 
 	if use doc ; then
 		pushd "${WORKDIR}/${PN}-${PV%_*}" >/dev/null
+		dodoc Doc/zsh.{dvi,pdf}
 		docinto html
 		dodoc Doc/*.html
-		insinto /usr/share/doc/${PF}
-		doins Doc/zsh.{dvi,pdf}
 		popd >/dev/null
 	fi
 
@@ -191,10 +184,11 @@ src_install() {
 pkg_postinst() {
 	if [[ -z ${REPLACING_VERSIONS} ]] ; then
 		echo
-		elog "If you want to enable Portage completions,"
+		elog "If you want to enable Portage completions and Gentoo prompt,"
 		elog "emerge app-shells/gentoo-zsh-completions and add"
-		elog "	autoload -U compinit"
+		elog "	autoload -U compinit promptinit"
 		elog "	compinit"
+		elog "	promptinit; prompt gentoo"
 		elog "to your ~/.zshrc"
 		echo
 		elog "Also, if you want to enable cache for the completions, add"

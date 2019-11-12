@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -11,7 +11,7 @@ SRC_URI="https://dev.gentoo.org/~mgorny/dist/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~riscv ~s390 ~sh sparc x86"
 IUSE=""
 
 DEPEND="app-arch/xz-utils
@@ -23,12 +23,6 @@ has sandbox_death_notice ${EBUILD_DEATH_HOOKS} || EBUILD_DEATH_HOOKS="${EBUILD_D
 sandbox_death_notice() {
 	ewarn "If configure failed with a 'cannot run C compiled programs' error, try this:"
 	ewarn "FEATURES='-sandbox -usersandbox' emerge sandbox"
-}
-
-src_prepare() {
-	eapply "${FILESDIR}"/${PN}-2.11-musl.patch
-	eapply "${FILESDIR}"/${PN}-2.10-fix-visibility-musl.patch
-	eapply_user
 }
 
 multilib_src_configure() {
@@ -54,7 +48,6 @@ multilib_src_install_all() {
 	fperms 0770 /var/log/sandbox
 
 	dodoc AUTHORS ChangeLog* NEWS README
-	rm -f "${ED}"usr/share/applications/sandbox.desktop
 }
 
 pkg_preinst() {
