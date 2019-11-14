@@ -13,12 +13,12 @@ SRC_URI="https://github.com/CanonicalLtd/lightdm/releases/download/${PV}/${P}.ta
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
 KEYWORDS="amd64 arm arm64 ppc ppc64 x86"
-IUSE="audit +gnome +introspection qt5 +vala"
+IUSE="audit +gnome +gtk +introspection qt5 vala"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.44.0:2
 	dev-libs/libxml2
-	virtual/pam
+	sys-libs/pam
 	x11-libs/libX11
 	>=x11-libs/libxklavier-5
 	audit? ( sys-process/audit )
@@ -40,6 +40,7 @@ DEPEND="${COMMON_DEPEND}
 	gnome? ( gnome-base/gnome-common )
 	vala? ( $(vala_depend) )
 "
+PDEPEND="gtk? ( x11-misc/lightdm-gtk-greeter )"
 
 DOCS=( NEWS )
 RESTRICT="test"

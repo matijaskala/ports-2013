@@ -11,7 +11,7 @@ else
 	MY_P=${PN}-${MY_PV}
 	S=${WORKDIR}/${MY_P}
 	SRC_URI="https://github.com/systemd/systemd/archive/v${MY_PV}/${MY_P}.tar.gz"
-	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~sparc x86"
+	KEYWORDS="alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~sparc x86"
 fi
 
 PYTHON_COMPAT=( python{3_5,3_6,3_7} )
@@ -98,7 +98,6 @@ RDEPEND="${COMMON_DEPEND}
 		sys-apps/util-linux[kill(-)]
 		sys-process/procps[kill(+)]
 		sys-apps/coreutils[kill(-)]
-		sys-apps/busybox-wrappers[kill(-)]
 	) )
 	!sys-auth/nss-myhostname
 	!<sys-kernel/dracut-044
@@ -126,7 +125,6 @@ BDEPEND="
 	app-text/docbook-xml-dtd:4.5
 	app-text/docbook-xsl-stylesheets
 	dev-libs/libxslt:0
-	elibc_musl? ( sys-libs/musl-nscd )
 	$(python_gen_any_dep 'dev-python/lxml[${PYTHON_USEDEP}]')
 "
 
@@ -187,7 +185,6 @@ src_prepare() {
 
 	# Add local patches here
 	PATCHES+=(
-		"${FILESDIR}"/243-musl.patch
 	)
 
 	if ! use vanilla; then
@@ -199,11 +196,6 @@ src_prepare() {
 	fi
 
 	default
-
-	sed -i "/secure_getenv/s/.$/, 'issetugid'&/" meson.build || die
-	sed -i "/ILP32/s/$/ \&\& defined __GLIBC__/" src/basic/format-util.h || die
-	sed -i "/info.__/d" src/test/test-sizeof.c || die
-	sed -i s/ULONG_LONG_MAX/ULLONG_MAX/ src/shutdown/shutdown.c src/journal-remote/journal-remote.c || die
 }
 
 src_configure() {
@@ -308,8 +300,6 @@ multilib_src_configure() {
 		-Dtimesyncd=$(meson_multilib)
 		-Dtmpfiles=$(meson_multilib)
 		-Dvconsole=$(meson_multilib)
-
-		-Dgshadow=$(usex elibc_musl false true)
 
 		# static-libs
 		-Dstatic-libsystemd=$(usex static-libs true false)

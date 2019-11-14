@@ -23,7 +23,7 @@ HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-IUSE="acl apparmor audit build cryptsetup curl dns-over-tls elfutils +gcrypt gnuefi http idn importd +kmod libidn2 +lz4 lzma nat pam pcre policykit qrcode +resolvconf +seccomp selinux split-usr +sysv-utils test vanilla xkb elibc_musl"
+IUSE="acl apparmor audit build cryptsetup curl dns-over-tls elfutils +gcrypt gnuefi http idn importd +kmod libidn2 +lz4 lzma nat pam pcre policykit qrcode +resolvconf +seccomp selinux split-usr +sysv-utils test vanilla xkb"
 
 REQUIRED_USE="importd? ( curl gcrypt lzma )"
 RESTRICT="!test? ( test )"
@@ -57,7 +57,7 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.30:0=[${MULTILIB_USEDEP}]
 	lz4? ( >=app-arch/lz4-0_p131:0=[${MULTILIB_USEDEP}] )
 	lzma? ( >=app-arch/xz-utils-5.0.5-r1:0=[${MULTILIB_USEDEP}] )
 	nat? ( net-firewall/iptables:0= )
-	pam? ( virtual/pam:=[${MULTILIB_USEDEP}] )
+	pam? ( sys-libs/pam:=[${MULTILIB_USEDEP}] )
 	pcre? ( dev-libs/libpcre2 )
 	qrcode? ( media-gfx/qrencode:0= )
 	seccomp? ( >=sys-libs/libseccomp-2.3.3:0= )
@@ -101,7 +101,6 @@ RDEPEND="${COMMON_DEPEND}
 		sys-apps/util-linux[kill(-)]
 		sys-process/procps[kill(+)]
 		sys-apps/coreutils[kill(-)]
-		sys-apps/busybox-wrappers[kill(-)]
 	) )
 	!sys-auth/nss-myhostname
 	!<sys-kernel/dracut-044
@@ -129,7 +128,6 @@ BDEPEND="
 	app-text/docbook-xml-dtd:4.5
 	app-text/docbook-xsl-stylesheets
 	dev-libs/libxslt:0
-	elibc_musl? ( sys-libs/musl-nscd )
 	$(python_gen_any_dep 'dev-python/lxml[${PYTHON_USEDEP}]')
 "
 
@@ -190,7 +188,6 @@ src_prepare() {
 
 	# Add local patches here
 	PATCHES+=(
-		"${FILESDIR}"/242-musl.patch
 		"${FILESDIR}"/242-gcc-9.patch
 		"${FILESDIR}"/242-socket-util-flush-accept.patch
 		"${FILESDIR}"/242-wireguard-listenport.patch
@@ -209,11 +206,6 @@ src_prepare() {
 	fi
 
 	default
-
-	sed -i "/secure_getenv/s/.$/, 'issetugid'&/" meson.build || die
-	sed -i "/ILP32/s/$/ \&\& defined __GLIBC__/" src/basic/format-util.h || die
-	sed -i "/info.__/d" src/test/test-sizeof.c || die
-	sed -i s/ULONG_LONG_MAX/ULLONG_MAX/ src/shutdown/shutdown.c src/journal-remote/journal-remote.c || die
 }
 
 src_configure() {
@@ -315,8 +307,6 @@ multilib_src_configure() {
 		-Dtimesyncd=$(meson_multilib)
 		-Dtmpfiles=$(meson_multilib)
 		-Dvconsole=$(meson_multilib)
-
-		-Dgshadow=$(usex elibc_musl false true)
 	)
 
 	if multilib_is_native_abi && use idn; then
@@ -473,6 +463,14 @@ pkg_postinst() {
 
 	if [[ ${ENABLED_UNITS[@]} ]]; then
 		systemctl --root="${ROOT:-/}" enable "${ENABLED_UNITS[@]}"
+	fi
+
+	if [[ -z ${REPLACING_VERSIONS} ]]; then
+		if type systemctl &>/dev/null; then
+			systemctl --root="${ROOT:-/}" enable getty@.service remote-fs.target || FAIL=1
+		fi
+		elog "To enable a useful set of services, run the following:"
+		elog "  systemctl preset-all --preset-mode=enable-only"
 	fi
 
 	if [[ -L ${EROOT}/var/lib/systemd/timesync ]]; then

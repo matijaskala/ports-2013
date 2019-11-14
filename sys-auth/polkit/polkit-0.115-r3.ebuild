@@ -24,7 +24,7 @@ CDEPEND="
 	introspection? ( dev-libs/gobject-introspection )
 	pam? (
 		sys-auth/pambase
-		virtual/pam
+		sys-libs/pam
 	)
 	systemd? ( sys-apps/systemd:0=[policykit] )
 "
@@ -46,7 +46,6 @@ PDEPEND="
 	consolekit? ( sys-auth/consolekit[policykit] )
 	gtk? ( || (
 		>=gnome-extra/polkit-gnome-0.105
-		lxde-base/lxpolkit
 		>=lxde-base/lxsession-0.5.2
 	) )
 	kde? ( kde-plasma/polkit-kde-agent )
