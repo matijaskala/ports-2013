@@ -5,7 +5,7 @@ EAPI=7
 
 DESCRIPTION="NetBSD command to read man pages"
 HOMEPAGE="https://www.netbsd.org"
-COMMIT_ID="8c1eed46d3cb5ace7f6c4daffd8c47ee7290e060"
+COMMIT_ID="38fde09fdc006bb6719547c245f93a87def25a56"
 SRC_URI="https://github.com/matijaskala/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
