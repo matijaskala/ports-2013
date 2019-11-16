@@ -3168,8 +3168,8 @@ dev-db/pgxnclient 1.2-r1 1.2.1: PostgreSQL Extension Network Client
 dev-db/phpmyadmin 4.9.1: Web-based administration for MySQL database in PHP
 dev-db/plr 8.3.0.17: R language extension for postgresql database
 dev-db/postgis 2.4.6 2.4.7 2.4.8 2.5.1-r1 2.5.2 2.5.3 3.0.0 9999: Geographic Objects for PostgreSQL
-dev-db/postgresql 9.4.22 9.4.22-r1 9.4.23 9.4.24 9.5.17 9.5.17-r1 9.5.18 9.5.19 9.6.13 9.6.13-r1 9.6.14 9.6.15 10.9 10.10 11.4 11.5 12.0 9999: PostgreSQL RDBMS
-dev-db/pspg 1.6.5 1.6.8: A better pager for psql and mysql
+dev-db/postgresql 9.4.22 9.4.22-r1 9.4.23 9.4.24 9.4.25 9.5.17 9.5.17-r1 9.5.18 9.5.19 9.5.20 9.6.13 9.6.13-r1 9.6.14 9.6.15 9.6.16 10.9 10.10 10.11 11.4 11.5 11.6 12.0 12.1 9999: PostgreSQL RDBMS
+dev-db/pspg 1.6.5 1.6.8 2.5.4: A better pager for psql and mysql
 dev-db/psqlodbc 10.01.0000 11.01.0000: Official ODBC driver for PostgreSQL
 dev-db/qdbm 1.8.78-r2: Quick Database Manager
 dev-db/qt5-sqlcipher 1.0.1_p20191025: Qt SQL driver plugin for SQLCipher
@@ -7594,7 +7594,7 @@ dev-python/corner 2.0.1: Make scatter matrix corner plots
 dev-python/cosmolopy 0.1.104-r1: Cosmology routines built on NumPy/SciPy
 dev-python/couchdb-python 1.1: Python library for working with CouchDB
 dev-python/cov-core 1.7 1.15.0 1.15.0-r1: plugin core for use by pytest-cov, nose-cov and nose2-cov
-dev-python/coverage 4.2 4.5.2: Code coverage measurement for Python
+dev-python/coverage 4.2 4.5.2 4.5.4: Code coverage measurement for Python
 dev-python/coverage-test-runner 1.15: fail Python program unit tests unless they test everything
 dev-python/crcmod 1.7-r2 1.7-r3: Python CRC Generator module
 dev-python/croniter 0.3.17 0.3.29 0.3.30: Python module to provide iteration for datetime object
@@ -7768,7 +7768,7 @@ dev-python/fixtures 1.4.0 3.0.0: Fixtures, reusable state for writing clean test
 dev-python/flake8 2.1.0 2.2.5 2.5.4 3.5.0 3.6.0: A wrapper around PyFlakes, pep8 & mccabe
 dev-python/flake8-import-order 0.18: Flake8 plugin that checks import order against various Python Style Guides
 dev-python/flake8-polyfill 1.0.1: Polyfill package for Flake8 plugins
-dev-python/flaky 3.1.1 3.4.0 3.5.3: Plugin for nose or py.test that automatically reruns flaky tests
+dev-python/flaky 3.1.1 3.4.0 3.5.3 3.6.1: Plugin for nose or py.test that automatically reruns flaky tests
 dev-python/flask 0.12.2 1.0.2 1.0.4 1.1.1 9999: A microframework based on Werkzeug, Jinja2 and good intentions
 dev-python/flask-admin 1.0.6 1.5.0 1.5.1: Simple and extensible admin interface framework for Flask
 dev-python/flask-api 1.0 1.1: Browsable web APIs for Flask
@@ -7883,9 +7883,9 @@ dev-python/graphviz 0.7.1 0.10.1 0.13: Simple Python interface for Graphviz
 dev-python/graphy 1.0-r1: Simple Chart Library for Python
 dev-python/greenlet 0.4.12 0.4.13 0.4.15: Lightweight in-process concurrent programming
 dev-python/greenstalk 0.5.2 1.0.1: A Python 3 client for the beanstalkd work queue
-dev-python/grpcio 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1 1.21.1 1.22.1 1.23.0 1.24.3: High-performance RPC framework (python libraries)
-dev-python/grpcio-testing 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1 1.21.1 1.22.1 1.23.0 1.24.3: Testing utilities for gRPC Python
-dev-python/grpcio-tools 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1 1.21.1 1.22.1 1.23.0 1.24.3: Protobuf code generator for gRPC
+dev-python/grpcio 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1 1.21.1 1.22.1 1.23.0 1.24.3 1.25.0: High-performance RPC framework (python libraries)
+dev-python/grpcio-testing 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1 1.21.1 1.22.1 1.23.0 1.24.3 1.25.0: Testing utilities for gRPC Python
+dev-python/grpcio-tools 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1 1.21.1 1.22.1 1.23.0 1.24.3 1.25.0: Protobuf code generator for gRPC
 dev-python/gsd 1.5.3: GSD - file format specification and a library to read and write it
 dev-python/gst-python 1.14.1-r1: A Python Interface to GStreamer
 dev-python/gtkspell-python 2.25.3-r1: GtkSpell bindings for Python
@@ -7992,7 +7992,7 @@ dev-python/jedi 0.10.2 0.11.1 0.12.0 0.12.1: Autocompletion library for Python
 dev-python/jeepney 0.3.1: Low-level, pure Python DBus protocol wrapper
 dev-python/jellyfish 0.7.2: Python module for doing approximate and phonetic matching of strings
 dev-python/jikanpy 3.4.1: Python wrapper for jikan.moe API.
-dev-python/jinja 2.10.1: A full-featured template engine for Python
+dev-python/jinja 2.10.1 2.10.3: A full-featured template engine for Python
 dev-python/jinja2-time 0.2.0: Jinja2 Extension for Dates and Times
 dev-python/jinja2_pluralize 0.3.0: Jinja2 pluralize filters
 dev-python/jira 1.0.5 1.0.10 1.0.10-r1 1.0.14 1.0.14-r1 1.0.14-r2: Python library for interacting with the JIRA REST API
@@ -8095,7 +8095,7 @@ dev-python/manuel 1.8.0 1.9.0: Manuel lets you build tested documentation
 dev-python/markdown 2.6.5 2.6.8 2.6.9 2.6.11 3.0.1 3.1.1: Python implementation of the markdown markup language
 dev-python/markdown2 2.3.0: Python Markdown language reimplementation
 dev-python/markups 2.0.0 3.0.0: A wrapper around various text markups
-dev-python/markupsafe 0.23 1.0: Implements a XML/HTML/XHTML Markup safe string for Python
+dev-python/markupsafe 0.23 1.0 1.1.1: Implements a XML/HTML/XHTML Markup safe string for Python
 dev-python/marshmallow 2.20.2 3.0.1: A lightweight library for converting complex datatypes to and from native Python datatypes.
 dev-python/matplotlib 2.2.2-r1 2.2.4 9999: Pure python plotting library with matlab like syntax
 dev-python/matplotlib2tikz 0.6.18: Convert matplotlib figures into TikZ/PGFPlots
@@ -8188,7 +8188,7 @@ dev-python/nltk 3.2.3 3.2.5: Natural Language Toolkit
 dev-python/nnpy 1.4.1 1.4.2: cffi-based Python bindings for nanomsg
 dev-python/node-semver 0.2.0 0.6.1 0.7.0: Python version of node-semver, the semantic versioner for npm
 dev-python/nodeenv 1.1.3-r1: Node.js virtual environment builder
-dev-python/nose 1.3.7-r1 1.3.7-r3 9999: Unittest extension with automatic test suite discovery and easy test authoring
+dev-python/nose 1.3.7-r1 1.3.7-r3 1.3.7-r4: Unittest extension with automatic test suite discovery and easy test authoring
 dev-python/nose-cover3 0.1.0-r1: Coverage 3.x support for Nose
 dev-python/nose-descriptionfixer 0.0.4: Fix the way tests are described when the verbose flag is used
 dev-python/nose-exclude 0.4.1 0.5.0: Exclude specific directories from nosetests runs
@@ -9112,7 +9112,7 @@ dev-python/uncertainties 3.0.1: Python module for calculations with uncertaintie
 dev-python/uncompyle6 2.10.1: Python cross-version byte-code deparser
 dev-python/unicodecsv 0.14.1: Drop-in replacement for python stdlib csv module supporting unicode
 dev-python/unidecode 0.04.20 0.04.21 1.0.22 1.0.23 1.1.1: Module providing ASCII transliterations of Unicode text
-dev-python/unittest-mixins 1.3: A set of mixin classes and other helpers for unittest test case classes
+dev-python/unittest-mixins 1.3 1.6: A set of mixin classes and other helpers for unittest test case classes
 dev-python/unittest2 1.1.0: The new features in unittest backported to Python 2.4+
 dev-python/uranium 3.6.0-r1 4.2.0 4.3.0: A Python framework for building 3D printing related applications
 dev-python/urdf_parser_py 0.3.3 0.4.0: URDF parser for Python
@@ -9772,11 +9772,11 @@ dev-ruby/equatable 0.5.0 0.6.0 0.6.1: Allows ruby objects to implement equality 
 dev-ruby/erubi 1.8.0 1.9.0: a ERB template engine for ruby; a simplified fork of Erubis
 dev-ruby/erubis 2.7.0-r2: Erubis is an implementation of eRuby
 dev-ruby/escape_utils 1.2.1: Faster string escaping routines for your ruby apps
-dev-ruby/ethon 0.11.0 0.12.0: Very lightweight libcurl wrapper
+dev-ruby/ethon 0.12.0: Very lightweight libcurl wrapper
 dev-ruby/evented-spec 0.9.0: A set of helpers to help you test your asynchronous code
 dev-ruby/eventmachine 1.2.7: EventMachine is a fast, simple event-processing library for Ruby programs
 dev-ruby/execjs 2.7.0: ExecJS lets you run JavaScript code from Ruby
-dev-ruby/exifr 1.3.4 1.3.5 1.3.6: A library to read EXIF info from JPEG and TIFF images
+dev-ruby/exifr 1.3.6: A library to read EXIF info from JPEG and TIFF images
 dev-ruby/expression_parser 0.9.0_p20130518: A math parser
 dev-ruby/facter 3.9.2-r1 3.14.3 3.14.5 9999: A cross-platform ruby library for retrieving facts from operating systems
 dev-ruby/factory_girl 4.8.1: factory_girl provides a framework and DSL for defining and using factories
@@ -9784,10 +9784,10 @@ dev-ruby/fakefs 0.19.2 0.20.0 0.20.1: A fake filesystem. Use it in your tests
 dev-ruby/faker 1.9.6-r1 2.6.0 2.7.0: A library for generating fake data such as names, addresses, and phone numbers
 dev-ruby/fakeweb 1.3.0.20170806: Helper for faking web requests in Ruby
 dev-ruby/faraday 0.15.4: HTTP/REST API client library with pluggable components
-dev-ruby/faraday_middleware 0.12.2 0.13.1: Various middleware for Faraday
+dev-ruby/faraday_middleware 0.13.1: Various middleware for Faraday
 dev-ruby/faraday_middleware-multi_json 0.0.6-r1: Response JSON parser using MultiJson and FaradayMiddleware
 dev-ruby/fast-stemmer 1.0.2-r2: Simple wrapper around multithreaded Porter stemming algorithm
-dev-ruby/fast_gettext 1.6.0 1.7.0 1.8.0 2.0.0 2.0.1: GetText but 3.5x faster, 560x less memory, clean namespace and threadsave!
+dev-ruby/fast_gettext 1.6.0 1.8.0 2.0.0 2.0.1: GetText but 3.5x faster, 560x less memory, clean namespace and threadsave!
 dev-ruby/fast_xs 0.8.0-r2: fast_xs text escaping library ruby bindings
 dev-ruby/fattr 2.4.0: fattr.rb is a "fatter attr" for ruby
 dev-ruby/fcgi 0.9.2.1-r1: FastCGI library for Ruby
@@ -9809,11 +9809,11 @@ dev-ruby/gettext_i18n_rails 1.8.0: FastGettext / Rails integration
 dev-ruby/gh 0.15.1-r2: multi-layer client for the github api v3
 dev-ruby/gherkin 5.1.0: Fast Gherkin lexer and parser
 dev-ruby/gist 5.0.0: Potentially the best command line gister.
-dev-ruby/git 1.4.0 1.5.0: Library for using Git in Ruby
+dev-ruby/git 1.5.0: Library for using Git in Ruby
 dev-ruby/github_api 0.18.2: A Ruby wrapper for the GitHub REST API v3
-dev-ruby/globalid 0.4.1 0.4.2: Reference models by URI
+dev-ruby/globalid 0.4.2: Reference models by URI
 dev-ruby/gnuplot 2.6.2-r2: Gnuplot drawing library - Ruby Bindings
-dev-ruby/google-protobuf 3.6.1 3.8.0 3.9.2 3.10.0 3.10.1: Protocol Buffers are Google's data interchange format
+dev-ruby/google-protobuf 3.8.0 3.9.2 3.10.0 3.10.1: Protocol Buffers are Google's data interchange format
 dev-ruby/gpgme 2.0.18 2.0.19: Ruby language binding for GnuPG Made Easy
 dev-ruby/gruff 0.7.0-r1 0.7.0-r2: Beautiful graphs for one or multiple datasets
 dev-ruby/haml 4.0.7-r3 5.1.2: A ruby web page templating engine
@@ -9822,7 +9822,7 @@ dev-ruby/hamster 3.0.0-r1: Efficient, immutable, thread-safe collection classes 
 dev-ruby/hashdiff 0.3.9 0.4.0 1.0.0: Simple Hash extension to make working with nested hashes easier
 dev-ruby/hashery 2.1.2: The Hashery is a tight collection of Hash-like classes
 dev-ruby/hashicorp-checkpoint 0.1.5: Internal HashiCorp service to check version information
-dev-ruby/hashie 2.1.2-r1 3.5.7 3.6.0 4.0.0: Hashie is a small collection of tools that make hashes more powerful
+dev-ruby/hashie 2.1.2-r1 3.6.0 4.0.0: Hashie is a small collection of tools that make hashes more powerful
 dev-ruby/hashr 2.0.1: Simple Hash extension to make working with nested hashes easier
 dev-ruby/heredoc_unindent 1.2.0: Removes leading whitespace from Ruby heredocs
 dev-ruby/hiera 3.4.3 3.5.0 3.6.0: A simple pluggable Hierarchical Database
@@ -9839,12 +9839,12 @@ dev-ruby/hoe-seattlerb 1.3.5: Hoe plugins providing tasks used by seattle.rb
 dev-ruby/hpricot 0.8.6-r5: A fast and liberal HTML parser for Ruby
 dev-ruby/html2haml 2.2.0: Convert HTML and HTML+Erb to Haml
 dev-ruby/htmlentities 4.3.4: A simple library for encoding/decoding entities in (X)HTML documents
-dev-ruby/http 0.9.8-r2 3.3.0 4.0.5 4.1.0 4.1.1: An easy-to-use client library for making requests from Ruby
+dev-ruby/http 0.9.8-r2 3.3.0 4.1.1: An easy-to-use client library for making requests from Ruby
 dev-ruby/http-accept 1.7.0 2.1.0 2.1.1: Parse Accept and Accept-Language HTTP headers
 dev-ruby/http-cookie 1.0.3: A ruby library to handle HTTP cookies
 dev-ruby/http-form_data 1.0.3 2.1.1: Utility-belt to build form data request bodies
 dev-ruby/http_parser_rb 0.6.0-r1: Simple callback-based HTTP request/response parser
-dev-ruby/httparty 0.16.4 0.17.0 0.17.1: Makes http fun! Also, makes consuming restful web services dead easy
+dev-ruby/httparty 0.17.0 0.17.1: Makes http fun! Also, makes consuming restful web services dead easy
 dev-ruby/httpauth 0.2.1: Library implementing the full HTTP Authentication protocol (RFC 2617)
 dev-ruby/httpclient 2.8.3: 'httpclient' gives something like the functionality of libwww-perl (LWP) in Ruby
 dev-ruby/i18n 0.7.0-r3 0.9.5-r1 1.0.1-r1 1.6.0 1.7.0: Add Internationalization support to your Ruby application
@@ -9875,7 +9875,7 @@ dev-ruby/kpeg 1.1.0-r1: A simple PEG library for Ruby
 dev-ruby/kramdown 1.17.0: Yet-another-markdown-parser but fast, pure Ruby, using strict syntax definition
 dev-ruby/launchy 2.4.3-r2: Helper class for launching cross-platform applications
 dev-ruby/lemon 0.9.1: Lemon is a unit testing framework
-dev-ruby/letter_opener 1.6.0 1.7.0: Preview mail in the browser instead of sending
+dev-ruby/letter_opener 1.7.0: Preview mail in the browser instead of sending
 dev-ruby/levenshtein 0.2.2-r2: Levenshtein distance algorithm
 dev-ruby/libusb 0.6.4: binding that gives Ruby programmers access to arbitrary USB devices
 dev-ruby/libxml 2.9.0: Ruby libxml with a user friendly API, akin to REXML
@@ -9894,7 +9894,7 @@ dev-ruby/loquacious 1.9.1-r2: Descriptive configuration files for Ruby written i
 dev-ruby/lumberjack 1.0.13: A simple, powerful, and very fast logging utility
 dev-ruby/mab 0.0.3: Markup as Ruby
 dev-ruby/magic 0.2.9-r1: Ruby FFI bindings to libmagic
-dev-ruby/mail 2.7.0 2.7.1: An email handling library
+dev-ruby/mail 2.7.1: An email handling library
 dev-ruby/maildir 2.2.1-r1: A library for reading and writing arbitrary messages in DJB's maildir format
 dev-ruby/marcel 0.3.3-r1: Simple mime type detection using magic numbers, filenames, and extensions
 dev-ruby/maruku 0.7.3: A Markdown-superset interpreter written in Ruby
@@ -10015,7 +10015,7 @@ dev-ruby/pry 0.12.2: Pry is a powerful alternative to the standard IRB shell for
 dev-ruby/psych 3.1.0: A libyaml wrapper for Ruby
 dev-ruby/public_suffix 3.1.1 4.0.1: Parse and decompose a domain name into top level domain, domain and subdomains
 dev-ruby/pundit 1.1.0 2.1.0: Object oriented authorization for Rails applications
-dev-ruby/puppet_forge 2.2.9-r1 2.3.0: Tools to access Forge API information on Modules, Users, and Releases
+dev-ruby/puppet_forge 2.2.9-r1 2.3.0 2.3.1: Tools to access Forge API information on Modules, Users, and Releases
 dev-ruby/puppetdb-termini 6.6.0 6.7.1: Library needed to connect puppet to puppetdb
 dev-ruby/pusher-client 0.6.2: Client for consuming WebSockets from http://pusher.com
 dev-ruby/pygments_rb 1.2.1: Pygments syntax highlighting in ruby
@@ -10053,7 +10053,7 @@ dev-ruby/rcairo 1.16.2 1.16.4: Ruby bindings for cairo
 dev-ruby/rdiscount 2.2.0.1: Implementation of John Gruber's Markdown
 dev-ruby/rdoc 5.1.0 5.1.0-r1 6.1.1 6.1.2 6.2.0: An extended version of the RDoc library from Ruby 1.8
 dev-ruby/rdtool 0.6.38-r2: A multipurpose documentation format for Ruby
-dev-ruby/recog 2.1.46 2.3.2 2.3.4 2.3.5: Pattern recognition for hosts, services, and content
+dev-ruby/recog 2.1.46 2.3.2 2.3.4 2.3.5 2.3.6: Pattern recognition for hosts, services, and content
 dev-ruby/redcarpet 3.4.0 3.5.0: A Ruby wrapper for Upskirt
 dev-ruby/redcloth 4.3.2-r1: A module for using Textile in Ruby
 dev-ruby/redis 3.3.5 4.0.1: A Ruby client library for Redis
@@ -12492,7 +12492,7 @@ mail-filter/exim-geoip 0.1: This is an IPv4 and IPv6 capable GeoIP dlfunc librar
 mail-filter/exim-p0f 0.1: This is p0f version 3 dlfunc library for Exim
 mail-filter/gld 1.7-r2 1.7-r4: A standalone anti-spam greylisting algorithm on top of Postfix
 mail-filter/imapfilter 2.5.6 2.6.12: An IMAP mail filtering utility
-mail-filter/libmilter 1.0.2: The Sendmail Filter API (Milter)
+mail-filter/libmilter 1.0.2 1.0.2_p1: The Sendmail Filter API (Milter)
 mail-filter/libsieve 2.2.7: A library for parsing, sorting and filtering your mail
 mail-filter/libspf2 1.2.10: libspf2 implements the Sender Policy Framework, a part of the SPF/SRS protocols
 mail-filter/libsrs2 1.0.18: libsrs2 is the next generation Sender Rewriting Scheme library
@@ -12529,6 +12529,7 @@ mail-filter/spampd 2.42: spampd is a program to scan messages for Unsolicited Co
 mail-filter/spamprobe 1.4d-r1: Fast, intelligent, automatic spam detector using Bayesian analysis
 mail-filter/sqlgrey 1.7.6-r2: A postfix policy service implementing a grey-listing policy
 mail-filter/tmda 1.1.12-r2: Python-based SPAM reduction system
+mail-filter/zdkimfilter 1.8: DKIM filter for Courier-MTA
 mail-mta/courier 1.0.5: An MTA designed specifically for maildirs
 mail-mta/esmtp 1.2-r1: User configurable relay-only Mail Transfer Agent with a sendmail-like syntax
 mail-mta/exim 4.92.2 4.92.3: A highly configurable, drop-in replacement for sendmail
@@ -13913,7 +13914,7 @@ media-sound/linuxsampler 2.1.1: Software audio sampler engine with professional 
 media-sound/litestream 1.3_rc3: Litstream is a lightweight and robust shoutcast-compatible streaming mp3 server
 media-sound/lltag 0.14.4-r1 0.14.5: Automatic command-line mp3/ogg/flac file tagger and renamer
 media-sound/lmms 1.2.0 1.2.1 9999: Cross-platform music production software
-media-sound/lollypop 1.1.4.16 1.2.7: Modern music player for GNOME
+media-sound/lollypop 1.1.4.16 1.2.12: Modern music player for GNOME
 media-sound/loudness-scanner 0.5.1_p20190709 9999: Scans your music files and tags them with loudness information
 media-sound/lxmusic 0.4.7: A simple GUI XMMS2 client with minimal functionality
 media-sound/lyvi 2.0.0: A simple command-line lyrics viewer
@@ -14247,7 +14248,7 @@ media-video/ogmrip 1.0.1: Graphical frontend and libraries for ripping DVDs and 
 media-video/openshot 2.4.0-r1 2.4.4: Free, open-source, non-linear video editor to create and edit videos and movies
 media-video/orion 1.6.1 1.6.5 1.6.6: Cross-platform Twitch client
 media-video/oxine 0.7.1-r2: OSD frontend for Xine
-media-video/parole 1.0.4: A simple Xfce4 media player using GStreamer
+media-video/parole 1.0.4 1.0.5: A simple Xfce4 media player using GStreamer
 media-video/peek 1.3.1-r2 1.4.0: Simple animated Gif screen recorder
 media-video/pgmfindclip 1.13: automatically find a clipping border for a sequence of pgm images
 media-video/photofilmstrip 3.7.1: Movie slideshow creator using Ken Burns effect
@@ -14892,7 +14893,7 @@ net-libs/gnet 2.0.8-r2: A simple network library
 net-libs/gnome-online-accounts 3.30.2 3.32.1: GNOME framework for accessing online accounts
 net-libs/gnutls 3.6.7 3.6.9 3.6.10: A TLS 1.2 and SSL 3.0 implementation for the GNU project
 net-libs/google-cloud-cpp 0.2.0-r1 0.5.0 0.9.0 0.10.0: Google Cloud Client Library for C++
-net-libs/grpc 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1-r1 1.21.1-r1 1.22.1 1.23.0 1.24.3: Modern open source high performance RPC framework
+net-libs/grpc 1.16.1 1.17.1 1.18.0 1.19.0 1.20.1-r1 1.21.1-r1 1.22.1 1.23.0 1.24.3 1.25.0: Modern open source high performance RPC framework
 net-libs/gsnmp 0.3.0: An SNMP library based on glib and gnet
 net-libs/gsoap 2.8.84 2.8.87 2.8.91 2.8.93: A cross-platform open source C and C++ SDK for SOAP/XML Web services
 net-libs/gssdp 1.0.3: A GObject-based API for handling resource discovery and announcement over SSDP
@@ -17620,7 +17621,7 @@ sys-firmware/b43legacy-firmware 3.130.20.0: broadcom firmware for b43legacy/bcm4
 sys-firmware/bluez-firmware 1.2: Firmware for Broadcom BCM203x and STLC2300 Bluetooth chips
 sys-firmware/edk2-ovmf 201905 999999: UEFI firmware for 64-bit x86 virtual machines
 sys-firmware/firmware-imx 5.4: NXP i.MX firmware
-sys-firmware/intel-microcode 20191112_p20191110: Intel IA32/IA64 microcode update data
+sys-firmware/intel-microcode 20191115_p20191110: Intel IA32/IA64 microcode update data
 sys-firmware/ipw2100-firmware 1.3: Firmware for the Intel PRO/Wireless 2100 3B miniPCI adapter
 sys-firmware/ipw2200-firmware 3.1: Firmware for the Intel PRO/Wireless 2200BG/2915ABG miniPCI and 2225BG PCI
 sys-firmware/ipxe 1.0.0_p20180211 1.0.0_p20190728: Open source network boot (PXE) firmware
@@ -18517,7 +18518,7 @@ x11-libs/cairo 1.16.0-r3 9999: A vector graphics library with cross-device outpu
 x11-libs/colord-gtk 0.1.26: GTK support library for colord
 x11-libs/dnd 1.1-r3: OffiX' Drag'n'drop library
 x11-libs/flowcanvas 0.7.1-r1 0.7.1-r2: Gtkmm/Gnomecanvasmm widget for boxes and lines environments
-x11-libs/fltk 1.3.3-r3 1.3.4 1.3.5-r3 1.3.9999 1.4.9999: C++ user interface toolkit for X and OpenGL
+x11-libs/fltk 1.3.3-r3 1.3.4 1.3.5-r4 1.3.9999 1.4.9999: C++ user interface toolkit for X and OpenGL
 x11-libs/fox 1.6.49 1.6.50 1.7.54: C++ Toolkit for developing Graphical User Interfaces easily and effectively
 x11-libs/fox-wrapper 2 3: wrapper for fox-config to manage multiple versions
 x11-libs/gdk-pixbuf 2.36.12 2.38.1-r1 2.38.2-r1 2.40.0: Image loading library for GTK+
@@ -19318,11 +19319,11 @@ x11-wm/xmonad 0.11-r1 0.11-r3 0.11.1 0.12 0.13 0.15: A tiling window manager
 x11-wm/xmonad-contrib 0.11.2 0.11.4 0.12 0.13 0.15: Third party extensions for xmonad
 x11-wm/xoat 9999: X Obstinate Asymmetric Tiler
 x11-wm/xpra 2.2.2-r1 2.2.6-r2 2.4.3: X Persistent Remote Apps (xpra) and Partitioning WM (parti) based on wimpiggy
-xfce-base/exo 0.12.4 0.12.8: Extensions, widgets and framework library with session support for Xfce
+xfce-base/exo 0.12.4 0.12.8 0.12.9: Extensions, widgets and framework library with session support for Xfce
 xfce-base/garcon 0.6.4-r1: Xfce's freedesktop.org specification compatible menu implementation library
 xfce-base/libxfce4ui 4.13.4 4.14.1: Unified widget and session management libs for Xfce
 xfce-base/libxfce4util 4.13.2 4.14.0: A basic utility library for the Xfce desktop environment
-xfce-base/thunar 1.8.9 1.8.10: File manager for the Xfce desktop environment
+xfce-base/thunar 1.8.9 1.8.10 1.8.11: File manager for the Xfce desktop environment
 xfce-base/xfce4-appfinder 4.14.0: A tool to find and launch installed applications for the Xfce desktop
 xfce-base/xfce4-meta 4.14-r1: The Xfce Desktop Environment (meta package)
 xfce-base/xfce4-panel 4.14.1 4.15.0: Panel for the Xfce desktop environment
