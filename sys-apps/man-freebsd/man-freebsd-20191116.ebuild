@@ -5,7 +5,8 @@ EAPI=7
 
 DESCRIPTION="FreeBSD commands to read man pages"
 HOMEPAGE="https://www.freebsd.org"
-SRC_URI="https://github.com/matijaskala/${PN}/archive/f857ffbe8fcc2c678017a6ae6174de7fdbea0e58.tar.gz -> ${P}.tar.gz"
+COMMIT_ID="44772d35fbdddfc4319c938874c621b94dca3260"
+SRC_URI="https://github.com/matijaskala/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
@@ -20,6 +21,4 @@ RDEPEND="userland_GNU? ( sys-apps/which )
 	!sys-apps/man-netbsd
 	!sys-freebsd/freebsd-ubin"
 
-S=${WORKDIR}/${PN}-f857ffbe8fcc2c678017a6ae6174de7fdbea0e58
-
-src_compile() { :; }
+S=${WORKDIR}/${PN}-${COMMIT_ID}
