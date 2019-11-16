@@ -3,9 +3,9 @@
 
 EAPI=7
 
-DESCRIPTION="FreeBSD utility to apply diffs to files"
+DESCRIPTION="NetBSD macro processor"
 HOMEPAGE="https://www.netbsd.org"
-COMMIT_ID="9079f458556872a07c2478780d373b570635d167"
+COMMIT_ID="37ab9281aa0952bdd0cd44e62b2e82286f3f7fec"
 SRC_URI="https://github.com/matijaskala/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
@@ -14,9 +14,11 @@ KEYWORDS="amd64 x86"
 IUSE=""
 RESTRICT="mirror"
 
+BDEPEND="sys-devel/flex
+	virtual/yacc"
 DEPEND="dev-libs/libbsd"
 RDEPEND="${DEPEND}
-	!sys-apps/patch
+	!sys-devel/m4
 	!sys-freebsd/freebsd-ubin"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
