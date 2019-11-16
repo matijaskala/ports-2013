@@ -1538,9 +1538,9 @@ app-emulation/wine-any 3.20 3.21 4.0 4.1 9999: Free implementation of Windows(tm
 app-emulation/wine-d3d9 3.20 3.21 4.0 4.1 9999: Free implementation of Windows(tm) on Unix, with Gallium Nine patchset
 app-emulation/wine-desktop-common 20150204-r1: Various desktop menu items and icons for wine
 app-emulation/wine-gecko 2.47-r1: A Mozilla Gecko based version of Internet Explorer for Wine
-app-emulation/wine-mono 4.6.4 4.7.0 4.7.1 4.7.3 4.7.5 4.8.0 4.8.1 4.8.3 4.9.0 4.9.2 4.9.3: Wine Mono is a replacement for the .NET runtime and class libraries in Wine
-app-emulation/wine-staging 4.16 4.17 4.18 4.19 9999: Free implementation of Windows(tm) on Unix, with Wine-Staging patchset
-app-emulation/wine-vanilla 4.0 4.0.1 4.0.2 4.16 4.17 4.18 4.19 9999: Free implementation of Windows(tm) on Unix, without external patchsets
+app-emulation/wine-mono 4.6.4 4.7.0 4.7.1 4.7.3 4.7.5 4.8.0 4.8.1 4.8.3 4.9.0 4.9.2 4.9.3 4.9.4: Wine Mono is a replacement for the .NET runtime and class libraries in Wine
+app-emulation/wine-staging 4.17 4.18 4.19 4.20 9999: Free implementation of Windows(tm) on Unix, with Wine-Staging patchset
+app-emulation/wine-vanilla 4.0 4.0.1 4.0.2 4.17 4.18 4.19 4.20 9999: Free implementation of Windows(tm) on Unix, without external patchsets
 app-emulation/winetricks 20190310 20190912 99999999: Easy way to install DLLs needed to work around problems in Wine
 app-emulation/x48 0.6.4-r2: HP48 Calculator Emulator
 app-emulation/xcpc 20070122: XCPC is a portable Amstrad CPC 464/664/6128 emulator written in C.
@@ -7358,7 +7358,7 @@ dev-python/PyECLib 1.5.0 1.6.0: Messaging API for RPC and notifications over dif
 dev-python/PyGithub 1.43.8 1.44 1.44.1: Python library to access the Github API v3
 dev-python/PyPDF2 1.26.0: Python library to work with pdf files
 dev-python/PyQt5 5.10.1-r1 5.12.2 5.13.1 5.13.2: Python bindings for the Qt framework
-dev-python/PyQt5-sip 4.19.17 4.19.18 4.19.19: Private sip module for PyQt5
+dev-python/PyQt5-sip 4.19.17 4.19.19: Private sip module for PyQt5
 dev-python/PyQtWebEngine 5.12.1 5.13.2_pre1909181828 5.13.2: Python bindings for QtWebEngine
 dev-python/PyRSS2Gen 1.1: RSS feed generator written in Python
 dev-python/PySDL2 0.9.6: Python (ctypes) bindings for SDL2 libraries
@@ -7992,7 +7992,7 @@ dev-python/jedi 0.10.2 0.11.1 0.12.0 0.12.1: Autocompletion library for Python
 dev-python/jeepney 0.3.1: Low-level, pure Python DBus protocol wrapper
 dev-python/jellyfish 0.7.2: Python module for doing approximate and phonetic matching of strings
 dev-python/jikanpy 3.4.1: Python wrapper for jikan.moe API.
-dev-python/jinja 2.10.1 2.10.3: A full-featured template engine for Python
+dev-python/jinja 2.10.1 2.10.3 2.10.3-r1: A full-featured template engine for Python
 dev-python/jinja2-time 0.2.0: Jinja2 Extension for Dates and Times
 dev-python/jinja2_pluralize 0.3.0: Jinja2 pluralize filters
 dev-python/jira 1.0.5 1.0.10 1.0.10-r1 1.0.14 1.0.14-r1 1.0.14-r2: Python library for interacting with the JIRA REST API
@@ -8922,7 +8922,7 @@ dev-python/simplesoapy 1.5.1-r1 9999: Simple pythonic wrapper for SoapySDR libra
 dev-python/simplespectral 1.0.0 9999: Heavily simplified scipy.signal.spectral module
 dev-python/simpy 3.0.8: Object-oriented, process-based discrete-event simulation language
 dev-python/singledispatch 3.4.0.3: A library to bring functools.singledispatch from Python 3.4 to Python 2.6-3.3
-dev-python/sip 4.19.13 4.19.17 4.19.18 4.19.19: Python extension module generator for C and C++ libraries
+dev-python/sip 4.19.17 4.19.19: Python extension module generator for C and C++ libraries
 dev-python/six 1.10.0 1.11.0 1.12.0 1.13.0: Python 2 and 3 compatibility library
 dev-python/slackclient 1.1.0 1.2.0: Client for Slack supporting the Slack Web and Real Time Messaging API
 dev-python/sleekxmpp 1.3.1-r1: Python library for XMPP
@@ -8953,6 +8953,7 @@ dev-python/sphinx-aiohttp-theme 0.1.4 0.1.5 0.1.6: Sphinx theme for aiohttp
 dev-python/sphinx-better-theme 0.1.5: A nice-looking, customizable theme for Sphinx
 dev-python/sphinx-bootstrap-theme 0.4.9 0.6.0 0.6.5: Sphinx theme integrates the Bootstrap CSS / JavaScript framework
 dev-python/sphinx-gallery 0.1.12 0.3.1: Sphinx extension to automatically generate an examples gallery
+dev-python/sphinx-issues 1.2.0: A Sphinx extension for linking to your project's issue tracker
 dev-python/sphinx-jinja 0.2.1 0.3.0: A sphinx extension to include jinja based templates into a sphinx doc
 dev-python/sphinx-notfound-page 0.4: Create a custom 404 page with absolute URLs hardcoded.
 dev-python/sphinx-py3doc-enhanced-theme 2.3.2 2.3.2-r1: Enhanced Sphinx theme (based on Python 3 docs)
@@ -13382,7 +13383,7 @@ media-libs/sdl2-ttf 2.0.14 2.0.15: library that allows you to use TrueType fonts
 media-libs/sg 1.5: Socket Graphics tool for displaying polygons
 media-libs/sge 030809: Graphics extensions library for SDL
 media-libs/shaderc 2018.0 2019.0-r1: Collection of tools, libraries and tests for shader compilation
-media-libs/simage 1.7.0-r1 1.7.1: Image and video texturing library
+media-libs/simage 1.7.0-r1 1.7.1-r1: Image and video texturing library
 media-libs/skstream 0.3.9: FreeSockets - Portable C++ classes for IP (sockets) applications
 media-libs/slv2 0.6.6-r2: A library to make the use of LV2 plugins as simple as possible for applications
 media-libs/smpeg 0.4.4-r10: SDL MPEG Player Library
@@ -17793,7 +17794,7 @@ sys-kernel/raspberrypi-image 4.14.98_p20190215 4.19.57_p20190709 9999: Raspberry
 sys-kernel/raspberrypi-sources 4.4.9999 4.9.9999 4.10.9999 4.11.9999 4.12.9999 4.13.9999 4.14.9999 4.19.9999: Raspberry PI kernel sources
 sys-kernel/rt-sources 3.18.123_p107 3.18.125_p108 3.18.129_p110 4.4.162_p175 4.4.164_p176 4.9.115_p93 4.9.146_p125 4.14.71_p44 4.14.78_p47 4.14.87_p49 4.16.18_p12 4.18.16_p9 4.19.5_p4 4.19.10_p8: Full Linux 4.19 kernel sources with the CONFIG_PREEMPT_RT patch
 sys-kernel/spl 0.7.13: The Solaris Porting Layer provides many of the Solaris kernel APIs
-sys-kernel/vanilla-sources 3.16.77 4.4.201 4.9.201 4.14.154 4.19.84 5.3.11: Full sources for the Linux kernel
+sys-kernel/vanilla-sources 3.16.77 4.4.202 4.9.202 4.14.154 4.19.84 5.3.11: Full sources for the Linux kernel
 sys-kernel/xbox-sources 2.6.16.26: Full sources for the Xbox Linux kernel
 sys-kernel/xnu-headers 3789.70.16-r2 4570.71.2-r2 4903.241.1-r2: System headers provided by XNU-4903.241.1, macOS 10.14.3
 sys-kernel/zen-sources 4.14.9999 4.15.9999 4.16.9999: The Zen Kernel Live Sources

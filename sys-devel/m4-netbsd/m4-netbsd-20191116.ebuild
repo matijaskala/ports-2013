@@ -18,7 +18,7 @@ BDEPEND="sys-devel/flex
 	virtual/yacc"
 DEPEND="dev-libs/libbsd"
 RDEPEND="${DEPEND}
-	!sys-devel/m4
+	userland_GNU? ( !sys-devel/m4 )
 	!sys-freebsd/freebsd-ubin"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}

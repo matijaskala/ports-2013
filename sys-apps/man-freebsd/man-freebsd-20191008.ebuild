@@ -21,3 +21,5 @@ RDEPEND="userland_GNU? ( sys-apps/which )
 	!sys-freebsd/freebsd-ubin"
 
 S=${WORKDIR}/${PN}-f857ffbe8fcc2c678017a6ae6174de7fdbea0e58
+
+src_compile() { :; }
