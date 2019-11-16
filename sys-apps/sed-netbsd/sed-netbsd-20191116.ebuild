@@ -3,7 +3,7 @@
 
 EAPI=7
 
-DESCRIPTION="NetBSD command to read man pages"
+DESCRIPTION="A stream editor from NetBSD"
 HOMEPAGE="https://www.netbsd.org"
 COMMIT_ID="38fde09fdc006bb6719547c245f93a87def25a56"
 SRC_URI="https://github.com/matijaskala/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
