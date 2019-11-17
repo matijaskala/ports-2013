@@ -3,9 +3,9 @@
 
 EAPI=7
 
-DESCRIPTION="Standard BSD utilities"
-HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
-COMMIT_ID="11d8bf9f0bf00ff62b1eec50659b2d614c4c631f"
+DESCRIPTION="FreeBSD tools to compare files"
+HOMEPAGE="https://www.freebsd.org"
+COMMIT_ID="2f0fa09e071a1866cb7b7f4a0c25a8a719d63ef5"
 SRC_URI="https://github.com/matijaskala/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
@@ -16,6 +16,7 @@ RESTRICT="mirror"
 
 DEPEND="dev-libs/libbsd"
 RDEPEND="${DEPEND}
-	!sys-apps/coreutils"
+	!sys-apps/diffutils
+	!sys-freebsd/freebsd-ubin"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
