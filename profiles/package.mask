@@ -29,6 +29,26 @@
 
 #--- END OF EXAMPLES ---
 
+# Mart Raudsepp <leio@gentoo.org> (2019-11-17)
+# Obsolete library with no consumers.
+# Removal in 30 days.  Bug #700332.
+dev-libs/qof
+
+# Aaron Bauman <bman@gentoo.org> (2019-11-16)
+# EAPI=4 and fails to build
+dev-util/ccglue
+
+# Aaron Bauman <bman@gentoo.org> (2019-11-16)
+# EAPI=4. --filter=gay Really?!
+# rdeps too. Removal in 15 days
+app-misc/toilet
+net-irc/rbot
+
+# Aaron Bauman <bman@gentoo.org> (2019-11-16)
+# EAPI=4. If anyone has this hardware then speak up.
+# Removal in 15 days
+app-misc/rioutil
+
 # Lars Wendler <polynomial-c@gentoo.org> (2019-11-14)
 # Breaks archives containing relative paths
 # when being called with --no-absolute-filenames
