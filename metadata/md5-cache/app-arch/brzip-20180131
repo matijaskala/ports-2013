@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=dev-libs/glib:2= app-arch/brotli:= dev-libs/xxhash:= kernel_linux? ( sys-fs/btrfs-progs:= ) virtual/pkgconfig || ( dev-lang/vala:0.36 dev-lang/vala:0.34 dev-lang/vala:0.32 ) >=dev-util/meson-0.48.2 >=dev-util/ninja-1.7.2
+DEPEND=dev-libs/glib:2= app-arch/brotli:= dev-libs/xxhash:= kernel_linux? ( sys-fs/btrfs-progs:= ) virtual/pkgconfig || ( dev-lang/vala:0.46 dev-lang/vala:0.44 dev-lang/vala:0.42 dev-lang/vala:0.40 dev-lang/vala:0.38 dev-lang/vala:0.36 dev-lang/vala:0.34 dev-lang/vala:0.32 ) >=dev-util/meson-0.48.2 >=dev-util/ninja-1.7.2
 DESCRIPTION=A compression utility based on Brotli algorithm
 EAPI=6
 HOMEPAGE=https://github.com/matijaskala/brzip
@@ -9,5 +9,5 @@ RDEPEND=dev-libs/glib:2= app-arch/brotli:= dev-libs/xxhash:= kernel_linux? ( sys
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/matijaskala/brzip/archive/3e8ae177890dc4970691d3b8b841b8a62ce0cb4e.tar.gz -> brzip-20180131.tar.gz
-_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	ltprune	2729691420b6deeda2a90b1f1183fb55	meson	b5ee7a05833ab91225acf30ffdeed006	multilib	80d37d966de71bcc1c073a2033273fb4	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	preserve-libs	ef207dc62baddfddfd39a164d9797648	python-utils-r1	93ff6f0f8518926f2951ca70ce36e887	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c	vala	0740c6203f92ac8a080f7455e5a4fe1c	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	ltprune	2729691420b6deeda2a90b1f1183fb55	meson	b5ee7a05833ab91225acf30ffdeed006	multilib	80d37d966de71bcc1c073a2033273fb4	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	preserve-libs	ef207dc62baddfddfd39a164d9797648	python-utils-r1	93ff6f0f8518926f2951ca70ce36e887	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c	vala	07c241d39642677c0c74b3337997b001	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
 _md5_=99e8faf5d21a2dc70a3ff40f55728041

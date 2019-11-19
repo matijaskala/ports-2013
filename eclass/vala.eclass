@@ -31,7 +31,7 @@ VALA_MIN_API_VERSION=${VALA_MIN_API_VERSION:-0.32}
 # @ECLASS-VARIABLE: VALA_MAX_API_VERSION
 # @DESCRIPTION:
 # Maximum vala API version (e.g. 0.32).
-VALA_MAX_API_VERSION=${VALA_MAX_API_VERSION:-0.36}
+VALA_MAX_API_VERSION=${VALA_MAX_API_VERSION:-0.46}
 
 # @ECLASS-VARIABLE: VALA_USE_DEPEND
 # @DEFAULT_UNSET
@@ -128,6 +128,9 @@ vala_src_prepare() {
 
 	valafoo=$(type -P vapigen-${version})
 	[[ ${valafoo} ]] && export VAPIGEN="${valafoo}"
+
+	valafoo=$(type -P valadoc-${version})
+	[[ ${valafoo} ]] && has valadoc ${VALA_USE_DEPEND} && export VALADOC="${valafoo}"
 
 	valafoo="${EPREFIX}/usr/share/vala/Makefile.vapigen"
 	[[ -e ${valafoo} ]] && export VAPIGEN_MAKEFILE="${valafoo}"
