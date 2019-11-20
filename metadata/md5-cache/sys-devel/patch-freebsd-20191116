@@ -1,0 +1,12 @@
+DEFINED_PHASES=install
+DEPEND=dev-libs/libbsd
+DESCRIPTION=FreeBSD utility to apply diffs to files
+EAPI=7
+HOMEPAGE=https://www.netbsd.org
+KEYWORDS=amd64 x86
+LICENSE=BSD
+RDEPEND=dev-libs/libbsd !sys-freebsd/freebsd-ubin
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/matijaskala/patch-freebsd/archive/9079f458556872a07c2478780d373b570635d167.tar.gz -> patch-freebsd-20191116.tar.gz
+_md5_=3e287761dadb304408874b297c9e8729

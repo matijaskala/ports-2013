@@ -16,6 +16,16 @@ RESTRICT="mirror"
 
 DEPEND="dev-libs/libbsd"
 RDEPEND="${DEPEND}
-	!sys-apps/coreutils"
+	!sys-apps/coreutils
+	!sys-apps/util-linux[kill]
+	!sys-apps/which
+	!sys-process/procps[kill]"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
+
+src_install() {
+	default
+
+	rm -f "${D}"/usr/bin/groups || die
+	rm -f "${D}"/usr/share/man/man1/groups.1 || die
+}

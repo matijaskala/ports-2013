@@ -25,5 +25,6 @@ src_compile() {
 }
 
 src_install() {
-	bmake -C libelf DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install
+	bmake -C common DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install || die
+	bmake -C libelf DESTDIR="${D}" LIBDIR="/usr/$(get_libdir)" install || die
 }

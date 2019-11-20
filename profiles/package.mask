@@ -29,12 +29,6 @@
 
 #--- END OF EXAMPLES ---
 
-# Lars Wendler <polynomial-c@gentoo.org> (2019-11-18)
-# Brand new release with a couple of hiccups like:
-#   syslogd: Failed writing to /var/log/auth.log: Bad file descriptor
-# Also no log rotation currently available. Use at your own risk!
->=app-admin/sysklogd-2.0
-
 # Alfredo Tupone <tupone@gentoo.org> (2019-11-18)
 # No more needed.
 # Removal in 30 days.
@@ -320,10 +314,6 @@ kde-misc/systemd-kcm
 # Replaced by introspection bindings. Bug #628938
 # Removal in 30 days
 dev-python/gnome-keyring-python
-
-# Matthew Thode <prometheanfire@gentoo.org> (2019-10-20)
-# defunct upstream, removal in 30 days. Bug #611580
-app-emulation/openstack-guest-agents-unix
 
 # Michał Górny <mgorny@gentoo.org> (2019-10-20)
 # Fails to build.  Last release in 2009.  The stable version is EAPI 0.
