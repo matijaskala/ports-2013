@@ -13,7 +13,7 @@ SRC_URI="mirror://pypi/p/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="test"
 
 RDEPEND=">=dev-python/tempora-1.8[${PYTHON_USEDEP}]"
@@ -23,7 +23,9 @@ distutils_enable_tests pytest
 
 python_prepare_all() {
 	# avoid a setuptools_scm dependency
-	sed -i "s:use_scm_version=True:version='${PV}':" setup.py || die
+	sed -i "s:use_scm_version=True:version='${PV}',name='${PN//-/.}':" setup.py || die
+	sed -r -i "s:setuptools(_|-)scm[[:space:]]*([><=]{1,2}[[:space:]]*[0-9.a-zA-Z]+|)[[:space:]]*::" \
+		setup.cfg || die
 
 	# avoid extra test deps
 	sed -i -r 's: --flake8:: ; s: --black:: ; s: --cov::' pytest.ini || die

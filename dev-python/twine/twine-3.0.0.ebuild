@@ -35,7 +35,7 @@ RDEPEND="${CDEPEND}
 	>=dev-python/requests-2.20.0[${PYTHON_USEDEP}]
 	>=dev-python/requests-toolbelt-0.8.0[${PYTHON_USEDEP}]
 	dev-python/importlib_metadata[${PYTHON_USEDEP}]
-	dev-python/keyring[${PYTHON_USEDEP}]
+	>=dev-python/keyring-15.1[${PYTHON_USEDEP}]
 "
 
 RESTRICT="!test? ( test )"
@@ -45,8 +45,10 @@ PATCHES=(
 )
 
 python_prepare_all() {
-	# avoid a dep on setuptools_scm
-	sed -i "s:use_scm_version=True:version=\"${PV}\":" setup.py || die
+	# avoid a setuptools_scm dependency
+	sed -i "s:use_scm_version=True:version='${PV}',name='${PN//-/.}':" setup.py || die
+	sed -r -i "s:setuptools(_|-)scm[[:space:]]*([><=]{1,2}[[:space:]]*[0-9.a-zA-Z]+|)[[:space:]]*::" \
+		setup.cfg || die
 
 	# requires internet
 	rm -f tests/test_integration.py || die

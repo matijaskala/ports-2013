@@ -11,7 +11,7 @@ SRC_URI="https://github.com/matijaskala/${PN}/archive/${COMMIT_ID}.tar.gz -> ${P
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE=""
+IUSE="+manpager"
 RESTRICT="mirror"
 
 RDEPEND="userland_GNU? ( sys-apps/which )
@@ -20,5 +20,6 @@ RDEPEND="userland_GNU? ( sys-apps/which )
 	!sys-apps/man-db
 	!sys-apps/man-netbsd
 	!sys-freebsd/freebsd-ubin"
+PDEPEND="manpager? ( app-text/manpager )"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
