@@ -16,7 +16,19 @@ RESTRICT="mirror"
 
 DEPEND="dev-libs/libbsd"
 RDEPEND="${DEPEND}
-	!sys-apps/diffutils
 	!sys-freebsd/freebsd-ubin"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
+
+src_install() {
+	default
+
+	mv "${D}"/usr/bin/cmp "${D}"/usr/bin/bsdcmp || die
+	mv "${D}"/usr/bin/diff "${D}"/usr/bin/bsddiff || die
+	mv "${D}"/usr/bin/diff3 "${D}"/usr/bin/bsddiff3 || die
+	mv "${D}"/usr/bin/sdiff "${D}"/usr/bin/bsdsdiff || die
+	mv "${D}"/usr/share/man/man1/cmp.1 "${D}"/usr/share/man/man1/bsdcmp.1 || die
+	mv "${D}"/usr/share/man/man1/diff.1 "${D}"/usr/share/man/man1/bsddiff.1 || die
+	mv "${D}"/usr/share/man/man1/diff3.1 "${D}"/usr/share/man/man1/bsddiff3.1 || die
+	mv "${D}"/usr/share/man/man1/sdiff.1 "${D}"/usr/share/man/man1/bsdsdiff.1 || die
+}
