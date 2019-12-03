@@ -12,15 +12,13 @@ HOMEPAGE="https://www.gtk.org/"
 
 LICENSE="LGPL-2+"
 SLOT="3"
-IUSE="aqua broadway cloudprint colord cups examples gtk-doc +introspection test +ubuntu vim-syntax wayland +X xinerama"
+IUSE="aqua broadway cloudprint colord cups examples gtk-doc +introspection test vim-syntax wayland +X xinerama"
 REQUIRED_USE="
-	|| ( aqua kernel_Winnt wayland X )
+	|| ( aqua wayland X )
 	xinerama? ( X )
 "
 
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-SRC_URI="${SRC_URI}
-	ubuntu? ( https://launchpad.net/ubuntu/+archive/primary/+files/gtk+3.0_3.24.11-1ubuntu1.debian.tar.xz )"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
 # Upstream wants us to do their job:
 # https://bugzilla.gnome.org/show_bug.cgi?id=768662#c1
@@ -31,7 +29,7 @@ RESTRICT="test"
 COMMON_DEPEND="
 	>=dev-libs/atk-2.15[introspection?,${MULTILIB_USEDEP}]
 	>=dev-libs/fribidi-0.19.7[${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.53.4:2[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.57.2:2[${MULTILIB_USEDEP}]
 	media-libs/fontconfig[${MULTILIB_USEDEP}]
 	>=media-libs/libepoxy-1.4[X(+)?,${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.14[aqua?,glib,svg,X?,${MULTILIB_USEDEP}]
@@ -48,7 +46,7 @@ COMMON_DEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-1.39:= )
 	wayland? (
 		>=dev-libs/wayland-1.9.91[${MULTILIB_USEDEP}]
-		>=dev-libs/wayland-protocols-1.12
+		>=dev-libs/wayland-protocols-1.14
 		media-libs/mesa[wayland,${MULTILIB_USEDEP}]
 		>=x11-libs/libxkbcommon-0.2[${MULTILIB_USEDEP}]
 	)
@@ -74,7 +72,8 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-util/gdbus-codegen-2.48
 	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1.20
-	gtk-doc? ( >=dev-util/gtk-doc-1.20 )
+	gtk-doc? ( >=dev-util/gtk-doc-1.20
+		app-text/docbook-xml-dtd:4.3 )
 	>=sys-devel/gettext-0.19.7[${MULTILIB_USEDEP}]
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
 	X? ( x11-base/xorg-proto )
@@ -110,14 +109,6 @@ strip_builddir() {
 }
 
 src_prepare() {
-	# Ubuntu patches
-	if use ubuntu; then
-		einfo "Applying patches from Ubuntu:"
-		for patch in `grep -v "#" "${WORKDIR}/debian/patches/series"`; do
-			eapply "${WORKDIR}/debian/patches/${patch}"
-		done
-	fi
-
 	if ! use test ; then
 		# don't waste time building tests
 		strip_builddir SRC_SUBDIRS testsuite Makefile.{am,in}
@@ -151,7 +142,6 @@ multilib_src_configure() {
 		$(use_enable cups cups auto)
 		$(multilib_native_use_enable gtk-doc)
 		$(multilib_native_use_enable introspection)
-		$(use_enable kernel_Winnt win32-backend)
 		$(use_enable wayland wayland-backend)
 		$(use_enable X x11-backend)
 		$(use_enable X xcomposite)

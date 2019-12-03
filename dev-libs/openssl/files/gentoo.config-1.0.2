@@ -55,7 +55,6 @@ fi
 
 # Detect the operating system
 case ${CHOST} in
-	i686-gnu|i686-pc-gnu|i686-hurd-gnu) system="hurd";;
 	*-aix*)          system="aix";;
 	*-darwin*)       system="darwin";;
 	*-freebsd*)      system="BSD";;
@@ -80,9 +79,6 @@ fi
 machine=""
 chost_machine=${CHOST%%-*}
 case ${system} in
-hurd)
-	machine=x86
-	;;
 linux)
 	case ${chost_machine}:${ABI} in
 		aarch64*be*)  machine="aarch64 -DB_ENDIAN";;

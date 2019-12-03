@@ -13,14 +13,12 @@ SRC_URI+=" https://dev.gentoo.org/~leio/distfiles/${P}-patchset-r1.tar.xz"
 
 LICENSE="LGPL-2+"
 SLOT="2"
-IUSE="aqua cups examples +introspection test +ubuntu vim-syntax xinerama"
+IUSE="aqua cups examples +introspection test vim-syntax xinerama"
 REQUIRED_USE="
 	xinerama? ( !aqua )
 "
 
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-SRC_URI="${SRC_URI}
-	ubuntu? ( https://launchpad.net/ubuntu/+archive/primary/+files/gtk+2.0_2.24.32-1ubuntu1.debian.tar.xz )"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
 # Upstream wants us to do their job:
 # https://bugzilla.gnome.org/show_bug.cgi?id=768663#c1
@@ -122,13 +120,6 @@ set_gtk2_confdir() {
 }
 
 src_prepare() {
-	# Ubuntu patches
-	if use ubuntu; then
-		einfo "Applying patches from Ubuntu:"
-		for patch in `cat "${FILESDIR}/${P}-ubuntu-patch-series"`; do
-			epatch "${WORKDIR}/debian/patches/${patch}"
-		done
-	fi
 	# Various glib marshaller churn could break build against a different glib version, force regeneration
 	rm -v gdk/gdkmarshalers.{c,h} gtk/gtkmarshal.{c,h} gtk/gtkmarshalers.{c,h} \
 		perf/marshalers.{c,h} gtk/gtkaliasdef.c gtk/gtkalias.h || die
