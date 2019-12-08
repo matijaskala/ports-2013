@@ -1,0 +1,21 @@
+--- a/subprojects/appmenu-gtk-module/data/org.appmenu.gtk-module.gschema.xml	2019-07-29 16:45:42.000000000 +0200
++++ b/subprojects/appmenu-gtk-module/data/org.appmenu.gtk-module.gschema.xml	2019-12-03 20:13:14.728912122 +0100
+@@ -4,7 +4,7 @@
+     <key name="blacklist" type="as">
+       <summary>Application blacklist</summary>
+       <description>List of applications where appmenu-gtk-module should be disabled.</description>
+-      <default>['anjuta','freeciv', 'freeciv-gtk2', 'freeciv-gtk3', 'glade','gwyddion']</default>
++      <default>['anjuta', 'freeciv', 'freeciv-gtk2', 'freeciv-gtk3', 'glade', 'gwyddion', 'spacefm']</default>
+     </key>
+     <key name="whitelist" type="as">
+       <summary>Application whitelist</summary>
+--- a/subprojects/registrar/registrar-dbusmenu.c	2019-07-29 16:45:42.000000000 +0200
++++ b/subprojects/registrar/registrar-dbusmenu.c	2019-12-03 19:53:55.527850138 +0100
+@@ -296,7 +296,6 @@
+ 	                               NULL);
+ 	g_object_unref(invocation);
+ 	g_object_unref(_reply_message);
+-	g_variant_unref(menus);
+ }
+ 
+ static void registrar_dbus_menu_dbus_interface_method_call(
