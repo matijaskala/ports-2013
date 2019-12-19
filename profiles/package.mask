@@ -32,6 +32,241 @@
 
 #--- END OF EXAMPLES ---
 
+# Brian Evans <grknight@gentoo.org> (2019-12-19)
+# PHP 7.1 is end of life and has security issues Bug 703326
+# Associated packages are not ready for new versions tracked in bug 702110
+# Removal in 30 days
+dev-lang/php:7.1
+dev-php/pecl-cassandra
+<dev-php/pecl-event-2.5
+
+# Ulrich Müller <ulm@gentoo.org> (2019-12-18)
+# Live ebuilds for Emacs from Git have been consolidated
+# into separate slots of the app-editors/emacs package.
+# Please update your package.accept_keywords file accordingly.
+# Masked for removal in 30 days. Bug #291296.
+app-editors/emacs-vcs
+
+# Anthony G. Basile <blueness@gentoo.org> (2019-12-17)
+# Project has been dead upstream for years.
+# Removal in 30 days.
+app-benchmarks/spew
+
+# Jason A. Donenfeld <zx2c4@gentoo.org> (2019-12-16)
+# Simplify FOX packages. Nobody uses the demo apps or the "stable" branch.
+# Removal in 30 days.  Bug #703088. Bug #703084.
+app-editors/adie
+dev-util/reswrap
+sci-calculators/calculator
+x11-libs/fox:1.6
+x11-misc/pathfinder
+x11-misc/shutterbug
+x11-misc/xfe
+
+# Michał Górny <mgorny@gentoo.org> (2019-12-15)
+# Live ebuild only.  Not touched since 2012.  Unsurprisingly,
+# the included patch no longer applies.  Actually, there's
+# sys-fs/yaffs2utils duplicate which is a release.
+# Removal in 14 days.  Bug #703040.
+sys-fs/yaffs2-utils
+
+# Michał Górny <mgorny@gentoo.org> (2019-12-15)
+# Repo gone in 2014.  Never had a release ebuild.  Apparently was broken
+# before anyway (bug #508924).
+# Removal in 14 days.  Bug #533052.
+net-analyzer/gsm-receiver
+
+# Michał Górny <mgorny@gentoo.org> (2019-12-15)
+# Unmaintained.  Most of those packages haven't been bumped since 2013,
+# few have been updated in 2015.
+# Removal in 30 days.  Bug #703032.
+dev-util/obs-service-cpanspec
+dev-util/obs-service-download_files
+dev-util/obs-service-download_src_package
+dev-util/obs-service-download_url
+dev-util/obs-service-extract_file
+dev-util/obs-service-format_spec_file
+dev-util/obs-service-generator_driver_update_disk
+dev-util/obs-service-github_tarballs
+dev-util/obs-service-git_tarballs
+dev-util/obs-service-meta
+dev-util/obs-service-rearchive
+dev-util/obs-service-recompress
+dev-util/obs-service-set_version
+dev-util/obs-service-source_validator
+dev-util/obs-service-tar_scm
+dev-util/obs-service-update_source
+dev-util/obs-service-verify_file
+dev-util/osc
+dev-util/suse-build
+
+# Joerg Bornkessel <hd_brummy@gentoo.org> (2019-12-15)
+#media-plugins/vdr-console failed after glibc update.
+#see wrt bug 692334
+#The project is given up by upstream years ago.
+#There is no HOMAPAGE and SRC_URI available.
+#Package will be removed on ~15 Jan 2020.
+media-plugins/vdr-console
+
+# Aaron Bauman <bman@gentoo.org> (2019-12-13)
+# These are (mostly) leaf packages with only py2.7
+# Please review commit msg. Removal in 30 days
+dev-python/python-daap
+dev-python/dbutils
+dev-python/pychecker
+dev-python/pyosd
+dev-python/python-digest
+dev-python/ed2551911
+dev-python/quixote
+dev-python/shm
+dev-python/fpconst
+dev-python/pysctp
+dev-python/pyamazon
+dev-python/rackspace-monitoring-cli
+dev-python/pyptlib
+dev-python/librharris
+dev-python/simples3
+dev-python/pyxenstore
+dev-python/yolk
+dev-python/yolk-portage
+dev-python/reconfigure
+dev-python/flask-evolution
+dev-python/carrot
+dev-python/python-biggles
+dev-python/py-xmlrpc
+dev-python/sampy
+dev-python/pychart
+dev-python/bjoern
+dev-python/arrayterator
+dev-python/mocker
+dev-python/cfgparse
+dev-python/pyutmp
+dev-python/dingus
+dev-python/functest
+
+# Aaron Bauman <bman@gentoo.org> (2019-12-13)
+# Dead upstream. Fork is available as sci-electronics/drahnr-oregano
+# Removal in 30 days
+sci-electronics/oregano
+
+# Michał Górny <mgorny@gentoo.org> (2019-12-13)
+# The first part of cleanup post the dead ML project.  Those packages
+# have no reverse dependencies (except one another, in some cases).
+# Due to lack of interest, we are limiting the Gentoo ML packages
+# to those that are needed by programs packages for Gentoo.
+# Many of those packages are outdated and/or buggy.
+# Removal in 30 days.  Bug #695782.
+<dev-ml/ANSITerminal-0.8
+<dev-ml/OCaml-ImageMagick-0.34-r2
+<dev-ml/angstrom-0.10
+<dev-ml/angstrom-async-0.10
+<dev-ml/angstrom-lwt-unix-0.10
+<dev-ml/angstrom-unix-0.10
+<dev-ml/async_js-0.10
+<dev-ml/atd-1.12
+<dev-ml/atdgen-1.12
+<dev-ml/bignum-0.10
+<dev-ml/bolt-1.4-r1
+dev-ml/bson
+<dev-ml/camlimages-5
+dev-ml/capnp-ocaml
+<dev-ml/core_bench-0.10
+<dev-ml/core_profiler-0.10
+dev-ml/dns-async
+dev-ml/dns-lwt
+dev-ml/dns-lwt-unix
+dev-ml/enumerate
+<dev-ml/flow_parser-0.100
+dev-ml/fort
+dev-ml/gd4o
+<dev-ml/gen_js_api-1.0.5
+dev-ml/herelib
+<dev-ml/incremental-0.10
+dev-ml/incremental_kernel
+<dev-ml/io-page-2
+dev-ml/js-build-tools
+<dev-ml/kaputt-1.2-r4
+<dev-ml/lambda-term-2
+<dev-ml/lwt_glib-1.1
+<dev-ml/mccs-1.1.10
+<dev-ml/merlin-3.3
+<dev-ml/mirage-profile-0.9
+dev-ml/mongo
+dev-ml/ocaml-bigstring
+dev-ml/ocaml-cairo
+dev-ml/ocaml-containers
+dev-ml/ocamldap
+dev-ml/ocamldsort
+<dev-ml/ocaml-extunix-0.2
+<dev-ml/ocaml-make-6.39.2
+<dev-ml/ocaml-mysql-1.2.4
+dev-ml/ocamlpam
+dev-ml/ocaml-pcap
+dev-ml/ocaml-redis
+dev-ml/ocaml-redis-lwt
+dev-ml/ocaml-redis-sync
+dev-ml/ocaml-safepass
+dev-ml/ocaml-sha
+<dev-ml/ocaml-snappy-0.1.1
+dev-ml/ocaml-stdint
+<dev-ml/ocaml-text-0.8-r1
+dev-ml/ocaml-uint
+dev-ml/ocaml-webmachine
+dev-ml/ocaml-websocket
+<dev-ml/ocsigen-i18n-3.5.0
+<dev-ml/ocsigen-start-2
+<dev-ml/ocsigen-toolkit-2
+dev-ml/odns
+dev-ml/ojquery
+dev-ml/onanomsg
+<dev-ml/opam-file-format-2.0.0
+dev-ml/pa_bench
+dev-ml/pa_ounit
+dev-ml/pa_sexp_conv
+dev-ml/pa_structural_sexp
+dev-ml/pipebang
+<dev-ml/pomap-4.1
+dev-ml/postgresql-ocaml
+<dev-ml/ppx_deriving_yojson-3.5
+<dev-ml/ppx_import-1.6
+<dev-ml/pxp-1.2.9-r2
+<dev-ml/reason-3
+dev-ml/reason-parser
+<dev-ml/res-5.0.1
+<dev-ml/sedlex-1.99.4-r1
+dev-ml/sequence
+dev-ml/typerep_extended
+<dev-ml/ulex-1.2
+<dev-ml/utop-2.4
+<dev-ml/uuidm-0.9.7
+<dev-ml/xmlm-1.3.0-r1
+dev-ml/xstr
+<dev-ml/zed-2
+
+# Aaron Bauman <bman@gentoo.org> (2019-12-12)
+# EAPI 4, new versions upstream, not bumped
+# Removal in 30 days
+dev-lang/opendylan
+dev-lang/opendylan-bin
+dev-libs/mps
+
+# Aaron Bauman <bman@gentoo.org> (2019-12-12)
+# Multiple QA issues and docs no longer build
+# Removal in 30 days
+dev-util/cmt
+
+# Ulrich Müller <ulm@gentoo.org> (2019-12-11)
+# No license. HOMEPAGE and SRC_URI are dead.
+# Last visible upstream activity in 2000.
+# The package contains only 7 man pages in total.
+# Masked for removal in 30 days. Bug #702468
+app-i18n/man-pages-da
+
+# Aaron Bauman <bman@gentoo.org> (2019-12-10)
+# EAPI=4, dead upstream/srcurl/homepage. cannot find new home
+# Compression has come along way. Removal in 30 days
+media-gfx/tic98
+
 # Lars Wendler <polynomial-c@gentoo.org> (2019-12-10)
 # Dead upstream, no homepage, requires grub-0 which is gone
 # Also no UEFI support!
@@ -58,12 +293,6 @@ dev-libs/boost-numpy
 # Abandoned upstream, broken ncurses linking, last release 8 years ago.
 # Bug #677742, #696228. Removal in 30 days.
 media-sound/vitunes
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-09)
-# EAPI=4, unmaintained upstream and Gentoo is versions behind
-# Removal in 30 days
-dev-tex/dvi2tty
-app-office/auto-multiple-choice
 
 # Aaron Bauman <bman@gentoo.org> (2019-12-09)
 # EAPI=4, unmaintained upstream, rdep as well
@@ -169,7 +398,6 @@ net-wireless/ndiswrapper
 dev-python/inotifyx
 dev-python/disqus-python
 dev-python/figleaf
-dev-python/pysvg
 dev-python/sphinxcontrib-ditaa
 dev-python/pyrax
 dev-python/tgmochikit
@@ -204,8 +432,6 @@ dev-python/python-cdb
 dev-python/foolscap
 net-fs/tahoe-lafs
 dev-python/pyvtk
-<dev-python/pycdio-2.1.0
-media-sound/whipper
 dev-python/hachoir-regex
 app-misc/hachoir-subfile
 dev-python/numdisplay
@@ -257,7 +483,6 @@ dev-python/gdmodule
 dev-python/qserve
 dev-python/pyifp
 dev-python/telarchive
-dev-python/XenAPI
 dev-python/sudsds
 dev-python/webpy
 dev-python/slowaes
@@ -292,14 +517,6 @@ dev-python/pyamf
 # Project does not exist anymore.
 # Removal in 30 days.  Bug #680452.
 dev-java/balloontip
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2019-12-02)
-# Obsolete by moving to KDE Frameworks.
-# kde-apps/zanshin is demoted to ~arch as a consequence.
-# Removal in 15 days.
-kde-apps/kcalcore
-kde-apps/kcontacts
-=kde-misc/zanshin-0.5.0-r1
 
 # Michał Górny <mgorny@gentoo.org> (2019-12-01)
 # Unmaintained Rust packages with incorrect license information.
@@ -359,18 +576,6 @@ sys-fabric/ibutils
 # Removal in 30 days.  Bug #585126.
 www-servers/hiawatha
 www-apps/hiawatha-monitor
-
-# Michał Górny <mgorny@gentoo.org> (2019-12-01)
-# Multiple unresolved vulnerabilities.  The current Gentoo version
-# has reached EOL upstream.  The package hasn't been bumped since
-# mid-2018.
-# Removal in 30 days.  Bug #686428.
-net-analyzer/suricata
-
-# Michał Górny <mgorny@gentoo.org> (2019-12-01)
-# Unresolved license issues.  No reply from maintainer.
-# Removal in 30 days.  Bug #694262.
-dev-util/idea-community
 
 # Michał Górny <mgorny@gentoo.org> (2019-12-01)
 # Unmaintained.  Last release in 2012.  Buggy ebuild.
@@ -540,11 +745,6 @@ virtual/pam
 # Depends on apache-2.2
 dev-libs/OpenSRF
 
-# Lars Wendler <polynomial-c@gentoo.org> (2019-10-16)
-# Masked for removal (bug #692088)
-=app-admin/apache-tools-2.2*
-=www-servers/apache-2.2*
-
 # Miroslav Šulc <fordfrog@gentoo.org> (2019-10-16)
 # Depends on >=virtual/{jdk,jre}-11 which is masked
 =www-servers/tomcat-9.0.27
@@ -590,6 +790,7 @@ dev-php/pecl-apcu:0
 dev-php/pecl-dbase:0
 dev-php/pecl-http:2
 dev-php/pecl-mailparse:0
+dev-php/pecl-memcache:0
 dev-php/pecl-memcached:0
 dev-php/pecl-oauth:0
 dev-php/pecl-propro:0
@@ -603,7 +804,6 @@ dev-php/pecl-yaml:0
 
 # Brian Evans <grknight@gentoo.org> (2019-10-01)
 # Old extensions which only work with PHP <7
-# pecl-memcache is replaced by pecl-memcachd (with code changes)
 # pecl-mongo is replaced by pecl-monogodb
 # Removal in 90 days. Bug 651784
 dev-php/PEAR-MDB2_Driver_mysql
@@ -611,10 +811,9 @@ dev-php/magickwand
 dev-php/pecl-bbcode
 dev-php/pecl-cairo
 dev-php/pecl-dbx
-dev-php/haru
+dev-php/pecl-haru
 dev-php/pecl-htscanner
 dev-php/pecl-libevent
-dev-php/pecl-memcache
 dev-php/pecl-mongo
 dev-php/pecl-mysqlnd_ms
 dev-php/pecl-mysqlnd_qc

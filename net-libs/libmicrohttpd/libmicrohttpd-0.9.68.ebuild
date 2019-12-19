@@ -13,8 +13,9 @@ SRC_URI="mirror://gnu/${PN}/${MY_P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0/12"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
 IUSE="+epoll ssl static-libs test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="ssl? (
 		dev-libs/libgcrypt:0=

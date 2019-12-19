@@ -7,6 +7,7 @@ IUSE=doc luajit test
 LICENSE=GPL-3
 PROPERTIES=live
 RDEPEND=dev-db/sqlite:3 dev-libs/glib:2 dev-lua/luafilesystem[luajit=] net-libs/webkit-gtk:4= x11-libs/gtk+:3 luajit? ( dev-lang/luajit:2 ) !luajit? ( dev-lang/lua:0 )
+RESTRICT=!test? ( test )
 SLOT=0
-_eclasses_=git-r3	6d22636df236df4cc8475f7b7668bdcd	multilib	80d37d966de71bcc1c073a2033273fb4	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
-_md5_=af3e7ccbb1534cf14758429bbe415c76
+_eclasses_=git-r3	7d6c351ee8b1feb12ed8c8b0adae088b	multilib	80d37d966de71bcc1c073a2033273fb4	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
+_md5_=9933a837655d42c803c468015d840651

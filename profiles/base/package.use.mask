@@ -1,15 +1,31 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-# This file requires >=portage-2.1.1
 # New entries go on top.
 
 # This file is only for generic masks. For arch-specific masks (i.e.
 # mask everywhere, unmask on arch/*) use arch/base.
 
-# Aaron Bauman <bman@gentoo.org> (2019-12-09)
-# dev-tex/dvi2tty is masked for removal
-app-text/texlive dvi2tty
+# Brian Evans <grknight@gentoo.org> (2019-12-19)
+# PHP 7.1 is end of life and has security issues Bug 703326
+# Associated packages are not ready for new versions tracked in bug 702110
+dev-libs/ossp-uuid php
+www-servers/nginx-unit php7-1
+
+# Michał Górny <mgorny@gentoo.org> (2019-12-16)
+# Requires old x11-libs/fox:1.6 slot.
+dev-games/openscenegraph fox
+dev-libs/hidapi fox
+sci-mathematics/gsl-shell fox
+sys-libs/gwenhywfar fox
+
+# Ulrich Müller <ulm@gentoo.org> (2019-12-11)
+# Depends on last-rited app-i18n/man-pages-da.
+sys-apps/man-pages l10n_da
+
+# James Le Cuirot <chewi@gentoo.org> (2019-12-10)
+# The JIT feature only works on amd64 and x86.
+app-emulation/aranym jit
 
 # Andreas Sturmlechner <asturm@gentoo.org> (2019-12-07)
 # dev-python/flask-cors is PMASKED.

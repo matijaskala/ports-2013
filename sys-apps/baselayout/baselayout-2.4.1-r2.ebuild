@@ -177,7 +177,7 @@ pkg_preinst() {
 	multilib_layout
 	usrmerge_layout
 	if use build ; then
-		emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout || die
+		emake -C "${ED}/usr/share/${PN}" DESTDIR="${EROOT}" layout
 	fi
 	rm -f "${ED}"/usr/share/${PN}/Makefile
 }

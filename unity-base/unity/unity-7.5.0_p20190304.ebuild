@@ -37,8 +37,6 @@ COMMON_DEPEND=">=sys-apps/systemd-232
 	sys-auth/pambase
 	unity-base/compiz:=
 	unity-base/nux:=
-	unity-base/overlay-scrollbar
-	unity-base/unity-gtk-module
 	virtual/pam
 	x11-libs/bamf:=
 	>=x11-libs/cairo-1.13.1
@@ -230,7 +228,6 @@ src_install() {
 
 	# Make 'unity-session.target' systemd user unit auto-start 'unity7.service' #
 	dosym $(systemd_get_userunitdir)/unity7.service $(systemd_get_userunitdir)/unity-session.target.requires/unity7.service
-	dosym $(systemd_get_userunitdir)/unity-gtk-module.service $(systemd_get_userunitdir)/unity-session.target.wants/unity-gtk-module.service
 	dosym $(systemd_get_userunitdir)/unity-settings-daemon.service $(systemd_get_userunitdir)/unity-session.target.wants/unity-settings-daemon.service
 }
 

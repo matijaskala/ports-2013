@@ -19,7 +19,7 @@ RESTRICT="mirror"
 RDEPEND=">=x11-libs/gtk+-3.12.0:3
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf
-	unity-base/bamf
+	x11-libs/bamf
 	mate? ( mate-base/mate-panel )
 	valapanel? ( x11-misc/vala-panel )
 	wnck? ( >=x11-libs/libwnck-3.4.0 )

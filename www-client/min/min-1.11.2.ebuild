@@ -50,6 +50,7 @@ QA_PREBUILT="usr/lib/min/min"
 S=${WORKDIR}
 
 src_install() {
-	cp -r * "${D}" || die
+	insinto /
+	doins -r *
 	mv "${D}"/usr/share/doc/${PN} "${D}"/usr/share/doc/${P} || die
 }
