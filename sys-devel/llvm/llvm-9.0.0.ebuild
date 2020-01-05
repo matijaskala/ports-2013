@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python{2_7,3_{6,7}} )
 inherit cmake-utils llvm.org multilib-minimal multiprocessing \
 	pax-utils python-any-r1 toolchain-funcs
 
@@ -88,7 +88,7 @@ src_unpack() {
 	if ! use doc; then
 		ebegin "Unpacking llvm-${PV}-manpages.tar.bz2"
 		tar -xf "${DISTDIR}/llvm-${PV}-manpages.tar.bz2" || die
-		eend
+		eend ${?}
 	fi
 }
 
