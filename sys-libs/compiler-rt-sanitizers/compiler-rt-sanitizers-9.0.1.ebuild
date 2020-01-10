@@ -38,6 +38,11 @@ BDEPEND="
 # least intrusive of all
 CMAKE_BUILD_TYPE=RelWithDebInfo
 
+python_check_deps() {
+	use test || return 0
+	has_version "dev-python/lit[${PYTHON_USEDEP}]"
+}
+
 check_space() {
 	if use test; then
 		local CHECKREQS_DISK_BUILD=11G
