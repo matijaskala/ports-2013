@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -10,7 +10,7 @@ inherit python-r1 autotools-utils
 
 DESCRIPTION="Non-linear optimization library"
 HOMEPAGE="http://ab-initio.mit.edu/nlopt/"
-SRC_URI="${HOMEPAGE}/${P}.tar.gz"
+SRC_URI="http://ab-initio.mit.edu/nlopt/${P}.tar.gz"
 
 LICENSE="LGPL-2.1 MIT"
 KEYWORDS="amd64 x86 ~amd64-linux ~x86-linux"
@@ -23,7 +23,10 @@ DEPEND="
 	octave? ( sci-mathematics/octave )
 	python? (
 		${PYTHON_DEPS}
-		dev-python/numpy[${PYTHON_USEDEP}]
+		|| (
+			dev-python/numpy-python2[${PYTHON_USEDEP}]
+			dev-python/numpy[${PYTHON_USEDEP}]
+		)
 	)"
 RDEPEND="${DEPEND}"
 

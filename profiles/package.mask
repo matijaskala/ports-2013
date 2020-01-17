@@ -32,6 +32,66 @@
 
 #--- END OF EXAMPLES ---
 
+# Michał Górny <mgorny@gentoo.org> (2020-01-16)
+# Python 2 only.  Last release in 2006.  No reverse dependencies.
+# Removal in 30 days.  Bug #705522.
+dev-python/pyemf
+
+# Michał Górny <mgorny@gentoo.org> (2020-01-16)
+# Abandoned upstream.  Python 2 only.  No reverse dependencies.
+# Removal in 30 days.  Bug #705518.
+dev-python/milk
+dev-python/milksets
+
+# Michał Górny <mgorny@gentoo.org> (2020-01-16)
+# The new version loses Python 2 support but does not introduce any real
+# changes.  Let's mask it to reduce the noise, and hopefully try to get
+# python2_7 out of default PYTHON_TARGETS first.
+>=dev-python/setuptools-45.0.0
+
+# Mikle Kolyada <zlogene@gentoo.org> (2020-01-13)
+# Current versioning breaks portage logic and prevents
+# us from adding official releases made by google.
+# Please DOWNGRADE to dev-python/nototools-0_pre20200113
+=dev-python/nototools-20190320
+
+# Mike Gilbert <floppym@gentoo.org> (2020-01-12)
+# No upstream activity since 2014, no reverse deps.
+# Remove in 30 days.
+dev-python/transmissionrpc
+
+# Ulrich Müller <ulm@gentoo.org> (2020-01-12)
+# Runtime errors. Last upstream release in 2003. No license.
+# Masked for removal in 30 days. Bug #703548.
+games-board/cgoban2
+
+# Joerg Bornkessel <hd_brummy@gentoo.org> (2020-01-12)
+# upstream has give up this project,
+# upstream is not interressted on any patches to fix this
+# If you really would like to stay on this plugin,
+# add a comment in this bug
+# wrt bug 704004
+# masked for removal ~12 Feb 2020
+media-plugins/vdr-mailbox
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-01-12)
+# Unmaintained upstream and redundant. Use kde-apps/kamera instead.
+# Only revdep of ancient media-libs/qimageblitz. Removal in 30 days.
+media-video/kamerka
+media-libs/qimageblitz
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-01-12)
+# Ancient, blocks x11-libs/gtkglext cleanup, open bug #649066
+# Masked for removal in 30 days.
+dev-cpp/gtkglextmm
+sci-misc/repsnapper
+
+# Michał Górny <mgorny@gentoo.org> (2020-01-12)
+# Python 2 only, depends on OpenStack which is Py3 now.  No release
+# since 2005.
+# Removal in 30 days.
+app-admin/supernova
+
 # Michał Górny <mgorny@gentoo.org> (2020-01-12)
 # libcxxrt is no longer maintained upstream.  It used to be needed to
 # maintain ABI in Gentoo/FreeBSD but that is no longer supported.  Plus,
@@ -115,7 +175,6 @@ app-dicts/sword-est
 app-dicts/sword-family
 app-dicts/sword-finpr92
 app-dicts/sword-frecrl
-app-dicts/sword-geneva
 app-dicts/sword-hebmodern
 app-dicts/sword-hunuj
 app-dicts/sword-icelandic
@@ -501,262 +560,15 @@ sys-fs/yaffs2-utils
 # Removal in 14 days.  Bug #533052.
 net-analyzer/gsm-receiver
 
-# Michał Górny <mgorny@gentoo.org> (2019-12-15)
-# Unmaintained.  Most of those packages haven't been bumped since 2013,
-# few have been updated in 2015.
-# Removal in 30 days.  Bug #703032.
-dev-util/obs-service-cpanspec
-dev-util/obs-service-download_files
-dev-util/obs-service-download_src_package
-dev-util/obs-service-download_url
-dev-util/obs-service-extract_file
-dev-util/obs-service-format_spec_file
-dev-util/obs-service-generator_driver_update_disk
-dev-util/obs-service-github_tarballs
-dev-util/obs-service-git_tarballs
-dev-util/obs-service-meta
-dev-util/obs-service-rearchive
-dev-util/obs-service-recompress
-dev-util/obs-service-set_version
-dev-util/obs-service-source_validator
-dev-util/obs-service-tar_scm
-dev-util/obs-service-update_source
-dev-util/obs-service-verify_file
-dev-util/osc
-dev-util/suse-build
-
-# Joerg Bornkessel <hd_brummy@gentoo.org> (2019-12-15)
-#media-plugins/vdr-console failed after glibc update.
-#see wrt bug 692334
-#The project is given up by upstream years ago.
-#There is no HOMAPAGE and SRC_URI available.
-#Package will be removed on ~15 Jan 2020.
-media-plugins/vdr-console
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-13)
-# Dead upstream. Fork is available as sci-electronics/drahnr-oregano
-# Removal in 30 days
-sci-electronics/oregano
-
-# Michał Górny <mgorny@gentoo.org> (2019-12-13)
-# The first part of cleanup post the dead ML project.  Those packages
-# have no reverse dependencies (except one another, in some cases).
-# Due to lack of interest, we are limiting the Gentoo ML packages
-# to those that are needed by programs packages for Gentoo.
-# Many of those packages are outdated and/or buggy.
-# Removal in 30 days.  Bug #695782.
-<dev-ml/ANSITerminal-0.8
-<dev-ml/OCaml-ImageMagick-0.34-r2
-<dev-ml/angstrom-0.10
-<dev-ml/angstrom-async-0.10
-<dev-ml/angstrom-lwt-unix-0.10
-<dev-ml/angstrom-unix-0.10
-<dev-ml/async_js-0.10
-<dev-ml/atd-1.12
-<dev-ml/atdgen-1.12
-<dev-ml/bignum-0.10
-<dev-ml/bolt-1.4-r1
-dev-ml/bson
-<dev-ml/camlimages-5
-dev-ml/capnp-ocaml
-<dev-ml/core_bench-0.10
-<dev-ml/core_profiler-0.10
-dev-ml/dns-async
-dev-ml/dns-lwt
-dev-ml/dns-lwt-unix
-dev-ml/enumerate
-<dev-ml/flow_parser-0.100
-dev-ml/fort
-dev-ml/gd4o
-<dev-ml/gen_js_api-1.0.5
-dev-ml/herelib
-<dev-ml/incremental-0.10
-dev-ml/incremental_kernel
-<dev-ml/io-page-2
-dev-ml/js-build-tools
-<dev-ml/kaputt-1.2-r4
-<dev-ml/lambda-term-2
-<dev-ml/lwt_glib-1.1
-<dev-ml/mccs-1.1.10
-<dev-ml/merlin-3.3
-<dev-ml/mirage-profile-0.9
-dev-ml/mongo
-dev-ml/ocaml-bigstring
-dev-ml/ocaml-cairo
-dev-ml/ocaml-containers
-dev-ml/ocamldap
-dev-ml/ocamldsort
-<dev-ml/ocaml-extunix-0.2
-<dev-ml/ocaml-make-6.39.2
-<dev-ml/ocaml-mysql-1.2.4
-dev-ml/ocamlpam
-dev-ml/ocaml-pcap
-dev-ml/ocaml-redis
-dev-ml/ocaml-redis-lwt
-dev-ml/ocaml-redis-sync
-dev-ml/ocaml-safepass
-dev-ml/ocaml-sha
-<dev-ml/ocaml-snappy-0.1.1
-dev-ml/ocaml-stdint
-<dev-ml/ocaml-text-0.8-r1
-dev-ml/ocaml-uint
-dev-ml/ocaml-webmachine
-dev-ml/ocaml-websocket
-<dev-ml/ocsigen-i18n-3.5.0
-<dev-ml/ocsigen-start-2
-<dev-ml/ocsigen-toolkit-2
-dev-ml/odns
-dev-ml/ojquery
-dev-ml/onanomsg
-<dev-ml/opam-file-format-2.0.0
-dev-ml/pa_bench
-dev-ml/pa_ounit
-dev-ml/pa_sexp_conv
-dev-ml/pa_structural_sexp
-dev-ml/pipebang
-<dev-ml/pomap-4.1
-dev-ml/postgresql-ocaml
-<dev-ml/ppx_deriving_yojson-3.5
-<dev-ml/ppx_import-1.6
-<dev-ml/pxp-1.2.9-r2
-<dev-ml/reason-3
-dev-ml/reason-parser
-<dev-ml/res-5.0.1
-<dev-ml/sedlex-1.99.4-r1
-dev-ml/sequence
-dev-ml/typerep_extended
-<dev-ml/ulex-1.2
-<dev-ml/utop-2.4
-<dev-ml/uuidm-0.9.7
-<dev-ml/xmlm-1.3.0-r1
-dev-ml/xstr
-<dev-ml/zed-2
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-12)
-# EAPI 4, new versions upstream, not bumped
-# Removal in 30 days
-dev-lang/opendylan
-dev-lang/opendylan-bin
-dev-libs/mps
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-12)
-# Multiple QA issues and docs no longer build
-# Removal in 30 days
-dev-util/cmt
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-10)
-# EAPI=4, dead upstream/srcurl/homepage. cannot find new home
-# Compression has come along way. Removal in 30 days
-media-gfx/tic98
-
-# Lars Wendler <polynomial-c@gentoo.org> (2019-12-10)
-# Dead upstream, no homepage, requires grub-0 which is gone
-# Also no UEFI support!
-# Masked for removal in 30 days (bug #702416)
-app-admin/grubconfig
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-10)
-# EAPI=4, dead upstream, can't locate new home
-# Removal in 30 days
-dev-util/kelbt
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-10)
-# EAPI=4, fails to build
-# Removal in 30 days
-dev-util/idutils
-
-# David Seifert <soap@gentoo.org> (2019-12-10)
-# Abandoned upstream, broken ncurses linking, last release 8 years ago.
-# Bug #677742, #696228. Removal in 30 days.
-media-sound/vitunes
-
-# Aaron Bauman <bman@gentoo.org> (2019-12-09)
-# EAPI=4, unmaintained upstream, rdep as well
-# Removal in 30 days. Open bugs #552934
-dev-libs/cityhash
-dev-db/hyperdex
-
 # David Seifert <soap@gentoo.org> (2019-12-08)
 # Unmaintained, build hangs, tons of other build failures, missing
 # dependencies.  Bug #663794, #666916, #666922, #667062, #678068,
 # #681678, #684420, #694488. Removal in 30 days.
 dev-db/clickhouse
 
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, needs version bump, practically unmaintained
-# in Gentoo. Removal in 30 days.
-sci-chemistry/pymol-plugins-psico
-
-# Michał Górny <mgorny@gentoo.org> (2019-12-08)
-# Not touched by maintainer since mid-2018.  Fails to build with gcc-9.
-# Requires llvm:6 (which is being removed).  Pending version bump.
-# Removal in 30 days.  Bug #686162.
-sys-devel/byfl
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only (the py3 targets don't work properly), last
-# release in 2015. Use sci-mathematics/pymc3 as modern replacement.
-# Removal in 30 days.
-sci-mathematics/pymc
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, upstream HOMEPAGE gone, last release in 2007.
-# Removal in 30 days.
-sci-mathematics/lybniz
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# Yet another NIH machine learning package in python. Last release in
-# 2012, no revdeps, py2 only. Removal in 30 days.
-sci-mathematics/mlpy
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, last release in 2015, lots of QA issues.
-# Bug #343743, #347928, #451394, #547714, #623756, #697562.
-# Removal in 30 days.
-sci-mathematics/nusmv
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, last release in 2008. Removal in 30 days.
-sci-mathematics/p9m4
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, bump required and very involved and messy
-# buildsystem, tons of QA issues.
-# Bug #345233, #459640, #474782, #474784, #474788, #474790, #474792,
-# #620942, #631876, #671130. Removal in 30 days.
-sci-mathematics/Macaulay2
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, upstream dead, last release in 2011.
-# file collisions with sci-chemistry/tinker, bug #597702.
-# Removal in 30 days.
-sci-mathematics/snns
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, upstream HOMEPAGE gone.
-# Removal in 30 days.
-sci-mathematics/factmsieve
-
-# David Seifert <soap@gentoo.org> (2019-12-08)
-# No revdeps, py2 only, bump required and very involved buildsystem,
-# has QA issues, bug #598840. Removal in 30 days.
-sci-mathematics/xmds
-
-# Michał Górny <mgorny@gentoo.org> (2019-12-05)
-# Last maintainer activity in 2016.  Does not build for quite some time
-# already.  Needs a version bump, at the very least.
-# Removal in 30 days.  Bug #602024.
-app-laptop/nvidiabl
-
 # Bernard Cafarelli <voyageur@gentoo.org> (2019-11-29)
 # Beta for new major version with initial Python 3 support
 =app-backup/rdiff-backup-1.4.0_beta*
-
-# Jonas Stein <jstein@gentoo.org> (2019-11-26)
-# Package is obsolete. Successor is net-wireless/b43-fwcutter
-# Bug #537786.
-# Removal after 2020-01-01
-net-wireless/bcm43xx-fwcutter
 
 # Lars Wendler <polynomial-c@gentoo.org> (2019-11-14)
 # Breaks archives containing relative paths
@@ -768,6 +580,7 @@ net-wireless/bcm43xx-fwcutter
 # Testing version that breaks multiple plugins.  Let's keep it masked
 # until upstream releases fixed versions.
 ~xfce-base/xfce4-panel-4.15.0
+~xfce-base/xfce4-panel-4.15.1
 
 # Lars Wendler <polynomial-c@gentoo.org> (2019-10-16)
 # Depends on apache-2.2
