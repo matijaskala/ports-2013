@@ -6,6 +6,10 @@
 # This file is only for generic masks. For arch-specific masks (i.e.
 # mask everywhere, unmask on arch/*) use arch/base.
 
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-01-19)
+# media-libs/pulseaudio-qt is not keyworded
+kde-misc/kdeconnect pulseaudio
+
 # Michał Górny <mgorny@gentoo.org> (2020-01-12)
 # libcxxrt is unmaintained and it's going to be removed.
 sys-libs/libcxx libcxxrt
@@ -217,7 +221,6 @@ sys-libs/glibc cet
 # Michał Górny <mgorny@gentoo.org> (2018-06-13)
 # Requires app-arch/snappy[static-libs] that is no longer available.
 # Bugs #651604, #651606.
-app-emulation/qemu static
 <dev-libs/leveldb-1.20 static-libs
 sys-block/fio static
 sys-cluster/ceph static-libs
