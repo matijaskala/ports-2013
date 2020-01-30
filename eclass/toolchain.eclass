@@ -30,16 +30,6 @@ case ${EAPI:-0} in
 	*) die "I don't speak EAPI ${EAPI}." ;;
 esac
 
-tc_supports_dostrip() {
-	case ${EAPI:-0} in
-		5*|6) return 1 ;;
-		7) return 0 ;;
-		*) die "Update apply_patches() for ${EAPI}." ;;
-	esac
-}
-
-tc_supports_dostrip || RESTRICT="strip" # cross-compilers need controlled stripping
-
 EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare src_configure \
 	src_compile src_test src_install pkg_postinst pkg_postrm
 
@@ -137,15 +127,18 @@ else
 	LICENSE="GPL-2+ LGPL-2.1+ FDL-1.1+"
 fi
 
-if tc_version_is_at_least 8.3; then
-	GCC_EBUILD_TEST_FLAG='test'
-else
-	# Don't force USE regression-test->test change on every
-	# gcc ebuild just yet. Let's do the change when >=gcc-8.3
-	# is commonly used as a main compiler.
-	GCC_EBUILD_TEST_FLAG='regression-test'
-fi
-IUSE="${GCC_EBUILD_TEST_FLAG} vanilla +nls"
+IUSE="test vanilla +nls"
+RESTRICT="!test? ( test )"
+
+tc_supports_dostrip() {
+	case ${EAPI:-0} in
+		5*|6) return 1 ;;
+		7) return 0 ;;
+		*) die "Update apply_patches() for ${EAPI}." ;;
+	esac
+}
+
+tc_supports_dostrip || RESTRICT+=" strip" # cross-compilers need controlled stripping
 
 TC_FEATURES=()
 
@@ -154,11 +147,13 @@ tc_has_feature() {
 }
 
 if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
-	IUSE+=" altivec debug +cxx +fortran +nptl" TC_FEATURES+=(fortran nptl)
+	IUSE+=" altivec debug +cxx +nptl" TC_FEATURES+=(nptl)
 	[[ -n ${PIE_VER} ]] && IUSE+=" nopie"
 	[[ -n ${HTB_VER} ]] && IUSE+=" boundschecking"
 	[[ -n ${D_VER}   ]] && IUSE+=" d"
 	[[ -n ${SPECS_VER} ]] && IUSE+=" nossp"
+	# fortran support appeared in 4.1, but 4.1 needs outdated mpfr
+	tc_version_is_at_least 4.2 && IUSE+=" +fortran" TC_FEATURES+=(fortran)
 	tc_version_is_at_least 3 && IUSE+=" doc hardened multilib objc"
 	tc_version_is_between 3 7 && IUSE+=" awt gcj" TC_FEATURES+=(gcj)
 	tc_version_is_at_least 3.3 && IUSE+=" pgo"
@@ -169,11 +164,16 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	tc_version_is_at_least 4.2 && IUSE+=" +openmp"
 	tc_version_is_at_least 4.3 && IUSE+=" fixed-point"
 	tc_version_is_at_least 4.7 && IUSE+=" go"
-	# Note: while <=gcc-4.7 also supported graphite, it required forked ppl
-	# versions which we dropped.  Since graphite was also experimental in
-	# the older versions, we don't want to bother supporting it.  #448024
 	tc_version_is_at_least 4.8 &&
-		IUSE+=" graphite +sanitize" TC_FEATURES+=(graphite)
+		IUSE+=" +sanitize"
+	# Note:
+	#   <gcc-4.8 supported graphite, it required forked ppl
+	#     versions which we dropped.  Since graphite was also experimental in
+	#     the older versions, we don't want to bother supporting it.  #448024
+	#   <gcc-5 supported graphite, it required cloog
+	#   <gcc-6.5 supported graphite, it required old incompatible isl
+	tc_version_is_at_least 6.5 &&
+		IUSE+=" graphite" TC_FEATURES+=(graphite)
 	tc_version_is_between 4.9 8 && IUSE+=" cilk"
 	tc_version_is_at_least 4.9 && IUSE+=" +vtv"
 	tc_version_is_at_least 5.0 && IUSE+=" jit"
@@ -224,22 +224,14 @@ if tc_has_feature objc-gc ; then
 fi
 
 if tc_has_feature graphite ; then
-	if tc_version_is_at_least 5.0 ; then
-		RDEPEND+=" graphite? ( >=dev-libs/isl-0.14:0= )"
-	elif tc_version_is_at_least 4.8 ; then
-		RDEPEND+="
-			graphite? (
-				>=dev-libs/cloog-0.18.0:0=
-				>=dev-libs/isl-0.11.1:0=
-			)"
-	fi
+	RDEPEND+=" graphite? ( >=dev-libs/isl-0.14:0= )"
 fi
 
 DEPEND="${RDEPEND}
 	>=sys-devel/bison-1.875
 	>=sys-devel/flex-2.5.4
 	nls? ( sys-devel/gettext )
-	${GCC_EBUILD_TEST_FLAG}? (
+	test? (
 		>=dev-util/dejagnu-1.4.4
 		>=sys-devel/autogen-5.5.4
 	)"
@@ -387,7 +379,6 @@ get_gcc_src_uri() {
 	[[ -n ${GMP_VER} ]] && \
 		GCC_SRC_URI+=" mirror://gnu/gmp/gmp-${GMP_VER}.tar.xz"
 
-	# strawberry pie, Cappuccino and a Gauloises (it's a good thing)
 	[[ -n ${PIE_VER} ]] && \
 		PIE_CORE=${PIE_CORE:-gcc-${PIE_GCC_VER}-piepatches-v${PIE_VER}.tar.bz2} && \
 		GCC_SRC_URI+=" $(gentoo_urls ${PIE_CORE})"
@@ -458,9 +449,9 @@ toolchain_pkg_setup() {
 toolchain_src_unpack() {
 	if [[ ${PV} == *9999* ]]; then
 		git-r3_src_unpack
-	else
-		gcc_quick_unpack
 	fi
+
+	gcc_quick_unpack
 }
 
 gcc_quick_unpack() {
@@ -475,6 +466,8 @@ gcc_quick_unpack() {
 	# 'GCC_A_FAKEIT' to specify it's own source and binary tarballs.
 	if [[ -n ${GCC_A_FAKEIT} ]] ; then
 		unpack ${GCC_A_FAKEIT}
+	elif [[ ${PV} == *9999* ]]; then
+		: # sources comes from git, not tarball
 	elif [[ -n ${PRERELEASE} ]] ; then
 		unpack gcc-${PRERELEASE}.tar.bz2
 	elif [[ -n ${SNAPSHOT} ]] ; then
@@ -561,9 +554,14 @@ toolchain_src_prepare() {
 	export BRANDING_GCC_PKGVERSION="Gentoo ${GCC_PVR}"
 	cd "${S}"
 
+	do_gcc_gentoo_patches
 	do_gcc_HTB_patches
 	do_gcc_PIE_patches
 	do_gcc_CYGWINPORTS_patches
+
+	if [[ ${PV} == *9999* ]] ; then
+		BRANDING_GCC_PKGVERSION="${BRANDING_GCC_PKGVERSION}, commit ${EGIT_VERSION}"
+	fi
 
 	case ${EAPI:-0} in
 		5*) epatch_user;;
@@ -1252,6 +1250,15 @@ toolchain_src_configure() {
 		is-flagq -mfloat-gprs=double && confgcc+=( --enable-e500-double )
 		[[ ${CTARGET//_/-} == *-e500v2-* ]] && confgcc+=( --enable-e500-double )
 		;;
+	ppc64)
+		# On ppc64 big endian target gcc assumes elfv1 by default,
+		# and elfv2 on little endian
+		# but musl does not support elfv1 at all on any endian ppc64
+		# see https://git.musl-libc.org/cgit/musl/tree/INSTALL
+		# https://bugs.gentoo.org/704784
+		# https://gcc.gnu.org/PR93157
+		[[ ${CTARGET} == powerpc64-*-musl ]] && confgcc+=( --with-abi=elfv2 )
+		;;
 	riscv)
 		# Add --with-abi flags to set default ABI
 		confgcc+=( --with-abi=$(gcc-abi-map ${TARGET_DEFAULT_ABI}) )
@@ -1364,14 +1371,15 @@ toolchain_src_configure() {
 		confgcc+=( --disable-lto )
 	fi
 
-	# graphite was added in 4.4 but we only support it in 4.8+ due to external
-	# library issues.  #448024
-	if tc_version_is_at_least 5.0 && in_iuse graphite ; then
+	# graphite was added in 4.4 but we only support it in 6.5+ due to external
+	# library issues.  #448024, #701270
+	if tc_version_is_at_least 6.5 && in_iuse graphite ; then
 		confgcc+=( $(use_with graphite isl) )
 		use graphite && confgcc+=( --disable-isl-version-check )
-	elif tc_version_is_at_least 4.8 && in_iuse graphite ; then
-		confgcc+=( $(use_with graphite cloog) )
-		use graphite && confgcc+=( --disable-isl-version-check )
+	elif tc_version_is_at_least 5.0 ; then
+		confgcc+=( --without-isl )
+	elif tc_version_is_at_least 4.8 ; then
+		confgcc+=( --without-cloog )
 	elif tc_version_is_at_least 4.4 ; then
 		confgcc+=( --without-{cloog,ppl} )
 	fi
@@ -1439,7 +1447,8 @@ downgrade_arch_flags() {
 	local arch bver i isa myarch mytune rep ver
 
 	bver=${1:-${GCC_BRANCH_VER}}
-	[[ $(gcc-version) < ${bver} ]] && return 0
+	# Don't perform downgrade if running gcc is older than ebuild's.
+	tc_version_is_at_least ${bver} $(gcc-version) || return 0
 	[[ $(tc-arch) != amd64 && $(tc-arch) != x86 ]] && return 0
 
 	myarch=$(get-flag march)
@@ -1447,7 +1456,7 @@ downgrade_arch_flags() {
 
 	# If -march=native isn't supported we have to tease out the actual arch
 	if [[ ${myarch} == native || ${mytune} == native ]] ; then
-		if [[ ${bver} < 4.2 ]] ; then
+		if ! tc_version_is_at_least 4.2 ${bver} ; then
 			arch=$($(tc-getCC) -march=native -v -E -P - </dev/null 2>&1 \
 				| sed -rn "/cc1.*-march/s:.*-march=([^ ']*).*:\1:p")
 			replace-cpu-flags native ${arch}
@@ -1455,10 +1464,10 @@ downgrade_arch_flags() {
 	fi
 
 	# Handle special -mtune flags
-	[[ ${mytune} == intel && ${bver} < 4.9 ]] && replace-cpu-flags intel generic
-	[[ ${mytune} == generic && ${bver} < 4.2 ]] && filter-flags '-mtune=*'
+	[[ ${mytune} == intel ]] && ! tc_version_is_at_least 4.9 ${bver} && replace-cpu-flags intel generic
+	[[ ${mytune} == generic ]] && ! tc_version_is_at_least 4.2 ${bver} && filter-flags '-mtune=*'
 	[[ ${mytune} == x86-64 ]] && filter-flags '-mtune=*'
-	[[ ${bver} < 3.4 ]] && filter-flags '-mtune=*'
+	tc_version_is_at_least 3.4 ${bver} || filter-flags '-mtune=*'
 
 	# "added" "arch" "replacement"
 	local archlist=(
@@ -1508,8 +1517,8 @@ downgrade_arch_flags() {
 
 		[[ ${myarch} != ${arch} && ${mytune} != ${arch} ]] && continue
 
-		if [[ ${ver} > ${bver} ]] ; then
-			einfo "Replacing ${myarch} (added in gcc ${ver}) with ${rep}..."
+		if ! tc_version_is_at_least ${ver} ${bver} ; then
+			einfo "Downgrading '${myarch}' (added in gcc ${ver}) with '${rep}'..."
 			[[ ${myarch} == ${arch} ]] && replace-cpu-flags ${myarch} ${rep}
 			[[ ${mytune} == ${arch} ]] && replace-cpu-flags ${mytune} ${rep}
 			continue
@@ -1557,7 +1566,7 @@ downgrade_arch_flags() {
 	for ((i = 0; i < ${#isalist[@]}; i += 2)) ; do
 		ver=${isalist[i]}
 		isa=${isalist[i + 1]}
-		[[ ${ver} > ${bver} ]] && filter-flags ${isa} ${isa/-m/-mno-}
+		tc_version_is_at_least ${ver} ${bver} || filter-flags ${isa} ${isa/-m/-mno-}
 	done
 }
 
@@ -1806,11 +1815,11 @@ gcc_do_make() {
 #---->> src_test <<----
 
 toolchain_src_test() {
-	if use ${GCC_EBUILD_TEST_FLAG} ; then
-		cd "${WORKDIR}"/build
-		# enable verbose test run and result logging
-		emake -k check RUNTESTFLAGS='-a -v'
-	fi
+	cd "${WORKDIR}"/build
+	# 'asan' wants to be preloaded first, so does 'sandbox'.
+	# To make asan tests work disable sandbox for all of test suite.
+	# 'backtrace' tests also does not like 'libsandbox.so' presence.
+	SANDBOX_ON=0 LD_PRELOAD= emake -k check
 }
 
 #---->> src_install <<----
@@ -1875,7 +1884,7 @@ toolchain_src_install() {
 	cd "${D}"${BINPATH}
 	# Ugh: we really need to auto-detect this list.
 	#      It's constantly out of date.
-	for x in cpp gcc g++ c++ gcov g77 gcj gcjh gfortran gccgo ; do
+	for x in cpp gcc g++ c++ gcov g77 gcj gcjh gfortran gccgo gnat* ; do
 		# For some reason, g77 gets made instead of ${CTARGET}-g77...
 		# this should take care of that
 		if [[ -f ${x} ]] ; then
@@ -1948,13 +1957,6 @@ toolchain_src_install() {
 
 	# prune empty dirs left behind
 	find "${ED}" -depth -type d -delete 2>/dev/null
-
-	# install testsuite results
-	if use ${GCC_EBUILD_TEST_FLAG}; then
-		docinto testsuite
-		find "${WORKDIR}"/build -type f -name "*.sum" -exec dodoc {} +
-		find "${WORKDIR}"/build -type f -path "*/testsuite/*.log" -exec dodoc {} +
-	fi
 
 	# Rather install the script, else portage with changing $FILESDIR
 	# between binary and source package borks things ....
@@ -2172,8 +2174,6 @@ create_gcc_env_entry() {
 	fi
 
 	cat <<-EOF > ${gcc_envd_file}
-	PATH="${BINPATH}"
-	ROOTPATH="${BINPATH}"
 	GCC_PATH="${BINPATH}"
 	LDPATH="${ldpaths}"
 	MANPATH="${DATAPATH}/man"
@@ -2290,11 +2290,6 @@ toolchain_pkg_postinst() {
 		# Since these aren't critical files and portage sucks with
 		# handling of binpkgs, don't require these to be found
 		cp "${ROOT%/}${DATAPATH}"/c{89,99} "${EROOT%/}"/usr/bin/ 2>/dev/null
-	fi
-
-	if use ${GCC_EBUILD_TEST_FLAG} ; then
-		elog "Testsuite results have been installed into /usr/share/doc/${PF}/testsuite"
-		echo
 	fi
 
 	if [[ -n ${PRERELEASE}${SNAPSHOT} ]] ; then

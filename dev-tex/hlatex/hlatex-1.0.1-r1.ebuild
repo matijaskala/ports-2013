@@ -29,7 +29,7 @@ SRC_URI="ftp://ftp.ktug.or.kr/pub/ktug/hlatex/${MY_P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 ppc x86 ~amd64-linux ~x86-linux ~ppc-macos"
+KEYWORDS="~alpha amd64 ppc x86 ~amd64-linux ~x86-linux ~ppc-macos"
 
 S="${WORKDIR}/HLaTeX"
 
@@ -81,7 +81,7 @@ src_install() {
 
 		dobin hmakeindex hbibtex
 
-	cd "${S}" die
+	cd "${S}" || die
 		dodoc ChangeLog.ko NEWS* README.en
 
 	cd "${WORKDIR}"/uhc-fonts-1.0 || die
