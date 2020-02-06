@@ -23,8 +23,10 @@ S=${WORKDIR}/${PN}-${COMMIT_ID}
 src_install() {
 	default
 
-	mv "${D}"/usr/bin/find "${D}"/usr/bin/bsdfind || die
-	mv "${D}"/usr/bin/xargs "${D}"/usr/bin/bsdxargs || die
-	mv "${D}"/usr/share/man/man1/find.1 "${D}"/usr/share/man/man1/bsdfind.1 || die
-	mv "${D}"/usr/share/man/man1/xargs.1 "${D}"/usr/share/man/man1/bsdxargs.1 || die
+	if [[ ${USERLAND} == GNU ]] ; then
+		mv "${D}"/usr/bin/find "${D}"/usr/bin/bsdfind || die
+		mv "${D}"/usr/bin/xargs "${D}"/usr/bin/bsdxargs || die
+		mv "${D}"/usr/share/man/man1/find.1 "${D}"/usr/share/man/man1/bsdfind.1 || die
+		mv "${D}"/usr/share/man/man1/xargs.1 "${D}"/usr/share/man/man1/bsdxargs.1 || die
+	fi
 }

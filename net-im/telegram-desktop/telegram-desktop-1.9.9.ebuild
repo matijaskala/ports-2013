@@ -23,7 +23,7 @@ RDEPEND="!net-im/telegram-desktop-bin
 	app-arch/xz-utils
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:0= )
-	dev-libs/range-v3
+	dev-cpp/range-v3
 	dev-libs/xxhash
 	dev-qt/qtcore:5
 	dev-qt/qtimageformats:5
@@ -48,7 +48,7 @@ RDEPEND="!net-im/telegram-desktop-bin
 		dev-libs/libappindicator:3
 		x11-libs/gtk+:3
 	)
-	spell? ( app-text/enchant )
+	spell? ( app-text/enchant:= )
 "
 
 DEPEND="${RDEPEND}
