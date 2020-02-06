@@ -19,8 +19,7 @@ RESTRICT="mirror"
 RDEPEND="
 	dev-libs/glib:2=
 	app-arch/brotli:=
-	dev-libs/xxhash:=
-	kernel_linux? ( sys-fs/btrfs-progs:= )"
+	dev-libs/xxhash:="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	$(vala_depend)"
@@ -30,9 +29,4 @@ S=${WORKDIR}/${PN}-${COMMIT_ID}
 src_prepare() {
 	vala_src_prepare
 	default
-}
-
-src_configure() {
-	meson_src_configure \
-		$(meson_use kernel_linux btrfs)
 }
