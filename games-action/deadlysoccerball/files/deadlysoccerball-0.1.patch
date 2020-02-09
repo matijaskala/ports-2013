@@ -1,0 +1,12 @@
+diff -Nuar deadlysoccerball.orig/src/World.cpp deadlysoccerball/src/World.cpp
+--- deadlysoccerball.orig/src/World.cpp	2020-02-07 22:16:50.755587682 +0300
++++ deadlysoccerball/src/World.cpp	2020-02-07 22:17:50.117590300 +0300
+@@ -712,7 +712,7 @@
+     Sphere::loadTexture("Textures/welcome.bmp", &this->welcomeTextureId);
+     Sphere::loadTexture("Textures/white.bmp", &this->whiteTextureId);
+     Sphere::loadTexture("Textures/sphere.bmp", &this->smallSphereTextureId);
+-    char filename[15] = "Textures/i.bmp";
++    char filename[255] = "Textures/i.bmp";
+     for (int i=0; i<10; i++)
+     {
+         filename[9] = '0' + i;
