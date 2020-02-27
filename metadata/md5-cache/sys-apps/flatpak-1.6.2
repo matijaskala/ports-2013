@@ -1,0 +1,14 @@
+DEFINED_PHASES=configure setup
+DEPEND=acct-group/flatpak acct-user/flatpak >=sys-fs/libostree-2018.9[gpg(+)] >=net-libs/libsoup-2.4 >=gnome-base/dconf-0.26 >=dev-libs/appstream-glib-0.5.10 x11-libs/gdk-pixbuf:2 >=dev-libs/glib-2.56:2 >=dev-libs/libxml2-2.4 sys-apps/dbus dev-libs/json-glib x11-apps/xauth >=app-arch/libarchive-2.8 >=app-crypt/gpgme-1.1.8 >=sys-fs/fuse-2.9.2 policykit? ( >=sys-auth/polkit-0.98 ) seccomp? ( sys-libs/libseccomp ) >=sys-devel/automake-1.13.4 >=sys-devel/gettext-0.18.2 virtual/pkgconfig dev-util/gdbus-codegen sys-devel/bison introspection? ( >=dev-libs/gobject-introspection-1.40 ) doc? ( >=dev-util/gtk-doc-1.20 dev-libs/libxslt ) >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Application distribution framework
+EAPI=6
+HOMEPAGE=http://flatpak.org/
+IUSE=doc gnome gtk introspection kde policykit seccomp kernel_linux
+KEYWORDS=~amd64
+LICENSE=LGPL-2.1
+PDEPEND=gtk? ( >=sys-apps/xdg-desktop-portal-0.10 sys-apps/xdg-desktop-portal-gtk ) gnome? ( >=sys-apps/xdg-desktop-portal-0.10 sys-apps/xdg-desktop-portal-gtk ) kde? ( kde-plasma/xdg-desktop-portal-kde )
+RDEPEND=acct-group/flatpak acct-user/flatpak >=sys-fs/libostree-2018.9[gpg(+)] >=net-libs/libsoup-2.4 >=gnome-base/dconf-0.26 >=dev-libs/appstream-glib-0.5.10 x11-libs/gdk-pixbuf:2 >=dev-libs/glib-2.56:2 >=dev-libs/libxml2-2.4 sys-apps/dbus dev-libs/json-glib x11-apps/xauth >=app-arch/libarchive-2.8 >=app-crypt/gpgme-1.1.8 >=sys-fs/fuse-2.9.2 policykit? ( >=sys-auth/polkit-0.98 ) seccomp? ( sys-libs/libseccomp )
+SLOT=0
+SRC_URI=https://github.com/flatpak/flatpak/releases/download/1.6.2/flatpak-1.6.2.tar.xz
+_eclasses_=autotools	ea7865c8fba1ea8d3639f355fffe1a3c	eapi7-ver	f9ec87e93172b25ce65a85303dc06964	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	80d37d966de71bcc1c073a2033273fb4	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
+_md5_=84b4d4c1ae58d9aef83974a1c1bfcd2c

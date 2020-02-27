@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
-inherit versionator virtualx autotools eutils gnome2 multilib python-single-r1
+inherit versionator virtualx autotools eutils gnome2 ltprune multilib python-single-r1
 
 DESCRIPTION="GNU Image Manipulation Program"
 HOMEPAGE="https://www.gimp.org/"
@@ -116,10 +116,7 @@ src_configure() {
 	local myconf=(
 		GEGL=${EPREFIX}/usr/bin/gegl-0.3
 		GDBUS_CODEGEN=${EPREFIX}/bin/false
-
 		--enable-default-binary
-		--disable-silent-rules
-
 		$(use_with !aqua x)
 		$(use_with aalib aa)
 		$(use_with alsa)

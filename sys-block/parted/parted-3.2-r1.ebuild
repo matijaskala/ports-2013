@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit autotools eutils flag-o-matic
+inherit autotools eutils flag-o-matic ltprune
 
 DESCRIPTION="Create, destroy, resize, check, copy partitions and file systems"
 HOMEPAGE="https://www.gnu.org/software/parted"
@@ -48,8 +48,7 @@ src_configure() {
 		$(use_enable selinux) \
 		$(use_enable static-libs static) \
 		$(use_with readline) \
-		--disable-rpath \
-		--disable-silent-rules
+		--disable-rpath
 }
 
 DOCS=( AUTHORS BUGS ChangeLog NEWS README THANKS TODO doc/{API,FAT,USER.jp} )

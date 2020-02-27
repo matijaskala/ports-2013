@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit flag-o-matic toolchain-funcs multilib prefix
+inherit eutils flag-o-matic toolchain-funcs multilib prefix
 
 # Official patchlevel
 # See ftp://ftp.cwru.edu/pub/bash/bash-5.0-patches/
@@ -110,8 +110,6 @@ src_prepare() {
 src_configure() {
 	local myconf=(
 		--disable-profiling
-		--docdir='$(datarootdir)'/doc/${PF}
-		--htmldir='$(docdir)/html'
 		--with-curses
 		$(use_enable mem-scramble)
 		$(use_enable net net-redirections)

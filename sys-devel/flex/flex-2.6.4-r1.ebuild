@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-inherit eutils flag-o-matic libtool multilib-minimal
+inherit eutils flag-o-matic libtool ltprune multilib-minimal
 
 DESCRIPTION="The Fast Lexical Analyzer"
 HOMEPAGE="https://flex.sourceforge.net/ https://github.com/westes/flex"
@@ -51,8 +51,7 @@ multilib_src_configure() {
 	ECONF_SOURCE=${S} \
 	econf \
 		--disable-shared \
-		$(use_enable nls) \
-		--docdir='$(datarootdir)/doc/'${PF}
+		$(use_enable nls)
 }
 
 multilib_src_compile() {

@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit flag-o-matic multilib multilib-minimal autotools pam java-pkg-opt-2 db-use systemd eapi7-ver
+inherit eutils flag-o-matic multilib multilib-minimal autotools pam java-pkg-opt-2 db-use systemd eapi7-ver
 
 SASLAUTHD_CONF_VER="2.1.26"
 
@@ -232,7 +232,7 @@ multilib_src_install_all() {
 	fi
 }
 
-pkg_postinst () {
+pkg_postinst() {
 	# Generate an empty sasldb2 with correct permissions.
 	if ( use berkdb || use gdbm ) && [[ ! -f "${EROOT}/etc/sasl2/sasldb2" ]] ; then
 		einfo "Generating an empty sasldb2 with correct permissions ..."

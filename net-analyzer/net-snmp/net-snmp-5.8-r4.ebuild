@@ -9,7 +9,7 @@ WANT_AUTOMAKE=none
 PATCHSET=3
 GENTOO_DEPEND_ON_PERL=no
 
-inherit autotools distutils-r1 eutils perl-module systemd
+inherit autotools distutils-r1 eutils ltprune perl-module systemd
 
 DESCRIPTION="Software for generating and retrieving SNMP data"
 HOMEPAGE="http://www.net-snmp.org/"
@@ -139,7 +139,7 @@ src_compile() {
 	use doc && emake docsdox
 }
 
-src_install () {
+src_install() {
 	# bug #317965
 	emake -j1 DESTDIR="${D}" install
 

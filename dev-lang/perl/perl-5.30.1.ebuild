@@ -652,6 +652,6 @@ pkg_postinst() {
 	fi
 }
 
-pkg_postrm(){
+pkg_postrm() {
 	dual_scripts
 }

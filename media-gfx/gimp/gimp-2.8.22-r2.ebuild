@@ -4,7 +4,7 @@
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-inherit versionator virtualx autotools eutils gnome2 fdo-mime multilib python-single-r1
+inherit versionator virtualx autotools eutils gnome2 fdo-mime ltprune multilib python-single-r1
 
 DESCRIPTION="GNU Image Manipulation Program"
 HOMEPAGE="https://www.gimp.org/"
@@ -75,7 +75,6 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 pkg_setup() {
 	G2CONF="--enable-default-binary \
-		--disable-silent-rules \
 		$(use_with !aqua x) \
 		$(use_with aalib aa) \
 		$(use_with alsa) \
