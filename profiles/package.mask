@@ -32,6 +32,30 @@
 
 #--- END OF EXAMPLES ---
 
+# Michał Górny <mgorny@gentoo.org> (2020-03-04)
+# Dead.  Last commit in 2011.  Python 2 only.  Requires old version
+# of Django.  The Gentoo instance is being replaced by pluto
+# (https://github.com/feedreader/pluto).
+# Removal in 30 days.  Bug #706362.
+www-apps/venus
+
+# Marek Szuba <marecki@gentoo.org> (2020-03-04)
+# Most of upstream code has got merged into x-crypto (dev-go/go-crypto),
+# and since go-1.13 subsequently into the Go standard library.
+# Original code is no longer maintained and contains known bugs.
+# Removal in 30 days. Bug #711520.
+dev-go/ed25519
+
+# Craig Andrews <candrews@gentoo.org> (2020-03-03)
+# Deprecated upstream in favor of dev-libs/rocm-comgr
+# Masked for removal in 30 days. Bug #711398
+dev-libs/rocm-opencl-driver
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-29)
+# Breaks at least app-text/texlive-core and app-office/libreoffice right now,
+# bugs 711096, 711102.
+~app-text/poppler-0.86.0
+
 # Miroslav Šulc <fordfrog@gentoo.org> (2020-02-27)
 # Depends on dev-java/eclipse-ecj:4.13 which
 # depends on >=virtual/{jdk,jre}-11 which is masked
@@ -45,22 +69,39 @@ www-servers/tomcat:9
 app-portage/euscan
 
 # Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
-# Unmaintained revdeps on dev-python/pygtk blocking its removal, py2-only
-# All masked for removal in 30 days.
-# Last release in 2011, bug #708106
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
+# Last release in 2011, bug #708106, masked for removal in 30 days.
 app-cdr/gtkcdlabel
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
 # No plans upstream to port away from pygtk, suggested alternative dupeguru
-# not packaged in Gentoo, bug #708112
+# not packaged in Gentoo, bug #708112. Masked for removal in 30 days.
 app-misc/fslint
-# Last release in 2012, bug #708124
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
+# Last release in 2012, bug #708124, masked for removal in 30 days.
 app-text/keepnote
-# Last release in 2012, bug #708142
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
+# Last release in 2012, bug #708142, masked for removal in 30 days.
 x11-misc/revelation
-# Last release in 2011, bug #708150
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
+# Last release in 2011, bug #708150, masked for removal in 30 days.
 x11-misc/tintwizard
-# Last activity in 2013, bug #710162
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
+# Last activity in 2013, bug #710162, masked for removal in 30 days.
 sci-misc/pythoncad
-# Last release in 2013, bug #710164
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-26)
+# Unmaintained revdep on dev-python/pygtk blocking its removal, py2-only
+# Last release in 2013, bug #710164, masked for removal in 30 days.
 sci-electronics/gresistor
 
 # Jason A. Donenfeld <zx2c4@gentoo.org> (2020-02-24)
@@ -524,12 +565,6 @@ dev-util/xesam-tools
 # Masked for removal in 30 days.
 dev-python/pygtkglext
 
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-01-31)
-# py2-only, 8.0 release is broken, upstream appears dormant, bug 707564,
-# blocks dev-python/pybluez py2 cleanup. Use kde-misc/kdeconnect instead.
-# Masked for removal in 30 days.
-kde-misc/kanyremote
-
 # Michał Górny <mgorny@gentoo.org> (2020-01-31)
 # Last release in 2009.  No tests.  Python 2 only.  No reverse
 # dependencies.
@@ -539,7 +574,6 @@ app-mobilephone/lightblue
 # Robin H. Johnson <robbat2@gentoo.org> (2020-01-26)
 # EAPI conversion caused some regressions, need to redesign old ebuilds.
 =dev-lang/lua-5.1.5-r5
-
 
 # Andrew Ammerlaan <andrewammerlaan@riseup.net> (2020-01-26)
 # Proxy Maintainers <proxy-maint@gentoo.org>
@@ -552,11 +586,6 @@ app-mobilephone/lightblue
 # install from addons.mozilla.org
 # passff-host remains in the tree
 www-plugins/passff
-
-# Michał Górny <mgorny@gentoo.org> (2020-01-18)
-# The following packages depend on django, support Python 2 only
-# and have no reverse dependencies.
-# Removal in 30 days.  Bug #706360.
 
 # Victor Payno <vpayno+gentoo@gmail.com> (2020-01-23)
 # Requires slotted lua.
@@ -577,8 +606,9 @@ www-plugins/passff
 =dev-python/nototools-20190320
 
 # Ulrich Müller <ulm@gentoo.org> (2020-01-06)
-# Snapshots from Git, masked for testing.
+# Snapshots from Git and pretest versions, masked for testing.
 =app-editors/emacs-27.0.50_pre*
+~app-editors/emacs-27.0.90
 
 # Jonas Stein <jstein@gentoo.org> (2019-12-30)
 # Package masked for removal. Broken SRC_URI,
@@ -586,12 +616,6 @@ www-plugins/passff
 # Bug #704316.
 # Removal after 2020-03-01
 app-backup/tob
-
-# Tomáš Mózes <hydrapolic@gentoo.org> (2019-12-19)
-# Needs more testing.
-=app-emulation/xen-4.13.0
-=app-emulation/xen-pvgrub-4.13.0
-=app-emulation/xen-tools-4.13.0
 
 # David Seifert <soap@gentoo.org> (2019-12-08)
 # Unmaintained, build hangs, tons of other build failures, missing
@@ -601,7 +625,8 @@ dev-db/clickhouse
 
 # Bernard Cafarelli <voyageur@gentoo.org> (2019-11-29)
 # Beta for new major version with initial Python 3 support
-=app-backup/rdiff-backup-1.4.0_beta*
+# Remove mask when stable version is released
+>=app-backup/rdiff-backup-1.4.0_beta
 
 # Lars Wendler <polynomial-c@gentoo.org> (2019-11-14)
 # Breaks archives containing relative paths
@@ -623,12 +648,6 @@ dev-libs/OpenSRF
 # Depends on >=virtual/{jdk,jre}-11 which is masked
 dev-java/ant-eclipse-ecj:4.13
 dev-java/eclipse-ecj:4.13
-
-# Sergei Trofimovich <slyfox@gentoo.org> (2019-10-16)
-# Binary-only slot that provides libmpfr.so.1. If you need that
-# library please add a note to describe use case to the bug #697822.
-# Masked for removal in a year.
-dev-libs/mpfr:1
 
 # Sergei Trofimovich <slyfox@gentoo.org> (2019-10-16)
 # Binary-only slot that provides libgmp.so.3. If you need that
