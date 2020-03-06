@@ -1,8 +1,8 @@
 USE="icu upower xcb xml" 									#core subsystems
-USE="$USE cairo cups gbm gpm lcms ldap libnotify opengl policykit sdl spell startup-notification"
+USE="$USE cairo cups gpm lcms ldap libnotify opengl policykit sdl spell startup-notification"
 USE="$USE consolekit udev"								# consolekit
 USE="$USE X dbus"									# desktop gui frameworks
-USE="$USE bluetooth dri glamor udisks usb"                             			# desktop hardware support
+USE="$USE bluetooth dri udisks usb"                             			# desktop hardware support
 USE="$USE -video_cards_vmware"								# disable vmware by default
 USE="$USE a52 aac alsa cdda cdr dvd dvdr dts ffmpeg flac lame mad mp3 mp4 mpeg ogg opus theora vorbis wavpack x264 xv xvid"	#core media features
 USE="$USE exif gif jpeg mng pdf png svg tiff truetype"										#core graphics
