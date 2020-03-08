@@ -1,8 +1,14 @@
+# Mart Raudsepp <leio@gentoo.org> (2020-02-16)
+# GNOME requires systemd user-session functionality for launching some services.
+# GNOME-3.34 requires it for basic session launching with systemd.
+sys-apps/dbus user-session
+net-wireless/bluez user-session
+
 # REQUIRED_USE constraint when pulseaudio is enabled
 dev-libs/efl sound
 
 # Needed by gnome-photos
-media-libs/gegl jpeg2k raw
+media-libs/gegl raw
 
 # Needed by a global USE=wayland right now; some REQUIRED_USE may be outdated and need review
 >=media-libs/cogl-1.18.2-r1 gles2
@@ -14,14 +20,6 @@ media-libs/cogl kms
 
 # For eautoreconf in =app-crypt/seahorse-3.10.2-r1
 app-crypt/gcr vala
-
-# Required by GNOME for a more complete experience.
-gnome-base/gnome accessibility
-gnome-base/nautilus sendto
-
-# eds is a problematic flag, causing many package to fail. It does allow
-# to build gnome clean but leading to pidgin failures. FL-347
-net-im/pidgin -eds
 
 # Required by folks, needed by empathy
 >=gnome-extra/evolution-data-server-3.8 vala
@@ -38,7 +36,3 @@ app-accessibility/speech-dispatcher python
 
 # Pulled in by grilo-plugins which is needed for gnome-music
 media-libs/grilo playlist
-
-# Pulled in by net-im/telepathy-connection-managers[msn] (via dev-python/papyon
-# and net-voip/telepathy-butterfly)
-net-libs/libproxy python
