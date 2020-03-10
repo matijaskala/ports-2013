@@ -96,7 +96,7 @@ provided_by sys-apps/man sys-apps/man-db: man
 provided_by sys-apps/net-tools: dnsdomainname ifconfig iptunnel nameif netstat route
 provided_by sys-apps/pciutils: lspci
 provided_by sys-apps/sed: sed
-provided_by sys-apps/shadow: chpasswd groupadd groupdel groups login passwd su useradd userdel
+provided_by sys-apps/shadow: chpasswd groupadd groupdel groups login passwd useradd userdel
 provided_by sys-apps/usbutils: lsusb
 provided_by sys-apps/util-linux: blkid blockdev cal dmesg findfs flock fsck hexdump hwclock last linux32 linux64 losetup mkswap mount mountpoint pivot_root script setarch swapoff swapon switch_root umount
 provided_by sys-apps/which: which
@@ -116,6 +116,7 @@ provided_by 'sys-apps/coreutils[hostname(-)]' 'sys-apps/net-tools[hostname(+)]':
 provided_by 'sys-apps/coreutils[kill(-)]' 'sys-apps/util-linux[kill(-)]' 'sys-process/procps[kill(+)]': kill
 provided_by 'sys-apps/more' 'sys-apps/util-linux[ncurses]': more
 provided_by 'sys-apps/kmod[tools]' sys-apps/modutils: ${KMOD_SBIN}
+provided_by 'sys-apps/shadow[su(+)]' 'sys-apps/util-linux[su(-)]': su
 
 S=${WORKDIR}
 
