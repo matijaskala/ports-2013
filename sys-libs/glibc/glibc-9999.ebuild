@@ -16,8 +16,7 @@ SLOT="2.2"
 EMULTILIB_PKG="true"
 
 if [[ ${PV} == 9999* ]]; then
-	# sourceware.org does not have https:// today.
-	EGIT_REPO_URI="git://sourceware.org/git/glibc.git"
+	EGIT_REPO_URI="https://sourceware.org/git/glibc.git"
 	inherit git-r3
 else
 	#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86"
@@ -103,7 +102,7 @@ COMMON_DEPEND="
 	systemtap? ( dev-util/systemtap )
 "
 DEPEND="${COMMON_DEPEND}
-	test? ( >=net-dns/libidn2-2.0.5 )
+	test? ( >=net-dns/libidn2-2.3.0 )
 "
 RDEPEND="${COMMON_DEPEND}
 	sys-apps/gentoo-functions
@@ -124,11 +123,21 @@ else
 	"
 	DEPEND+=" virtual/os-headers "
 	RDEPEND+="
-		>=net-dns/libidn2-2.0.5
+		>=net-dns/libidn2-2.3.0
 		vanilla? ( !sys-libs/timezone-data )
 	"
 	PDEPEND+=" !vanilla? ( sys-libs/timezone-data )"
 fi
+
+# Ignore tests whitelisted below
+GENTOO_GLIBC_XFAIL_TESTS="${GENTOO_GLIBC_XFAIL_TESTS:-yes}"
+
+# The following tests fail due to the Gentoo build system and are thus
+# executed but ignored:
+XFAIL_TEST_LIST=(
+	# 9) Failures of unknown origin
+	tst-latepthread
+)
 
 #
 # Small helper functions
@@ -869,7 +878,11 @@ glibc_do_configure() {
 			myconf+=( --enable-stack-protector=no )
 			;;
 		*)
-			myconf+=( --enable-stack-protector=$(usex ssp all no) )
+			# Use '=strong' instead of '=all' to protect only functions
+			# worth protecting from stack smashes.
+			# '=all' is also known to have a problem in IFUNC resolution
+			# tests: https://sourceware.org/PR25680, bug #712356.
+			myconf+=( --enable-stack-protector=$(usex ssp strong no) )
 			;;
 	esac
 	myconf+=( --enable-stackguard-randomization )
@@ -1136,7 +1149,18 @@ src_compile() {
 
 glibc_src_test() {
 	cd "$(builddir nptl)"
-	emake check
+
+	local myxfailparams=""
+	if [[ "${GENTOO_GLIBC_XFAIL_TESTS}" == "yes" ]] ; then
+		for myt in ${XFAIL_TEST_LIST[@]} ; do
+			myxfailparams+="test-xfail-${myt}=yes "
+		done
+	fi
+
+	# sandbox does not understand unshare() and prevents
+	# writes to /proc/, which makes many tests fail
+
+	SANDBOX_ON=0 LD_PRELOAD= emake ${myxfailparams} check
 }
 
 do_src_test() {

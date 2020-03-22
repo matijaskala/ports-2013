@@ -1,11 +1,12 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-EGIT_REPO_URI="https://git.exherbo.org/git/paludis/paludis.git"
+EGIT_REPO_URI="https://github.com/MageSlayer/paludis-gentoo-patches.git"
+EGIT_BRANCH="eapi7"
 PYTHON_COMPAT=( python2_7 )
-RUBY_VER=2.3
+RUBY_VER=2.5
 
 inherit bash-completion-r1 cmake-utils git-r3 python-single-r1 user
 
@@ -26,7 +27,9 @@ COMMON_DEPEND="
 	pbins? ( >=app-arch/libarchive-3.1.2:= )
 	python? (
 		${PYTHON_DEPS}
-		>=dev-libs/boost-1.41.0:=[python,${PYTHON_USEDEP}] )
+		$(python_gen_cond_dep '
+			>=dev-libs/boost-1.41.0:=[python,${PYTHON_MULTI_USEDEP}] )
+		')
 	ruby? ( dev-lang/ruby:${RUBY_VER} )
 	search-index? ( >=dev-db/sqlite-3:= )
 	xml? ( >=dev-libs/libxml2-2.6:= )"
@@ -38,7 +41,9 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/gcc-4.7
 	doc? (
 		app-doc/doxygen
-		python? ( dev-python/sphinx[${PYTHON_USEDEP}] )
+		python? (
+			$(python_gen_cond_dep 'dev-python/sphinx[${PYTHON_MULTI_USEDEP}]')
+		)
 		ruby? ( dev-ruby/syntax[ruby_targets_ruby${RUBY_VER/./}] )
 	)
 	virtual/pkgconfig

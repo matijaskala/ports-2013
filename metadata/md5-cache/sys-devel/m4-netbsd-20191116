@@ -1,5 +1,5 @@
 BDEPEND=sys-devel/flex virtual/yacc
-DEFINED_PHASES=-
+DEFINED_PHASES=prepare
 DEPEND=dev-libs/libbsd
 DESCRIPTION=NetBSD macro processor
 EAPI=7
@@ -10,4 +10,4 @@ RDEPEND=dev-libs/libbsd userland_GNU? ( !sys-devel/m4 ) !sys-freebsd/freebsd-ubi
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/matijaskala/m4-netbsd/archive/37ab9281aa0952bdd0cd44e62b2e82286f3f7fec.tar.gz -> m4-netbsd-20191116.tar.gz
-_md5_=652f4e16974370a1bf7f27e2393fed69
+_md5_=5de906dac44a9db33c9599c105373a20

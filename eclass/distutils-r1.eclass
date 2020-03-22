@@ -120,10 +120,10 @@ _distutils_set_globals() {
 	local bdep=${rdep}
 
 	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
-		local sdep="dev-python/setuptools[${PYTHON_USEDEP}]"
+		local sdep=">=dev-python/setuptools-42.0.2[${PYTHON_USEDEP}]"
 	else
 		local sdep="$(python_gen_cond_dep '
-			dev-python/setuptools[${PYTHON_MULTI_USEDEP}]
+			>=dev-python/setuptools-42.0.2[${PYTHON_MULTI_USEDEP}]
 		')"
 	fi
 
@@ -771,13 +771,11 @@ _distutils-r1_wrap_scripts() {
 	local path=${1}
 	local bindir=${2}
 
-	local PYTHON_SCRIPTDIR
-	python_export PYTHON_SCRIPTDIR
-
+	local scriptdir=$(python_get_scriptdir)
 	local f python_files=() non_python_files=()
 
-	if [[ -d ${path}${PYTHON_SCRIPTDIR} ]]; then
-		for f in "${path}${PYTHON_SCRIPTDIR}"/*; do
+	if [[ -d ${path}${scriptdir} ]]; then
+		for f in "${path}${scriptdir}"/*; do
 			[[ -d ${f} ]] && die "Unexpected directory: ${f}"
 			debug-print "${FUNCNAME}: found executable at ${f#${path}/}"
 

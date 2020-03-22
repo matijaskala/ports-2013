@@ -32,6 +32,89 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-03-21)
+# Package appears dead upstream, purpose unclear after media-sound/audacious-3.9
+# is gone, bug #671828. GTK2 (3.10.1) or Qt5 (4.0) version of Audacious remains.
+# Masked for removal in 30 days.
+media-libs/freeverb3
+=media-sound/audacious-3.9*
+=media-plugins/audacious-plugins-3.9*
+
+# Jonas Stein <jstein@gentoo.org> (2020-03-21)
+# Package masked for removal. Broken SRC_URI,
+# upstream is dead.
+# Bug #458662
+# Removal after 2020-05-01
+games-misc/OilWar
+
+# David Seifert <soap@gentoo.org> (2020-03-20)
+# Last release in 2014, unsupported, EOL.
+# Include the last remaining revdep, which was last updated in 2004.
+x11-libs/gtkglarea
+media-sound/galan
+
+# Matt Turner <mattst88@gentoo.org> (2020-03-20)
+# No reverse deps. GNOME 2 era slot. Removal in 30 days
+gnome-base/gnome-desktop:2
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-20)
+# Python 2 only.  Upstream is not working on a port.
+# Removal in 30 days.  Bug #713568.
+sci-physics/espresso++
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-20)
+# Deprecated GNOME libraries, replaced by introspection.  Python 2 only.
+# No reverse dependencies.
+# Removal in 30 days.  Bug #713566.
+dev-python/gnome-python-desktop-base
+dev-python/gnome-python-extras-base
+dev-python/gnome-vfs-python
+dev-python/gtkspell-python
+dev-python/libbonobo-python
+dev-python/libgnome-python
+dev-python/libgnomecanvas-python
+dev-python/librsvg-python
+dev-python/pyorbit
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-20)
+# Added in 2009, not bumped since.  Python 2 only, requires dead
+# dev-python/pygtk.  Gone from HOMEPAGE.
+# Removal in 30 days.  Bug #710166.
+sci-electronics/geda-xgsch2pcb
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-19)
+# Unmaintained.  Added in 2014 and not touched since.  Python 2 only.
+# Removal in 30 days.  Bug #713506.
+net-ftp/pybootd
+
+# Hans de Graaff <graaff@gentoo.org> (2020-03-19)
+# Masked for security issues, bug #699840
+# No reverse dependencies. Use dev-ruby/haml:5 instead.
+# Removal in 30 days.
+dev-ruby/haml:4
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-18)
+# Unmaintained.  Version bump pending.  No Python 3 support upstream.
+# Removal in 30 days.  Bug #708268.
+app-backup/buttersink
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-17)
+# Abandoned.  Python 2 only.  Upstream recommends dev-python/suds
+# instead.
+# Removal in 30 days.  Bug #713056.
+dev-python/soappy
+
+# Marc Schiffbauer <mschiff@gentoo.org> (2020-03-17)
+# No py3 support, replaced by its successor automx2
+# Removal in 30 days. Bug #708410
+net-mail/automx
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-17)
+# Unmaintained.  Current Gentoo version is from 2015, last upstream
+# release in 2017.  Python 2 only.
+# Removal in 30 days.  Bug #712950.
+mail-filter/spambayes
+
 # Andreas Sturmlechner <asturm@gentoo.org> (2020-03-14)
 # Breaks at least dev-games/simgear right now, bug #709878.
 ~dev-games/openscenegraph-3.6.5
@@ -163,20 +246,17 @@ dev-python/gevent-socketio
 dev-python/gitlabform
 dev-python/globre
 dev-python/glymur
-dev-python/hiredis
 dev-python/hiro
 dev-python/httreplay
 dev-python/husl
 dev-python/hvac
 dev-python/influxdb
-dev-python/intelhex
 dev-python/into
 dev-python/ipcalc
 dev-python/iso3166
 dev-python/iso_639
 dev-python/jog
 dev-python/jpype
-dev-python/jsmin
 dev-python/json-tools
 dev-python/keepassx
 dev-python/kitchen
@@ -217,7 +297,6 @@ dev-python/pyhcl
 dev-python/pymtp
 dev-python/pynzb
 dev-python/pyopencl
-dev-python/pyprof2calltree
 dev-python/pyshark
 dev-python/pysnmp-apps
 dev-python/pysnmp-mibs
@@ -255,7 +334,6 @@ dev-python/slackclient
 dev-python/spark-parser
 dev-python/sphinx-better-theme
 dev-python/sphinxcontrib-googleanalytics
-dev-python/sphinxcontrib-programoutput
 dev-python/tempest-lib
 dev-python/testify
 dev-python/tlslite
@@ -412,167 +490,10 @@ games-strategy/boswars
 # Use media-gfx/mcomix instead. Masked for removal in 30 days.
 media-gfx/comix
 
-# Mart Raudsepp <leio@gentoo.org> (2020-02-21)
-# Does not compile against new gupnp-1.2 API. No consumers, dead project.
-# Removal in 30 days. Bug #710436.
-net-libs/gupnp-ui
-
-# Mikle Kolyada <zlogene#gentoo.org> (2020-02-21)
-# Tiny package with semi-dead upstream. Unlikely useful.
-# Blocks pygtk removal.
-# Removal in 30 days.
-media-gfx/cropgui
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Last release in 2011, py2-only, blocks dev-python/pygtk removal, bug #708102
-# There are plenty other image viewers to choose. Masked for removal in 30 days.
-media-gfx/mirage
-
 # Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
 # No maintainer, py2-only, blocks dev-python/pygtk removal, needs version bump
-# See bugs #546024, #706486. Masked for removal in 30 days.
+# See bugs #546024, #706486, pending PR #14720. Masked for removal in 40 days.
 gnome-extra/nautilus-dropbox
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Last release in 2006, py2-only, blocks dev-python/pygtk removal, bug #708134
-# Masked for removal in 30 days.
-x11-misc/driconf
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Last commit in 2015, py2-only, blocks dev-python/pygtk removal, bug #710170
-# Masked for removal in 30 days.
-net-wireless/wifi-radar
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Dead upstream, py2-only. Masked for removal in 30 days.
-app-misc/pysmssend
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Last release in 2007, py2-only, blocks dev-python/pygtk removal,
-# Masked for removal in 30 days.
-app-mobilephone/pysms
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Last release and commit in 2007, py2-only, blocks dev-python/pygtk removal,
-# bugs #678656, #707632. Masked for removal in 30 days.
-media-sound/pympd
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# Abandoned upstream, broken by current dbus-python, py2-only, blocks
-# dev-python/pygtk removal, bug #626374. Masked for removal in 30 days.
-media-sound/volti
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-19)
-# (on behalf of QA team)
-# Masked due to unresolved vulnerabilities.  Please do not remove
-# the mask until they are resolved and confirmed fixed.
-# Bugs #629882, #629884.
-net-analyzer/zabbix
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-18)
-# Dead and unmaintained.  Last release in 2015.  Broken with newer
-# versions of Python 3.  No reverse dependencies left.
-# Removal in 30 days.  Bug #691044.
-dev-python/tlslite
-
-# Matthew Thode <prometheanfire@gentoo.org> (2020-02-17)
-# Discontinued upstream.  Bug #709998
-net-analyzer/icinga
-net-analyzer/icinga-web
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  Last bumped in 2018.  Blocks dev-qt/qtwebkit removal.
-# Removal in 30 days.  Bug #709850.
-app-text/openlp
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  No Python 3 support.  Last bumped in 2013.  Numerous
-# releases behind upstream.
-# Removal in 30 days.  Bug #709460.
-app-admin/bcfg2
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  No Python 3 support.  Needs a version bump.
-# Removal in 30 days.  Bug #708956.
-app-misc/tails-installer
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  Last release in 2009.  Python 2 only, depends on dead
-# dev-python/pygtk and dev-python/pygtksourceview.  Multiple unresolved
-# bugs including crashes.
-# Removal in 30 days.  Bug #708096.
-app-portage/porthole
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained upstream.  Last release in 2008.  Python 2 only.
-# No reverse dependencies left.
-# Removal in 30 days.  Bug #707906.
-dev-python/gnuplot-py
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Last release in 2011.  Python 2 only.
-# Removal in 30 days.  Bug #705652.
-sci-geosciences/tappy
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  Last (alpha) release in 2008.  Python 2 only.  Multiple
-# bugs open.
-# Removal in 30 days.  Bug #705606.
-net-proxy/http-replicator
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Discontinued as a standalone package, merged into AstroPy.  No reverse
-# dependencies.
-# Removal in 30 days.  Bug #704038.
-dev-python/asciitable
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Superseded by media-gfx/gmic.  Fails to build.
-# Removal in 30 days.  Bug #628116.
-media-gfx/greycstoration
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained upstream.  Last release in 2011.  Python 2 only.
-# Removal in 30 days.  Bug #703858.
-games-strategy/outerspace
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained upstream.  Last release in 2011, 2.0 branch never
-# finished.  Python 2 only.
-# Removal in 30 days.  Bug #703856.
-games-strategy/lightyears
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# SRC_URI is dead and the package cannot be mirrored.  Last updated
-# in 2016, newer versions are non-trivial to bump.
-# Removal in 30 days.  Bug #694548.
-net-p2p/soulseek-qt
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Effectively unmaintained.  Fails to build for almost a year now.
-# Removal in 30 days.  Bug #681054.
-games-rpg/arx-fatalis-data
-games-rpg/arx-fatalis-demo
-games-rpg/arx-libertatis
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  Does not build with any version of app-antivirus/clamav
-# available in Gentoo.
-# Removal in 30 days.  Bug #672668.
-app-antivirus/skyldav
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Unmaintained.  Reported test failures.  No reverse dependencies.
-# Removal in 30 days.  Bug #659796.
-dev-python/Kivy
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-17)
-# Based on very old code needing a lot of patches.  Minimal upstream
-# activity since early 2011, last patches accepted in 2016.  Multiple
-# unresolved bugs.  app-editors/vim[minimal] is the recommended
-# replacement.
-# Removal in 30 days.  Bug #690102.
-app-editors/nvi
 
 # Rich Freeman <rich0@gentoo.org> (2020-02-16)
 # Dead upstream, obsolete deps.
@@ -588,19 +509,6 @@ net-misc/gnome-remote-desktop
 # and accept a more unstable release.
 >=www-client/chromium-82
 
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-16)
-# No more revdeps, abandoned upstream, depends on deprecated dev-qt/qtwebkit.
-# Masked for removal in 30 days.
-kde-misc/kwebkitpart
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-15)
-# To reduce duplication of effort, prebuilt vanilla kernel packages
-# are discontinued.  Since Gentoo patchset is really minimal,
-# sys-kernel/gentoo-kernel-bin can be used as a replacement.  Vanilla
-# kernels can still be built using sys-kernel/vanilla-kernel.
-# Removal in 30 days.
-sys-kernel/vanilla-kernel-bin
-
 # Mart Raudsepp <leio@gentoo.org> (2020-02-12)
 # GNOME 3.35 development release packages
 >=dev-libs/vala-common-0.47
@@ -609,28 +517,6 @@ dev-lang/vala:0.48
 # Stefan Strogin <steils@gentoo.org> (2020-02-12)
 # Mask for testing revdeps.
 >=dev-games/mygui-3.4.0
-
-# David Seifert <soap@gentoo.org> (2020-02-11)
-# Unmaintained, EAPI 4, last release over 9 years ago, no revdeps.
-# Removal in 30 days.
-app-vim/cream
-
-# David Seifert <soap@gentoo.org> (2020-02-11)
-# Unmaintained, EAPI 4, last release over 9 years ago, ebuild has QA
-# issues, no revdeps.  Removal in 30 days.  Bug #558354.
-net-im/coccinella
-
-# David Seifert <soap@gentoo.org> (2020-02-10)
-# Unmaintained, only live ebuild, doesn't build, last release over 7
-# years ago, EAPI 4. Removal in 15 days. Bug #593008.
-dev-lang/rebol
-dev-lang/rebol-bin
-
-# David Seifert <soap@gentoo.org> (2020-02-10)
-# Unmaintained, EAPI 4, doesn't respect CFLAGS and LDFLAGS, which masks
-# undefined symbols in the shared object, upstream gone, no other distro
-# packages this anymore, no revdeps. Removal in 30 days.
-sys-apps/hbaapi
 
 # Patrick McLean <chutzpah@gentoo.org> (2020-02-07)
 # Mask until sys-libs/libxcrypt[system] is unmasked
@@ -688,23 +574,11 @@ www-plugins/passff
 =app-editors/emacs-27.0.50_pre*
 ~app-editors/emacs-27.0.90
 
-# Jonas Stein <jstein@gentoo.org> (2019-12-30)
-# Package masked for removal. Broken SRC_URI,
-# last upstream activity was ~16 years ago.
-# Bug #704316.
-# Removal after 2020-03-01
-app-backup/tob
-
 # David Seifert <soap@gentoo.org> (2019-12-08)
 # Unmaintained, build hangs, tons of other build failures, missing
 # dependencies.  Bug #663794, #666916, #666922, #667062, #678068,
 # #681678, #684420, #694488. Removal in 30 days.
 dev-db/clickhouse
-
-# Bernard Cafarelli <voyageur@gentoo.org> (2019-11-29)
-# Beta for new major version with initial Python 3 support
-# Remove mask when stable version is released
->=app-backup/rdiff-backup-1.4.0_beta
 
 # Lars Wendler <polynomial-c@gentoo.org> (2019-11-14)
 # Breaks archives containing relative paths
@@ -809,10 +683,6 @@ x11-drivers/xf86-video-tga
 x11-drivers/xf86-video-trident
 x11-drivers/xf86-video-tseng
 x11-drivers/xf86-video-voodoo
-
-# Eray Aslan <eras@gentoo.org> (2019-03-01)
-# Mask experimental software
-=mail-mta/postfix-3.5*
 
 # Miroslav Šulc <fordfrog@gentoo.org> (2019-01-23)
 # Depends on >=virtual/{jdk,jre}-11 which is masked

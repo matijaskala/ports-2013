@@ -14,7 +14,7 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 arm ~arm64 ~x86"
+KEYWORDS="~alpha ~amd64 arm ~arm64 ~ia64 ~x86"
 IUSE="brotli test"
 RESTRICT="!test? ( test )"
 
@@ -25,7 +25,9 @@ RDEPEND="
 	>=dev-python/cryptography-1.3.4[${PYTHON_USEDEP}]
 	>=dev-python/pyopenssl-0.14[${PYTHON_USEDEP}]
 	>=dev-python/idna-2.0.0[${PYTHON_USEDEP}]
-	virtual/python-ipaddress[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/ipaddress[${PYTHON_USEDEP}]
+	' -2)
 	brotli? ( dev-python/brotlipy[${PYTHON_USEDEP}] )
 "
 BDEPEND="
@@ -38,7 +40,7 @@ BDEPEND="
 		>=dev-python/trustme-0.5.3[${PYTHON_USEDEP}]
 		$(python_gen_cond_dep '
 			>=www-servers/tornado-4.2.1[${PYTHON_USEDEP}]
-		' python{2_7,3_{5,6,7}})
+		' 'python*')
 	)
 "
 
@@ -47,12 +49,9 @@ distutils_enable_sphinx docs \
 	dev-python/mock
 
 python_prepare_all() {
-	# tests requiring a route to be present
-	sed -e 's:test_enhanced_timeout:_&:' \
-		-e 's:test_https_timeout:_&:' \
-		-i test/with_dummyserver/test_https.py || die
-	sed -e 's:test_https_proxy_.*timeout:_&:' \
-		-i test/with_dummyserver/test_proxy_poolmanager.py || die
+	# https://github.com/urllib3/urllib3/issues/1756
+	sed -e 's:10.255.255.1:240.0.0.0:' \
+		-i test/__init__.py || die
 	# tests failing if 'localhost.' cannot be resolved
 	sed -e 's:test_dotted_fqdn:_&:' \
 		-i test/with_dummyserver/test_https.py || die
@@ -62,9 +61,7 @@ python_prepare_all() {
 	# very flaky
 	sed -e 's:test_client_no_intermediate:_&:' \
 		-i test/with_dummyserver/test_https.py || die
-	sed -e 's:test_cross_host_redirect:_&:' \
-		-e 's:test_cross_protocol_redirect:_&:' \
-		-e 's:test_basic_ipv6_proxy:_&:' \
+	sed -e 's:test_basic_ipv6_proxy:_&:' \
 		-i test/with_dummyserver/test_proxy_poolmanager.py || die
 	sed -e 's:test_connection_closed_on_read_timeout_preload_false:_&:' \
 		-i test/with_dummyserver/test_socketlevel.py || die
@@ -76,7 +73,7 @@ python_test() {
 	local -x CI=1
 	# FIXME: get tornado ported
 	case ${EPYTHON} in
-		python2*|python3.[567])
+		python*)
 			pytest -vv || die "Tests fail with ${EPYTHON}"
 			;;
 	esac

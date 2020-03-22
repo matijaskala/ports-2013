@@ -6,6 +6,19 @@
 # This file is only for generic masks. For arch-specific masks (i.e.
 # mask everywhere, unmask on arch/*) use arch/base.
 
+# Georgy Yakovlev <gyakovlev@gentoo.org> (2020-03-18)
+# USE=doc makes rust compile 6 times!
+# Reason unknown yet, masking for now.
+=dev-lang/rust-1.42.0 doc
+
+# Michał Górny <mgorny@gentoo.org> (2020-03-17)
+# dev-python/soappy is being removed.
+dev-python/twisted soap
+
+# Guilherme Amadio <amadio@gentoo.org> (2020-03-16)
+# Requires dev-libs/cudnn which is only available on amd64
+sci-physics/root cudnn
+
 # Thomas Deutschmann <whissi@gentoo.org> (2020-03-11)
 # Encrypted Media Extensions (eme-free) can't be disabled everywhere
 www-client/firefox eme-free

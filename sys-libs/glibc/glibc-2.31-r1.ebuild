@@ -16,8 +16,7 @@ SLOT="2.2"
 EMULTILIB_PKG="true"
 
 if [[ ${PV} == 9999* ]]; then
-	# sourceware.org does not have https:// today.
-	EGIT_REPO_URI="git://sourceware.org/git/glibc.git"
+	EGIT_REPO_URI="https://sourceware.org/git/glibc.git"
 	inherit git-r3
 else
 	# needs minimal testing
@@ -870,7 +869,11 @@ glibc_do_configure() {
 			myconf+=( --enable-stack-protector=no )
 			;;
 		*)
-			myconf+=( --enable-stack-protector=$(usex ssp all no) )
+			# Use '=strong' instead of '=all' to protect only functions
+			# worth protecting from stack smashes.
+			# '=all' is also known to have a problem in IFUNC resolution
+			# tests: https://sourceware.org/PR25680, bug #712356.
+			myconf+=( --enable-stack-protector=$(usex ssp strong no) )
 			;;
 	esac
 	myconf+=( --enable-stackguard-randomization )
@@ -1137,7 +1140,11 @@ src_compile() {
 
 glibc_src_test() {
 	cd "$(builddir nptl)"
-	emake check
+	# disable tests:
+	# - tests-container:
+	#     sandbox does not understand unshare() and prevents
+	#     writes to /proc/
+	emake check tests-container=
 }
 
 do_src_test() {

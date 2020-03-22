@@ -20,6 +20,12 @@ RDEPEND="${DEPEND}
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
 
+src_prepare() {
+	default
+
+	tc-export CC
+}
+
 src_install() {
 	default
 

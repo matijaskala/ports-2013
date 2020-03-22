@@ -18,7 +18,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ~ppc ~ppc64 x86"
 
 # TODO: QtNfc, QtRemoteObjects (Qt >= 5.12)
 IUSE="bluetooth dbus debug declarative designer examples gles2 gui help location multimedia
@@ -59,7 +59,9 @@ RDEPEND="
 	>=dev-python/PyQt5-sip-4.19.20:=[${PYTHON_USEDEP}]
 	>=dev-qt/qtcore-${QT_PV}
 	>=dev-qt/qtxml-${QT_PV}
-	virtual/python-enum34[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/enum34[${PYTHON_USEDEP}]
+	' -2)
 	bluetooth? ( >=dev-qt/qtbluetooth-${QT_PV} )
 	dbus? (
 		dev-python/dbus-python[${PYTHON_USEDEP}]

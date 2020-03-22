@@ -23,3 +23,9 @@ RDEPEND="${DEPEND}
 	!sys-freebsd/freebsd-bin"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
+
+src_prepare() {
+	default
+
+	tc-export CC
+}

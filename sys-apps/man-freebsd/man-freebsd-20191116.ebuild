@@ -23,3 +23,9 @@ RDEPEND="userland_GNU? ( sys-apps/which )
 PDEPEND="manpager? ( app-text/manpager )"
 
 S=${WORKDIR}/${PN}-${COMMIT_ID}
+
+src_prepare() {
+	default
+
+	tc-export CC
+}

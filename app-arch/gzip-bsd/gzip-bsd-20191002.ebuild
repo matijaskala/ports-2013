@@ -22,3 +22,9 @@ RDEPEND="${DEPEND}
 	!app-arch/gzip"
 
 S=${WORKDIR}/${PN}-9feb6d38aa0c087c2fe48bbcfd8b12d82c470c44
+
+src_prepare() {
+	default
+
+	tc-export CC
+}
