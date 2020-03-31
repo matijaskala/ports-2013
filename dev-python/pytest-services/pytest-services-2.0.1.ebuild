@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit distutils-r1
 
 DESCRIPTION="Collection of fixtures and utility functions to run service processes for pytest"
@@ -12,7 +12,7 @@ SRC_URI="https://github.com/pytest-dev/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~x86"
+KEYWORDS="~alpha ~amd64 ~ppc64 ~x86"
 IUSE="test"
 
 RDEPEND="dev-python/requests[${PYTHON_USEDEP}]

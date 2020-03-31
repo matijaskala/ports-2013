@@ -291,76 +291,26 @@ setup_target_flags() {
 			filter-flags "-fcall-used-g7"
 			append-flags "-fcall-used-g6"
 
-			# If the CHOST is the basic one (e.g. not sparcv9-xxx already),
-			# try to pick a better one so glibc can use cpu-specific .S files.
-			# We key off the CFLAGS to get a good value.  Also need to handle
-			# version skew.
-			# We can't force users to set their CHOST to their exact machine
-			# as many of these are not recognized by config.sub/gcc and such :(.
-			# Note: If the mcpu values don't scale, we might try probing CPP defines.
-			# Note: Should we factor in -Wa,-AvXXX flags too ?  Or -mvis/etc... ?
-
 			local cpu
 			case ${CTARGET} in
 			sparc64-*)
+				cpu="sparc64"
 				case $(get-flag mcpu) in
-				niagara[234])
-					if ver_test -ge 2.8 ; then
-						cpu="sparc64v2"
-					elif ver_test -ge 2.4 ; then
-						cpu="sparc64v"
-					elif ver_test -ge 2.2.3 ; then
-						cpu="sparc64b"
-					fi
-					;;
-				niagara)
-					if ver_test -ge 2.4 ; then
-						cpu="sparc64v"
-					elif ver_test -ge 2.2.3 ; then
-						cpu="sparc64b"
-					fi
-					;;
-				ultrasparc3)
-					cpu="sparc64b"
-					;;
-				*)
+				v9)
 					# We need to force at least v9a because the base build doesn't
 					# work with just v9.
 					# https://sourceware.org/bugzilla/show_bug.cgi?id=19477
-					[[ -z ${cpu} ]] && append-flags "-Wa,-xarch=v9a"
+					append-flags "-Wa,-xarch=v9a"
 					;;
 				esac
 				;;
 			sparc-*)
 				case $(get-flag mcpu) in
-				niagara[234])
-					if ver_test -ge 2.8 ; then
-						cpu="sparcv9v2"
-					elif ver_test -ge 2.4 ; then
-						cpu="sparcv9v"
-					elif ver_test -ge 2.2.3 ; then
-						cpu="sparcv9b"
-					else
-						cpu="sparcv9"
-					fi
-					;;
-				niagara)
-					if ver_test -ge 2.4 ; then
-						cpu="sparcv9v"
-					elif ver_test -ge 2.2.3 ; then
-						cpu="sparcv9b"
-					else
-						cpu="sparcv9"
-					fi
-					;;
-				ultrasparc3)
-					cpu="sparcv9b"
-					;;
-				v9|ultrasparc)
-					cpu="sparcv9"
-					;;
 				v8|supersparc|hypersparc|leon|leon3)
 					cpu="sparcv8"
+					;;
+				*)
+					cpu="sparcv9"
 					;;
 				esac
 			;;
@@ -543,27 +493,6 @@ glibc_banner() {
 	echo "${b}"
 }
 
-check_devpts() {
-	# Make sure devpts is mounted correctly for use w/out setuid pt_chown.
-
-	# If merely building the binary package, then there's nothing to verify.
-	[[ ${MERGE_TYPE} == "buildonly" ]] && return
-
-	# Only sanity check when installing the native glibc.
-	[[ -n ${ROOT} ]] && return
-
-	# If they're opting in to the old suid code, then no need to check.
-	use suid && return
-
-	if awk '$3 == "devpts" && $4 ~ /[, ]gid=5[, ]/ { exit 1 }' /proc/mounts ; then
-		eerror "In order to use glibc with USE=-suid, you must make sure that"
-		eerror "you have devpts mounted at /dev/pts with the gid=5 option."
-		eerror "Openrc should do this for you, so you should check /etc/fstab"
-		eerror "and make sure you do not have any invalid settings there."
-		die "mount & fix your /dev/pts settings"
-	fi
-}
-
 # The following Kernel version handling functions are mostly copied from portage
 # source. It's better not to use linux-info.eclass here since a) it adds too
 # much magic, see bug 326693 for some of the arguments, and b) some of the
@@ -633,9 +562,6 @@ get_kheader_version() {
 # pkg_ and src_ phases, so we call this function both in pkg_pretend and in
 # src_unpack.
 sanity_prechecks() {
-	# Make sure devpts is mounted correctly for use w/out setuid pt_chown
-	check_devpts
-
 	# Prevent native builds from downgrading
 	if [[ ${MERGE_TYPE} != "buildonly" ]] && \
 	   [[ -z ${ROOT} ]] && \
