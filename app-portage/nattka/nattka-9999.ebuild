@@ -17,6 +17,7 @@ SLOT="0"
 KEYWORDS=""
 
 RDEPEND="
+	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/requests[${PYTHON_USEDEP}]
 	dev-util/pkgcheck[${PYTHON_USEDEP}]
 	dev-vcs/git
@@ -24,4 +25,11 @@ RDEPEND="
 BDEPEND="
 	test? ( dev-python/vcrpy[${PYTHON_USEDEP}] )"
 
+distutils_enable_sphinx doc --no-autodoc
 distutils_enable_tests pytest
+
+pkg_postinst() {
+	elog "NATTkA can optionally use:"
+	elog "  dev-python/networkx"
+	elog "to sort 'apply' output in dependency order."
+}

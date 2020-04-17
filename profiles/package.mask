@@ -32,9 +32,165 @@
 
 #--- END OF EXAMPLES ---
 
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-04-05)
-# Breaks app-text/texlive-core right now, bug #716344.
-~app-text/poppler-0.87.0
+# Jeroen Roovers <jer@gentoo.org> (2020-04-26)
+# Breaks API, see https://bugs.gentoo.org/717728
+=dev-libs/libuv-1.36.0
+
+
+# Michał Górny <mgorny@gentoo.org> (2020-04-16)
+# Both packages have been last bumped mid-2018.  They depend
+# on pytest-relaxed plugin that has been removed due to breaking pretty
+# much everything.  They do not have a dedicated maintainer, and they
+# don't fit python@.  No revdeps.
+# Removal in 30 days.  Bug #717670.
+dev-python/fabric
+dev-python/invoke
+
+# Michał Górny <mgorny@gentoo.org> (2020-04-16)
+# Unmaintained.  Last release in 2011.  Multiple vulnerabilities
+# via bundled code.
+# Removal in 30 days.  Bug #701820.
+net-misc/ssvnc
+
+# Ulrich Müller <ulm@gentoo.org> (2020-04-15)
+# Last upstream release in 2001. HOMEPAGE disappeared in 2010.
+# Use app-i18n/man-pages-l10n[l10n_nl] as replacement.
+# Masked for removal in 30 days. Bug #713590.
+app-i18n/man-pages-nl
+
+# Michał Górny <mgorny@gentoo.org> (2020-04-15)
+# Temporary fork of app-emulation/runc used by Docker.  The latter
+# switched back to the original which is now blocking this package.
+# Most likely carries old vulnerabilities of runc.
+# Removal in 14 days.  Bug #711620.
+app-emulation/docker-runc
+
+# Michał Górny <mgorny@gentoo.org> (2020-04-15)
+# Unmaintained.  Python 2 only.  Superseded by net-p2p/tremc.
+# Removal in 30 days.  Bug #713518.
+net-p2p/transmission-remote-cli
+
+# Alfredo Tupone <tupone@gentoo.org> (2020-04-14)
+# Masked for removal
+# Upstream url non existent
+# No reverse dependency
+dev-tcltk/combobox
+
+# Alfredo Tupone <tupone@gentoo.org> (2020-04-13)
+# Masked for removal
+# Last release 2002
+# No reverse dependency
+dev-tcltk/anigif
+
+# Hans de Graaff <graaff@gentoo.org> (2020-04-13)
+# ruby24-only packages. Ruby 2.4 is EOL and will be masked for removal
+# shortly. These packages either have newer ruby25 slots available, or
+# are no longer maintained and have no reverse dependencies. Masked
+# for removal in 30 days.
+dev-ruby/activeldap:4
+dev-ruby/bones
+dev-ruby/github_api
+dev-ruby/http:0.8
+dev-ruby/http-form_data:0.8
+dev-ruby/rack-test:0.6
+dev-ruby/rails-deprecated_sanitizer
+dev-ruby/riel
+dev-ruby/shoulda-matchers:0
+dev-ruby/vcr:1
+dev-ruby/webmock:2
+
+# Hans de Graaff <graaff@gentoo.org> (2020-04-13)
+# dev-ruby/libxml is ruby24-only and has known
+# bugs. sci-biology/bioruby depends on this. It looks like there is a
+# new version upstream that may not depend on libxml, but this
+# requires a dedicated maintainer to test and sort out. Masked for
+# removal in 30 days.
+dev-ruby/libxml
+sci-biology/bioruby
+
+# Lars Wendler <polynomial-c@gentoo.org> (2020-04-13)
+# Discontinued by upstream. Superseded by sys-apps/fwupd.
+# Masked for removal in 30 days.
+sys-apps/fwupdate
+
+# Mikle Kolyada <zlogene@gentoo.org> (2020-04-12)
+# Texlive-2020 mask. Work in progress.
+# Do NOT report any bugs untill fully unmasked.
+~app-text/dvipsk-2020.1_p20200406
+~app-text/texlive-core-2020
+~app-text/ttf2pk2-2.0_p20200406
+~app-text/ps2pkm-1.8_p20200406
+~dev-libs/kpathsea-6.3.2_p20200406
+~dev-libs/ptexenc-1.3.8_p20200406
+~dev-tex/bibtexu-3.71_p20200406
+~dev-texlive/texlive-basic-2020
+~dev-texlive/texlive-bibtexextra-2020
+~dev-texlive/texlive-context-2020
+~dev-texlive/texlive-fontsextra-2020
+~dev-texlive/texlive-fontsrecommended-2020
+~dev-texlive/texlive-fontutils-2020
+~dev-texlive/texlive-formatsextra-2020
+~dev-texlive/texlive-games-2020
+~dev-texlive/texlive-humanities-2020
+~dev-texlive/texlive-langarabic-2020
+~dev-texlive/texlive-langchinese-2020
+~dev-texlive/texlive-langcjk-2020
+~dev-texlive/texlive-langcyrillic-2020
+~dev-texlive/texlive-langczechslovak-2020
+~dev-texlive/texlive-langenglish-2020
+~dev-texlive/texlive-langeuropean-2020
+~dev-texlive/texlive-langfrench-2020
+~dev-texlive/texlive-langgerman-2020
+~dev-texlive/texlive-langgreek-2020
+~dev-texlive/texlive-langitalian-2020
+~dev-texlive/texlive-langjapanese-2020
+~dev-texlive/texlive-langkorean-2020
+~dev-texlive/texlive-langother-2020
+~dev-texlive/texlive-langpolish-2020
+~dev-texlive/texlive-langportuguese-2020
+~dev-texlive/texlive-langspanish-2020
+~dev-texlive/texlive-latex-2020
+~dev-texlive/texlive-latexextra-2020
+~dev-texlive/texlive-latexrecommended-2020
+~dev-texlive/texlive-luatex-2020
+~dev-texlive/texlive-mathscience-2020
+~dev-texlive/texlive-metapost-2020
+~dev-texlive/texlive-music-2020
+~dev-texlive/texlive-pictures-2020
+~dev-texlive/texlive-plaingeneric-2020
+~dev-texlive/texlive-pstricks-2020
+~dev-texlive/texlive-publishers-2020
+~dev-texlive/texlive-xetex-2020
+
+# Matt Turner <mattst88@gentoo.org> (2020-04-12)
+# In conjunction with Firefox's sandbox, breaks loading of i965 driver.
+# Bug #716574
+=x11-libs/libdrm-2.4.101
+
+# Alfredo Tupone <tupone@gentoo.org> (2020-04-10)
+# Masked for removal
+# Last release 2002
+# No reverse dependency
+dev-tcltk/tcl-mccp
+
+# Stefan Strogin <steils@gentoo.org> (2020-04-09)
+# Masked for testing
+>=dev-libs/libressl-3.1.0
+
+# Marek Szuba <marecki@gentoo.org> (2020-04-08)
+# All of these block app-eselect/eselect-opencl in order to prevent
+# file collisions in /usr/include/CL and on /usr/lib/libOpenCL.so* .
+# However, eselect-opencl is still required by x11-drivers/nvidia-drivers
+# (even with USE=-uvm, i.e. when it does NOT handle OpenCL) - which by design
+# does not appear in virtual/opencl-3.
+# Moreover, upgrading to either of the loader ebuilds listed here
+# will on systems using FEATURES=collision-protect require prior manual
+# clean-up of libOpenCL links created by eselect-opencl so even with the Nvidia
+# situation taken care of, we should probably publish an appropriate news item
+# before unmasking these.
+>=dev-libs/ocl-icd-2.2.12-r3
+dev-libs/opencl-icd-loader
+dev-util/opencl-headers
 
 # Joonas Niilola <juippis@gentoo.org> (2020-04-05)
 # Not maintained in Gentoo, doesn't build for 2 years, has only
@@ -120,6 +276,8 @@ dev-ruby/web-console:0
 # likely be moved to an overlay.
 dev-ruby/metasploit-concern
 dev-ruby/metasploit-credential
+dev-ruby/metasploit-payloads
+dev-ruby/metasploit_payloads-mettle
 dev-ruby/metasploit-model
 dev-ruby/metasploit_data_models
 net-analyzer/metasploit
@@ -192,10 +350,6 @@ games-puzzle/skoosh
 # No consumers. Dead project. Blocks removal of gnome-base/libgnome-keyring
 # Bug #713020
 dev-dotnet/gnome-keyring-sharp
-
-# Matthew Thode <prometheanfire@gentoo.org> (2020-03-28)
-# No consumers. requires old dev-python/pika, bug 715152. Removal in 14 days.
-dev-python/pika-pool
 
 # Andreas K. Hüttel <dilfridge@gentoo.org> (2020-03-27)
 # No consumers. Build problems, bug 668244. Removal in 30 days.
@@ -420,203 +574,6 @@ media-libs/pyliblo
 # Mask experimental software
 =mail-mta/postfix-3.6*
 
-# Michał Górny <mgorny@gentoo.org> (2020-03-09)
-# Multiple releases behind.  Stuck at py3.6.  No reverse dependencies.
-# Removal in 30 days.  Bug #711934.
-dev-python/tweepy
-
-# Michał Górny <mgorny@gentoo.org> (2020-03-09)
-# Unmaintained.  Outdated.  Stuck on py3.6, wrong use of eclass.
-# No revdeps -- it is bundled by every consumer anyway.
-# Removal in 30 days.  Bug #711932.
-dev-util/waf
-
-# Michał Górny <mgorny@gentoo.org> (2020-03-07)
-# The following packages are stuck on Python 3.6, and have no reverse
-# dependencies.  Please let the Python team know if you find some
-# of them still useful.
-# Removal in 30 days.  Bug #711808.
-dev-python/CacheControl
-dev-python/ImageHash
-dev-python/ReParser
-dev-python/aadict
-dev-python/abstract_rendering
-dev-python/aioeventlet
-dev-python/aiotest
-dev-python/amqplib
-dev-python/anyjson
-dev-python/asciimatics
-dev-python/asset
-dev-python/atom
-dev-python/batinfo
-dev-python/bcolz
-dev-python/beaker
-dev-python/biplist
-dev-python/blaze
-dev-python/colander
-dev-python/colorful
-dev-python/columnize
-dev-python/common
-dev-python/crumbs
-dev-python/d2to1
-dev-python/datashape
-dev-python/deform
-dev-python/distlib
-dev-python/django-appconf
-dev-python/django-baker
-dev-python/django-crispy-forms
-dev-python/django-discover-runner
-dev-python/django-grappelli
-dev-python/django-haystack
-dev-python/django-nose
-dev-python/django-picklefield
-dev-python/django-recaptcha
-dev-python/django-select2
-dev-python/django-tinymce
-dev-python/dogpile-core
-dev-python/dynd-python
-dev-python/embedly
-dev-python/envoy
-dev-python/fedmsg
-dev-python/flask-admin
-dev-python/flask-peewee
-dev-python/flask-pymongo
-dev-python/flask-socketio
-dev-python/flask-uploads
-dev-python/flipflop
-dev-python/formencode
-dev-python/geoalchemy2
-dev-python/geopy
-dev-python/gevent-socketio
-dev-python/gitlabform
-dev-python/globre
-dev-python/glymur
-dev-python/hiro
-dev-python/httreplay
-dev-python/husl
-dev-python/hvac
-dev-python/influxdb
-dev-python/into
-dev-python/ipcalc
-dev-python/iso3166
-dev-python/iso_639
-dev-python/jog
-dev-python/jpype
-dev-python/json-tools
-dev-python/keepassx
-dev-python/kitchen
-dev-python/libzilla
-dev-python/locustio
-dev-python/mailmanclient
-dev-python/meteor-ejson
-dev-python/mimerender
-dev-python/mmh3
-dev-python/mockldap
-dev-python/multipledispatch
-dev-python/netmiko
-dev-python/nosehtmloutput
-dev-python/odo
-dev-python/passwordmeter
-dev-python/pdb-clone
-dev-python/pdoc
-dev-python/peppercorn
-dev-python/pgpdump
-dev-python/pillowfight
-dev-python/placefinder
-dev-python/prettyprinter
-dev-python/prometheus_flask_exporter
-dev-python/pxml
-dev-python/py-lz4framed
-dev-python/py2neo
-dev-python/pycanberra
-dev-python/pycipher
-dev-python/pycmd
-dev-python/pycobertura
-dev-python/pydot-ng
-dev-python/pyee
-dev-python/pyev
-dev-python/pyfiglet
-dev-python/pygcrypt
-dev-python/pygeocoder
-dev-python/pyhcl
-dev-python/pymtp
-dev-python/pynzb
-dev-python/pyshark
-dev-python/pysolr
-dev-python/pystache
-dev-python/pytest-arraydiff
-dev-python/pytest-cython
-dev-python/pytest-isort
-dev-python/pytest-mpl
-dev-python/python-afl
-dev-python/python-cluster
-dev-python/python-ddp
-dev-python/python-ebtables
-dev-python/python-engineio
-dev-python/python-hpilo
-dev-python/python-meteor
-dev-python/python-otrs
-dev-python/python-scsi
-dev-python/python-socketio
-dev-python/python-twitter
-dev-python/python-uinput
-dev-python/pythonmagick
-<dev-python/pyx-0.15
-dev-python/rackspace-monitoring
-dev-python/readlike
-dev-python/redis-py-cluster
-dev-python/regendoc
-dev-python/schedule
-dev-python/schema
-dev-python/scp
-dev-python/setuptools_hg
-dev-python/simplekv
-dev-python/slackclient
-dev-python/spark-parser
-dev-python/sphinx-better-theme
-dev-python/sphinxcontrib-googleanalytics
-dev-python/tempest-lib
-dev-python/testify
-dev-python/tlslite
-dev-python/tpg
-dev-python/translationstring
-dev-python/trollius
-dev-python/twitter
-dev-python/uhashring
-dev-python/uncompyle6
-dev-python/venusian
-dev-python/versiontools
-dev-python/vulture
-dev-python/wsgiintercept
-dev-python/wtf-peewee
-dev-python/xdis
-dev-python/zc-buildout
-
-# Mikle Kolyada <zlogene@gentoo.org> (2020-03-07)
-# virtual/shadow has the only alive provider.
-# sys-apps/hardened-shadow is unmaintained for the past
-# five years (at least). Upstream is dead.
-# Removal in 30 days.
-sys-apps/hardened-shadow
-virtual/shadow
-
-# Michał Górny <mgorny@gentoo.org> (2020-03-06)
-# Python 2 only.  Last update in 2012.  Blocker for a few dependencies.
-# Removal in 30 days.  Bug #708336.
-www-apps/ownpaste
-
-# Michał Górny <mgorny@gentoo.org> (2020-03-04)
-# Dead.  Last commit in 2011.  Python 2 only.  Requires old version
-# of Django.  The Gentoo instance is being replaced by pluto
-# (https://github.com/feedreader/pluto).
-# Removal in 30 days.  Bug #706362.
-www-apps/venus
-
-# Craig Andrews <candrews@gentoo.org> (2020-03-03)
-# Deprecated upstream in favor of dev-libs/rocm-comgr
-# Masked for removal in 30 days. Bug #711398
-dev-libs/rocm-opencl-driver
-
 # Miroslav Šulc <fordfrog@gentoo.org> (2020-02-27)
 # Depends on dev-java/eclipse-ecj:4.13 which
 # depends on >=virtual/{jdk,jre}-11 which is masked
@@ -644,18 +601,6 @@ app-admin/packagekit-gtk
 app-admin/packagekit-qt
 app-backup/deja-dup
 gnome-extra/gnome-packagekit
-
-# David Seifert <soap@gentoo.org> (2020-02-23)
-# Last release in 2013, the scons SConstruct script uses variables
-# that have been removed from Scons years ago and also uses a ton of
-# Python 2-only patterns, sed broken. Bug #703906, #710342.
-# Masked for removal in 30 days.
-games-strategy/boswars
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-02-19)
-# No maintainer, py2-only, blocks dev-python/pygtk removal, needs version bump
-# See bugs #546024, #706486, pending PR #14720. Masked for removal in 40 days.
-gnome-extra/nautilus-dropbox
 
 # Mart Raudsepp <leio@gentoo.org> (2020-02-16)
 # Fails to automatically launch pipewire for me. Help welcome figuring it out.
@@ -744,6 +689,7 @@ dev-db/clickhouse
 # until upstream releases fixed versions.
 ~xfce-base/xfce4-panel-4.15.0
 ~xfce-base/xfce4-panel-4.15.1
+~xfce-base/xfce4-panel-4.15.2
 
 # Lars Wendler <polynomial-c@gentoo.org> (2019-10-16)
 # Depends on apache-2.2

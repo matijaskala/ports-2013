@@ -93,13 +93,13 @@ BDEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils"
 
 for i in ${TEXLIVE_MODULE_CONTENTS}; do
-	SRC_URI="${SRC_URI} mirror://gentoo/texlive-module-${i}-${PV}.${PKGEXT}"
+	SRC_URI="${SRC_URI} https://dev.gentoo.org/~zlogene/distfiles/texlive/texlive-module-${i}-${PV}.${PKGEXT}"
 done
 
 # Forge doc SRC_URI
 [[ -n ${TEXLIVE_MODULE_DOC_CONTENTS} ]] && SRC_URI="${SRC_URI} doc? ("
 for i in ${TEXLIVE_MODULE_DOC_CONTENTS}; do
-	SRC_URI="${SRC_URI} mirror://gentoo/texlive-module-${i}-${PV}.${PKGEXT}"
+	SRC_URI="${SRC_URI} https://dev.gentoo.org/~zlogene/distfiles/texlive/texlive-module-${i}-${PV}.${PKGEXT}"
 done
 [[ -n ${TEXLIVE_MODULE_DOC_CONTENTS} ]] && SRC_URI="${SRC_URI} )"
 
@@ -107,7 +107,7 @@ done
 if [[ -n ${TEXLIVE_MODULE_SRC_CONTENTS} ]] ; then
 	SRC_URI="${SRC_URI} source? ("
 	for i in ${TEXLIVE_MODULE_SRC_CONTENTS}; do
-		SRC_URI="${SRC_URI} mirror://gentoo/texlive-module-${i}-${PV}.${PKGEXT}"
+		SRC_URI="${SRC_URI} https://dev.gentoo.org/~zlogene/distfiles/texlive/texlive-module-${i}-${PV}.${PKGEXT}"
 	done
 	SRC_URI="${SRC_URI} )"
 fi
@@ -140,16 +140,14 @@ RELOC_TARGET=texmf-dist
 texlive-module_src_unpack() {
 	unpack ${A}
 
-	grep RELOC tlpkg/tlpobj/* | awk '{print $2}' | sed 's#^RELOC/##' > "${T}/reloclist" || die
-	{ for i in $(<"${T}/reloclist"); do  dirname ${i}; done; } | uniq > "${T}/dirlist"
-	for i in $(<"${T}/dirlist"); do
-		if [[ ! -d ${RELOC_TARGET}/${i} ]]; then
-			mkdir -p "${RELOC_TARGET}/${i}" || die
-		fi
-	done
-	for i in $(<"${T}/reloclist"); do
-		mv "${i}" "${RELOC_TARGET}"/$(dirname "${i}") || die "failed to relocate ${i} to ${RELOC_TARGET}/$(dirname ${i})"
-	done
+	sed -n -e 's:\s*RELOC/::p' tlpkg/tlpobj/* > "${T}/reloclist" || die
+	sed -e 's/\/[^/]*$//' -e "s:^:${RELOC_TARGET}/:" "${T}/reloclist" |
+		sort -u |
+		xargs mkdir -p || die
+	local i
+	while read i; do
+		mv "${i}" "${RELOC_TARGET}/${i%/*}" || die
+	done < "${T}/reloclist"
 }
 
 # @FUNCTION: texlive-module_add_format

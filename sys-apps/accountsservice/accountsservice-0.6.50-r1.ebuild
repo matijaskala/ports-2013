@@ -41,7 +41,6 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-other-display-managers.patch
 	"${FILESDIR}"/${PN}-0.6.35-gentoo-system-users.patch
 
 	# lib: don't set loaded state until seat is fetched (from 'master')

@@ -1,6 +1,29 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# Michał Górny <mgorny@gentoo.org> (2020-04-13)
+# Requires unsupported dev-python/gevent.
+dev-python/socketpool gevent
+
+# # Sergei Trofimovich <slyfox@gentoo.org> (2020-04-12)
+# ruby-2.7 dropped ia64 support, mask dependencies requiring ruby.
+# These pull in:
+# - direct ruby dependency:
+app-admin/augeas test
+app-i18n/canna doc
+sys-block/thin-provisioning-tools test
+# - texlive japan modules: ruby runtime scripts
+app-text/texlive l10n_ja context
+# - net-libs/webkit-gtk: ruby build system
+app-editors/emacs xwidgets
+dev-util/geany-plugins markdown
+gnome-extra/evolution-data-server oauth
+# - gnome-extra/sushi: depends on webkit-gtk
+gnome-base/nautilus previewer
+# - net-libs/gnome-online-accounts: depends on webkit-gtk
+gnome-base/gnome-control-center flickr
+gnome-base/gvfs google
+
 # Thomas Deutschmann <whissi@gentoo.org> (2020-03-15)
 # Mask USE=libtesseract, app-text/tesseract is not keyworded
 # Mask USE=dav1d, media-libs/dav1d is not keyworded

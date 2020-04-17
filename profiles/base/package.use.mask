@@ -6,6 +6,19 @@
 # This file is only for generic masks. For arch-specific masks (i.e.
 # mask everywhere, unmask on arch/*) use arch/base.
 
+# Ulrich Müller <ulm@gentoo.org> (2020-04-15)
+# app-i18n/man-pages-nl masked for removal. Bug #713590.
+<sys-apps/man-pages-5.05-r1 l10n_nl
+
+# Stephan Hartmann <stha09@googlemail.com> (2020-04-11)
+# Requires unreleased >=dev-libs/icu-67
+>=www-client/chromium-83.0.4103.7 system-icu
+
+# Ulrich Müller <ulm@gentoo.org> (2020-04-08)
+# Old versions of libjpeg-turbo have known security issues.
+# Use the bundled lib on your own risk. Bug #715106.
+net-im/zoom bundled-libjpeg-turbo
+
 # Alfredo Tupone <tupone@gentoo.org> (2020-04-04)
 # Ada support is not yet ready for sys-deve/gcc
 sys-devel/gcc ada
@@ -488,11 +501,6 @@ net-irc/hexchat theme-manager
 # Pacho Ramos <pacho@gentoo.org> (2016-11-27)
 # Avoid the usage of dead net-dialup/capi4k-utils
 app-emulation/crossover-bin capi
-
-# Ettore Di Giacinto <mudler@gentoo.org> (2016-11-10)
-# Dependency has no stable keyword
-# and as for now we have only stable mate versions
-mate-base/mate bluetooth
 
 # Ulrich Müller <ulm@gentoo.org> (2016-10-15)
 # The --with-cairo option is considered as experimental by upstream

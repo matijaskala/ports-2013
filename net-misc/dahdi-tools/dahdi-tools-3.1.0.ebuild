@@ -11,12 +11,14 @@ SRC_URI="https://downloads.asterisk.org/pub/telephony/${PN}/releases/${P}.tar.gz
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~ppc ~ppc64 x86"
 IUSE="ppp"
 PATCHES=(
 	"${FILESDIR}/dahdi-nondigium-blacklist.patch"
 	"${FILESDIR}/dahdi-tools-3.1.0-parallel-make-no-config.patch"
 	"${FILESDIR}/dahdi-tools-3.1.0-fno-common.patch"
+	"${FILESDIR}/dahdi-tools-3.1.0-execinfo.patch"
+	"${FILESDIR}/dahdi-tools-3.1.0-cplusplusexternc.patch"
 )
 
 DEPEND="dev-libs/newt

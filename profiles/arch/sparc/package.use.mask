@@ -1,6 +1,60 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-15)
+# net-libs/farstream is not keyworded on sparc
+net-im/pidgin gstreamer
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-15)
+# dev-qt/designer is not keyworded on sparc
+sys-libs/gwenhywfar designer
+x11-libs/qwt designer
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-15)
+# USE=bpf depends on sys-devel/clang which is not keyworded on sparc
+media-tv/v4l-utils bpf
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-14)
+# dev-lang/luajit is not keyworded on sparc
+net-analyzer/snort open-appid
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-14)
+# net-libs/srt is -sparc
+media-video/ffmpeg srt
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-04-11)
+# git useflag requires dev-libs/libgit2
+dev-util/geany-plugins git
+dev-util/geany-plugins workbench
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-11)
+# uses slot 0 of dev-lang/spidermonkey that is broken on sparc
+www-client/elinks javascript
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-11)
+# Required dependencies are not keyworded.
+x11-themes/qtcurve plasma
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-09)
+# dependencies not keyworded
+dev-python/stevedore doc
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-06)
+# ghc does not build, which is needed for darcs, bug #711944
+app-portage/layman darcs
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-06)
+# grub pc is not supported on sparc
+sys-boot/grub:2 grub_platforms_pc grub_platforms_efi-32 grub_platforms_efi-64 grub_platforms_xen grub_platforms_xen-pvh
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-06)
+# net-misc/unison is not keyworded
+net-misc/scponly unison
+
+# Rolf Eike Beer <eike@sf-mail.de> (2020-04-06)
+# hardware related dependencies are not keyworded
+net-analyzer/nagios-plugin-check_raid 3ware aacraid hpa hpsa megaraid-sas megaraid-scsi mpt-sas2 mpt
+
 # Rolf Eike Beer <eike@sf-mail.de> (2020-04-04)
 # dev-python/pymongo is not keyworded
 app-portage/g-sorcery bson
@@ -20,10 +74,6 @@ net-misc/openssh security-key
 # Joonas Niilola <juippis@gentoo.org> (2020-02-08)
 # Dependency not keyworded on this arch.
 dev-libs/dbus-c++ ecore
-
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-01-26)
-# media-libs/libheif is not keyworded
-media-gfx/gimp heif
 
 # Robin H. Johnson <robbat2@gentoo.org> (2019-12-06)
 # PPS should work on all arches, but only keyworded on some arches
@@ -71,6 +121,7 @@ app-office/scribus osg
 # Sergei Trofimovich <slyfox@gentoo.org> (2018-06-17)
 # Mask broken HIPE support on sparc32 (bug #656618)
 dev-lang/erlang hipe
+net-im/ejabberd hipe
 
 # Sergei Trofimovich <slyfox@gentoo.org> (2018-05-08)
 # Mask USE=games to avoid unkeyworded games-util/qstat.
@@ -114,11 +165,6 @@ net-misc/ofono dundee
 # Michał Górny <mgorny@gentoo.org> (2017-08-07)
 # Requires USE=hdf5 that is masked in this profile.
 media-libs/vigra doc python test
-
-# Michał Górny <mgorny@gentoo.org> (2017-06-28)
-# app-misc/dtach is not keyworded, and tests are restricted anyway, so
-# no point in pursuing it right now.
-app-shells/bash-completion test
 
 # Jason Zaman <perfinion@gentoo.org> (2017-05-09)
 # x11-libs/libXpresent is not keyworded on sparc
