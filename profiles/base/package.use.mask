@@ -7,8 +7,10 @@
 # mask everywhere, unmask on arch/*) use arch/base.
 
 # Ulrich Müller <ulm@gentoo.org> (2020-04-15)
-# app-i18n/man-pages-nl masked for removal. Bug #713590.
-<sys-apps/man-pages-5.05-r1 l10n_nl
+# Mattéo Rossillol‑‑Laruelle <beatussum@protonmail.com> (2020-04-17)
+# app-i18n/man-pages-{de,fr,nl} masked for removal.
+# Bug #713590, bug #717744.
+<sys-apps/man-pages-5.05-r1 l10n_de l10n_fr l10n_nl
 
 # Stephan Hartmann <stha09@googlemail.com> (2020-04-11)
 # Requires unreleased >=dev-libs/icu-67
@@ -96,10 +98,6 @@ dev-python/pyzmq doc
 # Michał Górny <mgorny@gentoo.org> (2020-02-24)
 # app-admin/packagekit* are masked for removal.
 kde-frameworks/frameworkintegration appstream
-
-# Michał Górny <mgorny@gentoo.org> (2020-02-24)
-# sys-apps/entropy is masked for removal.
-app-admin/packagekit-base entropy
 
 # Michał Górny <mgorny@gentoo.org> (2020-02-08)
 # The dependency is python-single-r1 while the package (and its revdeps)
