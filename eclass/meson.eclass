@@ -182,6 +182,8 @@ _meson_create_cross_file() {
 	objcpp_args = $(_meson_env_array "${OBJCXXFLAGS} ${CPPFLAGS}")
 	objcpp_link_args = $(_meson_env_array "${OBJCXXFLAGS} ${LDFLAGS}")
 	needs_exe_wrapper = ${needs_exe_wrapper}
+	sys_root = '${SYSROOT}'
+	pkg_config_libdir = '${PKG_CONFIG_LIBDIR-${EPREFIX}/usr/$(get_libdir)/pkgconfig}'
 
 	[host_machine]
 	system = '${system}'
@@ -232,6 +234,7 @@ meson_src_configure() {
 		--prefix "${EPREFIX}/usr"
 		--sysconfdir "${EPREFIX}/etc"
 		--wrap-mode nodownload
+		--pkg-config-path="${PKG_CONFIG_PATH-${EPREFIX}/usr/share/pkgconfig}"
 	)
 
 	if tc-is-cross-compiler || [[ ${ABI} != ${DEFAULT_ABI-${ABI}} ]]; then
@@ -260,6 +263,11 @@ meson_src_configure() {
 		# Build directory
 		"${BUILD_DIR}"
 	)
+
+	# Used by symbolextractor.py
+	# https://bugs.gentoo.org/717720
+	tc-export NM
+	tc-getPROG READELF readelf >/dev/null
 
 	# https://bugs.gentoo.org/625396
 	python_export_utf8_locale

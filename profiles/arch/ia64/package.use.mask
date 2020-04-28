@@ -1,6 +1,18 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# James Le Cuirot <chewi@gentoo.org> (2020-04-23)
+# Requires media-libs/mesa[llvm], which is masked.
+dev-python/pyopengl test
+
+# Lars Wendler <polynomial-c@gentoo.org> (2020-04-20)
+# Not keyworded on ia64
+net-misc/whois xcrypt
+
+# Mikle Kolyada <zlogene@gentoo.org> (2020-04-20)
+# dev-lang/ruby is not keyworded (a dep)
+app-text/texlive context l10n_ja
+
 # Michał Górny <mgorny@gentoo.org> (2020-04-13)
 # Requires unsupported dev-python/gevent.
 dev-python/socketpool gevent
@@ -96,7 +108,6 @@ app-arch/rpm test
 
 # Michał Górny <mgorny@gentoo.org> (2018-04-15)
 # Unkeyworded dep masks moved from default/linux/ia64 tree.
-mail-client/mutt notmuch
 mail-mta/exim redis
 
 # Sergei Trofimovich <slyfox@gentoo.org> (2018-03-18)
@@ -334,11 +345,6 @@ dev-haskell/dataenc test
 # Julian Ospald <hasufell@gentoo.org> (2013-03-31)
 # depends on mono/monodevelop
 >=net-irc/hexchat-2.9.4-r1 theme-manager
-
-# Agostino Sarubbo <ago@gentoo.org> (2013-02-09)
-# Mask media-video/libav[hardcoded-tables] bug #453328
-# I don't use use.mask because it works on ffmpeg
-media-video/libav hardcoded-tables
 
 # Alexandre Rostovtsev <tetromino@gentoo.org> (2013-01-31)
 # remove mask when net-libs/libqmi is keyworded here

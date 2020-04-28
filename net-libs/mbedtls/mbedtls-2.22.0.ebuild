@@ -14,7 +14,7 @@ S=${WORKDIR}/${PN}-${P}
 
 LICENSE="Apache-2.0"
 SLOT="0/13" # slot for libmbedtls.so
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
 IUSE="cpu_flags_x86_sse2 doc havege libressl programs -static-libs test threads zlib"
 RESTRICT="!test? ( test )"
 
@@ -71,7 +71,7 @@ multilib_src_configure() {
 
 multilib_src_compile() {
 	cmake-utils_src_compile
-	use doc && multilib_is_native_abi && emake apidoc
+	use doc && multilib_is_native_abi && cd "${S}" && emake apidoc
 }
 
 multilib_src_test() {

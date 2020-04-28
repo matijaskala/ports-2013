@@ -15,7 +15,7 @@ IUSE="+bluetooth +browser-extension elogind gtk-doc +ibus +networkmanager system
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	?? ( elogind systemd )"
 
-KEYWORDS="~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 x86"
 
 # libXfixes-5.0 needed for pointer barriers and #include <X11/extensions/Xfixes.h>
 # FIXME:
@@ -39,6 +39,7 @@ DEPEND="
 	media-libs/gst-plugins-base:1.0
 	networkmanager? (
 		>=net-misc/networkmanager-1.10.4:=[introspection]
+		net-libs/libnma[introspection]
 		>=app-crypt/libsecret-0.18
 		dev-libs/dbus-glib )
 	systemd? ( >=sys-apps/systemd-31
@@ -106,9 +107,9 @@ RDEPEND="${DEPEND}
 # avoid circular dependency, see bug #546134
 PDEPEND="
 	>=gnome-base/gdm-3.5[introspection]
-	>=gnome-base/gnome-control-center-3.26[bluetooth(+)?,networkmanager(+)?]
+	!arm? ( >=gnome-base/gnome-control-center-3.26[bluetooth(+)?,networkmanager(+)?] )
 	browser-extension? ( gnome-extra/chrome-gnome-shell )
-"
+" # FIXME: Temporary ugly workaround above for arm deptree issues without cascading it more by unkeywording gnome-shell for arm
 BDEPEND="
 	dev-lang/sassc
 	dev-libs/libxslt

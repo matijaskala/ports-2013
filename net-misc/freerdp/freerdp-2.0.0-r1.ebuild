@@ -9,7 +9,7 @@ if [[ ${PV} != 9999 ]]; then
 	MY_P=${P/_/-}
 	S="${WORKDIR}/${MY_P}"
 	SRC_URI="https://pub.freerdp.com/releases/${MY_P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
+	KEYWORDS="~alpha amd64 arm arm64 ppc ppc64 x86"
 else
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/FreeRDP/FreeRDP.git"
@@ -20,7 +20,7 @@ HOMEPAGE="http://www.freerdp.com/"
 
 LICENSE="Apache-2.0"
 SLOT="0/2"
-IUSE="alsa +client cpu_flags_arm_neon cups debug doc +ffmpeg gstreamer jpeg libav libressl openh264 pulseaudio server smartcard systemd test usb wayland X xinerama xv"
+IUSE="alsa +client cpu_flags_arm_neon cups debug doc +ffmpeg gstreamer jpeg libressl openh264 pulseaudio server smartcard systemd test usb wayland X xinerama xv"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -45,10 +45,7 @@ RDEPEND="
 			xv? ( x11-libs/libXv )
 		)
 	)
-	ffmpeg? (
-		libav? ( media-video/libav:0= )
-		!libav? ( media-video/ffmpeg:0= )
-	)
+	ffmpeg? ( media-video/ffmpeg:0= )
 	!ffmpeg? (
 		x11-libs/cairo:0=
 	)

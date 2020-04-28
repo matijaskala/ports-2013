@@ -11,12 +11,12 @@ HOMEPAGE="https://wiki.gnome.org/Projects/Tracker"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
-IUSE="cue exif ffmpeg gif gsf +gstreamer iptc +iso +jpeg libav +pdf +playlist raw +rss seccomp test +tiff upower +xml xmp xps"
+IUSE="cue exif ffmpeg gif gsf +gstreamer iptc +iso +jpeg +pdf +playlist raw +rss seccomp test +tiff upower +xml xmp xps"
 
-REQUIRED_USE="cue? ( gstreamer )" # cue is currently only supported via gstreamer, not ffmpeg/libav
+REQUIRED_USE="cue? ( gstreamer )" # cue is currently only supported via gstreamer, not ffmpeg
 RESTRICT="!test? ( test )"
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc x86"
 
 # tracker-2.1.7 currently always depends on ICU (theoretically could be libunistring instead); so choose ICU over enca always here for the time being (ICU is preferred)
 RDEPEND="
@@ -27,9 +27,7 @@ RDEPEND="
 		media-libs/gst-plugins-base:1.0
 		media-plugins/gst-plugins-meta:1.0 )
 	!gstreamer? (
-		ffmpeg? (
-			libav? ( media-video/libav:0= )
-			!libav? ( media-video/ffmpeg:0= ) ) )
+		ffmpeg? ( media-video/ffmpeg:0= ) )
 
 	>=sys-apps/dbus-1.3.1
 	xmp? ( >=media-libs/exempi-2.1.0:= )

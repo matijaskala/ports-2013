@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -33,10 +33,7 @@ RDEPEND="
 	dev-qt/qtx11extras:5
 	media-libs/alsa-lib:0=
 	media-libs/mesa[${MULTILIB_USEDEP},X(+)]
-	|| (
-		media-video/ffmpeg[vorbis?,vpx?,x264?,mp3?,theora?]
-		media-video/libav[vorbis?,vpx?,x264?,mp3?,theora?]
-	)
+	media-video/ffmpeg[vorbis?,vpx?,x264?,mp3?,theora?]
 	x11-libs/libX11[${MULTILIB_USEDEP}]
 	x11-libs/libXext
 	x11-libs/libXfixes[${MULTILIB_USEDEP}]
@@ -56,7 +53,7 @@ pkg_pretend() {
 		elog
 	fi
 
-	if { has_version media-video/ffmpeg[x264] || has_version media-video/libav[x264] ; } && has_version media-libs/x264[10bit] ; then
+	if has_version media-video/ffmpeg[x264] && has_version media-libs/x264[10bit] ; then
 		ewarn
 		ewarn "media-libs/x264 is currently built with 10bit useflag."
 		ewarn "This is known to prevent simplescreenrecorder from recording x264 videos"
@@ -85,12 +82,6 @@ multilib_src_configure() {
 		-DWITH_JACK="$(multilib_native_usex jack)"
 		-DWITH_GLINJECT="true"
 	)
-
-	# libav doesn't have AVFrame::channels
-	# https://github.com/MaartenBaert/ssr/issues/195#issuecomment-45646159
-	if has_version media-video/libav ; then
-		mycmakeargs+=( -DENABLE_FFMPEG_VERSIONS="false" )
-	fi
 
 	if multilib_is_native_abi ; then
 		mycmakeargs+=(
