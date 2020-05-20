@@ -32,7 +32,23 @@
 
 #--- END OF EXAMPLES ---
 
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-05-03)
+# Christoph Junghans <junghans@gentoo.org> (2020-05-19)
+# multiple vulnerabilities (CVE-2019-{3463,3464,1000018})
+# bug #699842. Masked for removal in 30 days.
+app-shells/rssh
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-05-19)
+# Stuck on Python 2 and pygtk, last revdep on dev-python/matplotlib[gtk2],
+# last release in 2011, bug #705650. Masked for removal in 30 days.
+sci-chemistry/nmrdepaker
+
+# Michał Górny <mgorny@gentoo.org> (2020-05-18)
+# Unmaintained and vulnerable.  Last commit in 2015.  Stuck on Python 2.
+# All reverse dependencies removed restkit support upstream.
+# Removal in 30 days.  Bug #544228.
+dev-python/restkit
+
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-05-17)
 # Depends on deprecated x11-libs/pangox-compat, commercial software that
 # since 2017 does no longer support Linux. Bugs #694920, #720848
 # Masked for removal in 30 days.
