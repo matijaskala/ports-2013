@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig x11-base/xorg-proto >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst postrm prepare
+DEPEND=>=dev-libs/glib-2 dev-libs/libxml2 dev-libs/libxslt media-libs/libpng:0= media-libs/mesa x11-base/xorg-server x11-libs/libX11 x11-libs/libxcb x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXi x11-libs/libXinerama x11-libs/libXrandr x11-libs/libICE x11-libs/libSM >=x11-libs/libXrender-0.9.3 >=x11-libs/startup-notification-0.7 virtual/glu cairo? ( x11-libs/cairo[X] ) dbus? ( sys-apps/dbus ) fuse? ( sys-fs/fuse ) svg? ( gnome-base/librsvg:2 )
+DESCRIPTION=OpenGL window and compositing manager
+EAPI=7
+HOMEPAGE=https://gitlab.com/compiz
+IUSE=+cairo dbus fuse +gtk mate +svg
+KEYWORDS=amd64 ppc ppc64 x86
+LICENSE=GPL-2+ LGPL-2.1 MIT
+PDEPEND=gtk? ( x11-wm/gtk-window-decorator )
+RDEPEND=>=dev-libs/glib-2 dev-libs/libxml2 dev-libs/libxslt media-libs/libpng:0= media-libs/mesa x11-base/xorg-server x11-libs/libX11 x11-libs/libxcb x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXi x11-libs/libXinerama x11-libs/libXrandr x11-libs/libICE x11-libs/libSM >=x11-libs/libXrender-0.9.3 >=x11-libs/startup-notification-0.7 virtual/glu cairo? ( x11-libs/cairo[X] ) dbus? ( sys-apps/dbus ) fuse? ( sys-fs/fuse ) svg? ( gnome-base/librsvg:2 )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/compiz-reloaded/compiz/archive/v0.8.18.tar.gz -> compiz-0.8.18.tar.gz
+_eclasses_=autotools	7d999b62b8749fad43fff00620cedf47	eutils	fcb2aa98e1948b835b5ae66ca52868c5	gnome2-utils	893e828f0f25f070f0b38d20c83c7670	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	80d37d966de71bcc1c073a2033273fb4	toolchain-funcs	d3e75048a89c0445838d2f44e5c65d97	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_md5_=657ebe076387488b7841974e0fc41073
