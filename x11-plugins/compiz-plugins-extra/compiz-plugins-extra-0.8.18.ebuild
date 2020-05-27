@@ -1,13 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
-inherit autotools eutils
+inherit autotools
 
 DESCRIPTION="Compiz Fusion Window Decorator Extra Plugins"
 HOMEPAGE="https://github.com/compiz-reloaded"
-SRC_URI="https://github.com/compiz-reloaded/${PN}/releases/download/v${PV}/${P}.tar.xz"
+SRC_URI="https://github.com/compiz-reloaded/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
@@ -26,10 +26,11 @@ RDEPEND="
 	virtual/jpeg:0
 "
 
-DEPEND="${RDEPEND}
+DEPEND="${RDEPEND}"
+
+BDEPEND="
 	>=dev-util/intltool-0.35
 	>=sys-devel/gettext-0.15
-	x11-libs/cairo
 	virtual/pkgconfig
 "
 
@@ -40,11 +41,10 @@ src_prepare() {
 
 src_configure() {
 	econf \
-		--enable-fast-install \
 		--disable-static
 }
 
 src_install() {
 	default
-	prune_libtool_files
+	find "${D}" -name '*.la' -delete || die
 }
