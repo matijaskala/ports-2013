@@ -1,10 +1,9 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=7
 
-CMAKE_ECLASS=cmake
-inherit flag-o-matic multibuild cmake-multilib
+inherit cmake multilib-minimal multilib multibuild flag-o-matic
 
 if [[ ${PV} = 9999* ]]; then
 	inherit mercurial
@@ -19,31 +18,27 @@ HOMEPAGE="http://x265.org/ https://bitbucket.org/multicoreware/x265/wiki/Home"
 
 LICENSE="GPL-2"
 # subslot = libx265 soname
-SLOT="0/188"
-IUSE="+asm +10bit +12bit cpu_flags_arm_neon cpu_flags_ppc_altivec numa power8 test"
-
-# Test suite requires assembly support and is known to be broken
-RESTRICT="test"
-
-ASM_DEPEND=">=dev-lang/nasm-2.13"
-
-BDEPEND="asm? (
-		abi_x86_32? ( ${ASM_DEPEND} )
-		abi_x86_64? ( ${ASM_DEPEND} )
-	)"
+SLOT="0/192"
+IUSE="+10bit +12bit cpu_flags_arm_neon cpu_flags_ppc_vsx2 numa pic test"
+RESTRICT="!test? ( test )"
 
 RDEPEND="numa? ( >=sys-process/numactl-2.0.10-r1[${MULTILIB_USEDEP}] )"
-
 DEPEND="${RDEPEND}"
+ASM_DEPEND=">=dev-lang/nasm-2.13"
+BDEPEND="
+	abi_x86_32? ( ${ASM_DEPEND} )
+	abi_x86_64? ( ${ASM_DEPEND} )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-3.3-arm.patch
-	"${FILESDIR}"/${PN}-3.3-neon.patch
-	"${FILESDIR}"/${PN}-3.3-ppc64.patch
+	"${FILESDIR}/arm-r1.patch"
+	"${FILESDIR}/neon.patch"
+	"${FILESDIR}/x265-3.3-ppc64.patch"
+	"${FILESDIR}/tests.patch"
+	"${FILESDIR}/test-ns.patch"
 )
 
 src_unpack() {
-	if [[ ${PV} = 9999* ]] ; then
+	if [[ ${PV} = 9999* ]]; then
 		mercurial_src_unpack
 		# Can't set it at global scope due to mercurial.eclass limitations...
 		export S=${WORKDIR}/${P}/source
@@ -67,16 +62,18 @@ src_unpack() {
 # allow disabling it: "main" *MUST* come last in the following list.
 
 x265_get_variants() {
-	local -a variants=()
-	use 12bit && variants+=( main12 )
-	use 10bit && variants+=( main10 )
-	variants+=( main )
-	echo "${variants[@]}"
+	local variants=""
+	use 12bit && variants+="main12 "
+	use 10bit && variants+="main10 "
+	variants+="main"
+	echo "${variants}"
 }
 
 x265_variant_src_configure() {
 	mkdir -p "${BUILD_DIR}" || die
 	pushd "${BUILD_DIR}" >/dev/null || die
+
+	einfo "Configuring variant: ${MULTIBUILD_VARIANT} for ABI: ${ABI}"
 
 	local mycmakeargs=( "${myabicmakeargs[@]}" )
 	case "${MULTIBUILD_VARIANT}" in
@@ -88,8 +85,20 @@ x265_variant_src_configure() {
 				-DENABLE_CLI=OFF
 				-DMAIN12=ON
 			)
+			if [[ ${ABI} = x86 ]] ; then
+				mycmakeargs+=( -DENABLE_ASSEMBLY=OFF )
+			fi
+			if [[ ${ABI} = arm* ]] ; then
+				# 589674
+				mycmakeargs+=( -DENABLE_ASSEMBLY=OFF )
+			fi
 			# disable altivec for 12bit build #607802#c5
-			[[ ${ABI} = ppc* ]] && mycmakeargs+=( -DENABLE_ALTIVEC=OFF )
+			if [[ ${ABI} = ppc* ]] ; then
+				mycmakeargs+=(
+					-DENABLE_ALTIVEC=OFF
+					-DCPU_POWER8=$(usex cpu_flags_ppc_vsx2 ON OFF)
+				)
+			fi
 			;;
 		"main10")
 			mycmakeargs+=(
@@ -98,8 +107,20 @@ x265_variant_src_configure() {
 				-DENABLE_SHARED=OFF
 				-DENABLE_CLI=OFF
 			)
+			if [[ ${ABI} = x86 ]] ; then
+				mycmakeargs+=( -DENABLE_ASSEMBLY=OFF )
+			fi
+			if [[ ${ABI} = arm* ]] ; then
+				# 589674
+				mycmakeargs+=( -DENABLE_ASSEMBLY=OFF )
+			fi
 			# disable altivec for 10bit build #607802#c5
-			[[ ${ABI} = ppc* ]] && mycmakeargs+=( -DENABLE_ALTIVEC=OFF )
+			if [[ ${ABI} = ppc* ]] ; then
+				mycmakeargs+=(
+					-DENABLE_ALTIVEC=OFF
+					-DCPU_POWER8=$(usex cpu_flags_ppc_vsx2 ON OFF)
+				)
+			fi
 			;;
 		"main")
 			if (( "${#MULTIBUILD_VARIANTS[@]}" > 1 )) ; then
@@ -107,7 +128,7 @@ x265_variant_src_configure() {
 				unset myvariants[${#MULTIBUILD_VARIANTS[@]}-1]
 				local liblist="" v=
 				for v in "${myvariants[@]}" ; do
-					ln -s "${BUILD_DIR%-*}-${v}/libx265.a" "libx265_${v}.a" || die
+					ln -s "${BUILD_DIR%-*}-${v}/libx265.a" "libx265_${v}.a" ||	die
 					liblist+="libx265_${v}.a;"
 				done
 				mycmakeargs+=(
@@ -116,12 +137,14 @@ x265_variant_src_configure() {
 					-DLINKED_10BIT=$(usex 10bit)
 					-DLINKED_12BIT=$(usex 12bit)
 				)
-				# we have to handle ppc here and not in multilib_src_configure
-				# because we want those flags apply ONLY to "main" variant
 				if [[ ${ABI} = ppc* ]] ; then
-					myabicmakeargs+=(
-						-DCPU_POWER8=$(usex power8 ON OFF)
-						-DENABLE_ALTIVEC=$(usex cpu_flags_ppc_altivec ON OFF)
+					# upstream uses mix of altivec + power8 vectors
+					# it's impossible to enable altivec without CPU_POWER8
+					# and it does not work on ppc32
+					# so we toggle both variables together
+					mycmakeargs+=(
+						-DCPU_POWER8=$(usex cpu_flags_ppc_vsx2 ON OFF)
+						-DENABLE_ALTIVEC=$(usex cpu_flags_ppc_vsx2 ON OFF)
 					)
 				fi
 			fi
@@ -129,55 +152,31 @@ x265_variant_src_configure() {
 		*)
 			die "Unknown variant: ${MULTIBUILD_VARIANT}";;
 	esac
-
 	cmake_src_configure
 	popd >/dev/null || die
 }
 
 multilib_src_configure() {
 	local myabicmakeargs=(
+		-DENABLE_TESTS=$(usex test ON OFF)
 		$(multilib_is_native_abi || echo "-DENABLE_CLI=OFF")
 		-DENABLE_PIC=ON
 		-DENABLE_LIBNUMA=$(usex numa ON OFF)
 		-DLIB_INSTALL_DIR="$(get_libdir)"
 	)
 
-	local supports_asm=yes
-
 	if [[ ${ABI} = x86 ]] ; then
-		if use asm ; then
-			# Bug #528202
-			ewarn "x86 asm is not PIC-safe, disabling it."
-			supports_asm=no
+		# Bug #528202
+		if use pic ; then
+			ewarn "PIC has been requested but x86 asm is not PIC-safe, disabling it."
+			myabicmakeargs+=( -DENABLE_ASSEMBLY=OFF )
 		fi
 	elif [[ ${ABI} = x32 ]] ; then
-		if use asm ; then
-			# bug #510890
-			ewarn "x32 ABI doesn't support asm"
-			supports_asm=no
-		fi
-	elif [[ ${ABI} = arm ]] ; then
-		if use asm && use cpu_flags_arm_neon ; then
-			supports_asm=yes
-		elif use asm ; then
-			ewarn "arm asm is not PIC-safe, disabling it."
-			supports_asm=no
-		fi
-	elif [[ ${ABI} = ppc* ]] ; then
-		if use asm ; then
-			ewarn "ppc64 uses altivec instead of asm, disabling it."
-			supports_asm=no
-		fi
-	fi
-
-	if [[ "${supports_asm}" = yes ]] && use asm ; then
-		myabicmakeargs+=( -DENABLE_ASSEMBLY=ON )
-
-		if multilib_is_native_abi ; then
-			myabicmakeargs+=( -DENABLE_TESTS=$(usex test ON OFF) )
-		fi
-	else
+		# bug #510890
 		myabicmakeargs+=( -DENABLE_ASSEMBLY=OFF )
+	elif [[ ${ABI} = arm ]] ; then
+		myabicmakeargs+=( -DENABLE_ASSEMBLY=$(usex pic OFF $(usex cpu_flags_arm_neon ON OFF)) )
+		use cpu_flags_arm_neon && use pic && ewarn "PIC has been requested but arm neon asm is not PIC-safe, disabling it."
 	fi
 
 	local MULTIBUILD_VARIANTS=( $(x265_get_variants) )
@@ -190,7 +189,7 @@ multilib_src_compile() {
 }
 
 x265_variant_src_test() {
-	if [[ -x "${BUILD_DIR}/test/TestBench" ]] ; then
+	if [ -x "${BUILD_DIR}/test/TestBench" ] ; then
 		"${BUILD_DIR}/test/TestBench" || die
 	else
 		einfo "Unit tests check only assembly."

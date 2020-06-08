@@ -14,7 +14,7 @@ SRC_URI="https://github.com/jaraco/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 SLOT="0"
 LICENSE="PSF-2"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="doc"
 
 RDEPEND="
@@ -27,13 +27,8 @@ RDEPEND="
 "
 BDEPEND="
 	dev-python/setuptools_scm[${PYTHON_USEDEP}]
+	dev-python/toml[${PYTHON_USEDEP}]
 "
-
-PATCHES=(
-#	"${FILESDIR}/keyring-19.1.0-tests.patch"
-	# https://github.com/jaraco/keyring/commit/411204df606bdf02c99f3360ec033e3c235d5f67
-#	"${FILESDIR}/keyring-19.3.0-tests.patch"
-)
 
 distutils_enable_tests pytest
 distutils_enable_sphinx docs \

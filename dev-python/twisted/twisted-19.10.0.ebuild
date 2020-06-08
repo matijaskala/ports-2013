@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{6,7,8} )
+PYTHON_COMPAT=( python2_7 python3_{6,7,8,9} )
 PYTHON_REQ_USE="threads(+)"
 
 inherit distutils-r1 virtualx
@@ -19,11 +19,11 @@ SRC_URI="${SRC_URI}/${TWISTED_RELEASE}/${TWISTED_P}.tar.bz2
 	https://dev.gentoo.org/~mgorny/dist/twisted-regen-cache.gz"
 S=${WORKDIR}/${TWISTED_P}
 
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 s390 sparc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 s390 sparc x86 ~amd64-linux ~x86-linux"
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="conch crypt http2 serial +soap test"
+IUSE="conch crypt http2 serial test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -45,7 +45,6 @@ RDEPEND="
 		>=dev-python/idna-0.6[${PYTHON_USEDEP}]
 	)
 	serial? ( >=dev-python/pyserial-3.0[${PYTHON_USEDEP}] )
-	soap? ( $(python_gen_cond_dep 'dev-python/soappy[${PYTHON_USEDEP}]' python2_7) )
 	http2? (
 		>=dev-python/hyper-h2-3.0.0[${PYTHON_USEDEP}]
 		<dev-python/hyper-h2-4.0.0[${PYTHON_USEDEP}]
@@ -83,8 +82,10 @@ DEPEND="
 python_prepare_all() {
 	local PATCHES=(
 		"${FILESDIR}"/${P}-py38.patch
-		"${FILESDIR}"/twisted-20.3.0-py38-cgi.patch
+		"${FILESDIR}"/twisted-19.10.0-py38-cgi.patch
 		"${FILESDIR}"/twisted-20.3.0-py38-hmac.patch
+		"${FILESDIR}"/twisted-19.10.0-py39-b64.patch
+		"${FILESDIR}"/twisted-20.3.0-py39-combined.patch
 	)
 
 	# upstream test for making releases; not very useful and requires
