@@ -1,6 +1,6 @@
 USE="icu upower xcb xml" 									#core subsystems
 USE="$USE cairo cups gpm lcms ldap libnotify opengl policykit sdl spell startup-notification"
-USE="$USE consolekit udev"								# consolekit
+USE="$USE elogind udev"
 USE="$USE X dbus"									# desktop gui frameworks
 USE="$USE bluetooth dri udisks usb"                             			# desktop hardware support
 USE="$USE -video_cards_vmware"								# disable vmware by default
