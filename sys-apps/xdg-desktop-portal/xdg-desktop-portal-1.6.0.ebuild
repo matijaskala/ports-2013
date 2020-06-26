@@ -11,14 +11,14 @@ HOMEPAGE="http://flatpak.org/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="doc geolocation screencast test"
 
 RDEPEND="
 	dev-libs/json-glib
 	dev-libs/glib:2[dbus]
 	media-libs/fontconfig
-	sys-fs/fuse
+	sys-fs/fuse:0
 	geolocation? ( >=app-misc/geoclue-2.5.2:2.0 )
 	screencast? ( media-video/pipewire )
 	test? ( sys-libs/libportal )
