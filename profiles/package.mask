@@ -32,6 +32,79 @@
 
 #--- END OF EXAMPLES ---
 
+# Kent Fredric <kentnl@gentoo.org> (2020-07-15)
+# No LICENSE declaration by upstream, and no response from upstream
+# since at least 2013 as to what license to use (bug #732710)
+# Removal in 30 days.
+dev-perl/Data-Diver
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (2020-07-15)
+# In preparation; do not use yet.
+=dev-lang/perl-5.32*
+
+# Christoph Junghans <junghans@gentoo.org> (2020-07-14)
+# Unmaintained upstream and does not support systemd or firewalld. 
+# Please use net-analyzer/fail2ban instead. (bug #732076)
+# Removal in 30 days.
+app-admin/denyhosts
+
+# Matt Turner <mattst88@gentoo.org> (2019-09-01)
+# Icons look funny. E.g., the X (close) icon is wrong. I suspect files are
+# installed incorrectly
+>=x11-themes/adwaita-icon-theme-3.36
+
+# William Hubbs <williamh@gentoo.org> (2020-07-14)
+# The kubernetes split packages are old versions with known security
+# issues.
+#
+#If you haven't already, please upgrade and migrate to sys-cluster/kubernetes:
+#
+# https://www.gentoo.org/support/news-items/2020-04-03-kubernetes-moving-to-single-package.html
+#
+# Removal in 60 days. Bug #731804
+sys-cluster/kubeadm
+sys-cluster/kube-apiserver
+sys-cluster/kube-controller-manager
+sys-cluster/kubectl
+sys-cluster/kubelet
+sys-cluster/kube-proxy
+sys-cluster/kube-scheduler
+
+# Michał Górny <mgorny@gentoo.org> (2020-07-13)
+# Python 2 dev-python/pillow revdeps with extended removal time.
+# Removal in 90 days.  Bug #729672.
+<net-wireless/gnuradio-3.8
+<net-wireless/gr-iio-0.3_p20191219-r1
+<net-wireless/gr-paint-0.0_p20200517
+<net-analyzer/gr-fosphor-0.0_p20200131
+<net-wireless/gr-ieee802154-0.0_p20191006
+<net-wireless/gr-iqbal-0.38.1
+<net-wireless/gr-osmosdr-0.2.0
+
+# Michał Górny <mgorny@gentoo.org> (2020-07-13)
+# These packages are mid-profile Python 2-only dependencies
+# of dev-python/pillow.  Since the last Pillow version to support
+# Python 2 contains a number of unresolved vulnerabilities, these
+# packages and old package versions are queued for removal.
+#
+# In more detail:
+# - pyxplot has been last released in 2012
+# - pkpgcounter has been last released in 2007, and has seen only a few
+#   commits since 2009
+# - scipy has removed py2 support in 1.4 (py2 target in the old version
+#   is masked in profiles/base/package.use.mask)
+#
+# This list does not include two high-profile packages:
+# - app-office/scribus whose py3 version is being currently stabilized
+# - media-tv/kodi which has no py3 version at the moment
+#
+# Removal in 30 days.  Bug #729672.
+<media-plugins/mythplugins-31
+net-print/pkpgcounter
+<sci-chemistry/chemex-2018
+sci-libs/scipy-python2
+sci-visualization/pyxplot
+
 # Michał Górny <mgorny@gentoo.org> (2020-07-13)
 # Unmaintained.  Last release from 2018, still does not support py3.
 # Removal in 30 days.  Bug #732352.
@@ -180,7 +253,6 @@ dev-util/unrpyc
 games-engines/gemrb
 media-sound/lilycomp
 media-video/tovid
-net-irc/irker
 net-mail/archivemail
 net-mail/getmail
 net-wireless/airpwn
