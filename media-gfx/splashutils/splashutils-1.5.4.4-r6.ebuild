@@ -1,12 +1,12 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 inherit autotools eutils multilib toolchain-funcs
 
 MISCSPLASH="miscsplashutils-0.1.8"
 GENTOOSPLASH="splashutils-gentoo-1.0.17"
-V_JPEG="8a"
+V_JPEG="9d"
 V_PNG="1.4.3"
 V_ZLIB="1.2.3"
 V_FT="2.3.12"
@@ -54,8 +54,8 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	>=dev-libs/klibc-1.5
-	virtual/pkgconfig
 "
+BDEPEND="virtual/pkgconfig"
 
 S="${WORKDIR}/${P/_/-}"
 SG="${WORKDIR}/${GENTOOSPLASH}"
@@ -80,24 +80,23 @@ src_prepare() {
 
 	if use openrc ; then
 		cd "${SG}"
-		epatch "${FILESDIR}/splashutils-1.5.4.4-gentoo-typo-fix.patch"
-		epatch "${FILESDIR}/splashutils-1.5.4.4-sys-queue.patch"
+		eapply -p2 "${FILESDIR}/splashutils-1.5.4.4-gentoo-typo-fix.patch"
+		eapply -p0 "${FILESDIR}/splashutils-1.5.4.4-sys-queue.patch"
 	fi
 
 	if use truetype ; then
 		cd "${SM}"
-		epatch "${FILESDIR}/splashutils-1.5.4.4-freetype-bz2.patch"
-		cd "${WORKDIR}"
-		epatch "${FILESDIR}/splashutils-1.5.4.4-ft25.patch"
+		eapply -p0 "${FILESDIR}/splashutils-1.5.4.4-freetype-bz2.patch"
+		eapply "${FILESDIR}/splashutils-1.5.4.4-ft25.patch"
 	fi
 
 	cd "${S}"
 	ln -sf "${S}/src" "${WORKDIR}/core"
 
-	epatch "${FILESDIR}/${P}-bzip2.patch"
-	epatch "${FILESDIR}/${P}-multi-keyboard.patch"
+	eapply -p2 "${FILESDIR}/${P}-bzip2.patch"
+	eapply -p2 "${FILESDIR}/${P}-multi-keyboard.patch"
 	# Bug #557126
-	epatch "${FILESDIR}/${P}-no-la.patch"
+	eapply "${FILESDIR}/${P}-no-la.patch"
 
 	if ! tc-is-cross-compiler && \
 	   has_version "sys-devel/gcc:$(gcc-version)[vanilla]" ; then
@@ -119,7 +118,7 @@ src_prepare() {
 	fi
 
 	rm -f m4/*
-	epatch_user
+	eapply_user
 	export PKG_CONFIG="pkg-config --static"
 	eautoreconf
 }
@@ -176,7 +175,7 @@ src_install() {
 	if use openrc ; then
 		cd "${SG}"
 		make DESTDIR="${D}" LIB=${LIB} install
-		prune_libtool_files
+		find . -name '*.la' -type f -delete || die
 
 		if use fbcondecor ; then
 			newinitd init-fbcondecor fbcondecor

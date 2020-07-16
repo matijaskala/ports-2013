@@ -32,6 +32,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas Sturmlechner <asturm@gentoo.org> (2020-07-15)
+# Broken by scons-python3 for >1 year, depends on dead gnome-base/libgnomeui,
+# bugs #685576, #726818, no reverse dependencies. Removal in 30 days.
+app-text/glosung
+
 # Kent Fredric <kentnl@gentoo.org> (2020-07-15)
 # No LICENSE declaration by upstream, and no response from upstream
 # since at least 2013 as to what license to use (bug #732710)
@@ -437,21 +442,6 @@ games-board/sirius
 # this, last (and only) release in 2006, abandoned upstream. Bug #726790
 # Masked for removal in 30 days.
 dev-embedded/gnome-avrdude
-
-# Michał Górny <mgorny@gentoo.org> (2020-06-14)
-# Maintainer unresponsive.  Stuck on py3.6.  Pending version bump.
-# Failing tests.
-# Removal in 30 days.  Bug #718990.
-dev-python/hglib
-
-# Michał Górny <mgorny@gentoo.org> (2020-06-14)
-# Unmaintained since at least 2014.  The current release is 1.5 dev
-# branch from 2010.  Upstream had a few stable 1.4 releases since
-# but 1.5 seems to be dead.  Multiple build failures reported,
-# and an ebuild vulnerability.
-# Removal in 30 days.  Bug #728186.
-app-mobilephone/kannel
-app-mobilephone/kannel-sqlbox
 
 # Hans de Graaff <graaff@gentoo.org> (2020-06-14)
 # Ruby 2.4 is no longer supported by upstream and no longer gets
