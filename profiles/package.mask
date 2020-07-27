@@ -338,7 +338,7 @@ x11-misc/nts
 # Dev channel releases are only for people who
 # are developers or want more experimental features
 # and accept a more unstable release.
->=www-client/chromium-85
+>=www-client/chromium-86
 
 # Michał Górny <mgorny@gentoo.org> (2020-06-29)
 # Unmaintained in Gentoo.  Multiple unresolved vulnerabilities.
@@ -381,12 +381,6 @@ sci-libs/chemkit
 www-misc/surl
 x11-wm/plwm
 
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-06-28)
-# WIP PipeWire ebuild, breaks all current revdeps in ebuild repository
-# sys-apps/xdg-desktop-portal-1.7.2 depends on masked PipeWire >=0.3
-~media-video/pipewire-0.3.6
-~sys-apps/xdg-desktop-portal-1.7.2
-
 # Mikle Kolyada <zlogene@gentoo.org> (2020-06-28)
 # Obsolete package.
 # Does not build.
@@ -399,12 +393,6 @@ app-misc/scope
 # media-sound/quimup, xfce-extra/xfce4-mpc-plugin, media-sound/xfmpc
 # Bug 729822. Removal in 30 days.
 media-sound/guimup
-
-# Sergei Trofimovich <slyfox@gentoo.org> (2020-06-21)
-# virtual/libstdc++ has only one sys-libs/libstdc++-v3 provider.
-# Use that instead. Or even better use none of them. It's a
-# library from 2005. Removal in 30 days.
-virtual/libstdc++
 
 # Hans de Graaff <graaff@gentoo.org> (2020-06-14)
 # Ruby 2.4 is no longer supported by upstream and no longer gets
