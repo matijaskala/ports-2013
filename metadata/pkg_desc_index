@@ -538,7 +538,7 @@ app-admin/lib_users 0.14: Check for mapped libs and open files that are marked a
 app-admin/lnav 0.8.5: A curses-based tool for viewing and analyzing log files
 app-admin/logcheck 1.3.18-r1: Mails anomalies in the system logfiles to the administrator
 app-admin/logmon 0.4.4-r1: Split-screen terminal/ncurses based log viewer
-app-admin/logrotate 3.14.0 3.15.1 3.16.0: Rotates, compresses, and mails system logs
+app-admin/logrotate 3.14.0 3.15.1 3.16.0 3.17.0: Rotates, compresses, and mails system logs
 app-admin/logsentry 1.1.1-r2: Automatically monitor system logs and mail security violations
 app-admin/logstalgia 1.1.2: Replays or streams an access_log as a retro arcade game-like simulation
 app-admin/logstash-bin 6.8.11 7.6.2 7.7.0 7.8.1: Tool for managing events and logs
@@ -602,7 +602,7 @@ app-admin/serf 0.8.1-r1: Service orchestration and management tool
 app-admin/setools 4.2.1 4.2.2 9999: Policy Analysis Tools for SELinux
 app-admin/socklog 2.1.0: small secure replacement for syslogd with automatic log rotation
 app-admin/spectre-meltdown-checker 0.39 0.40 0.41 0.42 0.43 9999: Spectre & Meltdown vulnerability/mitigation checker for Linux
-app-admin/sshguard 2.4.0 99999: protects hosts from brute force attacks against ssh
+app-admin/sshguard 2.4.0 2.4.1 99999: protects hosts from brute force attacks against ssh
 app-admin/stow 2.2.2-r1 2.3.1: GNU Stow is a symlink farm manager
 app-admin/su-exec 0.2: Switch user and group id and exec
 app-admin/sud 1.3-r1: A daemon to execute processes with special privileges in a nosuid environment
@@ -615,7 +615,7 @@ app-admin/sysklogd 2.1.2 9999: Standard log daemons
 app-admin/syslog-ng 3.22.1 3.24.1 3.25.1 3.26.1-r1 3.28.1-r2: syslog replacement with advanced filtering features
 app-admin/syslog-summary 1.14-r1 1.14-r2 1.14-r3 1.14-r4: Summarizes the contents of a syslog log file
 app-admin/sysrqd 17 17-r1: Daemon providing access to the kernel sysrq functions via network
-app-admin/sysstat 12.2.1 12.2.2 12.3.1 12.3.2 12.3.3 999999: System performance tools for Linux
+app-admin/sysstat 12.2.1 12.2.2 12.2.3 12.4.0 999999: System performance tools for Linux
 app-admin/system-config-printer 1.5.12-r1: Graphical user interface for CUPS administration
 app-admin/system-tools-backends 2.10.2-r1: Tools aimed to make easy the administration of UNIX systems
 app-admin/systemdgenie 0.99.0: Systemd managment utility
@@ -1274,98 +1274,266 @@ app-dicts/sword-FreSynodale1921 1.0.3: Le Nouveau Testament Version Synodale 192
 app-dicts/sword-Geez 1.0.1: Ge’ez Bible
 app-dicts/sword-Geneva 1.1: Geneva Bible Translation Notes
 app-dicts/sword-Geneva1599 2.0: Geneva Bible (1599)
+app-dicts/sword-GerAlbrecht 1.5: German Albrecht Neues Testament und Psalmen
+app-dicts/sword-GerAugustinus 1.5: Augustines Confessions (German)
 app-dicts/sword-GerElb1871 1.2: German Elberfelder (1871)
 app-dicts/sword-GerElb1905 1.5: German Darby Unrevidierte Elberfelder (1905)
+app-dicts/sword-GerGruenewald 1.5: 1924 Grünewaldbibel
+app-dicts/sword-GerHfa2002 1.1: Hoffnung fuer alle - Die Bibel
+app-dicts/sword-GerHfaLex2002 1.0.1: Hoffnung fuer alle - Worterklaerungen
+app-dicts/sword-GerLeoNA28 1.2.1: Leonberger Bibel, NT (NA28)
+app-dicts/sword-GerLeoRP18 1.2: Leonberger Bibel, NT (RP19)
 app-dicts/sword-GerLut1545 2.0.1: German Luther Übersetzung von 1545 (moderne Rechtschreibung)
+app-dicts/sword-GerLutherpredigten 1.7: Eine Sammlung von Lutherpredigten
+app-dicts/sword-GerNeUe 2.7: Neue evangelistische Übersetzung der Bibel
+app-dicts/sword-GerReinhardt 1.6: German Reinhardt Evangelien
 app-dicts/sword-GerSch 1.1.1: German Schlachter Bibel (1951)
+app-dicts/sword-GerTafel 1.1: German Tafelbibel (1911)
+app-dicts/sword-GerTextbibel 1.1: German Textbibel AT (1906)
+app-dicts/sword-Godbey 1.0: 1902 William Baxter Godbey NT
+app-dicts/sword-GodsWord 1.3.1: God'S Word to the Nations
+app-dicts/sword-GreVamvas 1.0.2: Neophytos Vamvas's translation of the Holy Bible into modern Greek (1850)
 app-dicts/sword-GreekHebrew 1.1: Greek to Hebrew Dictionary of Septuagint Words
 app-dicts/sword-HNV 1.8: Hebrew Names Version of the World English Bible
+app-dicts/sword-Haitian 1.5: Haitian Creole Bible
+app-dicts/sword-HebDelitzsch 1.2: Hebrew New Testament with Niqqud, based on Delitzsch's translation
+app-dicts/sword-HebModern 1.2: Modern Hebrew Bible
 app-dicts/sword-HebrewGreek 1.1: Hebrew to Greek Dictionary of Septuagint Words
 app-dicts/sword-Heretics 1.1: Heretics by Gilbert K. Chesterton (1874-1936)
+app-dicts/sword-HinERV 1.1: Holy Bible: Easy-to-Read Version (Hindi ERV)
 app-dicts/sword-Hitchcock 1.3: Hitchcock's Bible Names
 app-dicts/sword-HunKar 1.7: Hungarian Karoli
+app-dicts/sword-HunUj 1.7.3: The New Translation Bible of the Hungarian Bible Society
 app-dicts/sword-ISBE 2.2: International Standard Bible Encyclopedia
 app-dicts/sword-ISV 1.5: International Standard Version
+app-dicts/sword-Imitation 1.7.1: Imitation of Christ by Thomas a Kempis
 app-dicts/sword-Institutes 1.2: Calvin's Institutes
+app-dicts/sword-IriODomhnuill 1.0: A modern Irish New Testament (Luke preview)
+app-dicts/sword-ItDizGreco 1.2: Greek-Italian Dictionary of the New Testament
+app-dicts/sword-ItNomiBibbia 1.0: Dizionario dei nomi della Bibbia
 app-dicts/sword-ItaDio 1.1: Italian Giovanni Diodati Bibbia 1649
 app-dicts/sword-ItaRive 1.1: Italian Riveduta Bibbia (1927)
+app-dicts/sword-JCRHoliness 1.0: Holiness by J. C. Ryle
+app-dicts/sword-JEAffections 1.0: Religious Affections by Jonathan Edwards
+app-dicts/sword-JESermons 1.0: Select Sermons of Jonathan Edwards
 app-dicts/sword-JFB 2.2: Jamieson Fausset Brown Bible Commentary
+app-dicts/sword-JOChrist 0.5: Christologia by John Owen
+app-dicts/sword-JOCommGod 0.1: Communion with God the Father, Son and Holy Ghost by John Owen
+app-dicts/sword-JOGlory 0.5: The Glory of Christ by John Owen
+app-dicts/sword-JOMortSin 1.0: The Mortification of Sin by John Owen
 app-dicts/sword-JPS 2.1: Jewish Publication Society Old Testament
 app-dicts/sword-JST 1.1: Joseph Smith Translation
+app-dicts/sword-JapBungo 1.0: Classical Japanese Bible (Bungo-yaku/Taisho-kaiyaku), 1950 edition
+app-dicts/sword-JapDenmo 1.1.1: Japanese Electronic Network Bible (Denmo)
+app-dicts/sword-JapKougo 1.1: Colloquial Japanese Bible (Kougo-yaku), published 1954/1955
+app-dicts/sword-JapMeiji 1.0: Japanese Bible translation from the Meiji period, version from 1953
+app-dicts/sword-JapRaguet 1.0: Raguet-yaku - Japanese translation of the Bible by Emile Raguet (1910)
 app-dicts/sword-Josephus 1.1: Josephus: The Complete Works
 app-dicts/sword-Jubilee2000 1.1: English Jubilee 2000 Bible
+app-dicts/sword-KD 1.0: Keil and Delitzsch Biblical Commentary on the Old Testament
 app-dicts/sword-KJV 2.9: King James Version (1769) with Strongs Numbers and Morphology
 app-dicts/sword-KJVA 3.0.1: King James Version (1769) incl. Apocrypha, with Strongs Numbers and Morphology
 app-dicts/sword-KJVD 1.1: King James Dictionary
+app-dicts/sword-KJVPCE 1.0: King James Version: Pure Cambridge Edition
 app-dicts/sword-KLV 2.2: Klingon Language Version of the World English Bible
 app-dicts/sword-KLVen_iklingon 2.1: Klingon Language Version English to Klingon mapping lexicon
 app-dicts/sword-KLViklingon_en 2.1: Klingon Language Version Klingon to English mapping lexicon
+app-dicts/sword-Kapingamarangi 1.0.1: The New Testament in the Kapingamarangi language
+app-dicts/sword-Kaz 1.1.1: Bible translation into Kazakh
+app-dicts/sword-Kekchi 1.5: K'ekchi' Bible
+app-dicts/sword-KhmerNT 1.1: Khmer Christian Bible
+app-dicts/sword-KorHKJV 1.0: Korean Hangul King James Version
+app-dicts/sword-KorRV 2.0.1: Korean Revised Version 1952/1961
+app-dicts/sword-KtuVb 3.1: Masonama ya Santu par le Père Widart et l’équipe de Verbum Bible Kinshasa
+app-dicts/sword-LEB 2.7: The Lexham English Bible
 app-dicts/sword-LITV 1.4: Green's Literal Translation
+app-dicts/sword-LO 1.1: The Living Oracles NT
+app-dicts/sword-LXX 2.5: Septuagint, Morphologically Tagged Rahlfs'
+app-dicts/sword-Latvian 1.4: Latvian New Testament
+app-dicts/sword-LawGospel 2.1: Walther's Law and Gospel
+app-dicts/sword-Leeser 1.2: 1853 Leeser Old Testament
 app-dicts/sword-Lightfoot 1.0: John Lightfoot Commentary
+app-dicts/sword-LinVB 1.0: Liloba lya Nzambe, édition Verbum Bible
+app-dicts/sword-LtKBB 1.7.2: Lithuanian Bible
 app-dicts/sword-Luther 1.1: Luther's Commentary on Galatians
+app-dicts/sword-LvGluck8 1.1: Latvian Glück 8th edition
 app-dicts/sword-MAK 1.0: Matthias Ansorgs Kommentar
 app-dicts/sword-MHC 1.6: Matthew Henry's Complete Commentary on the Whole Bible
 app-dicts/sword-MHCC 1.1: Matthew Henry's Concise Commentary on the Whole Bible
 app-dicts/sword-MKJV 1.4: Green's Modern King James Version
+app-dicts/sword-MLStrong 1.0.1: An Intermediate Greek-English Lexicon Keyed to Strong's Numbers
+app-dicts/sword-Mal1910 1.1.1: Sathyavedapusthakam (Malayalam Bible) published in 1910
 app-dicts/sword-ManxGaelic 1.1: Manx Gaelic Scripture Portions
+app-dicts/sword-Maori 1.1: Maori Bible
+app-dicts/sword-MapM 1.0: Miqra according to the Mesorah
+app-dicts/sword-Mg1865 1.1.1: Malagasy Bible (1865)
+app-dicts/sword-MollColossians 1.0: Paul's Letter to the Believers at Colosse - A Series of Devotions by Pastor Randy Moll
+app-dicts/sword-MonKJV 1.4: Mongolian King James Version
 app-dicts/sword-Montgomery 1.3: Montgomery New Testament
+app-dicts/sword-MorphGNT 2.0: Morphologically Parsed Greek New Testament based on the SBLGNT
 app-dicts/sword-Murdock 1.2: James Murdock's Translation of the Syriac Peshitta
+app-dicts/sword-NETfree 1.0.1: Free version of New English Translation with limited notes
+app-dicts/sword-NETnotesfree 1.0.1: Free version of NET Bible Footnotes with limited notes
+app-dicts/sword-NETtext 1.0.0: New English Translation text only with footnote markers
+app-dicts/sword-NHEB 2.1: New Heart English Bible
+app-dicts/sword-NHEBJE 2.1: New Heart English Bible: Jehovah Edition
+app-dicts/sword-NHEBME 2.1: New Heart English Bible: Messianic Edition
 app-dicts/sword-Nave 2.0: Nave's Topical Bible
+app-dicts/sword-Ndebele 1.2: Ndebele Bible
+app-dicts/sword-Nestle1904 1.3: Nestle GNT 1904
+app-dicts/sword-NlCanisius1939 1.0: Petrus Canisius Translation
+app-dicts/sword-NorBroed 1.0.1: Bread Norwegian NT
+app-dicts/sword-NorSMB 1.0: Studentmållagsbibelen, first complete Nynorsk Bible translation (1921)
 app-dicts/sword-Norsk 2.0: Den Norske Bibelen
+app-dicts/sword-NorthernAzeri 1.0.1: Northern Azeri Translation
+app-dicts/sword-Noyes 1.2: 1869 Noyes Translation
+app-dicts/sword-OEB 1.1: Open English Bible (US Spelling)
+app-dicts/sword-OEBcth 1.1: Open English Bible (Commonwealth Spelling)
+app-dicts/sword-OSHB 1.4: Open Scriptures Hebrew Bible
+app-dicts/sword-OSHM 1.4: Open Scriptures Hebrew Morphology Key
+app-dicts/sword-OrthJBC 1.1: The Orthodox Jewish Brit Chadasha
 app-dicts/sword-Orthodoxy 1.0: Orthodoxy by Gilbert K. Chesterton (1874-1936)
+app-dicts/sword-OxfordTR 1.0: 1873 Oxford Textus Receptus Gospel of John
 app-dicts/sword-PNT 1.1: The People's New Testament
 app-dicts/sword-Packard 1.2: Packard's Morphological Analysis Codes
+app-dicts/sword-Passion 1.0: Dolorous Passion of Our Lord Jesus Christ
 app-dicts/sword-Personal 1.0: Personal Commentary
 app-dicts/sword-Peshitta 2.0: Syriac Peshitta
+app-dicts/sword-Phaistos 1.0: Phaistos Disk
 app-dicts/sword-Pilgrim 1.0: The Pilgrim's Progress by John Bunyan (1628-1688)
+app-dicts/sword-PohnOld 1.01: Old Public Domain Pohnpeian Bible
+app-dicts/sword-Pohnpeian 1.1.1: Bible in Pohnpeian language
+app-dicts/sword-PolGdanska 1.0: Polish Biblia Gdanska (1881)
+app-dicts/sword-PolUGdanska 2.1.1: Updated Polish Gdansk Bible
+app-dicts/sword-PorAR 1.3: Bíblia Almeida Recebida (AR)
+app-dicts/sword-PorAlmeida1911 0.2: De 1911 Biblia Sagrada Traduzida em Portuguez Por João Ferreeira D'Almeida
+app-dicts/sword-PorBLivre 1.0.1: Bíblia Livre
+app-dicts/sword-PorBLivreTR 1.0.1: Bíblia Livre - Textus Receptus
+app-dicts/sword-PorCap 2.0.1: Bíblia Sagrada (Capuchinhos)
+app-dicts/sword-PorIBP 1.0: Índice Bíblico-Pastoral da Bíblia dos Capuchinhos
+app-dicts/sword-PotLykins 1.0: 1833 Potawatomi Matthew and Acts
 app-dicts/sword-Practice 1.0: The Practice of the Presence of God: The Best Rule of Holy Life
+app-dicts/sword-QuotingPassages 1.2: Scripture Passages Quoting Scripture
 app-dicts/sword-RKJNT 1.0: Revised King James New Testament
 app-dicts/sword-RNKJV 1.5: Restored Name King James Version
 app-dicts/sword-RST 1.6: Russian Synodal Translation
 app-dicts/sword-RWP 2.0: Robertson's Word Pictures
 app-dicts/sword-RWebster 1.3: Revised Webster Version (1833)
+app-dicts/sword-RecVer 1.0: Text Only Recovery Version (no outlines)
+app-dicts/sword-Rieger 1.0: Carl Heinrich Riegers Kommentar
 app-dicts/sword-Robinson 2.1: Robinson's Morphological Analysis Codes
+app-dicts/sword-RomCor 2.1: Cornilescu Bible in Romanian language
 app-dicts/sword-Rotherham 1.7: The Emphasized Bible by J. B. Rotherham
+app-dicts/sword-RusCARS 4.1.1: Смысловой перевод Таурата, Книги Пророков, Забура и Инджила
+app-dicts/sword-RusCARSA 4.1: Смысловой перевод Таурата, Книги Пророков, Забура и Инджила
+app-dicts/sword-RusCARSADICT 4.1: A dictionary companion to app-dicts/sword-RusCARSA
+app-dicts/sword-RusCARSDict 4.0: A dictionary companion to app-dicts/sword-RusCARS
+app-dicts/sword-RusCARST 4.1: Смысловой перевод Таврота, Книги Пророков, Забура и Инджила
+app-dicts/sword-RusCARSTDICT 4.1: A dictionary companion to app-dicts/sword-RusCARST
 app-dicts/sword-RusMakarij 2.0: The Pentateuch of Moses in Russian
 app-dicts/sword-RusSynodal 1.8.1: 1876 Russian Synodal Bible
+app-dicts/sword-RusSynodalLIO 1.0.2: Russian Synodal Bible, Licht im Osten Edition
+app-dicts/sword-RusVZh 1.0: Russian New Testament with Strong's Numbers under edition of Victor R. Zhuromsky
 app-dicts/sword-SAOA 1.0: Scripture Alphabet Of Animals
+app-dicts/sword-SBLGNT 1.3.1: The Greek New Testament: SBL Edition
+app-dicts/sword-SBLGNTApp 1.3: The Greek New Testament: SBL Edition, Apparatus
 app-dicts/sword-SME 1.7: C. H. Spurgeon's Morning and Evening: Daily Readins
+app-dicts/sword-SP 1.0: Samaritan Pentateuch
+app-dicts/sword-SPDSS 1.0: Dead Sea Scrolls variants parallel to the Samaritan Pentateuch
+app-dicts/sword-SPE 1.0: Samaritan Pentateuch in English
+app-dicts/sword-SPMT 1.0: Masoretic Text parallel to the Samaritan Pentateuch
+app-dicts/sword-SPVar 1.0: Samaritan Pentateuch with variant readings
+app-dicts/sword-SahidicBible 1.1.1: Sahidic Bible - Askeland / Schulz
 app-dicts/sword-Scofield 1.0: Scofield Reference Notes, 1917 Edition
 app-dicts/sword-ScotsGaelic 1.2: Scots Gaelic Gospel of Mark
+app-dicts/sword-Sentiment 1.0: Sentiment Analysis of the Bible
+app-dicts/sword-Shona 2.1: Shona Bible
+app-dicts/sword-SloKJV 11.0: Slovenian translation of Holy Bible King James Version (1769)
+app-dicts/sword-SloKJVA 0.3.41: Sveto pismo Kralja Jakoba (1769)
+app-dicts/sword-SloOjacano 1.0: Ojačano Sveto pismo (Ps + Gal)
+app-dicts/sword-SloStritar 1.1: Novi testament in Psalmi Davidovi Josipa Stritarja (1882)
 app-dicts/sword-Smith 1.3: Smith's Bible Dictionary
+app-dicts/sword-SomKQA 2.0: Kitaabka Quduuska Ah (Somali Bible)
+app-dicts/sword-Sorani 2.0.1: Bible in Sorani Kurdish language
 app-dicts/sword-SpaRV 1.6: Spanish Biblia Reina-Valera (1909)
+app-dicts/sword-SpaRV1865 1.1: Spanish Reina-Valera Bible (1865) with updated orthography
+app-dicts/sword-SpaRV1909 1.0.1: Spanish Reina-Valera 1909 with Strong's numbers
 app-dicts/sword-SpaRVG 1.3: Spanish Reina Valera Gomez Bible
 app-dicts/sword-SpaSEV 1.1: Spanish Sagradas Escrituras Version Antigua (1569)
+app-dicts/sword-SpaTDP 1.0: Spanish Traducción de dominio público (Mateo a Romanos)
 app-dicts/sword-SpaVNT 1.2.1: Spanish 1858 Reina Valera New Testament
 app-dicts/sword-Spurious 1.0: Tischendorf's Spurious Passages of the GNT
+app-dicts/sword-SrKDEkavski 1.0: Serbian Bible Daničić-Karadžić Ekavski, NRSV versification
+app-dicts/sword-SrKDIjekav 1.0: Serbian Bible Daničić-Karadžić Ijekavski, Calvin versification
 app-dicts/sword-StrongsGreek 1.2: Strong's Greek Bible Dictionary
 app-dicts/sword-StrongsHebrew 1.2: Strong's Hebrew Bible Dictionary
 app-dicts/sword-Swahili 1.1: Swahili New Testament
+app-dicts/sword-Swe1917 2.0: Swedish Bible (1917)
+app-dicts/sword-Swe1917Of 1.1: Ordförklaringar och sakupplysningar från 1917 års översättning av bibeln
+app-dicts/sword-SweFolk1998 1.2: Svenska Folkbibeln (1998)
+app-dicts/sword-SweKarlXII 1.0: Svenska Karl XII:s Bibel (1703)
+app-dicts/sword-SweKarlXII1873 1.0: Svenska Karl XII:s Bibel (1873)
 app-dicts/sword-TCR 1.1: Thompson Chain Topics
 app-dicts/sword-TDavid 1.1: C. H. Spurgeon's Treasury of David
 app-dicts/sword-TFG 1.5: The Fourfold Gospel and Commentary on Acts of Apostles
+app-dicts/sword-TNT 2.0: Tregelles' Greek New Testament
 app-dicts/sword-TR 2.4: Textus Receptus (1550/1894)
 app-dicts/sword-TSK 1.4: Treasury of Scripture Knowledge
+app-dicts/sword-TagAngBiblia 1.2: 'Ang Biblia' in Tagalog by Philippine Bible Society, 1905
 app-dicts/sword-Tagalog 1.1: Tagalog (John & James)
+app-dicts/sword-Tausug 1.1: Tausug Kitab Injil
+app-dicts/sword-ThaiKJV 2.0: Thai King James Version
 app-dicts/sword-Tisch 2.5: Tischendorf's 8th edition GNT
 app-dicts/sword-Torrey 1.3: R. A. Torrey's New Topical Textbook
+app-dicts/sword-TurHADI 1.1.1: Turkish Easy-to-Read Translation (HADI)
+app-dicts/sword-TurNTB 2.1.1: Kutsal Kitap (New Turkish Bible)
 app-dicts/sword-Twenty 1.1: Twentieth Century New Testament
 app-dicts/sword-Tyndale 1.0: William Tyndale Bible (1525/1530)
 app-dicts/sword-UKJV 1.1.1: Updated King James Version
+app-dicts/sword-UkrKulish 1.1: Ukrainian New Testament translated by P. Kulish (1871)
 app-dicts/sword-Ukrainian 1.4: Ivan Ogienko Ukrainian Bible, 1930
 app-dicts/sword-Uma 1.2: Uma New Testament
+app-dicts/sword-UrduGeo 1.6: Urdu Geo Version (UGV) of the Bible, Urdu script
+app-dicts/sword-UrduGeoDeva 1.7: Urdu Geo Version (UGV) Bible, Devanagari script
+app-dicts/sword-UrduGeoRoman 1.1: Urdu Geo Version (UGV) of the Bible, Latin script
+app-dicts/sword-UyCyr 1.1: Modern Uyghur Cyrillic translation of the Bible
+app-dicts/sword-VarApp 1.0: NT Manuscript Variant Apparatus
+app-dicts/sword-Viet 1.4.1: Vietnamese Bible (1934)
+app-dicts/sword-VietLCCMN 1.0: Lời Chúa Cho Mọi Người
+app-dicts/sword-VietLCCMNCT 1.0: Lời Chúa Cho Mọi Người Chú Thích
+app-dicts/sword-VietNVB 1.4: New Vietnamese Bible (2002)
+app-dicts/sword-VulgClementine 2.0.1: Clementine Vulgate
+app-dicts/sword-VulgConte 1.0.2: Vulgata Clementina, Conte editore
+app-dicts/sword-VulgGlossa 1.0.1: Glossa ordinaria, ed. Migne
+app-dicts/sword-VulgHetzenauer 1.0.2: Vulgata Clementina, Hetzenauer editore
+app-dicts/sword-VulgSistine 1.0.2: Vulgata Sistina
 app-dicts/sword-Vulgate 1.1: Latin Vulgate
 app-dicts/sword-Vulgate_HebPs 1.1: Latin Vulgate Psalms from Hebrew
 app-dicts/sword-WEB 1.8: World English Bible
 app-dicts/sword-WHNU 2.4: Westcott-Hort with NA27/UBS4 variants (1881)
 app-dicts/sword-WLC 1.9: Westminster Leningrad Codex
 app-dicts/sword-Webster 1.2: Webster Bible
+app-dicts/sword-Webster1806 1.0: Webster's 1806 A Compendious Dictionary of the English Language
 app-dicts/sword-Webster1913 2.0: Webster's English Dictionary, 1913 edition
+app-dicts/sword-WelBeiblNet 2.5.1: beibl.net translation of the Bible into colloquial Welsh by Arfon Jones
 app-dicts/sword-Wesley 1.1: John Wesley's Notes on the Bible
+app-dicts/sword-Westminster 1.0.1: Westminster Confession & Catechisms
+app-dicts/sword-Westminster21 1.0: The Westminster Standards translated into twenty-first century American English
 app-dicts/sword-Weymouth 1.1: Weymouth NT (1912)
+app-dicts/sword-Worsley 1.6: 1770 John Worsley NT
 app-dicts/sword-Wulfila 1.0.1: Bishop Wulfila Gothic Bible
 app-dicts/sword-Wycliffe 2.3: John Wycliffe Bible (c. 1395)
 app-dicts/sword-YLT 1.1: Young's Literal Translation (1898)
+app-dicts/sword-ZhEnglish 1.0.1: CEDICT English/Chinese Dictionary
+app-dicts/sword-ZhHanzi 1.0: CEDICT Chinese (Hanzi)/English Dictionary
+app-dicts/sword-ZhPinyin 1.0: CEDICT Chinese (Pinyin)/English Dictionary
+app-dicts/sword-alzat 1.0: الذات للبابا شنودة الثالث
+app-dicts/sword-br_en 1.1: Breton to English Glossary
+app-dicts/sword-en_eu 1.1: English to Basque Glossary
+app-dicts/sword-f35 1.0.1: Wilbur Pickering's Greek New Testament According to Family 35
+app-dicts/sword-la_en 1.1: Latin to English Glossary
+app-dicts/sword-sml_BL_2008 1.0.1: Kitab Awal-Jaman maka Kitab Injil
+app-dicts/sword-vlsJoNT 1.0.1: Het Nieuwe Testament by Nicolaas De Jonge
 app-dicts/verbiste 0.1.38-r1 0.1.41 0.1.44: French conjugation system
 app-dicts/wnn-ldic 1.04: Wnn dictionary for librarian
 app-dicts/wordnet 3.0-r4 3.0-r5 3.1: A lexical database for the English language
@@ -1753,7 +1921,7 @@ app-emulation/libcacard 2.6.0: virtual Common Access Card (CAC) library emulator
 app-emulation/libdsk 1.5.8: LIBDSK is a library for accessing discs and disc image files
 app-emulation/libguestfs 1.36.13 1.36.15 1.38.6: Tools for accessing, inspect and modifying virtual machine (VM) disk images
 app-emulation/libguestfs-appliance 1.36.1 1.38.0: VM appliance disk image used in libguestfs package
-app-emulation/libpod 1.8.2 1.9.3 2.0.0 2.0.1 2.0.2 2.0.3: Library and podman tool for running OCI-based containers in Pods
+app-emulation/libpod 1.8.2 1.9.3 2.0.0 2.0.1 2.0.2 2.0.3 2.0.4: Library and podman tool for running OCI-based containers in Pods
 app-emulation/libspectrum 1.4.4: Spectrum emulation library
 app-emulation/libvirt 6.2.0-r2 6.5.0 9999: C toolkit to manipulate virtual machines
 app-emulation/libvirt-glib 1.0.0-r1 2.0.0 3.0.0: GLib and GObject mappings for libvirt
@@ -1856,13 +2024,13 @@ app-eselect/eselect-repository 7: Manage repos.conf via eselect
 app-eselect/eselect-ruby 20170723 20190121 20191222: Manages multiple Ruby versions
 app-eselect/eselect-rust 20200419: Eselect module for management of multiple Rust versions
 app-eselect/eselect-scala 0.1.1: Manages multiple Scala versions
-app-eselect/eselect-sh 0.4-r2 0.4.1: Manages the /bin/sh (POSIX shell) symlink
+app-eselect/eselect-sh 0.4.1: Manages the /bin/sh (POSIX shell) symlink
 app-eselect/eselect-sndpeek 1.0.1: Manages the /usr/bin/sndpeek symlink
 app-eselect/eselect-timezone 0.2: Manages timezone selection
 app-eselect/eselect-timidity 20110513: Manages configuration of TiMidity++ patchsets
 app-eselect/eselect-unison 0.4: unison module for eselect
 app-eselect/eselect-vdr 0.0.3 0.0.4: Manages the VDR plugins
-app-eselect/eselect-vi 1.1.9 1.1.9-r1 1.2: Manages the /usr/bin/vi symlink
+app-eselect/eselect-vi 1.2: Manages the /usr/bin/vi symlink
 app-eselect/eselect-wine 1.2.2: Manage active wine version
 app-eselect/eselect-wxwidgets 20140423 20180529: Eselect module and wrappers for wxWidgets
 app-eselect/eselect-xvmc 0.4: Manages XvMC implementations
@@ -2644,7 +2812,7 @@ app-text/blogc 0.19.0 9999: A blog compiler
 app-text/bogosort 0.4.2-r1: A file sorting program which uses the bogosort algorithm
 app-text/build-docbook-catalog 1.21: DocBook XML catalog auto-updater
 app-text/c2ps 4.0: Generates a beautified ps document from a source file (c/c++)
-app-text/calibre 4.9.1-r3 4.20.0 4.21.0: Ebook management application
+app-text/calibre 4.9.1-r3 4.20.0 4.21.0 4.22.0: Ebook management application
 app-text/capyt 1.1.1: A python3 CLI utility to interface with cpy.pt paste service
 app-text/catdoc 0.95-r1: Converter for Microsoft Word, Excel, PowerPoint and RTF files to text
 app-text/cb2bib 1.9.8 1.9.9 2.0.0: Tool for extracting unformatted bibliographic references
@@ -2854,7 +3022,7 @@ app-text/sloccount 2.26-r3: Tools for counting Source Lines of Code (SLOC) for a
 app-text/spellutils 0.7: spellutils includes 'newsbody' (useful for spellchecking in mails, etc.)
 app-text/stardict 3.0.6-r3 4.0.0_pre20170304: A international dictionary supporting fuzzy and glob style matching
 app-text/sword 1.8.1-r1: Library for Bible reading software
-app-text/sword-modules 1-r3: A collection of modules for the SWORD project
+app-text/sword-modules 2: All the unlocked modules for app-text/sword, grouped by language
 app-text/t1utils 1.41-r2: Type 1 Font utilities
 app-text/tabler 2-r1: A utility to create text art tables from delimited input
 app-text/talkfilters 2.3.8-r1: Convert ordinary English text into text that mimics a stereotyped dialect
@@ -4674,9 +4842,9 @@ dev-java/offo-hyphenation 2.0: Hyphenation patterns for Apache Fop
 dev-java/ognl 3.0.8: Object-Graph Navigation Language: get/set properties of objects
 dev-java/okio 1.11.0: A modern I/O API for Java
 dev-java/opencsv 2.3: A very simple csv (comma-separated values) parser library for Java
-dev-java/openjdk 8.252_p09 8.262_p10 11.0.7_p10 11.0.8_p10: Open source implementation of the Java programming language
-dev-java/openjdk-bin 8.252_p09 8.262_p10 11.0.7_p10-r1 11.0.8_p10: Prebuilt Java JDK binaries provided by AdoptOpenJDK
-dev-java/openjdk-jre-bin 8.252_p09 8.262_p10 11.0.7_p10-r1 11.0.8_p10-r1: Prebuilt Java JRE binaries provided by AdoptOpenJDK
+dev-java/openjdk 8.252_p09 8.262_p10 8.265_p01 11.0.7_p10 11.0.8_p10: Open source implementation of the Java programming language
+dev-java/openjdk-bin 8.252_p09 8.262_p10 8.265_p01 11.0.7_p10-r1 11.0.8_p10: Prebuilt Java JDK binaries provided by AdoptOpenJDK
+dev-java/openjdk-jre-bin 8.252_p09 8.262_p10 8.265_p01 11.0.7_p10-r1 11.0.8_p10-r1: Prebuilt Java JRE binaries provided by AdoptOpenJDK
 dev-java/openjfx 11.0.8_p2: Java OpenJFX client application platform
 dev-java/oracle-javamail 1.5.2 1.5.5 1.5.6: A Java-based framework to build multiplatform mail and messaging applications
 dev-java/oracle-jdk-bin 1.8.0.202 11.0.2: Oracle's Java SE Development Kit
@@ -4871,7 +5039,7 @@ dev-lang/mozart 1.4.0-r3 1.4.0-r4 2.0.1: Advanced development platform for intel
 dev-lang/mozart-stdlib 1.4.0-r2 2.0.1: The Mozart Standard Library
 dev-lang/mujs 1.0.6 1.0.7: An embeddable Javascript interpreter in C.
 dev-lang/nasm 2.14.02 2.15.03: groovy little assembler
-dev-lang/nim 1.2.4: compiled, garbage-collected systems programming language
+dev-lang/nim 1.2.4 1.2.6: compiled, garbage-collected systems programming language
 dev-lang/nqp 2019.03-r1 2019.07.1 2019.11 2020.05 2020.06 9999: Not Quite Perl, a Perl 6 bootstrapping compiler
 dev-lang/nwcc 0.8.2 0.8.3: Nils Weller's C Compiler
 dev-lang/ocaml 4.04.2-r1 4.05.0-r1 4.09.0: Programming language supporting functional, imperative & object-oriented styles
@@ -4888,8 +5056,8 @@ dev-lang/qu-prolog 10.4 10.5: Extended Prolog supporting quantifiers, object-var
 dev-lang/rakudo 2019.03 2019.11 2020.05.1 2020.06 9999: A compiler for the Perl 6 programming language
 dev-lang/regina-rexx 3.9.1-r1: Portable Rexx interpreter
 dev-lang/ruby 2.4.10 2.5.8 2.5.8-r1 2.6.6 2.6.6-r1 2.6.6-r2 2.7.1 2.7.1-r1 2.7.1-r2: An object-oriented scripting language
-dev-lang/rust 1.41.1 1.42.0 1.43.1 1.44.1 1.45.0: Systems programming language from Mozilla
-dev-lang/rust-bin 1.41.1 1.42.0 1.43.1 1.44.1 1.45.0: Systems programming language from Mozilla
+dev-lang/rust 1.44.1 1.45.0 1.45.1: Systems programming language from Mozilla
+dev-lang/rust-bin 1.44.1 1.45.0 1.45.1: Systems programming language from Mozilla
 dev-lang/sassc 3.6.0: A libsass command line driver
 dev-lang/scala 2.12.4 2.12.10: The Scala Programming Language
 dev-lang/scala-bin 2.13.1: The Scala Programming Language
@@ -4906,7 +5074,7 @@ dev-lang/tcl 8.5.17-r1 8.6.8 8.6.9-r1: Tool Command Language
 dev-lang/teyjus 2.1 2.1-r1: Higher-order logic programming language Lambda Prolog
 dev-lang/tk 8.5.17-r1 8.6.8 8.6.9 8.6.9.1: Tk Widget Set
 dev-lang/tuprolog 2.9.2 3.0.1 3.1.0 3.1.0-r1 3.2.0: tuProlog is a light-weight Prolog for Internet applications and infrastructures
-dev-lang/vala 0.36.20 0.40.20 0.40.23 0.44.11 0.46.7 0.46.10 0.46.11 0.48.6 0.48.7: Compiler for the GObject type system
+dev-lang/vala 0.36.20 0.40.20 0.40.23 0.44.11 0.46.7 0.46.10 0.46.11 0.46.12 0.48.6 0.48.7 0.48.8: Compiler for the GObject type system
 dev-lang/whitespace 0.4: Whitespace, an esoteric programming language
 dev-lang/xsb 3.6.0 3.6.0-r1 3.7.0-r1 3.8.0: XSB is a logic programming and deductive database system
 dev-lang/yap 6.3.3-r1: YAP is a high-performance Prolog compiler
@@ -5081,7 +5249,7 @@ dev-libs/libbsd 0.10.0: An library to provide useful functions commonly found on
 dev-libs/libbson 0.98.0 1.1.2 1.1.10 1.3.5 1.3.6 1.6.2 1.8.2 1.9.3 1.10.3 1.11.0 1.12.0 1.13.0 1.13.1 1.14.0 1.15.1 1.16.2: Library routines related to building,parsing and iterating BSON documents
 dev-libs/libbulletml 0.0.6: A Library of Bullet Markup Language
 dev-libs/libburn 1.5.2_p1: Open-source library for reading, mastering and writing optical discs
-dev-libs/libbytesize 2.2 2.3: Tiny library providing a C "class" for working with arbitrary big sizes in bytes
+dev-libs/libbytesize 2.2 2.3 2.4: Tiny library providing a C "class" for working with arbitrary big sizes in bytes
 dev-libs/libcbor 0.5.0 0.6.0-r1 0.6.1 0.7.0: CBOR protocol implementation for C and others
 dev-libs/libcdio 2.0.0-r1 2.1.0-r1: A library to encapsulate CD-ROM reading and control
 dev-libs/libcdio-paranoia 0.93_p1-r1 0.94_p2-r2 2.0.0-r1 2.0.1: an advanced CDDA reader with error correction
@@ -5329,7 +5497,7 @@ dev-libs/pcl 1.12-r1: Portable Coroutine Library
 dev-libs/pegtl 2.8.3: Header-only library for creating parsers according to Parsing Expression Grammar
 dev-libs/pigpio 76 77: A library for the Raspberry which allows control of the GPIOs
 dev-libs/pkcs11-helper 1.25.1: PKCS#11 helper library
-dev-libs/plasma-wayland-protocols 1.0 1.1.0: Plasma Specific Protocols for Wayland
+dev-libs/plasma-wayland-protocols 1.0 1.1.1: Plasma Specific Protocols for Wayland
 dev-libs/poco 1.9.0-r2: C++ libraries for building network-based applications
 dev-libs/popt 1.16-r2 1.18: Parse Options - Command line parser
 dev-libs/ppl 1.2-r3: The Parma Polyhedra Library for numerical analysis of complex systems
@@ -5405,7 +5573,7 @@ dev-libs/ustr 1.0.4-r5 1.0.4-r7 1.0.4-r8: Low-overhead managed string library fo
 dev-libs/utfcpp 3.1 9999: UTF-8 C++ library
 dev-libs/uthash 2.0.2: An easy-to-use hash implementation for C programmers
 dev-libs/uulib 0.5.20-r1: Library that supports Base64 (MIME), uuencode, xxencode and binhex coding
-dev-libs/vala-common 0.46.7 0.46.10 0.48.6 0.48.7: Build infrastructure for packages that use Vala
+dev-libs/vala-common 0.46.7 0.46.10 0.48.6 0.48.7 0.48.8: Build infrastructure for packages that use Vala
 dev-libs/vc 1.3.0 1.3.3 1.4.1: SIMD Vector Class Library for C++
 dev-libs/voikko-fi 2.3: Finnish dictionary for libvoikko based spell checkers (vvfst format)
 dev-libs/volume_key 0.3.11 0.3.12: Library for manipulating and storing storage volume encryption keys
@@ -5774,7 +5942,7 @@ dev-perl/CPAN-Meta-Check 0.14.0: Verify requirements in a CPAN::Meta object
 dev-perl/CPAN-Mini 1.111.16: Create a minimal mirror of CPAN
 dev-perl/CPAN-Mini-Inject 0.350.0: Inject modules into a CPAN::Mini mirror
 dev-perl/CPAN-Perl-Releases 3.760.0 5.202.3.200 5.202.4.280 5.202.6.200 5.202.7.170: Mapping Perl releases on CPAN to the location of the tarballs
-dev-perl/CPAN-Uploader 0.103.13 0.103.14: upload things to the CPAN
+dev-perl/CPAN-Uploader 0.103.14: upload things to the CPAN
 dev-perl/CQL-Parser 1.130.0-r1: compiles CQL strings into parse trees of Node subtypes
 dev-perl/CSS-Minifier 0.10.0-r2: Perl extension for minifying CSS
 dev-perl/CSS-Minifier-XS 0.90.0-r1 0.90.0-r2: XS based CSS minifier
@@ -5851,19 +6019,19 @@ dev-perl/Clone-PP 1.70.0: Recursively copy Perl datatypes
 dev-perl/Color-Calc 1.74.0: Simple calculations with RGB colors
 dev-perl/Color-Library 0.21.0-r1 0.21.0-r2: An easy-to-use and comprehensive named-color library
 dev-perl/Compress-Bzip2 2.260.0 2.270.0 2.280.0: Interface to Bzip2 compression library
-dev-perl/Compress-LZF 3.800.0 3.800.0-r1: extremely light-weight Lempel-Ziv-Free compression
+dev-perl/Compress-LZF 3.800.0-r1: extremely light-weight Lempel-Ziv-Free compression
 dev-perl/Conf-Libconfig 0.100.0 0.100.0-r1: Perl extension for libconfig
 dev-perl/Config-Any 0.320.0: Load configuration from different file formats, transparently
 dev-perl/Config-ApacheFormat 1.200.0-r1 1.200.0-r2: use Apache format config files
-dev-perl/Config-Auto 0.440.0 0.440.0-r1: Magical config file parser
+dev-perl/Config-Auto 0.440.0-r1: Magical config file parser
 dev-perl/Config-AutoConf 0.315.0 0.318.0: A module to implement some of AutoConf macros in pure perl
 dev-perl/Config-Crontab 1.450.0: Read/Write Vixie compatible crontab(5) files
 dev-perl/Config-General 2.630.0: Config file parser module
 dev-perl/Config-Grammar 1.120.0 1.130.0: A grammar-based, user-friendly config parser
 dev-perl/Config-INI 0.25.0: simple .ini-file format
 dev-perl/Config-IniFiles 2.940.0 3.0.3: A module for reading .ini-style configuration files
-dev-perl/Config-JSON 1.520.200 1.520.200-r1: A JSON based config file system
-dev-perl/Config-MVP 2.200.10 2.200.11: multivalue-property package-oriented configuration
+dev-perl/Config-JSON 1.520.200-r1: A JSON based config file system
+dev-perl/Config-MVP 2.200.11: multivalue-property package-oriented configuration
 dev-perl/Config-MVP-Reader-INI 2.101.463: an MVP config reader for .ini files
 dev-perl/Config-MVP-Slicer 0.303.0: Extract embedded plugin config from parent config
 dev-perl/Config-Properties 1.800.0 1.800.0-r1: Configuration using Java style properties
@@ -5871,7 +6039,7 @@ dev-perl/Config-Simple 4.590.0-r1 4.590.0-r2: Simple configuration file class
 dev-perl/Config-Tiny 2.230.0 2.240.0: Read/Write .ini style files with as little code as possible
 dev-perl/ConfigReader 0.500.0-r2: Read directives from a configuration file
 dev-perl/Const-Fast 0.14.0-r1 0.14.0-r2: Facility for creating read-only scalars, arrays, and hashes
-dev-perl/Context-Preserve 0.20.0 0.30.0: Return chained, modified values from subs, without losing context
+dev-perl/Context-Preserve 0.30.0: Return chained, modified values from subs, without losing context
 dev-perl/Contextual-Return 0.4.14: Create context-sensitive return values
 dev-perl/Convert-ASCII-Armour 1.400.0-r1 1.400.0-r2: Convert binary octets into ASCII armoured messages
 dev-perl/Convert-ASN1 0.270.0-r1: Standard en/decode of ASN.1 structures
@@ -6056,21 +6224,21 @@ dev-perl/Digest-MD2 2.40.0 2.40.0-r1: Perl interface to the MD2 Algorithm
 dev-perl/Digest-MD4 1.900.0-r1 1.900.0-r2: MD4 message digest algorithm
 dev-perl/Digest-MD5-File 0.80.0-r1 0.80.0-r2: Perl extension for getting MD5 sums for files and urls
 dev-perl/Digest-Nilsimsa 0.60.0-r2 0.60.0-r3: Perl version of Nilsimsa code
-dev-perl/Digest-Perl-MD5 1.900.0: Pure perl implementation of MD5
-dev-perl/Digest-SHA1 2.130.0-r1: NIST SHA message digest algorithm
+dev-perl/Digest-Perl-MD5 1.900.0 1.900.0-r1: Pure perl implementation of MD5
+dev-perl/Digest-SHA1 2.130.0-r1 2.130.0-r2: NIST SHA message digest algorithm
 dev-perl/Dist-CheckConflicts 0.110.0: Declare version conflicts for your dist
 dev-perl/Dist-Metadata 0.927.0: Information about a perl module distribution
 dev-perl/Dist-Milla 1.0.20: Distribution builder, Opinionated but Unobtrusive
-dev-perl/Dist-Zilla 6.10.0-r2: distribution builder; installer not included!
+dev-perl/Dist-Zilla 6.10.0-r2 6.15.0: distribution builder; installer not included!
 dev-perl/Dist-Zilla-Config-Slicer 0.202.0: Config::MVP::Slicer customized for Dist::Zilla
 dev-perl/Dist-Zilla-Plugin-AuthorsFromGit 0.6.0: Add per-file per-year copyright information
 dev-perl/Dist-Zilla-Plugin-CheckChangesHasContent 0.11.0: Ensure Changes has content before releasing
 dev-perl/Dist-Zilla-Plugin-CheckExtraTests 0.29.0-r1: check xt tests before release
-dev-perl/Dist-Zilla-Plugin-Config-Git 0.920.0: Plugin configuration containing settings for a Git repo
+dev-perl/Dist-Zilla-Plugin-Config-Git 0.920.0 0.920.0-r1: Plugin configuration containing settings for a Git repo
 dev-perl/Dist-Zilla-Plugin-ContributorsFile 0.3.0: add a file listing all contributors
 dev-perl/Dist-Zilla-Plugin-CopyFilesFromBuild 0.170.880: Copy (or move) specific files after building (for SCM inclusion, etc.)
-dev-perl/Dist-Zilla-Plugin-CopyFilesFromRelease 0.6.0: Copy files from a release (for SCM inclusion, etc.)
-dev-perl/Dist-Zilla-Plugin-Git 2.42.0-r1: Update your git repository after release
+dev-perl/Dist-Zilla-Plugin-CopyFilesFromRelease 0.6.0 0.7.0: Copy files from a release (for SCM inclusion, etc.)
+dev-perl/Dist-Zilla-Plugin-Git 2.42.0-r1 2.46.0: Update your git repository after release
 dev-perl/Dist-Zilla-Plugin-Git-Contributors 0.35.0: Add contributor names from git to your distribution
 dev-perl/Dist-Zilla-Plugin-GithubMeta 0.580.0: Automatically include GitHub meta information in META.yml
 dev-perl/Dist-Zilla-Plugin-LicenseFromModule 0.70.0: Extract License and Copyright from its main_module file
@@ -6171,7 +6339,7 @@ dev-perl/Festival-Client-Async 0.30.300-r2: Non-blocking interface to a Festival
 dev-perl/File-BOM 0.160.0: Utilities for handling Byte Order Marks
 dev-perl/File-BaseDir 0.30.0-r1 0.70.0: Use the Freedesktop.org base directory specification
 dev-perl/File-Copy-Link 0.140.0: Perl extension for replacing a link by a copy of the linked file
-dev-perl/File-Copy-Recursive 0.380.0-r1: uses File::Copy to recursively copy dirs
+dev-perl/File-Copy-Recursive 0.380.0-r1 0.450.0: uses File::Copy to recursively copy dirs
 dev-perl/File-DesktopEntry 0.220.0: Object to handle .desktop files
 dev-perl/File-Find-Rule 0.340.0: Alternative interface to File::Find
 dev-perl/File-Find-Rule-Perl 1.150.0: Common rules for searching for Perl things
@@ -6879,7 +7047,7 @@ dev-perl/Snowball-Norwegian 1.200.0-r1: Porters stemming algorithm for Norwegian
 dev-perl/Snowball-Swedish 1.200.0-r1: Porters stemming algorithm for Swedish
 dev-perl/Socket-GetAddrInfo 0.220.0: Address-family independent name resolving functions
 dev-perl/Socket6 0.270.0 0.280.0: IPv6 related part of the C socket.h defines and structure manipulators
-dev-perl/Software-License 0.103.13: packages that provide templated software licenses
+dev-perl/Software-License 0.103.13 0.103.14: packages that provide templated software licenses
 dev-perl/Sort-Key 1.330.0-r1: sort objects by some (calculated) key
 dev-perl/Sort-Key-IPv4 0.30.0-r1: Sort IP v4 addresses
 dev-perl/Sort-Naturally 1.30.0-r1: sort lexically, but sort numeral parts numerically
@@ -7124,6 +7292,7 @@ dev-perl/Try-Tiny 0.300.0: Minimal try/catch with proper localization of $@
 dev-perl/Type-Tie 0.9.0: Tie a variable to a type constraint
 dev-perl/Type-Tiny 1.2.1: tiny, yet Moo(se)-compatible type constraint
 dev-perl/Type-Tiny-XS 0.12.0: provides an XS boost for some of Type::Tiny's built-in type constraints
+dev-perl/Types-Path-Tiny 0.6.0: Path::Tiny types and coercions for Moose and Moo
 dev-perl/Types-Serialiser 1.0.0-r1: simple data types for common serialisation formats
 dev-perl/UNIVERSAL-can 1.201.403.280: Hack around people calling UNIVERSAL::can() as a function
 dev-perl/UNIVERSAL-isa 1.201.710.120: Attempt to recover from people calling UNIVERSAL::isa as a function
@@ -7644,7 +7813,7 @@ dev-python/bitarray 0.8.3: efficient arrays of booleans -- C extension
 dev-python/bitstring 3.1.6 3.1.7: A pure Python module for creation and analysis of binary data
 dev-python/black 19.10_beta0: The uncompromising Python code formatter
 dev-python/bleach 3.1.5: an easy whitelist-based HTML-sanitizing tool
-dev-python/blessed 1.17.8: Library for making terminal apps using colors, keyboard input and positioning
+dev-python/blessed 1.17.8 1.17.9: Library for making terminal apps using colors, keyboard input and positioning
 dev-python/blessings 1.7-r1: A thin, practical wrapper around terminal coloring, styling, and positioning
 dev-python/blinker 1.4-r1: Fast, simple object-to-object and broadcast signaling
 dev-python/blockdiag 1.5.4: Generate block-diagram image from text
@@ -8007,7 +8176,7 @@ dev-python/ipynb 0.5.1: Package/Module importer for importing code from Jupyter 
 dev-python/ipyparallel 6.2.3 6.3.0: Interactive Parallel Computing with IPython
 dev-python/ipython 7.5.0 7.16.1: Advanced interactive shell for Python
 dev-python/ipython_genutils 0.2.0 0.2.0-r1: Vestigial utilities from IPython
-dev-python/ipywidgets 7.0.0 7.5.1: IPython HTML widgets for Jupyter
+dev-python/ipywidgets 7.5.1: IPython HTML widgets for Jupyter
 dev-python/irc 18.0.0-r1: IRC client framework written in Python
 dev-python/iso8601 0.1.12: Simple module to parse ISO 8601 dates
 dev-python/isodate 0.6.0-r1: ISO 8601 date/time/duration parser and formatter
@@ -8024,7 +8193,7 @@ dev-python/jaraco-logging 3.0.0-r1: Additional facilities to supplement Python's
 dev-python/jaraco-packaging 6.2-r1 8.1.0: Tools to supplement packaging Python releases
 dev-python/jaraco-stream 3.0.0: Routines for handling streaming data
 dev-python/jaraco-text 3.2.0: Text utilities used by other projects by developer jaraco
-dev-python/jdcal 1.4 1.4.1: Julian dates from proleptic Gregorian and Julian calendars
+dev-python/jdcal 1.4.1: Julian dates from proleptic Gregorian and Julian calendars
 dev-python/jedi 0.14.1 0.15.2 0.17.0 0.17.1-r1 0.17.2: Autocompletion library for Python
 dev-python/jeepney 0.4.3: Low-level, pure Python DBus protocol wrapper
 dev-python/jellyfish 0.8.2: Python module for doing approximate and phonetic matching of strings
@@ -8051,7 +8220,7 @@ dev-python/jsonschema 3.2.0: An implementation of JSON-Schema validation for Pyt
 dev-python/jsonxs 0.6: Get/set values in JSON and Python datastructures
 dev-python/jupyter 1.0.0-r2: Jupyter metapackage. Install all the Jupyter components in one go
 dev-python/jupyter_client 5.3.4 6.1.5 6.1.6: Jupyter protocol implementation and client libraries
-dev-python/jupyter_console 6.1.0: A terminal-based console frontend for Jupyter kernels
+dev-python/jupyter_console 6.1.0-r1: A terminal-based console frontend for Jupyter kernels
 dev-python/jupyter_core 4.6.1-r1 4.6.3: Core common functionality of Jupyter projects
 dev-python/jwcrypto 0.7.0: Implements JWK,JWS,JWE specifications using python-cryptography
 dev-python/kafka-python 1.4.7: Kafka protocol support in Python
@@ -8111,7 +8280,7 @@ dev-python/markdown2 2.3.9: Python Markdown language reimplementation
 dev-python/markups 3.0.0 3.0.0-r1: A wrapper around various text markups
 dev-python/markupsafe 1.1.1: Implements a XML/HTML/XHTML Markup safe string for Python
 dev-python/marshmallow 3.5.1: A lightweight library for converting complex datatypes to and from native Python datatypes.
-dev-python/matplotlib 2.2.2-r1 2.2.4 3.1.2 3.2.1 3.2.2 3.3.0: Pure python plotting library with matlab like syntax
+dev-python/matplotlib 2.2.2-r1 2.2.4 3.2.2 3.3.0: Pure python plotting library with matlab like syntax
 dev-python/matplotlib-python2 2.2.5-r1: Pure python plotting library with matlab like syntax (py2 version)
 dev-python/matterhook 0.1-r1: Interact with Mattermost incoming webhooks easily
 dev-python/mccabe 0.6.1-r1: flake8 plugin: McCabe complexity checker
@@ -8142,7 +8311,7 @@ dev-python/mock 3.0.5-r1: Rolling backport of unittest.mock for all Pythons
 dev-python/mongoengine 0.10.6 0.20.0: A Python Object-Document-Mapper for working with MongoDB
 dev-python/mongomock 3.19.0: Library to help testing Python code that interacts with MongoDB via Pymongo
 dev-python/monotonic 1.5-r1: An implementation of time.monotonic() for Python 2 & < 3.3
-dev-python/more-itertools 5.0.0 8.3.0 8.4.0: More routines for operating on iterables, beyond itertools
+dev-python/more-itertools 5.0.0 8.4.0: More routines for operating on iterables, beyond itertools
 dev-python/moto 1.3.14-r3: Mock library for boto
 dev-python/moviepy 1.0.1-r1: Video editing with Python
 dev-python/mox 0.5.3-r1: A mock object framework for Python, loosely based on EasyMock for Java
@@ -8179,7 +8348,7 @@ dev-python/neovim-remote 2.2.1 9999: A tool that helps control neovim processes
 dev-python/netaddr 0.7.19: Network address representation and manipulation library
 dev-python/netcdf4-python 1.2.2-r1: Python/numpy interface to the netCDF C library
 dev-python/netifaces 0.10.9: Portable network interface information
-dev-python/networkx 2.4 2.4-r1: Python tools to manipulate graphs and complex networks
+dev-python/networkx 2.4-r1: Python tools to manipulate graphs and complex networks
 dev-python/neutron-lib 2.3.0: Neutron shared routines and utilities.
 dev-python/nltk 3.5: Natural Language Toolkit
 dev-python/nltk-data 20200312-r1: Data files for NLTK
@@ -8329,7 +8498,7 @@ dev-python/portend 2.6: TCP port monitoring utilities
 dev-python/poyo 0.5.0: A lightweight YAML Parser for Python
 dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pretend 1.0.9: A library for stubbing in Python
-dev-python/pretty-yaml 15.8.2 20.4.0: PyYAML-based module to produce pretty and readable YAML-serialized data
+dev-python/pretty-yaml 20.4.0: PyYAML-based module to produce pretty and readable YAML-serialized data
 dev-python/prettytable 0.7.2-r1: Easily displaying tabular data in a visually appealing ASCII table format
 dev-python/priority 1.3.0: A pure-Python implementation of the HTTP/2 priority tree
 dev-python/process-tests 2.0.2 2.1.1: Tools for testing processes
@@ -8422,7 +8591,7 @@ dev-python/pygobject 2.28.6-r55 3.34.0 3.36.1: Python bindings for GObject Intro
 dev-python/pygpgme 0.3-r2: A Python wrapper for the GPGME library
 dev-python/pygpu 0.6.7: Python bindings to libgpuarray
 dev-python/pygraphviz 1.5: Python wrapper for the Graphviz Agraph data structure
-dev-python/pygresql 5.1: A Python interface for the PostgreSQL database
+dev-python/pygresql 5.1 5.2: A Python interface for the PostgreSQL database
 dev-python/pygsl 2.1.1: Python interface for the GNU scientific library (gsl)
 dev-python/pygtk 2.24.0-r5: GTK+2 bindings for Python
 dev-python/pyh2o 9999: Python API for sci-libs/libh2o
@@ -8440,7 +8609,7 @@ dev-python/pylast 1.9.0 3.2.1: Python interface to last.fm and other api-compati
 dev-python/pylatex 1.3.3: A Python library for creating LaTeX files and snippets
 dev-python/pylibacl 0.5.3 0.5.4_p20191217: POSIX ACLs (Access Control Lists) for Python
 dev-python/pylibmc 1.6.1-r1: Libmemcached wrapper written as a Python extension
-dev-python/pylint 2.4.4-r1 2.5.3: Python code static checker
+dev-python/pylint 2.5.3: Python code static checker
 dev-python/pylru 1.2.0: A least recently used (LRU) cache for Python
 dev-python/pylzma 0.4.9: Python bindings for the LZMA compression library
 dev-python/pymad 0.10: Python wrapper for libmad MP3 decoding in python
@@ -8449,7 +8618,7 @@ dev-python/pymediainfo 4.2.1: A wrapper around the mediainfo library
 dev-python/pymetar 1.1: Downloads and decodes to the weather report for a given station ID
 dev-python/pymilter 1.0.4-r1: Python interface to sendmail milter API
 dev-python/pyminuit 1.2.1-r1: Minuit numerical function minimization in Python
-dev-python/pymongo 3.10.1: Python driver for MongoDB
+dev-python/pymongo 3.10.1 3.11.0: Python driver for MongoDB
 dev-python/pymountboot 0.2.2 0.2.3 9999: Python extension module to (re)mount /boot
 dev-python/pympler 0.6: Memory profiling for Python applications
 dev-python/pymssql 2.1.3: Simple MSSQL python extension module
@@ -8517,7 +8686,7 @@ dev-python/pytables 3.4.4 3.6.1: Hierarchical datasets for Python
 dev-python/pyte 0.8.0-r1: Simple VTXXX-compatible terminal emulator
 dev-python/pytest 3.10.1 4.5.0 4.6.11 5.4.3 6.0.1: Simple powerful testing with Python
 dev-python/pytest-aiohttp 0.3.0-r1: pytest plugin for aiohttp support
-dev-python/pytest-asyncio 0.12.0 0.14.0: Library for testing asyncio code with pytest
+dev-python/pytest-asyncio 0.14.0: Library for testing asyncio code with pytest
 dev-python/pytest-cache 1.0-r2 1.0-r3: mechanisms for caching across test runs
 dev-python/pytest-catchlog 1.2.2: py.test plugin to catch log messages, fork of pytest-capturelog
 dev-python/pytest-cov 2.8.1: py.test plugin for coverage reporting
@@ -8541,14 +8710,14 @@ dev-python/pytest-pylint 0.14.1: pytest plugin to check source code with pylint
 dev-python/pytest-qt 3.3.0: pytest plugin for PyQt4 or PyQt5 applications
 dev-python/pytest-rerunfailures 8.0: pytest plugin to re-run tests to eliminate flaky failures
 dev-python/pytest-salt 2019.2.1_p1 2020.1.27: PyTest Salt Plugin
-dev-python/pytest-services 2.0.1 2.1.0: Collection of fixtures and utility functions to run service processes for pytest
+dev-python/pytest-services 2.1.0: Collection of fixtures and utility functions to run service processes for pytest
 dev-python/pytest-shutil 1.7.0-r1: A goodie-bag of unix shell and environment tools for py.test
 dev-python/pytest-subtesthack 0.1.1: A hack for test fixtures, needed for hypothesis inside py.test
 dev-python/pytest-tempdir 2019.10.12: Pytest plugin to support for a predictable and repeatable temporary directory
 dev-python/pytest-testmon 0.9.15: take TDD to a new level with py.test and testmon
 dev-python/pytest-timeout 1.3.4 1.4.1-r1 1.4.2: py.test plugin to abort hanging tests
 dev-python/pytest-virtualenv 1.7.0-r1: Virtualenv fixture for py.test
-dev-python/pytest-xdist 1.23.2 1.28.0 1.31.0 1.32.0 1.33.0: Distributed testing and loop-on-failing modes
+dev-python/pytest-xdist 1.23.2 1.28.0 1.31.0 1.32.0 1.33.0 1.34.0: Distributed testing and loop-on-failing modes
 dev-python/pytest-xprocess 0.13.1: Manage external processes across test runs
 dev-python/python-augeas 1.1.0: Python bindings for Augeas
 dev-python/python-axolotl 0.2.3: A python module for the axolotl protocol
@@ -8690,7 +8859,7 @@ dev-python/reno 2.7.0 2.11.3: Release notes manager, storing release notes in a 
 dev-python/reportlab 3.5.42: Tools for generating printable PDF documents from any data source
 dev-python/repoze-lru 0.7-r1: A tiny LRU cache implementation and decorator
 dev-python/repoze-sphinx-autointerface 0.8: Sphinx extension: auto-generates API docs from Zope interfaces
-dev-python/requests 2.21.0-r1 2.23.0 2.24.0: HTTP library for human beings
+dev-python/requests 2.23.0 2.24.0: HTTP library for human beings
 dev-python/requests-cache 0.4.12 0.4.12-r1: Persistent cache for requests library
 dev-python/requests-credssp 1.1.1: HTTPS CredSSP authentication with the requests library
 dev-python/requests-file 1.4.3: File transport adapter for Requests
@@ -8979,7 +9148,7 @@ dev-python/wsaccel 0.6.2_p20170108: Accelerator for ws4py, autobahn and tornado
 dev-python/wsgiproxy2 0.4.6-r1: HTTP proxying tools for WSGI apps
 dev-python/wsproto 0.15.0: WebSockets state-machine based protocol implementation
 dev-python/wstools 0.4.8: WSDL parsing services package for Web Services for Python
-dev-python/wtforms 2.2.1 2.3.1: Flexible forms validation and rendering library for python web development
+dev-python/wtforms 2.2.1 2.3.1 2.3.3: Flexible forms validation and rendering library for python web development
 dev-python/wurlitzer 2.0.0 2.0.1: Capture C-level stdout/stderr in Python
 dev-python/www-authenticate 0.9.2: WWW-Authenticate header parser
 dev-python/wxpython 3.0.2.0 4.0.7: A blending of the wxWindows C++ class library with Python
@@ -9197,7 +9366,7 @@ dev-ros/image_proc 1.15.2 9999: Single image rectification and color processing
 dev-ros/image_publisher 1.15.2 9999: Publish an image stream from single image file or avi file.
 dev-ros/image_rotate 1.15.2 9999: Rotates an image minimizing the angle between a vector and the camera frame
 dev-ros/image_transport 1.12.0 9999: Transparent support for transporting images in low-bandwidth compressed formats
-dev-ros/image_view 1.15.2 9999: Simple viewer for ROS image topics
+dev-ros/image_view 1.15.2-r1 9999: Simple viewer for ROS image topics
 dev-ros/imu_complementary_filter 1.2.2 9999: Fuses angular velocities, accelerations, and magnetic readings from an IMU
 dev-ros/imu_filter_madgwick 1.2.2-r1 9999: Fuses angular velocities, accelerations, and magnetic readings from an IMU
 dev-ros/imu_processors 0.3.0 9999: Processors for sensor_msgs::Imu data
@@ -9283,7 +9452,7 @@ dev-ros/rosapi 0.11.9 9999: Service calls for getting ros meta-information
 dev-ros/rosauth 1.0.1 9999: Server Side tools for Authorization and Authentication of ROS Clients
 dev-ros/rosbag 1.15.7 1.15.8 9999: Set of tools for recording from and playing back to ROS topics
 dev-ros/rosbag_migration_rule 1.0.1 9999: Allows to export rosbag migration rule files without depending on rosbag
-dev-ros/rosbag_storage 1.15.7 1.15.8 9999: Set of tools for recording from and playing back ROS message
+dev-ros/rosbag_storage 1.15.8 9999: Set of tools for recording from and playing back ROS message
 dev-ros/rosbash 1.15.5 1.15.6 9999: Assorted shell commands for using ros with bash
 dev-ros/rosboost_cfg 1.15.5 1.15.6 9999: Tool for determining cflags/lflags/etc. of boost on your system
 dev-ros/rosbridge_library 0.11.9 9999: Core rosbridge package for parsing JSON and performing the appropriate action
@@ -9302,7 +9471,7 @@ dev-ros/rosdiagnostic 1.9.4 9999: Command to print aggregated diagnostic content
 dev-ros/rosgraph 1.15.7 1.15.8 9999: Prints information about the ROS Computation Graph
 dev-ros/rosgraph_msgs 1.11.3 9999: Messages relating to ROS comm
 dev-ros/roslang 1.15.5 1.15.6 9999: Common package for all ROS client libraries
-dev-ros/roslaunch 1.15.7 1.15.8 9999: Tool for easily launching multiple ROS nodes
+dev-ros/roslaunch 1.15.8 9999: Tool for easily launching multiple ROS nodes
 dev-ros/roslib 1.15.6 9999: Base dependencies and support libraries for ROS
 dev-ros/roslint 0.12.0 9999: Static checking of Python or C++ source code for errors and standards compliance
 dev-ros/roslisp 1.9.24 9999: Lisp client library for ROS
@@ -9310,7 +9479,7 @@ dev-ros/roslz4 1.15.8 9999: Python and C++ implementation of the LZ4 streaming f
 dev-ros/rosmake 1.15.5 1.15.6 9999: ROS dependency aware build tool
 dev-ros/rosmaster 1.15.7 1.15.8 9999: ROS Master implementation
 dev-ros/rosmsg 1.15.7 1.15.8 9999: Command-line tools for displaying information about message and services
-dev-ros/rosnode 1.15.7 1.15.8 9999: Command-line tool for displaying debug information about ROS nodes
+dev-ros/rosnode 1.15.8 9999: Command-line tool for displaying debug information about ROS nodes
 dev-ros/rosout 1.15.7 1.15.8 9999: System-wide logging mechanism for messages sent to the /rosout topic
 dev-ros/rospack 2.6.2 9999: Retrieves information about ROS packages available on the filesystem
 dev-ros/rosparam 1.15.7 1.15.8 9999: Command-line tool for getting and setting ROS Parameters on the parameter server
@@ -9388,7 +9557,7 @@ dev-ros/test_diagnostic_aggregator 1.9.4 9999: diagnostic_aggregator tests
 dev-ros/test_nodelet 1.10.0 9999: Nodelet unit tests
 dev-ros/test_nodelet_topic_tools 1.10.0 9999: Nodelet topic tools unit tests
 dev-ros/test_rosbag 1.15.7 1.15.8 9999: Unit tests for rosbag
-dev-ros/test_rosbag_storage 1.15.7 1.15.8 9999: Unit tests for rosbag_storage
+dev-ros/test_rosbag_storage 1.15.8 9999: Unit tests for rosbag_storage
 dev-ros/test_roscpp 1.15.7 1.15.8 9999: Unit tests for roscpp
 dev-ros/test_rosgraph 1.15.7 1.15.8 9999: Unit tests for rosgraph
 dev-ros/test_roslaunch 1.15.7 1.15.8 9999: Unit tests for roslaunch
@@ -9435,7 +9604,7 @@ dev-ros/visualization_marker_tutorials 0.11.0 9999: Visualization marker tutoria
 dev-ros/visualization_msgs 1.12.7 1.13.0 9999: Messages used by higher level packages that deal in visualization-specific data.
 dev-ros/voxel_grid 1.16.6 1.17.0 9999: Implementation of an efficient 3D voxel grid
 dev-ros/xacro 1.14.1 9999: XML macro language
-dev-ros/xmlrpcpp 1.15.4 1.15.7 1.15.8 9999: C++ implementation of the XML-RPC protocol
+dev-ros/xmlrpcpp 1.15.8 9999: C++ implementation of the XML-RPC protocol
 dev-ruby/GeoRuby 2.5.2: Ruby data holder for OGC Simple Features
 dev-ruby/abstract 1.0.0-r3: Library which enable you to define abstract method in Ruby
 dev-ruby/acme-client 2.0.4 2.0.5 2.0.6: A Ruby client for the letsencrypt's ACME protocol.
@@ -9815,13 +9984,13 @@ dev-ruby/permutation 0.1.8-r1: Library performing operations with permutations o
 dev-ruby/pg 0.21.0 1.2.2: Ruby extension library providing an API to PostgreSQL
 dev-ruby/pg_array_parser 0.0.9-r2: Simple library to parse PostgreSQL arrays into a array of strings
 dev-ruby/pkg-config 1.2.8 1.4.1: A pkg-config implementation by Ruby
-dev-ruby/plist 3.4.0 3.5.0: A library to manipulate Property List files, also known as plists
+dev-ruby/plist 3.5.0: A library to manipulate Property List files, also known as plists
 dev-ruby/pluggaloid 1.2.0 1.3.1 1.4.0 1.4.1 1.5.0: Pluggaloid is extensible plugin system for mikutter
 dev-ruby/podcast 0.0.4-r2: A pure Ruby library for generating podcasts from mp3 files
 dev-ruby/polyglot 0.3.5: Polyglot provides support for fully-custom DSLs
-dev-ruby/posix-spawn 0.3.13-r1 0.3.14 0.3.15: Library that implements a subset of the Ruby 1.9 Process::spawn
+dev-ruby/posix-spawn 0.3.14 0.3.15: Library that implements a subset of the Ruby 1.9 Process::spawn
 dev-ruby/power_assert 1.1.5 1.1.6 1.1.7 1.2.0: Shows each value of variables and method calls in the expression
-dev-ruby/prawn 2.2.0 2.2.2: Fast, Nimble PDF Generation For Ruby
+dev-ruby/prawn 2.2.2: Fast, Nimble PDF Generation For Ruby
 dev-ruby/prawn-table 0.2.2-r1: Provides support for tables in Prawn
 dev-ruby/pry 0.13.1: Pry is a powerful alternative to the standard IRB shell for Ruby
 dev-ruby/public_suffix 3.1.1 4.0.3 4.0.4 4.0.5: Parse and decompose a domain name into top level domain, domain and subdomains
@@ -10180,7 +10349,7 @@ dev-tex/biber 2.12 2.14: A BibTeX replacement for users of biblatex
 dev-tex/biblatex 3.12 3.14: Reimplementation of the bibliographic facilities provided by LaTeX
 dev-tex/biblatex-apa 7.5: APA style for BibLaTeX
 dev-tex/biblatex-gost 1.17: Biblatex styles for Russian GOST 7.0.5-2008 bibliography standard
-dev-tex/bibtex2html 1.98 1.99: A bibtex to HTML converter
+dev-tex/bibtex2html 1.99: A bibtex to HTML converter
 dev-tex/bibtexu 3.71_p20200406: 8-bit Implementation of BibTeX 0.99 with a Very Large Capacity
 dev-tex/catdvi 0.14-r2: DVI to plain text translator
 dev-tex/chktex 1.7.6: Checks latex source for common mistakes
@@ -10321,7 +10490,6 @@ dev-util/byacc 20190617 20191125 20200330: the best variant of the Yacc parser g
 dev-util/cargo-c 0.6.2: Helper program to build and install c-like libraries
 dev-util/cargo-ebuild 0.2.0 0.3.0: Generates an ebuild for a package using the in-tree eclasses.
 dev-util/cargo-license 0.3.0: Cargo subcommand to see license of dependencies
-dev-util/cargo-tree 0.29.0-r1: Cargo subcommand that visualizes crate dependency graph in a tree-like format
 dev-util/catalyst 3.0.9 3.0.12 9999: Release metatool used for creating releases based on Gentoo Linux
 dev-util/catfish 1.4.13: A frontend for find, (s)locate, doodle, tracker, beagle, strigi and pinot
 dev-util/catkin 0.8.3-r1 0.8.8 9999: Cmake macros and associated python code used to build some parts of ROS
@@ -10341,7 +10509,7 @@ dev-util/cligh 0.3 9999: Command-line interface to GitHub
 dev-util/clinfo 2.2.18.03.26 2.2.18.04.06-r1 9999: A tool to display info about the system's OpenCL capabilities
 dev-util/clion 2020.1.2: A complete toolset for C and C++ development
 dev-util/cloc 1.84: Count Lines of Code
-dev-util/cmake 3.13.5 3.16.5 3.17.2 3.17.3 3.18.0: Cross platform Make
+dev-util/cmake 3.13.5 3.16.5 3.17.3 3.17.4 3.18.0 3.18.1: Cross platform Make
 dev-util/cmake-fedora 2.7.1: Provides cmake helper macros and targets for linux, especially fedora developers
 dev-util/cmdtest 0.30 0.32: black box tests Unix command line tools
 dev-util/cmocka 1.1.5: Unit testing framework for C
@@ -10395,7 +10563,7 @@ dev-util/devhelp 3.34.0: An API documentation browser for GNOME
 dev-util/dialog 1.3.20170131 1.3.20200228 1.3.20200327: tool to display dialog boxes from a shell
 dev-util/diffball 1.0.1-r2: Delta compression suite for using/generating binary patches
 dev-util/difffilter 0.3.3-r1: Filter files out of unified diffs using POSIX extended regular expressions
-dev-util/diffoscope 153: Will try to get to the bottom of what makes files or directories different
+dev-util/diffoscope 153 154: Will try to get to the bottom of what makes files or directories different
 dev-util/diffstat 1.60 1.61 1.63: Display a histogram of diff changes
 dev-util/diffuse 0.5.0_alpha7-r1: A graphical tool to compare and merge text files
 dev-util/dirdiff 2.1-r3: A tool for differing and merging directories
@@ -12537,7 +12705,7 @@ media-gfx/graphite2 1.3.14: Library providing rendering capabilities for complex
 media-gfx/graphviz 2.42.3 2.44.0 2.44.1: Open Source Graph Visualization Software
 media-gfx/grub-splashes 20091109: Collection of grub splashes
 media-gfx/gscan2pdf 1.8.11 2.7.0 2.8.1: Scan documents, perform OCR, produce PDFs and DjVus
-media-gfx/gthumb 3.6.2-r1: Image viewer and browser for Gnome
+media-gfx/gthumb 3.6.2-r1 3.10.0: Image viewer and browser for Gnome
 media-gfx/gtkam 1.0: A frontend for gPhoto 2
 media-gfx/gtkimageview 1.6.4: A simple image viewer widget for GTK
 media-gfx/hp2xx 3.4.4-r1: Convert Hewlett-Packard's HP-GL plotter language to other graphics formats
@@ -12802,7 +12970,7 @@ media-libs/libXcm 0.5.4 9999: Reference implementation of the X Color Management
 media-libs/libaacplus 2.0.2-r2 2.0.2-r3: HE-AAC+ v2 library, based on the reference implementation
 media-libs/libaacs 0.9.0 0.10.0: Open implementation of the Advanced Access Content System (AACS) specification
 media-libs/libafterimage 1.20-r2 1.20-r3: Afterstep's standalone generic image manipulation library
-media-libs/libao 1.2.2 1.2.2-r1: The Audio Output library
+media-libs/libao 1.2.2-r1: The Audio Output library
 media-libs/libaom 1.0.0-r2 2.0.0 9999: Alliance for Open Media AV1 Codec SDK
 media-libs/libart_lgpl 2.3.21-r3: A LGPL version of libart
 media-libs/libass 0.14.0: Library for SSA/ASS subtitles rendering
@@ -13193,10 +13361,10 @@ media-plugins/kodi-audiodecoder-snesapu 2.0.0 2.0.1 2.0.2 2.1.3 9999: SPC decode
 media-plugins/kodi-audiodecoder-stsound 2.0.0 2.0.1 2.0.2 2.1.3 9999: SPC decoder addon for Kodi
 media-plugins/kodi-audiodecoder-timidity 2.0.5 2.3.0 9999: Timidity decoder addon for Kodi
 media-plugins/kodi-audiodecoder-vgmstream 1.1.3 1.1.4 1.1.5 2.1.2 9999: vgmstream decoder addon for Kodi
-media-plugins/kodi-audioencoder-flac 2.0.6 2.1.1 9999: Flac encoder addon for Kodi
-media-plugins/kodi-audioencoder-lame 2.0.1 2.0.2 2.0.4 2.1.1 9999: Lame MP3 encoder addon for Kodi
-media-plugins/kodi-audioencoder-vorbis 2.0.4 2.1.1 9999: Vorbis encoder addon for Kodi
-media-plugins/kodi-audioencoder-wav 2.0.1 2.0.2 2.0.3 2.1.1 9999: WAV encoder addon for Kodi
+media-plugins/kodi-audioencoder-flac 2.0.6 2.1.1 3.0.0 9999: Flac encoder addon for Kodi
+media-plugins/kodi-audioencoder-lame 2.0.1 2.0.2 2.0.4 2.1.1 3.0.0 3.0.1 9999: Lame MP3 encoder addon for Kodi
+media-plugins/kodi-audioencoder-vorbis 2.0.4 2.1.1 3.0.1 9999: Vorbis encoder addon for Kodi
+media-plugins/kodi-audioencoder-wav 2.0.1 2.0.2 2.0.3 2.1.1 3.0.0 9999: WAV encoder addon for Kodi
 media-plugins/kodi-game-libretro 1.1.0 1.1.1 2.0.2 9999: Libretro compatibility layer for the Kodi Game API
 media-plugins/kodi-game-libretro-bnes 0.83.0.3 0.83.0.4 0.83.0.5 0.83.0.6 0.83.0.7 9999: bNES GameClient for Kodi
 media-plugins/kodi-game-libretro-dosbox 0.74.0.3 0.74.0.4 0.74.0.5 0.74.0.6 9999: DOSBox GameClient for Kodi
@@ -13248,7 +13416,7 @@ media-plugins/kodi-visualization-spectrum 3.0.3 3.2.0 9999: Spectrum visualizer 
 media-plugins/kodi-visualization-starburst 2.0.0 2.0.1 2.0.2 2.2.0 9999: StarBurst visualizer for Kodi
 media-plugins/kodi-visualization-waveform 2.0.1 3.0.2 3.1.0 3.1.1 4.2.0 9999: Waveform visualizer for Kodi
 media-plugins/ladspa-bs2b 0.9.1-r1: LADSPA plugin for bs2b headphone filter
-media-plugins/libvisual-plugins 0.4.0-r3: collection of visualization plugins for use with the libvisual framework
+media-plugins/libvisual-plugins 0.4.0-r3 0.4.0-r4: collection of visualization plugins for use with the libvisual framework
 media-plugins/libvisual-projectm 2.1.0-r1: A libvisual graphical music visualization plugin similar to milkdrop
 media-plugins/live 2020.03.06 2020.05.15: Libraries for standards-based RTP/RTCP/RTSP multimedia streaming
 media-plugins/mcp-plugins 0.4.0-r1: MCP ladspa plugins package. Includes moogvcf, phaser & chorus
@@ -13589,7 +13757,7 @@ media-sound/murmur 1.3.1 1.3.2 9999: Mumble is an open source, low-latency, high
 media-sound/muse 0.9.2_p20161002: Multiple Streaming Engine, an icecast source streamer
 media-sound/musepack-tools 465-r1: Musepack SV8 libraries and utilities
 media-sound/musescore 3.4.2 9999: WYSIWYG Music Score Typesetter
-media-sound/music-file-organizer 1.0.2: Organizes audio files into directories based on metadata tags, along with other metadata utilities.
+media-sound/music-file-organizer 1.0.3: Organizes audio files into directories based on metadata tags
 media-sound/musique 1.5-r1: Qt music player
 media-sound/ncmpc 0.34: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 0.7.7 0.8.2-r1 9999: featureful ncurses based MPD client inspired by ncmpc
@@ -14242,8 +14410,8 @@ net-dialup/wvdial 1.61: Excellent program to automatically configure PPP session
 net-dialup/xc 4.3.2-r3 4.3.2-r4: Modem dialout & serial terminal program
 net-dialup/xl2tpd 1.3.10 1.3.11 1.3.12 1.3.13 1.3.15: A modern version of the Layer 2 Tunneling Protocol (L2TP) daemon
 net-dns/avahi 0.7-r2 0.7-r4 0.7-r5 0.8-r2: System which facilitates service discovery on a local network
-net-dns/bind 9.14.12 9.16.3 9.16.4: Berkeley Internet Name Domain - Name Server
-net-dns/bind-tools 9.14.12 9.16.3 9.16.4 9.16.5: bind tools: dig, nslookup, host, nsupdate, dnssec-keygen
+net-dns/bind 9.14.12 9.16.4 9.16.5: Berkeley Internet Name Domain - Name Server
+net-dns/bind-tools 9.14.12 9.16.4 9.16.5: bind tools: dig, nslookup, host, nsupdate, dnssec-keygen
 net-dns/c-ares 1.16.1: C library that resolves names asynchronously
 net-dns/coredns 1.6.9 1.7.0: A DNS server that chains middleware
 net-dns/ddclient 3.9.0-r3 3.9.1: Perl client used to update dynamic DNS entries
@@ -14251,7 +14419,7 @@ net-dns/djbdns 1.05-r33: Collection of DNS client/server software
 net-dns/dnrd 2.20.3-r2: A caching DNS proxy server
 net-dns/dnscap 1.10.2 1.10.3: Network capture utility designed specifically for DNS traffic
 net-dns/dnscrypt-proxy 2.0.43 2.0.44 9999: A flexible DNS proxy, with support for encrypted DNS protocols
-net-dns/dnsdist 1.3.3-r1 1.4.0: A highly DNS-, DoS- and abuse-aware loadbalancer
+net-dns/dnsdist 1.3.3-r1 1.4.0 1.5.0: A highly DNS-, DoS- and abuse-aware loadbalancer
 net-dns/dnshijacker 1.3-r2: a libnet/libpcap based packet sniffer and spoofer
 net-dns/dnsmasq 2.81 2.82: Small forwarding DNS server
 net-dns/dnssec-check 2.2: Tests local resolver for support of DNSSEC validation
@@ -15270,7 +15438,7 @@ net-vpn/tor 0.4.2.8 0.4.3.6 0.4.4.3_alpha: Anonymizing overlay network for TCP
 net-vpn/vpnc 0.5.3_p550-r1: Free client for Cisco VPN routing software
 net-vpn/vpncwatch 1.8.1: Keepalive daemon for vpnc on Linux systems
 net-vpn/vtun 3.0.3 3.0.3-r1: Create tunnels over TCP/IP networks with shaping, encryption, and compression
-net-vpn/wireguard-modules 1.0.20200729 9999: Simple yet fast and modern VPN that utilizes state-of-the-art cryptography.
+net-vpn/wireguard-modules 1.0.20200729: Simple yet fast and modern VPN that utilizes state-of-the-art cryptography.
 net-vpn/wireguard-tools 1.0.20200513: Required tools for WireGuard, such as wg(8) and wg-quick(8)
 net-wireless/aircrack-ng 1.5.2 1.6-r1 1.6_p20200722 9999: WLAN tools for breaking 802.11 WEP/WPA keys
 net-wireless/airspy 1.0.9 9999: Usemode driver and associated tools for airspy
@@ -16830,6 +16998,7 @@ sys-apps/which 2.21: Prints out location of specified executables that are in yo
 sys-apps/x86info 1.30_p20190617: Dave Jones' handy, informative x86 CPU diagnostic utility
 sys-apps/xdg-dbus-proxy 0.1.2: Filtering proxy for D-Bus connections
 sys-apps/xdg-desktop-portal 1.6.0-r2 1.7.2: Desktop integration portal
+sys-apps/xdg-desktop-portal-gtk 1.7.1_pre: portal backend implementation that is using GTK+ and various pieces of GNOME
 sys-apps/xinetd 2.3.15-r3 2.3.15.3 2.3.15.3-r2 2.3.15.4: powerful replacement for inetd
 sys-apps/xmbmon 2.0.5-r1: Mother Board Monitor Program for X Window System
 sys-apps/yarn 1.22.4: Fast, reliable, and secure node dependency management
@@ -16882,7 +17051,7 @@ sys-auth/pam_u2f 1.0.8: Library for authenticating against PAM with a Yubikey
 sys-auth/pam_yubico 2.26: Library for authenticating against PAM with a Yubikey
 sys-auth/pambase 20190402 20191128 20200304 20200618: PAM base configuration files
 sys-auth/passwdqc 1.3.0 1.4.0: Password strength checking library (and PAM module)
-sys-auth/polkit 0.115-r4 0.116-r1: Policy framework for controlling privileges for system-wide services
+sys-auth/polkit 0.115-r4 0.116-r1 0.117: Policy framework for controlling privileges for system-wide services
 sys-auth/polkit-pkla-compat 0.1: Rules for polkit to add compatibility with pklocalauthority
 sys-auth/polkit-qt 0.113.0: Qt wrapper around polkit-1 client libraries
 sys-auth/realtime-base 0.1: Sets up realtime scheduling
@@ -17082,10 +17251,10 @@ sys-devel/automake 1.4_p6-r2 1.5-r2 1.6.3-r2 1.7.9-r3 1.8.5-r5 1.9.6-r5 1.10.3-r
 sys-devel/automake-wrapper 10 11: wrapper for automake to manage multiple automake versions
 sys-devel/bc 1.06.95-r2 1.07.1-r3: Handy console-based calculator utility
 sys-devel/bin86 0.16.20-r2 0.16.21: Assembler and loader used to create kernel bootsector
-sys-devel/binutils 2.32-r1 2.32-r2 2.33.1-r1 2.34-r1 2.35 9999: Tools necessary to build programs
+sys-devel/binutils 2.32-r1 2.32-r2 2.33.1-r1 2.34-r1 2.34-r2 2.35 9999: Tools necessary to build programs
 sys-devel/binutils-apple 3.2 3.2.6 4.3-r2 5.1-r1 6.1-r1 6.3-r2 7.0-r1 7.1-r1 7.2-r1 7.3.1 8.1 8.2.1-r1: Darwin assembler as(1) and static linker ld(1), Xcode Tools 8.2.1
 sys-devel/binutils-config 5.2 5.3.1 5.3.2 9999: Utility to change the binutils version being used
-sys-devel/binutils-hppa64 2.32-r1 2.33.1 2.34-r1 2.35: Tools necessary to build programs
+sys-devel/binutils-hppa64 2.32-r1 2.33.1 2.34-r1 2.34-r2 2.35: Tools necessary to build programs
 sys-devel/bison 3.1 3.6.4 3.7: A general-purpose (yacc-compatible) parser generator
 sys-devel/bmake 20200318: NetBSD's portable make
 sys-devel/boost-m4 0.4_p20160328: Another set of autoconf macros for compiling against boost
@@ -17323,7 +17492,7 @@ sys-kernel/genkernel 3.5.3.3 4.0.10 4.1.0_beta1 9999: Gentoo automatic kernel bu
 sys-kernel/genkernel-next 69 70: Gentoo automatic kernel building scripts, reloaded
 sys-kernel/gentoo-kernel 5.4.40 5.4.52 5.4.53 5.7.10: Linux kernel built with Gentoo patches
 sys-kernel/gentoo-kernel-bin 5.4.40 5.4.52 5.4.53 5.7.10: Pre-built Linux kernel with genpatches
-sys-kernel/gentoo-sources 4.4.221 4.4.228 4.4.229 4.4.230 4.4.231 4.9.221 4.9.228 4.9.229 4.9.230 4.9.231 4.14.178 4.14.185 4.14.188 4.14.189 4.14.190 4.19.120 4.19.129 4.19.133 4.19.134 4.19.135 5.4.38 5.4.48 5.4.52 5.4.53 5.4.54 5.7.8 5.7.9 5.7.10 5.7.11: Full sources including the Gentoo patchset for the 5.7 kernel tree
+sys-kernel/gentoo-sources 4.4.221 4.4.228 4.4.229 4.4.230 4.4.231 4.4.232 4.9.221 4.9.228 4.9.229 4.9.230 4.9.231 4.9.232 4.14.178 4.14.185 4.14.188 4.14.189 4.14.190 4.14.191 4.19.120 4.19.129 4.19.133 4.19.134 4.19.135 4.19.136 5.4.38 5.4.48 5.4.52 5.4.53 5.4.54 5.4.55 5.7.8 5.7.9 5.7.10 5.7.11 5.7.12: Full sources including the Gentoo patchset for the 5.7 kernel tree
 sys-kernel/git-sources 5.8_rc1 5.8_rc2 5.8_rc3 5.8_rc4 5.8_rc5 5.8_rc6 5.8_rc7: The very latest -git version of the Linux kernel
 sys-kernel/installkernel-gentoo 1 2: Gentoo fork of installkernel script from debianutils
 sys-kernel/installkernel-systemd-boot 0: Wrap kernel-install from systemd-boot as installkernel
@@ -17338,12 +17507,12 @@ sys-kernel/raspberrypi-image 4.14.98_p20190215 4.19.57_p20190709 4.19.75_p201909
 sys-kernel/raspberrypi-sources 4.19.9999 5.4.9999: Raspberry PI kernel sources
 sys-kernel/rt-sources 4.4.220_p197 4.4.225_p198 4.9.224_p144 4.9.227_p146 4.14.170_p75 4.14.184_p84 4.19.124_p53 4.19.127_p54 5.4.40_p24 5.4.44_p27 5.6.14_p7 5.6.17_p10: Full Linux 5.6 kernel sources with the CONFIG_PREEMPT_RT patch
 sys-kernel/vanilla-kernel 5.4.40 5.4.52 5.4.53 5.7.10: Linux kernel built from vanilla upstream sources
-sys-kernel/vanilla-sources 4.4.231 4.9.231 4.14.190 4.19.135 5.4.54 5.7.11: Full sources for the Linux kernel
+sys-kernel/vanilla-sources 4.4.232 4.9.232 4.14.191 4.19.136 5.4.55 5.7.12: Full sources for the Linux kernel
 sys-kernel/xbox-sources 2.6.16.26: Full sources for the Xbox Linux kernel
 sys-kernel/xnu-headers 3789.70.16-r5 4570.71.2-r5 4903.241.1-r5: System headers provided by XNU-4903.241.1, macOS 10.14.3
 sys-kernel/zen-sources 5.4.15 5.6.15 5.7.5: The Zen Kernel Live Sources
 sys-libs/argp-standalone 1.3-r2: Standalone argp library for use with uclibc
-sys-libs/binutils-libs 2.33.1-r1 2.34-r1 2.35: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
+sys-libs/binutils-libs 2.33.1-r1 2.34-r1 2.34-r2 2.35: Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
 sys-libs/compiler-rt 9.0.1 10.0.0 10.0.1 11.0.0_rc1 11.0.0.9999 12.0.0.9999: Compiler runtime library for clang (built-in part)
 sys-libs/compiler-rt-sanitizers 9.0.1 10.0.0 10.0.1 11.0.0_rc1 11.0.0.9999 12.0.0.9999: Compiler runtime libraries for clang (sanitizers & xray)
 sys-libs/cracklib 2.9.6-r2 2.9.7: Password Checking Library
@@ -17520,7 +17689,7 @@ virtual/cblas 1.0 3.6 3.7 3.8: Virtual for BLAS C implementation
 virtual/cdrtools 0: Virtual for command-line recorders cdrtools and cdrkit
 virtual/checkpassword 0: Virtual for checkpassword compatible applications
 virtual/commonlisp 0: Virtual for Common Lisp
-virtual/cron 0-r1: Virtual for cron
+virtual/cron 0-r2: Virtual for cron
 virtual/daemontools 0: Virtual for daemontools
 virtual/dev-manager 0-r2: Virtual for the device filesystem manager
 virtual/editor 0-r3: Virtual for editor
@@ -17587,18 +17756,18 @@ virtual/pager 0: Virtual for command-line pagers
 virtual/perl-Archive-Tar 2.320.0 2.360.0: Virtual for Archive-Tar
 virtual/perl-Attribute-Handlers 1.10.0-r3: Virtual for Attribute-Handlers
 virtual/perl-AutoLoader 5.740.0-r9: Virtual for AutoLoader
-virtual/perl-CPAN 2.220.0: Virtual for CPAN
-virtual/perl-CPAN-Meta 2.150.10-r3: Virtual for CPAN-Meta
-virtual/perl-CPAN-Meta-Requirements 2.140.0-r5: Virtual for CPAN-Meta-Requirements
-virtual/perl-CPAN-Meta-YAML 0.18.0-r5: Virtual for CPAN-Meta-YAML
+virtual/perl-CPAN 2.220.0 2.270.0: Virtual for CPAN
+virtual/perl-CPAN-Meta 2.150.10-r4: Virtual for CPAN-Meta
+virtual/perl-CPAN-Meta-Requirements 2.140.0-r6: Virtual for CPAN-Meta-Requirements
+virtual/perl-CPAN-Meta-YAML 0.18.0-r6: Virtual for CPAN-Meta-YAML
 virtual/perl-Carp 1.500.0-r3: Virtual for Carp
 virtual/perl-Compress-Raw-Bzip2 2.89.0-r1 2.93.0: Virtual for Compress-Raw-Bzip2
-virtual/perl-Compress-Raw-Zlib 2.84.0: Virtual for Compress-Raw-Zlib
-virtual/perl-DB_File 1.843.0: Virtual for DB_File
-virtual/perl-Data-Dumper 2.174.0: Virtual for Data-Dumper
-virtual/perl-Devel-PPPort 3.520.0: Virtual for Devel-PPPort
-virtual/perl-Digest 1.170.100_rc-r9: Virtual for Digest
-virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
+virtual/perl-Compress-Raw-Zlib 2.84.0 2.93.0: Virtual for Compress-Raw-Zlib
+virtual/perl-DB_File 1.843.0 1.853.0: Virtual for DB_File
+virtual/perl-Data-Dumper 2.174.0-r1: Virtual for Data-Dumper
+virtual/perl-Devel-PPPort 3.520.0 3.570.0: Virtual for Devel-PPPort
+virtual/perl-Digest 1.170.100_rc-r10: Virtual for Digest
+virtual/perl-Digest-MD5 2.550.0-r2 2.550.100_rc: Virtual for Digest-MD5
 virtual/perl-Digest-SHA 6.20.0: Virtual for Digest-SHA
 virtual/perl-Dumpvalue 1.180.0-r5: Virtual for Dumpvalue
 virtual/perl-Encode 3.10.0: Virtual for Encode
@@ -17694,7 +17863,7 @@ virtual/qmail 1.03: Virtual for qmail
 virtual/resolvconf 1: Virtual to select between different resolvconf providers
 virtual/ruby-ssl 11: Virtual ebuild for the Ruby OpenSSL bindings
 virtual/rubygems 15 16: Virtual ebuild for rubygems
-virtual/rust 1.41.1 1.42.0 1.43.1 1.44.1 1.45.0: Virtual for Rust language compiler
+virtual/rust 1.44.1 1.45.0 1.45.1: Virtual for Rust language compiler
 virtual/service-manager 0 1: Virtual for various service managers
 virtual/skkserv 0: Virtual for SKK server
 virtual/ssh 0: Virtual for SSH client and server
@@ -17820,7 +17989,7 @@ www-apps/websvn 2.3.3-r1: Web-based browsing tool for Subversion (SVN) repositor
 www-apps/wiliki 0.6.1-r1: WiLiKi is a lightweight Wiki engine written in and running on Gauche Scheme
 www-apps/wordpress 5.4.2: Wordpress PHP and MySQL based content management system (CMS)
 www-apps/zeppelin-bin 0.8.2: Web-based interactive data analytics notebook launcher
-www-client/chromium 84.0.4147.105 85.0.4183.39 86.0.4209.2: Open-source version of Google Chrome web browser
+www-client/chromium 84.0.4147.105 85.0.4183.48 86.0.4209.2: Open-source version of Google Chrome web browser
 www-client/dillo 3.0.5 3.0.5-r3 3.1_p20181005 9999: Lean FLTK based web browser
 www-client/elinks 0.12_pre6-r4 0.13_pre_pre20180225 9999: Advanced and well-established text-mode web browser
 www-client/epiphany 3.30.5 3.32.6 3.34.4 3.36.3: GNOME webbrowser based on Webkit
@@ -17878,7 +18047,7 @@ www-plugins/freshplayerplugin 0.3.9-r1: PPAPI-host NPAPI-plugin adapter for flas
 www-plugins/google-talkplugin 5.41.0.0 5.41.3.0 9999: Video chat browser plug-in for Google Talk
 www-plugins/lightspark 0.8.2-r1: High performance flash player
 www-plugins/passff 1.9.1: zx2c4 pass manager extension for Firefox
-www-plugins/passff-host 1.2.1 1.2.1-r1: Host app for the PassFF WebExtension
+www-plugins/passff-host 1.2.1-r1: Host app for the PassFF WebExtension
 www-plugins/pdfjs 1.9.426 2.1.266 2.4.456: A PDF reader in JavaScript
 www-servers/adsf 1.4.3: A Dead Simple Fileserver is a static file server that can launch in a directory
 www-servers/apache 2.4.43: The Apache Web Server
@@ -18059,7 +18228,7 @@ x11-libs/libGLw 8.0.0-r1: Mesa GLw library
 x11-libs/libICE 1.0.10: X.Org Inter-Client Exchange library
 x11-libs/libQGLViewer 2.7.1 2.7.2: C++ library based on Qt that eases the creation of OpenGL 3D viewers
 x11-libs/libSM 1.2.3: X.Org Session Management library
-x11-libs/libX11 1.6.9: X.Org X11 library
+x11-libs/libX11 1.6.9 1.6.10: X.Org X11 library
 x11-libs/libXScrnSaver 1.2.3: X.Org XScrnSaver library
 x11-libs/libXau 1.0.9: X.Org X authorization library
 x11-libs/libXaw 1.0.13-r1: X.Org Xaw library
@@ -18611,7 +18780,7 @@ x11-plugins/wmwifi 0.6-r1: wireless network interface monitor dockapp
 x11-plugins/wmwork 0.2.5-r1: a dockapp that lets you easily track time spent on different projects
 x11-plugins/wmxkb 1.2.2-r1: Dockable keyboard layout switcher for Window Maker
 x11-plugins/wmxres 1.2-r1: Dock application to select your display mode among those possible
-x11-terms/alacritty 0.4.3 0.5.0_rc1 9999: GPU-accelerated terminal emulator
+x11-terms/alacritty 0.4.3 0.5.0 9999: GPU-accelerated terminal emulator
 x11-terms/aterm 1.0.1-r4: rxvt compatible terminal emulator with transparency support
 x11-terms/cool-retro-term 1.1.1-r2: terminal emulator which mimics the look and feel of the old cathode tube screens
 x11-terms/eterm 0.9.6-r2 9999: A vt102 terminal emulator for X
