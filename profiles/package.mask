@@ -32,6 +32,54 @@
 
 #--- END OF EXAMPLES ---
 
+# Mikle Kolyada <zlogene@gentoo.org> (2020-08-14)
+# Obsolete package. Current version is py2-only.
+# py3 port has been abandoned for a long time.
+# Use bibtex/biber as a replacement.
+# Removal in 30 days.
+dev-tex/crosstex
+
+# Matt Turner <mattst88@gentoo.org> (2020-08-13)
+# Masked for testing
+>=sys-auth/sssd-2.3.0
+
+# Jonas Stein <jstein@gentoo.org> (2020-08-13)
+# One of many password generators, but with dead upstream in this case.
+# Masked for removal after 2020-10-01.
+# Bug #629272
+app-admin/apg
+
+# Sam James <sam@gentoo.org> (2020-08-12)
+# Obsolete. Now included in texlive.
+# Removal in 30 days.
+app-text/vlna
+
+# Matt Turner <mattst88@gentoo.org> (2020-08-11)
+# No longer needed with virtual/opencl-3
+# Masked for removal in 30 days. Bug #728284
+app-eselect/eselect-opencl
+
+# Matt Turner <mattst88@gentoo.org> (2020-08-11)
+# Replaced by media-libs/libglvnd.
+# Masked for removal in 30 days. Bug #728286
+app-eselect/eselect-opengl
+
+# Matt Turner <mattst88@gentoo.org> (2020-08-11)
+# NVIDIA declared this branch to have reached end of life about six months ago.
+# Blocks removal of app-eselect/eselect-opengl and app-eselect/eselect-opencl.
+# Masked for removal in 30 days. Bug #728290
+x11-drivers/nvidia-drivers:0/340
+
+# Miroslav Šulc <fordfrog@gentoo.org> (2020-08-11)
+# Package dead. No consumers in the tree.
+# Removal in 30 days. Bug #735518
+x11-libs/flowcanvas
+
+# Michał Górny <mgorny@gentoo.org> (2020-08-09)
+# Build tool with no revdeps left.
+# Removal in 30 days.  Bug #736517.
+dev-python/paver
+
 # Michał Górny <mgorny@gentoo.org> (2020-08-09)
 # Python 2 only.  No commits since 2015.
 # Removal in 30 days.  Bug #735334.
@@ -100,12 +148,6 @@ dev-python/gntp
 # No consumers since 2015, and no known stand-alone use.
 # Removal in 30 days.
 dev-libs/liboobs
-
-# Mikle Kolyada <zlogene@gentoo.org> (2020-08-04)
-# Starting with this version pambase was
-# completly rewritten in python.
-# Initial testing needed.
-=sys-auth/pambase-20200806
 
 # Jack Todaro <solpeth@posteo.org> (2020-08-04)
 # Deprecated in favour of dev-haskell/dbus.
@@ -355,7 +397,6 @@ dev-python/elementtree
 # Py2 only. Last upstream release 2013.
 # Removal in 30 days. Last 2 have deps on cddb.
 dev-python/cddb-py
-media-sound/exaile
 media-sound/jack
 
 # Michał Górny <mgorny@gentoo.org> (2020-08-01)
@@ -556,11 +597,6 @@ dev-ruby/zeitwerk:1
 # Unmaintained upstream and broken by ECM 5.72.0, masked for removal in 30 days.
 media-video/plasma-mediacenter
 
-# Andreas Sturmlechner <asturm@gentoo.org> (2020-07-15)
-# Broken by scons-python3 for >1 year, depends on dead gnome-base/libgnomeui,
-# bugs #685576, #726818, no reverse dependencies. Removal in 30 days.
-app-text/glosung
-
 # Andreas K. Hüttel <dilfridge@gentoo.org> (2020-07-15)
 # In preparation; do not use yet.
 =dev-lang/perl-5.32*
@@ -687,13 +723,6 @@ sys-kernel/genkernel-next
 # Removal in 30 days. Bug #732136.
 dev-go/goptlib
 
-# Mikle Kolyada <zlogene@gentoo.org> (2020-07-10)
-# Last major release in 2001. Was added into texlive
-# long ago.
-# Use dev-texlive/texlive-formatsextra instead.
-# Removal in 30 days.
-dev-tex/xmltex
-
 # Kent Fredric <kentnl@gentoo.org> (2020-07-10)
 # No reverse dependencies, and Gtk2 support is becomming
 # obsolete in Gentoo.
@@ -751,12 +780,6 @@ app-misc/ifp-line
 # Removal after 2020-08-01
 # Bug 687664
 app-dicts/stardict-quick-eng-fra
-
-# Aaron W. Swenson <titanofold@gentoo.org> (2020-05-15)
-# PostgreSQL 9.4 series is EOL. Migrate your database cluster to a more recent
-# version.
-# Removal after 2020-06-14.
-<dev-db/postgresql-9.5
 
 # Michael Orlitzky <mjo@gentoo.org> (2020-04-19)
 # Stuck on Python 3.6, support for which already required
